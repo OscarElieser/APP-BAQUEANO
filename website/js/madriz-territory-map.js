@@ -13,6 +13,11 @@
 // territorio y pines aceptados únicamente si caen dentro del contorno (la
 // geocodificación se restringe al rectángulo del territorio). Antes un lugar
 // podía ubicarse en otro departamento y mezclar información entre territorios.
+// 🎞️ FRANJA VIVA (2026-10-05): las fichas bajo el mapa avanzan solas (pausa al
+// pasar el mouse, enfocar, tocar o desplazar; nunca con prefers-reduced-motion
+// ni fuera de pantalla) y al tocar una se abre su ficha informativa: qué es,
+// dónde queda (precisa o aproximada), mejor época, cómo llegar y accesos a
+// "Cómo llegar" y BAQUI. Igual en los 15 departamentos y las 2 regiones.
 // ============================================================================
 
 (function (window, document) {
@@ -46,6 +51,8 @@
   const PRECOMPUTED_URL = 'data/territory-places.json';
   let precomputedPromise = null;
   let territoryFeature = null;
+  let autoplay = null;
+  let infoPanel = null;
   const NICARAGUA_BOUNDS = { south: 10.7, north: 15.1, west: -88.1, east: -82.5 };
 
   function byId(id) {
@@ -267,6 +274,7 @@
           longitude: result.longitude,
           verified: false,
           catalogReference: true,
+          icon: String(result.icon || ''),
           // Precisa: el nombre completo se encontró en OpenStreetMap.
           // Aproximada: se ubicó por una parte del nombre o su municipio.
           approximate: fixed ? fixed.approximate : true,
@@ -370,48 +378,6 @@
     return Promise.race([loadPlaces(runId), timeout]);
   }
 
-  function createPopup(place) {
-    const root = document.createElement('article');
-    root.className = 'madriz-map-popup';
-
-    const image = document.createElement('img');
-    image.src = safeImage(place.image);
-    image.alt = '';
-    image.loading = 'lazy';
-
-    const content = document.createElement('div');
-    const title = document.createElement('h3');
-    title.textContent = String(place.name || `Lugar de ${territoryName}`);
-    const description = document.createElement('p');
-    description.textContent = String(place.shortDescription || place.categoryLabel || 'Lugar publicado en el catálogo territorial.');
-    content.append(title, description);
-
-    const meta = document.createElement('p');
-    meta.className = 'madriz-map-popup-meta';
-    meta.textContent = place.catalogReference
-      ? (place.approximate === false && place.osmLabel ? place.osmLabel : `${territoryName} · ubicación aproximada`)
-      : String(place.municipality || territoryName);
-    content.append(meta);
-
-    const directions = document.createElement('a');
-    directions.className = 'madriz-map-popup-link';
-    directions.href = `https://www.google.com/maps/dir/?api=1&destination=${Number(place.latitude)},${Number(place.longitude)}`;
-    directions.target = '_blank';
-    directions.rel = 'noopener noreferrer';
-    directions.innerHTML = '<i class="fa-solid fa-route" aria-hidden="true"></i> Cómo llegar';
-    content.append(directions);
-
-    if (place.verified === true) {
-      const verified = document.createElement('span');
-      verified.className = 'madriz-map-verified';
-      verified.innerHTML = '<i class="fa-solid fa-shield-check"></i> BAQUEANO Verificado';
-      content.append(verified);
-    }
-
-    root.append(image, content);
-    return root;
-  }
-
   function ratingLabel(place) {
     if (!place.reviewRating) return '';
     return `★ ${place.reviewRating.average.toFixed(1)}`;
@@ -424,11 +390,210 @@
       zoom: 13,
       essential: true
     });
-    marker.togglePopup();
     document.querySelectorAll('.map-place-card.is-active').forEach((item) => item.classList.remove('is-active'));
     card?.classList.add('is-active');
     card?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   }
+
+  function iconClass(value) {
+    const name = String(value || '').split(/\s+/)[0];
+    return /^fa-[a-z0-9-]+$/.test(name) ? name : 'fa-location-dot';
+  }
+
+  const normalizeText = (value) => String(value || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const STOP_WORDS = new Set(['reserva', 'natural', 'silvestre', 'parque', 'nacional', 'comunidad', 'indigena', 'centro', 'historico',
+    'cascada', 'cascadas', 'salto', 'cerro', 'laguna', 'playa', 'playas', 'museo', 'iglesia', 'ciudad', 'aguas', 'termales', 'mirador',
+    'finca', 'fincas', 'taller', 'talleres', 'puerto', 'isla', 'volcan', 'calle', 'antigua', 'artesanias', 'ruta', 'rio', 'lago']);
+
+  // Relato del lugar desde la guía rica del territorio (js/territories-rich-data.js):
+  // lugares emblemáticos, artesanías y fiestas. Solo se usa si coincide de verdad.
+  function findPlaceStory(placeName) {
+    const details = (window.BAQUEANO_TERRITORY_DETAILS || {})[departmentId];
+    if (!details) return null;
+    const tokens = normalizeText(placeName).split(/[^a-z0-9]+/).filter((t) => t.length >= 4 && !STOP_WORDS.has(t));
+    if (!tokens.length) return null;
+    const pool = [];
+    (details.signature || []).forEach((item) => pool.push({ title: item.title, head: `${item.title} ${item.subtitle || ''}`, text: item.text, facts: item.facts }));
+    (details.crafts || []).forEach((item) => pool.push({ title: item.title, head: `${item.title} ${item.community || ''}`, text: item.text }));
+    (details.festivals || []).forEach((item) => pool.push({ title: item.name, head: `${item.name} ${item.where || ''}`, text: item.text }));
+    let best = null;
+    pool.forEach((item) => {
+      const head = normalizeText(item.head);
+      const body = normalizeText(item.text);
+      const headHits = tokens.filter((t) => head.includes(t)).length;
+      const score = headHits * 2 + tokens.filter((t) => body.includes(t)).length;
+      if (headHits && (!best || score > best.score)) best = { ...item, score };
+    });
+    return best;
+  }
+
+  function territoryInfo() {
+    const list = Array.isArray(window.BAQUEANO_TERRITORIES) ? window.BAQUEANO_TERRITORIES : [];
+    return list.find((item) => item && item.id === departmentId) || null;
+  }
+
+  function shortText(value, max) {
+    const text = String(value || '').replace(/\s+/g, ' ').trim();
+    if (text.length <= max) return text;
+    const cut = text.slice(0, max);
+    return `${cut.slice(0, Math.max(cut.lastIndexOf('. ') + 1, cut.lastIndexOf(' ')))}…`;
+  }
+
+  function closePlaceInfo() {
+    if (!infoPanel) return;
+    infoPanel.hidden = true;
+    infoPanel.replaceChildren();
+    if (autoplay) autoplay.resumeSoon(1200);
+  }
+
+  function openPlaceInfo(place, card) {
+    const shell = byId('madrizMapShell');
+    if (!shell) return;
+    if (!infoPanel || !shell.contains(infoPanel)) {
+      infoPanel = document.createElement('aside');
+      infoPanel.className = 'map-place-info';
+      infoPanel.setAttribute('role', 'dialog');
+      infoPanel.setAttribute('aria-modal', 'false');
+      shell.append(infoPanel);
+    }
+    if (autoplay) autoplay.hold();
+    const titleId = `mapPlaceInfoTitle-${elementPrefix}`;
+    infoPanel.setAttribute('aria-labelledby', titleId);
+    const el = (tag, className, text) => {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text != null) node.textContent = text;
+      return node;
+    };
+    const icon = (name) => { const i = el('i', `fa-solid ${name}`); i.setAttribute('aria-hidden', 'true'); return i; };
+
+    const close = el('button', 'map-place-info-close');
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Cerrar información del lugar');
+    close.append(icon('fa-xmark'));
+    close.addEventListener('click', () => { closePlaceInfo(); card?.focus({ preventScroll: true }); });
+
+    const head = el('header', 'map-place-info-head');
+    const badge = el('span', 'map-place-icon map-place-info-icon');
+    badge.append(icon(iconClass(place.icon)));
+    const titles = el('div', 'map-place-info-titles');
+    const title = el('h3', '', String(place.name || `Lugar de ${territoryName}`));
+    title.id = titleId;
+    const category = el('span', 'map-place-info-chip', String(place.categoryLabel || 'Atractivo territorial'));
+    titles.append(title, category);
+    head.append(badge, titles, close);
+
+    const where = el('p', 'map-place-info-where');
+    where.append(icon('fa-location-dot'), ' ', place.catalogReference
+      ? (place.approximate === false && place.osmLabel ? place.osmLabel : `${territoryName} · ubicación aproximada`)
+      : String(place.municipality || territoryName));
+
+    const body = el('div', 'map-place-info-body');
+    const story = findPlaceStory(place.name);
+    const description = story ? story.text : (place.catalogReference ? '' : place.shortDescription);
+    if (description) body.append(el('p', 'map-place-info-text', String(description)));
+    if (story && Array.isArray(story.facts) && story.facts.length) {
+      const facts = el('ul', 'map-place-info-facts');
+      story.facts.slice(0, 3).forEach((fact) => {
+        const li = el('li');
+        li.append(el('strong', '', `${fact[0]}: `), String(fact[1]));
+        facts.append(li);
+      });
+      body.append(facts);
+    }
+    const territory = territoryInfo();
+    const extras = [
+      ['fa-calendar-days', 'Mejor época', territory && territory.bestSeason],
+      ['fa-bus', `Cómo llegar a ${territoryName}`, territory && territory.howToReach]
+    ].filter((item) => item[2]);
+    if (extras.length) {
+      const list = el('dl', 'map-place-info-extras');
+      extras.forEach(([name, label, value]) => {
+        const dt = el('dt');
+        dt.append(icon(name), ` ${label}`);
+        list.append(dt, el('dd', '', shortText(value, 220)));
+      });
+      body.append(list);
+    }
+    if (!body.childElementCount) body.append(el('p', 'map-place-info-text', `Lugar destacado de la guía territorial de ${territoryName}.`));
+
+    const actions = el('div', 'map-place-info-actions');
+    const directions = el('a', 'map-place-info-btn is-primary');
+    directions.href = `https://www.google.com/maps/dir/?api=1&destination=${Number(place.latitude)},${Number(place.longitude)}`;
+    directions.target = '_blank';
+    directions.rel = 'noopener noreferrer';
+    directions.append(icon('fa-route'), ' Cómo llegar');
+    const plan = el('a', 'map-place-info-btn');
+    plan.href = `baqueano-ia.html?q=${encodeURIComponent(`Quiero visitar ${place.name} en ${territoryName}`)}`;
+    plan.append(icon('fa-wand-magic-sparkles'), ' Planificar con BAQUI');
+    actions.append(directions, plan);
+
+    infoPanel.replaceChildren(head, where, body, actions);
+    infoPanel.hidden = false;
+  }
+
+  // Avance automático y continuo de la franja de fichas (60 fps con rAF).
+  function startAutoplay(carousel) {
+    stopAutoplay();
+    if (!carousel || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    const controller = new AbortController();
+    const opts = { signal: controller.signal, passive: true };
+    const SPEED = 28; // px por segundo: legible y tranquilo
+    let frame = 0;
+    let last = 0;
+    let position = carousel.scrollLeft;
+    let pausedUntil = 0;
+    let hovering = false;
+    let holding = false;
+    let visible = true;
+    const state = {
+      hold() { holding = true; carousel.classList.remove('is-autoplaying'); },
+      resumeSoon(ms) { holding = false; pausedUntil = performance.now() + ms; },
+      stop() { controller.abort(); window.cancelAnimationFrame(frame); carousel.classList.remove('is-autoplaying'); }
+    };
+    const pause = (ms) => { pausedUntil = performance.now() + ms; carousel.classList.remove('is-autoplaying'); };
+    const tick = (now) => {
+      frame = window.requestAnimationFrame(tick);
+      const delta = last ? Math.min(now - last, 64) : 16;
+      last = now;
+      const room = carousel.scrollWidth - carousel.clientWidth;
+      if (holding || hovering || !visible || document.hidden || now < pausedUntil || room < 8) return;
+      carousel.classList.add('is-autoplaying');
+      if (Math.abs(carousel.scrollLeft - position) > 2) position = carousel.scrollLeft; // el usuario se movió
+      position += (SPEED * delta) / 1000;
+      if (position >= room - 1) {
+        position = 0;
+        pause(1600);
+        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+        return;
+      }
+      carousel.scrollLeft = position;
+    };
+    carousel.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hovering = true; }, opts);
+    carousel.addEventListener('pointerleave', () => { hovering = false; }, opts);
+    carousel.addEventListener('pointerdown', () => pause(6000), opts);
+    carousel.addEventListener('wheel', () => pause(6000), opts);
+    carousel.addEventListener('touchstart', () => pause(6000), opts);
+    carousel.addEventListener('focusin', () => { holding = true; carousel.classList.remove('is-autoplaying'); }, opts);
+    carousel.addEventListener('focusout', () => { if (!infoPanel || infoPanel.hidden) state.resumeSoon(2500); }, opts);
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => { visible = entries.some((entry) => entry.isIntersecting); });
+      observer.observe(carousel);
+      controller.signal.addEventListener('abort', () => observer.disconnect());
+    }
+    pausedUntil = performance.now() + 1800; // deja ver la primera ficha
+    frame = window.requestAnimationFrame(tick);
+    autoplay = state;
+  }
+
+  function stopAutoplay() {
+    if (autoplay) autoplay.stop();
+    autoplay = null;
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && infoPanel && !infoPanel.hidden) closePlaceInfo();
+  });
 
   function addPlace(place, bounds) {
     const markerButton = document.createElement('button');
@@ -438,11 +603,10 @@
     markerButton.textContent = place.reviewRating ? ratingLabel(place) : '';
     if (!place.reviewRating) markerButton.innerHTML = '<i class="fa-solid fa-location-dot"></i>';
 
-    const popup = new window.maplibregl.Popup({ offset: 24, closeButton: false })
-      .setDOMContent(createPopup(place));
+    // La ficha informativa (openPlaceInfo) reemplaza al globo emergente: una
+    // sola fuente de información por lugar, sin duplicados sobre el mapa.
     const marker = new window.maplibregl.Marker({ element: markerButton, anchor: 'bottom' })
       .setLngLat([Number(place.longitude), Number(place.latitude)])
-      .setPopup(popup)
       .addTo(map);
     markers.push(marker);
     bounds.extend([Number(place.longitude), Number(place.latitude)]);
@@ -454,10 +618,24 @@
     card.className = 'map-place-card';
     card.dataset.placeId = place.id;
 
-    const image = document.createElement('img');
-    image.src = safeImage(place.image);
-    image.alt = '';
-    image.loading = 'lazy';
+    // Foto real si existe; si no, el ícono del tipo de lugar (no el logo repetido).
+    let image;
+    if (place.image && safeImage(place.image) !== 'assets/images/logo.png') {
+      image = document.createElement('img');
+      image.src = safeImage(place.image);
+      image.alt = '';
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      image.width = 68;
+      image.height = 68;
+    } else {
+      image = document.createElement('span');
+      image.className = 'map-place-icon';
+      image.setAttribute('aria-hidden', 'true');
+      const glyph = document.createElement('i');
+      glyph.className = `fa-solid ${iconClass(place.icon)}`;
+      image.append(glyph);
+    }
     const copy = document.createElement('span');
     copy.className = 'map-place-copy';
     const name = document.createElement('strong');
@@ -469,11 +647,16 @@
     meta.textContent = parts.join(' · ') || String(place.municipality || territoryName);
     copy.append(name, meta);
     card.append(image, copy);
-    card.addEventListener('click', () => focusPlace(place, marker, card));
+    card.setAttribute('aria-label', `${name.textContent}: ver información`);
+    card.addEventListener('click', () => {
+      focusPlace(place, marker, card);
+      openPlaceInfo(place, card);
+    });
     markerButton.addEventListener('click', () => {
       document.querySelectorAll('.map-place-card.is-active').forEach((item) => item.classList.remove('is-active'));
       card.classList.add('is-active');
       card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      openPlaceInfo(place, card);
     });
     carousel.append(card);
   }
@@ -562,6 +745,7 @@
       const territoryBounds = territoryBbox();
       if (territoryBounds) bounds.extend([[territoryBounds[0], territoryBounds[1]], [territoryBounds[2], territoryBounds[3]]]);
       places.forEach((place) => addPlace(place, bounds));
+      startAutoplay(byId('mapPlacesCarousel')); // avanza aunque sigan llegando fichas
       const publishedCount = places.length;
       const knownNames = new Set(places.map((place) => String(place.name || '').toLocaleLowerCase('es-NI')));
       const catalogResolved = await loadCatalogPlaces(runId, (place) => {
@@ -594,6 +778,8 @@
 
   function unmount() {
     generation += 1;
+    stopAutoplay();
+    if (infoPanel) { infoPanel.remove(); infoPanel = null; }
     markers.forEach((marker) => marker.remove());
     markers = [];
     territoryFeature = null;

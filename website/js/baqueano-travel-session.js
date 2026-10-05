@@ -856,6 +856,17 @@
       renderAll();
     });
     if (travelSession.destinations.length) generateSession(); else renderAll();
+    // Llegada desde una ficha del mapa (departamento.html): baqueano-ia.html?q=…
+    // Se trata como texto que escribe la persona (addMessage usa textNode).
+    try {
+      const incoming = new URLSearchParams(window.location.search).get('q');
+      const input = $('#iaChatInput');
+      if (incoming && input && incoming.trim().length <= 200) {
+        input.value = incoming.trim();
+        submitChat();
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    } catch (_) { /* sin parámetros válidos: BAQUI arranca normal */ }
     window.BaqueanoTravelSession = Object.freeze({ get: () => clone(travelSession), parseTravelIntent, resolveTravelEntity, generate: generateSession, renderDynamicRoute, calculateTripBudget, flags: FLAGS });
   }
 
