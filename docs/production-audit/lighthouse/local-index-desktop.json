@@ -1,0 +1,20 @@
+{
+ "url": "http://127.0.0.1:8790/index.html",
+ "fetchTime": "2026-10-05T12:20:22.687Z",
+ "formFactor": "desktop",
+ "scores": {
+  "performance": 32,
+  "accessibility": 94,
+  "best-practices": 96,
+  "seo": 100
+ },
+ "metrics": {
+  "first-contentful-paint": "1.4 s",
+  "largest-contentful-paint": "2.1 s",
+  "cumulative-layout-shift": "0.372",
+  "total-blocking-time": "1,980 ms",
+  "speed-index": "2.4 s",
+  "interactive": "3.8 s",
+  "total-byte-weight": "Total size was 49,103 KiB"
+ }
+}

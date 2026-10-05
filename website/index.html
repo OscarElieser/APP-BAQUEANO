@@ -60,6 +60,9 @@
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-16">
+  <!-- Póster del hero = elemento LCP: se pide primero; el video se carga después (js/hero-video-loader.js). -->
+  <link rel="preload" as="image" href="assets/images/heroes/hero-ometepe-1280.webp" imagesrcset="assets/images/heroes/hero-ometepe-768.webp 768w, assets/images/heroes/hero-ometepe-1280.webp 1280w" imagesizes="100vw" fetchpriority="high" type="image/webp">
+  <script src="js/hero-video-loader.js?v=20261005-1" defer></script>
 </head>
 
 <body class="page-index-exact">
@@ -160,8 +163,9 @@
          SECCIÓN 1: HERO PRINCIPAL CINEMATOGRÁFICO (IMAGEN 4)
          ============================================================================ -->
     <section class="hero-exact hero-section-nicaragua" id="heroNicaragua">
-      <video class="bq-hero-background" autoplay muted loop playsinline preload="none" poster="assets/images/destinos/isla_de_ometepe.jpg" aria-hidden="true">
-        <source src="assets/videos/video%20nicaragua.mp4" type="video/mp4">
+      <video class="bq-hero-background" data-hero-video muted loop playsinline preload="none" poster="assets/images/heroes/hero-ometepe-1280.webp" aria-hidden="true">
+        <source data-src="assets/videos/hero/nicaragua-hero-720.mp4" media="(max-width: 768px)" type="video/mp4">
+        <source data-src="assets/videos/hero/nicaragua-hero-1280.mp4" type="video/mp4">
       </video>
       <div class="bq-hero-overlay" aria-hidden="true"></div>
       <div class="exact-container">

@@ -4226,3 +4226,10 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - `js/baqueano-analytics.js`: arquitectura única (RPC `track_event` de Supabase), cargada SOLO con consentimiento; sin PII ni contenido de BAQUI; eventos automáticos page_view, whatsapp, teléfono, SOS, idioma, favorito, búsqueda (solo longitud), registro de negocio, testimonio, mensaje BAQUI, itinerario.
   - Migración `20261005060000_analytics_web_events` (7 tipos nuevos, aditiva) aplicada en producción.
   - Pruebas: `scripts/consent-analytics.test.mjs` 5/5 en Chromium; SQL como anon: 17/17 eventos aceptados, `user_registered` desde cliente bloqueado (transacción revertida).
+
+### 2026-10-05 — Solicitud (durante la auditoría 20/20): "https://github.com/OscarElieser/graphify agregar a nuestro trabajo"
+- Inspeccionar qué es antes de integrarlo; no copiar código externo sin revisión (AGENTS.md §9).
+- **20/20 bloque C (rendimiento, parcial):** Lighthouse local (salida publicada, sin gzip) del inicio — antes: móvil 15 / escritorio 32, 46,8 MB, TBT 15 s, CLS 0,201/0,372. Causas: video del hero 42 MB (autoplay anulaba preload), footer.png 766 KB, 25 hojas CSS bloqueantes, 7 hojas inyectadas por JS a ~700 ms (CLS), fuentes/iconos CDN bloqueantes.
+  - Hecho (sin borrar originales): video web 1280 px 2,9 MB (−93 %) y 720 px 1,0 MB (−97,5 %) cargado tras `load` con póster WebP precargado (`js/hero-video-loader.js`; respeta reducir movimiento / ahorro de datos); footer.webp 18,7 KB (−97,6 %); build: fuentes+Font Awesome no bloqueantes (`js/async-styles.js`), hojas duplicadas eliminadas, hojas del inyector pre-declaradas en el orden final, barra `bq-nav-over-video` desde el HTML.
+  - Después: móvil 28–30 / escritorio 64; 2,7 MB; TBT móvil 1,5–2,2 s; CLS móvil 0 / escritorio 0,057. Regresión visual: 8 capturas (4 páginas × 390/1366) idénticas salvo la mascota animada.
+  - Brecha honesta: móvil sigue lejos de 90 (FCP 8,5 s, LCP 16,7 s) por ~800 KB de CSS bloqueante (566 KB sin usar en la portada) y 27 animaciones no compuestas → requiere consolidar CSS crítico (refactor con riesgo visual, pendiente).
