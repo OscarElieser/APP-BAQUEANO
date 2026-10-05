@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T06:34:35.822Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3594 · en 3594 · fr 3594 · it 3594 · pt 3594 · de 3594
+Generado: 2026-10-05T12:16:28.513Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3610 · en 3610 · fr 3610 · it 3610 · pt 3610 · de 3610
 
 HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -52,7 +52,7 @@ HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | js/calculator.js | js | 11 | 0 | 11 | 0 % |
 | js/environmental-evidence.js | js | 11 | 0 | 11 | 0 % |
 | js/environmental.js | js | 11 | 0 | 11 | 0 % |
-| js/global-injector.js | js | 16 | 5 | 11 | 31.3 % |
+| js/global-injector.js | js | 32 | 21 | 11 | 65.6 % |
 | apps/admin/src/app/auditoria/page.tsx | tsx | 10 | 0 | 10 | 0 % |
 | apps/admin/src/app/website-builder/page.tsx | tsx | 10 | 0 | 10 | 0 % |
 | apps/web/src/app/open-data/page.tsx | tsx | 10 | 0 | 10 | 0 % |
@@ -177,6 +177,7 @@ HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | index.html | html | 215 | 215 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
 | js/ayuda.js | js | 0 | 0 | 0 | 100 % |
+| js/baqueano-analytics.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-api.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-master-catalog.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-traffic-tracker.js | js | 0 | 0 | 0 | 100 % |

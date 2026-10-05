@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T06:34:35.822Z",
+  "generatedAt": "2026-10-05T12:16:28.513Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 3594,
-    "en": 3594,
-    "fr": 3594,
-    "it": 3594,
-    "pt": 3594,
-    "de": 3594
+    "es": 3610,
+    "en": 3610,
+    "fr": 3610,
+    "it": 3610,
+    "pt": 3610,
+    "de": 3610
   },
   "html": {
     "files": 31,
@@ -23,8 +23,8 @@
     "untranslated": 1
   },
   "js": {
-    "files": 78,
-    "translated": 16,
+    "files": 79,
+    "translated": 32,
     "untranslated": 731
   },
   "jsEditorial": {
@@ -70,6 +70,7 @@
     "testimonios.html",
     "js/ai-assistant.js",
     "js/ayuda.js",
+    "js/baqueano-analytics.js",
     "js/baqueano-api.js",
     "js/baqueano-master-catalog.js",
     "js/baqueano-traffic-tracker.js",
@@ -457,6 +458,15 @@
       "coverage": 0
     },
     {
+      "file": "js/baqueano-analytics.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/baqueano-api.js",
       "type": "js",
       "total": 0,
@@ -720,11 +730,11 @@
     {
       "file": "js/global-injector.js",
       "type": "js",
-      "total": 16,
-      "translated": 5,
+      "total": 32,
+      "translated": 21,
       "untranslated": 11,
       "editorialStrings": 0,
-      "coverage": 31.3
+      "coverage": 65.6
     },
     {
       "file": "js/global-language.js",

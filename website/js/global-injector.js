@@ -328,7 +328,7 @@
         bqFooterLinks('EXPLORÁ', [['index.html', 'Inicio'], ['destinos.html', 'Destinos'], ['mapa.html', 'Mapa Interactivo'], ['experiencias.html', 'Experiencias'], ['departamento.html', 'Departamentos']]) +
         bqFooterLinks('CULTURA', [['historia.html', 'Historia &amp; Memoria'], ['gastronomia.html', 'Gastronomía Ancestral'], ['musica.html', 'Son Sonoro Folk'], ['ambiental.html', 'Custodia Ambiental'], ['aliados.html', 'Red de Aliados']]) +
         bqFooterLinks('COMUNIDAD', [['nosotros.html', 'Quiénes Somos'], ['testimonios.html', 'Experiencias de viajeros'], ['mi-negocio.html', 'Registrá tu Negocio'], ['denuncias.html', 'Canal de Denuncias'], ['perfil.html', 'Mi Perfil'], ['mi-viaje.html', 'Mi Viaje']]) +
-        bqFooterLinks('LEGAL', [['terminos.html', 'Términos y Condiciones'], ['privacidad.html', 'Política de Privacidad'], ['cookies.html', 'Política de Cookies'], ['aviso-legal.html', 'Aviso Legal']]) +
+        bqFooterLinks('LEGAL', [['terminos.html', 'Términos y Condiciones'], ['privacidad.html', 'Política de Privacidad'], ['cookies.html', 'Política de Cookies'], ['aviso-legal.html', 'Aviso Legal']]).replace('</ul>', '<li><a href="cookies.html#preferencias" data-cookie-open data-i18n="consent.footerLink">Configurar cookies</a></li></ul>') +
       '</div></div>' +
       '<div class="footer-bottom-bar"><div class="exact-container">' +
         '<span>&copy; 2026 BAQUEANO. Todos los derechos reservados.</span>' +
@@ -659,7 +659,7 @@
       .bq-cookie-layer[hidden],.bq-cookie-settings[hidden]{display:none!important}
       .bq-cookie-card{width:min(1120px,100%);background:#fff;color:#0F172A;border:1px solid #D7E2E6;border-radius:22px;box-shadow:0 24px 70px rgba(15,23,42,.25);padding:24px;display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;font-family:'Inter',system-ui,sans-serif}
       .bq-cookie-copy{display:flex;gap:16px;align-items:flex-start}.bq-cookie-icon{width:48px;height:48px;flex:0 0 48px;border-radius:14px;background:#FFF1E8;color:#F65E01;display:grid;place-items:center;font-size:1.35rem}
-      .bq-cookie-title{font:800 1.15rem/1.25 'Montserrat',sans-serif;margin:0 0 7px;color:#0F172A}.bq-cookie-text{margin:0;color:#52627A;font-size:.91rem;line-height:1.55}.bq-cookie-text a{color:#165D6F;font-weight:800}
+      .bq-cookie-title{font:800 1.15rem/1.25 'Montserrat',sans-serif;margin:0 0 7px;color:#0F172A}.bq-cookie-text{margin:0;color:#52627A;font-size:.91rem;line-height:1.55}.bq-cookie-text a{color:#165D6F;font-weight:800}.bq-cookie-version{display:block;margin-top:6px;color:#475569;font-size:.78rem}.bq-cookie-option label{cursor:pointer}.bq-cookie-btn:focus-visible,.bq-cookie-check:focus-visible{outline:3px solid #F65E01;outline-offset:2px}
       .bq-cookie-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.bq-cookie-btn{border-radius:12px;padding:11px 16px;font-weight:800;font-size:.84rem;cursor:pointer;transition:transform .2s,box-shadow .2s;border:1px solid #CBD5E1;background:#fff;color:#0F172A}.bq-cookie-btn:hover{transform:translateY(-1px)}
       .bq-cookie-reject{color:#165D6F;border-color:#165D6F}.bq-cookie-accept{color:#fff;background:#165D6F;border-color:#165D6F;box-shadow:0 8px 18px rgba(22,93,111,.22)}
       .bq-cookie-settings{grid-column:1/-1;border-top:1px solid #E2E8F0;padding-top:18px}.bq-cookie-option{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:12px 0}.bq-cookie-option+ .bq-cookie-option{border-top:1px solid #EEF2F6}.bq-cookie-option strong{display:block;font-size:.9rem}.bq-cookie-option small{display:block;color:#64748B;margin-top:3px}.bq-cookie-check{width:20px;height:20px;accent-color:#165D6F}
@@ -667,21 +667,29 @@
     `;
     document.head.appendChild(style);
 
+    // 🎯 Requisito 3 del checklist 20/20: consentimiento real, reversible y en 6 idiomas.
+    // ⚙️ Textos con data-i18n (global-language.js los traduce); la política tiene
+    //    versión y fecha; la analítica (js/baqueano-analytics.js) solo se carga con
+    //    consentimiento y deja de enviar al retirarlo. Se reabre desde el footer
+    //    ([data-cookie-open]) y desde cookies.html.
+    // 📦 window.BaqueanoCookieConsent = { open, read, policyVersion }.
+    var POLICY_VERSION = '2026-09-26';
     var layer = document.createElement('div');
     layer.id = 'bqCookieConsent';
     layer.className = 'bq-cookie-layer';
     layer.setAttribute('role', 'dialog');
     layer.setAttribute('aria-modal', 'true');
     layer.setAttribute('aria-labelledby', 'bqCookieTitle');
+    layer.setAttribute('aria-describedby', 'bqCookieText');
     layer.innerHTML = `
       <div class="bq-cookie-card">
-        <div class="bq-cookie-copy"><div class="bq-cookie-icon" aria-hidden="true"><i class="fa-solid fa-cookie-bite"></i></div><div><h2 class="bq-cookie-title" id="bqCookieTitle">Tu privacidad y tus preferencias</h2><p class="bq-cookie-text">Usamos almacenamiento esencial para que BAQUEANO funcione y, con tu permiso, preferencias y analítica para mejorar tu experiencia. Podés aceptar, rechazar o configurar. <a href="cookies.html">Ver política de cookies</a>.</p></div></div>
-        <div class="bq-cookie-actions"><button type="button" class="bq-cookie-btn bq-cookie-reject" data-cookie-action="reject">Rechazar opcionales</button><button type="button" class="bq-cookie-btn" data-cookie-action="settings">Configurar</button><button type="button" class="bq-cookie-btn bq-cookie-accept" data-cookie-action="accept">Aceptar todas</button></div>
+        <div class="bq-cookie-copy"><div class="bq-cookie-icon" aria-hidden="true"><i class="fa-solid fa-cookie-bite"></i></div><div><h2 class="bq-cookie-title" id="bqCookieTitle" data-i18n="consent.title">Tu privacidad y tus preferencias</h2><p class="bq-cookie-text" id="bqCookieText"><span data-i18n="consent.text">Usamos almacenamiento esencial para que BAQUEANO funcione y, con tu permiso, preferencias y analítica para mejorar tu experiencia. Podés aceptar, rechazar o configurar.</span> <a href="cookies.html" data-i18n="consent.policyLink">Ver política de cookies</a>. <small class="bq-cookie-version" data-i18n="consent.policyDate">Política vigente desde el 26 de septiembre de 2026.</small></p></div></div>
+        <div class="bq-cookie-actions"><button type="button" class="bq-cookie-btn bq-cookie-reject" data-cookie-action="reject" data-i18n="consent.reject">Rechazar opcionales</button><button type="button" class="bq-cookie-btn" data-cookie-action="settings" aria-controls="bqCookieSettings" aria-expanded="false" data-i18n="consent.settings">Configurar</button><button type="button" class="bq-cookie-btn bq-cookie-accept" data-cookie-action="accept" data-i18n="consent.accept">Aceptar todas</button></div>
         <div class="bq-cookie-settings" id="bqCookieSettings" hidden>
-          <div class="bq-cookie-option"><div><strong>Cookies esenciales</strong><small>Seguridad, navegación y conservación de tu elección.</small></div><input class="bq-cookie-check" type="checkbox" checked disabled aria-label="Cookies esenciales siempre activas"></div>
-          <div class="bq-cookie-option"><div><strong>Preferencias</strong><small>Idioma, tema, región y personalización.</small></div><input class="bq-cookie-check" id="bqConsentPreferences" type="checkbox"></div>
-          <div class="bq-cookie-option"><div><strong>Analítica opcional</strong><small>Mediciones anónimas para mejorar el servicio.</small></div><input class="bq-cookie-check" id="bqConsentAnalytics" type="checkbox"></div>
-          <div class="bq-cookie-actions"><button type="button" class="bq-cookie-btn bq-cookie-accept" data-cookie-action="save">Guardar selección</button></div>
+          <div class="bq-cookie-option"><div><strong data-i18n="consent.essentialTitle">Cookies esenciales</strong><small data-i18n="consent.essentialDesc">Seguridad, navegación y conservación de tu elección.</small></div><input class="bq-cookie-check" type="checkbox" checked disabled data-i18n-aria-label="consent.essentialAria" aria-label="Cookies esenciales siempre activas"></div>
+          <div class="bq-cookie-option"><label for="bqConsentPreferences"><strong data-i18n="consent.preferencesTitle">Preferencias</strong><small data-i18n="consent.preferencesDesc">Idioma, tema, región y personalización.</small></label><input class="bq-cookie-check" id="bqConsentPreferences" type="checkbox"></div>
+          <div class="bq-cookie-option"><label for="bqConsentAnalytics"><strong data-i18n="consent.analyticsTitle">Analítica opcional</strong><small data-i18n="consent.analyticsDesc">Mediciones anónimas para mejorar el servicio.</small></label><input class="bq-cookie-check" id="bqConsentAnalytics" type="checkbox"></div>
+          <div class="bq-cookie-actions"><button type="button" class="bq-cookie-btn bq-cookie-accept" data-cookie-action="save" data-i18n="consent.save">Guardar selección</button></div>
         </div>
       </div>`;
     document.body.appendChild(layer);
@@ -689,17 +697,46 @@
     function readConsent() {
       try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch (error) { return null; }
     }
+    function loadAnalytics() {
+      if (document.querySelector('script[data-baqueano-analytics]')) return;
+      var script = document.createElement('script');
+      script.src = 'js/baqueano-analytics.js?v=20261005-1';
+      script.defer = true;
+      script.dataset.baqueanoAnalytics = 'true';
+      document.body.appendChild(script);
+    }
+    function honorConsent(consent) {
+      window.BaqueanoConsent = consent;
+      if (consent && consent.analytics) { loadAnalytics(); return; }
+      // Retirar la analítica también borra el identificador anónimo de este navegador.
+      try { localStorage.removeItem('baqueano_anonymous_id'); sessionStorage.removeItem('baqueano_session_id'); } catch (error) { /* sin almacenamiento */ }
+    }
     function applyConsent(preferences, analytics) {
-      var consent = { essential: true, preferences: !!preferences, analytics: !!analytics, version: 1, updatedAt: new Date().toISOString() };
+      var consent = { essential: true, preferences: !!preferences, analytics: !!analytics, version: 1, policyVersion: POLICY_VERSION, updatedAt: new Date().toISOString() };
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
         localStorage.setItem('baqueano_pref_enabled', String(consent.preferences));
         localStorage.setItem('baqueano_analytics_enabled', String(consent.analytics));
       } catch (error) { /* La navegación continúa aun si el navegador bloquea almacenamiento. */ }
       document.cookie = COOKIE_NAME + '=' + (consent.analytics ? 'all' : consent.preferences ? 'preferences' : 'essential') + '; Max-Age=31536000; Path=/; SameSite=Lax; Secure';
-      window.BaqueanoConsent = consent;
+      honorConsent(consent);
       window.dispatchEvent(new CustomEvent('baqueano:consent', { detail: consent }));
+      if (consent.analytics && window.BaqueanoAnalytics) window.BaqueanoAnalytics.track('consent_update', { mode: consent.preferences ? 'all' : 'analytics' });
       layer.hidden = true;
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+    var lastFocus = null;
+    function openConsent(showSettings) {
+      var current = readConsent() || {};
+      document.getElementById('bqConsentPreferences').checked = Boolean(current.preferences);
+      document.getElementById('bqConsentAnalytics').checked = Boolean(current.analytics);
+      var settings = document.getElementById('bqCookieSettings');
+      settings.hidden = !showSettings;
+      layer.querySelector('[data-cookie-action="settings"]').setAttribute('aria-expanded', String(!!showSettings));
+      lastFocus = document.activeElement;
+      layer.hidden = false;
+      var first = layer.querySelector(showSettings ? '#bqConsentPreferences' : '[data-cookie-action="reject"]');
+      if (first) first.focus();
     }
 
     layer.addEventListener('click', function(event) {
@@ -708,12 +745,29 @@
       var type = action.getAttribute('data-cookie-action');
       if (type === 'accept') applyConsent(true, true);
       if (type === 'reject') applyConsent(false, false);
-      if (type === 'settings') document.getElementById('bqCookieSettings').hidden = false;
+      if (type === 'settings') {
+        document.getElementById('bqCookieSettings').hidden = false;
+        action.setAttribute('aria-expanded', 'true');
+        document.getElementById('bqConsentPreferences').focus();
+      }
       if (type === 'save') applyConsent(document.getElementById('bqConsentPreferences').checked, document.getElementById('bqConsentAnalytics').checked);
     });
+    // Reabrir: enlace del footer, botón de cookies.html o cualquier [data-cookie-open].
+    document.addEventListener('click', function(event) {
+      var trigger = event.target.closest && event.target.closest('[data-cookie-open]');
+      if (!trigger) return;
+      event.preventDefault();
+      openConsent(true);
+    });
+    // cookies.html guarda desde sus propios interruptores: se respeta igual.
+    window.addEventListener('baqueano:consent', function(event) { honorConsent(event.detail); });
+    window.BaqueanoCookieConsent = { open: function() { openConsent(true); }, read: readConsent, policyVersion: POLICY_VERSION };
+
     var existing = readConsent();
-    if (existing && existing.version === 1) {
-      window.BaqueanoConsent = existing;
+    // Un consentimiento previo sin policyVersion sigue siendo válido; solo una
+    // política NUEVA (policyVersion distinta) vuelve a pedir la decisión.
+    if (existing && existing.version === 1 && (!existing.policyVersion || existing.policyVersion === POLICY_VERSION)) {
+      honorConsent(existing);
       layer.hidden = true;
     } else {
       layer.hidden = false;

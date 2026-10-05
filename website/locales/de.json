@@ -4924,5 +4924,23 @@
       "signIn": "Melde dich an, um die Kennzahlen zu sehen.",
       "error": "Die Kennzahlen konnten nicht berechnet werden: {error}"
     }
+  },
+  "consent": {
+    "title": "Deine Privatsphäre und deine Einstellungen",
+    "text": "Wir nutzen notwendige Speicherung, damit BAQUEANO funktioniert, und mit deiner Erlaubnis Einstellungen und Analyse, um dein Erlebnis zu verbessern. Du kannst zustimmen, ablehnen oder anpassen.",
+    "policyLink": "Cookie-Richtlinie ansehen",
+    "policyDate": "Richtlinie gültig seit dem 26. September 2026.",
+    "reject": "Optionale ablehnen",
+    "settings": "Anpassen",
+    "accept": "Alle akzeptieren",
+    "essentialTitle": "Notwendige Cookies",
+    "essentialDesc": "Sicherheit, Navigation und Speicherung deiner Auswahl.",
+    "essentialAria": "Notwendige Cookies immer aktiv",
+    "preferencesTitle": "Einstellungen",
+    "preferencesDesc": "Sprache, Design, Region und Personalisierung.",
+    "analyticsTitle": "Optionale Analyse",
+    "analyticsDesc": "Anonyme Messungen zur Verbesserung des Dienstes.",
+    "save": "Auswahl speichern",
+    "footerLink": "Cookie-Einstellungen"
   }
 }

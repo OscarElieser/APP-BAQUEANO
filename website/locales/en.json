@@ -4924,5 +4924,23 @@
       "signIn": "Sign in to see the indicators.",
       "error": "The indicators could not be calculated: {error}"
     }
+  },
+  "consent": {
+    "title": "Your privacy and your preferences",
+    "text": "We use essential storage so BAQUEANO works and, with your permission, preferences and analytics to improve your experience. You can accept, reject or configure.",
+    "policyLink": "View cookie policy",
+    "policyDate": "Policy in effect since September 26, 2026.",
+    "reject": "Reject optional",
+    "settings": "Configure",
+    "accept": "Accept all",
+    "essentialTitle": "Essential cookies",
+    "essentialDesc": "Security, navigation and remembering your choice.",
+    "essentialAria": "Essential cookies always active",
+    "preferencesTitle": "Preferences",
+    "preferencesDesc": "Language, theme, region and personalization.",
+    "analyticsTitle": "Optional analytics",
+    "analyticsDesc": "Anonymous measurements to improve the service.",
+    "save": "Save selection",
+    "footerLink": "Cookie settings"
   }
 }
