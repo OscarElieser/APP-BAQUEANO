@@ -4338,7 +4338,17 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   5. Sincronizar catálogo para la App Android (`website/scripts/export-territories-for-app.mjs`) y mapa/destinos.
   6. Validar todos los gates: `build-hostinger-static.mjs`, `npm run i18n`, `production-audit.mjs`, `territory-places-rule.test.mjs`, `seo-normalize.test.mjs`, `npm test`.
 - 📦 **QUÉ:** 13 hospedajes verificados integrados en el mapa, territorios, BAQUI y documentación del ecosistema.
-- **Estado:** En progreso.
+- **Entregables y gates verificados:**
+  - `docs/data/CATALOGO_HOSPEDAJES_2026-10.md`: documento maestro con 13 fichas verificadas.
+  - `tools/data/apply-lodging-catalog-2026-10.mjs`: script idempotente de enriquecimiento y carga.
+  - `supabase/migrations/20261005071000_verified_lodgings_catalog.sql`: tabla `public.lodgings` con RLS, double precision, check constraints y semilla de 13 registros.
+  - `website/js/territories-data.js`: 4 enriquecidos (Hotel Darío, Poco a Poco, Morgan's Rock, Treehouse con map_ready=false) + 9 nuevos. Total territorio: 254 lugares con franja viva y ficha propia.
+  - `assets/data/territories_places.json`: sincronizado para la App Android (254 lugares).
+  - `website/js/destinos-verified.js`: soporte de categoría `hospedaje`, visualización de servicios, dirección, teléfono, whatsapp y botón 'Cómo llegar'.
+  - `website/mapa.html`: 5 chips de filtros de alojamiento, 12 marcadores verificados y popups con check azul, servicios, contacto y ruta.
+  - `website/locales/`: 6 claves semánticas añadidas en 6 idiomas (`common.hoteles`, `common.hostales`, `common.resorts`, `common.otrosHospedajes`, `places.verified.checkNotice`, `places.verified.seeSheet`).
+  - Gates: `territory-places-rule.test.mjs` OK (254 lugares), `test:app-territories` OK, `npm run i18n` 0 errores, `flutter analyze` limpio (No issues found), `flutter test` 66/66 OK, `production-audit.mjs` 0 críticos.
+- **Estado:** ✅ Completado y validado en todas las plataformas.
 
 
 ## 2026-10-05 — Solicitud: "BAQUEANO IMPACTO — integración estratégica y alineación nacional" (Claude Code)
@@ -4356,3 +4366,18 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - Gates: test:impact 26/26 (nuevo), i18n 0 errores, smoke OK, shell 3535/0, BAQUI 20/20, territorios 254 OK, SEO 12/12, auditoría 0 críticos. Lighthouse no ejecutado.
 - Entregable completo y clasificación 🟢🟡🔴: docs/impact/BAQUEANO_IMPACTO.md (avance real ~55 %). Pendiente: aplicar migración + desplegar baqueano-ops y baqueano-ai (requiere autorización del propietario).
 - Siguiente: catálogo de restaurantes, comedores y kioscos.
+
+## 2026-10-05 12:56 — Solicitud: Integración de meta google-site-verification
+- 🎯 **POR QUÉ:** Verificar la propiedad del sitio web en Google Search Console mediante la etiqueta meta `<meta name="google-site-verification" content="6t1JFxW85JXZurRIWnfJshrlaEICyNAn7feqGsl01Y8" />` para asegurar indexación oficial, presencia en Google y rastreo orgánico de BAQUEANO.
+- ⚙️ **CÓMO:**
+  1. Integrar la etiqueta meta en el `<head>` de `website/index.html` (página raíz principal de verificación de Search Console) y en las páginas clave de entrada si corresponde.
+  2. Verificar que no altere el formato, metadatos existentes ni rompa los auditores de CI (`production-audit.mjs`, `seo-normalize.test.mjs`, `npm run i18n`).
+- 📦 **QUÉ:** Etiqueta `<meta name="google-site-verification" content="6t1JFxW85JXZurRIWnfJshrlaEICyNAn7feqGsl01Y8">` integrada en el `<head>` de `website/index.html`. Auditorías estáticas y de internacionalización 100% limpias (0 críticos, 0 errores).
+- **Estado:** ✅ Completado y verificado.
+
+
+- Catálogo de restaurantes, comedores y kioscos (oct 2026) aplicado → tools/data/apply-food-catalog-2026-10.mjs (idempotente, 2.ª ejecución 0 cambios): 12 lugares (Managua 5, Granada 6, León 1); 7 map-ready con lat/lng exacta, 5 'partial' sin coordenadas ni "Cómo llegar"; precios/horarios dinámicos con checkedAt; teléfonos "confirmar/no publicar" omitidos; nombre de la responsable de La Gata no publicado (coherencia INTUR). destinos.html: filtros Restaurantes/Comedores/Kioscos (+3 claves ×6). 266 lugares. Doc: docs/data/CATALOGO_GASTRONOMIA_2026-10.md.
+- Verificado en navegador (390 px): Cómo llegar solo en pins exactos; sin teléfonos vetados; sin desborde. Gates: territorios 266 OK, app-territories 266, i18n 0 errores, auditoría 0 críticos, smoke OK.
+- i18n-audit.mjs: se excluyen archivos de verificación de Google Search Console (google<hex>.html, apareció google5c73d71f3e5f8337.html a las 12:53, no creado por esta sesión) — no son interfaz y deben conservar su contenido exacto.
+- Coordinación: la sesión de hospedajes (Antigravity) tenía cambios sin commit en territories-data.js/destinos-verified.js/mapa.html; se editó encima sin revertir nada (CATEGORY_KIND conserva 'hospedaje'). Nada commiteado por esta sesión.
+- **Estado:** ✅ BAQUEANO IMPACTO (repo) y catálogo gastronómico completados. Pendiente autorización: aplicar migración 20261005070000 y desplegar baqueano-ops / baqueano-ai.

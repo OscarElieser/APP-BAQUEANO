@@ -5047,7 +5047,10 @@
         "reserva": "Riserve naturali",
         "cueva": "Grotte e canyon",
         "mirador": "Punti panoramici",
-        "parque": "Parchi e aree protette"
+        "parque": "Parchi e aree protette",
+        "restaurante": "Ristoranti",
+        "comedor": "Comedores (trattorie locali)",
+        "kiosco": "Chioschi"
       }
     }
   },

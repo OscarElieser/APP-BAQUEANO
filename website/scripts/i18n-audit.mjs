@@ -59,7 +59,10 @@ const walk = (dir, filter, output = []) => {
 const rel = (file) => path.relative(root, file).split(path.sep).join('/');
 
 const files = [];
-for (const file of fs.readdirSync(root).filter((name) => name.endsWith('.html'))) {
+// Los archivos de verificación de Google Search Console (googleXXXX.html) deben
+// conservar su contenido exacto: no son páginas de interfaz ni cargan el shell.
+const isSiteVerification = (name) => /^google[0-9a-f]{8,}\.html$/.test(name);
+for (const file of fs.readdirSync(root).filter((name) => name.endsWith('.html') && !isSiteVerification(name))) {
   const source = fs.readFileSync(path.join(root, file), 'utf8');
   if (!SHELL_EXEMPT.has(file) && !/js\/global-injector\.js/.test(source)) errors.push(`${file}: no carga el shell global (js/global-injector.js).`);
   if (/js\/global-language\.js/.test(source)) errors.push(`${file}: carga global-language.js directamente (debe cargarlo el shell).`);

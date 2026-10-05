@@ -5047,7 +5047,10 @@
         "reserva": "Naturreservate",
         "cueva": "Höhlen und Schluchten",
         "mirador": "Aussichtspunkte",
-        "parque": "Parks und Schutzgebiete"
+        "parque": "Parks und Schutzgebiete",
+        "restaurante": "Restaurants",
+        "comedor": "Comedores (einfache Lokale)",
+        "kiosco": "Imbissstände"
       }
     }
   },

@@ -5047,7 +5047,10 @@
         "reserva": "Reservas naturales",
         "cueva": "Cuevas y cañones",
         "mirador": "Miradores",
-        "parque": "Parques y áreas protegidas"
+        "parque": "Parques y áreas protegidas",
+        "restaurante": "Restaurantes",
+        "comedor": "Comedores",
+        "kiosco": "Kioscos"
       }
     }
   },

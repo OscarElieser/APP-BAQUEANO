@@ -33,7 +33,7 @@
   function icon(name) { var i = el('i', name.indexOf('fa-brands') === 0 ? name : 'fa-solid ' + name); i.setAttribute('aria-hidden', 'true'); return i; }
 
   // Tipo legible: modalidad del catálogo INTUR o "Lugar verificado" (base verificada).
-  var CATEGORY_KIND = { playa: 'Playas', rio: 'Ríos', isla: 'Islas', cascada: 'Cascadas', laguna: 'Lagunas y lagos', volcan: 'Volcanes y cerros', reserva: 'Reservas naturales', cueva: 'Cuevas y cañones', mirador: 'Miradores', parque: 'Parques y áreas protegidas', hospedaje: 'Hospedajes' };
+  var CATEGORY_KIND = { playa: 'Playas', rio: 'Ríos', isla: 'Islas', cascada: 'Cascadas', laguna: 'Lagunas y lagos', volcan: 'Volcanes y cerros', reserva: 'Reservas naturales', cueva: 'Cuevas y cañones', mirador: 'Miradores', parque: 'Parques y áreas protegidas', hospedaje: 'Hospedajes', restaurante: 'Restaurantes', comedor: 'Comedores', kiosco: 'Kioscos' };
   function kindOf(place) {
     var v = place.verification || {};
     if (place.category && CATEGORY_KIND[place.category]) return i18n('destinos.verified.kind.' + place.category, CATEGORY_KIND[place.category]);

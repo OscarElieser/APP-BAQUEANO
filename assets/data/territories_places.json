@@ -232,6 +232,13 @@
           "desc": "Hotel ubicado en el centro histórico de León, registrado como alojamiento en OpenStreetMap y GeoNames, a pocos minutos caminando de la Catedral de León.",
           "lat": 12.43561,
           "lng": -86.8819
+        },
+        {
+          "name": "Comedor La Cucaracha",
+          "type": "Comedor",
+          "desc": "Comedor popular en León con ubicación geográfica verificable y referencias públicas de comida nicaragüense.",
+          "lat": 12.4342008,
+          "lng": -86.873702
         }
       ],
       "gastronomy": [
@@ -817,6 +824,40 @@
           "desc": "Hotel ubicado frente al Parque Central de Granada. Su web oficial confirma habitaciones, balcones, servicios hoteleros y prácticas de sostenibilidad certificadas.",
           "lat": 11.92982,
           "lng": -85.95451
+        },
+        {
+          "name": "Restaurante El Zaguán",
+          "type": "Restaurante",
+          "desc": "Restaurante del centro histórico de Granada, verificado mediante ficha comercial y cartografía abierta.",
+          "lat": 11.92958,
+          "lng": -85.95256
+        },
+        {
+          "name": "Boca Baco",
+          "type": "Restaurante",
+          "desc": "Restaurante de cocina fusión y tapas en el centro de Granada. Su sitio oficial confirma contacto, ubicación y menú."
+        },
+        {
+          "name": "Comedor Doña Tulita",
+          "type": "Comedor",
+          "desc": "Comedor de comida casera nicaragüense en Granada. La dirección, el teléfono y las coordenadas coinciden en fuentes locales y cartográficas.",
+          "lat": 11.9322657,
+          "lng": -85.9573215
+        },
+        {
+          "name": "Comedor La Parada",
+          "type": "Comedor",
+          "desc": "Comedor local dentro de la terminal de pequeños buses de Granada. Fuentes recientes confirman dirección, teléfono y horario."
+        },
+        {
+          "name": "Comedor Martha",
+          "type": "Comedor",
+          "desc": "Comedor y restaurante nicaragüense con ficha comercial activa en Granada."
+        },
+        {
+          "name": "Kiosco La Gata",
+          "type": "Kiosco",
+          "desc": "Kiosco tradicional de vigorón en el Parque Central Colón, identificado por fuentes periodísticas nicaragüenses como un kiosco histórico de Granada."
         }
       ],
       "gastronomy": [
@@ -1389,6 +1430,39 @@
           "desc": "Hotel de la marca Hyatt Place. Hyatt confirma habitaciones modernas, desayuno, Wi-Fi, piscina exterior y espacios para viajeros de negocios y ocio.",
           "lat": 12.10173,
           "lng": -86.24828
+        },
+        {
+          "name": "Cocina de Doña Haydée",
+          "type": "Restaurante",
+          "desc": "Restaurante nicaragüense ampliamente conocido en Managua. La ficha comercial actual confirma su dirección, teléfono y operación diaria.",
+          "lat": 12.11872,
+          "lng": -86.26163
+        },
+        {
+          "name": "Restaurante Don Cándido",
+          "type": "Restaurante",
+          "desc": "Restaurante especializado en cortes de carne, con ficha comercial activa y ubicación cartográfica verificada en Managua.",
+          "lat": 12.12577,
+          "lng": -86.26316
+        },
+        {
+          "name": "Restaurante El Eskimo",
+          "type": "Restaurante",
+          "desc": "Restaurante registrado cartográficamente en Managua y con ficha comercial activa.",
+          "lat": 12.14409,
+          "lng": -86.29012
+        },
+        {
+          "name": "Restaurante Los Ranchos",
+          "type": "Restaurante",
+          "desc": "Restaurante con presencia consolidada en Managua. La ficha comercial y OpenStreetMap confirman su ubicación.",
+          "lat": 12.14443,
+          "lng": -86.29049
+        },
+        {
+          "name": "Kiosko Vilma",
+          "type": "Kiosco",
+          "desc": "Kiosco y cafetería identificado públicamente dentro del Aeropuerto Internacional Augusto C. Sandino; también sirve de punto de referencia para el transporte turístico."
         }
       ],
       "gastronomy": [
