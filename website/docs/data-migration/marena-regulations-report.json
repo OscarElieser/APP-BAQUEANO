@@ -1,0 +1,37 @@
+{
+  "generated_from": "website/scripts/data/marena",
+  "statements": 211,
+  "regulations": [
+    {
+      "key": "rm-016-2026-vedas",
+      "status": "verified"
+    },
+    {
+      "key": "rm-009-2025-vedas",
+      "status": "expired"
+    },
+    {
+      "key": "ley-1248-acads",
+      "status": "pending"
+    },
+    {
+      "key": "ley-217-ambiente",
+      "status": "pending"
+    },
+    {
+      "key": "ley-489-pesca",
+      "status": "pending"
+    },
+    {
+      "key": "rm-007-99-sistema-vedas",
+      "status": "pending"
+    }
+  ],
+  "wildlife_restrictions": 204,
+  "conflicting": [
+    "Dendrocygna bicolor",
+    "Thunus albacares",
+    "Thunus obesus",
+    "Katsuwonus pelamis"
+  ]
+}

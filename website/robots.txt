@@ -48,6 +48,14 @@ Disallow: /health
 Disallow: /offline.html
 
 # Assets públicos — permitidos
+Allow: /favicon.ico
+Allow: /favicon.png
+Allow: /favicon-*.png
+Allow: /apple-touch-icon.png
+Allow: /android-chrome-*.png
+Allow: /maskable-*.png
+Allow: /site.webmanifest
+Allow: /manifest.json
 Allow: /assets/images/
 Allow: /assets/audio/
 Allow: /assets/icons/

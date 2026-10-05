@@ -1,0 +1,75 @@
+{
+ "retrieved_at": "2026-10-05",
+ "regulations": [
+  {
+   "regulation_key": "rm-016-2026-vedas",
+   "title": "Resolución Ministerial No. 016-2026 \"Actualización del Sistema de Vedas para el año 2026\"",
+   "document_type": "resolucion_ministerial",
+   "institution": "MARENA",
+   "publication_reference": "La Gaceta, Diario Oficial No. 29, págs. 1643-1654",
+   "publication_date": "2026-02-16",
+   "effective_date": "2026-02-16",
+   "source_url": "https://www.marena.gob.ni/wp-content/uploads/2026/03/GACETA29_2026.pdf",
+   "applies_to": "Todo el territorio nacional: especies de flora y fauna silvestres (Art. 2).",
+   "summary": "Vedas nacionales indefinidas (Art. 4) y parciales (Art. 5) para 2026. Art. 6: tortuga verde del Caribe solo consumo de subsistencia de comunidades costeñas. Art. 7: pesca deportiva de Sábalo Real autorizada en septiembre en Río San Juan con autorizaciones. Art. 9 deroga la R.M. 009-2025. Art. 10: sigue vigente si no se publica el sistema 2027. Vigencia desde su publicación (Art. 11).",
+   "status": "verified",
+   "evidence": "Texto completo leído del PDF oficial enlazado por MARENA el 2026-10-05."
+  },
+  {
+   "regulation_key": "rm-009-2025-vedas",
+   "title": "Resolución Ministerial No. 009-2025 (Sistema de Vedas 2025)",
+   "document_type": "resolucion_ministerial",
+   "institution": "MARENA",
+   "publication_reference": "La Gaceta, Diario Oficial No. 35 (21-02-2025)",
+   "publication_date": "2025-02-21",
+   "source_url": null,
+   "summary": "Derogada por la R.M. 016-2026 (Art. 9). Se registra solo para no usar vedas de 2025 como vigentes.",
+   "superseded_by": "rm-016-2026-vedas",
+   "status": "expired",
+   "evidence": "Derogación citada en el Art. 9 de la R.M. 016-2026; el documento 2025 no se leyó."
+  },
+  {
+   "regulation_key": "ley-1248-acads",
+   "title": "Ley No. 1248, Ley Área de Conservación Ambiental y Desarrollo Sostenible",
+   "document_type": "ley",
+   "institution": "Asamblea Nacional",
+   "source_url": null,
+   "summary": "Citada por la R.M. 016-2026 (Art. 8) como marco sancionatorio; los considerandos se refieren al SINACADS. Texto no leído: pendiente de fuente oficial.",
+   "status": "pending",
+   "evidence": "Mención en la R.M. 016-2026."
+  },
+  {
+   "regulation_key": "ley-217-ambiente",
+   "title": "Ley No. 217, Ley General del Medio Ambiente y los Recursos Naturales",
+   "document_type": "ley",
+   "institution": "Asamblea Nacional",
+   "source_url": null,
+   "summary": "Citada por la R.M. 016-2026 (considerandos III-V, Art. 8). Texto no leído: pendiente de fuente oficial.",
+   "status": "pending",
+   "evidence": "Mención en la R.M. 016-2026."
+  },
+  {
+   "regulation_key": "ley-489-pesca",
+   "title": "Ley No. 489, Ley de Pesca y Acuicultura",
+   "document_type": "ley",
+   "institution": "Asamblea Nacional",
+   "publication_reference": "La Gaceta No. 251 (27-12-2004), según la R.M. 016-2026",
+   "source_url": null,
+   "summary": "Citada por la R.M. 016-2026 (considerando VI, Art. 6). Texto no leído: pendiente de fuente oficial.",
+   "status": "pending",
+   "evidence": "Mención en la R.M. 016-2026."
+  },
+  {
+   "regulation_key": "rm-007-99-sistema-vedas",
+   "title": "Resolución Ministerial No. 007-99, Sistema de Vedas de Especies Silvestres Nicaragüenses",
+   "document_type": "resolucion_ministerial",
+   "institution": "MARENA",
+   "publication_reference": "La Gaceta No. 109 (09-06-1999), según la R.M. 016-2026",
+   "publication_date": "1999-06-09",
+   "source_url": null,
+   "summary": "Establece el Sistema de Vedas; su Art. 13 ordena revisión y publicación anual. Texto no leído: pendiente.",
+   "status": "pending",
+   "evidence": "Mención en la R.M. 016-2026 (considerando VII)."
+  }
+ ]
+}

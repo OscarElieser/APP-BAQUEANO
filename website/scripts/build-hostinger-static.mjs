@@ -20,8 +20,11 @@ if (path.dirname(output) !== path.resolve(root) || path.basename(output) !== 'di
 // (scripts/build-search-index.mjs); sin ellos el buscador cae al modo básico.
 const publicDirectories = ['assets', 'css', 'data', 'js', 'locales'];
 const publicRootFiles = new Set([
-  '.htaccess', 'app.js', 'favicon.ico', 'favicon.png', 'manifest.json', 'robots.txt',
-  'service-worker.js', 'sitemap.xml', 'styles.css'
+  '.htaccess', 'app.js', 'favicon.ico', 'favicon.png', 'manifest.json', 'site.webmanifest',
+  'favicon-16x16.png', 'favicon-32x32.png', 'favicon-48x48.png', 'favicon-64x64.png',
+  'apple-touch-icon.png', 'android-chrome-192x192.png', 'android-chrome-512x512.png',
+  'icon-192.png', 'icon-512.png', 'maskable-icon-192.png', 'maskable-icon-512.png',
+  'robots.txt', 'service-worker.js', 'sitemap.xml', 'styles.css'
 ]);
 const ignoredAssetNames = new Set([
   'BaqueanoNicaragua.apk',

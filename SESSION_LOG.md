@@ -20,13 +20,74 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 # ðŸ§­ BAQUEANO â€” BitÃ¡cora Persistente de Sesiones
 
+## 🧭 MÓDULO AMBIENTAL MARENA — REANUDACIÓN (05-10-2026)
+
+- **Consulta / Mandato del Usuario:** *"ok te autorizo"* (respuesta a "¿Retomo MARENA o sigo con la biblioteca?"). Se retoma MARENA (opción 1, AGENTS.md §6). Sin commit/push/db push/deploy.
+- **Plan:** vedas 2026 extraídas fila a fila de la R.M. 016-2026 → inventario de 42 planes de manejo oficiales → cruce con `places` → migración en repo (no aplicada) → importadores idempotentes en modo prueba → pruebas en PostgreSQL local → informe 🟢🟡🔴⚪ con riesgos y rollback.
+- 📦 **QUÉ (avance verificable, sin tocar producción):**
+  - Datos fuente con URL oficial y fecha (website/scripts/data/marena/): `vedas-2026.json` (R.M. 016-2026, Gaceta 29 del 16-02-2026: 140 indefinidas + 64 parciales, transcritas de las páginas impresas; 4 filas marcadas `conflicting` por erratas del original: "31 Abril" y atunes "19 Enero de 2024"), `management-plans.json` (42 planes oficiales; QR decodificados 42/42 → página del plan → PDF HTTP 200; 41 con categoría legal; 17 con resolución confirmada en el texto de La Gaceta; Saslaya en conflicto Parque Nacional vs Reserva Natural), `regulations.json` (R.M. 016-2026 verificada; R.M. 009-2025 derogada; Leyes 1248, 217, 489 y R.M. 007-99 pendientes de lectura), `access-points.json` (vacío: 0 accesos verificados), `places-snapshot.json` (237 lugares públicos).
+  - Migración `supabase/migrations/20261005090000_environmental_marena_module.sql` (NO aplicada): reutiliza places/businesses/verification_sources; crea protected_area_details, management_plans, biodiversity_records, visitor_rules, access_points, biosphere_reserves(+places), environmental_regulations, wildlife_restrictions; guardias de verificación/publicación (Fase 18), vista `place_navigation` (Cómo llegar solo con acceso verificado), `wildlife_restrictions_current`, `refresh_environmental_verification_status()`, `environmental_dashboard()`, RLS.
+  - Importadores idempotentes `website/scripts/import-marena-{areas,management-plans,regulations,access-points}.mjs` + `lib/marena-import.mjs` → `supabase/imports/marena/*.sql` (modo prueba). Enlace estricto: 10 áreas = lugar existente; 32 lugares nuevos SIN publicar; 12 "posible misma entidad" para revisión en Ops Center.
+  - Pruebas: `supabase/tests/environmental_marena.test.sql` (pgTAP 25 casos). Ejecutado en PGlite (PostgreSQL 18) con réplica del esquema: migración ×2 idempotente ✅, importación ×2 sin duplicar ✅ (269 places, 42 fichas, 42 planes, 6 normativas, 204 vedas, 43 fuentes), 25/25 ✅. Hallazgo: 10 áreas ya publicadas no cumplen el mínimo de la Fase 18 (sin departamento/municipio oficial).
+  - Pendiente: leer los 42 PDF de planes (≈1.2 GB) para departamento/municipio/zonificación; biosfera y Ramsar sin fuente leída (0); web/mapa/ficha/BAQUI/Android/Ops Center sin conectar aún; documento de arquitectura y rollback.
+- **Interrupción del propietario (05-10-2026 ~17:20):** "NO QUIERO VER ERRORES NI WARNINGS" (capturas Supabase: Auth 1 warning, Postgres 21 errores, API Gateway 20 warnings, 16:19–17:17) y "HÁBLEME SIEMPRE EN ESPAÑOL" (guardado en memoria). Sin acceso a logs desde esta máquina (sin CLI ni token). Aporte propio identificado: lecturas REST públicas de solo lectura ~16:45, incluida 1 consulta a `protected_area_details` (no existe → 404, cuenta como warning del API Gateway). No hubo escrituras en producción. Se pide acceso a logs para diagnosticar el resto.
+
+
+## 🧭 CONFIGURACIÓN OFICIAL DE LOGO, FAVICON, PWA, SCHEMA.ORG Y METADATA DE IDENTIDAD BAQUEANO (05-10-2026)
+
+- **Consulta / Mandato del Usuario:**
+  Configurar correctamente el LOGO / ÍCONO OFICIAL DE BAQUEANO (`baqueano_icono_oficial.png`) en toda la plataforma web para que sea utilizado como favicon, icono del navegador, icono PWA, manifest, apple touch icon, Android web/PWA, Schema.org Organization, identidad del sitio y representación para motores de búsqueda (Google Search).
+  Reglas estrictas:
+  - Archivo maestro oficial: `baqueano_icono_oficial.png`.
+  - Cero rediseño, deformación, alteración de colores o textos agregados.
+  - No borrar logos actuales, código, service worker, ni configuraciones existentes sin auditar.
+  - Respetar `google5c73d71f3e5f8337.html` intacto.
+  - No reemplazar la imagen social grande Open Graph (`og:image` / `twitter:image`) por el icono pequeño.
+  - Auditoría exhaustiva en 26 fases y entrega de reporte con 20 puntos clasificados en 🟢/🟡/🔴/⚪.
+  - Cero commits, cero push, cero deploys a producción hasta auditar, implementar localmente, probar y recibir autorización explícita.
+- **Golden Circle:**
+  - 🎯 **POR QUÉ:** Consolidar la identidad técnica y visual de BAQUEANO Nicaragua en Google Search, navegadores web, PWA y ecosistema móvil, erradicando íconos genéricos o referencias obsoletas, respetando el símbolo original intacto.
+  - ⚙️ **CÓMO:** Auditoría completa de favicons, manifest, `<head>` en todas las páginas públicas, Schema.org Organization, service worker y robots.txt; generación de variantes técnicas de alta resolución a partir del master oficial sin distorsión; integración limpia en el directorio público `website/`.
+  - 📦 **QUÉ:** `favicon.ico`, variantes PNG (16x16, 32x32, 48x48, 64x64, 180x180, 192x192, 512x512, maskables), `site.webmanifest`, estandarización de `<head>` y Schema.org, auditoría Firebase/Nginx/Android, y reporte exhaustivo.
+- **Estado Actual:** 🟢 AUDITORÍA E IMPLEMENTACIÓN LOCAL COMPLETADAS AL 100% — Esperando autorización explícita para commit, push o despliegue.
+- **Entregables y Acciones Completadas:**
+  1. **Auditoría e Identificación del Problema:** Los favicons previos (`favicon.png`, `apple-touch-icon.png`, `icon-512.png`) eran 100% blancos generados a partir de `baqueano_icono_2000x2000-blanco.png`. Sobre fondos claros (como las pestañas de navegador y las SERPs de Google Search con fondo `#FFFFFF`), el ícono blanco resultaba invisible, obligando a Google a degradar la vista a un globo terráqueo genérico. Además, `index.html` enlazaba a un archivo `.webp` no estándar.
+  2. **Identificación del Master Oficial:** `assets/images/baqueano_icono_oficial.png` (478x478 RGBA, colores oficiales `#EA5D0D` naranja terracota y `#145B6B` azul petróleo teal, fondo transparente, relación 1:1).
+  3. **Respaldo de Seguridad:** Archivos anteriores respaldados en `website/assets/icons/backup_pre_oficial_20261005/`.
+  4. **Generación de Íconos de Alta Resolución:**
+     - `favicon.ico`: Formato ICO multi-resolución real conteniendo frames PNG de 16x16, 32x32 y 48x48 (6,518 bytes).
+     - `favicon-16x16.png` (904 bytes), `favicon-32x32.png` (2,208 bytes), `favicon-48x48.png` (3,352 bytes), `favicon-64x64.png` (4,723 bytes).
+     - `apple-touch-icon.png` (180x180, 14,713 bytes).
+     - `android-chrome-192x192.png` (15,714 bytes), `android-chrome-512x512.png` (56,037 bytes).
+     - `maskable-icon-192.png` (12,262 bytes), `maskable-icon-512.png` (39,811 bytes) con safe zone del 80% sobre lienzo `#ffffff`.
+     - Réplicas en `website/assets/icons/` (`favicon-48.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`).
+  5. **site.webmanifest & manifest.json:** Creado `website/site.webmanifest` y sincronizado `website/manifest.json` con branding oficial `BAQUEANO Nicaragua`, tema `#165D6F`, fondo `#ffffff` e iconografía completa.
+  6. **Estandarización de <head> en 31 Páginas HTML:** Inyectado bloque canónico con `<link rel="icon" href="/favicon.ico" sizes="any">`, variantes PNG 32x32 y 16x16, `apple-touch-icon`, `site.webmanifest` y `theme-color` `#165D6F`.
+  7. **Preservación Inviolable:** `google5c73d71f3e5f8337.html` permanece 100% intacto y sin tocar. `og:image` y `twitter:image` conservan su card social horizontal de 1200x630.
+  8. **Service Worker:** Actualizado a `baqueano-offline-v15` con precaché de los nuevos íconos oficiales y soporte en requests estáticos.
+  9. **robots.txt:** Agregadas directivas `Allow:` explícitas para `/favicon.ico`, `/favicon.png`, `/favicon-*.png`, `/apple-touch-icon.png`, `/android-chrome-*.png`, `/maskable-*.png`, `/site.webmanifest` y `/manifest.json`.
+  10. **Schema.org:** Estandarizado `Organization` en `seo-normalize.mjs` con logo apuntando a `https://baqueanonicaragua.com/android-chrome-512x512.png`.
+  11. **Pruebas y Verificaciones:**
+      - 18 rutas HTTP de íconos probadas con servidor efímero: 100% devuelven HTTP 200 OK con Content-Type correspondiente.
+      - `npm run build:hostinger`: compila 770 archivos estáticos en `dist-hostinger/` incluyendo todos los íconos raíz.
+      - `npm run test:hostinger`: 10/10 rutas críticas aprobadas.
+      - `node scripts/seo-normalize.test.mjs`: 12/12 pruebas pasadas.
+      - `npm run i18n`: 0 errores, 3916 claves traducidas en 6 idiomas.
+      - `npm run test`: suite de humo de producción aprobada.
+  12. **Cero Commits, Cero Pushes, Cero Deploys:** El código se encuentra probado localmente esperando revisión y autorización del usuario.
+
+
 ## 🧭 BIBLIOTECA SONORA DE HISTORIA EN LA AUDIOGUÍA DE historia.html (05-10-2026)
 
 - **Consulta / Mandato del Usuario:** aporta 12 bloques históricos verificables (Época prehispánica, Conquista y Colonia, León Viejo, Independencia, Formación del Estado, Guerra Nacional, Batalla de San Jacinto, Rubén Darío, Augusto C. Sandino, Costa Caribe, Autonomía de la Costa Caribe, Patrimonio de Nicaragua) con fuentes (Academia de Geografía e Historia de Nicaragua, UNESCO, MINED, Ministerio de Defensa, UNAN-Managua); propone una biblioteca de 40–60 capítulos, separar `historical_fact` de `oral_tradition` (La Mocuana, Carreta Nagua, Cadejo → "Mitos, leyendas y tradición oral") y una ficha por capítulo (título, período, fecha, relato, personajes, lugar, departamento, tipo, fuente, source_url, verified_at). *"ahí en la imagen lo vamos a agregar, ve tú cómo se van a visualizar pero sin perder la trama que llevamos"* (imagen: bloque "Escuchá nuestra historia", Capítulo 4 de 7).
 - **Golden Circle:**
   - 🎯 **POR QUÉ:** convertir la audioguía de 7 capítulos en una biblioteca sonora con hechos verificados y fuente visible, sin mezclar tradición oral con historia documentada.
   - ⚙️ **CÓMO:** mantener el diseño actual (avatar, ▶, waveform, chips) y ampliarlo con los capítulos aportados, ficha de fuente y tipo; textos con claves i18n en 6 idiomas.
-  - 📦 **QUÉ:** (en curso) — el módulo ambiental MARENA queda en pausa con la evidencia descargada (planes de manejo y R.M. 016-2026 de vedas).
+  - 📦 **QUÉ:** biblioteca sonora con 8 períodos (chips; se agrega 🌊 Costa Caribe y "Siglo XX" pasa a "Personajes") y 13 capítulos: Pueblos originarios del Pacífico · Conquista y Colonia · León Viejo · Independencia · Los Treinta Años · Guerra Nacional · Batalla de San Jacinto · Rubén Darío · Augusto C. Sandino · Costa Caribe y la Mosquitia · Autonomía de la Costa Caribe · Patrimonio Mundial · El Güegüense. Cada capítulo: tipo (hecho histórico / patrimonio), fecha, lugar, personajes, "Ver en el mapa", fuentes enlazadas y "Verificado el 05-10-2026". Voz en el idioma activo.
+- **Archivos:** `website/js/historia-audioguia-data.js` (nuevo), `website/js/historia-audioguia.js` (reescrito, misma mecánica ▶/⏸), `website/historia.html`, `website/css/pages/historia-exact.css`, `website/scripts/historia-audioguia.test.mjs` (nuevo, `npm run test:audioguia`), 43 claves i18n en 6 idiomas, `assets/i18n` reexportado.
+- **Verificación de fuentes (leídas el 05-10-2026):** AGHN "Breve Historia de Nicaragua"; MINED (fiestas patrias San Jacinto + PDF "Los dos combates de San Jacinto": domingo 14-09-1856, Ejército del Septentrión, parte de Estrada); Instituto Cervantes (Darío); MINED + ENEL (Sandino: 18-05-1895, 1927, EDSN, 21-02-1934); UNAN-Managua (Ley No. 28); UNESCO (Nicaragua: León Viejo 2000, Catedral de León 2011; Güegüense 2005/2008). Ajustes por evidencia: "influencia inglesa" (no "británica"); Ley 28 solo "1987" (fuentes discrepan en el día); no se afirma la participación de los flecheros de Matagalpa (el PDF del MINED dice que no hay prueba documental salvo su jefe). Se retiraron del guion anterior afirmaciones sin fuente (Gritería, Palo de Mayo, terremoto 1972, 1979, Bosawás/Indio Maíz) — pendientes de fuente para volver como capítulos.
+- **Evidencia:** `test:audioguia` ✅ 13/8; `npm run i18n` ✅ 0 errores (JS pendientes 734 → 729); Playwright local 1280 y 390 px: 8 chips, "Capítulo 7 de 13", ficha y fuentes correctas, "Siguiente capítulo" pasa a Personajes, alemán traduce relato/tipo/fecha, sin errores JS ni desborde. Sin commit, push ni deploy.
+- **Pendiente:** capítulos de tradición oral (Mocuana, Carreta Nagua, Cadejo) en período propio con `type = oral_tradition`; ampliar a ~30 capítulos con fuente. Módulo ambiental MARENA en pausa con evidencia descargada (42 planes de manejo; R.M. 016-2026 vedas, Gaceta 29 del 16-02-2026; Ley 1248 / SINACADS).
 
 
 ## 🧭 MÓDULO AMBIENTAL MAESTRO MARENA — INICIO AUTORIZADO (05-10-2026)

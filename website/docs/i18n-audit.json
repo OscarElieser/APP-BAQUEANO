@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T22:59:19.884Z",
+  "generatedAt": "2026-10-05T23:27:44.603Z",
   "languages": [
     "es",
     "en",
@@ -18,8 +18,8 @@
   },
   "html": {
     "files": 31,
-    "total": 3664,
-    "translated": 3663,
+    "total": 3661,
+    "translated": 3660,
     "untranslated": 1
   },
   "js": {
@@ -226,8 +226,8 @@
     {
       "file": "departamento.html",
       "type": "html",
-      "total": 81,
-      "translated": 81,
+      "total": 78,
+      "translated": 78,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
