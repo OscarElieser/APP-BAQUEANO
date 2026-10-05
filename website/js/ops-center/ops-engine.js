@@ -44,6 +44,8 @@
   // escrituras directas exigían políticas RLS abiertas (`ALL` para `public`) en
   // audit_logs y ops_backup_entities, que permitían borrar la auditoría.
   const SUPABASE_BROWSER_WRITES = false;
+  // audit_logs inmutable (supabase/migrations/20261005040000_identity_rbac_foundation.sql).
+  const AUDIT_LOGS_IMMUTABLE = true;
 
   // --------------------------------------------------------------------------
   // --------------------------------------------------------------------------
@@ -2573,6 +2575,14 @@
     async deleteAuditLog(logId) {
       if (!logId) return;
 
+      // Directiva de identidad 2026-10-05: audit_logs es INMUTABLE (trigger en
+      // Supabase; ni el servidor puede borrar). Antes este flujo mostraba
+      // "eliminado exitosamente" aunque el borrado fallaba. Se conserva la
+      // función, pero ya no intenta borrar ni simula éxito.
+      if (AUDIT_LOGS_IMMUTABLE) {
+        OpsToast.show('Los registros de auditoría son inmutables: no se pueden eliminar (trazabilidad protegida).', 'info');
+        return;
+      }
       const confirmed = await OpsDialog.confirm({
         title: '¿Eliminar Registro del Historial?',
         message: '¿Deseas eliminar permanentemente esta entrada de auditoría en Firebase y Supabase?',
@@ -2611,6 +2621,10 @@
     },
 
     async clearAuditLogs() {
+      if (AUDIT_LOGS_IMMUTABLE) {
+        OpsToast.show('El historial de auditoría es inmutable: no se puede vaciar (trazabilidad protegida).', 'info');
+        return;
+      }
       const logs = OpsState.collectionsData['27-auditoria'] || [];
       if (logs.length === 0) {
         OpsToast.show('No hay registros de auditoría para eliminar.', 'info');

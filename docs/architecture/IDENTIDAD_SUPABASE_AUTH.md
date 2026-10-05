@@ -103,3 +103,47 @@ Todo lo de esta auditoría se comprobó directamente; nada se infirió de la doc
   - Nadie puede elevarse a sí mismo.
   - Solo un superadmin gestiona superadmins.
 - **`service_role`** solo existe dentro de las Edge Functions. Ningún archivo servido al navegador lo contiene; CI ya revisa secretos.
+
+## Estado de implementación
+
+### Fases B, C, D, F, G e I — base de datos ✅ (2026-10-05)
+
+| Migración | Contenido |
+|---|---|
+| `20261005040000_identity_rbac_foundation.sql` | `profiles` 1:1 con `auth.users` (FK `RESTRICT`; `firebase_uid` opcional), estados, `profile_verified`; `roles`, `permissions` (31), `role_permissions`, `user_roles`; `has_permission()`, `has_role()`, `user_has_permission()` (solo servidor), `is_business_manager()`; `business_members` (N:N); `verification_requests` normalizada (con `verified` conservado por compatibilidad); `audit_logs` con actor, valores antes/después y motivo, e **inmutable** por trigger; `identity_links`; triggers de alta y de confirmación de correo; RLS y privilegios por columna. |
+| `20261005041000_identity_grants_hardening.sql` | `SELECT` para `authenticated` en `profiles` y `audit_logs` (las filas las decide RLS); se revocan las escrituras directas en `verification_requests` y `businesses`. |
+| `20261005042000_identity_restrictive_policies.sql` | La política **restrictiva** "Solo servidor" (`false`) anulaba las nuevas políticas permisivas. Se reescribe con `ALTER POLICY`, sin borrarla: exige sesión, y las políticas permisivas deciden las filas. En `audit_logs` y `verification_requests` las escrituras desde el cliente siguen siempre bloqueadas. |
+| `20261005043000_identity_function_privileges.sql` | Funciones de trigger no invocables por RPC; funciones de permisos retiradas a `anon`. |
+
+#### Matriz de permisos (resumen)
+
+- **Todos:** `profile.*_own`, `favorites.manage`, `trips.manage`, `reservations.create`, `reviews.create`, `community.use`, `baqui.use` y `verifications.request`.
+- **Emprendedor:** más `businesses.manage_own`, `reservations.read_own_business`, `messages.respond` y `stats.read_own_business`.
+- **Guía:** más `guide.services_manage` y `messages.respond`.
+- **Auditor:** más lectura (`users.read`, `businesses.read`, `verifications.read`, `audits.read`, `reports.read` y `roles.read`).
+- **Admin:** más `users.update`, `users.suspend`, `users.assign_role` (solo roles no administrativos), `users.invite`, `businesses.update`, `businesses.verify` y `verifications.review`.
+- **Superadmin:** más `roles.assign_staff`, `roles.assign_superadmin`, `permissions.manage` y `settings.manage`.
+
+#### Pruebas
+
+`supabase/tests/identity_rbac_cases.sql` se ejecuta contra la base real dentro de una transacción que **se revierte por completo**.
+
+Resultado (2026-10-05): **casos 1 a 10 OK**, más la asignación de roles de personal por correo verificado. Después de la prueba se comprobó que `auth.users`, `profiles`, `staff_roles` y `audit_logs` quedaron sin restos y el negocio usado quedó intacto.
+
+La prueba sirvió para detectar y corregir dos problemas: faltaba `SELECT` sobre `profiles` y `audit_logs` para `authenticated`, y la política restrictiva anulaba las políticas permisivas.
+
+Se corrigió también el Ops Center: `deleteAuditLog` y `clearAuditLogs` mostraban "eliminado exitosamente" aunque el borrado fallaba. Las funciones se conservan, pero ahora informan que la auditoría es inmutable.
+
+#### Advisors de Supabase
+
+Los avisos restantes están justificados:
+- `has_permission`, `has_role` e `is_business_manager` son ejecutables por `authenticated` a propósito: las políticas RLS las evalúan con el rol de quien consulta, y solo informan los permisos del propio usuario.
+- `sos_events` no tiene políticas a propósito: es solo para el servidor.
+- `vector` en `public`: aviso preexistente.
+
+### Pendiente
+
+- **E y H:** Edge Function `baqueano-identity` (lista paginada, ficha, roles con reglas contra el escalamiento, suspender/reactivar, invitar, verificaciones) y la vista del Ops Center.
+- **A:** login web con Supabase (Google y correo/contraseña).
+- **J:** modo dual de tokens.
+- **Acción del propietario:** configurar el proveedor Google en Supabase (Authentication → Providers → Google: Client ID/Secret del proyecto de Google Cloud) y las URLs de redirección (`https://baqueanonicaragua.com/**`, `https://www.baqueanonicaragua.com/**`, `https://app-baqueano.web.app/**`). Además, personalizar las plantillas de correo con la marca BAQUEANO (Authentication → Email Templates).
