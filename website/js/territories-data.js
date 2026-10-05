@@ -158,14 +158,14 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Rosquillas en Miel de Caña', desc: 'Postre tradicional de Semana Santa y fiestas patronales bañado en almíbar de dulce de atado.' }
     ],
     places: [
-      { name: 'Monumento Nacional Cañón de Somoto', type: 'Geositio / Geoparque UNESCO', icon: 'fa-water' },
-      { name: 'Reserva Natural Tepesomoto-La Pataste', type: 'Bosque Nuboso & Biodiversidad', icon: 'fa-tree' },
-      { name: 'Laguna La Bruja (Las Sabanas)', type: 'Humedal de Altura & Canopy', icon: 'fa-water' },
-      { name: 'Mirador El Balcón (San José de Cusmapa)', type: 'Vistas al Pacífico & Serranías', icon: 'fa-mountain-sun' },
-      { name: 'Parque Natural El Majaste (San Juan del Río Coco)', type: 'Cafetales de Altura & Cascadas', icon: 'fa-leaf' },
-      { name: 'Comunidad Indígena San José de Palmira (Totogalpa)', type: 'Turismo Rural Comunitario', icon: 'fa-hands-holding-circle' },
-      { name: 'Talleres de Cerámica de Loma Panda (San Lucas)', type: 'Alfarería Prehispánica', icon: 'fa-palette' },
-      { name: 'Parque Arqueológico Piedras Pintadas', type: 'Petroglifos & Memoria Viva', icon: 'fa-feather' }
+      { name: 'Monumento Nacional Cañón de Somoto', type: 'Geositio / Geoparque UNESCO', icon: 'fa-water', desc: 'Cañón labrado por el río Coco entre paredes de roca; se recorre caminando, nadando y saltando con guías locales. Es parte del Geoparque Río Coco, reconocido por la UNESCO.' },
+      { name: 'Reserva Natural Tepesomoto-La Pataste', type: 'Bosque Nuboso & Biodiversidad', icon: 'fa-tree', desc: 'Montaña protegida cerca de Somoto con bosque nuboso y pinares, fuente de agua para las comunidades y refugio de aves.' },
+      { name: 'Laguna La Bruja (Las Sabanas)', type: 'Humedal de Altura & Canopy', icon: 'fa-water', desc: 'Laguna de altura en el municipio de Las Sabanas, rodeada de bosque de pino y clima fresco; se visita con guías comunitarios.' },
+      { name: 'Mirador El Balcón (San José de Cusmapa)', type: 'Vistas al Pacífico & Serranías', icon: 'fa-mountain-sun', desc: 'Mirador en las serranías de Cusmapa, uno de los poblados más altos del país; en días despejados se divisa hacia el Golfo de Fonseca.' },
+      { name: 'Parque Natural El Majaste (San Juan del Río Coco)', type: 'Cafetales de Altura & Cascadas', icon: 'fa-leaf', desc: 'Área natural entre cafetales de altura del norte de Madriz, con senderos, pozas y caídas de agua.' },
+      { name: 'Comunidad Indígena San José de Palmira (Totogalpa)', type: 'Turismo Rural Comunitario', icon: 'fa-hands-holding-circle', desc: 'Comunidad indígena de Totogalpa que recibe visitantes con turismo rural comunitario: vida campesina, cocina local y tradiciones.' },
+      { name: 'Talleres de Cerámica de Loma Panda (San Lucas)', type: 'Alfarería Prehispánica', icon: 'fa-palette', desc: 'Talleres familiares de alfarería en San Lucas, donde se trabaja el barro con técnicas heredadas; se puede ver el proceso y comprar directo.' },
+      { name: 'Parque Arqueológico Piedras Pintadas', type: 'Petroglifos & Memoria Viva', icon: 'fa-feather', desc: 'Rocas con petroglifos precolombinos que forman parte de la memoria ancestral de Madriz; se visitan con respeto y sin tocar los grabados.' }
     ],
     activities: [
       'Navegación y flotación guiada entre las paredes milenarias del Cañón de Somoto',
@@ -217,21 +217,21 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Sabores del Centro Histórico', desc: 'Mercados, dulcerías, cafés y emprendimientos familiares con cocina local.' }
     ],
     places: [
-      { name: 'Insigne Basílica Catedral de León', type: 'Patrimonio Mundial, arquitectura, religión y fotografía', icon: 'fa-church' },
-      { name: 'Museo Archivo Rubén Darío', type: 'Literatura, historia e identidad nacional', icon: 'fa-book-open' },
-      { name: 'Museo de la Revolución', type: 'Historia política reciente y memoria nacional', icon: 'fa-landmark' },
-      { name: 'Centro de Arte Fundación Ortiz Gurdián', type: 'Arte latinoamericano y europeo', icon: 'fa-palette' },
-      { name: 'Iglesia San Juan Bautista de Sutiaba', type: 'Patrimonio indígena, arquitectura y memoria', icon: 'fa-place-of-worship' },
-      { name: 'Teatro Municipal José de la Cruz Mena', type: 'Cultura, música, arquitectura y artes escénicas', icon: 'fa-masks-theater' },
-      { name: 'Museo de Mitos y Leyendas', type: 'Narrativa popular y memoria viva', icon: 'fa-book-skull' },
-      { name: 'Volcán Cerro Negro', type: 'Senderismo, ascenso volcánico y sandboarding', icon: 'fa-volcano' },
-      { name: 'Volcán Telica', type: 'Senderismo, fotografía y observación geológica', icon: 'fa-mountain-sun' },
-      { name: 'Hervideros de San Jacinto', type: 'Geología, educación ambiental y turismo comunitario', icon: 'fa-temperature-high' },
-      { name: 'Volcán El Hoyo', type: 'Senderismo, campamento y aventura', icon: 'fa-mountain' },
-      { name: 'Volcán Momotombo', type: 'Paisaje volcánico, historia y lago Xolotlán', icon: 'fa-volcano' },
-      { name: 'Ruinas de León Viejo', type: 'Patrimonio Mundial y arqueología colonial', icon: 'fa-landmark' },
-      { name: 'Las Peñitas y Poneloya', type: 'Playa, surf, gastronomía marina y atardeceres', icon: 'fa-umbrella-beach' },
-      { name: 'Isla Juan Venado', type: 'Manglares, fauna, lancha y kayak', icon: 'fa-water' }
+      { name: 'Insigne Basílica Catedral de León', type: 'Patrimonio Mundial, arquitectura, religión y fotografía', icon: 'fa-church', desc: 'La catedral más grande de Centroamérica, Patrimonio de la Humanidad. Sus techos blancos se recorren a pie y guarda la tumba de Rubén Darío.' },
+      { name: 'Museo Archivo Rubén Darío', type: 'Literatura, historia e identidad nacional', icon: 'fa-book-open', desc: 'Casa donde vivió de niño Rubén Darío, el poeta del modernismo; conserva objetos, documentos y espacios de su vida en León.' },
+      { name: 'Museo de la Revolución', type: 'Historia política reciente y memoria nacional', icon: 'fa-landmark', desc: 'Espacio dedicado a la historia política reciente de Nicaragua, con fotografías y relatos; desde su techo hay vistas del centro de León.' },
+      { name: 'Centro de Arte Fundación Ortiz Gurdián', type: 'Arte latinoamericano y europeo', icon: 'fa-palette', desc: 'Colección de arte latinoamericano y europeo en casonas coloniales restauradas del centro de León.' },
+      { name: 'Iglesia San Juan Bautista de Sutiaba', type: 'Patrimonio indígena, arquitectura y memoria', icon: 'fa-place-of-worship', desc: 'Templo colonial del barrio indígena de Sutiaba, uno de los más antiguos de León, con su sol tallado en el techo de madera.' },
+      { name: 'Teatro Municipal José de la Cruz Mena', type: 'Cultura, música, arquitectura y artes escénicas', icon: 'fa-masks-theater', desc: 'Teatro histórico de León que lleva el nombre del compositor leonés José de la Cruz Mena; sede de conciertos y artes escénicas.' },
+      { name: 'Museo de Mitos y Leyendas', type: 'Narrativa popular y memoria viva', icon: 'fa-book-skull', desc: 'Museo que reúne personajes de la tradición oral nicaragüense, como la Carreta Nahua y la Gigantona, en figuras y relatos.' },
+      { name: 'Volcán Cerro Negro', type: 'Senderismo, ascenso volcánico y sandboarding', icon: 'fa-volcano', desc: 'Cono de arena volcánica negra, de los volcanes más jóvenes de Centroamérica. Se sube a pie y se desciende en tabla (sandboarding).' },
+      { name: 'Volcán Telica', type: 'Senderismo, fotografía y observación geológica', icon: 'fa-mountain-sun', desc: 'Volcán activo de la cordillera de los Maribios; las caminatas guiadas suben hasta el borde del cráter, muy buscado al atardecer.' },
+      { name: 'Hervideros de San Jacinto', type: 'Geología, educación ambiental y turismo comunitario', icon: 'fa-temperature-high', desc: 'Campo de fumarolas y lodo hirviente al pie del Telica; la comunidad de San Jacinto guía el recorrido por senderos seguros.' },
+      { name: 'Volcán El Hoyo', type: 'Senderismo, campamento y aventura', icon: 'fa-mountain', desc: 'Volcán de los Maribios con travesías de senderismo y campamento, conocido por su gran agujero en la ladera.' },
+      { name: 'Volcán Momotombo', type: 'Paisaje volcánico, historia y lago Xolotlán', icon: 'fa-volcano', desc: 'Volcán de cono casi perfecto a orillas del lago Xolotlán, símbolo de León y vecino de las Ruinas de León Viejo.' },
+      { name: 'Ruinas de León Viejo', type: 'Patrimonio Mundial y arqueología colonial', icon: 'fa-landmark', desc: 'Restos de la primera ciudad de León, a orillas del Xolotlán y frente al Momotombo; Patrimonio de la Humanidad.' },
+      { name: 'Las Peñitas y Poneloya', type: 'Playa, surf, gastronomía marina y atardeceres', icon: 'fa-umbrella-beach', desc: 'Playas del Pacífico a pocos minutos de León, con pueblos de pescadores, olas para surf y atardeceres.' },
+      { name: 'Isla Juan Venado', type: 'Manglares, fauna, lancha y kayak', icon: 'fa-water', desc: 'Reserva de estero y manglares frente a Las Peñitas, con aves acuáticas y playas de anidación de tortugas; se recorre en lancha.' }
     ],
     activities: [
       'Aventura: sandboarding, trekking volcánico, campamento y fotografía',
@@ -290,20 +290,20 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Cacao y Bebidas Tradicionales', desc: 'Bebidas y productos tropicales elaborados en comunidades y emprendimientos.' }
     ],
     places: [
-      { name: 'Reserva de Biosfera Isla de Ometepe', type: 'Dos volcanes, naturaleza, arqueología y turismo rural', icon: 'fa-mountain-sun' },
-      { name: 'Volcán Concepción', type: 'Senderismo regulado, geología, fotografía y naturaleza', icon: 'fa-volcano' },
-      { name: 'Volcán Maderas', type: 'Bosque, biodiversidad, senderismo y vida rural', icon: 'fa-mountain' },
-      { name: 'Punta Jesús María', type: 'Atardecer, fotografía y vistas del Cocibolca', icon: 'fa-camera' },
-      { name: 'Reserva Natural Charco Verde', type: 'Mariposario, senderos, aves, bosque y lago', icon: 'fa-feather' },
-      { name: 'Ojo de Agua y Playa Santo Domingo', type: 'Naturaleza, descanso, ciclismo y corredor turístico', icon: 'fa-droplet' },
-      { name: 'Cascada de San Ramón', type: 'Caminata, bosque y paisaje natural de Altagracia', icon: 'fa-water' },
-      { name: 'Museo El Ceibo y petroglifos de Ometepe', type: 'Arqueología, cerámica e historia precolombina', icon: 'fa-landmark' },
-      { name: 'San Juan del Sur y Cristo de la Misericordia', type: 'Bahía, paisaje, gastronomía y atardeceres', icon: 'fa-anchor' },
-      { name: 'Maderas, Marsella, Remanso, Hermosa y El Coco', type: 'Playas, surf, recreación y naturaleza', icon: 'fa-water' },
-      { name: 'Refugio de Vida Silvestre La Flor', type: 'Conservación de tortugas y experiencias reguladas', icon: 'fa-shield-heart' },
-      { name: 'Corredor de playas de Tola', type: 'Popoyo, Guasacate, Santana, Colorado, Gigante y comunidades', icon: 'fa-umbrella-beach' },
-      { name: 'Puerto de San Jorge', type: 'Puerta lacustre, ferris y transporte hacia Ometepe', icon: 'fa-ship' },
-      { name: 'Ciudad de Rivas', type: 'Historia, mercados, arquitectura, gastronomía y servicios', icon: 'fa-building-columns' }
+      { name: 'Reserva de Biosfera Isla de Ometepe', type: 'Dos volcanes, naturaleza, arqueología y turismo rural', icon: 'fa-mountain-sun', desc: 'Dos volcanes, Concepción y Maderas, unidos por un istmo en medio del Cocibolca; Reserva de Biosfera con petroglifos y comunidades rurales.' },
+      { name: 'Volcán Concepción', type: 'Senderismo regulado, geología, fotografía y naturaleza', icon: 'fa-volcano', desc: 'El volcán más alto de Ometepe, activo; su ascenso es exigente y se hace solo con guía autorizado.' },
+      { name: 'Volcán Maderas', type: 'Bosque, biodiversidad, senderismo y vida rural', icon: 'fa-mountain', desc: 'Volcán inactivo de Ometepe cubierto de bosque nuboso, con una laguna en el cráter y fincas en sus faldas.' },
+      { name: 'Punta Jesús María', type: 'Atardecer, fotografía y vistas del Cocibolca', icon: 'fa-camera', desc: 'Lengua de arena en Ometepe que se adentra en el Lago Cocibolca; famosa por sus atardeceres.' },
+      { name: 'Reserva Natural Charco Verde', type: 'Mariposario, senderos, aves, bosque y lago', icon: 'fa-feather', desc: 'Reserva en Ometepe con laguna, senderos, mariposario y monos aulladores, frente a playas del lago.' },
+      { name: 'Ojo de Agua y Playa Santo Domingo', type: 'Naturaleza, descanso, ciclismo y corredor turístico', icon: 'fa-droplet', desc: 'Ojo de Agua es un balneario de agua cristalina entre árboles; Playa Santo Domingo es la franja de arena volcánica del istmo de Ometepe.' },
+      { name: 'Cascada de San Ramón', type: 'Caminata, bosque y paisaje natural de Altagracia', icon: 'fa-water', desc: 'Cascada en la ladera del Volcán Maderas a la que se llega con una caminata por bosque.' },
+      { name: 'Museo El Ceibo y petroglifos de Ometepe', type: 'Arqueología, cerámica e historia precolombina', icon: 'fa-landmark', desc: 'Museo en Ometepe con colecciones precolombinas y numismáticas; la isla conserva numerosos petroglifos en sus fincas y senderos.' },
+      { name: 'San Juan del Sur y Cristo de la Misericordia', type: 'Bahía, paisaje, gastronomía y atardeceres', icon: 'fa-anchor', desc: 'Bahía de pescadores rodeada de playas para surf y navegación, vigilada por el mirador del Cristo de la Misericordia.' },
+      { name: 'Maderas, Marsella, Remanso, Hermosa y El Coco', type: 'Playas, surf, recreación y naturaleza', icon: 'fa-water', desc: 'Playas del Pacífico alrededor de San Juan del Sur, buscadas para surf, baño y descanso.' },
+      { name: 'Refugio de Vida Silvestre La Flor', type: 'Conservación de tortugas y experiencias reguladas', icon: 'fa-shield-heart', desc: 'Playa protegida donde llegan a desovar tortugas marinas, con visitas reguladas por guardaparques.' },
+      { name: 'Corredor de playas de Tola', type: 'Popoyo, Guasacate, Santana, Colorado, Gigante y comunidades', icon: 'fa-umbrella-beach', desc: 'Costa del municipio de Tola con playas como Popoyo, Guasacate, Santana, Colorado y Gigante, reconocidas por el surf.' },
+      { name: 'Puerto de San Jorge', type: 'Puerta lacustre, ferris y transporte hacia Ometepe', icon: 'fa-ship', desc: 'Puerto lacustre de Rivas desde donde salen los ferris y lanchas hacia la Isla de Ometepe.' },
+      { name: 'Ciudad de Rivas', type: 'Historia, mercados, arquitectura, gastronomía y servicios', icon: 'fa-building-columns', desc: 'Cabecera departamental con iglesias, mercado y servicios; punto de paso entre San Juan del Sur, San Jorge y la frontera sur.' }
     ],
     activities: [
       'Surf en San Juan del Sur y el corredor costero de Tola',
@@ -361,16 +361,16 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Productos de Finca', desc: 'Cacao, miel, cuajada, queso, crema, frijoles, tamales y sopa de cuajada.' }
     ],
     places: [
-      { name: 'Cascada La Luna & El Cuá', type: 'Nebliselva & Canopy', icon: 'fa-cloud-rain' },
-      { name: 'Lago de Apanás', type: 'Humedal Ramsar', icon: 'fa-water' },
-      { name: 'Peña de La Cruz', type: 'Mirador Panorámico', icon: 'fa-mountain' },
-      { name: 'Reserva Natural Macizo de Peñas Blancas', type: 'Bosque Nuboso Prístino', icon: 'fa-tree' },
-      { name: 'Fincas Agroecológicas de San Rafael del Norte', type: 'Ruta del Café', icon: 'fa-mug-hot' },
-      { name: 'Reserva Natural Cerro Datanlí–El Diablo', type: 'Bosque nuboso, aviturismo, café y comunidades', icon: 'fa-tree' },
-      { name: 'Salto La Mocuana', type: 'Cascada y naturaleza en La Fundadora', icon: 'fa-water' },
-      { name: 'Cascadas Arco Iris, La Pavona y La Sonora', type: 'Agua y senderismo en Peñas Blancas', icon: 'fa-cloud-rain' },
-      { name: 'Cerro Kilambé y aguas termales de El Caño', type: 'Montaña, termalismo y vida rural en El Cuá', icon: 'fa-mountain-sun' },
-      { name: 'Salto de Kayaska', type: 'Naturaleza y acceso hacia Bosawás desde Bocay', icon: 'fa-water' }
+      { name: 'Cascada La Luna & El Cuá', type: 'Nebliselva & Canopy', icon: 'fa-cloud-rain', desc: 'Cascada rodeada de bosque húmedo en la zona de El Cuá, en el norte montañoso de Jinotega.' },
+      { name: 'Lago de Apanás', type: 'Humedal Ramsar', icon: 'fa-water', desc: 'Lago artificial entre montañas al norte de Jinotega, con comunidades de pescadores y paisajes de neblina.' },
+      { name: 'Peña de La Cruz', type: 'Mirador Panorámico', icon: 'fa-mountain', desc: 'Cerro con una cruz que domina la ciudad de Jinotega; la subida ofrece vista a todo el valle.' },
+      { name: 'Reserva Natural Macizo de Peñas Blancas', type: 'Bosque Nuboso Prístino', icon: 'fa-tree', desc: 'Macizo rocoso con bosque nuboso, nacientes de agua y cascadas, parte de la zona de amortiguamiento de Bosawás.' },
+      { name: 'Fincas Agroecológicas de San Rafael del Norte', type: 'Ruta del Café', icon: 'fa-mug-hot', desc: 'Fincas familiares de café y cultivos diversos en San Rafael del Norte que reciben visitantes con turismo rural.' },
+      { name: 'Reserva Natural Cerro Datanlí–El Diablo', type: 'Bosque nuboso, aviturismo, café y comunidades', icon: 'fa-tree', desc: 'Reserva de bosque nuboso entre Jinotega y Matagalpa, con fincas de café, senderos y fuentes de agua.' },
+      { name: 'Salto La Mocuana', type: 'Cascada y naturaleza en La Fundadora', icon: 'fa-water', desc: 'Cascada cercana a la comunidad de La Fundadora, en Jinotega, conocida por la leyenda de La Mocuana.' },
+      { name: 'Cascadas Arco Iris, La Pavona y La Sonora', type: 'Agua y senderismo en Peñas Blancas', icon: 'fa-cloud-rain', desc: 'Conjunto de caídas de agua en Peñas Blancas, unidas por senderos de montaña.' },
+      { name: 'Cerro Kilambé y aguas termales de El Caño', type: 'Montaña, termalismo y vida rural en El Cuá', icon: 'fa-mountain-sun', desc: 'Montaña de las más altas del norte del país y fuentes termales en la zona rural de El Cuá.' },
+      { name: 'Salto de Kayaska', type: 'Naturaleza y acceso hacia Bosawás desde Bocay', icon: 'fa-water', desc: 'Cascada en la zona de Bocay, puerta de acceso a la Reserva de Biosfera Bosawás.' }
     ],
     activities: [
       'Canopy sobre cascadas torrenciales en El Cuá',
@@ -428,17 +428,17 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Bebidas Tradicionales', desc: 'Cacao, tiste, pinolillo y bebidas de maíz.' }
     ],
     places: [
-      { name: 'Parque Nacional Volcán Masaya', type: 'Vulcanología, miradores, senderos autorizados y educación ambiental', icon: 'fa-fire' },
-      { name: 'Laguna de Masaya', type: 'Naturaleza, paisaje volcánico y fotografía', icon: 'fa-water' },
-      { name: 'Monimbó', type: 'Identidad indígena, talleres, gastronomía y memoria comunitaria', icon: 'fa-hands-holding' },
-      { name: 'Mercado de Artesanías de Masaya', type: 'Artesanía, cultura, gastronomía y economía local', icon: 'fa-store' },
-      { name: 'Mirador de Catarina', type: 'Paisaje, viveros, música y gastronomía', icon: 'fa-eye' },
-      { name: 'San Juan de Oriente', type: 'Cerámica artesanal y experiencias directas con productores', icon: 'fa-hands' },
-      { name: 'Niquinohomo y Casa Museo de Sandino', type: 'Memoria histórica y patrimonio cultural', icon: 'fa-landmark' },
-      { name: 'Reserva Natural Laguna de Apoyo', type: 'Kayak, senderismo, aves, fotografía y descanso', icon: 'fa-person-swimming' },
-      { name: 'Reserva Natural Laguna de Tisma', type: 'Humedal Ramsar, biodiversidad y observación responsable', icon: 'fa-binoculars' },
-      { name: 'Petroglifos de El Cailagua', type: 'Arqueología, símbolos ancestrales e interpretación comunitaria', icon: 'fa-monument' },
-      { name: 'Taller Escuela Valentín López y Palo Solo', type: 'Artesanía, cultura y experiencias comunitarias', icon: 'fa-hands' }
+      { name: 'Parque Nacional Volcán Masaya', type: 'Vulcanología, miradores, senderos autorizados y educación ambiental', icon: 'fa-fire', desc: 'Volcán activo con miradores al cráter Santiago, del que salen gases y donde anidan chocoyos; las visitas nocturnas muestran su resplandor.' },
+      { name: 'Laguna de Masaya', type: 'Naturaleza, paisaje volcánico y fotografía', icon: 'fa-water', desc: 'Laguna de origen volcánico al pie de la ciudad de Masaya, con miradores desde el malecón.' },
+      { name: 'Monimbó', type: 'Identidad indígena, talleres, gastronomía y memoria comunitaria', icon: 'fa-hands-holding', desc: 'Barrio indígena de Masaya, corazón de la artesanía y del folclore, con talleres de cuero, madera y máscaras.' },
+      { name: 'Mercado de Artesanías de Masaya', type: 'Artesanía, cultura, gastronomía y economía local', icon: 'fa-store', desc: 'Edificio histórico con hamacas, cerámica, madera, cuero y textiles de todo el país.' },
+      { name: 'Mirador de Catarina', type: 'Paisaje, viveros, música y gastronomía', icon: 'fa-eye', desc: 'Balcón natural sobre la Laguna de Apoyo, con viveros, comida y artesanía.' },
+      { name: 'San Juan de Oriente', type: 'Cerámica artesanal y experiencias directas con productores', icon: 'fa-hands', desc: 'Pueblo alfarero de los Pueblos Blancos donde la cerámica se tornea y pinta a mano con motivos precolombinos.' },
+      { name: 'Niquinohomo y Casa Museo de Sandino', type: 'Memoria histórica y patrimonio cultural', icon: 'fa-landmark', desc: 'Pueblo natal de Augusto C. Sandino; la casa donde nació funciona como museo y biblioteca.' },
+      { name: 'Reserva Natural Laguna de Apoyo', type: 'Kayak, senderismo, aves, fotografía y descanso', icon: 'fa-person-swimming', desc: 'Laguna de cráter de agua templada entre Granada y Masaya, ideal para nadar, remar en kayak y observar aves.' },
+      { name: 'Reserva Natural Laguna de Tisma', type: 'Humedal Ramsar, biodiversidad y observación responsable', icon: 'fa-binoculars', desc: 'Humedal de importancia internacional (sitio Ramsar) con gran diversidad de aves acuáticas.' },
+      { name: 'Petroglifos de El Cailagua', type: 'Arqueología, símbolos ancestrales e interpretación comunitaria', icon: 'fa-monument', desc: 'Grabados precolombinos en las paredes de una cañada cerca de Masaya, interpretados por guías comunitarios.' },
+      { name: 'Taller Escuela Valentín López y Palo Solo', type: 'Artesanía, cultura y experiencias comunitarias', icon: 'fa-hands', desc: 'Espacios de artesanía y tradición en Masaya donde se aprende de los oficios locales y se compra directo.' }
     ],
     activities: [
       'Volcanes: miradores, vulcanología, fotografía y senderismo autorizado en el Volcán Masaya',
@@ -493,17 +493,17 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Sabores Municipales', desc: 'Atol de ánimas de Diriá y preparaciones tradicionales de Nandaime.' }
     ],
     places: [
-      { name: 'Centro Histórico y Calle La Calzada', type: 'Arquitectura, plazas, iglesias, museos y gastronomía', icon: 'fa-building-columns' },
-      { name: 'Catedral de Granada y Parque Colón', type: 'Patrimonio, vida urbana, religión y fotografía', icon: 'fa-church' },
-      { name: 'Iglesia y Torre de La Merced', type: 'Arquitectura, historia y vistas urbanas', icon: 'fa-church' },
-      { name: 'Convento e Iglesia San Francisco', type: 'Historia, arquitectura y espacios museísticos', icon: 'fa-landmark' },
-      { name: 'Casa de los Leones', type: 'Patrimonio cultural y ciudades históricas', icon: 'fa-house' },
-      { name: 'Antigua Estación del Ferrocarril', type: 'Memoria ferroviaria y patrimonio', icon: 'fa-train' },
-      { name: 'Isletas de Granada', type: 'Lancha, kayak, fauna, paisaje y fotografía', icon: 'fa-ship' },
-      { name: 'Lago Cocibolca', type: 'Agua, navegación, biodiversidad e historia', icon: 'fa-water' },
-      { name: 'Reserva Natural Volcán Mombacho', type: 'Senderos, miradores, bosque nuboso y aviturismo', icon: 'fa-tree' },
-      { name: 'Aguas Agrias–La Nanda', type: 'Turismo rural comunitario, senderos y cocina local', icon: 'fa-people-group' },
-      { name: 'Reserva Natural Laguna de Apoyo', type: 'Kayak, baño, senderismo, fotografía y aves', icon: 'fa-person-swimming' }
+      { name: 'Centro Histórico y Calle La Calzada', type: 'Arquitectura, plazas, iglesias, museos y gastronomía', icon: 'fa-building-columns', desc: 'Recorrido a pie por el centro colonial de Granada y su calle peatonal La Calzada, que baja hasta el lago.' },
+      { name: 'Catedral de Granada y Parque Colón', type: 'Patrimonio, vida urbana, religión y fotografía', icon: 'fa-church', desc: 'La catedral amarilla de Granada frente al Parque Colón, el punto de partida para recorrer la ciudad colonial.' },
+      { name: 'Iglesia y Torre de La Merced', type: 'Arquitectura, historia y vistas urbanas', icon: 'fa-church', desc: 'Iglesia colonial de Granada cuyo campanario ofrece una de las mejores vistas de los techos de la ciudad y del lago.' },
+      { name: 'Convento e Iglesia San Francisco', type: 'Historia, arquitectura y espacios museísticos', icon: 'fa-landmark', desc: 'Convento-museo que guarda estatuas precolombinas de la isla Zapatera, hoy parque nacional.' },
+      { name: 'Casa de los Leones', type: 'Patrimonio cultural y ciudades históricas', icon: 'fa-house', desc: 'Casona colonial frente al Parque Colón de Granada, hoy centro cultural con exposiciones y actividades.' },
+      { name: 'Antigua Estación del Ferrocarril', type: 'Memoria ferroviaria y patrimonio', icon: 'fa-train', desc: 'Edificio histórico de la estación de trenes de Granada, testimonio de la época del ferrocarril en el Pacífico.' },
+      { name: 'Isletas de Granada', type: 'Lancha, kayak, fauna, paisaje y fotografía', icon: 'fa-ship', desc: 'Cientos de pequeñas islas formadas por una antigua erupción del Mombacho, con aves y comunidades; se recorren en lancha.' },
+      { name: 'Lago Cocibolca', type: 'Agua, navegación, biodiversidad e historia', icon: 'fa-water', desc: 'El lago más grande de Centroamérica, frente a Granada, con islas, playas lacustres y paseos en lancha.' },
+      { name: 'Reserva Natural Volcán Mombacho', type: 'Senderos, miradores, bosque nuboso y aviturismo', icon: 'fa-tree', desc: 'Senderos entre fumarolas, orquídeas y bosque nuboso con vistas a Granada y al lago.' },
+      { name: 'Aguas Agrias–La Nanda', type: 'Turismo rural comunitario, senderos y cocina local', icon: 'fa-people-group', desc: 'Experiencia de turismo rural comunitario en Nandaime, con senderos, ríos y cocina local.' },
+      { name: 'Reserva Natural Laguna de Apoyo', type: 'Kayak, baño, senderismo, fotografía y aves', icon: 'fa-person-swimming', desc: 'Laguna de cráter de agua templada entre Granada y Masaya, ideal para nadar, remar en kayak y observar aves.' }
     ],
     activities: [
       'Granada a pie: arquitectura, plazas, iglesias, mercados y museos',
@@ -565,17 +565,17 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Café, Chocolate y Miel', desc: 'Productos de montaña ofrecidos en fincas, comunidades y cafeterías locales.' }
     ],
     places: [
-      { name: 'Reserva Silvestre Selva Negra', type: 'Bosque Nuboso & Aves', icon: 'fa-feather' },
-      { name: 'Comunidad Indígena de El Chile', type: 'Tejidos Tradicionales', icon: 'fa-hands-holding' },
-      { name: 'Cascada Santa Emilia', type: 'Caída de Agua Mística', icon: 'fa-water' },
-      { name: 'Cerro Apante (Reserva Natural)', type: 'Senderismo de Altura', icon: 'fa-mountain' },
-      { name: 'Museo Nacional del Café', type: 'Cultura Cafetalera', icon: 'fa-mug-hot' },
-      { name: 'Museo Casa Natal Rubén Darío', type: 'Poesía, historia y patrimonio en Ciudad Darío', icon: 'fa-book-open' },
-      { name: 'Villa Chagüitillo', type: 'Arte rupestre, arqueología e interpretación histórica', icon: 'fa-monument' },
-      { name: 'Cascada Blanca y Cascada La Luna', type: 'Naturaleza, aventura y paisajes de agua', icon: 'fa-water' },
-      { name: 'Macizo de Peñas Blancas', type: 'Café, senderismo, cascadas y conservación', icon: 'fa-mountain-sun' },
-      { name: 'San Ramón', type: 'Turismo rural comunitario, café, cacao y fincas', icon: 'fa-people-group' },
-      { name: 'Catedral San Pedro', type: 'Arquitectura, religión y patrimonio urbano', icon: 'fa-church' }
+      { name: 'Reserva Silvestre Selva Negra', type: 'Bosque Nuboso & Aves', icon: 'fa-feather', desc: 'Bosque nuboso, senderos y finca cafetalera en las montañas de Matagalpa.' },
+      { name: 'Comunidad Indígena de El Chile', type: 'Tejidos Tradicionales', icon: 'fa-hands-holding', desc: 'Comunidad indígena de Matagalpa reconocida por sus tejidos en telar; se visitan los talleres y se compra a las tejedoras.' },
+      { name: 'Cascada Santa Emilia', type: 'Caída de Agua Mística', icon: 'fa-water', desc: 'Cascada entre bosque y cafetales en las montañas de Matagalpa, accesible con una caminata corta.' },
+      { name: 'Cerro Apante (Reserva Natural)', type: 'Senderismo de Altura', icon: 'fa-mountain', desc: 'Reserva que rodea la ciudad de Matagalpa, con senderos de bosque y miradores sobre el valle.' },
+      { name: 'Museo Nacional del Café', type: 'Cultura Cafetalera', icon: 'fa-mug-hot', desc: 'Historia del café en Nicaragua contada desde Matagalpa, la ciudad que lo hizo identidad.' },
+      { name: 'Museo Casa Natal Rubén Darío', type: 'Poesía, historia y patrimonio en Ciudad Darío', icon: 'fa-book-open', desc: 'Museo en la casa de Ciudad Darío (Matagalpa) donde nació Rubén Darío, el Príncipe de las Letras Castellanas.' },
+      { name: 'Villa Chagüitillo', type: 'Arte rupestre, arqueología e interpretación histórica', icon: 'fa-monument', desc: 'Comunidad de Sébaco con petroglifos precolombinos a orillas de quebradas, interpretados por guías locales.' },
+      { name: 'Cascada Blanca y Cascada La Luna', type: 'Naturaleza, aventura y paisajes de agua', icon: 'fa-water', desc: 'Caídas de agua en Matagalpa con pozas y senderos, buenas para un día de naturaleza.' },
+      { name: 'Macizo de Peñas Blancas', type: 'Café, senderismo, cascadas y conservación', icon: 'fa-mountain-sun', desc: 'Macizo de bosque nuboso compartido con Jinotega, con café, cascadas y conservación del agua.' },
+      { name: 'San Ramón', type: 'Turismo rural comunitario, café, cacao y fincas', icon: 'fa-people-group', desc: 'Municipio cafetalero cercano a Matagalpa con turismo rural comunitario en fincas de café y cacao.' },
+      { name: 'Catedral San Pedro', type: 'Arquitectura, religión y patrimonio urbano', icon: 'fa-church', desc: 'Catedral de la ciudad de Matagalpa, de arquitectura colonial tardía y centro de la vida urbana.' }
     ],
     activities: [
       'Senderismo de observación de quetzales y tucanes en Selva Negra',
@@ -630,16 +630,16 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Queso de Cabra y Miel', desc: 'Productos comunitarios vinculados con La Garnacha y fincas rurales.' }
     ],
     places: [
-      { name: 'Reserva Natural Tisey-La Estanzuela', type: 'Cascada & Esculturas', icon: 'fa-water' },
-      { name: 'Galería de Esculturas en Piedra de Don Alberto', type: 'Arte Popular Rústico', icon: 'fa-palette' },
-      { name: 'Reserva Natural Miraflor', type: 'Orquídeas & Turismo Rural', icon: 'fa-seedling' },
-      { name: 'Fábricas de Puros Artesanales', type: 'Ruta del Tabaco de Alta Gama', icon: 'fa-fire' },
-      { name: 'Murales Revolucionarios y Urbanos', type: 'Arte Público', icon: 'fa-brush' },
-      { name: 'La Garnacha', type: 'Comunidad, queso de cabra, producción sostenible y aves', icon: 'fa-people-group' },
-      { name: 'Condega y su Taller Comunal de Cerámica', type: 'Arqueología, barro y artesanía', icon: 'fa-hands' },
-      { name: 'Pueblo Nuevo', type: 'Paleontología, arqueología y memoria', icon: 'fa-landmark' },
-      { name: 'San Juan de Limay', type: 'Gorditas de Limay, marmolina y talleres de escultura', icon: 'fa-hammer' },
-      { name: 'Mirador San Luis', type: 'Paisaje, fotografía y artesanía', icon: 'fa-eye' }
+      { name: 'Reserva Natural Tisey-La Estanzuela', type: 'Cascada & Esculturas', icon: 'fa-water', desc: 'Cascada, pinares, miradores y las esculturas talladas en piedra en la montaña de Estelí.' },
+      { name: 'Galería de Esculturas en Piedra de Don Alberto', type: 'Arte Popular Rústico', icon: 'fa-palette', desc: 'Figuras talladas en la roca de la montaña por el artista Alberto Gutiérrez, dentro de la reserva Tisey.' },
+      { name: 'Reserva Natural Miraflor', type: 'Orquídeas & Turismo Rural', icon: 'fa-seedling', desc: 'Bosque nuboso, orquídeas, aves y familias campesinas que reciben visitantes en sus fincas.' },
+      { name: 'Fábricas de Puros Artesanales', type: 'Ruta del Tabaco de Alta Gama', icon: 'fa-fire', desc: 'Recorridos por fábricas de Estelí donde el tabaco se enrolla a mano.' },
+      { name: 'Murales Revolucionarios y Urbanos', type: 'Arte Público', icon: 'fa-brush', desc: 'Murales en las calles de Estelí que cuentan su historia social y política; se recorren a pie por el centro.' },
+      { name: 'La Garnacha', type: 'Comunidad, queso de cabra, producción sostenible y aves', icon: 'fa-people-group', desc: 'Comunidad en la Reserva Tisey-La Estanzuela que produce queso de cabra y recibe visitantes con turismo rural.' },
+      { name: 'Condega y su Taller Comunal de Cerámica', type: 'Arqueología, barro y artesanía', icon: 'fa-hands', desc: 'Condega es tierra de alfarería; en Ducualí Grande las mujeres trabajan el barro con técnicas tradicionales.' },
+      { name: 'Pueblo Nuevo', type: 'Paleontología, arqueología y memoria', icon: 'fa-landmark', desc: 'Municipio del norte de Estelí conocido por el Museo Paleontológico El Bosque, con fósiles de megafauna encontrados en la zona.' },
+      { name: 'San Juan de Limay', type: 'Gorditas de Limay, marmolina y talleres de escultura', icon: 'fa-hammer', desc: 'Pueblo de Estelí famoso por sus artesanos que tallan piedra marmolina en figuras y animales.' },
+      { name: 'Mirador San Luis', type: 'Paisaje, fotografía y artesanía', icon: 'fa-eye', desc: 'Mirador en las montañas de Estelí con paisaje amplio, fotografía y artesanía local.' }
     ],
     activities: [
       'Nado en la poza natural del Salto La Estanzuela',
@@ -683,11 +683,11 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Fresco de Chicha Morada', desc: 'Elaborada con maíz morado autóctono.' }
     ],
     places: [
-      { name: 'Volcán San Cristóbal (1,745 msnm)', type: 'Pico Más Alto del País', icon: 'fa-volcano' },
-      { name: 'Volcán Cosigüina y Laguna Cráter', type: 'Reserva Natural & Golfo', icon: 'fa-mountain' },
-      { name: 'Basílica Menor de Nuestra Señora del Trono', type: 'Santuario Nacional', icon: 'fa-church' },
-      { name: 'Playas de Aserradores & Jiquilillo', type: 'Surf & Esteros', icon: 'fa-umbrella-beach' },
-      { name: 'Estero Padre Ramos', type: 'Santuario de Manglar & Tortugas', icon: 'fa-tree' }
+      { name: 'Volcán San Cristóbal (1,745 msnm)', type: 'Pico Más Alto del País', icon: 'fa-volcano', desc: 'El volcán más alto de Nicaragua, activo; el ascenso es exigente y se hace solo con guía y buen estado físico.' },
+      { name: 'Volcán Cosigüina y Laguna Cráter', type: 'Reserva Natural & Golfo', icon: 'fa-mountain', desc: 'Volcán en la península de Cosigüina con una laguna en el cráter y vistas al Golfo de Fonseca.' },
+      { name: 'Basílica Menor de Nuestra Señora del Trono', type: 'Santuario Nacional', icon: 'fa-church', desc: 'Santuario de El Viejo, centro de la devoción a la Virgen del Trono y de la tradición de La Lavada de la Plata.' },
+      { name: 'Playas de Aserradores & Jiquilillo', type: 'Surf & Esteros', icon: 'fa-umbrella-beach', desc: 'Playas del Pacífico norte con olas para surf, esteros y pueblos de pescadores.' },
+      { name: 'Estero Padre Ramos', type: 'Santuario de Manglar & Tortugas', icon: 'fa-tree', desc: 'Reserva de manglares y esteros donde anidan tortugas marinas; se recorre en lancha con guías comunitarios.' }
     ],
     activities: [
       'Ascenso exigente al coloso activo San Cristóbal',
@@ -732,19 +732,19 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Bebidas Tradicionales', desc: 'Cacao, pinolillo, tiste, chicha, cebada y semilla de jícaro.' }
     ],
     places: [
-      { name: 'Puerto Salvador Allende y lago Xolotlán', type: 'Gastronomía, navegación, familia, paisaje y entretenimiento', icon: 'fa-ship' },
-      { name: 'Centro Histórico de Managua', type: 'Plaza de la Revolución, Antigua Catedral y patrimonio', icon: 'fa-landmark' },
-      { name: 'Teatro Nacional Rubén Darío', type: 'Artes escénicas, música, arquitectura y cultura', icon: 'fa-masks-theater' },
-      { name: 'Huellas de Acahualinca', type: 'Arqueología, geología e historia humana', icon: 'fa-shoe-prints' },
-      { name: 'Laguna de Tiscapa', type: 'Laguna cratérica, miradores, historia y fotografía', icon: 'fa-camera' },
-      { name: 'Laguna de Xiloá y Apoyeque', type: 'Recreación autorizada, paisaje volcánico y naturaleza', icon: 'fa-water' },
-      { name: 'Laguna de Asososca', type: 'Paisaje natural y observación desde áreas permitidas', icon: 'fa-droplet' },
-      { name: 'Reserva Natural Chocoyero–El Brujo', type: 'Senderismo, bosque, aves e interpretación ambiental', icon: 'fa-feather' },
-      { name: 'Ticuantepe y El Crucero', type: 'Agricultura, café, clima fresco, miradores y turismo rural', icon: 'fa-seedling' },
-      { name: 'Pochomil y Masachapa', type: 'Playa, pesca, gastronomía, familia y atardecer', icon: 'fa-umbrella-beach' },
-      { name: 'Mercado Roberto Huembes', type: 'Artesanía, textiles, comida y comercio local', icon: 'fa-store' },
-      { name: 'Parque Luis Alfonso Velásquez Flores', type: 'Turismo familiar y recreación al aire libre', icon: 'fa-children' },
-      { name: 'Tipitapa y Centro Turístico El Trapiche', type: 'Termalismo, recreación, historia y gastronomía', icon: 'fa-hot-tub-person' }
+      { name: 'Puerto Salvador Allende y lago Xolotlán', type: 'Gastronomía, navegación, familia, paisaje y entretenimiento', icon: 'fa-ship', desc: 'Malecón de Managua a orillas del lago Xolotlán, con restaurantes, paseos en barco y espacios familiares.' },
+      { name: 'Centro Histórico de Managua', type: 'Plaza de la Revolución, Antigua Catedral y patrimonio', icon: 'fa-landmark', desc: 'Zona de la antigua Managua con la Catedral vieja, el Palacio de la Cultura y la plaza junto al lago Xolotlán.' },
+      { name: 'Teatro Nacional Rubén Darío', type: 'Artes escénicas, música, arquitectura y cultura', icon: 'fa-masks-theater', desc: 'Principal escenario de artes escénicas del país, frente al lago Xolotlán, con conciertos, danza y teatro.' },
+      { name: 'Huellas de Acahualinca', type: 'Arqueología, geología e historia humana', icon: 'fa-shoe-prints', desc: 'Huellas de personas y animales conservadas en ceniza volcánica, de más de dos milenios de antigüedad, protegidas en un museo.' },
+      { name: 'Laguna de Tiscapa', type: 'Laguna cratérica, miradores, historia y fotografía', icon: 'fa-camera', desc: 'Laguna cratérica en el corazón de Managua, con miradores, historia y canopy.' },
+      { name: 'Laguna de Xiloá y Apoyeque', type: 'Recreación autorizada, paisaje volcánico y naturaleza', icon: 'fa-water', desc: 'Lagunas de origen volcánico en la península de Chiltepe; Xiloá es balneario y Apoyeque una reserva natural.' },
+      { name: 'Laguna de Asososca', type: 'Paisaje natural y observación desde áreas permitidas', icon: 'fa-droplet', desc: 'Laguna cratérica que abastece de agua a Managua; se observa solo desde los miradores permitidos.' },
+      { name: 'Reserva Natural Chocoyero–El Brujo', type: 'Senderismo, bosque, aves e interpretación ambiental', icon: 'fa-feather', desc: 'Cascadas y paredes donde anidan miles de chocoyos, a poca distancia de la capital.' },
+      { name: 'Ticuantepe y El Crucero', type: 'Agricultura, café, clima fresco, miradores y turismo rural', icon: 'fa-seedling', desc: 'Municipios de altura al sur de Managua: Ticuantepe con fincas de piña y El Crucero con clima fresco y miradores.' },
+      { name: 'Pochomil y Masachapa', type: 'Playa, pesca, gastronomía, familia y atardecer', icon: 'fa-umbrella-beach', desc: 'Playas del Pacífico de Managua con pesca, comedores de mariscos y atardeceres.' },
+      { name: 'Mercado Roberto Huembes', type: 'Artesanía, textiles, comida y comercio local', icon: 'fa-store', desc: 'Mercado de Managua con una gran sección de artesanía nicaragüense, textiles y comida típica.' },
+      { name: 'Parque Luis Alfonso Velásquez Flores', type: 'Turismo familiar y recreación al aire libre', icon: 'fa-children', desc: 'Parque urbano familiar de Managua con áreas verdes, juegos y espacios recreativos.' },
+      { name: 'Tipitapa y Centro Turístico El Trapiche', type: 'Termalismo, recreación, historia y gastronomía', icon: 'fa-hot-tub-person', desc: 'Tipitapa, entre los dos grandes lagos, es conocida por sus aguas termales; El Trapiche ofrece piscinas y comida típica.' }
     ],
     activities: [
       'Experiencias urbanas de cultura, entretenimiento, gastronomía y compras',
@@ -800,17 +800,17 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Sabores de la Costa', desc: 'Pescado y mariscos preparados en La Boquita, Casares, Huehuete y otros pueblos costeros.' }
     ],
     places: [
-      { name: 'Diriamba y Basílica de San Sebastián', type: 'El Güegüense, patrimonio, fiestas, arquitectura y fotografía', icon: 'fa-church' },
-      { name: 'Jinotepe y Parroquia Santiago', type: 'Arquitectura, gastronomía, cultura, parques y servicios', icon: 'fa-building-columns' },
-      { name: 'La Boquita', type: 'Playa, gastronomía marina, familia y atardeceres', icon: 'fa-umbrella-beach' },
-      { name: 'Casares', type: 'Pesca artesanal, comunidad, restaurantes y paisaje costero', icon: 'fa-fish' },
-      { name: 'Huehuete y El Tamarindo', type: 'Playas, recreación y costa caraceña', icon: 'fa-water' },
-      { name: 'Centro Ecoturístico La Máquina', type: 'Cascadas, senderos y bosque seco', icon: 'fa-water' },
-      { name: 'Refugio Río Escalante–Chacocente', type: 'Senderismo, fauna y conservación regulada de tortugas', icon: 'fa-shield-heart' },
-      { name: 'Reserva Silvestre Privada Tonantzin', type: 'Senderismo, aves, petroglifos, agricultura y educación ambiental', icon: 'fa-leaf' },
-      { name: 'Reserva Silvestre Privada FRANIN', type: 'Senderismo, observación de aves y cabalgatas', icon: 'fa-feather' },
-      { name: 'Centro Ecoturístico Loma de Viento', type: 'Senderismo, cabalgatas, jardín botánico y turismo rural', icon: 'fa-mountain-sun' },
-      { name: 'Dolores y fincas cafetaleras', type: 'Ciclismo, agroturismo, café y producción local', icon: 'fa-bicycle' }
+      { name: 'Diriamba y Basílica de San Sebastián', type: 'El Güegüense, patrimonio, fiestas, arquitectura y fotografía', icon: 'fa-church', desc: 'Ciudad de Carazo donde, en las fiestas de San Sebastián, el Güegüense, el Toro Huaco y el Gigante bailan en las calles.' },
+      { name: 'Jinotepe y Parroquia Santiago', type: 'Arquitectura, gastronomía, cultura, parques y servicios', icon: 'fa-building-columns', desc: 'Cabecera de Carazo con su parroquia de Santiago y fiestas patronales con bailes tradicionales y procesiones.' },
+      { name: 'La Boquita', type: 'Playa, gastronomía marina, familia y atardeceres', icon: 'fa-umbrella-beach', desc: 'Balneario del Pacífico de Carazo con comedores de mariscos, pescadores y atardeceres.' },
+      { name: 'Casares', type: 'Pesca artesanal, comunidad, restaurantes y paisaje costero', icon: 'fa-fish', desc: 'Comunidad de pescadores en la costa de Carazo, con playa tranquila y comida de mar.' },
+      { name: 'Huehuete y El Tamarindo', type: 'Playas, recreación y costa caraceña', icon: 'fa-water', desc: 'Playas de la costa de Carazo con pesca artesanal y descanso frente al mar.' },
+      { name: 'Centro Ecoturístico La Máquina', type: 'Cascadas, senderos y bosque seco', icon: 'fa-water', desc: 'Área natural en Carazo con ríos, pozas, cascadas y senderos entre bosque seco.' },
+      { name: 'Refugio Río Escalante–Chacocente', type: 'Senderismo, fauna y conservación regulada de tortugas', icon: 'fa-shield-heart', desc: 'Playa protegida y bosque seco donde desovan tortugas marinas.' },
+      { name: 'Reserva Silvestre Privada Tonantzin', type: 'Senderismo, aves, petroglifos, agricultura y educación ambiental', icon: 'fa-leaf', desc: 'Reserva privada en Carazo con senderos, aves, petroglifos y prácticas agrícolas sostenibles.' },
+      { name: 'Reserva Silvestre Privada FRANIN', type: 'Senderismo, observación de aves y cabalgatas', icon: 'fa-feather', desc: 'Reserva privada de bosque para senderismo, observación de aves y cabalgatas.' },
+      { name: 'Centro Ecoturístico Loma de Viento', type: 'Senderismo, cabalgatas, jardín botánico y turismo rural', icon: 'fa-mountain-sun', desc: 'Espacio de turismo rural en Carazo con senderos, cabalgatas y jardín botánico.' },
+      { name: 'Dolores y fincas cafetaleras', type: 'Ciclismo, agroturismo, café y producción local', icon: 'fa-bicycle', desc: 'Municipio de la meseta de Carazo con fincas de café, rutas en bicicleta y producción local.' }
     ],
     activities: [
       'Cultura viva: El Güegüense, Toro Huaco, El Viejo y La Vieja',
@@ -869,17 +869,17 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Sabores del Lago y la Finca', desc: 'Pescado, carne, güirilas, nacatamales, sopas y café de zonas altas.' }
     ],
     places: [
-      { name: 'Cordillera de Amerrisque', type: 'Serranía Mística & Trekking', icon: 'fa-mountain' },
-      { name: 'Museo Arqueológico Gregorio Aguilar Barea', type: 'Estatuas de Piedra Prehispánicas', icon: 'fa-landmark' },
-      { name: 'Zoológico Thomas Belt de Juigalpa', type: 'Fauna Silvestre & Puma Albino', icon: 'fa-paw' },
-      { name: 'Puerto Díaz & Lago Cocibolca', type: 'Pueblo de Pescadores', icon: 'fa-anchor' },
-      { name: 'Piedras Pintadas de Villa Sandino', type: 'Petroglifos Sagrados', icon: 'fa-palette' },
-      { name: 'Pirámides de Garro Grande', type: 'Arqueología y memoria precolombina', icon: 'fa-monument' },
-      { name: 'Archipiélago El Nancital', type: '27 islas, aves, pesca, navegación y atardeceres', icon: 'fa-ship' },
-      { name: 'Cerro y Cuevas Las Ventanas', type: 'Senderismo, espeleología y geología en Acoyapa', icon: 'fa-mountain-sun' },
-      { name: 'Cascadas de Chontales', type: 'El Corozo, El Silencio, El Chancho, Hato Grande y Kilona', icon: 'fa-water' },
-      { name: 'Salto y Cueva La Oropéndola', type: 'Senderismo y naturaleza en Santo Tomás', icon: 'fa-person-hiking' },
-      { name: 'Aguas Calientes e Isla Arena', type: 'Geología, lancha, balneario y campamento', icon: 'fa-hot-tub-person' }
+      { name: 'Cordillera de Amerrisque', type: 'Serranía Mística & Trekking', icon: 'fa-mountain', desc: 'Serranía de Chontales con montañas, ríos y miradores sobre la llanura ganadera.' },
+      { name: 'Museo Arqueológico Gregorio Aguilar Barea', type: 'Estatuas de Piedra Prehispánicas', icon: 'fa-landmark', desc: 'Museo de Juigalpa con una colección de estatuas prehispánicas de piedra de la región chontal.' },
+      { name: 'Zoológico Thomas Belt de Juigalpa', type: 'Fauna Silvestre & Puma Albino', icon: 'fa-paw', desc: 'Pequeño zoológico de Juigalpa con fauna nicaragüense, dedicado a la educación ambiental de familias y escuelas.' },
+      { name: 'Puerto Díaz & Lago Cocibolca', type: 'Pueblo de Pescadores', icon: 'fa-anchor', desc: 'Pueblo de pescadores a orillas del Cocibolca, con lanchas, pescado fresco y atardeceres sobre el lago.' },
+      { name: 'Piedras Pintadas de Villa Sandino', type: 'Petroglifos Sagrados', icon: 'fa-palette', desc: 'Rocas con petroglifos precolombinos en Villa Sandino, parte de la memoria ancestral de Chontales.' },
+      { name: 'Pirámides de Garro Grande', type: 'Arqueología y memoria precolombina', icon: 'fa-monument', desc: 'Sitio arqueológico con montículos y vestigios precolombinos en Chontales.' },
+      { name: 'Archipiélago El Nancital', type: '27 islas, aves, pesca, navegación y atardeceres', icon: 'fa-ship', desc: 'Grupo de islas del Cocibolca frente a Chontales, con aves, pesca, navegación y atardeceres.' },
+      { name: 'Cerro y Cuevas Las Ventanas', type: 'Senderismo, espeleología y geología en Acoyapa', icon: 'fa-mountain-sun', desc: 'Cerro con cuevas y formaciones rocosas en Acoyapa, para senderismo y espeleología guiada.' },
+      { name: 'Cascadas de Chontales', type: 'El Corozo, El Silencio, El Chancho, Hato Grande y Kilona', icon: 'fa-water', desc: 'Caídas de agua como El Corozo, El Silencio, El Chancho, Hato Grande y Kilona, entre ganadería y bosque.' },
+      { name: 'Salto y Cueva La Oropéndola', type: 'Senderismo y naturaleza en Santo Tomás', icon: 'fa-person-hiking', desc: 'Cascada y cueva en Santo Tomás, nombradas por las aves oropéndolas que anidan en la zona.' },
+      { name: 'Aguas Calientes e Isla Arena', type: 'Geología, lancha, balneario y campamento', icon: 'fa-hot-tub-person', desc: 'Aguas termales a orillas del Cocibolca y una isla de arena a la que se llega en lancha.' }
     ],
     activities: [
       'Escalada y senderismo en los riscos de la Cordillera Amerrisque',
@@ -934,17 +934,17 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Sabores Campesinos', desc: 'Güirilas, nacatamales, carnes, sopas, miel, tortillas y café de montaña.' }
     ],
     places: [
-      { name: 'Centro Histórico & Calles Escalonadas de Boaco', type: 'Arquitectura Topográfica', icon: 'fa-city' },
-      { name: 'Cerro de la Vieja & Cerro Alegre', type: 'Senderismo & Mitos', icon: 'fa-mountain' },
-      { name: 'Río Fonseca & Balnearios Naturales', type: 'Pozas de Montaña', icon: 'fa-water' },
-      { name: 'Pueblo Ganadero de Camoapa', type: 'Sombreros de Pita & Lácteos', icon: 'fa-hat-cowboy' },
-      { name: 'Mirador El Faro', type: 'Panorámica de la Ciudad', icon: 'fa-eye' },
-      { name: 'Reserva Mombachito–Cerro La Vieja', type: 'Bosque, senderismo, agua y turismo rural', icon: 'fa-tree' },
-      { name: 'Reserva Natural Filas de Masigüe', type: 'Bosque húmedo, aves y conservación del agua', icon: 'fa-feather' },
-      { name: 'Comunidad Las Lagunas', type: 'Petrograbados, senderismo, gastronomía y miradores', icon: 'fa-monument' },
-      { name: 'Cerros y cascadas de Santa Lucía', type: 'La Cruz, Santo Domingo, Peña Labrada y Salto Las Américas', icon: 'fa-mountain-sun' },
-      { name: 'Cueva La Cocinera y Finca El Tamarindo', type: 'Aventura, café, orquídeas y cactus', icon: 'fa-person-hiking' },
-      { name: 'Salto La Chorrera', type: 'Senderismo, aves, cafetales y miradores', icon: 'fa-water' }
+      { name: 'Centro Histórico & Calles Escalonadas de Boaco', type: 'Arquitectura Topográfica', icon: 'fa-city', desc: 'La \'ciudad de dos pisos\': parte alta y parte baja unidas por calles en pendiente con vista al valle.' },
+      { name: 'Cerro de la Vieja & Cerro Alegre', type: 'Senderismo & Mitos', icon: 'fa-mountain', desc: 'Cerros de Boaco con senderos, miradores y leyendas de la tradición oral local.' },
+      { name: 'Río Fonseca & Balnearios Naturales', type: 'Pozas de Montaña', icon: 'fa-water', desc: 'Río de montaña con pozas naturales para bañarse cerca de la ciudad de Boaco.' },
+      { name: 'Pueblo Ganadero de Camoapa', type: 'Sombreros de Pita & Lácteos', icon: 'fa-hat-cowboy', desc: 'Municipio ganadero de Boaco, conocido por sus artesanías de palma (pita) y la vida de hacienda.' },
+      { name: 'Mirador El Faro', type: 'Panorámica de la Ciudad', icon: 'fa-eye', desc: 'Mirador sobre la \'ciudad de dos pisos\', con vista panorámica de Boaco.' },
+      { name: 'Reserva Mombachito–Cerro La Vieja', type: 'Bosque, senderismo, agua y turismo rural', icon: 'fa-tree', desc: 'Reserva de bosque con fuentes de agua, senderos y turismo rural en Boaco.' },
+      { name: 'Reserva Natural Filas de Masigüe', type: 'Bosque húmedo, aves y conservación del agua', icon: 'fa-feather', desc: 'Serranía de bosque húmedo protegida por su valor para el agua y las aves.' },
+      { name: 'Comunidad Las Lagunas', type: 'Petrograbados, senderismo, gastronomía y miradores', icon: 'fa-monument', desc: 'Comunidad rural de Boaco con petrograbados, senderos, cocina local y miradores.' },
+      { name: 'Cerros y cascadas de Santa Lucía', type: 'La Cruz, Santo Domingo, Peña Labrada y Salto Las Américas', icon: 'fa-mountain-sun', desc: 'Pueblo rodeado de montañas, con cerros y cascadas ideales para caminatas y turismo rural.' },
+      { name: 'Cueva La Cocinera y Finca El Tamarindo', type: 'Aventura, café, orquídeas y cactus', icon: 'fa-person-hiking', desc: 'Cueva para aventura guiada y una finca con café, orquídeas y cactus.' },
+      { name: 'Salto La Chorrera', type: 'Senderismo, aves, cafetales y miradores', icon: 'fa-water', desc: 'Cascada entre cafetales con senderos, aves y miradores.' }
     ],
     activities: [
       'Caminatas por las escalinatas y miradores urbanos de la Ciudad de Dos Pisos',
@@ -1004,17 +1004,17 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Ruta del Maíz y el Jocote', desc: 'Productos, dulces y bebidas vinculados con Jalapa y Macuelizo.' }
     ],
     places: [
-      { name: 'Cerro Mogotón (2,107 msnm)', type: 'Cima Más Alta de Nicaragua', icon: 'fa-mountain' },
-      { name: 'Santuario de la Virgen de la Piedra (Dipilto)', type: 'Sitio Religioso & Río', icon: 'fa-church' },
-      { name: 'Aguas Termales de Macuelizo & Delia', type: 'Termalismo Terapéutico', icon: 'fa-hot-tub-person' },
-      { name: 'Valle Fértil de Jalapa', type: 'Granero de Maíz & Tabaco', icon: 'fa-seedling' },
-      { name: 'Ocotal Colonial & Casa de la Cultura', type: 'Historia & Música', icon: 'fa-landmark' },
-      { name: 'Ciudad Antigua', type: 'Ruta colonial, iglesias, arquitectura y comunidades', icon: 'fa-building-columns' },
-      { name: 'Cerro Las Tres Señoritas', type: 'Senderismo y vistas panorámicas cerca de Ocotal', icon: 'fa-mountain-sun' },
-      { name: 'Cruz de la Fe', type: 'Mirador y recorrido religioso en Dipilto', icon: 'fa-cross' },
-      { name: 'Artesanías de Mozonte', type: 'Barro, talleres y compra directa a creadores', icon: 'fa-hands' },
-      { name: 'Salto El Rosario', type: 'Cascada, senderismo, bosque y comunidades de Murra', icon: 'fa-water' },
-      { name: 'Aguas termales Don Alfonso', type: 'Naturaleza y bienestar en San Fernando', icon: 'fa-hot-tub-person' }
+      { name: 'Cerro Mogotón (2,107 msnm)', type: 'Cima Más Alta de Nicaragua', icon: 'fa-mountain', desc: 'El punto más alto de Nicaragua, en una reserva natural de pinares y bosque nuboso en la frontera norte.' },
+      { name: 'Santuario de la Virgen de la Piedra (Dipilto)', type: 'Sitio Religioso & Río', icon: 'fa-church', desc: 'Santuario en una cueva de piedra en Dipilto, centro de peregrinación entre pinares y fincas de café.' },
+      { name: 'Aguas Termales de Macuelizo & Delia', type: 'Termalismo Terapéutico', icon: 'fa-hot-tub-person', desc: 'Fuentes de aguas termales en el municipio de Macuelizo, usadas como baños de descanso.' },
+      { name: 'Valle Fértil de Jalapa', type: 'Granero de Maíz & Tabaco', icon: 'fa-seedling', desc: 'Valle agrícola del norte de Nueva Segovia, conocido por el maíz, el tabaco y el clima fresco.' },
+      { name: 'Ocotal Colonial & Casa de la Cultura', type: 'Historia & Música', icon: 'fa-landmark', desc: 'Cabecera de Nueva Segovia con su parque central, catedral y casa de la cultura, puerta hacia los pinares del norte.' },
+      { name: 'Ciudad Antigua', type: 'Ruta colonial, iglesias, arquitectura y comunidades', icon: 'fa-building-columns', desc: 'Uno de los pueblos coloniales más antiguos de Nicaragua, con su iglesia histórica y calles tradicionales.' },
+      { name: 'Cerro Las Tres Señoritas', type: 'Senderismo y vistas panorámicas cerca de Ocotal', icon: 'fa-mountain-sun', desc: 'Cerro cercano a Ocotal con senderos y vistas panorámicas del valle.' },
+      { name: 'Cruz de la Fe', type: 'Mirador y recorrido religioso en Dipilto', icon: 'fa-cross', desc: 'Mirador con una gran cruz en Dipilto, destino de recorridos religiosos y paisaje de pinares.' },
+      { name: 'Artesanías de Mozonte', type: 'Barro, talleres y compra directa a creadores', icon: 'fa-hands', desc: 'Talleres de cerámica de barro en Mozonte, comunidad de tradición indígena; se compra directo a las artesanas.' },
+      { name: 'Salto El Rosario', type: 'Cascada, senderismo, bosque y comunidades de Murra', icon: 'fa-water', desc: 'Cascada en el municipio de Murra, rodeada de bosque y comunidades cafetaleras.' },
+      { name: 'Aguas termales Don Alfonso', type: 'Naturaleza y bienestar en San Fernando', icon: 'fa-hot-tub-person', desc: 'Aguas termales naturales en San Fernando para descanso y bienestar.' }
     ],
     activities: [
       'Expedición y cumbre al Cerro Mogotón entre pinares y neblina',
@@ -1069,17 +1069,17 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Sabores del Agua y la Selva', desc: 'Pescado, sopas, plátano, maíz, productos tropicales, miel y lácteos rurales.' }
     ],
     places: [
-      { name: 'Fortaleza de la Inmaculada Concepción (El Castillo)', type: 'Monumento Nacional Siglo XVII', icon: 'fa-chess-rook' },
-      { name: 'Reserva Biológica Indio Maíz', type: 'Selva Virgen & Jaguares', icon: 'fa-tree' },
-      { name: 'Archipiélago de Solentiname', type: 'Islas de Pintores Primitivistas', icon: 'fa-palette' },
-      { name: 'Humedales de San Carlos & Malecón', type: 'Confluencia Lago-Río', icon: 'fa-water' },
-      { name: 'San Juan de Nicaragua (Greytown)', type: 'Salida al Caribe & Cementerios Británicos', icon: 'fa-anchor' },
-      { name: 'San Carlos y su circuito urbano', type: 'Malecón, fortaleza, centro cultural, museo y puerto', icon: 'fa-city' },
-      { name: 'Bartola', type: 'Senderismo, cacao, fauna, cabalgatas y aviturismo', icon: 'fa-tree' },
-      { name: 'Refugio de Vida Silvestre Río San Juan', type: 'Bosque húmedo, humedales y biodiversidad', icon: 'fa-feather' },
-      { name: 'Antigua Greytown', type: 'Cementerios, lagunas, caños y memoria del tránsito', icon: 'fa-landmark' },
-      { name: 'Refugio Los Guatuzos', type: 'Kayak, aves, fauna, bosque y senderos', icon: 'fa-binoculars' },
-      { name: 'Muelle de San Miguelito y Chocoyolandia', type: 'Atardeceres, gastronomía y balneario lacustre', icon: 'fa-water' }
+      { name: 'Fortaleza de la Inmaculada Concepción (El Castillo)', type: 'Monumento Nacional Siglo XVII', icon: 'fa-chess-rook', desc: 'Fortaleza colonial sobre los raudales del río San Juan, construida para defender la ruta hacia el Caribe.' },
+      { name: 'Reserva Biológica Indio Maíz', type: 'Selva Virgen & Jaguares', icon: 'fa-tree', desc: 'Una de las selvas mejor conservadas de Centroamérica; se visita por sus bordes con guías autorizados.' },
+      { name: 'Archipiélago de Solentiname', type: 'Islas de Pintores Primitivistas', icon: 'fa-palette', desc: 'Islas de pintores y talladores de madera de balsa en el Cocibolca.' },
+      { name: 'Humedales de San Carlos & Malecón', type: 'Confluencia Lago-Río', icon: 'fa-water', desc: 'Malecón de San Carlos donde se unen el lago y el río San Juan, rodeado de humedales con aves.' },
+      { name: 'San Juan de Nicaragua (Greytown)', type: 'Salida al Caribe & Cementerios Británicos', icon: 'fa-anchor', desc: 'Poblado en la desembocadura del río San Juan al Caribe, con historia del tránsito interoceánico.' },
+      { name: 'San Carlos y su circuito urbano', type: 'Malecón, fortaleza, centro cultural, museo y puerto', icon: 'fa-city', desc: 'Cabecera de Río San Juan, con malecón, fortaleza, centro cultural y el puerto de salida hacia el río y Solentiname.' },
+      { name: 'Bartola', type: 'Senderismo, cacao, fauna, cabalgatas y aviturismo', icon: 'fa-tree', desc: 'Comunidad a orillas del río San Juan, junto a la Reserva Indio Maíz, con senderos, cacao y fauna.' },
+      { name: 'Refugio de Vida Silvestre Río San Juan', type: 'Bosque húmedo, humedales y biodiversidad', icon: 'fa-feather', desc: 'Refugio a lo largo del río San Juan con selva, humedales y fauna, recorrido en lancha.' },
+      { name: 'Antigua Greytown', type: 'Cementerios, lagunas, caños y memoria del tránsito', icon: 'fa-landmark', desc: 'Sitio histórico con cementerios de la época del tránsito, lagunas y caños en la costa caribe de Río San Juan.' },
+      { name: 'Refugio Los Guatuzos', type: 'Kayak, aves, fauna, bosque y senderos', icon: 'fa-binoculars', desc: 'Humedales y ríos con aves, caimanes y monos al sur del Cocibolca.' },
+      { name: 'Muelle de San Miguelito y Chocoyolandia', type: 'Atardeceres, gastronomía y balneario lacustre', icon: 'fa-water', desc: 'Muelle del Cocibolca con atardeceres, comida local y balneario lacustre.' }
     ],
     activities: [
       'Navegación en lancha rápida por los raudales de El Castillo',
@@ -1136,14 +1136,14 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Bunya y Productos del Territorio', desc: 'Yuca fermentada, pescado, mariscos, plátano, maíz y coco.' }
     ],
     places: [
-      { name: 'Reserva de Biosfera Bosawás', type: 'Patrimonio de la Humanidad UNESCO', icon: 'fa-tree' },
-      { name: 'Río Coco / Wangki', type: 'Río Más Largo de Centroamérica', icon: 'fa-water' },
-      { name: 'Bilwi (Puerto Cabezas) & Muelle Histórico', type: 'Cultura Caribeña & Playas', icon: 'fa-anchor' },
-      { name: 'Comunidades Mayangnas de Bonanza y Rosita', type: 'Pueblos Originarios', icon: 'fa-hands-holding' },
-      { name: 'Cayos Miskitos', type: 'Arrecifes & Casas sobre Pilotes', icon: 'fa-fish' },
-      { name: 'Waspam, Portal del Wangki', type: 'Navegación, comunidades, lengua y cultura', icon: 'fa-ship' },
-      { name: 'Sabanas de Pino', type: 'Paisaje, fotografía, fauna y comunidad', icon: 'fa-tree' },
-      { name: 'Triángulo Minero', type: 'Siuna, Bonanza y Rosita: naturaleza y memoria productiva', icon: 'fa-mountain-sun' }
+      { name: 'Reserva de Biosfera Bosawás', type: 'Patrimonio de la Humanidad UNESCO', icon: 'fa-tree', desc: 'Uno de los bosques tropicales más extensos de Centroamérica, territorio mayangna y miskitu.' },
+      { name: 'Río Coco / Wangki', type: 'Río Más Largo de Centroamérica', icon: 'fa-water', desc: 'El río más largo de Centroamérica, frontera con Honduras y eje de la vida miskitu.' },
+      { name: 'Bilwi (Puerto Cabezas) & Muelle Histórico', type: 'Cultura Caribeña & Playas', icon: 'fa-anchor', desc: 'Ciudad portuaria del Caribe norte con muelle, playa y cultura miskita.' },
+      { name: 'Comunidades Mayangnas de Bonanza y Rosita', type: 'Pueblos Originarios', icon: 'fa-hands-holding', desc: 'Pueblos originarios mayangnas que conservan su idioma y su relación con el bosque de Bosawás.' },
+      { name: 'Cayos Miskitos', type: 'Arrecifes & Casas sobre Pilotes', icon: 'fa-fish', desc: 'Cayos y arrecifes frente a la costa de la RACCN, con casas sobre pilotes de comunidades miskitas.' },
+      { name: 'Waspam, Portal del Wangki', type: 'Navegación, comunidades, lengua y cultura', icon: 'fa-ship', desc: 'Pueblo a orillas del río Coco, centro de las comunidades miskitas del Wangki.' },
+      { name: 'Sabanas de Pino', type: 'Paisaje, fotografía, fauna y comunidad', icon: 'fa-tree', desc: 'Extensas sabanas de pino caribe cerca de Bilwi, con fauna y paisajes abiertos.' },
+      { name: 'Triángulo Minero', type: 'Siuna, Bonanza y Rosita: naturaleza y memoria productiva', icon: 'fa-mountain-sun', desc: 'Siuna, Bonanza y Rosita: municipios mineros con historia productiva y acceso a la naturaleza de Bosawás.' }
     ],
     activities: [
       'Expediciones científicas y de ecoturismo en los senderos de Bosawás',
@@ -1204,16 +1204,16 @@ window.BAQUEANO_TERRITORIES = [
       { name: 'Sabores del Mar', desc: 'Pescado, camarón, cangrejo y langosta únicamente durante temporada autorizada.' }
     ],
     places: [
-      { name: 'Corn Island & Little Corn Island', type: 'Playas Turquesas & Arrecife', icon: 'fa-umbrella-beach' },
-      { name: 'Cayos Perlas', type: 'Islas de Coral Desiertas', icon: 'fa-fish' },
-      { name: 'Bahía de Bluefields & Malecón', type: 'Cultura Afrocaribeña', icon: 'fa-anchor' },
-      { name: 'Laguna de Perlas & Aspinwall', type: 'Humedales & Comunidades Garífunas', icon: 'fa-water' },
-      { name: 'Isla Rama Cay', type: 'Pueblo Originario Rama', icon: 'fa-people-roof' },
-      { name: 'Bluff Beach', type: 'Playa, paisaje, deporte y gastronomía marina', icon: 'fa-umbrella-beach' },
-      { name: 'Playas de Corn Island', type: 'Long Bay, South West Bay, Heavy Sand y Mount Pleasant', icon: 'fa-water' },
-      { name: 'Little Corn Island y Otto Beach', type: 'Caminatas, snorkel, buceo y descanso', icon: 'fa-island-tropical' },
-      { name: 'Awas y Orinoco', type: 'Experiencias culturales comunitarias miskita y garífuna', icon: 'fa-people-group' },
-      { name: 'Saltos Walpapigny y Busay', type: 'Senderismo, aves, naturaleza y aguas termales', icon: 'fa-water' }
+      { name: 'Corn Island & Little Corn Island', type: 'Playas Turquesas & Arrecife', icon: 'fa-umbrella-beach', desc: 'Islas caribeñas de arena blanca, arrecifes y cultura creole.' },
+      { name: 'Cayos Perlas', type: 'Islas de Coral Desiertas', icon: 'fa-fish', desc: 'Cayos de arena y arrecife frente a Laguna de Perlas, en un área de anidación de tortugas.' },
+      { name: 'Bahía de Bluefields & Malecón', type: 'Cultura Afrocaribeña', icon: 'fa-anchor', desc: 'Ciudad caribeña de música, bahía y mercado, cabecera de la RACCS.' },
+      { name: 'Laguna de Perlas & Aspinwall', type: 'Humedales & Comunidades Garífunas', icon: 'fa-water', desc: 'Laguna costera con comunidades creoles, garífunas y miskitu, punto de salida hacia los Cayos Perlas.' },
+      { name: 'Isla Rama Cay', type: 'Pueblo Originario Rama', icon: 'fa-people-roof', desc: 'Pequeña isla en la bahía de Bluefields, hogar principal del pueblo originario Rama.' },
+      { name: 'Bluff Beach', type: 'Playa, paisaje, deporte y gastronomía marina', icon: 'fa-umbrella-beach', desc: 'Playa en El Bluff, a la entrada de la bahía de Bluefields, con mar abierto y comida marina.' },
+      { name: 'Playas de Corn Island', type: 'Long Bay, South West Bay, Heavy Sand y Mount Pleasant', icon: 'fa-water', desc: 'Playas de arena blanca y agua turquesa alrededor de Corn Island, con arrecifes para esnórquel.' },
+      { name: 'Little Corn Island y Otto Beach', type: 'Caminatas, snorkel, buceo y descanso', icon: 'fa-island-tropical', desc: 'Isla pequeña y sin carros, con senderos, arrecifes y playas tranquilas como Otto Beach.' },
+      { name: 'Awas y Orinoco', type: 'Experiencias culturales comunitarias miskita y garífuna', icon: 'fa-people-group', desc: 'Comunidades de Laguna de Perlas: Awas con playa lacustre y Orinoco, corazón de la cultura garífuna.' },
+      { name: 'Saltos Walpapigny y Busay', type: 'Senderismo, aves, naturaleza y aguas termales', icon: 'fa-water', desc: 'Caídas de agua en la RACCS rodeadas de bosque tropical, con aves y aguas termales en la zona.' }
     ],
     activities: [
       'Buceo y snorkel en los arrecifes de coral virgen de Little Corn Island',

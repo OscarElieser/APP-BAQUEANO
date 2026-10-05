@@ -275,6 +275,7 @@
           verified: false,
           catalogReference: true,
           icon: String(result.icon || ''),
+          desc: String(result.desc || ''),
           // Precisa: el nombre completo se encontró en OpenStreetMap.
           // Aproximada: se ubicó por una parte del nombre o su municipio.
           approximate: fixed ? fixed.approximate : true,
@@ -400,33 +401,6 @@
     return /^fa-[a-z0-9-]+$/.test(name) ? name : 'fa-location-dot';
   }
 
-  const normalizeText = (value) => String(value || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-  const STOP_WORDS = new Set(['reserva', 'natural', 'silvestre', 'parque', 'nacional', 'comunidad', 'indigena', 'centro', 'historico',
-    'cascada', 'cascadas', 'salto', 'cerro', 'laguna', 'playa', 'playas', 'museo', 'iglesia', 'ciudad', 'aguas', 'termales', 'mirador',
-    'finca', 'fincas', 'taller', 'talleres', 'puerto', 'isla', 'volcan', 'calle', 'antigua', 'artesanias', 'ruta', 'rio', 'lago']);
-
-  // Relato del lugar desde la guía rica del territorio (js/territories-rich-data.js):
-  // lugares emblemáticos, artesanías y fiestas. Solo se usa si coincide de verdad.
-  function findPlaceStory(placeName) {
-    const details = (window.BAQUEANO_TERRITORY_DETAILS || {})[departmentId];
-    if (!details) return null;
-    const tokens = normalizeText(placeName).split(/[^a-z0-9]+/).filter((t) => t.length >= 4 && !STOP_WORDS.has(t));
-    if (!tokens.length) return null;
-    const pool = [];
-    (details.signature || []).forEach((item) => pool.push({ title: item.title, head: `${item.title} ${item.subtitle || ''}`, text: item.text, facts: item.facts }));
-    (details.crafts || []).forEach((item) => pool.push({ title: item.title, head: `${item.title} ${item.community || ''}`, text: item.text }));
-    (details.festivals || []).forEach((item) => pool.push({ title: item.name, head: `${item.name} ${item.where || ''}`, text: item.text }));
-    let best = null;
-    pool.forEach((item) => {
-      const head = normalizeText(item.head);
-      const body = normalizeText(item.text);
-      const headHits = tokens.filter((t) => head.includes(t)).length;
-      const score = headHits * 2 + tokens.filter((t) => body.includes(t)).length;
-      if (headHits && (!best || score > best.score)) best = { ...item, score };
-    });
-    return best;
-  }
-
   function territoryInfo() {
     const list = Array.isArray(window.BAQUEANO_TERRITORIES) ? window.BAQUEANO_TERRITORIES : [];
     return list.find((item) => item && item.id === departmentId) || null;
@@ -489,18 +463,11 @@
       : String(place.municipality || territoryName));
 
     const body = el('div', 'map-place-info-body');
-    const story = findPlaceStory(place.name);
-    const description = story ? story.text : (place.catalogReference ? '' : place.shortDescription);
+    // Regla (AGENTS.md "Franja viva de lugares"): todo lugar de la guía tiene
+    // descripción propia y revisada (`desc` en js/territories-data.js). No se
+    // deduce por coincidencia de palabras: eso mostraba datos de OTRO lugar.
+    const description = place.desc || (place.catalogReference ? '' : place.shortDescription);
     if (description) body.append(el('p', 'map-place-info-text', String(description)));
-    if (story && Array.isArray(story.facts) && story.facts.length) {
-      const facts = el('ul', 'map-place-info-facts');
-      story.facts.slice(0, 3).forEach((fact) => {
-        const li = el('li');
-        li.append(el('strong', '', `${fact[0]}: `), String(fact[1]));
-        facts.append(li);
-      });
-      body.append(facts);
-    }
     const territory = territoryInfo();
     const extras = [
       ['fa-calendar-days', 'Mejor época', territory && territory.bestSeason],

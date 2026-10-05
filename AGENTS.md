@@ -41,6 +41,11 @@
    - Al finalizar o alcanzar un avance verificable, `SESSION_LOG.md` se actualiza con los entregables, pruebas y estado exacto para garantizar continuidad fluida.
    - Ante cualquier apagón, corte de energía o pérdida de sesión, el asistente consultará inmediatamente este archivo para reanudar el trabajo exactamente en el último punto sin pérdida de contexto.
 
+8. **Franja viva de lugares en todos los territorios (Regla del propietario, 2026-10-05)**:
+   - Los 15 departamentos y las 2 regiones autónomas (y todo territorio futuro) deben tener bajo su mapa la franja de lugares en **movimiento automático** y una **ficha informativa** al tocar cada lugar o pin.
+   - Cada lugar tiene descripción propia (`desc`) en `website/js/territories-data.js`; nunca se reutiliza la información de otro lugar.
+   - Detalle: `.agents/rules/franja_viva_territorios.md`. Prueba obligatoria en CI: `website/scripts/territory-places-rule.test.mjs`.
+
 ## BAQUEANO Agent Skills Orchestration
 
 ### 🎯 POR QUÉ (Why / Propósito)

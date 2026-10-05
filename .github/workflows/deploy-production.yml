@@ -54,6 +54,9 @@ jobs:
         run: npm --prefix azure/api test
       - name: APK Android presente y no vacío
         run: test -s website/assets/BaqueanoNicaragua.apk
+      - name: Regla "Franja viva de lugares" (17 territorios con franja y ficha)
+        working-directory: website
+        run: node scripts/territory-places-rule.test.mjs
       - name: Build estático del Website (misma lista permitida que producción)
         working-directory: website
         run: node scripts/build-hostinger-static.mjs
