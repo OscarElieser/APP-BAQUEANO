@@ -3128,7 +3128,8 @@
     },
     "historia": {
       "body": {
-        "title1": "Historia de Nicaragua | Baqueano Nicaragua"
+        "title1": "Historia de Nicaragua | Baqueano Nicaragua",
+        "metaDescription1": "Recorre la memoria histórica de Nicaragua: 7 periodos, pueblos originarios, personajes y los 17 territorios."
       },
       "histHeroExact": {
         "h11": "UNA HISTORIA",
@@ -3165,7 +3166,8 @@
         "span1": "RUTA TERRITORIAL",
         "h32": "Explorador de los 17 territorios",
         "p2": "Un recorrido continuo por la historia, cultura y naturaleza de Nicaragua.",
-        "a1": "Ver guía completa"
+        "a1": "Ver guía completa",
+        "divAriaLabel1": "Controles del explorador territorial"
       },
       "territoryHighlightRegion": {
         "span1": "Occidente cultural"
@@ -3218,7 +3220,132 @@
         "p4": "Ciudad colonial (UNESCO)",
         "p5": "Historia viva a orillas del Gran Lago.",
         "h42": "Petroglifos de Ometepe",
-        "p6": "Arte ancestral en piedra."
+        "p6": "Arte ancestral en piedra.",
+        "h43": "Música, danza y tradiciones",
+        "p7": "Expresiones que nos identifican.",
+        "imgAlt1": "Música y danza"
+      },
+      "histBeforeAfterSection": {
+        "h21": "Antes y ahora",
+        "p1": "Descubrí cómo nuestros sitios históricos se mantienen vivos.",
+        "div1": "León (antes y ahora)",
+        "div2": "Granada (antes y ahora)",
+        "div3": "León Viejo (antes y ahora)",
+        "div4": "Momotombo (antes y ahora)"
+      },
+      "histAudioSection": {
+        "h31": "Escuchá nuestra historia",
+        "p1": "Relatos, música y personajes en voz de Baqueano Digital.",
+        "span1": "7 capítulos",
+        "p2": "Elegí un capítulo o tocá ▶ para escuchar desde el inicio.",
+        "button1": "🏛️ Época Prehispánica",
+        "button2": "⛪ Colonia",
+        "button3": "📜 Independencia",
+        "button4": "⚔️ Guerra Nacional",
+        "button5": "🎖️ Siglo XX",
+        "button6": "🇳🇮 Nicaragua Actual",
+        "button7": "🎶 Música y Tradiciones",
+        "buttonAriaLabel1": "Reproducir audioguía",
+        "divAriaLabel1": "Capítulos de la audioguía"
+      },
+      "museosPatrimonio": {
+        "h21": "Monumentos Históricos & Red Nacional de Museos",
+        "p1": "Catálogo oficial validado con INTUR e Instituto de Cultura: baluartes, fortalezas coloniales, templos patrimoniales y museos de nuestra identidad.",
+        "span1": "Registro Oficial INTUR",
+        "h31": "Monumentos y Sitios de Memoria Viva",
+        "h32": "Red Nacional de Museos de Nicaragua (Directorio INTUR)",
+        "div1": "Palacio Nacional de la Cultura",
+        "div2": "Alberga el Museo Nacional Dioclesiano Chaves, salas de paleontología, arqueología, cerámica precolombina y el Museo de Arte Contemporáneo Julio Cortázar.",
+        "div3": "Casa Natal Rubén Darío",
+        "div4": "Monumento histórico nacional. Casa de taquezal donde nació Félix Rubén García Sarmiento el 18 de enero de 1867, con museo testimonial.",
+        "div5": "Casa Museo Augusto C. Sandino",
+        "div6": "Vivienda familiar del héroe de Las Segovias. Exhibe documentos, cartas, vestimentas y fotografías de la lucha por la soberanía nacional.",
+        "div7": "Museo Convento San Francisco",
+        "div8": "Edificado en 1529. Resguarda la célebre estatuaria zapatera precolombina de basalto negro descubierta en la Isla Zapatera del Lago Cocibolca.",
+        "div9": "Antigua casona solariega de los abuelos de Darío. Preserva manuscritos originales, primeras ediciones modernistas y su traje diplomático de embajador.",
+        "div10": "Museo de Mitos y Leyendas",
+        "div11": "Ubicado en la antigua cárcel colonial La XXI. Espacio etnográfico donde reviven La Cegua, El Cadejo, La Carreta Nagua y el espanto de la memoria oral.",
+        "div12": "El complejo museístico privado más relevante de Centroamérica distribuido en cuatro casas señoriales restauradas con pintura europea, virreinal y contemporánea.",
+        "div13": "Museo Dr. Alejandro Dávila Bolaños",
+        "div14": "Referente de la cultura amerindia chontaleña con esculturas antropomorfas, herramientas de obsidiana, vasijas funerarias y fósiles de la cordillera de Amerrisque."
+      },
+      "histSiteCard": {
+        "h41": "Fortaleza de la Inmaculada Concepción",
+        "p1": "Baluarte militar español de 1675. Custodió la ruta interoceánica de piratas y bucaneros. Cuna de la heroína nacional Rafaela Herrera.",
+        "span1": "Río San Juan · Abierto martes a domingo",
+        "div1": "Puerto Momotombo · León",
+        "h42": "Ruinas de León Viejo (UNESCO)",
+        "p2": "Patrimonio de la Humanidad UNESCO fundado en 1524 por Francisco Hernández de Córdoba. Sepultada por erupciones del volcán Momotombo en 1610.",
+        "span2": "La Paz Centro · Museo de sitio y senderos",
+        "div2": "Plaza de la Revolución · Managua",
+        "h43": "Antigua Catedral de Santiago de Managua",
+        "p3": "Icono arquitectónico de hierro y cantera neoclásica inaugurado en 1938. Resistió con su fachada intacta el terremoto del 23 de diciembre de 1972.",
+        "span3": "Managua Histórica · Circuito Xolotlán",
+        "h44": "Hacienda San Jacinto",
+        "p4": "Monumento de la dignidad nacional. Escenario de la batalla del 14 de septiembre de 1856, donde Andrés Castro y los patriotas derrotaron a los filibusteros.",
+        "span4": "Km 39 Carretera Panamericana Norte",
+        "div3": "Catedral de León · León",
+        "h45": "Tumba y Cripta de Rubén Darío",
+        "p5": "Bajo el altar de la Insigne Basílica Catedral reposan los restos del Príncipe de las Letras Castellanas, custodiados por el esculpido León Doliente de mármol.",
+        "span5": "Plaza Mayor de León · Acceso a bóvedas",
+        "div4": "Centro Histórico · Granada",
+        "h46": "Fortaleza La Pólvora (1748)",
+        "p6": "Fuerte colonial español construido en el siglo XVIII para abastecimiento y depósito militar ante ataques de piratas ingleses que asolaban el Gran Lago.",
+        "span6": "Final de Calle Real Xalteva, Granada"
+      },
+      "histSourcesSection": {
+        "div1": "INC",
+        "div2": "MINED",
+        "div3": "BCN",
+        "a1": "Ver todas las fuentes"
+      },
+      "mainContent": {
+        "h31": "Conocer nuestra historia también es viajar por Nicaragua",
+        "p1": "Explorá sus territorios, viví sus tradiciones y sé parte de su futuro."
+      },
+      "territoryTrack": {
+        "imgAlt1": "Costa Caribe Norte",
+        "imgAlt2": "Costa Caribe Sur"
+      },
+      "territoryPrevious": {
+        "buttonAriaLabel1": "Territorio anterior"
+      },
+      "territoryPause": {
+        "buttonAriaLabel1": "Pausar recorrido"
+      },
+      "territoryNext": {
+        "buttonAriaLabel1": "Territorio siguiente"
+      }
+    },
+    "index": {
+      "body": {
+        "title1": "Baqueano Nicaragua | Descubre lo que no sale en el mapa"
+      },
+      "heroNicaragua": {
+        "span1": "AUTÉNTICA",
+        "h11": "NO SE VISITA,",
+        "span2": "SE DESCUBRE",
+        "p1": "Descubrí una Nicaragua que no cabe en una guía turística. Naturaleza, historia, museos, patrimonio, sabores, arte, tradiciones y comunidades que mantienen viva nuestra identidad.",
+        "a1": "Explorar mapa",
+        "a2": "Planificar con IA"
+      },
+      "categoriaStrip": {
+        "span1": "Turismo comunitario"
+      },
+      "vivirHeader": {
+        "p1": "DESCUBRÍ NICARAGUA",
+        "p2": "No te preguntamos a dónde querés ir. Te preguntamos qué querés sentir. Nicaragua tiene una experiencia para cada deseo."
+      },
+      "vivirTitle": {
+        "h21": "¿Qué querés",
+        "span1": "vivir"
+      },
+      "vivirSelector": {
+        "span1": "La Calzada · Granada",
+        "span2": "Descanso",
+        "span3": "Corn Island · Caribe Sur",
+        "span4": "Vigorón · Granada",
+        "span5": "Finca Magdalena · Ometepe"
       }
     }
   },

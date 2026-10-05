@@ -3128,7 +3128,8 @@
     },
     "historia": {
       "body": {
-        "title1": "Storia del Nicaragua | Baqueano Nicaragua"
+        "title1": "Storia del Nicaragua | Baqueano Nicaragua",
+        "metaDescription1": "Percorri la memoria storica del Nicaragua: 7 periodi, popoli originari, personaggi e i 17 territori."
       },
       "histHeroExact": {
         "h11": "UNA STORIA",
@@ -3165,7 +3166,8 @@
         "span1": "PERCORSO TERRITORIALE",
         "h32": "Esploratore dei 17 territori",
         "p2": "Un percorso continuo tra storia, cultura e natura del Nicaragua.",
-        "a1": "Vedi la guida completa"
+        "a1": "Vedi la guida completa",
+        "divAriaLabel1": "Controlli dell'esploratore territoriale"
       },
       "territoryHighlightRegion": {
         "span1": "Occidente culturale"
@@ -3218,7 +3220,132 @@
         "p4": "Città coloniale (UNESCO)",
         "p5": "Storia viva sulle rive del Grande Lago.",
         "h42": "Petroglifi di Ometepe",
-        "p6": "Arte ancestrale nella pietra."
+        "p6": "Arte ancestrale nella pietra.",
+        "h43": "Musica, danza e tradizioni",
+        "p7": "Espressioni che ci identificano.",
+        "imgAlt1": "Musica e danza"
+      },
+      "histBeforeAfterSection": {
+        "h21": "Prima e ora",
+        "p1": "Scopri come i nostri siti storici restano vivi.",
+        "div1": "León (prima e ora)",
+        "div2": "Granada (prima e ora)",
+        "div3": "León Viejo (prima e ora)",
+        "div4": "Momotombo (prima e ora)"
+      },
+      "histAudioSection": {
+        "h31": "Ascolta la nostra storia",
+        "p1": "Racconti, musica e personaggi con la voce di Baqueano Digital.",
+        "span1": "7 capitoli",
+        "p2": "Scegli un capitolo o tocca ▶ per ascoltare dall'inizio.",
+        "button1": "🏛️ Epoca preispanica",
+        "button2": "⛪ Colonia",
+        "button3": "📜 Indipendenza",
+        "button4": "⚔️ Guerra nazionale",
+        "button5": "🎖️ XX secolo",
+        "button6": "🇳🇮 Il Nicaragua di oggi",
+        "button7": "🎶 Musica e tradizioni",
+        "buttonAriaLabel1": "Riproduci audioguida",
+        "divAriaLabel1": "Capitoli dell'audioguida"
+      },
+      "museosPatrimonio": {
+        "h21": "Monumenti storici & rete nazionale dei musei",
+        "p1": "Catalogo ufficiale convalidato con INTUR e l'Istituto di Cultura: bastioni, fortezze coloniali, chiese storiche e musei della nostra identità.",
+        "span1": "Registro ufficiale INTUR",
+        "h31": "Monumenti e luoghi di memoria viva",
+        "h32": "Rete nazionale dei musei del Nicaragua (elenco INTUR)",
+        "div1": "Palazzo nazionale della cultura",
+        "div2": "Ospita il Museo nazionale Dioclesiano Chaves, sale di paleontologia, archeologia, ceramica precolombiana e il Museo d'arte contemporanea Julio Cortázar.",
+        "div3": "Casa natale di Rubén Darío",
+        "div4": "Monumento storico nazionale. Casa in taquezal dove nacque Félix Rubén García Sarmiento il 18 gennaio 1867, con museo testimoniale.",
+        "div5": "Casa museo Augusto C. Sandino",
+        "div6": "Casa di famiglia dell'eroe di Las Segovias. Espone documenti, lettere, abiti e fotografie della lotta per la sovranità nazionale.",
+        "div7": "Museo del convento di San Francisco",
+        "div8": "Costruito nel 1529. Custodisce la celebre statuaria precolombiana in basalto nero scoperta sull'isola Zapatera del lago Cocibolca.",
+        "div9": "Antica casa padronale dei nonni di Darío. Conserva manoscritti originali, prime edizioni moderniste e il suo abito diplomatico da ambasciatore.",
+        "div10": "Museo dei miti e delle leggende",
+        "div11": "Situato nell'antico carcere coloniale La XXI. Spazio etnografico dove rivivono La Cegua, El Cadejo, La Carreta Nagua e gli spettri della memoria orale.",
+        "div12": "Il complesso museale privato più rilevante dell'America centrale, distribuito in quattro case signorili restaurate con pittura europea, vicereale e contemporanea.",
+        "div13": "Museo Dr. Alejandro Dávila Bolaños",
+        "div14": "Punto di riferimento della cultura amerindia di Chontales con sculture antropomorfe, strumenti di ossidiana, vasi funerari e fossili della cordigliera di Amerrisque."
+      },
+      "histSiteCard": {
+        "h41": "Fortezza dell'Immacolata Concezione",
+        "p1": "Bastione militare spagnolo del 1675. Custodiva la rotta interoceanica da pirati e bucanieri. Culla dell'eroina nazionale Rafaela Herrera.",
+        "span1": "Río San Juan · Aperto da martedì a domenica",
+        "div1": "Puerto Momotombo · León",
+        "h42": "Rovine di León Viejo (UNESCO)",
+        "p2": "Patrimonio dell'umanità UNESCO fondato nel 1524 da Francisco Hernández de Córdoba. Sepolto dalle eruzioni del vulcano Momotombo nel 1610.",
+        "span2": "La Paz Centro · Museo del sito e sentieri",
+        "div2": "Plaza de la Revolución · Managua",
+        "h43": "Antica cattedrale di Santiago de Managua",
+        "p3": "Icona architettonica in ferro e pietra neoclassica inaugurata nel 1938. La sua facciata resistette intatta al terremoto del 23 dicembre 1972.",
+        "span3": "Managua storica · Circuito Xolotlán",
+        "h44": "Hacienda San Jacinto",
+        "p4": "Monumento alla dignità nazionale. Teatro della battaglia del 14 settembre 1856, in cui Andrés Castro e i patrioti sconfissero i filibustieri.",
+        "span4": "Km 39 Strada Panamericana Nord",
+        "div3": "Cattedrale di León · León",
+        "h45": "Tomba e cripta di Rubén Darío",
+        "p5": "Sotto l'altare della Basilica Cattedrale riposano i resti del Principe delle Lettere Castigliane, custoditi dal Leone dolente scolpito nel marmo.",
+        "span5": "Plaza Mayor di León · Accesso alle volte",
+        "div4": "Centro storico · Granada",
+        "h46": "Fortezza La Pólvora (1748)",
+        "p6": "Forte coloniale spagnolo costruito nel XVIII secolo come deposito militare contro gli attacchi dei pirati inglesi che devastavano il Grande Lago.",
+        "span6": "In fondo alla Calle Real Xalteva, Granada"
+      },
+      "histSourcesSection": {
+        "div1": "INC",
+        "div2": "MINED",
+        "div3": "BCN",
+        "a1": "Vedi tutte le fonti"
+      },
+      "mainContent": {
+        "h31": "Conoscere la nostra storia è anche viaggiare per il Nicaragua",
+        "p1": "Esplora i suoi territori, vivi le sue tradizioni e fai parte del suo futuro."
+      },
+      "territoryTrack": {
+        "imgAlt1": "Costa caraibica nord",
+        "imgAlt2": "Costa caraibica sud"
+      },
+      "territoryPrevious": {
+        "buttonAriaLabel1": "Territorio precedente"
+      },
+      "territoryPause": {
+        "buttonAriaLabel1": "Metti in pausa il percorso"
+      },
+      "territoryNext": {
+        "buttonAriaLabel1": "Territorio successivo"
+      }
+    },
+    "index": {
+      "body": {
+        "title1": "Baqueano Nicaragua | Scopri ciò che non è sulla mappa"
+      },
+      "heroNicaragua": {
+        "span1": "AUTENTICO",
+        "h11": "NON SI VISITA,",
+        "span2": "SI SCOPRE",
+        "p1": "Scopri un Nicaragua che non sta in una guida turistica. Natura, storia, musei, patrimonio, sapori, arte, tradizioni e comunità che mantengono viva la nostra identità.",
+        "a1": "Esplora la mappa",
+        "a2": "Pianifica con l'IA"
+      },
+      "categoriaStrip": {
+        "span1": "Turismo comunitario"
+      },
+      "vivirHeader": {
+        "p1": "SCOPRI IL NICARAGUA",
+        "p2": "Non ti chiediamo dove vuoi andare. Ti chiediamo cosa vuoi sentire. Il Nicaragua ha un'esperienza per ogni desiderio."
+      },
+      "vivirTitle": {
+        "h21": "Cosa vuoi",
+        "span1": "vivere"
+      },
+      "vivirSelector": {
+        "span1": "La Calzada · Granada",
+        "span2": "Riposo",
+        "span3": "Corn Island · Caraibi Sud",
+        "span4": "Vigorón · Granada",
+        "span5": "Finca Magdalena · Ometepe"
       }
     }
   },
