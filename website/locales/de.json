@@ -3608,7 +3608,8 @@
     },
     "miNegocio": {
       "body": {
-        "title1": "Portal für Gastgeber & Betriebe | Baqueano Nicaragua"
+        "title1": "Portal für Gastgeber & Betriebe | Baqueano Nicaragua",
+        "metaDescription1": "Registriere deine Kooperative, Herberge oder deinen Guide-Service bei Baqueano Nicaragua. Ohne Vermittler, 0 % Provision, direkt verbunden mit verantwortungsvollen Reisenden."
       },
       "hostHeroSection": {
         "div1": "Offizielles Gastgeberportal",
@@ -3629,7 +3630,9 @@
         "div6": "Wenn du 1.000 $/Monat über ein Portal verdienst:",
         "div7": "➤ Du verlierst 200 $ an Provisionen",
         "div8": "➤ Mit Baqueano: 0 Verlust = +2.400 $/Jahr",
-        "div9": "Rechtsrahmen: INTUR-Gesetze 1210 & 1211, Nicaragua"
+        "div9": "Rechtsrahmen: INTUR-Gesetze 1210 & 1211, Nicaragua",
+        "buttonTitle1": "Video umschalten",
+        "buttonAriaLabel1": "Hintergrundvideo anhalten oder abspielen"
       },
       "benefitsSection": {
         "div1": "Vorteile des Baqueano-Ökosystems",
@@ -3760,7 +3763,90 @@
       },
       "legalFrameworkSection": {
         "div1": "Rechtsrahmen & offizielle Förderung",
-        "h21": "Tourismusgesetze Nr. 1210 und 1211 & INTUR-Kategorien"
+        "h21": "Tourismusgesetze Nr. 1210 und 1211 & INTUR-Kategorien",
+        "p1": "Die touristische Entwicklung Nicaraguas stützt sich auf den geltenden, von INTUR und der Nationalversammlung getragenen Rechtsrahmen. Er sichert Steueranreize für lokale Betriebe und erkennt 13 offizielle Tourismuskategorien an.",
+        "h31": "Gesetz Nr. 1210",
+        "p2": "Legt die Leitprinzipien Nachhaltigkeit, Wettbewerbsfähigkeit und Souveränität des nicaraguanischen Tourismus fest. Artikel 16 definiert und ordnet die offiziellen Tourismuskategorien, die Regionen beleben und die Einbindung der Gemeinden fördern.",
+        "li1": "Direkte Abstimmung von INTUR mit lokalen und regionalen Regierungen.",
+        "li2": "Formelle Anerkennung von Dienstleistern in den Gemeinden.",
+        "li3": "Schutz und Bewahrung des natürlichen und kulturellen Erbes des Landes.",
+        "div2": "Förderung und Anreize",
+        "h32": "Gesetz Nr. 1211",
+        "p3": "Gesetz über Anreize für touristische Entwicklung (Fassung 2026). Gewährt Steuervorteile, Abgabenbefreiungen und Investitionserleichterungen für Unterkünfte, Restaurants, Tourismustransport und Ökotourismuszentren.",
+        "li4": "Befreiungen für Investitionsgüter und touristisches Baumaterial.",
+        "li5": "Direkte Unterstützung bei der Formalisierung von KMU und ländlichen Kooperativen.",
+        "li6": "Akkreditierung von Qualitäts- und Umweltstandards.",
+        "h33": "Die 13 offiziellen Tourismuskategorien (Art. 16, Gesetz 1210)",
+        "span1": "Offizielle nationale Einteilung",
+        "div3": "1. 🧗 Abenteuertourismus",
+        "div4": "2. 🌿 Natur- und Ökotourismus",
+        "div5": "3. 🏛️ Kulturtourismus",
+        "div6": "4. 🍲 Kulinarischer Tourismus",
+        "div7": "5. 🏖️ Sonne und Strand",
+        "div8": "6. 🧘 Wellnesstourismus",
+        "div9": "7. 🌾 Land- und Agrotourismus",
+        "div10": "8. ⛪ Religiöser Tourismus",
+        "div11": "9. 🏙️ Städtetourismus",
+        "div12": "10. 🤝 Freiwilligentourismus",
+        "div13": "11. 🩺 Medizintourismus",
+        "div14": "12. 🏭 Industrietourismus",
+        "div15": "13. 💼 Geschäftsreisen & Kongresse"
+      },
+      "faqSection": {
+        "div1": "Häufige Fragen",
+        "h21": "Alles, was du wissen musst"
+      },
+      "faqList": {
+        "div1": "Erhebt Baqueano eine Provision auf meine Verkäufe?",
+        "div2": "Nein. Das Baqueano-Modell soll finanzielle Vermittlung abschaffen. Reisende zahlen direkt an deine Kooperative oder deinen Betrieb. Baqueano stellt den Kontakt her, berührt oder behält aber keinen Anteil deiner Einnahmen. Das nennen wir „Tourismus mit bäuerlicher Souveränität“.",
+        "div3": "Brauche ich eine INTUR-Registrierung, um mitzumachen?",
+        "div4": "Es ist keine zwingende Voraussetzung, aber sehr empfehlenswert. Die INTUR-Registrierung gibt dir Zugang zur Förderung nach den Gesetzen Nr. 1210 und 1211, die den Gemeindetourismus stärken. Das Baqueano-Team hilft dir bei Bedarf mit der Registrierung.",
+        "div5": "Wie lange dauert es, bis mein Betrieb in der App erscheint?",
+        "div6": "Nach dem Absenden prüft die Gesamtverwaltung deinen Antrag im Ops Center innerhalb von 48–72 Arbeitsstunden. Sind die Angaben korrekt und überprüfbar, wird dein Betrieb auf der Webkarte und in der Android-App veröffentlicht. Du erhältst eine Bestätigungs-E-Mail mit deinem offiziellen Gastgeberabzeichen.",
+        "div7": "Was ist das GPS-Bakensystem auf dem Wanderweg?",
+        "div8": "GPS-Baken sind satellitengestützte Sicherheitspunkte, die Baqueano-Guides zu Beginn einer Tour in der Android-App aktivieren. Reisende und ihre Notfallkontakte sehen den Standort in Echtzeit. Bei einem Vorfall sendet die SOS-Funktion die genauen Koordinaten an die Notrufnummern und an den WhatsApp-Kontakt der Baqueano-Stelle.",
+        "div9": "Wie erhalte ich Zahlungen von Reisenden?",
+        "div10": "Die Zahlung erfolgt zu 100 % direkt: Reisende stimmen sich per WhatsApp, E-Mail oder Telefon mit dir ab und zahlen, wie ihr es vereinbart (bar, Überweisung, Bankeinzahlung). Baqueano zeigt deinen Direktkontakt im Profil. Es gibt keinen zwischengeschalteten Zahlungsdienst. Bald ist optional eine Anbindung an Tilopay/BAC möglich – immer freiwillig und ohne Baqueano-Provision.",
+        "div11": "Kann ich die Angaben zu meinem Betrieb später ändern?",
+        "div12": "Ja. Nach der Freigabe erhältst du Zugang zu einem Verwaltungsportal, in dem du Preise, Zeiten, Fotos und Verfügbarkeit aktualisieren kannst. Änderungen werden kurz von der Verwaltung geprüft (meist unter 24 Stunden), bevor sie in App und Website erscheinen."
+      },
+      "downloadModal": {
+        "p1": "Speichere die Datei baqueanonicaragua.apk auf deinem Handy.",
+        "p2": "Erlaube in den Android-Einstellungen die direkte Installation.",
+        "p3": "Offline-Karten und Wanderwege ohne Vermittler."
+      },
+      "portalBizName": {
+        "inputPlaceholder1": "z. B. Ökotourismus-Koop. Las Nubes, Posada Don Marcos..."
+      },
+      "portalBizMunicipality": {
+        "inputPlaceholder1": "z. B. Somoto, El Cuá..."
+      },
+      "portalBizDescription": {
+        "textareaPlaceholder1": "Erzähl uns, welche Touren, Unterkünfte, Speisen oder Erlebnisse du anbietest und was sie besonders macht…"
+      },
+      "bizCapacity": {
+        "inputPlaceholder1": "z. B. 12"
+      },
+      "portalBizPrice": {
+        "inputPlaceholder1": "z. B. 35"
+      },
+      "bizOwnerName": {
+        "inputPlaceholder1": "Vollständiger Name laut Ausweis"
+      },
+      "portalBizPhone": {
+        "inputPlaceholder1": "+505 8XXX-XXXX"
+      },
+      "bizCommunityBenefit": {
+        "textareaPlaceholder1": "z. B. 40 % der Einnahmen fließen in einen Schulstipendienfonds. Wir beschäftigen 8 Bauernfamilien der Kooperative..."
+      }
+    },
+    "miViaje": {
+      "body": {
+        "title1": "Meine Reise & Planer | Baqueano Nicaragua"
+      },
+      "viajeHero": {
+        "span1": "SOUVERÄNER PLANER",
+        "h11": "Mein Abenteuer durch Nicaragua"
       }
     }
   },

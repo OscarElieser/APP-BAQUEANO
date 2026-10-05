@@ -3608,7 +3608,8 @@
     },
     "miNegocio": {
       "body": {
-        "title1": "Portal de Anfitriones & Negocios | Baqueano Nicaragua"
+        "title1": "Portal de Anfitriones & Negocios | Baqueano Nicaragua",
+        "metaDescription1": "Registra tu cooperativa, posada o guía turístico en Baqueano Nicaragua. Sin intermediarios, 0% comisión, conectado directamente con exploradores responsables."
       },
       "hostHeroSection": {
         "div1": "Portal Oficial de Anfitriones",
@@ -3629,7 +3630,9 @@
         "div6": "Si ganas $1,000/mes con OTA:",
         "div7": "➤ Pierdes $200 en comisiones",
         "div8": "➤ Con Baqueano: 0 pérdida = +$2,400/año",
-        "div9": "Marco Legal Leyes 1210 & 1211 INTUR Nicaragua"
+        "div9": "Marco Legal Leyes 1210 & 1211 INTUR Nicaragua",
+        "buttonTitle1": "Alternar video",
+        "buttonAriaLabel1": "Pausar o reproducir video de fondo"
       },
       "benefitsSection": {
         "div1": "Ventajas del Ecosistema Baqueano",
@@ -3760,7 +3763,90 @@
       },
       "legalFrameworkSection": {
         "div1": "Marco Jurídico & Fomento Oficial",
-        "h21": "Leyes de Turismo No. 1210 y 1211 & Modalidades INTUR"
+        "h21": "Leyes de Turismo No. 1210 y 1211 & Modalidades INTUR",
+        "p1": "El desarrollo turístico en Nicaragua se sustenta en el marco legal vigente impulsado por el INTUR y la Asamblea Nacional, garantizando incentivos fiscales para el emprendimiento local y reconociendo 13 modalidades oficiales de actividad turística.",
+        "h31": "Ley No. 1210",
+        "p2": "Establece los principios rectores de sostenibilidad, competitividad y soberanía del turismo nicaragüense. En su Artículo 16 define y clasifica las modalidades turísticas oficiales que dinamizan los territorios y promueven la inclusión comunitaria.",
+        "li1": "Coordinación directa de INTUR con gobiernos locales y regionales.",
+        "li2": "Reconocimiento formal de prestadores de servicios en comunidades.",
+        "li3": "Protección y preservación del patrimonio natural y cultural patrio.",
+        "div2": "Fomento e Incentivos",
+        "h32": "Ley No. 1211",
+        "p3": "Ley de Incentivos para los Desarrollos Turísticos (actualizada 2026). Brinda beneficios fiscales, exoneraciones tributarias y facilidades de inversión para proyectos de hospedería, restaurantes, transporte turístico y centros ecoturísticos.",
+        "li4": "Exoneraciones en bienes de capital y materiales de construcción turística.",
+        "li5": "Apoyo directo a la formalización de Pymes y cooperativas de campo.",
+        "li6": "Acreditación de estándares de calidad y sostenibilidad ambiental.",
+        "h33": "Las 13 Modalidades Oficiales de Turismo (Art. 16 Ley 1210)",
+        "span1": "Clasificación Oficial Nacional",
+        "div3": "1. 🧗 Turismo de Aventura",
+        "div4": "2. 🌿 Natural y Ecoturismo",
+        "div5": "3. 🏛️ Turismo Cultural",
+        "div6": "4. 🍲 Turismo Gastronómico",
+        "div7": "5. 🏖️ Sol y Playa",
+        "div8": "6. 🧘 Turismo de Bienestar",
+        "div9": "7. 🌾 Rural y Agroturismo",
+        "div10": "8. ⛪ Turismo Religioso",
+        "div11": "9. 🏙️ Turismo Urbano",
+        "div12": "10. 🤝 Turismo de Voluntariado",
+        "div13": "11. 🩺 Turismo Médico",
+        "div14": "12. 🏭 Turismo Industrial",
+        "div15": "13. 💼 Negocios & Convenciones"
+      },
+      "faqSection": {
+        "div1": "Preguntas Frecuentes",
+        "h21": "Todo lo que necesitás saber"
+      },
+      "faqList": {
+        "div1": "¿Baqueano cobra alguna comisión por mis ventas?",
+        "div2": "No. El modelo Baqueano está diseñado para eliminar la intermediación financiera. El explorador paga directamente a tu cooperativa o negocio. Baqueano facilita la conexión, pero no toca ni retiene ningún porcentaje de tus ingresos. Esto es lo que llamamos «turismo con soberanía campesina».",
+        "div3": "¿Necesito tener registro INTUR para unirme?",
+        "div4": "No es un requisito estricto para registrarse, pero sí es muy recomendable. El registro en INTUR te da acceso al régimen de incentivos de las Leyes No. 1210 y 1211, que promueven el fomento y desarrollo turístico comunitario. El equipo Baqueano puede orientarte en el proceso de registro INTUR si lo necesitás.",
+        "div5": "¿En cuánto tiempo aparece mi negocio en la app?",
+        "div6": "Una vez enviada tu solicitud, el Administrador General la revisa en el Ops Center en 48-72 horas hábiles. Si la información es correcta y verificable, tu negocio queda publicado en el mapa web y en la app Android. Recibirás un correo de confirmación con tu badge de anfitrión oficial.",
+        "div7": "¿Qué es el sistema de balizas GPS en sendero?",
+        "div8": "Las balizas GPS son puntos de seguridad satelital que los guías baqueanos activan en la app Android al comenzar un recorrido. Los exploradores y sus contactos de emergencia pueden ver la ubicación en tiempo real. Si ocurre un incidente, la función SOS envía coordenadas exactas a los números de emergencia y al WhatsApp de la Mesa Baqueano.",
+        "div9": "¿Cómo recibo los pagos de los exploradores?",
+        "div10": "El pago es 100% directo: el explorador coordina contigo por WhatsApp, correo o llamada, y paga como prefieran (efectivo, transferencia, depósito bancario). Baqueano muestra tu contacto directo en tu perfil. No existe pasarela de pago intermediaria. Próximamente se habilitará integración con Tilopay/BAC para quienes lo deseen, pero siempre opcional y sin comisiones de Baqueano.",
+        "div11": "¿Puedo actualizar la información de mi negocio después?",
+        "div12": "Sí. Una vez aprobado tu registro, recibirás acceso a un portal de gestión donde podrás actualizar precios, horarios, fotos y disponibilidad. Los cambios pasan por una revisión rápida del Administrador (generalmente menos de 24 horas) antes de reflejarse en la app y el sitio web."
+      },
+      "downloadModal": {
+        "p1": "Guardá el archivo baqueanonicaragua.apk en tu teléfono.",
+        "p2": "En Ajustes de Android autoriza la instalación directa.",
+        "p3": "Mapas fuera de línea y senderos sin intermediarios."
+      },
+      "portalBizName": {
+        "inputPlaceholder1": "Ej: Coop. Ecoturismo Las Nubes, Posada Don Marcos..."
+      },
+      "portalBizMunicipality": {
+        "inputPlaceholder1": "Ej: Somoto, El Cuá..."
+      },
+      "portalBizDescription": {
+        "textareaPlaceholder1": "Contá qué tours, alojamiento, comida o experiencias ofrecés y qué los hace especiales…"
+      },
+      "bizCapacity": {
+        "inputPlaceholder1": "Ej: 12"
+      },
+      "portalBizPrice": {
+        "inputPlaceholder1": "Ej: 35"
+      },
+      "bizOwnerName": {
+        "inputPlaceholder1": "Nombre completo según cédula"
+      },
+      "portalBizPhone": {
+        "inputPlaceholder1": "+505 8XXX-XXXX"
+      },
+      "bizCommunityBenefit": {
+        "textareaPlaceholder1": "Ej: El 40% de los ingresos va al fondo de becas escolares. Empleamos 8 familias campesinas de la cooperativa..."
+      }
+    },
+    "miViaje": {
+      "body": {
+        "title1": "Mi Viaje & Planificador | Baqueano Nicaragua"
+      },
+      "viajeHero": {
+        "span1": "PLANIFICADOR SOBERANO",
+        "h11": "Mi Aventura por Nicaragua"
       }
     }
   },
