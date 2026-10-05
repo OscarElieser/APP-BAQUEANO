@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T15:47:23.833Z",
+  "generatedAt": "2026-10-05T17:32:36.963Z",
   "source": "OpenStreetMap Nominatim — © OpenStreetMap contributors (ODbL). Contornos: geoBoundaries ADM1 (CC BY 4.0).",
   "rule": "Cada punto se acepta solo si cae dentro del contorno oficial de su territorio.",
   "territories": {
@@ -7,9 +7,10 @@
       {
         "name": "Monumento Nacional Cañón de Somoto",
         "lat": 13.45523,
-        "lng": -86.70376,
-        "osm": "node/10836162360",
-        "label": "Monumento nacional Cañón de Somoto, Carretera Panamericana Norte, Valle de Sonís"
+        "lng": -86.70377,
+        "source": "catalog",
+        "label": "Monumento Nacional Cañón de Somoto",
+        "approx": true
       },
       {
         "name": "Laguna La Bruja (Las Sabanas)",
@@ -57,6 +58,30 @@
         "lng": -86.66332,
         "osm": "node/4259178620",
         "label": "Petroglifos y Arte Rupestre Piedras Pintadas, Somoto, Madriz",
+        "approx": true
+      },
+      {
+        "name": "Rosquillas Delicias del Norte",
+        "lat": 13.54366,
+        "lng": -86.64831,
+        "osm": "relation/5726605",
+        "label": "Somoto, Madriz, 34000",
+        "approx": true
+      },
+      {
+        "name": "Finca Entre Pinos",
+        "lat": 13.26234,
+        "lng": -86.6858,
+        "osm": "relation/5726603",
+        "label": "San José de Cusmapa, Madriz, 35600",
+        "approx": true
+      },
+      {
+        "name": "Casa de Huésped La Ceibita",
+        "lat": 13.54366,
+        "lng": -86.64831,
+        "osm": "relation/5726605",
+        "label": "Somoto, Madriz, 34000",
         "approx": true
       },
       {
@@ -116,15 +141,17 @@
         "name": "Volcán Cerro Negro",
         "lat": 12.50782,
         "lng": -86.70329,
-        "osm": "node/1199504508",
-        "label": "Volcán Cerro Negro, Larreynaga, León"
+        "source": "catalog",
+        "label": "Volcán Cerro Negro",
+        "approx": true
       },
       {
         "name": "Volcán Telica",
-        "lat": 12.60441,
-        "lng": -86.84417,
-        "osm": "node/301977969",
-        "label": "Volcán Telica, Telica, León"
+        "lat": 12.6,
+        "lng": -86.87,
+        "source": "catalog",
+        "label": "Volcán Telica",
+        "approx": true
       },
       {
         "name": "Hervideros de San Jacinto",
@@ -177,6 +204,14 @@
         "label": "Poco a Poco Hostal, 2da Calle Nor Oeste, León"
       },
       {
+        "name": "Rancho Los Alpes",
+        "lat": 12.3783,
+        "lng": -87.04223,
+        "osm": "relation/6017149",
+        "label": "Poneloya, León, 21000",
+        "approx": true
+      },
+      {
         "name": "Playa Las Peñitas",
         "lat": 12.3614,
         "lng": -87.0215,
@@ -204,15 +239,17 @@
         "name": "Volcán Concepción",
         "lat": 11.53901,
         "lng": -85.62258,
-        "osm": "node/175897820",
-        "label": "Volcán Concepción, Altagracia, Rivas"
+        "source": "catalog",
+        "label": "Volcán Concepción",
+        "approx": true
       },
       {
         "name": "Volcán Maderas",
         "lat": 11.44452,
         "lng": -85.51197,
-        "osm": "node/175897822",
-        "label": "Volcán Maderas, Altagracia, Rivas"
+        "source": "catalog",
+        "label": "Volcán Maderas",
+        "approx": true
       },
       {
         "name": "Punta Jesús María",
@@ -290,6 +327,14 @@
         "approx": true
       },
       {
+        "name": "Morgan's Rock Reserve & Ecolodge",
+        "lat": 11.30556,
+        "lng": -85.92063,
+        "osm": "relation/5927937",
+        "label": "Playa Ocotal, San Juan del Sur, Rivas",
+        "approx": true
+      },
+      {
         "name": "Hostal Puesta del Sol (Ometepe)",
         "lat": 11.25252,
         "lng": -85.87066,
@@ -358,10 +403,11 @@
       },
       {
         "name": "Lago de Apanás",
-        "lat": 13.19821,
-        "lng": -85.98072,
-        "osm": "relation/9357262",
-        "label": "Lago de Apanás, Asturias, Jinotega"
+        "lat": 13.194444,
+        "lng": -85.976389,
+        "source": "catalog",
+        "label": "Lago de Apanás",
+        "approx": true
       },
       {
         "name": "Peña de La Cruz",
@@ -389,8 +435,9 @@
         "name": "Reserva Natural Cerro Datanlí–El Diablo",
         "lat": 13.11941,
         "lng": -85.87948,
-        "osm": "node/5905388972",
-        "label": "Cerro El Diablo, Jinotega, 65000"
+        "source": "catalog",
+        "label": "Reserva Natural Cerro Datanlí–El Diablo",
+        "approx": true
       },
       {
         "name": "Cascadas Arco Iris, La Pavona y La Sonora",
@@ -402,10 +449,10 @@
       },
       {
         "name": "Cerro Kilambé y aguas termales de El Caño",
-        "lat": 14.28167,
-        "lng": -85.16475,
-        "osm": "relation/18514265",
-        "label": "Panka Dákura, Wiwilí de Jinotega, Jinotega",
+        "lat": 13.58178,
+        "lng": -85.69313,
+        "source": "catalog",
+        "label": "Cerro Kilambé y aguas termales de El Caño",
         "approx": true
       },
       {
@@ -427,10 +474,11 @@
     "masaya": [
       {
         "name": "Parque Nacional Volcán Masaya",
-        "lat": 11.98216,
-        "lng": -86.16212,
-        "osm": "node/2123292734",
-        "label": "Volcán Masaya, Nindirí, Masaya"
+        "lat": 11.983333,
+        "lng": -86.15,
+        "source": "catalog",
+        "label": "Parque Nacional Volcán Masaya",
+        "approx": true
       },
       {
         "name": "Laguna de Masaya",
@@ -457,8 +505,8 @@
         "name": "Mirador de Catarina",
         "lat": 11.91318,
         "lng": -86.06903,
-        "osm": "node/175858767",
-        "label": "Mirador de Catarina, 1a Calle NE, San Silvestre"
+        "source": "catalog",
+        "label": "Mirador de Catarina"
       },
       {
         "name": "San Juan de Oriente",
@@ -504,6 +552,14 @@
         "osm": "node/2539247442",
         "label": "La Posada Ecologica Abuela, Secret Path to Laguna Unerum, Laguna Nº 1",
         "approx": true
+      },
+      {
+        "name": "Volcán Masaya (caldera Santiago)",
+        "lat": 11.9822,
+        "lng": -86.1621,
+        "source": "catalog",
+        "label": "Volcán Masaya (caldera Santiago)",
+        "approx": true
       }
     ],
     "granada": [
@@ -526,9 +582,10 @@
       {
         "name": "Reserva Natural Volcán Mombacho",
         "lat": 11.82732,
-        "lng": -85.95994,
-        "osm": "node/484783342",
-        "label": "Volcán Mombacho, Granada, 43000"
+        "lng": -85.95995,
+        "source": "catalog",
+        "label": "Reserva Natural Volcán Mombacho",
+        "approx": true
       },
       {
         "name": "Aguas Agrias–La Nanda",
@@ -553,11 +610,27 @@
         "label": "Hotel Dario, Calle La Calzada, Granada"
       },
       {
+        "name": "Treehouse Nicaragua",
+        "lat": 11.71266,
+        "lng": -86.01118,
+        "osm": "relation/5745660",
+        "label": "Nandaime, Granada, 44300",
+        "approx": true
+      },
+      {
         "name": "Finca El Rayo",
         "lat": 11.88695,
         "lng": -85.89633,
         "osm": "node/11211112157",
         "label": "Finca El Rayo, Puerto El Rayo, Granada"
+      },
+      {
+        "name": "Eco Finca El Buen Pastor",
+        "lat": 11.71266,
+        "lng": -86.01118,
+        "osm": "relation/5745660",
+        "label": "Nandaime, Granada, 44300",
+        "approx": true
       },
       {
         "name": "Finca María Auxiliadora",
@@ -651,6 +724,14 @@
         "label": "Catedral San Pedro, 1a Calle Norte, Matagalpa"
       },
       {
+        "name": "Albergue Tierra Alta Ecolodge",
+        "lat": 12.91362,
+        "lng": -85.74571,
+        "osm": "relation/5752418",
+        "label": "San Ramón, Matagalpa, 62100",
+        "approx": true
+      },
+      {
         "name": "Río Tuma",
         "lat": 13.1025,
         "lng": -85.74323,
@@ -670,15 +751,32 @@
         "lng": -85.82931,
         "source": "catalog",
         "label": "Cascada Blanca (Río Yasica)"
+      },
+      {
+        "name": "Reserva Natural Cerro Musún",
+        "lat": 12.98536,
+        "lng": -85.24221,
+        "source": "catalog",
+        "label": "Reserva Natural Cerro Musún",
+        "approx": true
       }
     ],
     "esteli": [
       {
+        "name": "Reserva Natural Tisey-La Estanzuela",
+        "lat": 13.0222,
+        "lng": -86.3884,
+        "source": "catalog",
+        "label": "Reserva Natural Tisey-La Estanzuela",
+        "approx": true
+      },
+      {
         "name": "Reserva Natural Miraflor",
-        "lat": 13.21698,
-        "lng": -86.27089,
-        "osm": "relation/5828274",
-        "label": "Paisaje Terrestre Protegido Mesas de Miraflor-Moropotente, Estelí, Nicaragua"
+        "lat": 13.21,
+        "lng": -86.28,
+        "source": "catalog",
+        "label": "Reserva Natural Miraflor",
+        "approx": true
       },
       {
         "name": "La Garnacha",
@@ -718,12 +816,73 @@
         "approx": true
       },
       {
+        "name": "Finca Lindos Ojos",
+        "lat": 13.21698,
+        "lng": -86.27089,
+        "osm": "relation/5828274",
+        "label": "Paisaje Terrestre Protegido Mesas de Miraflor-Moropotente, Estelí, Nicaragua",
+        "approx": true
+      },
+      {
+        "name": "Ecoposada Tisey",
+        "lat": 13.09435,
+        "lng": -86.35569,
+        "osm": "node/2581913786",
+        "label": "Tisey, Calle 3 NE, René Barrantes",
+        "approx": true
+      },
+      {
+        "name": "Albergue Familiar Neblina del Bosque",
+        "lat": 13.21698,
+        "lng": -86.27089,
+        "osm": "relation/5828274",
+        "label": "Paisaje Terrestre Protegido Mesas de Miraflor-Moropotente, Estelí, Nicaragua",
+        "approx": true
+      },
+      {
+        "name": "ASOPASN · Programa Agrícola San Nicolás",
+        "lat": 12.92434,
+        "lng": -86.36859,
+        "osm": "relation/5728878",
+        "label": "San Nicolás, Estelí, 32400",
+        "approx": true
+      },
+      {
+        "name": "Finca Agroturística Fuente de Vida",
+        "lat": 13.21698,
+        "lng": -86.27089,
+        "osm": "relation/5828274",
+        "label": "Paisaje Terrestre Protegido Mesas de Miraflor-Moropotente, Estelí, Nicaragua",
+        "approx": true
+      },
+      {
         "name": "Salto de La Estanzuela",
         "lat": 13.025,
         "lng": -86.39,
         "source": "catalog",
         "label": "Salto de La Estanzuela",
         "approx": true
+      },
+      {
+        "name": "Cuevas y Mirador de Apaguají",
+        "lat": 12.96849,
+        "lng": -86.37914,
+        "source": "catalog",
+        "label": "Cuevas y Mirador de Apaguají"
+      },
+      {
+        "name": "Cueva del Duende (Tisey)",
+        "lat": 12.97122,
+        "lng": -86.38087,
+        "source": "catalog",
+        "label": "Cueva del Duende (Tisey)"
+      },
+      {
+        "name": "Mirador El Ranchito (Tisey)",
+        "lat": 12.97223,
+        "lng": -86.37849,
+        "source": "catalog",
+        "label": "Mirador El Ranchito (Tisey)"
       }
     ],
     "chinandega": [
@@ -736,10 +895,10 @@
       },
       {
         "name": "Volcán Cosigüina y Laguna Cráter",
-        "lat": 12.97095,
-        "lng": -87.5765,
-        "osm": "node/302364254",
-        "label": "Volcán Cosigüina, El Viejo, Chinandega",
+        "lat": 12.983333,
+        "lng": -87.566667,
+        "source": "catalog",
+        "label": "Volcán Cosigüina y Laguna Cráter",
         "approx": true
       },
       {
@@ -752,10 +911,35 @@
       },
       {
         "name": "Estero Padre Ramos",
-        "lat": 12.77585,
-        "lng": -87.48048,
-        "osm": "relation/19879953",
-        "label": "Estero Padre Ramos, El Viejo, Chinandega"
+        "lat": 12.78091,
+        "lng": -87.48321,
+        "source": "catalog",
+        "label": "Estero Padre Ramos",
+        "approx": true
+      },
+      {
+        "name": "Rancho Maribel",
+        "lat": 12.99255,
+        "lng": -86.96156,
+        "osm": "relation/5719075",
+        "label": "Somotillo, Chinandega, 26800",
+        "approx": true
+      },
+      {
+        "name": "Campamento Ecológico Campuzano",
+        "lat": 12.99255,
+        "lng": -86.96156,
+        "osm": "relation/5719075",
+        "label": "Somotillo, Chinandega, 26800",
+        "approx": true
+      },
+      {
+        "name": "Cabañas El Manantial",
+        "lat": 13.20745,
+        "lng": -86.85105,
+        "osm": "relation/5720377",
+        "label": "Cinco Pinos, Chinandega, 27200",
+        "approx": true
       }
     ],
     "managua": [
@@ -790,25 +974,27 @@
       },
       {
         "name": "Laguna de Tiscapa",
-        "lat": 12.13992,
-        "lng": -86.27379,
-        "osm": "relation/5847689",
-        "label": "Sector Laguna de Tiscapa, Sector Gobierno, Distrito I"
+        "lat": 12.13943,
+        "lng": -86.27034,
+        "source": "catalog",
+        "label": "Laguna de Tiscapa",
+        "approx": true
       },
       {
         "name": "Laguna de Xiloá y Apoyeque",
-        "lat": 12.22097,
-        "lng": -86.32192,
-        "osm": "relation/5883616",
-        "label": "Laguna de Xiloá, Mateare, Managua",
+        "lat": 12.22151,
+        "lng": -86.32196,
+        "source": "catalog",
+        "label": "Laguna de Xiloá y Apoyeque",
         "approx": true
       },
       {
         "name": "Laguna de Asososca",
-        "lat": 12.13719,
-        "lng": -86.31607,
-        "osm": "relation/20109064",
-        "label": "Reserva Natural Laguna de Asososca, Distrito II, Managua"
+        "lat": 12.137778,
+        "lng": -86.313611,
+        "source": "catalog",
+        "label": "Laguna de Asososca",
+        "approx": true
       },
       {
         "name": "Reserva Natural Chocoyero–El Brujo",
@@ -870,6 +1056,14 @@
         "label": "Finca Las Delicias, Ticuantepe, Managua"
       },
       {
+        "name": "Reserva Silvestre Privada Montibelli",
+        "lat": 12.02177,
+        "lng": -86.20531,
+        "osm": "relation/5835755",
+        "label": "Ticuantepe, Managua, 16300",
+        "approx": true
+      },
+      {
         "name": "Playa Pochomil",
         "lat": 11.77244,
         "lng": -86.50435,
@@ -882,6 +1076,30 @@
         "lng": -86.51594,
         "source": "catalog",
         "label": "Playa Masachapa"
+      },
+      {
+        "name": "Laguna de Apoyeque",
+        "lat": 12.244931,
+        "lng": -86.341497,
+        "source": "catalog",
+        "label": "Laguna de Apoyeque",
+        "approx": true
+      },
+      {
+        "name": "Lago Xolotlán (Lago de Managua)",
+        "lat": 12.339722,
+        "lng": -86.350556,
+        "source": "catalog",
+        "label": "Lago Xolotlán (Lago de Managua)",
+        "approx": true
+      },
+      {
+        "name": "Reserva Natural Península de Chiltepe",
+        "lat": 12.24928,
+        "lng": -86.35086,
+        "source": "catalog",
+        "label": "Reserva Natural Península de Chiltepe",
+        "approx": true
       }
     ],
     "carazo": [
@@ -954,6 +1172,14 @@
         "osm": "relation/5737929",
         "label": "Dolores, Carazo, 46100",
         "approx": true
+      },
+      {
+        "name": "Reserva Silvestre Privada La Mákina",
+        "lat": 11.6947,
+        "lng": -86.38124,
+        "osm": "relation/5737928",
+        "label": "Diriamba, Carazo, 46300",
+        "approx": true
       }
     ],
     "chontales": [
@@ -1016,6 +1242,14 @@
         "osm": "node/11005735092",
         "label": "Cerro El Salto, Acoyapa, Chontales",
         "approx": true
+      },
+      {
+        "name": "Finca Los Ángeles",
+        "lat": 11.96412,
+        "lng": -85.46866,
+        "osm": "relation/5755628",
+        "label": "Juigalpa, Chontales, 55000",
+        "approx": true
       }
     ],
     "boaco": [
@@ -1073,6 +1307,14 @@
         "lng": -85.78884,
         "osm": "relation/17301800",
         "label": "Río La Chorrera o de Coyusne, Teustepe, Boaco",
+        "approx": true
+      },
+      {
+        "name": "Finca Poza Redonda Azul",
+        "lat": 12.41728,
+        "lng": -85.81314,
+        "osm": "relation/5753322",
+        "label": "Teustepe, Boaco, 52300",
         "approx": true
       }
     ],
@@ -1216,6 +1458,14 @@
         "approx": true
       },
       {
+        "name": "Hostal Buen Amigo",
+        "lat": 11.18188,
+        "lng": -85.02906,
+        "osm": "relation/16403654",
+        "label": "Isla Mancarrón, San Carlos, Río San Juan",
+        "approx": true
+      },
+      {
         "name": "Albergue Caimán (Los Guatuzos)",
         "lat": 11.03826,
         "lng": -85.04148,
@@ -1233,6 +1483,22 @@
       }
     ],
     "raccn": [
+      {
+        "name": "Reserva de Biosfera Bosawás",
+        "lat": 13.44305,
+        "lng": -85.14404,
+        "source": "catalog",
+        "label": "Reserva de Biosfera Bosawás",
+        "approx": true
+      },
+      {
+        "name": "Río Coco / Wangki",
+        "lat": 14.60669,
+        "lng": -84.35278,
+        "osm": "relation/5762297",
+        "label": "Waspán, Costa Caribe Norte, 72100",
+        "approx": true
+      },
       {
         "name": "Bilwi (Puerto Cabezas) & Muelle Histórico",
         "lat": 14.0284,
@@ -1262,6 +1528,22 @@
         "lng": -84.35278,
         "osm": "relation/5762297",
         "label": "Waspán, Costa Caribe Norte, 72100",
+        "approx": true
+      },
+      {
+        "name": "Finca Agroturística El Cortés",
+        "lat": 13.64235,
+        "lng": -84.9408,
+        "osm": "relation/5760838",
+        "label": "Siuna, Costa Caribe Norte, 72400",
+        "approx": true
+      },
+      {
+        "name": "Parque Nacional Saslaya",
+        "lat": 13.7,
+        "lng": -84.86,
+        "source": "catalog",
+        "label": "Parque Nacional Saslaya",
         "approx": true
       }
     ],
@@ -1314,6 +1596,14 @@
         "approx": true
       },
       {
+        "name": "Garífuna Secrets of the Jungle",
+        "lat": 12.55655,
+        "lng": -83.71351,
+        "osm": "way/1456604050",
+        "label": "Orinoco, Laguna de Perlas, Costa Caribe Sur",
+        "approx": true
+      },
+      {
         "name": "Río Grande de Matagalpa",
         "lat": 12.90905,
         "lng": -83.51531,
@@ -1333,18 +1623,13 @@
   },
   "unresolved": {
     "madriz": [
-      "Reserva Natural Tepesomoto-La Pataste",
-      "Rosquillas Delicias del Norte",
-      "Finca Entre Pinos",
-      "Casa de Huésped La Ceibita"
+      "Reserva Natural Tepesomoto-La Pataste"
     ],
     "leon": [
-      "Centro de Arte Fundación Ortiz Gurdián",
-      "Rancho Los Alpes"
+      "Centro de Arte Fundación Ortiz Gurdián"
     ],
     "rivas": [
-      "Corredor de playas de Tola",
-      "Morgan's Rock Reserve & Ecolodge"
+      "Corredor de playas de Tola"
     ],
     "jinotega": [
       "Salto La Mocuana"
@@ -1358,53 +1643,36 @@
       "Convento e Iglesia San Francisco",
       "Casa de los Leones",
       "Antigua Estación del Ferrocarril",
-      "Lago Cocibolca",
-      "Treehouse Nicaragua",
-      "Eco Finca El Buen Pastor"
+      "Lago Cocibolca"
     ],
     "matagalpa": [
       "Villa Chagüitillo",
-      "Macizo de Peñas Blancas",
-      "Albergue Tierra Alta Ecolodge"
+      "Macizo de Peñas Blancas"
     ],
     "esteli": [
-      "Reserva Natural Tisey-La Estanzuela",
       "Galería de Esculturas en Piedra de Don Alberto",
       "Fábricas de Puros Artesanales",
-      "Murales Revolucionarios y Urbanos",
-      "Finca Lindos Ojos",
-      "Ecoposada Tisey",
-      "Albergue Familiar Neblina del Bosque",
-      "ASOPASN · Programa Agrícola San Nicolás",
-      "Finca Agroturística Fuente de Vida"
+      "Murales Revolucionarios y Urbanos"
     ],
     "chinandega": [
       "Basílica Menor de Nuestra Señora del Trono",
-      "Rancho Maribel",
-      "Campamento Ecológico Campuzano",
-      "Cabañas El Manantial",
       "Playa Jiquilillo"
     ],
-    "managua": [
-      "Reserva Silvestre Privada Montibelli"
-    ],
+    "managua": [],
     "carazo": [
       "Reserva Silvestre Privada Tonantzin",
-      "Reserva Silvestre Privada FRANIN",
-      "Reserva Silvestre Privada La Mákina"
+      "Reserva Silvestre Privada FRANIN"
     ],
     "chontales": [
       "Pirámides de Garro Grande",
       "Archipiélago El Nancital",
-      "Aguas Calientes e Isla Arena",
-      "Finca Los Ángeles"
+      "Aguas Calientes e Isla Arena"
     ],
     "boaco": [
       "Centro Histórico & Calles Escalonadas de Boaco",
       "Mirador El Faro",
       "Reserva Natural Filas de Masigüe",
-      "Comunidad Las Lagunas",
-      "Finca Poza Redonda Azul"
+      "Comunidad Las Lagunas"
     ],
     "nueva-segovia": [
       "Ocotal Colonial & Casa de la Cultura",
@@ -1412,22 +1680,16 @@
       "Cruz de la Fe",
       "Aguas termales Don Alfonso"
     ],
-    "rio-san-juan": [
-      "Hostal Buen Amigo"
-    ],
+    "rio-san-juan": [],
     "raccn": [
-      "Reserva de Biosfera Bosawás",
-      "Río Coco / Wangki",
       "Sabanas de Pino",
-      "Triángulo Minero",
-      "Finca Agroturística El Cortés"
+      "Triángulo Minero"
     ],
     "raccs": [
       "Cayos Perlas",
       "Isla Rama Cay",
       "Playas de Corn Island",
-      "Saltos Walpapigny y Busay",
-      "Garífuna Secrets of the Jungle"
+      "Saltos Walpapigny y Busay"
     ]
   }
 }
