@@ -112,6 +112,10 @@ jobs:
           expect "mod_queue sin sesión" 401 -X POST "$FN" -H 'content-type: application/json' -d '{"action":"mod_queue"}'
           expect "mod_queue con token falso" 401 -X POST "$FN" -H 'content-type: application/json' -H 'x-firebase-token: falso.token.firma' -d '{"action":"mod_queue"}'
           expect "moderate sin sesión" 401 -X POST "$FN" -H 'content-type: application/json' -d '{"action":"moderate","id":"00000000-0000-0000-0000-000000000000","status":"published"}'
+          OPS=https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-ops
+          expect "ops overview sin sesión" 401 -X POST "$OPS" -H 'content-type: application/json' -d '{"action":"overview"}'
+          expect "ops save con token falso" 401 -X POST "$OPS" -H 'content-type: application/json' -H 'x-firebase-token: falso.token.firma' -d '{"action":"save","entity":"destinations","values":{"name":"x"}}'
+          expect "ops audit_list sin sesión" 401 -X POST "$OPS" -H 'content-type: application/json' -d '{"action":"audit_list"}'
           expect "lista pública de experiencias" 200 -X POST "$FN" -H 'content-type: application/json' -d '{"action":"list"}'
           for t in staff_roles audit_logs ops_backup_entities profiles reservations; do
             body="$(curl -s --max-time 20 "$REST/$t?select=*&limit=1" -H "apikey: $ANON")"

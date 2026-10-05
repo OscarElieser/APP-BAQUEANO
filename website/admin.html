@@ -50,7 +50,7 @@
   <!-- Estilos Base & Tema Matte Pro -->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="css/modules.css">
-  <link rel="stylesheet" href="css/ops-matte-theme.css">
+  <link rel="stylesheet" href="css/ops-matte-theme.css?v=20261005-ops2-1">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
 
   <!-- Favicon e Iconografía Oficial de Pestaña (Mesa de trabajo 1) -->
@@ -85,7 +85,7 @@
       </button>
 
       <div style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--ops-border-subtle); display: flex; justify-content: space-between; font-size: 0.76rem; color: var(--ops-text-muted);">
-        <span><i class="fa-solid fa-shield-halved"></i> Autenticación TLS 1.3</span>
+        <span><i class="fa-solid fa-shield-halved"></i> Acceso con Google · rol verificado en el servidor</span>
         <a href="index.html" style="color: var(--bq-secondary); text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Volver al Portal</a>
       </div>
     </div>
@@ -121,32 +121,32 @@
           <a class="ops-nav-item" data-tab="02-contenido">
             <i class="fa-solid fa-file-lines ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">CMS de Contenido</span>
-            <span class="ops-nav-badge" id="badgeCount-02">16</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-02" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="03-destinos">
             <i class="fa-solid fa-mountain ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Destinos</span>
-            <span class="ops-nav-badge" id="badgeDestinosCount">29</span>
+            <span class="ops-nav-badge is-pending" id="badgeDestinosCount" data-ops-count="destinations" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="04-territorios">
             <i class="fa-solid fa-map ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Territorios</span>
-            <span class="ops-nav-badge" id="badgeCount-04">17</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-04" data-ops-count="departments" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="05-municipios">
             <i class="fa-solid fa-city ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Municipios</span>
-            <span class="ops-nav-badge" id="badgeCount-05">153</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-05" data-ops-count="municipalities" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="06-experiencias">
             <i class="fa-solid fa-compass ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Experiencias</span>
-            <span class="ops-nav-badge" id="badgeCount-06">12</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-06" data-ops-count="experiences" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="07-mapa">
             <i class="fa-solid fa-map-location-dot ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Mapa Geográfico</span>
-            <span class="ops-nav-badge" id="badgeCount-07">29</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-07" data-ops-count="destinations_with_coordinates" title="Cargando dato real desde Supabase…">—</span>
           </a>
         </div>
 
@@ -156,32 +156,32 @@
           <a class="ops-nav-item" data-tab="08-negocios">
             <i class="fa-solid fa-store ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Negocios &amp; Aliados</span>
-            <span class="ops-nav-badge" id="badgePendingBiz">14</span>
+            <span class="ops-nav-badge is-pending" id="badgePendingBiz" data-ops-count="businesses" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="09-verificaciones">
             <i class="fa-solid fa-certificate ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Verificaciones</span>
-            <span class="ops-nav-badge" id="badgeCount-09">8</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-09" data-ops-count="verification_pending" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="10-suscripciones">
             <i class="fa-solid fa-id-card ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Suscripciones</span>
-            <span class="ops-nav-badge" id="badgeCount-10">6</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-10" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="11-reservas">
             <i class="fa-solid fa-calendar-check ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Reservas Reales</span>
-            <span class="ops-nav-badge" id="badgeCount-11">10</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-11" data-ops-count="reservations" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="12-pagos">
             <i class="fa-solid fa-receipt ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Pagos &amp; Comprobantes</span>
-            <span class="ops-nav-badge" id="badgeCount-12">8</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-12" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="13-usuarios">
             <i class="fa-solid fa-users ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Usuarios</span>
-            <span class="ops-nav-badge" id="badgeCount-13">12</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-13" data-ops-count="profiles" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="36-comunidad">
             <i class="fa-solid fa-people-group ops-nav-item-icon"></i>
@@ -191,7 +191,7 @@
           <a class="ops-nav-item" data-tab="14-guias">
             <i class="fa-solid fa-person-hiking ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Guías / Baqueanos</span>
-            <span class="ops-nav-badge" id="badgeCount-14">8</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-14" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
         </div>
 
@@ -201,32 +201,32 @@
           <a class="ops-nav-item" data-tab="15-gastronomia">
             <i class="fa-solid fa-utensils ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Gastronomía</span>
-            <span class="ops-nav-badge" id="badgeCount-15">14</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-15" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="16-historia">
             <i class="fa-solid fa-scroll ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Historia Patria</span>
-            <span class="ops-nav-badge" id="badgeCount-16">17</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-16" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="17-cultura">
             <i class="fa-solid fa-guitar ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Cultura &amp; Sonido</span>
-            <span class="ops-nav-badge" id="badgeCount-17">8</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-17" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="18-sostenibilidad">
             <i class="fa-solid fa-seedling ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Sostenibilidad</span>
-            <span class="ops-nav-badge" id="badgeCount-18">10</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-18" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="19-ambiental">
             <i class="fa-solid fa-leaf ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Campaña Ambiental</span>
-            <span class="ops-nav-badge" id="badgeCount-19">6</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-19" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="20-sos">
             <i class="fa-solid fa-tower-broadcast ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Centro SOS 24/7</span>
-            <span class="ops-nav-badge" id="badgeActiveSos">3</span>
+            <span class="ops-nav-badge is-pending" id="badgeActiveSos" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
         </div>
 
@@ -236,27 +236,27 @@
           <a class="ops-nav-item" data-tab="21-multimedia">
             <i class="fa-solid fa-photo-film ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Media Library</span>
-            <span class="ops-nav-badge" id="badgeCount-21">48</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-21" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="22-notificaciones">
             <i class="fa-solid fa-bullhorn ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Notificaciones</span>
-            <span class="ops-nav-badge" id="badgeCount-22">5</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-22" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="23-ai">
             <i class="fa-solid fa-brain ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">BAQUEANO AI</span>
-            <span class="ops-nav-badge" id="badgeCount-23">6</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-23" data-ops-count="ai_sessions" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="24-builder">
             <i class="fa-solid fa-cubes ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Website Builder</span>
-            <span class="ops-nav-badge" id="badgeCount-24">16</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-24" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="25-android">
             <i class="fa-brands fa-android ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Android Monitor</span>
-            <span class="ops-nav-badge" id="badgeCount-25">8</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-25" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
         </div>
 
@@ -266,17 +266,17 @@
           <a class="ops-nav-item" data-tab="26-analitica">
             <i class="fa-solid fa-chart-line ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Analítica Web vs Android</span>
-            <span class="ops-nav-badge" id="badgeCount-26">2</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-26" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="27-auditoria">
             <i class="fa-solid fa-file-shield ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Audit Logs</span>
-            <span class="ops-nav-badge" id="badgeCount-27">15</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-27" data-ops-count="audit_logs" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="28-seguridad">
             <i class="fa-solid fa-shield-halved ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Seguridad &amp; RBAC</span>
-            <span class="ops-nav-badge" id="badgeCount-28">4</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-28" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
         </div>
 
@@ -286,27 +286,27 @@
           <a class="ops-nav-item" data-tab="29-fuentes">
             <i class="fa-solid fa-building-columns ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Fuentes Oficiales</span>
-            <span class="ops-nav-badge" id="badgeCount-29">6</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-29" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="30-legislacion">
             <i class="fa-solid fa-scale-balanced ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Legislación (Ley 306)</span>
-            <span class="ops-nav-badge" id="badgeCount-30">4</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-30" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="31-seo">
             <i class="fa-solid fa-magnifying-glass-chart ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">SEO Center</span>
-            <span class="ops-nav-badge" id="badgeCount-31">16</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-31" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="32-configuracion">
             <i class="fa-solid fa-sliders ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Configuración Global</span>
-            <span class="ops-nav-badge" id="badgeCount-32">10</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-32" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="33-estado">
             <i class="fa-solid fa-server ops-nav-item-icon"></i>
             <span class="ops-nav-item-label">Estado del Sistema</span>
-            <span class="ops-nav-badge" id="badgeCount-33">8</span>
+            <span class="ops-nav-badge is-pending" id="badgeCount-33" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="34-tarifas">
             <i class="fa-solid fa-tags ops-nav-item-icon"></i>
@@ -382,7 +382,7 @@
           <div class="ops-view-header">
             <div class="ops-view-title-group">
               <h1><i class="fa-solid fa-gauge-high" style="color: var(--bq-secondary);"></i> Centro de Operaciones BAQUEANO</h1>
-              <p class="ops-view-subtitle">ARQUITECTURA OFICIAL: FIREBASE (AUTH &amp; HOSTING) + SUPABASE (BASE TURÍSTICA &amp; AUDITORÍA)</p>
+              <p class="ops-view-subtitle">ARQUITECTURA OFICIAL: FIREBASE (AUTENTICACIÓN &amp; HOSTING) + SUPABASE (BASE DE DATOS PRINCIPAL)</p>
             </div>
             <div class="ops-view-actions">
               <span style="font-size: 0.78rem; color: var(--ops-text-muted);" id="opsMetricsLastUpdated">Actualizando...</span>
@@ -395,9 +395,9 @@
           <div style="background: rgba(22, 93, 111, 0.25); border: 1px solid rgba(45, 212, 191, 0.4); border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-size: 0.8rem; color: #E2E8F0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.65rem;">
             <div style="display: flex; align-items: center; gap: 0.65rem;">
               <i class="fa-solid fa-layer-group" style="color: #2DD4BF; font-size: 1.1rem;"></i>
-              <span><strong>Diferenciación de Datos:</strong> El ecosistema cuenta con <strong>29 destinos territoriales</strong> y <strong>14 cooperativas</strong> verificadas, sincronizadas con <strong>Supabase</strong> como base de datos principal y <strong>Firebase</strong> para autenticación segura (RBAC) y distribución global CDN.</span>
+              <span id="opsDataSourceBanner"><strong>Fuente de datos:</strong> Supabase es la base de datos principal; Firebase autentica al equipo. Cargando conteos reales…</span>
             </div>
-            <span style="font-size: 0.7rem; background: rgba(45, 212, 191, 0.15); color: #2DD4BF; padding: 0.25rem 0.5rem; border-radius: 6px; font-weight: 700; white-space: nowrap;">Modo Híbrido Activo</span>
+            <span class="ops-data-state" id="opsDataSourceState" data-state="SINCRONIZANDO">Sincronizando</span>
           </div>
 
           <!-- CONTENEDOR INTELIGENTE BAQUEANO OPS IA & PULSE (COPILOTO DE OSCAR) -->
@@ -737,45 +737,45 @@
           <!-- Insignia de Entorno de Demostración para Jurado -->
           <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(246, 94, 1, 0.16); border: 1px solid rgba(246, 94, 1, 0.45); border-radius: 8px; padding: 0.4rem 0.85rem; font-size: 0.75rem; color: #F4E6C1; margin-bottom: 1.25rem;">
             <i class="fa-solid fa-flask" style="color: #F65E01;"></i>
-            <span><strong>MODO DEMOSTRACIÓN · MÉTRICAS SIMULADAS PARA ENTORNO PILOTO (TELEMETRÍA RAG)</strong></span>
+            <span id="opsAiDataNote"><strong>Telemetría de BAQUI:</strong> se muestran solo datos registrados en Supabase (<code>ai_messages</code>). Sin registros, cada indicador dice "Sin datos".</span>
           </div>
 
           <!-- Métricas del Motor de IA (Últimas 24 Horas) -->
           <div class="ops-kpi-grid-matte" style="margin-bottom: 1.5rem;">
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header">
-                <span class="ops-kpi-title">Consultas Procesadas</span>
+                <span class="ops-kpi-title">Interacciones BAQUI registradas</span>
                 <div class="ops-kpi-icon-wrap"><i class="fa-solid fa-comments"></i></div>
               </div>
-              <div class="ops-kpi-value-num">1,248</div>
-              <div class="ops-kpi-subtext">Últimas 24h (Portal + App)</div>
+              <div class="ops-kpi-value-num" data-ops-kpi="ai_messages">—</div>
+              <div class="ops-kpi-subtext" data-ops-kpi-note="ai_messages">Cargando desde Supabase…</div>
             </div>
 
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header">
-                <span class="ops-kpi-title">Proveedor Primario</span>
+                <span class="ops-kpi-title">Proveedores usados</span>
                 <div class="ops-kpi-icon-wrap" style="color: #10B981;"><i class="fa-solid fa-microchip"></i></div>
               </div>
-              <div class="ops-kpi-value-num" style="color: #10B981;">88%</div>
-              <div class="ops-kpi-subtext">Gemini 1.5 Pro (Google Cloud)</div>
+              <div class="ops-kpi-value-num" data-ops-kpi="ai_provider">—</div>
+              <div class="ops-kpi-subtext" data-ops-kpi-note="ai_provider">Cargando desde Supabase…</div>
             </div>
 
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header">
-                <span class="ops-kpi-title">Groq Fallback</span>
+                <span class="ops-kpi-title">Tokens registrados</span>
                 <div class="ops-kpi-icon-wrap"><i class="fa-solid fa-shield"></i></div>
               </div>
-              <div class="ops-kpi-value-num">12%</div>
-              <div class="ops-kpi-subtext">Llama-3 70B (Respaldo activo)</div>
+              <div class="ops-kpi-value-num" data-ops-kpi="ai_tokens">—</div>
+              <div class="ops-kpi-subtext" data-ops-kpi-note="ai_tokens">Cargando desde Supabase…</div>
             </div>
 
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header">
-                <span class="ops-kpi-title">Latencia Media</span>
+                <span class="ops-kpi-title">Latencia media real</span>
                 <div class="ops-kpi-icon-wrap" style="color: var(--bq-secondary);"><i class="fa-solid fa-stopwatch"></i></div>
               </div>
-              <div class="ops-kpi-value-num" style="color: var(--bq-secondary);">1.4s</div>
-              <div class="ops-kpi-subtext">Objetivo SLA: &lt; 2.0s</div>
+              <div class="ops-kpi-value-num" data-ops-kpi="ai_latency">—</div>
+              <div class="ops-kpi-subtext" data-ops-kpi-note="ai_latency">Cargando desde Supabase…</div>
             </div>
           </div>
 
@@ -792,7 +792,7 @@
 
               <div id="commanderInlineFeed" style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1rem; min-height: 220px; max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem;">
                 <div style="background: var(--ops-surface-1); border-left: 3px solid var(--bq-secondary); border-radius: var(--ops-radius-sm); padding: 0.65rem 0.85rem; font-size: 0.82rem; color: var(--ops-text-primary);">
-                  <strong>Baqueano Ops IA:</strong> <span data-ops-operator>Administrador</span>, la plataforma se encuentra en un <strong>98% de Pulso Operativo</strong>. Todos los servicios de IA y contingencias están listos. ¿Qué deseas supervisar en este momento?
+                  <strong>Baqueano Ops IA:</strong> <span data-ops-operator>Administrador</span>, consultá el <strong>Estado del Sistema</strong> para ver la salud real de cada servicio. ¿Qué deseas supervisar en este momento?
                 </div>
               </div>
 
@@ -867,7 +867,7 @@
           <div class="ops-view-header">
             <div class="ops-view-title-group">
               <h1><i class="fa-solid fa-file-shield" style="color: var(--bq-secondary);"></i> Historial y Registro de Auditoría</h1>
-              <p class="ops-view-subtitle">TRAZABILIDAD DE ACCESO, DIRECCIÓN IP Y ACCIONES EDITORIALES EN FIRESTORE Y SUPABASE</p>
+              <p class="ops-view-subtitle">AUDITORÍA DEL SERVIDOR EN SUPABASE (ARRIBA) · REGISTRO HEREDADO DE FIRESTORE (ABAJO)</p>
             </div>
             <div class="ops-view-actions">
               <button type="button" class="btn-ops-matte" style="color:#ef4444; border-color:rgba(239,68,68,0.4);" onclick="window.BaqueanoOpsEngine.clearAuditLogs()" title="Vaciar todo el historial">
@@ -1572,8 +1572,9 @@
   <script src="js/video-registry.js?v=20260926-ops-fixed-uhd-1"></script>
   <!-- Matriz de roles compartida con el sitio público (autorización del Ops Center). -->
   <script src="js/shared/roles.js?v=20261005-rbac-1"></script>
-  <script src="js/ops-center/ops-engine.js?v=20261005-rbac-2"></script>
-  <script src="js/ops-center/ops-ia-copilot.js?v=20261003-1"></script>
+  <script src="js/ops-center/ops-engine.js?v=20261005-ops2-1"></script>
+  <script src="js/ops-center/ops-live-data.js?v=20261005-ops2-1"></script>
+  <script src="js/ops-center/ops-ia-copilot.js?v=20261005-ops2-1"></script>
   <!-- Moderación de la comunidad: cliente de la Edge Function + vista 36. -->
   <script defer src="js/community-api.js?v=20261004-1"></script>
   <script defer src="js/ops-center/ops-community-moderation.js?v=20261005-rbac-1"></script>

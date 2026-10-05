@@ -2291,6 +2291,10 @@
     },
 
     async getClientIp() {
+      // Auditoría 2026-10-05 (A2): la IP ya no se consulta a servicios de terceros
+      // (ipify/seeip/httpbin) desde el navegador; la registra el servidor
+      // (Edge Function baqueano-ops, cabecera x-forwarded-for).
+      if (window.BaqueanoOpsData) return 'registrada por el servidor';
       if (OpsState.clientIp) return OpsState.clientIp;
       try {
         const controller = new AbortController();
@@ -2650,6 +2654,9 @@
 
     // 7.3 Guardado y Actualización Universal (con Dual-Write Atómico)
     async saveEntity(tabId, itemData) {
+      // Supabase es la base principal (directiva 2026-10-05): las entidades ya
+      // migradas se guardan vía Edge Function baqueano-ops (RBAC + auditoría).
+      if (window.BaqueanoOpsData && window.BaqueanoOpsData.manages(tabId)) return window.BaqueanoOpsData.save(tabId, itemData);
       const config = ENTITY_REGISTRY[tabId];
       if (!config || !config.collection) {
         throw new Error(`Módulo "${tabId}" no está configurado para persistencia.`);
@@ -2791,6 +2798,10 @@
 
     // 7.4 Cambio de Estado Editorial (Publicar / Despublicar / Archivar)
     async updateStatus(tabId, entityId, newStatus) {
+      if (window.BaqueanoOpsData && window.BaqueanoOpsData.manages(tabId)) {
+        const op = newStatus === 'published' ? 'publish' : (newStatus === 'trashed' || newStatus === 'archived' ? 'archive' : 'unpublish');
+        return window.BaqueanoOpsData.setStatus(tabId, entityId, op);
+      }
       const config = ENTITY_REGISTRY[tabId];
       if (!config || !config.collection) return;
 
@@ -2825,6 +2836,7 @@
 
     // 7.5 Eliminación Lógica (Papelera) & Restauración
     async setTrashed(tabId, entityId, trashed = true) {
+      if (window.BaqueanoOpsData && window.BaqueanoOpsData.manages(tabId)) return window.BaqueanoOpsData.setStatus(tabId, entityId, trashed ? 'archive' : 'restore');
       const newStatus = trashed ? 'trashed' : 'draft';
       const config = ENTITY_REGISTRY[tabId];
       if (!config) return;
@@ -2859,6 +2871,8 @@
 
     // 7.6 Eliminación Definitiva (Hard Delete - Exclusivo SuperAdmin)
     async hardDelete(tabId, entityId) {
+      // En Supabase no se borra físicamente desde el panel: se archiva (recuperable).
+      if (window.BaqueanoOpsData && window.BaqueanoOpsData.manages(tabId)) return window.BaqueanoOpsData.setStatus(tabId, entityId, 'archive');
       const config = ENTITY_REGISTRY[tabId];
       if (!config) return;
 
@@ -2935,6 +2949,7 @@
       const items = OpsState.collectionsData[tabId] || [];
       const item = items.find((x) => x.id === entityId);
       if (!item) return;
+      if (window.BaqueanoOpsData && window.BaqueanoOpsData.manages(tabId)) return window.BaqueanoOpsData.verify(tabId, entityId, !(item.verified === true));
 
       const newVerified = !(item.verified === true || item.verificationStatus === 'verified');
       const collName = config?.collection || 'destinations';
@@ -4031,17 +4046,17 @@
 
     renderDashboardMetrics() {
       const pubDest = OpsState.metrics.publishedDestinations ||
-        (OpsState.collectionsData['03-destinos'] || []).filter(d => (d.status || 'published') === 'published').length || 29;
+        (OpsState.collectionsData['03-destinos'] || []).filter(d => (d.status || 'published') === 'published').length || 0;
       const totalDest = OpsState.metrics.totalDestinations ||
-        OpsState.collectionsData['03-destinos']?.length || 29;
+        OpsState.collectionsData['03-destinos']?.length || 0; // sin valores inventados
       const verBiz = OpsState.metrics.verifiedBusinesses ||
-        (OpsState.collectionsData['08-negocios'] || []).filter(b => b.verified === true || b.verificationStatus === 'verified').length || 8;
+        (OpsState.collectionsData['08-negocios'] || []).filter(b => b.verified === true || b.verificationStatus === 'verified').length || 0;
       const pendBiz = OpsState.metrics.pendingBusinesses ||
-        (OpsState.collectionsData['08-negocios'] || []).filter(b => b.status === 'pending_review' || b.status === 'pending').length || 6;
+        (OpsState.collectionsData['08-negocios'] || []).filter(b => b.status === 'pending_review' || b.status === 'pending').length || 0;
       const activeSos = OpsState.metrics.activeSosAlerts ||
         (OpsState.collectionsData['20-sos'] || []).filter(s => s.status === 'active').length || 0;
       const totalUsers = OpsState.metrics.totalUsers ||
-        OpsState.collectionsData['13-usuarios']?.length || 12;
+        OpsState.collectionsData['13-usuarios']?.length || 0;
 
       this.setText('kpiPublishedDestinations', pubDest);
       this.setText('kpiTotalDestinations', totalDest);
@@ -4111,7 +4126,7 @@
         <div class="ops-view-header">
           <div class="ops-view-title-group">
             <h1><i class="fa-solid ${config.icon}" style="color: var(--bq-secondary);"></i> ${config.title}</h1>
-            <p class="ops-view-subtitle">ADMINISTRACIÓN EDITORIAL EN TIEMPO REAL · PERSISTENCIA CLOUD FIRESTORE</p>
+            <p class="ops-view-subtitle">ADMINISTRACIÓN EDITORIAL · ${window.BaqueanoOpsData && window.BaqueanoOpsData.TABS && window.BaqueanoOpsData.TABS[tabId] ? 'DATOS REALES DE SUPABASE (BASE PRINCIPAL)' : 'MÓDULO PENDIENTE DE MIGRAR A SUPABASE'}</p>
           </div>
           <div class="ops-view-actions">
             <button class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine.openCreateDrawer('${tabId}')">
@@ -4164,7 +4179,7 @@
                     <div class="ops-empty-state">
                       <i class="fa-solid ${config.icon} ops-empty-icon"></i>
                       <div class="ops-empty-title">0 ${config.title} encontrados</div>
-                      <div class="ops-empty-desc">No existen registros que coincidan con los filtros actuales en Cloud Firestore.</div>
+                      <div class="ops-empty-desc">No hay registros que coincidan con los filtros actuales.</div>
                       <button class="btn-ops-matte primary" style="margin-top: 1rem;" onclick="window.BaqueanoOpsEngine.openCreateDrawer('${tabId}')">
                         <i class="fa-solid fa-plus"></i> Crear Primer ${config.singular || 'Registro'}
                       </button>
@@ -4641,7 +4656,9 @@
         const drawer = document.getElementById('opsEntityDrawer');
         if (drawer) drawer.classList.remove('is-open');
         this.renderEntityView(tabId);
-        OpsToast.show(`Registro guardado exitosamente como "${statusToSave}". Sincronizado en Firebase y Supabase.`, 'success');
+        if (!(window.BaqueanoOpsData && window.BaqueanoOpsData.manages(tabId))) {
+          OpsToast.show(`Registro guardado como "${statusToSave}".`, 'success');
+        }
       } catch (err) {
         OpsToast.show(`Error al guardar: ${err.message}`, 'error');
       }
@@ -5553,7 +5570,7 @@
           <div class="ops-view-header">
             <div class="ops-view-title-group">
               <h1><i class="fa-solid fa-file-shield" style="color: var(--bq-secondary);"></i> Historial y Registro de Auditoría</h1>
-              <p class="ops-view-subtitle">TRAZABILIDAD DE ACCESO, DIRECCIÓN IP Y ACCIONES EDITORIALES EN FIRESTORE Y SUPABASE</p>
+              <p class="ops-view-subtitle">AUDITORÍA DEL SERVIDOR EN SUPABASE (ARRIBA) · REGISTRO HEREDADO DE FIRESTORE (ABAJO)</p>
             </div>
             <div class="ops-view-actions">
               <button type="button" class="btn-ops-matte" style="color:#ef4444; border-color:rgba(239,68,68,0.4);" onclick="window.BaqueanoOpsEngine.clearAuditLogs()" title="Vaciar todo el historial">
@@ -5984,117 +6001,22 @@
       const panel = document.getElementById('view-33-estado');
       if (!panel) return;
 
+      // Auditoría 2026-10-05: antes se mostraban tarjetas fijas ("Cloud Firestore
+      // Operativo 99.99 %", "28 ms", "153 municipios", "TLS 1.3") sin comprobar
+      // nada. Ahora el Health Center consulta cada servicio desde el servidor
+      // (Edge Function baqueano-ops) y muestra su estado real.
       panel.innerHTML = `
         <div class="ops-view-header">
           <div class="ops-view-title-group">
             <h1><i class="fa-solid fa-server" style="color: var(--bq-secondary);"></i> Estado del Sistema &amp; Infraestructura</h1>
-            <p class="ops-view-subtitle">SALUD DE SERVICIOS CLOUD · DISPONIBILIDAD DE RED · AUDITORÍA DE LATENCIAS</p>
-          </div>
-          <div class="ops-view-actions">
-            <button type="button" class="btn-ops-matte primary" onclick="window.BaqueanoOpsEngine.runSystemDiagnostics()">
-              <i class="fa-solid fa-arrows-rotate fa-spin"></i> Ejecutar Diagnóstico en Vivo
-            </button>
+            <p class="ops-view-subtitle">COMPROBACIONES REALES DESDE EL SERVIDOR · OPERATIVO · DEGRADADO · ERROR · SIN CONFIGURAR</p>
           </div>
         </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-              <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
-                <i class="fa-solid fa-database" style="color:#FFA000;"></i> Cloud Firestore (Google Cloud)
-              </strong>
-              <span class="ops-badge-pill published">Operativo</span>
-            </div>
-            <div style="font-size:0.8rem; color:var(--ops-text-secondary); line-height:1.5;">
-              Base de datos primaria. Escritura y lectura en tiempo real activa.
-            </div>
-            <div style="margin-top:0.75rem; font-size:0.76rem; color:var(--ops-text-muted); display:flex; justify-content:space-between;">
-              <span>Latencia: <strong style="color:var(--bq-jungle);">28ms</strong></span>
-              <span>Uptime: <strong style="color:#fff;">99.99%</strong></span>
-            </div>
-          </div>
-
-          <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-              <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
-                <i class="fa-solid fa-bolt" style="color:#3ECF8E;"></i> Supabase Cloud (Respaldo Oficial)
-              </strong>
-              <span class="ops-badge-pill published">Operativo</span>
-            </div>
-            <div style="font-size:0.8rem; color:var(--ops-text-secondary); line-height:1.5;">
-              Almacenamiento de respaldo y sincronización híbrida redundante.
-            </div>
-            <div style="margin-top:0.75rem; font-size:0.76rem; color:var(--ops-text-muted); display:flex; justify-content:space-between;">
-              <span>Latencia: <strong style="color:var(--bq-jungle);">42ms</strong></span>
-              <span>Uptime: <strong style="color:#fff;">100.0%</strong></span>
-            </div>
-          </div>
-
-          <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-              <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
-                <i class="fa-solid fa-box-archive" style="color:#4285F4;"></i> Cloud Storage (Firebase / CDN)
-              </strong>
-              <span class="ops-badge-pill published">Operativo</span>
-            </div>
-            <div style="font-size:0.8rem; color:var(--ops-text-secondary); line-height:1.5;">
-              Alojamiento seguro de fotografías 4K, audios MP3 y documentos PDF.
-            </div>
-            <div style="margin-top:0.75rem; font-size:0.76rem; color:var(--ops-text-muted); display:flex; justify-content:space-between;">
-              <span>CDN: <strong style="color:#fff;">Global Edge</strong></span>
-              <span>Fallback: <strong style="color:var(--bq-secondary);">DataURL Activo</strong></span>
-            </div>
-          </div>
-
-          <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-              <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
-                <i class="fa-solid fa-user-shield" style="color:#EA4335;"></i> Autenticación Google OAuth 2.0
-              </strong>
-              <span class="ops-badge-pill published">Operativo</span>
-            </div>
-            <div style="font-size:0.8rem; color:var(--ops-text-secondary); line-height:1.5;">
-              Verificación criptográfica de credenciales administrativas y roles RBAC.
-            </div>
-            <div style="margin-top:0.75rem; font-size:0.76rem; color:var(--ops-text-muted); display:flex; justify-content:space-between;">
-              <span>Protocolo: <strong style="color:#fff;">TLS 1.3</strong></span>
-              <span>Tokens: <strong style="color:var(--bq-jungle);">Válidos</strong></span>
-            </div>
-          </div>
-
-          <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-              <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
-                <i class="fa-solid fa-brain" style="color:var(--bq-accent);"></i> Algoritmo de Inteligencia Baqueano
-              </strong>
-              <span class="ops-badge-pill published">Operativo</span>
-            </div>
-            <div style="font-size:0.8rem; color:var(--ops-text-secondary); line-height:1.5;">
-              Motor autónomo de recomendación de rutas y asistencia al viajero.
-            </div>
-            <div style="margin-top:0.75rem; font-size:0.76rem; color:var(--ops-text-muted); display:flex; justify-content:space-between;">
-              <span>Modo: <strong style="color:#fff;">Heurística Soberana</strong></span>
-              <span>Respuesta: <strong style="color:var(--bq-jungle);">140ms</strong></span>
-            </div>
-          </div>
-
-          <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-              <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
-                <i class="fa-solid fa-satellite" style="color:var(--bq-secondary);"></i> Red Satelital &amp; Telemetría GPS
-              </strong>
-              <span class="ops-badge-pill published">Operativo</span>
-            </div>
-            <div style="font-size:0.8rem; color:var(--ops-text-secondary); line-height:1.5;">
-              Coordenadas WGS84 para 153 municipios y senderos protegidos.
-            </div>
-            <div style="margin-top:0.75rem; font-size:0.76rem; color:var(--ops-text-muted); display:flex; justify-content:space-between;">
-              <span>Precisión: <strong style="color:var(--bq-jungle);">GPS Submétrica</strong></span>
-              <span>Caché: <strong style="color:#fff;">Offline Activo</strong></span>
-            </div>
-          </div>
+        <div class="ops-live-slot" id="opsLiveHealthCenter">
+          <section class="ops-health"><p class="ops-health-detail">Iniciá sesión con una cuenta autorizada para comprobar los servicios.</p></section>
         </div>
       `;
+      if (window.BaqueanoOpsData && typeof window.BaqueanoOpsData.renderHealth === 'function') window.BaqueanoOpsData.renderHealth();
     },
 
     // 8.3g Módulo de Backup y Sincronización Multi-Nube (35-backup)
@@ -6122,17 +6044,21 @@
         }
       };
 
-      setBadge('statusBadgeFirebase', isFirestoreOnline ? '🟢 OPERATIVO' : '🟡 LOCAL / STANDBY', isFirestoreOnline);
-      setEl('stateTextFirebase', isFirestoreOnline ? 'ONLINE (Cloud Firestore)' : 'STANDBY', isFirestoreOnline ? 'var(--bq-jungle)' : 'var(--bq-accent)');
+      setBadge('statusBadgeFirebase', isFirestoreOnline ? '🟡 FIRESTORE (heredado de Android)' : '⚪ NO SE USA EN EL OPS CENTER', false);
+      setEl('stateTextFirebase', isFirestoreOnline ? 'Origen heredado; se replica en Supabase' : 'El panel trabaja sobre Supabase', 'var(--bq-accent)');
 
-      setBadge('statusBadgeSupabase', isSupabaseOnline ? '🟢 OPERATIVO' : '🟡 LOCAL / STANDBY', isSupabaseOnline);
-      setEl('stateTextSupabase', isSupabaseOnline ? 'ONLINE (PostgreSQL Respaldo)' : 'STANDBY', isSupabaseOnline ? 'var(--bq-jungle)' : 'var(--bq-accent)');
+      const liveDb = window.BaqueanoOpsData && window.BaqueanoOpsData.state.health && window.BaqueanoOpsData.state.health.checks.find((c) => c.id === 'supabase_db');
+      setBadge('statusBadgeSupabase', liveDb ? (liveDb.state === 'OPERATIVO' ? '🟢 OPERATIVO' : `🔴 ${liveDb.state}`) : (isSupabaseOnline ? '🟡 CLIENTE CONFIGURADO (sin comprobar)' : '⚪ NO CONFIGURADO'), Boolean(liveDb && liveDb.state === 'OPERATIVO'));
+      setEl('stateTextSupabase', liveDb ? `${liveDb.detail} (base principal)` : 'Base de datos principal', liveDb && liveDb.state === 'OPERATIVO' ? 'var(--bq-jungle)' : 'var(--bq-accent)');
 
-      setBadge('statusBadgeFirebaseStorage', '🟢 OPERATIVO', true);
-      setEl('stateTextFirebaseStorage', 'ONLINE (Global CDN)', 'var(--bq-jungle)');
+      // Sin SDK de Storage cargado no se informa OPERATIVO (auditoría 2026-10-05).
+      const hasFbStorage = Boolean(window.firebase && window.firebase.storage);
+      setBadge('statusBadgeFirebaseStorage', hasFbStorage ? '🟡 SDK CARGADO (sin comprobar)' : '⚪ NO CONFIGURADO', false);
+      setEl('stateTextFirebaseStorage', hasFbStorage ? 'SDK presente' : 'No se usa en el Ops Center', 'var(--bq-accent)');
 
-      setBadge('statusBadgeSupabaseStorage', isSupabaseOnline ? '🟢 OPERATIVO' : '🟡 RESGUARDO', true);
-      setEl('stateTextSupabaseStorage', 'ONLINE (Espejo SHA-256)', 'var(--bq-jungle)');
+      const liveSt = window.BaqueanoOpsData && window.BaqueanoOpsData.state.health && window.BaqueanoOpsData.state.health.checks.find((c) => c.id === 'supabase_storage');
+      setBadge('statusBadgeSupabaseStorage', liveSt ? (liveSt.state === 'OPERATIVO' ? '🟢 OPERATIVO' : `🔴 ${liveSt.state}`) : '⚪ SIN COMPROBAR', Boolean(liveSt && liveSt.state === 'OPERATIVO'));
+      setEl('stateTextSupabaseStorage', liveSt ? liveSt.detail : 'Se comprueba al iniciar sesión', 'var(--bq-accent)');
 
       const totalSync = (OpsState.collectionsData['03-destinos']?.length || 0) +
                         (OpsState.collectionsData['08-negocios']?.length || 0) +
@@ -6339,6 +6265,28 @@
   // 9. FACHADA PÚBLICA (WINDOW.BAQUEANOOPSENGINE)
   // --------------------------------------------------------------------------
   window.BaqueanoOpsEngine = {
+    // Puente con js/ops-center/ops-live-data.js (datos reales de Supabase).
+    toast(message, type = 'info', duration) { OpsToast.show(message, type, duration); },
+    getCollection(tabId) { return OpsState.collectionsData[tabId] || []; },
+    ingestCollection(tabId, items, meta = {}) {
+      OpsState.collectionsData[tabId] = Array.isArray(items) ? items : [];
+      OpsState.loadedTabs.add(tabId);
+      OpsState.dataSources = OpsState.dataSources || {};
+      OpsState.dataSources[tabId] = { ...meta, at: new Date().toISOString() };
+      if (tabId === '03-destinos') {
+        const live = OpsState.collectionsData[tabId].filter((d) => d.status !== 'trashed');
+        OpsState.metrics.totalDestinations = live.length;
+        OpsState.metrics.publishedDestinations = live.filter((d) => d.status === 'published').length;
+      }
+      if (tabId === '08-negocios') {
+        const live = OpsState.collectionsData[tabId].filter((b) => b.status !== 'trashed');
+        OpsState.metrics.totalBusinesses = live.length;
+        OpsState.metrics.verifiedBusinesses = live.filter((b) => b.verified === true).length;
+      }
+      OpsUI.renderDashboardMetrics();
+      if (OpsState.activeTab === tabId) OpsUI.renderEntityView(tabId);
+    },
+
     async seedInitialContent() {
       const btn = document.querySelector('button[onclick*="seedInitialContent"]');
       const originalHtml = btn ? btn.innerHTML : '';
@@ -6374,12 +6322,12 @@
       try {
         OpsCMS.initDataSync();
 
-        OpsState.metrics.totalDestinations = OpsState.collectionsData['03-destinos']?.length || 29;
-        OpsState.metrics.publishedDestinations = (OpsState.collectionsData['03-destinos'] || []).filter(d => (d.status || 'published') === 'published').length || 29;
-        OpsState.metrics.totalBusinesses = OpsState.collectionsData['08-negocios']?.length || 14;
-        OpsState.metrics.verifiedBusinesses = (OpsState.collectionsData['08-negocios'] || []).filter(b => b.verified === true || b.verificationStatus === 'verified').length || 8;
-        OpsState.metrics.pendingBusinesses = (OpsState.collectionsData['08-negocios'] || []).filter(b => b.status === 'pending_review' || b.status === 'pending').length || 6;
-        OpsState.metrics.totalUsers = OpsState.collectionsData['13-usuarios']?.length || 12;
+        OpsState.metrics.totalDestinations = OpsState.collectionsData['03-destinos']?.length || 0; // sin valores inventados
+        OpsState.metrics.publishedDestinations = (OpsState.collectionsData['03-destinos'] || []).filter(d => (d.status || 'published') === 'published').length || 0;
+        OpsState.metrics.totalBusinesses = OpsState.collectionsData['08-negocios']?.length || 0;
+        OpsState.metrics.verifiedBusinesses = (OpsState.collectionsData['08-negocios'] || []).filter(b => b.verified === true || b.verificationStatus === 'verified').length || 0;
+        OpsState.metrics.pendingBusinesses = (OpsState.collectionsData['08-negocios'] || []).filter(b => b.status === 'pending_review' || b.status === 'pending').length || 0;
+        OpsState.metrics.totalUsers = OpsState.collectionsData['13-usuarios']?.length || 0;
         OpsState.metrics.activeSosAlerts = (OpsState.collectionsData['20-sos'] || []).filter(s => s.status === 'active').length || 0;
 
         OpsUI.renderDashboardMetrics();
@@ -6495,14 +6443,16 @@
           body: JSON.stringify({ force: true })
         });
 
+        if (!res.ok) throw new Error(res.status === 404 ? 'El servicio de reintento de respaldo no está configurado en el servidor (NO CONFIGURADO).' : `El servidor respondió ${res.status}.`);
         const data = await res.json();
         if (data.ok || data.success) {
-          if (typeof OpsToast !== 'undefined') OpsToast.show('Sincronización procesada exitosamente.', 'success');
+          if (typeof OpsToast !== 'undefined') OpsToast.show('Sincronización procesada por el servidor.', 'success');
         } else {
-          if (typeof OpsToast !== 'undefined') OpsToast.show(data.message || 'Ciclo de verificación completado.', 'info');
+          if (typeof OpsToast !== 'undefined') OpsToast.show(data.message || 'El servidor no confirmó la sincronización.', 'warning');
         }
       } catch (err) {
-        if (typeof OpsToast !== 'undefined') OpsToast.show('Servicio de respaldo verificado. Cola al corriente.', 'success');
+        // Auditoría 2026-10-05 (C4): antes se informaba "éxito" aunque fallara.
+        if (typeof OpsToast !== 'undefined') OpsToast.show(`Sin sincronización: ${err.message || 'el servicio no respondió'}`, 'error', 6000);
       } finally {
         if (btn) {
           btn.disabled = false;
@@ -6525,12 +6475,12 @@
       }
 
       // 2. Calcular métricas operativas iniciales
-      OpsState.metrics.totalDestinations = OpsState.collectionsData['03-destinos']?.length || 29;
+      OpsState.metrics.totalDestinations = OpsState.collectionsData['03-destinos']?.length || 0; // sin valores inventados
       OpsState.metrics.publishedDestinations = (OpsState.collectionsData['03-destinos'] || []).filter(d => d.status === 'published').length;
-      OpsState.metrics.totalBusinesses = OpsState.collectionsData['08-negocios']?.length || 10;
+      OpsState.metrics.totalBusinesses = OpsState.collectionsData['08-negocios']?.length || 0;
       OpsState.metrics.verifiedBusinesses = (OpsState.collectionsData['08-negocios'] || []).filter(b => b.verified === true).length;
       OpsState.metrics.pendingBusinesses = (OpsState.collectionsData['08-negocios'] || []).filter(b => b.status === 'pending_review').length;
-      OpsState.metrics.totalUsers = OpsState.collectionsData['13-usuarios']?.length || 12;
+      OpsState.metrics.totalUsers = OpsState.collectionsData['13-usuarios']?.length || 0;
       OpsState.metrics.activeSosAlerts = (OpsState.collectionsData['20-sos'] || []).filter(s => s.status === 'active').length;
 
       OpsUI.init();
@@ -6638,7 +6588,9 @@
     async hardDeleteEntity(tabId, entityId) {
       const confirmed = await OpsDialog.confirm({
         title: '⚠️ ¿ELIMINACIÓN FÍSICA DEFINITIVA?',
-        message: 'Esta acción borrará el registro para siempre de Cloud Firestore y no podrá recuperarse.',
+        message: window.BaqueanoOpsData && window.BaqueanoOpsData.manages(tabId)
+          ? 'En Supabase este registro se ARCHIVA (borrado lógico recuperable desde la papelera) y queda en la auditoría.'
+          : 'Esta acción borrará el registro para siempre de Cloud Firestore y no podrá recuperarse.',
         isDangerous: true,
         confirmText: 'Eliminar Permanentemente'
       });

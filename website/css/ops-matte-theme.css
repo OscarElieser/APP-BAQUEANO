@@ -1858,3 +1858,142 @@ body.ops-readonly [onclick*="saveGlobal"] {
   opacity: 0.45;
   cursor: not-allowed;
 }
+
+/* ==========================================================================
+   🛰️ OPS CENTER 2.0 — DATOS REALES, HEALTH CENTER, AUDITORÍA Y COMMANDER
+   🎯 POR QUÉ: auditoría 2026-10-05; los datos reales (Supabase) y su estado
+      (REAL / SIN DATOS / ERROR / SINCRONIZANDO / DESCONECTADO) deben verse claros.
+   ⚙️ CÓMO: tokens --ops2-* sobre la paleta oficial (#F65E01 acción, #165D6F
+      información, #4A7A5A saludable, #0D1B2A / #102A43 estructura).
+   📦 QUÉ: .ops-health, .ops-audit-live, .ops-verify-*, .ops-ia-*, .ops-commander-*.
+   ========================================================================== */
+:root {
+  --ops2-deep: #0D1B2A;
+  --ops2-panel: #102A43;
+  --ops2-teal: #165D6F;
+  --ops2-orange: #F65E01;
+  --ops2-green: #4A7A5A;
+  --ops2-sand: #F4E6C1;
+  --ops2-text: #E2E8F0;
+  --ops2-muted: #94A3B8;
+  --ops2-line: rgba(148, 163, 184, 0.18);
+  --ops2-radius: 14px;
+  --ops2-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
+  --ops2-ease: 180ms ease;
+}
+
+.ops-nav-badge.is-pending { opacity: 0.55; }
+.ops-nav-badge[data-state="SIN_DATOS"] { background: rgba(148, 163, 184, 0.16); color: var(--ops2-muted); }
+.ops-nav-badge[data-state="ERROR"] { background: rgba(239, 68, 68, 0.2); color: #FCA5A5; }
+
+.ops-data-state {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.72rem; font-weight: 700; white-space: nowrap;
+  background: rgba(148, 163, 184, 0.15); color: var(--ops2-text); border: 1px solid var(--ops2-line);
+}
+.ops-data-state::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ops2-muted); }
+.ops-data-state[data-state="REAL"]::before { background: #6FCF97; }
+.ops-data-state[data-state="SINCRONIZANDO"]::before { background: var(--ops2-orange); animation: ops2-pulse 1.2s ease-in-out infinite; }
+.ops-data-state[data-state="ERROR"]::before,
+.ops-data-state[data-state="DESCONECTADO"]::before { background: #EF4444; }
+@keyframes ops2-pulse { 50% { opacity: 0.3; } }
+
+[data-ops-kpi][data-state="SIN_DATOS"] { color: var(--ops2-muted) !important; }
+
+.ops-live-slot { margin-bottom: 1.25rem; }
+.ops-health {
+  background: linear-gradient(160deg, var(--ops2-panel), var(--ops2-deep));
+  border: 1px solid var(--ops2-line); border-radius: var(--ops2-radius);
+  padding: 1.1rem 1.2rem; box-shadow: var(--ops2-shadow);
+}
+.ops-health-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; margin-bottom: 0.9rem; }
+.ops-health-title { margin: 0; font-size: 1rem; color: #fff; flex: 1 1 auto; }
+.ops-health-meta { font-size: 0.75rem; color: var(--ops2-muted); }
+.ops-health-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.7rem; }
+.ops-health.is-compact .ops-health-grid { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.ops-health-item {
+  background: rgba(13, 27, 42, 0.7); border: 1px solid var(--ops2-line); border-left: 4px solid var(--ops2-muted);
+  border-radius: 12px; padding: 0.75rem 0.85rem; transition: border-color var(--ops2-ease);
+}
+.ops-health-item.is-ok { border-left-color: var(--ops2-green); }
+.ops-health-item.is-warn { border-left-color: #F59E0B; }
+.ops-health-item.is-bad { border-left-color: #EF4444; }
+.ops-health-item-top { display: flex; justify-content: space-between; gap: 0.5rem; align-items: baseline; }
+.ops-health-item-top strong { color: #fff; font-size: 0.85rem; }
+.ops-health-state { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ops2-sand); }
+.ops-health-item.is-ok .ops-health-state { color: #9BE3B4; }
+.ops-health-item.is-bad .ops-health-state { color: #FCA5A5; }
+.ops-health-detail { margin: 0.35rem 0; font-size: 0.8rem; line-height: 1.45; color: var(--ops2-text); }
+.ops-health-source { font-size: 0.7rem; color: var(--ops2-muted); }
+.ops-health.is-compact .ops-health-detail { font-size: 0.74rem; }
+
+.ops-audit-live { background: var(--ops2-panel); border: 1px solid var(--ops2-line); border-radius: var(--ops2-radius); padding: 1.1rem 1.2rem; }
+.ops-audit-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.6rem; align-items: end; margin: 0.8rem 0; }
+.ops-audit-field { display: grid; gap: 0.25rem; font-size: 0.74rem; color: var(--ops2-muted); }
+.ops-audit-field input, .ops-audit-field textarea {
+  min-height: 40px; padding: 0.45rem 0.6rem; border-radius: 10px; border: 1px solid var(--ops2-line);
+  background: var(--ops2-deep); color: #fff; font: inherit; font-size: 0.85rem;
+}
+.ops-audit-field input:focus-visible, .ops-audit-field textarea:focus-visible { outline: 2px solid var(--ops2-orange); outline-offset: 1px; }
+.ops-audit-list { overflow-x: auto; }
+.ops-audit-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; color: var(--ops2-text); }
+.ops-audit-table th { text-align: left; color: var(--ops2-sand); font-weight: 700; padding: 0.5rem; border-bottom: 1px solid var(--ops2-line); white-space: nowrap; }
+.ops-audit-table td { padding: 0.5rem; border-bottom: 1px solid var(--ops2-line); vertical-align: top; }
+
+.ops-verify-overlay, .ops-commander-overlay {
+  position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1rem;
+  background: rgba(8, 13, 26, 0.82); backdrop-filter: blur(6px);
+}
+.ops-verify-dialog, .ops-commander-box {
+  width: min(560px, 100%); max-height: 88vh; overflow: auto; display: grid; gap: 0.75rem;
+  background: var(--ops2-panel); border: 1px solid var(--ops2-line); border-radius: 18px; padding: 1.2rem; box-shadow: var(--ops2-shadow);
+}
+.ops-commander-box { width: min(700px, 100%); gap: 0; padding: 0; }
+.ops-verify-dialog h3 { margin: 0; color: #fff; }
+.ops-verify-actions { display: flex; justify-content: flex-end; gap: 0.5rem; }
+.ops-field-error { color: #FCA5A5; font-size: 0.74rem; min-height: 1em; }
+
+.ops-ia-real { padding: 1.3rem; border-radius: var(--ops2-radius); background: linear-gradient(140deg, var(--ops2-panel), var(--ops2-deep)); border: 1px solid var(--ops2-line); }
+.ops-ia-head { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.ops-ia-ring { width: 68px; height: 68px; border-radius: 50%; border: 3px solid var(--ops2-muted); display: grid; place-items: center; align-content: center; flex: 0 0 68px; }
+.ops-ia-ring-value { font-size: 1.15rem; font-weight: 800; color: #fff; line-height: 1; }
+.ops-ia-ring-label { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ops2-muted); }
+.ops-ia-titles { flex: 1 1 260px; min-width: 0; }
+.ops-ia-title { margin: 0; font-size: 1.1rem; color: #fff; }
+.ops-ia-sub { margin: 0.25rem 0 0; font-size: 0.8rem; color: var(--ops2-muted); }
+.ops-ia-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.ops-ia-brief, .ops-ia-agenda { background: rgba(13, 27, 42, 0.6); border: 1px solid var(--ops2-line); border-radius: 12px; padding: 0.9rem 1rem; color: var(--ops2-text); font-size: 0.86rem; line-height: 1.55; margin-bottom: 0.9rem; }
+.ops-ia-brief strong { color: #fff; }
+.ops-ia-brief-label { color: var(--ops2-sand); font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+.ops-ia-task { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem; padding: 0.65rem 0; border-top: 1px solid var(--ops2-line); }
+.ops-ia-task-text { display: grid; gap: 0.15rem; flex: 1 1 260px; min-width: 0; }
+.ops-ia-task-text strong { color: #fff; font-size: 0.85rem; }
+.ops-ia-task-text small { color: var(--ops2-muted); font-size: 0.76rem; }
+.ops-ia-task-badge { justify-self: start; font-size: 0.68rem; font-weight: 800; padding: 0.15rem 0.5rem; border-radius: 6px; background: rgba(22, 93, 111, 0.4); color: var(--ops2-sand); }
+.ops-ia-task.is-urgent .ops-ia-task-badge { background: rgba(239, 68, 68, 0.2); color: #FCA5A5; }
+.ops-ia-task.is-warning .ops-ia-task-badge { background: rgba(245, 158, 11, 0.18); color: #FCD34D; }
+
+.ops-commander-header { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 1.1rem; border-bottom: 1px solid var(--ops2-line); }
+.ops-commander-header h3 { margin: 0; color: #fff; font-size: 1rem; }
+.ops-commander-feed { display: flex; flex-direction: column; gap: 0.7rem; padding: 1rem 1.1rem; min-height: 260px; max-height: 50vh; overflow-y: auto; }
+.ops-commander-msg { padding: 0.65rem 0.85rem; border-radius: 12px; font-size: 0.84rem; line-height: 1.5; max-width: 90%; color: var(--ops2-text); }
+.ops-commander-msg strong { color: #fff; }
+.ops-commander-msg.is-ai { background: rgba(13, 27, 42, 0.75); border-left: 3px solid var(--ops2-teal); align-self: flex-start; }
+.ops-commander-msg.is-operator { background: rgba(246, 94, 1, 0.18); border: 1px solid rgba(246, 94, 1, 0.35); align-self: flex-end; }
+.ops-commander-chips { display: flex; gap: 0.4rem; overflow-x: auto; padding: 0.55rem 1.1rem; border-top: 1px solid var(--ops2-line); }
+.ops-commander-chips .btn-ops-matte { white-space: nowrap; font-size: 0.75rem; }
+.ops-commander-form { display: flex; gap: 0.5rem; padding: 0.8rem 1.1rem; border-top: 1px solid var(--ops2-line); }
+.ops-commander-form input { flex: 1; min-height: 44px; padding: 0.5rem 0.8rem; border-radius: 10px; border: 1px solid var(--ops2-line); background: var(--ops2-deep); color: #fff; font: inherit; }
+.ops-commander-form input:focus-visible { outline: 2px solid var(--ops2-orange); }
+.ops-pulse-label { background: none; border: 0; color: inherit; font: inherit; cursor: pointer; padding: 0; }
+
+@media (max-width: 640px) {
+  .ops-health, .ops-audit-live, .ops-ia-real { padding: 0.9rem; }
+  .ops-ia-buttons { width: 100%; }
+  .ops-ia-buttons .btn-ops-matte { flex: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ops-data-state[data-state="SINCRONIZANDO"]::before { animation: none; }
+}
+/* Los encabezados globales (headings-system.css) no deben agrandar el widget. */
+#opsIaCommandCenterWidget .ops-ia-real .ops-ia-title { font-size: clamp(1rem, 1.6vw, 1.2rem) !important; line-height: 1.3 !important; }

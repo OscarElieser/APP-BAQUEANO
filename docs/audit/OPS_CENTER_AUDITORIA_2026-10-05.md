@@ -134,3 +134,30 @@ API Azure: /api/azure/health · /api/azure/db · /api/azure/evidence/crud   (no 
    - Observabilidad de BAQUI (tokens, latencia y errores reales desde `ai_messages`).
    - Ecosistema Android (versiones y dispositivos cuando la app los transmita).
    - Notificaciones segmentadas con confirmación.
+
+## Hallazgos adicionales durante la implementación
+
+| # | Problema | Archivo | Corrección |
+|---|---|---|---|
+| C6 | `saveEntity` **inventaba datos**: coordenadas de Managua (12.1364, −86.2514) si faltaban y `rating: 5.0` por defecto | `ops-engine.js` (saveEntity, destinos) | La ruta Supabase (`ops-live-data.js` → `baqueano-ops`) exige latitud y longitud juntas, dentro de Nicaragua, o ninguna. No asigna rating |
+| C7 | El copiloto simulaba una agenda con **anfitrión y reserva ficticios** ("Don Pedro Gómez", +505 8888 1234, #BQ-2026-1842) y acciones "1-Click" que decían "coordenadas actualizadas" o "paridad exacta" sin hacer nada | `ops-ia-copilot.js` | Reescrito con la misma API pública: agenda, pulso y Commander solo con datos reales; las acciones abren módulos y nunca modifican datos |
+| C8 | Vista "Estado del Sistema" con tarjetas fijas ("Cloud Firestore Operativo 99.99 %", "28 ms", "153 municipios", "TLS 1.3") | `ops-engine.js` (renderSystemStatusModule) | Health Center real: 8 comprobaciones desde el servidor |
+| A7 | Estados de respaldo en "OPERATIVO" sin comprobar (Firebase Storage sin SDK, Supabase por la sola existencia del cliente) | `ops-engine.js` (renderBackupSyncModule) | Estados según la comprobación real o "sin comprobar" / "no configurado" |
+| M8 | IDs de departamentos inconsistentes: Supabase `nueva_segovia`, `rio_san_juan`; la web usa `nueva-segovia`, `rio-san-juan` | BD / web | Pendiente: normalizar con migración (expand → migrate → contract) |
+
+## Estado de la implementación (Fase G, primera entrega, 2026-10-05)
+
+| Ítem del plan | Estado | Evidencia |
+|---|---|---|
+| Arquitectura única (Supabase principal) | ✅ | `AGENTS.md` regla 5, `ARQUITECTURA_OFICIAL`, README, textos del panel |
+| API administrativa `baqueano-ops` (RBAC en servidor, auditoría antes/después, IP del servidor) | ✅ desplegada v1 | `supabase/functions/baqueano-ops/index.ts`; pruebas negativas en vivo en CI (401) |
+| Contadores del menú con conteos reales y estado | ✅ | `data-ops-count` y `ops-live-data.js` |
+| KPIs de IA honestos ("Sin datos" mientras `ai_messages` esté vacío) | ✅ | `admin.html` y `ops-live-data.js` |
+| Lectura real de destinos, negocios, territorios, municipios, experiencias, gastronomía, cultura, tarifas y verificaciones | ✅ | `loadTab` → `ingestCollection` |
+| Guardar, publicar, archivar, restaurar y verificar destinos y negocios en Supabase | ✅ | Rutas en `OpsCMS` → `BaqueanoOpsData` |
+| Sello "Verificado por BAQUEANO" con trazabilidad (quién, cuándo, fuente, evidencia, notas, próxima revisión) | ✅ | Acción `verify` |
+| Health Center real | ✅ | Vista 33 y franja en el dashboard |
+| Visor de auditoría del servidor con filtros | ✅ | Vista 27 |
+| Éxito falso de respaldo y consulta de IP a terceros eliminados | ✅ | `ops-engine.js` |
+| Prueba en navegador (sesión y API simuladas): 0 cifras inventadas y 0 errores JS | ✅ | `scratchpad/ops2-test.js` |
+| Sidebar reagrupado y persistente, tokens, carga bajo demanda, Realtime | ⏳ P2 | — |

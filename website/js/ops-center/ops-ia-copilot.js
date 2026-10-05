@@ -1,51 +1,36 @@
 // ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — OPS IA COPILOT & COMMAND CENTER (ops-ia-copilot.js)
+// 🧭 BAQUEANO ECOSYSTEM — OPS IA COPILOT & BAQUEANO COMMANDER (ops-ia-copilot.js)
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Servir como el CEREBRO INTELIGENTE y ASISTENTE PERSONAL EJECUTIVO del operador autenticado y
-//   la dirección operativa de BAQUEANO Nicaragua, transformando el Ops Center en
-//   un centro de mando activo y proactivo (NOC + SOC + AI Operations Center).
-// - Vigilar 24/7 la salud integral de la plataforma: infraestructura (Firebase y
-//   Supabase dual-backup), motor de IA (Gemini/Groq), reservas huérfanas,
-//   calidad de datos de negocios locales (GPS, fotos, horarios) y seguridad.
-// - Erradicar la sobrecarga cognitiva mediante un Briefing Ejecutivo diario,
-//   "Mi Agenda Operativa" priorizada y resoluciones con 1-Click (borradores de
-//   contacto cordial vía WhatsApp para negocios y turistas).
+// - Asistente del operador autenticado dentro del Ops Center: resume el estado
+//   del ecosistema, propone una agenda priorizada y ejecuta comandos SEGUROS.
+// - Auditoría 2026-10-05 (C2): la versión anterior mostraba datos inventados
+//   (pulso 98 %, 1,248 consultas, 88 %/12 %, 42 ms, reserva #BQ-2026-1842 de un
+//   anfitrión ficticio, "coordenadas actualizadas" sin hacer nada). Esta versión
+//   conserva la misma API pública pero SOLO usa datos reales.
 //
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Baqueano Pulse Engine: Algoritmo de ponderación multivariable que calcula el
-//   score de salud global (0-100%) analizando 4 pilares: Infraestructura (25%),
-//   Operaciones (30%), Inteligencia Artificial (25%) y Seguridad (20%).
-// - Digital Twin (Gemelo Digital): Mapeo topológico reactivo de los 6 nodos de
-//   flujo (Turistas -> Web/App -> Baqueano AI -> Firestore/Supabase -> Reservas -> Pagos).
-// - Baqueano Commander: Motor de comprensión de lenguaje natural para órdenes
-//   administrativas ("¿Cómo está Baqueano?", "Negocios sin GPS", "Simular impacto").
-// - Modo Simulación: Evaluación de impacto antes de ejecutar acciones de Nivel 2 o 3.
-// - Sanitización de voz natural: Compatible con cleanTextForSpeech para dictado ejecutivo.
-// - Cero uso de frameworks externos innecesarios: Vanilla JS de alto rendimiento,
-//   estándar defensivo con try/catch y eventos asíncronos desacoplados.
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA):
+// - Fuente única: window.BaqueanoOpsData (js/ops-center/ops-live-data.js), que
+//   obtiene conteos y salud de servicios desde la Edge Function `baqueano-ops`.
+// - Baqueano Pulse = % de comprobaciones de salud en estado OPERATIVO sobre las
+//   que están configuradas. Sin comprobaciones → "Sin evaluar" (no un número).
+// - Agenda: tareas derivadas de conteos reales (moderación, verificaciones,
+//   reservas, destinos sin coordenadas, servicios con error, catálogos vacíos).
+// - Commander: comandos de navegación y consulta. Nunca ejecuta operaciones
+//   destructivas ni modifica datos; las acciones abren el módulo para que el
+//   administrador decida. La IA no modifica datos turísticos oficiales.
 //
-// 📦 3. QUÉ (WHAT / INTERFACES & MÉTODOS EXPUESTOS):
-// - window.BaqueanoOpsIA:
-//   * init(): Inicializa observadores y calcula el Pulso inicial.
-//   * getPulse(): Retorna estado detallado del Baqueano Pulse y desglose por cuadrante.
-//   * getExecutiveBriefing(): Genera el saludo y resumen dinámico para el operador autenticado.
-//   * getOperationalAgenda(): Devuelve la lista priorizada de tareas del día.
-//   * executeQuickAction(actionId, payload): Resuelve incidencias con 1-Click.
-//   * sendCommand(text): Procesa consultas y comandos en lenguaje natural.
-//   * simulateAction(actionKey): Realiza análisis de impacto predictivo.
-//   * speakBriefing(): Lee el briefing en voz natural nicaragüense sin signos.
+// 📦 3. QUÉ (window.BaqueanoOpsIA, misma interfaz que antes):
+// - init, getPulse, getExecutiveBriefing, getOperationalAgenda,
+//   executeQuickAction, sendCommand, simulateAction, speakBriefing,
+//   openCommanderModal, triggerPredefinedCommand, handleCommanderSubmit.
 // ============================================================================
 
 (function (window, document) {
   'use strict';
 
-  // --------------------------------------------------------------------------
-  // ESTADO Y CONFIGURACIÓN DEL ASISTENTE PERSONAL OPS IA
-  // --------------------------------------------------------------------------
-  // Nombre del operador: SIEMPRE el de la cuenta autenticada (Firebase Auth),
-  // nunca un nombre fijo en el código. Respaldo neutro: "Administrador".
+  // Nombre del operador: SIEMPRE el de la cuenta autenticada.
   function getOperatorName() {
     try {
       const fbUser = window.firebase && window.firebase.auth && window.firebase.auth().currentUser;
@@ -62,560 +47,347 @@
     return String(value).replace(/[&<>'"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[ch]));
   }
 
-  // Actualiza todos los puntos de la interfaz que muestran al operador.
   function syncOperatorName() {
     const name = getOperatorName();
     document.querySelectorAll('[data-ops-operator]').forEach((node) => { node.textContent = name; });
     const commanderBtn = document.getElementById('btnOpsIaCommander');
-    if (commanderBtn) commanderBtn.title = 'Baqueano Commander — Asistente personal de ' + name;
+    if (commanderBtn) commanderBtn.title = 'Baqueano Commander — Asistente de ' + name;
   }
 
   const OPS_STATE = {
     initialized: false,
     get adminName() { return getOperatorName(); },
-    pulseScore: 98,
-    pulseStatus: 'optimal', // optimal (>=95), attention (85-94), degraded (<85)
-    lastEvaluation: new Date(),
-    metrics: {
-      firebase: { status: 'online', label: 'Operativo', pingMs: 42, latency: '42ms' },
-      supabaseBackup: { status: 'synced', label: 'Sincronizado (99.9%)', diffCount: 1, pendingRecord: 'Reserva #BQ-2026-1842' },
-      cloudRun: { status: 'online', label: '100% Uptime', cpu: '14%' },
-      storage: { status: 'online', label: 'Firebase Storage Activo', usageMb: 428 },
-      aiGemini: { status: 'online', label: 'Gemini Pro Activo', avgLatencySec: 1.4, usagePercent: 88 },
-      aiGroqFallback: { status: 'standby', label: 'Groq Llama-3 Listo (Standby)', usagePercent: 12 },
-      bookingsPending: 3,
-      bookingsOverdueHours: [5.2, 3.1, 1.4],
-      businessesTotal: 29,
-      businessesWithoutGps: 2,
-      businessesWithoutPhotos: 1,
-      businessesUnverified: 2,
-      activeSosAlerts: 0,
-      securityThreats: 0,
-      appCheckStatus: 'enforced',
-      authRateLimitStatus: 'normal'
-    },
-    // Decisiones de IA auditables
     decisionLog: [],
-    // Conversación activa con Baqueano Commander
     conversationHistory: []
   };
 
   // --------------------------------------------------------------------------
-  // 1. MOTOR DE CÁLCULO DEL BAQUEANO PULSE (SALUD GLOBAL 0-100%)
+  // Datos reales
+  // --------------------------------------------------------------------------
+  function data() { return (window.BaqueanoOpsData && window.BaqueanoOpsData.state) || null; }
+  function metric(key) {
+    const d = data();
+    const m = d && d.overview && d.overview.metrics && d.overview.metrics[key];
+    return m && m.value != null ? m.value : null;
+  }
+  const fmt = (n) => (n == null ? 'sin dato' : new Intl.NumberFormat('es-NI').format(n));
+
+  // --------------------------------------------------------------------------
+  // 1. BAQUEANO PULSE (calculado de comprobaciones reales)
   // --------------------------------------------------------------------------
   function calculateBaqueanoPulse() {
-    let score = 100;
-
-    // Deducciones ponderadas según el estado real
-    // Infraestructura (máx 25%)
-    if (OPS_STATE.metrics.firebase.status !== 'online') score -= 25;
-    if (OPS_STATE.metrics.supabaseBackup.diffCount > 5) score -= 5;
-    else if (OPS_STATE.metrics.supabaseBackup.diffCount > 0) score -= 1;
-
-    // Operaciones (máx 30%)
-    if (OPS_STATE.metrics.activeSosAlerts > 0) score -= 15 * OPS_STATE.metrics.activeSosAlerts;
-    if (OPS_STATE.metrics.bookingsPending > 5) score -= 6;
-    else if (OPS_STATE.metrics.bookingsPending > 0) score -= 2;
-
-    if (OPS_STATE.metrics.businessesWithoutGps > 0) score -= (OPS_STATE.metrics.businessesWithoutGps * 1.5);
-    if (OPS_STATE.metrics.businessesUnverified > 3) score -= 2;
-
-    // IA (máx 25%)
-    if (OPS_STATE.metrics.aiGemini.status !== 'online' && OPS_STATE.metrics.aiGroqFallback.status !== 'online') score -= 25;
-    else if (OPS_STATE.metrics.aiGemini.status !== 'online') score -= 5; // Degrado a fallback
-
-    // Seguridad (máx 20%)
-    if (OPS_STATE.metrics.securityThreats > 0) score -= 20;
-
-    // Acotar entre 0 y 100
-    score = Math.max(0, Math.min(100, Math.round(score)));
-    OPS_STATE.pulseScore = score;
-    OPS_STATE.pulseStatus = score >= 95 ? 'optimal' : (score >= 85 ? 'attention' : 'degraded');
-    OPS_STATE.lastEvaluation = new Date();
-
+    const d = data();
+    const checks = d && d.health && Array.isArray(d.health.checks) ? d.health.checks : [];
+    const evaluated = checks.filter((c) => c.state !== 'SIN_CONFIGURAR' && c.state !== 'DESCONOCIDO');
+    if (!evaluated.length) {
+      return { score: null, status: 'unknown', statusLabel: d && d.status === 'ERROR' ? 'Sin conexión con el servidor' : 'Sin evaluar todavía', color: '#94A3B8', basis: 'Sin comprobaciones de salud disponibles.' };
+    }
+    const ok = evaluated.filter((c) => c.state === 'OPERATIVO').length;
+    const errors = evaluated.filter((c) => c.state === 'ERROR').length;
+    const score = Math.round((ok / evaluated.length) * 100);
+    const status = errors ? 'degraded' : (score === 100 ? 'optimal' : 'attention');
     return {
       score,
-      status: OPS_STATE.pulseStatus,
-      statusLabel: score >= 95 ? 'Sistema 100% Operativo' : (score >= 85 ? 'Atención Requerida' : 'Incidencia Crítica Detectada'),
-      color: score >= 95 ? '#10B981' : (score >= 85 ? '#F59E0B' : '#EF4444')
+      status,
+      statusLabel: status === 'optimal' ? 'Servicios comprobados operativos' : (status === 'attention' ? 'Atención requerida' : 'Hay servicios con error'),
+      color: status === 'optimal' ? '#4A7A5A' : (status === 'attention' ? '#F59E0B' : '#EF4444'),
+      basis: `${ok} de ${evaluated.length} comprobaciones reales en estado operativo${checks.length > evaluated.length ? ` (${checks.length - evaluated.length} sin configurar)` : ''}.`
     };
   }
 
   // --------------------------------------------------------------------------
-  // 2. BRIEFING EJECUTIVO PERSONALIZADO PARA OSCAR
-  // --------------------------------------------------------------------------
-  function getExecutiveBriefing() {
-    const pulse = calculateBaqueanoPulse();
-    const currentHour = new Date().getHours();
-    let saludo = 'Buenos días';
-    if (currentHour >= 12 && currentHour < 19) saludo = 'Buenas tardes';
-    else if (currentHour >= 19 || currentHour < 5) saludo = 'Buenas noches';
-
-    const agenda = getOperationalAgenda();
-    const criticalCount = agenda.filter(item => item.priority === 'critical' || item.priority === 'urgent').length;
-    const attentionCount = agenda.filter(item => item.priority === 'warning').length;
-
-    let narrative = `${saludo}, ${OPS_STATE.adminName}. El **Baqueano Pulse** se sitúa en un **${pulse.score}%** (${pulse.statusLabel}). `;
-    
-    if (criticalCount === 0 && attentionCount === 0) {
-      narrative += 'Todos los servicios de infraestructura, IA turística y seguridad operan en parámetros óptimos sin incidencias pendientes.';
-    } else {
-      narrative += `He detectado **${criticalCount + attentionCount} asuntos** en la plataforma que requieren tu intervención: `;
-      const bullets = agenda.slice(0, 3).map(item => `\n- **${item.title}:** ${item.summary}`);
-      narrative += bullets.join('') + '\n\n¿Deseas que aplique las resoluciones recomendadas en 1-Click o prefieres analizar una en detalle?';
-    }
-
-    return {
-      greeting: saludo,
-      admin: OPS_STATE.adminName,
-      pulse,
-      narrative,
-      totalPending: agenda.length,
-      criticalCount,
-      attentionCount
-    };
-  }
-
-  // --------------------------------------------------------------------------
-  // 3. MI AGENDA OPERATIVA (TAREAS PRIORIZADAS DEL DÍA)
+  // 2. AGENDA OPERATIVA (solo con datos reales)
   // --------------------------------------------------------------------------
   function getOperationalAgenda() {
     const agenda = [];
+    const d = data();
+    if (!d || !d.overview) return agenda;
+    const add = (item) => agenda.push(Object.assign({ actionType: 'open_tab' }, item));
 
-    // Verificación de reservas huérfanas
-    if (OPS_STATE.metrics.bookingsPending > 0) {
-      const maxHours = Math.max(...OPS_STATE.metrics.bookingsOverdueHours);
-      agenda.push({
-        id: 'agenda-booking-delay',
-        category: 'Operaciones',
-        priority: maxHours >= 5 ? 'urgent' : 'warning',
-        priorityBadge: maxHours >= 5 ? '🟡 Urgente' : '🔵 Atención',
-        title: 'Reserva sin confirmación de anfitrión',
-        summary: `Hospedaje ecológico en Matagalpa no ha confirmado disponibilidad tras ${maxHours.toFixed(1)} horas.`,
-        actionLabel: 'Enviar Recordatorio WhatsApp 1-Click',
-        actionType: 'quick_whatsapp_reminder',
-        payload: {
-          phone: '+50588881234',
-          hostName: 'Don Pedro Gómez',
-          location: 'Matagalpa',
-          bookingId: 'BQ-2026-1842',
-          draftText: 'Estimado Don Pedro, cordial saludo de Baqueano Nicaragua. Tiene una solicitud de experiencia pendiente de confirmación desde hace 5 horas (#BQ-2026-1842). Por favor confirme si tiene disponibilidad para asegurar al viajero.'
-        }
-      });
-    }
-
-    // Negocios sin GPS
-    if (OPS_STATE.metrics.businessesWithoutGps > 0) {
-      agenda.push({
-        id: 'agenda-biz-gps',
-        category: 'Calidad de Datos',
-        priority: 'warning',
-        priorityBadge: '🟡 Atención',
-        title: `${OPS_STATE.metrics.businessesWithoutGps} establecimientos sin coordenadas GPS`,
-        summary: 'Negocios en Rivas y León carecen de latitud/longitud precisas. Los viajeros no pueden ubicarlos en el mapa satelital.',
-        actionLabel: 'Autolocalizar por Municipio 1-Click',
-        actionType: 'quick_geocode_fix',
-        payload: { targetCount: OPS_STATE.metrics.businessesWithoutGps }
-      });
-    }
-
-    // Sincronización Supabase
-    if (OPS_STATE.metrics.supabaseBackup.diffCount > 0) {
-      agenda.push({
-        id: 'agenda-supabase-diff',
-        category: 'Infraestructura & Respaldo',
-        priority: 'notice',
-        priorityBadge: '⚪ Contingencia',
-        title: `Desfase de respaldo: ${OPS_STATE.metrics.supabaseBackup.diffCount} registro pendiente`,
-        summary: `Firebase contiene 1 registro más que Supabase (${OPS_STATE.metrics.supabaseBackup.pendingRecord}).`,
-        actionLabel: 'Sincronizar Supabase Dual-Backup',
-        actionType: 'quick_sync_supabase',
-        payload: { recordId: OPS_STATE.metrics.supabaseBackup.pendingRecord }
-      });
-    }
-
-    // Calidad del contenido turístico
-    agenda.push({
-      id: 'agenda-tourism-stale',
-      category: 'Contenido Turístico',
-      priority: 'notice',
-      priorityBadge: '🟢 Sugerencia',
-      title: 'Verificación periódica de horarios (Museo de León)',
-      summary: 'El horario de atención tiene más de 120 días sin confirmación física o telefónica.',
-      actionLabel: 'Marcar para Auditoría Territorial',
-      actionType: 'quick_mark_audit',
-      payload: { destinationId: 'museo_leon' }
-    });
-
+    (d.health && d.health.checks || []).filter((c) => c.state === 'ERROR' || c.state === 'DEGRADADO').forEach((c) => add({
+      id: `health-${c.id}`, category: 'Infraestructura', priority: c.state === 'ERROR' ? 'urgent' : 'warning',
+      priorityBadge: c.state === 'ERROR' ? 'Error' : 'Degradado', title: c.label, summary: c.detail,
+      actionLabel: 'Ver estado del sistema', payload: { tab: '33-estado' }
+    }));
+    const pendingStories = metric('testimonials_pending');
+    if (pendingStories > 0) add({ id: 'mod-pending', category: 'Comunidad', priority: 'warning', priorityBadge: 'Moderación', title: `${fmt(pendingStories)} experiencias esperan revisión`, summary: 'Publicadas por viajeros; no aparecen en la web hasta aprobarse.', actionLabel: 'Abrir moderación', payload: { tab: '36-comunidad' } });
+    const reports = metric('reports_open');
+    if (reports > 0) add({ id: 'mod-reports', category: 'Comunidad', priority: 'urgent', priorityBadge: 'Denuncias', title: `${fmt(reports)} denuncias abiertas`, summary: 'Contenido denunciado por la comunidad.', actionLabel: 'Revisar denuncias', payload: { tab: '36-comunidad' } });
+    const verif = metric('verification_pending');
+    if (verif > 0) add({ id: 'verif', category: 'Negocios', priority: 'warning', priorityBadge: 'Verificación', title: `${fmt(verif)} solicitudes de verificación`, summary: 'Negocios que piden el sello "Verificado por BAQUEANO".', actionLabel: 'Abrir verificaciones', payload: { tab: '09-verificaciones' } });
+    const resv = metric('reservations_pending');
+    if (resv > 0) add({ id: 'resv', category: 'Operaciones', priority: 'urgent', priorityBadge: 'Reservas', title: `${fmt(resv)} reservas pendientes`, summary: 'Reservas sin confirmar.', actionLabel: 'Abrir reservas', payload: { tab: '11-reservas' } });
+    const dest = metric('destinations');
+    const withCoords = metric('destinations_with_coordinates');
+    if (dest != null && withCoords != null && dest > withCoords) add({ id: 'coords', category: 'Calidad de datos', priority: 'warning', priorityBadge: 'Mapa', title: `${fmt(dest - withCoords)} destinos sin coordenadas`, summary: 'No aparecen en el mapa. Se corrigen a mano con una fuente verificable (no se inventan coordenadas).', actionLabel: 'Abrir destinos', payload: { tab: '03-destinos' } });
+    if (metric('municipalities') === 0) add({ id: 'muni', category: 'Catálogo', priority: 'notice', priorityBadge: 'Catálogo vacío', title: 'Municipios sin cargar en Supabase', summary: 'La tabla municipalities está vacía; el filtrado territorial por municipio no tiene datos.', actionLabel: 'Abrir municipios', payload: { tab: '05-municipios' } });
+    if (metric('ai_messages') === 0) add({ id: 'baqui', category: 'BAQUI', priority: 'notice', priorityBadge: 'Sin telemetría', title: 'BAQUI no registra interacciones', summary: 'No hay datos de uso, tokens ni latencia en ai_messages.', actionLabel: 'Abrir BAQUEANO AI', payload: { tab: '23-ai' } });
     return agenda;
   }
 
   // --------------------------------------------------------------------------
-  // 4. RESOLUCIÓN DE ACCIONES 1-CLICK (QUICK ACTIONS)
+  // 3. BRIEFING
   // --------------------------------------------------------------------------
-  async function executeQuickAction(actionType, payload) {
-    const timestamp = new Date();
-    let resultMessage = '';
-
-    switch (actionType) {
-      case 'quick_whatsapp_reminder':
-        // Simulación de despacho por enlace directo de WhatsApp Business
-        const encodedText = encodeURIComponent(payload.draftText || '');
-        const cleanPhone = (payload.phone || '').replace(/[^0-9]/g, '');
-        const waUrl = `https://wa.me/${cleanPhone}?text=${encodedText}`;
-        
-        // Registrar en bitácora de auditoría
-        logDecision('WhatsApp Recordatorio', `Enviado a anfitrión ${payload.hostName} por reserva ${payload.bookingId}`);
-        window.open(waUrl, '_blank');
-        resultMessage = `Recordatorio preparado para ${payload.hostName}. Ventana de WhatsApp abierta.`;
-        break;
-
-      case 'quick_sync_supabase':
-        OPS_STATE.metrics.supabaseBackup.diffCount = 0;
-        OPS_STATE.metrics.supabaseBackup.label = 'Sincronizado al 100%';
-        logDecision('Sincronización Dual', `Registro ${payload.recordId} replicado exitosamente en Supabase.`);
-        resultMessage = `Sincronización completada. Firebase y Supabase cuentan con paridad exacta de datos.`;
-        break;
-
-      case 'quick_geocode_fix':
-        OPS_STATE.metrics.businessesWithoutGps = 0;
-        logDecision('Corrección GPS', `Asignadas coordenadas de referencia municipal a establecimientos.`);
-        resultMessage = `Coordenadas actualizadas satisfactoriamente. Todos los negocios son visibles en el mapa.`;
-        break;
-
-      case 'quick_mark_audit':
-        logDecision('Auditoría de Contenido', `Destino ${payload.destinationId} añadido a la cola de verificación territorial.`);
-        resultMessage = `Destino programado para verificación de campo con promotores locales.`;
-        break;
-
-      default:
-        resultMessage = `Acción ejecutada correctamente.`;
+  function getExecutiveBriefing() {
+    const pulse = calculateBaqueanoPulse();
+    const hour = new Date().getHours();
+    const saludo = hour >= 19 || hour < 5 ? 'Buenas noches' : (hour >= 12 ? 'Buenas tardes' : 'Buenos días');
+    const agenda = getOperationalAgenda();
+    const criticalCount = agenda.filter((i) => i.priority === 'urgent').length;
+    const attentionCount = agenda.filter((i) => i.priority === 'warning').length;
+    const d = data();
+    let narrative = `${saludo}, ${OPS_STATE.adminName}. `;
+    if (!d || !d.overview) {
+      narrative += d && d.error ? `No pude leer los datos reales: ${d.error}` : 'Estoy esperando los datos reales de Supabase.';
+    } else {
+      narrative += pulse.score == null ? `Estado de servicios: **${pulse.statusLabel}**. ` : `Estado de servicios: **${pulse.score}%** — ${pulse.basis} `;
+      narrative += `Catálogo real: **${fmt(metric('destinations'))} destinos** (${fmt(metric('destinations_published'))} publicados) y **${fmt(metric('businesses'))} negocios** (${fmt(metric('businesses_verified'))} verificados). `;
+      narrative += agenda.length ? `Hay **${agenda.length} asuntos** en tu agenda.` : 'No hay asuntos pendientes detectados en los datos.';
     }
-
-    // Recalcular pulso y refrescar UI
-    calculateBaqueanoPulse();
-    renderOpsIaDashboardWidget();
-    renderPulseIndicatorInTopbar();
-
-    if (window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.toast) {
-      window.BaqueanoOpsEngine.toast(resultMessage, 'success');
-    }
-
-    return { success: true, message: resultMessage, timestamp };
+    return { greeting: saludo, admin: OPS_STATE.adminName, pulse, narrative, totalPending: agenda.length, criticalCount, attentionCount };
   }
 
   // --------------------------------------------------------------------------
-  // 5. BAQUEANO COMMANDER — MOTOR DE LENGUAJE NATURAL
+  // 4. ACCIONES SEGURAS (navegación y refresco; nada destructivo)
   // --------------------------------------------------------------------------
+  function openTab(tab, search) {
+    const engine = window.BaqueanoOpsEngine;
+    if (!engine || typeof engine.switchTab !== 'function') return false;
+    engine.switchTab(tab);
+    if (search && typeof engine.onSearchInput === 'function') engine.onSearchInput(tab, search);
+    return true;
+  }
+
+  async function executeQuickAction(actionType, payload) {
+    const p = payload || {};
+    let resultMessage;
+    switch (actionType) {
+      case 'open_tab':
+      case 'quick_mark_audit':
+      case 'quick_geocode_fix':
+        openTab(p.tab || (actionType === 'quick_geocode_fix' ? '03-destinos' : '27-auditoria'));
+        resultMessage = actionType === 'quick_geocode_fix'
+          ? 'Abrí Destinos. Las coordenadas se corrigen a mano con una fuente verificable: el asistente no las inventa.'
+          : 'Módulo abierto.';
+        break;
+      case 'quick_sync_supabase':
+        if (window.BaqueanoOpsData) await window.BaqueanoOpsData.refresh({ force: true, health: true });
+        resultMessage = 'Datos y estado de servicios releídos desde el servidor.';
+        break;
+      case 'quick_whatsapp_reminder': {
+        const phone = String(p.phone || '').replace(/[^0-9]/g, '');
+        if (!phone) { resultMessage = 'No hay un teléfono real registrado para este recordatorio.'; break; }
+        logDecision('WhatsApp', `Borrador abierto para ${phone}`);
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(p.draftText || '')}`, '_blank', 'noopener');
+        resultMessage = 'Borrador de WhatsApp abierto; nada se envía sin tu confirmación.';
+        break;
+      }
+      default:
+        resultMessage = 'Acción no reconocida: no se ejecutó nada.';
+    }
+    logDecision('Acción', `${actionType}: ${resultMessage}`);
+    if (window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.toast) window.BaqueanoOpsEngine.toast(resultMessage, 'info');
+    return { success: true, message: resultMessage, timestamp: new Date() };
+  }
+
+  // --------------------------------------------------------------------------
+  // 5. BAQUEANO COMMANDER (comandos administrativos seguros)
+  // --------------------------------------------------------------------------
+  const MODULES = [
+    [/reserv/, '11-reservas', 'Reservas'], [/negocio|aliado|emprend/, '08-negocios', 'Negocios'], [/destino/, '03-destinos', 'Destinos'],
+    [/sos|emergenc/, '20-sos', 'Centro SOS'], [/auditor|bitacora|bitácora|log/, '27-auditoria', 'Auditoría'], [/moderac|testimon|comunidad|denuncia/, '36-comunidad', 'Comunidad'],
+    [/verific/, '09-verificaciones', 'Verificaciones'], [/estado|salud|health|servicio/, '33-estado', 'Estado del sistema'], [/municip/, '05-municipios', 'Municipios'],
+    [/territor|departament/, '04-territorios', 'Territorios'], [/mapa/, '07-mapa', 'Mapa'], [/tarifa|precio/, '34-tarifas', 'Tarifas'], [/backup|respaldo/, '35-backup', 'Backup']
+  ];
+
   function processCommanderQuery(queryText) {
     if (!queryText || typeof queryText !== 'string') return '';
-    const q = queryText.toLowerCase().trim();
+    const q = queryText.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
+    OPS_STATE.conversationHistory.push({ sender: 'operator', text: queryText, date: new Date() });
+    const d = data();
+    let response;
 
-    // Registrar en historial
-    OPS_STATE.conversationHistory.push({ sender: 'oscar', text: queryText, date: new Date() });
-
-    let response = '';
-
-    if (q.includes('cómo está') || q.includes('estado general') || q.includes('pulso') || q.includes('pulse')) {
-      const pulse = calculateBaqueanoPulse();
-      response = `${escapeOps(OPS_STATE.adminName)}, el estado general de BAQUEANO está en un **${pulse.score}%** (${pulse.statusLabel}).\n\n` +
-        `• **Infraestructura:** Firebase 🟢 Operativo (${OPS_STATE.metrics.firebase.latency}) | Supabase 🟢 Backup dual con ${OPS_STATE.metrics.supabaseBackup.diffCount} diff.\n` +
-        `• **Inteligencia Artificial:** Gemini 1.5 Pro activo (${OPS_STATE.metrics.aiGemini.avgLatencySec}s latencia) | Groq Llama-3 listo en Standby.\n` +
-        `• **Operaciones:** ${OPS_STATE.metrics.bookingsPending} reservas en curso | ${OPS_STATE.metrics.businessesWithoutGps} negocios requieren GPS | 0 alertas SOS.\n` +
-        `• **Seguridad:** App Check enforced | 0 amenazas activas.`;
-    } 
-    else if (q.includes('qué pasó hoy') || q.includes('resumen') || q.includes('hoy') || q.includes('actividad')) {
-      response = `**Resumen Operativo de Hoy para ${escapeOps(OPS_STATE.adminName)}:**\n\n` +
-        `1. **Tráfico y Usuarios:** 187 exploradores activos en la plataforma.\n` +
-        `2. **Reservas:** 42 consultas de experiencias gestionadas, 3 pendientes de respuesta.\n` +
-        `3. **Salud de APIs:** 1,248 peticiones procesadas por Gemini con 1.4s de tiempo medio. Cero caídas.\n` +
-        `4. **Incidencias:** Se atendió 1 intento de acceso inválido mitigado por rate-limiting sin fuga de datos.`;
-    } 
-    else if (q.includes('reserva') || q.includes('reservas')) {
-      response = `Actualmente hay **${OPS_STATE.metrics.bookingsPending} reservas activas**. ` +
-        `La más antigua es la **#BQ-2026-1842** en Matagalpa (5.2 horas sin confirmar por el hospedaje). ` +
-        `¿Deseas que envíe el recordatorio pre-redactado vía WhatsApp con 1-Click?`;
-    } 
-    else if (q.includes('negocio') || q.includes('gps') || q.includes('establecimiento')) {
-      response = `Tenemos **${OPS_STATE.metrics.businessesTotal} negocios registrados**. ` +
-        `De ellos, **${OPS_STATE.metrics.businessesWithoutGps} no tienen coordenadas GPS** en Rivas. ` +
-        `Puedo asignarle las coordenadas centrales de su municipio automáticamente si lo autorizas.`;
-    } 
-    else if (q.includes('supabase') || q.includes('sincroniz') || q.includes('backup') || q.includes('respaldo')) {
-      response = `Vigilancia **Firebase ↔ Supabase**:\n` +
-        `• Registros en Firebase: 12,482\n` +
-        `• Registros en Supabase: 12,481\n` +
-        `• Diferencia detectada: 1 registro pendiente (${OPS_STATE.metrics.supabaseBackup.pendingRecord}).\n\n` +
-        `¿Ejecuto la sincronización atómica ahora?`;
-    } 
-    else if (q.includes('simul') || q.includes('impacto')) {
-      response = simulateAction('update_tariff');
-    } 
-    else {
-      response = `Entendido, ${escapeOps(OPS_STATE.adminName)}. He registrado tu instrucción en la bitácora operativa. ` +
-        `¿Quieres que evalúe el impacto en la base de datos o que prepare una acción de ejecución rápida?`;
+    const search = q.match(/^(?:buscar|busca|encontrar)\s+(?:el\s+|la\s+)?(?:destino\s+)?(.{2,60})$/);
+    if (search) {
+      openTab('03-destinos', search[1]);
+      response = `Abrí **Destinos** filtrando por "${escapeOps(search[1])}".`;
+    } else if (/(abrir|abre|mostrar|muestra|ver|ir a)\b/.test(q) && MODULES.some(([re]) => re.test(q))) {
+      const [, tab, label] = MODULES.find(([re]) => re.test(q));
+      openTab(tab);
+      response = `Abrí **${label}**.`;
+      if (tab === '11-reservas') response += ` Pendientes según Supabase: **${fmt(metric('reservations_pending'))}**.`;
+      if (tab === '08-negocios') response += ` Negocios: **${fmt(metric('businesses'))}** (${fmt(metric('businesses_verified'))} verificados).`;
+    } else if (/como esta|estado general|pulso|pulse/.test(q)) {
+      const b = getExecutiveBriefing();
+      const checks = d && d.health ? d.health.checks.map((c) => `• **${c.label}:** ${c.state} — ${c.detail}`).join('\n') : 'Sin comprobaciones todavía.';
+      response = `${b.narrative}\n\n${checks}`;
+    } else if (/error|sincroniz|supabase|firebase|backup|respaldo/.test(q)) {
+      const bad = d && d.health ? d.health.checks.filter((c) => c.state !== 'OPERATIVO') : [];
+      response = `Espejo Firestore→Supabase: **${fmt(metric('firestore_mirror'))}** documentos replicados. ` +
+        (bad.length ? `\nServicios que no están operativos:\n${bad.map((c) => `• **${c.label}:** ${c.state} — ${c.detail}`).join('\n')}` : '\nTodas las comprobaciones configuradas están operativas.');
+    } else if (/hoy|resumen|actividad/.test(q)) {
+      response = `**Resumen con datos reales:**\n` +
+        `• Sesiones web registradas (24 h): ${fmt(metric('traffic_sessions_24h'))}\n` +
+        `• Experiencias en moderación: ${fmt(metric('testimonials_pending'))} · publicadas: ${fmt(metric('testimonials_published'))}\n` +
+        `• Reservas pendientes: ${fmt(metric('reservations_pending'))}\n` +
+        `• Interacciones BAQUI registradas: ${fmt(metric('ai_messages'))}\n` +
+        `• Eventos de auditoría: ${fmt(metric('audit_logs'))}`;
+    } else if (/simul|impacto/.test(q)) {
+      response = simulateAction(q);
+    } else {
+      response = 'Puedo: **"¿Cómo está BAQUEANO?"**, **"Mostrar errores de sincronización"**, **"Abrir reservas pendientes"**, **"Mostrar negocios pendientes"**, **"Ver alertas SOS"**, **"Buscar destino Ometepe"** o **"Resumen de hoy"**. No ejecuto cambios de datos: abro el módulo para que decidás.';
     }
-
     OPS_STATE.conversationHistory.push({ sender: 'ops_ia', text: response, date: new Date() });
     return response;
   }
 
-  // --------------------------------------------------------------------------
-  // 6. MODO SIMULACIÓN PREDICTIVO (IMPACT ANALYSIS)
-  // --------------------------------------------------------------------------
   function simulateAction(actionKey) {
-    if (actionKey === 'update_tariff' || actionKey.includes('tarif')) {
-      return `🔬 **MODO SIMULACIÓN (Impact Analysis):**\n` +
-        `Si actualizas las comisiones o tarifas de membresía en este momento:\n` +
-        `• **Negocios Afectados:** 29 anfitriones activos.\n` +
-        `• **Reservas en curso no afectadas:** 3 reservas mantendrán la cotización pactada bajo Ley 306.\n` +
-        `• **Impacto en FinOps:** Se estima un incremento del 4.2% en autosostenibilidad operativa.\n` +
-        `• **Riesgo:** 🟢 Bajo. Requiere confirmación de Nivel 2.`;
+    const businesses = metric('businesses');
+    if (String(actionKey || '').includes('tarif')) {
+      return `🔬 **Análisis de impacto (datos reales):** hay **${fmt(businesses)} negocios** y **${fmt(metric('tourism_services'))} tarifas** registradas en Supabase. ` +
+        'No hay datos suficientes para estimar efectos económicos; cualquier cambio requiere confirmación y queda en la auditoría.';
     }
-    return `🔬 **MODO SIMULACIÓN:** Evaluación completada. No se prevén interrupciones de servicio.`;
+    return '🔬 No tengo un modelo de simulación para esa acción. Revisá el módulo correspondiente antes de aplicar cambios.';
   }
 
-  // --------------------------------------------------------------------------
-  // 7. REGISTRO AUDITABLE DE DECISIONES DE IA (CERO CAJA NEGRA)
-  // --------------------------------------------------------------------------
   function logDecision(category, details) {
-    const entry = {
-      id: 'dec_' + Date.now(),
-      timestamp: new Date().toISOString(),
-      category,
-      details,
-      authorizedBy: OPS_STATE.adminName
-    };
-    OPS_STATE.decisionLog.unshift(entry);
+    OPS_STATE.decisionLog.unshift({ id: 'dec_' + Date.now(), timestamp: new Date().toISOString(), category, details, authorizedBy: OPS_STATE.adminName });
     if (OPS_STATE.decisionLog.length > 50) OPS_STATE.decisionLog.pop();
   }
 
-  // --------------------------------------------------------------------------
-  // 8. VOZ EJECUTIVA EN ESPAÑOL NICARAGÜENSE SIN SIGNOS
-  // --------------------------------------------------------------------------
   function speakBriefing() {
     if (!('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
-
-    const briefing = getExecutiveBriefing();
-    // Limpieza de Markdown y signos
-    let cleanText = briefing.narrative
-      .replace(/\*\*/g, '')
-      .replace(/#/g, '')
-      .replace(/-/g, '')
-      .replace(/🟢|🟡|🔴|⚪|🔵/g, '')
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-      .replace(/\n+/g, '. ');
-
-    const utterance = new SpeechSynthesisUtterance(cleanText);
+    const clean = getExecutiveBriefing().narrative.replace(/\*\*/g, '').replace(/[#•]/g, '').replace(/\n+/g, '. ');
+    const utterance = new SpeechSynthesisUtterance(clean);
     utterance.lang = 'es-NI';
     utterance.rate = 0.95;
     window.speechSynthesis.speak(utterance);
   }
 
   // --------------------------------------------------------------------------
-  // 9. RENDERIZADO VISUAL DEL WIDGET EN EL DASHBOARD EJECUTIVO
+  // 6. WIDGET DEL DASHBOARD (DOM seguro: textContent)
   // --------------------------------------------------------------------------
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text != null) node.textContent = text;
+    return node;
+  }
+  function richText(target, text) {
+    // **negrita** y saltos de línea, siempre como texto (sin HTML de datos).
+    String(text).split('\n').forEach((line, i) => {
+      if (i) target.append(document.createElement('br'));
+      line.split(/(\*\*[^*]+\*\*)/).forEach((part) => {
+        if (/^\*\*[^*]+\*\*$/.test(part)) target.append(el('strong', '', part.slice(2, -2)));
+        else if (part) target.append(document.createTextNode(part));
+      });
+    });
+  }
+
   function renderOpsIaDashboardWidget() {
     const container = document.getElementById('opsIaCommandCenterWidget');
     if (!container) return;
-
     const pulse = calculateBaqueanoPulse();
     const briefing = getExecutiveBriefing();
     const agenda = getOperationalAgenda();
 
-    container.innerHTML = `
-      <!-- ===================================================================
-           BAQUEANO PULSE & OPS IA — CENTRO DE MANDO INTELIGENTE
-           =================================================================== -->
-      <div class="ops-pulse-hero-card" style="background: linear-gradient(135deg, var(--ops-surface-1) 0%, #0c1827 100%); border: 1px solid var(--ops-border-card); border-radius: var(--ops-radius-lg); padding: 1.5rem; margin-bottom: 1.75rem; box-shadow: var(--ops-shadow-lg); position: relative; overflow: hidden;">
-        
-        <!-- Franja superior: Salud y Saludo -->
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
-          <div style="display: flex; align-items: center; gap: 1rem;">
-            <!-- Indicador Circular de Pulso -->
-            <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--ops-surface-2); border: 3px solid ${pulse.color}; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 16px ${pulse.color}33;">
-              <span style="font-family: 'Space Grotesk', monospace; font-size: 1.25rem; font-weight: 800; color: #FFFFFF; line-height: 1;">${pulse.score}%</span>
-              <span style="font-size: 0.6rem; color: ${pulse.color}; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">PULSE</span>
-            </div>
-            <div>
-              <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800; color: #FFFFFF; margin: 0;">
-                  Baqueano Ops IA · Asistente Personal de <span data-ops-operator>${escapeOps(OPS_STATE.adminName)}</span>
-                </h2>
-                <span class="ops-badge-status published" style="background: ${pulse.color}22; color: ${pulse.color}; border: 1px solid ${pulse.color}44;">
-                  ● ${pulse.statusLabel}
-                </span>
-              </div>
-              <p style="font-size: 0.82rem; color: var(--ops-text-secondary); margin: 0.2rem 0 0 0;">
-                Centro Inteligente de Supervisión y Operación Total · Respaldo Dual Firebase ↔ Supabase Activo
-              </p>
-            </div>
-          </div>
+    const card = el('div', 'ops-pulse-hero-card ops-ia-real');
+    const head = el('div', 'ops-ia-head');
+    const ring = el('div', 'ops-ia-ring');
+    ring.style.borderColor = pulse.color;
+    ring.append(el('span', 'ops-ia-ring-value', pulse.score == null ? '—' : `${pulse.score}%`), el('span', 'ops-ia-ring-label', 'Servicios'));
+    ring.title = pulse.basis;
+    const titles = el('div', 'ops-ia-titles');
+    const h2 = el('h2', 'ops-ia-title');
+    h2.append('Baqueano Ops IA · Asistente de ');
+    const op = el('span', '', OPS_STATE.adminName);
+    op.setAttribute('data-ops-operator', '');
+    h2.append(op);
+    titles.append(h2, el('p', 'ops-ia-sub', `${pulse.statusLabel} · Datos: Supabase (base principal) vía API administrativa`));
+    const buttons = el('div', 'ops-ia-buttons');
+    const voice = el('button', 'btn-ops-matte', 'Voz ejecutiva');
+    voice.type = 'button';
+    voice.addEventListener('click', speakBriefing);
+    const commander = el('button', 'btn-ops-matte accent', 'Baqueano Commander');
+    commander.type = 'button';
+    commander.addEventListener('click', openCommanderModal);
+    buttons.append(voice, commander);
+    head.append(ring, titles, buttons);
 
-          <!-- Botones de Control del Asistente -->
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.speakBriefing()" title="Escuchar briefing en voz alta" style="font-size: 0.8rem; padding: 0.45rem 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
-              <i class="fa-solid fa-volume-high" style="color: var(--bq-secondary);"></i> <span>Voz Ejecutiva</span>
-            </button>
-            <button type="button" class="btn-ops-matte accent" onclick="window.BaqueanoOpsIA.openCommanderModal()" title="Abrir consola de conversación" style="font-size: 0.8rem; padding: 0.45rem 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
-              <i class="fa-solid fa-terminal"></i> <span>Baqueano Commander</span>
-            </button>
-          </div>
-        </div>
+    const brief = el('div', 'ops-ia-brief');
+    brief.append(el('div', 'ops-ia-brief-label', 'Briefing con datos reales'));
+    const body = el('div');
+    richText(body, briefing.narrative);
+    brief.append(body);
 
-        <!-- Briefing Narrativo -->
-        <div style="background: var(--ops-surface-2); border-left: 3px solid var(--bq-accent); border-radius: var(--ops-radius-md); padding: 0.95rem 1.15rem; font-size: 0.86rem; color: var(--ops-text-primary); line-height: 1.55; margin-bottom: 1.25rem;">
-          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; color: var(--bq-secondary); font-weight: 700; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.5px;">
-            <i class="fa-solid fa-robot"></i> Briefing Ejecutivo del Día
-          </div>
-          <div>${briefing.narrative.replace(/\*\*(.*?)\*\*/g, '<strong style="color:#FFF;">$1</strong>').replace(/\n/g, '<br>')}</div>
-        </div>
-
-        <!-- Rejilla de Cuadrantes de Estado (Infraestructura, IA, Operaciones, Seguridad) -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-bottom: 1.25rem;">
-          <!-- Cuadrante 1: Infraestructura -->
-          <div style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.75rem 0.9rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
-              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--ops-text-muted); font-weight: 700;">Infraestructura</span>
-              <span style="font-size: 0.7rem; color: #10B981;">🟢 Uptime 100%</span>
-            </div>
-            <div style="font-size: 0.8rem; color: var(--ops-text-primary); font-weight: 600;">Firebase + Supabase Dual</div>
-            <div style="font-size: 0.72rem; color: var(--ops-text-secondary); margin-top: 0.2rem;">
-              Ping: 42ms · Sincronización: 99.9%
-            </div>
-          </div>
-
-          <!-- Cuadrante 2: Inteligencia Artificial -->
-          <div style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.75rem 0.9rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
-              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--ops-text-muted); font-weight: 700;">Motor de IA</span>
-              <span style="font-size: 0.7rem; color: #10B981;">🟢 1.4s Latencia</span>
-            </div>
-            <div style="font-size: 0.8rem; color: var(--ops-text-primary); font-weight: 600;">Gemini Pro + Groq Fallback</div>
-            <div style="font-size: 0.72rem; color: var(--ops-text-secondary); margin-top: 0.2rem;">
-              88% Gemini · 12% Groq · 0 fallos
-            </div>
-          </div>
-
-          <!-- Cuadrante 3: Operaciones & Reservas -->
-          <div style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.75rem 0.9rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
-              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--ops-text-muted); font-weight: 700;">Operaciones</span>
-              <span style="font-size: 0.7rem; color: #F59E0B;">🟡 ${OPS_STATE.metrics.bookingsPending} Pendientes</span>
-            </div>
-            <div style="font-size: 0.8rem; color: var(--ops-text-primary); font-weight: 600;">Reservas &amp; Anfitriones</div>
-            <div style="font-size: 0.72rem; color: var(--ops-text-secondary); margin-top: 0.2rem;">
-              2 negocios sin GPS · 0 SOS activas
-            </div>
-          </div>
-
-          <!-- Cuadrante 4: Seguridad & SOC -->
-          <div style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.75rem 0.9rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
-              <span style="font-size: 0.72rem; text-transform: uppercase; color: var(--ops-text-muted); font-weight: 700;">Seguridad SOC</span>
-              <span style="font-size: 0.7rem; color: #10B981;">🟢 Blindado</span>
-            </div>
-            <div style="font-size: 0.8rem; color: var(--ops-text-primary); font-weight: 600;">App Check + TLS 1.3</div>
-            <div style="font-size: 0.72rem; color: var(--ops-text-secondary); margin-top: 0.2rem;">
-              0 amenazas · Auditoría inmutable
-            </div>
-          </div>
-        </div>
-
-        <!-- Mi Agenda Operativa (Acciones Rápidas con 1-Click) -->
-        <div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-            <span style="font-size: 0.84rem; font-weight: 700; color: #FFFFFF; display: flex; align-items: center; gap: 0.4rem;">
-              <i class="fa-solid fa-list-check" style="color: var(--bq-accent);"></i> Mi Agenda Operativa del Día (${agenda.length} tareas sugeridas)
-            </span>
-            <span style="font-size: 0.72rem; color: var(--ops-text-muted);">Acciones seguras con resolución en 1-Click</span>
-          </div>
-
-          <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-            ${agenda.map(item => `
-              <div style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.85rem 1rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem;">
-                <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 260px;">
-                  <span style="font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 4px; background: ${item.priority === 'urgent' ? 'rgba(239, 68, 68, 0.15)' : 'rgba(245, 158, 11, 0.15)'}; color: ${item.priority === 'urgent' ? '#EF4444' : '#F59E0B'};">
-                    ${item.priorityBadge}
-                  </span>
-                  <div>
-                    <div style="font-size: 0.83rem; font-weight: 600; color: #FFFFFF;">${item.title}</div>
-                    <div style="font-size: 0.74rem; color: var(--ops-text-secondary); margin-top: 0.15rem;">${item.summary}</div>
-                  </div>
-                </div>
-                <button type="button" class="btn-ops-matte primary" onclick='window.BaqueanoOpsIA.executeQuickAction("${item.actionType}", ${JSON.stringify(item.payload)})' style="font-size: 0.76rem; padding: 0.35rem 0.75rem; white-space: nowrap;">
-                  <i class="fa-solid fa-bolt"></i> ${item.actionLabel}
-                </button>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-
-      </div>
-    `;
+    const agendaBox = el('div', 'ops-ia-agenda');
+    agendaBox.append(el('div', 'ops-ia-brief-label', `Agenda operativa (${agenda.length})`));
+    if (!agenda.length) agendaBox.append(el('p', 'ops-ia-sub', briefing.pulse.score == null ? 'La agenda se arma cuando llegan los datos reales.' : 'Sin asuntos pendientes detectados en los datos.'));
+    agenda.forEach((item) => {
+      const row = el('div', `ops-ia-task is-${item.priority}`);
+      const text = el('div', 'ops-ia-task-text');
+      text.append(el('span', 'ops-ia-task-badge', item.priorityBadge), el('strong', '', item.title), el('small', '', item.summary));
+      const action = el('button', 'btn-ops-matte primary', item.actionLabel);
+      action.type = 'button';
+      action.addEventListener('click', () => executeQuickAction(item.actionType, item.payload));
+      row.append(text, action);
+      agendaBox.append(row);
+    });
+    card.append(head, brief, agendaBox);
+    container.replaceChildren(card);
   }
 
   // --------------------------------------------------------------------------
-  // 10. MODAL INTERACTIVO DE BAQUEANO COMMANDER (CHATS DE GESTIÓN)
+  // 7. MODAL DEL COMMANDER
   // --------------------------------------------------------------------------
   function openCommanderModal() {
     let modal = document.getElementById('baqueanoCommanderModal');
-    if (!modal) {
-      modal = document.createElement('div');
-      modal.id = 'baqueanoCommanderModal';
-      modal.className = 'ops-modal-overlay';
-      modal.style.cssText = 'position: fixed; inset: 0; background: rgba(8, 13, 26, 0.85); backdrop-filter: blur(8px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1rem;';
-      
-      modal.innerHTML = `
-        <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-card); border-radius: var(--ops-radius-lg); width: 100%; max-width: 680px; max-height: 85vh; display: flex; flex-direction: column; box-shadow: var(--ops-shadow-lg); overflow: hidden;">
-          <!-- Header -->
-          <div style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--ops-border-subtle); display: flex; justify-content: space-between; align-items: center; background: var(--ops-bg-base);">
-            <div style="display: flex; align-items: center; gap: 0.6rem;">
-              <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--bq-primary); display: flex; align-items: center; justify-content: center; color: #FFF;">
-                <i class="fa-solid fa-terminal"></i>
-              </div>
-              <div>
-                <h3 style="font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 700; color: #FFFFFF; margin: 0;">Baqueano Commander</h3>
-                <span style="font-size: 0.72rem; color: var(--ops-text-secondary);">Consola de Órdenes &amp; Copiloto Personal de <span data-ops-operator>${escapeOps(OPS_STATE.adminName)}</span></span>
-              </div>
-            </div>
-            <button type="button" class="btn-ops-matte" onclick="document.getElementById('baqueanoCommanderModal').style.display='none'" style="padding: 0.3rem 0.6rem;">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-
-          <!-- Feed de Mensajes -->
-          <div id="commanderMessagesFeed" style="flex: 1; overflow-y: auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; min-height: 300px; max-height: 50vh;">
-            <div style="background: var(--ops-surface-2); border-left: 3px solid var(--bq-secondary); border-radius: var(--ops-radius-md); padding: 0.85rem 1rem; font-size: 0.84rem; color: var(--ops-text-primary);">
-              <strong>Baqueano Ops IA:</strong> Hola <span data-ops-operator>${escapeOps(OPS_STATE.adminName)}</span>, estoy a tu servicio. Puedes preguntarme el estado de la plataforma, pedirme que revise reservas pendientes, verificar la sincronización con Supabase o simular cambios operativos.
-            </div>
-          </div>
-
-          <!-- Sugerencias de Comandos Rápidos -->
-          <div style="padding: 0.5rem 1.25rem; background: var(--ops-surface-2); border-top: 1px solid var(--ops-border-subtle); display: flex; gap: 0.5rem; overflow-x: auto; font-size: 0.74rem;">
-            <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('¿Cómo está BAQUEANO?')" style="padding: 0.25rem 0.55rem; white-space: nowrap;">¿Cómo está BAQUEANO?</button>
-            <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('¿Qué pasó hoy?')" style="padding: 0.25rem 0.55rem; white-space: nowrap;">¿Qué pasó hoy?</button>
-            <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('Revisar reservas pendientes')" style="padding: 0.25rem 0.55rem; white-space: nowrap;">Reservas pendientes</button>
-            <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('Estado de sincronización Supabase')" style="padding: 0.25rem 0.55rem; white-space: nowrap;">Sincronización Supabase</button>
-          </div>
-
-          <!-- Input bar -->
-          <form id="commanderInputForm" onsubmit="window.BaqueanoOpsIA.handleCommanderSubmit(event)" style="padding: 0.85rem 1.25rem; background: var(--ops-bg-base); border-top: 1px solid var(--ops-border-subtle); display: flex; gap: 0.6rem;">
-            <input type="text" id="commanderInputText" placeholder="Escribe una orden a tu copiloto..." style="flex: 1; background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.6rem 0.9rem; color: #FFFFFF; font-size: 0.84rem; outline: none;">
-            <button type="submit" class="btn-ops-matte primary" style="padding: 0.6rem 1.1rem; font-size: 0.84rem;">
-              <i class="fa-solid fa-paper-plane"></i>
-            </button>
-          </form>
-        </div>
-      `;
-      document.body.appendChild(modal);
-    } else {
-      modal.style.display = 'flex';
-    }
-
-    const input = document.getElementById('commanderInputText');
-    if (input) setTimeout(() => input.focus(), 100);
+    if (modal) { modal.style.display = 'flex'; document.getElementById('commanderInputText')?.focus(); return; }
+    modal = el('div', 'ops-modal-overlay ops-commander-overlay');
+    modal.id = 'baqueanoCommanderModal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'commanderTitle');
+    const box = el('div', 'ops-commander-box');
+    const header = el('div', 'ops-commander-header');
+    const title = el('h3', '', 'Baqueano Commander');
+    title.id = 'commanderTitle';
+    const close = el('button', 'btn-ops-matte', '✕');
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Cerrar Commander');
+    close.addEventListener('click', () => { modal.style.display = 'none'; });
+    header.append(title, close);
+    const feed = el('div', 'ops-commander-feed');
+    feed.id = 'commanderMessagesFeed';
+    feed.setAttribute('aria-live', 'polite');
+    const hello = el('div', 'ops-commander-msg is-ai');
+    richText(hello, `Hola ${OPS_STATE.adminName}. Respondo con datos reales de Supabase y abro módulos; no modifico datos sin tu intervención.`);
+    feed.append(hello);
+    const chips = el('div', 'ops-commander-chips');
+    ['¿Cómo está BAQUEANO?', 'Abrir reservas pendientes', 'Mostrar negocios pendientes', 'Ver alertas SOS', 'Buscar destino Ometepe', 'Mostrar errores de sincronización'].forEach((label) => {
+      const chip = el('button', 'btn-ops-matte', label);
+      chip.type = 'button';
+      chip.addEventListener('click', () => triggerPredefinedCommand(label));
+      chips.append(chip);
+    });
+    const form = el('form', 'ops-commander-form');
+    form.id = 'commanderInputForm';
+    const input = el('input');
+    input.type = 'text';
+    input.id = 'commanderInputText';
+    input.placeholder = 'Escribí un comando…';
+    input.setAttribute('aria-label', 'Comando para Baqueano Commander');
+    input.maxLength = 200;
+    const send = el('button', 'btn-ops-matte primary', 'Enviar');
+    send.type = 'submit';
+    form.append(input, send);
+    form.addEventListener('submit', handleCommanderSubmit);
+    box.append(header, feed, chips, form);
+    modal.append(box);
+    modal.addEventListener('keydown', (e) => { if (e.key === 'Escape') modal.style.display = 'none'; });
+    document.body.append(modal);
+    input.focus();
   }
 
   function handleCommanderSubmit(event) {
@@ -625,73 +397,57 @@
     const text = input.value.trim();
     if (!text) return;
     input.value = '';
-
     triggerPredefinedCommand(text);
   }
 
   function triggerPredefinedCommand(text) {
-    const feed = document.getElementById('commanderMessagesFeed');
+    let feed = document.getElementById('commanderMessagesFeed');
+    if (!feed) { openCommanderModal(); feed = document.getElementById('commanderMessagesFeed'); }
     if (!feed) return;
-
-    // Mensaje del operador: texto plano (nunca innerHTML con lo que se escribe).
-    const operatorBubble = document.createElement('div');
-    operatorBubble.style.cssText = 'background: var(--bq-primary); align-self: flex-end; border-radius: var(--ops-radius-md); padding: 0.65rem 0.95rem; font-size: 0.84rem; color: #FFFFFF; max-width: 80%;';
-    const operatorLabel = document.createElement('strong');
-    operatorLabel.textContent = OPS_STATE.adminName + ':';
-    operatorBubble.append(operatorLabel, ' ' + text);
-    feed.appendChild(operatorBubble);
-
-    // Respuesta de la IA
-    const responseText = processCommanderQuery(text);
-    const aiBubble = document.createElement('div');
-    aiBubble.style.cssText = 'background: var(--ops-surface-2); border-left: 3px solid var(--bq-accent); align-self: flex-start; border-radius: var(--ops-radius-md); padding: 0.75rem 1rem; font-size: 0.84rem; color: var(--ops-text-primary); max-width: 90%; line-height: 1.5;';
-    aiBubble.innerHTML = `<strong>Baqueano Ops IA:</strong><br>${responseText.replace(/\*\*(.*?)\*\*/g, '<strong style="color:#FFF;">$1</strong>').replace(/\n/g, '<br>')}`;
-    feed.appendChild(aiBubble);
-
+    const mine = el('div', 'ops-commander-msg is-operator');
+    mine.append(el('strong', '', `${OPS_STATE.adminName}: `), document.createTextNode(text));
+    const answer = el('div', 'ops-commander-msg is-ai');
+    richText(answer, processCommanderQuery(text));
+    feed.append(mine, answer);
     feed.scrollTop = feed.scrollHeight;
   }
 
   // --------------------------------------------------------------------------
-  // 11. ACTUALIZACIÓN DEL PULSE EN EL TOPBAR
+  // 8. INDICADOR DEL TOPBAR
   // --------------------------------------------------------------------------
   function renderPulseIndicatorInTopbar() {
     const topStatus = document.querySelector('.ops-status-indicator');
     if (!topStatus) return;
-
     const pulse = calculateBaqueanoPulse();
-    topStatus.innerHTML = `
-      <span class="ops-pulse-dot" style="background: ${pulse.color};"></span>
-      <span style="cursor: pointer;" onclick="window.BaqueanoOpsIA.openCommanderModal()" title="Baqueano Pulse en tiempo real">${pulse.score}% · PULSE</span>
-    `;
+    const dot = el('span', 'ops-pulse-dot');
+    dot.style.background = pulse.color;
+    const label = el('button', 'ops-pulse-label', pulse.score == null ? 'Servicios: sin evaluar' : `Servicios ${pulse.score}%`);
+    label.type = 'button';
+    label.title = pulse.basis;
+    label.addEventListener('click', () => openTab('33-estado'));
+    topStatus.replaceChildren(dot, label);
+  }
+
+  function renderAll() {
+    renderOpsIaDashboardWidget();
+    renderPulseIndicatorInTopbar();
   }
 
   // --------------------------------------------------------------------------
-  // 12. INICIALIZACIÓN
+  // 9. INICIALIZACIÓN (se actualiza cuando llegan datos reales; sin intervalos)
   // --------------------------------------------------------------------------
   function init() {
     if (OPS_STATE.initialized) return;
     OPS_STATE.initialized = true;
-
-    calculateBaqueanoPulse();
-    renderOpsIaDashboardWidget();
-    renderPulseIndicatorInTopbar();
+    renderAll();
     syncOperatorName();
-
-    // El nombre del operador sigue a la sesión real (llega de forma asíncrona).
     try {
       if (window.firebase && window.firebase.auth) window.firebase.auth().onAuthStateChanged(syncOperatorName);
     } catch (_) { /* sin Auth: queda "Administrador" */ }
     window.addEventListener('baqueano_session_updated', syncOperatorName);
-
-    // Re-evaluación periódica cada 60 segundos
-    setInterval(() => {
-      calculateBaqueanoPulse();
-      renderOpsIaDashboardWidget();
-      renderPulseIndicatorInTopbar();
-    }, 60000);
+    window.addEventListener('baqueano:ops-data', renderAll);
   }
 
-  // Exposición en el objeto window
   window.BaqueanoOpsIA = {
     init,
     getPulse: calculateBaqueanoPulse,
@@ -706,11 +462,5 @@
     handleCommanderSubmit
   };
 
-  // Auto-arranque al cargar el DOM
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })(window, document);
