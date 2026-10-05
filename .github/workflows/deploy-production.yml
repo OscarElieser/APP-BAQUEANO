@@ -75,6 +75,9 @@ jobs:
           node scripts/seo-normalize.test.mjs
           grep -q 'Sitemap: https://baqueanonicaragua.com/sitemap.xml' dist-hostinger/robots.txt
           ! grep -q 'web.app' dist-hostinger/sitemap.xml
+      - name: Auditoría 20/20 de la salida publicada (metadatos, OG, JSON-LD, favicon, ALT, enlaces, robots, sitemap)
+        working-directory: website
+        run: node scripts/production-audit.mjs --out=../docs/production-audit
       - name: Evidencia Kronox al día (documentos generados = fuente única)
         run: node tools/kronox/gen-development-docs.mjs --check
 

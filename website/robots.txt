@@ -39,7 +39,7 @@ Disallow: /docs/
 Disallow: /node_modules/
 Disallow: /apps/
 Disallow: /packages/
-Disallow: /css/
+# /css/ y /js/ quedan permitidos: Google necesita CSS y JS para renderizar las páginas.
 Disallow: /dev-admin.log
 Disallow: /dev-web.log
 Disallow: /*.log

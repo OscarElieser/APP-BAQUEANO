@@ -14,6 +14,14 @@
 export const SITE = 'https://baqueanonicaragua.com';
 export const LEGACY_HOSTS = ['https://app-baqueano.web.app', 'https://app-baqueano.firebaseapp.com'];
 export const LANGUAGES = ['es', 'en', 'fr', 'it', 'pt', 'de'];
+// Imagen social por defecto (1200×630, generada de assets/images/destinos/isla_de_ometepe.jpg).
+export const DEFAULT_OG_IMAGE = `${SITE}/assets/images/og-image.jpg`;
+// Perfiles públicos reales enlazados en el footer del sitio (global-injector.js).
+export const SOCIAL_PROFILES = [
+  'https://www.instagram.com/baqueano_nicaragua',
+  'https://www.facebook.com/share/1S71xwJKse/',
+  'https://www.tiktok.com/@baqueano.nicaragu'
+];
 
 // Páginas que nunca deben indexarse (panel, utilitarias, pruebas).
 export const NOINDEX_PAGES = new Set(['admin.html', 'offline.html', '404.html', 'i18n-test.html']);
@@ -44,6 +52,12 @@ function headBounds(html) {
   const open = html.search(/<head[\s>]/i);
   const close = html.search(/<\/head>/i);
   return open === -1 || close === -1 ? null : { open, close };
+}
+
+function metaContent(head, attr, value) {
+  const tag = head.match(new RegExp(`<meta\\b[^>]*${attr}=["']${value}["'][^>]*>`, 'i'));
+  const content = tag && tag[0].match(/content=["']([^"']*)["']/i);
+  return content ? content[1] : '';
 }
 
 function pageTitle(html) {
@@ -92,20 +106,60 @@ export function normalizeHtml(html, page) {
       head = head.replace(/<meta\b[^>]*property=["']og:url["'][^>]*>/i, ogUrl);
     } else additions.push(ogUrl);
 
+    // 3b) Open Graph y Twitter Card: solo se completan las etiquetas que falten,
+    //     reutilizando el <title> y la meta description propios de cada página.
+    if (!alias) {
+      const title = pageTitle(html);
+      const description = metaContent(head, 'name', 'description');
+      const ogImage = metaContent(head, 'property', 'og:image') || DEFAULT_OG_IMAGE;
+      const social = [
+        ['property', 'og:type', 'website'],
+        ['property', 'og:site_name', 'Baqueano Nicaragua'],
+        ['property', 'og:locale', 'es_NI'],
+        ['property', 'og:title', title],
+        ['property', 'og:description', description],
+        ['property', 'og:image', ogImage],
+        ['name', 'twitter:card', 'summary_large_image'],
+        ['name', 'twitter:title', title],
+        ['name', 'twitter:description', description],
+        ['name', 'twitter:image', ogImage]
+      ];
+      for (const [attr, key, value] of social) {
+        if (value && !metaContent(head, attr, key)) additions.push(`<meta ${attr}="${key}" content="${escapeAttr(value)}">`);
+      }
+      if (ogImage === DEFAULT_OG_IMAGE && !metaContent(head, 'property', 'og:image:width')) {
+        additions.push('<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">');
+      }
+    }
+
     // 4) Datos estructurados (solo si la página no declara los suyos).
     if (!alias && !/application\/ld\+json/i.test(head)) {
       const website = { '@type': 'WebSite', '@id': `${SITE}/#website`, url: `${SITE}/`, name: 'Baqueano Nicaragua', inLanguage: LANGUAGES };
       const graph = page === 'index.html'
         ? [website, {
           '@type': 'Organization', '@id': `${SITE}/#organization`, name: 'Baqueano Nicaragua', url: `${SITE}/`,
-          logo: `${SITE}/assets/Mesa%20de%20trabajo%201.webp`, areaServed: { '@type': 'Country', name: 'Nicaragua' }
+          logo: `${SITE}/assets/icons/icon-512.png`, image: DEFAULT_OG_IMAGE, sameAs: SOCIAL_PROFILES,
+          areaServed: { '@type': 'Country', name: 'Nicaragua' }
         }]
-        : [website, { '@type': 'WebPage', '@id': `${canonical}#webpage`, url: canonical, name: pageTitle(html), inLanguage: 'es', isPartOf: { '@id': `${SITE}/#website` } }];
+        : [website,
+          { '@type': 'WebPage', '@id': `${canonical}#webpage`, url: canonical, name: pageTitle(html), inLanguage: 'es', isPartOf: { '@id': `${SITE}/#website` }, breadcrumb: { '@id': `${canonical}#breadcrumb` } },
+          { '@type': 'BreadcrumbList', '@id': `${canonical}#breadcrumb`, itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE}/` },
+            { '@type': 'ListItem', position: 2, name: pageTitle(html).split('|')[0].trim(), item: canonical }
+          ] }];
       additions.push(jsonLd({ '@context': 'https://schema.org', '@graph': graph }));
     }
   }
 
-  // 5) Manifest PWA enlazado en todas las páginas.
+  // 5) Iconos: favicon y apple-touch-icon en todas las páginas (iOS y pestañas).
+  if (!/<link\b[^>]*rel=["'](?:shortcut )?icon["']/i.test(head)) {
+    additions.push('<link rel="icon" type="image/png" sizes="48x48" href="/assets/icons/favicon-48.png">');
+  }
+  if (!/<link\b[^>]*rel=["']apple-touch-icon["']/i.test(head)) {
+    additions.push('<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">');
+  }
+
+  // 6) Manifest PWA enlazado en todas las páginas.
   if (!/<link\b[^>]*rel=["']manifest["']/i.test(head)) additions.push('<link rel="manifest" href="/manifest.json">');
 
   if (!additions.length) return before + head + after;

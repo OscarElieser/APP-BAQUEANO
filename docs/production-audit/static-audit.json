@@ -1,0 +1,1223 @@
+{
+ "summary": {
+  "generatedAt": "2026-10-05T06:34:14.881Z",
+  "dir": "dist-hostinger",
+  "pages": 31,
+  "critical": 0,
+  "warnings": 67,
+  "sitemapUrls": 23
+ },
+ "seo": [
+  {
+   "page": "404.html",
+   "title": "404 — Este camino no lleva a ningún lado | BAQUEANO Nicaragua",
+   "description": "Este camino no lleva a ningún lado, pero Nicaragua tiene muchos más por descubrir con BAQUEANO.",
+   "canonical": "",
+   "og": false,
+   "twitter": false,
+   "jsonLd": 0,
+   "hreflang": 0,
+   "indexable": false,
+   "lang": "es",
+   "sitemap": false
+  },
+  {
+   "page": "admin.html",
+   "title": "Baqueano Ops Center | Centro de Operaciones & Administración Total",
+   "description": "Centro de Operaciones y Mando Central de Baqueano Nicaragua. Administración universal de contenidos, negocios, telemetría y seguridad.",
+   "canonical": "",
+   "og": false,
+   "twitter": false,
+   "jsonLd": 0,
+   "hreflang": 0,
+   "indexable": false,
+   "lang": "es",
+   "sitemap": false
+  },
+  {
+   "page": "aliados.html",
+   "title": "Aliados Baqueano | Conectá con quienes hacen posible la experiencia",
+   "description": "Cooperativas, eco-lodges, hospedajes, comedores, guías y emprendedores locales en toda Nicaragua. Contacto directo y turismo responsable.",
+   "canonical": "https://baqueanonicaragua.com/aliados.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "ambiental.html",
+   "title": "Custodia del Territorio | Baqueano Nicaragua",
+   "description": "Decálogo verde del explorador, denuncias ambientales ciudadanas y pasaporte de conservación en Nicaragua.",
+   "canonical": "https://baqueanonicaragua.com/ambiental.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "aviso-legal.html",
+   "title": "Aviso Legal & Propiedad Intelectual | BAQUEANO Nicaragua",
+   "description": "Marco jurídico, transparencia y condiciones de operación de BAQUEANO, plataforma digital comprometida con un turismo auténtico, responsable y seguro en Nicaragua.",
+   "canonical": "https://baqueanonicaragua.com/aviso-legal.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "ayuda.html",
+   "title": "Centro de Ayuda | Baqueano Nicaragua",
+   "description": "Centro de ayuda de Baqueano Nicaragua: respuestas sobre viajes, favoritos, reservas, negocios, seguridad y cuenta.",
+   "canonical": "https://baqueanonicaragua.com/ayuda.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "baqueano-ai.html",
+   "title": "Baqueano Digital | Redirigiendo a Baqueano IA...",
+   "description": "",
+   "canonical": "https://baqueanonicaragua.com/baqueano-ia.html",
+   "og": false,
+   "twitter": false,
+   "jsonLd": 0,
+   "hreflang": 0,
+   "indexable": false,
+   "lang": "es-NI",
+   "sitemap": false
+  },
+  {
+   "page": "baqueano-ia.html",
+   "title": "BAQUI | Tu viaje por Nicaragua, pensado contigo",
+   "description": "Copiloto de IA para planificar rutas auténticas, realistas y personalizadas en Nicaragua con mapa satelital, itinerarios y anfitriones locales.",
+   "canonical": "https://baqueanonicaragua.com/baqueano-ia.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es-NI",
+   "sitemap": true
+  },
+  {
+   "page": "cookies.html",
+   "title": "Cookies y Almacenamiento Local | BAQUEANO Nicaragua",
+   "description": "Transparencia sobre el uso de cookies, tecnologías de almacenamiento y datos locales para brindarte una experiencia de viaje segura y sin conexión en Nicaragua.",
+   "canonical": "https://baqueanonicaragua.com/cookies.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "cronicas.html",
+   "title": "Crónicas & Relatos Territoriales | Baqueano Nicaragua",
+   "description": "Relatos territoriales, voces comunitarias y crónicas de viaje responsable por Nicaragua. Descubre lo que no sale en el mapa.",
+   "canonical": "https://baqueanonicaragua.com/cronicas.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "denuncias.html",
+   "title": "Canal Ético Ambiental & Denuncias | Baqueano Nicaragua",
+   "description": "Canal ético y de denuncias ambientales de Baqueano Nicaragua. Reporta delitos ecológicos y apoya a las brigadas comunitarias y MARENA.",
+   "canonical": "https://baqueanonicaragua.com/denuncias.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "departamento.html",
+   "title": "Guía Turística Departamental | Baqueano Nicaragua",
+   "description": "Descubre la historia, gastronomía, lugares turísticos y rutas auténticas de los departamentos de Nicaragua.",
+   "canonical": "https://baqueanonicaragua.com/departamento.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "destino.html",
+   "title": "Ficha de Destino | Baqueano Nicaragua",
+   "description": "Información territorial oficial, logística de viaje, costos y anfitriones comunitarios verificados en Nicaragua.",
+   "canonical": "https://baqueanonicaragua.com/destino.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es-NI",
+   "sitemap": true
+  },
+  {
+   "page": "destinos.html",
+   "title": "Destinos de Nicaragua | Baqueano Nicaragua",
+   "description": "Explora los destinos naturales, playas, volcanes y patrimonio cultural de Nicaragua.",
+   "canonical": "https://baqueanonicaragua.com/destinos.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "experiencias.html",
+   "title": "Experiencias de Aventura & Cultura | Baqueano Nicaragua",
+   "description": "Descubrí las mejores experiencias de Nicaragua: sandboarding en Cerro Negro, rappel en Cañón de Somoto, rutas del café y surf en el Pacífico.",
+   "canonical": "https://baqueanonicaragua.com/experiencias.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "favoritos.html",
+   "title": "Mis Favoritos | BAQUEANO Nicaragua",
+   "description": "Consultá y administrá tus destinos favoritos guardados en BAQUEANO Nicaragua.",
+   "canonical": "https://baqueanonicaragua.com/favoritos.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": false
+  },
+  {
+   "page": "gastronomia.html",
+   "title": "Gastronomía Ancestral de los Hijos del Maíz | Baqueano Nicaragua",
+   "description": "Sabores, tradiciones y saberes que dan vida a nuestra cultura. Descubrí Gallo Pinto, Nacatamal, Vigorón, Quesillo, Baho, Rondón e Indio Viejo.",
+   "canonical": "https://baqueanonicaragua.com/gastronomia.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "historia.html",
+   "title": "Historia de Nicaragua | Baqueano Nicaragua",
+   "description": "Recorre la memoria histórica de Nicaragua: 7 periodos, pueblos originarios, personajes y los 17 territorios.",
+   "canonical": "https://baqueanonicaragua.com/historia.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "i18n-test.html",
+   "title": "BAQUEANO · I18N Test",
+   "description": "",
+   "canonical": "",
+   "og": false,
+   "twitter": false,
+   "jsonLd": 0,
+   "hreflang": 0,
+   "indexable": false,
+   "lang": "es-NI",
+   "sitemap": false
+  },
+  {
+   "page": "index.html",
+   "title": "Baqueano Nicaragua | Descubre lo que no sale en el mapa",
+   "description": "Portal oficial de turismo comunitario y ecoturismo en Nicaragua. Explora volcanes, lagos, reservas de biósfera, playas y cooperativas campesinas.",
+   "canonical": "https://baqueanonicaragua.com/",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "legal.html",
+   "title": "Centro Legal & Términos | Baqueano Nicaragua",
+   "description": "Términos y condiciones, política de privacidad, cookies y aviso legal de Baqueano Nicaragua.",
+   "canonical": "https://baqueanonicaragua.com/legal.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "mapa.html",
+   "title": "Mapa Interactivo de Nicaragua | Baqueano",
+   "description": "Explorá los 17 territorios de Nicaragua en nuestro mapa interactivo. Volcanes, playas, cooperativas campesinas y rutas culturales.",
+   "canonical": "https://baqueanonicaragua.com/mapa.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "mi-negocio.html",
+   "title": "Portal de Anfitriones & Negocios | Baqueano Nicaragua",
+   "description": "Registra tu cooperativa, posada o guía turístico en Baqueano Nicaragua. Sin intermediarios, 0% comisión, conectado directamente con exploradores responsables.",
+   "canonical": "https://baqueanonicaragua.com/mi-negocio.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "mi-viaje.html",
+   "title": "Mi Viaje & Planificador | Baqueano Nicaragua",
+   "description": "Planificá tu aventura por Nicaragua: armá tu itinerario día a día, calculá tu presupuesto y guardá tus destinos favoritos.",
+   "canonical": "https://baqueanonicaragua.com/mi-viaje.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": false
+  },
+  {
+   "page": "musica.html",
+   "title": "Música & Patrimonio Sonoro | Baqueano Nicaragua",
+   "description": "Música, identidad y tradición que conectan nuestra gente. Escucha son nica, marimba, trova campesina y ritmos del Caribe.",
+   "canonical": "https://baqueanonicaragua.com/musica.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "nosotros.html",
+   "title": "Nosotros | BAQUEANO Nicaragua Auténtica",
+   "description": "Conocé el propósito, misión y equipo de BAQUEANO Nicaragua. El puente tecnológico para el turismo comunitario, soberano y regenerativo.",
+   "canonical": "https://baqueanonicaragua.com/nosotros.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es-NI",
+   "sitemap": true
+  },
+  {
+   "page": "offline.html",
+   "title": "Modo Offline Territorial | Baqueano Nicaragua",
+   "description": "",
+   "canonical": "",
+   "og": false,
+   "twitter": false,
+   "jsonLd": 0,
+   "hreflang": 0,
+   "indexable": false,
+   "lang": "es",
+   "sitemap": false
+  },
+  {
+   "page": "perfil.html",
+   "title": "Mi Perfil | BAQUEANO Nicaragua Auténtica",
+   "description": "Tu información, reservas, preferencias de viaje y logros como Explorador BAQUEANO en Nicaragua, en un solo lugar.",
+   "canonical": "https://baqueanonicaragua.com/perfil.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es-NI",
+   "sitemap": false
+  },
+  {
+   "page": "privacidad.html",
+   "title": "Privacidad & Seguridad de tus Datos | BAQUEANO Nicaragua",
+   "description": "Política de privacidad de BAQUEANO Nicaragua. Tus datos bajo tu control: cero venta de información, privacidad en IA y seguridad cloud.",
+   "canonical": "https://baqueanonicaragua.com/privacidad.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es-NI",
+   "sitemap": true
+  },
+  {
+   "page": "terminos.html",
+   "title": "Términos & Condiciones de Uso | BAQUEANO Nicaragua",
+   "description": "Términos y Condiciones de Uso de la plataforma BAQUEANO en Nicaragua. Información legal transparente, derechos del viajero y compromisos comunitarios.",
+   "canonical": "https://baqueanonicaragua.com/terminos.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es-NI",
+   "sitemap": true
+  },
+  {
+   "page": "testimonios.html",
+   "title": "Experiencias de viajeros | Testimonios BAQUEANO",
+   "description": "Experiencias reales de viajeros en Nicaragua: destinos, playas, volcanes, comunidades y gastronomía contadas por quienes las vivieron.",
+   "canonical": "https://baqueanonicaragua.com/testimonios.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  }
+ ],
+ "findings": [
+  {
+   "severity": "warning",
+   "page": "404.html",
+   "rule": "anchor-missing",
+   "detail": "perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "404.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "404.html",
+   "rule": "anchor-missing",
+   "detail": "index.html#faq: ancla #faq no encontrada en index.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "aliados.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#blog: ancla #blog no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "aliados.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faqs: ancla #faqs no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "ambiental.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "ambiental.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #bizRegisterModal no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "ambiental.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "aviso-legal.html",
+   "rule": "anchor-missing",
+   "detail": "perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "aviso-legal.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "ayuda.html",
+   "rule": "anchor-missing",
+   "detail": "perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "ayuda.html",
+   "rule": "anchor-missing",
+   "detail": "perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "baqueano-ai.html",
+   "rule": "anchor-missing",
+   "detail": "perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "baqueano-ai.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "baqueano-ia.html",
+   "rule": "anchor-missing",
+   "detail": "perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "baqueano-ia.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "baqueano-ia.html",
+   "rule": "anchor-missing",
+   "detail": "aliados.html#postular: ancla #postular no encontrada en aliados.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "cookies.html",
+   "rule": "anchor-missing",
+   "detail": "perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "cookies.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "cookies.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #control no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "cookies.html",
+   "rule": "anchor-missing",
+   "detail": "index.html#faq: ancla #faq no encontrada en index.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "departamento.html",
+   "rule": "anchor-missing",
+   "detail": "destinos.html#cotizadorModal: ancla #cotizadorModal no encontrada en destinos.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "destino.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "destinos.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "destinos.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "gastronomia.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#blog: ancla #blog no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "gastronomia.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faqs: ancla #faqs no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #epocaPrehispanica no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #resistenciaIndigena no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #periodoColonial no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #independencia no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #guerraNacional no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #sigloXX no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #nicaraguaActual no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #pueblosOriginarios no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #personajes no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #patrimonio no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #fuentes no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "historia.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "index.html",
+   "rule": "anchor-missing",
+   "detail": "perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "legal.html",
+   "rule": "anchor-missing",
+   "detail": "perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "legal.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "mi-viaje.html",
+   "rule": "anchor-missing",
+   "detail": "perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "mi-viaje.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "mi-viaje.html",
+   "rule": "anchor-missing",
+   "detail": "index.html#faq: ancla #faq no encontrada en index.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "musica.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#blog: ancla #blog no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "musica.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faqs: ancla #faqs no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "nosotros.html",
+   "rule": "anchor-missing",
+   "detail": "index.html#sos: ancla #sos no encontrada en index.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "nosotros.html",
+   "rule": "anchor-missing",
+   "detail": "mi-viaje.html#favoritos: ancla #favoritos no encontrada en mi-viaje.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "nosotros.html",
+   "rule": "anchor-missing",
+   "detail": "aliados.html#postular: ancla #postular no encontrada en aliados.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "offline.html",
+   "rule": "anchor-missing",
+   "detail": "perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "offline.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "perfil.html",
+   "rule": "anchor-missing",
+   "detail": "index.html#sos: ancla #sos no encontrada en index.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "perfil.html",
+   "rule": "anchor-missing",
+   "detail": "mi-viaje.html#favoritos: ancla #favoritos no encontrada en mi-viaje.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "perfil.html",
+   "rule": "anchor-missing",
+   "detail": "mi-viaje.html#favoritos: ancla #favoritos no encontrada en mi-viaje.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "perfil.html",
+   "rule": "anchor-missing",
+   "detail": "mi-viaje.html#reservas: ancla #reservas no encontrada en mi-viaje.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "perfil.html",
+   "rule": "anchor-missing",
+   "detail": "mi-viaje.html#favoritos: ancla #favoritos no encontrada en mi-viaje.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "perfil.html",
+   "rule": "anchor-missing",
+   "detail": "mi-viaje.html#reservas: ancla #reservas no encontrada en mi-viaje.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "perfil.html",
+   "rule": "anchor-missing",
+   "detail": "mi-viaje.html#reservas: ancla #reservas no encontrada en mi-viaje.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "perfil.html",
+   "rule": "anchor-missing",
+   "detail": "aliados.html#postular: ancla #postular no encontrada en aliados.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "privacidad.html",
+   "rule": "anchor-missing",
+   "detail": "index.html#sos: ancla #sos no encontrada en index.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "privacidad.html",
+   "rule": "anchor-missing",
+   "detail": "mi-viaje.html#favoritos: ancla #favoritos no encontrada en mi-viaje.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "privacidad.html",
+   "rule": "anchor-missing",
+   "detail": "aliados.html#postular: ancla #postular no encontrada en aliados.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "terminos.html",
+   "rule": "anchor-missing",
+   "detail": "index.html#sos: ancla #sos no encontrada en index.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "terminos.html",
+   "rule": "anchor-missing",
+   "detail": "mi-viaje.html#favoritos: ancla #favoritos no encontrada en mi-viaje.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "terminos.html",
+   "rule": "anchor-missing",
+   "detail": "aliados.html#postular: ancla #postular no encontrada en aliados.html (estático)"
+  }
+ ],
+ "links": [
+  {
+   "from": "404.html",
+   "link": "perfil.html#tab-viajes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "404.html",
+   "link": "nosotros.html#faq",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "404.html",
+   "link": "index.html#faq",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "aliados.html",
+   "link": "nosotros.html#blog",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "aliados.html",
+   "link": "nosotros.html#faqs",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "ambiental.html",
+   "link": "#sosModal",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "ambiental.html",
+   "link": "#bizRegisterModal",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "ambiental.html",
+   "link": "#sosModal",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "aviso-legal.html",
+   "link": "perfil.html#tab-viajes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "aviso-legal.html",
+   "link": "nosotros.html#faq",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "ayuda.html",
+   "link": "perfil.html#tab-viajes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "ayuda.html",
+   "link": "perfil.html#tab-viajes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "baqueano-ai.html",
+   "link": "perfil.html#tab-viajes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "baqueano-ai.html",
+   "link": "nosotros.html#faq",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "baqueano-ia.html",
+   "link": "perfil.html#tab-viajes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "baqueano-ia.html",
+   "link": "nosotros.html#faq",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "baqueano-ia.html",
+   "link": "aliados.html#postular",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "cookies.html",
+   "link": "perfil.html#tab-viajes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "cookies.html",
+   "link": "nosotros.html#faq",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "cookies.html",
+   "link": "#control",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "cookies.html",
+   "link": "index.html#faq",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "departamento.html",
+   "link": "destinos.html#cotizadorModal",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "destino.html",
+   "link": "nosotros.html#faq",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "destinos.html",
+   "link": "#sosModal",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "destinos.html",
+   "link": "#sosModal",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "gastronomia.html",
+   "link": "nosotros.html#blog",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "gastronomia.html",
+   "link": "nosotros.html#faqs",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#sosModal",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#epocaPrehispanica",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#resistenciaIndigena",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#periodoColonial",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#independencia",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#guerraNacional",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#sigloXX",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#nicaraguaActual",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#pueblosOriginarios",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#personajes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#patrimonio",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#fuentes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "historia.html",
+   "link": "#sosModal",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "index.html",
+   "link": "perfil.html#tab-viajes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "legal.html",
+   "link": "perfil.html#tab-viajes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "legal.html",
+   "link": "nosotros.html#faq",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "mi-viaje.html",
+   "link": "perfil.html#tab-viajes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "mi-viaje.html",
+   "link": "nosotros.html#faq",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "mi-viaje.html",
+   "link": "index.html#faq",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "musica.html",
+   "link": "nosotros.html#blog",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "musica.html",
+   "link": "nosotros.html#faqs",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "nosotros.html",
+   "link": "index.html#sos",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "nosotros.html",
+   "link": "mi-viaje.html#favoritos",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "nosotros.html",
+   "link": "aliados.html#postular",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "offline.html",
+   "link": "perfil.html#tab-viajes",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "offline.html",
+   "link": "nosotros.html#faq",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "perfil.html",
+   "link": "index.html#sos",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "perfil.html",
+   "link": "mi-viaje.html#favoritos",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "perfil.html",
+   "link": "mi-viaje.html#favoritos",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "perfil.html",
+   "link": "mi-viaje.html#reservas",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "perfil.html",
+   "link": "mi-viaje.html#favoritos",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "perfil.html",
+   "link": "mi-viaje.html#reservas",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "perfil.html",
+   "link": "mi-viaje.html#reservas",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "perfil.html",
+   "link": "aliados.html#postular",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "privacidad.html",
+   "link": "index.html#sos",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "privacidad.html",
+   "link": "mi-viaje.html#favoritos",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "privacidad.html",
+   "link": "aliados.html#postular",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "terminos.html",
+   "link": "index.html#sos",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "terminos.html",
+   "link": "mi-viaje.html#favoritos",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "terminos.html",
+   "link": "aliados.html#postular",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  }
+ ]
+}

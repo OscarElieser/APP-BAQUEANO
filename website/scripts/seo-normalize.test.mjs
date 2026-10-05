@@ -77,6 +77,18 @@ check('alias con meta refresh: canónico al destino, sin hreflang ni sitemap', (
   assert.equal(count(out, /hreflang|ld\+json/g), 0);
   assert.equal(count(buildSitemap(['baqueano-ai.html', 'baqueano-ia.html'], 'x', new Set(['baqueano-ai.html'])), /<loc>/g), 1);
 });
+check('Open Graph, Twitter Card e iconos se completan sin pisar los existentes', () => {
+  const src = '<html><head><title>Mapa | Baqueano</title><meta name="description" content="Mapa interactivo de Nicaragua."><meta property="og:title" content="Propio"></head></html>';
+  const out = normalizeHtml(src, 'mapa.html');
+  assert.equal(count(out, /property="og:title"/g), 1);
+  assert.ok(out.includes('content="Propio"'));
+  assert.ok(out.includes('<meta name="twitter:card" content="summary_large_image">'));
+  assert.ok(out.includes('og:description" content="Mapa interactivo de Nicaragua."'));
+  assert.ok(out.includes(`og:image" content="${SITE}/assets/images/og-image.jpg"`));
+  assert.ok(out.includes('rel="apple-touch-icon"') && out.includes('rel="icon"'));
+  assert.ok(out.includes('"BreadcrumbList"'));
+  assert.equal(normalizeHtml(out, 'mapa.html'), out);
+});
 check('robots apunta al sitemap oficial', () => {
   const out = normalizeRobots('User-agent: *\nSitemap: https://app-baqueano.web.app/sitemap.xml\n');
   assert.ok(out.includes(`Sitemap: ${SITE}/sitemap.xml`) && !out.includes('web.app'));
