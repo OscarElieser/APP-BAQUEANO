@@ -3558,18 +3558,209 @@
         "title1": "Interactive Map of Nicaragua | Baqueano",
         "button1": "All (10)",
         "button2": "🌋 Volcanoes",
-        "button3": "🏖️ Beaches"
+        "button3": "🏖️ Beaches",
+        "button4": "🤝 Cooperatives",
+        "metaDescription1": "Explore Nicaragua's 17 territories on our interactive map. Volcanoes, beaches, rural cooperatives and cultural routes."
       },
       "mapIntro": {
         "span1": "Interactive atlas of Nicaragua",
         "p1": "Explore destinations, volcanoes, beaches, nature, culture and local communities from a map designed to help you plan every trip better.",
         "span2": "territories",
         "span3": "featured places",
-        "span4": "categories"
+        "span4": "categories",
+        "divAriaLabel1": "Map summary"
       },
       "mapPageTitle": {
         "h11": "Discover Nicaragua",
         "span1": "territory by territory"
+      },
+      "btnGeolocateUser": {
+        "button1": "My GPS",
+        "buttonTitle1": "My GPS location"
+      },
+      "btnSwitchTileLayer": {
+        "button1": "Satellite / Terrain",
+        "buttonTitle1": "Change map type"
+      },
+      "mapMainViewportContainer": {
+        "div1": "Interactive map"
+      },
+      "mapLegend": {
+        "strong1": "Legend",
+        "asideAriaLabel1": "Category legend"
+      },
+      "drawerDesc": {
+        "p1": "An oasis of fire and water in the Great Lake Cocibolca with the Concepción and Maderas volcanoes."
+      },
+      "drawerLinkDest": {
+        "a1": "View full profile"
+      },
+      "sosModal": {
+        "p1": "Your satellite location has been calculated for roadside assistance.",
+        "a1": "Firefighters (115)"
+      },
+      "mapSearchInput": {
+        "inputPlaceholder1": "Search destination, volcano or department..."
+      },
+      "drawerImg": {
+        "imgAlt1": "Destination"
+      }
+    },
+    "miNegocio": {
+      "body": {
+        "title1": "Hosts & Businesses Portal | Baqueano Nicaragua"
+      },
+      "hostHeroSection": {
+        "div1": "Official Hosts Portal",
+        "h11": "Your community deserves",
+        "span1": "to earn 100%",
+        "h12": "of what it charges",
+        "p1": "Register your cooperative, inn, certified guide or rural business in the Baqueano Nicaragua ecosystem.",
+        "strong1": "Zero abusive commissions",
+        "p2": ", direct contact with responsible explorers and full backing of INTUR Laws No. 1210 and 1211.",
+        "span2": "Registered Businesses",
+        "span3": "Baqueano Commission",
+        "span4": "Direct Income",
+        "div2": "Real Economic Model",
+        "h31": "How much do you lose with foreign OTAs?",
+        "div3": "Foreign OTA",
+        "div4": "Abusive commission",
+        "div5": "No middlemen",
+        "div6": "If you earn $1,000/month with an OTA:",
+        "div7": "➤ You lose $200 in commissions",
+        "div8": "➤ With Baqueano: 0 loss = +$2,400/year",
+        "div9": "Legal Framework: INTUR Laws 1210 & 1211, Nicaragua"
+      },
+      "benefitsSection": {
+        "div1": "Advantages of the Baqueano Ecosystem",
+        "h21": "Why register your business here?",
+        "p1": "More than one reason to be part of the most honest network in Nicaraguan tourism.",
+        "div2": "Direct Income, No Cuts",
+        "div3": "The explorer pays you directly. Baqueano charges no commissions or hidden fees. What you charge is 100% yours.",
+        "div4": "Visibility on the Android App",
+        "div5": "Your business appears on the map of the BaqueanoNicaragua Android app, with trail GPS, ratings and direct contact.",
+        "div6": "Legal Framework: INTUR Laws 1210 & 1211",
+        "div7": "Access to the current tax regime of tourism incentives. International tourists access legal incentives on your services.",
+        "div8": "GPS Beacons on the Trail",
+        "div9": "Real-time satellite safety system for your routes. Explorers will always know where they are and how to reach you.",
+        "div10": "Baqueano Green Certification",
+        "div11": "An environmental conservation badge on your profile for meeting the Green Decalogue. It builds trust with responsible tourists.",
+        "div12": "Partner Cooperatives Network",
+        "div13": "Be part of a community of 12+ active businesses. Cross-referrals, training and support in high season."
+      },
+      "registro": {
+        "div1": "Official Registration",
+        "h21": "Register as a host",
+        "p1": "Complete the 3 steps in under 5 minutes. Your request goes directly to the Ops Center for approval by the General Administrator."
+      },
+      "indicator0": {
+        "span1": "Your Business"
+      },
+      "regErrorText": {
+        "span1": "We couldn't register your business. Check your connection and try again."
+      },
+      "regStep0": {
+        "div1": "🏡 Your Business Details",
+        "div2": "Tell us about your cooperative, inn or tourism service.",
+        "label1": "Business or Cooperative Name",
+        "label2": "Description of Your Services",
+        "span1": "Maximum 800 characters. Be specific: include prices, duration and maximum group size.",
+        "label3": "Maximum Capacity (people)",
+        "label4": "Base Price per Person (USD)"
+      },
+      "portalBizNameError": {
+        "span1": "This field is required."
+      },
+      "portalBizType": {
+        "option1": "— Choose the type —",
+        "option2": "Ecotourism Cooperative",
+        "option3": "Inn / Rural Lodging",
+        "option4": "Certified Baqueano Guide",
+        "option5": "Community Tour Operator",
+        "option6": "Restaurant / Local Food",
+        "option7": "Solidarity Rural Transport",
+        "option8": "Crafts & Culture",
+        "option9": "Adventure & Hiking"
+      },
+      "portalBizTypeError": {
+        "span1": "Choose the type of business."
+      },
+      "portalBizDepartment": {
+        "option1": "— Department —"
+      },
+      "portalBizDepartmentError": {
+        "span1": "Choose your department."
+      },
+      "portalBizMunicipalityError": {
+        "span1": "Enter the municipality."
+      },
+      "portalBizDescriptionError": {
+        "span1": "Tell us what services you offer."
+      },
+      "regStep1": {
+        "div1": "📋 Contact Details",
+        "div2": "Information of the business owner or legal representative.",
+        "label1": "Owner's Full Name",
+        "label2": "National ID Number",
+        "span1": "Nicaraguan national format.",
+        "label3": "Registered with INTUR?",
+        "label4": "Contact Phone",
+        "label5": "WhatsApp (optional)",
+        "span2": "For direct contact from explorers.",
+        "label6": "How does your business benefit the community?"
+      },
+      "bizOwnerNameError": {
+        "span1": "Owner's name is required."
+      },
+      "bizInturReg": {
+        "option1": "— Choose an option —",
+        "option2": "Yes, I have INTUR registration",
+        "option3": "Not yet, I'm in the process"
+      },
+      "bizInturRegError": {
+        "span1": "Choose an option."
+      },
+      "portalBizEmailError": {
+        "span1": "Invalid email address."
+      },
+      "portalBizPhoneError": {
+        "span1": "Invalid phone number."
+      },
+      "bizCommunityBenefitError": {
+        "span1": "Tell us how it benefits your community."
+      },
+      "regStep2": {
+        "div1": "✅ Review your request",
+        "div2": "Confirm the details before sending them to the Ops Center for approval.",
+        "a1": "Baqueano Green Decalogue Terms",
+        "label1": "and confirm that the information provided is true. I understand that the General Administrator will review my request within 48-72 business hours.",
+        "strong1": "What happens after you submit?",
+        "li1": "Your request is recorded in Cloud Firestore with status",
+        "strong2": "pending_review",
+        "li2": "The General Administrator reviews it in the Ops Center within 48-72 hours.",
+        "li3": "You'll receive confirmation at your registered email.",
+        "li4": "Once approved, your business appears in the Android app and on the web map."
+      },
+      "bizTermsAcceptError": {
+        "span1": "You must accept the terms to continue."
+      },
+      "btnRegPrev": {
+        "button1": "Back"
+      },
+      "btnRegSubmit": {
+        "button1": "Submit my request"
+      },
+      "regSuccessPanel": {
+        "div1": "Request Sent!",
+        "p1": "Your business",
+        "p2": "has been successfully registered in Cloud Firestore. The General Administrator will review it in the Ops Center within the next 48-72 business hours and will contact you at your registered email.",
+        "div2": "OFFICIAL REGISTRATION ID",
+        "a1": "See Partner Cooperatives",
+        "a2": "Explore Destinations"
+      },
+      "legalFrameworkSection": {
+        "div1": "Legal Framework & Official Support",
+        "h21": "Tourism Laws No. 1210 and 1211 & INTUR Categories"
       }
     }
   },
@@ -3670,7 +3861,9 @@
     "baquiAsistente": "Baqüi Assistant",
     "explorarTerritorios": "Explore territories",
     "explorarNicaragua": "Explore Nicaragua",
-    "tipoDeNegocio": "Type of business"
+    "tipoDeNegocio": "Type of business",
+    "n867022WNicaragua": "12.5061° N, 86.7022° W (Nicaragua)",
+    "contacto": "Contact"
   },
   "ops": {
     "impact": {

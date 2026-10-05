@@ -3558,18 +3558,209 @@
         "title1": "Interaktive Karte Nicaraguas | Baqueano",
         "button1": "Alle (10)",
         "button2": "🌋 Vulkane",
-        "button3": "🏖️ Strände"
+        "button3": "🏖️ Strände",
+        "button4": "🤝 Kooperativen",
+        "metaDescription1": "Entdecke die 17 Gebiete Nicaraguas auf unserer interaktiven Karte. Vulkane, Strände, ländliche Kooperativen und Kulturrouten."
       },
       "mapIntro": {
         "span1": "Interaktiver Atlas Nicaraguas",
         "p1": "Erkunde Reiseziele, Vulkane, Strände, Natur, Kultur und lokale Gemeinden auf einer Karte, mit der du jede Tour besser planst.",
         "span2": "Gebiete",
         "span3": "ausgewählte Orte",
-        "span4": "Kategorien"
+        "span4": "Kategorien",
+        "divAriaLabel1": "Kartenübersicht"
       },
       "mapPageTitle": {
         "h11": "Entdecke Nicaragua",
         "span1": "Gebiet für Gebiet"
+      },
+      "btnGeolocateUser": {
+        "button1": "Mein GPS",
+        "buttonTitle1": "Mein GPS-Standort"
+      },
+      "btnSwitchTileLayer": {
+        "button1": "Satellit / Relief",
+        "buttonTitle1": "Kartentyp wechseln"
+      },
+      "mapMainViewportContainer": {
+        "div1": "Interaktive Karte"
+      },
+      "mapLegend": {
+        "strong1": "Legende",
+        "asideAriaLabel1": "Kategorienlegende"
+      },
+      "drawerDesc": {
+        "p1": "Eine Oase aus Feuer und Wasser im großen Cocibolca-See mit den Vulkanen Concepción und Maderas."
+      },
+      "drawerLinkDest": {
+        "a1": "Vollständigen Steckbrief ansehen"
+      },
+      "sosModal": {
+        "p1": "Dein Satellitenstandort wurde für Hilfe unterwegs ermittelt.",
+        "a1": "Feuerwehr (115)"
+      },
+      "mapSearchInput": {
+        "inputPlaceholder1": "Reiseziel, Vulkan oder Departamento suchen..."
+      },
+      "drawerImg": {
+        "imgAlt1": "Reiseziel"
+      }
+    },
+    "miNegocio": {
+      "body": {
+        "title1": "Portal für Gastgeber & Betriebe | Baqueano Nicaragua"
+      },
+      "hostHeroSection": {
+        "div1": "Offizielles Gastgeberportal",
+        "h11": "Deine Gemeinde verdient",
+        "span1": "100 % zu verdienen",
+        "h12": "von dem, was sie berechnet",
+        "p1": "Registriere deine Kooperative, Herberge, deinen zertifizierten Guide oder ländlichen Betrieb im Baqueano-Nicaragua-Ökosystem.",
+        "strong1": "Keine überhöhten Provisionen",
+        "p2": ", direkter Kontakt zu verantwortungsvollen Reisenden und volle Rückendeckung durch die INTUR-Gesetze Nr. 1210 und 1211.",
+        "span2": "Registrierte Betriebe",
+        "span3": "Baqueano-Provision",
+        "span4": "Direkte Einnahmen",
+        "div2": "Echtes Wirtschaftsmodell",
+        "h31": "Wie viel verlierst du bei ausländischen Buchungsportalen?",
+        "div3": "Ausländisches Portal",
+        "div4": "Überhöhte Provision",
+        "div5": "Ohne Vermittler",
+        "div6": "Wenn du 1.000 $/Monat über ein Portal verdienst:",
+        "div7": "➤ Du verlierst 200 $ an Provisionen",
+        "div8": "➤ Mit Baqueano: 0 Verlust = +2.400 $/Jahr",
+        "div9": "Rechtsrahmen: INTUR-Gesetze 1210 & 1211, Nicaragua"
+      },
+      "benefitsSection": {
+        "div1": "Vorteile des Baqueano-Ökosystems",
+        "h21": "Warum deinen Betrieb hier registrieren?",
+        "p1": "Mehr als ein Grund, Teil des ehrlichsten Netzwerks im nicaraguanischen Tourismus zu werden.",
+        "div2": "Direkte Einnahmen ohne Abzüge",
+        "div3": "Reisende zahlen direkt an dich. Baqueano erhebt keine Provisionen oder versteckten Gebühren. Was du berechnest, gehört zu 100 % dir.",
+        "div4": "Sichtbarkeit in der Android-App",
+        "div5": "Dein Betrieb erscheint auf der Karte der Android-App BaqueanoNicaragua – mit GPS auf dem Weg, Bewertungen und Direktkontakt.",
+        "div6": "Rechtsrahmen: INTUR-Gesetze 1210 & 1211",
+        "div7": "Zugang zur geltenden steuerlichen Tourismusförderung. Internationale Gäste erhalten gesetzliche Vorteile für deine Leistungen.",
+        "div8": "GPS-Baken auf dem Weg",
+        "div9": "Satellitengestütztes Sicherheitssystem in Echtzeit für deine Routen. Reisende wissen immer, wo sie sind und wie sie dich erreichen.",
+        "div10": "Grüne Baqueano-Zertifizierung",
+        "div11": "Umweltschutz-Abzeichen in deinem Profil für die Einhaltung des Grünen Dekalogs. Schafft Vertrauen bei verantwortungsvollen Reisenden.",
+        "div12": "Netzwerk der Partnerkooperativen",
+        "div13": "Werde Teil einer Gemeinschaft von über 12 aktiven Betrieben. Gegenseitige Empfehlungen, Schulungen und Unterstützung in der Hochsaison."
+      },
+      "registro": {
+        "div1": "Offizielle Registrierung",
+        "h21": "Als Gastgeber registrieren",
+        "p1": "Erledige die 3 Schritte in weniger als 5 Minuten. Dein Antrag geht direkt an das Ops Center zur Freigabe durch die Gesamtverwaltung."
+      },
+      "indicator0": {
+        "span1": "Dein Betrieb"
+      },
+      "regErrorText": {
+        "span1": "Wir konnten deinen Betrieb nicht registrieren. Prüfe deine Verbindung und versuche es erneut."
+      },
+      "regStep0": {
+        "div1": "🏡 Angaben zu deinem Betrieb",
+        "div2": "Erzähl uns von deiner Kooperative, Herberge oder deinem touristischen Angebot.",
+        "label1": "Name des Betriebs oder der Kooperative",
+        "label2": "Beschreibung deiner Leistungen",
+        "span1": "Höchstens 800 Zeichen. Sei konkret: Preise, Dauer und maximale Gruppengröße angeben.",
+        "label3": "Maximale Kapazität (Personen)",
+        "label4": "Grundpreis pro Person (USD)"
+      },
+      "portalBizNameError": {
+        "span1": "Dieses Feld ist erforderlich."
+      },
+      "portalBizType": {
+        "option1": "— Art wählen —",
+        "option2": "Ökotourismus-Kooperative",
+        "option3": "Herberge / ländliche Unterkunft",
+        "option4": "Zertifizierter Baqueano-Guide",
+        "option5": "Gemeindebasierter Reiseveranstalter",
+        "option6": "Restaurant / lokale Küche",
+        "option7": "Solidarischer Landtransport",
+        "option8": "Kunsthandwerk & Kultur",
+        "option9": "Abenteuer & Wandern"
+      },
+      "portalBizTypeError": {
+        "span1": "Wähle die Art des Betriebs."
+      },
+      "portalBizDepartment": {
+        "option1": "— Departamento —"
+      },
+      "portalBizDepartmentError": {
+        "span1": "Wähle dein Departamento."
+      },
+      "portalBizMunicipalityError": {
+        "span1": "Gib die Gemeinde ein."
+      },
+      "portalBizDescriptionError": {
+        "span1": "Erzähl uns, welche Leistungen du anbietest."
+      },
+      "regStep1": {
+        "div1": "📋 Kontaktdaten",
+        "div2": "Angaben zur Inhaberin, zum Inhaber oder zur gesetzlichen Vertretung des Betriebs.",
+        "label1": "Vollständiger Name der Inhaberin / des Inhabers",
+        "label2": "Personalausweisnummer",
+        "span1": "Nicaraguanisches Format.",
+        "label3": "Bei INTUR registriert?",
+        "label4": "Telefonnummer",
+        "label5": "WhatsApp (optional)",
+        "span2": "Für den direkten Kontakt mit Reisenden.",
+        "label6": "Wie nützt dein Betrieb der Gemeinde?"
+      },
+      "bizOwnerNameError": {
+        "span1": "Name der Inhaberin / des Inhabers ist erforderlich."
+      },
+      "bizInturReg": {
+        "option1": "— Option wählen —",
+        "option2": "Ja, ich bin bei INTUR registriert",
+        "option3": "Noch nicht, ist in Bearbeitung"
+      },
+      "bizInturRegError": {
+        "span1": "Wähle eine Option."
+      },
+      "portalBizEmailError": {
+        "span1": "Ungültige E-Mail-Adresse."
+      },
+      "portalBizPhoneError": {
+        "span1": "Ungültige Telefonnummer."
+      },
+      "bizCommunityBenefitError": {
+        "span1": "Erzähl uns, wie er deiner Gemeinde nützt."
+      },
+      "regStep2": {
+        "div1": "✅ Antrag prüfen",
+        "div2": "Bestätige die Angaben, bevor du sie zur Freigabe an das Ops Center sendest.",
+        "a1": "Bedingungen des Grünen Baqueano-Dekalogs",
+        "label1": "und bestätige, dass die Angaben wahr sind. Mir ist bekannt, dass die Gesamtverwaltung meinen Antrag innerhalb von 48–72 Arbeitsstunden prüft.",
+        "strong1": "Was passiert nach dem Absenden?",
+        "li1": "Dein Antrag wird in Cloud Firestore mit folgendem Status gespeichert:",
+        "strong2": "pending_review",
+        "li2": "Die Gesamtverwaltung prüft ihn im Ops Center innerhalb von 48–72 Stunden.",
+        "li3": "Du erhältst eine Bestätigung an deine registrierte E-Mail-Adresse.",
+        "li4": "Nach der Freigabe erscheint dein Betrieb in der Android-App und auf der Webkarte."
+      },
+      "bizTermsAcceptError": {
+        "span1": "Du musst die Bedingungen akzeptieren, um fortzufahren."
+      },
+      "btnRegPrev": {
+        "button1": "Zurück"
+      },
+      "btnRegSubmit": {
+        "button1": "Antrag absenden"
+      },
+      "regSuccessPanel": {
+        "div1": "Antrag gesendet!",
+        "p1": "Dein Betrieb",
+        "p2": "wurde erfolgreich in Cloud Firestore registriert. Die Gesamtverwaltung prüft ihn in den nächsten 48–72 Arbeitsstunden im Ops Center und meldet sich über deine registrierte E-Mail-Adresse.",
+        "div2": "OFFIZIELLE REGISTRIERUNGS-ID",
+        "a1": "Partnerkooperativen ansehen",
+        "a2": "Reiseziele erkunden"
+      },
+      "legalFrameworkSection": {
+        "div1": "Rechtsrahmen & offizielle Förderung",
+        "h21": "Tourismusgesetze Nr. 1210 und 1211 & INTUR-Kategorien"
       }
     }
   },
@@ -3670,7 +3861,9 @@
     "baquiAsistente": "Baqüi-Assistent",
     "explorarTerritorios": "Gebiete erkunden",
     "explorarNicaragua": "Nicaragua erkunden",
-    "tipoDeNegocio": "Art des Betriebs"
+    "tipoDeNegocio": "Art des Betriebs",
+    "n867022WNicaragua": "12.5061° N, 86.7022° W (Nicaragua)",
+    "contacto": "Kontakt"
   },
   "ops": {
     "impact": {

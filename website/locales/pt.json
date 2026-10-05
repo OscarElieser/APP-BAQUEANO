@@ -3558,18 +3558,209 @@
         "title1": "Mapa interativo da Nicarágua | Baqueano",
         "button1": "Todos (10)",
         "button2": "🌋 Vulcões",
-        "button3": "🏖️ Praias"
+        "button3": "🏖️ Praias",
+        "button4": "🤝 Cooperativas",
+        "metaDescription1": "Explore os 17 territórios da Nicarágua no nosso mapa interativo. Vulcões, praias, cooperativas camponesas e rotas culturais."
       },
       "mapIntro": {
         "span1": "Atlas interativo da Nicarágua",
         "p1": "Explore destinos, vulcões, praias, natureza, cultura e comunidades locais num mapa feito para planejar melhor cada percurso.",
         "span2": "territórios",
         "span3": "lugares em destaque",
-        "span4": "categorias"
+        "span4": "categorias",
+        "divAriaLabel1": "Resumo do mapa"
       },
       "mapPageTitle": {
         "h11": "Descubra a Nicarágua",
         "span1": "território por território"
+      },
+      "btnGeolocateUser": {
+        "button1": "Meu GPS",
+        "buttonTitle1": "Minha localização GPS"
+      },
+      "btnSwitchTileLayer": {
+        "button1": "Satélite / Relevo",
+        "buttonTitle1": "Mudar tipo de mapa"
+      },
+      "mapMainViewportContainer": {
+        "div1": "Mapa interativo"
+      },
+      "mapLegend": {
+        "strong1": "Legenda",
+        "asideAriaLabel1": "Legenda de categorias"
+      },
+      "drawerDesc": {
+        "p1": "Oásis de fogo e água no Grande Lago Cocibolca com os vulcões Concepción e Maderas."
+      },
+      "drawerLinkDest": {
+        "a1": "Ver ficha completa"
+      },
+      "sosModal": {
+        "p1": "Sua localização por satélite foi calculada para assistência na rota.",
+        "a1": "Bombeiros (115)"
+      },
+      "mapSearchInput": {
+        "inputPlaceholder1": "Buscar destino, vulcão ou departamento..."
+      },
+      "drawerImg": {
+        "imgAlt1": "Destino"
+      }
+    },
+    "miNegocio": {
+      "body": {
+        "title1": "Portal de anfitriões & negócios | Baqueano Nicaragua"
+      },
+      "hostHeroSection": {
+        "div1": "Portal oficial de anfitriões",
+        "h11": "Sua comunidade merece",
+        "span1": "ganhar 100%",
+        "h12": "do que cobra",
+        "p1": "Cadastre sua cooperativa, pousada, guia certificado ou empreendimento rural no ecossistema Baqueano Nicaragua.",
+        "strong1": "Zero comissões abusivas",
+        "p2": ", contato direto com exploradores responsáveis e respaldo total das Leis nº 1210 e 1211 do INTUR.",
+        "span2": "Negócios cadastrados",
+        "span3": "Comissão Baqueano",
+        "span4": "Receita direta",
+        "div2": "Modelo econômico real",
+        "h31": "Quanto você perde com OTAs estrangeiras?",
+        "div3": "OTA estrangeira",
+        "div4": "Comissão abusiva",
+        "div5": "Sem intermediários",
+        "div6": "Se você ganha US$ 1.000/mês com uma OTA:",
+        "div7": "➤ Você perde US$ 200 em comissões",
+        "div8": "➤ Com o Baqueano: 0 perda = +US$ 2.400/ano",
+        "div9": "Marco legal: Leis 1210 & 1211 INTUR Nicarágua"
+      },
+      "benefitsSection": {
+        "div1": "Vantagens do ecossistema Baqueano",
+        "h21": "Por que cadastrar seu negócio aqui?",
+        "p1": "Mais de um motivo para fazer parte da rede mais honesta do turismo nicaraguense.",
+        "div2": "Receitas diretas sem cortes",
+        "div3": "O explorador paga diretamente a você. O Baqueano não cobra comissões nem taxas ocultas. O que você cobra é 100% seu.",
+        "div4": "Visibilidade no app Android",
+        "div5": "Seu negócio aparece no mapa do app BaqueanoNicaragua para Android, com GPS na trilha, avaliações e contato direto.",
+        "div6": "Marco legal: Leis 1210 & 1211 INTUR",
+        "div7": "Acesso ao regime fiscal de incentivos turísticos vigente. Turistas internacionais acessam incentivos legais nos seus serviços.",
+        "div8": "Balizas GPS na trilha",
+        "div9": "Sistema de segurança por satélite em tempo real para suas rotas. Os exploradores sempre saberão onde estão e como contatar você.",
+        "div10": "Certificação Verde Baqueano",
+        "div11": "Selo de conservação ambiental no seu perfil por cumprir o Decálogo Verde. Gera confiança em turistas responsáveis.",
+        "div12": "Rede de cooperativas parceiras",
+        "div13": "Faça parte da comunidade de mais de 12 negócios ativos. Indicações cruzadas, capacitações e apoio na alta temporada."
+      },
+      "registro": {
+        "div1": "Cadastro oficial",
+        "h21": "Cadastre-se como anfitrião",
+        "p1": "Complete os 3 passos em menos de 5 minutos. Sua solicitação vai direto ao Ops Center para aprovação pelo Administrador Geral."
+      },
+      "indicator0": {
+        "span1": "Seu negócio"
+      },
+      "regErrorText": {
+        "span1": "Não conseguimos cadastrar seu negócio. Verifique sua conexão e tente de novo."
+      },
+      "regStep0": {
+        "div1": "🏡 Dados do seu negócio",
+        "div2": "Conte sobre sua cooperativa, pousada ou serviço turístico.",
+        "label1": "Nome do negócio ou cooperativa",
+        "label2": "Descrição dos seus serviços",
+        "span1": "Máximo de 800 caracteres. Seja concreto: inclua preços, duração e tamanho máximo do grupo.",
+        "label3": "Capacidade máxima (pessoas)",
+        "label4": "Preço base por pessoa (USD)"
+      },
+      "portalBizNameError": {
+        "span1": "Este campo é obrigatório."
+      },
+      "portalBizType": {
+        "option1": "— Escolha o tipo —",
+        "option2": "Cooperativa ecoturística",
+        "option3": "Pousada / hospedagem camponesa",
+        "option4": "Guia baqueano certificado",
+        "option5": "Operadora de turismo comunitária",
+        "option6": "Restaurante / gastronomia local",
+        "option7": "Transporte rural solidário",
+        "option8": "Artesanato & cultura",
+        "option9": "Aventura & trilhas"
+      },
+      "portalBizTypeError": {
+        "span1": "Escolha o tipo de negócio."
+      },
+      "portalBizDepartment": {
+        "option1": "— Departamento —"
+      },
+      "portalBizDepartmentError": {
+        "span1": "Escolha seu departamento."
+      },
+      "portalBizMunicipalityError": {
+        "span1": "Escreva o município."
+      },
+      "portalBizDescriptionError": {
+        "span1": "Conte quais serviços você oferece."
+      },
+      "regStep1": {
+        "div1": "📋 Dados de contato",
+        "div2": "Informações do proprietário ou representante legal do negócio.",
+        "label1": "Nome completo do proprietário",
+        "label2": "Número da cédula de identidade",
+        "span1": "Formato nacional nicaraguense.",
+        "label3": "Registrado no INTUR?",
+        "label4": "Telefone de contato",
+        "label5": "WhatsApp (opcional)",
+        "span2": "Para contato direto dos exploradores.",
+        "label6": "Como seu negócio beneficia a comunidade?"
+      },
+      "bizOwnerNameError": {
+        "span1": "Nome do proprietário obrigatório."
+      },
+      "bizInturReg": {
+        "option1": "— Escolha uma opção —",
+        "option2": "Sim, tenho registro no INTUR",
+        "option3": "Ainda não, estou em processo"
+      },
+      "bizInturRegError": {
+        "span1": "Escolha uma opção."
+      },
+      "portalBizEmailError": {
+        "span1": "E-mail inválido."
+      },
+      "portalBizPhoneError": {
+        "span1": "Telefone inválido."
+      },
+      "bizCommunityBenefitError": {
+        "span1": "Conte como beneficia sua comunidade."
+      },
+      "regStep2": {
+        "div1": "✅ Revise sua solicitação",
+        "div2": "Confirme os dados antes de enviar ao Ops Center para aprovação.",
+        "a1": "Termos do Decálogo Verde Baqueano",
+        "label1": "e confirmo que as informações fornecidas são verdadeiras. Entendo que o Administrador Geral revisará minha solicitação em 48 a 72 horas úteis.",
+        "strong1": "O que acontece depois do envio?",
+        "li1": "Sua solicitação fica registrada no Cloud Firestore com o status",
+        "strong2": "pending_review",
+        "li2": "O Administrador Geral a revisa no Ops Center em 48 a 72 horas.",
+        "li3": "Você receberá confirmação no e-mail cadastrado.",
+        "li4": "Depois de aprovado, seu negócio aparece no app Android e no mapa web."
+      },
+      "bizTermsAcceptError": {
+        "span1": "Você deve aceitar os termos para continuar."
+      },
+      "btnRegPrev": {
+        "button1": "Voltar"
+      },
+      "btnRegSubmit": {
+        "button1": "Enviar minha solicitação"
+      },
+      "regSuccessPanel": {
+        "div1": "Solicitação enviada!",
+        "p1": "Seu negócio",
+        "p2": "foi cadastrado com sucesso no Cloud Firestore. O Administrador Geral o revisará no Ops Center nas próximas 48 a 72 horas úteis e entrará em contato pelo e-mail cadastrado.",
+        "div2": "ID DE CADASTRO OFICIAL",
+        "a1": "Ver cooperativas parceiras",
+        "a2": "Explorar destinos"
+      },
+      "legalFrameworkSection": {
+        "div1": "Marco jurídico & fomento oficial",
+        "h21": "Leis de Turismo nº 1210 e 1211 & modalidades INTUR"
       }
     }
   },
@@ -3670,7 +3861,9 @@
     "baquiAsistente": "Assistente Baqüi",
     "explorarTerritorios": "Explorar territórios",
     "explorarNicaragua": "Explorar a Nicarágua",
-    "tipoDeNegocio": "Tipo de negócio"
+    "tipoDeNegocio": "Tipo de negócio",
+    "n867022WNicaragua": "12.5061° N, 86.7022° O (Nicarágua)",
+    "contacto": "Contato"
   },
   "ops": {
     "impact": {
