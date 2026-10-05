@@ -4053,8 +4053,10 @@
         (OpsState.collectionsData['08-negocios'] || []).filter(b => b.verified === true || b.verificationStatus === 'verified').length || 0;
       const pendBiz = OpsState.metrics.pendingBusinesses ||
         (OpsState.collectionsData['08-negocios'] || []).filter(b => b.status === 'pending_review' || b.status === 'pending').length || 0;
-      const activeSos = OpsState.metrics.activeSosAlerts ||
-        (OpsState.collectionsData['20-sos'] || []).filter(s => s.status === 'active').length || 0;
+      // SOS: fuente real = Supabase sos_events (baqueano-sos) vía BaqueanoOpsData.
+      const liveSos = window.BaqueanoOpsData && window.BaqueanoOpsData.state && window.BaqueanoOpsData.state.sos;
+      const activeSos = liveSos ? liveSos.active : (OpsState.metrics.activeSosAlerts ||
+        (OpsState.collectionsData['20-sos'] || []).filter(s => s.status === 'active').length || 0);
       const totalUsers = OpsState.metrics.totalUsers ||
         OpsState.collectionsData['13-usuarios']?.length || 0;
 
@@ -4093,6 +4095,7 @@
       if (tabId === '31-seo') return this.renderSeoCenterModule();
       if (tabId === '32-configuracion') return this.renderGlobalConfigModule();
       if (tabId === '33-estado') return this.renderSystemStatusModule();
+      if (tabId === '20-sos') return this.renderSosModule();
       if (tabId === '35-backup') return this.renderBackupSyncModule();
       if (tabId === '36-comunidad') {
         if (window.BaqueanoCommunityModeration) return window.BaqueanoCommunityModeration.render(panel);
@@ -6017,6 +6020,38 @@
         </div>
       `;
       if (window.BaqueanoOpsData && typeof window.BaqueanoOpsData.renderHealth === 'function') window.BaqueanoOpsData.renderHealth();
+    },
+
+    // Centro SOS (20-sos). Auditoría 2026-10-05: la vista usaba la tabla
+    // editorial genérica ("Nuevo Alerta SOS", publicados/borradores) sobre la
+    // colección Firestore `sos_logs`, que nunca recibía datos. Ahora muestra la
+    // cola real de Supabase `sos_events` vía la Edge Function baqueano-sos.
+    renderSosModule() {
+      const panel = document.getElementById('view-20-sos');
+      if (!panel) return;
+      panel.innerHTML = `
+        <div class="ops-view-header">
+          <div class="ops-view-title-group">
+            <h1><i class="fa-solid fa-tower-broadcast" style="color: var(--bq-crimson);"></i> Centro SOS de Emergencias</h1>
+            <p class="ops-view-subtitle">ALERTAS REALES DE LA APP ANDROID · FUENTE: SUPABASE sos_events · ACTUALIZACIÓN CADA 30 s</p>
+          </div>
+        </div>
+        <div class="ops-table-container-matte">
+          <table class="ops-table-matte">
+            <caption class="ops-sr-only">Alertas SOS registradas por viajeros</caption>
+            <thead>
+              <tr><th scope="col">Alerta</th><th scope="col">Tipo</th><th scope="col">Coordenadas GPS</th><th scope="col">Origen</th><th scope="col">Hora reportada</th></tr>
+            </thead>
+            <tbody id="sosTableBody"></tbody>
+          </table>
+          <div class="ops-empty-state" id="sosEmptyState">
+            <i class="fa-solid fa-shield-heart ops-empty-icon" style="color: var(--bq-jungle);"></i>
+            <div class="ops-empty-title">Cargando alertas SOS…</div>
+            <div class="ops-empty-desc">Iniciá sesión con una cuenta autorizada para ver el Centro SOS.</div>
+          </div>
+        </div>
+      `;
+      if (window.BaqueanoOpsData && typeof window.BaqueanoOpsData.renderSos === 'function') window.BaqueanoOpsData.renderSos({ force: true });
     },
 
     // 8.3g Módulo de Backup y Sincronización Multi-Nube (35-backup)

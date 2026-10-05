@@ -17,13 +17,18 @@
 //   `BaqueanoOpsEngine.ingestCollection` y atiende guardar/publicar/archivar/
 //   verificar para las entidades administradas en Supabase.
 //
-// 📦 QUÉ: window.BaqueanoOpsData = { call, refresh, loadTab, manages, save,
+// - Centro SOS (vista 20): cola real de `baqueano-sos` (sondeo de 30 s solo con
+//   la vista abierta); admin gestiona estados con nota, el auditor solo lee.
+// 📦 QUÉ: window.BaqueanoOpsData = { call, callSos, renderSos, refresh, loadTab, manages, save,
 //   setStatus, verify, state }.
 // ============================================================================
 (function (window, document) {
   'use strict';
 
   const ENDPOINT = 'https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-ops';
+  // Alertas SOS de la App/Web (tabla sos_events, acceso solo vía Edge Function).
+  const SOS_ENDPOINT = 'https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-sos';
+  const SOS_POLL_MS = 30 * 1000;
   const REFRESH_MS = 5 * 60 * 1000;
 
   // Pestañas del Ops Center con datos en Supabase. `write` = edición habilitada.
@@ -67,14 +72,22 @@
     try { return window.firebase && window.firebase.auth ? window.firebase.auth().currentUser : null; } catch (_) { return null; }
   }
 
-  async function call(action, payload) {
+  function call(action, payload) {
+    return request(ENDPOINT, action, payload);
+  }
+
+  function callSos(action, payload) {
+    return request(SOS_ENDPOINT, action, payload);
+  }
+
+  async function request(endpoint, action, payload) {
     const user = currentUser();
     if (!user) throw new Error('Sin sesión administrativa.');
     const token = await user.getIdToken();
     const controller = new AbortController();
     const timer = window.setTimeout(() => controller.abort(), 20000);
     try {
-      const res = await fetch(ENDPOINT, {
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'content-type': 'application/json', 'x-firebase-token': token },
         body: JSON.stringify(Object.assign({ action }, payload || {})),
@@ -475,6 +488,137 @@
   }
 
   // --------------------------------------------------------------------------
+  // Centro SOS (vista 20): alertas reales desde la App Android y la Web
+  // --------------------------------------------------------------------------
+  const SOS_LABEL = { open: 'Abierta', acknowledged: 'Atendiendo', resolved: 'Resuelta', false_alarm: 'Falsa alarma' };
+  const SOS_LOCATION = { gps: 'GPS', denied: 'Permiso de ubicación denegado', disabled: 'GPS desactivado', unavailable: 'Ubicación no disponible' };
+  let sosLoading = null;
+
+  function sosVisible() {
+    const view = document.getElementById('view-20-sos');
+    return Boolean(view && view.offsetParent !== null && !document.hidden);
+  }
+
+  function sosRow(item, readOnly) {
+    const tr = el('tr');
+    tr.dataset.sosStatus = item.status;
+
+    const alertCell = el('td');
+    const chip = el('span', 'ops-sos-chip', SOS_LABEL[item.status] || item.status);
+    chip.dataset.state = item.status;
+    alertCell.appendChild(chip);
+    alertCell.appendChild(el('div', 'ops-sos-who', item.reporter_name || 'Viajero'));
+    if (item.reporter_email) alertCell.appendChild(el('div', 'ops-sos-meta', item.reporter_email));
+    tr.appendChild(alertCell);
+
+    tr.appendChild(el('td', '', item.dialed_service ? `Llamada a ${item.dialed_service}` : 'Alerta sin llamada registrada'));
+
+    const geoCell = el('td');
+    const lat = Number(item.latitude);
+    const lng = Number(item.longitude);
+    if (item.latitude != null && Number.isFinite(lat) && Number.isFinite(lng)) {
+      const link = el('a', 'ops-sos-geo', `${lat.toFixed(5)}, ${lng.toFixed(5)}`);
+      link.href = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      geoCell.appendChild(link);
+      if (item.accuracy_m != null) geoCell.appendChild(el('div', 'ops-sos-meta', `±${Math.round(Number(item.accuracy_m))} m`));
+    } else {
+      geoCell.appendChild(el('span', 'ops-sos-meta', SOS_LOCATION[item.location_status] || 'Sin ubicación'));
+    }
+    tr.appendChild(geoCell);
+
+    tr.appendChild(el('td', '', item.channel === 'web' ? 'Portal web' : 'App Android'));
+    tr.appendChild(el('td', '', new Date(item.created_at).toLocaleString('es-NI')));
+
+    const actions = el('td', 'ops-sos-actions');
+    if (readOnly) {
+      actions.appendChild(el('span', 'ops-sos-meta', item.handled_by ? `Gestionó: ${item.handled_by}` : 'Solo lectura'));
+    } else {
+      [['acknowledged', 'Atender'], ['resolved', 'Resolver'], ['false_alarm', 'Falsa alarma']]
+        .filter(([status]) => status !== item.status)
+        .forEach(([status, label]) => {
+          const btn = el('button', 'ops-sos-btn', label);
+          btn.type = 'button';
+          btn.addEventListener('click', async () => {
+            const note = window.prompt(`${label}: nota para el historial (opcional)`, '');
+            if (note === null) return;
+            btn.disabled = true;
+            try {
+              await callSos('update', { id: item.id, status, note });
+              toast(`Alerta marcada como ${SOS_LABEL[status].toLowerCase()}.`, 'success');
+              renderSos({ force: true });
+            } catch (error) {
+              btn.disabled = false;
+              toast(`No se pudo actualizar la alerta: ${error.message}`, 'error');
+            }
+          });
+          actions.appendChild(btn);
+        });
+    }
+    tr.appendChild(actions);
+    return tr;
+  }
+
+  function toast(message, type) {
+    const engine = window.BaqueanoOpsEngine;
+    if (engine && typeof engine.toast === 'function') engine.toast(message, type);
+    else console.info('[OpsData]', message);
+  }
+
+  async function renderSos(options) {
+    const opts = options || {};
+    if (!currentUser()) return;
+    if (sosLoading && !opts.force) return sosLoading;
+    sosLoading = (async () => {
+      // La tabla solo existe con la vista abierta; el KPI y el contador del
+      // menú se actualizan siempre.
+      const body = document.getElementById('sosTableBody');
+      const empty = document.getElementById('sosEmptyState');
+      const kpi = document.getElementById('kpiActiveSos');
+      const headRow = body && body.closest('table') && body.closest('table').querySelector('thead tr');
+      if (headRow && !headRow.querySelector('[data-sos-actions]')) {
+        const th = el('th', '', 'Gestión');
+        th.dataset.sosActions = '1';
+        headRow.appendChild(th);
+      }
+      try {
+        const data = await callSos('queue');
+        const items = Array.isArray(data.items) ? data.items : [];
+        if (body) body.replaceChildren(...items.map((item) => sosRow(item, data.read_only === true)));
+        if (empty) {
+          empty.style.display = items.length ? 'none' : '';
+          const title = empty.querySelector('.ops-empty-title');
+          const desc = empty.querySelector('.ops-empty-desc');
+          if (title) title.textContent = 'Sin alertas SOS registradas';
+          if (desc) desc.textContent = 'Fuente: Supabase sos_events vía baqueano-sos. Las alertas aparecen cuando un viajero con sesión llama a emergencias desde la App.';
+        }
+        const active = (data.counts && (Number(data.counts.open || 0) + Number(data.counts.acknowledged || 0))) || 0;
+        state.sos = { active, counts: data.counts || {}, lastSync: Date.now() };
+        if (kpi) { kpi.textContent = String(active); kpi.dataset.state = 'REAL'; kpi.title = 'Fuente: Supabase sos_events'; }
+        const badge = document.getElementById('badgeActiveSos');
+        if (badge) {
+          badge.textContent = String(active);
+          badge.title = `Alertas SOS abiertas o en atención (Supabase sos_events) · ${new Date().toLocaleTimeString('es-NI')}`;
+          badge.classList.toggle('is-pending', false);
+          badge.classList.toggle('is-alert', active > 0);
+        }
+      } catch (error) {
+        if (body) body.replaceChildren();
+        if (empty) {
+          empty.style.display = '';
+          const title = empty.querySelector('.ops-empty-title');
+          const desc = empty.querySelector('.ops-empty-desc');
+          if (title) title.textContent = 'No se pudo leer el Centro SOS';
+          if (desc) desc.textContent = error.message;
+        }
+        if (kpi) { kpi.textContent = '—'; kpi.dataset.state = 'ERROR'; kpi.title = error.message; }
+      }
+    })().finally(() => { sosLoading = null; });
+    return sosLoading;
+  }
+
+  // --------------------------------------------------------------------------
   // Ciclo de refresco
   // --------------------------------------------------------------------------
   let refreshing = null;
@@ -523,6 +667,7 @@
     await refresh({ health: true });
     Object.keys(TABS).forEach((tabId) => { loadTab(tabId).catch((e) => console.warn('[OpsData]', tabId, e.message)); });
     renderAudit();
+    renderSos();
   }
 
   function start() {
@@ -534,15 +679,18 @@
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden && currentUser() && Date.now() - (state.lastSync || 0) > 60000) refresh();
     });
-    window.setInterval(() => { if (!document.hidden && currentUser()) refresh(); }, REFRESH_MS);
+    window.setInterval(() => { if (!document.hidden && currentUser()) { refresh(); renderSos(); } }, REFRESH_MS);
+    // SOS: sondeo cada 30 s solo mientras la vista está abierta y visible.
+    window.setInterval(() => { if (currentUser() && sosVisible()) renderSos(); }, SOS_POLL_MS);
     document.addEventListener('click', (event) => {
-      const target = event.target.closest && event.target.closest('#btnOpsSyncAll, [data-tab="27-auditoria"]');
+      const target = event.target.closest && event.target.closest('#btnOpsSyncAll, [data-tab="27-auditoria"], [data-tab="20-sos"]');
       if (!target || !currentUser()) return;
-      if (target.id === 'btnOpsSyncAll') refresh({ force: true, health: true });
+      if (target.id === 'btnOpsSyncAll') { refresh({ force: true, health: true }); renderSos({ force: true }); }
+      else if (target.dataset.tab === '20-sos') window.setTimeout(() => renderSos({ force: true }), 0);
       else window.setTimeout(renderAudit, 0); // después de que el motor dibuje la vista
     });
   }
 
-  window.BaqueanoOpsData = { call, refresh, loadTab, manages, save, setStatus, verify, onSignedIn, renderAudit, renderHealth, state, TABS };
+  window.BaqueanoOpsData = { call, callSos, refresh, loadTab, manages, save, setStatus, verify, onSignedIn, renderAudit, renderHealth, renderSos, state, TABS };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })(window, document);
