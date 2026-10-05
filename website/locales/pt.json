@@ -2983,7 +2983,8 @@
     },
     "gastronomia": {
       "body": {
-        "title1": "Gastronomia ancestral dos filhos do milho | Baqueano Nicaragua"
+        "title1": "Gastronomia ancestral dos filhos do milho | Baqueano Nicaragua",
+        "metaDescription1": "Sabores, tradições e saberes que dão vida à nossa cultura. Descubra gallo pinto, nacatamal, vigorón, quesillo, baho, rondón e indio viejo."
       },
       "gastroHeroExact": {
         "h11": "Gastronomia ancestral dos",
@@ -2998,7 +2999,8 @@
         "button2": "Doces",
         "button3": "Milho ancestral",
         "button4": "Norte",
-        "button5": "Centro"
+        "button5": "Centro",
+        "divAriaLabel1": "Categorias gastronômicas"
       },
       "saboresNuestraHistoria": {
         "h21": "Sabores que contam nossa história",
@@ -3038,7 +3040,38 @@
         "h41": "Bebidas da nossa terra",
         "h52": "Pinolillo",
         "p2": "A bebida emblemática da Nicarágua feita de milho torrado e cacau.",
-        "h53": "Cacau com leite"
+        "h53": "Cacau com leite",
+        "p3": "Sabor ancestral do trópico nicaraguense com canela e baunilha.",
+        "h54": "Chicha de milho",
+        "p4": "Tradição indígena de milho fermentado que segue viva.",
+        "h55": "Tiste",
+        "p5": "Refrescante e único, com tortilha torrada e cacau fino.",
+        "h56": "Pozol",
+        "p6": "Energia natural do nosso povo, com milho cozido.",
+        "h57": "Fresco de capim-santo",
+        "p7": "Infusão medicinal e refrescante com limão crioulo e baunilha.",
+        "h42": "Doces e fornos de tradição",
+        "h58": "Cajetas",
+        "p8": "Um doce com história.",
+        "h59": "Buñuelos",
+        "p9": "Mandioca e queijo com melado.",
+        "h510": "Pío Quinto",
+        "p10": "Bolo com licor.",
+        "h511": "Frutas em calda",
+        "span1": "Semana Santa",
+        "p11": "Jocotes, mamão e manga.",
+        "h512": "Abóbora em calda",
+        "p12": "Doce de rapadura pura.",
+        "h513": "Rosquillas",
+        "p13": "O sabor de Somoto.",
+        "h514": "Tres leches",
+        "span2": "Nacional",
+        "p14": "Pão de ló banhado em leite e merengue.",
+        "h21": "A Nicarágua também se descobre pelo paladar",
+        "p15": "Cada prato é uma viagem pela nossa história, natureza e gente. Sabores que conectam territórios 🍃",
+        "a1": "Explorar gastronomia →",
+        "a2": "Planejar minha rota",
+        "imgAlt1": "Abóbora"
       },
       "gastroMapDepto": {
         "option1": "Caribe Sul"
@@ -3047,12 +3080,145 @@
         "option1": "Tipo: todos",
         "option2": "Milho tradicional",
         "option3": "Frutos do mar",
-        "option4": "Carnes e guisados"
+        "option4": "Carnes e guisados",
+        "selectAriaLabel1": "Tipo de comida"
       },
       "gastroMapPrecio": {
         "option1": "Preço: todos",
         "option2": "Econômico (C$ 60 - C$ 150)",
         "option3": "Médio (C$ 150 - C$ 350)"
+      },
+      "gastroMaizManifestoSection": {
+        "h21": "Somos homens e mulheres de milho",
+        "p1": "Nossa gastronomia nasce da terra, do trabalho do nosso povo e de uma herança que se mantém viva em cada prato. O milho é nossa identidade, nossa história e nosso futuro.",
+        "a1": "Conhecer a origem →"
+      },
+      "dondeVivirSabores": {
+        "h21": "Onde viver estes sabores",
+        "p1": "Cozinheiras tradicionais, refeitórios, mercados e empreendimentos locais."
+      },
+      "placeCardExact": {
+        "h31": "Comedor Doña Rosa",
+        "div1": "4.8 (320 avaliações)",
+        "p1": "Comida típica nicaraguense, vigorón autêntico e guisados camponeses feitos na hora.",
+        "a1": "Ver localização",
+        "h32": "Mercado de Masaya",
+        "div2": "4.7 (295 avaliações)",
+        "p2": "Sabores populares, nacatamales, cajetas e refrescos tradicionais num só lugar.",
+        "h33": "Cozinha tradicional El Güegüense",
+        "div3": "4.9 (410 avaliações)",
+        "p3": "Pratos típicos do ocidente, indio viejo, chanfaina e sopas crioulas nos fins de semana.",
+        "h34": "Sabor caribenho",
+        "span1": "Bluefields (RACCS)",
+        "div4": "4.8 (180 avaliações)",
+        "p4": "Especialidade em rondón com frutos do mar frescos, pão de coco e patí recém-assado."
+      },
+      "gastroAiSection": {
+        "h31": "Baqueano Digital: o que você quer provar hoje?",
+        "p1": "Conte seus gostos e eu recomendo os melhores lugares, pratos e rotas gastronômicas da Nicarágua.",
+        "button1": "Criar rota gastronômica com IA →",
+        "span1": "Sugestões rápidas:",
+        "button2": "🌽 Algo com milho",
+        "button3": "🍲 Comida do Caribe",
+        "button4": "🍮 Doces tradicionais",
+        "button5": "📍 Quero comer perto",
+        "button6": "🍛 Comida típica",
+        "button7": "💵 Opções econômicas"
+      }
+    },
+    "historia": {
+      "body": {
+        "title1": "História da Nicarágua | Baqueano Nicaragua"
+      },
+      "histHeroExact": {
+        "h11": "UMA HISTÓRIA",
+        "span1": "QUE SEGUE VIVA",
+        "p1": "Povos, culturas, lutas e tradições que deram forma à nossa identidade.",
+        "a1": "Explorar linha do tempo",
+        "div1": "também se viaja"
+      },
+      "lineaTiempoSeccion": {
+        "h21": "Linha do tempo da Nicarágua",
+        "p1": "Um percurso pelos momentos que construíram nossa nação."
+      },
+      "histEraCard": {
+        "h41": "Época pré-hispânica",
+        "p1": "Primeiros habitantes, grandes culturas e legado ancestral.",
+        "a1": "Saiba mais",
+        "h42": "Resistência indígena",
+        "p2": "Luta pela terra, pela liberdade e pela identidade.",
+        "h43": "Período colonial",
+        "p3": "Transformações sociais, culturais e econômicas.",
+        "h44": "Independência de 1821",
+        "p4": "Nascimento da nação e busca de soberania.",
+        "h45": "Guerra Nacional",
+        "p5": "Defesa da nossa soberania e identidade.",
+        "h46": "Século XX",
+        "p6": "Mudanças políticas, sociais e culturais que marcaram o país.",
+        "h47": "Nicarágua contemporânea",
+        "span1": "1980 - atualidade",
+        "p7": "Um país que avança com seu povo, sua cultura e seu patrimônio."
+      },
+      "territoriosSeccion": {
+        "h31": "Explore os 17 territórios",
+        "p1": "Conheça a riqueza histórica, cultural e natural de cada departamento e região autônoma da Nicarágua.",
+        "span1": "ROTA TERRITORIAL",
+        "h32": "Explorador dos 17 territórios",
+        "p2": "Um percurso contínuo pela história, cultura e natureza da Nicarágua.",
+        "a1": "Ver guia completo"
+      },
+      "territoryHighlightRegion": {
+        "span1": "Ocidente cultural"
+      },
+      "territoryHighlightDescription": {
+        "p1": "Berço da independência, cidade de arte, história e tradições."
+      },
+      "territoryHighlightLink": {
+        "a1": "Explorar León"
+      },
+      "histPeoplesSection": {
+        "h21": "Povos originários e memória viva",
+        "p1": "Culturas que mantêm vivo o espírito da Nicarágua.",
+        "a1": "Ver mais sobre nossos povos"
+      },
+      "histPeopleCard": {
+        "h41": "Chorotegas",
+        "p1": "Raízes do Pacífico, tradição cerâmica e legado cultural.",
+        "h42": "Nicaraos",
+        "p2": "Povo do grande lago e da fertilidade da terra.",
+        "h43": "Matagalpas",
+        "p3": "Guardiões das montanhas do norte.",
+        "h44": "Misquitos",
+        "p4": "Cultura do Caribe, mar, rios e biodiversidade.",
+        "h45": "Mayangnas",
+        "p5": "Sabedoria ancestral da Reserva da Biosfera."
+      },
+      "histCharactersSection": {
+        "h21": "Personagens que marcaram nossa história",
+        "p1": "Líderes, pensadores, artistas e homens e mulheres que deixaram um legado.",
+        "a1": "Ver mais personagens"
+      },
+      "histCharacterCard": {
+        "h41": "Diriangén",
+        "p1": "Líder chorotega, símbolo de resistência e dignidade.",
+        "h42": "Andrés Castro",
+        "p2": "Herói da Guerra Nacional e defensor da soberania.",
+        "h43": "José Dolores Estrada",
+        "p3": "Líder militar e figura-chave na defesa nacional.",
+        "p4": "Poeta universal, orgulho da Nicarágua e pai do modernismo.",
+        "p5": "Defesa da soberania e da autodeterminação."
+      },
+      "histHeritageSection": {
+        "h21": "Patrimônio vivo",
+        "p1": "Nossa cultura segue presente em cada expressão.",
+        "a1": "Ver mais patrimônios",
+        "p2": "Patrimônio da Humanidade (UNESCO)",
+        "p3": "Testemunhos milenares da nossa história.",
+        "h41": "León Viejo",
+        "p4": "Cidade colonial (UNESCO)",
+        "p5": "História viva às margens do Grande Lago.",
+        "h42": "Petróglifos de Ometepe",
+        "p6": "Arte ancestral em pedra."
       }
     }
   },
@@ -3146,7 +3312,12 @@
     "favorito": "Favorito",
     "policia118": "Polícia (118)",
     "abrirMapaInteractivo": "Abrir mapa interativo →",
-    "verTodas": "Ver todas →"
+    "verTodas": "Ver todas →",
+    "verTodos": "Ver todos →",
+    "n867022WReferencia": "12.5061° N, 86.7022° O (referência nacional)",
+    "funcionaConElChipGnss": "Funciona com o chip GNSS do seu dispositivo, sem saldo.",
+    "baquiAsistente": "Assistente Baqüi",
+    "explorarTerritorios": "Explorar territórios"
   },
   "ops": {
     "impact": {

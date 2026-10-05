@@ -2983,7 +2983,8 @@
     },
     "gastronomia": {
       "body": {
-        "title1": "Ancestral Cuisine of the Children of Corn | Baqueano Nicaragua"
+        "title1": "Ancestral Cuisine of the Children of Corn | Baqueano Nicaragua",
+        "metaDescription1": "Flavors, traditions and knowledge that bring our culture to life. Discover Gallo Pinto, Nacatamal, Vigorón, Quesillo, Baho, Rondón and Indio Viejo."
       },
       "gastroHeroExact": {
         "h11": "Ancestral Cuisine of the",
@@ -2998,7 +2999,8 @@
         "button2": "Sweets",
         "button3": "Ancestral corn",
         "button4": "North",
-        "button5": "Center"
+        "button5": "Center",
+        "divAriaLabel1": "Food categories"
       },
       "saboresNuestraHistoria": {
         "h21": "Flavors that tell our story",
@@ -3038,7 +3040,38 @@
         "h41": "Drinks from our land",
         "h52": "Pinolillo",
         "p2": "Nicaragua's emblematic drink made from toasted corn and cacao.",
-        "h53": "Cacao with milk"
+        "h53": "Cacao with milk",
+        "p3": "Ancestral flavor of the Nicaraguan tropics with cinnamon and vanilla.",
+        "h54": "Corn chicha",
+        "p4": "An indigenous tradition of fermented corn that is still alive.",
+        "h55": "Tiste",
+        "p5": "Refreshing and unique, with toasted tortilla and fine cacao.",
+        "h56": "Pozol",
+        "p6": "Natural energy of our people, made with cooked corn.",
+        "h57": "Lemongrass drink",
+        "p7": "A refreshing medicinal infusion with Creole lime and vanilla.",
+        "h42": "Traditional sweets and bakes",
+        "h58": "Cajetas",
+        "p8": "A sweet with history.",
+        "h59": "Buñuelos",
+        "p9": "Cassava and cheese with honey syrup.",
+        "h510": "Pío Quinto",
+        "p10": "Liqueur-soaked sponge cake.",
+        "h511": "Fruit in syrup",
+        "span1": "Holy Week",
+        "p11": "Jocotes, papaya and mango.",
+        "h512": "Squash in syrup",
+        "p12": "A sweet made with pure panela.",
+        "h513": "Rosquillas",
+        "p13": "The taste of Somoto.",
+        "h514": "Tres Leches",
+        "span2": "National",
+        "p14": "Sponge cake soaked in milk and topped with meringue.",
+        "h21": "Nicaragua is also discovered through taste",
+        "p15": "Every dish is a journey through our history, nature and people. Flavors that connect territories 🍃",
+        "a1": "Explore food →",
+        "a2": "Plan my route",
+        "imgAlt1": "Squash"
       },
       "gastroMapDepto": {
         "option1": "South Caribbean"
@@ -3047,12 +3080,145 @@
         "option1": "Type: All",
         "option2": "Traditional corn",
         "option3": "Seafood",
-        "option4": "Meats and stews"
+        "option4": "Meats and stews",
+        "selectAriaLabel1": "Type of food"
       },
       "gastroMapPrecio": {
         "option1": "Price: All",
         "option2": "Budget (C$ 60 - C$ 150)",
         "option3": "Mid-range (C$ 150 - C$ 350)"
+      },
+      "gastroMaizManifestoSection": {
+        "h21": "We are the men and women of corn",
+        "p1": "Our cuisine is born from the land, from the work of our people and from a heritage that stays alive in every dish. Corn is our identity, our history and our future.",
+        "a1": "Discover the origin →"
+      },
+      "dondeVivirSabores": {
+        "h21": "Where to experience these flavors",
+        "p1": "Traditional cooks, eateries, markets and local businesses."
+      },
+      "placeCardExact": {
+        "h31": "Comedor Doña Rosa",
+        "div1": "4.8 (320 reviews)",
+        "p1": "Typical Nicaraguan food, authentic vigorón and freshly made country stews.",
+        "a1": "View location",
+        "h32": "Masaya Market",
+        "div2": "4.7 (295 reviews)",
+        "p2": "Popular flavors, nacatamales, cajetas and traditional drinks all in one place.",
+        "h33": "El Güegüense Traditional Kitchen",
+        "div3": "4.9 (410 reviews)",
+        "p3": "Typical dishes from the west, indio viejo, chanfaina and Creole soups on weekends.",
+        "h34": "Caribbean Flavor",
+        "span1": "Bluefields (RACCS)",
+        "div4": "4.8 (180 reviews)",
+        "p4": "Specializing in rondón with fresh seafood, coconut bread and freshly baked patí."
+      },
+      "gastroAiSection": {
+        "h31": "Baqueano Digital: what do you want to try today?",
+        "p1": "Tell me your tastes and I'll recommend the best places, dishes and food routes in Nicaragua.",
+        "button1": "Create a food route with AI →",
+        "span1": "Quick suggestions:",
+        "button2": "🌽 Something with corn",
+        "button3": "🍲 Caribbean food",
+        "button4": "🍮 Traditional sweets",
+        "button5": "📍 I want to eat nearby",
+        "button6": "🍛 Typical food",
+        "button7": "💵 Budget options"
+      }
+    },
+    "historia": {
+      "body": {
+        "title1": "History of Nicaragua | Baqueano Nicaragua"
+      },
+      "histHeroExact": {
+        "h11": "A HISTORY",
+        "span1": "THAT IS STILL ALIVE",
+        "p1": "Peoples, cultures, struggles and traditions that have shaped our identity.",
+        "a1": "Explore the timeline",
+        "div1": "is also traveled"
+      },
+      "lineaTiempoSeccion": {
+        "h21": "Nicaragua timeline",
+        "p1": "A journey through the moments that built our nation."
+      },
+      "histEraCard": {
+        "h41": "Pre-Hispanic Era",
+        "p1": "First settlers, great cultures and ancestral legacy.",
+        "a1": "Learn more",
+        "h42": "Indigenous Resistance",
+        "p2": "The struggle for land, freedom and identity.",
+        "h43": "Colonial Period",
+        "p3": "Social, cultural and economic transformations.",
+        "h44": "Independence of 1821",
+        "p4": "Birth of the nation and the search for sovereignty.",
+        "h45": "National War",
+        "p5": "Defense of our sovereignty and identity.",
+        "h46": "20th Century",
+        "p6": "Political, social and cultural changes that shaped the country.",
+        "h47": "Contemporary Nicaragua",
+        "span1": "1980 - Present",
+        "p7": "A country moving forward with its people, culture and heritage."
+      },
+      "territoriosSeccion": {
+        "h31": "Explore the 17 territories",
+        "p1": "Discover the historical, cultural and natural richness of each department and autonomous region of Nicaragua.",
+        "span1": "TERRITORIAL ROUTE",
+        "h32": "Explorer of the 17 territories",
+        "p2": "A continuous journey through Nicaragua's history, culture and nature.",
+        "a1": "See full guide"
+      },
+      "territoryHighlightRegion": {
+        "span1": "Cultural west"
+      },
+      "territoryHighlightDescription": {
+        "p1": "Cradle of independence, a city of art, history and traditions."
+      },
+      "territoryHighlightLink": {
+        "a1": "Explore León"
+      },
+      "histPeoplesSection": {
+        "h21": "Indigenous peoples and living memory",
+        "p1": "Cultures that keep the spirit of Nicaragua alive.",
+        "a1": "See more about our peoples"
+      },
+      "histPeopleCard": {
+        "h41": "Chorotegas",
+        "p1": "Pacific roots, ceramic tradition and cultural legacy.",
+        "h42": "Nicaraos",
+        "p2": "People of the great lake and the fertility of the land.",
+        "h43": "Matagalpas",
+        "p3": "Guardians of the northern mountains.",
+        "h44": "Miskitos",
+        "p4": "Culture of the Caribbean, sea, rivers and biodiversity.",
+        "h45": "Mayangnas",
+        "p5": "Ancestral wisdom of the Biosphere Reserve."
+      },
+      "histCharactersSection": {
+        "h21": "People who shaped our history",
+        "p1": "Leaders, thinkers, artists and men and women who left a legacy.",
+        "a1": "See more figures"
+      },
+      "histCharacterCard": {
+        "h41": "Diriangén",
+        "p1": "Chorotega leader, a symbol of resistance and dignity.",
+        "h42": "Andrés Castro",
+        "p2": "Hero of the National War and defender of sovereignty.",
+        "h43": "José Dolores Estrada",
+        "p3": "Military leader and key figure in national defense.",
+        "p4": "Universal poet, Nicaragua's pride and father of Modernism.",
+        "p5": "Defense of sovereignty and self-determination."
+      },
+      "histHeritageSection": {
+        "h21": "Living heritage",
+        "p1": "Our culture remains present in every expression.",
+        "a1": "See more heritage",
+        "p2": "World Heritage (UNESCO)",
+        "p3": "Thousand-year-old testimonies of our history.",
+        "h41": "León Viejo",
+        "p4": "Colonial city (UNESCO)",
+        "p5": "Living history on the shores of the Great Lake.",
+        "h42": "Ometepe Petroglyphs",
+        "p6": "Ancestral art in stone."
       }
     }
   },
@@ -3146,7 +3312,12 @@
     "favorito": "Favorite",
     "policia118": "Police (118)",
     "abrirMapaInteractivo": "Open interactive map →",
-    "verTodas": "See all →"
+    "verTodas": "See all →",
+    "verTodos": "See all →",
+    "n867022WReferencia": "12.5061° N, 86.7022° W (national reference)",
+    "funcionaConElChipGnss": "Works with your device's GNSS chip, no data plan needed.",
+    "baquiAsistente": "Baqüi Assistant",
+    "explorarTerritorios": "Explore territories"
   },
   "ops": {
     "impact": {

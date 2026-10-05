@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T04:49:29.650Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 2349 · en 2349 · fr 2349 · it 2349 · pt 2349 · de 2349
+Generado: 2026-10-05T04:50:58.754Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 2484 · en 2484 · fr 2484 · it 2484 · pt 2484 · de 2484
 
 HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 

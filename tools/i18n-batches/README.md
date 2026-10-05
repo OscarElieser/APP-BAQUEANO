@@ -22,5 +22,5 @@ Cuando todos los lotes estén fusionados y la puerta muestre 0 errores, las 30 p
 | Lote | Claves | Estado |
 |---|---:|---|
 | 00–06 | ~960 | ✅ Fusionados (`16cb27a`) |
-| 07–11 | 566 | ✅ Fusionados |
-| 12–23 | ~1 350 | ⏳ Pendientes |
+| 07–12 | 701 | ✅ Fusionados |
+| 13–23 | ~1 210 | ⏳ Pendientes |
