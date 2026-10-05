@@ -2776,10 +2776,152 @@
     },
     "destinos": {
       "body": {
-        "title1": "Destinations in Nicaragua | Baqueano Nicaragua"
+        "title1": "Destinations in Nicaragua | Baqueano Nicaragua",
+        "metaDescription1": "Explore Nicaragua's natural destinations, beaches, volcanoes and cultural heritage."
       },
       "destinosHeroExact": {
-        "h11": "Destinations in Nicaragua"
+        "h11": "Destinations in Nicaragua",
+        "p1": "Beaches, volcanoes, mountains, culture, food and much more.",
+        "div1": "Discover your next adventure"
+      },
+      "mainContent": {
+        "button1": "Forests",
+        "button2": "Rating",
+        "span1": "Sort by:",
+        "option1": "Most popular",
+        "option2": "Top rated",
+        "option3": "Price: low to high",
+        "option4": "Price: high to low",
+        "button3": "List",
+        "button4": "Both",
+        "span2": "Granada · Culture · ★ 4.8 (950)",
+        "h21": "Featured destinations",
+        "h22": "All destinations",
+        "h23": "More destinations you'll love",
+        "h31": "Don't know where to go?",
+        "p1": "Tell me what you're looking for and Baqueano Digital will find the best destinations for you.",
+        "a1": "🍃 I want nature",
+        "a2": "⏱️ I only have one day",
+        "p2": "Get inspiration, exclusive destinations and travel tips.",
+        "a3": "Sign up for free",
+        "divAriaLabel1": "Category filter",
+        "selectAriaLabel1": "Sort destinations",
+        "divAriaLabel2": "Destination pagination",
+        "imgAlt1": "Rural host"
+      },
+      "destHighlightCard": {
+        "div1": "From C$ 600",
+        "div2": "From C$ 400",
+        "div3": "From C$ 500",
+        "div4": "From C$ 700",
+        "div5": "From C$ 350",
+        "div6": "From C$ 300"
+      },
+      "destCatalogCard": {
+        "h41": "The Islets of Granada",
+        "button1": "+ My trip",
+        "h42": "Miraflor",
+        "div1": "From C$ 800",
+        "h43": "Indio Maíz Reserve",
+        "div2": "From C$ 450",
+        "h44": "El Viejo",
+        "imgAlt1": "Miraflor Estelí",
+        "imgAlt2": "Colonial León"
+      },
+      "destinosHeroSearch": {
+        "inputPlaceholder1": "Search destinations, experiences, businesses..."
+      }
+    },
+    "experiencias": {
+      "body": {
+        "title1": "Adventure & Culture Experiences | Baqueano Nicaragua"
+      },
+      "expHero": {
+        "span1": "POSITIVE-IMPACT TOURISM",
+        "h11": "Experiences that",
+        "span2": "transform you",
+        "p1": "Experience Nicaragua through local baqueano guides: crater hiking, ancient canyons, wild surfing and coffee harvests in the mountains."
+      },
+      "expCatalogSection": {
+        "button1": "All experiences",
+        "button2": "🌋 Volcanoes & Sandboard",
+        "button3": "🏞️ Rivers & Canyons",
+        "button4": "🏖️ Beaches & Surf",
+        "button5": "☕ Coffee & Agrotourism"
+      },
+      "expMainCard": {
+        "span1": "Moderate · Adrenaline",
+        "h31": "Sandboarding on Cerro Negro",
+        "p1": "Hike to the top of the youngest volcano and board down black ash at over 50 km/h.",
+        "span2": "From $30 USD / C$ 1,100",
+        "span3": "Easy / Moderate",
+        "h32": "Somoto Canyon Crossing",
+        "p2": "Water trek and hiking between 150 m rock walls with certified community guides.",
+        "span4": "From $15 USD / C$ 550",
+        "span5": "Demanding · 8 hours",
+        "h33": "Concepción Volcano Climb",
+        "p3": "Conquer the perfect 1,610-meter cone with 360° panoramic views of the Great Lake Cocibolca.",
+        "span6": "From $25 USD / C$ 920",
+        "span7": "Easy · Family",
+        "h34": "Coffee Harvest and Route",
+        "div1": "Miraflor, Estelí",
+        "p4": "Experience picking, pulping and artisanal cupping with rural coffee-growing families.",
+        "span8": "From $12 USD / C$ 440",
+        "span9": "Easy · Relaxing",
+        "h35": "Kayaking the 365 Islets",
+        "p5": "Gentle paddling through volcanic channels, waterbird watching and a visit to historic forts.",
+        "span10": "From $18 USD / C$ 660",
+        "span11": "All levels",
+        "h36": "Surf Lessons & Sunset",
+        "p6": "Consistent world-class waves, board rental and personalized lessons with local instructors.",
+        "h37": "El Cráter Trail on Mombacho",
+        "p7": "Cloud forest hike among active fumaroles, orchids and viewpoints over Lake Nicaragua.",
+        "span12": "Easy · Water",
+        "h38": "Snorkeling on Coral Reefs",
+        "p8": "Turquoise Caribbean waters, nurse sharks, eagle rays and pristine coral gardens with Raizal fishermen.",
+        "span13": "From $35 USD / C$ 1,280"
+      },
+      "paquetesOficiales": {
+        "span1": "INTEGRATED TERRITORIAL OFFER",
+        "h21": "Verified Tour Packages (Mapa Nicaragua & INTUR)",
+        "p1": "Offers designed by registered hotels, restaurants, local guides and community cooperatives. They include transport, a guided itinerary and official prices in córdobas (C$).",
+        "span2": "Verified by INTUR"
+      },
+      "expPkgCard": {
+        "span1": "2 days / 1 night",
+        "h31": "BETWEEN CLOUDS AND WAVES",
+        "p1": "A circuit linking the cool microclimate of El Crucero with the Pacific coast at Pochomil. Includes transport, guided tour, lodging, meals and sun-and-beach activities.",
+        "strong1": "Capacity:",
+        "div1": "15 people ·",
+        "strong2": "Audience:",
+        "div2": "Families, young people and adults",
+        "strong3": "Difficulty:",
+        "div3": "Low ·",
+        "strong4": "Area:",
+        "div4": "El Crucero + Pochomil",
+        "span2": "Price per person",
+        "span3": "1 full day",
+        "h32": "MANAGUA: ROOTS, HISTORY AND CHARM",
+        "p2": "Historical and cultural circuit: Historic Center, Tiscapa Hill, Old Cathedral, Central Park, National Palace of Culture, Paseo Xolotlán and Puerto Salvador Allende.",
+        "strong5": "Group:",
+        "div5": "12 people ·",
+        "strong6": "Includes:",
+        "div6": "Transport, breakfast, lunch and guide",
+        "div7": "Children, young people and adults",
+        "span4": "Night Tour",
+        "h33": "MOMBACHO VOLCANO NIGHT TOUR",
+        "p3": "A 45-minute night walk along El Cráter Trail. Watch nocturnal wildlife, the Mombacho salamander, sleeping birds, bioluminescent insects and illuminated views of Granada.",
+        "div8": "Transport from Granada + tour with a certified guide",
+        "div9": "Medium ·",
+        "h34": "BOCA DE SÁBALOS & EL CASTILLO",
+        "p4": "Historical and river immersion: the Fortress of the Immaculate Conception, the colonial history of Rafaela Herrera, the riverside village of El Castillo and tropical nature on the river.",
+        "strong7": "Minimum:",
+        "div10": "2 people ·",
+        "div11": "Lodging + guide at the Fortress",
+        "strong8": "Note:",
+        "div12": "Boat transport from San Carlos is separate",
+        "h35": "CERROS PEGADOS CANYON (ZIPOTE VAGO)",
+        "p5": "Adventure expedition in the northern mountain range with the local team Zipote Vago Tours. Cliffs, mountain hiking, natural pools and traditional Segovian food."
       }
     }
   },
@@ -2861,7 +3003,16 @@
     "descargaElApk": "Download the APK",
     "habilitaFuentesDesconocidas": "Enable Unknown Sources",
     "comienzaLaAventura": "Start the adventure!",
-    "baqueanoApk": "Baqueano APK"
+    "baqueanoApk": "Baqueano APK",
+    "riosYLagunas": "Rivers and lagoons",
+    "verificados": "Verified",
+    "planificarConBaqueanoDigital": "Plan with Baqueano Digital",
+    "tengoC1500": "💵 I have C$1,500",
+    "viajoConNinos": "👨‍👩‍👧 Traveling with kids",
+    "quieroAventura": "🧗 I want adventure",
+    "algoCerca": "📍 Something nearby",
+    "sumateALaComunidadBaqueano": "Join the BAQUEANO community",
+    "favorito": "Favorite"
   },
   "ops": {
     "impact": {

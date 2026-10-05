@@ -5,7 +5,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 node tools/i18n-batches/merge.mjs "$@"
-(cd website && node scripts/validate-i18n.mjs | tail -1 && node scripts/i18n-audit.mjs | tail -1 || true)
+(cd website && node scripts/validate-i18n.mjs | tail -1 && node scripts/i18n-audit.mjs 2>/dev/null | tail -1 || true)
 npm --prefix website run export:app-locales >/dev/null 2>&1 || true
 git add -A
 git commit -q -m "i18n: lotes $* traducidos (6 idiomas)

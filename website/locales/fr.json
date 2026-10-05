@@ -2776,10 +2776,152 @@
     },
     "destinos": {
       "body": {
-        "title1": "Destinations du Nicaragua | Baqueano Nicaragua"
+        "title1": "Destinations du Nicaragua | Baqueano Nicaragua",
+        "metaDescription1": "Explorez les destinations naturelles, plages, volcans et le patrimoine culturel du Nicaragua."
       },
       "destinosHeroExact": {
-        "h11": "Destinations du Nicaragua"
+        "h11": "Destinations du Nicaragua",
+        "p1": "Plages, volcans, montagnes, culture, gastronomie et bien plus.",
+        "div1": "Découvrez votre prochaine aventure"
+      },
+      "mainContent": {
+        "button1": "Forêts",
+        "button2": "Évaluation",
+        "span1": "Trier par :",
+        "option1": "Les plus populaires",
+        "option2": "Les mieux notés",
+        "option3": "Prix : croissant",
+        "option4": "Prix : décroissant",
+        "button3": "Liste",
+        "button4": "Les deux",
+        "span2": "Granada · Culture · ★ 4.8 (950)",
+        "h21": "Destinations à la une",
+        "h22": "Toutes les destinations",
+        "h23": "D'autres destinations que vous allez adorer",
+        "h31": "Vous ne savez pas où aller ?",
+        "p1": "Dites-moi ce que vous cherchez et Baqueano Digital trouvera les meilleures destinations pour vous.",
+        "a1": "🍃 Je veux de la nature",
+        "a2": "⏱️ Je n'ai qu'une journée",
+        "p2": "Recevez de l'inspiration, des destinations exclusives et des conseils de voyage.",
+        "a3": "S'inscrire gratuitement",
+        "divAriaLabel1": "Filtre de catégories",
+        "selectAriaLabel1": "Trier les destinations",
+        "divAriaLabel2": "Pagination des destinations",
+        "imgAlt1": "Hôte paysan"
+      },
+      "destHighlightCard": {
+        "div1": "À partir de 600 C$",
+        "div2": "À partir de 400 C$",
+        "div3": "À partir de 500 C$",
+        "div4": "À partir de 700 C$",
+        "div5": "À partir de 350 C$",
+        "div6": "À partir de 300 C$"
+      },
+      "destCatalogCard": {
+        "h41": "Les îlots de Granada",
+        "button1": "+ Mon voyage",
+        "h42": "Miraflor",
+        "div1": "À partir de 800 C$",
+        "h43": "Réserve Indio Maíz",
+        "div2": "À partir de 450 C$",
+        "h44": "El Viejo",
+        "imgAlt1": "Miraflor Estelí",
+        "imgAlt2": "León colonial"
+      },
+      "destinosHeroSearch": {
+        "inputPlaceholder1": "Rechercher destinations, expériences, entreprises..."
+      }
+    },
+    "experiencias": {
+      "body": {
+        "title1": "Expériences d'aventure & de culture | Baqueano Nicaragua"
+      },
+      "expHero": {
+        "span1": "TOURISME À IMPACT POSITIF",
+        "h11": "Des expériences qui vous",
+        "span2": "transforment",
+        "p1": "Vivez le Nicaragua avec des guides baqueanos locaux : randonnée dans les cratères, canyons millénaires, surf sauvage et récoltes de café en montagne."
+      },
+      "expCatalogSection": {
+        "button1": "Toutes les expériences",
+        "button2": "🌋 Volcans & sandboard",
+        "button3": "🏞️ Rivières & canyons",
+        "button4": "🏖️ Plages & surf",
+        "button5": "☕ Café & agrotourisme"
+      },
+      "expMainCard": {
+        "span1": "Modéré · Adrénaline",
+        "h31": "Sandboard sur le Cerro Negro",
+        "p1": "Montée au sommet du plus jeune volcan et descente en planche sur la cendre noire à plus de 50 km/h.",
+        "span2": "À partir de 30 USD / 1 100 C$",
+        "span3": "Facile / Modéré",
+        "h32": "Traversée du canyon de Somoto",
+        "p2": "Parcours aquatique et randonnée entre des falaises de 150 m avec des guides communautaires certifiés.",
+        "span4": "À partir de 15 USD / 550 C$",
+        "span5": "Exigeant · 8 heures",
+        "h33": "Ascension du volcan Concepción",
+        "p3": "Conquérez le cône parfait de 1 610 mètres avec des vues panoramiques à 360° sur le Grand Lac Cocibolca.",
+        "span6": "À partir de 25 USD / 920 C$",
+        "span7": "Facile · Familial",
+        "h34": "Récolte et route du café",
+        "div1": "Miraflor, Estelí",
+        "p4": "Vivez la cueillette, le dépulpage et la dégustation artisanale avec des familles caféicultrices paysannes.",
+        "span8": "À partir de 12 USD / 440 C$",
+        "span9": "Facile · Relaxant",
+        "h35": "Kayak dans les 365 îlots",
+        "p5": "Pagaie tranquille entre les canaux volcaniques, observation d'oiseaux aquatiques et visite de forteresses historiques.",
+        "span10": "À partir de 18 USD / 660 C$",
+        "span11": "Tous niveaux",
+        "h36": "Cours de surf & coucher de soleil",
+        "p6": "Vagues constantes de classe mondiale, location de planches et cours personnalisés avec des moniteurs locaux.",
+        "h37": "Sentier El Cráter sur le Mombacho",
+        "p7": "Randonnée dans la forêt de nuages entre fumerolles actives, orchidées et belvédères sur le lac Nicaragua.",
+        "span12": "Facile · Aquatique",
+        "h38": "Snorkeling sur les récifs coralliens",
+        "p8": "Eaux turquoise des Caraïbes, requins-nourrices, raies léopards et jardins de corail vierges avec des pêcheurs raizales.",
+        "span13": "À partir de 35 USD / 1 280 C$"
+      },
+      "paquetesOficiales": {
+        "span1": "OFFRE TERRITORIALE INTÉGRÉE",
+        "h21": "Forfaits touristiques vérifiés (Mapa Nicaragua & INTUR)",
+        "p1": "Offres conçues par des hôtels, restaurants, guides locaux et coopératives communautaires enregistrés. Elles incluent le transport, un itinéraire guidé et des prix officiels en córdobas (C$).",
+        "span2": "Vérifié par l'INTUR"
+      },
+      "expPkgCard": {
+        "span1": "2 jours / 1 nuit",
+        "h31": "ENTRE NUAGES ET VAGUES",
+        "p1": "Circuit reliant le microclimat frais d'El Crucero à la côte pacifique de Pochomil. Comprend le transport, la visite guidée, l'hébergement, les repas et des activités de plage.",
+        "strong1": "Capacité :",
+        "div1": "15 personnes ·",
+        "strong2": "Public :",
+        "div2": "Familles, jeunes et adultes",
+        "strong3": "Difficulté :",
+        "div3": "Faible ·",
+        "strong4": "Zone :",
+        "div4": "El Crucero + Pochomil",
+        "span2": "Prix par personne",
+        "span3": "1 journée complète",
+        "h32": "MANAGUA : RACINES, HISTOIRE ET CHARME",
+        "p2": "Circuit historique et culturel : centre historique, colline de Tiscapa, ancienne cathédrale, parc central, Palais national de la culture, Paseo Xolotlán et Puerto Salvador Allende.",
+        "strong5": "Groupe :",
+        "div5": "12 personnes ·",
+        "strong6": "Comprend :",
+        "div6": "Transport, petit-déjeuner, déjeuner et guide",
+        "div7": "Enfants, jeunes et adultes",
+        "span4": "Visite nocturne",
+        "h33": "VISITE NOCTURNE DU VOLCAN MOMBACHO",
+        "p3": "Marche nocturne de 45 minutes sur le sentier El Cráter. Observation de la faune nocturne, de la salamandre du Mombacho, des oiseaux endormis, d'insectes bioluminescents et des lumières de Granada.",
+        "div8": "Transport depuis Granada + visite avec guide certifié",
+        "div9": "Moyenne ·",
+        "h34": "BOCA DE SÁBALOS & EL CASTILLO",
+        "p4": "Immersion historique et fluviale : forteresse de l'Immaculée Conception, histoire coloniale de Rafaela Herrera, village riverain d'El Castillo et nature tropicale sur le fleuve.",
+        "strong7": "Minimum :",
+        "div10": "2 personnes ·",
+        "div11": "Hébergement + guide à la forteresse",
+        "strong8": "Remarque :",
+        "div12": "Transport fluvial depuis San Carlos en supplément",
+        "h35": "CANYON CERROS PEGADOS (ZIPOTE VAGO)",
+        "p5": "Expédition d'aventure dans la cordillère du nord avec l'équipe locale Zipote Vago Tours. Falaises, randonnée en montagne, bassins naturels et gastronomie traditionnelle ségovienne."
       }
     }
   },
@@ -2861,7 +3003,16 @@
     "descargaElApk": "Téléchargez l'APK",
     "habilitaFuentesDesconocidas": "Activez les sources inconnues",
     "comienzaLaAventura": "Commencez l'aventure !",
-    "baqueanoApk": "APK Baqueano"
+    "baqueanoApk": "APK Baqueano",
+    "riosYLagunas": "Rivières et lagunes",
+    "verificados": "Vérifiés",
+    "planificarConBaqueanoDigital": "Planifier avec Baqueano Digital",
+    "tengoC1500": "💵 J'ai 1 500 C$",
+    "viajoConNinos": "👨‍👩‍👧 Je voyage avec des enfants",
+    "quieroAventura": "🧗 Je veux de l'aventure",
+    "algoCerca": "📍 Quelque chose à proximité",
+    "sumateALaComunidadBaqueano": "Rejoignez la communauté BAQUEANO",
+    "favorito": "Favori"
   },
   "ops": {
     "impact": {
