@@ -129,7 +129,7 @@
     }
 
     function updateResultCount(count) {
-      const countEl = document.querySelector('.section-header-exact h2 span');
+      const countEl = document.querySelector('.section-header-exact h2 [aria-live]');
       if (countEl) countEl.textContent = `(${count})`;
     }
 

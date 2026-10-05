@@ -32,7 +32,7 @@
 - 33 Vistas Modulares con persistencia en tiempo real en Cloud Firestore.
 ============================================================================
 -->
-<html lang="es" data-bq-page="admin" data-bq-group="ops">
+<html data-i18n-description="pages.admin.body.metaDescription1" data-i18n-title="pages.admin.body.title1" lang="es" data-bq-page="admin" data-bq-group="ops">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -66,8 +66,8 @@
     <div class="admin-login-card" style="width: 100%; max-width: 440px; background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-lg); padding: 2.5rem 2rem; box-shadow: var(--ops-shadow-lg); text-align: center;">
       <div style="margin-bottom: 1.5rem;">
         <img src="assets/images/logo.png" alt="Baqueano Nicaragua" style="width: 58px; height: 58px; border-radius: 12px; margin-bottom: 1rem; filter: brightness(0) invert(1);" decoding="async" loading="lazy" width="600" height="608">
-        <h1 style="font-family: 'Montserrat', sans-serif; font-size: 1.35rem; font-weight: 800; color: #FFFFFF; letter-spacing: 1px; margin: 0 0 0.4rem 0;">BAQUEANO OPS CENTER</h1>
-        <p style="font-size: 0.84rem; color: var(--ops-text-secondary); line-height: 1.5; margin: 0;">
+        <h1 data-i18n="pages.admin.adminLoginGate.h11" style="font-family: 'Montserrat', sans-serif; font-size: 1.35rem; font-weight: 800; color: #FFFFFF; letter-spacing: 1px; margin: 0 0 0.4rem 0;">BAQUEANO OPS CENTER</h1>
+        <p data-i18n="pages.admin.adminLoginGate.p1" style="font-size: 0.84rem; color: var(--ops-text-secondary); line-height: 1.5; margin: 0;">
           Centro de Operaciones y Mando Digital. Acceso exclusivo para la dirección y auditores autorizados.
         </p>
       </div>
@@ -81,12 +81,12 @@
           <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
           <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
         </svg>
-        <span>Ingresar con Cuenta Google</span>
+        <span data-i18n="pages.admin.btnGoogleLogin.span1">Ingresar con Cuenta Google</span>
       </button>
 
       <div style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--ops-border-subtle); display: flex; justify-content: space-between; font-size: 0.76rem; color: var(--ops-text-muted);">
-        <span><i class="fa-solid fa-shield-halved"></i> Acceso con Google · rol verificado en el servidor</span>
-        <a href="index.html" style="color: var(--bq-secondary); text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Volver al Portal</a>
+        <span><i class="fa-solid fa-shield-halved"></i> <span data-i18n="pages.admin.adminLoginGate.span1">Acceso con Google · rol verificado en el servidor</span></span>
+        <a href="index.html" style="color: var(--bq-secondary); text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="pages.admin.adminLoginGate.a1">Volver al Portal</span></a>
       </div>
     </div>
   </div>
@@ -101,10 +101,10 @@
           <img src="assets/images/logo.png" alt="Baqueano" class="ops-brand-logo-img" decoding="async" loading="lazy" width="600" height="608">
           <div class="ops-brand-text-group">
             <span class="ops-brand-title">BAQUEANO</span>
-            <span class="ops-brand-subtitle">Ops Command</span>
+            <span data-i18n="pages.admin.opsSidebarMatte.span1" class="ops-brand-subtitle">Ops Command</span>
           </div>
         </a>
-        <button type="button" class="ops-sidebar-toggle-btn" id="opsSidebarToggleBtn" title="Colapsar menú">
+        <button data-i18n-title="pages.admin.opsSidebarToggleBtn.buttonTitle1" type="button" class="ops-sidebar-toggle-btn" id="opsSidebarToggleBtn" title="Colapsar menú">
           <i class="fa-solid fa-chevron-left"></i>
         </button>
       </div>
@@ -112,210 +112,210 @@
       <nav class="ops-sidebar-nav">
         <!-- GRUPO 1: EXPLORACIÓN & CATÁLOGO -->
         <div class="ops-nav-group">
-          <div class="ops-nav-group-title">01 — Exploración &amp; Catálogo</div>
+          <div data-i18n="pages.admin.opsSidebarNav.div1" class="ops-nav-group-title">01 — Exploración &amp; Catálogo</div>
           <a class="ops-nav-item is-active" data-tab="01-dashboard">
             <i class="fa-solid fa-gauge-high ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Dashboard Ejecutivo</span>
-            <span class="ops-nav-badge live">● En Vivo</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span1" class="ops-nav-item-label">Dashboard Ejecutivo</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span2" class="ops-nav-badge live">● En Vivo</span>
           </a>
           <a class="ops-nav-item" data-tab="02-contenido">
             <i class="fa-solid fa-file-lines ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">CMS de Contenido</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-02" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span3" class="ops-nav-item-label">CMS de Contenido</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-02" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="03-destinos">
             <i class="fa-solid fa-mountain ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Destinos</span>
-            <span class="ops-nav-badge is-pending" id="badgeDestinosCount" data-ops-count="destinations" title="Cargando dato real desde Supabase…">—</span>
+            <span data-i18n="nav.destinations" class="ops-nav-item-label">Destinos</span>
+            <span data-i18n-title="pages.admin.badgeDestinosCount.spanTitle1" class="ops-nav-badge is-pending" id="badgeDestinosCount" data-ops-count="destinations" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="04-territorios">
             <i class="fa-solid fa-map ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Territorios</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-04" data-ops-count="departments" title="Cargando dato real desde Supabase…">—</span>
+            <span data-i18n="nav.territories" class="ops-nav-item-label">Territorios</span>
+            <span data-i18n-title="pages.admin.badgeDestinosCount.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-04" data-ops-count="departments" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="05-municipios">
             <i class="fa-solid fa-city ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Municipios</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-05" data-ops-count="municipalities" title="Cargando dato real desde Supabase…">—</span>
+            <span data-i18n="departments.municipalities" class="ops-nav-item-label">Municipios</span>
+            <span data-i18n-title="pages.admin.badgeDestinosCount.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-05" data-ops-count="municipalities" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="06-experiencias">
             <i class="fa-solid fa-compass ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Experiencias</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-06" data-ops-count="experiences" title="Cargando dato real desde Supabase…">—</span>
+            <span data-i18n="nav.experiences" class="ops-nav-item-label">Experiencias</span>
+            <span data-i18n-title="pages.admin.badgeDestinosCount.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-06" data-ops-count="experiences" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="07-mapa">
             <i class="fa-solid fa-map-location-dot ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Mapa Geográfico</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-07" data-ops-count="destinations_with_coordinates" title="Cargando dato real desde Supabase…">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span4" class="ops-nav-item-label">Mapa Geográfico</span>
+            <span data-i18n-title="pages.admin.badgeDestinosCount.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-07" data-ops-count="destinations_with_coordinates" title="Cargando dato real desde Supabase…">—</span>
           </a>
         </div>
 
         <!-- GRUPO 2: OPERACIONES & NEGOCIOS -->
         <div class="ops-nav-group">
-          <div class="ops-nav-group-title">02 — Operaciones &amp; Negocios</div>
+          <div data-i18n="pages.admin.opsSidebarNav.div2" class="ops-nav-group-title">02 — Operaciones &amp; Negocios</div>
           <a class="ops-nav-item" data-tab="08-negocios">
             <i class="fa-solid fa-store ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Negocios &amp; Aliados</span>
-            <span class="ops-nav-badge is-pending" id="badgePendingBiz" data-ops-count="businesses" title="Cargando dato real desde Supabase…">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span5" class="ops-nav-item-label">Negocios &amp; Aliados</span>
+            <span data-i18n-title="pages.admin.badgeDestinosCount.spanTitle1" class="ops-nav-badge is-pending" id="badgePendingBiz" data-ops-count="businesses" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="09-verificaciones">
             <i class="fa-solid fa-certificate ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Verificaciones</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-09" data-ops-count="verification_pending" title="Cargando dato real desde Supabase…">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span6" class="ops-nav-item-label">Verificaciones</span>
+            <span data-i18n-title="pages.admin.badgeDestinosCount.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-09" data-ops-count="verification_pending" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="10-suscripciones">
             <i class="fa-solid fa-id-card ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Suscripciones</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-10" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span7" class="ops-nav-item-label">Suscripciones</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-10" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="11-reservas">
             <i class="fa-solid fa-calendar-check ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Reservas Reales</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-11" data-ops-count="reservations" title="Cargando dato real desde Supabase…">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span8" class="ops-nav-item-label">Reservas Reales</span>
+            <span data-i18n-title="pages.admin.badgeDestinosCount.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-11" data-ops-count="reservations" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="12-pagos">
             <i class="fa-solid fa-receipt ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Pagos &amp; Comprobantes</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-12" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span9" class="ops-nav-item-label">Pagos &amp; Comprobantes</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-12" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="13-usuarios">
             <i class="fa-solid fa-users ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Usuarios</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-13" data-ops-count="profiles" title="Cargando dato real desde Supabase…">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span10" class="ops-nav-item-label">Usuarios</span>
+            <span data-i18n-title="pages.admin.badgeDestinosCount.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-13" data-ops-count="profiles" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="36-comunidad">
             <i class="fa-solid fa-people-group ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Comunidad · Moderación</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span11" class="ops-nav-item-label">Comunidad · Moderación</span>
             <span class="ops-nav-badge" id="badgeCount-36" style="display:none;">0</span>
           </a>
           <a class="ops-nav-item" data-tab="14-guias">
             <i class="fa-solid fa-person-hiking ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Guías / Baqueanos</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-14" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span12" class="ops-nav-item-label">Guías / Baqueanos</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-14" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
         </div>
 
         <!-- GRUPO 3: GASTRONOMÍA & PATRIMONIO -->
         <div class="ops-nav-group">
-          <div class="ops-nav-group-title">03 — Gastronomía &amp; Patrimonio</div>
+          <div data-i18n="pages.admin.opsSidebarNav.div3" class="ops-nav-group-title">03 — Gastronomía &amp; Patrimonio</div>
           <a class="ops-nav-item" data-tab="15-gastronomia">
             <i class="fa-solid fa-utensils ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Gastronomía</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-15" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="nav.gastronomy" class="ops-nav-item-label">Gastronomía</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-15" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="16-historia">
             <i class="fa-solid fa-scroll ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Historia Patria</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-16" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span13" class="ops-nav-item-label">Historia Patria</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-16" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="17-cultura">
             <i class="fa-solid fa-guitar ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Cultura &amp; Sonido</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-17" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span14" class="ops-nav-item-label">Cultura &amp; Sonido</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-17" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="18-sostenibilidad">
             <i class="fa-solid fa-seedling ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Sostenibilidad</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-18" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="home.pillars.sustainability.title" class="ops-nav-item-label">Sostenibilidad</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-18" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="19-ambiental">
             <i class="fa-solid fa-leaf ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Campaña Ambiental</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-19" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span15" class="ops-nav-item-label">Campaña Ambiental</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-19" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="20-sos">
             <i class="fa-solid fa-tower-broadcast ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Centro SOS 24/7</span>
-            <span class="ops-nav-badge is-pending" id="badgeActiveSos" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span16" class="ops-nav-item-label">Centro SOS 24/7</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeActiveSos" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
         </div>
 
         <!-- GRUPO 4: WEBSITE & MULTIMEDIA -->
         <div class="ops-nav-group">
-          <div class="ops-nav-group-title">04 — Website &amp; Multimedia</div>
+          <div data-i18n="pages.admin.opsSidebarNav.div4" class="ops-nav-group-title">04 — Website &amp; Multimedia</div>
           <a class="ops-nav-item" data-tab="21-multimedia">
             <i class="fa-solid fa-photo-film ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Media Library</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-21" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span17" class="ops-nav-item-label">Media Library</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-21" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="22-notificaciones">
             <i class="fa-solid fa-bullhorn ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Notificaciones</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-22" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="app.nav.notifications" class="ops-nav-item-label">Notificaciones</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-22" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="23-ai">
             <i class="fa-solid fa-brain ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">BAQUEANO AI</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-23" data-ops-count="ai_sessions" title="Cargando dato real desde Supabase…">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span18" class="ops-nav-item-label">BAQUEANO AI</span>
+            <span data-i18n-title="pages.admin.badgeDestinosCount.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-23" data-ops-count="ai_sessions" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="24-builder">
             <i class="fa-solid fa-cubes ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Website Builder</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-24" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span19" class="ops-nav-item-label">Website Builder</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-24" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="25-android">
             <i class="fa-brands fa-android ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Android Monitor</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-25" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span20" class="ops-nav-item-label">Android Monitor</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-25" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
         </div>
 
         <!-- GRUPO 5: INTELIGENCIA & AUDITORÍA -->
         <div class="ops-nav-group">
-          <div class="ops-nav-group-title">05 — Inteligencia &amp; Auditoría</div>
+          <div data-i18n="pages.admin.opsSidebarNav.div5" class="ops-nav-group-title">05 — Inteligencia &amp; Auditoría</div>
           <a class="ops-nav-item" data-tab="26-analitica">
             <i class="fa-solid fa-chart-line ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Analítica Web vs Android</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-26" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span21" class="ops-nav-item-label">Analítica Web vs Android</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-26" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="27-auditoria">
             <i class="fa-solid fa-file-shield ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Audit Logs</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-27" data-ops-count="audit_logs" title="Cargando dato real desde Supabase…">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span22" class="ops-nav-item-label">Audit Logs</span>
+            <span data-i18n-title="pages.admin.badgeDestinosCount.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-27" data-ops-count="audit_logs" title="Cargando dato real desde Supabase…">—</span>
           </a>
           <a class="ops-nav-item" data-tab="28-seguridad">
             <i class="fa-solid fa-shield-halved ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Seguridad &amp; RBAC</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-28" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span23" class="ops-nav-item-label">Seguridad &amp; RBAC</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-28" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
         </div>
 
         <!-- GRUPO 6: GOBERNANZA & CONFIGURACIÓN -->
         <div class="ops-nav-group">
-          <div class="ops-nav-group-title">06 — Gobernanza &amp; Sistema</div>
+          <div data-i18n="pages.admin.opsSidebarNav.div6" class="ops-nav-group-title">06 — Gobernanza &amp; Sistema</div>
           <a class="ops-nav-item" data-tab="29-fuentes">
             <i class="fa-solid fa-building-columns ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Fuentes Oficiales</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-29" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span24" class="ops-nav-item-label">Fuentes Oficiales</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-29" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="30-legislacion">
             <i class="fa-solid fa-scale-balanced ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Legislación (Ley 306)</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-30" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span25" class="ops-nav-item-label">Legislación (Ley 306)</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-30" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="31-seo">
             <i class="fa-solid fa-magnifying-glass-chart ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">SEO Center</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-31" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span26" class="ops-nav-item-label">SEO Center</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-31" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="32-configuracion">
             <i class="fa-solid fa-sliders ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Configuración Global</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-32" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span27" class="ops-nav-item-label">Configuración Global</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-32" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="33-estado">
             <i class="fa-solid fa-server ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Estado del Sistema</span>
-            <span class="ops-nav-badge is-pending" id="badgeCount-33" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span28" class="ops-nav-item-label">Estado del Sistema</span>
+            <span data-i18n-title="pages.admin.badgeCount02.spanTitle1" class="ops-nav-badge is-pending" id="badgeCount-33" title="Sin fuente de datos real todavía (integración pendiente)">—</span>
           </a>
           <a class="ops-nav-item" data-tab="34-tarifas">
             <i class="fa-solid fa-tags ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Gestión de Tarifas</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span29" class="ops-nav-item-label">Gestión de Tarifas</span>
           </a>
           <a class="ops-nav-item" data-tab="35-backup">
             <i class="fa-solid fa-cloud-arrow-up ops-nav-item-icon"></i>
-            <span class="ops-nav-item-label">Backup &amp; Sincronización</span>
-            <span class="ops-nav-badge" id="badgeCount-35" style="background:var(--bq-accent);color:#fff;">Sync</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span30" class="ops-nav-item-label">Backup &amp; Sincronización</span>
+            <span class="ops-nav-badge" id="badgeCount-35" style="background:var(--bq-accent);color:#fff;"><span data-i18n="pages.admin.badgeCount35.span1">Sync</span></span>
           </a>
         </div>
       </nav>
@@ -329,34 +329,34 @@
         <div class="ops-topbar-left">
           <div class="ops-topbar-brand-indicator">
             <span class="ops-topbar-shield"><i class="fa-solid fa-shield-halved"></i></span>
-            <span class="ops-topbar-title">Centro de Mando Nacional</span>
+            <span data-i18n="pages.admin.opsTopbarMatte.span1" class="ops-topbar-title">Centro de Mando Nacional</span>
           </div>
         </div>
 
         <div class="ops-topbar-right">
           <div class="ops-status-indicator">
             <span class="ops-pulse-dot"></span>
-            <span>PRODUCCIÓN</span>
+            <span data-i18n="pages.admin.opsTopbarMatte.span2">PRODUCCIÓN</span>
           </div>
 
           <div class="ops-topbar-clock" id="opsLiveClock">00:00:00</div>
-          <div style="font-size: 0.72rem; color: var(--ops-text-muted);" id="opsLiveDate">HOY</div>
+          <div style="font-size: 0.72rem; color: var(--ops-text-muted);" id="opsLiveDate"><span data-i18n="pages.admin.opsLiveDate.div1">HOY</span></div>
 
-          <button type="button" class="btn-ops-matte accent" id="btnOpsBackupAction" title="Copia de Seguridad & Restauración con Fecha y Hora" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.openBackupModal()" style="font-size: 0.78rem; padding: 0.4rem 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
-            <i class="fa-solid fa-clock-rotate-left"></i> <span>Backup</span>
+          <button data-i18n-title="pages.admin.btnOpsBackupAction.buttonTitle1" type="button" class="btn-ops-matte accent" id="btnOpsBackupAction" title="Copia de Seguridad & Restauración con Fecha y Hora" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.openBackupModal()" style="font-size: 0.78rem; padding: 0.4rem 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+            <i class="fa-solid fa-clock-rotate-left"></i> <span data-i18n="pages.admin.btnOpsBackupAction.span1">Backup</span>
           </button>
 
-          <button type="button" class="btn-ops-matte primary" id="btnOpsIaCommander" title="Baqueano Commander — Asistente personal del administrador" onclick="window.BaqueanoOpsIA && window.BaqueanoOpsIA.openCommanderModal()" style="font-size: 0.78rem; padding: 0.4rem 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+          <button data-i18n-title="pages.admin.btnOpsIaCommander.buttonTitle1" type="button" class="btn-ops-matte primary" id="btnOpsIaCommander" title="Baqueano Commander — Asistente personal del administrador" onclick="window.BaqueanoOpsIA && window.BaqueanoOpsIA.openCommanderModal()" style="font-size: 0.78rem; padding: 0.4rem 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
             <i class="fa-solid fa-robot"></i> <span>Ops IA</span>
           </button>
 
           <div class="ops-user-profile-menu">
-            <div class="ops-user-avatar" id="opsTopUserAvatar">AD</div>
+            <div class="ops-user-avatar" id="opsTopUserAvatar"><span data-i18n="pages.admin.opsTopUserAvatar.div1">AD</span></div>
             <div class="ops-user-details">
-              <span class="ops-user-name" id="opsTopUserName">Administrador</span>
-              <span class="ops-user-role" id="opsTopUserRole">Super Administrador</span>
+              <span class="ops-user-name" id="opsTopUserName"><span data-i18n="pages.admin.opsTopUserName.span1">Administrador</span></span>
+              <span class="ops-user-role" id="opsTopUserRole"><span data-i18n="pages.admin.opsTopUserRole.span1">Super Administrador</span></span>
             </div>
-            <button type="button" class="btn-ops-matte" id="btnLogoutAdmin" title="Cerrar Sesión" style="padding: 0.35rem 0.6rem; margin-left: 0.5rem;">
+            <button data-i18n-title="pages.admin.btnLogoutAdmin.buttonTitle1" type="button" class="btn-ops-matte" id="btnLogoutAdmin" title="Cerrar Sesión" style="padding: 0.35rem 0.6rem; margin-left: 0.5rem;">
               <i class="fa-solid fa-right-from-bracket"></i>
             </button>
           </div>
@@ -367,8 +367,8 @@
       <div class="ops-search-strip">
         <button type="button" class="ops-global-search-btn" id="opsCommandPaletteTrigger">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <span>Buscar destino, negocio, usuario o comando...</span>
-          <span class="ops-kbd-badge">Ctrl+K</span>
+          <span data-i18n="pages.admin.opsCommandPaletteTrigger.span1">Buscar destino, negocio, usuario o comando...</span>
+          <span data-i18n="pages.admin.opsCommandPaletteTrigger.span2" class="ops-kbd-badge">Ctrl+K</span>
         </button>
       </div>
 
@@ -381,13 +381,13 @@
         <section class="ops-view-panel is-active" id="view-01-dashboard">
           <div class="ops-view-header">
             <div class="ops-view-title-group">
-              <h1><i class="fa-solid fa-gauge-high" style="color: var(--bq-secondary);"></i> Centro de Operaciones BAQUEANO</h1>
-              <p class="ops-view-subtitle">ARQUITECTURA OFICIAL: FIREBASE (AUTENTICACIÓN &amp; HOSTING) + SUPABASE (BASE DE DATOS PRINCIPAL)</p>
+              <h1><i class="fa-solid fa-gauge-high" style="color: var(--bq-secondary);"></i> <span data-i18n="pages.admin.view01Dashboard.h11">Centro de Operaciones BAQUEANO</span></h1>
+              <p data-i18n="pages.admin.view01Dashboard.p1" class="ops-view-subtitle">ARQUITECTURA OFICIAL: FIREBASE (AUTENTICACIÓN &amp; HOSTING) + SUPABASE (BASE DE DATOS PRINCIPAL)</p>
             </div>
             <div class="ops-view-actions">
-              <span style="font-size: 0.78rem; color: var(--ops-text-muted);" id="opsMetricsLastUpdated">Actualizando...</span>
-              <button type="button" class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.seedInitialContent()"><i class="fa-solid fa-cloud-arrow-up"></i> Migrar Catálogo Inicial</button>
-              <button type="button" class="btn-ops-matte primary" id="btnOpsSyncAll" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.syncAll()"><i class="fa-solid fa-rotate"></i> Sincronizar</button>
+              <span style="font-size: 0.78rem; color: var(--ops-text-muted);" id="opsMetricsLastUpdated"><span data-i18n="pages.admin.opsMetricsLastUpdated.span1">Actualizando...</span></span>
+              <button type="button" class="btn-ops-matte accent" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.seedInitialContent()"><i class="fa-solid fa-cloud-arrow-up"></i> <span data-i18n="pages.admin.view01Dashboard.button1">Migrar Catálogo Inicial</span></button>
+              <button type="button" class="btn-ops-matte primary" id="btnOpsSyncAll" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.syncAll()"><i class="fa-solid fa-rotate"></i> <span data-i18n="pages.admin.btnOpsSyncAll.button1">Sincronizar</span></button>
             </div>
           </div>
 
@@ -395,9 +395,9 @@
           <div style="background: rgba(22, 93, 111, 0.25); border: 1px solid rgba(45, 212, 191, 0.4); border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-size: 0.8rem; color: #E2E8F0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.65rem;">
             <div style="display: flex; align-items: center; gap: 0.65rem;">
               <i class="fa-solid fa-layer-group" style="color: #2DD4BF; font-size: 1.1rem;"></i>
-              <span id="opsDataSourceBanner"><strong>Fuente de datos:</strong> Supabase es la base de datos principal; Firebase autentica al equipo. Cargando conteos reales…</span>
+              <span id="opsDataSourceBanner"><strong data-i18n="pages.admin.opsDataSourceBanner.strong1">Fuente de datos:</strong> <span data-i18n="pages.admin.opsDataSourceBanner.span1">Supabase es la base de datos principal; Firebase autentica al equipo. Cargando conteos reales…</span></span>
             </div>
-            <span class="ops-data-state" id="opsDataSourceState" data-state="SINCRONIZANDO">Sincronizando</span>
+            <span class="ops-data-state" id="opsDataSourceState" data-state="SINCRONIZANDO"><span data-i18n="pages.admin.opsDataSourceState.span1">Sincronizando</span></span>
           </div>
 
           <!-- CONTENEDOR INTELIGENTE BAQUEANO OPS IA & PULSE (COPILOTO DE OSCAR) -->
@@ -407,38 +407,38 @@
           <div class="ops-kpi-grid-matte">
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header">
-                <span class="ops-kpi-title">Destinos Publicados</span>
+                <span data-i18n="pages.admin.view01Dashboard.span1" class="ops-kpi-title">Destinos Publicados</span>
                 <div class="ops-kpi-icon-wrap"><i class="fa-solid fa-mountain"></i></div>
               </div>
               <div class="ops-kpi-value-num" id="kpiPublishedDestinations">0</div>
-              <div class="ops-kpi-subtext">Total registrados: <strong id="kpiTotalDestinations">0</strong></div>
+              <div class="ops-kpi-subtext"><span data-i18n="pages.admin.view01Dashboard.div1">Total registrados:</span> <strong id="kpiTotalDestinations">0</strong></div>
             </div>
 
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header">
-                <span class="ops-kpi-title">Negocios Verificados</span>
+                <span data-i18n="pages.admin.view01Dashboard.span2" class="ops-kpi-title">Negocios Verificados</span>
                 <div class="ops-kpi-icon-wrap"><i class="fa-solid fa-certificate"></i></div>
               </div>
               <div class="ops-kpi-value-num" id="kpiVerifiedBusinesses">0</div>
-              <div class="ops-kpi-subtext">Pendientes de revisión: <strong id="kpiPendingBusinesses" style="color:var(--bq-accent);">0</strong></div>
+              <div class="ops-kpi-subtext"><span data-i18n="pages.admin.view01Dashboard.div2">Pendientes de revisión:</span> <strong id="kpiPendingBusinesses" style="color:var(--bq-accent);">0</strong></div>
             </div>
 
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header">
-                <span class="ops-kpi-title">Alertas SOS Activas</span>
+                <span data-i18n="pages.admin.view01Dashboard.span3" class="ops-kpi-title">Alertas SOS Activas</span>
                 <div class="ops-kpi-icon-wrap" style="color: var(--bq-crimson);"><i class="fa-solid fa-tower-broadcast"></i></div>
               </div>
               <div class="ops-kpi-value-num" id="kpiActiveSos" style="color: var(--bq-crimson);">0</div>
-              <div class="ops-kpi-subtext">Emergencias reales en ruta</div>
+              <div data-i18n="pages.admin.view01Dashboard.div3" class="ops-kpi-subtext">Emergencias reales en ruta</div>
             </div>
 
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header">
-                <span class="ops-kpi-title">Usuarios en Ecosistema</span>
+                <span data-i18n="pages.admin.view01Dashboard.span4" class="ops-kpi-title">Usuarios en Ecosistema</span>
                 <div class="ops-kpi-icon-wrap"><i class="fa-solid fa-users"></i></div>
               </div>
               <div class="ops-kpi-value-num" id="kpiTotalUsers">0</div>
-              <div class="ops-kpi-subtext">Cuentas autenticadas</div>
+              <div data-i18n="pages.admin.view01Dashboard.div4" class="ops-kpi-subtext">Cuentas autenticadas</div>
             </div>
           </div>
 
@@ -447,25 +447,25 @@
             <!-- Comparativa Plataformas -->
             <div class="ops-table-container-matte" style="padding: 1.5rem;">
               <h3 style="font-size: 1rem; color: #FFFFFF; margin: 0 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fa-solid fa-code-compare" style="color: var(--bq-secondary);"></i> Ecosistema Baqueano: Web vs Android
+                <i class="fa-solid fa-code-compare" style="color: var(--bq-secondary);"></i> <span data-i18n="pages.admin.view01Dashboard.h31">Ecosistema Baqueano: Web vs Android</span>
               </h3>
               <div style="display: flex; flex-direction: column; gap: 1rem;">
                 <div style="background: var(--ops-surface-2); padding: 1rem; border-radius: var(--ops-radius-md); border: 1px solid var(--ops-border-subtle);">
                   <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
-                    <strong><i class="fa-solid fa-globe"></i> Portal Website</strong>
-                    <span class="ops-badge-status published">Activo</span>
+                    <strong><i class="fa-solid fa-globe"></i> <span data-i18n="pages.admin.view01Dashboard.strong1">Portal Website</span></strong>
+                    <span data-i18n="pages.admin.view01Dashboard.span5" class="ops-badge-status published">Activo</span>
                   </div>
-                  <div style="font-size: 0.8rem; color: var(--ops-text-secondary);">
+                  <div data-i18n="pages.admin.view01Dashboard.div5" style="font-size: 0.8rem; color: var(--ops-text-secondary);">
                     Catálogo público, formulario de anfitriones, cotizador bimoneda Ley 306 y mapa satelital.
                   </div>
                 </div>
 
                 <div style="background: var(--ops-surface-2); padding: 1rem; border-radius: var(--ops-radius-md); border: 1px solid var(--ops-border-subtle);">
                   <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
-                    <strong><i class="fa-brands fa-android"></i> Aplicación Android</strong>
-                    <span class="ops-badge-status published">Producción</span>
+                    <strong><i class="fa-brands fa-android"></i> <span data-i18n="pages.admin.view01Dashboard.strong2">Aplicación Android</span></strong>
+                    <span data-i18n="pages.admin.view01Dashboard.span6" class="ops-badge-status published">Producción</span>
                   </div>
-                  <div style="font-size: 0.8rem; color: var(--ops-text-secondary);">
+                  <div data-i18n="pages.admin.view01Dashboard.div6" style="font-size: 0.8rem; color: var(--ops-text-secondary);">
                     Sincronización de senderos offline, registro de emergencias SOS, favoritos de explorador.
                   </div>
                 </div>
@@ -476,15 +476,15 @@
             <div class="ops-table-container-matte" style="padding: 1.5rem;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
                 <h3 style="font-size: 1rem; color: #FFFFFF; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
-                  <i class="fa-solid fa-clock-rotate-left" style="color: var(--bq-secondary);"></i> Actividad Reciente Verificada
+                  <i class="fa-solid fa-clock-rotate-left" style="color: var(--bq-secondary);"></i> <span data-i18n="pages.admin.view01Dashboard.h32">Actividad Reciente Verificada</span>
                 </h3>
-                <button type="button" class="btn-ops-matte" style="font-size: 0.75rem; padding: 0.28rem 0.65rem; color: #ef4444; border-color: rgba(239,68,68,0.35);" onclick="window.BaqueanoOpsEngine.clearAuditLogs()" title="Limpiar todo el historial de auditoría">
-                  <i class="fa-solid fa-trash-can"></i> Limpiar Historial
+                <button data-i18n-title="pages.admin.view01Dashboard.buttonTitle1" type="button" class="btn-ops-matte" style="font-size: 0.75rem; padding: 0.28rem 0.65rem; color: #ef4444; border-color: rgba(239,68,68,0.35);" onclick="window.BaqueanoOpsEngine.clearAuditLogs()" title="Limpiar todo el historial de auditoría">
+                  <i class="fa-solid fa-trash-can"></i> <span data-i18n="pages.admin.view01Dashboard.button2">Limpiar Historial</span>
                 </button>
               </div>
               <div id="opsAuditFeed" style="max-height: 280px; overflow-y: auto;">
                 <div class="ops-empty-state" style="padding: 1.5rem;">
-                  <div style="font-size: 0.85rem;">Esperando eventos de auditoría...</div>
+                  <div data-i18n="pages.admin.opsAuditFeed.div1" style="font-size: 0.85rem;">Esperando eventos de auditoría...</div>
                 </div>
               </div>
             </div>
@@ -497,11 +497,11 @@
         <section class="ops-view-panel" id="view-03-destinos">
           <div class="ops-view-header">
             <div class="ops-view-title-group">
-              <h1><i class="fa-solid fa-mountain" style="color: var(--bq-secondary);"></i> Catálogo de Destinos</h1>
-              <p class="ops-view-subtitle">ADMINISTRACIÓN EDITORIAL DE SENDEROS, VOLCANES, PLAYAS Y ÁREAS PROTEGIDAS</p>
+              <h1><i class="fa-solid fa-mountain" style="color: var(--bq-secondary);"></i> <span data-i18n="pages.admin.view03Destinos.h11">Catálogo de Destinos</span></h1>
+              <p data-i18n="pages.admin.view03Destinos.p1" class="ops-view-subtitle">ADMINISTRACIÓN EDITORIAL DE SENDEROS, VOLCANES, PLAYAS Y ÁREAS PROTEGIDAS</p>
             </div>
             <div class="ops-view-actions">
-              <button type="button" class="btn-ops-matte accent" onclick="promptNewDestination()"><i class="fa-solid fa-plus"></i> Nuevo Destino</button>
+              <button type="button" class="btn-ops-matte accent" onclick="promptNewDestination()"><i class="fa-solid fa-plus"></i> <span data-i18n="pages.admin.view03Destinos.button1">Nuevo Destino</span></button>
             </div>
           </div>
 
@@ -509,11 +509,11 @@
             <table class="ops-table-matte">
               <thead>
                 <tr>
-                  <th>Destino / Municipio</th>
-                  <th>Estado</th>
-                  <th>Categoría</th>
-                  <th>Tarifa Comprobada</th>
-                  <th style="text-align: right;">Acciones</th>
+                  <th data-i18n="pages.admin.view03Destinos.th1">Destino / Municipio</th>
+                  <th data-i18n="pages.admin.view03Destinos.th2">Estado</th>
+                  <th data-i18n="destinations.category">Categoría</th>
+                  <th data-i18n="pages.admin.view03Destinos.th3">Tarifa Comprobada</th>
+                  <th data-i18n="pages.admin.view03Destinos.th4" style="text-align: right;">Acciones</th>
                 </tr>
               </thead>
               <tbody id="destinationsTableBody">
@@ -522,8 +522,8 @@
             </table>
             <div class="ops-empty-state" id="destinationsEmptyState" style="display: none;">
               <i class="fa-solid fa-mountain ops-empty-icon"></i>
-              <div class="ops-empty-title">0 Destinos Registrados en Firestore</div>
-              <div class="ops-empty-desc">No se encontraron destinos en la base de datos de producción. Utiliza el botón "Nuevo Destino" para agregar el primero.</div>
+              <div data-i18n="pages.admin.destinationsEmptyState.div1" class="ops-empty-title">0 Destinos Registrados en Firestore</div>
+              <div data-i18n="pages.admin.destinationsEmptyState.div2" class="ops-empty-desc">No se encontraron destinos en la base de datos de producción. Utiliza el botón "Nuevo Destino" para agregar el primero.</div>
             </div>
           </div>
         </section>
@@ -534,8 +534,8 @@
         <section class="ops-view-panel" id="view-08-negocios">
           <div class="ops-view-header">
             <div class="ops-view-title-group">
-              <h1><i class="fa-solid fa-store" style="color: var(--bq-secondary);"></i> Negocios Comunitarios &amp; Anfitriones</h1>
-              <p class="ops-view-subtitle">REVISIÓN, APROBACIÓN, VERIFICACIÓN Y PUBLICACIÓN BAJO LEY 1210/1211</p>
+              <h1><i class="fa-solid fa-store" style="color: var(--bq-secondary);"></i> <span data-i18n="pages.admin.view08Negocios.h11">Negocios Comunitarios &amp; Anfitriones</span></h1>
+              <p data-i18n="pages.admin.view08Negocios.p1" class="ops-view-subtitle">REVISIÓN, APROBACIÓN, VERIFICACIÓN Y PUBLICACIÓN BAJO LEY 1210/1211</p>
             </div>
           </div>
 
@@ -543,10 +543,10 @@
             <table class="ops-table-matte">
               <thead>
                 <tr>
-                  <th>Negocio / Contacto</th>
-                  <th>Estado</th>
-                  <th>Sello Verificado</th>
-                  <th style="text-align: right;">Auditoría</th>
+                  <th data-i18n="pages.admin.view08Negocios.th1">Negocio / Contacto</th>
+                  <th data-i18n="pages.admin.view03Destinos.th2">Estado</th>
+                  <th data-i18n="pages.admin.view08Negocios.th2">Sello Verificado</th>
+                  <th data-i18n="pages.admin.view08Negocios.th3" style="text-align: right;">Auditoría</th>
                 </tr>
               </thead>
               <tbody id="businessesTableBody">
@@ -555,8 +555,8 @@
             </table>
             <div class="ops-empty-state" id="businessesEmptyState" style="display: none;">
               <i class="fa-solid fa-store-slash ops-empty-icon"></i>
-              <div class="ops-empty-title">No existen negocios pendientes de revisión</div>
-              <div class="ops-empty-desc">Todos los negocios comunitarios registrados están al día o no existen registros en la colección.</div>
+              <div data-i18n="pages.admin.businessesEmptyState.div1" class="ops-empty-title">No existen negocios pendientes de revisión</div>
+              <div data-i18n="pages.admin.businessesEmptyState.div2" class="ops-empty-desc">Todos los negocios comunitarios registrados están al día o no existen registros en la colección.</div>
             </div>
           </div>
         </section>
@@ -567,8 +567,8 @@
         <section class="ops-view-panel" id="view-20-sos">
           <div class="ops-view-header">
             <div class="ops-view-title-group">
-              <h1><i class="fa-solid fa-tower-broadcast" style="color: var(--bq-crimson);"></i> Centro SOS de Emergencias</h1>
-              <p class="ops-view-subtitle">TELEMETRÍA REAL PROCEDENTE DE DISPOSITIVOS ANDROID Y PORTAL WEB</p>
+              <h1><i class="fa-solid fa-tower-broadcast" style="color: var(--bq-crimson);"></i> <span data-i18n="pages.admin.view20Sos.h11">Centro SOS de Emergencias</span></h1>
+              <p data-i18n="pages.admin.view20Sos.p1" class="ops-view-subtitle">TELEMETRÍA REAL PROCEDENTE DE DISPOSITIVOS ANDROID Y PORTAL WEB</p>
             </div>
           </div>
 
@@ -576,11 +576,11 @@
             <table class="ops-table-matte">
               <thead>
                 <tr>
-                  <th>Alerta</th>
-                  <th>Tipo</th>
-                  <th>Coordenadas GPS</th>
-                  <th>Origen</th>
-                  <th>Hora Reportada</th>
+                  <th data-i18n="pages.admin.view20Sos.th1">Alerta</th>
+                  <th data-i18n="pages.admin.view20Sos.th2">Tipo</th>
+                  <th data-i18n="pages.admin.view20Sos.th3">Coordenadas GPS</th>
+                  <th data-i18n="pages.admin.view20Sos.th4">Origen</th>
+                  <th data-i18n="pages.admin.view20Sos.th5">Hora Reportada</th>
                 </tr>
               </thead>
               <tbody id="sosTableBody">
@@ -589,8 +589,8 @@
             </table>
             <div class="ops-empty-state" id="sosEmptyState" style="display: none;">
               <i class="fa-solid fa-shield-heart ops-empty-icon" style="color: var(--bq-jungle);"></i>
-              <div class="ops-empty-title">No existen alertas SOS activas</div>
-              <div class="ops-empty-desc">El territorio nacional se encuentra en calma. Ningún dispositivo Android ni usuario web ha emitido alertas en este momento.</div>
+              <div data-i18n="pages.admin.sosEmptyState.div1" class="ops-empty-title">No existen alertas SOS activas</div>
+              <div data-i18n="pages.admin.sosEmptyState.div2" class="ops-empty-desc">El territorio nacional se encuentra en calma. Ningún dispositivo Android ni usuario web ha emitido alertas en este momento.</div>
             </div>
           </div>
         </section>
@@ -601,19 +601,19 @@
         <section class="ops-view-panel" id="view-24-builder">
           <div class="ops-view-header">
             <div class="ops-view-title-group">
-              <h1><i class="fa-solid fa-cubes" style="color: var(--bq-secondary);"></i> Website Builder por Bloques</h1>
-              <p class="ops-view-subtitle">CONFIGURACIÓN DINÁMICA DE PÁGINAS, SECCIONES, BANNERS Y BARRAS DE NAVEGACIÓN</p>
+              <h1><i class="fa-solid fa-cubes" style="color: var(--bq-secondary);"></i> <span data-i18n="pages.admin.view24Builder.h11">Website Builder por Bloques</span></h1>
+              <p data-i18n="pages.admin.view24Builder.p1" class="ops-view-subtitle">CONFIGURACIÓN DINÁMICA DE PÁGINAS, SECCIONES, BANNERS Y BARRAS DE NAVEGACIÓN</p>
             </div>
             <div class="ops-view-actions">
-              <button type="button" class="btn-ops-matte primary" onclick="saveWebsiteConfig()"><i class="fa-solid fa-floppy-disk"></i> Guardar Cambios</button>
+              <button type="button" class="btn-ops-matte primary" onclick="saveWebsiteConfig()"><i class="fa-solid fa-floppy-disk"></i> <span data-i18n="pages.admin.view24Builder.button1">Guardar Cambios</span></button>
             </div>
           </div>
 
           <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-lg); padding: 1.5rem;">
-            <h3 style="font-size: 1rem; color: #fff; margin-bottom: 1rem;"><i class="fa-solid fa-bullhorn"></i> Banner de Anuncio Global</h3>
+            <h3 style="font-size: 1rem; color: #fff; margin-bottom: 1rem;"><i class="fa-solid fa-bullhorn"></i> <span data-i18n="pages.admin.view24Builder.h31">Banner de Anuncio Global</span></h3>
             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-              <label style="font-size: 0.8rem; color: var(--ops-text-secondary);">Texto del Anuncio en Website &amp; Android:</label>
-              <input type="text" id="cfgAnnouncementText" placeholder="Ejemplo: ¡OFERTAS EXCLUSIVAS! Descubre las mejores promociones de negocios locales." style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.65rem 1rem; color: #fff; font-size: 0.88rem;">
+              <label style="font-size: 0.8rem; color: var(--ops-text-secondary);"><span data-i18n="pages.admin.view24Builder.label1">Texto del Anuncio en Website &amp; Android:</span></label>
+              <input data-i18n-placeholder="pages.admin.cfgAnnouncementText.inputPlaceholder1" type="text" id="cfgAnnouncementText" placeholder="Ejemplo: ¡OFERTAS EXCLUSIVAS! Descubre las mejores promociones de negocios locales." style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.65rem 1rem; color: #fff; font-size: 0.88rem;">
             </div>
           </div>
         </section>
@@ -624,158 +624,158 @@
         <section class="ops-view-panel" id="view-25-android">
           <div class="ops-view-header">
             <div class="ops-view-title-group">
-              <h1><i class="fa-brands fa-android" style="color: var(--bq-jungle);"></i> Android Monitor &amp; Telemetría</h1>
-              <p class="ops-view-subtitle">DATOS REALES CONSULTABLES PROCEDENTES DEL APK BAQUEANO NICARAGUA</p>
+              <h1><i class="fa-brands fa-android" style="color: var(--bq-jungle);"></i> <span data-i18n="pages.admin.view25Android.h11">Android Monitor &amp; Telemetría</span></h1>
+              <p data-i18n="pages.admin.view25Android.p1" class="ops-view-subtitle">DATOS REALES CONSULTABLES PROCEDENTES DEL APK BAQUEANO NICARAGUA</p>
             </div>
           </div>
 
           <div class="ops-kpi-grid-matte">
             <div class="ops-kpi-card-matte">
-              <div class="ops-kpi-header"><span class="ops-kpi-title">Dispositivos Android</span><div class="ops-kpi-icon-wrap"><i class="fa-brands fa-android"></i></div></div>
+              <div class="ops-kpi-header"><span data-i18n="pages.admin.view25Android.span1" class="ops-kpi-title">Dispositivos Android</span><div class="ops-kpi-icon-wrap"><i class="fa-brands fa-android"></i></div></div>
               <div class="ops-kpi-value-num">0</div>
-              <div class="ops-kpi-subtext">Sesiones registradas</div>
+              <div data-i18n="pages.admin.view25Android.div1" class="ops-kpi-subtext">Sesiones registradas</div>
             </div>
             <div class="ops-kpi-card-matte">
-              <div class="ops-kpi-header"><span class="ops-kpi-title">Versión Oficial</span><div class="ops-kpi-icon-wrap"><i class="fa-solid fa-code-branch"></i></div></div>
+              <div class="ops-kpi-header"><span data-i18n="pages.admin.view25Android.span2" class="ops-kpi-title">Versión Oficial</span><div class="ops-kpi-icon-wrap"><i class="fa-solid fa-code-branch"></i></div></div>
               <div class="ops-kpi-value-num" style="font-size: 1.4rem;">v1.0.0</div>
-              <div class="ops-kpi-subtext">Paquete firmado APK</div>
+              <div data-i18n="pages.admin.view25Android.div2" class="ops-kpi-subtext">Paquete firmado APK</div>
             </div>
           </div>
 
           <div class="ops-empty-state">
             <i class="fa-solid fa-circle-info ops-empty-icon"></i>
-            <div class="ops-empty-title">Información Verificada de Android</div>
-            <div class="ops-empty-desc">Las métricas mostradas provienen únicamente de las colecciones <code>users</code> y <code>sos_logs</code> con <code>platform = 'android'</code>. No se generan eventos ficticios que la APK no transmita.</div>
+            <div data-i18n="pages.admin.view25Android.div3" class="ops-empty-title">Información Verificada de Android</div>
+            <div class="ops-empty-desc"><span data-i18n="pages.admin.view25Android.div4">Las métricas mostradas provienen únicamente de las colecciones</span> <code>users</code> y <code>sos_logs</code> <span data-i18n="pages.admin.view25Android.div5">con</span> <code>platform = 'android'</code><span data-i18n="pages.admin.view25Android.div6">. No se generan eventos ficticios que la APK no transmita.</span></div>
           </div>
         </section>
 
         <!-- VISTAS RESTANTES: EMPTY STATES PROFESIONALES DE CONEXIÓN REAL -->
         <section class="ops-view-panel" id="view-02-contenido">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-file-lines"></i> CMS de Contenido</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-file-circle-check ops-empty-icon"></i><div class="ops-empty-title">Contenido Editorial al Día</div><div class="ops-empty-desc">Todos los artículos y páginas se encuentran sincronizados con Cloud Firestore.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-file-lines"></i> <span data-i18n="pages.admin.opsSidebarNav.span3">CMS de Contenido</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-file-circle-check ops-empty-icon"></i><div data-i18n="pages.admin.view02Contenido.div1" class="ops-empty-title">Contenido Editorial al Día</div><div data-i18n="pages.admin.view02Contenido.div2" class="ops-empty-desc">Todos los artículos y páginas se encuentran sincronizados con Cloud Firestore.</div></div>
         </section>
         <section class="ops-view-panel" id="view-04-territorios">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-map"></i> Territorios Nacionales</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-earth-americas ops-empty-icon"></i><div class="ops-empty-title">15 Departamentos &amp; 2 Regiones Autónomas</div><div class="ops-empty-desc">Estructura territorial soberana enlazada con la base cartográfica nacional.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-map"></i> <span data-i18n="pages.admin.view04Territorios.h11">Territorios Nacionales</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-earth-americas ops-empty-icon"></i><div data-i18n="pages.admin.view04Territorios.div1" class="ops-empty-title">15 Departamentos &amp; 2 Regiones Autónomas</div><div data-i18n="pages.admin.view04Territorios.div2" class="ops-empty-desc">Estructura territorial soberana enlazada con la base cartográfica nacional.</div></div>
         </section>
         <section class="ops-view-panel" id="view-05-municipios">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-city"></i> Municipios</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-city ops-empty-icon"></i><div class="ops-empty-title">Cobertura Municipal Verificada</div><div class="ops-empty-desc">No existen municipios pendientes de auditoría territorial.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-city"></i> <span data-i18n="departments.municipalities">Municipios</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-city ops-empty-icon"></i><div data-i18n="pages.admin.view05Municipios.div1" class="ops-empty-title">Cobertura Municipal Verificada</div><div data-i18n="pages.admin.view05Municipios.div2" class="ops-empty-desc">No existen municipios pendientes de auditoría territorial.</div></div>
         </section>
         <section class="ops-view-panel" id="view-06-experiencias">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-compass"></i> Experiencias Turísticas</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-person-hiking ops-empty-icon"></i><div class="ops-empty-title">Categorías Activas</div><div class="ops-empty-desc">Senderismo, Volcanes, Surf, Ríos, Naturaleza y Gastronomía Campesina.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-compass"></i> <span data-i18n="pages.admin.view06Experiencias.h11">Experiencias Turísticas</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-person-hiking ops-empty-icon"></i><div data-i18n="pages.admin.view06Experiencias.div1" class="ops-empty-title">Categorías Activas</div><div data-i18n="pages.admin.view06Experiencias.div2" class="ops-empty-desc">Senderismo, Volcanes, Surf, Ríos, Naturaleza y Gastronomía Campesina.</div></div>
         </section>
         <section class="ops-view-panel" id="view-07-mapa">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-map-location-dot"></i> Mapa Geográfico</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-location-crosshairs ops-empty-icon"></i><div class="ops-empty-title">Puntos Georreferenciados</div><div class="ops-empty-desc">Visualización de coordenadas válidas verificadas sin extrapolaciones ficticias.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-map-location-dot"></i> <span data-i18n="pages.admin.opsSidebarNav.span4">Mapa Geográfico</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-location-crosshairs ops-empty-icon"></i><div data-i18n="pages.admin.view07Mapa.div1" class="ops-empty-title">Puntos Georreferenciados</div><div data-i18n="pages.admin.view07Mapa.div2" class="ops-empty-desc">Visualización de coordenadas válidas verificadas sin extrapolaciones ficticias.</div></div>
         </section>
         <section class="ops-view-panel" id="view-09-verificaciones">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-certificate"></i> Verificaciones</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-shield-check ops-empty-icon"></i><div class="ops-empty-title">Sello "Verificado por BAQUEANO"</div><div class="ops-empty-desc">Control de acreditación en campo y auditoría de cumplimiento de Ley 1210 y 1211.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-certificate"></i> <span data-i18n="pages.admin.opsSidebarNav.span6">Verificaciones</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-shield-check ops-empty-icon"></i><div data-i18n="pages.admin.view09Verificaciones.div1" class="ops-empty-title">Sello "Verificado por BAQUEANO"</div><div data-i18n="pages.admin.view09Verificaciones.div2" class="ops-empty-desc">Control de acreditación en campo y auditoría de cumplimiento de Ley 1210 y 1211.</div></div>
         </section>
         <section class="ops-view-panel" id="view-10-suscripciones">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-id-card"></i> Suscripciones</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-id-card ops-empty-icon"></i><div class="ops-empty-title">0 Suscripciones por vencer</div><div class="ops-empty-desc">No hay suscripciones de aliados en estado de vencimiento o suspensión.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-id-card"></i> <span data-i18n="pages.admin.opsSidebarNav.span7">Suscripciones</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-id-card ops-empty-icon"></i><div data-i18n="pages.admin.view10Suscripciones.div1" class="ops-empty-title">0 Suscripciones por vencer</div><div data-i18n="pages.admin.view10Suscripciones.div2" class="ops-empty-desc">No hay suscripciones de aliados en estado de vencimiento o suspensión.</div></div>
         </section>
         <section class="ops-view-panel" id="view-11-reservas">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-calendar-check"></i> Reservas</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-calendar-xmark ops-empty-icon"></i><div class="ops-empty-title">0 Reservas Pendientes</div><div class="ops-empty-desc">No existen solicitudes de excursiones o recorridos pendientes de confirmación.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-calendar-check"></i> <span data-i18n="environmental.reserves">Reservas</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-calendar-xmark ops-empty-icon"></i><div data-i18n="pages.admin.view11Reservas.div1" class="ops-empty-title">0 Reservas Pendientes</div><div data-i18n="pages.admin.view11Reservas.div2" class="ops-empty-desc">No existen solicitudes de excursiones o recorridos pendientes de confirmación.</div></div>
         </section>
         <section class="ops-view-panel" id="view-12-pagos">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-receipt"></i> Pagos &amp; Comprobantes</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-hand-holding-dollar ops-empty-icon"></i><div class="ops-empty-title">Ningún pago está pendiente actualmente</div><div class="ops-empty-desc">Solo se procesan comprobantes de transferencias y pagos verificados con respaldo fiscal.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-receipt"></i> <span data-i18n="pages.admin.opsSidebarNav.span9">Pagos &amp; Comprobantes</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-hand-holding-dollar ops-empty-icon"></i><div data-i18n="pages.admin.view12Pagos.div1" class="ops-empty-title">Ningún pago está pendiente actualmente</div><div data-i18n="pages.admin.view12Pagos.div2" class="ops-empty-desc">Solo se procesan comprobantes de transferencias y pagos verificados con respaldo fiscal.</div></div>
         </section>
         <section class="ops-view-panel" id="view-13-usuarios">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-users"></i> Directorio de Usuarios</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-user-shield ops-empty-icon"></i><div class="ops-empty-title">Gestión Segura de Identidad</div><div class="ops-empty-desc">Control de roles y suspensión bajo políticas de privacidad y mínimo privilegio.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-users"></i> <span data-i18n="pages.admin.view13Usuarios.h11">Directorio de Usuarios</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-user-shield ops-empty-icon"></i><div data-i18n="pages.admin.view13Usuarios.div1" class="ops-empty-title">Gestión Segura de Identidad</div><div data-i18n="pages.admin.view13Usuarios.div2" class="ops-empty-desc">Control de roles y suspensión bajo políticas de privacidad y mínimo privilegio.</div></div>
         </section>
         <section class="ops-view-panel" id="view-14-guias">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-person-hiking"></i> Guías / Baqueanos</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-person-walking-arrow-right ops-empty-icon"></i><div class="ops-empty-title">Directorio Campesino</div><div class="ops-empty-desc">Comprobación de guías locales certificados nativos de cada territorio.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-person-hiking"></i> <span data-i18n="pages.admin.opsSidebarNav.span12">Guías / Baqueanos</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-person-walking-arrow-right ops-empty-icon"></i><div data-i18n="pages.admin.view14Guias.div1" class="ops-empty-title">Directorio Campesino</div><div data-i18n="pages.admin.view14Guias.div2" class="ops-empty-desc">Comprobación de guías locales certificados nativos de cada territorio.</div></div>
         </section>
         <section class="ops-view-panel" id="view-15-gastronomia">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-utensils"></i> Gastronomía Ancestral</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-bowl-food ops-empty-icon"></i><div class="ops-empty-title">Sazón Tradicional</div><div class="ops-empty-desc">Recetas, comederos típicos y cocineras populares georreferenciadas.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-utensils"></i> <span data-i18n="footer.ancestral_gastronomy">Gastronomía Ancestral</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-bowl-food ops-empty-icon"></i><div data-i18n="pages.admin.view15Gastronomia.div1" class="ops-empty-title">Sazón Tradicional</div><div data-i18n="pages.admin.view15Gastronomia.div2" class="ops-empty-desc">Recetas, comederos típicos y cocineras populares georreferenciadas.</div></div>
         </section>
         <section class="ops-view-panel" id="view-16-historia">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-scroll"></i> Historia Patria</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-landmark ops-empty-icon"></i><div class="ops-empty-title">Línea de Tiempo Soberana</div><div class="ops-empty-desc">Hitos históricos, héroes nacionales y patrimonio territorial verificable.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-scroll"></i> <span data-i18n="pages.admin.opsSidebarNav.span13">Historia Patria</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-landmark ops-empty-icon"></i><div data-i18n="pages.admin.view16Historia.div1" class="ops-empty-title">Línea de Tiempo Soberana</div><div data-i18n="pages.admin.view16Historia.div2" class="ops-empty-desc">Hitos históricos, héroes nacionales y patrimonio territorial verificable.</div></div>
         </section>
         <section class="ops-view-panel" id="view-17-cultura">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-guitar"></i> Cultura &amp; Sonido</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-music ops-empty-icon"></i><div class="ops-empty-title">Patrimonio Sonoro</div><div class="ops-empty-desc">Archivo de marimba, danzas tradicionales y folclore nicaragüense.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-guitar"></i> <span data-i18n="pages.admin.opsSidebarNav.span14">Cultura &amp; Sonido</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-music ops-empty-icon"></i><div data-i18n="pages.admin.view17Cultura.div1" class="ops-empty-title">Patrimonio Sonoro</div><div data-i18n="pages.admin.view17Cultura.div2" class="ops-empty-desc">Archivo de marimba, danzas tradicionales y folclore nicaragüense.</div></div>
         </section>
         <section class="ops-view-panel" id="view-18-sostenibilidad">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-seedling"></i> Sostenibilidad</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-tree ops-empty-icon"></i><div class="ops-empty-title">Huella Cero &amp; Conservación</div><div class="ops-empty-desc">Indicadores ecológicos y cálculo de retorno rural campesino.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-seedling"></i> <span data-i18n="home.pillars.sustainability.title">Sostenibilidad</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-tree ops-empty-icon"></i><div data-i18n="pages.admin.view18Sostenibilidad.div1" class="ops-empty-title">Huella Cero &amp; Conservación</div><div data-i18n="pages.admin.view18Sostenibilidad.div2" class="ops-empty-desc">Indicadores ecológicos y cálculo de retorno rural campesino.</div></div>
         </section>
         <section class="ops-view-panel" id="view-19-ambiental">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-leaf"></i> Campaña Ambiental</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-bullhorn ops-empty-icon"></i><div class="ops-empty-title">0 Denuncias Ambientales Activas</div><div class="ops-empty-desc">No se registran denuncias ciudadanas pendientes de canalización municipal.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-leaf"></i> <span data-i18n="pages.admin.opsSidebarNav.span15">Campaña Ambiental</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-bullhorn ops-empty-icon"></i><div data-i18n="pages.admin.view19Ambiental.div1" class="ops-empty-title">0 Denuncias Ambientales Activas</div><div data-i18n="pages.admin.view19Ambiental.div2" class="ops-empty-desc">No se registran denuncias ciudadanas pendientes de canalización municipal.</div></div>
         </section>
         <section class="ops-view-panel" id="view-21-multimedia">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-photo-film"></i> Media Library</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-cloud-arrow-up ops-empty-icon"></i><div class="ops-empty-title">Almacenamiento Cloud Storage</div><div class="ops-empty-desc">Gestor de fotografías, mapas e insignias en bucket oficial sin duplicación.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-photo-film"></i> <span data-i18n="pages.admin.opsSidebarNav.span17">Media Library</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-cloud-arrow-up ops-empty-icon"></i><div data-i18n="pages.admin.view21Multimedia.div1" class="ops-empty-title">Almacenamiento Cloud Storage</div><div data-i18n="pages.admin.view21Multimedia.div2" class="ops-empty-desc">Gestor de fotografías, mapas e insignias en bucket oficial sin duplicación.</div></div>
         </section>
         <section class="ops-view-panel" id="view-22-notificaciones">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-bullhorn"></i> Notificaciones</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-envelope-open-text ops-empty-icon"></i><div class="ops-empty-title">Centro de Comunicaciones</div><div class="ops-empty-desc">Emisión segmentada a usuarios web y terminales Android autorizados.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-bullhorn"></i> <span data-i18n="app.nav.notifications">Notificaciones</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-envelope-open-text ops-empty-icon"></i><div data-i18n="pages.admin.view22Notificaciones.div1" class="ops-empty-title">Centro de Comunicaciones</div><div data-i18n="pages.admin.view22Notificaciones.div2" class="ops-empty-desc">Emisión segmentada a usuarios web y terminales Android autorizados.</div></div>
         </section>
         <section class="ops-view-panel" id="view-23-ai">
           <div class="ops-view-header">
             <div class="ops-view-title-group">
-              <h1><i class="fa-solid fa-brain" style="color: var(--bq-secondary);"></i> BAQUEANO AI Center &amp; Ops IA</h1>
-              <p class="ops-view-subtitle">SUPERVISIÓN DEL BAQUEANO DIGITAL TURÍSTICO · COPILOTO ADMINISTRATIVO DE OSCAR · TELEMETRÍA DE MODELOS</p>
+              <h1><i class="fa-solid fa-brain" style="color: var(--bq-secondary);"></i> <span data-i18n="pages.admin.view23Ai.h11">BAQUEANO AI Center &amp; Ops IA</span></h1>
+              <p data-i18n="pages.admin.view23Ai.p1" class="ops-view-subtitle">SUPERVISIÓN DEL BAQUEANO DIGITAL TURÍSTICO · COPILOTO ADMINISTRATIVO DE OSCAR · TELEMETRÍA DE MODELOS</p>
             </div>
             <div class="ops-view-actions">
-              <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.speakBriefing()"><i class="fa-solid fa-volume-high"></i> Escuchar Briefing</button>
-              <button type="button" class="btn-ops-matte primary" onclick="window.BaqueanoOpsIA.openCommanderModal()"><i class="fa-solid fa-terminal"></i> Abrir Commander Modal</button>
+              <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.speakBriefing()"><i class="fa-solid fa-volume-high"></i> <span data-i18n="pages.admin.view23Ai.button1">Escuchar Briefing</span></button>
+              <button type="button" class="btn-ops-matte primary" onclick="window.BaqueanoOpsIA.openCommanderModal()"><i class="fa-solid fa-terminal"></i> <span data-i18n="pages.admin.view23Ai.button2">Abrir Commander Modal</span></button>
             </div>
           </div>
 
           <!-- Insignia de Entorno de Demostración para Jurado -->
           <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(246, 94, 1, 0.16); border: 1px solid rgba(246, 94, 1, 0.45); border-radius: 8px; padding: 0.4rem 0.85rem; font-size: 0.75rem; color: #F4E6C1; margin-bottom: 1.25rem;">
             <i class="fa-solid fa-flask" style="color: #F65E01;"></i>
-            <span id="opsAiDataNote"><strong>Telemetría de BAQUI:</strong> se muestran solo datos registrados en Supabase (<code>ai_messages</code>). Sin registros, cada indicador dice "Sin datos".</span>
+            <span id="opsAiDataNote"><strong data-i18n="pages.admin.opsAiDataNote.strong1">Telemetría de BAQUI:</strong> <span data-i18n="pages.admin.opsAiDataNote.span1">se muestran solo datos registrados en Supabase (</span><code>ai_messages</code><span data-i18n="pages.admin.opsAiDataNote.span2">). Sin registros, cada indicador dice "Sin datos".</span></span>
           </div>
 
           <!-- Métricas del Motor de IA (Últimas 24 Horas) -->
           <div class="ops-kpi-grid-matte" style="margin-bottom: 1.5rem;">
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header">
-                <span class="ops-kpi-title">Interacciones BAQUI registradas</span>
+                <span data-i18n="pages.admin.view23Ai.span1" class="ops-kpi-title">Interacciones BAQUI registradas</span>
                 <div class="ops-kpi-icon-wrap"><i class="fa-solid fa-comments"></i></div>
               </div>
               <div class="ops-kpi-value-num" data-ops-kpi="ai_messages">—</div>
-              <div class="ops-kpi-subtext" data-ops-kpi-note="ai_messages">Cargando desde Supabase…</div>
+              <div data-i18n="pages.admin.view23Ai.div1" class="ops-kpi-subtext" data-ops-kpi-note="ai_messages">Cargando desde Supabase…</div>
             </div>
 
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header">
-                <span class="ops-kpi-title">Proveedores usados</span>
+                <span data-i18n="pages.admin.view23Ai.span2" class="ops-kpi-title">Proveedores usados</span>
                 <div class="ops-kpi-icon-wrap" style="color: #10B981;"><i class="fa-solid fa-microchip"></i></div>
               </div>
               <div class="ops-kpi-value-num" data-ops-kpi="ai_provider">—</div>
-              <div class="ops-kpi-subtext" data-ops-kpi-note="ai_provider">Cargando desde Supabase…</div>
+              <div data-i18n="pages.admin.view23Ai.div1" class="ops-kpi-subtext" data-ops-kpi-note="ai_provider">Cargando desde Supabase…</div>
             </div>
 
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header">
-                <span class="ops-kpi-title">Tokens registrados</span>
+                <span data-i18n="pages.admin.view23Ai.span3" class="ops-kpi-title">Tokens registrados</span>
                 <div class="ops-kpi-icon-wrap"><i class="fa-solid fa-shield"></i></div>
               </div>
               <div class="ops-kpi-value-num" data-ops-kpi="ai_tokens">—</div>
-              <div class="ops-kpi-subtext" data-ops-kpi-note="ai_tokens">Cargando desde Supabase…</div>
+              <div data-i18n="pages.admin.view23Ai.div1" class="ops-kpi-subtext" data-ops-kpi-note="ai_tokens">Cargando desde Supabase…</div>
             </div>
 
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header">
-                <span class="ops-kpi-title">Latencia media real</span>
+                <span data-i18n="pages.admin.view23Ai.span4" class="ops-kpi-title">Latencia media real</span>
                 <div class="ops-kpi-icon-wrap" style="color: var(--bq-secondary);"><i class="fa-solid fa-stopwatch"></i></div>
               </div>
               <div class="ops-kpi-value-num" data-ops-kpi="ai_latency">—</div>
-              <div class="ops-kpi-subtext" data-ops-kpi-note="ai_latency">Cargando desde Supabase…</div>
+              <div data-i18n="pages.admin.view23Ai.div1" class="ops-kpi-subtext" data-ops-kpi-note="ai_latency">Cargando desde Supabase…</div>
             </div>
           </div>
 
@@ -784,28 +784,28 @@
             <!-- Panel Interactivo Baqueano Commander -->
             <div class="ops-table-container-matte" style="padding: 1.5rem; display: flex; flex-direction: column;">
               <h3 style="font-size: 1rem; color: #FFFFFF; margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fa-solid fa-terminal" style="color: var(--bq-accent);"></i> Baqueano Commander (Consola Activa)
+                <i class="fa-solid fa-terminal" style="color: var(--bq-accent);"></i> <span data-i18n="pages.admin.view23Ai.h31">Baqueano Commander (Consola Activa)</span>
               </h3>
-              <p style="font-size: 0.78rem; color: var(--ops-text-secondary); margin: 0 0 1rem 0;">
+              <p data-i18n="pages.admin.view23Ai.p2" style="font-size: 0.78rem; color: var(--ops-text-secondary); margin: 0 0 1rem 0;">
                 Pregúntale a tu asistente personal sobre el estado operativo, reservas, negocios o simula cambios.
               </p>
 
               <div id="commanderInlineFeed" style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1rem; min-height: 220px; max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem;">
                 <div style="background: var(--ops-surface-1); border-left: 3px solid var(--bq-secondary); border-radius: var(--ops-radius-sm); padding: 0.65rem 0.85rem; font-size: 0.82rem; color: var(--ops-text-primary);">
-                  <strong>Baqueano Ops IA:</strong> <span data-ops-operator>Administrador</span>, consultá el <strong>Estado del Sistema</strong> para ver la salud real de cada servicio. ¿Qué deseas supervisar en este momento?
+                  <strong data-i18n="pages.admin.commanderInlineFeed.strong1">Baqueano Ops IA:</strong> <span data-i18n="pages.admin.opsTopUserName.span1" data-ops-operator>Administrador</span><span data-i18n="pages.admin.commanderInlineFeed.div1">, consultá el</span> <strong data-i18n="pages.admin.opsSidebarNav.span28">Estado del Sistema</strong> <span data-i18n="pages.admin.commanderInlineFeed.div2">para ver la salud real de cada servicio. ¿Qué deseas supervisar en este momento?</span>
                 </div>
               </div>
 
               <!-- Quick query chips -->
               <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.85rem;">
-                <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('¿Cómo está BAQUEANO?')" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">¿Cómo está BAQUEANO?</button>
-                <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('¿Qué pasó hoy?')" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">Resumen de hoy</button>
-                <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('Revisar reservas pendientes')" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">Reservas pendientes</button>
-                <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('Simular impacto de actualización')" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">Modo Simulación</button>
+                <button data-i18n="pages.admin.view23Ai.button3" type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('¿Cómo está BAQUEANO?')" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">¿Cómo está BAQUEANO?</button>
+                <button data-i18n="pages.admin.view23Ai.button4" type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('¿Qué pasó hoy?')" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">Resumen de hoy</button>
+                <button data-i18n="pages.admin.view23Ai.button5" type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('Revisar reservas pendientes')" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">Reservas pendientes</button>
+                <button data-i18n="pages.admin.view23Ai.button6" type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsIA.triggerPredefinedCommand('Simular impacto de actualización')" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">Modo Simulación</button>
               </div>
 
               <div style="display: flex; gap: 0.5rem;">
-                <input type="text" id="commanderInlineInput" placeholder="Escribe tu orden para Ops IA..." onkeydown="if(event.key==='Enter'){window.BaqueanoOpsIA.triggerPredefinedCommand(this.value); this.value='';}" style="flex: 1; background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.6rem 0.85rem; color: #FFFFFF; font-size: 0.82rem; outline: none;">
+                <input data-i18n-placeholder="pages.admin.commanderInlineInput.inputPlaceholder1" type="text" id="commanderInlineInput" placeholder="Escribe tu orden para Ops IA..." onkeydown="if(event.key==='Enter'){window.BaqueanoOpsIA.triggerPredefinedCommand(this.value); this.value='';}" style="flex: 1; background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.6rem 0.85rem; color: #FFFFFF; font-size: 0.82rem; outline: none;">
                 <button type="button" class="btn-ops-matte primary" onclick="const input=document.getElementById('commanderInlineInput'); if(input && input.value){window.BaqueanoOpsIA.triggerPredefinedCommand(input.value); input.value='';}" style="padding: 0.6rem 1rem;">
                   <i class="fa-solid fa-paper-plane"></i>
                 </button>
@@ -815,44 +815,44 @@
             <!-- Supervisión RAG & Fuentes Oficiales -->
             <div class="ops-table-container-matte" style="padding: 1.5rem;">
               <h3 style="font-size: 1rem; color: #FFFFFF; margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fa-solid fa-database" style="color: var(--bq-secondary);"></i> Fuentes de Conocimiento RAG &amp; Calidad
+                <i class="fa-solid fa-database" style="color: var(--bq-secondary);"></i> <span data-i18n="pages.admin.view23Ai.h32">Fuentes de Conocimiento RAG &amp; Calidad</span>
               </h3>
-              <p style="font-size: 0.78rem; color: var(--ops-text-secondary); margin: 0 0 1rem 0;">
+              <p data-i18n="pages.admin.view23Ai.p3" style="font-size: 0.78rem; color: var(--ops-text-secondary); margin: 0 0 1rem 0;">
                 Validación de documentos que alimentan las respuestas del Baqueano Digital turístico.
               </p>
 
               <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                 <div style="background: var(--ops-surface-2); padding: 0.75rem 1rem; border-radius: var(--ops-radius-md); border: 1px solid var(--ops-border-subtle); display: flex; justify-content: space-between; align-items: center;">
                   <div>
-                    <div style="font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">Base Territorial Baqueano</div>
-                    <div style="font-size: 0.72rem; color: var(--ops-text-muted);">29 destinos, 153 municipios, tarifas Ley 306</div>
+                    <div data-i18n="pages.admin.view23Ai.div2" style="font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">Base Territorial Baqueano</div>
+                    <div data-i18n="pages.admin.view23Ai.div3" style="font-size: 0.72rem; color: var(--ops-text-muted);">29 destinos, 153 municipios, tarifas Ley 306</div>
                   </div>
-                  <span class="ops-badge-status published">🟢 Verificado</span>
+                  <span data-i18n="pages.admin.view23Ai.span5" class="ops-badge-status published">🟢 Verificado</span>
                 </div>
 
                 <div style="background: var(--ops-surface-2); padding: 0.75rem 1rem; border-radius: var(--ops-radius-md); border: 1px solid var(--ops-border-subtle); display: flex; justify-content: space-between; align-items: center;">
                   <div>
-                    <div style="font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">INTUR &amp; VisitaNicaragua</div>
-                    <div style="font-size: 0.72rem; color: var(--ops-text-muted);">Rutas nacionales, reservas naturales, calendario patrio</div>
+                    <div data-i18n="pages.admin.view23Ai.div4" style="font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">INTUR &amp; VisitaNicaragua</div>
+                    <div data-i18n="pages.admin.view23Ai.div5" style="font-size: 0.72rem; color: var(--ops-text-muted);">Rutas nacionales, reservas naturales, calendario patrio</div>
                   </div>
-                  <span class="ops-badge-status published">🟢 Conectado</span>
+                  <span data-i18n="pages.admin.view23Ai.span6" class="ops-badge-status published">🟢 Conectado</span>
                 </div>
 
                 <div style="background: var(--ops-surface-2); padding: 0.75rem 1rem; border-radius: var(--ops-radius-md); border: 1px solid var(--ops-border-subtle); display: flex; justify-content: space-between; align-items: center;">
                   <div>
                     <div style="font-size: 0.82rem; font-weight: 600; color: #FFFFFF;">MARENA &amp; UNESCO</div>
-                    <div style="font-size: 0.72rem; color: var(--ops-text-muted);">Geoparques, áreas protegidas, normativas ambientales</div>
+                    <div data-i18n="pages.admin.view23Ai.div6" style="font-size: 0.72rem; color: var(--ops-text-muted);">Geoparques, áreas protegidas, normativas ambientales</div>
                   </div>
-                  <span class="ops-badge-status published">🟢 Conectado</span>
+                  <span data-i18n="pages.admin.view23Ai.span6" class="ops-badge-status published">🟢 Conectado</span>
                 </div>
 
                 <!-- Detección de Vacíos de Información -->
                 <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: var(--ops-radius-md); padding: 0.85rem 1rem; margin-top: 0.5rem;">
                   <div style="font-size: 0.78rem; font-weight: 700; color: #F59E0B; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.4rem;">
-                    <i class="fa-solid fa-triangle-exclamation"></i> Sugerencia de Contenido Detectada
+                    <i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="pages.admin.view23Ai.div7">Sugerencia de Contenido Detectada</span>
                   </div>
                   <div style="font-size: 0.76rem; color: var(--ops-text-primary); line-height: 1.45;">
-                    27 viajeros consultaron por <em>transporte y ferrys Managua–Ometepe</em> esta semana. Se sugiere enriquecer la ficha municipal de Rivas con frecuencias y costos actualizados.
+                    <span data-i18n="pages.admin.view23Ai.div8">27 viajeros consultaron por</span> <em data-i18n="pages.admin.view23Ai.em1">transporte y ferrys Managua–Ometepe</em> <span data-i18n="pages.admin.view23Ai.div9">esta semana. Se sugiere enriquecer la ficha municipal de Rivas con frecuencias y costos actualizados.</span>
                   </div>
                 </div>
               </div>
@@ -860,54 +860,54 @@
           </div>
         </section>
         <section class="ops-view-panel" id="view-26-analitica">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-chart-line"></i> Analítica Web vs Android</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-chart-simple ops-empty-icon"></i><div class="ops-empty-title">Analítica Agregada &amp; Ética</div><div class="ops-empty-desc">Medición sin invasión a la privacidad, combinando Firebase Analytics y Firestore.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-chart-line"></i> <span data-i18n="pages.admin.opsSidebarNav.span21">Analítica Web vs Android</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-chart-simple ops-empty-icon"></i><div data-i18n="pages.admin.view26Analitica.div1" class="ops-empty-title">Analítica Agregada &amp; Ética</div><div data-i18n="pages.admin.view26Analitica.div2" class="ops-empty-desc">Medición sin invasión a la privacidad, combinando Firebase Analytics y Firestore.</div></div>
         </section>
         <section class="ops-view-panel" id="view-27-auditoria">
           <div class="ops-view-header">
             <div class="ops-view-title-group">
-              <h1><i class="fa-solid fa-file-shield" style="color: var(--bq-secondary);"></i> Historial y Registro de Auditoría</h1>
-              <p class="ops-view-subtitle">AUDITORÍA DEL SERVIDOR EN SUPABASE (ARRIBA) · REGISTRO HEREDADO DE FIRESTORE (ABAJO)</p>
+              <h1><i class="fa-solid fa-file-shield" style="color: var(--bq-secondary);"></i> <span data-i18n="pages.admin.view27Auditoria.h11">Historial y Registro de Auditoría</span></h1>
+              <p data-i18n="pages.admin.view27Auditoria.p1" class="ops-view-subtitle">AUDITORÍA DEL SERVIDOR EN SUPABASE (ARRIBA) · REGISTRO HEREDADO DE FIRESTORE (ABAJO)</p>
             </div>
             <div class="ops-view-actions">
-              <button type="button" class="btn-ops-matte" style="color:#ef4444; border-color:rgba(239,68,68,0.4);" onclick="window.BaqueanoOpsEngine.clearAuditLogs()" title="Vaciar todo el historial">
-                <i class="fa-solid fa-trash-can"></i> Vaciar Historial
+              <button data-i18n-title="pages.admin.view27Auditoria.buttonTitle1" type="button" class="btn-ops-matte" style="color:#ef4444; border-color:rgba(239,68,68,0.4);" onclick="window.BaqueanoOpsEngine.clearAuditLogs()" title="Vaciar todo el historial">
+                <i class="fa-solid fa-trash-can"></i> <span data-i18n="pages.admin.view27Auditoria.button1">Vaciar Historial</span>
               </button>
             </div>
           </div>
-          <div class="ops-empty-state"><i class="fa-solid fa-clock-rotate-left ops-empty-icon"></i><div class="ops-empty-title">Cargando Historial de Auditoría...</div><div class="ops-empty-desc">Sincronizando registros con Cloud Firestore y Supabase.</div></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-clock-rotate-left ops-empty-icon"></i><div data-i18n="pages.admin.view27Auditoria.div1" class="ops-empty-title">Cargando Historial de Auditoría...</div><div data-i18n="pages.admin.view27Auditoria.div2" class="ops-empty-desc">Sincronizando registros con Cloud Firestore y Supabase.</div></div>
         </section>
         <section class="ops-view-panel" id="view-28-seguridad">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-shield-halved"></i> Seguridad &amp; RBAC</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-user-lock ops-empty-icon"></i><div class="ops-empty-title">Políticas de Acceso Estricto</div><div class="ops-empty-desc">Reglas de mínimo privilegio, tokens verificados y prevención contra escalada.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-shield-halved"></i> <span data-i18n="pages.admin.opsSidebarNav.span23">Seguridad &amp; RBAC</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-user-lock ops-empty-icon"></i><div data-i18n="pages.admin.view28Seguridad.div1" class="ops-empty-title">Políticas de Acceso Estricto</div><div data-i18n="pages.admin.view28Seguridad.div2" class="ops-empty-desc">Reglas de mínimo privilegio, tokens verificados y prevención contra escalada.</div></div>
         </section>
         <section class="ops-view-panel" id="view-29-fuentes">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-building-columns"></i> Fuentes Oficiales</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-landmark-dome ops-empty-icon"></i><div class="ops-empty-title">Organismos Oficiales Enlazados</div><div class="ops-empty-desc">INTUR, MARENA, INETER y alcaldías municipales comunitarias.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-building-columns"></i> <span data-i18n="pages.admin.opsSidebarNav.span24">Fuentes Oficiales</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-landmark-dome ops-empty-icon"></i><div data-i18n="pages.admin.view29Fuentes.div1" class="ops-empty-title">Organismos Oficiales Enlazados</div><div data-i18n="pages.admin.view29Fuentes.div2" class="ops-empty-desc">INTUR, MARENA, INETER y alcaldías municipales comunitarias.</div></div>
         </section>
         <section class="ops-view-panel" id="view-30-legislacion">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-scale-balanced"></i> Legislación &amp; Ley 306</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-gavel ops-empty-icon"></i><div class="ops-empty-title">Marco Legal Ecoturístico</div><div class="ops-empty-desc">Incentivos de la Ley No. 306 y transparencia territorial Ley 1210 y 1211.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-scale-balanced"></i> <span data-i18n="pages.admin.view30Legislacion.h11">Legislación &amp; Ley 306</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-gavel ops-empty-icon"></i><div data-i18n="pages.admin.view30Legislacion.div1" class="ops-empty-title">Marco Legal Ecoturístico</div><div data-i18n="pages.admin.view30Legislacion.div2" class="ops-empty-desc">Incentivos de la Ley No. 306 y transparencia territorial Ley 1210 y 1211.</div></div>
         </section>
         <section class="ops-view-panel" id="view-31-seo">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-magnifying-glass-chart"></i> SEO Center</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-tags ops-empty-icon"></i><div class="ops-empty-title">Metadatos &amp; OpenGraph</div><div class="ops-empty-desc">Títulos canónicos, descripciones estructuradas e indexación sin tocar código.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-magnifying-glass-chart"></i> <span data-i18n="pages.admin.opsSidebarNav.span26">SEO Center</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-tags ops-empty-icon"></i><div data-i18n="pages.admin.view31Seo.div1" class="ops-empty-title">Metadatos &amp; OpenGraph</div><div data-i18n="pages.admin.view31Seo.div2" class="ops-empty-desc">Títulos canónicos, descripciones estructuradas e indexación sin tocar código.</div></div>
         </section>
         <section class="ops-view-panel" id="view-32-configuracion">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-sliders"></i> Configuración Global</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-gears ops-empty-icon"></i><div class="ops-empty-title">Parámetros del Sistema</div><div class="ops-empty-desc">Teléfonos de emergencia, tasas bimoneda y conmutadores de características.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-sliders"></i> <span data-i18n="pages.admin.opsSidebarNav.span27">Configuración Global</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-gears ops-empty-icon"></i><div data-i18n="pages.admin.view32Configuracion.div1" class="ops-empty-title">Parámetros del Sistema</div><div data-i18n="pages.admin.view32Configuracion.div2" class="ops-empty-desc">Teléfonos de emergencia, tasas bimoneda y conmutadores de características.</div></div>
         </section>
         <section class="ops-view-panel" id="view-33-estado">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-server"></i> Estado del Sistema</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-heart-pulse ops-empty-icon" style="color: var(--bq-jungle);"></i><div class="ops-empty-title">Servicios en Operación</div><div class="ops-empty-desc">Firebase Auth (Activo) • Cloud Firestore (Activo) • Storage (Activo) • Hosting (Activo).</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-server"></i> <span data-i18n="pages.admin.opsSidebarNav.span28">Estado del Sistema</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-heart-pulse ops-empty-icon" style="color: var(--bq-jungle);"></i><div data-i18n="pages.admin.view33Estado.div1" class="ops-empty-title">Servicios en Operación</div><div data-i18n="pages.admin.view33Estado.div2" class="ops-empty-desc">Firebase Auth (Activo) • Cloud Firestore (Activo) • Storage (Activo) • Hosting (Activo).</div></div>
         </section>
         <section class="ops-view-panel" id="view-36-comunidad">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-people-group"></i> Comunidad · Moderación</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-people-group ops-empty-icon"></i><div class="ops-empty-title">Experiencias de viajeros</div><div class="ops-empty-desc">Aprobación de publicaciones, denuncias y comentarios de la comunidad.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-people-group"></i> <span data-i18n="pages.admin.opsSidebarNav.span11">Comunidad · Moderación</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-people-group ops-empty-icon"></i><div data-i18n="testimonials.title" class="ops-empty-title">Experiencias de viajeros</div><div data-i18n="pages.admin.view36Comunidad.div1" class="ops-empty-desc">Aprobación de publicaciones, denuncias y comentarios de la comunidad.</div></div>
         </section>
         <section class="ops-view-panel" id="view-34-tarifas">
-          <div class="ops-view-header"><h1><i class="fa-solid fa-tags"></i> Gestión de Tarifas</h1></div>
-          <div class="ops-empty-state"><i class="fa-solid fa-database ops-empty-icon"></i><div class="ops-empty-title">Catálogo verificable de precios</div><div class="ops-empty-desc">Servicios, vigencia, fuente, moneda, disponibilidad y trazabilidad histórica.</div></div>
+          <div class="ops-view-header"><h1><i class="fa-solid fa-tags"></i> <span data-i18n="pages.admin.opsSidebarNav.span29">Gestión de Tarifas</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-database ops-empty-icon"></i><div data-i18n="pages.admin.view34Tarifas.div1" class="ops-empty-title">Catálogo verificable de precios</div><div data-i18n="pages.admin.view34Tarifas.div2" class="ops-empty-desc">Servicios, vigencia, fuente, moneda, disponibilidad y trazabilidad histórica.</div></div>
         </section>
 
         <!-- ═══════════════════════════════════════════════════════════════
@@ -916,18 +916,18 @@
         <section class="ops-view-panel" id="view-35-backup">
           <div class="ops-view-header">
             <div class="ops-view-title-group">
-              <h1><i class="fa-solid fa-cloud-arrow-up" style="color: var(--bq-secondary);"></i> Sistema → Backup y Sincronización</h1>
-              <p class="ops-view-subtitle">ARQUITECTURA FIREBASE FIRST, SUPABASE FALLBACK · AUDITORÍA DE FAILOVER Y RESGUARDO TRANSACCIONAL</p>
+              <h1><i class="fa-solid fa-cloud-arrow-up" style="color: var(--bq-secondary);"></i> <span data-i18n="pages.admin.view35Backup.h11">Sistema → Backup y Sincronización</span></h1>
+              <p data-i18n="pages.admin.view35Backup.p1" class="ops-view-subtitle">ARQUITECTURA FIREBASE FIRST, SUPABASE FALLBACK · AUDITORÍA DE FAILOVER Y RESGUARDO TRANSACCIONAL</p>
             </div>
             <div class="ops-view-actions">
               <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.scrollToSyncErrors()">
-                <i class="fa-solid fa-triangle-exclamation" style="color:var(--bq-accent);"></i> Ver Errores
+                <i class="fa-solid fa-triangle-exclamation" style="color:var(--bq-accent);"></i> <span data-i18n="pages.admin.view35Backup.button1">Ver Errores</span>
               </button>
               <button type="button" class="btn-ops-matte accent" id="btnOpsRetrySync" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.triggerManualBackupSync()">
-                <i class="fa-solid fa-rotate"></i> Reintentar Sincronización
+                <i class="fa-solid fa-rotate"></i> <span data-i18n="pages.admin.btnOpsRetrySync.button1">Reintentar Sincronización</span>
               </button>
               <button type="button" class="btn-ops-matte primary" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.refreshBackupStatus()">
-                <i class="fa-solid fa-arrows-rotate"></i> Actualizar Telemetría
+                <i class="fa-solid fa-arrows-rotate"></i> <span data-i18n="pages.admin.view35Backup.button2">Actualizar Telemetría</span>
               </button>
             </div>
           </div>
@@ -938,16 +938,16 @@
             <div class="ops-table-container-matte" style="padding: 1.25rem; border-top: 3px solid #FFA000;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
                 <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
-                  <i class="fa-solid fa-fire" style="color:#FFA000;"></i> Firebase (Principal)
+                  <i class="fa-solid fa-fire" style="color:#FFA000;"></i> <span data-i18n="pages.admin.view35Backup.strong1">Firebase (Principal)</span>
                 </strong>
-                <span class="ops-badge-status published" id="statusBadgeFirebase">🟢 OPERATIVO</span>
+                <span class="ops-badge-status published" id="statusBadgeFirebase"><span data-i18n="pages.admin.statusBadgeFirebase.span1">🟢 OPERATIVO</span></span>
               </div>
-              <div style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
+              <div data-i18n="pages.admin.view35Backup.div1" style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
                 Auth, Firestore, Hosting, App Check y Secret Manager.
               </div>
               <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--ops-text-muted); border-top:1px solid var(--ops-border-subtle); padding-top:0.6rem;">
-                <span>Estado de Red:</span>
-                <strong id="stateTextFirebase" style="color:var(--bq-jungle);">ONLINE</strong>
+                <span data-i18n="pages.admin.view35Backup.span1">Estado de Red:</span>
+                <strong id="stateTextFirebase" style="color:var(--bq-jungle);"><span data-i18n="pages.admin.stateTextFirebase.strong1">ONLINE</span></strong>
               </div>
             </div>
 
@@ -955,16 +955,16 @@
             <div class="ops-table-container-matte" style="padding: 1.25rem; border-top: 3px solid #3ECF8E;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
                 <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
-                  <i class="fa-solid fa-bolt" style="color:#3ECF8E;"></i> Supabase (Respaldo)
+                  <i class="fa-solid fa-bolt" style="color:#3ECF8E;"></i> <span data-i18n="pages.admin.view35Backup.strong2">Supabase (Respaldo)</span>
                 </strong>
-                <span class="ops-badge-status published" id="statusBadgeSupabase">🟢 OPERATIVO</span>
+                <span class="ops-badge-status published" id="statusBadgeSupabase"><span data-i18n="pages.admin.statusBadgeFirebase.span1">🟢 OPERATIVO</span></span>
               </div>
-              <div style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
+              <div data-i18n="pages.admin.view35Backup.div2" style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
                 PostgreSQL, PostGIS, pgvector, Realtime y Contingencia.
               </div>
               <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--ops-text-muted); border-top:1px solid var(--ops-border-subtle); padding-top:0.6rem;">
-                <span>Estado de Red:</span>
-                <strong id="stateTextSupabase" style="color:var(--bq-jungle);">ONLINE</strong>
+                <span data-i18n="pages.admin.view35Backup.span1">Estado de Red:</span>
+                <strong id="stateTextSupabase" style="color:var(--bq-jungle);"><span data-i18n="pages.admin.stateTextFirebase.strong1">ONLINE</span></strong>
               </div>
             </div>
 
@@ -972,16 +972,16 @@
             <div class="ops-table-container-matte" style="padding: 1.25rem; border-top: 3px solid #4285F4;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
                 <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
-                  <i class="fa-solid fa-box-archive" style="color:#4285F4;"></i> Firebase Storage
+                  <i class="fa-solid fa-box-archive" style="color:#4285F4;"></i> <span data-i18n="pages.admin.view35Backup.strong3">Firebase Storage</span>
                 </strong>
-                <span class="ops-badge-status published" id="statusBadgeFirebaseStorage">🟢 OPERATIVO</span>
+                <span class="ops-badge-status published" id="statusBadgeFirebaseStorage"><span data-i18n="pages.admin.statusBadgeFirebase.span1">🟢 OPERATIVO</span></span>
               </div>
-              <div style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
+              <div data-i18n="pages.admin.view35Backup.div3" style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
                 Almacenamiento primario CDN de imágenes y archivos.
               </div>
               <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--ops-text-muted); border-top:1px solid var(--ops-border-subtle); padding-top:0.6rem;">
-                <span>Estado Bucket:</span>
-                <strong id="stateTextFirebaseStorage" style="color:var(--bq-jungle);">ONLINE</strong>
+                <span data-i18n="pages.admin.view35Backup.span2">Estado Bucket:</span>
+                <strong id="stateTextFirebaseStorage" style="color:var(--bq-jungle);"><span data-i18n="pages.admin.stateTextFirebase.strong1">ONLINE</span></strong>
               </div>
             </div>
 
@@ -989,16 +989,16 @@
             <div class="ops-table-container-matte" style="padding: 1.25rem; border-top: 3px solid #00B4D8;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
                 <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
-                  <i class="fa-solid fa-cloud-arrow-down" style="color:#00B4D8;"></i> Supabase Storage
+                  <i class="fa-solid fa-cloud-arrow-down" style="color:#00B4D8;"></i> <span data-i18n="pages.admin.view35Backup.strong4">Supabase Storage</span>
                 </strong>
-                <span class="ops-badge-status published" id="statusBadgeSupabaseStorage">🟢 OPERATIVO</span>
+                <span class="ops-badge-status published" id="statusBadgeSupabaseStorage"><span data-i18n="pages.admin.statusBadgeFirebase.span1">🟢 OPERATIVO</span></span>
               </div>
-              <div style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
+              <div data-i18n="pages.admin.view35Backup.div4" style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
                 Copia secundaria y espejo con integridad SHA-256.
               </div>
               <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--ops-text-muted); border-top:1px solid var(--ops-border-subtle); padding-top:0.6rem;">
-                <span>Estado Bucket:</span>
-                <strong id="stateTextSupabaseStorage" style="color:var(--bq-jungle);">ONLINE</strong>
+                <span data-i18n="pages.admin.view35Backup.span2">Estado Bucket:</span>
+                <strong id="stateTextSupabaseStorage" style="color:var(--bq-jungle);"><span data-i18n="pages.admin.stateTextFirebase.strong1">ONLINE</span></strong>
               </div>
             </div>
           </div>
@@ -1006,27 +1006,27 @@
           <!-- KPIS DE SINCRONIZACIÓN Y COLA DE CONTINGENCIA -->
           <div class="ops-kpi-grid-matte" style="margin-bottom: 1.5rem;">
             <div class="ops-kpi-card-matte">
-              <div class="ops-kpi-header"><span class="ops-kpi-title">Operaciones Pendientes</span><div class="ops-kpi-icon-wrap" style="color:var(--bq-accent);"><i class="fa-solid fa-hourglass-half"></i></div></div>
+              <div class="ops-kpi-header"><span data-i18n="pages.admin.view35Backup.span3" class="ops-kpi-title">Operaciones Pendientes</span><div class="ops-kpi-icon-wrap" style="color:var(--bq-accent);"><i class="fa-solid fa-hourglass-half"></i></div></div>
               <div class="ops-kpi-value-num" id="kpiSyncPending" style="color:var(--bq-accent);">0</div>
-              <div class="ops-kpi-subtext">En espera de sincronización</div>
+              <div data-i18n="pages.admin.view35Backup.div5" class="ops-kpi-subtext">En espera de sincronización</div>
             </div>
 
             <div class="ops-kpi-card-matte">
-              <div class="ops-kpi-header"><span class="ops-kpi-title">Operaciones Sincronizadas</span><div class="ops-kpi-icon-wrap" style="color:var(--bq-jungle);"><i class="fa-solid fa-circle-check"></i></div></div>
+              <div class="ops-kpi-header"><span data-i18n="pages.admin.view35Backup.span4" class="ops-kpi-title">Operaciones Sincronizadas</span><div class="ops-kpi-icon-wrap" style="color:var(--bq-jungle);"><i class="fa-solid fa-circle-check"></i></div></div>
               <div class="ops-kpi-value-num" id="kpiSyncCompleted" style="color:var(--bq-jungle);">0</div>
-              <div class="ops-kpi-subtext">Confirmadas en base principal</div>
+              <div data-i18n="pages.admin.view35Backup.div6" class="ops-kpi-subtext">Confirmadas en base principal</div>
             </div>
 
             <div class="ops-kpi-card-matte">
-              <div class="ops-kpi-header"><span class="ops-kpi-title">Operaciones Fallidas</span><div class="ops-kpi-icon-wrap" style="color:var(--bq-crimson);"><i class="fa-solid fa-triangle-exclamation"></i></div></div>
+              <div class="ops-kpi-header"><span data-i18n="pages.admin.view35Backup.span5" class="ops-kpi-title">Operaciones Fallidas</span><div class="ops-kpi-icon-wrap" style="color:var(--bq-crimson);"><i class="fa-solid fa-triangle-exclamation"></i></div></div>
               <div class="ops-kpi-value-num" id="kpiSyncFailed" style="color:var(--bq-crimson);">0</div>
-              <div class="ops-kpi-subtext">Requieren reintento manual</div>
+              <div data-i18n="pages.admin.view35Backup.div7" class="ops-kpi-subtext">Requieren reintento manual</div>
             </div>
 
             <div class="ops-kpi-card-matte">
-              <div class="ops-kpi-header"><span class="ops-kpi-title">Conflictos Detectados</span><div class="ops-kpi-icon-wrap" style="color:#F59E0B;"><i class="fa-solid fa-code-compare"></i></div></div>
+              <div class="ops-kpi-header"><span data-i18n="pages.admin.view35Backup.span6" class="ops-kpi-title">Conflictos Detectados</span><div class="ops-kpi-icon-wrap" style="color:#F59E0B;"><i class="fa-solid fa-code-compare"></i></div></div>
               <div class="ops-kpi-value-num" id="kpiSyncConflicts" style="color:#F59E0B;">0</div>
-              <div class="ops-kpi-subtext">Resueltos por marca de tiempo</div>
+              <div data-i18n="pages.admin.view35Backup.div8" class="ops-kpi-subtext">Resueltos por marca de tiempo</div>
             </div>
           </div>
 
@@ -1034,32 +1034,32 @@
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
             <div class="ops-table-container-matte" style="padding: 1.25rem;">
               <h4 style="color:#fff; margin:0 0 0.75rem 0; font-size:0.92rem; display:flex; align-items:center; gap:0.5rem;">
-                <i class="fa-solid fa-shield-halved" style="color:var(--bq-secondary);"></i> Política de Protección y Resiliencia
+                <i class="fa-solid fa-shield-halved" style="color:var(--bq-secondary);"></i> <span data-i18n="pages.admin.view35Backup.h41">Política de Protección y Resiliencia</span>
               </h4>
               <div style="display:flex; flex-direction:column; gap:0.6rem; font-size:0.82rem; color:var(--ops-text-secondary); line-height:1.5;">
-                <div>• <strong>Principio Rector:</strong> Firebase es el sistema primario. Supabase mantiene el resguardo relacional y geoespacial.</div>
-                <div>• <strong>Conmutador Circuit Breaker:</strong> Monitoreo continuo de conectividad para desviar solicitudes a cola de contingencia local.</div>
-                <div>• <strong>Resiliencia de Datos:</strong> Diseñado para minimizar pérdida de datos mediante cola de contingencia y respaldo secundario.</div>
-                <div>• <strong>Integridad de Archivos:</strong> Hash SHA-256 verificado en cada replicación entre buckets.</div>
+                <div>• <strong data-i18n="pages.admin.view35Backup.strong5">Principio Rector:</strong> <span data-i18n="pages.admin.view35Backup.div9">Firebase es el sistema primario. Supabase mantiene el resguardo relacional y geoespacial.</span></div>
+                <div>• <strong data-i18n="pages.admin.view35Backup.strong6">Conmutador Circuit Breaker:</strong> <span data-i18n="pages.admin.view35Backup.div10">Monitoreo continuo de conectividad para desviar solicitudes a cola de contingencia local.</span></div>
+                <div>• <strong data-i18n="pages.admin.view35Backup.strong7">Resiliencia de Datos:</strong> <span data-i18n="pages.admin.view35Backup.div11">Diseñado para minimizar pérdida de datos mediante cola de contingencia y respaldo secundario.</span></div>
+                <div>• <strong data-i18n="pages.admin.view35Backup.strong8">Integridad de Archivos:</strong> <span data-i18n="pages.admin.view35Backup.div12">Hash SHA-256 verificado en cada replicación entre buckets.</span></div>
               </div>
             </div>
 
             <div class="ops-table-container-matte" style="padding: 1.25rem;">
               <h4 style="color:#fff; margin:0 0 0.75rem 0; font-size:0.92rem; display:flex; align-items:center; gap:0.5rem;">
-                <i class="fa-solid fa-clock-rotate-left" style="color:var(--bq-accent);"></i> Cronología de Sincronización
+                <i class="fa-solid fa-clock-rotate-left" style="color:var(--bq-accent);"></i> <span data-i18n="pages.admin.view35Backup.h42">Cronología de Sincronización</span>
               </h4>
               <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.82rem;">
                 <div style="display:flex; justify-content:space-between; padding-bottom:0.5rem; border-bottom:1px solid var(--ops-border-subtle);">
-                  <span style="color:var(--ops-text-muted);">Último Backup Registrado:</span>
-                  <strong id="txtLastBackupTimestamp" style="color:#fff;">Comprobando...</strong>
+                  <span data-i18n="pages.admin.view35Backup.span7" style="color:var(--ops-text-muted);">Último Backup Registrado:</span>
+                  <strong id="txtLastBackupTimestamp" style="color:#fff;"><span data-i18n="pages.admin.txtLastBackupTimestamp.strong1">Comprobando...</span></strong>
                 </div>
                 <div style="display:flex; justify-content:space-between; padding-bottom:0.5rem; border-bottom:1px solid var(--ops-border-subtle);">
-                  <span style="color:var(--ops-text-muted);">Última Sincronización Exitosa:</span>
-                  <strong id="txtLastSyncTimestamp" style="color:var(--bq-jungle);">Comprobando...</strong>
+                  <span data-i18n="pages.admin.view35Backup.span8" style="color:var(--ops-text-muted);">Última Sincronización Exitosa:</span>
+                  <strong id="txtLastSyncTimestamp" style="color:var(--bq-jungle);"><span data-i18n="pages.admin.txtLastBackupTimestamp.strong1">Comprobando...</span></strong>
                 </div>
                 <div style="display:flex; justify-content:space-between;">
-                  <span style="color:var(--ops-text-muted);">Circuit Breaker Firestore:</span>
-                  <span class="ops-badge-status published" id="badgeCircuitBreaker">CLOSED (Normal)</span>
+                  <span data-i18n="pages.admin.view35Backup.span9" style="color:var(--ops-text-muted);">Circuit Breaker Firestore:</span>
+                  <span class="ops-badge-status published" id="badgeCircuitBreaker"><span data-i18n="pages.admin.badgeCircuitBreaker.span1">CLOSED (Normal)</span></span>
                 </div>
               </div>
             </div>
@@ -1069,25 +1069,25 @@
           <div class="ops-table-container-matte" id="syncErrorsSection">
             <div style="display:flex; justify-content:space-between; align-items:center; padding: 1rem 1.25rem; border-bottom:1px solid var(--ops-border-subtle);">
               <h3 style="margin:0; font-size:0.95rem; color:#fff; display:flex; align-items:center; gap:0.5rem;">
-                <i class="fa-solid fa-list-check" style="color:var(--bq-secondary);"></i> Cola de Operaciones Transaccionales
+                <i class="fa-solid fa-list-check" style="color:var(--bq-secondary);"></i> <span data-i18n="pages.admin.syncErrorsSection.h31">Cola de Operaciones Transaccionales</span>
               </h3>
-              <span style="font-size:0.75rem; color:var(--ops-text-muted);" id="syncOperationsCount">Cargando...</span>
+              <span style="font-size:0.75rem; color:var(--ops-text-muted);" id="syncOperationsCount"><span data-i18n="pages.admin.syncOperationsCount.span1">Cargando...</span></span>
             </div>
             <table class="ops-table-matte">
               <thead>
                 <tr>
-                  <th>ID Operación</th>
-                  <th>Entidad</th>
-                  <th>Tipo</th>
-                  <th>Estado</th>
-                  <th>Reintentos</th>
-                  <th>Último Error / Detalle</th>
-                  <th style="text-align:right;">Fecha</th>
+                  <th data-i18n="pages.admin.syncErrorsSection.th1">ID Operación</th>
+                  <th data-i18n="pages.admin.syncErrorsSection.th2">Entidad</th>
+                  <th data-i18n="pages.admin.view20Sos.th2">Tipo</th>
+                  <th data-i18n="pages.admin.view03Destinos.th2">Estado</th>
+                  <th data-i18n="pages.admin.syncErrorsSection.th3">Reintentos</th>
+                  <th data-i18n="pages.admin.syncErrorsSection.th4">Último Error / Detalle</th>
+                  <th data-i18n="forms.date" style="text-align:right;">Fecha</th>
                 </tr>
               </thead>
               <tbody id="syncOperationsTableBody">
                 <tr>
-                  <td colspan="7" style="text-align:center; padding:2rem; color:var(--ops-text-muted);">
+                  <td data-i18n="pages.admin.syncOperationsTableBody.td1" colspan="7" style="text-align:center; padding:2rem; color:var(--ops-text-muted);">
                     Consultando estado del servicio central de respaldo...
                   </td>
                 </tr>
@@ -1105,30 +1105,30 @@
     <div class="ops-command-modal">
       <div class="ops-command-search-wrap">
         <i class="fa-solid fa-magnifying-glass" style="color: var(--ops-text-muted);"></i>
-        <input type="text" class="ops-command-input" id="opsCommandSearchInput" placeholder="Escribe un comando o navega a un módulo...">
+        <input data-i18n-placeholder="pages.admin.opsCommandSearchInput.inputPlaceholder1" type="text" class="ops-command-input" id="opsCommandSearchInput" placeholder="Escribe un comando o navega a un módulo...">
         <button type="button" class="ops-sidebar-toggle-btn" id="opsCommandCloseBtn"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="ops-command-results-list" id="opsCommandResultsList">
         <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('01-dashboard')">
-          <i class="fa-solid fa-gauge-high"></i> <span>Abrir Dashboard Principal</span>
+          <i class="fa-solid fa-gauge-high"></i> <span data-i18n="pages.admin.opsCommandResultsList.span1">Abrir Dashboard Principal</span>
         </div>
         <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('03-destinos')">
-          <i class="fa-solid fa-mountain"></i> <span>Gestionar Destinos Turísticos</span>
+          <i class="fa-solid fa-mountain"></i> <span data-i18n="pages.admin.opsCommandResultsList.span2">Gestionar Destinos Turísticos</span>
         </div>
         <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('08-negocios')">
-          <i class="fa-solid fa-store"></i> <span>Revisar Negocios Pendientes</span>
+          <i class="fa-solid fa-store"></i> <span data-i18n="pages.admin.opsCommandResultsList.span3">Revisar Negocios Pendientes</span>
         </div>
         <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('20-sos')">
-          <i class="fa-solid fa-tower-broadcast"></i> <span>Monitorear Centro SOS</span>
+          <i class="fa-solid fa-tower-broadcast"></i> <span data-i18n="pages.admin.opsCommandResultsList.span4">Monitorear Centro SOS</span>
         </div>
         <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('24-builder')">
-          <i class="fa-solid fa-cubes"></i> <span>Abrir Website Builder</span>
+          <i class="fa-solid fa-cubes"></i> <span data-i18n="pages.admin.opsCommandResultsList.span5">Abrir Website Builder</span>
         </div>
         <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('27-auditoria')">
-          <i class="fa-solid fa-file-shield"></i> <span>Ver Registro de Auditoría</span>
+          <i class="fa-solid fa-file-shield"></i> <span data-i18n="pages.admin.opsCommandResultsList.span6">Ver Registro de Auditoría</span>
         </div>
         <div class="ops-command-item" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.switchTab('35-backup')">
-          <i class="fa-solid fa-cloud-arrow-up"></i> <span>Sistema: Backup y Sincronización</span>
+          <i class="fa-solid fa-cloud-arrow-up"></i> <span data-i18n="pages.admin.opsCommandResultsList.span7">Sistema: Backup y Sincronización</span>
         </div>
       </div>
     </div>
@@ -1137,11 +1137,11 @@
   <!-- MODAL DE CONFIRMACIÓN REFORZADA (OPS DIALOG) -->
   <div class="ops-modal-backdrop" id="opsConfirmModal">
     <div class="ops-modal-box">
-      <h3 class="ops-modal-title" id="opsConfirmTitle">¿Confirmar Acción?</h3>
-      <p class="ops-modal-desc" id="opsConfirmDesc">Esta acción impactará los registros de la base de datos de producción.</p>
+      <h3 class="ops-modal-title" id="opsConfirmTitle"><span data-i18n="pages.admin.opsConfirmTitle.h31">¿Confirmar Acción?</span></h3>
+      <p class="ops-modal-desc" id="opsConfirmDesc"><span data-i18n="pages.admin.opsConfirmDesc.p1">Esta acción impactará los registros de la base de datos de producción.</span></p>
       <div class="ops-modal-actions">
-        <button type="button" class="btn-ops-matte" id="opsConfirmCancelBtn">Cancelar</button>
-        <button type="button" class="btn-ops-matte primary" id="opsConfirmOkBtn">Confirmar</button>
+        <button type="button" class="btn-ops-matte" id="opsConfirmCancelBtn"><span data-i18n="actions.cancel">Cancelar</span></button>
+        <button type="button" class="btn-ops-matte primary" id="opsConfirmOkBtn"><span data-i18n="actions.confirm">Confirmar</span></button>
       </div>
     </div>
   </div>
@@ -1150,7 +1150,7 @@
   <div class="ops-modal-backdrop" id="opsPreviewModal">
     <div class="ops-modal-box" style="max-width: 680px; width: 92%;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
-        <h3 class="ops-modal-title" id="previewModalTitle" style="margin:0;">Vista Previa</h3>
+        <h3 class="ops-modal-title" id="previewModalTitle" style="margin:0;"><span data-i18n="pages.admin.previewModalTitle.h31">Vista Previa</span></h3>
         <button type="button" class="ops-sidebar-toggle-btn" id="previewModalCloseBtn"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div id="previewModalBody"></div>
@@ -1162,8 +1162,8 @@
     <div class="ops-modal-box" style="max-width: 760px; width: 95%; max-height: 90vh; display: flex; flex-direction: column;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; border-bottom: 1px solid var(--ops-border-subtle); padding-bottom: 1rem;">
         <div>
-          <h3 class="ops-modal-title" id="opsSectionModalTitle" style="margin:0;"><i class="fa-solid fa-layer-group" style="color: var(--bq-accent);"></i> Editar Sección</h3>
-          <span style="font-size:0.78rem; color:var(--ops-text-muted);" id="opsSectionModalSubtitle">Página: index.html</span>
+          <h3 class="ops-modal-title" id="opsSectionModalTitle" style="margin:0;"><i class="fa-solid fa-layer-group" style="color: var(--bq-accent);"></i> <span data-i18n="pages.admin.opsSectionModalTitle.h31">Editar Sección</span></h3>
+          <span style="font-size:0.78rem; color:var(--ops-text-muted);" id="opsSectionModalSubtitle"><span data-i18n="pages.admin.opsSectionModalSubtitle.span1">Página: index.html</span></span>
         </div>
         <button type="button" class="ops-sidebar-toggle-btn" id="opsSectionModalCloseBtn"><i class="fa-solid fa-xmark"></i></button>
       </div>
@@ -1174,25 +1174,25 @@
 
         <div class="ops-form-grid-2">
           <div class="ops-form-group">
-            <label class="ops-form-label" id="lblSecFormTitle">Título de la Sección / Encabezado *</label>
-            <input type="text" class="ops-form-input" id="secFormTitle" placeholder="Ej. El Sendero lo Abren las Comunidades" required>
+            <label class="ops-form-label" id="lblSecFormTitle"><span data-i18n="pages.admin.lblSecFormTitle.label1">Título de la Sección / Encabezado *</span></label>
+            <input data-i18n-placeholder="pages.admin.secFormTitle.inputPlaceholder1" type="text" class="ops-form-input" id="secFormTitle" placeholder="Ej. El Sendero lo Abren las Comunidades" required>
             <span class="ops-form-hint" id="hintSecFormTitle" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
           </div>
           <div class="ops-form-group">
-            <label class="ops-form-label" id="lblSecFormType">Tipo de Componente</label>
+            <label class="ops-form-label" id="lblSecFormType"><span data-i18n="pages.admin.lblSecFormType.label1">Tipo de Componente</span></label>
             <select class="ops-form-select" id="secFormType">
-              <option value="header">Encabezado &amp; Barra de Navegación</option>
-              <option value="hero">Hero Cinemático Principal</option>
-              <option value="content">Bloque de Contenido / Texto</option>
-              <option value="cards">Rejilla de Tarjetas / Destacados</option>
-              <option value="map">Mapa Interactivo &amp; Coordenadas</option>
-              <option value="form">Formulario / Cotizador / Registro</option>
-              <option value="cta">Llamada a la Acción (CTA)</option>
-              <option value="banner">Banner de Anuncio / Alerta</option>
-              <option value="testimonial">Testimonios &amp; Reseñas</option>
-              <option value="footer">Pie de Página / Footer Institucional</option>
-              <option value="custom">Bloque Personalizado</option>
-              <option value="element">Elemento HTML Detectado</option>
+              <option data-i18n="pages.admin.secFormType.option1" value="header">Encabezado &amp; Barra de Navegación</option>
+              <option data-i18n="pages.admin.secFormType.option2" value="hero">Hero Cinemático Principal</option>
+              <option data-i18n="pages.admin.secFormType.option3" value="content">Bloque de Contenido / Texto</option>
+              <option data-i18n="pages.admin.secFormType.option4" value="cards">Rejilla de Tarjetas / Destacados</option>
+              <option data-i18n="pages.admin.secFormType.option5" value="map">Mapa Interactivo &amp; Coordenadas</option>
+              <option data-i18n="pages.admin.secFormType.option6" value="form">Formulario / Cotizador / Registro</option>
+              <option data-i18n="pages.admin.secFormType.option7" value="cta">Llamada a la Acción (CTA)</option>
+              <option data-i18n="pages.admin.secFormType.option8" value="banner">Banner de Anuncio / Alerta</option>
+              <option data-i18n="pages.admin.secFormType.option9" value="testimonial">Testimonios &amp; Reseñas</option>
+              <option data-i18n="pages.admin.secFormType.option10" value="footer">Pie de Página / Footer Institucional</option>
+              <option data-i18n="pages.admin.secFormType.option11" value="custom">Bloque Personalizado</option>
+              <option data-i18n="pages.admin.secFormType.option12" value="element">Elemento HTML Detectado</option>
             </select>
             <span class="ops-form-hint" id="hintSecFormType" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
           </div>
@@ -1200,33 +1200,33 @@
 
         <div class="ops-form-grid-2">
           <div class="ops-form-group">
-            <label class="ops-form-label" id="lblSecFormSubtitle">Subtítulo / Bajada Cultural</label>
-            <input type="text" class="ops-form-input" id="secFormSubtitle" placeholder="Ej. Ecoturismo Auténtico en Nicaragua sin intermediarios">
+            <label class="ops-form-label" id="lblSecFormSubtitle"><span data-i18n="pages.admin.lblSecFormSubtitle.label1">Subtítulo / Bajada Cultural</span></label>
+            <input data-i18n-placeholder="pages.admin.secFormSubtitle.inputPlaceholder1" type="text" class="ops-form-input" id="secFormSubtitle" placeholder="Ej. Ecoturismo Auténtico en Nicaragua sin intermediarios">
             <span class="ops-form-hint" id="hintSecFormSubtitle" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
           </div>
           <div class="ops-form-group">
-            <label class="ops-form-label" id="lblSecFormBadge">Distintivo / Badge Superior</label>
-            <input type="text" class="ops-form-input" id="secFormBadgeText" placeholder="Ej. GPS Satelital 24/7, Ley 306, etc.">
+            <label class="ops-form-label" id="lblSecFormBadge"><span data-i18n="pages.admin.lblSecFormBadge.label1">Distintivo / Badge Superior</span></label>
+            <input data-i18n-placeholder="pages.admin.secFormBadgeText.inputPlaceholder1" type="text" class="ops-form-input" id="secFormBadgeText" placeholder="Ej. GPS Satelital 24/7, Ley 306, etc.">
             <span class="ops-form-hint" id="hintSecFormBadge" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
           </div>
         </div>
 
         <div class="ops-form-group">
-          <label class="ops-form-label" id="lblSecFormContent">Cuerpo del Contenido / Descripción / Texto Legal</label>
-          <textarea class="ops-form-textarea" id="secFormContent" rows="4" placeholder="Texto descriptivo, párrafos, notas de copyright o manifiesto que se despliega en este componente..."></textarea>
+          <label class="ops-form-label" id="lblSecFormContent"><span data-i18n="pages.admin.lblSecFormContent.label1">Cuerpo del Contenido / Descripción / Texto Legal</span></label>
+          <textarea data-i18n-placeholder="pages.admin.secFormContent.textareaPlaceholder1" class="ops-form-textarea" id="secFormContent" rows="4" placeholder="Texto descriptivo, párrafos, notas de copyright o manifiesto que se despliega en este componente..."></textarea>
           <span class="ops-form-hint" id="hintSecFormContent" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
         </div>
 
         <!-- BOTÓN PRINCIPAL (CTA 1) -->
         <div class="ops-form-grid-2">
           <div class="ops-form-group">
-            <label class="ops-form-label" id="lblSecFormCtaText">Botón Principal: Texto</label>
-            <input type="text" class="ops-form-input" id="secFormCtaText" placeholder="Ej. Explorar Nicaragua en 3D">
+            <label class="ops-form-label" id="lblSecFormCtaText"><span data-i18n="pages.admin.lblSecFormCtaText.label1">Botón Principal: Texto</span></label>
+            <input data-i18n-placeholder="pages.admin.secFormCtaText.inputPlaceholder1" type="text" class="ops-form-input" id="secFormCtaText" placeholder="Ej. Explorar Nicaragua en 3D">
             <span class="ops-form-hint" id="hintSecFormCtaText" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
           </div>
           <div class="ops-form-group">
-            <label class="ops-form-label" id="lblSecFormCtaLink">Botón Principal: Enlace / URL</label>
-            <input type="text" class="ops-form-input" id="secFormCtaLink" placeholder="Ej. #mapaVivo3dSection o destinos.html">
+            <label class="ops-form-label" id="lblSecFormCtaLink"><span data-i18n="pages.admin.lblSecFormCtaLink.label1">Botón Principal: Enlace / URL</span></label>
+            <input data-i18n-placeholder="pages.admin.secFormCtaLink.inputPlaceholder1" type="text" class="ops-form-input" id="secFormCtaLink" placeholder="Ej. #mapaVivo3dSection o destinos.html">
             <span class="ops-form-hint" id="hintSecFormCtaLink" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
           </div>
         </div>
@@ -1234,23 +1234,23 @@
         <!-- BOTÓN SECUNDARIO (CTA 2) -->
         <div class="ops-form-grid-2">
           <div class="ops-form-group">
-            <label class="ops-form-label" id="lblSecFormCta2Text">Botón Secundario: Texto (Opcional)</label>
-            <input type="text" class="ops-form-input" id="secFormCta2Text" placeholder="Ej. Descargar APK Android">
+            <label class="ops-form-label" id="lblSecFormCta2Text"><span data-i18n="pages.admin.lblSecFormCta2Text.label1">Botón Secundario: Texto (Opcional)</span></label>
+            <input data-i18n-placeholder="pages.admin.secFormCta2Text.inputPlaceholder1" type="text" class="ops-form-input" id="secFormCta2Text" placeholder="Ej. Descargar APK Android">
             <span class="ops-form-hint" id="hintSecFormCta2Text" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
           </div>
           <div class="ops-form-group">
-            <label class="ops-form-label" id="lblSecFormCta2Link">Botón Secundario: Enlace / URL</label>
-            <input type="text" class="ops-form-input" id="secFormCta2Link" placeholder="Ej. assets/baqueanonicaragua.apk">
+            <label class="ops-form-label" id="lblSecFormCta2Link"><span data-i18n="pages.admin.lblSecFormCta2Link.label1">Botón Secundario: Enlace / URL</span></label>
+            <input data-i18n-placeholder="pages.admin.secFormCta2Link.inputPlaceholder1" type="text" class="ops-form-input" id="secFormCta2Link" placeholder="Ej. assets/baqueanonicaragua.apk">
             <span class="ops-form-hint" id="hintSecFormCta2Link" style="font-size:0.74rem; color:var(--ops-text-muted); margin-top:0.25rem; display:block;"></span>
           </div>
         </div>
 
         <div class="ops-form-group">
-          <label class="ops-form-label" id="lblSecFormImage">URL de Fotografía / Fondo Multimedia</label>
+          <label class="ops-form-label" id="lblSecFormImage"><span data-i18n="pages.admin.lblSecFormImage.label1">URL de Fotografía / Fondo Multimedia</span></label>
           <div style="display:flex; gap:0.5rem;">
-            <input type="text" class="ops-form-input" id="secFormImageUrl" placeholder="https://firebasestorage.googleapis.com/... o assets/images/...">
+            <input data-i18n-placeholder="pages.admin.secFormImageUrl.inputPlaceholder1" type="text" class="ops-form-input" id="secFormImageUrl" placeholder="https://firebasestorage.googleapis.com/... o assets/images/...">
             <button type="button" class="btn-ops-matte accent" id="btnUploadSectionMedia" style="white-space:nowrap;">
-              <i class="fa-solid fa-cloud-arrow-up"></i> Subir a Storage
+              <i class="fa-solid fa-cloud-arrow-up"></i> <span data-i18n="pages.admin.btnUploadSectionMedia.button1">Subir a Storage</span>
             </button>
             <input type="file" id="secFormFileInput" accept="image/*,video/*" style="display:none;">
           </div>
@@ -1258,34 +1258,34 @@
 
         <div class="ops-form-grid-2">
           <div class="ops-form-group">
-            <label class="ops-form-label">Estado de Publicación</label>
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsSectionModalBody.label1">Estado de Publicación</span></label>
             <select class="ops-form-select" id="secFormStatus">
-              <option value="published">Publicado (Visible en el sitio web)</option>
-              <option value="draft">Borrador (Oculto en el sitio web)</option>
-              <option value="trashed">En Papelera (Desactivado)</option>
+              <option data-i18n="pages.admin.secFormStatus.option1" value="published">Publicado (Visible en el sitio web)</option>
+              <option data-i18n="pages.admin.secFormStatus.option2" value="draft">Borrador (Oculto en el sitio web)</option>
+              <option data-i18n="pages.admin.secFormStatus.option3" value="trashed">En Papelera (Desactivado)</option>
             </select>
           </div>
           <div class="ops-form-group">
-            <label class="ops-form-label">Orden de Aparición (Sort Order)</label>
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsSectionModalBody.label2">Orden de Aparición (Sort Order)</span></label>
             <input type="number" class="ops-form-input" id="secFormSortOrder" value="1" min="1">
           </div>
         </div>
       </div>
 
       <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.25rem; border-top: 1px solid var(--ops-border-subtle); padding-top:1rem;">
-        <button type="button" class="btn-ops-matte" id="btnCancelSectionModal">Cancelar</button>
-        <button type="button" class="btn-ops-matte primary" id="btnSaveSectionModal"><i class="fa-solid fa-floppy-disk"></i> Guardar Cambios en Vivo</button>
+        <button type="button" class="btn-ops-matte" id="btnCancelSectionModal"><span data-i18n="actions.cancel">Cancelar</span></button>
+        <button type="button" class="btn-ops-matte primary" id="btnSaveSectionModal"><i class="fa-solid fa-floppy-disk"></i> <span data-i18n="pages.admin.btnSaveSectionModal.button1">Guardar Cambios en Vivo</span></button>
       </div>
     </div>
   </div>
 
   <!-- BARRA FLOTANTE DE ACCIONES MASIVAS -->
   <div class="ops-bulk-bar" id="opsBulkBar">
-    <span class="ops-bulk-count" id="opsBulkCount">0 seleccionados</span>
-    <button type="button" class="btn-ops-matte" id="btnBulkPublish"><i class="fa-solid fa-circle-check"></i> Publicar</button>
-    <button type="button" class="btn-ops-matte" id="btnBulkDraft"><i class="fa-solid fa-file-pen"></i> Borrador</button>
-    <button type="button" class="btn-ops-matte" id="btnBulkArchive"><i class="fa-solid fa-box-archive"></i> Archivar</button>
-    <button type="button" class="btn-ops-matte danger" id="btnBulkTrash"><i class="fa-solid fa-trash-can"></i> Papelera</button>
+    <span class="ops-bulk-count" id="opsBulkCount"><span data-i18n="pages.admin.opsBulkCount.span1">0 seleccionados</span></span>
+    <button type="button" class="btn-ops-matte" id="btnBulkPublish"><i class="fa-solid fa-circle-check"></i> <span data-i18n="pages.admin.btnBulkPublish.button1">Publicar</span></button>
+    <button type="button" class="btn-ops-matte" id="btnBulkDraft"><i class="fa-solid fa-file-pen"></i> <span data-i18n="testimonials.status.draft">Borrador</span></button>
+    <button type="button" class="btn-ops-matte" id="btnBulkArchive"><i class="fa-solid fa-box-archive"></i> <span data-i18n="pages.admin.btnBulkArchive.button1">Archivar</span></button>
+    <button type="button" class="btn-ops-matte danger" id="btnBulkTrash"><i class="fa-solid fa-trash-can"></i> <span data-i18n="pages.admin.btnBulkTrash.button1">Papelera</span></button>
   </div>
 
   <!-- CONTENEDOR DE TOASTS FLOTANTES -->
@@ -1296,19 +1296,19 @@
     <div class="ops-drawer-panel">
       <div class="ops-drawer-header">
         <div>
-          <h2 class="ops-drawer-title" id="opsDrawerTitle">Nuevo Registro</h2>
-          <p class="ops-drawer-subtitle" id="opsDrawerSubtitle">Módulo Administrativo</p>
+          <h2 class="ops-drawer-title" id="opsDrawerTitle"><span data-i18n="pages.admin.opsDrawerTitle.h21">Nuevo Registro</span></h2>
+          <p class="ops-drawer-subtitle" id="opsDrawerSubtitle"><span data-i18n="pages.admin.opsDrawerSubtitle.p1">Módulo Administrativo</span></p>
         </div>
         <button type="button" class="ops-drawer-close-btn" id="opsDrawerCloseBtn"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <!-- Navegación de pestañas del Drawer -->
       <div class="ops-drawer-tabs">
-        <button type="button" class="ops-drawer-tab-btn is-active" data-drawer-tab="general"><i class="fa-solid fa-file-lines"></i> General</button>
-        <button type="button" class="ops-drawer-tab-btn" data-drawer-tab="location"><i class="fa-solid fa-map-location-dot"></i> Territorio</button>
-        <button type="button" class="ops-drawer-tab-btn" data-drawer-tab="pricing"><i class="fa-solid fa-tag"></i> Tarifas &amp; Contacto</button>
-        <button type="button" class="ops-drawer-tab-btn" data-drawer-tab="media"><i class="fa-solid fa-image"></i> Multimedia</button>
-        <button type="button" class="ops-drawer-tab-btn" data-drawer-tab="seo"><i class="fa-solid fa-globe"></i> SEO</button>
+        <button type="button" class="ops-drawer-tab-btn is-active" data-drawer-tab="general"><i class="fa-solid fa-file-lines"></i> <span data-i18n="pages.admin.opsEntityDrawer.button1">General</span></button>
+        <button type="button" class="ops-drawer-tab-btn" data-drawer-tab="location"><i class="fa-solid fa-map-location-dot"></i> <span data-i18n="common.territorio">Territorio</span></button>
+        <button type="button" class="ops-drawer-tab-btn" data-drawer-tab="pricing"><i class="fa-solid fa-tag"></i> <span data-i18n="pages.admin.opsEntityDrawer.button2">Tarifas &amp; Contacto</span></button>
+        <button type="button" class="ops-drawer-tab-btn" data-drawer-tab="media"><i class="fa-solid fa-image"></i> <span data-i18n="pages.admin.opsEntityDrawer.button3">Multimedia</span></button>
+        <button type="button" class="ops-drawer-tab-btn" data-drawer-tab="seo"><i class="fa-solid fa-globe"></i> <span data-i18n="pages.admin.opsEntityDrawer.button4">SEO</span></button>
       </div>
 
       <div class="ops-drawer-body">
@@ -1321,58 +1321,58 @@
             <div style="display:flex; justify-content:space-between; align-items:center;">
               <div>
                 <strong style="color:#00BAF2; font-size:0.92rem; display:flex; align-items:center; gap:0.4rem;">
-                  <i class="fa-solid fa-circle-check"></i> Insignia de Verificación Oficial (Check Manual)
+                  <i class="fa-solid fa-circle-check"></i> <span data-i18n="pages.admin.paneGeneral.strong1">Insignia de Verificación Oficial (Check Manual)</span>
                 </strong>
-                <span style="font-size:0.75rem; color:var(--ops-text-muted); display:block; margin-top:0.2rem;">
+                <span data-i18n="pages.admin.paneGeneral.span1" style="font-size:0.75rem; color:var(--ops-text-muted); display:block; margin-top:0.2rem;">
                   Como en TikTok, Instagram, X y Facebook: activa el check de verificación y autenticidad visible en toda la web y la app.
                 </span>
               </div>
               <label style="cursor:pointer; display:flex; align-items:center; gap:0.5rem; background:var(--ops-surface-2); padding:0.4rem 0.8rem; border-radius:var(--ops-radius-md); border:1px solid rgba(0,186,242,0.4);">
                 <input type="checkbox" id="entityVerified" style="accent-color:#00BAF2; width:18px; height:18px; cursor:pointer;">
-                <span style="font-size:0.82rem; font-weight:700; color:#fff;">Verificado</span>
+                <span data-i18n="app.res.verified" style="font-size:0.82rem; font-weight:700; color:#fff;">Verificado</span>
               </label>
             </div>
           </div>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">Nombre / Título Oficial *</label>
-            <input type="text" class="ops-form-input" id="entityTitle" placeholder="Ej. Cañón de Somoto, Volcán Mombacho...">
+            <label class="ops-form-label"><span data-i18n="pages.admin.paneGeneral.label1">Nombre / Título Oficial *</span></label>
+            <input data-i18n-placeholder="pages.admin.entityTitle.inputPlaceholder1" type="text" class="ops-form-input" id="entityTitle" placeholder="Ej. Cañón de Somoto, Volcán Mombacho...">
           </div>
 
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label">Slug URL Amigable</label>
-              <input type="text" class="ops-form-input" id="entitySlug" placeholder="ej. canon-de-somoto">
+              <label class="ops-form-label"><span data-i18n="pages.admin.paneGeneral.label2">Slug URL Amigable</span></label>
+              <input data-i18n-placeholder="pages.admin.entitySlug.inputPlaceholder1" type="text" class="ops-form-input" id="entitySlug" placeholder="ej. canon-de-somoto">
             </div>
             <div class="ops-form-group">
-              <label class="ops-form-label">Categoría</label>
-              <input type="text" class="ops-form-input" id="entityCategory" placeholder="playas, volcanes, rios, senderismo...">
+              <label class="ops-form-label"><span data-i18n="destinations.category">Categoría</span></label>
+              <input data-i18n-placeholder="pages.admin.entityCategory.inputPlaceholder1" type="text" class="ops-form-input" id="entityCategory" placeholder="playas, volcanes, rios, senderismo...">
             </div>
           </div>
 
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label">Estado Editorial</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.paneGeneral.label3">Estado Editorial</span></label>
               <select class="ops-form-select" id="entityStatus">
-                <option value="published">Publicado</option>
-                <option value="draft">Borrador</option>
-                <option value="archived">Archivado</option>
+                <option data-i18n="pages.admin.entityStatus.option1" value="published">Publicado</option>
+                <option data-i18n="testimonials.status.draft" value="draft">Borrador</option>
+                <option data-i18n="pages.admin.entityStatus.option2" value="archived">Archivado</option>
               </select>
             </div>
             <div class="ops-form-group">
-              <label class="ops-form-label">Orden de Aparición</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.paneGeneral.label4">Orden de Aparición</span></label>
               <input type="number" class="ops-form-input" id="entitySortOrder" value="0">
             </div>
           </div>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">Resumen Ejecutivo</label>
-            <input type="text" class="ops-form-input" id="entityShortDesc" placeholder="Breve sinopsis para listados y tarjetas móviles">
+            <label class="ops-form-label"><span data-i18n="pages.admin.paneGeneral.label5">Resumen Ejecutivo</span></label>
+            <input data-i18n-placeholder="pages.admin.entityShortDesc.inputPlaceholder1" type="text" class="ops-form-input" id="entityShortDesc" placeholder="Breve sinopsis para listados y tarjetas móviles">
           </div>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">Descripción Detallada / Contenido Enriquecido</label>
-            <textarea class="ops-form-textarea" id="entityDescription" rows="5" placeholder="Descripción profunda, normas de acceso, recomendaciones campesinas..."></textarea>
+            <label class="ops-form-label"><span data-i18n="pages.admin.paneGeneral.label6">Descripción Detallada / Contenido Enriquecido</span></label>
+            <textarea data-i18n-placeholder="pages.admin.entityDescription.textareaPlaceholder1" class="ops-form-textarea" id="entityDescription" rows="5" placeholder="Descripción profunda, normas de acceso, recomendaciones campesinas..."></textarea>
           </div>
         </div>
 
@@ -1380,9 +1380,9 @@
         <div class="ops-drawer-tab-pane" id="pane-location">
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label">Departamento / Región</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.paneLocation.label1">Departamento / Región</span></label>
               <select class="ops-form-select" id="entityDepartment">
-                <option value="Nacional">Nacional / Multiterritorial</option>
+                <option data-i18n="pages.admin.entityDepartment.option1" value="Nacional">Nacional / Multiterritorial</option>
                 <option value="Boaco">Boaco</option>
                 <option value="Carazo">Carazo</option>
                 <option value="Chinandega">Chinandega</option>
@@ -1398,28 +1398,28 @@
                 <option value="Nueva Segovia">Nueva Segovia</option>
                 <option value="Rivas">Rivas</option>
                 <option value="Río San Juan">Río San Juan</option>
-                <option value="RACCN">RACCN (Caribe Norte)</option>
-                <option value="RACCS">RACCS (Caribe Sur)</option>
+                <option data-i18n="pages.admin.entityDepartment.option2" value="RACCN">RACCN (Caribe Norte)</option>
+                <option data-i18n="pages.admin.entityDepartment.option3" value="RACCS">RACCS (Caribe Sur)</option>
               </select>
             </div>
             <div class="ops-form-group">
-              <label class="ops-form-label">Municipio</label>
-              <input type="text" class="ops-form-input" id="entityMunicipality" placeholder="Ej. Tola, San Juan del Sur, Matagalpa...">
+              <label class="ops-form-label"><span data-i18n="testimonials.fieldMunicipality">Municipio</span></label>
+              <input data-i18n-placeholder="pages.admin.entityMunicipality.inputPlaceholder1" type="text" class="ops-form-input" id="entityMunicipality" placeholder="Ej. Tola, San Juan del Sur, Matagalpa...">
             </div>
           </div>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">Dirección / Referencia de Llegada</label>
-            <input type="text" class="ops-form-input" id="entityAddress" placeholder="Ej. De la iglesia 2 cuadras al norte...">
+            <label class="ops-form-label"><span data-i18n="pages.admin.paneLocation.label2">Dirección / Referencia de Llegada</span></label>
+            <input data-i18n-placeholder="pages.admin.entityAddress.inputPlaceholder1" type="text" class="ops-form-input" id="entityAddress" placeholder="Ej. De la iglesia 2 cuadras al norte...">
           </div>
 
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label">Latitud GPS (Ej. 12.1364)</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.paneLocation.label3">Latitud GPS (Ej. 12.1364)</span></label>
               <input type="number" step="any" class="ops-form-input" id="entityLatitude" placeholder="12.1364">
             </div>
             <div class="ops-form-group">
-              <label class="ops-form-label">Longitud GPS (Ej. -86.2514)</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.paneLocation.label4">Longitud GPS (Ej. -86.2514)</span></label>
               <input type="number" step="any" class="ops-form-input" id="entityLongitude" placeholder="-86.2514">
             </div>
           </div>
@@ -1429,40 +1429,40 @@
         <div class="ops-drawer-tab-pane" id="pane-pricing">
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label">Tarifa en Córdobas (C$ NIO)</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.panePricing.label1">Tarifa en Córdobas (C$ NIO)</span></label>
               <input type="number" step="any" class="ops-form-input" id="entityPriceNio" placeholder="500">
             </div>
             <div class="ops-form-group">
-              <label class="ops-form-label">Tarifa en Dólares ($ USD)</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.panePricing.label2">Tarifa en Dólares ($ USD)</span></label>
               <input type="number" step="any" class="ops-form-input" id="entityPriceUsd" placeholder="15">
             </div>
           </div>
 
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label">Teléfono Convencional</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.panePricing.label3">Teléfono Convencional</span></label>
               <input type="text" class="ops-form-input" id="entityPhone" placeholder="+505 2222-0000">
             </div>
             <div class="ops-form-group">
-              <label class="ops-form-label">WhatsApp Directo</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.panePricing.label4">WhatsApp Directo</span></label>
               <input type="text" class="ops-form-input" id="entityWhatsapp" placeholder="+505 8888-0000">
             </div>
           </div>
 
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label">Correo Electrónico</label>
+              <label class="ops-form-label"><span data-i18n="common.correoElectronico">Correo Electrónico</span></label>
               <input type="email" class="ops-form-input" id="entityEmail" placeholder="contacto@aliado.com">
             </div>
             <div class="ops-form-group">
-              <label class="ops-form-label">Sitio Web / Red Social</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.panePricing.label5">Sitio Web / Red Social</span></label>
               <input type="url" class="ops-form-input" id="entityWebsite" placeholder="https://...">
             </div>
           </div>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">Day Pass / Paquete / Amenidades</label>
-            <input type="text" class="ops-form-input" id="entityDayPass" placeholder="Acceso piscina, almuerzo típico, senderismo guiado...">
+            <label class="ops-form-label"><span data-i18n="pages.admin.panePricing.label6">Day Pass / Paquete / Amenidades</span></label>
+            <input data-i18n-placeholder="pages.admin.entityDayPass.inputPlaceholder1" type="text" class="ops-form-input" id="entityDayPass" placeholder="Acceso piscina, almuerzo típico, senderismo guiado...">
           </div>
         </div>
 
@@ -1471,20 +1471,20 @@
           <input type="file" id="entityFileInput" accept="image/*,video/*,audio/*,.pdf" style="display: none;">
           <div class="ops-dropzone" id="entityDropzone">
             <i class="fa-solid fa-cloud-arrow-up ops-dropzone-icon"></i>
-            <div style="font-weight: 600; color: #fff; margin-bottom: 0.25rem;">Haz clic para subir a Firebase Storage</div>
-            <div style="font-size: 0.76rem; color: var(--ops-text-muted);">Soporta JPG, PNG, WebP de alta resolución</div>
+            <div data-i18n="pages.admin.entityDropzone.div1" style="font-weight: 600; color: #fff; margin-bottom: 0.25rem;">Haz clic para subir a Firebase Storage</div>
+            <div data-i18n="pages.admin.entityDropzone.div2" style="font-size: 0.76rem; color: var(--ops-text-muted);">Soporta JPG, PNG, WebP de alta resolución</div>
           </div>
 
           <div class="ops-form-group" style="margin-top: 1rem;">
-            <label class="ops-form-label">URL Permanente de Imagen</label>
+            <label class="ops-form-label"><span data-i18n="pages.admin.paneMedia.label1">URL Permanente de Imagen</span></label>
             <input type="text" class="ops-form-input" id="entityImageUrl" placeholder="https://firebasestorage.googleapis.com/...">
           </div>
 
           <div class="ops-preview-box" id="entityPreviewBox" style="display: none; margin-top: 1rem;">
-            <img src="" id="entityPreviewImg" class="ops-preview-img" alt="Vista previa" decoding="async" loading="lazy">
+            <img data-i18n-alt="pages.admin.entityPreviewImg.imgAlt1" src="" id="entityPreviewImg" class="ops-preview-img" alt="Vista previa" decoding="async" loading="lazy">
             <div style="margin-top: 0.5rem; text-align: right;">
               <button type="button" class="btn-ops-matte danger" id="btnRemovePreview" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">
-                <i class="fa-solid fa-trash-can"></i> Quitar Imagen
+                <i class="fa-solid fa-trash-can"></i> <span data-i18n="pages.admin.btnRemovePreview.button1">Quitar Imagen</span>
               </button>
             </div>
           </div>
@@ -1493,24 +1493,24 @@
         <!-- PANE SEO -->
         <div class="ops-drawer-tab-pane" id="pane-seo">
           <div class="ops-form-group">
-            <label class="ops-form-label">Meta Título Canónico</label>
-            <input type="text" class="ops-form-input" id="entityMetaTitle" placeholder="Título para Google y OpenGraph">
+            <label class="ops-form-label"><span data-i18n="pages.admin.paneSeo.label1">Meta Título Canónico</span></label>
+            <input data-i18n-placeholder="pages.admin.entityMetaTitle.inputPlaceholder1" type="text" class="ops-form-input" id="entityMetaTitle" placeholder="Título para Google y OpenGraph">
           </div>
           <div class="ops-form-group">
-            <label class="ops-form-label">Meta Descripción</label>
-            <textarea class="ops-form-textarea" id="entityMetaDesc" rows="3" placeholder="Descripción optimizada para buscadores (máx 160 caracteres)"></textarea>
+            <label class="ops-form-label"><span data-i18n="pages.admin.paneSeo.label2">Meta Descripción</span></label>
+            <textarea data-i18n-placeholder="pages.admin.entityMetaDesc.textareaPlaceholder1" class="ops-form-textarea" id="entityMetaDesc" rows="3" placeholder="Descripción optimizada para buscadores (máx 160 caracteres)"></textarea>
           </div>
           <div class="ops-form-group">
-            <label class="ops-form-label">Palabras Clave (Keywords)</label>
-            <input type="text" class="ops-form-input" id="entityKeywords" placeholder="nicaragua, turismo rural, volcanes, baqueano">
+            <label class="ops-form-label"><span data-i18n="pages.admin.paneSeo.label3">Palabras Clave (Keywords)</span></label>
+            <input data-i18n-placeholder="pages.admin.entityKeywords.inputPlaceholder1" type="text" class="ops-form-input" id="entityKeywords" placeholder="nicaragua, turismo rural, volcanes, baqueano">
           </div>
         </div>
       </div>
 
       <div class="ops-drawer-footer">
-        <button type="button" class="btn-ops-matte" id="opsDrawerCancelBtn">Cancelar</button>
-        <button type="button" class="btn-ops-matte" id="opsDrawerSaveDraftBtn"><i class="fa-solid fa-file-pen"></i> Guardar Borrador</button>
-        <button type="button" class="btn-ops-matte primary" id="opsDrawerSavePublishBtn"><i class="fa-solid fa-paper-plane"></i> Publicar Registro</button>
+        <button type="button" class="btn-ops-matte" id="opsDrawerCancelBtn"><span data-i18n="actions.cancel">Cancelar</span></button>
+        <button type="button" class="btn-ops-matte" id="opsDrawerSaveDraftBtn"><i class="fa-solid fa-file-pen"></i> <span data-i18n="pages.admin.opsDrawerSaveDraftBtn.button1">Guardar Borrador</span></button>
+        <button type="button" class="btn-ops-matte primary" id="opsDrawerSavePublishBtn"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="pages.admin.opsDrawerSavePublishBtn.button1">Publicar Registro</span></button>
       </div>
     </div>
   </div>
@@ -1520,11 +1520,11 @@
     <div class="ops-modal-card" style="width: 100%; max-width: 560px; background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-lg); padding: 2rem; box-shadow: var(--ops-shadow-lg); animation: opsFadeIn 0.25s ease;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.25rem;">
         <h2 style="font-size: 1.25rem; color: #fff; margin:0; display:flex; align-items:center; gap:0.65rem; font-family: 'Montserrat', sans-serif;">
-          <i class="fa-solid fa-clock-rotate-left" style="color: var(--bq-accent);"></i> Copia de Seguridad &amp; Restauración
+          <i class="fa-solid fa-clock-rotate-left" style="color: var(--bq-accent);"></i> <span data-i18n="pages.admin.opsBackupModal.h21">Copia de Seguridad &amp; Restauración</span>
         </h2>
-      <button type="button" class="ops-drawer-close-btn" aria-label="Cerrar respaldo" onclick="document.getElementById('opsBackupModal').style.display='none'"><i class="fa-solid fa-xmark"></i></button>
+      <button data-i18n-aria-label="pages.admin.opsBackupModal.buttonAriaLabel1" type="button" class="ops-drawer-close-btn" aria-label="Cerrar respaldo" onclick="document.getElementById('opsBackupModal').style.display='none'"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <p style="font-size: 0.84rem; color: var(--ops-text-secondary); line-height: 1.55; margin-bottom: 1.5rem;">
+      <p data-i18n="pages.admin.opsBackupModal.p1" style="font-size: 0.84rem; color: var(--ops-text-secondary); line-height: 1.55; margin-bottom: 1.5rem;">
         Genera una copia de seguridad integral fechada (año, mes, día y hora exacta) con todos los 33 módulos, destinos, leyes y configuraciones del ecosistema para restauraciones seguras en cualquier momento.
       </p>
       
@@ -1532,30 +1532,30 @@
         <div style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: 12px; padding: 1.35rem 1.1rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <i class="fa-solid fa-file-arrow-down" style="font-size: 2.2rem; color: var(--bq-jungle); margin-bottom: 0.75rem;"></i>
-            <h4 style="color:#fff; margin:0 0 0.4rem 0; font-size:0.95rem;">Exportar Backup</h4>
-            <p style="font-size:0.75rem; color:var(--ops-text-muted); margin-bottom:1.25rem; line-height: 1.4;">Descarga archivo .json con sello de tiempo oficial (fecha, día y hora).</p>
+            <h4 data-i18n="pages.admin.opsBackupModal.h41" style="color:#fff; margin:0 0 0.4rem 0; font-size:0.95rem;">Exportar Backup</h4>
+            <p data-i18n="pages.admin.opsBackupModal.p2" style="font-size:0.75rem; color:var(--ops-text-muted); margin-bottom:1.25rem; line-height: 1.4;">Descarga archivo .json con sello de tiempo oficial (fecha, día y hora).</p>
           </div>
           <button type="button" class="btn-ops-matte primary" style="width:100%; justify-content:center; padding: 0.65rem;" onclick="window.BaqueanoOpsEngine.exportFullBackup()">
-            <i class="fa-solid fa-download"></i> Descargar Backup
+            <i class="fa-solid fa-download"></i> <span data-i18n="pages.admin.opsBackupModal.button1">Descargar Backup</span>
           </button>
         </div>
 
         <div style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: 12px; padding: 1.35rem 1.1rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <i class="fa-solid fa-file-arrow-up" style="font-size: 2.2rem; color: var(--bq-accent); margin-bottom: 0.75rem;"></i>
-            <h4 style="color:#fff; margin:0 0 0.4rem 0; font-size:0.95rem;">Restaurar Backup</h4>
-            <p style="font-size:0.75rem; color:var(--ops-text-muted); margin-bottom:1.25rem; line-height: 1.4;">Restaura todo el catálogo y módulos desde una copia previa.</p>
+            <h4 data-i18n="pages.admin.opsBackupModal.h42" style="color:#fff; margin:0 0 0.4rem 0; font-size:0.95rem;">Restaurar Backup</h4>
+            <p data-i18n="pages.admin.opsBackupModal.p3" style="font-size:0.75rem; color:var(--ops-text-muted); margin-bottom:1.25rem; line-height: 1.4;">Restaura todo el catálogo y módulos desde una copia previa.</p>
           </div>
           <input type="file" id="opsBackupFileInput" accept=".json" style="display:none;" onchange="window.BaqueanoOpsEngine.importBackupFile(this.files[0])">
           <button type="button" class="btn-ops-matte accent" style="width:100%; justify-content:center; padding: 0.65rem;" onclick="document.getElementById('opsBackupFileInput').click()">
-            <i class="fa-solid fa-upload"></i> Cargar Archivo
+            <i class="fa-solid fa-upload"></i> <span data-i18n="pages.admin.opsBackupModal.button2">Cargar Archivo</span>
           </button>
         </div>
       </div>
 
       <div style="background: rgba(22, 93, 111, 0.15); border: 1px solid rgba(22, 93, 111, 0.35); border-radius: 8px; padding: 0.85rem 1rem; font-size: 0.78rem; color: var(--ops-text-secondary); display:flex; align-items:center; gap:0.65rem;">
         <i class="fa-solid fa-shield-halved" style="color: var(--bq-secondary); font-size: 1.15rem; flex-shrink: 0;"></i>
-        <span>Respaldo soberano cifrado con fecha, día y hora compatible con Firebase Firestore y Supabase.</span>
+        <span data-i18n="pages.admin.opsBackupModal.span1">Respaldo soberano cifrado con fecha, día y hora compatible con Firebase Firestore y Supabase.</span>
       </div>
     </div>
   </div>

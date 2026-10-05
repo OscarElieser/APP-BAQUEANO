@@ -63,6 +63,17 @@ export function isExempt(text, root) {
   return parts.length > 0 && parts.every((part) => nouns.has(part));
 }
 
+// Menú y pie estáticos que el shell (js/global-injector.js) reemplaza al cargar:
+// nunca se muestran, su traducción vive en el shell (una sola fuente).
+const SHELL_FOOTER_CLASSES = ['site-footer-exact', 'bq-global-footer', 'official-footer-exact', 'main-footer', 'site-footer-pro', 'footer-unified', 'nav-404-header'];
+export function isShellReplaced(tag) {
+  const cls = ` ${tag.attr('class')?.value || ''} `;
+  const id = tag.attr('id')?.value;
+  if (tag.name === 'nav' && (id === 'mainNavbar' || / main-navbar(-exact)? /.test(cls))) return true;
+  if (id === 'siteFooter' || SHELL_FOOTER_CLASSES.some((name) => cls.includes(` ${name} `))) return true;
+  return tag.name === 'footer' && tag.ancestors.length > 0 && tag.ancestors[tag.ancestors.length - 1].name === 'body';
+}
+
 function exemptAncestor(tag) {
   if (SKIP_TAGS.has(tag.name)) return true;
   if (tag.attr('data-no-translate')) return true;
@@ -78,12 +89,14 @@ function exemptAncestor(tag) {
 export function scanHtml(html, { root, catalog }) {
   const { texts, tags } = tokenize(html);
   const catalogValues = new Set([...catalog.values()].map((value) => normalizeText(value)));
-  const result = { total: 0, keyed: 0, legacy: 0, untranslated: 0, attrTotal: 0, attrKeyed: 0, attrUntranslated: 0, missingKeys: [], pendingTexts: [], pendingAttrs: [] };
+  const usesShell = /js\/global-injector\.js/.test(html);
+  const replaced = (tag) => usesShell && isShellReplaced(tag);
+  const result = { tags, texts, total: 0, keyed: 0, legacy: 0, untranslated: 0, attrTotal: 0, attrKeyed: 0, attrUntranslated: 0, missingKeys: [], pendingTexts: [], pendingAttrs: [] };
 
   for (const text of texts) {
     const value = normalizeText(text.value);
     if (!/\p{L}{2}/u.test(value)) continue;
-    if (text.ancestors.some(exemptAncestor)) continue;
+    if (text.ancestors.some(exemptAncestor) || text.ancestors.some(replaced)) continue;
     if (text.parentTag?.name === 'title' || text.parentTag?.name === 'textarea') {
       // <title> se traduce con data-i18n-title en <html>; textarea es contenido del usuario.
       if (text.parentTag.name === 'textarea') continue;
@@ -107,6 +120,7 @@ export function scanHtml(html, { root, catalog }) {
   }
 
   for (const tag of tags) {
+    if (replaced(tag) || tag.ancestors.some(replaced)) continue;
     if (tag.ancestors.some(exemptAncestor) || exemptAncestor(tag)) {
       // Un elemento exento puede igual tener aria-label traducible; solo se exime si es SVG/script.
       if (tag.ancestors.some((ancestor) => SKIP_TAGS.has(ancestor.name)) || SKIP_TAGS.has(tag.name)) continue;

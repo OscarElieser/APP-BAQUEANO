@@ -30,7 +30,7 @@
 - Reproductor inferior permanente.
 ============================================================================
 -->
-<html lang="es" data-bq-page="musica" data-bq-group="cultura">
+<html data-i18n-description="pages.musica.body.metaDescription1" data-i18n-title="pages.musica.body.title1" lang="es" data-bq-page="musica" data-bq-group="cultura">
 
 <head>
   <meta charset="UTF-8">
@@ -131,23 +131,23 @@
         <div>
           <span class="musica-hero-badge">NICARAGUA</span>
           <h1 class="musica-hero-title">
-            EL SONIDO DE NICARAGUA <span>SIGUE VIVO</span>
+            <span data-i18n="pages.musica.musicaHeroExact.h11">EL SONIDO DE NICARAGUA</span> <span data-i18n="pages.musica.musicaHeroExact.span1">SIGUE VIVO</span>
           </h1>
-          <p class="musica-hero-desc">
+          <p data-i18n="pages.musica.musicaHeroExact.p1" class="musica-hero-desc">
             Música, identidad y tradición que conectan nuestra gente y hacen del mundo un lugar más humano.
           </p>
           <div class="musica-hero-actions">
             <button type="button" class="btn-musica-hero-primary" onclick="toggleMainTrack()">
-              <i class="fa-solid fa-play"></i> Escuchar ahora &rarr;
+              <i class="fa-solid fa-play"></i> <span data-i18n="pages.musica.musicaHeroExact.button1">Escuchar ahora &rarr;</span>
             </button>
             <a href="#mapaSonoro" class="btn-musica-hero-secondary">
-              <i class="fa-solid fa-location-dot"></i> Explorar mapa sonoro
+              <i class="fa-solid fa-location-dot"></i> <span data-i18n="pages.musica.musicaHeroExact.a1">Explorar mapa sonoro</span>
             </a>
           </div>
         </div>
 
         <div class="musica-hero-stamp">
-          <span>Nuestra música también es paisaje 🍃</span>
+          <span data-i18n="pages.musica.musicaHeroExact.span2">Nuestra música también es paisaje 🍃</span>
         </div>
       </div>
     </div>
@@ -162,12 +162,12 @@
         <!-- Izquierda: Portada + Meta -->
         <div class="featured-player-left">
           <div class="featured-player-cover-box">
-            <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="La Mora Limpia" class="featured-player-cover" decoding="async" loading="lazy" width="1600" height="900">
+            <img data-i18n-alt="pages.musica.featuredTrackTitle.h41" src="assets/images/destinos/isla_de_ometepe.jpg" alt="La Mora Limpia" class="featured-player-cover" decoding="async" loading="lazy" width="1600" height="900">
             <div class="featured-player-disc"><i class="fa-solid fa-compact-disc"></i></div>
           </div>
           <div class="featured-player-meta">
-            <h4 id="featuredTrackTitle">La Mora Limpia</h4>
-            <span><b id="featuredTrackArtist">Justo Santos</b> <button type="button" class="btn-player-heart" title="Me gusta"><i class="fa-regular fa-heart"></i></button></span>
+            <h4 id="featuredTrackTitle"><span data-i18n="pages.musica.featuredTrackTitle.h41">La Mora Limpia</span></h4>
+            <span><b id="featuredTrackArtist"><span data-i18n="pages.musica.featuredTrackArtist.b1">Justo Santos</span></b> <button data-i18n-title="pages.musica.musicaFeaturedPlayerSection.buttonTitle1" type="button" class="btn-player-heart" title="Me gusta"><i class="fa-regular fa-heart"></i></button></span>
           </div>
         </div>
 
@@ -190,13 +190,13 @@
             <span class="wave-bar" style="height: 13px;"></span>
           </div>
           <div class="featured-player-controls">
-            <button type="button" class="player-ctrl-btn" title="Aleatorio"><i class="fa-solid fa-shuffle"></i></button>
-            <button type="button" class="player-ctrl-btn" title="Anterior"><i class="fa-solid fa-backward-step"></i></button>
-            <button type="button" class="player-ctrl-btn play-circle" id="btnMainPlay" onclick="toggleMainTrack()" title="Reproducir">
+            <button data-i18n-title="pages.musica.musicaFeaturedPlayerSection.buttonTitle2" type="button" class="player-ctrl-btn" title="Aleatorio"><i class="fa-solid fa-shuffle"></i></button>
+            <button data-i18n-title="common.anterior" type="button" class="player-ctrl-btn" title="Anterior"><i class="fa-solid fa-backward-step"></i></button>
+            <button data-i18n-title="pages.musica.btnMainPlay.buttonTitle1" type="button" class="player-ctrl-btn play-circle" id="btnMainPlay" onclick="toggleMainTrack()" title="Reproducir">
               <i class="fa-solid fa-play" id="mainPlayIcon"></i>
             </button>
-            <button type="button" class="player-ctrl-btn" title="Siguiente"><i class="fa-solid fa-forward-step"></i></button>
-            <button type="button" class="player-ctrl-btn" title="Repetir"><i class="fa-solid fa-repeat"></i></button>
+            <button data-i18n-title="common.siguiente" type="button" class="player-ctrl-btn" title="Siguiente"><i class="fa-solid fa-forward-step"></i></button>
+            <button data-i18n-title="pages.musica.musicaFeaturedPlayerSection.buttonTitle3" type="button" class="player-ctrl-btn" title="Repetir"><i class="fa-solid fa-repeat"></i></button>
           </div>
         </div>
 
@@ -204,8 +204,8 @@
         <div class="featured-player-right">
           <span class="player-time-display" id="playerTime">1:24 / 3:52</span>
           <i class="fa-solid fa-volume-high" style="color: #94A3B8; font-size: 0.85rem;"></i>
-          <input type="range" min="0" max="100" value="80" class="player-volume-slider" aria-label="Volumen">
-          <button type="button" class="btn-player-ficha" id="btnTrackProfile">Ver ficha &rarr;</button>
+          <input data-i18n-aria-label="pages.musica.musicaFeaturedPlayerSection.inputAriaLabel1" type="range" min="0" max="100" value="80" class="player-volume-slider" aria-label="Volumen">
+          <button type="button" class="btn-player-ficha" id="btnTrackProfile"><span data-i18n="pages.musica.btnTrackProfile.button1">Ver ficha &rarr;</span></button>
         </div>
       </div>
     </div>
@@ -218,14 +218,14 @@
     <div class="exact-container">
       <div class="musica-head-row">
         <div class="musica-head-title">
-          <h2><i class="fa-solid fa-music"></i> Explorá por géneros</h2>
-          <p>Ritmos que cuentan la historia de nuestra tierra.</p>
+          <h2><i class="fa-solid fa-music"></i> <span data-i18n="pages.musica.musicaSectionCommon.h21">Explorá por géneros</span></h2>
+          <p data-i18n="pages.musica.musicaSectionCommon.p1">Ritmos que cuentan la historia de nuestra tierra.</p>
         </div>
         <div class="musica-head-actions">
-          <a href="#archivoSonoro" class="musica-view-link">Ver todos los géneros &rarr;</a>
+          <a data-i18n="pages.musica.musicaSectionCommon.a1" href="#archivoSonoro" class="musica-view-link">Ver todos los géneros &rarr;</a>
           <div class="musica-carousel-arrows">
-            <button type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
-            <button type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+            <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
         </div>
       </div>
@@ -233,41 +233,41 @@
       <div class="musica-genres-grid">
         <!-- 1. Son Nica -->
         <a href="#archivoSonoro" class="genre-card-exact">
-          <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Son Nica" class="genre-card-bg" decoding="async" loading="lazy" width="401" height="498">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h31" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Son Nica" class="genre-card-bg" decoding="async" loading="lazy" width="401" height="498">
           <div class="genre-card-overlay"></div>
           <div class="genre-card-content">
-            <h3>Son Nica</h3>
-            <p>Ritmo e identidad</p>
+            <h3 data-i18n="pages.musica.musicaSectionCommon.h31">Son Nica</h3>
+            <p data-i18n="pages.musica.musicaSectionCommon.p2">Ritmo e identidad</p>
           </div>
         </a>
 
         <!-- 2. Marimba -->
         <a href="#archivoSonoro" class="genre-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Marimba" class="genre-card-bg" width="1600" height="1131">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h32" loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Marimba" class="genre-card-bg" width="1600" height="1131">
           <div class="genre-card-overlay"></div>
           <div class="genre-card-content">
-            <h3>Marimba</h3>
-            <p>Sonido ancestral</p>
+            <h3 data-i18n="pages.musica.musicaSectionCommon.h32">Marimba</h3>
+            <p data-i18n="pages.musica.musicaSectionCommon.p3">Sonido ancestral</p>
           </div>
         </a>
 
         <!-- 3. Nueva Canción -->
         <a href="#archivoSonoro" class="genre-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Nueva Canción" class="genre-card-bg" width="399" height="501">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h33" loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Nueva Canción" class="genre-card-bg" width="399" height="501">
           <div class="genre-card-overlay"></div>
           <div class="genre-card-content">
-            <h3>Nueva Canción</h3>
-            <p>Voz del pueblo</p>
+            <h3 data-i18n="pages.musica.musicaSectionCommon.h33">Nueva Canción</h3>
+            <p data-i18n="pages.musica.musicaSectionCommon.p4">Voz del pueblo</p>
           </div>
         </a>
 
         <!-- 4. Folclor -->
         <a href="#archivoSonoro" class="genre-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/selva_negra.jpg" alt="Folclor" class="genre-card-bg" width="399" height="501">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h34" loading="lazy" decoding="async" src="assets/images/destinos/selva_negra.jpg" alt="Folclor" class="genre-card-bg" width="399" height="501">
           <div class="genre-card-overlay"></div>
           <div class="genre-card-content">
-            <h3>Folclor</h3>
-            <p>Tradición viva</p>
+            <h3 data-i18n="pages.musica.musicaSectionCommon.h34">Folclor</h3>
+            <p data-i18n="pages.musica.musicaSectionCommon.p5">Tradición viva</p>
           </div>
         </a>
 
@@ -277,27 +277,27 @@
           <div class="genre-card-overlay"></div>
           <div class="genre-card-content">
             <h3>Caribe</h3>
-            <p>Ritmos del Atlántico</p>
+            <p data-i18n="pages.musica.musicaSectionCommon.p6">Ritmos del Atlántico</p>
           </div>
         </a>
 
         <!-- 6. Música Clásica -->
         <a href="#archivoSonoro" class="genre-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/aliados/hotel_dario.jpg" alt="Música Clásica" class="genre-card-bg" width="1000" height="1333">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h35" loading="lazy" decoding="async" src="assets/images/aliados/hotel_dario.jpg" alt="Música Clásica" class="genre-card-bg" width="1000" height="1333">
           <div class="genre-card-overlay"></div>
           <div class="genre-card-content">
-            <h3>Música Clásica</h3>
-            <p>Legado universal</p>
+            <h3 data-i18n="pages.musica.musicaSectionCommon.h35">Música Clásica</h3>
+            <p data-i18n="pages.musica.musicaSectionCommon.p7">Legado universal</p>
           </div>
         </a>
 
         <!-- 7. Tradicional -->
         <a href="#archivoSonoro" class="genre-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Tradicional" class="genre-card-bg">
+          <img data-i18n-alt="gastronomy.traditional" loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Tradicional" class="genre-card-bg">
           <div class="genre-card-overlay"></div>
           <div class="genre-card-content">
-            <h3>Tradicional</h3>
-            <p>Raíces de nuestra tierra</p>
+            <h3 data-i18n="gastronomy.traditional">Tradicional</h3>
+            <p data-i18n="pages.musica.musicaSectionCommon.p8">Raíces de nuestra tierra</p>
           </div>
         </a>
       </div>
@@ -311,14 +311,14 @@
     <div class="exact-container">
       <div class="musica-head-row">
         <div class="musica-head-title">
-          <h2><i class="fa-solid fa-user-group"></i> Artistas y compositores</h2>
-          <p>Voces que han puesto a Nicaragua en el corazón del mundo.</p>
+          <h2><i class="fa-solid fa-user-group"></i> <span data-i18n="pages.musica.musicaSectionCommon.h22">Artistas y compositores</span></h2>
+          <p data-i18n="pages.musica.musicaSectionCommon.p9">Voces que han puesto a Nicaragua en el corazón del mundo.</p>
         </div>
         <div class="musica-head-actions">
-          <a href="#archivoSonoro" class="musica-view-link">Ver todos los artistas &rarr;</a>
+          <a data-i18n="pages.musica.musicaSectionCommon.a2" href="#archivoSonoro" class="musica-view-link">Ver todos los artistas &rarr;</a>
           <div class="musica-carousel-arrows">
-            <button type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
-            <button type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+            <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
         </div>
       </div>
@@ -327,73 +327,73 @@
         <!-- 1. Camilo Zapata -->
         <div class="artist-card-exact">
           <div class="artist-avatar-wrap">
-            <img loading="lazy" decoding="async" src="assets/artistas/camilo zapata.jpg" alt="Camilo Zapata" class="artist-avatar-img" width="409" height="488">
+            <img data-i18n-alt="pages.musica.musicaSectionCommon.h41" loading="lazy" decoding="async" src="assets/artistas/camilo zapata.jpg" alt="Camilo Zapata" class="artist-avatar-img" width="409" height="488">
           </div>
-          <h4 class="artist-name">Camilo Zapata</h4>
-          <p class="artist-tagline">El poeta de la montaña</p>
+          <h4 data-i18n="pages.musica.musicaSectionCommon.h41" class="artist-name">Camilo Zapata</h4>
+          <p data-i18n="pages.musica.musicaSectionCommon.p10" class="artist-tagline">El poeta de la montaña</p>
         </div>
 
         <!-- 2. Justo Santos -->
         <div class="artist-card-exact">
           <div class="artist-avatar-wrap">
-            <img loading="lazy" decoding="async" src="assets/artistas/justo santos.jpg" alt="Justo Santos" class="artist-avatar-img" width="184" height="274">
+            <img data-i18n-alt="pages.musica.featuredTrackArtist.b1" loading="lazy" decoding="async" src="assets/artistas/justo santos.jpg" alt="Justo Santos" class="artist-avatar-img" width="184" height="274">
           </div>
-          <h4 class="artist-name">Justo Santos</h4>
-          <p class="artist-tagline">Ícono del Son Nica</p>
+          <h4 data-i18n="pages.musica.featuredTrackArtist.b1" class="artist-name">Justo Santos</h4>
+          <p data-i18n="pages.musica.musicaSectionCommon.p11" class="artist-tagline">Ícono del Son Nica</p>
         </div>
 
         <!-- 3. Carlos Mejía Godoy -->
         <div class="artist-card-exact">
           <div class="artist-avatar-wrap">
-            <img loading="lazy" decoding="async" src="assets/artistas/carlos mejia godoy.jpg" alt="Carlos Mejía Godoy" class="artist-avatar-img" width="698" height="400">
+            <img data-i18n-alt="pages.musica.musicaSectionCommon.h42" loading="lazy" decoding="async" src="assets/artistas/carlos mejia godoy.jpg" alt="Carlos Mejía Godoy" class="artist-avatar-img" width="698" height="400">
           </div>
-          <h4 class="artist-name">Carlos Mejía Godoy</h4>
-          <p class="artist-tagline">Voz de nuestra gente</p>
+          <h4 data-i18n="pages.musica.musicaSectionCommon.h42" class="artist-name">Carlos Mejía Godoy</h4>
+          <p data-i18n="pages.musica.musicaSectionCommon.p12" class="artist-tagline">Voz de nuestra gente</p>
         </div>
 
         <!-- 4. Luis Enrique Mejía Godoy -->
         <div class="artist-card-exact">
           <div class="artist-avatar-wrap">
-            <img loading="lazy" decoding="async" src="assets/artistas/Luis Enrique Mejía Godoy.jpg" alt="Luis Enrique Mejía Godoy" class="artist-avatar-img" width="554" height="554">
+            <img data-i18n-alt="pages.musica.musicaSectionCommon.h43" loading="lazy" decoding="async" src="assets/artistas/Luis Enrique Mejía Godoy.jpg" alt="Luis Enrique Mejía Godoy" class="artist-avatar-img" width="554" height="554">
           </div>
-          <h4 class="artist-name">Luis Enrique Mejía Godoy</h4>
-          <p class="artist-tagline">Canciones que nos unen</p>
+          <h4 data-i18n="pages.musica.musicaSectionCommon.h43" class="artist-name">Luis Enrique Mejía Godoy</h4>
+          <p data-i18n="pages.musica.musicaSectionCommon.p13" class="artist-tagline">Canciones que nos unen</p>
         </div>
 
         <!-- 5. Salvador Cardenal -->
         <div class="artist-card-exact">
           <div class="artist-avatar-wrap">
-            <img loading="lazy" decoding="async" src="assets/artistas/Salvador Cardenal Barquero.jpg" alt="Salvador Cardenal" class="artist-avatar-img" width="268" height="400">
+            <img data-i18n-alt="pages.musica.musicaSectionCommon.h44" loading="lazy" decoding="async" src="assets/artistas/Salvador Cardenal Barquero.jpg" alt="Salvador Cardenal" class="artist-avatar-img" width="268" height="400">
           </div>
-          <h4 class="artist-name">Salvador Cardenal</h4>
-          <p class="artist-tagline">Alma de Nicaragua</p>
+          <h4 data-i18n="pages.musica.musicaSectionCommon.h44" class="artist-name">Salvador Cardenal</h4>
+          <p data-i18n="pages.musica.musicaSectionCommon.p14" class="artist-tagline">Alma de Nicaragua</p>
         </div>
 
         <!-- 6. Katia Cardenal -->
         <div class="artist-card-exact">
           <div class="artist-avatar-wrap">
-            <img loading="lazy" decoding="async" src="assets/artistas/Katia Cardenal.jpg" alt="Katia Cardenal" class="artist-avatar-img" width="408" height="490">
+            <img data-i18n-alt="pages.musica.musicaSectionCommon.h45" loading="lazy" decoding="async" src="assets/artistas/Katia Cardenal.jpg" alt="Katia Cardenal" class="artist-avatar-img" width="408" height="490">
           </div>
-          <h4 class="artist-name">Katia Cardenal</h4>
-          <p class="artist-tagline">Música con sentido</p>
+          <h4 data-i18n="pages.musica.musicaSectionCommon.h45" class="artist-name">Katia Cardenal</h4>
+          <p data-i18n="pages.musica.musicaSectionCommon.p15" class="artist-tagline">Música con sentido</p>
         </div>
 
         <!-- 7. Norma Helena Gadea -->
         <div class="artist-card-exact">
           <div class="artist-avatar-wrap">
-            <img loading="lazy" decoding="async" src="assets/artistas/Norma Helena Gadea.jpg" alt="Norma Helena Gadea" class="artist-avatar-img" width="447" height="447">
+            <img data-i18n-alt="pages.musica.musicaSectionCommon.h46" loading="lazy" decoding="async" src="assets/artistas/Norma Helena Gadea.jpg" alt="Norma Helena Gadea" class="artist-avatar-img" width="447" height="447">
           </div>
-          <h4 class="artist-name">Norma Helena Gadea</h4>
-          <p class="artist-tagline">La flor de la canción</p>
+          <h4 data-i18n="pages.musica.musicaSectionCommon.h46" class="artist-name">Norma Helena Gadea</h4>
+          <p data-i18n="pages.musica.musicaSectionCommon.p16" class="artist-tagline">La flor de la canción</p>
         </div>
 
         <!-- 8. Alejandro Vega Matus -->
         <div class="artist-card-exact">
           <div class="artist-avatar-wrap">
-            <img loading="lazy" decoding="async" src="assets/artistas/Alejandro Vega Matus.jpg" alt="Alejandro Vega Matus" class="artist-avatar-img" width="320" height="427">
+            <img data-i18n-alt="pages.musica.musicaSectionCommon.h47" loading="lazy" decoding="async" src="assets/artistas/Alejandro Vega Matus.jpg" alt="Alejandro Vega Matus" class="artist-avatar-img" width="320" height="427">
           </div>
-          <h4 class="artist-name">Alejandro Vega Matus</h4>
-          <p class="artist-tagline">Cronista musical</p>
+          <h4 data-i18n="pages.musica.musicaSectionCommon.h47" class="artist-name">Alejandro Vega Matus</h4>
+          <p data-i18n="pages.musica.musicaSectionCommon.p17" class="artist-tagline">Cronista musical</p>
         </div>
       </div>
     </div>
@@ -408,36 +408,36 @@
         <!-- Izquierda: Mapa de Ritmos Leaflet -->
         <div class="musica-map-card">
           <div class="musica-map-left-overlay">
-            <h3><i class="fa-solid fa-map-location-dot"></i> Mapa sonoro de Nicaragua</h3>
-            <p>Explorá cómo suenan nuestros territorios. Descubrí los ritmos, artistas y expresiones musicales de cada región.</p>
-            <a href="mapa.html" class="btn-open-sound-map">
+            <h3><i class="fa-solid fa-map-location-dot"></i> <span data-i18n="pages.musica.mapaSonoro.h31">Mapa sonoro de Nicaragua</span></h3>
+            <p data-i18n="pages.musica.mapaSonoro.p1">Explorá cómo suenan nuestros territorios. Descubrí los ritmos, artistas y expresiones musicales de cada región.</p>
+            <a data-i18n="common.abrirMapaInteractivo" href="mapa.html" class="btn-open-sound-map">
               Abrir mapa interactivo &rarr;
             </a>
           </div>
 
           <!-- Filtro Flotante Sobre el Mapa -->
           <div class="musica-map-filter-box">
-            <h5>Filtrar mapa sonoro</h5>
-            <select class="musica-filter-select" id="soundFilterDepto" aria-label="Filtrar departamento">
-              <option value="">Departamento: Todos</option>
-              <option value="masaya">Masaya (Marimba)</option>
-              <option value="granada">Granada (Serenatas)</option>
-              <option value="leon">León (Trova)</option>
-              <option value="caribe">Caribe (Palo de Mayo)</option>
-              <option value="matagalpa">Matagalpa (Polkas)</option>
+            <h5 data-i18n="pages.musica.mapaSonoro.h51">Filtrar mapa sonoro</h5>
+            <select data-i18n-aria-label="pages.musica.soundFilterDepto.selectAriaLabel1" class="musica-filter-select" id="soundFilterDepto" aria-label="Filtrar departamento">
+              <option data-i18n="common.departamentoTodos" value="">Departamento: Todos</option>
+              <option data-i18n="pages.musica.soundFilterDepto.option1" value="masaya">Masaya (Marimba)</option>
+              <option data-i18n="pages.musica.soundFilterDepto.option2" value="granada">Granada (Serenatas)</option>
+              <option data-i18n="pages.musica.soundFilterDepto.option3" value="leon">León (Trova)</option>
+              <option data-i18n="pages.musica.soundFilterDepto.option4" value="caribe">Caribe (Palo de Mayo)</option>
+              <option data-i18n="pages.musica.soundFilterDepto.option5" value="matagalpa">Matagalpa (Polkas)</option>
             </select>
-            <select class="musica-filter-select" id="soundFilterGenre" aria-label="Filtrar género">
-              <option value="">Género musical: Todos</option>
-              <option value="son-nica">Son Nica</option>
-              <option value="marimba">Marimba</option>
+            <select data-i18n-aria-label="pages.musica.soundFilterGenre.selectAriaLabel1" class="musica-filter-select" id="soundFilterGenre" aria-label="Filtrar género">
+              <option data-i18n="pages.musica.soundFilterGenre.option1" value="">Género musical: Todos</option>
+              <option data-i18n="pages.musica.musicaSectionCommon.h31" value="son-nica">Son Nica</option>
+              <option data-i18n="pages.musica.musicaSectionCommon.h32" value="marimba">Marimba</option>
               <option value="caribe">Caribe</option>
             </select>
-            <select class="musica-filter-select" id="soundFilterEpoch" aria-label="Filtrar época">
-              <option value="">Época: Todos</option>
-              <option value="tradicional">Tradicional</option>
-              <option value="moderno">Contemporáneo</option>
+            <select data-i18n-aria-label="pages.musica.soundFilterEpoch.selectAriaLabel1" class="musica-filter-select" id="soundFilterEpoch" aria-label="Filtrar época">
+              <option data-i18n="pages.musica.soundFilterEpoch.option1" value="">Época: Todos</option>
+              <option data-i18n="gastronomy.traditional" value="tradicional">Tradicional</option>
+              <option data-i18n="pages.musica.soundFilterEpoch.option2" value="moderno">Contemporáneo</option>
             </select>
-            <button type="button" class="btn-map-filter-search" id="btnSoundMapSearch">Buscar</button>
+            <button type="button" class="btn-map-filter-search" id="btnSoundMapSearch"><span data-i18n="actions.search">Buscar</span></button>
           </div>
 
           <div id="musicaInteractiveMap" class="musica-map-viewport"></div>
@@ -445,11 +445,11 @@
 
         <!-- Derecha: Ficha de Destino Musical (Granada) -->
         <div class="musica-featured-dest-card">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Granada Musical" class="featured-dest-img" width="401" height="498">
+          <img data-i18n-alt="pages.musica.mapaSonoro.imgAlt1" loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Granada Musical" class="featured-dest-img" width="401" height="498">
           <div class="featured-dest-body">
             <h4>Granada</h4>
-            <p>Cuna de compositores, serenatas y tradición musical frente al Gran Lago Cocibolca.</p>
-            <a href="departamento.html?id=granada" class="btn-explore-musical-dest">
+            <p data-i18n="pages.musica.mapaSonoro.p2">Cuna de compositores, serenatas y tradición musical frente al Gran Lago Cocibolca.</p>
+            <a data-i18n="pages.musica.mapaSonoro.a1" href="departamento.html?id=granada" class="btn-explore-musical-dest">
               Explorar Granada &rarr;
             </a>
           </div>
@@ -465,14 +465,14 @@
     <div class="exact-container">
       <div class="musica-head-row">
         <div class="musica-head-title">
-          <h2><i class="fa-solid fa-book-open"></i> Historia viva del sonido pinolero</h2>
-          <p>Momentos, expresiones y movimientos que marcaron nuestra identidad.</p>
+          <h2><i class="fa-solid fa-book-open"></i> <span data-i18n="pages.musica.musicaSectionCommon.h23">Historia viva del sonido pinolero</span></h2>
+          <p data-i18n="pages.musica.musicaSectionCommon.p18">Momentos, expresiones y movimientos que marcaron nuestra identidad.</p>
         </div>
         <div class="musica-head-actions">
-          <a href="historia.html" class="musica-view-link">Ver toda la historia &rarr;</a>
+          <a data-i18n="pages.musica.musicaSectionCommon.a3" href="historia.html" class="musica-view-link">Ver toda la historia &rarr;</a>
           <div class="musica-carousel-arrows">
-            <button type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
-            <button type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+            <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
         </div>
       </div>
@@ -480,12 +480,12 @@
       <div class="musica-history-grid">
         <!-- 1. El Son Nica -->
         <a href="#archivoSonoro" class="history-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="El Son Nica" class="history-card-bg" width="401" height="498">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h36" loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="El Son Nica" class="history-card-bg" width="401" height="498">
           <div class="history-card-overlay"></div>
           <div class="history-card-content">
             <div class="history-card-info">
-              <h3>El Son Nica</h3>
-              <p>Raíces de un pueblo</p>
+              <h3 data-i18n="pages.musica.musicaSectionCommon.h36">El Son Nica</h3>
+              <p data-i18n="pages.musica.musicaSectionCommon.p19">Raíces de un pueblo</p>
             </div>
             <span class="history-card-arrow">&rarr;</span>
           </div>
@@ -493,12 +493,12 @@
 
         <!-- 2. La Mora Limpia -->
         <a href="#archivoSonoro" class="history-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/isla_de_ometepe.jpg" alt="La Mora Limpia" class="history-card-bg" width="1600" height="900">
+          <img data-i18n-alt="pages.musica.featuredTrackTitle.h41" loading="lazy" decoding="async" src="assets/images/destinos/isla_de_ometepe.jpg" alt="La Mora Limpia" class="history-card-bg" width="1600" height="900">
           <div class="history-card-overlay"></div>
           <div class="history-card-content">
             <div class="history-card-info">
-              <h3>La Mora Limpia</h3>
-              <p>La canción que nos representa</p>
+              <h3 data-i18n="pages.musica.featuredTrackTitle.h41">La Mora Limpia</h3>
+              <p data-i18n="pages.musica.musicaSectionCommon.p20">La canción que nos representa</p>
             </div>
             <span class="history-card-arrow">&rarr;</span>
           </div>
@@ -506,12 +506,12 @@
 
         <!-- 3. Marimba de Arco -->
         <a href="#archivoSonoro" class="history-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Marimba de Arco" class="history-card-bg" width="1600" height="1131">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h37" loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Marimba de Arco" class="history-card-bg" width="1600" height="1131">
           <div class="history-card-overlay"></div>
           <div class="history-card-content">
             <div class="history-card-info">
-              <h3>Marimba de Arco</h3>
-              <p>Patrimonio ancestral</p>
+              <h3 data-i18n="pages.musica.musicaSectionCommon.h37">Marimba de Arco</h3>
+              <p data-i18n="pages.musica.musicaSectionCommon.p21">Patrimonio ancestral</p>
             </div>
             <span class="history-card-arrow">&rarr;</span>
           </div>
@@ -524,7 +524,7 @@
           <div class="history-card-content">
             <div class="history-card-info">
               <h3>El Güegüense</h3>
-              <p>Arte, sátira y resistencia</p>
+              <p data-i18n="pages.musica.musicaSectionCommon.p22">Arte, sátira y resistencia</p>
             </div>
             <span class="history-card-arrow">&rarr;</span>
           </div>
@@ -540,14 +540,14 @@
     <div class="exact-container">
       <div class="musica-head-row">
         <div class="musica-head-title">
-          <h2><i class="fa-solid fa-guitar"></i> Instrumentos tradicionales</h2>
-          <p>Sonidos que nacen de nuestra tierra.</p>
+          <h2><i class="fa-solid fa-guitar"></i> <span data-i18n="pages.musica.musicaSectionCommon.h24">Instrumentos tradicionales</span></h2>
+          <p data-i18n="pages.musica.musicaSectionCommon.p23">Sonidos que nacen de nuestra tierra.</p>
         </div>
         <div class="musica-head-actions">
-          <a href="#archivoSonoro" class="musica-view-link">Ver todos los instrumentos &rarr;</a>
+          <a data-i18n="pages.musica.musicaSectionCommon.a4" href="#archivoSonoro" class="musica-view-link">Ver todos los instrumentos &rarr;</a>
           <div class="musica-carousel-arrows">
-            <button type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
-            <button type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+            <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
         </div>
       </div>
@@ -555,55 +555,55 @@
       <div class="musica-instruments-grid">
         <!-- 1. Marimba de Arco -->
         <div class="instrument-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Marimba de Arco" class="instrument-img" width="1600" height="1131">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h37" loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Marimba de Arco" class="instrument-img" width="1600" height="1131">
           <div class="instrument-body">
-            <h4>Marimba de Arco</h4>
-            <p>Patrimonio de la Humanidad</p>
+            <h4 data-i18n="pages.musica.musicaSectionCommon.h37">Marimba de Arco</h4>
+            <p data-i18n="pages.musica.musicaSectionCommon.p24">Patrimonio de la Humanidad</p>
           </div>
         </div>
 
         <!-- 2. Guitarra Nicaragüense -->
         <div class="instrument-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/cerro_negro.jpg" alt="Guitarra Nicaragüense" class="instrument-img" width="700" height="438">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h48" loading="lazy" decoding="async" src="assets/images/destinos/cerro_negro.jpg" alt="Guitarra Nicaragüense" class="instrument-img" width="700" height="438">
           <div class="instrument-body">
-            <h4>Guitarra Nicaragüense</h4>
-            <p>Acompaña nuestra identidad</p>
+            <h4 data-i18n="pages.musica.musicaSectionCommon.h48">Guitarra Nicaragüense</h4>
+            <p data-i18n="pages.musica.musicaSectionCommon.p25">Acompaña nuestra identidad</p>
           </div>
         </div>
 
         <!-- 3. Pito -->
         <div class="instrument-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Pito" class="instrument-img">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h49" loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Pito" class="instrument-img">
           <div class="instrument-body">
-            <h4>Pito</h4>
-            <p>Sonidos del pueblo</p>
+            <h4 data-i18n="pages.musica.musicaSectionCommon.h49">Pito</h4>
+            <p data-i18n="pages.musica.musicaSectionCommon.p26">Sonidos del pueblo</p>
           </div>
         </div>
 
         <!-- 4. Tambor -->
         <div class="instrument-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Tambor" class="instrument-img" width="1600" height="1131">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h410" loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Tambor" class="instrument-img" width="1600" height="1131">
           <div class="instrument-body">
-            <h4>Tambor</h4>
-            <p>Ritmo que une</p>
+            <h4 data-i18n="pages.musica.musicaSectionCommon.h410">Tambor</h4>
+            <p data-i18n="pages.musica.musicaSectionCommon.p27">Ritmo que une</p>
           </div>
         </div>
 
         <!-- 5. Quijongo -->
         <div class="instrument-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Quijongo" class="instrument-img" width="399" height="501">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h411" loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Quijongo" class="instrument-img" width="399" height="501">
           <div class="instrument-body">
-            <h4>Quijongo</h4>
-            <p>Herencia afroindígena</p>
+            <h4 data-i18n="pages.musica.musicaSectionCommon.h411">Quijongo</h4>
+            <p data-i18n="pages.musica.musicaSectionCommon.p28">Herencia afroindígena</p>
           </div>
         </div>
 
         <!-- 6. Percusión -->
         <div class="instrument-card-exact">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/corn_island.jpg" alt="Percusión" class="instrument-img" width="800" height="550">
+          <img data-i18n-alt="pages.musica.musicaSectionCommon.h412" loading="lazy" decoding="async" src="assets/images/destinos/corn_island.jpg" alt="Percusión" class="instrument-img" width="800" height="550">
           <div class="instrument-body">
-            <h4>Percusión</h4>
-            <p>Energía del Caribe</p>
+            <h4 data-i18n="pages.musica.musicaSectionCommon.h412">Percusión</h4>
+            <p data-i18n="pages.musica.musicaSectionCommon.p29">Energía del Caribe</p>
           </div>
         </div>
       </div>
@@ -617,15 +617,15 @@
     <div class="exact-container">
       <div class="musica-head-row">
         <div class="musica-head-title">
-          <h2><i class="fa-solid fa-compact-disc"></i> Archivo sonoro</h2>
-          <p>Grabaciones, canciones y recopilaciones para escuchar y aprender.</p>
+          <h2><i class="fa-solid fa-compact-disc"></i> <span data-i18n="pages.musica.archivoSonoro.h21">Archivo sonoro</span></h2>
+          <p data-i18n="pages.musica.archivoSonoro.p1">Grabaciones, canciones y recopilaciones para escuchar y aprender.</p>
         </div>
         <div class="musica-head-actions">
-          <span class="musica-archive-count"><strong>93</strong> Grabaciones preservadas</span>
-          <a href="#archivoSonoro" class="musica-view-link">Ver archivo completo &rarr;</a>
+          <span class="musica-archive-count"><strong>93</strong> <span data-i18n="pages.musica.archivoSonoro.span1">Grabaciones preservadas</span></span>
+          <a data-i18n="pages.musica.archivoSonoro.a1" href="#archivoSonoro" class="musica-view-link">Ver archivo completo &rarr;</a>
           <div class="musica-carousel-arrows">
-            <button type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
-            <button type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+            <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
         </div>
       </div>
@@ -634,7 +634,7 @@
       <div class="musica-archive-bar">
         <div class="musica-search-box">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="trackSearchInput" class="musica-search-input" placeholder="Buscar canción, artista, género o territorio..." aria-label="Buscar en archivo sonoro">
+          <input data-i18n-aria-label="pages.musica.trackSearchInput.inputAriaLabel1" data-i18n-placeholder="pages.musica.trackSearchInput.inputPlaceholder1" type="text" id="trackSearchInput" class="musica-search-input" placeholder="Buscar canción, artista, género o territorio..." aria-label="Buscar en archivo sonoro">
         </div>
       </div>
 
@@ -642,62 +642,62 @@
       <div class="musica-archive-grid" id="tracksGrid">
         <!-- 1. Son de Mi Tierra -->
         <div class="track-card-exact" data-title="Son de Mi Tierra" data-artist="Anónimo">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Son de Mi Tierra" class="track-thumb">
+          <img data-i18n-alt="pages.musica.tracksGrid.h51" loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Son de Mi Tierra" class="track-thumb">
           <div class="track-info">
-            <h5 class="track-title">Son de Mi Tierra</h5>
-            <p class="track-artist">Anónimo</p>
+            <h5 data-i18n="pages.musica.tracksGrid.h51" class="track-title">Son de Mi Tierra</h5>
+            <p data-i18n="pages.musica.tracksGrid.p1" class="track-artist">Anónimo</p>
           </div>
-          <button type="button" class="track-play-btn" onclick="playSong('Son de Mi Tierra', 'Anónimo')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+          <button data-i18n-title="pages.musica.btnMainPlay.buttonTitle1" type="button" class="track-play-btn" onclick="playSong('Son de Mi Tierra', 'Anónimo')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
         </div>
 
         <!-- 2. Sirena del Lago -->
         <div class="track-card-exact" data-title="Sirena del Lago" data-artist="Camilo Zapata">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/isla_de_ometepe.jpg" alt="Sirena del Lago" class="track-thumb" width="1600" height="900">
+          <img data-i18n-alt="pages.musica.tracksGrid.h52" loading="lazy" decoding="async" src="assets/images/destinos/isla_de_ometepe.jpg" alt="Sirena del Lago" class="track-thumb" width="1600" height="900">
           <div class="track-info">
-            <h5 class="track-title">Sirena del Lago</h5>
-            <p class="track-artist">Camilo Zapata</p>
+            <h5 data-i18n="pages.musica.tracksGrid.h52" class="track-title">Sirena del Lago</h5>
+            <p data-i18n="pages.musica.musicaSectionCommon.h41" class="track-artist">Camilo Zapata</p>
           </div>
-          <button type="button" class="track-play-btn" onclick="playSong('Sirena del Lago', 'Camilo Zapata')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+          <button data-i18n-title="pages.musica.btnMainPlay.buttonTitle1" type="button" class="track-play-btn" onclick="playSong('Sirena del Lago', 'Camilo Zapata')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
         </div>
 
         <!-- 3. Nicaragua Nicaragüita -->
         <div class="track-card-exact" data-title="Nicaragua Nicaragüita" data-artist="Carlos Mejía Godoy">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Nicaragua Nicaragüita" class="track-thumb" width="1600" height="1131">
+          <img data-i18n-alt="pages.musica.tracksGrid.h53" loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Nicaragua Nicaragüita" class="track-thumb" width="1600" height="1131">
           <div class="track-info">
-            <h5 class="track-title">Nicaragua Nicaragüita</h5>
-            <p class="track-artist">Carlos Mejía Godoy</p>
+            <h5 data-i18n="pages.musica.tracksGrid.h53" class="track-title">Nicaragua Nicaragüita</h5>
+            <p data-i18n="pages.musica.musicaSectionCommon.h42" class="track-artist">Carlos Mejía Godoy</p>
           </div>
-          <button type="button" class="track-play-btn" onclick="playSong('Nicaragua Nicaragüita', 'Carlos Mejía Godoy')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+          <button data-i18n-title="pages.musica.btnMainPlay.buttonTitle1" type="button" class="track-play-btn" onclick="playSong('Nicaragua Nicaragüita', 'Carlos Mejía Godoy')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
         </div>
 
         <!-- 4. El Solar de Monimbó -->
         <div class="track-card-exact" data-title="El Solar de Monimbó" data-artist="Luis Enrique Mejía Godoy">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="El Solar de Monimbó" class="track-thumb" width="1600" height="1131">
+          <img data-i18n-alt="pages.musica.tracksGrid.h54" loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="El Solar de Monimbó" class="track-thumb" width="1600" height="1131">
           <div class="track-info">
-            <h5 class="track-title">El Solar de Monimbó</h5>
-            <p class="track-artist">Luis Enrique Mejía Godoy</p>
+            <h5 data-i18n="pages.musica.tracksGrid.h54" class="track-title">El Solar de Monimbó</h5>
+            <p data-i18n="pages.musica.musicaSectionCommon.h43" class="track-artist">Luis Enrique Mejía Godoy</p>
           </div>
-          <button type="button" class="track-play-btn" onclick="playSong('El Solar de Monimbó', 'Luis Enrique Mejía Godoy')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+          <button data-i18n-title="pages.musica.btnMainPlay.buttonTitle1" type="button" class="track-play-btn" onclick="playSong('El Solar de Monimbó', 'Luis Enrique Mejía Godoy')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
         </div>
 
         <!-- 5. Palo de Mayo -->
         <div class="track-card-exact" data-title="Palo de Mayo" data-artist="Tradicional">
-          <img loading="lazy" decoding="async" src="assets/images/destinos/corn_island.jpg" alt="Palo de Mayo" class="track-thumb" width="800" height="550">
+          <img data-i18n-alt="pages.musica.tracksGrid.h55" loading="lazy" decoding="async" src="assets/images/destinos/corn_island.jpg" alt="Palo de Mayo" class="track-thumb" width="800" height="550">
           <div class="track-info">
-            <h5 class="track-title">Palo de Mayo</h5>
-            <p class="track-artist">Tradicional</p>
+            <h5 data-i18n="pages.musica.tracksGrid.h55" class="track-title">Palo de Mayo</h5>
+            <p data-i18n="gastronomy.traditional" class="track-artist">Tradicional</p>
           </div>
-          <button type="button" class="track-play-btn" onclick="playSong('Palo de Mayo', 'Tradicional')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+          <button data-i18n-title="pages.musica.btnMainPlay.buttonTitle1" type="button" class="track-play-btn" onclick="playSong('Palo de Mayo', 'Tradicional')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
         </div>
 
         <!-- 6. Danza del Güegüense -->
         <div class="track-card-exact" data-title="Danza del Güegüense" data-artist="Folclor Nacional">
-          <img loading="lazy" decoding="async" src="assets/images/comida/gallo_pinto.jpg" alt="Danza del Güegüense" class="track-thumb" width="387" height="516">
+          <img data-i18n-alt="pages.musica.tracksGrid.h56" loading="lazy" decoding="async" src="assets/images/comida/gallo_pinto.jpg" alt="Danza del Güegüense" class="track-thumb" width="387" height="516">
           <div class="track-info">
-            <h5 class="track-title">Danza del Güegüense</h5>
-            <p class="track-artist">Folclor Nacional</p>
+            <h5 data-i18n="pages.musica.tracksGrid.h56" class="track-title">Danza del Güegüense</h5>
+            <p data-i18n="pages.musica.tracksGrid.p2" class="track-artist">Folclor Nacional</p>
           </div>
-          <button type="button" class="track-play-btn" onclick="playSong('Danza del Güegüense', 'Folclor Nacional')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+          <button data-i18n-title="pages.musica.btnMainPlay.buttonTitle1" type="button" class="track-play-btn" onclick="playSong('Danza del Güegüense', 'Folclor Nacional')" title="Reproducir"><i class="fa-solid fa-play"></i></button>
         </div>
       </div>
     </div>
@@ -710,20 +710,20 @@
     <div class="exact-container">
       <div class="musica-digital-strip">
         <div class="musica-digital-left">
-          <img loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi Asistente" class="musica-digital-bird" width="300" height="300">
+          <img data-i18n-alt="common.baquiAsistente" loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi Asistente" class="musica-digital-bird" width="300" height="300">
           <div class="musica-digital-text">
-            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Baqueano Digital: ¿Qué música querés disfrutar hoy?</h3>
-            <p>Te recomiendo canciones, artistas, rutas culturales y experiencias según el territorio que estés explorando.</p>
+            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="pages.musica.musicaSectionCommon.h38">Baqueano Digital: ¿Qué música querés disfrutar hoy?</span></h3>
+            <p data-i18n="pages.musica.musicaSectionCommon.p30">Te recomiendo canciones, artistas, rutas culturales y experiencias según el territorio que estés explorando.</p>
           </div>
         </div>
 
         <div class="musica-digital-chips">
-          <button type="button" class="musica-chip-btn" onclick="askBaquiMusic('Quiero escuchar el mejor Son Nica tradicional')">🎵 Quiero Son Nica</button>
-          <button type="button" class="musica-chip-btn" onclick="askBaquiMusic('Recomiéndame música del Caribe y Palo de Mayo')">🌊 Música del Caribe</button>
-          <button type="button" class="musica-chip-btn" onclick="askBaquiMusic('Música de marimba de Masaya')">🪵 Marimba</button>
-          <button type="button" class="musica-chip-btn" onclick="askBaquiMusic('Canciones históricas y de la patria')">📜 Canciones históricas</button>
-          <button type="button" class="musica-chip-btn" onclick="askBaquiMusic('Artistas destacados y compositores')">⭐ Artistas destacados</button>
-          <button type="button" class="musica-chip-btn" onclick="askBaquiMusic('Rutas musicales de Nicaragua')">🗺️ Rutas musicales</button>
+          <button data-i18n="pages.musica.musicaSectionCommon.button1" type="button" class="musica-chip-btn" onclick="askBaquiMusic('Quiero escuchar el mejor Son Nica tradicional')">🎵 Quiero Son Nica</button>
+          <button data-i18n="pages.musica.musicaSectionCommon.button2" type="button" class="musica-chip-btn" onclick="askBaquiMusic('Recomiéndame música del Caribe y Palo de Mayo')">🌊 Música del Caribe</button>
+          <button data-i18n="pages.musica.musicaSectionCommon.button3" type="button" class="musica-chip-btn" onclick="askBaquiMusic('Música de marimba de Masaya')">🪵 Marimba</button>
+          <button data-i18n="pages.musica.musicaSectionCommon.button4" type="button" class="musica-chip-btn" onclick="askBaquiMusic('Canciones históricas y de la patria')">📜 Canciones históricas</button>
+          <button data-i18n="pages.musica.musicaSectionCommon.button5" type="button" class="musica-chip-btn" onclick="askBaquiMusic('Artistas destacados y compositores')">⭐ Artistas destacados</button>
+          <button data-i18n="pages.musica.musicaSectionCommon.button6" type="button" class="musica-chip-btn" onclick="askBaquiMusic('Rutas musicales de Nicaragua')">🗺️ Rutas musicales</button>
         </div>
       </div>
     </div>
@@ -736,10 +736,10 @@
     <div class="exact-container">
       <div class="musica-sunset-banner">
         <div class="musica-sunset-text">
-          <h2>Escuchá Nicaragua, conocé su historia</h2>
-          <p>De sus pueblos, su gente y sus paisajes nacen sonidos que trascienden.</p>
+          <h2 data-i18n="pages.musica.musicaSectionCommon.h25">Escuchá Nicaragua, conocé su historia</h2>
+          <p data-i18n="pages.musica.musicaSectionCommon.p31">De sus pueblos, su gente y sus paisajes nacen sonidos que trascienden.</p>
         </div>
-        <a href="experiencias.html" class="btn-musica-sunset">
+        <a data-i18n="pages.musica.musicaSectionCommon.a5" href="experiencias.html" class="btn-musica-sunset">
           Explorar experiencias musicales &rarr;
         </a>
       </div>
@@ -824,23 +824,23 @@
   <!-- ============================================================================
        12. BARRA STICKY INFERIOR DE REPRODUCCIÓN (IMAGEN 1)
        ============================================================================ -->
-  <aside class="musica-sticky-bottom-bar" id="stickyMusicBar" aria-label="Reproductor persistente">
+  <aside data-i18n-aria-label="pages.musica.stickyMusicBar.asideAriaLabel1" class="musica-sticky-bottom-bar" id="stickyMusicBar" aria-label="Reproductor persistente">
     <div class="sticky-track-info">
-      <img loading="lazy" decoding="async" src="assets/images/destinos/isla_de_ometepe.jpg" alt="Track Activo" class="sticky-thumb" id="stickyTrackThumb" width="1600" height="900">
+      <img data-i18n-alt="pages.musica.stickyTrackThumb.imgAlt1" loading="lazy" decoding="async" src="assets/images/destinos/isla_de_ometepe.jpg" alt="Track Activo" class="sticky-thumb" id="stickyTrackThumb" width="1600" height="900">
       <div class="sticky-meta">
-        <h5 id="stickyTrackTitle">La Mora Limpia</h5>
-        <span id="stickyTrackArtist">Justo Santos</span>
+        <h5 id="stickyTrackTitle"><span data-i18n="pages.musica.featuredTrackTitle.h41">La Mora Limpia</span></h5>
+        <span id="stickyTrackArtist"><span data-i18n="pages.musica.featuredTrackArtist.b1">Justo Santos</span></span>
       </div>
-      <button type="button" class="btn-player-heart" title="Favorito"><i class="fa-regular fa-heart"></i></button>
+      <button data-i18n-title="common.favorito" type="button" class="btn-player-heart" title="Favorito"><i class="fa-regular fa-heart"></i></button>
     </div>
 
     <div class="sticky-controls">
-      <button type="button" class="player-ctrl-btn" title="Aleatorio"><i class="fa-solid fa-shuffle"></i></button>
-      <button type="button" class="player-ctrl-btn" title="Anterior"><i class="fa-solid fa-backward-step"></i></button>
-      <button type="button" class="sticky-btn-play" onclick="toggleMainTrack()" title="Pausar / Reproducir">
+      <button data-i18n-title="pages.musica.musicaFeaturedPlayerSection.buttonTitle2" type="button" class="player-ctrl-btn" title="Aleatorio"><i class="fa-solid fa-shuffle"></i></button>
+      <button data-i18n-title="common.anterior" type="button" class="player-ctrl-btn" title="Anterior"><i class="fa-solid fa-backward-step"></i></button>
+      <button data-i18n-title="pages.musica.stickyMusicBar.buttonTitle1" type="button" class="sticky-btn-play" onclick="toggleMainTrack()" title="Pausar / Reproducir">
         <i class="fa-solid fa-play" id="stickyPlayIcon"></i>
       </button>
-      <button type="button" class="player-ctrl-btn" title="Siguiente"><i class="fa-solid fa-forward-step"></i></button>
+      <button data-i18n-title="common.siguiente" type="button" class="player-ctrl-btn" title="Siguiente"><i class="fa-solid fa-forward-step"></i></button>
     </div>
 
     <div class="sticky-progress-wrap">
@@ -852,28 +852,28 @@
 
     <div style="display: flex; align-items: center; gap: 12px;">
       <i class="fa-solid fa-volume-high" style="color: #94A3B8; font-size: 0.85rem;"></i>
-      <span style="font-size: 0.75rem; color: #94A3B8;">15 | EN</span>
-      <button type="button" class="player-ctrl-btn" title="Lista de reproducción"><i class="fa-solid fa-list"></i></button>
+      <span data-i18n="pages.musica.stickyMusicBar.span1" style="font-size: 0.75rem; color: #94A3B8;">15 | EN</span>
+      <button data-i18n-title="pages.musica.stickyMusicBar.buttonTitle2" type="button" class="player-ctrl-btn" title="Lista de reproducción"><i class="fa-solid fa-list"></i></button>
     </div>
   </aside>
 
   <!-- MODAL SOS -->
   <div class="exact-modal-backdrop" id="sosModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="sosModalTitle">
     <div class="exact-modal-window sos-modal">
-      <button type="button" class="exact-modal-close" onclick="closeSosModal()" aria-label="Cerrar modal">&times;</button>
+      <button data-i18n-aria-label="accessibility.closeModal" type="button" class="exact-modal-close" onclick="closeSosModal()" aria-label="Cerrar modal">&times;</button>
       <div class="exact-modal-header">
-        <h3 id="sosModalTitle"><i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> Centro SOS &amp; Auxilio Inmediato</h3>
-        <p>Tu ubicación GPS está activa para asistencia en ruta y enlace directo con autoridades de socorro.</p>
+        <h3 id="sosModalTitle"><i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> <span data-i18n="common.centroSosAuxilioInmediato">Centro SOS &amp; Auxilio Inmediato</span></h3>
+        <p data-i18n="common.tuUbicacionGpsEstaActiva">Tu ubicación GPS está activa para asistencia en ruta y enlace directo con autoridades de socorro.</p>
       </div>
       <div class="sos-gps-card">
-        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> GPS Satelital Autónomo</div>
-        <div class="sos-gps-coords" id="sosGpsDisplay">12.5061° N, 86.7022° W (Referencia Nacional)</div>
-        <small style="color: #94A3B8;">Funciona con el chip GNSS de tu dispositivo, sin saldo.</small>
+        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> <span data-i18n="common.gpsSatelitalAutonomo">GPS Satelital Autónomo</span></div>
+        <div class="sos-gps-coords" id="sosGpsDisplay"><span data-i18n="common.n867022WReferencia">12.5061° N, 86.7022° W (Referencia Nacional)</span></div>
+        <small data-i18n="common.funcionaConElChipGnss" style="color: #94A3B8;">Funciona con el chip GNSS de tu dispositivo, sin saldo.</small>
       </div>
       <div class="sos-emergency-buttons">
-        <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> Policía Nacional (118)</a>
-        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> Cruz Roja (128)</a>
-        <a href="tel:115" class="btn-sos-call fire"><i class="fa-solid fa-fire-extinguisher"></i> Bomberos Unificados (115)</a>
+        <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> <span data-i18n="common.policiaNacional118">Policía Nacional (118)</span></a>
+        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> <span data-i18n="common.cruzRoja128">Cruz Roja (128)</span></a>
+        <a href="tel:115" class="btn-sos-call fire"><i class="fa-solid fa-fire-extinguisher"></i> <span data-i18n="common.bomberosUnificados115">Bomberos Unificados (115)</span></a>
       </div>
     </div>
   </div>

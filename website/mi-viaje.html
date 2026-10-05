@@ -28,7 +28,7 @@
 - Modal SOS y footer institucional.
 ============================================================================
 -->
-<html lang="es" data-bq-page="mi-viaje" data-bq-group="cuenta">
+<html data-i18n-description="pages.miViaje.body.metaDescription1" data-i18n-title="pages.miViaje.body.title1" lang="es" data-bq-page="mi-viaje" data-bq-group="cuenta">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -367,9 +367,9 @@
        ═══════════════════════════════════════════════════════ -->
   <header class="viaje-hero">
     <div class="exact-container">
-      <span style="font-size:.8rem;font-weight:800;letter-spacing:.15em;color:#F65E01;text-transform:uppercase">PLANIFICADOR SOBERANO</span>
-      <h1>Mi Aventura por Nicaragua</h1>
-      <p>Organizá tus días, calculá tus gastos con tarifas reales y guardá tus destinos favoritos para recorrer la patria sin intermediarios.</p>
+      <span data-i18n="pages.miViaje.viajeHero.span1" style="font-size:.8rem;font-weight:800;letter-spacing:.15em;color:#F65E01;text-transform:uppercase">PLANIFICADOR SOBERANO</span>
+      <h1 data-i18n="pages.miViaje.viajeHero.h11">Mi Aventura por Nicaragua</h1>
+      <p data-i18n="pages.miViaje.viajeHero.p1">Organizá tus días, calculá tus gastos con tarifas reales y guardá tus destinos favoritos para recorrer la patria sin intermediarios.</p>
     </div>
   </header>
 
@@ -386,16 +386,16 @@
           <!-- Pestañas del Planificador -->
           <div class="viaje-tabs-nav" role="tablist">
             <button type="button" class="viaje-tab-btn active" onclick="switchViajeTab('itinerario', this)" role="tab" aria-selected="true">
-              <i class="fa-solid fa-route"></i> Itinerario Activo
+              <i class="fa-solid fa-route"></i> <span data-i18n="pages.miViaje.printableItinerary.button1">Itinerario Activo</span>
             </button>
             <button type="button" class="viaje-tab-btn" onclick="switchViajeTab('presupuesto', this)" role="tab" aria-selected="false">
-              <i class="fa-solid fa-calculator"></i> Calculadora de Gastos
+              <i class="fa-solid fa-calculator"></i> <span data-i18n="pages.miViaje.printableItinerary.button2">Calculadora de Gastos</span>
             </button>
             <button type="button" class="viaje-tab-btn" onclick="switchViajeTab('checklist', this)" role="tab" aria-selected="false">
-              <i class="fa-solid fa-list-check"></i> Equipaje de Campo
+              <i class="fa-solid fa-list-check"></i> <span data-i18n="pages.miViaje.printableItinerary.button3">Equipaje de Campo</span>
             </button>
             <button type="button" class="viaje-tab-btn" onclick="switchViajeTab('favoritos', this)" role="tab" aria-selected="false">
-              <i class="fa-regular fa-heart"></i> Mis Favoritos
+              <i class="fa-regular fa-heart"></i> <span data-i18n="pages.miViaje.printableItinerary.button4">Mis Favoritos</span>
             </button>
           </div>
 
@@ -410,9 +410,9 @@
             <!-- Bloque Tu Ruta está Lista -->
             <div class="route-ready-card">
               <div class="route-ready-body">
-                <h3>Tu ruta está lista 🌿</h3>
-                <p>Podés ajustar destinos, días, presupuesto o tipo de experiencias y Baqueano IA la actualizará al instante.</p>
-                <button type="button" class="btn-modify-ai" onclick="modifyWithAI()">
+                <h3 data-i18n="common.tuRutaEstaLista">Tu ruta está lista 🌿</h3>
+                <p data-i18n="pages.miViaje.tabItinerario.p1">Podés ajustar destinos, días, presupuesto o tipo de experiencias y Baqueano IA la actualizará al instante.</p>
+                <button data-i18n="pages.miViaje.tabItinerario.button1" type="button" class="btn-modify-ai" onclick="modifyWithAI()">
                   Modificar con IA &nbsp;→
                 </button>
               </div>
@@ -422,18 +422,18 @@
             <!-- Botones de Acción Global -->
             <div class="route-action-btns">
               <button type="button" id="saveTripBtn" class="btn-route-action" onclick="saveTrip(this)">
-                <i class="fa-regular fa-calendar-check"></i> Guardar en Mi Viaje
+                <i class="fa-regular fa-calendar-check"></i> <span data-i18n="common.guardarEnMiViaje">Guardar en Mi Viaje</span>
               </button>
               <button type="button" class="btn-route-action" onclick="shareRoute()">
-                <i class="fa-solid fa-share-nodes"></i> Compartir ruta
+                <i class="fa-solid fa-share-nodes"></i> <span data-i18n="common.compartirRuta">Compartir ruta</span>
               </button>
               <button type="button" class="btn-route-action" onclick="downloadPDF()">
-                <i class="fa-regular fa-file-pdf"></i> Descargar PDF
+                <i class="fa-regular fa-file-pdf"></i> <span data-i18n="common.descargarPdf">Descargar PDF</span>
               </button>
               <button type="button" class="btn-route-action" onclick="generateQR()">
-                <i class="fa-solid fa-qrcode"></i> Generar QR
+                <i class="fa-solid fa-qrcode"></i> <span data-i18n="common.generarQr">Generar QR</span>
               </button>
-              <button type="button" class="btn-reserve-all" onclick="reserveAll()">
+              <button data-i18n="common.reservarTodo" type="button" class="btn-reserve-all" onclick="reserveAll()">
                 Reservar todo
               </button>
             </div>
@@ -442,35 +442,35 @@
           <!-- ── PANEL 2: Calculadora ── -->
           <div class="viaje-tab-panel" id="tabPresupuesto">
             <div class="budget-calc-box">
-              <h3 style="font-family:'Montserrat',sans-serif;margin:0 0 8px">Estimación de Gastos (3 Días / 2 Personas)</h3>
-              <p style="font-size:0.82rem;color:#64748B;margin:0 0 16px">Cálculo transparente y validado según la realidad de costos en Nicaragua.</p>
+              <h3 data-i18n="pages.miViaje.tabPresupuesto.h31" style="font-family:'Montserrat',sans-serif;margin:0 0 8px">Estimación de Gastos (3 Días / 2 Personas)</h3>
+              <p data-i18n="pages.miViaje.tabPresupuesto.p1" style="font-size:0.82rem;color:#64748B;margin:0 0 16px">Cálculo transparente y validado según la realidad de costos en Nicaragua.</p>
               
               <div class="calc-row">
-                <span><i class="fa-solid fa-car"></i> Transporte (Gasolina vehículo propio / Bus)</span>
-                <strong>C$ 1,200 (~$33 USD)</strong>
+                <span><i class="fa-solid fa-car"></i> <span data-i18n="pages.miViaje.tabPresupuesto.span1">Transporte (Gasolina vehículo propio / Bus)</span></span>
+                <strong data-i18n="pages.miViaje.tabPresupuesto.strong1">C$ 1,200 (~$33 USD)</strong>
               </div>
               <div class="calc-row">
-                <span><i class="fa-solid fa-hotel"></i> Hospedaje (Hoteles estándar o boutique colonial, 2 noches)</span>
-                <strong>C$ 3,000 (~$82 USD)</strong>
+                <span><i class="fa-solid fa-hotel"></i> <span data-i18n="pages.miViaje.tabPresupuesto.span2">Hospedaje (Hoteles estándar o boutique colonial, 2 noches)</span></span>
+                <strong data-i18n="pages.miViaje.tabPresupuesto.strong2">C$ 3,000 (~$82 USD)</strong>
               </div>
               <div class="calc-row">
-                <span><i class="fa-solid fa-utensils"></i> Alimentación (Restaurantes típicos tradicionales, 3 tiempos)</span>
-                <strong>C$ 2,000 (~$55 USD)</strong>
+                <span><i class="fa-solid fa-utensils"></i> <span data-i18n="pages.miViaje.tabPresupuesto.span3">Alimentación (Restaurantes típicos tradicionales, 3 tiempos)</span></span>
+                <strong data-i18n="pages.miViaje.tabPresupuesto.strong3">C$ 2,000 (~$55 USD)</strong>
               </div>
               <div class="calc-row">
-                <span><i class="fa-solid fa-person-hiking"></i> Guías baqueanos comunitarios y entradas a reservas</span>
-                <strong>C$ 2,300 (~$63 USD)</strong>
+                <span><i class="fa-solid fa-person-hiking"></i> <span data-i18n="pages.miViaje.tabPresupuesto.span4">Guías baqueanos comunitarios y entradas a reservas</span></span>
+                <strong data-i18n="pages.miViaje.tabPresupuesto.strong4">C$ 2,300 (~$63 USD)</strong>
               </div>
               <div class="calc-row">
-                <span><i class="fa-solid fa-gift"></i> Otros gastos &amp; Utilerías (Artesanías, recuerdos, apoyo a niños locales)</span>
-                <strong>C$ 800 (~$22 USD)</strong>
+                <span><i class="fa-solid fa-gift"></i> <span data-i18n="pages.miViaje.tabPresupuesto.span5">Otros gastos &amp; Utilerías (Artesanías, recuerdos, apoyo a niños locales)</span></span>
+                <strong data-i18n="pages.miViaje.tabPresupuesto.strong5">C$ 800 (~$22 USD)</strong>
               </div>
               <div class="calc-total">
-                <span>Total Estimado:</span>
-                <span>C$ 9,300 (~$254 USD)</span>
+                <span data-i18n="pages.miViaje.tabPresupuesto.span6">Total Estimado:</span>
+                <span data-i18n="pages.miViaje.tabPresupuesto.span7">C$ 9,300 (~$254 USD)</span>
               </div>
               <div style="margin-top:14px;background:#F8FAFC;border-left:3px solid #F65E01;padding:10px 14px;border-radius:6px;font-size:0.75rem;color:#475569;line-height:1.45">
-                <strong>💡 Transparencia de Costos:</strong> Comer en comedores populares cuesta C$ 120-180 por plato, mientras que restaurantes turísticos rondan C$ 500-900. El bus interurbano es muy accesible (C$ 360), el auto propio ahorra en combustible y el alquiler de vehículo (C$ 3,800) brinda mayor comodidad.
+                <strong data-i18n="pages.miViaje.tabPresupuesto.strong6">💡 Transparencia de Costos:</strong> <span data-i18n="pages.miViaje.tabPresupuesto.div1">Comer en comedores populares cuesta C$ 120-180 por plato, mientras que restaurantes turísticos rondan C$ 500-900. El bus interurbano es muy accesible (C$ 360), el auto propio ahorra en combustible y el alquiler de vehículo (C$ 3,800) brinda mayor comodidad.</span>
               </div>
             </div>
           </div>
@@ -478,15 +478,15 @@
           <!-- ── PANEL 3: Checklist ── -->
           <div class="viaje-tab-panel" id="tabChecklist">
             <div class="checklist-wrap">
-              <h3 style="font-family:'Montserrat',sans-serif;margin:0 0 16px">Lista de Equipaje para el Sendero</h3>
-              <label class="check-item"><input type="checkbox" checked> Botella de agua reutilizable (evitar plásticos de un solo uso)</label>
-              <label class="check-item"><input type="checkbox" checked> Protector solar biodegradable y repelente de insectos</label>
-              <label class="check-item"><input type="checkbox"> Calzado de senderismo con buen agarre para terreno volcánico</label>
-              <label class="check-item"><input type="checkbox"> Capa impermeable para nebliselvas y lluvias repentinas</label>
-              <label class="check-item"><input type="checkbox"> Dinero en efectivo en córdobas para cooperativas y pulperías</label>
-              <label class="check-item"><input type="checkbox"> Linterna frontal o de mano con batería de respaldo</label>
-              <label class="check-item"><input type="checkbox"> Botiquín básico de primeros auxilios y antihistamínicos</label>
-              <label class="check-item"><input type="checkbox"> Documento de identidad y fotocopia de emergencia</label>
+              <h3 data-i18n="pages.miViaje.tabChecklist.h31" style="font-family:'Montserrat',sans-serif;margin:0 0 16px">Lista de Equipaje para el Sendero</h3>
+              <label class="check-item"><input type="checkbox" checked> <span data-i18n="pages.miViaje.tabChecklist.label1">Botella de agua reutilizable (evitar plásticos de un solo uso)</span></label>
+              <label class="check-item"><input type="checkbox" checked> <span data-i18n="pages.miViaje.tabChecklist.label2">Protector solar biodegradable y repelente de insectos</span></label>
+              <label class="check-item"><input type="checkbox"> <span data-i18n="pages.miViaje.tabChecklist.label3">Calzado de senderismo con buen agarre para terreno volcánico</span></label>
+              <label class="check-item"><input type="checkbox"> <span data-i18n="pages.miViaje.tabChecklist.label4">Capa impermeable para nebliselvas y lluvias repentinas</span></label>
+              <label class="check-item"><input type="checkbox"> <span data-i18n="pages.miViaje.tabChecklist.label5">Dinero en efectivo en córdobas para cooperativas y pulperías</span></label>
+              <label class="check-item"><input type="checkbox"> <span data-i18n="pages.miViaje.tabChecklist.label6">Linterna frontal o de mano con batería de respaldo</span></label>
+              <label class="check-item"><input type="checkbox"> <span data-i18n="pages.miViaje.tabChecklist.label7">Botiquín básico de primeros auxilios y antihistamínicos</span></label>
+              <label class="check-item"><input type="checkbox"> <span data-i18n="pages.miViaje.tabChecklist.label8">Documento de identidad y fotocopia de emergencia</span></label>
             </div>
           </div>
 
@@ -494,12 +494,12 @@
           <div class="viaje-tab-panel" id="tabFavoritos">
             <div style="background:#FFF;border:1px solid #E2E8F0;border-radius:14px;padding:30px;text-align:center">
               <i class="fa-solid fa-heart" style="font-size:2.5rem;color:#EF4444;display:block;margin-bottom:12px"></i>
-              <h3 style="font-family:'Montserrat',sans-serif;margin:0 0 8px">Tus destinos favoritos</h3>
-              <p style="color:#64748B;max-width:450px;margin:0 auto 18px">
+              <h3 data-i18n="pages.miViaje.tabFavoritos.h31" style="font-family:'Montserrat',sans-serif;margin:0 0 8px">Tus destinos favoritos</h3>
+              <p data-i18n="pages.miViaje.tabFavoritos.p1" style="color:#64748B;max-width:450px;margin:0 auto 18px">
                 Al hacer clic en el corazón de cualquier destino, cooperativa o platillo típico, quedará registrado aquí para tu próxima ruta.
               </p>
               <a href="destinos.html" class="btn-modify-ai">
-                <i class="fa-solid fa-compass"></i> Explorar catálogo
+                <i class="fa-solid fa-compass"></i> <span data-i18n="pages.miViaje.tabFavoritos.a1">Explorar catálogo</span>
               </a>
             </div>
           </div>
@@ -507,81 +507,81 @@
           <!-- ── SECCIÓN RECOMENDACIONES VERIFICADAS ── -->
           <div class="recommendations-section">
             <div class="rec-section-head">
-              <h2>Recomendaciones verificadas para tu ruta</h2>
-              <a href="aliados.html">Ver más recomendaciones →</a>
+              <h2 data-i18n="common.recomendacionesVerificadasParaTuRuta">Recomendaciones verificadas para tu ruta</h2>
+              <a data-i18n="common.verMasRecomendaciones" href="aliados.html">Ver más recomendaciones →</a>
             </div>
-            <p style="font-size:.85rem;color:#64748B;margin:0 0 18px">Hospedajes, restaurantes, guías y experiencias locales seleccionadas para este itinerario.</p>
+            <p data-i18n="common.hospedajesRestaurantesGuiasYExperiencias" style="font-size:.85rem;color:#64748B;margin:0 0 18px">Hospedajes, restaurantes, guías y experiencias locales seleccionadas para este itinerario.</p>
             <div class="rec-grid">
 
               <!-- Tarjeta 1 -->
               <div class="rec-card">
                 <div class="rec-card-img" style="background: linear-gradient(135deg, #165D6F 0%, #0B253A 100%);">
-                  <span class="rec-badge"><i class="fa-solid fa-hotel"></i> Hospedaje</span>
-                  <img src="assets/images/assistant/baqui.png" alt="Hotel Boutique Adela - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
+                  <span class="rec-badge"><i class="fa-solid fa-hotel"></i> <span data-i18n="testimonials.types.hospedaje">Hospedaje</span></span>
+                  <img data-i18n-alt="pages.miViaje.printableItinerary.imgAlt1" src="assets/images/assistant/baqui.png" alt="Hotel Boutique Adela - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
                 </div>
                 <div class="rec-card-body">
-                  <div class="rec-card-name">Hotel Boutique Adela</div>
+                  <div data-i18n="pages.miViaje.printableItinerary.div1" class="rec-card-name">Hotel Boutique Adela</div>
                   <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
                   <div class="rec-card-rating">
                     <span class="rec-stars">★ 4.8</span> <span style="color:#64748B">(120)</span>
-                    <span class="rec-verified">· Verificado BAQUEANO</span>
+                    <span data-i18n="pages.miViaje.printableItinerary.span1" class="rec-verified">· Verificado BAQUEANO</span>
                   </div>
-                  <div class="rec-price">C$ 1,800 / noche</div>
-                  <button type="button" class="btn-rec-action" onclick="viewDetail('Hotel Boutique Adela')">Ver detalle</button>
+                  <div data-i18n="pages.miViaje.printableItinerary.div2" class="rec-price">C$ 1,800 / noche</div>
+                  <button data-i18n="pages.miViaje.printableItinerary.button5" type="button" class="btn-rec-action" onclick="viewDetail('Hotel Boutique Adela')">Ver detalle</button>
                 </div>
               </div>
 
               <!-- Tarjeta 2 -->
               <div class="rec-card">
                 <div class="rec-card-img" style="background: linear-gradient(135deg, #F65E01 0%, #0B253A 100%);">
-                  <span class="rec-badge"><i class="fa-solid fa-utensils"></i> Gastronomía</span>
-                  <img src="assets/images/assistant/baqui.png" alt="Restaurante El Zaguán - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
+                  <span class="rec-badge"><i class="fa-solid fa-utensils"></i> <span data-i18n="nav.gastronomy">Gastronomía</span></span>
+                  <img data-i18n-alt="pages.miViaje.printableItinerary.imgAlt2" src="assets/images/assistant/baqui.png" alt="Restaurante El Zaguán - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
                 </div>
                 <div class="rec-card-body">
-                  <div class="rec-card-name">Restaurante El Zaguán</div>
+                  <div data-i18n="pages.miViaje.printableItinerary.div3" class="rec-card-name">Restaurante El Zaguán</div>
                   <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
                   <div class="rec-card-rating">
                     <span class="rec-stars">★ 4.7</span> <span style="color:#64748B">(210)</span>
-                    <span class="rec-verified">· Verificado BAQUEANO</span>
+                    <span data-i18n="pages.miViaje.printableItinerary.span1" class="rec-verified">· Verificado BAQUEANO</span>
                   </div>
-                  <div class="rec-price">C$ 350 / persona</div>
-                  <button type="button" class="btn-rec-action" onclick="viewDetail('Restaurante El Zaguán')">Ver detalle</button>
+                  <div data-i18n="pages.miViaje.printableItinerary.div4" class="rec-price">C$ 350 / persona</div>
+                  <button data-i18n="pages.miViaje.printableItinerary.button5" type="button" class="btn-rec-action" onclick="viewDetail('Restaurante El Zaguán')">Ver detalle</button>
                 </div>
               </div>
 
               <!-- Tarjeta 3 -->
               <div class="rec-card">
                 <div class="rec-card-img" style="background: linear-gradient(135deg, #4A7A5A 0%, #0B253A 100%);">
-                  <span class="rec-badge"><i class="fa-solid fa-person-hiking"></i> Guía Local</span>
-                  <img src="assets/images/assistant/baqui.png" alt="Guía Local Don Carlos - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
+                  <span class="rec-badge"><i class="fa-solid fa-person-hiking"></i> <span data-i18n="pages.miViaje.printableItinerary.span2">Guía Local</span></span>
+                  <img data-i18n-alt="pages.miViaje.printableItinerary.imgAlt3" src="assets/images/assistant/baqui.png" alt="Guía Local Don Carlos - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
                 </div>
                 <div class="rec-card-body">
-                  <div class="rec-card-name">Guía Local Don Carlos</div>
+                  <div data-i18n="pages.miViaje.printableItinerary.div5" class="rec-card-name">Guía Local Don Carlos</div>
                   <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
                   <div class="rec-card-rating">
                     <span class="rec-stars">★ 4.9</span> <span style="color:#64748B">(64)</span>
-                    <span class="rec-verified">· Verificado BAQUEANO</span>
+                    <span data-i18n="pages.miViaje.printableItinerary.span1" class="rec-verified">· Verificado BAQUEANO</span>
                   </div>
-                  <div class="rec-price">C$ 800 / tour</div>
-                  <button type="button" class="btn-rec-action primary" onclick="contactRec('Guía Local Don Carlos')">Contactar</button>
+                  <div data-i18n="pages.miViaje.printableItinerary.div6" class="rec-price">C$ 800 / tour</div>
+                  <button data-i18n="actions.contact" type="button" class="btn-rec-action primary" onclick="contactRec('Guía Local Don Carlos')">Contactar</button>
                 </div>
               </div>
 
               <!-- Tarjeta 4 -->
               <div class="rec-card">
                 <div class="rec-card-img" style="background: linear-gradient(135deg, #0284C7 0%, #0B253A 100%);">
-                  <span class="rec-badge"><i class="fa-solid fa-water"></i> Tour Acuático</span>
-                  <img src="assets/images/assistant/baqui.png" alt="Tour en Kayak Isletas - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
+                  <span class="rec-badge"><i class="fa-solid fa-water"></i> <span data-i18n="pages.miViaje.printableItinerary.span3">Tour Acuático</span></span>
+                  <img data-i18n-alt="pages.miViaje.printableItinerary.imgAlt4" src="assets/images/assistant/baqui.png" alt="Tour en Kayak Isletas - Baqüi Guía" class="rec-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
                 </div>
                 <div class="rec-card-body">
-                  <div class="rec-card-name">Tour en Kayak Isletas</div>
+                  <div data-i18n="pages.miViaje.printableItinerary.div7" class="rec-card-name">Tour en Kayak Isletas</div>
                   <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
                   <div class="rec-card-rating">
                     <span class="rec-stars">★ 4.8</span> <span style="color:#64748B">(93)</span>
-                    <span class="rec-verified">· Verificado BAQUEANO</span>
+                    <span data-i18n="pages.miViaje.printableItinerary.span1" class="rec-verified">· Verificado BAQUEANO</span>
                   </div>
-                  <div class="rec-price">C$ 600 / persona</div>
-                  <button type="button" class="btn-rec-action primary" onclick="reserveRec('Tour en Kayak Isletas')">Reservar</button>
+                  <div data-i18n="pages.miViaje.printableItinerary.div8" class="rec-price">C$ 600 / persona</div>
+                  <button data-i18n="actions.book" type="button" class="btn-rec-action primary" onclick="reserveRec('Tour en Kayak Isletas')">Reservar</button>
                 </div>
               </div>
 
@@ -591,11 +591,11 @@
           <!-- ── SECCIÓN MAPA CON PESTAÑAS ── -->
           <div class="map-section-wrap" style="margin-top:30px">
             <div class="map-tabs-nav" role="tablist">
-              <button type="button" class="map-tab-btn active" data-tab="mapa" onclick="switchMapTab('mapa', this)" role="tab">Mapa</button>
-              <button type="button" class="map-tab-btn" data-tab="itinerario" onclick="switchMapTab('itinerario', this)" role="tab">Itinerario</button>
-              <button type="button" class="map-tab-btn" data-tab="hospedajes" onclick="switchMapTab('hospedajes', this)" role="tab">Hospedajes</button>
-              <button type="button" class="map-tab-btn" data-tab="comida" onclick="switchMapTab('comida', this)" role="tab">Comida</button>
-              <button type="button" class="map-tab-btn" data-tab="atractivos" onclick="switchMapTab('atractivos', this)" role="tab">Atractivos</button>
+              <button data-i18n="nav.map" type="button" class="map-tab-btn active" data-tab="mapa" onclick="switchMapTab('mapa', this)" role="tab">Mapa</button>
+              <button data-i18n="common.itinerario" type="button" class="map-tab-btn" data-tab="itinerario" onclick="switchMapTab('itinerario', this)" role="tab">Itinerario</button>
+              <button data-i18n="common.hospedajes" type="button" class="map-tab-btn" data-tab="hospedajes" onclick="switchMapTab('hospedajes', this)" role="tab">Hospedajes</button>
+              <button data-i18n="common.comida" type="button" class="map-tab-btn" data-tab="comida" onclick="switchMapTab('comida', this)" role="tab">Comida</button>
+              <button data-i18n="departments.attractions" type="button" class="map-tab-btn" data-tab="atractivos" onclick="switchMapTab('atractivos', this)" role="tab">Atractivos</button>
             </div>
 
             <!-- Mapa Leaflet -->
@@ -608,15 +608,15 @@
               <div class="map-day-cards">
                 <div class="map-day-row">
                   <div class="map-day-num">1</div>
-                  <div class="map-day-info"><h5>Granada colonial y atardecer en las Isletas</h5><span>Granada Colonial · 45 km · 6 h</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelItinerario.h51">Granada colonial y atardecer en las Isletas</h5><span data-i18n="pages.miViaje.mapPanelItinerario.span1">Granada Colonial · 45 km · 6 h</span></div>
                 </div>
                 <div class="map-day-row">
                   <div class="map-day-num">2</div>
-                  <div class="map-day-info"><h5>Lago de lava en Volcán Masaya y artesanías de Monimbó</h5><span>Masaya &amp; Sandboarding · 120 km · 9 h</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelItinerario.h52">Lago de lava en Volcán Masaya y artesanías de Monimbó</h5><span data-i18n="pages.miViaje.mapPanelItinerario.span2">Masaya &amp; Sandboarding · 120 km · 9 h</span></div>
                 </div>
                 <div class="map-day-row">
                   <div class="map-day-num">3</div>
-                  <div class="map-day-info"><h5>Ferry a Ometepe, Ojo de Agua y senderismo en Finca Magdalena</h5><span>Isla de Ometepe · 110 km · 8 h</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelItinerario.h53">Ferry a Ometepe, Ojo de Agua y senderismo en Finca Magdalena</h5><span data-i18n="pages.miViaje.mapPanelItinerario.span3">Isla de Ometepe · 110 km · 8 h</span></div>
                 </div>
               </div>
             </div>
@@ -626,11 +626,11 @@
               <div class="map-day-cards">
                 <div class="map-day-row">
                   <div class="map-day-num" style="background:#165D6F"><i class="fa-solid fa-bed" style="font-size:.9rem"></i></div>
-                  <div class="map-day-info"><h5>Hotel Boutique Adela · Granada</h5><span>C$ 1,800/noche · 4.8 ★ · Verificado</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelHospedajes.h51">Hotel Boutique Adela · Granada</h5><span data-i18n="pages.miViaje.mapPanelHospedajes.span1">C$ 1,800/noche · 4.8 ★ · Verificado</span></div>
                 </div>
                 <div class="map-day-row">
                   <div class="map-day-num" style="background:#165D6F"><i class="fa-solid fa-bed" style="font-size:.9rem"></i></div>
-                  <div class="map-day-info"><h5>Posada Rural San Ramón · Ometepe</h5><span>C$ 1,200/noche · 4.6 ★ · Verificado</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelHospedajes.h52">Posada Rural San Ramón · Ometepe</h5><span data-i18n="pages.miViaje.mapPanelHospedajes.span2">C$ 1,200/noche · 4.6 ★ · Verificado</span></div>
                 </div>
               </div>
             </div>
@@ -640,11 +640,11 @@
               <div class="map-day-cards">
                 <div class="map-day-row">
                   <div class="map-day-num" style="background:#4A7A5A"><i class="fa-solid fa-utensils" style="font-size:.9rem"></i></div>
-                  <div class="map-day-info"><h5>Restaurante El Zaguán · Granada</h5><span>C$ 350/persona · 4.7 ★ · Gastronomía típica</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelComida.h51">Restaurante El Zaguán · Granada</h5><span data-i18n="pages.miViaje.mapPanelComida.span1">C$ 350/persona · 4.7 ★ · Gastronomía típica</span></div>
                 </div>
                 <div class="map-day-row">
                   <div class="map-day-num" style="background:#4A7A5A"><i class="fa-solid fa-utensils" style="font-size:.9rem"></i></div>
-                  <div class="map-day-info"><h5>Kiosco Doña Rosa · Granada</h5><span>Vigorón artesanal · C$ 80/porción · Campesino</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelComida.h52">Kiosco Doña Rosa · Granada</h5><span data-i18n="pages.miViaje.mapPanelComida.span2">Vigorón artesanal · C$ 80/porción · Campesino</span></div>
                 </div>
               </div>
             </div>
@@ -654,15 +654,15 @@
               <div class="map-day-cards">
                 <div class="map-day-row">
                   <div class="map-day-num" style="background:#A855F7"><i class="fa-solid fa-star" style="font-size:.9rem"></i></div>
-                  <div class="map-day-info"><h5>365 Isletas del Cocibolca</h5><span>Granada · Paseo en lancha con pescador local</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelAtractivos.h51">365 Isletas del Cocibolca</h5><span data-i18n="pages.miViaje.mapPanelAtractivos.span1">Granada · Paseo en lancha con pescador local</span></div>
                 </div>
                 <div class="map-day-row">
                   <div class="map-day-num" style="background:#A855F7"><i class="fa-solid fa-star" style="font-size:.9rem"></i></div>
-                  <div class="map-day-info"><h5>Cráter Santiago · Volcán Masaya</h5><span>Masaya · Único lago de lava visible en auto de Nicaragua</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelAtractivos.h52">Cráter Santiago · Volcán Masaya</h5><span data-i18n="pages.miViaje.mapPanelAtractivos.span2">Masaya · Único lago de lava visible en auto de Nicaragua</span></div>
                 </div>
                 <div class="map-day-row">
                   <div class="map-day-num" style="background:#A855F7"><i class="fa-solid fa-star" style="font-size:.9rem"></i></div>
-                  <div class="map-day-info"><h5>Manantial Ojo de Agua · Ometepe</h5><span>Isla de Ometepe · Aguas cristalinas de origen volcánico</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelAtractivos.h53">Manantial Ojo de Agua · Ometepe</h5><span data-i18n="pages.miViaje.mapPanelAtractivos.span3">Isla de Ometepe · Aguas cristalinas de origen volcánico</span></div>
                 </div>
               </div>
             </div>
@@ -680,22 +680,22 @@
 
           <!-- Calculadora Mini -->
           <div class="sidebar-budget-mini">
-            <h4>Resumen de Presupuesto</h4>
-            <div class="budget-mini-row"><span>Transporte (Gasolina / Bus)</span><strong>C$ 1,200</strong></div>
-            <div class="budget-mini-row"><span>Hospedaje (Hotel estándar)</span><strong>C$ 3,000</strong></div>
-            <div class="budget-mini-row"><span>Alimentación (Rest. típicos)</span><strong>C$ 2,000</strong></div>
-            <div class="budget-mini-row"><span>Guías &amp; entradas</span><strong>C$ 2,300</strong></div>
-            <div class="budget-mini-row"><span>Otros gastos &amp; utilerías</span><strong>C$ 800</strong></div>
-            <div class="budget-mini-total"><span>Total estimado</span><span>C$ 9,300 <small style="font-size:0.75rem;font-weight:600">(USD 254)</small></span></div>
+            <h4 data-i18n="pages.miViaje.viajeSidebar.h41">Resumen de Presupuesto</h4>
+            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span1">Transporte (Gasolina / Bus)</span><strong>C$ 1,200</strong></div>
+            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span2">Hospedaje (Hotel estándar)</span><strong>C$ 3,000</strong></div>
+            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span3">Alimentación (Rest. típicos)</span><strong>C$ 2,000</strong></div>
+            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span4">Guías &amp; entradas</span><strong>C$ 2,300</strong></div>
+            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span5">Otros gastos &amp; utilerías</span><strong>C$ 800</strong></div>
+            <div class="budget-mini-total"><span data-i18n="pages.miViaje.viajeSidebar.span6">Total estimado</span><span>C$ 9,300 <small data-i18n="common.usd254" style="font-size:0.75rem;font-weight:600">(USD 254)</small></span></div>
           </div>
 
           <!-- Acceso Rápido a Baqueano IA -->
           <div style="background:linear-gradient(135deg,#0B253A 0%,#165D6F 100%);border-radius:14px;padding:20px;color:#FFF;text-align:center">
             <i class="fa-solid fa-robot" style="font-size:2rem;margin-bottom:10px;display:block;color:#F4E6C1"></i>
-            <h4 style="font-family:'Montserrat',sans-serif;margin:0 0 8px;font-size:.95rem">Baqueano Digital IA</h4>
-            <p style="font-size:.82rem;color:#CBD5E1;margin:0 0 14px">Generá una ruta personalizada o ajustá esta en segundos.</p>
+            <h4 data-i18n="pages.miViaje.viajeSidebar.h42" style="font-family:'Montserrat',sans-serif;margin:0 0 8px;font-size:.95rem">Baqueano Digital IA</h4>
+            <p data-i18n="pages.miViaje.viajeSidebar.p1" style="font-size:.82rem;color:#CBD5E1;margin:0 0 14px">Generá una ruta personalizada o ajustá esta en segundos.</p>
             <a href="baqueano-ia.html" class="btn-modify-ai" style="width:100%;justify-content:center;box-sizing:border-box">
-              <i class="fa-solid fa-wand-magic-sparkles"></i> Abrir asistente
+              <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="baqui.openPanel">Abrir asistente</span>
             </a>
           </div>
 
@@ -820,16 +820,16 @@
     <div class="exact-modal-window sos-modal">
       <button type="button" class="exact-modal-close" onclick="closeSosModal()">&times;</button>
       <div class="exact-modal-header">
-        <h3><i class="fa-solid fa-triangle-exclamation" style="color:#EF4444"></i> Centro SOS &amp; Auxilio</h3>
-        <p>Tu ubicación GPS está activa para asistencia en ruta.</p>
+        <h3><i class="fa-solid fa-triangle-exclamation" style="color:#EF4444"></i> <span data-i18n="pages.miViaje.sosModal.h31">Centro SOS &amp; Auxilio</span></h3>
+        <p data-i18n="pages.miViaje.sosModal.p1">Tu ubicación GPS está activa para asistencia en ruta.</p>
       </div>
       <div class="sos-gps-card">
-        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> GPS Satelital Autónomo</div>
-        <div class="sos-gps-coords" id="sosGpsDisplay">12.5061° N, 86.7022° W (Nicaragua)</div>
+        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> <span data-i18n="common.gpsSatelitalAutonomo">GPS Satelital Autónomo</span></div>
+        <div class="sos-gps-coords" id="sosGpsDisplay"><span data-i18n="common.n867022WNicaragua">12.5061° N, 86.7022° W (Nicaragua)</span></div>
       </div>
       <div class="sos-emergency-buttons">
-        <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> Policía (118)</a>
-        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> Cruz Roja (128)</a>
+        <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> <span data-i18n="common.policia118">Policía (118)</span></a>
+        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> <span data-i18n="common.cruzRoja128">Cruz Roja (128)</span></a>
       </div>
     </div>
   </div>

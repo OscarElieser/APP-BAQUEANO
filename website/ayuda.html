@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-bq-page="ayuda" data-bq-group="institucional">
+<html data-i18n-description="pages.ayuda.body.metaDescription1" data-i18n-title="pages.ayuda.body.title1" lang="es" data-bq-page="ayuda" data-bq-group="institucional">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -43,50 +43,50 @@
     <section class="help-hero">
       <div class="help-wrap help-hero-grid">
         <div>
-          <span class="help-eyebrow"><i class="fa-regular fa-compass"></i> Estamos para orientarte</span>
-          <h1>¿Cómo podemos ayudarte?</h1>
-          <p>Encontrá respuestas y llegá directamente a cada herramienta de Baqueano.</p>
+          <span class="help-eyebrow"><i class="fa-regular fa-compass"></i> <span data-i18n="pages.ayuda.helpHero.span1">Estamos para orientarte</span></span>
+          <h1 data-i18n="pages.ayuda.helpHero.h11">¿Cómo podemos ayudarte?</h1>
+          <p data-i18n="pages.ayuda.helpHero.p1">Encontrá respuestas y llegá directamente a cada herramienta de Baqueano.</p>
           <form class="help-search" id="helpSearchForm" role="search">
-            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><label class="sr-only" for="helpSearch">Buscar en el Centro de Ayuda</label>
-            <input id="helpSearch" type="search" placeholder="Ej.: guardar un destino, reservas o registrar negocio" autocomplete="off"><button type="submit">Buscar</button>
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><label class="sr-only" for="helpSearch"><span data-i18n="pages.ayuda.helpSearchForm.label1">Buscar en el Centro de Ayuda</span></label>
+            <input data-i18n-placeholder="pages.ayuda.helpSearch.inputPlaceholder1" id="helpSearch" type="search" placeholder="Ej.: guardar un destino, reservas o registrar negocio" autocomplete="off"><button data-i18n="actions.search" type="submit">Buscar</button>
           </form>
-          <p class="help-search-status" id="helpSearchStatus" aria-live="polite">También podés elegir una categoría.</p>
+          <p class="help-search-status" id="helpSearchStatus" aria-live="polite"><span data-i18n="pages.ayuda.helpSearchStatus.p1">También podés elegir una categoría.</span></p>
         </div>
         <aside class="help-sos-card">
           <span class="help-sos-icon"><i class="fa-solid fa-shield-heart"></i></span>
-          <div><small>ASISTENCIA EN RUTA</small><h2>¿Tenés una emergencia?</h2><p>Accedé a ubicación GPS, Policía, Cruz Roja, Bomberos y emergencias nacionales.</p></div>
-          <button type="button" onclick="openSosModal(event)">Abrir Centro SOS <i class="fa-solid fa-arrow-right"></i></button>
+          <div><small data-i18n="pages.ayuda.helpSosCard.small1">ASISTENCIA EN RUTA</small><h2 data-i18n="pages.ayuda.helpSosCard.h21">¿Tenés una emergencia?</h2><p data-i18n="pages.ayuda.helpSosCard.p1">Accedé a ubicación GPS, Policía, Cruz Roja, Bomberos y emergencias nacionales.</p></div>
+          <button type="button" onclick="openSosModal(event)"><span data-i18n="pages.ayuda.helpSosCard.button1">Abrir Centro SOS</span> <i class="fa-solid fa-arrow-right"></i></button>
         </aside>
       </div>
     </section>
     <section class="help-section help-wrap" aria-labelledby="quickTitle">
-      <div class="help-heading"><div><span>ACCESOS DIRECTOS</span><h2 id="quickTitle">Resolvé lo que necesitás</h2></div><p>Cada opción te lleva a la función correspondiente.</p></div>
+      <div class="help-heading"><div><span data-i18n="pages.ayuda.helpSection.span1">ACCESOS DIRECTOS</span><h2 id="quickTitle"><span data-i18n="pages.ayuda.quickTitle.h21">Resolvé lo que necesitás</span></h2></div><p data-i18n="pages.ayuda.helpSection.p1">Cada opción te lleva a la función correspondiente.</p></div>
       <div class="help-actions">
-        <a href="mi-viaje.html"><i class="fa-solid fa-route"></i><strong>Planificar mi viaje</strong><span>Crear y ajustar una ruta</span></a>
-        <a href="favoritos.html"><i class="fa-regular fa-heart"></i><strong>Mis favoritos</strong><span>Ver destinos guardados</span></a>
-        <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-check"></i><strong>Mis reservas</strong><span>Consultar viajes reservados</span></a>
-        <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i><strong>Registrar negocio</strong><span>Publicar un emprendimiento</span></a>
-        <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i><strong>Reportar incidencia</strong><span>Usar el canal confidencial</span></a>
-        <a href="perfil.html"><i class="fa-regular fa-user"></i><strong>Cuenta y acceso</strong><span>Administrar tu perfil</span></a>
+        <a href="mi-viaje.html"><i class="fa-solid fa-route"></i><strong data-i18n="pages.ayuda.helpSection.strong1">Planificar mi viaje</strong><span data-i18n="pages.ayuda.helpSection.span2">Crear y ajustar una ruta</span></a>
+        <a href="favoritos.html"><i class="fa-regular fa-heart"></i><strong data-i18n="profile.favorites">Mis favoritos</strong><span data-i18n="pages.ayuda.helpSection.span3">Ver destinos guardados</span></a>
+        <a href="perfil.html#tab-viajes"><i class="fa-regular fa-calendar-check"></i><strong data-i18n="common.misReservas">Mis reservas</strong><span data-i18n="pages.ayuda.helpSection.span4">Consultar viajes reservados</span></a>
+        <a href="mi-negocio.html"><i class="fa-solid fa-shop"></i><strong data-i18n="pages.ayuda.helpSection.strong2">Registrar negocio</strong><span data-i18n="pages.ayuda.helpSection.span5">Publicar un emprendimiento</span></a>
+        <a href="denuncias.html"><i class="fa-solid fa-shield-halved"></i><strong data-i18n="pages.ayuda.helpSection.strong3">Reportar incidencia</strong><span data-i18n="pages.ayuda.helpSection.span6">Usar el canal confidencial</span></a>
+        <a href="perfil.html"><i class="fa-regular fa-user"></i><strong data-i18n="pages.ayuda.helpSection.strong4">Cuenta y acceso</strong><span data-i18n="pages.ayuda.helpSection.span7">Administrar tu perfil</span></a>
       </div>
     </section>
     <section class="help-faq-section" id="preguntas">
       <div class="help-wrap help-faq-layout">
-        <div class="help-faq-intro"><span>PREGUNTAS FRECUENTES</span><h2>Respuestas rápidas</h2><p>Buscá arriba o abrí una pregunta. Si no encontrás la solución, podés contactarnos.</p><a href="mailto:contacto@baqueano.ni"><i class="fa-regular fa-envelope"></i> contacto@baqueano.ni</a></div>
+        <div class="help-faq-intro"><span data-i18n="pages.ayuda.preguntas.span1">PREGUNTAS FRECUENTES</span><h2 data-i18n="pages.ayuda.preguntas.h21">Respuestas rápidas</h2><p data-i18n="pages.ayuda.preguntas.p1">Buscá arriba o abrí una pregunta. Si no encontrás la solución, podés contactarnos.</p><a href="mailto:contacto@baqueano.ni"><i class="fa-regular fa-envelope"></i> contacto@baqueano.ni</a></div>
         <div class="help-faq-list" id="helpFaqList">
-          <details data-search="favoritos guardar destino corazon lista"><summary>¿Cómo guardo y consulto mis destinos favoritos?<i class="fa-solid fa-plus"></i></summary><p>En cada destino usá el botón de corazón. Después ingresá a <a href="favoritos.html">Mis favoritos</a>, donde podés consultar o quitar los elementos guardados.</p></details>
-          <details data-search="viaje ruta inteligencia artificial itinerario clima"><summary>¿Cómo creo o modifico una ruta de viaje?<i class="fa-solid fa-plus"></i></summary><p>Entrá a <a href="mi-viaje.html">Mi Viaje</a> para elegir territorios, días y presupuesto. También podés usar <a href="baqueano-ia.html">Baqueano IA</a> para recibir una propuesta y consultar el clima.</p></details>
-          <details data-search="reservas perfil cuenta iniciar sesion"><summary>¿Dónde aparecen mis reservas?<i class="fa-solid fa-plus"></i></summary><p>Las encontrás en la sección Reservas de tu <a href="perfil.html#tab-viajes">perfil</a>. Si todavía no iniciaste sesión, la plataforma te pedirá identificarte.</p></details>
-          <details data-search="negocio comercio emprendimiento registrar publicar"><summary>¿Cómo registro mi negocio turístico?<i class="fa-solid fa-plus"></i></summary><p>Visitá <a href="mi-negocio.html">Mi Negocio</a>, completá los datos solicitados y enviá la propuesta para revisión.</p></details>
-          <details data-search="denuncia reporte incidencia ambiental seguridad confidencial"><summary>¿Cómo reporto una incidencia?<i class="fa-solid fa-plus"></i></summary><p>Usá el <a href="denuncias.html">Canal de denuncias</a>. Para un peligro inmediato, abrí el botón SOS disponible en el menú.</p></details>
-          <details data-search="cookies privacidad datos aceptar rechazar"><summary>¿Cómo se administran las cookies y mis datos?<i class="fa-solid fa-plus"></i></summary><p>La elección de cookies se guarda en el dispositivo para no preguntarte repetidamente. Consultá la <a href="cookies.html">política de cookies</a> y la <a href="privacidad.html">política de privacidad</a>.</p></details>
-          <details data-search="emergencia sos policia cruz roja cruz blanca bomberos gps"><summary>¿Qué incluye el Centro SOS?<i class="fa-solid fa-plus"></i></summary><p>Incluye ubicación GPS, instrucciones de seguridad y accesos a Policía 118, Cruz Roja 128, Bomberos 115 y emergencias 911.</p></details>
+          <details data-search="favoritos guardar destino corazon lista"><summary><span data-i18n="pages.ayuda.helpFaqList.summary1">¿Cómo guardo y consulto mis destinos favoritos?</span><i class="fa-solid fa-plus"></i></summary><p><span data-i18n="pages.ayuda.helpFaqList.p1">En cada destino usá el botón de corazón. Después ingresá a</span> <a data-i18n="profile.favorites" href="favoritos.html">Mis favoritos</a><span data-i18n="pages.ayuda.helpFaqList.p2">, donde podés consultar o quitar los elementos guardados.</span></p></details>
+          <details data-search="viaje ruta inteligencia artificial itinerario clima"><summary><span data-i18n="pages.ayuda.helpFaqList.summary2">¿Cómo creo o modifico una ruta de viaje?</span><i class="fa-solid fa-plus"></i></summary><p><span data-i18n="pages.ayuda.helpFaqList.p3">Entrá a</span> <a data-i18n="nav.trip" href="mi-viaje.html">Mi Viaje</a> <span data-i18n="pages.ayuda.helpFaqList.p4">para elegir territorios, días y presupuesto. También podés usar</span> <a data-i18n="nav.baqueanoAi" href="baqueano-ia.html">Baqueano IA</a> <span data-i18n="pages.ayuda.helpFaqList.p5">para recibir una propuesta y consultar el clima.</span></p></details>
+          <details data-search="reservas perfil cuenta iniciar sesion"><summary><span data-i18n="pages.ayuda.helpFaqList.summary3">¿Dónde aparecen mis reservas?</span><i class="fa-solid fa-plus"></i></summary><p><span data-i18n="pages.ayuda.helpFaqList.p6">Las encontrás en la sección Reservas de tu</span> <a data-i18n="pages.ayuda.helpFaqList.a1" href="perfil.html#tab-viajes">perfil</a><span data-i18n="pages.ayuda.helpFaqList.p7">. Si todavía no iniciaste sesión, la plataforma te pedirá identificarte.</span></p></details>
+          <details data-search="negocio comercio emprendimiento registrar publicar"><summary><span data-i18n="pages.ayuda.helpFaqList.summary4">¿Cómo registro mi negocio turístico?</span><i class="fa-solid fa-plus"></i></summary><p><span data-i18n="pages.ayuda.helpFaqList.p8">Visitá</span> <a data-i18n="menu.business" href="mi-negocio.html">Mi Negocio</a><span data-i18n="pages.ayuda.helpFaqList.p9">, completá los datos solicitados y enviá la propuesta para revisión.</span></p></details>
+          <details data-search="denuncia reporte incidencia ambiental seguridad confidencial"><summary><span data-i18n="pages.ayuda.helpFaqList.summary5">¿Cómo reporto una incidencia?</span><i class="fa-solid fa-plus"></i></summary><p><span data-i18n="pages.ayuda.helpFaqList.p10">Usá el</span> <a data-i18n="pages.ayuda.helpFaqList.a2" href="denuncias.html">Canal de denuncias</a><span data-i18n="pages.ayuda.helpFaqList.p11">. Para un peligro inmediato, abrí el botón SOS disponible en el menú.</span></p></details>
+          <details data-search="cookies privacidad datos aceptar rechazar"><summary><span data-i18n="pages.ayuda.helpFaqList.summary6">¿Cómo se administran las cookies y mis datos?</span><i class="fa-solid fa-plus"></i></summary><p><span data-i18n="pages.ayuda.helpFaqList.p12">La elección de cookies se guarda en el dispositivo para no preguntarte repetidamente. Consultá la</span> <a data-i18n="pages.ayuda.helpFaqList.a3" href="cookies.html">política de cookies</a> <span data-i18n="pages.ayuda.helpFaqList.p13">y la</span> <a data-i18n="pages.ayuda.helpFaqList.a4" href="privacidad.html">política de privacidad</a>.</p></details>
+          <details data-search="emergencia sos policia cruz roja cruz blanca bomberos gps"><summary><span data-i18n="pages.ayuda.helpFaqList.summary7">¿Qué incluye el Centro SOS?</span><i class="fa-solid fa-plus"></i></summary><p data-i18n="pages.ayuda.helpFaqList.p14">Incluye ubicación GPS, instrucciones de seguridad y accesos a Policía 118, Cruz Roja 128, Bomberos 115 y emergencias 911.</p></details>
         </div>
       </div>
     </section>
     <section class="help-contact help-wrap">
-      <div><span>¿NECESITÁS MÁS AYUDA?</span><h2>Hablemos con vos</h2><p>Contanos qué intentabas hacer y en qué página ocurrió.</p></div>
-      <div class="help-contact-actions"><a class="primary" href="https://wa.me/50584431289" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Escribir por WhatsApp</a><a href="mailto:contacto@baqueano.ni"><i class="fa-regular fa-envelope"></i> Enviar correo</a></div>
+      <div><span data-i18n="pages.ayuda.helpContact.span1">¿NECESITÁS MÁS AYUDA?</span><h2 data-i18n="pages.ayuda.helpContact.h21">Hablemos con vos</h2><p data-i18n="pages.ayuda.helpContact.p1">Contanos qué intentabas hacer y en qué página ocurrió.</p></div>
+      <div class="help-contact-actions"><a class="primary" href="https://wa.me/50584431289" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="pages.ayuda.helpContact.a1">Escribir por WhatsApp</span></a><a href="mailto:contacto@baqueano.ni"><i class="fa-regular fa-envelope"></i> <span data-i18n="pages.ayuda.helpContact.a2">Enviar correo</span></a></div>
     </section>
   </main>
   <footer id="siteFooter"></footer>

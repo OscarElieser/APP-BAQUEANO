@@ -27,7 +27,7 @@
 - Enlaces y botones 100% operativos conectando a Mi Viaje, configuración y soporte.
 ============================================================================
 -->
-<html lang="es-NI" data-bq-page="perfil" data-bq-group="cuenta">
+<html data-i18n-description="pages.perfil.body.metaDescription1" data-i18n-title="pages.perfil.body.title1" lang="es-NI" data-bq-page="perfil" data-bq-group="cuenta">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -146,14 +146,14 @@
   <!-- HERO EDITORIAL (IMAGEN 1) -->
   <header class="prof-hero">
     <div class="prof-hero-container">
-      <div class="prof-hero-eyebrow">Mi Perfil</div>
+      <div data-i18n="nav.profile" class="prof-hero-eyebrow">Mi Perfil</div>
       <h1 class="prof-hero-title">
-        Un viajero, <br><span class="prof-script">mil historias</span>
+        <span data-i18n="pages.perfil.profHero.h11">Un viajero,</span> <br><span data-i18n="pages.perfil.profHero.span1" class="prof-script">mil historias</span>
       </h1>
-      <p class="prof-hero-sub">
+      <p data-i18n="pages.perfil.profHero.p1" class="prof-hero-sub">
         Tus datos, tus viajes y tu Nicaragua, a tu manera.
       </p>
-<img src="assets/images/PROPUESTA/NICARAGUA AUTENTICA.png" alt="Nicaragua Auténtica" class="prof-hero-stamp" onerror="this.style.display='none'" decoding="async" loading="lazy">
+<img data-i18n-alt="common.nicaraguaAutentica1" src="assets/images/PROPUESTA/NICARAGUA AUTENTICA.png" alt="Nicaragua Auténtica" class="prof-hero-stamp" onerror="this.style.display='none'" decoding="async" loading="lazy">
     </div>
   </header>
 
@@ -163,16 +163,16 @@
       <div class="prof-user-left">
         <div class="prof-avatar-box">
           <img src="assets/images/logo.png" alt="" class="prof-avatar-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="600" height="608">
-          <a href="perfil.html?editar=foto#perfil-personal" class="prof-avatar-edit-btn" aria-label="Cambiar foto"><i class="fa-solid fa-camera"></i></a>
+          <a data-i18n-aria-label="pages.perfil.profUserSection.aAriaLabel1" href="perfil.html?editar=foto#perfil-personal" class="prof-avatar-edit-btn" aria-label="Cambiar foto"><i class="fa-solid fa-camera"></i></a>
         </div>
         <div class="prof-user-info">
-          <h3><span data-profile-field="name">Explorador</span> <span class="prof-user-badge">Explorador BAQUEANO</span></h3>
+          <h3><span data-i18n="pages.perfil.profUserSection.span1" data-profile-field="name">Explorador</span> <span data-i18n="pages.perfil.profUserSection.span2" class="prof-user-badge">Explorador BAQUEANO</span></h3>
           <p class="prof-user-tagline" data-profile-field="email"></p>
           <div class="prof-user-meta">
-            <span><i class="fa-regular fa-calendar"></i> Miembro desde <strong data-profile-field="since">—</strong></span>
-            <span><i class="fa-solid fa-location-dot"></i> <strong>Ubicación sin completar</strong></span>
-            <span><i class="fa-solid fa-language"></i> <strong>Español</strong></span>
-            <span><i class="fa-solid fa-coins"></i> Moneda preferida: <strong>C$ Córdoba (NIO)</strong></span>
+            <span><i class="fa-regular fa-calendar"></i> <span data-i18n="pages.perfil.profUserSection.span3">Miembro desde</span> <strong data-profile-field="since">—</strong></span>
+            <span><i class="fa-solid fa-location-dot"></i> <strong data-i18n="pages.perfil.profUserSection.strong1">Ubicación sin completar</strong></span>
+            <span><i class="fa-solid fa-language"></i> <strong data-i18n="language.es">Español</strong></span>
+            <span><i class="fa-solid fa-coins"></i> <span data-i18n="pages.perfil.profUserSection.span4">Moneda preferida:</span> <strong data-i18n="pages.perfil.profUserSection.strong2">C$ Córdoba (NIO)</strong></span>
           </div>
         </div>
       </div>
@@ -180,21 +180,21 @@
       <div class="prof-stats-box">
         <div class="prof-stat-item">
           <i class="fa-solid fa-map prof-stat-icon green"></i>
-          <div><div class="prof-stat-val">0</div><span class="prof-stat-lbl">Viajes completados</span></div>
+          <div><div class="prof-stat-val">0</div><span data-i18n="pages.perfil.profUserSection.span5" class="prof-stat-lbl">Viajes completados</span></div>
         </div>
         <div class="prof-stat-item">
           <i class="fa-regular fa-calendar-check prof-stat-icon blue"></i>
-          <div><div class="prof-stat-val">0</div><span class="prof-stat-lbl">Próximo viaje</span></div>
+          <div><div class="prof-stat-val">0</div><span data-i18n="pages.perfil.profUserSection.span6" class="prof-stat-lbl">Próximo viaje</span></div>
         </div>
         <div class="prof-stat-item">
           <i class="fa-solid fa-heart prof-stat-icon red"></i>
-          <div><div class="prof-stat-val">0</div><span class="prof-stat-lbl">Destinos guardados</span></div>
+          <div><div class="prof-stat-val">0</div><span data-i18n="pages.perfil.profUserSection.span7" class="prof-stat-lbl">Destinos guardados</span></div>
         </div>
         <div class="prof-stat-item">
           <i class="fa-solid fa-star prof-stat-icon yellow"></i>
-          <div><div class="prof-stat-val">0</div><span class="prof-stat-lbl">Reseñas realizadas</span></div>
+          <div><div class="prof-stat-val">0</div><span data-i18n="pages.perfil.profUserSection.span8" class="prof-stat-lbl">Reseñas realizadas</span></div>
         </div>
-        <a href="#perfil-personal" class="prof-btn-edit"><i class="fa-regular fa-pen-to-square"></i> Editar perfil</a>
+        <a href="#perfil-personal" class="prof-btn-edit"><i class="fa-regular fa-pen-to-square"></i> <span data-i18n="profile.editProfile">Editar perfil</span></a>
       </div>
     </div>
   </section>
@@ -202,15 +202,15 @@
   <!-- TABS DE NAVEGACIÓN -->
   <section class="prof-tabs-section" data-private-section hidden>
     <div class="prof-tabs-bar">
-      <a href="#resumen" class="prof-tab-btn active"><i class="fa-regular fa-id-card"></i> Resumen</a>
-      <a href="#pasaporte" class="prof-tab-btn"><i class="fa-solid fa-passport"></i> Pasaporte Baqueano</a>
-      <a href="mi-viaje.html" class="prof-tab-btn"><i class="fa-solid fa-route"></i> Mi Viaje</a>
-      <a href="#reservas" class="prof-tab-btn"><i class="fa-regular fa-calendar-days"></i> Reservas</a>
-      <a href="mi-viaje.html#favoritos" class="prof-tab-btn"><i class="fa-regular fa-heart"></i> Favoritos</a>
-      <a href="#preferencias" class="prof-tab-btn"><i class="fa-solid fa-sliders"></i> Preferencias</a>
-      <a href="#seguridad" class="prof-tab-btn"><i class="fa-solid fa-shield-halved"></i> Seguridad</a>
-      <a href="#pagos" class="prof-tab-btn"><i class="fa-regular fa-credit-card"></i> Pagos</a>
-      <a href="privacidad.html" class="prof-tab-btn"><i class="fa-solid fa-lock"></i> Privacidad</a>
+      <a href="#resumen" class="prof-tab-btn active"><i class="fa-regular fa-id-card"></i> <span data-i18n="pages.perfil.profTabsSection.a1">Resumen</span></a>
+      <a href="#pasaporte" class="prof-tab-btn"><i class="fa-solid fa-passport"></i> <span data-i18n="pages.perfil.profTabsSection.a2">Pasaporte Baqueano</span></a>
+      <a href="mi-viaje.html" class="prof-tab-btn"><i class="fa-solid fa-route"></i> <span data-i18n="nav.trip">Mi Viaje</span></a>
+      <a href="#reservas" class="prof-tab-btn"><i class="fa-regular fa-calendar-days"></i> <span data-i18n="environmental.reserves">Reservas</span></a>
+      <a href="mi-viaje.html#favoritos" class="prof-tab-btn"><i class="fa-regular fa-heart"></i> <span data-i18n="nav.favorites">Favoritos</span></a>
+      <a href="#preferencias" class="prof-tab-btn"><i class="fa-solid fa-sliders"></i> <span data-i18n="common.preferencias">Preferencias</span></a>
+      <a href="#seguridad" class="prof-tab-btn"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="common.seguridad">Seguridad</span></a>
+      <a href="#pagos" class="prof-tab-btn"><i class="fa-regular fa-credit-card"></i> <span data-i18n="common.pagos">Pagos</span></a>
+      <a href="privacidad.html" class="prof-tab-btn"><i class="fa-solid fa-lock"></i> <span data-i18n="menu.privacy">Privacidad</span></a>
     </div>
   </section>
 
@@ -219,30 +219,30 @@
     <!-- PRÓXIMO VIAJE -->
     <div class="prof-card">
       <div class="prof-card-header">
-        <h4><i class="fa-regular fa-calendar-days" style="color:var(--prof-primary)"></i> Próximo viaje</h4>
+        <h4><i class="fa-regular fa-calendar-days" style="color:var(--prof-primary)"></i> <span data-i18n="pages.perfil.profUserSection.span6">Próximo viaje</span></h4>
         </div>
       <div class="prof-empty">
         <i class="fa-regular fa-map" aria-hidden="true"></i>
-        <p>Todavía no tenés un viaje programado.</p>
-        <a href="baqueano-ia.html" class="prof-btn-open-trip">Armar mi viaje con BAQUI <i class="fa-solid fa-arrow-right"></i></a>
+        <p data-i18n="pages.perfil.resumen.p1">Todavía no tenés un viaje programado.</p>
+        <a href="baqueano-ia.html" class="prof-btn-open-trip"><span data-i18n="pages.perfil.resumen.a1">Armar mi viaje con BAQUI</span> <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
 
     <!-- MIS RESERVAS -->
     <div class="prof-card" id="reservas">
       <div class="prof-card-header">
-        <h4><i class="fa-solid fa-bag-shopping" style="color:var(--prof-green)"></i> Mis reservas</h4>
-        <a href="mi-viaje.html#reservas">Ver todas →</a>
+        <h4><i class="fa-solid fa-bag-shopping" style="color:var(--prof-green)"></i> <span data-i18n="common.misReservas">Mis reservas</span></h4>
+        <a data-i18n="common.verTodas" href="mi-viaje.html#reservas">Ver todas →</a>
       </div>
       <div class="prof-res-tabs">
-        <button type="button" class="prof-res-pill active" data-reservation-filter="proximas">Próximas 0</button>
-        <button type="button" class="prof-res-pill" data-reservation-filter="completadas">Completadas 0</button>
-        <button type="button" class="prof-res-pill" data-reservation-filter="canceladas">Canceladas 0</button>
+        <button data-i18n="pages.perfil.reservas.button1" type="button" class="prof-res-pill active" data-reservation-filter="proximas">Próximas 0</button>
+        <button data-i18n="pages.perfil.reservas.button2" type="button" class="prof-res-pill" data-reservation-filter="completadas">Completadas 0</button>
+        <button data-i18n="pages.perfil.reservas.button3" type="button" class="prof-res-pill" data-reservation-filter="canceladas">Canceladas 0</button>
       </div>
       <div class="prof-res-list">
         <div class="prof-empty">
           <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-          <p>No tenés reservas todavía.</p>
+          <p data-i18n="pages.perfil.reservas.p1">No tenés reservas todavía.</p>
         </div>
       </div>
     </div>
@@ -251,14 +251,14 @@
     <!-- FAVORITOS RECIENTES -->
     <div class="prof-card">
       <div class="prof-card-header">
-        <h4><i class="fa-solid fa-heart" style="color:#EF4444"></i> Favoritos recientes</h4>
-        <a href="mi-viaje.html#favoritos">Ver todos →</a>
+        <h4><i class="fa-solid fa-heart" style="color:#EF4444"></i> <span data-i18n="pages.perfil.resumen.h41">Favoritos recientes</span></h4>
+        <a data-i18n="common.verTodos" href="mi-viaje.html#favoritos">Ver todos →</a>
       </div>
       <div class="prof-favs-row">
         <div class="prof-empty">
           <i class="fa-regular fa-heart" aria-hidden="true"></i>
-          <p>Tocá ♥ en un destino y aparece acá.</p>
-          <a href="destinos.html" class="prof-btn-open-trip">Explorar destinos <i class="fa-solid fa-arrow-right"></i></a>
+          <p data-i18n="pages.perfil.resumen.p2">Tocá ♥ en un destino y aparece acá.</p>
+          <a href="destinos.html" class="prof-btn-open-trip"><span data-i18n="home.hero.cta">Explorar destinos</span> <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -275,13 +275,13 @@
             <i class="fa-solid fa-passport"></i>
           </div>
           <div class="prof-passport-heading">
-            <h3>PASAPORTE BAQUEANO · EXPEDICIÓN NICARAGUA</h3>
-            <p>Registro oficial de exploración territorial y preservación cultural comunitaria</p>
+            <h3 data-i18n="pages.perfil.pasaporte.h31">PASAPORTE BAQUEANO · EXPEDICIÓN NICARAGUA</h3>
+            <p data-i18n="pages.perfil.pasaporte.p1">Registro oficial de exploración territorial y preservación cultural comunitaria</p>
           </div>
         </div>
         <div>
           <button type="button" class="prof-btn-primary" id="btnSharePassport" style="padding:8px 16px;font-size:0.82rem;background:#F65E01;display:inline-flex;align-items:center;gap:6px;">
-            <i class="fa-solid fa-share-nodes"></i> Compartir Pasaporte
+            <i class="fa-solid fa-share-nodes"></i> <span data-i18n="pages.perfil.btnSharePassport.button1">Compartir Pasaporte</span>
           </button>
         </div>
       </div>
@@ -289,16 +289,16 @@
       <!-- Barra de Progreso Territorial -->
       <div class="prof-passport-progress-box">
         <div class="prof-passport-progress-meta">
-          <span><i class="fa-solid fa-map-location-dot" style="color:#4A7A5A;margin-right:6px;"></i> Progreso Territorial: 0 de 17 departamentos explorados</span>
-          <span style="color:#2DD4BF;">0% del territorio nacional</span>
+          <span><i class="fa-solid fa-map-location-dot" style="color:#4A7A5A;margin-right:6px;"></i> <span data-i18n="pages.perfil.pasaporte.span1">Progreso Territorial: 0 de 17 departamentos explorados</span></span>
+          <span data-i18n="pages.perfil.pasaporte.span2" style="color:#2DD4BF;">0% del territorio nacional</span>
         </div>
         <div class="prof-passport-bar-track">
           <div class="prof-passport-bar-fill" style="width:0%"></div>
         </div>
         <div class="prof-passport-badges-summary">
-          <span><i class="fa-solid fa-stamp" style="color:#4A7A5A;"></i> <strong>0 sellos desbloqueados</strong></span>
-          <span><i class="fa-solid fa-route" style="color:#F65E01;"></i> <strong>0 territorios en ruta activa</strong></span>
-          <span><i class="fa-solid fa-compass" style="color:#94A3B8;"></i> <strong>17 territorios por descubrir</strong></span>
+          <span><i class="fa-solid fa-stamp" style="color:#4A7A5A;"></i> <strong data-i18n="pages.perfil.pasaporte.strong1">0 sellos desbloqueados</strong></span>
+          <span><i class="fa-solid fa-route" style="color:#F65E01;"></i> <strong data-i18n="pages.perfil.pasaporte.strong2">0 territorios en ruta activa</strong></span>
+          <span><i class="fa-solid fa-compass" style="color:#94A3B8;"></i> <strong data-i18n="pages.perfil.pasaporte.strong3">17 territorios por descubrir</strong></span>
         </div>
       </div>
 
@@ -308,9 +308,9 @@
         <div class="prof-stamp-item locked">
           <div class="prof-stamp-icon"><i class="fa-solid fa-volcano"></i></div>
           <div class="prof-stamp-info">
-            <h5>Sello Masaya</h5>
+            <h5 data-i18n="pages.perfil.pasaporte.h51">Sello Masaya</h5>
             <p>Volcán Masaya &amp; Laguna de Apoyo</p>
-            <span class="prof-stamp-status">Por Descubrir</span>
+            <span data-i18n="pages.perfil.pasaporte.span3" class="prof-stamp-status">Por Descubrir</span>
           </div>
         </div>
 
@@ -318,9 +318,9 @@
         <div class="prof-stamp-item locked">
           <div class="prof-stamp-icon"><i class="fa-solid fa-water"></i></div>
           <div class="prof-stamp-info">
-            <h5>Sello Rivas</h5>
+            <h5 data-i18n="pages.perfil.pasaporte.h52">Sello Rivas</h5>
             <p>Isla de Ometepe &amp; San Juan del Sur</p>
-            <span class="prof-stamp-status">Por Descubrir</span>
+            <span data-i18n="pages.perfil.pasaporte.span3" class="prof-stamp-status">Por Descubrir</span>
           </div>
         </div>
 
@@ -328,9 +328,9 @@
         <div class="prof-stamp-item locked">
           <div class="prof-stamp-icon"><i class="fa-solid fa-landmark"></i></div>
           <div class="prof-stamp-info">
-            <h5>Sello Granada</h5>
-            <p>Isletas del Cocibolca &amp; Colonial</p>
-            <span class="prof-stamp-status">Por Descubrir</span>
+            <h5 data-i18n="pages.perfil.pasaporte.h53">Sello Granada</h5>
+            <p data-i18n="pages.perfil.pasaporte.p2">Isletas del Cocibolca &amp; Colonial</p>
+            <span data-i18n="pages.perfil.pasaporte.span3" class="prof-stamp-status">Por Descubrir</span>
           </div>
         </div>
 
@@ -338,9 +338,9 @@
         <div class="prof-stamp-item locked">
           <div class="prof-stamp-icon"><i class="fa-solid fa-mug-hot"></i></div>
           <div class="prof-stamp-info">
-            <h5>Sello Matagalpa</h5>
-            <p>Selva Negra &amp; Ruta del Café</p>
-            <span class="prof-stamp-status">Por Descubrir</span>
+            <h5 data-i18n="pages.perfil.pasaporte.h54">Sello Matagalpa</h5>
+            <p data-i18n="pages.perfil.pasaporte.p3">Selva Negra &amp; Ruta del Café</p>
+            <span data-i18n="pages.perfil.pasaporte.span3" class="prof-stamp-status">Por Descubrir</span>
           </div>
         </div>
 
@@ -348,9 +348,9 @@
         <div class="prof-stamp-item locked">
           <div class="prof-stamp-icon"><i class="fa-solid fa-person-snowboarding"></i></div>
           <div class="prof-stamp-info">
-            <h5>Sello León</h5>
-            <p>Sandboarding Cerro Negro &amp; Catedral</p>
-            <span class="prof-stamp-status">Por Descubrir</span>
+            <h5 data-i18n="pages.perfil.pasaporte.h55">Sello León</h5>
+            <p data-i18n="pages.perfil.pasaporte.p4">Sandboarding Cerro Negro &amp; Catedral</p>
+            <span data-i18n="pages.perfil.pasaporte.span3" class="prof-stamp-status">Por Descubrir</span>
           </div>
         </div>
 
@@ -358,9 +358,9 @@
         <div class="prof-stamp-item locked">
           <div class="prof-stamp-icon"><i class="fa-solid fa-mountain-sun"></i></div>
           <div class="prof-stamp-info">
-            <h5>Sello Madriz</h5>
+            <h5 data-i18n="pages.perfil.pasaporte.h56">Sello Madriz</h5>
             <p>Cañón de Somoto &amp; Yalagüina</p>
-            <span class="prof-stamp-status">Por Descubrir</span>
+            <span data-i18n="pages.perfil.pasaporte.span3" class="prof-stamp-status">Por Descubrir</span>
           </div>
         </div>
 
@@ -368,9 +368,9 @@
         <div class="prof-stamp-item locked">
           <div class="prof-stamp-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
           <div class="prof-stamp-info">
-            <h5>Sello Caribe Sur</h5>
+            <h5 data-i18n="pages.perfil.pasaporte.h57">Sello Caribe Sur</h5>
             <p>Corn Island &amp; Laguna de Perlas</p>
-            <span class="prof-stamp-status">Por Descubrir</span>
+            <span data-i18n="pages.perfil.pasaporte.span3" class="prof-stamp-status">Por Descubrir</span>
           </div>
         </div>
 
@@ -378,9 +378,9 @@
         <div class="prof-stamp-item locked">
           <div class="prof-stamp-icon"><i class="fa-solid fa-cloud-sun"></i></div>
           <div class="prof-stamp-info">
-            <h5>Sello Jinotega</h5>
-            <p>Ciudad de las Brumas &amp; Datanlí</p>
-            <span class="prof-stamp-status">Por Descubrir</span>
+            <h5 data-i18n="pages.perfil.pasaporte.h58">Sello Jinotega</h5>
+            <p data-i18n="pages.perfil.pasaporte.p5">Ciudad de las Brumas &amp; Datanlí</p>
+            <span data-i18n="pages.perfil.pasaporte.span3" class="prof-stamp-status">Por Descubrir</span>
           </div>
         </div>
       </div>
@@ -388,14 +388,14 @@
       <!-- Acciones Tácticas del Pasaporte -->
       <div class="prof-passport-actions">
         <span style="font-size:0.8rem;color:#94A3B8;">
-          <i class="fa-solid fa-shield-halved" style="color:#4A7A5A;margin-right:4px;"></i> Cada sello acredita tu impacto económico directo en cooperativas comunitarias.
+          <i class="fa-solid fa-shield-halved" style="color:#4A7A5A;margin-right:4px;"></i> <span data-i18n="pages.perfil.pasaporte.span4">Cada sello acredita tu impacto económico directo en cooperativas comunitarias.</span>
         </span>
         <div style="display:flex;gap:10px;">
           <a href="departamento.html" class="prof-btn-edit" style="color:#FFFFFF;border-color:rgba(255,255,255,0.2);">
-            <i class="fa-solid fa-map"></i> Ver 17 Departamentos
+            <i class="fa-solid fa-map"></i> <span data-i18n="pages.perfil.pasaporte.a1">Ver 17 Departamentos</span>
           </a>
           <a href="mi-viaje.html" class="prof-btn-primary" style="padding:6px 14px;font-size:0.8rem;background:#165D6F;">
-            <i class="fa-solid fa-plus"></i> Añadir Destino a Mi Viaje
+            <i class="fa-solid fa-plus"></i> <span data-i18n="pages.perfil.pasaporte.a2">Añadir Destino a Mi Viaje</span>
           </a>
         </div>
       </div>
@@ -406,25 +406,25 @@
   <section class="prof-prefs-section" id="preferencias" data-private-section hidden>
     <div class="prof-prefs-card">
       <div class="prof-card-header">
-        <h4><i class="fa-solid fa-compass" style="color:var(--prof-primary)"></i> Mis preferencias de viaje</h4>
+        <h4><i class="fa-solid fa-compass" style="color:var(--prof-primary)"></i> <span data-i18n="pages.perfil.preferencias.h41">Mis preferencias de viaje</span></h4>
       </div>
-      <p style="font-size:0.8rem;color:var(--prof-muted);margin:0">Selecciona tus intereses para recibir recomendaciones personalizadas.</p>
+      <p data-i18n="pages.perfil.preferencias.p1" style="font-size:0.8rem;color:var(--prof-muted);margin:0">Selecciona tus intereses para recibir recomendaciones personalizadas.</p>
       <div class="prof-prefs-cloud">
-        <span class="prof-pref-tag"><i class="fa-solid fa-umbrella-beach"></i> Playas</span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-volcano"></i> Volcanes</span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-person-hiking"></i> Senderismo</span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-utensils"></i> Gastronomía</span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-mug-hot"></i> Café</span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-water"></i> Cascadas</span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-masks-theater"></i> Cultura</span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-people-roof"></i> Turismo familiar</span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-camera"></i> Fotografía</span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-mountain"></i> Aventura</span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-umbrella-beach"></i> <span data-i18n="home.destinations.filters.beaches">Playas</span></span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-volcano"></i> <span data-i18n="home.destinations.filters.volcanoes">Volcanes</span></span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-person-hiking"></i> <span data-i18n="pages.perfil.preferencias.span1">Senderismo</span></span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-utensils"></i> <span data-i18n="nav.gastronomy">Gastronomía</span></span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-mug-hot"></i> <span data-i18n="pages.perfil.preferencias.span2">Café</span></span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-water"></i> <span data-i18n="pages.perfil.preferencias.span3">Cascadas</span></span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-masks-theater"></i> <span data-i18n="nav.culture">Cultura</span></span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-people-roof"></i> <span data-i18n="pages.perfil.preferencias.span4">Turismo familiar</span></span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-camera"></i> <span data-i18n="common.fotografia">Fotografía</span></span>
+        <span class="prof-pref-tag"><i class="fa-solid fa-mountain"></i> <span data-i18n="testimonials.types.aventura">Aventura</span></span>
       </div>
     </div>
 
     <div class="prof-scenic-banner">
-      <div class="prof-scenic-text">
+      <div data-i18n="pages.perfil.preferencias.div1" class="prof-scenic-text">
         "Más experiencias que te conectan con nuestra tierra."
       </div>
       <img src="assets/images/assistant/baqui-bird.png" alt="Baqüi" class="prof-scenic-bird" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
@@ -436,41 +436,41 @@
     <!-- INFO PERSONAL -->
     <div class="prof-card">
       <div class="prof-card-header">
-        <h4><i class="fa-regular fa-user" style="color:var(--prof-primary)"></i> Información personal</h4>
-        <a href="perfil.html?editar=datos#perfil-personal" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
+        <h4><i class="fa-regular fa-user" style="color:var(--prof-primary)"></i> <span data-i18n="pages.perfil.perfilPersonal.h41">Información personal</span></h4>
+        <a data-i18n="actions.edit" href="perfil.html?editar=datos#perfil-personal" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
       </div>
       <div class="prof-field-list">
-        <div class="prof-field-item"><i class="fa-solid fa-id-badge"></i><div><small>Nombre completo</small><strong data-profile-field="name">Sin completar</strong></div></div>
-        <div class="prof-field-item"><i class="fa-regular fa-envelope"></i><div><small>Correo electrónico</small><strong data-profile-field="email">Sin completar</strong></div></div>
-        <div class="prof-field-item"><i class="fa-solid fa-phone"></i><div><small>Teléfono</small><strong>Sin completar</strong></div></div>
-        <div class="prof-field-item"><i class="fa-solid fa-location-dot"></i><div><small>Ubicación</small><strong>Sin completar</strong></div></div>
-        <div class="prof-field-item"><i class="fa-solid fa-phone-volume"></i><div><small>Contacto de emergencia</small><strong>Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-id-badge"></i><div><small data-i18n="forms.fullName">Nombre completo</small><strong data-i18n="pages.perfil.perfilPersonal.strong1" data-profile-field="name">Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-regular fa-envelope"></i><div><small data-i18n="profile.email">Correo electrónico</small><strong data-i18n="pages.perfil.perfilPersonal.strong1" data-profile-field="email">Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-phone"></i><div><small data-i18n="profile.phone">Teléfono</small><strong data-i18n="pages.perfil.perfilPersonal.strong1">Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-location-dot"></i><div><small data-i18n="pages.perfil.perfilPersonal.small1">Ubicación</small><strong data-i18n="pages.perfil.perfilPersonal.strong1">Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-phone-volume"></i><div><small data-i18n="pages.perfil.perfilPersonal.small2">Contacto de emergencia</small><strong data-i18n="pages.perfil.perfilPersonal.strong1">Sin completar</strong></div></div>
       </div>
     </div>
 
     <!-- IDIOMA Y MONEDA -->
     <div class="prof-card">
       <div class="prof-card-header">
-        <h4><i class="fa-solid fa-globe" style="color:var(--prof-green)"></i> Idioma y moneda</h4>
-        <a href="perfil.html?editar=idioma#perfil-personal" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
+        <h4><i class="fa-solid fa-globe" style="color:var(--prof-green)"></i> <span data-i18n="pages.perfil.perfilPersonal.h42">Idioma y moneda</span></h4>
+        <a data-i18n="actions.edit" href="perfil.html?editar=idioma#perfil-personal" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:14px">
         <div>
-          <label style="font-size:0.78rem;font-weight:700;color:var(--prof-dark)">Idioma de la plataforma</label>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--prof-dark)"><span data-i18n="pages.perfil.perfilPersonal.label1">Idioma de la plataforma</span></label>
           <select class="prof-select">
-            <option selected>🇳🇮 Español</option>
-            <option>🇺🇸 English</option>
+            <option data-i18n="pages.perfil.perfilPersonal.option1" selected>🇳🇮 Español</option>
+            <option data-i18n="pages.perfil.perfilPersonal.option2">🇺🇸 English</option>
           </select>
         </div>
         <div>
-          <label style="font-size:0.78rem;font-weight:700;color:var(--prof-dark)">Moneda preferida</label>
+          <label style="font-size:0.78rem;font-weight:700;color:var(--prof-dark)"><span data-i18n="pages.perfil.perfilPersonal.label2">Moneda preferida</span></label>
           <select class="prof-select">
-            <option selected>C$ Córdoba (NIO)</option>
-            <option>$ Dólar (USD)</option>
+            <option data-i18n="pages.perfil.profUserSection.strong2" selected>C$ Córdoba (NIO)</option>
+            <option data-i18n="pages.perfil.perfilPersonal.option3">$ Dólar (USD)</option>
           </select>
         </div>
         <div style="background:#F8FAFC;border:1px solid #EDF2F7;padding:10px;border-radius:8px;font-size:0.74rem;color:var(--prof-muted)">
-          <i class="fa-regular fa-lightbulb" style="color:var(--prof-accent)"></i> Esto ayuda a mostrar precios, contenido y recomendaciones más relevantes para tu experiencia.
+          <i class="fa-regular fa-lightbulb" style="color:var(--prof-accent)"></i> <span data-i18n="pages.perfil.perfilPersonal.div1">Esto ayuda a mostrar precios, contenido y recomendaciones más relevantes para tu experiencia.</span>
         </div>
       </div>
     </div>
@@ -478,14 +478,14 @@
     <!-- SALUD Y BIENESTAR -->
     <div class="prof-card">
       <div class="prof-card-header">
-        <h4><i class="fa-solid fa-heart-pulse" style="color:#EF4444"></i> Salud, accesibilidad y bienestar</h4>
-        <a href="perfil.html?editar=accesibilidad#perfil-personal" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
+        <h4><i class="fa-solid fa-heart-pulse" style="color:#EF4444"></i> <span data-i18n="pages.perfil.perfilPersonal.h43">Salud, accesibilidad y bienestar</span></h4>
+        <a data-i18n="actions.edit" href="perfil.html?editar=accesibilidad#perfil-personal" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
       </div>
       <div class="prof-field-list">
-        <div class="prof-field-item"><i class="fa-solid fa-wheat-awn-circle-exclamation"></i><div><small>Alergias o restricciones</small><strong>Sin completar</strong></div></div>
-        <div class="prof-field-item"><i class="fa-solid fa-wheelchair"></i><div><small>Accesibilidad</small><strong>Sin completar</strong></div></div>
-        <div class="prof-field-item"><i class="fa-solid fa-user-shield"></i><div><small>Contacto de emergencia</small><strong>Sin completar</strong></div></div>
-        <div style="background:#ECFDF5;border:1px solid #A7F3D0;padding:8px;border-radius:8px;font-size:0.72rem;color:#2F5A3C;margin-top:6px">
+        <div class="prof-field-item"><i class="fa-solid fa-wheat-awn-circle-exclamation"></i><div><small data-i18n="pages.perfil.perfilPersonal.small3">Alergias o restricciones</small><strong data-i18n="pages.perfil.perfilPersonal.strong1">Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-wheelchair"></i><div><small data-i18n="pages.perfil.perfilPersonal.small4">Accesibilidad</small><strong data-i18n="pages.perfil.perfilPersonal.strong1">Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-user-shield"></i><div><small data-i18n="pages.perfil.perfilPersonal.small2">Contacto de emergencia</small><strong data-i18n="pages.perfil.perfilPersonal.strong1">Sin completar</strong></div></div>
+        <div data-i18n="pages.perfil.perfilPersonal.div2" style="background:#ECFDF5;border:1px solid #A7F3D0;padding:8px;border-radius:8px;font-size:0.72rem;color:#2F5A3C;margin-top:6px">
           Esta información solo se comparte cuando es necesaria y con tu autorización (por ejemplo, en reservas o emergencias).
         </div>
       </div>
@@ -497,17 +497,17 @@
     <!-- SEGURIDAD -->
     <div class="prof-card" id="seguridad">
       <div class="prof-card-header">
-        <h4><i class="fa-solid fa-shield-halved" style="color:var(--prof-green)"></i> Seguridad de la cuenta</h4>
-        <a href="privacidad.html" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Configurar seguridad</a>
+        <h4><i class="fa-solid fa-shield-halved" style="color:var(--prof-green)"></i> <span data-i18n="pages.perfil.seguridad.h41">Seguridad de la cuenta</span></h4>
+        <a data-i18n="pages.perfil.seguridad.a1" href="privacidad.html" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Configurar seguridad</a>
       </div>
       <div class="prof-field-list">
         <!-- Datos reales de Firebase Auth (js/auth-panel.js → renderUser); nunca un estado fijo. -->
-        <div class="prof-field-item"><i class="fa-solid fa-lock"></i><div><small>Método de acceso</small><strong data-profile-field="auth-provider">—</strong></div></div>
-        <div class="prof-field-item"><i class="fa-regular fa-envelope-open"></i><div><small>Correo verificado</small><strong data-profile-field="email-verified">—</strong></div></div>
-        <div class="prof-field-item"><i class="fa-solid fa-key"></i><div><small>Autenticación en dos pasos (2FA)</small><strong data-profile-field="auth-2fa">—</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-lock"></i><div><small data-i18n="pages.perfil.seguridad.small1">Método de acceso</small><strong data-profile-field="auth-provider">—</strong></div></div>
+        <div class="prof-field-item"><i class="fa-regular fa-envelope-open"></i><div><small data-i18n="pages.perfil.seguridad.small2">Correo verificado</small><strong data-profile-field="email-verified">—</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-key"></i><div><small data-i18n="pages.perfil.seguridad.small3">Autenticación en dos pasos (2FA)</small><strong data-profile-field="auth-2fa">—</strong></div></div>
         <div style="font-size:0.75rem;color:var(--prof-muted);border-top:1px dashed #EDF2F7;padding-top:8px;display:flex;justify-content:space-between">
-          <span>Último acceso: <strong data-profile-field="last-login">—</strong></span>
-          <a href="privacidad.html" style="color:var(--prof-primary);font-weight:700">Ver todas →</a>
+          <span><span data-i18n="pages.perfil.seguridad.span1">Último acceso:</span> <strong data-profile-field="last-login">—</strong></span>
+          <a data-i18n="common.verTodas" href="privacidad.html" style="color:var(--prof-primary);font-weight:700">Ver todas →</a>
         </div>
       </div>
     </div>
@@ -515,44 +515,44 @@
     <!-- PAGOS Y FACTURACIÓN -->
     <div class="prof-card" id="pagos">
       <div class="prof-card-header">
-        <h4><i class="fa-solid fa-wallet" style="color:var(--prof-accent)"></i> Pagos y facturación</h4>
-        <a href="mi-viaje.html#reservas">Ver historial →</a>
+        <h4><i class="fa-solid fa-wallet" style="color:var(--prof-accent)"></i> <span data-i18n="pages.perfil.pagos.h41">Pagos y facturación</span></h4>
+        <a data-i18n="pages.perfil.pagos.a1" href="mi-viaje.html#reservas">Ver historial →</a>
       </div>
       <div style="text-align:center;padding:12px 0">
         <i class="fa-regular fa-credit-card" style="font-size:2rem;color:var(--prof-muted);margin-bottom:8px"></i>
-        <h6 style="font-size:0.86rem;font-weight:800;color:var(--prof-dark);margin:0 0 4px">No hay métodos de pago guardados</h6>
-        <p style="font-size:0.74rem;color:var(--prof-muted);margin:0 0 12px">Tus pagos se procesan de forma segura a través de nuestros proveedores aliados.</p>
-        <a href="mi-viaje.html#reservas" class="prof-btn-primary" style="padding:8px 16px;font-size:0.8rem">Abrir checkout seguro <i class="fa-solid fa-arrow-right"></i></a>
+        <h6 data-i18n="pages.perfil.pagos.h61" style="font-size:0.86rem;font-weight:800;color:var(--prof-dark);margin:0 0 4px">No hay métodos de pago guardados</h6>
+        <p data-i18n="pages.perfil.pagos.p1" style="font-size:0.74rem;color:var(--prof-muted);margin:0 0 12px">Tus pagos se procesan de forma segura a través de nuestros proveedores aliados.</p>
+        <a href="mi-viaje.html#reservas" class="prof-btn-primary" style="padding:8px 16px;font-size:0.8rem"><span data-i18n="pages.perfil.pagos.a2">Abrir checkout seguro</span> <i class="fa-solid fa-arrow-right"></i></a>
       </div>
       <div style="border-top:1px solid #F1F5F9;padding-top:10px;font-size:0.76rem">
-        <strong style="color:var(--prof-dark)">Transacciones recientes:</strong>
-        <p style="margin:6px 0 0;color:var(--prof-muted)">Sin transacciones todavía.</p>
+        <strong data-i18n="pages.perfil.pagos.strong1" style="color:var(--prof-dark)">Transacciones recientes:</strong>
+        <p data-i18n="pages.perfil.pagos.p2" style="margin:6px 0 0;color:var(--prof-muted)">Sin transacciones todavía.</p>
       </div>
     </div>
 
     <!-- PRIVACIDAD Y DATOS -->
     <div class="prof-card">
       <div class="prof-card-header">
-        <h4><i class="fa-solid fa-user-lock" style="color:var(--prof-primary)"></i> Privacidad y datos</h4>
-        <a href="privacidad.html">Gestionar</a>
+        <h4><i class="fa-solid fa-user-lock" style="color:var(--prof-primary)"></i> <span data-i18n="pages.perfil.profBottomCards.h41">Privacidad y datos</span></h4>
+        <a data-i18n="pages.perfil.profBottomCards.a1" href="privacidad.html">Gestionar</a>
       </div>
       <div>
         <div class="prof-toggle-row">
-          <div><strong>Permisos de ubicación</strong><small>Usamos tu ubicación solo cuando la activás para mapas y clima.</small></div>
+          <div><strong data-i18n="pages.perfil.profBottomCards.strong1">Permisos de ubicación</strong><small data-i18n="pages.perfil.profBottomCards.small1">Usamos tu ubicación solo cuando la activás para mapas y clima.</small></div>
           <input type="checkbox" style="accent-color:var(--prof-green)">
         </div>
         <div class="prof-toggle-row">
-          <div><strong>Personalización de contenido</strong><small>Recomendaciones basadas en tus intereses de viaje.</small></div>
+          <div><strong data-i18n="pages.perfil.profBottomCards.strong2">Personalización de contenido</strong><small data-i18n="pages.perfil.profBottomCards.small2">Recomendaciones basadas en tus intereses de viaje.</small></div>
           <input type="checkbox" style="accent-color:var(--prof-green)">
         </div>
         <div class="prof-toggle-row">
-          <div><strong>Analítica (opcional)</strong><small>Nos ayuda a mejorar la plataforma.</small></div>
+          <div><strong data-i18n="pages.perfil.profBottomCards.strong3">Analítica (opcional)</strong><small data-i18n="pages.perfil.profBottomCards.small3">Nos ayuda a mejorar la plataforma.</small></div>
           <input type="checkbox" style="accent-color:var(--prof-green)">
         </div>
         <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:0.78rem">
-          <a href="privacidad.html" style="color:var(--prof-dark);text-decoration:none"><i class="fa-solid fa-download"></i> Descargar mis datos →</a>
-          <a href="privacidad.html" style="color:#EF4444;text-decoration:none"><i class="fa-solid fa-trash-can"></i> Solicitar eliminación de cuenta →</a>
-          <a href="privacidad.html" style="color:var(--prof-primary);text-decoration:none"><i class="fa-solid fa-file-shield"></i> Ver Política de Privacidad →</a>
+          <a href="privacidad.html" style="color:var(--prof-dark);text-decoration:none"><i class="fa-solid fa-download"></i> <span data-i18n="pages.perfil.profBottomCards.a2">Descargar mis datos →</span></a>
+          <a href="privacidad.html" style="color:#EF4444;text-decoration:none"><i class="fa-solid fa-trash-can"></i> <span data-i18n="pages.perfil.profBottomCards.a3">Solicitar eliminación de cuenta →</span></a>
+          <a href="privacidad.html" style="color:var(--prof-primary);text-decoration:none"><i class="fa-solid fa-file-shield"></i> <span data-i18n="pages.perfil.profBottomCards.a4">Ver Política de Privacidad →</span></a>
         </div>
       </div>
     </div>
@@ -562,14 +562,14 @@
   <section class="prof-gamification-section" id="logros" data-private-section hidden>
     <div class="prof-gamification-card">
       <div class="prof-badge-box">
-        <img src="assets/images/logo.png" alt="Explorador" class="prof-badge-shield" decoding="async" loading="lazy" width="600" height="608">
+        <img data-i18n-alt="pages.perfil.profUserSection.span1" src="assets/images/logo.png" alt="Explorador" class="prof-badge-shield" decoding="async" loading="lazy" width="600" height="608">
         <div>
-          <h4 style="font-size:1.05rem;font-weight:800;color:var(--prof-dark);margin:0 0 2px">Tu identidad de explorador</h4>
-          <p style="font-size:0.78rem;color:var(--prof-muted);margin:0 0 6px">Sigue descubriendo Nicaragua y desbloquea nuevos niveles y recompensas.</p>
+          <h4 data-i18n="pages.perfil.logros.h41" style="font-size:1.05rem;font-weight:800;color:var(--prof-dark);margin:0 0 2px">Tu identidad de explorador</h4>
+          <p data-i18n="pages.perfil.logros.p1" style="font-size:0.78rem;color:var(--prof-muted);margin:0 0 6px">Sigue descubriendo Nicaragua y desbloquea nuevos niveles y recompensas.</p>
           <div class="prof-progress-bar"><div class="prof-progress-fill" style="width:0%"></div></div>
           <div style="display:flex;justify-content:space-between;font-size:0.74rem;color:var(--prof-muted)">
-            <span><strong>0 / 500 XP</strong></span>
-            <span>Próximo nivel: <strong>Aventurero</strong></span>
+            <span><strong data-i18n="pages.perfil.logros.strong1">0 / 500 XP</strong></span>
+            <span><span data-i18n="pages.perfil.logros.span1">Próximo nivel:</span> <strong data-i18n="pages.perfil.logros.strong2">Aventurero</strong></span>
           </div>
         </div>
       </div>
@@ -577,30 +577,30 @@
       <div class="prof-achievements-row">
         <div class="prof-ach-item">
           <div class="prof-ach-icon" style="opacity:0.5"><i class="fa-solid fa-compass"></i></div>
-          <strong>Primer viaje</strong>
-          <small style="display:block;color:var(--prof-muted)">Por lograr</small>
+          <strong data-i18n="pages.perfil.logros.strong3">Primer viaje</strong>
+          <small data-i18n="pages.perfil.logros.small1" style="display:block;color:var(--prof-muted)">Por lograr</small>
         </div>
         <div class="prof-ach-item">
           <div class="prof-ach-icon" style="opacity:0.5"><i class="fa-solid fa-leaf"></i></div>
-          <strong>Amante Natura</strong>
-          <small style="display:block;color:var(--prof-muted)">Por lograr</small>
+          <strong data-i18n="pages.perfil.logros.strong4">Amante Natura</strong>
+          <small data-i18n="pages.perfil.logros.small1" style="display:block;color:var(--prof-muted)">Por lograr</small>
         </div>
         <div class="prof-ach-item">
           <div class="prof-ach-icon"><i class="fa-solid fa-masks-theater"></i></div>
-          <strong>Cultura Viva</strong>
-          <small style="display:block;color:var(--prof-muted)">Por lograr</small>
+          <strong data-i18n="pages.perfil.logros.strong5">Cultura Viva</strong>
+          <small data-i18n="pages.perfil.logros.small1" style="display:block;color:var(--prof-muted)">Por lograr</small>
         </div>
         <div class="prof-ach-item">
           <div class="prof-ach-icon" style="opacity:0.5"><i class="fa-solid fa-bowl-food"></i></div>
-          <strong>Gastronomía</strong>
-          <small style="display:block;color:var(--prof-muted)">Bloqueado</small>
+          <strong data-i18n="nav.gastronomy">Gastronomía</strong>
+          <small data-i18n="pages.perfil.logros.small2" style="display:block;color:var(--prof-muted)">Bloqueado</small>
         </div>
         <div class="prof-ach-item">
           <div class="prof-ach-icon" style="opacity:0.5"><i class="fa-solid fa-shield"></i></div>
-          <strong>Guardián</strong>
-          <small style="display:block;color:var(--prof-muted)">Bloqueado</small>
+          <strong data-i18n="pages.perfil.logros.strong6">Guardián</strong>
+          <small data-i18n="pages.perfil.logros.small2" style="display:block;color:var(--prof-muted)">Bloqueado</small>
         </div>
-        <a href="#logros" class="prof-btn-edit" style="margin-left:10px">Ver todos mis logros →</a>
+        <a data-i18n="pages.perfil.logros.a1" href="#logros" class="prof-btn-edit" style="margin-left:10px">Ver todos mis logros →</a>
       </div>
     </div>
   </section>
@@ -608,12 +608,12 @@
   <!-- BANNER FINAL CTA -->
   <section class="prof-final-cta">
     <div>
-      <h3>Tu próxima aventura empieza desde tu perfil</h3>
-      <p>Planifica, guarda, reserva y vive una Nicaragua auténtica.</p>
+      <h3 data-i18n="pages.perfil.profFinalCta.h31">Tu próxima aventura empieza desde tu perfil</h3>
+      <p data-i18n="pages.perfil.profFinalCta.p1">Planifica, guarda, reserva y vive una Nicaragua auténtica.</p>
     </div>
     <div class="prof-final-actions">
-      <a href="baqueano-ia.html" class="nos-btn-primary">Planificar con Baqueano Digital <i class="fa-solid fa-arrow-right"></i></a>
-      <a href="destinos.html" class="nos-btn-glass">Explorar destinos <i class="fa-solid fa-compass"></i></a>
+      <a href="baqueano-ia.html" class="nos-btn-primary"><span data-i18n="common.planificarConBaqueanoDigital">Planificar con Baqueano Digital</span> <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="destinos.html" class="nos-btn-glass"><span data-i18n="home.hero.cta">Explorar destinos</span> <i class="fa-solid fa-compass"></i></a>
     </div>
   </section>
 

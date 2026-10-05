@@ -140,8 +140,17 @@ export function hasAttr(tag, name) {
 }
 
 /** Decodifica entidades HTML comunes para comparar con el catálogo. */
+const NAMED_ENTITIES = {
+  rarr: '→', larr: '←', uarr: '↑', darr: '↓', harr: '↔', copy: '©', reg: '®', trade: '™', middot: '·', bull: '•',
+  hellip: '…', mdash: '—', ndash: '–', laquo: '«', raquo: '»', lsquo: '‘', rsquo: '’', ldquo: '“', rdquo: '”',
+  iexcl: '¡', iquest: '¿', deg: '°', times: '×', euro: '€', aacute: 'á', eacute: 'é', iacute: 'í', oacute: 'ó',
+  uacute: 'ú', ntilde: 'ñ', Aacute: 'Á', Eacute: 'É', Iacute: 'Í', Oacute: 'Ó', Uacute: 'Ú', Ntilde: 'Ñ', uuml: 'ü', Uuml: 'Ü',
+  ordf: 'ª', ordm: 'º', check: '✓',
+};
+
 export function decodeEntities(value) {
   return value
+    .replace(/&(?!nbsp;|amp;|lt;|gt;|quot;|apos;)([A-Za-z]+);/g, (entity, name) => NAMED_ENTITIES[name] ?? entity)
     .replace(/&nbsp;/g, ' ')
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')

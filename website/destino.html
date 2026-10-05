@@ -27,7 +27,7 @@
 - Footer oficial institucional.
 ============================================================================
 -->
-<html lang="es-NI" data-bq-page="destino" data-bq-group="territorio">
+<html data-i18n-description="pages.destino.body.metaDescription1" data-i18n-title="pages.destino.body.title1" lang="es-NI" data-bq-page="destino" data-bq-group="territorio">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -296,18 +296,18 @@
   <main class="destino-page-wrapper" id="mainContent">
     <div class="destino-back-bar">
       <a href="destinos.html" class="destino-back-btn">
-        <i class="fa-solid fa-arrow-left"></i> Volver al Catálogo de Destinos
+        <i class="fa-solid fa-arrow-left"></i> <span data-i18n="pages.destino.mainContent.a1">Volver al Catálogo de Destinos</span>
       </a>
       <span style="font-size:0.82rem;color:#94A3B8;">
-        <i class="fa-solid fa-shield-halved" style="color:#4A7A5A;margin-right:4px;"></i> Verificación Territorial en 8 Puntos
+        <i class="fa-solid fa-shield-halved" style="color:#4A7A5A;margin-right:4px;"></i> <span data-i18n="pages.destino.mainContent.span1">Verificación Territorial en 8 Puntos</span>
       </span>
     </div>
 
     <div id="destinoContentCard">
       <div style="padding: 60px 20px; text-align: center;">
         <i class="fa-solid fa-compass fa-spin" style="font-size: 2.5rem; color: #F65E01; margin-bottom: 16px;"></i>
-        <h2 style="font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-size: 1.4rem;">Buscando qué hay por aquí…</h2>
-        <p style="color: #94A3B8;">Consultando el Banco Maestro Baqueano de Nicaragua.</p>
+        <h2 data-i18n="pages.destino.destinoContentCard.h21" style="font-family: 'Montserrat', sans-serif; color: #FFFFFF; font-size: 1.4rem;">Buscando qué hay por aquí…</h2>
+        <p data-i18n="pages.destino.destinoContentCard.p1" style="color: #94A3B8;">Consultando el Banco Maestro Baqueano de Nicaragua.</p>
       </div>
     </div>
   </main>
@@ -317,30 +317,30 @@
     <div class="bq-report-modal-card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
         <h3 id="reportModalTitle" style="font-family:'Montserrat',sans-serif;color:#F4E6C1;font-size:1.1rem;margin:0;">
-          <i class="fa-solid fa-flag" style="color:#F65E01;margin-right:8px;"></i> Reportar Dato o Sugerir Corrección
+          <i class="fa-solid fa-flag" style="color:#F65E01;margin-right:8px;"></i> <span data-i18n="pages.destino.reportModalTitle.h31">Reportar Dato o Sugerir Corrección</span>
         </h3>
         <button type="button" id="closeReportModalBtn" style="background:none;border:none;color:#94A3B8;font-size:1.2rem;cursor:pointer;">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <p style="font-size:0.82rem;color:#CBD5E1;margin-bottom:14px;">
+      <p data-i18n="pages.destino.bqReportModal.p1" style="font-size:0.82rem;color:#CBD5E1;margin-bottom:14px;">
         Tu contribución mantiene actualizado el inventario territorial de Nicaragua sin comisiones ni intermediarios.
       </p>
       <form id="bqReportForm">
-        <label style="display:block;font-size:0.78rem;font-weight:700;color:#F4E6C1;margin-bottom:6px;">¿Qué dato deseas actualizar?</label>
+        <label style="display:block;font-size:0.78rem;font-weight:700;color:#F4E6C1;margin-bottom:6px;"><span data-i18n="pages.destino.bqReportForm.label1">¿Qué dato deseas actualizar?</span></label>
         <select id="reportCategory" style="width:100%;padding:10px;border-radius:8px;background:#081827;border:1px solid rgba(244,230,193,0.2);color:#FFFFFF;margin-bottom:12px;font-size:0.85rem;">
-          <option value="precios">Precios / Tarifas locales</option>
-          <option value="como_llegar">Ruta de acceso / Transporte</option>
-          <option value="horarios">Horarios de atención</option>
-          <option value="aliado">Contacto de Cooperativa / Guía Local</option>
-          <option value="seguridad">Recomendación ambiental o seguridad</option>
-          <option value="otro">Otro detalle territorial</option>
+          <option data-i18n="pages.destino.reportCategory.option1" value="precios">Precios / Tarifas locales</option>
+          <option data-i18n="pages.destino.reportCategory.option2" value="como_llegar">Ruta de acceso / Transporte</option>
+          <option data-i18n="pages.destino.reportCategory.option3" value="horarios">Horarios de atención</option>
+          <option data-i18n="pages.destino.reportCategory.option4" value="aliado">Contacto de Cooperativa / Guía Local</option>
+          <option data-i18n="pages.destino.reportCategory.option5" value="seguridad">Recomendación ambiental o seguridad</option>
+          <option data-i18n="pages.destino.reportCategory.option6" value="otro">Otro detalle territorial</option>
         </select>
-        <label style="display:block;font-size:0.78rem;font-weight:700;color:#F4E6C1;margin-bottom:6px;">Detalle o corrección sugerida:</label>
-        <textarea id="reportDetails" rows="3" required placeholder="Describe brevemente el dato actualizado..." style="width:100%;padding:10px;border-radius:8px;background:#081827;border:1px solid rgba(244,230,193,0.2);color:#FFFFFF;margin-bottom:16px;font-size:0.85rem;box-sizing:border-box;"></textarea>
+        <label style="display:block;font-size:0.78rem;font-weight:700;color:#F4E6C1;margin-bottom:6px;"><span data-i18n="pages.destino.bqReportForm.label2">Detalle o corrección sugerida:</span></label>
+        <textarea data-i18n-placeholder="pages.destino.reportDetails.textareaPlaceholder1" id="reportDetails" rows="3" required placeholder="Describe brevemente el dato actualizado..." style="width:100%;padding:10px;border-radius:8px;background:#081827;border:1px solid rgba(244,230,193,0.2);color:#FFFFFF;margin-bottom:16px;font-size:0.85rem;box-sizing:border-box;"></textarea>
         <div style="display:flex;justify-content:flex-end;gap:10px;">
-          <button type="button" id="cancelReportBtn" class="bq-feedback-chip">Cancelar</button>
-          <button type="submit" class="bq-feedback-chip" style="background:#165D6F;border-color:#2DD4BF;color:#FFFFFF;">Enviar Reporte</button>
+          <button type="button" id="cancelReportBtn" class="bq-feedback-chip"><span data-i18n="actions.cancel">Cancelar</span></button>
+          <button data-i18n="pages.destino.bqReportForm.button1" type="submit" class="bq-feedback-chip" style="background:#165D6F;border-color:#2DD4BF;color:#FFFFFF;">Enviar Reporte</button>
         </div>
       </form>
     </div>

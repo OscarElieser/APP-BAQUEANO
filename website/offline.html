@@ -28,7 +28,7 @@
 - Botones ergonómicos de reconexión y reintento.
 ============================================================================
 -->
-<html lang="es" data-bq-page="offline" data-bq-group="sistema">
+<html data-i18n-title="pages.offline.body.title1" lang="es" data-bq-page="offline" data-bq-group="sistema">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -391,61 +391,61 @@
       <span class="radar-icon">🧭</span>
     </div>
 
-    <span class="offline-tag">Modo Supervivencia Territorial</span>
-    <h1>Se fue la señal</h1>
-    <p class="lead-text">
+    <span data-i18n="pages.offline.offlineWrapper.span1" class="offline-tag">Modo Supervivencia Territorial</span>
+    <h1 data-i18n="offline.subtitle">Se fue la señal</h1>
+    <p data-i18n="pages.offline.offlineWrapper.p1" class="lead-text">
       No pasa nada: aquí tenés guardados los números de emergencia y los puntos de apoyo de los lugares más visitados. Cuando vuelva el internet, seguimos explorando.
     </p>
 
     <!-- Marcación Telefónica Directa SOS (Funciona sin datos móviles) -->
-    <section aria-label="Líneas directas de emergencia nacional">
+    <section data-i18n-aria-label="pages.offline.section.sectionAriaLabel1" aria-label="Líneas directas de emergencia nacional">
       <div class="sos-grid">
-        <a href="tel:118" class="sos-card" title="Llamar a Policía Nacional">
-          <span class="sos-card-title">Policía Nacional</span>
+        <a data-i18n-title="pages.offline.section.aTitle1" href="tel:118" class="sos-card" title="Llamar a Policía Nacional">
+          <span data-i18n="home.sos.police" class="sos-card-title">Policía Nacional</span>
           <span class="sos-card-number">📞 118</span>
-          <span class="sos-card-desc">Auxilio en ruta y seguridad</span>
+          <span data-i18n="pages.offline.section.span1" class="sos-card-desc">Auxilio en ruta y seguridad</span>
         </a>
 
-        <a href="tel:128" class="sos-card" title="Llamar a la Cruz Roja">
-          <span class="sos-card-title">Cruz Roja</span>
+        <a data-i18n-title="pages.offline.section.aTitle2" href="tel:128" class="sos-card" title="Llamar a la Cruz Roja">
+          <span data-i18n="common.cruzRoja" class="sos-card-title">Cruz Roja</span>
           <span class="sos-card-number">🚑 128</span>
-          <span class="sos-card-desc">Atención médica y rescate</span>
+          <span data-i18n="pages.offline.section.span2" class="sos-card-desc">Atención médica y rescate</span>
         </a>
 
-        <a href="tel:115" class="sos-card" title="Llamar a Bomberos">
-          <span class="sos-card-title">Bomberos</span>
+        <a data-i18n-title="pages.offline.section.aTitle3" href="tel:115" class="sos-card" title="Llamar a Bomberos">
+          <span data-i18n="home.sos.fire" class="sos-card-title">Bomberos</span>
           <span class="sos-card-number">🚒 115</span>
-          <span class="sos-card-desc">Incendios y rescate agreste</span>
+          <span data-i18n="pages.offline.section.span3" class="sos-card-desc">Incendios y rescate agreste</span>
         </a>
       </div>
     </section>
 
     <!-- Protocolo Territorial de Contingencia -->
     <div class="protocol-box">
-      <div class="protocol-title">📌 Protocolo de Emergencia en Cañones y Volcanes:</div>
+      <div data-i18n="pages.offline.offlineWrapper.div1" class="protocol-title">📌 Protocolo de Emergencia en Cañones y Volcanes:</div>
       <ul class="protocol-list">
-        <li><strong>Cañón de Somoto:</strong> Punto de enlace en Comunidad El Zapote o Puesto de Guías La Patasta.</li>
-        <li><strong>Isla de Ometepe:</strong> Puesto de guardaparques Volcán Maderas y Albergue Charco Verde.</li>
-        <li><strong>Cerro Negro / Telica:</strong> Caseta Comunitaria Rota y Puesto de Guías San Jacinto.</li>
-        <li><strong>Conservación:</strong> Quedate en el sendero marcado, ahorrá batería y buscá la posada o comunidad más cercana.</li>
+        <li><strong>Cañón de Somoto:</strong> <span data-i18n="pages.offline.offlineWrapper.li1">Punto de enlace en Comunidad El Zapote o Puesto de Guías La Patasta.</span></li>
+        <li><strong>Isla de Ometepe:</strong> <span data-i18n="pages.offline.offlineWrapper.li2">Puesto de guardaparques Volcán Maderas y Albergue Charco Verde.</span></li>
+        <li><strong>Cerro Negro / Telica:</strong> <span data-i18n="pages.offline.offlineWrapper.li3">Caseta Comunitaria Rota y Puesto de Guías San Jacinto.</span></li>
+        <li><strong data-i18n="pages.offline.offlineWrapper.strong1">Conservación:</strong> <span data-i18n="pages.offline.offlineWrapper.li4">Quedate en el sendero marcado, ahorrá batería y buscá la posada o comunidad más cercana.</span></li>
       </ul>
     </div>
 
     <!-- Botones de Acción -->
     <div class="action-row">
-      <button type="button" class="btn btn-primary" onclick="reintentarConexion()">
+      <button data-i18n="pages.offline.offlineWrapper.button1" type="button" class="btn btn-primary" onclick="reintentarConexion()">
         🔄 Probar la conexión
       </button>
-      <a href="/" class="btn btn-secondary">
+      <a data-i18n="pages.offline.offlineWrapper.a1" href="/" class="btn btn-secondary">
         Ver Caché de Inicio
       </a>
-      <a href="/destinos.html" class="btn btn-secondary">
+      <a data-i18n="pages.offline.offlineWrapper.a2" href="/destinos.html" class="btn btn-secondary">
         Catálogo en Caché
       </a>
     </div>
 
     <div class="status-pill" id="offlineStatus">
-      📡 Esperando señal… En cuanto vuelva, te reconectamos solos.
+      <span data-i18n="pages.offline.offlineStatus.div1">📡 Esperando señal… En cuanto vuelva, te reconectamos solos.</span>
     </div>
   </main>
 

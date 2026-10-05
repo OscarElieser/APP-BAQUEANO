@@ -21,7 +21,7 @@
 - Módulo Baqueano Digital y footer unificado.
 ============================================================================
 -->
-<html lang="es" data-bq-page="experiencias" data-bq-group="home">
+<html data-i18n-description="pages.experiencias.body.metaDescription1" data-i18n-title="pages.experiencias.body.title1" lang="es" data-bq-page="experiencias" data-bq-group="home">
 
 <head>
   <meta charset="UTF-8">
@@ -287,9 +287,9 @@
   <!-- HERO EXPERIENCIAS -->
   <header class="exp-hero">
     <div class="exact-container">
-      <span style="font-size: 0.8rem; font-weight: 800; letter-spacing: 0.15em; color: #4A7A5A; text-transform: uppercase;">TURISMO DE IMPACTO POSITIVO</span>
-      <h1>Experiencias que te <span>transforman</span></h1>
-      <p>Viví Nicaragua a través de guías baqueanos locales: senderismo en cráteres, cañones milenarios, surfing salvaje y cosechas de café en las montañas.</p>
+      <span data-i18n="pages.experiencias.expHero.span1" style="font-size: 0.8rem; font-weight: 800; letter-spacing: 0.15em; color: #4A7A5A; text-transform: uppercase;">TURISMO DE IMPACTO POSITIVO</span>
+      <h1><span data-i18n="pages.experiencias.expHero.h11">Experiencias que te</span> <span data-i18n="pages.experiencias.expHero.span2">transforman</span></h1>
+      <p data-i18n="pages.experiencias.expHero.p1">Viví Nicaragua a través de guías baqueanos locales: senderismo en cráteres, cañones milenarios, surfing salvaje y cosechas de café en las montañas.</p>
     </div>
   </header>
 
@@ -298,11 +298,11 @@
     <div class="exact-container">
       <!-- Filtros -->
       <div class="exp-filter-bar">
-        <button type="button" class="exp-filter-pill active" onclick="filterExpCat('all', this)">Todas las experiencias</button>
-        <button type="button" class="exp-filter-pill" onclick="filterExpCat('volcan', this)">🌋 Volcanes &amp; Sandboard</button>
-        <button type="button" class="exp-filter-pill" onclick="filterExpCat('rio', this)">🏞️ Ríos &amp; Cañones</button>
-        <button type="button" class="exp-filter-pill" onclick="filterExpCat('playa', this)">🏖️ Playas &amp; Surf</button>
-        <button type="button" class="exp-filter-pill" onclick="filterExpCat('cafe', this)">☕ Café &amp; Agroturismo</button>
+        <button data-i18n="pages.experiencias.expCatalogSection.button1" type="button" class="exp-filter-pill active" onclick="filterExpCat('all', this)">Todas las experiencias</button>
+        <button data-i18n="pages.experiencias.expCatalogSection.button2" type="button" class="exp-filter-pill" onclick="filterExpCat('volcan', this)">🌋 Volcanes &amp; Sandboard</button>
+        <button data-i18n="pages.experiencias.expCatalogSection.button3" type="button" class="exp-filter-pill" onclick="filterExpCat('rio', this)">🏞️ Ríos &amp; Cañones</button>
+        <button data-i18n="pages.experiencias.expCatalogSection.button4" type="button" class="exp-filter-pill" onclick="filterExpCat('playa', this)">🏖️ Playas &amp; Surf</button>
+        <button data-i18n="pages.experiencias.expCatalogSection.button5" type="button" class="exp-filter-pill" onclick="filterExpCat('cafe', this)">☕ Café &amp; Agroturismo</button>
       </div>
 
       <!-- Grilla de 8 Experiencias -->
@@ -310,16 +310,16 @@
         <!-- 1. Sandboarding Cerro Negro -->
         <article class="exp-main-card" data-cat="volcan">
           <div class="exp-img-box">
-            <img src="assets/images/destinos/cerro_negro.jpg" alt="Sandboarding Cerro Negro" class="exp-img" loading="lazy" decoding="async" width="700" height="438">
-            <span class="exp-difficulty-badge">Moderado · Adrenalina</span>
+            <img data-i18n-alt="pages.experiencias.expMainCard.imgAlt1" src="assets/images/destinos/cerro_negro.jpg" alt="Sandboarding Cerro Negro" class="exp-img" loading="lazy" decoding="async" width="700" height="438">
+            <span data-i18n="pages.experiencias.expMainCard.span1" class="exp-difficulty-badge">Moderado · Adrenalina</span>
           </div>
           <div class="exp-card-body">
-            <h3 class="exp-card-title">Sandboarding en Cerro Negro</h3>
+            <h3 data-i18n="pages.experiencias.expMainCard.h31" class="exp-card-title">Sandboarding en Cerro Negro</h3>
             <div class="exp-card-loc"><i class="fa-solid fa-location-dot"></i> León</div>
-            <p class="exp-card-desc">Caminata hasta la cima del volcán más joven y descenso en tabla sobre ceniza negra a más de 50 km/h.</p>
+            <p data-i18n="pages.experiencias.expMainCard.p1" class="exp-card-desc">Caminata hasta la cima del volcán más joven y descenso en tabla sobre ceniza negra a más de 50 km/h.</p>
             <div class="exp-card-footer">
-              <span class="exp-price">Desde $30 USD / C$ 1,100</span>
-              <a href="https://wa.me/50588880004" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> Reservar</a>
+              <span data-i18n="pages.experiencias.expMainCard.span2" class="exp-price">Desde $30 USD / C$ 1,100</span>
+              <a href="https://wa.me/50588880004" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span></a>
             </div>
           </div>
         </article>
@@ -328,15 +328,15 @@
         <article class="exp-main-card" data-cat="rio">
           <div class="exp-img-box">
             <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto" class="exp-img" loading="lazy" decoding="async" width="399" height="501">
-            <span class="exp-difficulty-badge">Fácil / Moderado</span>
+            <span data-i18n="pages.experiencias.expMainCard.span3" class="exp-difficulty-badge">Fácil / Moderado</span>
           </div>
           <div class="exp-card-body">
-            <h3 class="exp-card-title">Travesía en el Cañón de Somoto</h3>
+            <h3 data-i18n="pages.experiencias.expMainCard.h32" class="exp-card-title">Travesía en el Cañón de Somoto</h3>
             <div class="exp-card-loc"><i class="fa-solid fa-location-dot"></i> Somoto, Madriz</div>
-            <p class="exp-card-desc">Recorrido acuático y senderismo entre farallones rocosos de 150m con guías comunitarios certificados.</p>
+            <p data-i18n="pages.experiencias.expMainCard.p2" class="exp-card-desc">Recorrido acuático y senderismo entre farallones rocosos de 150m con guías comunitarios certificados.</p>
             <div class="exp-card-footer">
-              <span class="exp-price">Desde $15 USD / C$ 550</span>
-              <a href="https://wa.me/50588880001" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> Reservar</a>
+              <span data-i18n="pages.experiencias.expMainCard.span4" class="exp-price">Desde $15 USD / C$ 550</span>
+              <a href="https://wa.me/50588880001" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span></a>
             </div>
           </div>
         </article>
@@ -345,15 +345,15 @@
         <article class="exp-main-card" data-cat="volcan">
           <div class="exp-img-box">
             <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Volcán Concepción" class="exp-img" loading="lazy" decoding="async" width="1600" height="900">
-            <span class="exp-difficulty-badge">Exigente · 8 Horas</span>
+            <span data-i18n="pages.experiencias.expMainCard.span5" class="exp-difficulty-badge">Exigente · 8 Horas</span>
           </div>
           <div class="exp-card-body">
-            <h3 class="exp-card-title">Ascenso al Volcán Concepción</h3>
+            <h3 data-i18n="pages.experiencias.expMainCard.h33" class="exp-card-title">Ascenso al Volcán Concepción</h3>
             <div class="exp-card-loc"><i class="fa-solid fa-location-dot"></i> Ometepe, Rivas</div>
-            <p class="exp-card-desc">Conquista el cono perfecto de 1,610 metros con vistas panorámicas 360° al Gran Lago Cocibolca.</p>
+            <p data-i18n="pages.experiencias.expMainCard.p3" class="exp-card-desc">Conquista el cono perfecto de 1,610 metros con vistas panorámicas 360° al Gran Lago Cocibolca.</p>
             <div class="exp-card-footer">
-              <span class="exp-price">Desde $25 USD / C$ 920</span>
-              <a href="https://wa.me/50588880005" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> Reservar</a>
+              <span data-i18n="pages.experiencias.expMainCard.span6" class="exp-price">Desde $25 USD / C$ 920</span>
+              <a href="https://wa.me/50588880005" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span></a>
             </div>
           </div>
         </article>
@@ -361,16 +361,16 @@
         <!-- 4. Ruta del Café Miraflor -->
         <article class="exp-main-card" data-cat="cafe">
           <div class="exp-img-box">
-            <img src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Café Miraflor" class="exp-img" loading="lazy" decoding="async">
-            <span class="exp-difficulty-badge">Fácil · Familiar</span>
+            <img data-i18n-alt="pages.experiencias.expMainCard.imgAlt2" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Café Miraflor" class="exp-img" loading="lazy" decoding="async">
+            <span data-i18n="pages.experiencias.expMainCard.span7" class="exp-difficulty-badge">Fácil · Familiar</span>
           </div>
           <div class="exp-card-body">
-            <h3 class="exp-card-title">Cosecha y Ruta del Café</h3>
-            <div class="exp-card-loc"><i class="fa-solid fa-location-dot"></i> Miraflor, Estelí</div>
-            <p class="exp-card-desc">Viví el proceso de recolección, despulpado y catación artesanal con familias cafetaleras campesinas.</p>
+            <h3 data-i18n="pages.experiencias.expMainCard.h34" class="exp-card-title">Cosecha y Ruta del Café</h3>
+            <div class="exp-card-loc"><i class="fa-solid fa-location-dot"></i> <span data-i18n="pages.experiencias.expMainCard.div1">Miraflor, Estelí</span></div>
+            <p data-i18n="pages.experiencias.expMainCard.p4" class="exp-card-desc">Viví el proceso de recolección, despulpado y catación artesanal con familias cafetaleras campesinas.</p>
             <div class="exp-card-footer">
-              <span class="exp-price">Desde $12 USD / C$ 440</span>
-              <a href="https://wa.me/50588880002" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> Reservar</a>
+              <span data-i18n="pages.experiencias.expMainCard.span8" class="exp-price">Desde $12 USD / C$ 440</span>
+              <a href="https://wa.me/50588880002" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span></a>
             </div>
           </div>
         </article>
@@ -378,16 +378,16 @@
         <!-- 5. Kayak en Isletas de Granada -->
         <article class="exp-main-card" data-cat="rio">
           <div class="exp-img-box">
-            <img src="assets/images/destinos/isletas_de_granada.jpg" alt="Kayak Isletas" class="exp-img" loading="lazy" decoding="async" width="669" height="446">
-            <span class="exp-difficulty-badge">Fácil · Relajante</span>
+            <img data-i18n-alt="pages.experiencias.expMainCard.imgAlt3" src="assets/images/destinos/isletas_de_granada.jpg" alt="Kayak Isletas" class="exp-img" loading="lazy" decoding="async" width="669" height="446">
+            <span data-i18n="pages.experiencias.expMainCard.span9" class="exp-difficulty-badge">Fácil · Relajante</span>
           </div>
           <div class="exp-card-body">
-            <h3 class="exp-card-title">Kayak en las 365 Isletas</h3>
+            <h3 data-i18n="pages.experiencias.expMainCard.h35" class="exp-card-title">Kayak en las 365 Isletas</h3>
             <div class="exp-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
-            <p class="exp-card-desc">Remo suave entre canales volcánicos, avistamiento de aves acuáticas y visita a fortalezas históricas.</p>
+            <p data-i18n="pages.experiencias.expMainCard.p5" class="exp-card-desc">Remo suave entre canales volcánicos, avistamiento de aves acuáticas y visita a fortalezas históricas.</p>
             <div class="exp-card-footer">
-              <span class="exp-price">Desde $18 USD / C$ 660</span>
-              <a href="https://wa.me/50588880010" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> Reservar</a>
+              <span data-i18n="pages.experiencias.expMainCard.span10" class="exp-price">Desde $18 USD / C$ 660</span>
+              <a href="https://wa.me/50588880010" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span></a>
             </div>
           </div>
         </article>
@@ -395,16 +395,16 @@
         <!-- 6. Surf en Playa Maderas -->
         <article class="exp-main-card" data-cat="playa">
           <div class="exp-img-box">
-            <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="Surf Playa Maderas" class="exp-img" loading="lazy" decoding="async" width="447" height="447">
-            <span class="exp-difficulty-badge">Todos los niveles</span>
+            <img data-i18n-alt="pages.experiencias.expMainCard.imgAlt4" src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="Surf Playa Maderas" class="exp-img" loading="lazy" decoding="async" width="447" height="447">
+            <span data-i18n="pages.experiencias.expMainCard.span11" class="exp-difficulty-badge">Todos los niveles</span>
           </div>
           <div class="exp-card-body">
-            <h3 class="exp-card-title">Clases de Surf &amp; Sunset</h3>
+            <h3 data-i18n="pages.experiencias.expMainCard.h36" class="exp-card-title">Clases de Surf &amp; Sunset</h3>
             <div class="exp-card-loc"><i class="fa-solid fa-location-dot"></i> San Juan del Sur, Rivas</div>
-            <p class="exp-card-desc">Olas constantes de clase mundial, alquiler de tablas e instrucción personalizada con instructores locales.</p>
+            <p data-i18n="pages.experiencias.expMainCard.p6" class="exp-card-desc">Olas constantes de clase mundial, alquiler de tablas e instrucción personalizada con instructores locales.</p>
             <div class="exp-card-footer">
-              <span class="exp-price">Desde $25 USD / C$ 920</span>
-              <a href="https://wa.me/50588880007" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> Reservar</a>
+              <span data-i18n="pages.experiencias.expMainCard.span6" class="exp-price">Desde $25 USD / C$ 920</span>
+              <a href="https://wa.me/50588880007" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span></a>
             </div>
           </div>
         </article>
@@ -413,15 +413,15 @@
         <article class="exp-main-card" data-cat="volcan">
           <div class="exp-img-box">
             <img src="assets/images/departamentos/granada1.jpg" alt="Mombacho" class="exp-img" loading="lazy" decoding="async" width="108" height="108">
-            <span class="exp-difficulty-badge">Fácil / Moderado</span>
+            <span data-i18n="pages.experiencias.expMainCard.span3" class="exp-difficulty-badge">Fácil / Moderado</span>
           </div>
           <div class="exp-card-body">
-            <h3 class="exp-card-title">Sendero El Cráter en Mombacho</h3>
+            <h3 data-i18n="pages.experiencias.expMainCard.h37" class="exp-card-title">Sendero El Cráter en Mombacho</h3>
             <div class="exp-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
-            <p class="exp-card-desc">Caminata por el bosque nuboso entre fumarolas activas, orquídeas y miradores hacia el Lago de Nicaragua.</p>
+            <p data-i18n="pages.experiencias.expMainCard.p7" class="exp-card-desc">Caminata por el bosque nuboso entre fumarolas activas, orquídeas y miradores hacia el Lago de Nicaragua.</p>
             <div class="exp-card-footer">
-              <span class="exp-price">Desde $15 USD / C$ 550</span>
-              <a href="https://wa.me/50588880010" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> Reservar</a>
+              <span data-i18n="pages.experiencias.expMainCard.span4" class="exp-price">Desde $15 USD / C$ 550</span>
+              <a href="https://wa.me/50588880010" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span></a>
             </div>
           </div>
         </article>
@@ -429,16 +429,16 @@
         <!-- 8. Snorkel en Corn Island -->
         <article class="exp-main-card" data-cat="playa">
           <div class="exp-img-box">
-            <img src="assets/images/destinos/corn_island.jpg" alt="Snorkel Corn Island" class="exp-img" loading="lazy" decoding="async" width="800" height="550">
-            <span class="exp-difficulty-badge">Fácil · Acuático</span>
+            <img data-i18n-alt="pages.experiencias.expMainCard.imgAlt5" src="assets/images/destinos/corn_island.jpg" alt="Snorkel Corn Island" class="exp-img" loading="lazy" decoding="async" width="800" height="550">
+            <span data-i18n="pages.experiencias.expMainCard.span12" class="exp-difficulty-badge">Fácil · Acuático</span>
           </div>
           <div class="exp-card-body">
-            <h3 class="exp-card-title">Snorkel en Arrecifes de Coral</h3>
+            <h3 data-i18n="pages.experiencias.expMainCard.h38" class="exp-card-title">Snorkel en Arrecifes de Coral</h3>
             <div class="exp-card-loc"><i class="fa-solid fa-location-dot"></i> Little Corn Island</div>
-            <p class="exp-card-desc">Aguas turquesas del Caribe, tiburones nodriza, rayas águila y jardines de coral virgen con pescadores raizales.</p>
+            <p data-i18n="pages.experiencias.expMainCard.p8" class="exp-card-desc">Aguas turquesas del Caribe, tiburones nodriza, rayas águila y jardines de coral virgen con pescadores raizales.</p>
             <div class="exp-card-footer">
-              <span class="exp-price">Desde $35 USD / C$ 1,280</span>
-              <a href="https://wa.me/50588880014" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> Reservar</a>
+              <span data-i18n="pages.experiencias.expMainCard.span13" class="exp-price">Desde $35 USD / C$ 1,280</span>
+              <a href="https://wa.me/50588880014" target="_blank" rel="noopener" class="btn-exp-book"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span></a>
             </div>
           </div>
         </article>
@@ -451,17 +451,17 @@
         <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
           <div>
             <span style="font-size: 0.78rem; font-weight: 800; color: #F65E01; text-transform: uppercase; letter-spacing: 0.1em;">
-              <i class="fa-solid fa-gift"></i> OFERTA TERRITORIAL INTEGRADA
+              <i class="fa-solid fa-gift"></i> <span data-i18n="pages.experiencias.paquetesOficiales.span1">OFERTA TERRITORIAL INTEGRADA</span>
             </span>
-            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.6rem; font-weight: 900; color: #0F172A; margin: 4px 0;">
+            <h2 data-i18n="pages.experiencias.paquetesOficiales.h21" style="font-family: 'Montserrat', sans-serif; font-size: 1.6rem; font-weight: 900; color: #0F172A; margin: 4px 0;">
               Paquetes Turísticos Verificados (Mapa Nicaragua &amp; INTUR)
             </h2>
-            <p style="font-size: 0.88rem; color: #64748B; margin: 0; max-width: 720px;">
+            <p data-i18n="pages.experiencias.paquetesOficiales.p1" style="font-size: 0.88rem; color: #64748B; margin: 0; max-width: 720px;">
               Ofertas diseñadas por hoteles, restaurantes, guías locales y cooperativas comunitarias registradas. Incluyen transporte, itinerario guiado y precios oficiales en Córdobas (C$).
             </p>
           </div>
           <span style="background: rgba(22,93,111,0.08); color: #165D6F; border: 1px solid rgba(22,93,111,0.2); padding: 8px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 700;">
-            <i class="fa-solid fa-circle-check" style="color: #4A7A5A;"></i> Verificado por INTUR
+            <i class="fa-solid fa-circle-check" style="color: #4A7A5A;"></i> <span data-i18n="pages.experiencias.paquetesOficiales.span2">Verificado por INTUR</span>
           </span>
         </div>
 
@@ -470,23 +470,23 @@
           <article class="exp-pkg-card" style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(15,23,42,0.04); display: flex; flex-direction: column;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
               <span style="font-size: 0.72rem; font-weight: 800; color: #165D6F; background: #F1F5F9; padding: 4px 10px; border-radius: 6px;">MANAGUA</span>
-              <span style="font-size: 0.72rem; font-weight: 700; color: #64748B;"><i class="fa-solid fa-clock"></i> 2 días / 1 noche</span>
+              <span style="font-size: 0.72rem; font-weight: 700; color: #64748B;"><i class="fa-solid fa-clock"></i> <span data-i18n="pages.experiencias.expPkgCard.span1">2 días / 1 noche</span></span>
             </div>
-            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #0F172A; margin: 0 0 8px;">ENTRE NUBES Y OLAS</h3>
-            <p style="font-size: 0.82rem; color: #475569; margin: 0 0 12px; line-height: 1.5; flex: 1;">
+            <h3 data-i18n="pages.experiencias.expPkgCard.h31" style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #0F172A; margin: 0 0 8px;">ENTRE NUBES Y OLAS</h3>
+            <p data-i18n="pages.experiencias.expPkgCard.p1" style="font-size: 0.82rem; color: #475569; margin: 0 0 12px; line-height: 1.5; flex: 1;">
               Circuito que conecta el microclima fresco de El Crucero con la costa del Pacífico en Pochomil. Incluye transporte, recorrido guiado, hospedaje, alimentación y actividades de sol y playa.
             </p>
             <div style="background: #F8FAFC; border-radius: 10px; padding: 10px; font-size: 0.78rem; color: #334155; margin-bottom: 14px;">
-              <div><strong>Capacidad:</strong> 15 personas · <strong>Público:</strong> Familias, jóvenes y adultos</div>
-              <div><strong>Dificultad:</strong> Baja · <strong>Zona:</strong> El Crucero + Pochomil</div>
+              <div><strong data-i18n="pages.experiencias.expPkgCard.strong1">Capacidad:</strong> <span data-i18n="pages.experiencias.expPkgCard.div1">15 personas ·</span> <strong data-i18n="pages.experiencias.expPkgCard.strong2">Público:</strong> <span data-i18n="pages.experiencias.expPkgCard.div2">Familias, jóvenes y adultos</span></div>
+              <div><strong data-i18n="pages.experiencias.expPkgCard.strong3">Dificultad:</strong> <span data-i18n="pages.experiencias.expPkgCard.div3">Baja ·</span> <strong data-i18n="pages.experiencias.expPkgCard.strong4">Zona:</strong> <span data-i18n="pages.experiencias.expPkgCard.div4">El Crucero + Pochomil</span></div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2E8F0; padding-top: 12px;">
               <div>
-                <span style="font-size: 0.7rem; color: #64748B; display: block;">Precio por persona</span>
+                <span data-i18n="pages.experiencias.expPkgCard.span2" style="font-size: 0.7rem; color: #64748B; display: block;">Precio por persona</span>
                 <strong style="font-size: 1.15rem; color: #F65E01; font-weight: 900;">C$ 3,100</strong>
               </div>
               <a href="https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20reservar%20el%20paquete%20Entre%20Nubes%20y%20Olas" target="_blank" rel="noopener" style="background: #165D6F; color: #FFFFFF; text-decoration: none; padding: 8px 16px; border-radius: 8px; font-size: 0.82rem; font-weight: 800;">
-                <i class="fa-brands fa-whatsapp"></i> Reservar
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span>
               </a>
             </div>
           </article>
@@ -495,23 +495,23 @@
           <article class="exp-pkg-card" style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(15,23,42,0.04); display: flex; flex-direction: column;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
               <span style="font-size: 0.72rem; font-weight: 800; color: #165D6F; background: #F1F5F9; padding: 4px 10px; border-radius: 6px;">MANAGUA</span>
-              <span style="font-size: 0.72rem; font-weight: 700; color: #64748B;"><i class="fa-solid fa-clock"></i> 1 día completo</span>
+              <span style="font-size: 0.72rem; font-weight: 700; color: #64748B;"><i class="fa-solid fa-clock"></i> <span data-i18n="pages.experiencias.expPkgCard.span3">1 día completo</span></span>
             </div>
-            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #0F172A; margin: 0 0 8px;">MANAGUA, RAÍCES, HISTORIA Y ENCANTO</h3>
-            <p style="font-size: 0.82rem; color: #475569; margin: 0 0 12px; line-height: 1.5; flex: 1;">
+            <h3 data-i18n="pages.experiencias.expPkgCard.h32" style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #0F172A; margin: 0 0 8px;">MANAGUA, RAÍCES, HISTORIA Y ENCANTO</h3>
+            <p data-i18n="pages.experiencias.expPkgCard.p2" style="font-size: 0.82rem; color: #475569; margin: 0 0 12px; line-height: 1.5; flex: 1;">
               Circuito histórico y cultural: Centro Histórico, Loma de Tiscapa, Antigua Catedral, Parque Central, Palacio Nacional de la Cultura, Paseo Xolotlán y Puerto Salvador Allende.
             </p>
             <div style="background: #F8FAFC; border-radius: 10px; padding: 10px; font-size: 0.78rem; color: #334155; margin-bottom: 14px;">
-              <div><strong>Grupo:</strong> 12 personas · <strong>Incluye:</strong> Transporte, desayuno, almuerzo y guía</div>
-              <div><strong>Dificultad:</strong> Baja · <strong>Público:</strong> Niños, jóvenes y adultos</div>
+              <div><strong data-i18n="pages.experiencias.expPkgCard.strong5">Grupo:</strong> <span data-i18n="pages.experiencias.expPkgCard.div5">12 personas ·</span> <strong data-i18n="pages.experiencias.expPkgCard.strong6">Incluye:</strong> <span data-i18n="pages.experiencias.expPkgCard.div6">Transporte, desayuno, almuerzo y guía</span></div>
+              <div><strong data-i18n="pages.experiencias.expPkgCard.strong3">Dificultad:</strong> <span data-i18n="pages.experiencias.expPkgCard.div3">Baja ·</span> <strong data-i18n="pages.experiencias.expPkgCard.strong2">Público:</strong> <span data-i18n="pages.experiencias.expPkgCard.div7">Niños, jóvenes y adultos</span></div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2E8F0; padding-top: 12px;">
               <div>
-                <span style="font-size: 0.7rem; color: #64748B; display: block;">Precio por persona</span>
+                <span data-i18n="pages.experiencias.expPkgCard.span2" style="font-size: 0.7rem; color: #64748B; display: block;">Precio por persona</span>
                 <strong style="font-size: 1.15rem; color: #F65E01; font-weight: 900;">C$ 880</strong>
               </div>
               <a href="https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20reservar%20el%20paquete%20Managua%20Raices" target="_blank" rel="noopener" style="background: #165D6F; color: #FFFFFF; text-decoration: none; padding: 8px 16px; border-radius: 8px; font-size: 0.82rem; font-weight: 800;">
-                <i class="fa-brands fa-whatsapp"></i> Reservar
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span>
               </a>
             </div>
           </article>
@@ -520,23 +520,23 @@
           <article class="exp-pkg-card" style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(15,23,42,0.04); display: flex; flex-direction: column;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
               <span style="font-size: 0.72rem; font-weight: 800; color: #165D6F; background: #F1F5F9; padding: 4px 10px; border-radius: 6px;">GRANADA</span>
-              <span style="font-size: 0.72rem; font-weight: 700; color: #64748B;"><i class="fa-solid fa-moon"></i> Tour Nocturno</span>
+              <span style="font-size: 0.72rem; font-weight: 700; color: #64748B;"><i class="fa-solid fa-moon"></i> <span data-i18n="pages.experiencias.expPkgCard.span4">Tour Nocturno</span></span>
             </div>
-            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #0F172A; margin: 0 0 8px;">NIGHT TOUR VOLCÁN MOMBACHO</h3>
-            <p style="font-size: 0.82rem; color: #475569; margin: 0 0 12px; line-height: 1.5; flex: 1;">
+            <h3 data-i18n="pages.experiencias.expPkgCard.h33" style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #0F172A; margin: 0 0 8px;">NIGHT TOUR VOLCÁN MOMBACHO</h3>
+            <p data-i18n="pages.experiencias.expPkgCard.p3" style="font-size: 0.82rem; color: #475569; margin: 0 0 12px; line-height: 1.5; flex: 1;">
               Caminata nocturna de 45 minutos por el Sendero El Cráter. Observación de fauna nocturna, salamandra del Mombacho, aves dormidas, insectos bioluminiscentes y vistas iluminadas de Granada.
             </p>
             <div style="background: #F8FAFC; border-radius: 10px; padding: 10px; font-size: 0.78rem; color: #334155; margin-bottom: 14px;">
-              <div><strong>Incluye:</strong> Transporte desde Granada + recorrido con guía certificado</div>
-              <div><strong>Dificultad:</strong> Media · <strong>Público:</strong> Familias, jóvenes y adultos</div>
+              <div><strong data-i18n="pages.experiencias.expPkgCard.strong6">Incluye:</strong> <span data-i18n="pages.experiencias.expPkgCard.div8">Transporte desde Granada + recorrido con guía certificado</span></div>
+              <div><strong data-i18n="pages.experiencias.expPkgCard.strong3">Dificultad:</strong> <span data-i18n="pages.experiencias.expPkgCard.div9">Media ·</span> <strong data-i18n="pages.experiencias.expPkgCard.strong2">Público:</strong> <span data-i18n="pages.experiencias.expPkgCard.div2">Familias, jóvenes y adultos</span></div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2E8F0; padding-top: 12px;">
               <div>
-                <span style="font-size: 0.7rem; color: #64748B; display: block;">Precio por persona</span>
+                <span data-i18n="pages.experiencias.expPkgCard.span2" style="font-size: 0.7rem; color: #64748B; display: block;">Precio por persona</span>
                 <strong style="font-size: 1.15rem; color: #F65E01; font-weight: 900;">C$ 1,100</strong>
               </div>
               <a href="https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20reservar%20el%20Night%20Tour%20Mombacho" target="_blank" rel="noopener" style="background: #165D6F; color: #FFFFFF; text-decoration: none; padding: 8px 16px; border-radius: 8px; font-size: 0.82rem; font-weight: 800;">
-                <i class="fa-brands fa-whatsapp"></i> Reservar
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span>
               </a>
             </div>
           </article>
@@ -545,23 +545,23 @@
           <article class="exp-pkg-card" style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(15,23,42,0.04); display: flex; flex-direction: column;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
               <span style="font-size: 0.72rem; font-weight: 800; color: #165D6F; background: #F1F5F9; padding: 4px 10px; border-radius: 6px;">RÍO SAN JUAN</span>
-              <span style="font-size: 0.72rem; font-weight: 700; color: #64748B;"><i class="fa-solid fa-clock"></i> 2 días / 1 noche</span>
+              <span style="font-size: 0.72rem; font-weight: 700; color: #64748B;"><i class="fa-solid fa-clock"></i> <span data-i18n="pages.experiencias.expPkgCard.span1">2 días / 1 noche</span></span>
             </div>
-            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #0F172A; margin: 0 0 8px;">BOCA DE SÁBALOS &amp; EL CASTILLO</h3>
-            <p style="font-size: 0.82rem; color: #475569; margin: 0 0 12px; line-height: 1.5; flex: 1;">
+            <h3 data-i18n="pages.experiencias.expPkgCard.h34" style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #0F172A; margin: 0 0 8px;">BOCA DE SÁBALOS &amp; EL CASTILLO</h3>
+            <p data-i18n="pages.experiencias.expPkgCard.p4" style="font-size: 0.82rem; color: #475569; margin: 0 0 12px; line-height: 1.5; flex: 1;">
               Inmersión histórica y fluvial: Fortaleza de la Inmaculada Concepción, historia colonial de Rafaela Herrera, poblado ribereño de El Castillo y naturaleza tropical sobre el río.
             </p>
             <div style="background: #F8FAFC; border-radius: 10px; padding: 10px; font-size: 0.78rem; color: #334155; margin-bottom: 14px;">
-              <div><strong>Mínimo:</strong> 2 personas · <strong>Incluye:</strong> Alojamiento + guía en Fortaleza</div>
-              <div><strong>Nota:</strong> Transporte acuático desde San Carlos por separado</div>
+              <div><strong data-i18n="pages.experiencias.expPkgCard.strong7">Mínimo:</strong> <span data-i18n="pages.experiencias.expPkgCard.div10">2 personas ·</span> <strong data-i18n="pages.experiencias.expPkgCard.strong6">Incluye:</strong> <span data-i18n="pages.experiencias.expPkgCard.div11">Alojamiento + guía en Fortaleza</span></div>
+              <div><strong data-i18n="pages.experiencias.expPkgCard.strong8">Nota:</strong> <span data-i18n="pages.experiencias.expPkgCard.div12">Transporte acuático desde San Carlos por separado</span></div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2E8F0; padding-top: 12px;">
               <div>
-                <span style="font-size: 0.7rem; color: #64748B; display: block;">Precio por persona</span>
+                <span data-i18n="pages.experiencias.expPkgCard.span2" style="font-size: 0.7rem; color: #64748B; display: block;">Precio por persona</span>
                 <strong style="font-size: 1.15rem; color: #F65E01; font-weight: 900;">C$ 1,700</strong>
               </div>
               <a href="https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20reservar%20el%20paquete%20Rio%20San%20Juan" target="_blank" rel="noopener" style="background: #165D6F; color: #FFFFFF; text-decoration: none; padding: 8px 16px; border-radius: 8px; font-size: 0.82rem; font-weight: 800;">
-                <i class="fa-brands fa-whatsapp"></i> Reservar
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span>
               </a>
             </div>
           </article>
@@ -570,23 +570,23 @@
           <article class="exp-pkg-card" style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(15,23,42,0.04); display: flex; flex-direction: column;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
               <span style="font-size: 0.72rem; font-weight: 800; color: #165D6F; background: #F1F5F9; padding: 4px 10px; border-radius: 6px;">NUEVA SEGOVIA</span>
-              <span style="font-size: 0.72rem; font-weight: 700; color: #64748B;"><i class="fa-solid fa-clock"></i> 1 día completo</span>
+              <span style="font-size: 0.72rem; font-weight: 700; color: #64748B;"><i class="fa-solid fa-clock"></i> <span data-i18n="pages.experiencias.expPkgCard.span3">1 día completo</span></span>
             </div>
-            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #0F172A; margin: 0 0 8px;">CAÑÓN CERROS PEGADOS (ZIPOTE VAGO)</h3>
-            <p style="font-size: 0.82rem; color: #475569; margin: 0 0 12px; line-height: 1.5; flex: 1;">
+            <h3 data-i18n="pages.experiencias.expPkgCard.h35" style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #0F172A; margin: 0 0 8px;">CAÑÓN CERROS PEGADOS (ZIPOTE VAGO)</h3>
+            <p data-i18n="pages.experiencias.expPkgCard.p5" style="font-size: 0.82rem; color: #475569; margin: 0 0 12px; line-height: 1.5; flex: 1;">
               Expedición de aventura en la cordillera norteña con el equipo local Zipote Vago Tours. Farallones, senderismo de montaña, pozas naturales y gastronomía tradicional segoviana.
             </p>
             <div style="background: #F8FAFC; border-radius: 10px; padding: 10px; font-size: 0.78rem; color: #334155; margin-bottom: 14px;">
-              <div><strong>Incluye:</strong> Transporte 4x4, café con rosquillas, senderos, guía local y almuerzo</div>
-              <div><strong>Dificultad:</strong> Alta · <strong>Público:</strong> Jóvenes y adultos</div>
+              <div><strong data-i18n="pages.experiencias.expPkgCard.strong6">Incluye:</strong> <span data-i18n="pages.experiencias.expPkgCard.div13">Transporte 4x4, café con rosquillas, senderos, guía local y almuerzo</span></div>
+              <div><strong data-i18n="pages.experiencias.expPkgCard.strong3">Dificultad:</strong> <span data-i18n="pages.experiencias.expPkgCard.div14">Alta ·</span> <strong data-i18n="pages.experiencias.expPkgCard.strong2">Público:</strong> <span data-i18n="pages.experiencias.expPkgCard.div15">Jóvenes y adultos</span></div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2E8F0; padding-top: 12px;">
               <div>
-                <span style="font-size: 0.7rem; color: #64748B; display: block;">Precio por persona</span>
+                <span data-i18n="pages.experiencias.expPkgCard.span2" style="font-size: 0.7rem; color: #64748B; display: block;">Precio por persona</span>
                 <strong style="font-size: 1.15rem; color: #F65E01; font-weight: 900;">C$ 1,200</strong>
               </div>
               <a href="https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20reservar%20el%20paquete%20Cerros%20Pegados" target="_blank" rel="noopener" style="background: #165D6F; color: #FFFFFF; text-decoration: none; padding: 8px 16px; border-radius: 8px; font-size: 0.82rem; font-weight: 800;">
-                <i class="fa-brands fa-whatsapp"></i> Reservar
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span>
               </a>
             </div>
           </article>
@@ -594,24 +594,24 @@
           <!-- 6. Caribe Sur: Cayos Perlas -->
           <article class="exp-pkg-card" style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(15,23,42,0.04); display: flex; flex-direction: column;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <span style="font-size: 0.72rem; font-weight: 800; color: #165D6F; background: #F1F5F9; padding: 4px 10px; border-radius: 6px;">RACCS · CARIBE SUR</span>
-              <span style="font-size: 0.72rem; font-weight: 700; color: #64748B;"><i class="fa-solid fa-clock"></i> 2 días / 1 noche</span>
+              <span data-i18n="pages.experiencias.expPkgCard.span5" style="font-size: 0.72rem; font-weight: 800; color: #165D6F; background: #F1F5F9; padding: 4px 10px; border-radius: 6px;">RACCS · CARIBE SUR</span>
+              <span style="font-size: 0.72rem; font-weight: 700; color: #64748B;"><i class="fa-solid fa-clock"></i> <span data-i18n="pages.experiencias.expPkgCard.span1">2 días / 1 noche</span></span>
             </div>
-            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #0F172A; margin: 0 0 8px;">EXPERIENCIA CAYOS PERLAS</h3>
-            <p style="font-size: 0.82rem; color: #475569; margin: 0 0 12px; line-height: 1.5; flex: 1;">
+            <h3 data-i18n="pages.experiencias.expPkgCard.h36" style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: #0F172A; margin: 0 0 8px;">EXPERIENCIA CAYOS PERLAS</h3>
+            <p data-i18n="pages.experiencias.expPkgCard.p6" style="font-size: 0.82rem; color: #475569; margin: 0 0 12px; line-height: 1.5; flex: 1;">
               Islotes coralinos vírgenes en el Mar Caribe. Salida desde Laguna de Perlas, transporte acuático seguro con chalecos, arrecife de coral, desayuno criollo, almuerzo caribeño y kayaks.
             </p>
             <div style="background: #F8FAFC; border-radius: 10px; padding: 10px; font-size: 0.78rem; color: #334155; margin-bottom: 14px;">
-              <div><strong>Incluye:</strong> Lancha rápida, guía acreditado, snorkeling y kayaks</div>
-              <div><strong>Dificultad:</strong> Baja · <strong>Sujeto a:</strong> Condiciones del mar y viento</div>
+              <div><strong data-i18n="pages.experiencias.expPkgCard.strong6">Incluye:</strong> <span data-i18n="pages.experiencias.expPkgCard.div16">Lancha rápida, guía acreditado, snorkeling y kayaks</span></div>
+              <div><strong data-i18n="pages.experiencias.expPkgCard.strong3">Dificultad:</strong> <span data-i18n="pages.experiencias.expPkgCard.div3">Baja ·</span> <strong data-i18n="pages.experiencias.expPkgCard.strong9">Sujeto a:</strong> <span data-i18n="pages.experiencias.expPkgCard.div17">Condiciones del mar y viento</span></div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2E8F0; padding-top: 12px;">
               <div>
-                <span style="font-size: 0.7rem; color: #64748B; display: block;">Precio por persona</span>
+                <span data-i18n="pages.experiencias.expPkgCard.span2" style="font-size: 0.7rem; color: #64748B; display: block;">Precio por persona</span>
                 <strong style="font-size: 1.15rem; color: #F65E01; font-weight: 900;">C$ 2,910</strong>
               </div>
               <a href="https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20reservar%20el%20paquete%20Cayos%20Perlas" target="_blank" rel="noopener" style="background: #165D6F; color: #FFFFFF; text-decoration: none; padding: 8px 16px; border-radius: 8px; font-size: 0.82rem; font-weight: 800;">
-                <i class="fa-brands fa-whatsapp"></i> Reservar
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.book">Reservar</span>
               </a>
             </div>
           </article>
@@ -624,12 +624,12 @@
       <section class="exp-routes-rsj-section" id="rutasRioSanJuan" style="margin-top: 50px; padding-top: 40px; border-top: 1px solid #E2E8F0;">
         <div style="margin-bottom: 24px;">
           <span style="font-size: 0.78rem; font-weight: 800; color: #4A7A5A; text-transform: uppercase; letter-spacing: 0.1em;">
-            <i class="fa-solid fa-water"></i> PORTAL ESPECIALIZADO RIOSANJUAN.COM.NI
+            <i class="fa-solid fa-water"></i> <span data-i18n="pages.experiencias.rutasRioSanJuan.span1">PORTAL ESPECIALIZADO RIOSANJUAN.COM.NI</span>
           </span>
-          <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.6rem; font-weight: 900; color: #0F172A; margin: 4px 0;">
+          <h2 data-i18n="pages.experiencias.rutasRioSanJuan.h21" style="font-family: 'Montserrat', sans-serif; font-size: 1.6rem; font-weight: 900; color: #0F172A; margin: 4px 0;">
             Rutas Temáticas y Turismo Comunitario en Río San Juan
           </h2>
-          <p style="font-size: 0.88rem; color: #64748B; margin: 0; max-width: 780px;">
+          <p data-i18n="pages.experiencias.rutasRioSanJuan.p1" style="font-size: 0.88rem; color: #64748B; margin: 0; max-width: 780px;">
             Conectando el Gran Lago Cocibolca con el Caribe a través de cuatro grandes rutas de navegación, historia viva, biodiversidad y convivencia con pueblos originarios Rama.
           </p>
         </div>
@@ -638,59 +638,59 @@
           <!-- 1. Ruta del Oro -->
           <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px; box-shadow: 0 4px 12px rgba(15,23,42,0.03);">
             <div style="font-size: 1.4rem; color: #F65E01; margin-bottom: 8px;"><i class="fa-solid fa-coins"></i></div>
-            <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">Ruta del Oro (6 Días)</h4>
-            <p style="font-size: 0.8rem; color: #64748B; margin: 0 0 8px; line-height: 1.45;">
+            <h4 data-i18n="pages.experiencias.rutasRioSanJuan.h41" style="font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">Ruta del Oro (6 Días)</h4>
+            <p data-i18n="pages.experiencias.rutasRioSanJuan.p2" style="font-size: 0.8rem; color: #64748B; margin: 0 0 8px; line-height: 1.45;">
               La legendaria ruta interoceánica de la fiebre del oro del siglo XIX: Managua &rarr; San Juan del Sur &rarr; Río San Juan &rarr; El Castillo &rarr; Greytown &rarr; Reserva Indio Maíz.
             </p>
-            <span style="font-size: 0.74rem; font-weight: 700; color: #165D6F;"><i class="fa-solid fa-ship"></i> Navegación fluvial &amp; selva</span>
+            <span style="font-size: 0.74rem; font-weight: 700; color: #165D6F;"><i class="fa-solid fa-ship"></i> <span data-i18n="pages.experiencias.rutasRioSanJuan.span2">Navegación fluvial &amp; selva</span></span>
           </div>
 
           <!-- 2. Ruta Colonial -->
           <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px; box-shadow: 0 4px 12px rgba(15,23,42,0.03);">
             <div style="font-size: 1.4rem; color: #165D6F; margin-bottom: 8px;"><i class="fa-solid fa-chess-rook"></i></div>
-            <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">Ruta Colonial</h4>
-            <p style="font-size: 0.8rem; color: #64748B; margin: 0 0 8px; line-height: 1.45;">
+            <h4 data-i18n="pages.experiencias.rutasRioSanJuan.h42" style="font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">Ruta Colonial</h4>
+            <p data-i18n="pages.experiencias.rutasRioSanJuan.p3" style="font-size: 0.8rem; color: #64748B; margin: 0 0 8px; line-height: 1.45;">
               El comercio colonial español, las fortificaciones ribereñas y la gesta del Desaguadero. Incluye la Fortaleza Inmaculada Concepción, museos y poblado de El Castillo.
             </p>
-            <span style="font-size: 0.74rem; font-weight: 700; color: #165D6F;"><i class="fa-solid fa-landmark"></i> Historia militar y baluartes</span>
+            <span style="font-size: 0.74rem; font-weight: 700; color: #165D6F;"><i class="fa-solid fa-landmark"></i> <span data-i18n="pages.experiencias.rutasRioSanJuan.span3">Historia militar y baluartes</span></span>
           </div>
 
           <!-- 3. Ruta de las Aves -->
           <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px; box-shadow: 0 4px 12px rgba(15,23,42,0.03);">
             <div style="font-size: 1.4rem; color: #4A7A5A; margin-bottom: 8px;"><i class="fa-solid fa-feather-pointed"></i></div>
-            <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">Ruta de las Aves (+270 Especies)</h4>
-            <p style="font-size: 0.8rem; color: #64748B; margin: 0 0 8px; line-height: 1.45;">
+            <h4 data-i18n="pages.experiencias.rutasRioSanJuan.h43" style="font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">Ruta de las Aves (+270 Especies)</h4>
+            <p data-i18n="pages.experiencias.rutasRioSanJuan.p4" style="font-size: 0.8rem; color: #64748B; margin: 0 0 8px; line-height: 1.45;">
               Aviturismo en los humedales de San Carlos, San Miguelito, Solentiname y Refugio Los Guatuzos. Garzas, martín pescador, espátulas rosadas y loras frentirrojas.
             </p>
-            <span style="font-size: 0.74rem; font-weight: 700; color: #165D6F;"><i class="fa-solid fa-binoculars"></i> Avistamiento temprano en kayak</span>
+            <span style="font-size: 0.74rem; font-weight: 700; color: #165D6F;"><i class="fa-solid fa-binoculars"></i> <span data-i18n="pages.experiencias.rutasRioSanJuan.span4">Avistamiento temprano en kayak</span></span>
           </div>
 
           <!-- 4. Ruta de los Naturalistas -->
           <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px; box-shadow: 0 4px 12px rgba(15,23,42,0.03);">
             <div style="font-size: 1.4rem; color: #0284C7; margin-bottom: 8px;"><i class="fa-solid fa-tree"></i></div>
-            <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">Ruta de los Naturalistas</h4>
-            <p style="font-size: 0.8rem; color: #64748B; margin: 0 0 8px; line-height: 1.45;">
+            <h4 data-i18n="pages.experiencias.rutasRioSanJuan.h44" style="font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">Ruta de los Naturalistas</h4>
+            <p data-i18n="pages.experiencias.rutasRioSanJuan.p5" style="font-size: 0.8rem; color: #64748B; margin: 0 0 8px; line-height: 1.45;">
               Exploración de la Reserva Biológica Indio Maíz y Bartola. Selva tropical primaria, caimanes/cuajipales, monos congo, manatíes y ceibas milenarias con baqueanos.
             </p>
-            <span style="font-size: 0.74rem; font-weight: 700; color: #165D6F;"><i class="fa-solid fa-compass"></i> Guía nativo obligatorio</span>
+            <span style="font-size: 0.74rem; font-weight: 700; color: #165D6F;"><i class="fa-solid fa-compass"></i> <span data-i18n="pages.experiencias.rutasRioSanJuan.span5">Guía nativo obligatorio</span></span>
           </div>
         </div>
 
         <!-- Banner Especial: Experiencia Comunitaria Rama en Reserva Cantagallo -->
         <div style="background: linear-gradient(135deg, #0F172A 0%, #165D6F 100%); color: #FFFFFF; border-radius: 16px; padding: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
           <div style="max-width: 680px;">
-            <span style="background: #C54B01; color: #FFFFFF; font-size: 0.7rem; font-weight: 800; padding: 4px 10px; border-radius: 4px; text-transform: uppercase;">
+            <span data-i18n="pages.experiencias.rutasRioSanJuan.span6" style="background: #C54B01; color: #FFFFFF; font-size: 0.7rem; font-weight: 800; padding: 4px 10px; border-radius: 4px; text-transform: uppercase;">
               CONVIVENCIA INDÍGENA RAMA
             </span>
-            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 900; margin: 8px 0;">
+            <h3 data-i18n="pages.experiencias.rutasRioSanJuan.h31" style="font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 900; margin: 8px 0;">
               Reserva Cantagallo: Biósfera y Sabiduría Ancestral
             </h3>
-            <p style="font-size: 0.84rem; opacity: 0.9; margin: 0; line-height: 1.5;">
+            <p data-i18n="pages.experiencias.rutasRioSanJuan.p6" style="font-size: 0.84rem; opacity: 0.9; margin: 0; line-height: 1.5;">
               Alojamiento comunitario y convivencia directa con familias del pueblo originario Rama. Recorridos guiados por líderes ancestrales a través de formaciones de basalto columnar, aguas termales medicinales y senderos vírgenes.
             </p>
           </div>
           <a href="https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20informacion%20de%20la%20experiencia%20Rama%20en%20Cantagallo" target="_blank" rel="noopener" style="background: #F4E6C1; color: #0F172A; text-decoration: none; padding: 12px 22px; border-radius: 10px; font-weight: 800; font-size: 0.85rem; white-space: nowrap;">
-            <i class="fa-solid fa-people-roof"></i> Conocer Experiencia Rama
+            <i class="fa-solid fa-people-roof"></i> <span data-i18n="pages.experiencias.rutasRioSanJuan.a1">Conocer Experiencia Rama</span>
           </a>
         </div>
       </section>
@@ -712,16 +712,16 @@
     <div class="exact-modal-window sos-modal">
       <button type="button" class="exact-modal-close" onclick="closeSosModal()">&times;</button>
       <div class="exact-modal-header">
-        <h3><i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> Centro SOS</h3>
-        <p>Tu ubicación GPS está activa para auxilio.</p>
+        <h3><i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> <span data-i18n="pages.experiencias.sosModal.h31">Centro SOS</span></h3>
+        <p data-i18n="pages.experiencias.sosModal.p1">Tu ubicación GPS está activa para auxilio.</p>
       </div>
       <div class="sos-gps-card">
-        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> GPS Satelital</div>
+        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> <span data-i18n="pages.experiencias.sosModal.div1">GPS Satelital</span></div>
         <div class="sos-gps-coords" id="sosGpsDisplay">12.5061° N, 86.7022° W</div>
       </div>
       <div class="sos-emergency-buttons">
-        <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> Policía (118)</a>
-        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> Cruz Roja (128)</a>
+        <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> <span data-i18n="common.policia118">Policía (118)</span></a>
+        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> <span data-i18n="common.cruzRoja128">Cruz Roja (128)</span></a>
       </div>
     </div>
   </div>

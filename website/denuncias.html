@@ -24,7 +24,7 @@
 - Protocolo de acción inmediata ante emergencias de incendios forestales (SINAPRED).
 ============================================================================
 -->
-<html lang="es" data-bq-page="denuncias" data-bq-group="institucional">
+<html data-i18n-description="pages.denuncias.body.metaDescription1" data-i18n-title="pages.denuncias.body.title1" lang="es" data-bq-page="denuncias" data-bq-group="institucional">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -239,12 +239,12 @@
     <section class="report-hero-section">
       <div class="container">
         <span class="report-tag-badge">
-          <i class="fa-solid fa-seedling"></i> Vigilancia Ecológica & Soberanía Territorial
+          <i class="fa-solid fa-seedling"></i> <span data-i18n="pages.denuncias.reportHeroSection.span1">Vigilancia Ecológica & Soberanía Territorial</span>
         </span>
-        <h1 class="denuncias-inline-001">
+        <h1 data-i18n="pages.denuncias.reportHeroSection.h11" class="denuncias-inline-001">
           🌳 Canal Ético & Denuncias Ambientales
         </h1>
-        <p class="denuncias-inline-002">
+        <p data-i18n="pages.denuncias.reportHeroSection.p1" class="denuncias-inline-002">
           Protegemos juntos el patrimonio natural de Nicaragua. Reporta con total confidencialidad cualquier daño ecológico para facilitar el registro territorial y su debida canalización hacia las autoridades correspondientes y brigadas comunitarias.
         </p>
 
@@ -252,66 +252,66 @@
         <div class="report-card-wrap">
           <h3 class="denuncias-inline-003">
             <i class="fa-solid fa-triangle-exclamation denuncias-inline-004"></i>
-            <span>Formulario de Reporte Ecológico Confidencial</span>
+            <span data-i18n="pages.denuncias.reportHeroSection.span2">Formulario de Reporte Ecológico Confidencial</span>
           </h3>
 
           <form id="ecoReportForm" onsubmit="event.preventDefault(); alert('✅ Tu reporte ha sido registrado con éxito en la Mesa Técnica Ambiental Baqueano para su debida canalización territorial.'); this.reset();">
             <div class="denuncias-inline-005">
               <div class="report-form-group">
-                <label class="report-form-label" for="reportType">Tipo de Incidencia Ambiental *</label>
+                <label class="report-form-label" for="reportType"><span data-i18n="pages.denuncias.ecoReportForm.label1">Tipo de Incidencia Ambiental *</span></label>
                 <select id="reportType" class="report-select" required>
-                  <option value="">Selecciona una categoría...</option>
-                  <option value="tala">Tala ilegal o despale en reserva</option>
-                  <option value="caza">Caza furtiva o tráfico de fauna silvestre</option>
-                  <option value="contaminacion">Contaminación de río, laguna o afluente</option>
-                  <option value="incendio">Foco de incendio forestal o quema agrícola descontrolada</option>
-                  <option value="basura">Acumulación de residuos sólidos o basurero clandestino</option>
-                  <option value="otro">Otra alteración del ecosistema</option>
+                  <option data-i18n="pages.denuncias.reportType.option1" value="">Selecciona una categoría...</option>
+                  <option data-i18n="pages.denuncias.reportType.option2" value="tala">Tala ilegal o despale en reserva</option>
+                  <option data-i18n="pages.denuncias.reportType.option3" value="caza">Caza furtiva o tráfico de fauna silvestre</option>
+                  <option data-i18n="pages.denuncias.reportType.option4" value="contaminacion">Contaminación de río, laguna o afluente</option>
+                  <option data-i18n="pages.denuncias.reportType.option5" value="incendio">Foco de incendio forestal o quema agrícola descontrolada</option>
+                  <option data-i18n="pages.denuncias.reportType.option6" value="basura">Acumulación de residuos sólidos o basurero clandestino</option>
+                  <option data-i18n="pages.denuncias.reportType.option7" value="otro">Otra alteración del ecosistema</option>
                 </select>
               </div>
 
               <div class="report-form-group">
-                <label class="report-form-label" for="reportDepartment">Departamento o Región *</label>
+                <label class="report-form-label" for="reportDepartment"><span data-i18n="pages.denuncias.ecoReportForm.label2">Departamento o Región *</span></label>
                 <select id="reportDepartment" class="report-select" required>
-                  <option value="">Selecciona el territorio...</option>
-                  <option value="Madriz">Madriz (Cañón de Somoto)</option>
-                  <option value="Rivas">Rivas (Isla de Ometepe / San Juan del Sur)</option>
-                  <option value="León">León (Volcán Cerro Negro / Telica)</option>
-                  <option value="Masaya">Masaya (Volcán Masaya / Laguna de Apoyo)</option>
-                  <option value="Matagalpa">Matagalpa (Peñas Blancas / Selva Negra)</option>
-                  <option value="Jinotega">Jinotega (Bosawás / Datanlí El Diablo)</option>
-                  <option value="Río San Juan">Río San Juan (Indio Maíz / El Castillo)</option>
-                  <option value="Caribe Sur">RACCS (Corn Island / Bluefields)</option>
-                  <option value="Caribe Norte">RACCN (Waspam / Bilwi)</option>
-                  <option value="Otro">Otro Departamento de Nicaragua</option>
+                  <option data-i18n="pages.denuncias.reportDepartment.option1" value="">Selecciona el territorio...</option>
+                  <option data-i18n="pages.denuncias.reportDepartment.option2" value="Madriz">Madriz (Cañón de Somoto)</option>
+                  <option data-i18n="pages.denuncias.reportDepartment.option3" value="Rivas">Rivas (Isla de Ometepe / San Juan del Sur)</option>
+                  <option data-i18n="pages.denuncias.reportDepartment.option4" value="León">León (Volcán Cerro Negro / Telica)</option>
+                  <option data-i18n="pages.denuncias.reportDepartment.option5" value="Masaya">Masaya (Volcán Masaya / Laguna de Apoyo)</option>
+                  <option data-i18n="pages.denuncias.reportDepartment.option6" value="Matagalpa">Matagalpa (Peñas Blancas / Selva Negra)</option>
+                  <option data-i18n="pages.denuncias.reportDepartment.option7" value="Jinotega">Jinotega (Bosawás / Datanlí El Diablo)</option>
+                  <option data-i18n="pages.denuncias.reportDepartment.option8" value="Río San Juan">Río San Juan (Indio Maíz / El Castillo)</option>
+                  <option data-i18n="pages.denuncias.reportDepartment.option9" value="Caribe Sur">RACCS (Corn Island / Bluefields)</option>
+                  <option data-i18n="pages.denuncias.reportDepartment.option10" value="Caribe Norte">RACCN (Waspam / Bilwi)</option>
+                  <option data-i18n="pages.denuncias.reportDepartment.option11" value="Otro">Otro Departamento de Nicaragua</option>
                 </select>
               </div>
             </div>
 
             <div class="report-form-group">
-              <label class="report-form-label" for="reportLocation">Ubicación Precisa o Punto de Referencia *</label>
-              <input type="text" id="reportLocation" class="report-input" placeholder="Ej. Sendero El Aguacate, 2 km al norte de la entrada comunitaria..." required>
+              <label class="report-form-label" for="reportLocation"><span data-i18n="pages.denuncias.ecoReportForm.label3">Ubicación Precisa o Punto de Referencia *</span></label>
+              <input data-i18n-placeholder="pages.denuncias.reportLocation.inputPlaceholder1" type="text" id="reportLocation" class="report-input" placeholder="Ej. Sendero El Aguacate, 2 km al norte de la entrada comunitaria..." required>
             </div>
 
             <div class="report-form-group">
-              <label class="report-form-label" for="reportDetails">Descripción Detallada del Hecho *</label>
-              <textarea id="reportDetails" rows="4" class="report-textarea" placeholder="Contanos qué viste, qué tan grave es, quiénes podrían estar involucrados y, si las tenés, las coordenadas GPS…" required></textarea>
+              <label class="report-form-label" for="reportDetails"><span data-i18n="pages.denuncias.ecoReportForm.label4">Descripción Detallada del Hecho *</span></label>
+              <textarea data-i18n-placeholder="pages.denuncias.reportDetails.textareaPlaceholder1" id="reportDetails" rows="4" class="report-textarea" placeholder="Contanos qué viste, qué tan grave es, quiénes podrían estar involucrados y, si las tenés, las coordenadas GPS…" required></textarea>
             </div>
 
             <div class="denuncias-inline-006">
               <div class="report-form-group">
-                <label class="report-form-label" for="reportName">Nombre de Contacto (Opcional - Puede ser Anónimo)</label>
-                <input type="text" id="reportName" class="report-input" placeholder="Anónimo o tu nombre">
+                <label class="report-form-label" for="reportName"><span data-i18n="pages.denuncias.ecoReportForm.label5">Nombre de Contacto (Opcional - Puede ser Anónimo)</span></label>
+                <input data-i18n-placeholder="pages.denuncias.reportName.inputPlaceholder1" type="text" id="reportName" class="report-input" placeholder="Anónimo o tu nombre">
               </div>
               <div class="report-form-group">
-                <label class="report-form-label" for="reportContact">Teléfono o WhatsApp (Opcional para Seguimiento)</label>
+                <label class="report-form-label" for="reportContact"><span data-i18n="pages.denuncias.ecoReportForm.label6">Teléfono o WhatsApp (Opcional para Seguimiento)</span></label>
                 <input type="tel" id="reportContact" class="report-input" placeholder="+505 8000-0000">
               </div>
             </div>
 
             <button type="submit" class="report-submit-btn">
               <i class="fa-solid fa-paper-plane"></i>
-              <span>Enviar Reporte a la Brigada Ambiental</span>
+              <span data-i18n="pages.denuncias.ecoReportForm.span1">Enviar Reporte a la Brigada Ambiental</span>
             </button>
           </form>
         </div>
@@ -323,8 +323,8 @@
               <i class="fa-solid fa-phone-volume"></i>
             </div>
             <div>
-              <h4 class="denuncias-inline-007">Línea Verde MARENA</h4>
-              <p class="denuncias-inline-008">Emergencias Ambientales Nacionales: <strong class="denuncias-inline-004">+505 2263-1273</strong></p>
+              <h4 data-i18n="pages.denuncias.reportHeroSection.h41" class="denuncias-inline-007">Línea Verde MARENA</h4>
+              <p class="denuncias-inline-008"><span data-i18n="pages.denuncias.reportHeroSection.p2">Emergencias Ambientales Nacionales:</span> <strong class="denuncias-inline-004">+505 2263-1273</strong></p>
             </div>
           </div>
 
@@ -333,8 +333,8 @@
               <i class="fa-solid fa-fire-flame-curved"></i>
             </div>
             <div>
-              <h4 class="denuncias-inline-007">Incendios Forestales</h4>
-              <p class="denuncias-inline-008">Bomberos de Nicaragua & SINAPRED: <strong class="denuncias-inline-009">115 / 118</strong></p>
+              <h4 data-i18n="pages.denuncias.reportHeroSection.h42" class="denuncias-inline-007">Incendios Forestales</h4>
+              <p class="denuncias-inline-008"><span data-i18n="pages.denuncias.reportHeroSection.p3">Bomberos de Nicaragua & SINAPRED:</span> <strong class="denuncias-inline-009">115 / 118</strong></p>
             </div>
           </div>
 
@@ -343,8 +343,8 @@
               <i class="fa-brands fa-whatsapp"></i>
             </div>
             <div>
-              <h4 class="denuncias-inline-007">Mesa de Enlace Baqueano</h4>
-              <p class="denuncias-inline-008">WhatsApp Territorial Directo: <strong class="denuncias-inline-010">+505 8443-1289</strong></p>
+              <h4 data-i18n="pages.denuncias.reportHeroSection.h43" class="denuncias-inline-007">Mesa de Enlace Baqueano</h4>
+              <p class="denuncias-inline-008"><span data-i18n="pages.denuncias.reportHeroSection.p4">WhatsApp Territorial Directo:</span> <strong class="denuncias-inline-010">+505 8443-1289</strong></p>
             </div>
           </div>
         </div>

@@ -30,7 +30,7 @@
 - Modales funcionales: Registro de Negocio (#bizRegisterModal) y SOS (#sosModal).
 ============================================================================
 -->
-<html lang="es" data-bq-page="aliados" data-bq-group="institucional">
+<html data-i18n-description="pages.aliados.body.metaDescription1" data-i18n-title="pages.aliados.body.title1" lang="es" data-bq-page="aliados" data-bq-group="institucional">
 
 <head>
   <meta charset="UTF-8">
@@ -133,26 +133,26 @@
       <div class="aliados-hero-grid">
         <div class="aliados-hero-text-wrap">
           <div class="aliados-hero-badge">
-            <i class="fa-solid fa-leaf"></i> ALIADOS BAQUEANO
+            <i class="fa-solid fa-leaf"></i> <span data-i18n="pages.aliados.aliadosHeroExact.div1">ALIADOS BAQUEANO</span>
           </div>
           <h1 class="aliados-hero-title">
-            Conectá con quienes hacen posible <span>la experiencia</span>
+            <span data-i18n="pages.aliados.aliadosHeroExact.h11">Conectá con quienes hacen posible</span> <span data-i18n="pages.aliados.aliadosHeroExact.span1">la experiencia</span>
           </h1>
-          <p class="aliados-hero-desc">
+          <p data-i18n="pages.aliados.aliadosHeroExact.p1" class="aliados-hero-desc">
             Cooperativas, eco-lodges, hospedajes, comedores, guías y emprendedores locales. Contacto directo, turismo responsable y experiencias auténticas en toda Nicaragua.
           </p>
           <div class="aliados-hero-actions">
             <a href="#catalogoAliados" class="btn-aliados-hero-primary">
-              <i class="fa-solid fa-compass"></i> Explorar aliados <i class="fa-solid fa-arrow-right"></i>
+              <i class="fa-solid fa-compass"></i> <span data-i18n="pages.aliados.aliadosHeroExact.a1">Explorar aliados</span> <i class="fa-solid fa-arrow-right"></i>
             </a>
             <a href="#comoVerificamos" class="btn-aliados-hero-secondary">
-              <i class="fa-solid fa-shield-halved"></i> Cómo verificamos
+              <i class="fa-solid fa-shield-halved"></i> <span data-i18n="pages.aliados.aliadosHeroExact.a2">Cómo verificamos</span>
             </a>
           </div>
         </div>
 
         <div class="aliados-hero-stamp">
-          <span class="aliados-hero-stamp-text">Turismo que fortalece comunidades 🍃</span>
+          <span data-i18n="pages.aliados.aliadosHeroExact.span2" class="aliados-hero-stamp-text">Turismo que fortalece comunidades 🍃</span>
         </div>
       </div>
     </div>
@@ -161,32 +161,32 @@
   <!-- ============================================================================
        2. FRANJA DE MÉTRICAS DE ALIADOS (IMAGEN 3)
        ============================================================================ -->
-  <section class="aliados-metrics-strip" aria-label="Métricas de la red">
+  <section data-i18n-aria-label="pages.aliados.aliadosMetricsStrip.sectionAriaLabel1" class="aliados-metrics-strip" aria-label="Métricas de la red">
     <div class="exact-container">
       <div class="aliados-metrics-row">
         <div class="aliados-metric-item">
           <i class="fa-solid fa-circle-check" style="color: #4A7A5A;"></i>
-          <span><strong>14</strong> Aliados verificados en esta plataforma</span>
+          <span><strong>14</strong> <span data-i18n="pages.aliados.aliadosMetricsStrip.span1">Aliados verificados en esta plataforma</span></span>
         </div>
         <div class="aliados-metric-item">
           <i class="fa-solid fa-hands-holding-circle"></i>
-          <span>Cooperativas Campesinas (4)</span>
+          <span data-i18n="pages.aliados.aliadosMetricsStrip.span2">Cooperativas Campesinas (4)</span>
         </div>
         <div class="aliados-metric-item">
           <i class="fa-solid fa-tree"></i>
-          <span>Eco-Lodges y Cabañas (3)</span>
+          <span data-i18n="pages.aliados.aliadosMetricsStrip.span3">Eco-Lodges y Cabañas (3)</span>
         </div>
         <div class="aliados-metric-item">
           <i class="fa-solid fa-umbrella-beach"></i>
-          <span>Costa &amp; Playas (2)</span>
+          <span data-i18n="pages.aliados.aliadosMetricsStrip.span4">Costa &amp; Playas (2)</span>
         </div>
         <div class="aliados-metric-item">
           <i class="fa-solid fa-landmark"></i>
-          <span>Casonas &amp; Cultura (2)</span>
+          <span data-i18n="pages.aliados.aliadosMetricsStrip.span5">Casonas &amp; Cultura (2)</span>
         </div>
         <div class="aliados-metric-item verified-badge">
           <i class="fa-solid fa-shield-check"></i>
-          <span><strong>Verificado BAQUEANO</strong> Turismo responsable</span>
+          <span><strong data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</strong> <span data-i18n="common.turismoResponsable">Turismo responsable</span></span>
         </div>
       </div>
     </div>
@@ -201,8 +201,8 @@
         <!-- Departamento -->
         <div class="aliados-filter-group">
           <i class="fa-solid fa-location-dot"></i>
-          <select class="aliados-filter-select" id="filterDepto" aria-label="Filtrar por departamento">
-            <option value="">Departamento: Todos</option>
+          <select data-i18n-aria-label="pages.aliados.filterDepto.selectAriaLabel1" class="aliados-filter-select" id="filterDepto" aria-label="Filtrar por departamento">
+            <option data-i18n="common.departamentoTodos" value="">Departamento: Todos</option>
             <option value="madriz">Madriz</option>
             <option value="matagalpa">Matagalpa</option>
             <option value="leon">León</option>
@@ -219,46 +219,46 @@
         <!-- Categoría -->
         <div class="aliados-filter-group">
           <i class="fa-solid fa-store"></i>
-          <select class="aliados-filter-select" id="filterCat" aria-label="Filtrar por categoría">
-            <option value="">Categoría: Todas</option>
-            <option value="coop">Cooperativas</option>
-            <option value="lodge">Eco-Lodges</option>
-            <option value="playa">Hoteles de Playa</option>
-            <option value="guias">Guías Locales</option>
-            <option value="gastro">Gastronomía y Rooftop</option>
+          <select data-i18n-aria-label="pages.aliados.filterCat.selectAriaLabel1" class="aliados-filter-select" id="filterCat" aria-label="Filtrar por categoría">
+            <option data-i18n="pages.aliados.filterCat.option1" value="">Categoría: Todas</option>
+            <option data-i18n="common.cooperativas" value="coop">Cooperativas</option>
+            <option data-i18n="common.ecoLodges" value="lodge">Eco-Lodges</option>
+            <option data-i18n="pages.aliados.filterCat.option2" value="playa">Hoteles de Playa</option>
+            <option data-i18n="pages.aliados.filterCat.option3" value="guias">Guías Locales</option>
+            <option data-i18n="pages.aliados.filterCat.option4" value="gastro">Gastronomía y Rooftop</option>
           </select>
         </div>
 
         <!-- Tipo de experiencia -->
         <div class="aliados-filter-group">
           <i class="fa-solid fa-person-hiking"></i>
-          <select class="aliados-filter-select" id="filterExp" aria-label="Filtrar por experiencia">
-            <option value="">Tipo de experiencia: Todas</option>
-            <option value="senderismo">Senderismo y Cañones</option>
-            <option value="volcanes">Volcanes y Sandboard</option>
-            <option value="playa">Surf y Descanso</option>
-            <option value="agroturismo">Agroturismo y Café</option>
-            <option value="cultura">Cultura y Patrimonio</option>
+          <select data-i18n-aria-label="pages.aliados.filterExp.selectAriaLabel1" class="aliados-filter-select" id="filterExp" aria-label="Filtrar por experiencia">
+            <option data-i18n="pages.aliados.filterExp.option1" value="">Tipo de experiencia: Todas</option>
+            <option data-i18n="pages.aliados.filterExp.option2" value="senderismo">Senderismo y Cañones</option>
+            <option data-i18n="pages.aliados.filterExp.option3" value="volcanes">Volcanes y Sandboard</option>
+            <option data-i18n="pages.aliados.filterExp.option4" value="playa">Surf y Descanso</option>
+            <option data-i18n="pages.aliados.filterExp.option5" value="agroturismo">Agroturismo y Café</option>
+            <option data-i18n="pages.aliados.filterExp.option6" value="cultura">Cultura y Patrimonio</option>
           </select>
         </div>
 
         <!-- Verificados -->
         <div class="aliados-filter-group">
           <i class="fa-solid fa-shield-check"></i>
-          <select class="aliados-filter-select" id="filterVerif" aria-label="Filtrar por verificación">
-            <option value="todos">Verificados: Todos</option>
-            <option value="auditados">100% Auditados en campo</option>
+          <select data-i18n-aria-label="pages.aliados.filterVerif.selectAriaLabel1" class="aliados-filter-select" id="filterVerif" aria-label="Filtrar por verificación">
+            <option data-i18n="pages.aliados.filterVerif.option1" value="todos">Verificados: Todos</option>
+            <option data-i18n="pages.aliados.filterVerif.option2" value="auditados">100% Auditados en campo</option>
           </select>
         </div>
 
         <!-- Cerca de mí -->
         <button type="button" class="btn-near-me" id="btnAliadosNearMe">
-          <i class="fa-solid fa-location-crosshairs"></i> Cerca de mí
+          <i class="fa-solid fa-location-crosshairs"></i> <span data-i18n="common.cercaDeMi">Cerca de mí</span>
         </button>
 
         <!-- Buscar -->
         <button type="button" class="btn-search-aliados" id="btnFilterAliados">
-          <i class="fa-solid fa-magnifying-glass"></i> Buscar aliados
+          <i class="fa-solid fa-magnifying-glass"></i> <span data-i18n="pages.aliados.btnFilterAliados.button1">Buscar aliados</span>
         </button>
       </div>
     </div>
@@ -271,14 +271,14 @@
     <div class="exact-container">
       <div class="aliados-section-head">
         <div class="aliados-title-group">
-          <h2><i class="fa-solid fa-star"></i> Aliados destacados</h2>
-          <p>Experiencias auténticas, contacto directo y turismo que transforma comunidades.</p>
+          <h2><i class="fa-solid fa-star"></i> <span data-i18n="pages.aliados.aliadosShowcaseSection.h21">Aliados destacados</span></h2>
+          <p data-i18n="pages.aliados.aliadosShowcaseSection.p1">Experiencias auténticas, contacto directo y turismo que transforma comunidades.</p>
         </div>
         <div class="aliados-head-controls">
-          <a href="#catalogoAliados" class="aliados-view-all-link">Ver todos los aliados <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#catalogoAliados" class="aliados-view-all-link"><span data-i18n="pages.aliados.aliadosShowcaseSection.a1">Ver todos los aliados</span> <i class="fa-solid fa-arrow-right"></i></a>
           <div class="aliados-nav-arrows">
-            <button type="button" class="aliados-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
-            <button type="button" class="aliados-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+            <button data-i18n-aria-label="common.anterior" type="button" class="aliados-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button data-i18n-aria-label="common.siguiente" type="button" class="aliados-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
         </div>
       </div>
@@ -287,18 +287,18 @@
         <!-- 1. Coop. Cañón de Somoto -->
         <article class="aliado-card-exact" data-dept="madriz" data-cat="coop">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Coop. Cañón de Somoto" class="aliado-card-img" loading="lazy" decoding="async" width="399" height="501">
-            <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
+            <img data-i18n-alt="pages.aliados.aliadoCardExact.h31" src="assets/images/destinos/canon_de_somoto.jpg" alt="Coop. Cañón de Somoto" class="aliado-card-img" loading="lazy" decoding="async" width="399" height="501">
+            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
           </div>
           <div class="aliado-card-body">
-            <h3 class="aliado-card-title">Coop. Cañón de Somoto</h3>
+            <h3 data-i18n="pages.aliados.aliadoCardExact.h31" class="aliado-card-title">Coop. Cañón de Somoto</h3>
             <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> Somoto, Madriz</div>
-            <p class="aliado-card-desc">Senderismo, rappell y recorridos en el majestuoso Cañón de Somoto con guías comunitarios.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> Auditado: 12 ago 2026</div>
+            <p data-i18n="pages.aliados.aliadoCardExact.p1" class="aliado-card-desc">Senderismo, rappell y recorridos en el majestuoso Cañón de Somoto con guías comunitarios.</p>
+            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div1">Auditado: 12 ago 2026</span></div>
             <div class="aliado-card-actions">
               <a href="https://wa.me/50588880001?text=Hola%20Coop%20Cañón%20de%20Somoto,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a href="departamento.html?id=madriz" class="btn-aliado-profile">Ver perfil</a>
+              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=madriz" class="btn-aliado-profile">Ver perfil</a>
             </div>
           </div>
         </article>
@@ -306,18 +306,18 @@
         <!-- 2. Posada Ecológica La Abuela -->
         <article class="aliado-card-exact" data-dept="matagalpa" data-cat="lodge">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Posada Ecológica La Abuela" class="aliado-card-img" loading="lazy" decoding="async">
-            <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
+            <img data-i18n-alt="pages.aliados.aliadoCardExact.h32" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Posada Ecológica La Abuela" class="aliado-card-img" loading="lazy" decoding="async">
+            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
           </div>
           <div class="aliado-card-body">
-            <h3 class="aliado-card-title">Posada Ecológica La Abuela</h3>
+            <h3 data-i18n="pages.aliados.aliadoCardExact.h32" class="aliado-card-title">Posada Ecológica La Abuela</h3>
             <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> San Ramón, Matagalpa</div>
-            <p class="aliado-card-desc">Hospedaje rural, café de altura y senderos de nebliselva en el corazón del norte.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> Auditado: 05 ago 2026</div>
+            <p data-i18n="pages.aliados.aliadoCardExact.p2" class="aliado-card-desc">Hospedaje rural, café de altura y senderos de nebliselva en el corazón del norte.</p>
+            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div2">Auditado: 05 ago 2026</span></div>
             <div class="aliado-card-actions">
               <a href="https://wa.me/50588880002?text=Hola%20Posada%20La%20Abuela,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a href="departamento.html?id=matagalpa" class="btn-aliado-profile">Ver perfil</a>
+              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=matagalpa" class="btn-aliado-profile">Ver perfil</a>
             </div>
           </div>
         </article>
@@ -325,18 +325,18 @@
         <!-- 3. Arenas Beach Hotel & Cabañas -->
         <article class="aliado-card-exact" data-dept="leon" data-cat="playa">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="Arenas Beach Hotel & Cabañas" class="aliado-card-img" loading="lazy" decoding="async" width="447" height="447">
-            <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
+            <img data-i18n-alt="pages.aliados.aliadoCardExact.h33" src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="Arenas Beach Hotel & Cabañas" class="aliado-card-img" loading="lazy" decoding="async" width="447" height="447">
+            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
           </div>
           <div class="aliado-card-body">
-            <h3 class="aliado-card-title">Arenas Beach Hotel &amp; Cabañas</h3>
-            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> Las Peñitas, León</div>
-            <p class="aliado-card-desc">Frente al mar, descanso, surf y deportes acuáticos en las costas del Pacífico leonés.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> Auditado: 28 jul 2026</div>
+            <h3 data-i18n="pages.aliados.aliadoCardExact.h33" class="aliado-card-title">Arenas Beach Hotel &amp; Cabañas</h3>
+            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> <span data-i18n="pages.aliados.aliadoCardExact.div3">Las Peñitas, León</span></div>
+            <p data-i18n="pages.aliados.aliadoCardExact.p3" class="aliado-card-desc">Frente al mar, descanso, surf y deportes acuáticos en las costas del Pacífico leonés.</p>
+            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div4">Auditado: 28 jul 2026</span></div>
             <div class="aliado-card-actions">
               <a href="https://wa.me/50588880003?text=Hola%20Arenas%20Beach,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a href="departamento.html?id=leon" class="btn-aliado-profile">Ver perfil</a>
+              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=leon" class="btn-aliado-profile">Ver perfil</a>
             </div>
           </div>
         </article>
@@ -344,18 +344,18 @@
         <!-- 4. Baqueanos Cerro Negro -->
         <article class="aliado-card-exact" data-dept="leon" data-cat="guias">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/cerro_negro.jpg" alt="Baqueanos Cerro Negro" class="aliado-card-img" loading="lazy" decoding="async" width="700" height="438">
-            <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
+            <img data-i18n-alt="pages.aliados.aliadoCardExact.h34" src="assets/images/destinos/cerro_negro.jpg" alt="Baqueanos Cerro Negro" class="aliado-card-img" loading="lazy" decoding="async" width="700" height="438">
+            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
           </div>
           <div class="aliado-card-body">
-            <h3 class="aliado-card-title">Baqueanos Cerro Negro</h3>
+            <h3 data-i18n="pages.aliados.aliadoCardExact.h34" class="aliado-card-title">Baqueanos Cerro Negro</h3>
             <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> León</div>
-            <p class="aliado-card-desc">Ascenso al volcán más joven de Centroamérica, sandboarding y guías locales certificados.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> Auditado: 18 ago 2026</div>
+            <p data-i18n="pages.aliados.aliadoCardExact.p4" class="aliado-card-desc">Ascenso al volcán más joven de Centroamérica, sandboarding y guías locales certificados.</p>
+            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div5">Auditado: 18 ago 2026</span></div>
             <div class="aliado-card-actions">
               <a href="https://wa.me/50588880004?text=Hola%20Baqueanos%20Cerro%20Negro,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a href="departamento.html?id=leon" class="btn-aliado-profile">Ver perfil</a>
+              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=leon" class="btn-aliado-profile">Ver perfil</a>
             </div>
           </div>
         </article>
@@ -363,18 +363,18 @@
         <!-- 5. Finca Magdalena & Ometepe -->
         <article class="aliado-card-exact" data-dept="rivas" data-cat="coop">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/selva_negra.jpg" alt="Finca Magdalena & Ometepe" class="aliado-card-img" loading="lazy" decoding="async" width="399" height="501">
-            <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
+            <img data-i18n-alt="pages.aliados.aliadoCardExact.h35" src="assets/images/destinos/selva_negra.jpg" alt="Finca Magdalena & Ometepe" class="aliado-card-img" loading="lazy" decoding="async" width="399" height="501">
+            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
           </div>
           <div class="aliado-card-body">
-            <h3 class="aliado-card-title">Finca Magdalena &amp; Ometepe</h3>
+            <h3 data-i18n="pages.aliados.aliadoCardExact.h35" class="aliado-card-title">Finca Magdalena &amp; Ometepe</h3>
             <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> Ometepe, Rivas</div>
-            <p class="aliado-card-desc">Agroturismo comunitario, gastronomía campesina y senderismo al Volcán Maderas.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> Auditado: 22 ago 2026</div>
+            <p data-i18n="pages.aliados.aliadoCardExact.p5" class="aliado-card-desc">Agroturismo comunitario, gastronomía campesina y senderismo al Volcán Maderas.</p>
+            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div6">Auditado: 22 ago 2026</span></div>
             <div class="aliado-card-actions">
               <a href="https://wa.me/50588880005?text=Hola%20Finca%20Magdalena,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a href="departamento.html?id=rivas" class="btn-aliado-profile">Ver perfil</a>
+              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=rivas" class="btn-aliado-profile">Ver perfil</a>
             </div>
           </div>
         </article>
@@ -382,18 +382,18 @@
         <!-- 6. San Simián Eco-Lodge -->
         <article class="aliado-card-exact" data-dept="rivas" data-cat="lodge">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="San Simián Eco-Lodge" class="aliado-card-img" loading="lazy" decoding="async" width="1600" height="900">
-            <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
+            <img data-i18n-alt="pages.aliados.aliadoCardExact.h36" src="assets/images/destinos/isla_de_ometepe.jpg" alt="San Simián Eco-Lodge" class="aliado-card-img" loading="lazy" decoding="async" width="1600" height="900">
+            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
           </div>
           <div class="aliado-card-body">
-            <h3 class="aliado-card-title">San Simián Eco-Lodge</h3>
+            <h3 data-i18n="pages.aliados.aliadoCardExact.h36" class="aliado-card-title">San Simián Eco-Lodge</h3>
             <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> Isla de Ometepe, Rivas</div>
-            <p class="aliado-card-desc">Cabañas ecológicas frente a la costa lacustre, avistamiento de aves y descanso sostenible.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> Auditado: 10 ago 2026</div>
+            <p data-i18n="pages.aliados.aliadoCardExact.p6" class="aliado-card-desc">Cabañas ecológicas frente a la costa lacustre, avistamiento de aves y descanso sostenible.</p>
+            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div7">Auditado: 10 ago 2026</span></div>
             <div class="aliado-card-actions">
               <a href="https://wa.me/50588880006?text=Hola%20San%20Simián,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a href="departamento.html?id=rivas" class="btn-aliado-profile">Ver perfil</a>
+              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=rivas" class="btn-aliado-profile">Ver perfil</a>
             </div>
           </div>
         </article>
@@ -401,18 +401,18 @@
         <!-- 7. Morgan's Rock -->
         <article class="aliado-card-exact" data-dept="rivas" data-cat="lodge">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="Morgan's Rock" class="aliado-card-img" loading="lazy" decoding="async" width="447" height="447">
-            <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
+            <img data-i18n-alt="pages.aliados.aliadoCardExact.h37" src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="Morgan's Rock" class="aliado-card-img" loading="lazy" decoding="async" width="447" height="447">
+            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
           </div>
           <div class="aliado-card-body">
-            <h3 class="aliado-card-title">Morgan's Rock</h3>
+            <h3 data-i18n="pages.aliados.aliadoCardExact.h37" class="aliado-card-title">Morgan's Rock</h3>
             <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> San Juan del Sur, Rivas</div>
-            <p class="aliado-card-desc">Eco-lodge inmerso en bosque privado y playa de anidación de tortugas marinas.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> Auditado: 15 ago 2026</div>
+            <p data-i18n="pages.aliados.aliadoCardExact.p7" class="aliado-card-desc">Eco-lodge inmerso en bosque privado y playa de anidación de tortugas marinas.</p>
+            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div8">Auditado: 15 ago 2026</span></div>
             <div class="aliado-card-actions">
               <a href="https://wa.me/50588880007?text=Hola%20Morgan%20Rock,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a href="departamento.html?id=rivas" class="btn-aliado-profile">Ver perfil</a>
+              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=rivas" class="btn-aliado-profile">Ver perfil</a>
             </div>
           </div>
         </article>
@@ -420,18 +420,18 @@
         <!-- 8. Hola Ola Eco-Hostal -->
         <article class="aliado-card-exact" data-dept="rivas" data-cat="playa">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/corn_island.jpg" alt="Hola Ola Eco-Hostal" class="aliado-card-img" loading="lazy" decoding="async" width="800" height="550">
-            <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
+            <img data-i18n-alt="pages.aliados.aliadoCardExact.h38" src="assets/images/destinos/corn_island.jpg" alt="Hola Ola Eco-Hostal" class="aliado-card-img" loading="lazy" decoding="async" width="800" height="550">
+            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
           </div>
           <div class="aliado-card-body">
-            <h3 class="aliado-card-title">Hola Ola Eco-Hostal</h3>
-            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> Popoyo, Rivas</div>
-            <p class="aliado-card-desc">Surf, playa y ambiente comunitario entre viajeros y familias pescadoras locales.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> Auditado: 08 ago 2026</div>
+            <h3 data-i18n="pages.aliados.aliadoCardExact.h38" class="aliado-card-title">Hola Ola Eco-Hostal</h3>
+            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> <span data-i18n="pages.aliados.aliadoCardExact.div9">Popoyo, Rivas</span></div>
+            <p data-i18n="pages.aliados.aliadoCardExact.p8" class="aliado-card-desc">Surf, playa y ambiente comunitario entre viajeros y familias pescadoras locales.</p>
+            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div10">Auditado: 08 ago 2026</span></div>
             <div class="aliado-card-actions">
               <a href="https://wa.me/50588880008?text=Hola%20Hola%20Ola,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a href="departamento.html?id=rivas" class="btn-aliado-profile">Ver perfil</a>
+              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=rivas" class="btn-aliado-profile">Ver perfil</a>
             </div>
           </div>
         </article>
@@ -439,18 +439,18 @@
         <!-- 9. Feel at Home Campestre -->
         <article class="aliado-card-exact" data-dept="masaya" data-cat="lodge">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/volcan_masaya.jpg" alt="Feel at Home Campestre" class="aliado-card-img" loading="lazy" decoding="async" width="1600" height="1131">
-            <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
+            <img data-i18n-alt="pages.aliados.aliadoCardExact.h39" src="assets/images/destinos/volcan_masaya.jpg" alt="Feel at Home Campestre" class="aliado-card-img" loading="lazy" decoding="async" width="1600" height="1131">
+            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
           </div>
           <div class="aliado-card-body">
-            <h3 class="aliado-card-title">Feel at Home Campestre</h3>
+            <h3 data-i18n="pages.aliados.aliadoCardExact.h39" class="aliado-card-title">Feel at Home Campestre</h3>
             <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> Masaya</div>
-            <p class="aliado-card-desc">Hospedaje familiar, naturaleza, talleres artesanales y gastronomía típica en los Pueblos Blancos.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> Auditado: 16 ago 2026</div>
+            <p data-i18n="pages.aliados.aliadoCardExact.p9" class="aliado-card-desc">Hospedaje familiar, naturaleza, talleres artesanales y gastronomía típica en los Pueblos Blancos.</p>
+            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div11">Auditado: 16 ago 2026</span></div>
             <div class="aliado-card-actions">
               <a href="https://wa.me/50588880009?text=Hola%20Feel%20at%20Home,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a href="departamento.html?id=masaya" class="btn-aliado-profile">Ver perfil</a>
+              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=masaya" class="btn-aliado-profile">Ver perfil</a>
             </div>
           </div>
         </article>
@@ -458,18 +458,18 @@
         <!-- 10. Sohla Rooftop Granada -->
         <article class="aliado-card-exact" data-dept="granada" data-cat="gastro">
           <div class="aliado-img-box">
-            <img src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Sohla Rooftop Granada" class="aliado-card-img" loading="lazy" decoding="async" width="401" height="498">
-            <button type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> Verificado BAQUEANO</span>
+            <img data-i18n-alt="pages.aliados.aliadoCardExact.h310" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Sohla Rooftop Granada" class="aliado-card-img" loading="lazy" decoding="async" width="401" height="498">
+            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
+            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
           </div>
           <div class="aliado-card-body">
-            <h3 class="aliado-card-title">Sohla Rooftop Granada</h3>
+            <h3 data-i18n="pages.aliados.aliadoCardExact.h310" class="aliado-card-title">Sohla Rooftop Granada</h3>
             <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> Granada</div>
-            <p class="aliado-card-desc">Gastronomía fusión nicaragüense, coctelería de autor y vista panorámica a la Gran Sultana y al volcán.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> Auditado: 20 ago 2026</div>
+            <p data-i18n="pages.aliados.aliadoCardExact.p10" class="aliado-card-desc">Gastronomía fusión nicaragüense, coctelería de autor y vista panorámica a la Gran Sultana y al volcán.</p>
+            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div12">Auditado: 20 ago 2026</span></div>
             <div class="aliado-card-actions">
               <a href="https://wa.me/50588880010?text=Hola%20Sohla%20Rooftop,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a href="departamento.html?id=granada" class="btn-aliado-profile">Ver perfil</a>
+              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=granada" class="btn-aliado-profile">Ver perfil</a>
             </div>
           </div>
         </article>
@@ -486,10 +486,10 @@
         <!-- Izquierda: Mapa Interactivo Leaflet -->
         <div class="aliados-map-card">
           <div class="aliados-map-header-overlay">
-            <h3>Explorá nuestros aliados en el mapa</h3>
-            <p>Descubrí dónde viven estas experiencias y planificá tu ruta por Nicaragua.</p>
+            <h3 data-i18n="pages.aliados.aliadosMapSplitSection.h31">Explorá nuestros aliados en el mapa</h3>
+            <p data-i18n="pages.aliados.aliadosMapSplitSection.p1">Descubrí dónde viven estas experiencias y planificá tu ruta por Nicaragua.</p>
             <a href="mapa.html" class="btn-ver-mapa-completo">
-              Ver mapa completo <i class="fa-solid fa-arrow-right"></i>
+              <span data-i18n="pages.aliados.aliadosMapSplitSection.a1">Ver mapa completo</span> <i class="fa-solid fa-arrow-right"></i>
             </a>
           </div>
           <div id="aliadosInteractiveMap" class="aliados-map-viewport"></div>
@@ -498,40 +498,40 @@
         <!-- Derecha: Aliados cercanos y verificados -->
         <div class="aliados-nearby-box">
           <div class="aliados-nearby-head">
-            <h4><i class="fa-solid fa-location-arrow"></i> Aliados cercanos y verificados</h4>
-            <a href="mapa.html" class="aliados-nearby-link">Ver en el mapa &rarr;</a>
+            <h4><i class="fa-solid fa-location-arrow"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.h41">Aliados cercanos y verificados</span></h4>
+            <a data-i18n="pages.aliados.aliadosMapSplitSection.a2" href="mapa.html" class="aliados-nearby-link">Ver en el mapa &rarr;</a>
           </div>
 
           <div class="aliados-nearby-list">
             <!-- 1. Coop. Cañón de Somoto -->
             <div class="aliado-nearby-item">
-              <img loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Coop. Cañón de Somoto" class="aliado-nearby-img" width="399" height="501">
+              <img data-i18n-alt="pages.aliados.aliadoCardExact.h31" loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Coop. Cañón de Somoto" class="aliado-nearby-img" width="399" height="501">
               <div class="aliado-nearby-info">
-                <div class="aliado-nearby-name">Coop. Cañón de Somoto</div>
+                <div data-i18n="pages.aliados.aliadoCardExact.h31" class="aliado-nearby-name">Coop. Cañón de Somoto</div>
                 <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> Somoto, Madriz</div>
-                <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> ~ 12 km · Verificado</div>
+                <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.div1">~ 12 km · Verificado</span></div>
               </div>
               <a href="departamento.html?id=madriz" class="aliado-nearby-arrow"><i class="fa-solid fa-chevron-right"></i></a>
             </div>
 
             <!-- 2. Posada Ecológica La Abuela -->
             <div class="aliado-nearby-item">
-              <img loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Posada La Abuela" class="aliado-nearby-img">
+              <img data-i18n-alt="pages.aliados.aliadosMapSplitSection.imgAlt1" loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Posada La Abuela" class="aliado-nearby-img">
               <div class="aliado-nearby-info">
-                <div class="aliado-nearby-name">Posada Ecológica La Abuela</div>
+                <div data-i18n="pages.aliados.aliadoCardExact.h32" class="aliado-nearby-name">Posada Ecológica La Abuela</div>
                 <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> San Ramón, Matagalpa</div>
-                <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> ~ 35 km · Verificado</div>
+                <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.div2">~ 35 km · Verificado</span></div>
               </div>
               <a href="departamento.html?id=matagalpa" class="aliado-nearby-arrow"><i class="fa-solid fa-chevron-right"></i></a>
             </div>
 
             <!-- 3. Sohla Rooftop Granada -->
             <div class="aliado-nearby-item">
-              <img loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Sohla Rooftop" class="aliado-nearby-img" width="401" height="498">
+              <img data-i18n-alt="pages.aliados.aliadosMapSplitSection.imgAlt2" loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Sohla Rooftop" class="aliado-nearby-img" width="401" height="498">
               <div class="aliado-nearby-info">
-                <div class="aliado-nearby-name">Sohla Rooftop Granada</div>
+                <div data-i18n="pages.aliados.aliadoCardExact.h310" class="aliado-nearby-name">Sohla Rooftop Granada</div>
                 <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
-                <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> ~ 48 km · Verificado</div>
+                <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.div3">~ 48 km · Verificado</span></div>
               </div>
               <a href="departamento.html?id=granada" class="aliado-nearby-arrow"><i class="fa-solid fa-chevron-right"></i></a>
             </div>
@@ -548,67 +548,67 @@
     <div class="exact-container">
       <div class="aliados-verif-head">
         <div>
-          <h3><i class="fa-solid fa-circle-check" style="color: #4A7A5A;"></i> ¿Cómo verificamos a nuestros aliados?</h3>
-          <p>Para garantizar experiencias seguras, auténticas y de calidad.</p>
+          <h3><i class="fa-solid fa-circle-check" style="color: #4A7A5A;"></i> <span data-i18n="pages.aliados.comoVerificamos.h31">¿Cómo verificamos a nuestros aliados?</span></h3>
+          <p data-i18n="pages.aliados.comoVerificamos.p1">Para garantizar experiencias seguras, auténticas y de calidad.</p>
         </div>
-        <a href="#comoVerificamos" class="aliados-verif-link">Conocé más sobre el proceso &rarr;</a>
+        <a data-i18n="pages.aliados.comoVerificamos.a1" href="#comoVerificamos" class="aliados-verif-link">Conocé más sobre el proceso &rarr;</a>
       </div>
 
       <div class="aliados-steps-grid">
         <!-- Paso 1 -->
         <div class="aliado-step-card">
           <div class="aliado-step-icon"><i class="fa-solid fa-id-card"></i></div>
-          <h4 class="aliado-step-title">1. Identificación y titularidad</h4>
-          <p class="aliado-step-desc">Datos del negocio o cooperativa.</p>
+          <h4 data-i18n="pages.aliados.comoVerificamos.h41" class="aliado-step-title">1. Identificación y titularidad</h4>
+          <p data-i18n="pages.aliados.comoVerificamos.p2" class="aliado-step-desc">Datos del negocio o cooperativa.</p>
         </div>
 
         <!-- Paso 2 -->
         <div class="aliado-step-card">
           <div class="aliado-step-icon"><i class="fa-solid fa-location-crosshairs"></i></div>
-          <h4 class="aliado-step-title">2. Ubicación GPS</h4>
-          <p class="aliado-step-desc">Coordenadas y visita en territorio.</p>
+          <h4 data-i18n="pages.aliados.comoVerificamos.h42" class="aliado-step-title">2. Ubicación GPS</h4>
+          <p data-i18n="pages.aliados.comoVerificamos.p3" class="aliado-step-desc">Coordenadas y visita en territorio.</p>
         </div>
 
         <!-- Paso 3 -->
         <div class="aliado-step-card">
           <div class="aliado-step-icon"><i class="fa-solid fa-phone"></i></div>
-          <h4 class="aliado-step-title">3. Contacto Directo</h4>
-          <p class="aliado-step-desc">Comunicación con el responsable.</p>
+          <h4 data-i18n="pages.aliados.comoVerificamos.h43" class="aliado-step-title">3. Contacto Directo</h4>
+          <p data-i18n="pages.aliados.comoVerificamos.p4" class="aliado-step-desc">Comunicación con el responsable.</p>
         </div>
 
         <!-- Paso 4 -->
         <div class="aliado-step-card">
           <div class="aliado-step-icon"><i class="fa-solid fa-camera"></i></div>
-          <h4 class="aliado-step-title">4. Fotografía Real</h4>
-          <p class="aliado-step-desc">Imágenes actuales del lugar.</p>
+          <h4 data-i18n="pages.aliados.comoVerificamos.h44" class="aliado-step-title">4. Fotografía Real</h4>
+          <p data-i18n="pages.aliados.comoVerificamos.p5" class="aliado-step-desc">Imágenes actuales del lugar.</p>
         </div>
 
         <!-- Paso 5 -->
         <div class="aliado-step-card">
           <div class="aliado-step-icon"><i class="fa-solid fa-tag"></i></div>
-          <h4 class="aliado-step-title">5. Tarifa Transparente</h4>
-          <p class="aliado-step-desc">Precios claros y verificables.</p>
+          <h4 data-i18n="pages.aliados.comoVerificamos.h45" class="aliado-step-title">5. Tarifa Transparente</h4>
+          <p data-i18n="pages.aliados.comoVerificamos.p6" class="aliado-step-desc">Precios claros y verificables.</p>
         </div>
 
         <!-- Paso 6 -->
         <div class="aliado-step-card">
           <div class="aliado-step-icon"><i class="fa-solid fa-shield-heart"></i></div>
-          <h4 class="aliado-step-title">6. Seguridad &amp; Servicio</h4>
-          <p class="aliado-step-desc">Condiciones y recomendaciones.</p>
+          <h4 data-i18n="pages.aliados.comoVerificamos.h46" class="aliado-step-title">6. Seguridad &amp; Servicio</h4>
+          <p data-i18n="pages.aliados.comoVerificamos.p7" class="aliado-step-desc">Condiciones y recomendaciones.</p>
         </div>
 
         <!-- Paso 7 -->
         <div class="aliado-step-card">
           <div class="aliado-step-icon"><i class="fa-solid fa-calendar-day"></i></div>
-          <h4 class="aliado-step-title">7. Fecha de Auditoría</h4>
-          <p class="aliado-step-desc">Última verificación en campo.</p>
+          <h4 data-i18n="pages.aliados.comoVerificamos.h47" class="aliado-step-title">7. Fecha de Auditoría</h4>
+          <p data-i18n="pages.aliados.comoVerificamos.p8" class="aliado-step-desc">Última verificación en campo.</p>
         </div>
 
         <!-- Paso 8 -->
         <div class="aliado-step-card">
           <div class="aliado-step-icon"><i class="fa-solid fa-user-check"></i></div>
-          <h4 class="aliado-step-title">8. Auditor Comunitario</h4>
-          <p class="aliado-step-desc">Validación con la comunidad local.</p>
+          <h4 data-i18n="pages.aliados.comoVerificamos.h48" class="aliado-step-title">8. Auditor Comunitario</h4>
+          <p data-i18n="pages.aliados.comoVerificamos.p9" class="aliado-step-desc">Validación con la comunidad local.</p>
         </div>
       </div>
     </div>
@@ -621,15 +621,15 @@
     <div class="exact-container">
       <div class="aliados-impact-card">
         <div class="aliados-impact-content">
-          <h3 class="aliados-impact-title">Impacto en nuestras comunidades</h3>
-          <p class="aliados-impact-desc">El turismo genera oportunidades reales para las familias nicaragüenses.</p>
+          <h3 data-i18n="pages.aliados.impacto.h31" class="aliados-impact-title">Impacto en nuestras comunidades</h3>
+          <p data-i18n="pages.aliados.impacto.p1" class="aliados-impact-desc">El turismo genera oportunidades reales para las familias nicaragüenses.</p>
 
           <div class="aliados-impact-stats-grid">
             <div class="aliados-impact-stat-item">
               <div class="aliados-impact-stat-icon"><i class="fa-solid fa-users"></i></div>
               <div>
                 <p class="aliados-impact-stat-num">50+</p>
-                <p class="aliados-impact-stat-lbl">Emprendedores aliados</p>
+                <p data-i18n="pages.aliados.impacto.p2" class="aliados-impact-stat-lbl">Emprendedores aliados</p>
               </div>
             </div>
 
@@ -637,7 +637,7 @@
               <div class="aliados-impact-stat-icon"><i class="fa-solid fa-mountain-sun"></i></div>
               <div>
                 <p class="aliados-impact-stat-num">12</p>
-                <p class="aliados-impact-stat-lbl">Comunidades beneficiadas</p>
+                <p data-i18n="pages.aliados.impacto.p3" class="aliados-impact-stat-lbl">Comunidades beneficiadas</p>
               </div>
             </div>
 
@@ -645,7 +645,7 @@
               <div class="aliados-impact-stat-icon"><i class="fa-solid fa-percent"></i></div>
               <div>
                 <p class="aliados-impact-stat-num">0%</p>
-                <p class="aliados-impact-stat-lbl">Comisión de intermediación</p>
+                <p data-i18n="pages.aliados.impacto.p4" class="aliados-impact-stat-lbl">Comisión de intermediación</p>
               </div>
             </div>
 
@@ -653,15 +653,15 @@
               <div class="aliados-impact-stat-icon"><i class="fa-solid fa-seedling"></i></div>
               <div>
                 <p class="aliados-impact-stat-num">100%</p>
-                <p class="aliados-impact-stat-lbl">Turismo responsable</p>
+                <p data-i18n="common.turismoResponsable" class="aliados-impact-stat-lbl">Turismo responsable</p>
               </div>
             </div>
           </div>
         </div>
 
         <div class="aliados-impact-quote-side">
-          <p>&ldquo;Más viajeros, más oportunidades para nuestra gente.&rdquo;</p>
-          <span style="font-size: 0.85rem; color: #F4E6C1;">Nicaragua Auténtica 🍃</span>
+          <p data-i18n="pages.aliados.impacto.p5">&ldquo;Más viajeros, más oportunidades para nuestra gente.&rdquo;</p>
+          <span data-i18n="pages.aliados.impacto.span1" style="font-size: 0.85rem; color: #F4E6C1;">Nicaragua Auténtica 🍃</span>
         </div>
       </div>
     </div>
@@ -674,25 +674,25 @@
     <div class="exact-container">
       <div class="aliados-biz-cta-card">
         <div class="aliados-biz-left">
-          <img loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi Guardabarranco" class="aliados-biz-bird" width="300" height="300">
+          <img data-i18n-alt="common.baquiGuardabarranco" loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi Guardabarranco" class="aliados-biz-bird" width="300" height="300">
           <div class="aliados-biz-text">
-            <h3>¿Tenés un negocio turístico?</h3>
-            <p>Unite a la red BAQUEANO y mostrá tu experiencia a viajeros de todo el mundo. Juntos impulsamos un turismo justo y responsable.</p>
+            <h3 data-i18n="common.tenesUnNegocioTuristico">¿Tenés un negocio turístico?</h3>
+            <p data-i18n="pages.aliados.aliadosBizCtaSection.p1">Unite a la red BAQUEANO y mostrá tu experiencia a viajeros de todo el mundo. Juntos impulsamos un turismo justo y responsable.</p>
           </div>
         </div>
 
         <a href="#bizRegisterModal" onclick="openBizRegisterModal(event)" class="btn-postular-negocio">
-          Postular mi negocio <i class="fa-solid fa-arrow-right"></i>
+          <span data-i18n="pages.aliados.aliadosBizCtaSection.a1">Postular mi negocio</span> <i class="fa-solid fa-arrow-right"></i>
         </a>
 
         <div class="aliados-biz-badges">
           <div class="aliados-biz-pill">
             <i class="fa-solid fa-handshake"></i>
-            <span>Pequeños negocios grandes historias</span>
+            <span data-i18n="pages.aliados.aliadosBizCtaSection.span1">Pequeños negocios grandes historias</span>
           </div>
           <div class="aliados-biz-pill">
             <i class="fa-solid fa-people-group"></i>
-            <span>Crecemos en comunidad</span>
+            <span data-i18n="pages.aliados.aliadosBizCtaSection.span2">Crecemos en comunidad</span>
           </div>
         </div>
       </div>
@@ -710,8 +710,8 @@
           <div class="triad-left">
             <i class="fa-solid fa-phone-volume"></i>
             <div class="triad-text">
-              <h5>SOS 24/7</h5>
-              <p>Tu seguridad también es parte del viaje.</p>
+              <h5 data-i18n="common.sos247">SOS 24/7</h5>
+              <p data-i18n="pages.aliados.aliadosTriadSection.p1">Tu seguridad también es parte del viaje.</p>
             </div>
           </div>
           <span class="triad-arrow"><i class="fa-solid fa-arrow-right"></i></span>
@@ -722,8 +722,8 @@
           <div class="triad-left">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
             <div class="triad-text">
-              <h5>Baqueano Digital</h5>
-              <p>Planificá tu ruta, conocé aliados y viví experiencias auténticas con nuestra IA.</p>
+              <h5 data-i18n="nav.assistant">Baqueano Digital</h5>
+              <p data-i18n="pages.aliados.aliadosTriadSection.p2">Planificá tu ruta, conocé aliados y viví experiencias auténticas con nuestra IA.</p>
             </div>
           </div>
           <span class="triad-arrow"><i class="fa-solid fa-arrow-right"></i></span>
@@ -734,8 +734,8 @@
           <div class="triad-left">
             <i class="fa-solid fa-compass"></i>
             <div class="triad-text">
-              <h5>Explorá más de Nicaragua</h5>
-              <p>Descubrí destinos, cultura, gastronomía y naturaleza en un solo lugar.</p>
+              <h5 data-i18n="pages.aliados.aliadosTriadSection.h51">Explorá más de Nicaragua</h5>
+              <p data-i18n="pages.aliados.aliadosTriadSection.p3">Descubrí destinos, cultura, gastronomía y naturaleza en un solo lugar.</p>
             </div>
           </div>
           <span class="triad-arrow"><i class="fa-solid fa-arrow-right"></i></span>
@@ -823,31 +823,31 @@
        ============================================================================ -->
   <div class="exact-modal-backdrop" id="bizRegisterModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bizModalTitle">
     <div class="exact-modal-window">
-      <button type="button" class="exact-modal-close" onclick="closeBizRegisterModal()" aria-label="Cerrar modal">&times;</button>
+      <button data-i18n-aria-label="accessibility.closeModal" type="button" class="exact-modal-close" onclick="closeBizRegisterModal()" aria-label="Cerrar modal">&times;</button>
       <div class="exact-modal-header">
-        <h3 id="bizModalTitle"><i class="fa-solid fa-store" style="color: #4A7A5A;"></i> Postular mi Negocio a la Red BAQUEANO</h3>
-        <p>Unite a la plataforma oficial sin comisiones abusivas para impulsar tu cooperativa, hospedaje o servicio.</p>
+        <h3 id="bizModalTitle"><i class="fa-solid fa-store" style="color: #4A7A5A;"></i> <span data-i18n="pages.aliados.bizModalTitle.h31">Postular mi Negocio a la Red BAQUEANO</span></h3>
+        <p data-i18n="pages.aliados.bizRegisterModal.p1">Unite a la plataforma oficial sin comisiones abusivas para impulsar tu cooperativa, hospedaje o servicio.</p>
       </div>
       <form class="exact-modal-form" id="bizRegisterForm" onsubmit="handleBizFormSubmit(event)">
         <div class="exact-form-row">
           <div class="exact-form-field">
-            <label for="bizName">Nombre del Negocio o Cooperativa *</label>
-            <input type="text" id="bizName" required placeholder="Ej. Cooperativa Las Brisas">
+            <label for="bizName"><span data-i18n="pages.aliados.bizRegisterForm.label1">Nombre del Negocio o Cooperativa *</span></label>
+            <input data-i18n-placeholder="pages.aliados.bizName.inputPlaceholder1" type="text" id="bizName" required placeholder="Ej. Cooperativa Las Brisas">
           </div>
           <div class="exact-form-field">
-            <label for="bizContact">Nombre del Responsable *</label>
-            <input type="text" id="bizContact" required placeholder="Ej. Denis Mayorga">
+            <label for="bizContact"><span data-i18n="pages.aliados.bizRegisterForm.label2">Nombre del Responsable *</span></label>
+            <input data-i18n-placeholder="pages.aliados.bizContact.inputPlaceholder1" type="text" id="bizContact" required placeholder="Ej. Denis Mayorga">
           </div>
         </div>
         <div class="exact-form-row">
           <div class="exact-form-field">
-            <label for="bizPhone">WhatsApp Directo *</label>
+            <label for="bizPhone"><span data-i18n="pages.aliados.bizRegisterForm.label3">WhatsApp Directo *</span></label>
             <input type="tel" id="bizPhone" required placeholder="+505 8888-0000">
           </div>
           <div class="exact-form-field">
-            <label for="bizDept">Departamento / Región *</label>
+            <label for="bizDept"><span data-i18n="pages.aliados.bizRegisterForm.label4">Departamento / Región *</span></label>
             <select id="bizDept" required>
-              <option value="">Selecciona territorio...</option>
+              <option data-i18n="pages.aliados.bizDept.option1" value="">Selecciona territorio...</option>
               <option value="madriz">Madriz</option>
               <option value="matagalpa">Matagalpa</option>
               <option value="leon">León</option>
@@ -867,21 +867,21 @@
           </div>
         </div>
         <div class="exact-form-field">
-          <label for="bizServiceType">Tipo de Servicio Turístico</label>
+          <label for="bizServiceType"><span data-i18n="pages.aliados.bizRegisterForm.label5">Tipo de Servicio Turístico</span></label>
           <select id="bizServiceType">
-            <option value="hospedaje">Hospedaje Rural / Eco-Lodge / Cabañas</option>
-            <option value="cooperativa">Cooperativa Comunitaria de Turismo</option>
-            <option value="gastronomia">Comedor Típico / Restaurante Campesino</option>
-            <option value="guias">Guía Baqueano de Senderismo / Volcanes</option>
-            <option value="transporte">Transporte Turístico Local</option>
+            <option data-i18n="pages.aliados.bizServiceType.option1" value="hospedaje">Hospedaje Rural / Eco-Lodge / Cabañas</option>
+            <option data-i18n="pages.aliados.bizServiceType.option2" value="cooperativa">Cooperativa Comunitaria de Turismo</option>
+            <option data-i18n="pages.aliados.bizServiceType.option3" value="gastronomia">Comedor Típico / Restaurante Campesino</option>
+            <option data-i18n="pages.aliados.bizServiceType.option4" value="guias">Guía Baqueano de Senderismo / Volcanes</option>
+            <option data-i18n="pages.aliados.bizServiceType.option5" value="transporte">Transporte Turístico Local</option>
           </select>
         </div>
         <div class="exact-form-field">
-          <label for="bizDesc">Breve descripción de la experiencia ofrecida</label>
-          <textarea id="bizDesc" rows="3" placeholder="Contanos qué hace única tu experiencia..."></textarea>
+          <label for="bizDesc"><span data-i18n="pages.aliados.bizRegisterForm.label6">Breve descripción de la experiencia ofrecida</span></label>
+          <textarea data-i18n-placeholder="pages.aliados.bizDesc.textareaPlaceholder1" id="bizDesc" rows="3" placeholder="Contanos qué hace única tu experiencia..."></textarea>
         </div>
         <button type="submit" class="btn-exact-submit">
-          <i class="fa-solid fa-paper-plane"></i> Enviar Postulación para Auditoría Gratuita
+          <i class="fa-solid fa-paper-plane"></i> <span data-i18n="pages.aliados.bizRegisterForm.button1">Enviar Postulación para Auditoría Gratuita</span>
         </button>
       </form>
     </div>
@@ -892,20 +892,20 @@
        ============================================================================ -->
   <div class="exact-modal-backdrop" id="sosModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="sosModalTitle">
     <div class="exact-modal-window sos-modal">
-      <button type="button" class="exact-modal-close" onclick="closeSosModal()" aria-label="Cerrar modal">&times;</button>
+      <button data-i18n-aria-label="accessibility.closeModal" type="button" class="exact-modal-close" onclick="closeSosModal()" aria-label="Cerrar modal">&times;</button>
       <div class="exact-modal-header">
-        <h3 id="sosModalTitle"><i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> Centro SOS &amp; Auxilio Inmediato</h3>
-        <p>Tu ubicación GPS está activa para asistencia en ruta y enlace directo con autoridades de socorro.</p>
+        <h3 id="sosModalTitle"><i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> <span data-i18n="common.centroSosAuxilioInmediato">Centro SOS &amp; Auxilio Inmediato</span></h3>
+        <p data-i18n="common.tuUbicacionGpsEstaActiva">Tu ubicación GPS está activa para asistencia en ruta y enlace directo con autoridades de socorro.</p>
       </div>
       <div class="sos-gps-card">
-        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> GPS Satelital Autónomo</div>
-        <div class="sos-gps-coords" id="sosGpsDisplay">Obteniendo coordenadas satelitales...</div>
-        <small style="color: #94A3B8;">Funciona con el chip GNSS de tu dispositivo, sin necesidad de saldo.</small>
+        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> <span data-i18n="common.gpsSatelitalAutonomo">GPS Satelital Autónomo</span></div>
+        <div class="sos-gps-coords" id="sosGpsDisplay"><span data-i18n="pages.aliados.sosGpsDisplay.div1">Obteniendo coordenadas satelitales...</span></div>
+        <small data-i18n="pages.aliados.sosModal.small1" style="color: #94A3B8;">Funciona con el chip GNSS de tu dispositivo, sin necesidad de saldo.</small>
       </div>
       <div class="sos-emergency-buttons">
-        <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> Policía Nacional (118)</a>
-        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> Cruz Roja (128)</a>
-        <a href="tel:115" class="btn-sos-call fire"><i class="fa-solid fa-fire-extinguisher"></i> Bomberos Unificados (115)</a>
+        <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> <span data-i18n="common.policiaNacional118">Policía Nacional (118)</span></a>
+        <a href="tel:128" class="btn-sos-call redcross"><i class="fa-solid fa-truck-medical"></i> <span data-i18n="common.cruzRoja128">Cruz Roja (128)</span></a>
+        <a href="tel:115" class="btn-sos-call fire"><i class="fa-solid fa-fire-extinguisher"></i> <span data-i18n="common.bomberosUnificados115">Bomberos Unificados (115)</span></a>
       </div>
     </div>
   </div>

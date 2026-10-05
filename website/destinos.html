@@ -11,7 +11,7 @@ y finalmente el sistema global, la navegación y los estilos específicos de des
 paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucional.
 ============================================================================
 -->
-<html lang="es" data-bq-page="destinos" data-bq-group="territorio">
+<html data-i18n-description="pages.destinos.body.metaDescription1" data-i18n-title="pages.destinos.body.title1" lang="es" data-bq-page="destinos" data-bq-group="territorio">
 
 <head>
   <meta charset="UTF-8">
@@ -109,16 +109,16 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
       <div class="bq-hero-overlay" aria-hidden="true"></div>
       <div class="exact-container">
         <div class="destinos-hero-left">
-          <h1 class="destinos-hero-title">Destinos de Nicaragua</h1>
-          <p class="destinos-hero-subtitle">Playas, volcanes, montañas, cultura, gastronomía y mucho más.</p>
+          <h1 data-i18n="pages.destinos.destinosHeroExact.h11" class="destinos-hero-title">Destinos de Nicaragua</h1>
+          <p data-i18n="pages.destinos.destinosHeroExact.p1" class="destinos-hero-subtitle">Playas, volcanes, montañas, cultura, gastronomía y mucho más.</p>
           <form class="destinos-hero-search" action="destinos.html" method="get" role="search">
             <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-            <input type="search" name="q" placeholder="Buscar destinos, experiencias, negocios..." autocomplete="off">
-            <button type="submit">Buscar</button>
+            <input data-i18n-placeholder="pages.destinos.destinosHeroSearch.inputPlaceholder1" type="search" name="q" placeholder="Buscar destinos, experiencias, negocios..." autocomplete="off">
+            <button data-i18n="actions.search" type="submit">Buscar</button>
           </form>
         </div>
         <div class="destinos-hero-right">
-          <div class="destinos-script-badge">Descubrí tu próxima aventura</div>
+          <div data-i18n="pages.destinos.destinosHeroExact.div1" class="destinos-script-badge">Descubrí tu próxima aventura</div>
           <span class="destinos-location-tag"><i class="fa-solid fa-location-dot" style="color: #F65E01;"></i> Isla de Ometepe, Rivas, Nicaragua</span>
         </div>
       </div>
@@ -129,18 +129,18 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
          ============================================================================ -->
     <div class="exact-container">
       <div class="destinos-cat-bar">
-        <div class="destinos-cat-scroller" role="navigation" aria-label="Filtro de categorías">
-          <button type="button" class="destinos-cat-chip active" data-category="todos"><i class="fa-solid fa-table-cells-large"></i> Todos</button>
-          <button type="button" class="destinos-cat-chip" data-category="playa"><i class="fa-solid fa-water"></i> Playas</button>
-          <button type="button" class="destinos-cat-chip" data-category="volcan"><i class="fa-solid fa-volcano"></i> Volcanes</button>
-          <button type="button" class="destinos-cat-chip" data-category="agua"><i class="fa-solid fa-water-ladder"></i> Ríos y lagunas</button>
-          <button type="button" class="destinos-cat-chip" data-category="naturaleza"><i class="fa-solid fa-leaf"></i> Naturaleza</button>
-          <button type="button" class="destinos-cat-chip" data-category="cultura"><i class="fa-solid fa-landmark"></i> Cultura</button>
-          <button type="button" class="destinos-cat-chip" data-category="gastronomia"><i class="fa-solid fa-utensils"></i> Gastronomía</button>
-          <button type="button" class="destinos-cat-chip" data-category="hospedaje"><i class="fa-solid fa-bed"></i> Hospedaje</button>
-          <button type="button" class="destinos-cat-chip" data-category="aventura"><i class="fa-solid fa-person-hiking"></i> Aventura</button>
-          <button type="button" class="destinos-cat-chip" data-category="bosque"><i class="fa-solid fa-tree"></i> Bosques</button>
-          <button type="button" class="destinos-cat-chip" data-category="nocturna"><i class="fa-solid fa-moon"></i> Vida nocturna</button>
+        <div data-i18n-aria-label="pages.destinos.mainContent.divAriaLabel1" class="destinos-cat-scroller" role="navigation" aria-label="Filtro de categorías">
+          <button type="button" class="destinos-cat-chip active" data-category="todos"><i class="fa-solid fa-table-cells-large"></i> <span data-i18n="home.destinations.filters.all">Todos</span></button>
+          <button type="button" class="destinos-cat-chip" data-category="playa"><i class="fa-solid fa-water"></i> <span data-i18n="home.destinations.filters.beaches">Playas</span></button>
+          <button type="button" class="destinos-cat-chip" data-category="volcan"><i class="fa-solid fa-volcano"></i> <span data-i18n="home.destinations.filters.volcanoes">Volcanes</span></button>
+          <button type="button" class="destinos-cat-chip" data-category="agua"><i class="fa-solid fa-water-ladder"></i> <span data-i18n="common.riosYLagunas">Ríos y lagunas</span></button>
+          <button type="button" class="destinos-cat-chip" data-category="naturaleza"><i class="fa-solid fa-leaf"></i> <span data-i18n="home.destinations.filters.nature">Naturaleza</span></button>
+          <button type="button" class="destinos-cat-chip" data-category="cultura"><i class="fa-solid fa-landmark"></i> <span data-i18n="nav.culture">Cultura</span></button>
+          <button type="button" class="destinos-cat-chip" data-category="gastronomia"><i class="fa-solid fa-utensils"></i> <span data-i18n="nav.gastronomy">Gastronomía</span></button>
+          <button type="button" class="destinos-cat-chip" data-category="hospedaje"><i class="fa-solid fa-bed"></i> <span data-i18n="testimonials.types.hospedaje">Hospedaje</span></button>
+          <button type="button" class="destinos-cat-chip" data-category="aventura"><i class="fa-solid fa-person-hiking"></i> <span data-i18n="testimonials.types.aventura">Aventura</span></button>
+          <button type="button" class="destinos-cat-chip" data-category="bosque"><i class="fa-solid fa-tree"></i> <span data-i18n="pages.destinos.mainContent.button1">Bosques</span></button>
+          <button type="button" class="destinos-cat-chip" data-category="nocturna"><i class="fa-solid fa-moon"></i> <span data-i18n="app.nav.nightlife">Vida nocturna</span></button>
         </div>
       </div>
 
@@ -149,21 +149,21 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
            ============================================================================ -->
       <div class="destinos-filter-bar">
         <div class="destinos-filters-left">
-          <button type="button" class="dest-dropdown-btn" data-filter="department" aria-expanded="false">Departamento <i class="fa-solid fa-chevron-down"></i></button>
-          <button type="button" class="dest-dropdown-btn" data-filter="price" aria-expanded="false">Precio <i class="fa-solid fa-chevron-down"></i></button>
-          <button type="button" class="dest-dropdown-btn" data-filter="rating" aria-expanded="false">Valoración <i class="fa-solid fa-chevron-down"></i></button>
+          <button type="button" class="dest-dropdown-btn" data-filter="department" aria-expanded="false"><span data-i18n="testimonials.departmentLabel">Departamento</span> <i class="fa-solid fa-chevron-down"></i></button>
+          <button type="button" class="dest-dropdown-btn" data-filter="price" aria-expanded="false"><span data-i18n="experiences.price">Precio</span> <i class="fa-solid fa-chevron-down"></i></button>
+          <button type="button" class="dest-dropdown-btn" data-filter="rating" aria-expanded="false"><span data-i18n="pages.destinos.mainContent.button2">Valoración</span> <i class="fa-solid fa-chevron-down"></i></button>
           <button type="button" class="dest-toggle-btn" aria-pressed="false">
-            <span class="toggle-switch-ui"></span> Verificados
+            <span class="toggle-switch-ui"></span> <span data-i18n="common.verificados">Verificados</span>
           </button>
-          <button type="button" class="dest-dropdown-btn" data-action="nearby"><i class="fa-solid fa-location-crosshairs" style="color: #4A7A5A;"></i> Cerca de mí</button>
+          <button type="button" class="dest-dropdown-btn" data-action="nearby"><i class="fa-solid fa-location-crosshairs" style="color: #4A7A5A;"></i> <span data-i18n="common.cercaDeMi">Cerca de mí</span></button>
         </div>
         <div class="dest-order-right">
-          <span>Ordenar por:</span>
-          <select class="dest-order-select" aria-label="Ordenar destinos">
-            <option>Más populares</option>
-            <option>Mejor valorados</option>
-            <option>Precio: menor a mayor</option>
-            <option>Precio: mayor a menor</option>
+          <span data-i18n="pages.destinos.mainContent.span1">Ordenar por:</span>
+          <select data-i18n-aria-label="pages.destinos.mainContent.selectAriaLabel1" class="dest-order-select" aria-label="Ordenar destinos">
+            <option data-i18n="pages.destinos.mainContent.option1">Más populares</option>
+            <option data-i18n="pages.destinos.mainContent.option2">Mejor valorados</option>
+            <option data-i18n="pages.destinos.mainContent.option3">Precio: menor a mayor</option>
+            <option data-i18n="pages.destinos.mainContent.option4">Precio: mayor a menor</option>
           </select>
         </div>
       </div>
@@ -175,9 +175,9 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <!-- Izquierda: Mapa de Nicaragua -->
         <div class="destinos-map-panel">
           <div class="destinos-map-top-bar">
-            <button type="button" class="destinos-view-tab active" data-view="map" aria-pressed="true">Mapa</button>
-            <button type="button" class="destinos-view-tab" data-view="list" aria-pressed="false">Lista</button>
-            <button type="button" class="destinos-view-tab" data-view="both" aria-pressed="false">Ambos</button>
+            <button data-i18n="nav.map" type="button" class="destinos-view-tab active" data-view="map" aria-pressed="true">Mapa</button>
+            <button data-i18n="pages.destinos.mainContent.button3" type="button" class="destinos-view-tab" data-view="list" aria-pressed="false">Lista</button>
+            <button data-i18n="pages.destinos.mainContent.button4" type="button" class="destinos-view-tab" data-view="both" aria-pressed="false">Ambos</button>
           </div>
           <div class="destinos-map-viewport" id="destinosInteractiveMap"></div>
 
@@ -186,9 +186,9 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
             <img src="assets/images/departamentos/granada.jpg" alt="Granada" class="destinos-preview-img" decoding="async" loading="lazy" width="192" height="144">
             <div class="destinos-preview-info">
               <h4>Granada</h4>
-              <span><i class="fa-solid fa-location-dot" style="color: #F65E01;"></i> Granada · Cultura · ★ 4.8 (950)</span>
+              <span><i class="fa-solid fa-location-dot" style="color: #F65E01;"></i> <span data-i18n="pages.destinos.mainContent.span2">Granada · Cultura · ★ 4.8 (950)</span></span>
             </div>
-            <a href="destinos.html?id=granada" class="destinos-preview-btn">Ver detalles</a>
+            <a data-i18n="actions.details" href="destinos.html?id=granada" class="destinos-preview-btn">Ver detalles</a>
           </div>
         </div>
 
@@ -196,9 +196,9 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <div class="destinos-destacados-panel">
           <div class="section-header-exact">
             <div class="title-group">
-              <h2>Destinos destacados</h2>
+              <h2 data-i18n="pages.destinos.mainContent.h21">Destinos destacados</h2>
             </div>
-            <a href="destinos.html" class="section-header-link">Ver todos <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="destinos.html" class="section-header-link"><span data-i18n="actions.viewAll">Ver todos</span> <i class="fa-solid fa-arrow-right"></i></a>
           </div>
 
           <div class="destinos-destacados-grid">
@@ -206,14 +206,14 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
             <article class="dest-highlight-card">
               <div class="dest-highlight-media">
                 <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Isla de Ometepe" loading="lazy" decoding="async" width="1600" height="900">
-                <button type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
+                <button data-i18n-aria-label="common.favorito" type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
               </div>
               <div class="dest-highlight-body">
                 <h4>Isla de Ometepe</h4>
                 <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Rivas</span>
                 <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.9 (1,210)</div>
-                <div class="dest-highlight-price">Desde C$ 600</div>
-                <a href="destinos.html?id=ometepe" class="dest-btn-green">Ver destino</a>
+                <div data-i18n="pages.destinos.destHighlightCard.div1" class="dest-highlight-price">Desde C$ 600</div>
+                <a data-i18n="testimonials.viewDestination" href="destinos.html?id=ometepe" class="dest-btn-green">Ver destino</a>
               </div>
             </article>
 
@@ -221,14 +221,14 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
             <article class="dest-highlight-card">
               <div class="dest-highlight-media">
                 <img src="assets/images/departamentos/granada.jpg" alt="Granada" loading="lazy" decoding="async" width="192" height="144">
-                <button type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
+                <button data-i18n-aria-label="common.favorito" type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
               </div>
               <div class="dest-highlight-body">
                 <h4>Granada</h4>
                 <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Granada</span>
                 <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.8 (950)</div>
-                <div class="dest-highlight-price">Desde C$ 400</div>
-                <a href="destinos.html?id=granada" class="dest-btn-green">Ver destino</a>
+                <div data-i18n="pages.destinos.destHighlightCard.div2" class="dest-highlight-price">Desde C$ 400</div>
+                <a data-i18n="testimonials.viewDestination" href="destinos.html?id=granada" class="dest-btn-green">Ver destino</a>
               </div>
             </article>
 
@@ -236,14 +236,14 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
             <article class="dest-highlight-card">
               <div class="dest-highlight-media">
                 <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="San Juan del Sur" loading="lazy" decoding="async" width="447" height="447">
-                <button type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
+                <button data-i18n-aria-label="common.favorito" type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
               </div>
               <div class="dest-highlight-body">
                 <h4>San Juan del Sur</h4>
                 <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Rivas</span>
                 <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.7 (820)</div>
-                <div class="dest-highlight-price">Desde C$ 500</div>
-                <a href="destinos.html?id=sjds" class="dest-btn-green">Ver destino</a>
+                <div data-i18n="pages.destinos.destHighlightCard.div3" class="dest-highlight-price">Desde C$ 500</div>
+                <a data-i18n="testimonials.viewDestination" href="destinos.html?id=sjds" class="dest-btn-green">Ver destino</a>
               </div>
             </article>
 
@@ -251,14 +251,14 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
             <article class="dest-highlight-card">
               <div class="dest-highlight-media">
                 <img src="assets/images/destinos/cerro_negro.jpg" alt="Cerro Negro" loading="lazy" decoding="async" width="700" height="438">
-                <button type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
+                <button data-i18n-aria-label="common.favorito" type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
               </div>
               <div class="dest-highlight-body">
                 <h4>Cerro Negro</h4>
                 <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> León</span>
                 <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.9 (410)</div>
-                <div class="dest-highlight-price">Desde C$ 700</div>
-                <a href="destinos.html?id=cerro_negro" class="dest-btn-green">Ver destino</a>
+                <div data-i18n="pages.destinos.destHighlightCard.div4" class="dest-highlight-price">Desde C$ 700</div>
+                <a data-i18n="testimonials.viewDestination" href="destinos.html?id=cerro_negro" class="dest-btn-green">Ver destino</a>
               </div>
             </article>
 
@@ -266,14 +266,14 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
             <article class="dest-highlight-card">
               <div class="dest-highlight-media">
                 <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto" loading="lazy" decoding="async" width="399" height="501">
-                <button type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
+                <button data-i18n-aria-label="common.favorito" type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
               </div>
               <div class="dest-highlight-body">
                 <h4>Cañón de Somoto</h4>
                 <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Madriz</span>
                 <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.8 (320)</div>
-                <div class="dest-highlight-price">Desde C$ 350</div>
-                <a href="destinos.html?id=somoto" class="dest-btn-green">Ver destino</a>
+                <div data-i18n="pages.destinos.destHighlightCard.div5" class="dest-highlight-price">Desde C$ 350</div>
+                <a data-i18n="testimonials.viewDestination" href="destinos.html?id=somoto" class="dest-btn-green">Ver destino</a>
               </div>
             </article>
 
@@ -281,14 +281,14 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
             <article class="dest-highlight-card">
               <div class="dest-highlight-media">
                 <img src="assets/images/destinos/volcan_masaya.jpg" alt="Volcán Masaya" loading="lazy" decoding="async" width="1600" height="1131">
-                <button type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
+                <button data-i18n-aria-label="common.favorito" type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
               </div>
               <div class="dest-highlight-body">
                 <h4>Masaya</h4>
                 <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Masaya</span>
                 <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.6 (310)</div>
-                <div class="dest-highlight-price">Desde C$ 300</div>
-                <a href="destinos.html?id=masaya" class="dest-btn-green">Ver destino</a>
+                <div data-i18n="pages.destinos.destHighlightCard.div6" class="dest-highlight-price">Desde C$ 300</div>
+                <a data-i18n="testimonials.viewDestination" href="destinos.html?id=masaya" class="dest-btn-green">Ver destino</a>
               </div>
             </article>
           </div>
@@ -300,26 +300,26 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
            ============================================================================ -->
       <div class="section-header-exact">
         <div class="title-group">
-          <h2>Todos los destinos <span style="color: #F65E01; font-weight: 800;" aria-live="polite"></span></h2>
+          <h2><span data-i18n="pages.destinos.mainContent.h22">Todos los destinos</span> <span style="color: #F65E01; font-weight: 800;" aria-live="polite"></span></h2>
         </div>
-        <a href="destinos.html" class="section-header-link">Ver todos <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="destinos.html" class="section-header-link"><span data-i18n="actions.viewAll">Ver todos</span> <i class="fa-solid fa-arrow-right"></i></a>
       </div>
 
       <div class="destinos-catalog-row">
         <!-- 1. Las Isletas de Granada -->
         <article class="dest-catalog-card">
           <div class="dest-catalog-media">
-            <span class="dest-catalog-tag orange">Cultura</span>
-            <img src="assets/images/destinos/isletas_de_granada.jpg" alt="Las Isletas de Granada" loading="lazy" decoding="async" width="669" height="446">
+            <span data-i18n="nav.culture" class="dest-catalog-tag orange">Cultura</span>
+            <img data-i18n-alt="pages.destinos.destCatalogCard.h41" src="assets/images/destinos/isletas_de_granada.jpg" alt="Las Isletas de Granada" loading="lazy" decoding="async" width="669" height="446">
           </div>
           <div class="dest-catalog-body">
-            <h4>Las Isletas de Granada</h4>
+            <h4 data-i18n="pages.destinos.destCatalogCard.h41">Las Isletas de Granada</h4>
             <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Granada</span>
             <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.8 (310)</div>
-            <div class="dest-highlight-price">Desde C$ 400</div>
+            <div data-i18n="pages.destinos.destHighlightCard.div2" class="dest-highlight-price">Desde C$ 400</div>
             <div class="dest-catalog-dual-btns">
-              <a href="destinos.html?id=isletas" class="dest-btn-green">Ver destino</a>
-              <button type="button" class="dest-btn-subtle">+ Mi viaje</button>
+              <a data-i18n="testimonials.viewDestination" href="destinos.html?id=isletas" class="dest-btn-green">Ver destino</a>
+              <button data-i18n="pages.destinos.destCatalogCard.button1" type="button" class="dest-btn-subtle">+ Mi viaje</button>
             </div>
           </div>
         </article>
@@ -327,17 +327,17 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <!-- 2. Miraflor -->
         <article class="dest-catalog-card">
           <div class="dest-catalog-media">
-            <span class="dest-catalog-tag blue">Montaña</span>
-            <img src="assets/images/destinos/selva_negra.jpg" alt="Miraflor Estelí" loading="lazy" decoding="async" width="399" height="501">
+            <span data-i18n="testimonials.types.montana" class="dest-catalog-tag blue">Montaña</span>
+            <img data-i18n-alt="pages.destinos.destCatalogCard.imgAlt1" src="assets/images/destinos/selva_negra.jpg" alt="Miraflor Estelí" loading="lazy" decoding="async" width="399" height="501">
           </div>
           <div class="dest-catalog-body">
-            <h4>Miraflor</h4>
+            <h4 data-i18n="pages.destinos.destCatalogCard.h42">Miraflor</h4>
             <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Estelí</span>
             <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.7 (180)</div>
-            <div class="dest-highlight-price">Desde C$ 350</div>
+            <div data-i18n="pages.destinos.destHighlightCard.div5" class="dest-highlight-price">Desde C$ 350</div>
             <div class="dest-catalog-dual-btns">
-              <a href="destinos.html?id=miraflor" class="dest-btn-green">Ver destino</a>
-              <button type="button" class="dest-btn-subtle">+ Mi viaje</button>
+              <a data-i18n="testimonials.viewDestination" href="destinos.html?id=miraflor" class="dest-btn-green">Ver destino</a>
+              <button data-i18n="pages.destinos.destCatalogCard.button1" type="button" class="dest-btn-subtle">+ Mi viaje</button>
             </div>
           </div>
         </article>
@@ -345,17 +345,17 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <!-- 3. Laguna de Apoyo -->
         <article class="dest-catalog-card">
           <div class="dest-catalog-media">
-            <span class="dest-catalog-tag blue">Ríos y lagunas</span>
+            <span data-i18n="common.riosYLagunas" class="dest-catalog-tag blue">Ríos y lagunas</span>
             <img src="assets/images/destinos/laguna_de_apoyo.jpg" alt="Laguna de Apoyo" loading="lazy" decoding="async" width="400" height="600">
           </div>
           <div class="dest-catalog-body">
             <h4>Laguna de Apoyo</h4>
             <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Masaya</span>
             <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.8 (260)</div>
-            <div class="dest-highlight-price">Desde C$ 300</div>
+            <div data-i18n="pages.destinos.destHighlightCard.div6" class="dest-highlight-price">Desde C$ 300</div>
             <div class="dest-catalog-dual-btns">
-              <a href="destinos.html?id=apoyo" class="dest-btn-green">Ver destino</a>
-              <button type="button" class="dest-btn-subtle">+ Mi viaje</button>
+              <a data-i18n="testimonials.viewDestination" href="destinos.html?id=apoyo" class="dest-btn-green">Ver destino</a>
+              <button data-i18n="pages.destinos.destCatalogCard.button1" type="button" class="dest-btn-subtle">+ Mi viaje</button>
             </div>
           </div>
         </article>
@@ -363,17 +363,17 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <!-- 4. Corn Island -->
         <article class="dest-catalog-card">
           <div class="dest-catalog-media">
-            <span class="dest-catalog-tag blue">Playa</span>
+            <span data-i18n="testimonials.types.playa" class="dest-catalog-tag blue">Playa</span>
             <img src="assets/images/destinos/corn_island.jpg" alt="Corn Island" loading="lazy" decoding="async" width="800" height="550">
           </div>
           <div class="dest-catalog-body">
             <h4>Corn Island</h4>
             <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> RACCS</span>
             <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.9 (420)</div>
-            <div class="dest-highlight-price">Desde C$ 800</div>
+            <div data-i18n="pages.destinos.destCatalogCard.div1" class="dest-highlight-price">Desde C$ 800</div>
             <div class="dest-catalog-dual-btns">
-              <a href="destinos.html?id=cornisland" class="dest-btn-green">Ver destino</a>
-              <button type="button" class="dest-btn-subtle">+ Mi viaje</button>
+              <a data-i18n="testimonials.viewDestination" href="destinos.html?id=cornisland" class="dest-btn-green">Ver destino</a>
+              <button data-i18n="pages.destinos.destCatalogCard.button1" type="button" class="dest-btn-subtle">+ Mi viaje</button>
             </div>
           </div>
         </article>
@@ -381,17 +381,17 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <!-- 5. Reserva Indio Maíz -->
         <article class="dest-catalog-card">
           <div class="dest-catalog-media">
-            <span class="dest-catalog-tag green">Naturaleza</span>
-            <img src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="Reserva Indio Maíz" loading="lazy" decoding="async" width="678" height="452">
+            <span data-i18n="home.destinations.filters.nature" class="dest-catalog-tag green">Naturaleza</span>
+            <img data-i18n-alt="pages.destinos.destCatalogCard.h43" src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="Reserva Indio Maíz" loading="lazy" decoding="async" width="678" height="452">
           </div>
           <div class="dest-catalog-body">
-            <h4>Reserva Indio Maíz</h4>
+            <h4 data-i18n="pages.destinos.destCatalogCard.h43">Reserva Indio Maíz</h4>
             <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Río San Juan</span>
             <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.8 (150)</div>
-            <div class="dest-highlight-price">Desde C$ 450</div>
+            <div data-i18n="pages.destinos.destCatalogCard.div2" class="dest-highlight-price">Desde C$ 450</div>
             <div class="dest-catalog-dual-btns">
-              <a href="destinos.html?id=indiomaiz" class="dest-btn-green">Ver destino</a>
-              <button type="button" class="dest-btn-subtle">+ Mi viaje</button>
+              <a data-i18n="testimonials.viewDestination" href="destinos.html?id=indiomaiz" class="dest-btn-green">Ver destino</a>
+              <button data-i18n="pages.destinos.destCatalogCard.button1" type="button" class="dest-btn-subtle">+ Mi viaje</button>
             </div>
           </div>
         </article>
@@ -402,26 +402,26 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
            ============================================================================ -->
       <div class="section-header-exact">
         <div class="title-group">
-          <h2>Más destinos que te encantarán</h2>
+          <h2 data-i18n="pages.destinos.mainContent.h23">Más destinos que te encantarán</h2>
         </div>
-        <a href="destinos.html" class="section-header-link">Ver todos <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="destinos.html" class="section-header-link"><span data-i18n="actions.viewAll">Ver todos</span> <i class="fa-solid fa-arrow-right"></i></a>
       </div>
 
       <div class="destinos-catalog-row">
         <!-- 1. León -->
         <article class="dest-catalog-card">
           <div class="dest-catalog-media">
-            <span class="dest-catalog-tag orange">Cultura</span>
-            <img src="assets/images/departamentos/leon.png" alt="León Colonial" loading="lazy" decoding="async" width="192" height="144">
+            <span data-i18n="nav.culture" class="dest-catalog-tag orange">Cultura</span>
+            <img data-i18n-alt="pages.destinos.destCatalogCard.imgAlt2" src="assets/images/departamentos/leon.png" alt="León Colonial" loading="lazy" decoding="async" width="192" height="144">
           </div>
           <div class="dest-catalog-body">
             <h4>León</h4>
             <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> León</span>
             <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.7 (300)</div>
-            <div class="dest-highlight-price">Desde C$ 400</div>
+            <div data-i18n="pages.destinos.destHighlightCard.div2" class="dest-highlight-price">Desde C$ 400</div>
             <div class="dest-catalog-dual-btns">
-              <a href="destinos.html?id=leon" class="dest-btn-green">Ver destino</a>
-              <button type="button" class="dest-btn-subtle">+ Mi viaje</button>
+              <a data-i18n="testimonials.viewDestination" href="destinos.html?id=leon" class="dest-btn-green">Ver destino</a>
+              <button data-i18n="pages.destinos.destCatalogCard.button1" type="button" class="dest-btn-subtle">+ Mi viaje</button>
             </div>
           </div>
         </article>
@@ -429,17 +429,17 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <!-- 2. Chinandega -->
         <article class="dest-catalog-card">
           <div class="dest-catalog-media">
-            <span class="dest-catalog-tag orange">Gastronomía</span>
+            <span data-i18n="nav.gastronomy" class="dest-catalog-tag orange">Gastronomía</span>
             <img src="assets/images/departamentos/chinandega.jpg" alt="Chinandega" loading="lazy" decoding="async" width="192" height="144">
           </div>
           <div class="dest-catalog-body">
             <h4>Chinandega</h4>
             <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Chinandega</span>
             <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.6 (120)</div>
-            <div class="dest-highlight-price">Desde C$ 350</div>
+            <div data-i18n="pages.destinos.destHighlightCard.div5" class="dest-highlight-price">Desde C$ 350</div>
             <div class="dest-catalog-dual-btns">
-              <a href="destinos.html?id=chinandega" class="dest-btn-green">Ver destino</a>
-              <button type="button" class="dest-btn-subtle">+ Mi viaje</button>
+              <a data-i18n="testimonials.viewDestination" href="destinos.html?id=chinandega" class="dest-btn-green">Ver destino</a>
+              <button data-i18n="pages.destinos.destCatalogCard.button1" type="button" class="dest-btn-subtle">+ Mi viaje</button>
             </div>
           </div>
         </article>
@@ -447,17 +447,17 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <!-- 3. Río San Juan -->
         <article class="dest-catalog-card">
           <div class="dest-catalog-media">
-            <span class="dest-catalog-tag green">Naturaleza</span>
+            <span data-i18n="home.destinations.filters.nature" class="dest-catalog-tag green">Naturaleza</span>
             <img src="assets/images/destinos/Fortaleza de la Inmaculada Concepción.jpg" alt="Río San Juan" loading="lazy" decoding="async" width="678" height="452">
           </div>
           <div class="dest-catalog-body">
             <h4>Río San Juan</h4>
             <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Río San Juan</span>
             <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.8 (190)</div>
-            <div class="dest-highlight-price">Desde C$ 400</div>
+            <div data-i18n="pages.destinos.destHighlightCard.div2" class="dest-highlight-price">Desde C$ 400</div>
             <div class="dest-catalog-dual-btns">
-              <a href="destinos.html?id=riosanjuan" class="dest-btn-green">Ver destino</a>
-              <button type="button" class="dest-btn-subtle">+ Mi viaje</button>
+              <a data-i18n="testimonials.viewDestination" href="destinos.html?id=riosanjuan" class="dest-btn-green">Ver destino</a>
+              <button data-i18n="pages.destinos.destCatalogCard.button1" type="button" class="dest-btn-subtle">+ Mi viaje</button>
             </div>
           </div>
         </article>
@@ -465,17 +465,17 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <!-- 4. Bluefields -->
         <article class="dest-catalog-card">
           <div class="dest-catalog-media">
-            <span class="dest-catalog-tag purple">Comunidades</span>
+            <span data-i18n="home.destinations.filters.communities" class="dest-catalog-tag purple">Comunidades</span>
             <img src="assets/images/departamentos/RAAS.png" alt="Bluefields" loading="lazy" decoding="async" width="335" height="597">
           </div>
           <div class="dest-catalog-body">
             <h4>Bluefields</h4>
             <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> RACCS</span>
             <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.5 (110)</div>
-            <div class="dest-highlight-price">Desde C$ 350</div>
+            <div data-i18n="pages.destinos.destHighlightCard.div5" class="dest-highlight-price">Desde C$ 350</div>
             <div class="dest-catalog-dual-btns">
-              <a href="destinos.html?id=bluefields" class="dest-btn-green">Ver destino</a>
-              <button type="button" class="dest-btn-subtle">+ Mi viaje</button>
+              <a data-i18n="testimonials.viewDestination" href="destinos.html?id=bluefields" class="dest-btn-green">Ver destino</a>
+              <button data-i18n="pages.destinos.destCatalogCard.button1" type="button" class="dest-btn-subtle">+ Mi viaje</button>
             </div>
           </div>
         </article>
@@ -483,17 +483,17 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <!-- 5. El Viejo -->
         <article class="dest-catalog-card">
           <div class="dest-catalog-media">
-            <span class="dest-catalog-tag green">Aventura</span>
-            <img src="assets/images/departamentos/chinandega44.jpg" alt="El Viejo" loading="lazy" decoding="async" width="1000" height="1000">
+            <span data-i18n="testimonials.types.aventura" class="dest-catalog-tag green">Aventura</span>
+            <img data-i18n-alt="pages.destinos.destCatalogCard.h44" src="assets/images/departamentos/chinandega44.jpg" alt="El Viejo" loading="lazy" decoding="async" width="1000" height="1000">
           </div>
           <div class="dest-catalog-body">
-            <h4>El Viejo</h4>
+            <h4 data-i18n="pages.destinos.destCatalogCard.h44">El Viejo</h4>
             <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Chinandega</span>
             <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.6 (90)</div>
-            <div class="dest-highlight-price">Desde C$ 300</div>
+            <div data-i18n="pages.destinos.destHighlightCard.div6" class="dest-highlight-price">Desde C$ 300</div>
             <div class="dest-catalog-dual-btns">
-              <a href="destinos.html?id=elviejo" class="dest-btn-green">Ver destino</a>
-              <button type="button" class="dest-btn-subtle">+ Mi viaje</button>
+              <a data-i18n="testimonials.viewDestination" href="destinos.html?id=elviejo" class="dest-btn-green">Ver destino</a>
+              <button data-i18n="pages.destinos.destCatalogCard.button1" type="button" class="dest-btn-subtle">+ Mi viaje</button>
             </div>
           </div>
         </article>
@@ -502,8 +502,8 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
       <!-- ============================================================================
            7. PAGINACIÓN NUMÉRICA (IMAGEN 3)
            ============================================================================ -->
-      <div class="destinos-pagination-wrap" role="navigation" aria-label="Paginación de destinos">
-        <button type="button" class="pagination-btn" aria-label="Página anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <div data-i18n-aria-label="pages.destinos.mainContent.divAriaLabel2" class="destinos-pagination-wrap" role="navigation" aria-label="Paginación de destinos">
+        <button data-i18n-aria-label="actions.prevPage" type="button" class="pagination-btn" aria-label="Página anterior"><i class="fa-solid fa-chevron-left"></i></button>
         <button type="button" class="pagination-btn active">1</button>
         <button type="button" class="pagination-btn">2</button>
         <button type="button" class="pagination-btn">3</button>
@@ -511,7 +511,7 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <button type="button" class="pagination-btn">5</button>
         <span style="color: #94A3B8; font-size: 0.8rem;">...</span>
         <button type="button" class="pagination-btn">13</button>
-        <button type="button" class="pagination-btn" aria-label="Página siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+        <button data-i18n-aria-label="actions.nextPage" type="button" class="pagination-btn" aria-label="Página siguiente"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
 
       <!-- ============================================================================
@@ -520,24 +520,24 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
       <div class="destinos-ai-box">
         <div class="destinos-ai-top-row">
           <div class="destinos-ai-left">
-            <img loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi Guardabarranco" class="destinos-ai-avatar" width="300" height="300">
+            <img data-i18n-alt="common.baquiGuardabarranco" loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi Guardabarranco" class="destinos-ai-avatar" width="300" height="300">
             <div class="destinos-ai-text">
-              <h3>¿No sabés dónde ir?</h3>
-              <p>Contame qué buscás y Baqueano Digital encuentra los mejores destinos para vos.</p>
+              <h3 data-i18n="pages.destinos.mainContent.h31">¿No sabés dónde ir?</h3>
+              <p data-i18n="pages.destinos.mainContent.p1">Contame qué buscás y Baqueano Digital encuentra los mejores destinos para vos.</p>
             </div>
           </div>
           <a class="destinos-ai-btn-purple" href="baqueano-ai.html?prompt=recomendacion-destinos">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Planificar con Baqueano Digital <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="common.planificarConBaqueanoDigital">Planificar con Baqueano Digital</span> <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <div class="destinos-ai-chips-strip">
-          <a class="dest-ai-chip" href="baqueano-ai.html?prompt=presupuesto-1500">💵 Tengo C$1,500</a>
-          <a class="dest-ai-chip" href="baqueano-ai.html?prompt=naturaleza">🍃 Quiero naturaleza</a>
-          <a class="dest-ai-chip" href="baqueano-ai.html?prompt=viaje-con-ninos">👨‍👩‍👧 Viajo con niños</a>
-          <a class="dest-ai-chip" href="baqueano-ai.html?prompt=aventura">🧗 Quiero aventura</a>
-          <a class="dest-ai-chip" href="baqueano-ai.html?prompt=cerca-de-mi">📍 Algo cerca</a>
-          <a class="dest-ai-chip" href="baqueano-ai.html?prompt=un-dia">⏱️ Tengo solo un día</a>
+          <a data-i18n="common.tengoC1500" class="dest-ai-chip" href="baqueano-ai.html?prompt=presupuesto-1500">💵 Tengo C$1,500</a>
+          <a data-i18n="pages.destinos.mainContent.a1" class="dest-ai-chip" href="baqueano-ai.html?prompt=naturaleza">🍃 Quiero naturaleza</a>
+          <a data-i18n="common.viajoConNinos" class="dest-ai-chip" href="baqueano-ai.html?prompt=viaje-con-ninos">👨‍👩‍👧 Viajo con niños</a>
+          <a data-i18n="common.quieroAventura" class="dest-ai-chip" href="baqueano-ai.html?prompt=aventura">🧗 Quiero aventura</a>
+          <a data-i18n="common.algoCerca" class="dest-ai-chip" href="baqueano-ai.html?prompt=cerca-de-mi">📍 Algo cerca</a>
+          <a data-i18n="pages.destinos.mainContent.a2" class="dest-ai-chip" href="baqueano-ai.html?prompt=un-dia">⏱️ Tengo solo un día</a>
         </div>
       </div>
 
@@ -546,12 +546,12 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
            ============================================================================ -->
       <div class="destinos-cta-banner">
         <div class="destinos-cta-copy">
-          <h3>Sumate a la comunidad BAQUEANO</h3>
-          <p>Recibí inspiración, destinos exclusivos y tips de viaje.</p>
+          <h3 data-i18n="common.sumateALaComunidadBaqueano">Sumate a la comunidad BAQUEANO</h3>
+          <p data-i18n="pages.destinos.mainContent.p2">Recibí inspiración, destinos exclusivos y tips de viaje.</p>
         </div>
         <div class="destinos-cta-actions">
-          <a href="perfil.html" class="destinos-btn-register">Registrarme gratis <i class="fa-solid fa-arrow-right"></i></a>
-          <img loading="lazy" decoding="async" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Anfitrión Campesino" class="destinos-host-thumb" width="900" height="500">
+          <a href="perfil.html" class="destinos-btn-register"><span data-i18n="pages.destinos.mainContent.a3">Registrarme gratis</span> <i class="fa-solid fa-arrow-right"></i></a>
+          <img data-i18n-alt="pages.destinos.mainContent.imgAlt1" loading="lazy" decoding="async" src="assets/images/destinos/Finca Magdalena Eco-Lodge Campesino.jpg" alt="Anfitrión Campesino" class="destinos-host-thumb" width="900" height="500">
         </div>
       </div>
     </div>

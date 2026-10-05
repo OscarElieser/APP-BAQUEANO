@@ -36,7 +36,7 @@
 - Ficha técnica de viaje y botones de enlace a mapas satelitales y reservas.
 ============================================================================
 -->
-<html lang="es" data-bq-page="departamento" data-bq-group="territorio">
+<html data-i18n-description="pages.departamento.body.metaDescription1" data-i18n-title="pages.departamento.deptPageTitle.title1" lang="es" data-bq-page="departamento" data-bq-group="territorio">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -283,18 +283,18 @@
         <div class="dept-hero-content">
           <div class="dept-badge-pill">
             <i class="fa-solid fa-map-pin"></i>
-            <span id="deptBadgeText">Territorio Soberano</span>
+            <span id="deptBadgeText"><span data-i18n="pages.departamento.deptBadgeText.span1">Territorio Soberano</span></span>
           </div>
-          <h1 class="dept-title-big" id="deptTitle">Explorando el territorio…</h1>
+          <h1 class="dept-title-big" id="deptTitle"><span data-i18n="pages.departamento.deptTitle.h11">Explorando el territorio…</span></h1>
           <div class="dept-tagline" id="deptTagline"></div>
           <p class="dept-short-desc" id="deptShortDesc"></p>
 
           <div class="dept-cta-bar">
             <a href="destinos.html" class="btn-hero-primary" id="btnExploreMap">
-              <i class="fa-solid fa-map-location-dot"></i> Explorar en el Mapa
+              <i class="fa-solid fa-map-location-dot"></i> <span data-i18n="pages.departamento.btnExploreMap.a1">Explorar en el Mapa</span>
             </a>
             <a href="destinos.html#cotizadorModal" class="btn-hero-secondary" id="btnQuoteTrip">
-              <i class="fa-solid fa-calculator"></i> Planificar Visita
+              <i class="fa-solid fa-calculator"></i> <span data-i18n="pages.departamento.btnQuoteTrip.a1">Planificar Visita</span>
             </a>
           </div>
         </div>
@@ -314,16 +314,16 @@
         <section class="madriz-manifesto-strip territory-standard-manifesto" aria-labelledby="deptManifestoTitle">
           <div class="manifesto-card-alta-gama">
             <div class="manifesto-badge-row">
-              <span class="m-badge-primary"><i class="fa-solid fa-location-dot"></i> <span id="deptManifestoTerritory">Territorio</span></span>
-              <span class="m-badge-secondary"><i class="fa-solid fa-map"></i> <span id="deptManifestoMunicipalities">Municipios</span></span>
-              <span class="m-badge-accent"><i class="fa-solid fa-people-group"></i> <span id="deptManifestoCooperatives">Red local</span></span>
+              <span class="m-badge-primary"><i class="fa-solid fa-location-dot"></i> <span id="deptManifestoTerritory"><span data-i18n="common.territorio">Territorio</span></span></span>
+              <span class="m-badge-secondary"><i class="fa-solid fa-map"></i> <span id="deptManifestoMunicipalities"><span data-i18n="departments.municipalities">Municipios</span></span></span>
+              <span class="m-badge-accent"><i class="fa-solid fa-people-group"></i> <span id="deptManifestoCooperatives"><span data-i18n="pages.departamento.deptManifestoCooperatives.span1">Red local</span></span></span>
             </div>
-            <h2 class="manifesto-headline" id="deptManifestoTitle">Comprendé el territorio antes de recorrerlo.</h2>
+            <h2 class="manifesto-headline" id="deptManifestoTitle"><span data-i18n="pages.departamento.deptManifestoTitle.h21">Comprendé el territorio antes de recorrerlo.</span></h2>
             <p class="manifesto-copy" id="deptManifestoText"></p>
             <div class="manifesto-action-bar">
-              <a href="#deptPlacesGrid" class="btn-hero-primary"><i class="fa-solid fa-compass"></i> Explorar lugares</a>
-              <a href="#deptTerritorialProfile" class="btn-hero-secondary"><i class="fa-solid fa-map-location-dot"></i> Conocer municipios</a>
-              <button type="button" class="btn-hero-glass open-planner-btn"><i class="fa-solid fa-route"></i> Planificar visita</button>
+              <a href="#deptPlacesGrid" class="btn-hero-primary"><i class="fa-solid fa-compass"></i> <span data-i18n="pages.departamento.madrizManifestoStrip.a1">Explorar lugares</span></a>
+              <a href="#deptTerritorialProfile" class="btn-hero-secondary"><i class="fa-solid fa-map-location-dot"></i> <span data-i18n="pages.departamento.madrizManifestoStrip.a2">Conocer municipios</span></a>
+              <button type="button" class="btn-hero-glass open-planner-btn"><i class="fa-solid fa-route"></i> <span data-i18n="pages.departamento.madrizManifestoStrip.button1">Planificar visita</span></button>
             </div>
           </div>
         </section>
@@ -332,7 +332,7 @@
         <div class="dept-section-card">
           <div class="dept-card-header">
             <i class="fa-solid fa-landmark-dome"></i>
-            <h3>1. Historia, Origen & Memoria Viva</h3>
+            <h3 data-i18n="pages.departamento.deptSectionBlock.h31">1. Historia, Origen & Memoria Viva</h3>
           </div>
           <p id="deptHistoryText" class="departamento-inline-001"></p>
           <!--
@@ -342,7 +342,7 @@
           -->
           <div id="deptTerritorialProfile" hidden>
             <p id="deptExpandedDescription" class="departamento-inline-001"></p>
-            <h4>Municipios e identidad turística</h4>
+            <h4 data-i18n="pages.departamento.deptTerritorialProfile.h41">Municipios e identidad turística</h4>
             <div class="dept-places-grid" id="deptMunicipalitiesGrid"></div>
           </div>
         </div>
@@ -351,7 +351,7 @@
         <div class="dept-section-card">
           <div class="dept-card-header">
             <i class="fa-solid fa-utensils"></i>
-            <h3>2. Gastronomía Típica & Sabores de Identidad</h3>
+            <h3 data-i18n="pages.departamento.deptSectionBlock.h32">2. Gastronomía Típica & Sabores de Identidad</h3>
           </div>
           <div class="dept-gastro-grid" id="deptGastroGrid"></div>
         </div>
@@ -360,7 +360,7 @@
         <div class="dept-section-card">
           <div class="dept-card-header">
             <i class="fa-solid fa-mountain-sun"></i>
-            <h3>3. Lugares Turísticos Principales & Áreas Protegidas</h3>
+            <h3 data-i18n="pages.departamento.deptSectionBlock.h33">3. Lugares Turísticos Principales & Áreas Protegidas</h3>
           </div>
           <div class="dept-places-grid" id="deptPlacesGrid"></div>
         </div>
@@ -373,18 +373,18 @@
         -->
         <div class="dept-section-card" aria-labelledby="territoryMapTitle">
           <div class="madriz-map-heading">
-            <div class="sub-label-tag"><i class="fa-solid fa-map-location-dot"></i> CARTOGRAFÍA TERRITORIAL</div>
-            <h2 id="territoryMapTitle">Ubicación exacta del territorio</h2>
-            <p id="territoryMapDescription">Mapa centrado en las coordenadas oficiales del departamento o región seleccionada.</p>
+            <div class="sub-label-tag"><i class="fa-solid fa-map-location-dot"></i> <span data-i18n="pages.departamento.deptSectionBlock.div1">CARTOGRAFÍA TERRITORIAL</span></div>
+            <h2 id="territoryMapTitle"><span data-i18n="pages.departamento.territoryMapTitle.h21">Ubicación exacta del territorio</span></h2>
+            <p id="territoryMapDescription"><span data-i18n="pages.departamento.territoryMapDescription.p1">Mapa centrado en las coordenadas oficiales del departamento o región seleccionada.</span></p>
           </div>
           <div class="baqueano-map-wrapper" id="territoryMapShell">
-            <div id="territoryMap" role="application" aria-label="Mapa interactivo del territorio seleccionado"></div>
+            <div data-i18n-aria-label="pages.departamento.territoryMap.divAriaLabel1" id="territoryMap" role="application" aria-label="Mapa interactivo del territorio seleccionado"></div>
             <div class="madriz-map-topbar">
-              <span class="madriz-map-live"><i class="fa-solid fa-satellite-dish"></i> Datos territoriales BAQUEANO</span>
-              <button type="button" class="madriz-map-expand" id="territoryMapExpand" aria-label="Ampliar mapa">Ampliar <i class="fa-solid fa-expand"></i></button>
+              <span class="madriz-map-live"><i class="fa-solid fa-satellite-dish"></i> <span data-i18n="pages.departamento.territoryMapShell.span1">Datos territoriales BAQUEANO</span></span>
+              <button data-i18n-aria-label="pages.departamento.territoryMapExpand.buttonAriaLabel1" type="button" class="madriz-map-expand" id="territoryMapExpand" aria-label="Ampliar mapa"><span data-i18n="pages.departamento.territoryMapExpand.button1">Ampliar</span> <i class="fa-solid fa-expand"></i></button>
             </div>
-            <div class="madriz-map-status" id="territoryMapStatus" role="status" aria-live="polite"><i class="fa-solid fa-circle-notch fa-spin"></i> Preparando ubicación territorial…</div>
-            <div id="territoryMapPlacesCarousel" class="map-places-carousel" aria-label="Lugares disponibles en el mapa"></div>
+            <div class="madriz-map-status" id="territoryMapStatus" role="status" aria-live="polite"><i class="fa-solid fa-circle-notch fa-spin"></i> <span data-i18n="pages.departamento.territoryMapStatus.div1">Preparando ubicación territorial…</span></div>
+            <div data-i18n-aria-label="pages.departamento.territoryMapPlacesCarousel.divAriaLabel1" id="territoryMapPlacesCarousel" class="map-places-carousel" aria-label="Lugares disponibles en el mapa"></div>
           </div>
         </div>
 
@@ -392,7 +392,7 @@
         <div class="dept-section-card">
           <div class="dept-card-header">
             <i class="fa-solid fa-person-hiking"></i>
-            <h3>4. Actividades & Experiencias Vivas en Territorio</h3>
+            <h3 data-i18n="pages.departamento.deptSectionBlock.h34">4. Actividades & Experiencias Vivas en Territorio</h3>
           </div>
           <ul class="dept-activities-list" id="deptActivitiesList"></ul>
         </div>
@@ -401,7 +401,7 @@
         <div class="dept-section-card">
           <div class="dept-card-header">
             <i class="fa-solid fa-masks-theater"></i>
-            <h3>5. Cultura, Fiestas Patronales & Tradición Comunitaria</h3>
+            <h3 data-i18n="pages.departamento.deptSectionBlock.h35">5. Cultura, Fiestas Patronales & Tradición Comunitaria</h3>
           </div>
           <p id="deptCultureText" class="departamento-inline-001"></p>
         </div>
@@ -410,34 +410,34 @@
         <div class="dept-section-card">
           <div class="dept-card-header">
             <i class="fa-solid fa-compass"></i>
-            <h3>6. Guía Práctica de Viaje & Logística</h3>
+            <h3 data-i18n="pages.departamento.deptSectionBlock.h36">6. Guía Práctica de Viaje & Logística</h3>
           </div>
           <div class="dept-logistics-grid">
             <div class="dept-logistic-box">
-              <h5><i class="fa-solid fa-cloud-sun departamento-inline-002"></i> Mejor Época para Visitar</h5>
+              <h5><i class="fa-solid fa-cloud-sun departamento-inline-002"></i> <span data-i18n="pages.departamento.deptSectionBlock.h51">Mejor Época para Visitar</span></h5>
               <p id="deptBestSeasonText"></p>
             </div>
             <div class="dept-logistic-box">
-              <h5><i class="fa-solid fa-route departamento-inline-003"></i> Cómo Llegar</h5>
+              <h5><i class="fa-solid fa-route departamento-inline-003"></i> <span data-i18n="pages.departamento.deptSectionBlock.h52">Cómo Llegar</span></h5>
               <p id="deptHowToReachText"></p>
             </div>
             <div class="dept-logistic-box">
-              <h5><i class="fa-solid fa-circle-check departamento-inline-004"></i> Recomendaciones del Baqueano</h5>
+              <h5><i class="fa-solid fa-circle-check departamento-inline-004"></i> <span data-i18n="pages.departamento.deptSectionBlock.h53">Recomendaciones del Baqueano</span></h5>
               <p id="deptRecommendationsText"></p>
             </div>
           </div>
 
           <!-- BOTONES FINALES DE ACCIÓN -->
           <div class="departamento-inline-005">
-            <p class="departamento-inline-006">
+            <p data-i18n="pages.departamento.deptSectionBlock.p1" class="departamento-inline-006">
               ¿Listo para recorrer este territorio con un guía campesino certificado?
             </p>
             <div class="departamento-inline-007">
               <a href="destinos.html" class="btn-hero-primary departamento-inline-008">
-                <i class="fa-solid fa-map-location-dot"></i> Ver en Mapa Satelital
+                <i class="fa-solid fa-map-location-dot"></i> <span data-i18n="pages.departamento.deptSectionBlock.a1">Ver en Mapa Satelital</span>
               </a>
               <a href="aliados.html" class="btn-hero-secondary departamento-inline-008">
-                <i class="fa-solid fa-handshake"></i> Conocer Cooperativas Aliadas
+                <i class="fa-solid fa-handshake"></i> <span data-i18n="pages.departamento.deptSectionBlock.a2">Conocer Cooperativas Aliadas</span>
               </a>
             </div>
           </div>
@@ -462,31 +462,31 @@
         -->
         <section class="dept-section-card chinandega-logistics-card" aria-labelledby="deptPlanningTitle">
           <header>
-            <span><i class="fa-solid fa-compass"></i> PLANIFICACIÓN HONESTA</span>
-            <h2 id="deptPlanningTitle">Cómo llegar, cuándo viajar y cuánto cuesta</h2>
+            <span><i class="fa-solid fa-compass"></i> <span data-i18n="pages.departamento.header.span1">PLANIFICACIÓN HONESTA</span></span>
+            <h2 id="deptPlanningTitle"><span data-i18n="pages.departamento.deptPlanningTitle.h21">Cómo llegar, cuándo viajar y cuánto cuesta</span></h2>
             <p id="deptPlanningIntro"></p>
           </header>
           <div class="chinandega-logistics-grid">
-            <article><i class="fa-solid fa-bus-simple"></i><h3>Transporte</h3><p id="deptPlanningTransport"></p></article>
-            <article><i class="fa-solid fa-cloud-sun"></i><h3>Condiciones</h3><p id="deptPlanningConditions"></p></article>
-            <article><i class="fa-solid fa-tags"></i><h3>Precios reales</h3><p>Los precios deben estar publicados recientemente o consultarse directamente. No mostramos estimaciones como tarifas vigentes.</p></article>
-            <article><i class="fa-solid fa-kit-medical"></i><h3 id="deptPlanningSosTitle">SOS del territorio</h3><p id="deptPlanningSosText"></p></article>
+            <article><i class="fa-solid fa-bus-simple"></i><h3 data-i18n="common.transporte">Transporte</h3><p id="deptPlanningTransport"></p></article>
+            <article><i class="fa-solid fa-cloud-sun"></i><h3 data-i18n="pages.departamento.article.h31">Condiciones</h3><p id="deptPlanningConditions"></p></article>
+            <article><i class="fa-solid fa-tags"></i><h3 data-i18n="pages.departamento.article.h32">Precios reales</h3><p data-i18n="pages.departamento.article.p1">Los precios deben estar publicados recientemente o consultarse directamente. No mostramos estimaciones como tarifas vigentes.</p></article>
+            <article><i class="fa-solid fa-kit-medical"></i><h3 id="deptPlanningSosTitle"><span data-i18n="pages.departamento.deptPlanningSosTitle.h31">SOS del territorio</span></h3><p id="deptPlanningSosText"></p></article>
           </div>
         </section>
 
         <section class="madriz-closing-strip territory-closing-card" aria-labelledby="deptClosingTitle">
           <div class="closing-card-alta-gama">
-            <span class="closing-pretitle">TU EXPEDICIÓN COMIENZA AQUÍ</span>
-            <h2 class="closing-title" id="deptClosingTitle">Ya conocés un poco de este territorio. Ahora vivilo.</h2>
+            <span data-i18n="pages.departamento.madrizClosingStrip.span1" class="closing-pretitle">TU EXPEDICIÓN COMIENZA AQUÍ</span>
+            <h2 class="closing-title" id="deptClosingTitle"><span data-i18n="pages.departamento.deptClosingTitle.h21">Ya conocés un poco de este territorio. Ahora vivilo.</span></h2>
             <p class="closing-desc" id="deptClosingDescription"></p>
             <div class="closing-actions-grid">
-              <a class="closing-action-btn" href="#deptTerritorialProfile" id="deptClosingMunicipalities"><i class="fa-solid fa-map"></i> Explorar territorio</a>
-              <a class="closing-action-btn" href="#deptPlacesGrid" id="deptClosingNature"><i class="fa-solid fa-mountain-sun"></i> Conocer naturaleza</a>
-              <a class="closing-action-btn" href="#deptGastroGrid" id="deptClosingFood"><i class="fa-solid fa-bowl-food"></i> Probar sabores locales</a>
-              <a class="closing-action-btn" href="musica.html" id="deptClosingMusic"><i class="fa-solid fa-music"></i> Escuchar el territorio</a>
-              <a class="closing-action-btn" href="aliados.html"><i class="fa-solid fa-handshake"></i> Conocer anfitriones</a>
-              <button type="button" class="closing-action-btn open-planner-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Construir mi aventura</button>
-              <button type="button" class="closing-action-btn open-sos-btn" id="deptClosingSos"><i class="fa-solid fa-tower-broadcast"></i> SOS del territorio</button>
+              <a class="closing-action-btn" href="#deptTerritorialProfile" id="deptClosingMunicipalities"><i class="fa-solid fa-map"></i> <span data-i18n="pages.departamento.deptClosingMunicipalities.a1">Explorar territorio</span></a>
+              <a class="closing-action-btn" href="#deptPlacesGrid" id="deptClosingNature"><i class="fa-solid fa-mountain-sun"></i> <span data-i18n="pages.departamento.deptClosingNature.a1">Conocer naturaleza</span></a>
+              <a class="closing-action-btn" href="#deptGastroGrid" id="deptClosingFood"><i class="fa-solid fa-bowl-food"></i> <span data-i18n="pages.departamento.deptClosingFood.a1">Probar sabores locales</span></a>
+              <a class="closing-action-btn" href="musica.html" id="deptClosingMusic"><i class="fa-solid fa-music"></i> <span data-i18n="pages.departamento.deptClosingMusic.a1">Escuchar el territorio</span></a>
+              <a class="closing-action-btn" href="aliados.html"><i class="fa-solid fa-handshake"></i> <span data-i18n="common.conocerAnfitriones">Conocer anfitriones</span></a>
+              <button type="button" class="closing-action-btn open-planner-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="pages.departamento.madrizClosingStrip.button1">Construir mi aventura</span></button>
+              <button type="button" class="closing-action-btn open-sos-btn" id="deptClosingSos"><i class="fa-solid fa-tower-broadcast"></i> <span data-i18n="pages.departamento.deptPlanningSosTitle.h31">SOS del territorio</span></button>
             </div>
           </div>
         </section>
@@ -494,7 +494,7 @@
         <div class="dept-section-card" id="deptOfficialSourcesSection" hidden>
           <div class="dept-card-header">
             <i class="fa-solid fa-circle-check"></i>
-            <h3>7. Información oficial verificada</h3>
+            <h3 data-i18n="pages.departamento.deptOfficialSourcesSection.h31">7. Información oficial verificada</h3>
           </div>
           <ul class="dept-activities-list" id="deptOfficialHighlights"></ul>
           <p class="departamento-inline-001" id="deptOfficialVerificationDate"></p>
@@ -505,9 +505,9 @@
         <div class="dept-section-card" id="selectorTerritoriosSection">
           <div class="dept-card-header">
             <i class="fa-solid fa-map-location-dot"></i>
-            <h3>8. Explorar Otro Departamento o Región (17 Territorios)</h3>
+            <h3 data-i18n="pages.departamento.selectorTerritoriosSection.h31">8. Explorar Otro Departamento o Región (17 Territorios)</h3>
           </div>
-          <p class="departamento-inline-001">
+          <p data-i18n="pages.departamento.selectorTerritoriosSection.p1" class="departamento-inline-001">
             Selecciona cualquiera de los 15 departamentos y 2 regiones autónomas de Nicaragua para cambiar inmediatamente esta guía oficial a ese territorio:
           </p>
           <div class="territories-grid" id="deptSelectorGrid">
@@ -960,40 +960,40 @@
   <!-- MODAL DE AUXILIO SOS -->
   <div class="modal-backdrop-pro" id="sosModal" aria-hidden="true" role="dialog">
     <div class="sos-modal-dialog">
-      <button type="button" class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <button data-i18n-aria-label="actions.close" type="button" class="modal-close-x" id="closeSosModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
       <div class="departamento-inline-010">
         <i class="fa-solid fa-triangle-exclamation departamento-inline-011"></i>
-        <h3 class="departamento-inline-012">Centro de Auxilio SOS 24/7</h3>
-        <p class="departamento-inline-013">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
+        <h3 data-i18n="common.centroDeAuxilioSos247" class="departamento-inline-012">Centro de Auxilio SOS 24/7</h3>
+        <p data-i18n="common.lineasDeEmergenciaNacionalY" class="departamento-inline-013">Líneas de emergencia nacional y geolocalización satelital en sendero</p>
       </div>
       <div class="sos-gps-card departamento-inline-014">
-        <span class="departamento-inline-015">TUS COORDENADAS GPS:</span>
-        <div id="sosGpsDisplay" class="departamento-inline-016">Obteniendo señal GPS...</div>
+        <span data-i18n="common.tusCoordenadasGps" class="departamento-inline-015">TUS COORDENADAS GPS:</span>
+        <div id="sosGpsDisplay" class="departamento-inline-016"><span data-i18n="common.obteniendoSenalGps">Obteniendo señal GPS...</span></div>
       </div>
       <div class="sos-lines-grid">
         <a href="tel:128" class="sos-phone-card">
           <i class="fa-solid fa-truck-medical departamento-inline-017"></i>
-          <div><h5 class="departamento-inline-018">Cruz Roja</h5><span class="departamento-inline-019">Marcar 128</span></div>
+          <div><h5 data-i18n="common.cruzRoja" class="departamento-inline-018">Cruz Roja</h5><span data-i18n="pages.departamento.sosModal.span1" class="departamento-inline-019">Marcar 128</span></div>
         </a>
         <a href="tel:115" class="sos-phone-card">
           <i class="fa-solid fa-fire-extinguisher departamento-inline-020"></i>
-          <div><h5 class="departamento-inline-018">Bomberos</h5><span class="departamento-inline-019">Marcar 115</span></div>
+          <div><h5 data-i18n="home.sos.fire" class="departamento-inline-018">Bomberos</h5><span data-i18n="pages.departamento.sosModal.span2" class="departamento-inline-019">Marcar 115</span></div>
         </a>
         <a href="tel:118" class="sos-phone-card">
           <i class="fa-solid fa-shield-halved departamento-inline-021"></i>
-          <div><h5 class="departamento-inline-018">Policía Nacional</h5><span class="departamento-inline-019">Marcar 118</span></div>
+          <div><h5 data-i18n="home.sos.police" class="departamento-inline-018">Policía Nacional</h5><span data-i18n="pages.departamento.sosModal.span3" class="departamento-inline-019">Marcar 118</span></div>
         </a>
         <a href="tel:50584431289" class="sos-phone-card">
           <i class="fa-brands fa-whatsapp departamento-inline-022"></i>
-          <div><h5 class="departamento-inline-018">Mesa Baqueano</h5><span class="departamento-inline-019">WhatsApp SOS</span></div>
+          <div><h5 data-i18n="common.mesaBaqueano" class="departamento-inline-018">Mesa Baqueano</h5><span data-i18n="common.whatsappSos" class="departamento-inline-019">WhatsApp SOS</span></div>
         </a>
       </div>
       <div class="departamento-inline-023">
         <button type="button" class="btn-hero-primary departamento-inline-024" id="btnSendWhatsAppSos">
-          <i class="fa-brands fa-whatsapp"></i> Enviar Alerta con Coordenadas GPS
+          <i class="fa-brands fa-whatsapp"></i> <span data-i18n="common.enviarAlertaConCoordenadasGps">Enviar Alerta con Coordenadas GPS</span>
         </button>
         <button type="button" class="btn-hero-glass departamento-inline-025" id="btnCopyGpsSos">
-          <i class="fa-solid fa-copy"></i> Copiar Coordenadas al Portapapeles
+          <i class="fa-solid fa-copy"></i> <span data-i18n="common.copiarCoordenadasAlPortapapeles">Copiar Coordenadas al Portapapeles</span>
         </button>
       </div>
     </div>
@@ -1002,22 +1002,22 @@
   <!-- MODAL DE DESCARGA DE APK -->
   <div class="modal-backdrop-pro" id="downloadModal" aria-hidden="true" role="dialog">
     <div class="modal-card-dialog">
-      <button type="button" class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-icon-top"><img src="assets/images/logo.png" alt="Baqueano APK" decoding="async" loading="lazy" width="600" height="608"></div>
-      <h3 class="departamento-inline-026">Instalar Baqueano para Android</h3>
-      <p class="departamento-inline-027">Descarga directa del paquete firmado v1.0.0 (Versión Oficial) para tu smartphone Android.</p>
+      <button data-i18n-aria-label="actions.close" type="button" class="modal-close-x" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon-top"><img data-i18n-alt="common.baqueanoApk" src="assets/images/logo.png" alt="Baqueano APK" decoding="async" loading="lazy" width="600" height="608"></div>
+      <h3 data-i18n="common.instalarBaqueanoParaAndroid" class="departamento-inline-026">Instalar Baqueano para Android</h3>
+      <p data-i18n="common.descargaDirectaDelPaqueteFirmado" class="departamento-inline-027">Descarga directa del paquete firmado v1.0.0 (Versión Oficial) para tu smartphone Android.</p>
       <div class="install-steps-vertical">
         <div class="step-row-item">
           <div class="step-badge-num">1</div>
-          <div class="step-details"><h5>Descarga el APK</h5><p>Guarda el archivo seguro baqueanonicaragua.apk en tu almacenamiento.</p></div>
+          <div class="step-details"><h5 data-i18n="common.descargaElApk">Descarga el APK</h5><p data-i18n="pages.departamento.downloadModal.p1">Guarda el archivo seguro baqueanonicaragua.apk en tu almacenamiento.</p></div>
         </div>
         <div class="step-row-item">
           <div class="step-badge-num">2</div>
-          <div class="step-details"><h5>Habilita Fuentes Desconocidas</h5><p>En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
+          <div class="step-details"><h5 data-i18n="common.habilitaFuentesDesconocidas">Habilita Fuentes Desconocidas</h5><p data-i18n="pages.departamento.downloadModal.p2">En Ajustes de Android, autoriza la instalación directa para tu explorador.</p></div>
         </div>
         <div class="step-row-item">
           <div class="step-badge-num">3</div>
-          <div class="step-details"><h5>¡Comienza la Aventura!</h5><p>Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
+          <div class="step-details"><h5 data-i18n="common.comienzaLaAventura">¡Comienza la Aventura!</h5><p data-i18n="pages.departamento.downloadModal.p3">Abre la app y disfruta mapas fuera de línea y senderos sin intermediarios.</p></div>
         </div>
       </div>
       <div class="departamento-inline-028">
