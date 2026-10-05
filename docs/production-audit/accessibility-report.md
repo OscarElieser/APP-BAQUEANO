@@ -1,6 +1,6 @@
 # Informe de accesibilidad WCAG 2.2 AA (requisitos 10 y 13)
 
-> Generado por `website/scripts/browser-qa-report.mjs` a partir de `browser-qa.json` (2026-10-05 13:07 UTC).
+> Generado por `website/scripts/browser-qa-report.mjs` a partir de `browser-qa.json` (2026-10-05 14:55 UTC).
 > Medición: Playwright (Chromium) sobre el build publicado servido en local (`http://127.0.0.1:8790/`), con el shell JS montado.
 > Criterio: axe-core 4 con etiquetas wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa a 390 y 1366 px; la puerta CI falla con cualquier violación crítica o grave.
 

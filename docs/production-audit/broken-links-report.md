@@ -1,12 +1,12 @@
 # Informe de enlaces (requisitos 15 y 16)
 
-> Generado por `website/scripts/browser-qa-report.mjs` a partir de `browser-qa.json` (2026-10-05 13:07 UTC).
+> Generado por `website/scripts/browser-qa-report.mjs` a partir de `browser-qa.json` (2026-10-05 14:55 UTC).
 > Medición: Playwright (Chromium) sobre el build publicado servido en local (`http://127.0.0.1:8790/`), con el shell JS montado.
 > Dos capas: el auditor estático (`production-audit.mjs`) verifica que todo destino local exista en el build; el navegador verifica en ejecución las anclas `#id` y los enlaces de WhatsApp.
 
 ## Estático
 
-Páginas: 31 · críticos: 0 (enlaces, scripts, hojas e imágenes locales inexistentes bloquean el despliegue) · advertencias: 67 (de ellas 67 anclas que el HTML estático no contiene; se comprueban abajo en ejecución, donde el JS ya montó el contenido).
+Páginas: 31 · críticos: 0 (enlaces, scripts, hojas e imágenes locales inexistentes bloquean el despliegue) · advertencias: 64 (de ellas 64 anclas que el HTML estático no contiene; se comprueban abajo en ejecución, donde el JS ya montó el contenido).
 
 ## Anclas en ejecución (390 y 1366 px)
 

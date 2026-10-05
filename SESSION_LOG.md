@@ -4270,3 +4270,4 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   5. Tarjeta de presupuesto medía 528 px en móvil de 390 → 1 columna ≤600 px. Clase nueva `ia-budget-share` (la existente `ia-budget-split` es el desglose).
   6. i18n: 44 claves `baqui.trip.*` ×6; los mensajes salen en el idioma activo. Prueba fijada a ?lang=es.
   - Gates: i18n 0 errores · auditoría estática 0 críticos · franja viva OK · browser-qa 390/1366 0 fallos.
+- QA completa final: 448 cargas, 0 fallos, 0 interactivos recortados; informes regenerados; docs/CONTINUAR_EN_ANTIGRAVITY.md actualizado (req. 14 🟢, pausa cerrada).

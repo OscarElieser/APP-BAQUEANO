@@ -23,19 +23,17 @@ Mensaje sugerido para el agente:
 | `main` | `d6d787c` | Último trabajo **probado**. Es lo que se publica (Azure y Firebase). |
 | `claude/sleepy-goodall-kqogrq` | `main` + commits de pausa | Capa CSS "Responsive sin recortes" **sin probar**, más la bitácora. |
 
-## 2. Punto de pausa (exacto)
+## 2. Punto de pausa
 
-Trabajo en curso: **20/20 bloque D, responsive sin recortes**.
+✅ **Cerrado el 2026-10-05.** La capa "Responsive sin recortes" se probó y se publicó en `main`. También se corrigió BAQUI:
+- reconoce departamentos mal escritos;
+- propone una ruta cuando le dicen "quiero conocer Nicaragua";
+- reparte el presupuesto por persona y por día;
+- recomienda lugares según los intereses.
 
-1. En `website/css/baqueano-system.css`, al final (sección "RESPONSIVE SIN RECORTES"), **borrar** esta línea, que oculta funciones del reproductor:
-   `html[data-bq-page="musica"] body .sticky-controls .player-ctrl-btn:not(.sticky-btn-play) { display: none; }`
-2. Construir y medir (ver la sección 5). Objetivo: la lista "Elementos interactivos parcialmente fuera del viewport" de `docs/production-audit/responsive-report.md` queda vacía o explicada. Casos conocidos:
-   - Cookies: el índice se sale a ≤412 px.
-   - Música: la cabecera del archivo y los controles fijos a ≤430 px, y las tarjetas del archivo a 820 y 1280 px.
-   - Ambiental, Destinos e Historia: botones cortados a 320–375 px.
-   - Aliados, `baqueano-ia` y Mi Viaje: un enlace cada uno a 320–360 px.
-3. Correr la QA completa de **16 anchos**. El `browser-qa.json` subido tiene solo 2 anchos, así que el informe responsive está incompleto. Después ejecutar `node scripts/browser-qa-report.mjs`.
-4. Si todo pasa, hacer commit a la rama y luego a `main`, sin force push.
+`npm run test:baqui` da 20/20.
+
+Siguiente trabajo: la sección 4, desde el punto 2 (CTA principal).
 
 ## 3. Matriz 20/20 (estado honesto al 2026-10-05)
 
@@ -56,7 +54,7 @@ Trabajo en curso: **20/20 bloque D, responsive sin recortes**.
 | 11 | Optimización de imágenes | 🟡 | Hero de 42 MB pasó a 1–2,9 MB, footer de 766 KB a 19 KB. Faltan otras imágenes pesadas. |
 | 12 | Lighthouse / CWV | 🟠 | Escritorio: Perf 64, CLS 0,057. Móvil: Perf 28–30, LCP 16 s. Brecha: unos 800 KB de CSS que bloquea el render (refactor de CSS crítico). |
 | 13 | Contraste WCAG 2.2 AA | 🟢 | axe: 0 críticas y 0 graves en 28 páginas a 390 y 1366 px (`accessibility-report.md`). |
-| 14 | Responsive 16 anchos | 🟡 | 0 desbordes horizontales. Hay elementos recortados por `overflow-x: clip` (punto de pausa). |
+| 14 | Responsive 16 anchos | 🟢 | 448 cargas (28 páginas × 16 anchos): 0 desbordes y 0 elementos interactivos recortados (`responsive-report.md`). |
 | 15 | 404 propia | 🟢 | Enlaces OK. El estado HTTP 404 real lo verifica `kronox-evidence`. |
 | 16 | Enlaces rotos en CI | 🟢 / 🟡 | Estático: 0 críticos. Quedan 3 "Ver más" de Historia (pueblos, personajes, fuentes) sin contenido: **no inventar**, decide el propietario. |
 | 17 | Antispam en servidor | 🔴 | Pendiente bloque E: auditar Edge Functions (rate limit, validación, CORS, App Check). |
@@ -70,7 +68,7 @@ Informes que aún faltan (bloque E): `20-point-checklist.md`, `lighthouse-mobile
 
 ## 4. Pendientes en orden
 
-1. **Terminar la sección 2** (responsive sin recortes).
+1. ~~Responsive sin recortes~~ ✅ hecho.
 2. **CTA principal** (requisito 20): una acción primaria por pantalla en las páginas principales.
 3. **Bloque E:**
    - Antispam y seguridad de Edge Functions y formularios.
