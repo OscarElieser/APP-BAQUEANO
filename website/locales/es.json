@@ -801,5 +801,94 @@
   "seo": {
     "defaultTitle": "BAQUEANO — Descubrí Nicaragua",
     "defaultDescription": "Explorá destinos, cultura y experiencias auténticas de Nicaragua."
+  },
+  "app": {
+    "nav": {
+      "discover": "Descubrir",
+      "mapGps": "Mapa GPS",
+      "ai": "Baqueano AI",
+      "profile": "Perfil",
+      "discoverNicaragua": "Descubre Nicaragua",
+      "countryHistory": "Historia de mi país",
+      "videos": "Videos",
+      "beaches": "Playas y cascadas",
+      "lodging": "Hospedaje",
+      "nightlife": "Vida nocturna",
+      "tourism": "Turismo y volcanes",
+      "community": "Comunidad",
+      "trips": "Mi Viaje",
+      "messages": "Mensajes",
+      "notifications": "Notificaciones",
+      "myProfile": "Mi perfil",
+      "business": "Negocios y aliados",
+      "environmental": "Campaña ambiental",
+      "help": "Ayuda",
+      "brand": "Nuestra marca",
+      "terms": "Términos y condiciones",
+      "privacy": "Política de privacidad"
+    },
+    "drawer": {
+      "explore": "EXPLORAR",
+      "culture": "CULTURA Y TERRITORIO",
+      "trip": "MI VIAJE",
+      "more": "MÁS",
+      "language": "IDIOMA"
+    },
+    "res": {
+      "title": "Solicitud de reserva",
+      "intro": "BAQUEANO no cobra en línea. Registras tu solicitud y coordinas disponibilidad, precio y pago directamente con el negocio verificado por WhatsApp o llamada.",
+      "searching": "Buscando negocios verificados…",
+      "noneAny": "Aún no hay negocios verificados que reciban reservas. Cuando el equipo BAQUEANO los verifique aparecerán aquí.",
+      "noneIn": "Aún no hay negocios verificados en {department} que reciban reservas. Cuando el equipo BAQUEANO los verifique aparecerán aquí.",
+      "pick": "Elige un negocio verificado",
+      "verified": "Verificado",
+      "date": "Fecha del viaje",
+      "people": "Personas",
+      "fewer": "Menos personas",
+      "more": "Más personas",
+      "name": "Tu nombre",
+      "phone": "Tu teléfono / WhatsApp",
+      "notes": "Nota para el negocio (opcional)",
+      "phoneRequired": "Escribe tu teléfono para que el negocio pueda contactarte.",
+      "submit": "Registrar solicitud",
+      "whatsapp": "Coordinar por WhatsApp",
+      "call": "Llamar",
+      "otherBusiness": "Elegir otro negocio",
+      "code": "Código de solicitud",
+      "saved": "Guardada en Mi Viaje como \"{status}\". El negocio aún no la confirmó: escríbele o llámale con este código.",
+      "viewTrip": "Ver Mi Viaje",
+      "signIn": "Inicia sesión para guardar la solicitud en Mi Viaje. Igual puedes escribir al negocio por WhatsApp.",
+      "noContact": "Este negocio aún no tiene teléfono ni WhatsApp registrados.",
+      "mineTitle": "MIS SOLICITUDES DE RESERVA",
+      "mineIntro": "El precio y el pago se acuerdan directamente con el negocio por WhatsApp o llamada. BAQUEANO no cobra en línea.",
+      "mineLoading": "Cargando tus solicitudes…",
+      "mineSignIn": "Inicia sesión para ver tus solicitudes de reserva guardadas.",
+      "mineEmpty": "Aún no tienes solicitudes. Desde un destino o negocio verificado toca \"Reservar\" o \"Solicitar reserva\".",
+      "request": "Solicitar reserva",
+      "status": {
+        "pending": "Solicitud enviada · coordina con el negocio",
+        "confirmed": "Confirmada por el negocio",
+        "rejected": "No disponible",
+        "cancelled": "Cancelada",
+        "completed": "Completada"
+      }
+    },
+    "map": {
+      "loading": "Cargando lugares verificados…",
+      "none": "Sin conexión y sin copia guardada: no hay pines que mostrar.",
+      "status": "{places} destinos y {businesses} negocios con coordenadas reales · fuente: {source}",
+      "pending": "{count} negocios verificados aún sin coordenadas",
+      "live": "Supabase (en vivo)",
+      "cache": "copia guardada",
+      "refresh": "Actualizar datos",
+      "directions": "Cómo llegar",
+      "details": "Ver ficha"
+    },
+    "sos": {
+      "recorded": "Alerta registrada: el Centro de Operaciones BAQUEANO fue notificado.",
+      "throttled": "Tu alerta ya está registrada en el Centro de Operaciones.",
+      "signIn": "Inicia sesión para que el Centro de Operaciones reciba tu alerta. La llamada funciona igual.",
+      "failed": "No se pudo avisar al Centro de Operaciones (sin conexión). La llamada funciona igual."
+    }
   }
 }

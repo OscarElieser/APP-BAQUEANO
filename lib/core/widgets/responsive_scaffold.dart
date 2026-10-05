@@ -20,6 +20,7 @@
 // ============================================================================
 
 import 'dart:ui';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,8 +33,9 @@ import 'custom_toast.dart';
 import 'glass_container.dart';
 import 'sos_safety_modal.dart';
 import 'universal_search_modal.dart';
+import '../i18n/app_i18n.dart';
 
-class ResponsiveScaffold extends StatefulWidget {
+class ResponsiveScaffold extends ConsumerStatefulWidget {
   final Widget body;
   final int currentIndex;
 
@@ -44,11 +46,10 @@ class ResponsiveScaffold extends StatefulWidget {
   });
 
   @override
-  State<ResponsiveScaffold> createState() => _ResponsiveScaffoldState();
+  ConsumerState<ResponsiveScaffold> createState() => _ResponsiveScaffoldState();
 }
 
-class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
-  String _selectedLanguage = 'ES';
+class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
   bool _sidebarExpanded = true;
   final ScrollController _desktopMenuScrollController = ScrollController();
   final ScrollController _mobileMenuScrollController = ScrollController();
@@ -801,9 +802,10 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                       children: [
                         const Text('🇳🇮', style: TextStyle(fontSize: 12)),
                         const SizedBox(width: 4),
-                        _buildLangChip('ES'),
-                        const SizedBox(width: 2),
-                        _buildLangChip('EN'),
+                        for (final lang in kSupportedLanguages) ...[
+                          _buildLangChip(lang.toUpperCase()),
+                          if (lang != kSupportedLanguages.last) const SizedBox(width: 2),
+                        ],
                       ],
                     ),
                   ),
@@ -1109,10 +1111,12 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
     );
   }
 
+  /// Selector real de idioma (antes los chips ES/EN no traducían nada).
   Widget _buildLangChip(String lang) {
-    final isSelected = _selectedLanguage == lang;
+    final code = lang.toLowerCase();
+    final isSelected = ref.watch(appLanguageProvider) == code;
     return InkWell(
-      onTap: () => setState(() => _selectedLanguage = lang),
+      onTap: () => ref.read(appLanguageProvider.notifier).setLanguage(code),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
         decoration: BoxDecoration(
@@ -1133,6 +1137,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
 
   // --- FLOATING GLASS BOTTOM NAV (MOBILE) ---
   Widget _buildFloatingBottomNav(BuildContext context) {
+    final s = ref.strings;
     final screenHeight = MediaQuery.sizeOf(context).height;
     final isCompact = screenHeight < 520;
 
@@ -1157,32 +1162,32 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
               _buildBottomNavItem(
                 0,
                 Icons.home_rounded,
-                'Inicio',
+                s.t('nav.home', 'Inicio'),
                 isCompact: isCompact,
               ),
               _buildBottomNavItem(
                 1,
                 Icons.explore_rounded,
-                'Descubrir',
+                s.t('app.nav.discover', 'Descubrir'),
                 isCompact: isCompact,
               ),
               _buildBottomNavItem(
                 2,
                 Icons.map_rounded,
-                'Mapa GPS',
+                s.t('app.nav.mapGps', 'Mapa GPS'),
                 isCompact: isCompact,
               ),
               _buildBottomNavItem(
                 3,
                 Icons.smart_toy_rounded,
-                'Baqueano AI',
+                s.t('app.nav.ai', 'Baqueano AI'),
                 isAi: true,
                 isCompact: isCompact,
               ),
               _buildBottomNavItem(
                 4,
                 Icons.person_rounded,
-                'Perfil',
+                s.t('app.nav.profile', 'Perfil'),
                 isCompact: isCompact,
               ),
             ],
@@ -1276,6 +1281,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
 
   // --- MOBILE DRAWER ---
   Widget _buildDrawer(BuildContext context) {
+    final s = ref.strings;
     final drawerWidth =
         MediaQuery.sizeOf(context).width.clamp(0, 320).toDouble();
     return Drawer(
@@ -1379,154 +1385,171 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                       padding: const EdgeInsets.fromLTRB(14, 0, 18, 14),
                       physics: const BouncingScrollPhysics(),
                       children: [
-                        _buildMobileDrawerSection('EXPLORAR'),
+                        _buildMobileDrawerSection(s.t('app.drawer.explore', 'EXPLORAR')),
                         _buildMobileDrawerItem(
                           context,
                           Icons.home_rounded,
-                          'Inicio',
+                          s.t('nav.home', 'Inicio'),
                           '/home',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.travel_explore_rounded,
-                          'Descubre Nicaragua',
+                          s.t('app.nav.discoverNicaragua', 'Descubre Nicaragua'),
                           '/descubre-nicaragua',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.explore_rounded,
-                          'Destinos',
+                          s.t('nav.destinations', 'Destinos'),
                           '/descubrir',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.map_rounded,
-                          'Mapa y GPS',
+                          s.t('nav.map', 'Mapa y GPS'),
                           '/mapa',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.auto_awesome_rounded,
-                          'Baqueano AI',
+                          s.t('app.nav.ai', 'Baqueano AI'),
                           '/ai',
                           highlighted: true,
                         ),
-                        _buildMobileDrawerSection('CULTURA Y TERRITORIO'),
+                        _buildMobileDrawerSection(s.t('app.drawer.culture', 'CULTURA Y TERRITORIO')),
                         _buildMobileDrawerItem(
                           context,
                           Icons.history_edu_rounded,
-                          'Historia de mi país',
+                          s.t('app.nav.countryHistory', 'Historia de mi país'),
                           '/historia-mi-pais',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.restaurant_rounded,
-                          'Gastronomía',
+                          s.t('nav.gastronomy', 'Gastronomía'),
                           '/gastronomia',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.music_note_rounded,
-                          'Música',
+                          s.t('nav.music', 'Música'),
                           '/musica',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.smart_display_rounded,
-                          'Videos',
+                          s.t('app.nav.videos', 'Videos'),
                           '/videos',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.beach_access_rounded,
-                          'Playas y cascadas',
+                          s.t('app.nav.beaches', 'Playas y cascadas'),
                           '/playas',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.hotel_rounded,
-                          'Hospedaje',
+                          s.t('app.nav.lodging', 'Hospedaje'),
                           '/hospedaje',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.nightlife_rounded,
-                          'Vida nocturna',
+                          s.t('app.nav.nightlife', 'Vida nocturna'),
                           '/nocturna',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.volcano_rounded,
-                          'Turismo y volcanes',
+                          s.t('app.nav.tourism', 'Turismo y volcanes'),
                           '/turismo',
                         ),
-                        _buildMobileDrawerSection('MI VIAJE'),
+                        _buildMobileDrawerSection(s.t('app.drawer.trip', 'MI VIAJE')),
                         _buildMobileDrawerItem(
                           context,
                           Icons.groups_rounded,
-                          'Comunidad',
+                          s.t('app.nav.community', 'Comunidad'),
                           '/comunidad',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.route_rounded,
-                          'Mis expediciones',
+                          s.t('app.nav.trips', 'Mis expediciones'),
                           '/historial',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.chat_bubble_outline_rounded,
-                          'Mensajes',
+                          s.t('app.nav.messages', 'Mensajes'),
                           '/mensajes',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.notifications_none_rounded,
-                          'Notificaciones',
+                          s.t('app.nav.notifications', 'Notificaciones'),
                           '/notificaciones',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.account_circle_rounded,
-                          'Mi perfil',
+                          s.t('app.nav.myProfile', 'Mi perfil'),
                           '/perfil',
                         ),
-                        _buildMobileDrawerSection('MÁS'),
+                        _buildMobileDrawerSection(s.t('app.drawer.more', 'MÁS')),
                         _buildMobileDrawerItem(
                           context,
                           Icons.handshake_rounded,
-                          'Negocios y aliados',
+                          s.t('app.nav.business', 'Negocios y aliados'),
                           '/planes-negocios',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.eco_rounded,
-                          'Campaña ambiental',
+                          s.t('app.nav.environmental', 'Campaña ambiental'),
                           '/campana-ambiental',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.help_outline_rounded,
-                          'Ayuda',
+                          s.t('app.nav.help', 'Ayuda'),
                           '/ayuda',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.badge_rounded,
-                          'Nuestra marca',
+                          s.t('app.nav.brand', 'Nuestra marca'),
                           '/marca',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.description_outlined,
-                          'Términos y condiciones',
+                          s.t('app.nav.terms', 'Términos y condiciones'),
                           '/terminos',
                         ),
                         _buildMobileDrawerItem(
                           context,
                           Icons.shield_outlined,
-                          'Política de privacidad',
+                          s.t('app.nav.privacy', 'Política de privacidad'),
                           '/privacidad',
+                        ),
+                        _buildMobileDrawerSection(s.t('app.drawer.language', 'IDIOMA')),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(12, 0, 8, 8),
+                          child: Wrap(
+                            spacing: 6,
+                            runSpacing: 6,
+                            children: [
+                              for (final lang in kSupportedLanguages)
+                                Semantics(
+                                  button: true,
+                                  selected: ref.watch(appLanguageProvider) == lang,
+                                  label: kLanguageNames[lang],
+                                  child: _buildLangChip(lang.toUpperCase()),
+                                ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

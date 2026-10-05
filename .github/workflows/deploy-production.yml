@@ -60,6 +60,9 @@ jobs:
       - name: Paridad Web → APK (territorios y lugares idénticos en la app)
         working-directory: website
         run: node scripts/export-territories-for-app.mjs --check
+      - name: Paridad Web → APK (6 idiomas, mismas traducciones)
+        working-directory: website
+        run: node scripts/export-locales-for-app.mjs --check
       - name: Build estático del Website (misma lista permitida que producción)
         working-directory: website
         run: node scripts/build-hostinger-static.mjs

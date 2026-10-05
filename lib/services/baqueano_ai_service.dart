@@ -37,6 +37,7 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/data/catalog_data.dart';
+import '../core/i18n/app_i18n.dart';
 import '../core/ai/baqueano_rag_retriever.dart';
 import '../core/ai/master_tourism_prompt.dart';
 import '../core/ai/traveler_session_context.dart';
@@ -503,10 +504,8 @@ class BaqueanoAiService extends ChangeNotifier {
       final payload = jsonEncode({
         // Contrato de `baqueano-ai`: `prompt` + `currentLanguage`.
         'prompt': userQuery,
-        'currentLanguage': Platform.localeName
-            .split(RegExp('[_.-]'))
-            .first
-            .toLowerCase(),
+        // Idioma elegido en la App (6 idiomas, igual que la Web).
+        'currentLanguage': await _preferredLanguage(),
         'countryCode': 'NI',
         'messages': [
           {'role': 'system', 'content': systemPrompt},
@@ -534,6 +533,16 @@ class BaqueanoAiService extends ChangeNotifier {
     } finally {
       client.close();
     }
+  }
+
+  /// Idioma preferido guardado por `AppLanguageNotifier` o el del dispositivo.
+  static Future<String> _preferredLanguage() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final saved = prefs.getString(AppLanguageNotifier.prefKey);
+      if (saved != null) return AppLanguageNotifier.normalize(saved);
+    } catch (_) {}
+    return AppLanguageNotifier.detectDeviceLanguage();
   }
 
   /// Extrae el texto de respuesta del gateway. Acepta la forma conversacional
