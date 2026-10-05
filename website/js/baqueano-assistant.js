@@ -567,6 +567,27 @@ Todos los servicios están protegidos bajo la Ley de Turismo (Ley 306) con 0% de
       }
     }
 
+    // 2.5 CONSULTA TERRITORIAL POR DEPARTAMENTO ("qué visitar en Rivas", "lugares en Granada", etc.)
+    const deptQuery = text.match(/(?:visitar|conocer|hacer|lugares|destinos|atractivos)\\s+(?:en|de)\\s+([a-záéíóúñ\\s]+)/i);
+    if (deptQuery) {
+      const rawDept = deptQuery[1].trim().toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '');
+      const validDepts = ['boaco','carazo','chinandega','chontales','esteli','granada','jinotega','leon','madriz','managua','masaya','matagalpa','nueva segovia','rio san juan','rivas','raccn','raccs'];
+      const matched = validDepts.find(d => rawDept.includes(d) || d.includes(rawDept));
+      if (matched) {
+        const deptSlug = matched.replace(/\\s+/g, '-');
+        const deptTitle = matched.charAt(0).toUpperCase() + matched.slice(1);
+        return {
+          message: `¡Excelente territorio para explorar! En ${deptTitle} disponemos de destinos publicados en Supabase con coordenadas oficiales. Podés consultar la guía territorial completa, el catálogo filtrado o el mapa satelital:`,
+          animation: 'exploring',
+          actions: [
+            { type: 'open_department', label: `🥾 Guía de ${deptTitle}`, url: `departamento.html?id=${deptSlug}` },
+            { type: 'open_destination', label: `🗺️ Destinos en ${deptTitle}`, url: `destinos.html?department=${deptSlug}` },
+            { type: 'open_map', label: `📍 Mapa de ${deptTitle}`, url: `mapa.html?q=${encodeURIComponent(deptTitle)}` }
+          ]
+        };
+      }
+    }
+
     // 3. SOLICITUD DE CATÁLOGO O DESTINOS INTEGRADOS EN LA WEB ("muestrame el catalago", "destinos", "que tienen")
     const isCatalog = /catalogo|muestrame destino|mostrar destino|que destino|ver destino|cuales destino|lugares para visitar|sitios turisticos|atractivos/.test(text) || (text.includes('destino') && (text.includes('mostrar') || text.includes('recomendar') || text.includes('ver')));
     if (isCatalog) {

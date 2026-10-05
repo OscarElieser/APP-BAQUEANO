@@ -20,8 +20,74 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 # ðŸ§­ BAQUEANO â€” BitÃ¡cora Persistente de Sesiones
 
+## 🧭 BIBLIOTECA SONORA DE HISTORIA EN LA AUDIOGUÍA DE historia.html (05-10-2026)
+
+- **Consulta / Mandato del Usuario:** aporta 12 bloques históricos verificables (Época prehispánica, Conquista y Colonia, León Viejo, Independencia, Formación del Estado, Guerra Nacional, Batalla de San Jacinto, Rubén Darío, Augusto C. Sandino, Costa Caribe, Autonomía de la Costa Caribe, Patrimonio de Nicaragua) con fuentes (Academia de Geografía e Historia de Nicaragua, UNESCO, MINED, Ministerio de Defensa, UNAN-Managua); propone una biblioteca de 40–60 capítulos, separar `historical_fact` de `oral_tradition` (La Mocuana, Carreta Nagua, Cadejo → "Mitos, leyendas y tradición oral") y una ficha por capítulo (título, período, fecha, relato, personajes, lugar, departamento, tipo, fuente, source_url, verified_at). *"ahí en la imagen lo vamos a agregar, ve tú cómo se van a visualizar pero sin perder la trama que llevamos"* (imagen: bloque "Escuchá nuestra historia", Capítulo 4 de 7).
+- **Golden Circle:**
+  - 🎯 **POR QUÉ:** convertir la audioguía de 7 capítulos en una biblioteca sonora con hechos verificados y fuente visible, sin mezclar tradición oral con historia documentada.
+  - ⚙️ **CÓMO:** mantener el diseño actual (avatar, ▶, waveform, chips) y ampliarlo con los capítulos aportados, ficha de fuente y tipo; textos con claves i18n en 6 idiomas.
+  - 📦 **QUÉ:** (en curso) — el módulo ambiental MARENA queda en pausa con la evidencia descargada (planes de manejo y R.M. 016-2026 de vedas).
 
 
+## 🧭 MÓDULO AMBIENTAL MAESTRO MARENA — INICIO AUTORIZADO (05-10-2026)
+
+- **Consulta / Mandato del Usuario:** *"te autorizo"* — autoriza ejecutar el mandato ambiental de 39 fases (MARENA → fuentes oficiales → validación → Supabase → Ops Center → web → mapa → Android → BAQUI). Reglas: NO DATA = NO INVENTION; nada se publica a medias; sin `git commit`, `git push`, `supabase db push`, `firebase deploy` ni producción hasta entregar auditoría, datos, migraciones, pruebas, evidencias, riesgos y rollback.
+- **Golden Circle:**
+  - 🎯 **POR QUÉ:** base ambiental única, trazable y verificable; ningún check BAQUEANO sin evidencia (AGENTS.md regla 10).
+  - ⚙️ **CÓMO:** Fase 1 auditoría (solo lectura) → inventario MARENA con fuente → migraciones en repo (no aplicadas) → scripts idempotentes → pruebas → informe 🟢🟡🔴⚪.
+  - 📦 **QUÉ:** (en curso)
+
+
+## 🧭 ARTISTAS PLÁSTICOS Y ESCÉNICOS POR DEPARTAMENTO EN historia.html (05-10-2026)
+
+- **Consulta / Mandato del Usuario:**
+  > *"[Tabla de 14 artistas: Armando Morales, Rodrigo Peñalba, Raúl Marín, June Beer, Alejandro Aróstegui, Omar de León, Leoncio Sáenz, Edith Grön, Fernando Saravia, Gloria Bacon, Irene López, Gloria Elena Espinoza, Margarita Montealegre, Gloria Carrión Fonseca + mapeo rápido por departamento] agregarlo en historia.html y cada uno en su departamento. continua"*
+
+- **Golden Circle:**
+  - 🎯 **POR QUÉ:** Visibilizar la memoria de las artes visuales, escénicas y documentales de Nicaragua ligada a cada territorio.
+  - ⚙️ **CÓMO:** Sección nueva en `website/historia.html` agrupada por departamento/región, textos con claves i18n en los 6 idiomas; nombres propios con `translate="no"`.
+  - 📦 **QUÉ:** fuente única `website/js/territory-artists-data.js` + renderizador `website/js/territory-artists.js` + `website/css/components/territory-artists.css`; sección `#artistasTerritorio` en `historia.html` (7 territorios, 14 artistas) y bloque `#territoryArtistsSection` en `departamento.html` (se filtra por territorio; Peñalba aparece en Masaya y León; se oculta donde no hay artistas).
+- **Solicitud adicional (mismo turno):** publicar en `ambiental.html` las dos frases clave de verificación ambiental → sección `#verificacionAmbiental` (estilos en `css/pages/ambiental-exact.css`) + regla 10 en `AGENTS.md`. El mandato ambiental MARENA de 39 fases recibido junto a ellas NO se ejecutó en este turno (queda pendiente de autorización y alcance).
+- **i18n:** 50 claves nuevas en 6 idiomas (`pages.historia.artistas.*`, `pages.ambiental.verificacion.*`); `assets/i18n` reexportado para la app.
+- **Evidencia (05-10-2026):** `node scripts/territory-artists.test.mjs` ✅ (nuevo, `npm run test:artistas`); `export-locales-for-app --check` ✅; Playwright local: historia 14 fichas, sin errores JS, sin desborde horizontal a 390 px; masaya=2, leon=2, rivas=oculto; cambio a inglés traduce título, disciplina e hito; ambiental renderiza ambas reglas.
+- **Pendiente / no verde:** `npm run i18n` sigue en rojo por un error PREEXISTENTE ajeno a esta tarea (`js/services/places-service.js`, 3 textos sin clave). Datos de artistas marcados en página como "Contenido editorial en revisión con fuentes culturales oficiales"; dudas a confirmar por el propietario: lugar de nacimiento de Aróstegui (texto neutralizado a "Ligado al norte montañoso") y de Peñalba, autoría de monumentos atribuidos a Edith Grön, localidad de Omar de León. Sin commit, push ni deploy.
+
+
+
+
+
+
+## 🧭 MANDATO MAESTRO: SUPABASE = SOURCE OF TRUTH PARA DESTINOS Y TERRITORIOS (05-10-2026 16:00)
+
+- **Consulta / Mandato del Usuario:**
+  > *"ACTÚA COMO ARQUITECTO SENIOR DE SOFTWARE, DESARROLLADOR FRONTEND/BACKEND, EXPERTO EN SUPABASE, POSTGRESQL, JAVASCRIPT, HTML, MAPAS, GEOLOCALIZACIÓN, SEO, RLS, FLUTTER, OPS CENTER Y SISTEMAS MULTIPLATAFORMA... OBJETIVO PRINCIPAL: Hacer que TODOS LOS DESTINOS PUBLICADOS Y ACTIVOS EN SUPABASE se muestren automáticamente y de forma consistente en: 1. destinos.html, 2. la página del departamento correspondiente, 3. la página de la región correspondiente, 4. el mapa general de BAQUEANO, 5. los mapas departamentales/regionales si existen, 6. búsquedas y filtros, 7. BAQUI, 8. la aplicación Android, 9. Ops Center, 10. cualquier componente público de destinos. SUPABASE ES LA FUENTE PRINCIPAL DE DATOS. NO DUPLICAR INFORMACIÓN EN HTML, JAVASCRIPT, JSON O FIRESTORE... La parte más importante es esta: no quiero que destinos.html 'guarde' los destinos. Quiero que destinos.html los lea de Supabase. Igual las páginas departamentales. Así, cuando desde Ops Center publicás Playa X en Supabase, automáticamente aparece en destinos.html, en su departamento, en su región, en el mapa y en Android. Ese es el sistema correcto... NO HACER COMMIT. NO HACER PUSH. NO HACER DEPLOY PRODUCCIÓN. Primero: AUDITAR, IMPLEMENTAR LOCAL, PROBAR, DOCUMENTAR, MOSTRAR EVIDENCIA y esperar autorización."*
+
+- **Principio Innegociable y Golden Circle:**
+  - 🎯 **POR QUÉ:** Consolidar a Supabase PostgreSQL como la única fuente canónica de verdad para todos los destinos, lugares y territorios de BAQUEANO Nicaragua, eliminando la duplicación en archivos estáticos o hardcodeados, permitiendo que la creación y publicación en Ops Center se propague en tiempo real y dinámicamente a la web, mapas, páginas territoriales, IA BAQUI y app Android, garantizando integridad referencial y gobernanza de datos.
+  - ⚙️ **CÓMO:** Ejecución metódica y estructurada de las 30 Fases:
+    1. Auditoría de Supabase en vivo: `places` cuenta con 237 registros publicados (96 verificados, 141 pendientes, 21 listos para mapa con coordenadas).
+    2. Creación del servicio universal `website/js/services/places-service.js` con cache de 3 min, consultas dinámicas PostgREST por categoría, departamento, región, texto, y fallback limpio.
+    3. Creación del hidratador reactivo `website/js/destinos-supabase.js` para `destinos.html` con renderizado de tarjetas, chips de categorías, búsqueda y pines dinámicos.
+    4. Hidratación dinámica de `website/departamento.html` para consultar destinos por `dept.id` y actualizar el mapa departamental.
+    5. Hidratación dinámica de `website/mapa.html` para trazar todos los pines de `places` con `map_ready=true` y coordenadas válidas.
+    6. Actualización de Flutter Android (`lib/data/repositories/catalog_repository.dart`) para consultar `places` con `is_published=eq.true` como fuente primaria.
+    7. Actualización de Ops Center (`website/js/ops-center/ops-live-data.js` y `supabase/functions/baqueano-ops/index.ts`) para registrar `places` y métricas.
+    8. Integración con BAQUI (`website/js/baqueano-assistant.js`) para orientar consultas departamentales con destinos oficiales.
+    9. Suite automatizada de pruebas: `node scripts/places-consistency.test.mjs` (100% PASS), `npm run i18n` (100% limpio, 0 errores), `flutter analyze` (0 issues), `flutter test` (66/66 tests PASS).
+  - 📦 **QUÉ:**
+    * `website/js/services/places-service.js`: Servicio canónico de destinos.
+    * `website/js/destinos-supabase.js`: Hidratación dinámica de `destinos.html`.
+    * `website/destinos.html`: Desacoplado de listas hardcodeadas con pines dinámicos.
+    * `website/departamento.html`: Conectado a `places.department_id`.
+    * `website/mapa.html`: Pines dinámicos desde Supabase con popup enriquecido.
+    * `lib/data/repositories/catalog_repository.dart`: Conectado a `places` con fallback.
+    * `website/js/ops-center/ops-live-data.js`: Mapeo de `03-destinos` a `places`.
+    * `supabase/functions/baqueano-ops/index.ts`: Entidad `places` y conteos registrados.
+    * `website/js/baqueano-assistant.js`: Enrutamiento territorial inteligente en BAQUI.
+    * `website/scripts/places-consistency.test.mjs`: Test automatizado de consistencia.
+    * Cero commits, cero push, cero deploy a producción (esperando autorización).
+
+---
 
 ## 🧭 INSTALACIÓN Y EJECUCIÓN DE APK ANDROID EN DISPOSITIVO FÍSICO (05-10-2026 15:38)
 
@@ -32,6 +98,12 @@ LO QUE FUNCIONA EN ESTE PUNTO:
   - 🎯 **POR QUÉ:** Permitir al usuario explorar, validar e interactuar con la aplicación nativa BAQUEANO directamente en su dispositivo Android real conectado, verificando fluidez visual, diseño responsivo, franja viva, mapas y catálogo turístico sin errores.
   - ⚙️ **CÓMO:** (1) Detectar dispositivos físicos Android conectados mediante ADB (`adb devices`) o Flutter (`flutter devices`), (2) Localizar el APK generado (`website/assets/BaqueanoNicaragua.apk` o `build/app/outputs/flutter-apk/app-release.apk`) o ejecutar directamente mediante `flutter run -d <device-id>` / `adb install -r`, (3) Iniciar la actividad principal de BAQUEANO en el teléfono.
   - 📦 **QUÉ:** APK instalado y ejecutado en el teléfono físico conectado.
+- **Entregables y Verificación en Vivo (15:44 CST):**
+  - Dispositivo detectado: `SM-X216B` (`R9TX80227CV`), Android 16 (API 36).
+  - Instalación exitosa de `website/assets/BaqueanoNicaragua.apk` (91.02 MB) mediante ADB (`Performing Streamed Install -> Success`).
+  - Actividad lanzada: `ni.baqueano.app/.MainActivity`.
+  - Proceso activo verificado: PID 28559 con motor de renderizado Vulkan Impeller (`Using the Impeller rendering backend (Vulkan)`).
+  - Estado: ✅ Operativa y ejecutándose en pantalla en el dispositivo conectado.
 
 ---
 
@@ -4555,3 +4627,27 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - Se actualizó y desplegó `baqueano-status` versión 103 para reportar `destinations`, `places`, `businesses` y `catalog_total`.
 - Prueba en vivo: `operational`, destinos=7, lugares=237, negocios=30, catálogo total=274, operaciones pendientes=0.
 - Logs posteriores a la importación: únicamente INFO/LOG; 0 warnings y 0 errores nuevos.
+## Nueva directiva de arquitectura híbrida de transición — 2026-10-05
+
+- El propietario redefine la migración: Supabase permanece como base operacional principal, pero Firebase se conserva formalmente para Auth actual, Google Login, FCM, Analytics, App Check, datos/archivos heredados y compatibilidad del APK.
+- Supabase Auth entra progresivamente desde ahora.
+- Requisito crítico: una persona debe tener un único perfil BAQUEANO central en Supabase DB, capaz de vincular identidades Firebase Auth y Supabase Auth sin duplicar turistas ni perder datos.
+- Se analizará íntegramente el archivo adjunto y se reconciliará la arquitectura, documentación, esquema e implementación existente con esta directiva.
+
+### Auditoría y preparación completadas — sin despliegue
+
+- Se leyó íntegramente el documento adjunto de 1,916 líneas.
+- Evidencia Supabase: 0 usuarios en Supabase Auth, 0 perfiles y 0 `identity_links`; todavía no existen duplicados. El catálogo permanece con 237 lugares, 30 negocios y 7 destinos.
+- Hallazgo crítico: `profiles.id` tiene FK directa a `auth.users(id)` y las políticas/funciones asumen `profiles.id = auth.uid()`. Este modelo impide representar correctamente a una persona solo-Firebase.
+- `identity_links` existe, pero solo permite `provider='firebase'`; `baqueano-identity` ya contempla tokens Firebase y Supabase parcialmente.
+- Flutter mantiene Firebase Auth, Firestore y App Check; FCM y Analytics no aparecen como dependencias declaradas en el `pubspec.yaml` principal y requieren auditoría de consola/APK antes de afirmar que están operativos.
+- Se actualizó `AGENTS.md` y `SUPABASE_SOURCE_OF_TRUTH.md` con la arquitectura híbrida oficial.
+- Se creó `docs/architecture/DATA_ARCHITECTURE.md` con responsabilidades, evidencia, modelo de identidad, fases, rollback y matriz de 35 entregables.
+- Se creó `docs/architecture/profile_identity_transition_draft.sql` como borrador explícitamente no desplegable; desacopla el perfil de `auth.users` y enumera los cambios RLS/funciones pendientes.
+- Se restauró localmente Cloud Functions en `firebase.json` y la referencia al bucket heredado en `.env.example`; se actualizaron comentarios de `firebase.legacy.json`. No se ejecutó `firebase deploy`, `supabase db push`, commit ni push.
+- Validación local: JSON Firebase válido, `git diff --check` limpio y sin uso de la palabra prohibida en los archivos tocados.
+## Objetivo activo — catálogo Supabase visible en Web y Android — 2026-10-05
+
+- El propietario exige completar la integración de punta a punta: los datos de Supabase deben reflejarse realmente en Web y app Android; no acepta entregables parciales.
+- Alcance inmediato: conectar consumidores Web, mapa, fichas, BAQUI y Flutter al catálogo Supabase importado, conservar fallback legado solo para contingencia de lectura, validar consistencia y preparar/desplegar lo necesario con pruebas completas.
+- La autorización se limita a completar esta funcionalidad sin borrar datos ni retirar Firebase; cualquier cambio debe preservar compatibilidad y rollback.

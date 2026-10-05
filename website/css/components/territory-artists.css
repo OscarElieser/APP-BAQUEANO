@@ -1,0 +1,134 @@
+/* ============================================================================
+   🧭 BAQUEANO — ARTISTAS POR TERRITORIO (css/components/territory-artists.css)
+   ============================================================================
+   🎯 POR QUÉ: las fichas de artistas deben leerse igual en Historia y en la
+      guía departamental.
+   ⚙️ CÓMO: componentes `.bq-artist*` con variables locales (paleta oficial);
+      las mismas tarjetas claras sirven a ambas páginas.
+   📦 QUÉ: grupos por territorio, cuadrícula responsiva y ficha de artista.
+   ============================================================================ */
+.bq-artists {
+  --bq-artist-bg: #FFFFFF;
+  --bq-artist-border: #E2E8F0;
+  --bq-artist-title: #0F172A;
+  --bq-artist-text: #475569;
+  --bq-artist-muted: #64748B;
+  --bq-artist-accent: #F65E01;
+  --bq-artist-teal: #165D6F;
+  --bq-artist-chip-bg: #F4E6C1;
+  margin-bottom: 40px;
+}
+
+/* Anclas desde Historia ↔ Departamento: que el título no quede bajo la barra fija. */
+#territoryArtistsSection,
+#artistasTerritorio,
+.bq-artists-group { scroll-margin-top: 150px; }
+
+.bq-artists-groups { display: grid; gap: 28px; }
+
+.bq-artists-group-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--bq-artist-chip-bg);
+}
+
+.bq-artists-group-title h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--bq-artist-title);
+  margin: 0;
+}
+
+.bq-artists-group-title h3 i { color: var(--bq-artist-accent); }
+
+.bq-artists-group-tagline {
+  font-size: 0.8rem;
+  color: var(--bq-artist-muted);
+  margin: 2px 0 0;
+}
+
+.bq-artists-group-link {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--bq-artist-teal);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.bq-artists-group-link:hover,
+.bq-artists-group-link:focus-visible { color: var(--bq-artist-accent); }
+
+.bq-artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(270px, 100%), 1fr));
+  gap: 14px;
+}
+
+.bq-artist-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--bq-artist-bg);
+  border: 1px solid var(--bq-artist-border);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.bq-artist-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+}
+
+.bq-artist-discipline {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--bq-artist-teal);
+  background: var(--bq-artist-chip-bg);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.bq-artist-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--bq-artist-title);
+  margin: 2px 0 0;
+}
+
+.bq-artist-place {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--bq-artist-muted);
+}
+
+.bq-artist-place i { color: var(--bq-artist-accent); }
+
+.bq-artist-milestone {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--bq-artist-text);
+  margin: 4px 0 0;
+}
+
+.bq-artists-note {
+  font-size: 0.74rem;
+  color: var(--bq-artist-muted);
+  margin: 18px 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bq-artist-card { transition: none; }
+  .bq-artist-card:hover { transform: none; }
+}

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T21:02:43.921Z",
+  "generatedAt": "2026-10-05T22:59:19.884Z",
   "languages": [
     "es",
     "en",
@@ -9,26 +9,26 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 3824,
-    "en": 3824,
-    "fr": 3824,
-    "it": 3824,
-    "pt": 3824,
-    "de": 3824
+    "es": 3917,
+    "en": 3917,
+    "fr": 3917,
+    "it": 3917,
+    "pt": 3917,
+    "de": 3917
   },
   "html": {
     "files": 31,
-    "total": 3645,
-    "translated": 3644,
+    "total": 3664,
+    "translated": 3663,
     "untranslated": 1
   },
   "js": {
-    "files": 84,
-    "translated": 122,
-    "untranslated": 731
+    "files": 87,
+    "translated": 134,
+    "untranslated": 729
   },
   "jsEditorial": {
-    "files": 5,
+    "files": 7,
     "strings": 23
   },
   "tsx": {
@@ -79,19 +79,23 @@
     "js/definitive-index-interactions.js",
     "js/destination-community.js",
     "js/destinos-provenance.js",
+    "js/destinos-supabase.js",
     "js/destinos-verified.js",
     "js/favoritos.js",
     "js/firebase-config.js",
     "js/firestore-mirror.js",
     "js/firestore-realtime.js",
     "js/hero-video-loader.js",
+    "js/historia-audioguia.js",
     "js/impact-public.js",
     "js/local-keys.js",
     "js/ops-center/ops-community-moderation.js",
     "js/safety-gallery.js",
+    "js/services/places-service.js",
     "js/shared/roles.js",
     "js/smart-search.js",
     "js/supabase-config.js",
+    "js/territory-artists.js",
     "js/territory-inspector.js",
     "js/territory-media-catalog.js",
     "js/territory-rich-sections.js",
@@ -150,8 +154,8 @@
     {
       "file": "ambiental.html",
       "type": "html",
-      "total": 121,
-      "translated": 121,
+      "total": 129,
+      "translated": 129,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -222,8 +226,8 @@
     {
       "file": "departamento.html",
       "type": "html",
-      "total": 78,
-      "translated": 78,
+      "total": 81,
+      "translated": 81,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -276,8 +280,8 @@
     {
       "file": "historia.html",
       "type": "html",
-      "total": 176,
-      "translated": 176,
+      "total": 184,
+      "translated": 184,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -670,6 +674,15 @@
       "coverage": 100
     },
     {
+      "file": "js/destinos-supabase.js",
+      "type": "js",
+      "total": 8,
+      "translated": 8,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/destinos-verified.js",
       "type": "js",
       "total": 15,
@@ -805,13 +818,22 @@
       "coverage": 100
     },
     {
+      "file": "js/historia-audioguia-data.js",
+      "type": "js-editorial",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/historia-audioguia.js",
       "type": "js",
-      "total": 2,
+      "total": 0,
       "translated": 0,
-      "untranslated": 2,
+      "untranslated": 0,
       "editorialStrings": 0,
-      "coverage": 0
+      "coverage": 100
     },
     {
       "file": "js/historia-epocas.js",
@@ -1030,6 +1052,15 @@
       "coverage": 100
     },
     {
+      "file": "js/services/places-service.js",
+      "type": "js",
+      "total": 4,
+      "translated": 4,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/shared/roles.js",
       "type": "js",
       "total": 0,
@@ -1077,6 +1108,24 @@
     {
       "file": "js/territories-rich-data.js",
       "type": "js-editorial",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/territory-artists-data.js",
+      "type": "js-editorial",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/territory-artists.js",
+      "type": "js",
       "total": 0,
       "translated": 0,
       "untranslated": 0,

@@ -2017,6 +2017,16 @@
         "h41": "Join the community",
         "p3": "Together for a cleaner, more sustainable Nicaragua.",
         "a1": "I want to join"
+      },
+      "verificacion": {
+        "kicker": "BAQUEANO DATA POLICY",
+        "title": "Environmental verification commitment",
+        "intro": "This is how we make sure every nature fact you see on BAQUEANO can be trusted.",
+        "sourceTitle": "No evidence, no check mark",
+        "sourceRule": "No environmental content may be marked as verified or published with the BAQUEANO check unless there is traceable evidence from the official source or the corresponding documented validation.",
+        "accessTitle": "“Get directions” only with a validated access point",
+        "accessRule": "A protected area may be published for information without navigation; the “Get directions” button is enabled only when a validated access point exists. The geographic centre of a reserve will never be used automatically as a visitor entrance.",
+        "accessWhy": "This way we never send you to a point that is right on the map but wrong as an entrance."
       }
     },
     "avisoLegal": {
@@ -3295,17 +3305,18 @@
       "histAudioSection": {
         "h31": "Listen to our history",
         "p1": "Stories, music and historical figures in the voice of Baqueano Digital.",
-        "span1": "7 chapters",
+        "span1": "13 chapters",
         "p2": "Choose a chapter or tap ▶ to listen from the beginning.",
         "button1": "🏛️ Pre-Hispanic Era",
         "button2": "⛪ Colonial Era",
         "button3": "📜 Independence",
         "button4": "⚔️ National War",
-        "button5": "🎖️ 20th Century",
+        "button5": "🎖️ Historical figures",
         "button6": "🇳🇮 Nicaragua Today",
         "button7": "🎶 Music and Traditions",
         "buttonAriaLabel1": "Play audio guide",
-        "divAriaLabel1": "Audio guide chapters"
+        "divAriaLabel1": "Audio guide periods",
+        "button8": "🌊 Caribbean Coast"
       },
       "museosPatrimonio": {
         "h21": "Historic Monuments & National Museum Network",
@@ -3374,6 +3385,155 @@
       },
       "territoryNext": {
         "buttonAriaLabel1": "Next territory"
+      },
+      "artistas": {
+        "kicker": "VISUAL, PERFORMING AND DOCUMENTARY ARTS",
+        "title": "Artists who drew the territory",
+        "subtitle": "Painting, sculpture, dance, theatre, photography and film tied to each department and region of Nicaragua.",
+        "note": "Editorial content under review against official cultural sources.",
+        "deptLink": "View department",
+        "deptTitle": "Artists of the territory",
+        "deptSubtitle": "Creators whose work is tied to this department or region.",
+        "historiaLink": "See all artists in History",
+        "groups": {
+          "managua": "Metropolitan · Civic history",
+          "masaya": "Cradle of folklore and traditional dance",
+          "granada": "Colonial heritage and international reach",
+          "leon": "Theatrical and literary avant-garde",
+          "matagalpa": "Indigenism, Praxis and mountain textures",
+          "carazo": "Southern plateau and expressionism",
+          "raccs": "Afro-descendant worldview and cultural resistance"
+        },
+        "disciplines": {
+          "painting": "Painting",
+          "paintingPoetry": "Painting / Poetry",
+          "paintingMixed": "Painting / Mixed media",
+          "paintingDrawing": "Painting / Drawing",
+          "sculpture": "Sculpture",
+          "sculpturePainting": "Sculpture / Painting",
+          "danceManagement": "Dance / Cultural management",
+          "danceFolklore": "Dance / Folklore",
+          "playwriting": "Playwriting / Literature",
+          "photography": "Photography",
+          "film": "Film / Documentary"
+        },
+        "items": {
+          "gron": {
+            "locality": "Based in Managua · Danish-born, naturalised",
+            "milestone": "She shaped the country’s civic monumental memory: the Andrés Castro monument at Hacienda San Jacinto (Tipitapa), the Rubén Darío relief and the statue of the chief Diriangén."
+          },
+          "penalba": {
+            "locality": "San Pedro de Lovago / San Juan de Oriente (ties to Masaya and León)",
+            "milestone": "Regarded as the father of modern painting in Nicaragua and director of the National School of Fine Arts; he steered the traditional and sacred iconography of the Pacific towards the expressionist avant-garde."
+          },
+          "morales": {
+            "milestone": "Born in the “Great Sultana”. His imagery projects Lake Cocibolca, colonial still lifes and the lushness of the Nicaraguan Caribbean rainforest, carried onto the international circuit (Paris, New York)."
+          },
+          "marin": {
+            "milestone": "Heir to the artistic tradition of the Meseta de los Pueblos; known for his visual architecture and dense palette-knife oil textures depicting Creole and urban Central American scenes."
+          },
+          "beer": {
+            "milestone": "The first Afro-descendant national painter from the Caribbean Coast. Her work is living testimony to Creole identity, Black Caribbean women and the community memory of Bluefields."
+          },
+          "arostegui": {
+            "milestone": "Linked to the mountainous north. Founder of the Praxis Group (1963); he introduced material informalism using soils, volcanic textures and scrap metal as a metaphor for Nicaragua’s landscape and socio-political reality."
+          },
+          "deleon": {
+            "milestone": "Creator of the scraped-wax and fresco-transparency technique. He founded the Museo-Galería 904 in the capital before the 1972 earthquake, capturing the lakeside light of Managua."
+          },
+          "saenz": {
+            "milestone": "The leading exponent of pictorial indigenism. He brought petroglyphs, pre-Columbian ceramics, northern legends and the line of the central highlands into contemporary murals and canvases."
+          },
+          "saravia": {
+            "milestone": "A founding figure of public art in the capital and Peñalba’s right hand at the Fine Arts school; he sculpted reliefs and figures that document mestizaje and the vernacular anatomy of the Pacific."
+          },
+          "bacon": {
+            "milestone": "A pioneer of Afro-Caribbean contemporary dance and Caribbean ballroom dance; she connected Maypole (Palo de Mayo) folklore and Caribbean Coast rhythms with the stages of the Pacific."
+          },
+          "lopez": {
+            "milestone": "A national reference in researching and documenting marimba sones, the danzas de negras, the bailes de húngaras and the choreographic mestizaje of Monimbó and Masaya."
+          },
+          "espinoza": {
+            "milestone": "Heir to León’s university intellectual tradition; her plays explore colonial memory, patriarchal oppression and the urban mythology of the country’s first capital."
+          },
+          "montealegre": {
+            "milestone": "A witness through photojournalism to the insurrection, the National Literacy Crusade and post-war reconstruction; she captured everyday life in the capital’s working-class neighbourhoods."
+          },
+          "carrion": {
+            "milestone": "A filmmaker who connects the collective historical memory of the 1980s with urban generational dilemmas through her documentary Heredera del viento."
+          }
+        }
+      },
+      "audio": {
+        "counter": "Chapter {n} of {total}",
+        "pause": "Pause audio guide",
+        "end": "End of the journey. Choose a chapter to listen to it again.",
+        "noVoice": "Your browser can’t read aloud: here is the full story.",
+        "next": "Next chapter",
+        "map": "View on the map",
+        "sources": "Sources",
+        "verified": "Verified on {date}",
+        "people": "People",
+        "chaptersLabel": "Chapters in this period",
+        "types": {
+          "historical_fact": "Historical fact",
+          "heritage": "Heritage",
+          "oral_tradition": "Oral tradition"
+        },
+        "chapters": {
+          "pueblosOriginarios": {
+            "title": "Indigenous peoples of the Pacific",
+            "text": "When the Spanish arrived, Nicaragua’s Pacific region was already home to several peoples: the Maribios or Sutiavas, the Mangues or Chorotegas, and the Nahuas or Nicaraguas. They lived in farming villages on plains near the lakes and volcanoes, were governed by councils of elders or by chiefs, and traded by barter with neighbouring peoples. Their roots are linked to migrations from the north, from lands in present-day Mexico."
+          },
+          "conquista": {
+            "title": "Conquest and colonial era",
+            "text": "In 1502, on his fourth voyage, Christopher Columbus sailed along Nicaragua’s Caribbean coast and rounded a cape he named Gracias a Dios. In 1522, Gil González Dávila and Andrés Niño arrived overland from Panama and made contact with the chiefs Nicoya and Nicaragua. In 1524 the Spanish founded León and Granada, and in 1544 the territory became part of the Captaincy General of Guatemala."
+          },
+          "leonViejo": {
+            "title": "León Viejo",
+            "text": "León, one of the cities founded by the Spanish in 1524, was moved to its current site in 1610 after an earthquake. The ruins of the original city, known as León Viejo, were added to UNESCO’s World Heritage List in 2000."
+          },
+          "independencia": {
+            "title": "Independence",
+            "text": "The first independence uprisings broke out in 1811 in León, Granada and Rivas, with strong popular support. The Captaincy General of Guatemala, which included Nicaragua, declared independence from Spain on 15 September 1821. A year later it was annexed to Agustín de Iturbide’s short-lived Mexican Empire, and in 1823 Nicaragua joined the Federation of the United Provinces of Central America."
+          },
+          "treintaAnos": {
+            "title": "The Thirty Years",
+            "text": "After William Walker’s filibuster incursion, the Nicaraguan State slowly took shape. This period is known as the Thirty Years: it runs from the administrations of General Tomás Martínez, between 1858 and 1867, to 1893, the year of the liberal revolution."
+          },
+          "guerraNacional": {
+            "title": "National War",
+            "text": "Between 1855 and 1857, Nicaragua faced the filibuster incursion of William Walker. In the north, Generals Tomás Martínez and Fernando Chamorro organised the Army of the North (Ejército del Septentrión), whose officers declared in Matagalpa on 20 April 1856 that they would defend national independence to the last drop of blood. Six months of that resistance led to the Battle of San Jacinto."
+          },
+          "sanJacinto": {
+            "title": "The Battle of San Jacinto",
+            "text": "On Sunday, 14 September 1856, at the San Jacinto hacienda, Colonel José Dolores Estrada and his troops held off the filibusters’ attack. The fighting was hand to hand, and Andrés Castro, with no time to load his rifle, brought down a filibuster with a stone. A flanking sortie surprised the attackers, who fled. That same day, Estrada reported the victory in his official dispatch."
+          },
+          "dario": {
+            "title": "Rubén Darío",
+            "text": "Félix Rubén García Sarmiento was born in Metapa on 18 January 1867 and died in León on 6 February 1916. His father’s family was known as the Daríos, which is why he took the surname Darío. A poet, journalist and diplomat, he is regarded as the foremost representative of literary modernism in the Spanish language."
+          },
+          "sandino": {
+            "title": "Augusto C. Sandino",
+            "text": "Augusto Nicolás Calderón Sandino was born in Niquinohomo, Masaya, on 18 May 1895. In 1927 he began the armed struggle against the United States intervention at the head of the Army in Defence of National Sovereignty. He was assassinated on 21 February 1934 by National Guard officers acting on the orders of Anastasio Somoza García."
+          },
+          "costaCaribe": {
+            "title": "The Caribbean Coast and the Mosquitia",
+            "text": "The history of Nicaragua’s Caribbean followed its own path. In the 18th century the English allied with the Miskito people and consolidated their hold on the region; in 1748 they seized San Juan de Nicaragua. The Mosquitia, or Mosquito Coast, came to be regarded as an English colony until 1860, when the Treaty of Managua recognised Nicaragua’s sovereignty and created the Mosquitia Reserve."
+          },
+          "autonomia": {
+            "title": "Autonomy of the Caribbean Coast",
+            "text": "In 1987 Law No. 28, the Statute of Autonomy of the Regions of Nicaragua’s Caribbean Coast, was approved. The law symbolised the recognition of the ancestral rights of Indigenous and Afro-descendant peoples as the country’s multi-ethnic, multicultural and multilingual communities."
+          },
+          "patrimonioMundial": {
+            "title": "Nicaragua’s World Heritage",
+            "text": "Nicaragua has two properties on UNESCO’s World Heritage List: the Ruins of León Viejo, inscribed in 2000, and León Cathedral, inscribed in 2011."
+          },
+          "gueguense": {
+            "title": "El Güegüense",
+            "text": "El Güegüense is a satirical drama, well known in Nicaragua, that brings together theatre, dance and music as a synthesis of Spanish and Indigenous cultures. It is performed every year at the feast of San Sebastián. UNESCO proclaimed it in 2005 and inscribed it in 2008 on the Representative List of the Intangible Cultural Heritage of Humanity."
+          }
+        }
       }
     },
     "index": {
@@ -5068,7 +5228,10 @@
       "sources": "Sources",
       "zone": "Municipality or area",
       "checkNotice": "Verified with official source",
-      "seeSheet": "View details"
+      "seeSheet": "View details",
+      "partialNotice": "Partially verified information.",
+      "pendingNotice": "Location pending verification.",
+      "pendingConfirm": "Information to be confirmed."
     },
     "access": {
       "viewArea": "View the area on the map",

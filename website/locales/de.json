@@ -2017,6 +2017,16 @@
         "h41": "Tritt der Gemeinschaft bei",
         "p3": "Gemeinsam für ein saubereres und nachhaltigeres Nicaragua.",
         "a1": "Ich mache mit"
+      },
+      "verificacion": {
+        "kicker": "BAQUEANO-DATENRICHTLINIE",
+        "title": "Verpflichtung zur Umweltdatenprüfung",
+        "intro": "So stellen wir sicher, dass jede Naturinformation auf BAQUEANO verlässlich ist.",
+        "sourceTitle": "Ohne Nachweis kein Häkchen",
+        "sourceRule": "Kein Umweltinhalt darf als geprüft markiert oder mit dem BAQUEANO-Häkchen veröffentlicht werden, wenn kein nachvollziehbarer Nachweis der offiziellen Quelle oder eine entsprechende dokumentierte Validierung vorliegt.",
+        "accessTitle": "„Route“ nur mit geprüftem Zugangspunkt",
+        "accessRule": "Ein Schutzgebiet kann zu Informationszwecken ohne Navigation veröffentlicht werden; die Schaltfläche „Route“ wird nur aktiviert, wenn ein geprüfter Zugangspunkt existiert. Der geografische Mittelpunkt eines Reservats wird niemals automatisch als touristischer Eingang verwendet.",
+        "accessWhy": "So schicken wir dich nie zu einem Punkt, der auf der Karte stimmt, als Eingang aber falsch ist."
       }
     },
     "avisoLegal": {
@@ -3295,17 +3305,18 @@
       "histAudioSection": {
         "h31": "Hör dir unsere Geschichte an",
         "p1": "Geschichten, Musik und Persönlichkeiten, erzählt von Baqueano Digital.",
-        "span1": "7 Kapitel",
+        "span1": "13 Kapitel",
         "p2": "Wähle ein Kapitel oder tippe auf ▶, um von Anfang an zu hören.",
         "button1": "🏛️ Vorspanische Zeit",
         "button2": "⛪ Kolonialzeit",
         "button3": "📜 Unabhängigkeit",
         "button4": "⚔️ Nationaler Krieg",
-        "button5": "🎖️ 20. Jahrhundert",
+        "button5": "🎖️ Persönlichkeiten",
         "button6": "🇳🇮 Nicaragua heute",
         "button7": "🎶 Musik und Traditionen",
         "buttonAriaLabel1": "Audioguide abspielen",
-        "divAriaLabel1": "Kapitel des Audioguides"
+        "divAriaLabel1": "Zeiträume des Audioguides",
+        "button8": "🌊 Karibikküste"
       },
       "museosPatrimonio": {
         "h21": "Historische Denkmäler & nationales Museumsnetz",
@@ -3374,6 +3385,155 @@
       },
       "territoryNext": {
         "buttonAriaLabel1": "Nächstes Gebiet"
+      },
+      "artistas": {
+        "kicker": "BILDENDE, DARSTELLENDE UND DOKUMENTARISCHE KUNST",
+        "title": "Künstlerinnen und Künstler, die das Land gezeichnet haben",
+        "subtitle": "Malerei, Bildhauerei, Tanz, Theater, Fotografie und Film, verbunden mit jedem Departamento und jeder Region Nicaraguas.",
+        "note": "Redaktioneller Inhalt, der anhand offizieller Kulturquellen geprüft wird.",
+        "deptLink": "Departamento ansehen",
+        "deptTitle": "Künstler der Region",
+        "deptSubtitle": "Kunstschaffende, deren Werk mit diesem Departamento oder dieser Region verbunden ist.",
+        "historiaLink": "Alle Künstler unter Geschichte ansehen",
+        "groups": {
+          "managua": "Hauptstadt · Bürgergeschichte",
+          "masaya": "Wiege der Folklore und des traditionellen Tanzes",
+          "granada": "Koloniales Erbe und internationale Ausstrahlung",
+          "leon": "Theatralische und literarische Avantgarde",
+          "matagalpa": "Indigenismus, Praxis und Bergtexturen",
+          "carazo": "Südliche Hochebene und Expressionismus",
+          "raccs": "Afrokaribische Weltsicht und kultureller Widerstand"
+        },
+        "disciplines": {
+          "painting": "Malerei",
+          "paintingPoetry": "Malerei / Lyrik",
+          "paintingMixed": "Malerei / Mischtechnik",
+          "paintingDrawing": "Malerei / Zeichnung",
+          "sculpture": "Bildhauerei",
+          "sculpturePainting": "Bildhauerei / Malerei",
+          "danceManagement": "Tanz / Kulturmanagement",
+          "danceFolklore": "Tanz / Folklore",
+          "playwriting": "Dramatik / Literatur",
+          "photography": "Fotografie",
+          "film": "Film / Dokumentarfilm"
+        },
+        "items": {
+          "gron": {
+            "locality": "Lebte in Managua · dänischer Herkunft, eingebürgert",
+            "milestone": "Sie prägte das bürgerliche Denkmalgedächtnis des Landes: das Andrés-Castro-Denkmal an der Hacienda San Jacinto (Tipitapa), das Rubén-Darío-Relief und die Statue des Kaziken Diriangén."
+          },
+          "penalba": {
+            "locality": "San Pedro de Lovago / San Juan de Oriente (Verbindung zu Masaya und León)",
+            "milestone": "Gilt als Vater der modernen Malerei Nicaraguas und leitete die Nationale Kunstschule; er führte die traditionelle und sakrale Ikonografie der Pazifikregion zur expressionistischen Avantgarde."
+          },
+          "morales": {
+            "milestone": "Geboren in der „Großen Sultanin“. Seine Bildwelt zeigt den Cocibolca-See, koloniale Stillleben und die Üppigkeit des Regenwalds der nicaraguanischen Karibik – getragen bis in die internationale Kunstszene (Paris, New York)."
+          },
+          "marin": {
+            "milestone": "Erbe der künstlerischen Tradition der Meseta de los Pueblos; bekannt für seine Bildarchitektur und dichte, mit dem Spachtel aufgetragene Öltexturen mit kreolischen und städtischen Szenen Mittelamerikas."
+          },
+          "beer": {
+            "milestone": "Erste afrokaribische Malerin des Landes von der Karibikküste. Ihr Werk ist ein lebendiges Zeugnis kreolischer Identität, schwarzer karibischer Frauen und des Gemeinschaftsgedächtnisses von Bluefields."
+          },
+          "arostegui": {
+            "milestone": "Mit dem gebirgigen Norden verbunden. Gründer der Gruppe Praxis (1963); er führte den materialbetonten Informel mit Erden, vulkanischen Texturen und Metallschrott als Metapher für Landschaft und gesellschaftspolitische Wirklichkeit Nicaraguas ein."
+          },
+          "deleon": {
+            "milestone": "Schöpfer der Technik aus geschabtem Wachs und Fresko-Transparenzen. Er gründete vor dem Erdbeben von 1972 das Museo-Galería 904 in der Hauptstadt und fing das Seelicht Managuas ein."
+          },
+          "saenz": {
+            "milestone": "Wichtigster Vertreter des malerischen Indigenismus. Er übertrug Petroglyphen, präkolumbische Keramik, Legenden des Nordens und die Linienführung des zentralen Hochlands auf zeitgenössische Wandbilder und Leinwände."
+          },
+          "saravia": {
+            "milestone": "Mitbegründer der öffentlichen Kunst der Hauptstadt und rechte Hand Peñalbas an der Kunstschule; er schuf Reliefs und Figuren, die die Mestizenkultur und die volkstümliche Anatomie der Pazifikregion festhalten."
+          },
+          "bacon": {
+            "milestone": "Pionierin des afrokaribischen zeitgenössischen Tanzes und karibischer Gesellschaftstänze; sie verband die Folklore des Palo de Mayo (Maypole) und die Rhythmen der Karibikküste mit den Bühnen der Pazifikregion."
+          },
+          "lopez": {
+            "milestone": "Nationale Referenz für die Erforschung und Systematisierung der Marimba-Sones, der Danzas de Negras, der Bailes de Húngaras und der choreografischen Mestizenkultur von Monimbó und Masaya."
+          },
+          "espinoza": {
+            "milestone": "Erbin der intellektuellen Universitätstradition Leóns; ihre Theaterstücke erkunden koloniales Gedächtnis, patriarchale Unterdrückung und die urbane Mythologie der ersten Hauptstadt des Landes."
+          },
+          "montealegre": {
+            "milestone": "Fotojournalistische Zeugin des Aufstands, der Nationalen Alphabetisierungskampagne und des Wiederaufbaus nach dem Krieg; sie hielt den Alltag der Arbeiterviertel der Hauptstadt fest."
+          },
+          "carrion": {
+            "milestone": "Filmemacherin, die mit ihrem Dokumentarfilm Heredera del viento das kollektive historische Gedächtnis der 1980er-Jahre mit urbanen Generationskonflikten verbindet."
+          }
+        }
+      },
+      "audio": {
+        "counter": "Kapitel {n} von {total}",
+        "pause": "Audioguide pausieren",
+        "end": "Ende des Rundgangs. Wähle ein Kapitel, um es erneut zu hören.",
+        "noVoice": "Dein Browser kann nicht vorlesen: Hier ist die vollständige Geschichte.",
+        "next": "Nächstes Kapitel",
+        "map": "Auf der Karte ansehen",
+        "sources": "Quellen",
+        "verified": "Geprüft am {date}",
+        "people": "Personen",
+        "chaptersLabel": "Kapitel dieses Zeitraums",
+        "types": {
+          "historical_fact": "Historische Tatsache",
+          "heritage": "Kulturerbe",
+          "oral_tradition": "Mündliche Überlieferung"
+        },
+        "chapters": {
+          "pueblosOriginarios": {
+            "title": "Indigene Völker der Pazifikregion",
+            "text": "Als die Spanier ankamen, lebten an der Pazifikseite Nicaraguas bereits mehrere Völker: die Maribios oder Sutiavas, die Mangues oder Chorotegas und die Nahuas oder Nicaraguas. Sie wohnten in Bauerndörfern auf Ebenen nahe den Seen und Vulkanen, wurden von Ältestenräten oder Kaziken regiert und trieben Tauschhandel mit den Nachbarvölkern. Ihre Wurzeln gehen auf Wanderungsbewegungen aus dem Norden zurück, aus Gebieten des heutigen Mexiko."
+          },
+          "conquista": {
+            "title": "Eroberung und Kolonialzeit",
+            "text": "1502 fuhr Christoph Kolumbus auf seiner vierten Reise an der Karibikküste Nicaraguas entlang und umrundete ein Kap, das er Gracias a Dios nannte. 1522 kamen Gil González Dávila und Andrés Niño auf dem Landweg aus Panama und trafen auf die Kaziken Nicoya und Nicaragua. 1524 gründeten die Spanier León und Granada, und 1544 wurde das Gebiet dem Generalkapitanat Guatemala eingegliedert."
+          },
+          "leonViejo": {
+            "title": "León Viejo",
+            "text": "León, eine der 1524 von den Spaniern gegründeten Städte, wurde 1610 nach einem Erdbeben an ihren heutigen Standort verlegt. Die Ruinen der ursprünglichen Stadt, bekannt als León Viejo, wurden im Jahr 2000 in die UNESCO-Welterbeliste aufgenommen."
+          },
+          "independencia": {
+            "title": "Unabhängigkeit",
+            "text": "Die ersten Unabhängigkeitsaufstände brachen 1811 in León, Granada und Rivas aus und hatten einen starken volkstümlichen Charakter. Das Generalkapitanat Guatemala, zu dem Nicaragua gehörte, erklärte am 15. September 1821 seine Unabhängigkeit von Spanien. Ein Jahr später wurde es dem kurzlebigen Mexikanischen Kaiserreich Agustín de Iturbides angeschlossen, und 1823 wurde Nicaragua Teil der Föderation der Vereinigten Provinzen Zentralamerikas."
+          },
+          "treintaAnos": {
+            "title": "Die Dreißig Jahre",
+            "text": "Nach dem Einfall des Freibeuters William Walker festigte sich der nicaraguanische Staat nur langsam. Diese Epoche heißt die Dreißig Jahre: Sie reicht von den Regierungen General Tomás Martínez’ zwischen 1858 und 1867 bis 1893, dem Jahr der liberalen Revolution."
+          },
+          "guerraNacional": {
+            "title": "Nationaler Krieg",
+            "text": "Zwischen 1855 und 1857 stellte sich Nicaragua dem Einfall des Freibeuters William Walker entgegen. Im Norden stellten die Generäle Tomás Martínez und Fernando Chamorro das Heer des Nordens (Ejército del Septentrión) auf, dessen Offiziere am 20. April 1856 in Matagalpa erklärten, die nationale Unabhängigkeit bis zum letzten Blutstropfen zu verteidigen. Sechs Monate dieses Widerstands mündeten in die Schlacht von San Jacinto."
+          },
+          "sanJacinto": {
+            "title": "Die Schlacht von San Jacinto",
+            "text": "Am Sonntag, dem 14. September 1856, wehrten Oberst José Dolores Estrada und seine Truppen auf der Hacienda San Jacinto den Angriff der Freibeuter ab. Es wurde Mann gegen Mann gekämpft, und Andrés Castro, der keine Zeit hatte, sein Gewehr zu laden, streckte einen Freibeuter mit einem Stein nieder. Ein Ausfall über die Flanke überraschte die Angreifer, die flohen. Noch am selben Tag meldete Estrada den Sieg in seinem offiziellen Bericht."
+          },
+          "dario": {
+            "title": "Rubén Darío",
+            "text": "Félix Rubén García Sarmiento wurde am 18. Januar 1867 in Metapa geboren und starb am 6. Februar 1916 in León. Die Familie seines Vaters war als die Daríos bekannt, daher nahm er den Nachnamen Darío an. Als Dichter, Journalist und Diplomat gilt er als bedeutendster Vertreter des literarischen Modernismo in spanischer Sprache."
+          },
+          "sandino": {
+            "title": "Augusto C. Sandino",
+            "text": "Augusto Nicolás Calderón Sandino wurde am 18. Mai 1895 in Niquinohomo, Masaya, geboren. 1927 begann er an der Spitze des Heeres zur Verteidigung der nationalen Souveränität den bewaffneten Kampf gegen die US-Intervention. Am 21. Februar 1934 wurde er von Offizieren der Nationalgarde auf Befehl von Anastasio Somoza García ermordet."
+          },
+          "costaCaribe": {
+            "title": "Die Karibikküste und die Mosquitia",
+            "text": "Die Geschichte der nicaraguanischen Karibik nahm einen eigenen Weg. Im 18. Jahrhundert verbündeten sich die Engländer mit den Miskito und festigten ihre Vorherrschaft in der Region; 1748 nahmen sie San Juan de Nicaragua ein. Die Mosquitia, die Moskitoküste, galt bis 1860 als englische Kolonie, als der Vertrag von Managua die Souveränität Nicaraguas anerkannte und das Reservat der Mosquitia schuf."
+          },
+          "autonomia": {
+            "title": "Autonomie der Karibikküste",
+            "text": "1987 wurde das Gesetz Nr. 28, das Autonomiestatut der Regionen der Karibikküste Nicaraguas, verabschiedet. Es stand für die Anerkennung der angestammten Rechte der indigenen und afrokaribischen Völker als multiethnische, multikulturelle und mehrsprachige Gemeinschaften des Landes."
+          },
+          "patrimonioMundial": {
+            "title": "Nicaraguas Welterbe",
+            "text": "Nicaragua hat zwei Stätten auf der UNESCO-Welterbeliste: die Ruinen von León Viejo, seit 2000, und die Kathedrale von León, seit 2011."
+          },
+          "gueguense": {
+            "title": "El Güegüense",
+            "text": "El Güegüense ist ein in Nicaragua sehr bekanntes satirisches Drama, das Theater, Tanz und Musik als Synthese spanischer und indigener Kultur vereint. Es wird jedes Jahr zum Fest von San Sebastián aufgeführt. Die UNESCO proklamierte es 2005 und nahm es 2008 in die Repräsentative Liste des immateriellen Kulturerbes der Menschheit auf."
+          }
+        }
       }
     },
     "index": {
@@ -5068,7 +5228,10 @@
       "sources": "Quellen",
       "zone": "Gemeinde oder Gebiet",
       "checkNotice": "Mit offizieller Quelle verifiziert",
-      "seeSheet": "Eintrag ansehen"
+      "seeSheet": "Eintrag ansehen",
+      "partialNotice": "Teilweise verifizierte Informationen.",
+      "pendingNotice": "Standortausstehende Überprüfung.",
+      "pendingConfirm": "Informationen zu bestätigen."
     },
     "access": {
       "viewArea": "Gebiet auf der Karte ansehen",

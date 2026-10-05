@@ -9,7 +9,7 @@
 ⚙️ **CÓMO:** migración progresiva, sin big-bang: auditoría → respaldo → esquema → importación idempotente → lectura desde Supabase → retiro de dependencias.
 📦 **QUÉ:** este documento reúne la auditoría, el modelo, la migración, los conteos, los riesgos, el rollback y el estado real.
 
-Firebase queda **exclusivamente para Authentication** — decisión del propietario, 2026-10-05. Las APIs, datos, archivos y tiempo real se consolidan en Supabase. Hosting, Cloud Functions, reglas de Firestore/Storage y RTDB quedan como legado no desplegable en `firebase.legacy.json`; el sitio público vive solo en Azure (`baqueanonicaragua.com`). Las APIs activas y nuevas deben implementarse como Edge Functions de Supabase o, durante la transición, bajo `/api/azure/`. **La autenticación Firebase no se migra.**
+Firebase **no se elimina** — decisión del propietario, 2026-10-05. Durante la transición conserva Firebase Auth, Google Sign-In, FCM, Analytics, App Check y toda compatibilidad necesaria con Firestore, Storage, Hosting, Functions, datos y archivos heredados. Supabase concentra la fuente principal de datos y prepara Supabase Auth progresivamente. Ambas autoridades de autenticación deben converger en un único perfil BAQUEANO, sin duplicar personas. Ninguna superficie Firebase se retira hasta contar con respaldo, reemplazo probado, validación Web/Android/Ops/BAQUI, rollback y autorización expresa.
 
 ## 1. Auditoría (2026-10-05, consultas reales de solo lectura)
 
@@ -25,11 +25,11 @@ Firebase queda **exclusivamente para Authentication** — decisión del propieta
 
 ### 1.1.1 Corte arquitectónico obligatorio
 
-- Firebase conserva únicamente Authentication y la emisión de ID tokens.
+- Firebase conserva Auth, Google Sign-In, FCM, Analytics, App Check y compatibilidad heredada mientras cada módulo se migra y valida.
 - Supabase asume PostgreSQL/PostGIS, Storage, Realtime y Edge Functions.
-- `firebase.json` no contiene superficies desplegables; las configuraciones históricas viven en `firebase.legacy.json`.
-- Ningún cliente puede escribir en Firestore, RTDB o Firebase Storage, ni usarlos como fallback.
-- Ningún flujo nuevo usa Supabase Auth: `profiles` e `identity_links` complementan la identidad Firebase, no crean una segunda autoridad de sesión.
+- `firebase.json` y `firebase.legacy.json` requieren reconciliación controlada antes de cualquier despliegue; no se borran configuraciones heredadas.
+- Firestore y Firebase Storage permanecen en compatibilidad/legado; cada módulo cambia sus nuevas escrituras a Supabase solo después de pruebas y rollback.
+- Supabase Auth se prepara progresivamente. `profiles` representa la persona y `identity_links` relaciona identidades Firebase y Supabase sin duplicar usuarios.
 - Cada Edge Function protegida verifica el ID token de Firebase y resuelve permisos desde tablas RBAC de Supabase.
 
 ### 1.2 Matriz de fuentes actuales

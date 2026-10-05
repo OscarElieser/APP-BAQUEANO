@@ -15,8 +15,10 @@
 - Hero editorial "UNA HISTORIA QUE SIGUE VIVA" con accesos a la cronología y territorios.
 - Línea de tiempo de 7 periodos fundamentales con fichas de época.
 - Split de Exploración territorial (Mapa departamental + Directorio de los 17 territorios).
-- Colecciones de Pueblos originarios, Personajes ilustres, Patrimonio vivo y Antes y Ahora.
-- Audioguía Baqueano con waveform interactiva, fuentes oficiales verificadas y footer.
+- Colecciones de Pueblos originarios, Personajes ilustres, Artistas por territorio
+  (js/territory-artists*.js), Patrimonio vivo y Antes y Ahora.
+- Audioguía Baqueano (biblioteca sonora: 8 períodos, 13 capítulos con fuente y
+  fecha de verificación; js/historia-audioguia-data.js), fuentes oficiales y footer.
 
 📦 3. QUÉ (WHAT / ENTREGABLES & COMPONENTES):
 - HTML5 semántico con Leaflet 1.9.4, FontAwesome 6 y Google Fonts.
@@ -43,10 +45,11 @@
   <link rel="stylesheet" href="styles.css?v=20260927-compact-footer-3">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
-  <link rel="stylesheet" href="css/pages/historia-exact.css?v=20261003-epocas-2">
+  <link rel="stylesheet" href="css/pages/historia-exact.css?v=20261005-biblioteca-1">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
+  <link rel="stylesheet" href="css/components/territory-artists.css?v=20261005-1">
 
   <!-- Favicon e Iconografía Oficial de Pestaña (Mesa de trabajo 1) -->
   <link rel="icon" type="image/webp" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
@@ -447,6 +450,26 @@
       </section>
 
       <!-- ============================================================================
+           5.1 ARTISTAS POR TERRITORIO
+           POR QUÉ: la memoria de las artes visuales, escénicas y documentales está
+             ligada a cada departamento y región.
+           CÓMO: js/territory-artists.js pinta los grupos desde
+             js/territory-artists-data.js (misma fuente que departamento.html).
+           QUÉ: 14 artistas en 7 territorios con disciplina, localidad e hito.
+           ============================================================================ -->
+      <section class="hist-artists-section bq-artists" id="artistasTerritorio" aria-labelledby="artistasTerritorioTitle">
+        <div class="hist-section-header">
+          <div>
+            <span data-i18n="pages.historia.artistas.kicker" class="hist-territory-kicker">ARTES VISUALES, ESCÉNICAS Y DOCUMENTALES</span>
+            <h2 id="artistasTerritorioTitle"><i class="fa-solid fa-palette" style="color: #F65E01;"></i> <span data-i18n="pages.historia.artistas.title">Artistas que dibujaron el territorio</span></h2>
+            <p data-i18n="pages.historia.artistas.subtitle">Pintura, escultura, danza, teatro, fotografía y cine ligados a cada departamento y región de Nicaragua.</p>
+          </div>
+        </div>
+        <div class="bq-artists-groups" id="territoryArtistsGroups"></div>
+        <p data-i18n="pages.historia.artistas.note" class="bq-artists-note">Contenido editorial en revisión con fuentes culturales oficiales.</p>
+      </section>
+
+      <!-- ============================================================================
            6. PATRIMONIO VIVO (IMAGEN 1)
            ============================================================================ -->
       <section class="hist-heritage-section">
@@ -549,20 +572,31 @@
               <span style="height: 8px;"></span><span style="height: 14px;"></span><span style="height: 22px;"></span>
               <span style="height: 16px;"></span><span style="height: 26px;"></span><span style="height: 12px;"></span>
               <span style="height: 20px;"></span><span style="height: 10px;"></span><span style="height: 18px;"></span>
-              <span data-i18n="pages.historia.histAudioSection.span1" class="hist-audio-time" aria-hidden="true">7 capítulos</span>
+              <span data-i18n="pages.historia.histAudioSection.span1" class="hist-audio-time" aria-hidden="true">13 capítulos</span>
             </div>
             <p class="hist-audio-caption" aria-live="polite"><span data-i18n="pages.historia.histAudioSection.p2">Elegí un capítulo o tocá ▶ para escuchar desde el inicio.</span></p>
+            <!-- Ficha del capítulo (tipo, fecha, lugar, personajes, mapa) y fuentes verificadas: js/historia-audioguia.js -->
+            <div class="hist-audio-meta"></div>
+            <p class="hist-audio-sources" hidden></p>
           </div>
         </div>
 
-        <div data-i18n-aria-label="pages.historia.histAudioSection.divAriaLabel1" class="hist-audio-categories" role="group" aria-label="Capítulos de la audioguía">
-          <button data-i18n="pages.historia.histAudioSection.button1" type="button" class="hist-audio-tag" data-chapter="0" aria-pressed="false">🏛️ Época Prehispánica</button>
-          <button data-i18n="pages.historia.histAudioSection.button2" type="button" class="hist-audio-tag" data-chapter="1" aria-pressed="false">⛪ Colonia</button>
-          <button data-i18n="pages.historia.histAudioSection.button3" type="button" class="hist-audio-tag" data-chapter="2" aria-pressed="false">📜 Independencia</button>
-          <button data-i18n="pages.historia.histAudioSection.button4" type="button" class="hist-audio-tag" data-chapter="3" aria-pressed="false">⚔️ Guerra Nacional</button>
-          <button data-i18n="pages.historia.histAudioSection.button5" type="button" class="hist-audio-tag" data-chapter="4" aria-pressed="false">🎖️ Siglo XX</button>
-          <button data-i18n="pages.historia.histAudioSection.button6" type="button" class="hist-audio-tag" data-chapter="5" aria-pressed="false">🇳🇮 Nicaragua Actual</button>
-          <button data-i18n="pages.historia.histAudioSection.button7" type="button" class="hist-audio-tag" data-chapter="6" aria-pressed="false">🎶 Música y Tradiciones</button>
+        <div class="hist-audio-right">
+          <div data-i18n-aria-label="pages.historia.histAudioSection.divAriaLabel1" class="hist-audio-categories" role="group" aria-label="Períodos de la audioguía">
+            <button data-i18n="pages.historia.histAudioSection.button1" type="button" class="hist-audio-tag" data-period="prehispanica" aria-pressed="false">🏛️ Época Prehispánica</button>
+            <button data-i18n="pages.historia.histAudioSection.button2" type="button" class="hist-audio-tag" data-period="colonia" aria-pressed="false">⛪ Colonia</button>
+            <button data-i18n="pages.historia.histAudioSection.button3" type="button" class="hist-audio-tag" data-period="independencia" aria-pressed="false">📜 Independencia</button>
+            <button data-i18n="pages.historia.histAudioSection.button4" type="button" class="hist-audio-tag" data-period="guerraNacional" aria-pressed="false">⚔️ Guerra Nacional</button>
+            <button data-i18n="pages.historia.histAudioSection.button5" type="button" class="hist-audio-tag" data-period="personajes" aria-pressed="false">🎖️ Personajes</button>
+            <button data-i18n="pages.historia.histAudioSection.button8" type="button" class="hist-audio-tag" data-period="costaCaribe" aria-pressed="false">🌊 Costa Caribe</button>
+            <button data-i18n="pages.historia.histAudioSection.button6" type="button" class="hist-audio-tag" data-period="actual" aria-pressed="false">🇳🇮 Nicaragua Actual</button>
+            <button data-i18n="pages.historia.histAudioSection.button7" type="button" class="hist-audio-tag" data-period="tradiciones" aria-pressed="false">🎶 Música y Tradiciones</button>
+          </div>
+          <div class="hist-audio-chapters-wrap">
+            <span data-i18n="pages.historia.audio.chaptersLabel" class="hist-audio-chapters-label">Capítulos de este período</span>
+            <div data-i18n-aria-label="pages.historia.audio.chaptersLabel" class="hist-audio-chapters" role="group" aria-label="Capítulos de este período"></div>
+            <button type="button" class="hist-audio-next"><span data-i18n="pages.historia.audio.next">Siguiente capítulo</span> <i class="fa-solid fa-forward-step" aria-hidden="true"></i></button>
+          </div>
         </div>
       </section>
 
@@ -887,8 +921,11 @@
   </script>
 <script defer src="js/territory-carousel.js"></script>
 <script defer src="js/navigation.js?v=20261004-menu-2"></script>
-<script src="js/historia-audioguia.js?v=20261003-1" defer></script>
+<script src="js/historia-audioguia-data.js?v=20261005-1" defer></script>
+<script src="js/historia-audioguia.js?v=20261005-biblioteca-1" defer></script>
 <script src="js/historia-epocas.js?v=20261003-1" defer></script>
+<script src="js/territory-artists-data.js?v=20261005-1" defer></script>
+<script src="js/territory-artists.js?v=20261005-1" defer></script>
 <script src="js/global-injector.js"></script>
 </body>
 
