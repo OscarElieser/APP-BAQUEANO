@@ -1,0 +1,5305 @@
+{
+ "generatedAt": "2026-10-05T12:44:50.593Z",
+ "base": "http://127.0.0.1:8790/",
+ "widths": [
+  320,
+  360,
+  375,
+  390,
+  412,
+  430,
+  480,
+  600,
+  768,
+  820,
+  1024,
+  1280,
+  1366,
+  1440,
+  1920,
+  2560
+ ],
+ "pages": [
+  "index.html",
+  "destinos.html",
+  "destino.html",
+  "departamento.html?depto=madriz",
+  "mapa.html",
+  "experiencias.html",
+  "historia.html",
+  "gastronomia.html",
+  "musica.html",
+  "cronicas.html",
+  "baqueano-ia.html",
+  "mi-viaje.html",
+  "perfil.html",
+  "favoritos.html",
+  "mi-negocio.html",
+  "testimonios.html",
+  "nosotros.html",
+  "aliados.html",
+  "ambiental.html",
+  "denuncias.html",
+  "ayuda.html",
+  "cookies.html",
+  "privacidad.html",
+  "terminos.html",
+  "aviso-legal.html",
+  "legal.html",
+  "404.html",
+  "offline.html"
+ ],
+ "notFoundLinks": [
+  {
+   "href": "index.html",
+   "present": true
+  },
+  {
+   "href": "destinos.html",
+   "present": true
+  },
+  {
+   "href": "mapa.html",
+   "present": true
+  },
+  {
+   "href": "experiencias.html",
+   "present": true
+  }
+ ],
+ "fails": [
+  "cookies.html@390: axe crítico label (2)",
+  "cookies.html@1366: axe crítico label (2)",
+  "index.html@390: axe crítico aria-required-attr (1)",
+  "index.html@1366: axe crítico aria-required-attr (1)",
+  "musica.html@1366: axe crítico aria-required-attr (1)"
+ ],
+ "results": [
+  {
+   "page": "404.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [
+    "mainContent"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "404.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [
+    "mainContent"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "404.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "404.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [
+    "a.aliados-nearby-link [253,354]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 3,
+     "sample": ".sos > .triad-left > .triad-text > p | .explore > .triad-left > .triad-text > h5 | .explore > .triad-left > .triad-text > p"
+    },
+    {
+     "id": "link-name",
+     "impact": "serious",
+     "nodes": 3,
+     "sample": ".aliado-nearby-arrow[href=\"departamento.html?id=madriz\"] | .aliado-nearby-arrow[href=\"departamento.html?id=matagalpa\"] | .aliado-nearby-arrow[href=\"departamento.html?id=granada\"]"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50588880001?text=Hola%20Coop%20Cañón%20de%20So",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880002?text=Hola%20Posada%20La%20Abuela,%",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880003?text=Hola%20Arenas%20Beach,%20los%",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880004?text=Hola%20Baqueanos%20Cerro%20Ne",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880005?text=Hola%20Finca%20Magdalena,%20l",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880006?text=Hola%20San%20Simián,%20los%20",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880007?text=Hola%20Morgan%20Rock,%20los%2",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880008?text=Hola%20Hola%20Ola,%20los%20en",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880009?text=Hola%20Feel%20at%20Home,%20lo",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880010?text=Hola%20Sohla%20Rooftop,%20los",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "aliados.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 3,
+     "sample": ".sos > .triad-left > .triad-text > p | .explore > .triad-left > .triad-text > h5 | .explore > .triad-left > .triad-text > p"
+    },
+    {
+     "id": "link-name",
+     "impact": "serious",
+     "nodes": 3,
+     "sample": ".aliado-nearby-arrow[href=\"departamento.html?id=madriz\"] | .aliado-nearby-arrow[href=\"departamento.html?id=matagalpa\"] | .aliado-nearby-arrow[href=\"departamento.html?id=granada\"]"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50588880001?text=Hola%20Coop%20Cañón%20de%20So",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880002?text=Hola%20Posada%20La%20Abuela,%",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880003?text=Hola%20Arenas%20Beach,%20los%",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880004?text=Hola%20Baqueanos%20Cerro%20Ne",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880005?text=Hola%20Finca%20Magdalena,%20l",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880006?text=Hola%20San%20Simián,%20los%20",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880007?text=Hola%20Morgan%20Rock,%20los%2",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880008?text=Hola%20Hola%20Ola,%20los%20en",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880009?text=Hola%20Feel%20at%20Home,%20lo",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50588880010?text=Hola%20Sohla%20Rooftop,%20los",
+     "safe": true,
+     "name": "WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "aliados.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aliados.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [
+    "#btnSignAllDecalogo [291,370]",
+    "a.amb-btn-green [259,356]",
+    "button.amb-btn-box [282,365]",
+    "a.amb-btn-box [139,365]",
+    "a.amb-btn-box [207,365]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [
+    "#btnSignAllDecalogo [300,380]",
+    "a.amb-btn-green [268,364]",
+    "button.amb-btn-box [282,365]",
+    "a.amb-btn-box [139,365]",
+    "a.amb-btn-box [207,365]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [
+    "#btnSignAllDecalogo [306,385]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [
+    "bizRegisterModal"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "ambiental.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [
+    "bizRegisterModal"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "ambiental.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ambiental.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [
+    "mainContent"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [
+    "mainContent"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "aviso-legal.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 4,
+     "sample": "span[data-i18n=\"pages.ayuda.helpSection.span1\"] | span[data-i18n=\"pages.ayuda.quickTitle.h21\"] | span[data-i18n=\"pages.ayuda.preguntas.span1\"]"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "Write on WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "ayuda.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 4,
+     "sample": "span[data-i18n=\"pages.ayuda.helpSection.span1\"] | span[data-i18n=\"pages.ayuda.quickTitle.h21\"] | span[data-i18n=\"pages.ayuda.preguntas.span1\"]"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "Write on WhatsApp"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "ayuda.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "ayuda.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [
+    "a. [232,375]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [
+    "a. [232,375]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 4,
+     "sample": ".d1 | .masaya > .ia-overlay-desc | .granada > .ia-overlay-desc"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 4,
+     "sample": ".d1 | .masaya > .ia-overlay-desc | .granada > .ia-overlay-desc"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "baqueano-ia.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]",
+    "a.cookies-index-link [41,403]"
+   ],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 2,
+     "sample": ".cookies-badge-pill | #purgeStorageBtn > span"
+    },
+    {
+     "id": "label",
+     "impact": "critical",
+     "nodes": 2,
+     "sample": "#prefToggle | #analyticsToggle"
+    }
+   ],
+   "missingAnchors": [
+    "mainContent",
+    "control"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "cookies.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [
+    "a.sidebar-index-link [20,424]",
+    "a.sidebar-index-link [20,424]",
+    "a.sidebar-index-link [20,424]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 3,
+     "sample": ".cookies-badge-pill | #purgeStorageBtn > span | .flow-node-user > p"
+    },
+    {
+     "id": "label",
+     "impact": "critical",
+     "nodes": 2,
+     "sample": "#prefToggle | #analyticsToggle"
+    }
+   ],
+   "missingAnchors": [
+    "mainContent",
+    "control"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "cookies.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cookies.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "cronicas.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "cronicas.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "cronicas.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 3,
+     "sample": ".denuncias-inline-008 > .denuncias-inline-004 | .denuncias-inline-008 > .denuncias-inline-009 | .denuncias-inline-008 > .denuncias-inline-010"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "denuncias.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 3,
+     "sample": ".denuncias-inline-008 > .denuncias-inline-004 | .denuncias-inline-008 > .denuncias-inline-009 | .denuncias-inline-008 > .denuncias-inline-010"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "denuncias.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "denuncias.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "aria-prohibited-attr",
+     "impact": "serious",
+     "nodes": 1,
+     "sample": "#mapPlacesCarousel"
+    },
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 9,
+     "sample": ".m-badge-accent | .video-gallery-header > .sub-label-tag | .madriz-map-heading > .sub-label-tag"
+    },
+    {
+     "id": "scrollable-region-focusable",
+     "impact": "serious",
+     "nodes": 2,
+     "sample": ".timeline-madriz-strip | .matrix-table-wrap"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Mesa%20Baqueano,%20des",
+     "safe": true,
+     "name": "Conectar Taller"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Mesa%20Baqueano,%20des",
+     "safe": true,
+     "name": "Conectar Taller"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Mesa%20Baqueano,%20des",
+     "safe": true,
+     "name": "Conectar Taller"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "aria-prohibited-attr",
+     "impact": "serious",
+     "nodes": 1,
+     "sample": "#mapPlacesCarousel"
+    },
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 9,
+     "sample": ".m-badge-accent | .video-gallery-header > .sub-label-tag | .madriz-map-heading > .sub-label-tag"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Mesa%20Baqueano,%20des",
+     "safe": true,
+     "name": "Conectar Taller"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Mesa%20Baqueano,%20des",
+     "safe": true,
+     "name": "Conectar Taller"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Mesa%20Baqueano,%20des",
+     "safe": true,
+     "name": "Conectar Taller"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "departamento.html?depto=madriz",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [
+    "a.destinos-ai-btn-purple [45,337]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 5,
+     "sample": ".destinos-preview-btn | span[data-i18n=\"testimonials.types.montana\"] | .blue.dest-catalog-tag[data-i18n=\"common.riosYLagunas\"]"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "destino.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 5,
+     "sample": ".destinos-preview-btn | span[data-i18n=\"testimonials.types.montana\"] | .blue.dest-catalog-tag[data-i18n=\"common.riosYLagunas\"]"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "destino.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destino.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [
+    "a.destinos-ai-btn-purple [45,337]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 5,
+     "sample": ".destinos-preview-btn | span[data-i18n=\"testimonials.types.montana\"] | .blue.dest-catalog-tag[data-i18n=\"common.riosYLagunas\"]"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "destinos.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 5,
+     "sample": ".destinos-preview-btn | span[data-i18n=\"testimonials.types.montana\"] | .blue.dest-catalog-tag[data-i18n=\"common.riosYLagunas\"]"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "destinos.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "destinos.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 15,
+     "sample": ".exp-main-card[data-cat=\"volcan\"]:nth-child(1) > .exp-card-body > .exp-card-loc | .exp-main-card[data-cat=\"rio\"]:nth-child(2) > .exp-card-body > .exp-card-loc | .exp-main-card[data-cat=\"volcan\"]:nth-child(3) > .exp-card-body > .exp-card-loc"
+    },
+    {
+     "id": "target-size",
+     "impact": "serious",
+     "nodes": 5,
+     "sample": "button[data-banner-index=\"0\"] | button[data-banner-index=\"1\"] | button[data-banner-index=\"2\"]"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50588880004",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880001",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880005",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880002",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880010",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880007",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880010",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880014",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20in",
+     "safe": true,
+     "name": "Discover the Rama Experience"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "experiencias.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 15,
+     "sample": ".exp-main-card[data-cat=\"volcan\"]:nth-child(1) > .exp-card-body > .exp-card-loc | .exp-main-card[data-cat=\"rio\"]:nth-child(2) > .exp-card-body > .exp-card-loc | .exp-main-card[data-cat=\"volcan\"]:nth-child(3) > .exp-card-body > .exp-card-loc"
+    },
+    {
+     "id": "target-size",
+     "impact": "serious",
+     "nodes": 4,
+     "sample": "button[data-banner-index=\"1\"] | button[data-banner-index=\"2\"] | button[data-banner-index=\"3\"]"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50588880004",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880001",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880005",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880002",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880010",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880007",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880010",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50588880014",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Book"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20in",
+     "safe": true,
+     "name": "Discover the Rama Experience"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "experiencias.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "experiencias.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 1,
+     "sample": ".favorites-eyebrow > span"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "favoritos.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 1,
+     "sample": ".favorites-eyebrow > span"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "favoritos.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "favoritos.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 14,
+     "sample": "article[data-cat=\"todos pacifico norte centro\"] > .dish-body > .dish-region > span | article[data-cat=\"todos maiz pacifico norte\"] > .dish-body > .dish-region > span | .dish-card-exact[data-cat=\"todos pacifico\"]:nth-child(3) > .dish-body > .dish-region"
+    },
+    {
+     "id": "target-size",
+     "impact": "serious",
+     "nodes": 2,
+     "sample": "#checkGastroVerif | #checkGastroCerca"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50588880011",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50588880012",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50588880013",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50588880014",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 14,
+     "sample": "article[data-cat=\"todos pacifico norte centro\"] > .dish-body > .dish-region > span | article[data-cat=\"todos maiz pacifico norte\"] > .dish-body > .dish-region > span | .dish-card-exact[data-cat=\"todos pacifico\"]:nth-child(3) > .dish-body > .dish-region"
+    },
+    {
+     "id": "target-size",
+     "impact": "serious",
+     "nodes": 2,
+     "sample": "#checkGastroVerif | #checkGastroCerca"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50588880011",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50588880012",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50588880013",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50588880014",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [
+    "a.hist-btn-glass [210,339]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 12,
+     "sample": ".hist-era-card:nth-child(1) > .dates | .hist-era-card:nth-child(2) > .dates | .hist-era-card:nth-child(3) > .dates"
+    }
+   ],
+   "missingAnchors": [
+    "epocaPrehispanica",
+    "resistenciaIndigena",
+    "periodoColonial",
+    "independencia",
+    "guerraNacional",
+    "sigloXX",
+    "nicaraguaActual",
+    "pueblosOriginarios",
+    "personajes",
+    "patrimonio",
+    "fuentes"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "historia.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 12,
+     "sample": ".hist-era-card:nth-child(1) > .dates | .hist-era-card:nth-child(2) > .dates | .hist-era-card:nth-child(3) > .dates"
+    }
+   ],
+   "missingAnchors": [
+    "epocaPrehispanica",
+    "resistenciaIndigena",
+    "periodoColonial",
+    "independencia",
+    "guerraNacional",
+    "sigloXX",
+    "nicaraguaActual",
+    "pueblosOriginarios",
+    "personajes",
+    "patrimonio",
+    "fuentes"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "historia.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "historia.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "aria-required-attr",
+     "impact": "critical",
+     "nodes": 1,
+     "sample": ".hidden-gem-bar"
+    },
+    {
+     "id": "nested-interactive",
+     "impact": "serious",
+     "nodes": 1,
+     "sample": ".hidden-gem-bar"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289?text=EMERGENCIA%20BAQUEANO",
+     "safe": true,
+     "name": "Baqueano DeskWhatsApp 24/7"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=ALERTA%20SOS%20DESDE%20BAQUEA",
+     "safe": true,
+     "name": "Send alert with GPS coordinates"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "index.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "aria-required-attr",
+     "impact": "critical",
+     "nodes": 1,
+     "sample": ".hidden-gem-bar"
+    },
+    {
+     "id": "nested-interactive",
+     "impact": "serious",
+     "nodes": 1,
+     "sample": ".hidden-gem-bar"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289?text=EMERGENCIA%20BAQUEANO",
+     "safe": true,
+     "name": "Baqueano DeskWhatsApp 24/7"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=ALERTA%20SOS%20DESDE%20BAQUEA",
+     "safe": true,
+     "name": "Send alert with GPS coordinates"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "index.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "index.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 4,
+     "sample": "#terminos > .legal-card-link[data-i18n=\"pages.legal.terminos.span1\"] | #privacidad > .legal-card-link[data-i18n=\"pages.legal.terminos.span1\"] | #cookies > .legal-card-link[data-i18n=\"pages.legal.terminos.span1\"]"
+    }
+   ],
+   "missingAnchors": [
+    "mainContent"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "legal.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 4,
+     "sample": "#terminos > .legal-card-link[data-i18n=\"pages.legal.terminos.span1\"] | #privacidad > .legal-card-link[data-i18n=\"pages.legal.terminos.span1\"] | #cookies > .legal-card-link[data-i18n=\"pages.legal.terminos.span1\"]"
+    }
+   ],
+   "missingAnchors": [
+    "mainContent"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "legal.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "legal.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 2,
+     "sample": ".btn-map-action[onclick=\"openSosModal(event)\"][type=\"button\"] | .map-live-badge > span:nth-child(2)"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50588880000",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "mapa.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 2,
+     "sample": ".btn-map-action[onclick=\"openSosModal(event)\"][type=\"button\"] | .map-live-badge > span:nth-child(2)"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50588880000",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "mapa.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mapa.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 1,
+     "sample": ".legal-framework-section > .container > div:nth-child(2) > div:nth-child(2) > div > span"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 1,
+     "sample": ".legal-framework-section > .container > div:nth-child(2) > div:nth-child(2) > div > span"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [
+    "a. [215,352]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [
+    "a. [230,368]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 5,
+     "sample": ".viaje-tab-btn.active[role=\"tab\"] > span | button[onclick=\"removeDay(1)\"] | button[onclick=\"removeDay(2)\"]"
+    }
+   ],
+   "missingAnchors": [
+    "mainContent"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 5,
+     "sample": ".viaje-tab-btn.active[role=\"tab\"] > span | button[onclick=\"removeDay(1)\"] | button[onclick=\"removeDay(2)\"]"
+    }
+   ],
+   "missingAnchors": [
+    "mainContent"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [
+    "button.musica-arrow-btn [309,339]",
+    "a.musica-view-link [319,377]",
+    "button.musica-arrow-btn [389,419]",
+    "button.musica-arrow-btn [425,455]",
+    "button.player-ctrl-btn [299,340]",
+    "button.sticky-btn-play [354,395]",
+    "button.player-ctrl-btn [409,450]",
+    "button.player-ctrl-btn [491,532]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [
+    "a.musica-view-link [321,379]",
+    "button.musica-arrow-btn [391,421]",
+    "button.musica-arrow-btn [427,457]",
+    "button.sticky-btn-play [354,395]",
+    "button.player-ctrl-btn [409,450]",
+    "button.player-ctrl-btn [491,532]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [
+    "a.musica-view-link [325,383]",
+    "button.musica-arrow-btn [395,425]",
+    "button.musica-arrow-btn [431,461]",
+    "button.sticky-btn-play [354,395]",
+    "button.player-ctrl-btn [409,450]",
+    "button.player-ctrl-btn [491,532]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [
+    "button.musica-arrow-btn [399,429]",
+    "button.musica-arrow-btn [435,465]",
+    "button.sticky-btn-play [354,395]",
+    "button.player-ctrl-btn [409,450]",
+    "button.player-ctrl-btn [491,532]"
+   ],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "musica.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [
+    "button.musica-arrow-btn [404,434]",
+    "button.musica-arrow-btn [440,470]",
+    "button.player-ctrl-btn [409,450]",
+    "button.player-ctrl-btn [491,532]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [
+    "button.musica-arrow-btn [409,439]",
+    "button.musica-arrow-btn [445,475]",
+    "button.player-ctrl-btn [409,450]",
+    "button.player-ctrl-btn [491,532]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [
+    "button.player-ctrl-btn [491,532]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [
+    "button.track-play-btn [782,823]",
+    "button.track-play-btn [782,823]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [
+    "button.track-play-btn [1280,1321]",
+    "button.track-play-btn [1579,1620]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [
+    "button.track-play-btn [1622,1663]"
+   ],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "aria-required-attr",
+     "impact": "critical",
+     "nodes": 1,
+     "sample": ".sticky-progress-bar"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "musica.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [
+    "button.track-play-btn [1659,1700]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [
+    "button.track-play-btn [1899,1940]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "musica.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [
+    "input. [289,499]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [
+    "input. [289,499]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [
+    "input. [289,499]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [
+    "input. [289,499]"
+   ],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 2,
+     "sample": "span[data-i18n=\"pages.nosotros.contacto.span1\"] | div:nth-child(5) > p > span"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50588888888",
+     "safe": true,
+     "name": "WhatsAppReply within minutes"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "nosotros.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [
+    "input. [289,499]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [
+    "input. [289,499]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [
+    "input. [289,499]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 2,
+     "sample": "span[data-i18n=\"pages.nosotros.contacto.span1\"] | div:nth-child(5) > p > span"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50588888888",
+     "safe": true,
+     "name": "WhatsAppReply within minutes"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "nosotros.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "nosotros.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [
+    "mainContent"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "offline.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [
+    "mainContent"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "offline.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "offline.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [
+    "a.nos-btn-glass [189,348]"
+   ],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "perfil.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "perfil.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "perfil.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 1,
+     "sample": ".cloud > div:nth-child(1) > strong"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "privacidad.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 1,
+     "sample": ".cloud > div:nth-child(1) > strong"
+    }
+   ],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "privacidad.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "privacidad.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "terminos.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "terminos.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "terminos.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "testimonios.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "testimonios.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  },
+  {
+   "page": "testimonios.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null
+  }
+ ]
+}
