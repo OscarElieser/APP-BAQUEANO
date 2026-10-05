@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T15:45:01.491Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3695 · en 3695 · fr 3695 · it 3695 · pt 3695 · de 3695
+Generado: 2026-10-05T16:03:29.551Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3695 · en 3695 · fr 3695 · it 3695 · pt 3695 · de 3695
 
 HTML: 3611/3612 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -192,6 +192,7 @@ HTML: 3611/3612 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | js/firestore-mirror.js | js | 0 | 0 | 0 | 100 % |
 | js/firestore-realtime.js | js | 0 | 0 | 0 | 100 % |
 | js/hero-video-loader.js | js | 0 | 0 | 0 | 100 % |
+| js/local-keys.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |
 | js/shared/roles.js | js | 0 | 0 | 0 | 100 % |

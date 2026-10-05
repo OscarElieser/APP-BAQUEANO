@@ -4280,3 +4280,27 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - Propietario (mensaje en curso): catálogo de playas, ríos, islas y cascadas con coordenadas (32 puntos) → siguiente.
 - Catálogo de playas, ríos, islas y cascadas (oct 2026, 32 puntos con coordenadas) → `tools/data/apply-geo-catalog-2026-10.mjs`: 10 lugares existentes con lat/lng/categoría/precisión/fuente, 22 nuevos. Departamento confirmado por contorno oficial: Río Tipitapa cae en Granada, Río Estelí en Madriz; Jiquilillo y Río Coco quedan sobre costa/frontera (mapa los ubica por nombre). Mapa y geocodificador usan la coordenada con fuente si cae dentro del contorno. Ficha: "Municipio o zona", sin repetir descripción. destinos.html: 75 verificados; filtros Playas 12 · Ríos 7 · Islas 7 · Cascadas 6 (= catálogo). Doc: docs/data/CATALOGO_GEO_2026-10.md. 236 lugares en total.
 - Coordenadas: 26 lugares verificados quedaban sin ubicar en OSM. geocode-territory-places.mjs ahora usa 'geoHint' (comunidad/municipio de la dirección oficial) como respaldo aproximado; 25 pistas cargadas con tools/data/apply-geo-hints-2026-10-05.mjs. El workflow geocode-territories recalcula al llegar a main.
+
+## 2026-10-05 09:56 — Sincronización completa con GitHub ("actualiza trae todo de github aqui")
+- 🎯 **POR QUÉ:** Sincronizar localmente los 14 nuevos commits remotos generados en GitHub (catálogos INTUR, base verificada 2026, mejoras en BAQUI, coordenadas de territorios y QA de 16 anchos).
+- ⚙️ **CÓMO:**
+  1. `git fetch --all --prune` ejecutado.
+  2. `git pull origin main`: avance rápido (fast-forward) incorporando 14 commits y 76 archivos actualizados (+3876 inserciones).
+  3. Rama local `claude/sleepy-goodall-kqogrq` actualizada a la par con su upstream remoto (`aac307c7`).
+- 📦 **QUÉ:**
+  - `main` en commit `605968cf` (`data(mapas): coordenadas de lugares dentro de cada territorio`).
+  - Catálogo ampliado a 236 lugares verificados (playas, ríos, islas, cascadas y turismo rural INTUR).
+  - Algoritmo de BAQUI actualizado con corrección ortográfica de destinos, itinerarios adaptables y cálculo equitativo de presupuestos.
+  - Informes y auditorías actualizadas en `docs/production-audit/`.
+- **Estado:** ✅ Completado con éxito.
+
+## 2026-10-05 10:01 — Solicitud: "continuemos trabajando donde se quedo claude pero sin dañar la estructura que llevamos"
+- 🎯 **POR QUÉ:** Continuar el trabajo técnico exactamente en el punto donde se pausó Claude (Auditoría 20/20, requisitos pendientes del Bloque D/E y mapa de ruta en `docs/CONTINUAR_EN_ANTIGRAVITY.md`), garantizando la preservación estricta de la arquitectura (Supabase principal, Firebase Auth/Hosting, diseño visual oficial, sin romper funcionalidades ni estructuras existentes).
+- ⚙️ **CÓMO:**
+  1. Revisar `docs/CONTINUAR_EN_ANTIGRAVITY.md` y `SESSION_LOG.md` para ubicar el siguiente paso exacto en la lista de prioridades.
+  2. Verificar el estado de la matriz 20/20 y los gates de CI (`npm run i18n`, `production-audit.mjs`, tests).
+  3. Ejecutar de forma incremental el siguiente pendiente prioritario sin alterar configuraciones ni dependencias no autorizadas.
+- 📦 **QUÉ:** Progreso verificable y continuo en los requisitos de la auditoría 20/20.
+- **Estado:** En progreso.
+
+
