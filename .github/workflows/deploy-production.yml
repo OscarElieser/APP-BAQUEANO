@@ -69,6 +69,9 @@ jobs:
       - name: Build estático del Website (misma lista permitida que producción)
         working-directory: website
         run: node scripts/build-hostinger-static.mjs
+      - name: SEO del dominio oficial (canonical, hreflang ×6, manifest, JSON-LD, sitemap)
+        working-directory: website
+        run: node scripts/seo-normalize.test.mjs && grep -q 'Sitemap: https://baqueanonicaragua.com/sitemap.xml' dist-hostinger/robots.txt && ! grep -q 'web.app' dist-hostinger/sitemap.xml
 
   verify-azure:
     name: ☁️ Verificar despliegue en Azure

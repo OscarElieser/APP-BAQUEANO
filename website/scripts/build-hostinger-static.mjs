@@ -3,9 +3,11 @@
  * 🎯 POR QUÉ: Hostinger debe publicar la web HTML actual sin interpretar el monorepo Next.js como una sola aplicación Node.
  * ⚙️ CÓMO: Crea una salida estática determinista mediante una lista permitida, excluye fuentes de build y archivos pesados no utilizados, y valida rutas esenciales.
  * 📦 QUÉ: Genera `dist-hostinger/` con HTML, CSS, JavaScript, locales, recursos públicos, PWA y reglas Apache; conserva intactos `apps/` y `packages/`.
+ *   Normaliza el SEO de la copia publicada al dominio oficial (`scripts/lib/seo-normalize.mjs`).
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { buildSitemap, normalizeHtml, normalizeRobots } from './lib/seo-normalize.mjs';
 
 const root = process.cwd();
 const output = path.resolve(root, 'dist-hostinger');
@@ -48,6 +50,17 @@ for (const entry of await fs.readdir(root, { withFileTypes: true })) {
   }
 }
 for (const directory of publicDirectories) await copyTree(path.join(root, directory), path.join(output, directory));
+
+// SEO del dominio oficial solo en la copia publicada (los HTML fuente no cambian):
+// canonical, og:url, hreflang ×6 + x-default, manifest, JSON-LD, sitemap y robots.
+const publishedPages = (await fs.readdir(output)).filter((name) => name.endsWith('.html'));
+for (const page of publishedPages) {
+  const target = path.join(output, page);
+  await fs.writeFile(target, normalizeHtml(await fs.readFile(target, 'utf8'), page));
+}
+await fs.writeFile(path.join(output, 'sitemap.xml'), buildSitemap(publishedPages, new Date().toISOString().slice(0, 10)));
+const robotsPath = path.join(output, 'robots.txt');
+await fs.writeFile(robotsPath, normalizeRobots(await fs.readFile(robotsPath, 'utf8')));
 
 const required = ['index.html', '404.html', 'testimonios.html', 'styles.css', 'js/global-injector.js', 'js/global-language.js', 'js/global-search.js', 'locales/es.json', 'data/search-index.json', 'data/travel-knowledge.json', '.htaccess'];
 for (const relative of required) {

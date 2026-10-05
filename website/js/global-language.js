@@ -52,7 +52,19 @@
     try { return localStorage.getItem(key); } catch (_) { return null; }
   }
 
+  // `?lang=xx` en la URL manda sobre la preferencia guardada: es la URL que
+  // declaran los hreflang del build, así buscadores y enlaces compartidos
+  // abren la página directamente en ese idioma.
+  function languageFromUrl() {
+    try {
+      var code = new URLSearchParams(window.location.search).get('lang');
+      return code && SUPPORTED.includes(String(code).toLowerCase()) ? String(code).toLowerCase() : null;
+    } catch (_) { return null; }
+  }
+
   function initialLanguage() {
+    var fromUrl = languageFromUrl();
+    if (fromUrl) return fromUrl;
     var stored = readStored(STORAGE_KEY);
     if (!stored) {
       LEGACY_STORAGE_KEYS.some(function findLegacy(key) {

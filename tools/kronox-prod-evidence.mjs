@@ -134,10 +134,19 @@ await safe('S3-14/sitemap', 'sitemap.xml', async () => {
   const urls = (text.match(/<loc>/g) || []).length;
   record('S3-14/sitemap', 'sitemap.xml válido', res.ok && urls > 5, `status=${res.status} urls=${urls}`);
 });
-for (const p of ['/manifest.webmanifest', '/manifest.json', '/sw.js', '/service-worker.js']) {
-  await safe(`S3-12${p}`, `PWA ${p}`, async () => {
-    const { res } = await get(`${SITE}${p}`, { method: 'HEAD' });
-    record(`S3-12${p}`, `PWA ${p}`, res.ok, `status=${res.status}`);
+// La PWA es válida con cualquiera de los nombres estándar (manifest.json o
+// manifest.webmanifest; service-worker.js o sw.js): se exige uno de cada par.
+for (const [id, label, paths] of [
+  ['S3-12/manifest', 'PWA manifest servido', ['/manifest.json', '/manifest.webmanifest']],
+  ['S3-12/service-worker', 'PWA service worker servido', ['/service-worker.js', '/sw.js']]
+]) {
+  await safe(id, label, async () => {
+    const found = [];
+    for (const p of paths) {
+      const { res } = await get(`${SITE}${p}`, { method: 'HEAD' });
+      if (res.ok) found.push(p);
+    }
+    record(id, label, found.length > 0, found.length ? `servido=${found.join(',')}` : `ninguno de ${paths.join(',')}`);
   });
 }
 
