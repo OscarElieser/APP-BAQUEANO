@@ -74,7 +74,7 @@
       // Capa de identidad "Cartografía viva": correcciones de contraste y responsive.
       { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261004-menu-1' },
       // Sistema de diseño global: SIEMPRE la última hoja. Ver css/baqueano-system.css
-      { id: 'bq-system',    href: 'css/baqueano-system.css?v=20261005-a11y-1' }
+      { id: 'bq-system',    href: 'css/baqueano-system.css?v=20261005-a11y-2' }
     ];
     needed.forEach(function(css) {
       if (css.id === 'bq-fonts' && document.querySelector('link[href*="fonts.googleapis.com/css2"]')) return;
