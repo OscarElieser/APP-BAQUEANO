@@ -3842,11 +3842,171 @@
     },
     "miViaje": {
       "body": {
-        "title1": "Mi Viaje & Planificador | Baqueano Nicaragua"
+        "title1": "Mi Viaje & Planificador | Baqueano Nicaragua",
+        "metaDescription1": "Planificá tu aventura por Nicaragua: armá tu itinerario día a día, calculá tu presupuesto y guardá tus destinos favoritos."
       },
       "viajeHero": {
         "span1": "PLANIFICADOR SOBERANO",
-        "h11": "Mi Aventura por Nicaragua"
+        "h11": "Mi Aventura por Nicaragua",
+        "p1": "Organizá tus días, calculá tus gastos con tarifas reales y guardá tus destinos favoritos para recorrer la patria sin intermediarios."
+      },
+      "printableItinerary": {
+        "button1": "Itinerario Activo",
+        "button2": "Calculadora de Gastos",
+        "button3": "Equipaje de Campo",
+        "button4": "Mis Favoritos",
+        "div1": "Hotel Boutique Adela",
+        "span1": "· Verificado BAQUEANO",
+        "div2": "C$ 1,800 / noche",
+        "button5": "Ver detalle",
+        "div3": "Restaurante El Zaguán",
+        "div4": "C$ 350 / persona",
+        "span2": "Guía Local",
+        "div5": "Guía Local Don Carlos",
+        "div6": "C$ 800 / tour",
+        "span3": "Tour Acuático",
+        "div7": "Tour en Kayak Isletas",
+        "div8": "C$ 600 / persona",
+        "imgAlt1": "Hotel Boutique Adela - Baqüi Guía",
+        "imgAlt2": "Restaurante El Zaguán - Baqüi Guía",
+        "imgAlt3": "Guía Local Don Carlos - Baqüi Guía",
+        "imgAlt4": "Tour en Kayak Isletas - Baqüi Guía"
+      },
+      "tabItinerario": {
+        "p1": "Podés ajustar destinos, días, presupuesto o tipo de experiencias y Baqueano IA la actualizará al instante.",
+        "button1": "Modificar con IA →"
+      },
+      "tabPresupuesto": {
+        "h31": "Estimación de Gastos (3 Días / 2 Personas)",
+        "p1": "Cálculo transparente y validado según la realidad de costos en Nicaragua.",
+        "span1": "Transporte (Gasolina vehículo propio / Bus)",
+        "strong1": "C$ 1,200 (~$33 USD)",
+        "span2": "Hospedaje (Hoteles estándar o boutique colonial, 2 noches)",
+        "strong2": "C$ 3,000 (~$82 USD)",
+        "span3": "Alimentación (Restaurantes típicos tradicionales, 3 tiempos)",
+        "strong3": "C$ 2,000 (~$55 USD)",
+        "span4": "Guías baqueanos comunitarios y entradas a reservas",
+        "strong4": "C$ 2,300 (~$63 USD)",
+        "span5": "Otros gastos & Utilerías (Artesanías, recuerdos, apoyo a niños locales)",
+        "strong5": "C$ 800 (~$22 USD)",
+        "span6": "Total Estimado:",
+        "span7": "C$ 9,300 (~$254 USD)",
+        "strong6": "💡 Transparencia de Costos:",
+        "div1": "Comer en comedores populares cuesta C$ 120-180 por plato, mientras que restaurantes turísticos rondan C$ 500-900. El bus interurbano es muy accesible (C$ 360), el auto propio ahorra en combustible y el alquiler de vehículo (C$ 3,800) brinda mayor comodidad."
+      },
+      "tabChecklist": {
+        "h31": "Lista de Equipaje para el Sendero",
+        "label1": "Botella de agua reutilizable (evitar plásticos de un solo uso)",
+        "label2": "Protector solar biodegradable y repelente de insectos",
+        "label3": "Calzado de senderismo con buen agarre para terreno volcánico",
+        "label4": "Capa impermeable para nebliselvas y lluvias repentinas",
+        "label5": "Dinero en efectivo en córdobas para cooperativas y pulperías",
+        "label6": "Linterna frontal o de mano con batería de respaldo",
+        "label7": "Botiquín básico de primeros auxilios y antihistamínicos",
+        "label8": "Documento de identidad y fotocopia de emergencia"
+      },
+      "tabFavoritos": {
+        "h31": "Tus destinos favoritos",
+        "p1": "Al hacer clic en el corazón de cualquier destino, cooperativa o platillo típico, quedará registrado aquí para tu próxima ruta.",
+        "a1": "Explorar catálogo"
+      },
+      "mapPanelItinerario": {
+        "h51": "Granada colonial y atardecer en las Isletas",
+        "span1": "Granada Colonial · 45 km · 6 h",
+        "h52": "Lago de lava en Volcán Masaya y artesanías de Monimbó",
+        "span2": "Masaya & Sandboarding · 120 km · 9 h",
+        "h53": "Ferry a Ometepe, Ojo de Agua y senderismo en Finca Magdalena",
+        "span3": "Isla de Ometepe · 110 km · 8 h"
+      },
+      "mapPanelHospedajes": {
+        "h51": "Hotel Boutique Adela · Granada",
+        "span1": "C$ 1,800/noche · 4.8 ★ · Verificado",
+        "h52": "Posada Rural San Ramón · Ometepe",
+        "span2": "C$ 1,200/noche · 4.6 ★ · Verificado"
+      },
+      "mapPanelComida": {
+        "h51": "Restaurante El Zaguán · Granada",
+        "span1": "C$ 350/persona · 4.7 ★ · Gastronomía típica",
+        "h52": "Kiosco Doña Rosa · Granada",
+        "span2": "Vigorón artesanal · C$ 80/porción · Campesino"
+      },
+      "mapPanelAtractivos": {
+        "h51": "365 Isletas del Cocibolca",
+        "span1": "Granada · Paseo en lancha con pescador local",
+        "h52": "Cráter Santiago · Volcán Masaya",
+        "span2": "Masaya · Único lago de lava visible en auto de Nicaragua",
+        "h53": "Manantial Ojo de Agua · Ometepe",
+        "span3": "Isla de Ometepe · Aguas cristalinas de origen volcánico"
+      },
+      "viajeSidebar": {
+        "h41": "Resumen de Presupuesto",
+        "span1": "Transporte (Gasolina / Bus)",
+        "span2": "Hospedaje (Hotel estándar)",
+        "span3": "Alimentación (Rest. típicos)",
+        "span4": "Guías & entradas",
+        "span5": "Otros gastos & utilerías",
+        "span6": "Total estimado",
+        "h42": "Baqueano Digital IA",
+        "p1": "Generá una ruta personalizada o ajustá esta en segundos."
+      },
+      "sosModal": {
+        "h31": "Centro SOS & Auxilio",
+        "p1": "Tu ubicación GPS está activa para asistencia en ruta."
+      }
+    },
+    "musica": {
+      "body": {
+        "title1": "Música & Patrimonio Sonoro | Baqueano Nicaragua"
+      },
+      "musicaHeroExact": {
+        "h11": "EL SONIDO DE NICARAGUA",
+        "span1": "SIGUE VIVO",
+        "p1": "Música, identidad y tradición que conectan nuestra gente y hacen del mundo un lugar más humano.",
+        "button1": "Escuchar ahora →",
+        "a1": "Explorar mapa sonoro",
+        "span2": "Nuestra música también es paisaje 🍃"
+      },
+      "featuredTrackTitle": {
+        "h41": "La Mora Limpia"
+      },
+      "featuredTrackArtist": {
+        "b1": "Justo Santos"
+      },
+      "btnTrackProfile": {
+        "button1": "Ver ficha →"
+      },
+      "musicaSectionCommon": {
+        "h21": "Explorá por géneros",
+        "p1": "Ritmos que cuentan la historia de nuestra tierra.",
+        "a1": "Ver todos los géneros →",
+        "h31": "Son Nica",
+        "p2": "Ritmo e identidad",
+        "h32": "Marimba",
+        "p3": "Sonido ancestral",
+        "h33": "Nueva Canción",
+        "p4": "Voz del pueblo",
+        "h34": "Folclor",
+        "p5": "Tradición viva",
+        "p6": "Ritmos del Atlántico",
+        "h35": "Música Clásica",
+        "p7": "Legado universal",
+        "p8": "Raíces de nuestra tierra",
+        "h22": "Artistas y compositores",
+        "p9": "Voces que han puesto a Nicaragua en el corazón del mundo.",
+        "a2": "Ver todos los artistas →",
+        "h41": "Camilo Zapata",
+        "p10": "El poeta de la montaña",
+        "p11": "Ícono del Son Nica",
+        "h42": "Carlos Mejía Godoy",
+        "p12": "Voz de nuestra gente",
+        "h43": "Luis Enrique Mejía Godoy",
+        "p13": "Canciones que nos unen",
+        "h44": "Salvador Cardenal",
+        "p14": "Alma de Nicaragua",
+        "h45": "Katia Cardenal",
+        "p15": "Música con sentido",
+        "h46": "Norma Helena Gadea",
+        "p16": "La flor de la canción"
       }
     }
   },

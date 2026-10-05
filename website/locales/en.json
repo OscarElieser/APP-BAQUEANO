@@ -3842,11 +3842,171 @@
     },
     "miViaje": {
       "body": {
-        "title1": "My Trip & Planner | Baqueano Nicaragua"
+        "title1": "My Trip & Planner | Baqueano Nicaragua",
+        "metaDescription1": "Plan your adventure through Nicaragua: build your day-by-day itinerary, calculate your budget and save your favorite destinations."
       },
       "viajeHero": {
         "span1": "SOVEREIGN PLANNER",
-        "h11": "My Adventure through Nicaragua"
+        "h11": "My Adventure through Nicaragua",
+        "p1": "Organize your days, calculate your expenses with real rates and save your favorite destinations to travel the country without middlemen."
+      },
+      "printableItinerary": {
+        "button1": "Active Itinerary",
+        "button2": "Expense Calculator",
+        "button3": "Field Gear",
+        "button4": "My Favorites",
+        "div1": "Hotel Boutique Adela",
+        "span1": "· BAQUEANO Verified",
+        "div2": "C$ 1,800 / night",
+        "button5": "View details",
+        "div3": "El Zaguán Restaurant",
+        "div4": "C$ 350 / person",
+        "span2": "Local Guide",
+        "div5": "Local Guide Don Carlos",
+        "div6": "C$ 800 / tour",
+        "span3": "Water Tour",
+        "div7": "Islets Kayak Tour",
+        "div8": "C$ 600 / person",
+        "imgAlt1": "Hotel Boutique Adela - Baqüi Guide",
+        "imgAlt2": "El Zaguán Restaurant - Baqüi Guide",
+        "imgAlt3": "Local Guide Don Carlos - Baqüi Guide",
+        "imgAlt4": "Islets Kayak Tour - Baqüi Guide"
+      },
+      "tabItinerario": {
+        "p1": "You can adjust destinations, days, budget or type of experiences and Baqueano AI will update it instantly.",
+        "button1": "Modify with AI →"
+      },
+      "tabPresupuesto": {
+        "h31": "Expense Estimate (3 days / 2 people)",
+        "p1": "Transparent calculation validated against real costs in Nicaragua.",
+        "span1": "Transport (own vehicle fuel / bus)",
+        "strong1": "C$ 1,200 (~$33 USD)",
+        "span2": "Lodging (standard or colonial boutique hotels, 2 nights)",
+        "strong2": "C$ 3,000 (~$82 USD)",
+        "span3": "Food (traditional restaurants, 3 meals)",
+        "strong3": "C$ 2,000 (~$55 USD)",
+        "span4": "Community baqueano guides and reserve entrance fees",
+        "strong4": "C$ 2,300 (~$63 USD)",
+        "span5": "Other expenses & supplies (crafts, souvenirs, support for local children)",
+        "strong5": "C$ 800 (~$22 USD)",
+        "span6": "Estimated Total:",
+        "span7": "C$ 9,300 (~$254 USD)",
+        "strong6": "💡 Cost Transparency:",
+        "div1": "Eating at local eateries costs C$ 120-180 per dish, while tourist restaurants run C$ 500-900. The intercity bus is very affordable (C$ 360), your own car saves on fuel and renting a vehicle (C$ 3,800) offers more comfort."
+      },
+      "tabChecklist": {
+        "h31": "Trail Packing List",
+        "label1": "Reusable water bottle (avoid single-use plastics)",
+        "label2": "Biodegradable sunscreen and insect repellent",
+        "label3": "Hiking shoes with good grip for volcanic terrain",
+        "label4": "Rain poncho for cloud forests and sudden showers",
+        "label5": "Cash in córdobas for cooperatives and corner stores",
+        "label6": "Headlamp or flashlight with backup battery",
+        "label7": "Basic first-aid kit and antihistamines",
+        "label8": "ID document and emergency photocopy"
+      },
+      "tabFavoritos": {
+        "h31": "Your favorite destinations",
+        "p1": "When you click the heart on any destination, cooperative or typical dish, it will be saved here for your next route.",
+        "a1": "Explore catalog"
+      },
+      "mapPanelItinerario": {
+        "h51": "Colonial Granada and sunset at the Islets",
+        "span1": "Colonial Granada · 45 km · 6 h",
+        "h52": "Lava lake at Masaya Volcano and Monimbó crafts",
+        "span2": "Masaya & Sandboarding · 120 km · 9 h",
+        "h53": "Ferry to Ometepe, Ojo de Agua and hiking at Finca Magdalena",
+        "span3": "Ometepe Island · 110 km · 8 h"
+      },
+      "mapPanelHospedajes": {
+        "h51": "Hotel Boutique Adela · Granada",
+        "span1": "C$ 1,800/night · 4.8 ★ · Verified",
+        "h52": "Posada Rural San Ramón · Ometepe",
+        "span2": "C$ 1,200/night · 4.6 ★ · Verified"
+      },
+      "mapPanelComida": {
+        "h51": "El Zaguán Restaurant · Granada",
+        "span1": "C$ 350/person · 4.7 ★ · Typical cuisine",
+        "h52": "Doña Rosa Kiosk · Granada",
+        "span2": "Homemade vigorón · C$ 80/portion · Rural"
+      },
+      "mapPanelAtractivos": {
+        "h51": "The 365 Islets of Cocibolca",
+        "span1": "Granada · Boat ride with a local fisherman",
+        "h52": "Santiago Crater · Masaya Volcano",
+        "span2": "Masaya · Nicaragua's only lava lake you can see by car",
+        "h53": "Ojo de Agua Spring · Ometepe",
+        "span3": "Ometepe Island · Crystal-clear waters of volcanic origin"
+      },
+      "viajeSidebar": {
+        "h41": "Budget Summary",
+        "span1": "Transport (fuel / bus)",
+        "span2": "Lodging (standard hotel)",
+        "span3": "Food (typical restaurants)",
+        "span4": "Guides & entrance fees",
+        "span5": "Other expenses & supplies",
+        "span6": "Estimated total",
+        "h42": "Baqueano Digital AI",
+        "p1": "Generate a personalized route or adjust this one in seconds."
+      },
+      "sosModal": {
+        "h31": "SOS & Help Center",
+        "p1": "Your GPS location is active for roadside assistance."
+      }
+    },
+    "musica": {
+      "body": {
+        "title1": "Music & Sound Heritage | Baqueano Nicaragua"
+      },
+      "musicaHeroExact": {
+        "h11": "THE SOUND OF NICARAGUA",
+        "span1": "IS STILL ALIVE",
+        "p1": "Music, identity and tradition that connect our people and make the world a more human place.",
+        "button1": "Listen now →",
+        "a1": "Explore the sound map",
+        "span2": "Our music is also landscape 🍃"
+      },
+      "featuredTrackTitle": {
+        "h41": "La Mora Limpia"
+      },
+      "featuredTrackArtist": {
+        "b1": "Justo Santos"
+      },
+      "btnTrackProfile": {
+        "button1": "View profile →"
+      },
+      "musicaSectionCommon": {
+        "h21": "Explore by genre",
+        "p1": "Rhythms that tell the story of our land.",
+        "a1": "See all genres →",
+        "h31": "Son Nica",
+        "p2": "Rhythm and identity",
+        "h32": "Marimba",
+        "p3": "Ancestral sound",
+        "h33": "New Song",
+        "p4": "Voice of the people",
+        "h34": "Folklore",
+        "p5": "Living tradition",
+        "p6": "Rhythms of the Atlantic",
+        "h35": "Classical Music",
+        "p7": "Universal legacy",
+        "p8": "Roots of our land",
+        "h22": "Artists and composers",
+        "p9": "Voices that have placed Nicaragua in the heart of the world.",
+        "a2": "See all artists →",
+        "h41": "Camilo Zapata",
+        "p10": "The poet of the mountain",
+        "p11": "Icon of Son Nica",
+        "h42": "Carlos Mejía Godoy",
+        "p12": "Voice of our people",
+        "h43": "Luis Enrique Mejía Godoy",
+        "p13": "Songs that unite us",
+        "h44": "Salvador Cardenal",
+        "p14": "Soul of Nicaragua",
+        "h45": "Katia Cardenal",
+        "p15": "Music with meaning",
+        "h46": "Norma Helena Gadea",
+        "p16": "The flower of song"
       }
     }
   },
