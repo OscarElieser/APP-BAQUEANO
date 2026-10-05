@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T15:40:47.941Z",
+  "generatedAt": "2026-10-05T15:47:23.833Z",
   "source": "OpenStreetMap Nominatim — © OpenStreetMap contributors (ODbL). Contornos: geoBoundaries ADM1 (CC BY 4.0).",
   "rule": "Cada punto se acepta solo si cae dentro del contorno oficial de su territorio.",
   "territories": {
@@ -57,6 +57,14 @@
         "lng": -86.66332,
         "osm": "node/4259178620",
         "label": "Petroglifos y Arte Rupestre Piedras Pintadas, Somoto, Madriz",
+        "approx": true
+      },
+      {
+        "name": "Río Estelí",
+        "lat": 13.49602,
+        "lng": -86.26757,
+        "source": "catalog",
+        "label": "Río Estelí",
         "approx": true
       }
     ],
@@ -155,10 +163,11 @@
       },
       {
         "name": "Isla Juan Venado",
-        "lat": 12.31418,
-        "lng": -86.94878,
-        "osm": "relation/17913378",
-        "label": "Isla del Venado, León, 21000"
+        "lat": 12.31306,
+        "lng": -86.94889,
+        "source": "catalog",
+        "label": "Isla Juan Venado",
+        "approx": true
       },
       {
         "name": "Poco a Poco Hostel",
@@ -166,15 +175,30 @@
         "lng": -86.88114,
         "osm": "node/4595638290",
         "label": "Poco a Poco Hostal, 2da Calle Nor Oeste, León"
+      },
+      {
+        "name": "Playa Las Peñitas",
+        "lat": 12.3614,
+        "lng": -87.0215,
+        "source": "catalog",
+        "label": "Playa Las Peñitas"
+      },
+      {
+        "name": "Playa Poneloya",
+        "lat": 12.3783,
+        "lng": -87.0422,
+        "source": "catalog",
+        "label": "Playa Poneloya"
       }
     ],
     "rivas": [
       {
         "name": "Reserva de Biosfera Isla de Ometepe",
-        "lat": 11.49876,
-        "lng": -85.59376,
-        "osm": "relation/19370665",
-        "label": "Reserva de Biósfera Isla de Ometepe, Rivas, Nicaragua"
+        "lat": 11.491051,
+        "lng": -85.554472,
+        "source": "catalog",
+        "label": "Reserva de Biosfera Isla de Ometepe",
+        "approx": true
       },
       {
         "name": "Volcán Concepción",
@@ -216,8 +240,8 @@
         "name": "Cascada de San Ramón",
         "lat": 11.43424,
         "lng": -85.51924,
-        "osm": "node/3986671229",
-        "label": "Salto San Ramón, Altagracia, Rivas"
+        "source": "catalog",
+        "label": "Cascada de San Ramón"
       },
       {
         "name": "Museo El Ceibo y petroglifos de Ometepe",
@@ -279,6 +303,48 @@
         "osm": "relation/6409432",
         "label": "Isla de Ometepe, Rivas, Nicaragua",
         "approx": true
+      },
+      {
+        "name": "Playa San Juan del Sur",
+        "lat": 11.2548,
+        "lng": -85.8729,
+        "source": "catalog",
+        "label": "Playa San Juan del Sur"
+      },
+      {
+        "name": "Playa Maderas",
+        "lat": 11.295,
+        "lng": -85.91,
+        "source": "catalog",
+        "label": "Playa Maderas"
+      },
+      {
+        "name": "Playa Remanso",
+        "lat": 11.22249,
+        "lng": -85.84622,
+        "source": "catalog",
+        "label": "Playa Remanso"
+      },
+      {
+        "name": "Playa El Coco",
+        "lat": 11.1559,
+        "lng": -85.7998,
+        "source": "catalog",
+        "label": "Playa El Coco"
+      },
+      {
+        "name": "Popoyo y Guasacate",
+        "lat": 11.473,
+        "lng": -86.1279,
+        "source": "catalog",
+        "label": "Popoyo y Guasacate"
+      },
+      {
+        "name": "Playa Gigante",
+        "lat": 11.3911,
+        "lng": -86.0326,
+        "source": "catalog",
+        "label": "Playa Gigante"
       }
     ],
     "jinotega": [
@@ -349,6 +415,13 @@
         "osm": "node/8706649564",
         "label": "Kayaska, San José de Bocay, Jinotega",
         "approx": true
+      },
+      {
+        "name": "Cascada La Bujona",
+        "lat": 13.08037,
+        "lng": -85.87418,
+        "source": "catalog",
+        "label": "Cascada La Bujona"
       }
     ],
     "masaya": [
@@ -444,10 +517,11 @@
       },
       {
         "name": "Isletas de Granada",
-        "lat": 11.8723,
-        "lng": -85.89949,
-        "osm": "relation/5719094",
-        "label": "Isletas de Granada, Granada, 43000"
+        "lat": 11.89911,
+        "lng": -85.88519,
+        "source": "catalog",
+        "label": "Isletas de Granada",
+        "approx": true
       },
       {
         "name": "Reserva Natural Volcán Mombacho",
@@ -491,6 +565,22 @@
         "lng": -85.93411,
         "osm": "node/11209087574",
         "label": "El Aguacate, Granada, 43000"
+      },
+      {
+        "name": "Río Tipitapa",
+        "lat": 12.08333,
+        "lng": -85.88333,
+        "source": "catalog",
+        "label": "Río Tipitapa",
+        "approx": true
+      },
+      {
+        "name": "Isla Zapatera",
+        "lat": 11.739,
+        "lng": -85.835,
+        "source": "catalog",
+        "label": "Isla Zapatera",
+        "approx": true
       }
     ],
     "matagalpa": [
@@ -559,6 +649,27 @@
         "lng": -85.91832,
         "osm": "way/244239172",
         "label": "Catedral San Pedro, 1a Calle Norte, Matagalpa"
+      },
+      {
+        "name": "Río Tuma",
+        "lat": 13.1025,
+        "lng": -85.74323,
+        "source": "catalog",
+        "label": "Río Tuma"
+      },
+      {
+        "name": "Cascada La Luna (El Tuma-La Dalia)",
+        "lat": 13.11685,
+        "lng": -85.75101,
+        "source": "catalog",
+        "label": "Cascada La Luna (El Tuma-La Dalia)"
+      },
+      {
+        "name": "Cascada Blanca (Río Yasica)",
+        "lat": 12.99124,
+        "lng": -85.82931,
+        "source": "catalog",
+        "label": "Cascada Blanca (Río Yasica)"
       }
     ],
     "esteli": [
@@ -604,6 +715,14 @@
         "lng": -86.47126,
         "osm": "relation/21178574",
         "label": "Cooperativa San Luis, San Juan de Limay, Estelí",
+        "approx": true
+      },
+      {
+        "name": "Salto de La Estanzuela",
+        "lat": 13.025,
+        "lng": -86.39,
+        "source": "catalog",
+        "label": "Salto de La Estanzuela",
         "approx": true
       }
     ],
@@ -692,6 +811,14 @@
         "label": "Reserva Natural Laguna de Asososca, Distrito II, Managua"
       },
       {
+        "name": "Reserva Natural Chocoyero–El Brujo",
+        "lat": 11.99,
+        "lng": -86.25,
+        "source": "catalog",
+        "label": "Reserva Natural Chocoyero–El Brujo",
+        "approx": true
+      },
+      {
         "name": "Ticuantepe y El Crucero",
         "lat": 12.02177,
         "lng": -86.20531,
@@ -741,6 +868,20 @@
         "lng": -86.28138,
         "osm": "node/12688850468",
         "label": "Finca Las Delicias, Ticuantepe, Managua"
+      },
+      {
+        "name": "Playa Pochomil",
+        "lat": 11.77244,
+        "lng": -86.50435,
+        "source": "catalog",
+        "label": "Playa Pochomil"
+      },
+      {
+        "name": "Playa Masachapa",
+        "lat": 11.78467,
+        "lng": -86.51594,
+        "source": "catalog",
+        "label": "Playa Masachapa"
       }
     ],
     "carazo": [
@@ -764,8 +905,8 @@
         "name": "La Boquita",
         "lat": 11.67825,
         "lng": -86.38236,
-        "osm": "relation/16140066",
-        "label": "La Boquita, Diriamba, Carazo"
+        "source": "catalog",
+        "label": "La Boquita"
       },
       {
         "name": "Casares",
@@ -1008,10 +1149,11 @@
       },
       {
         "name": "Archipiélago de Solentiname",
-        "lat": 11.18188,
-        "lng": -85.02906,
-        "osm": "relation/16404171",
-        "label": "Archipiélago de Solentiname, San Carlos, Río San Juan"
+        "lat": 11.17283,
+        "lng": -84.99081,
+        "source": "catalog",
+        "label": "Archipiélago de Solentiname",
+        "approx": true
       },
       {
         "name": "Humedales de San Carlos & Malecón",
@@ -1080,6 +1222,14 @@
         "osm": "relation/16339033",
         "label": "Refugio de Vida Silvestre Los Guatuzos, Río San Juan, Nicaragua",
         "approx": true
+      },
+      {
+        "name": "Río San Juan",
+        "lat": 11.119218,
+        "lng": -84.778118,
+        "source": "catalog",
+        "label": "Río San Juan",
+        "approx": true
       }
     ],
     "raccn": [
@@ -1118,10 +1268,11 @@
     "raccs": [
       {
         "name": "Corn Island & Little Corn Island",
-        "lat": 12.28851,
-        "lng": -82.98292,
-        "osm": "relation/19951377",
-        "label": "Little Corn Island, Carib Town, Corn Island"
+        "lat": 12.1664,
+        "lng": -83.0514,
+        "source": "catalog",
+        "label": "Corn Island & Little Corn Island",
+        "approx": true
       },
       {
         "name": "Bahía de Bluefields & Malecón",
@@ -1148,10 +1299,10 @@
       },
       {
         "name": "Little Corn Island y Otto Beach",
-        "lat": 12.28851,
-        "lng": -82.98292,
-        "osm": "relation/19951377",
-        "label": "Little Corn Island, Carib Town, Corn Island",
+        "lat": 12.2884,
+        "lng": -82.9812,
+        "source": "catalog",
+        "label": "Little Corn Island y Otto Beach",
         "approx": true
       },
       {
@@ -1160,6 +1311,22 @@
         "lng": -83.69055,
         "osm": "relation/14454091",
         "label": "Awás, Laguna de Perlas, Costa Caribe Sur",
+        "approx": true
+      },
+      {
+        "name": "Río Grande de Matagalpa",
+        "lat": 12.90905,
+        "lng": -83.51531,
+        "source": "catalog",
+        "label": "Río Grande de Matagalpa",
+        "approx": true
+      },
+      {
+        "name": "Río Escondido",
+        "lat": 12.08677,
+        "lng": -83.74916,
+        "source": "catalog",
+        "label": "Río Escondido",
         "approx": true
       }
     ]
@@ -1215,10 +1382,10 @@
       "Basílica Menor de Nuestra Señora del Trono",
       "Rancho Maribel",
       "Campamento Ecológico Campuzano",
-      "Cabañas El Manantial"
+      "Cabañas El Manantial",
+      "Playa Jiquilillo"
     ],
     "managua": [
-      "Reserva Natural Chocoyero–El Brujo",
       "Reserva Silvestre Privada Montibelli"
     ],
     "carazo": [
