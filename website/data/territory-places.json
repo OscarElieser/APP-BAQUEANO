@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T23:03:43.952Z",
+  "generatedAt": "2026-10-05T00:12:29.936Z",
   "source": "OpenStreetMap Nominatim — © OpenStreetMap contributors (ODbL). Contornos: geoBoundaries ADM1 (CC BY 4.0).",
   "rule": "Cada punto se acepta solo si cae dentro del contorno oficial de su territorio.",
   "territories": {
@@ -10,6 +10,54 @@
         "lng": -86.70376,
         "osm": "node/10836162360",
         "label": "Monumento nacional Cañón de Somoto, Carretera Panamericana Norte, Valle de Sonís"
+      },
+      {
+        "name": "Laguna La Bruja (Las Sabanas)",
+        "lat": 13.33874,
+        "lng": -86.65328,
+        "osm": "relation/5726602",
+        "label": "Las Sabanas, Madriz, 35500",
+        "approx": true
+      },
+      {
+        "name": "Mirador El Balcón (San José de Cusmapa)",
+        "lat": 13.26234,
+        "lng": -86.6858,
+        "osm": "relation/5726603",
+        "label": "San José de Cusmapa, Madriz, 35600",
+        "approx": true
+      },
+      {
+        "name": "Parque Natural El Majaste (San Juan del Río Coco)",
+        "lat": 13.52789,
+        "lng": -86.14112,
+        "osm": "relation/5726760",
+        "label": "San Juan del Río Coco, Madriz, 35800",
+        "approx": true
+      },
+      {
+        "name": "Comunidad Indígena San José de Palmira (Totogalpa)",
+        "lat": 13.54183,
+        "lng": -86.45995,
+        "osm": "relation/5726723",
+        "label": "Totogalpa, Madriz, 35300",
+        "approx": true
+      },
+      {
+        "name": "Talleres de Cerámica de Loma Panda (San Lucas)",
+        "lat": 13.38632,
+        "lng": -86.64582,
+        "osm": "node/9611534519",
+        "label": "Loma Panda, San Lucas, Madriz",
+        "approx": true
+      },
+      {
+        "name": "Parque Arqueológico Piedras Pintadas",
+        "lat": 13.60869,
+        "lng": -86.66332,
+        "osm": "node/4259178620",
+        "label": "Petroglifos y Arte Rupestre Piedras Pintadas, Somoto, Madriz",
+        "approx": true
       }
     ],
     "leon": [
@@ -47,6 +95,14 @@
         "lng": -86.88066,
         "osm": "way/312932871",
         "label": "Teatro Municipal José de la Cruz Mena, Avenida José W. Mayorga S., León"
+      },
+      {
+        "name": "Museo de Mitos y Leyendas",
+        "lat": 12.43204,
+        "lng": -86.87883,
+        "osm": "way/312935994",
+        "label": "Museo de Leyendas y Tradiciones, 4 Calle Sur, León",
+        "approx": true
       },
       {
         "name": "Volcán Cerro Negro",
@@ -142,11 +198,43 @@
         "label": "Laguna Charco Verde, Altagracia, Rivas"
       },
       {
+        "name": "Ojo de Agua y Playa Santo Domingo",
+        "lat": 11.54905,
+        "lng": -86.09215,
+        "osm": "node/3554867480",
+        "label": "Ojo de Agua, Tola, Rivas",
+        "approx": true
+      },
+      {
         "name": "Cascada de San Ramón",
         "lat": 11.43424,
         "lng": -85.51924,
         "osm": "node/3986671229",
         "label": "Salto San Ramón, Altagracia, Rivas"
+      },
+      {
+        "name": "Museo El Ceibo y petroglifos de Ometepe",
+        "lat": 11.48035,
+        "lng": -85.67296,
+        "osm": "node/1830071792",
+        "label": "Museos El Ceibo, NIC-64, Los Ángeles",
+        "approx": true
+      },
+      {
+        "name": "San Juan del Sur y Cristo de la Misericordia",
+        "lat": 11.25423,
+        "lng": -85.87228,
+        "osm": "relation/19722106",
+        "label": "San Juan del Sur, Rivas, 48600",
+        "approx": true
+      },
+      {
+        "name": "Maderas, Marsella, Remanso, Hermosa y El Coco",
+        "lat": 11.44452,
+        "lng": -85.51197,
+        "osm": "node/175897822",
+        "label": "Volcán Maderas, Altagracia, Rivas",
+        "approx": true
       },
       {
         "name": "Refugio de Vida Silvestre La Flor",
@@ -161,9 +249,25 @@
         "lng": -85.78916,
         "osm": "node/3152034052",
         "label": "Puerto Lacustre de San Jorge, Calle del Lago, Barrio El Lago"
+      },
+      {
+        "name": "Ciudad de Rivas",
+        "lat": 11.43894,
+        "lng": -85.82874,
+        "osm": "relation/5743428",
+        "label": "Rivas, 47000, Nicaragua",
+        "approx": true
       }
     ],
     "jinotega": [
+      {
+        "name": "Cascada La Luna & El Cuá",
+        "lat": 13.36816,
+        "lng": -85.67283,
+        "osm": "relation/5748205",
+        "label": "El Cuá, Jinotega, 66500",
+        "approx": true
+      },
       {
         "name": "Lago de Apanás",
         "lat": 13.19821,
@@ -186,11 +290,43 @@
         "label": "Macizo de Peñas Blancas, NN-51, Sonora"
       },
       {
+        "name": "Fincas Agroecológicas de San Rafael del Norte",
+        "lat": 13.23279,
+        "lng": -86.08699,
+        "osm": "relation/5747250",
+        "label": "San Rafael del Norte, Jinotega, 66100",
+        "approx": true
+      },
+      {
         "name": "Reserva Natural Cerro Datanlí–El Diablo",
         "lat": 13.11941,
         "lng": -85.87948,
         "osm": "node/5905388972",
         "label": "Cerro El Diablo, Jinotega, 65000"
+      },
+      {
+        "name": "Cascadas Arco Iris, La Pavona y La Sonora",
+        "lat": 13.35766,
+        "lng": -85.80289,
+        "osm": "node/6024491600",
+        "label": "La Pavona, El Cuá, Jinotega",
+        "approx": true
+      },
+      {
+        "name": "Cerro Kilambé y aguas termales de El Caño",
+        "lat": 14.28167,
+        "lng": -85.16475,
+        "osm": "relation/18514265",
+        "label": "Panka Dákura, Wiwilí de Jinotega, Jinotega",
+        "approx": true
+      },
+      {
+        "name": "Salto de Kayaska",
+        "lat": 13.85016,
+        "lng": -85.3784,
+        "osm": "node/8706649564",
+        "label": "Kayaska, San José de Bocay, Jinotega",
+        "approx": true
       }
     ],
     "masaya": [
@@ -237,6 +373,14 @@
         "label": "San Juan de Oriente, Masaya, 42800"
       },
       {
+        "name": "Niquinohomo y Casa Museo de Sandino",
+        "lat": 11.8803,
+        "lng": -86.09764,
+        "osm": "relation/5740292",
+        "label": "Niquinohomo, Masaya, 42700",
+        "approx": true
+      },
+      {
         "name": "Reserva Natural Laguna de Apoyo",
         "lat": 11.92394,
         "lng": -86.03358,
@@ -249,9 +393,33 @@
         "lng": -85.97623,
         "osm": "relation/6087422",
         "label": "Laguna de Tisma, Tisma, Masaya"
+      },
+      {
+        "name": "Taller Escuela Valentín López y Palo Solo",
+        "lat": 11.95554,
+        "lng": -86.24111,
+        "osm": "node/2714691374",
+        "label": "Palo Solo, La Concepción, Masaya",
+        "approx": true
       }
     ],
     "granada": [
+      {
+        "name": "Centro Histórico y Calle La Calzada",
+        "lat": 11.9316,
+        "lng": -85.95429,
+        "osm": "way/97986558",
+        "label": "Centro Histórico, Granada, 43000",
+        "approx": true
+      },
+      {
+        "name": "Catedral de Granada y Parque Colón",
+        "lat": 11.9297,
+        "lng": -85.94707,
+        "osm": "way/419263427",
+        "label": "Hotel Granada, Frente a Iglesia Guadalupe a tan solo 400 mts de la Catedral de Granada hacia el lago, Calle La Calzada",
+        "approx": true
+      },
       {
         "name": "Isletas de Granada",
         "lat": 11.8723,
@@ -265,6 +433,14 @@
         "lng": -85.95994,
         "osm": "node/484783342",
         "label": "Volcán Mombacho, Granada, 43000"
+      },
+      {
+        "name": "Aguas Agrias–La Nanda",
+        "lat": 11.77267,
+        "lng": -85.97144,
+        "osm": "node/1849290829",
+        "label": "Aguas Agrias, Nandaime, Granada",
+        "approx": true
       },
       {
         "name": "Reserva Natural Laguna de Apoyo",
@@ -281,6 +457,22 @@
         "lng": -85.90914,
         "osm": "node/10296278573",
         "label": "Selva Negra, Matagalpa, 61000"
+      },
+      {
+        "name": "Comunidad Indígena de El Chile",
+        "lat": 12.8402,
+        "lng": -85.82161,
+        "osm": "relation/20219043",
+        "label": "El Chile, Matagalpa, 61000",
+        "approx": true
+      },
+      {
+        "name": "Cascada Santa Emilia",
+        "lat": 12.98136,
+        "lng": -85.84089,
+        "osm": "relation/15068528",
+        "label": "Santa Emilia, Matagalpa, 61000",
+        "approx": true
       },
       {
         "name": "Cerro Apante (Reserva Natural)",
@@ -302,6 +494,14 @@
         "lng": -86.12459,
         "osm": "node/2435831823",
         "label": "Casa Natal Rubén Darío, Calle Rubén Darío, Ciudad Darío"
+      },
+      {
+        "name": "Cascada Blanca y Cascada La Luna",
+        "lat": 12.88992,
+        "lng": -85.90103,
+        "osm": "node/10313308230",
+        "label": "Cerro Peña Blanca, Matagalpa, 61000",
+        "approx": true
       },
       {
         "name": "San Ramón",
@@ -341,6 +541,14 @@
         "label": "Comunidad La Garnacha, San Nicolás, Estelí"
       },
       {
+        "name": "Condega y su Taller Comunal de Cerámica",
+        "lat": 13.34087,
+        "lng": -86.35278,
+        "osm": "relation/5728877",
+        "label": "Condega, Estelí, 32100",
+        "approx": true
+      },
+      {
         "name": "Pueblo Nuevo",
         "lat": 13.35036,
         "lng": -86.52424,
@@ -353,6 +561,14 @@
         "lng": -86.57571,
         "osm": "relation/5724027",
         "label": "San Juan de Limay, Estelí, 32300"
+      },
+      {
+        "name": "Mirador San Luis",
+        "lat": 13.25135,
+        "lng": -86.47126,
+        "osm": "relation/21178574",
+        "label": "Cooperativa San Luis, San Juan de Limay, Estelí",
+        "approx": true
       }
     ],
     "chinandega": [
@@ -364,6 +580,22 @@
         "label": "Volcán San Cristóbal, Chinandega, 25000"
       },
       {
+        "name": "Volcán Cosigüina y Laguna Cráter",
+        "lat": 12.97095,
+        "lng": -87.5765,
+        "osm": "node/302364254",
+        "label": "Volcán Cosigüina, El Viejo, Chinandega",
+        "approx": true
+      },
+      {
+        "name": "Playas de Aserradores & Jiquilillo",
+        "lat": 12.6271,
+        "lng": -87.34334,
+        "osm": "relation/15619135",
+        "label": "Aserradores, El Viejo, Chinandega",
+        "approx": true
+      },
+      {
         "name": "Estero Padre Ramos",
         "lat": 12.77585,
         "lng": -87.48048,
@@ -372,6 +604,14 @@
       }
     ],
     "managua": [
+      {
+        "name": "Puerto Salvador Allende y lago Xolotlán",
+        "lat": 12.1629,
+        "lng": -86.2752,
+        "osm": "node/14103792048",
+        "label": "Puerto Salvador Allende, 2a Avenida N.O., Centro Histórico Sur",
+        "approx": true
+      },
       {
         "name": "Centro Histórico de Managua",
         "lat": 12.1557,
@@ -401,11 +641,27 @@
         "label": "Sector Laguna de Tiscapa, Sector Gobierno, Distrito I"
       },
       {
+        "name": "Laguna de Xiloá y Apoyeque",
+        "lat": 12.22097,
+        "lng": -86.32192,
+        "osm": "relation/5883616",
+        "label": "Laguna de Xiloá, Mateare, Managua",
+        "approx": true
+      },
+      {
         "name": "Laguna de Asososca",
         "lat": 12.13719,
         "lng": -86.31607,
         "osm": "relation/20109064",
         "label": "Reserva Natural Laguna de Asososca, Distrito II, Managua"
+      },
+      {
+        "name": "Ticuantepe y El Crucero",
+        "lat": 12.02177,
+        "lng": -86.20531,
+        "osm": "relation/5835755",
+        "label": "Ticuantepe, Managua, 16300",
+        "approx": true
       },
       {
         "name": "Pochomil y Masachapa",
@@ -427,9 +683,33 @@
         "lng": -86.27124,
         "osm": "way/255735229",
         "label": "Parque Luis Alfonso Velásquez Flores, Distrito I, Managua"
+      },
+      {
+        "name": "Tipitapa y Centro Turístico El Trapiche",
+        "lat": 12.3633,
+        "lng": -86.0253,
+        "osm": "relation/5735801",
+        "label": "Tipitapa, Managua, 15100",
+        "approx": true
       }
     ],
     "carazo": [
+      {
+        "name": "Diriamba y Basílica de San Sebastián",
+        "lat": 11.6947,
+        "lng": -86.38124,
+        "osm": "relation/5737928",
+        "label": "Diriamba, Carazo, 46300",
+        "approx": true
+      },
+      {
+        "name": "Jinotepe y Parroquia Santiago",
+        "lat": 11.84785,
+        "lng": -86.19925,
+        "osm": "relation/5738009",
+        "label": "Jinotepe, Carazo, 41000",
+        "approx": true
+      },
       {
         "name": "La Boquita",
         "lat": 11.67825,
@@ -443,6 +723,46 @@
         "lng": -86.35747,
         "osm": "relation/16121308",
         "label": "Casares, Diriamba, Carazo"
+      },
+      {
+        "name": "Huehuete y El Tamarindo",
+        "lat": 11.62043,
+        "lng": -86.32912,
+        "osm": "relation/16121309",
+        "label": "Huehuete, Jinotepe, Carazo",
+        "approx": true
+      },
+      {
+        "name": "Centro Ecoturístico La Máquina",
+        "lat": 11.74234,
+        "lng": -86.32733,
+        "osm": "relation/16143759",
+        "label": "Balneario La Makina, Diriamba, Carazo",
+        "approx": true
+      },
+      {
+        "name": "Refugio Río Escalante–Chacocente",
+        "lat": 11.55656,
+        "lng": -86.18449,
+        "osm": "relation/5738094",
+        "label": "Refugio de Vida Silvestre Río Escalante - Chacocente, Santa Teresa, Carazo",
+        "approx": true
+      },
+      {
+        "name": "Centro Ecoturístico Loma de Viento",
+        "lat": 11.61845,
+        "lng": -86.17615,
+        "osm": "node/3554867557",
+        "label": "Cerro Loma de Viento, Santa Teresa, Carazo",
+        "approx": true
+      },
+      {
+        "name": "Dolores y fincas cafetaleras",
+        "lat": 11.85557,
+        "lng": -86.21739,
+        "osm": "relation/5737929",
+        "label": "Dolores, Carazo, 46100",
+        "approx": true
       }
     ],
     "chontales": [
@@ -468,15 +788,112 @@
         "label": "Zoológico Thomas Belt, 11ma Calle SO, Juigalpa"
       },
       {
+        "name": "Puerto Díaz & Lago Cocibolca",
+        "lat": 11.96461,
+        "lng": -85.51224,
+        "osm": "relation/15736248",
+        "label": "Puerto Díaz, Juigalpa, Chontales",
+        "approx": true
+      },
+      {
         "name": "Piedras Pintadas de Villa Sandino",
         "lat": 12.08344,
         "lng": -84.93601,
         "osm": "node/6397249155",
         "label": "Piedras Pintadas, Villa Sandino, Chontales"
+      },
+      {
+        "name": "Cerro y Cuevas Las Ventanas",
+        "lat": 11.99815,
+        "lng": -85.50154,
+        "osm": "node/11407582002",
+        "label": "Cerro El Orégano, Juigalpa, Chontales",
+        "approx": true
+      },
+      {
+        "name": "Cascadas de Chontales",
+        "lat": 11.57387,
+        "lng": -85.31262,
+        "osm": "relation/2194833",
+        "label": "Lago Cocibolca, Chontales, Nicaragua",
+        "approx": true
+      },
+      {
+        "name": "Salto y Cueva La Oropéndola",
+        "lat": 11.95573,
+        "lng": -84.98685,
+        "osm": "node/11005735092",
+        "label": "Cerro El Salto, Acoyapa, Chontales",
+        "approx": true
       }
     ],
-    "boaco": [],
+    "boaco": [
+      {
+        "name": "Cerro de la Vieja & Cerro Alegre",
+        "lat": 12.62211,
+        "lng": -85.72448,
+        "osm": "relation/19369678",
+        "label": "Reserva Natural Cerro Cumaica – Cerro Alegre, Boaco, Nicaragua",
+        "approx": true
+      },
+      {
+        "name": "Río Fonseca & Balnearios Naturales",
+        "lat": 12.44777,
+        "lng": -85.7208,
+        "osm": "relation/17359270",
+        "label": "Río Fonseca, Boaco, Nicaragua",
+        "approx": true
+      },
+      {
+        "name": "Pueblo Ganadero de Camoapa",
+        "lat": 12.55566,
+        "lng": -85.15499,
+        "osm": "relation/5753443",
+        "label": "Camoapa, Boaco, 52100",
+        "approx": true
+      },
+      {
+        "name": "Reserva Mombachito–Cerro La Vieja",
+        "lat": 12.42467,
+        "lng": -85.56974,
+        "osm": "relation/19173758",
+        "label": "Reserva Natural Cerro Mombachito – La Vieja, Boaco, 51000",
+        "approx": true
+      },
+      {
+        "name": "Cerros y cascadas de Santa Lucía",
+        "lat": 12.30739,
+        "lng": -85.85801,
+        "osm": "node/2816076559",
+        "label": "Cerros Colama, Teustepe, Boaco",
+        "approx": true
+      },
+      {
+        "name": "Cueva La Cocinera y Finca El Tamarindo",
+        "lat": 12.54035,
+        "lng": -85.73049,
+        "osm": "node/11741281250",
+        "label": "Cerro La Cocinera, Santa Lucía, Boaco",
+        "approx": true
+      },
+      {
+        "name": "Salto La Chorrera",
+        "lat": 12.53605,
+        "lng": -85.78884,
+        "osm": "relation/17301800",
+        "label": "Río La Chorrera o de Coyusne, Teustepe, Boaco",
+        "approx": true
+      }
+    ],
     "nueva-segovia": [
+      {
+        "name": "Cerro Mogotón (2,107 msnm)",
+        "lat": 13.74357,
+        "lng": -86.40936,
+        "osm": "node/11299029701",
+        "label": "El Mogotón, Mozonte, Nueva Segovia",
+        "approx": true
+      },
       {
         "name": "Santuario de la Virgen de la Piedra (Dipilto)",
         "lat": 13.7222,
@@ -485,11 +902,35 @@
         "label": "Santuario Virgen de la Piedra, Carretera Ocotal - Dipilto, Dipilto"
       },
       {
+        "name": "Aguas Termales de Macuelizo & Delia",
+        "lat": 13.68173,
+        "lng": -86.61861,
+        "osm": "relation/5729386",
+        "label": "Macuelizo, Nueva Segovia, 39300",
+        "approx": true
+      },
+      {
+        "name": "Valle Fértil de Jalapa",
+        "lat": 13.9248,
+        "lng": -86.10176,
+        "osm": "relation/5731469",
+        "label": "Jalapa, Nueva Segovia, 39200",
+        "approx": true
+      },
+      {
         "name": "Ciudad Antigua",
         "lat": 13.64759,
         "lng": -86.28304,
         "osm": "relation/5730763",
         "label": "Ciudad Antigua, Nueva Segovia, 38400"
+      },
+      {
+        "name": "Artesanías de Mozonte",
+        "lat": 13.67668,
+        "lng": -86.4137,
+        "osm": "relation/5729422",
+        "label": "Mozonte, Nueva Segovia, 38100",
+        "approx": true
       },
       {
         "name": "Salto El Rosario",
@@ -500,6 +941,14 @@
       }
     ],
     "rio-san-juan": [
+      {
+        "name": "Fortaleza de la Inmaculada Concepción (El Castillo)",
+        "lat": 11.09111,
+        "lng": -84.31992,
+        "osm": "relation/6641395",
+        "label": "El Castillo, Río San Juan, 92200",
+        "approx": true
+      },
       {
         "name": "Reserva Biológica Indio Maíz",
         "lat": 11.12037,
@@ -515,11 +964,27 @@
         "label": "Archipiélago de Solentiname, San Carlos, Río San Juan"
       },
       {
+        "name": "Humedales de San Carlos & Malecón",
+        "lat": 11.12307,
+        "lng": -84.77834,
+        "osm": "relation/5758820",
+        "label": "San Carlos, Río San Juan, 91000",
+        "approx": true
+      },
+      {
         "name": "San Juan de Nicaragua (Greytown)",
         "lat": 10.92096,
         "lng": -83.90819,
         "osm": "relation/5760615",
         "label": "San Juan del Norte, Río San Juan, 92500"
+      },
+      {
+        "name": "San Carlos y su circuito urbano",
+        "lat": 11.12307,
+        "lng": -84.77834,
+        "osm": "relation/5758820",
+        "label": "San Carlos, Río San Juan, 91000",
+        "approx": true
       },
       {
         "name": "Bartola",
@@ -536,20 +1001,60 @@
         "label": "Refugio de Vida Silvestre Los Guatuzos, Río San Juan, Nicaragua"
       },
       {
+        "name": "Antigua Greytown",
+        "lat": 10.94657,
+        "lng": -83.73567,
+        "osm": "relation/14950339",
+        "label": "Greytown, San Juan del Norte, Río San Juan",
+        "approx": true
+      },
+      {
         "name": "Refugio Los Guatuzos",
         "lat": 11.03826,
         "lng": -85.04148,
         "osm": "relation/16339033",
         "label": "Refugio de Vida Silvestre Los Guatuzos, Río San Juan, Nicaragua"
+      },
+      {
+        "name": "Muelle de San Miguelito y Chocoyolandia",
+        "lat": 11.4028,
+        "lng": -84.9004,
+        "osm": "relation/5758807",
+        "label": "San Miguelito, Río San Juan, 92100",
+        "approx": true
       }
     ],
     "raccn": [
+      {
+        "name": "Bilwi (Puerto Cabezas) & Muelle Histórico",
+        "lat": 14.0284,
+        "lng": -83.38226,
+        "osm": "relation/14335529",
+        "label": "Bilwi, Puerto Cabezas, Costa Caribe Norte",
+        "approx": true
+      },
+      {
+        "name": "Comunidades Mayangnas de Bonanza y Rosita",
+        "lat": 13.94155,
+        "lng": -84.28684,
+        "osm": "relation/5762483",
+        "label": "Rosita, Costa Caribe Norte, 72200",
+        "approx": true
+      },
       {
         "name": "Cayos Miskitos",
         "lat": 14.37772,
         "lng": -82.77303,
         "osm": "relation/17296497",
         "label": "Reserva Biológica Marina Cayos Miskitos y Franja Costera Inmediata, Costa Caribe Norte, Nicaragua"
+      },
+      {
+        "name": "Waspam, Portal del Wangki",
+        "lat": 14.60669,
+        "lng": -84.35278,
+        "osm": "relation/5762297",
+        "label": "Waspán, Costa Caribe Norte, 72100",
+        "approx": true
       }
     ],
     "raccs": [
@@ -561,152 +1066,116 @@
         "label": "Little Corn Island, Carib Town, Corn Island"
       },
       {
+        "name": "Bahía de Bluefields & Malecón",
+        "lat": 12.01315,
+        "lng": -83.76491,
+        "osm": "relation/3117424",
+        "label": "Bluefields, Costa Caribe Sur, 81000",
+        "approx": true
+      },
+      {
+        "name": "Laguna de Perlas & Aspinwall",
+        "lat": 12.33795,
+        "lng": -83.67286,
+        "osm": "relation/14445981",
+        "label": "Laguna de Perlas, Costa Caribe Sur, 82600",
+        "approx": true
+      },
+      {
         "name": "Bluff Beach",
         "lat": 12.09054,
         "lng": -83.68877,
         "osm": "relation/16528013",
         "label": "Playa Falso Bluff, Kukra Hill, Costa Caribe Sur"
+      },
+      {
+        "name": "Little Corn Island y Otto Beach",
+        "lat": 12.28851,
+        "lng": -82.98292,
+        "osm": "relation/19951377",
+        "label": "Little Corn Island, Carib Town, Corn Island",
+        "approx": true
+      },
+      {
+        "name": "Awas y Orinoco",
+        "lat": 12.33788,
+        "lng": -83.69055,
+        "osm": "relation/14454091",
+        "label": "Awás, Laguna de Perlas, Costa Caribe Sur",
+        "approx": true
       }
     ]
   },
   "unresolved": {
     "madriz": [
-      "Reserva Natural Tepesomoto-La Pataste",
-      "Laguna La Bruja (Las Sabanas)",
-      "Mirador El Balcón (San José de Cusmapa)",
-      "Parque Natural El Majaste (San Juan del Río Coco)",
-      "Comunidad Indígena San José de Palmira (Totogalpa)",
-      "Talleres de Cerámica de Loma Panda (San Lucas)",
-      "Parque Arqueológico Piedras Pintadas"
+      "Reserva Natural Tepesomoto-La Pataste"
     ],
     "leon": [
-      "Centro de Arte Fundación Ortiz Gurdián",
-      "Museo de Mitos y Leyendas"
+      "Centro de Arte Fundación Ortiz Gurdián"
     ],
     "rivas": [
-      "Ojo de Agua y Playa Santo Domingo",
-      "Museo El Ceibo y petroglifos de Ometepe",
-      "San Juan del Sur y Cristo de la Misericordia",
-      "Maderas, Marsella, Remanso, Hermosa y El Coco",
-      "Corredor de playas de Tola",
-      "Ciudad de Rivas"
+      "Corredor de playas de Tola"
     ],
     "jinotega": [
-      "Cascada La Luna & El Cuá",
-      "Fincas Agroecológicas de San Rafael del Norte",
-      "Salto La Mocuana",
-      "Cascadas Arco Iris, La Pavona y La Sonora",
-      "Cerro Kilambé y aguas termales de El Caño",
-      "Salto de Kayaska"
+      "Salto La Mocuana"
     ],
     "masaya": [
-      "Niquinohomo y Casa Museo de Sandino",
-      "Petroglifos de El Cailagua",
-      "Taller Escuela Valentín López y Palo Solo"
+      "Petroglifos de El Cailagua"
     ],
     "granada": [
-      "Centro Histórico y Calle La Calzada",
-      "Catedral de Granada y Parque Colón",
       "Iglesia y Torre de La Merced",
       "Convento e Iglesia San Francisco",
       "Casa de los Leones",
       "Antigua Estación del Ferrocarril",
-      "Lago Cocibolca",
-      "Aguas Agrias–La Nanda"
+      "Lago Cocibolca"
     ],
     "matagalpa": [
-      "Comunidad Indígena de El Chile",
-      "Cascada Santa Emilia",
       "Villa Chagüitillo",
-      "Cascada Blanca y Cascada La Luna",
       "Macizo de Peñas Blancas"
     ],
     "esteli": [
       "Galería de Esculturas en Piedra de Don Alberto",
       "Fábricas de Puros Artesanales",
-      "Murales Revolucionarios y Urbanos",
-      "Condega y su Taller Comunal de Cerámica",
-      "Mirador San Luis"
+      "Murales Revolucionarios y Urbanos"
     ],
     "chinandega": [
-      "Volcán Cosigüina y Laguna Cráter",
-      "Basílica Menor de Nuestra Señora del Trono",
-      "Playas de Aserradores & Jiquilillo"
+      "Basílica Menor de Nuestra Señora del Trono"
     ],
     "managua": [
-      "Puerto Salvador Allende y lago Xolotlán",
-      "Laguna de Xiloá y Apoyeque",
-      "Reserva Natural Chocoyero–El Brujo",
-      "Ticuantepe y El Crucero",
-      "Tipitapa y Centro Turístico El Trapiche"
+      "Reserva Natural Chocoyero–El Brujo"
     ],
     "carazo": [
-      "Diriamba y Basílica de San Sebastián",
-      "Jinotepe y Parroquia Santiago",
-      "Huehuete y El Tamarindo",
-      "Centro Ecoturístico La Máquina",
-      "Refugio Río Escalante–Chacocente",
       "Reserva Silvestre Privada Tonantzin",
-      "Reserva Silvestre Privada FRANIN",
-      "Centro Ecoturístico Loma de Viento",
-      "Dolores y fincas cafetaleras"
+      "Reserva Silvestre Privada FRANIN"
     ],
     "chontales": [
-      "Puerto Díaz & Lago Cocibolca",
       "Pirámides de Garro Grande",
       "Archipiélago El Nancital",
-      "Cerro y Cuevas Las Ventanas",
-      "Cascadas de Chontales",
-      "Salto y Cueva La Oropéndola",
       "Aguas Calientes e Isla Arena"
     ],
     "boaco": [
       "Centro Histórico & Calles Escalonadas de Boaco",
-      "Cerro de la Vieja & Cerro Alegre",
-      "Río Fonseca & Balnearios Naturales",
-      "Pueblo Ganadero de Camoapa",
       "Mirador El Faro",
-      "Reserva Mombachito–Cerro La Vieja",
       "Reserva Natural Filas de Masigüe",
-      "Comunidad Las Lagunas",
-      "Cerros y cascadas de Santa Lucía",
-      "Cueva La Cocinera y Finca El Tamarindo",
-      "Salto La Chorrera"
+      "Comunidad Las Lagunas"
     ],
     "nueva-segovia": [
-      "Cerro Mogotón (2,107 msnm)",
-      "Aguas Termales de Macuelizo & Delia",
-      "Valle Fértil de Jalapa",
       "Ocotal Colonial & Casa de la Cultura",
       "Cerro Las Tres Señoritas",
       "Cruz de la Fe",
-      "Artesanías de Mozonte",
       "Aguas termales Don Alfonso"
     ],
-    "rio-san-juan": [
-      "Fortaleza de la Inmaculada Concepción (El Castillo)",
-      "Humedales de San Carlos & Malecón",
-      "San Carlos y su circuito urbano",
-      "Antigua Greytown",
-      "Muelle de San Miguelito y Chocoyolandia"
-    ],
+    "rio-san-juan": [],
     "raccn": [
       "Reserva de Biosfera Bosawás",
       "Río Coco / Wangki",
-      "Bilwi (Puerto Cabezas) & Muelle Histórico",
-      "Comunidades Mayangnas de Bonanza y Rosita",
-      "Waspam, Portal del Wangki",
       "Sabanas de Pino",
       "Triángulo Minero"
     ],
     "raccs": [
       "Cayos Perlas",
-      "Bahía de Bluefields & Malecón",
-      "Laguna de Perlas & Aspinwall",
       "Isla Rama Cay",
       "Playas de Corn Island",
-      "Little Corn Island y Otto Beach",
-      "Awas y Orinoco",
       "Saltos Walpapigny y Busay"
     ]
   }
