@@ -63,7 +63,8 @@ const exists = (rel) => {
   return false;
 };
 
-const pages = fs.readdirSync(DIR).filter((n) => n.endsWith('.html')).sort();
+const isSiteVerification = (name) => /^google[0-9a-f]{8,}\.html$/.test(name);
+const pages = fs.readdirSync(DIR).filter((n) => n.endsWith('.html') && !isSiteVerification(n)).sort();
 const htmlCache = new Map(pages.map((p) => [p, stripComments(fs.readFileSync(path.join(DIR, p), 'utf8'))]));
 const idCache = new Map();
 const idsOf = (page) => {

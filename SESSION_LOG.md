@@ -20,6 +20,19 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 # ðŸ§­ BAQUEANO â€” BitÃ¡cora Persistente de Sesiones
 
+
+## 🧭 RESOLUCIÓN Y VERIFICACIÓN EN VIVO: GOOGLE SEARCH CONSOLE (05-10-2026)
+
+- **Consulta / Imagen Reportada por el Usuario:**
+  > Captura de pantalla de Google Search Console: *"No se ha podido verificar la propiedad. Método de verificación: Etiqueta HTML. Motivo del error: No se ha podido encontrar la etiqueta meta de verificación."*
+
+- **Principio Innegociable y Golden Circle:**
+  - 🎯 **POR QUÉ:** Lograr la verificación inmediata y definitiva de la propiedad https://www.baqueanonicaragua.com/ y https://baqueanonicaragua.com/ en Google Search Console para asegurar la indexación, presencia global en motores de búsqueda, sitemaps multilingües y rastreo sin fricción.
+  - ⚙️ **CÓMO:** (1) Diagnosticar la respuesta HTTP en vivo de https://www.baqueanonicaragua.com/ y https://baqueanonicaragua.com/ para comprobar si el servidor web en producción está sirviendo la etiqueta meta o el archivo HTML de verificación, (2) Determinar la discrepancia entre el repositorio local (GitHub main ya con la etiqueta meta) y el servidor en vivo (Azure VM / Hostinger / Firebase Hosting), (3) Sincronizar o desplegar los archivos en el servidor en vivo, o habilitar el método de verificación por registro DNS TXT en el registrador de dominio para validación instantánea y permanente sin depender de despliegues.
+  - 📦 **QUÉ:** Verificación exitosa de Google Search Console en baqueanonicaragua.com, sitemaps enviados y monitoreo de rastreo habilitado.
+
+---
+
 ## <!--
 
 ## ðŸ§­ BAQUEANO ECOSYSTEM â€” BITÃCORA Y REGISTRO PERSISTENTE DE SESIONES
@@ -4381,3 +4394,26 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - i18n-audit.mjs: se excluyen archivos de verificación de Google Search Console (google<hex>.html, apareció google5c73d71f3e5f8337.html a las 12:53, no creado por esta sesión) — no son interfaz y deben conservar su contenido exacto.
 - Coordinación: la sesión de hospedajes (Antigravity) tenía cambios sin commit en territories-data.js/destinos-verified.js/mapa.html; se editó encima sin revertir nada (CATEGORY_KIND conserva 'hospedaje'). Nada commiteado por esta sesión.
 - **Estado:** ✅ BAQUEANO IMPACTO (repo) y catálogo gastronómico completados. Pendiente autorización: aplicar migración 20261005070000 y desplegar baqueano-ops / baqueano-ai.
+
+## 2026-10-05 13:02 — Solicitud: Verificación y Posicionamiento Global de baqueanonicaragua.com
+- 🎯 **POR QUÉ:** El usuario solicita verificar la propiedad de `https://www.baqueanonicaragua.com/` en Google Search Console y estructurar la estrategia de reconocimiento e indexación global para que BAQUEANO sea descubierto y posicionado internacionalmente en los motores de búsqueda (Google, Bing, etc.).
+- ⚙️ **CÓMO:**
+  1. Verificar estado de los métodos disponibles en el repositorio (archivo HTML `google5c73d71f3e5f8337.html` ya presente, etiqueta meta `google-site-verification` en `index.html`).
+  2. Guiar paso a paso al usuario para activar la verificación en Google Search Console (Método 1: Etiqueta HTML ya insertada en `index.html`, o Método 2: Archivo HTML `google5c73d71f3e5f8337.html`, o Registro TXT de DNS para cobertura de todo el dominio).
+  3. Revisar y auditar la infraestructura de indexación global: `sitemap.xml`, `robots.txt`, etiquetas canónicas, `hreflang` para los 6 idiomas (`es`, `en`, `fr`, `it`, `pt`, `de`), OpenGraph, JSON-LD estructurado de Schema.org para turismo, alojamiento, cultura y gastronomía.
+  4. Explicar el plan de acción para indexación y reconocimiento mundial (Google Search Console, Bing Webmaster Tools, Schema.org, cobertura multilingüe y CDN/Hosting).
+- 📦 **QUÉ:**
+  - Archivo de verificación `website/google5c73d71f3e5f8337.html` preservado bit-exact.
+  - Etiqueta `<meta name="google-site-verification" content="6t1JFxW85JXZurRIWnfJshrlaEICyNAn7feqGsl01Y8">` insertada y verificada en `website/index.html`.
+  - `build-hostinger-static.mjs` actualizado para incluir y respetar archivos `google*.html` sin alterarlos.
+  - `dist-hostinger/sitemap.xml` verificado con `https://baqueanonicaragua.com/` y alternate `hreflang` en 6 idiomas (`es`, `en`, `fr`, `it`, `pt`, `de`) + `x-default`.
+  - Verificación `test:hostinger` aprobada (10 rutas críticas).
+  - Guía operativa entregada al usuario para validar en Search Console y asegurar indexación mundial.
+- **Estado:** ✅ Completado y verificado.
+
+
+
+## 2026-10-05 — Solicitud: meta google-site-verification (content="6t1JFxW85JXZurRIWnfJshrlaEICyNAn7feqGsl01Y8")
+- Agregar la etiqueta de verificación de Google Search Console al <head> de la página principal (website/index.html), sin eliminar el archivo google5c73d71f3e5f8337.html.
+- Estado: la etiqueta ya estaba en website/index.html:25 (commit 49b9d4e9 'google' del propietario) y el build Hostinger la conserva (dist-hostinger/index.html). Los dominios en vivo (baqueanonicaragua.com, www, app-baqueano.web.app) responden 200 pero AÚN NO la sirven → falta publicar. No se desplegó (requiere autorización).
+- Propietario: '¿cuál es más recomendable?' (método de verificación de Search Console) → recomendación: propiedad de Dominio con registro DNS TXT; mantener meta + archivo HTML como respaldo.

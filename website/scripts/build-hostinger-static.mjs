@@ -57,8 +57,13 @@ for (const directory of publicDirectories) await copyTree(path.join(root, direct
 const publishedPages = (await fs.readdir(output)).filter((name) => name.endsWith('.html'));
 const injectorSheets = readInjectorSheets(await fs.readFile(path.join(root, 'js/global-injector.js'), 'utf8'));
 if (injectorSheets.length < 5) throw new Error('No se pudo leer la lista de hojas de global-injector.js');
+const isGoogleVerification = (name) => /^google[a-f0-9]+\.html$/i.test(name);
 const aliasPages = new Set();
 for (const page of publishedPages) {
+  if (isGoogleVerification(page)) {
+    aliasPages.add(page);
+    continue;
+  }
   const target = path.join(output, page);
   const html = await fs.readFile(target, 'utf8');
   if (redirectTarget(html)) aliasPages.add(page);
