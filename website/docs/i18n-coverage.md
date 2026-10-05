@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T15:45:01.491Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3695 · en 3695 · fr 3695 · it 3695 · pt 3695 · de 3695
+Generado: 2026-10-05T17:30:15.626Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3703 · en 3703 · fr 3703 · it 3703 · pt 3703 · de 3703
 
 HTML: 3611/3612 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -125,7 +125,7 @@ HTML: 3611/3612 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | js/global-music-player.js | js | 2 | 0 | 2 | 0 % |
 | js/historia-audioguia.js | js | 2 | 0 | 2 | 0 % |
 | js/home-community.js | js | 2 | 0 | 2 | 0 % |
-| js/madriz-territory-map.js | js | 13 | 11 | 2 | 84.6 % |
+| js/madriz-territory-map.js | js | 15 | 13 | 2 | 86.7 % |
 | js/ops-center/ops-ia-copilot.js | js | 2 | 0 | 2 | 0 % |
 | apps/admin/src/app/fuentes/page.tsx | tsx | 1 | 0 | 1 | 0 % |
 | apps/web/src/app/mapa/page.tsx | tsx | 1 | 0 | 1 | 0 % |

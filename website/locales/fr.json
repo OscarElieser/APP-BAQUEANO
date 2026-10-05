@@ -5029,7 +5029,13 @@
         "playa": "Plages",
         "rio": "Rivières",
         "isla": "Îles",
-        "cascada": "Cascades"
+        "cascada": "Cascades",
+        "laguna": "Lagunes et lacs",
+        "volcan": "Volcans et sommets",
+        "reserva": "Réserves naturelles",
+        "cueva": "Grottes et canyons",
+        "mirador": "Belvédères",
+        "parque": "Parcs et aires protégées"
       }
     }
   },
@@ -5046,6 +5052,10 @@
       "map": "Carte de l'initiative",
       "sources": "Sources",
       "zone": "Commune ou zone"
+    },
+    "access": {
+      "viewArea": "Voir la zone sur la carte",
+      "note": "L'emplacement indiqué correspond à la zone générale. Le point d'accès reste à confirmer."
     }
   }
 }

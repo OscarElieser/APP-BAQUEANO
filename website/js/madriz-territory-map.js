@@ -285,6 +285,8 @@
           desc: String(result.desc || ''),
           // Datos comprobados con fuente (base verificada 2026-10-05, catálogo INTUR 2026).
           verification: result.verification || null,
+          // exact | centroid | reference | approximate (catálogos con fuente, 2026-10).
+          precision: result.precision || null,
           // Precisa: el nombre completo se encontró en OpenStreetMap.
           // Aproximada: se ubicó por una parte del nombre o su municipio.
           approximate: fixed ? fixed.approximate : true,
@@ -558,10 +560,16 @@
 
     const actions = el('div', 'map-place-info-actions');
     const directions = el('a', 'map-place-info-btn is-primary');
-    directions.href = `https://www.google.com/maps/dir/?api=1&destination=${Number(place.latitude)},${Number(place.longitude)}`;
+    // Regla del catálogo de naturaleza (2026-10): el centro de un lago, reserva o cráter
+    // NO es una ruta de acceso. Solo un punto exacto se ofrece como "Cómo llegar".
+    const generalArea = Boolean(place.precision) && place.precision !== 'exact';
+    directions.href = generalArea
+      ? `https://www.google.com/maps?q=${Number(place.latitude)},${Number(place.longitude)}`
+      : `https://www.google.com/maps/dir/?api=1&destination=${Number(place.latitude)},${Number(place.longitude)}`;
     directions.target = '_blank';
     directions.rel = 'noopener noreferrer';
-    directions.append(icon('fa-route'), ' Cómo llegar');
+    directions.append(icon(generalArea ? 'fa-map' : 'fa-route'), generalArea ? ` ${i18n('places.access.viewArea', 'Ver el área en el mapa')}` : ' Cómo llegar');
+    if (generalArea) body.append(el('p', 'map-place-info-access', i18n('places.access.note', 'La ubicación mostrada corresponde al área general. El punto de acceso está por confirmar.')));
     const plan = el('a', 'map-place-info-btn');
     plan.href = `baqueano-ia.html?q=${encodeURIComponent(`Quiero visitar ${place.name} en ${territoryName}`)}`;
     plan.append(icon('fa-wand-magic-sparkles'), ' Planificar con BAQUI');

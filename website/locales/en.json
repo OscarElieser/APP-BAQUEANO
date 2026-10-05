@@ -5029,7 +5029,13 @@
         "playa": "Beaches",
         "rio": "Rivers",
         "isla": "Islands",
-        "cascada": "Waterfalls"
+        "cascada": "Waterfalls",
+        "laguna": "Lagoons and lakes",
+        "volcan": "Volcanoes and peaks",
+        "reserva": "Nature reserves",
+        "cueva": "Caves and canyons",
+        "mirador": "Viewpoints",
+        "parque": "Parks and protected areas"
       }
     }
   },
@@ -5046,6 +5052,10 @@
       "map": "Map of the initiative",
       "sources": "Sources",
       "zone": "Municipality or area"
+    },
+    "access": {
+      "viewArea": "View the area on the map",
+      "note": "The location shown is the general area. The access point is still to be confirmed."
     }
   }
 }

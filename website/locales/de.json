@@ -5029,7 +5029,13 @@
         "playa": "Strände",
         "rio": "Flüsse",
         "isla": "Inseln",
-        "cascada": "Wasserfälle"
+        "cascada": "Wasserfälle",
+        "laguna": "Lagunen und Seen",
+        "volcan": "Vulkane und Berge",
+        "reserva": "Naturreservate",
+        "cueva": "Höhlen und Schluchten",
+        "mirador": "Aussichtspunkte",
+        "parque": "Parks und Schutzgebiete"
       }
     }
   },
@@ -5046,6 +5052,10 @@
       "map": "Karte der Initiative",
       "sources": "Quellen",
       "zone": "Gemeinde oder Gebiet"
+    },
+    "access": {
+      "viewArea": "Gebiet auf der Karte ansehen",
+      "note": "Der gezeigte Ort ist das allgemeine Gebiet. Der Zugangspunkt ist noch zu bestätigen."
     }
   }
 }

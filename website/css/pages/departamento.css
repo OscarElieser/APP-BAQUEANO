@@ -2812,3 +2812,5 @@ html body main#mainContent .bq-rich-feature li strong { color: #F4E6C1 !importan
 .map-place-info .map-place-verified-link:focus-visible { outline: 2px solid #F65E01; outline-offset: 2px; }
 .map-place-info .map-place-verified-sources { margin: 0.6rem 0 0; color: #CBD5E1 !important; font-size: 0.72rem; line-height: 1.5; }
 .map-place-info .map-place-verified-sources a { color: #F4E6C1 !important; text-decoration: underline; }
+/* Nota de acceso (catálogo de naturaleza 2026-10): el punto mostrado es el área general. */
+.map-place-info .map-place-info-access { margin: 0.5rem 0 0; padding: 0.45rem 0.6rem; border-left: 3px solid #F65E01; border-radius: 6px; background: rgba(246, 94, 1, 0.12); color: #F4E6C1 !important; font-size: 0.78rem; line-height: 1.45; }

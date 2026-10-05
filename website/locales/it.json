@@ -5029,7 +5029,13 @@
         "playa": "Spiagge",
         "rio": "Fiumi",
         "isla": "Isole",
-        "cascada": "Cascate"
+        "cascada": "Cascate",
+        "laguna": "Lagune e laghi",
+        "volcan": "Vulcani e colline",
+        "reserva": "Riserve naturali",
+        "cueva": "Grotte e canyon",
+        "mirador": "Punti panoramici",
+        "parque": "Parchi e aree protette"
       }
     }
   },
@@ -5046,6 +5052,10 @@
       "map": "Mappa dell'iniziativa",
       "sources": "Fonti",
       "zone": "Comune o zona"
+    },
+    "access": {
+      "viewArea": "Vedi l'area sulla mappa",
+      "note": "La posizione mostrata corrisponde all'area generale. Il punto di accesso è da confermare."
     }
   }
 }

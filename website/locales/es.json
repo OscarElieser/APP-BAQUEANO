@@ -5029,7 +5029,13 @@
         "playa": "Playas",
         "rio": "Ríos",
         "isla": "Islas",
-        "cascada": "Cascadas"
+        "cascada": "Cascadas",
+        "laguna": "Lagunas y lagos",
+        "volcan": "Volcanes y cerros",
+        "reserva": "Reservas naturales",
+        "cueva": "Cuevas y cañones",
+        "mirador": "Miradores",
+        "parque": "Parques y áreas protegidas"
       }
     }
   },
@@ -5046,6 +5052,10 @@
       "map": "Mapa de la iniciativa",
       "sources": "Fuentes",
       "zone": "Municipio o zona"
+    },
+    "access": {
+      "viewArea": "Ver el área en el mapa",
+      "note": "La ubicación mostrada corresponde al área general. El punto de acceso está por confirmar."
     }
   }
 }

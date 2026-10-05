@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T15:45:01.491Z",
+  "generatedAt": "2026-10-05T17:30:15.626Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 3695,
-    "en": 3695,
-    "fr": 3695,
-    "it": 3695,
-    "pt": 3695,
-    "de": 3695
+    "es": 3703,
+    "en": 3703,
+    "fr": 3703,
+    "it": 3703,
+    "pt": 3703,
+    "de": 3703
   },
   "html": {
     "files": 31,
@@ -24,7 +24,7 @@
   },
   "js": {
     "files": 82,
-    "translated": 110,
+    "translated": 112,
     "untranslated": 731
   },
   "jsEditorial": {
@@ -868,11 +868,11 @@
     {
       "file": "js/madriz-territory-map.js",
       "type": "js",
-      "total": 13,
-      "translated": 11,
+      "total": 15,
+      "translated": 13,
       "untranslated": 2,
       "editorialStrings": 0,
-      "coverage": 84.6
+      "coverage": 86.7
     },
     {
       "file": "js/mi-viaje-interactions.js",

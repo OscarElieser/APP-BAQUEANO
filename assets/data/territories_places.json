@@ -13,7 +13,9 @@
         {
           "name": "Monumento Nacional Cañón de Somoto",
           "type": "Geositio / Geoparque UNESCO",
-          "desc": "Cañón labrado por el río Coco entre paredes de roca; se recorre caminando, nadando y saltando con guías locales. Es parte del Geoparque Río Coco, reconocido por la UNESCO."
+          "desc": "Cañón labrado por el río Coco entre paredes de roca; se recorre caminando, nadando y saltando con guías locales. Es parte del Geoparque Río Coco, reconocido por la UNESCO.",
+          "lat": 13.45523,
+          "lng": -86.70377
         },
         {
           "name": "Reserva Natural Tepesomoto-La Pataste",
@@ -155,12 +157,16 @@
         {
           "name": "Volcán Cerro Negro",
           "type": "Senderismo, ascenso volcánico y sandboarding",
-          "desc": "Cono de arena volcánica negra, de los volcanes más jóvenes de Centroamérica. Se sube a pie y se desciende en tabla (sandboarding)."
+          "desc": "Cono de arena volcánica negra, de los volcanes más jóvenes de Centroamérica. Se sube a pie y se desciende en tabla (sandboarding).",
+          "lat": 12.50782,
+          "lng": -86.70329
         },
         {
           "name": "Volcán Telica",
           "type": "Senderismo, fotografía y observación geológica",
-          "desc": "Volcán activo de la cordillera de los Maribios; las caminatas guiadas suben hasta el borde del cráter, muy buscado al atardecer."
+          "desc": "Volcán activo de la cordillera de los Maribios; las caminatas guiadas suben hasta el borde del cráter, muy buscado al atardecer.",
+          "lat": 12.6,
+          "lng": -86.87
         },
         {
           "name": "Hervideros de San Jacinto",
@@ -275,12 +281,16 @@
         {
           "name": "Volcán Concepción",
           "type": "Senderismo regulado, geología, fotografía y naturaleza",
-          "desc": "El volcán más alto de Ometepe, activo; su ascenso es exigente y se hace solo con guía autorizado."
+          "desc": "El volcán más alto de Ometepe, activo; su ascenso es exigente y se hace solo con guía autorizado.",
+          "lat": 11.53901,
+          "lng": -85.62258
         },
         {
           "name": "Volcán Maderas",
           "type": "Bosque, biodiversidad, senderismo y vida rural",
-          "desc": "Volcán inactivo de Ometepe cubierto de bosque nuboso, con una laguna en el cráter y fincas en sus faldas."
+          "desc": "Volcán inactivo de Ometepe cubierto de bosque nuboso, con una laguna en el cráter y fincas en sus faldas.",
+          "lat": 11.44452,
+          "lng": -85.51197
         },
         {
           "name": "Punta Jesús María",
@@ -452,7 +462,9 @@
         {
           "name": "Lago de Apanás",
           "type": "Humedal Ramsar",
-          "desc": "Lago artificial entre montañas al norte de Jinotega, con comunidades de pescadores y paisajes de neblina."
+          "desc": "Lago artificial entre montañas al norte de Jinotega, con comunidades de pescadores y paisajes de neblina.",
+          "lat": 13.194444,
+          "lng": -85.976389
         },
         {
           "name": "Peña de La Cruz",
@@ -472,7 +484,9 @@
         {
           "name": "Reserva Natural Cerro Datanlí–El Diablo",
           "type": "Bosque nuboso, aviturismo, café y comunidades",
-          "desc": "Reserva de bosque nuboso entre Jinotega y Matagalpa, con fincas de café, senderos y fuentes de agua."
+          "desc": "Reserva de bosque nuboso entre Jinotega y Matagalpa, con fincas de café, senderos y fuentes de agua.",
+          "lat": 13.11941,
+          "lng": -85.87948
         },
         {
           "name": "Salto La Mocuana",
@@ -487,7 +501,9 @@
         {
           "name": "Cerro Kilambé y aguas termales de El Caño",
           "type": "Montaña, termalismo y vida rural en El Cuá",
-          "desc": "Montaña de las más altas del norte del país y fuentes termales en la zona rural de El Cuá."
+          "desc": "Montaña de las más altas del norte del país y fuentes termales en la zona rural de El Cuá.",
+          "lat": 13.58178,
+          "lng": -85.69313
         },
         {
           "name": "Salto de Kayaska",
@@ -550,7 +566,9 @@
         {
           "name": "Parque Nacional Volcán Masaya",
           "type": "Vulcanología, miradores, senderos autorizados y educación ambiental",
-          "desc": "Volcán activo con miradores al cráter Santiago, del que salen gases y donde anidan chocoyos; las visitas nocturnas muestran su resplandor."
+          "desc": "Volcán activo con miradores al cráter Santiago, del que salen gases y donde anidan chocoyos; las visitas nocturnas muestran su resplandor.",
+          "lat": 11.983333,
+          "lng": -86.15
         },
         {
           "name": "Laguna de Masaya",
@@ -570,7 +588,9 @@
         {
           "name": "Mirador de Catarina",
           "type": "Paisaje, viveros, música y gastronomía",
-          "desc": "Balcón natural sobre la Laguna de Apoyo, con viveros, comida y artesanía."
+          "desc": "Balcón natural sobre la Laguna de Apoyo, con viveros, comida y artesanía.",
+          "lat": 11.91318,
+          "lng": -86.06903
         },
         {
           "name": "San Juan de Oriente",
@@ -585,7 +605,9 @@
         {
           "name": "Reserva Natural Laguna de Apoyo",
           "type": "Kayak, senderismo, aves, fotografía y descanso",
-          "desc": "Laguna de cráter de agua templada entre Granada y Masaya, ideal para nadar, remar en kayak y observar aves."
+          "desc": "Laguna de cráter de agua templada entre Granada y Masaya, ideal para nadar, remar en kayak y observar aves.",
+          "lat": 11.923441,
+          "lng": -86.030882
         },
         {
           "name": "Reserva Natural Laguna de Tisma",
@@ -606,6 +628,13 @@
           "name": "Posada Ecológica La Abuela – Laguna de Apoyo",
           "type": "Hotel-restaurante y pase de día en la laguna",
           "desc": "Hotel-restaurante a orillas de la Laguna de Apoyo con cabañas y pase de día para disfrutar del agua y el bosque."
+        },
+        {
+          "name": "Volcán Masaya (caldera Santiago)",
+          "type": "Volcán o cerro · Geoturismo",
+          "desc": "Caldera volcánica activa dentro del Parque Nacional Volcán Masaya; INETER reporta actividad volcánica y monitoreo permanente.",
+          "lat": 11.9822,
+          "lng": -86.1621
         }
       ],
       "gastronomy": [
@@ -695,12 +724,16 @@
         {
           "name": "Lago Cocibolca",
           "type": "Agua, navegación, biodiversidad e historia",
-          "desc": "El lago más grande de Centroamérica, frente a Granada, con islas, playas lacustres y paseos en lancha."
+          "desc": "El lago más grande de Centroamérica, frente a Granada, con islas, playas lacustres y paseos en lancha.",
+          "lat": 11.6873,
+          "lng": -85.47863
         },
         {
           "name": "Reserva Natural Volcán Mombacho",
           "type": "Senderos, miradores, bosque nuboso y aviturismo",
-          "desc": "Senderos entre fumarolas, orquídeas y bosque nuboso con vistas a Granada y al lago."
+          "desc": "Senderos entre fumarolas, orquídeas y bosque nuboso con vistas a Granada y al lago.",
+          "lat": 11.82732,
+          "lng": -85.95995
         },
         {
           "name": "Aguas Agrias–La Nanda",
@@ -878,6 +911,13 @@
           "desc": "Cascada del Río Yasica conocida como Cascada Blanca, en el corredor hacia El Tuma-La Dalia.",
           "lat": 12.99124,
           "lng": -85.82931
+        },
+        {
+          "name": "Reserva Natural Cerro Musún",
+          "type": "Reserva natural · Senderismo",
+          "desc": "Área protegida de bosque húmedo tropical y bosque nuboso con cascadas y alta riqueza de flora y fauna.",
+          "lat": 12.98536,
+          "lng": -85.24221
         }
       ],
       "gastronomy": [
@@ -928,7 +968,9 @@
         {
           "name": "Reserva Natural Tisey-La Estanzuela",
           "type": "Cascada & Esculturas",
-          "desc": "Cascada, pinares, miradores y las esculturas talladas en piedra en la montaña de Estelí."
+          "desc": "Cascada, pinares, miradores y las esculturas talladas en piedra en la montaña de Estelí.",
+          "lat": 13.0222,
+          "lng": -86.3884
         },
         {
           "name": "Galería de Esculturas en Piedra de Don Alberto",
@@ -938,7 +980,9 @@
         {
           "name": "Reserva Natural Miraflor",
           "type": "Orquídeas & Turismo Rural",
-          "desc": "Bosque nuboso, orquídeas, aves y familias campesinas que reciben visitantes en sus fincas."
+          "desc": "Bosque nuboso, orquídeas, aves y familias campesinas que reciben visitantes en sus fincas.",
+          "lat": 13.21,
+          "lng": -86.28
         },
         {
           "name": "Fábricas de Puros Artesanales",
@@ -1006,6 +1050,27 @@
           "desc": "Salto asociado al río Estelí y uno de los atractivos naturales más conocidos del municipio; su coordenada debe confirmarse en campo.",
           "lat": 13.025,
           "lng": -86.39
+        },
+        {
+          "name": "Cuevas y Mirador de Apaguají",
+          "type": "Cueva o cañón · Senderismo",
+          "desc": "Sistema de cuevas y mirador en la parte alta de Tisey-La Estanzuela; Visit Nicaragua destaca su interés ecológico y la presencia de murciélagos.",
+          "lat": 12.96849,
+          "lng": -86.37914
+        },
+        {
+          "name": "Cueva del Duende (Tisey)",
+          "type": "Cueva o cañón · Senderismo",
+          "desc": "Cueva mencionada en el plan de manejo de Tisey-La Estanzuela, con un mirador panorámico próximo en la zona montañosa de la reserva.",
+          "lat": 12.97122,
+          "lng": -86.38087
+        },
+        {
+          "name": "Mirador El Ranchito (Tisey)",
+          "type": "Mirador · Senderismo",
+          "desc": "Mirador rural dentro del conjunto de puntos panorámicos de la zona de Apaguají, en Tisey-La Estanzuela.",
+          "lat": 12.97223,
+          "lng": -86.37849
         }
       ],
       "gastronomy": [
@@ -1061,7 +1126,9 @@
         {
           "name": "Volcán Cosigüina y Laguna Cráter",
           "type": "Reserva Natural & Golfo",
-          "desc": "Volcán en la península de Cosigüina con una laguna en el cráter y vistas al Golfo de Fonseca."
+          "desc": "Volcán en la península de Cosigüina con una laguna en el cráter y vistas al Golfo de Fonseca.",
+          "lat": 12.983333,
+          "lng": -87.566667
         },
         {
           "name": "Basílica Menor de Nuestra Señora del Trono",
@@ -1076,7 +1143,9 @@
         {
           "name": "Estero Padre Ramos",
           "type": "Santuario de Manglar & Tortugas",
-          "desc": "Reserva de manglares y esteros donde anidan tortugas marinas; se recorre en lancha con guías comunitarios."
+          "desc": "Reserva de manglares y esteros donde anidan tortugas marinas; se recorre en lancha con guías comunitarios.",
+          "lat": 12.78091,
+          "lng": -87.48321
         },
         {
           "name": "Rancho Maribel",
@@ -1159,17 +1228,23 @@
         {
           "name": "Laguna de Tiscapa",
           "type": "Laguna cratérica, miradores, historia y fotografía",
-          "desc": "Laguna cratérica en el corazón de Managua, con miradores, historia y canopy."
+          "desc": "Laguna cratérica en el corazón de Managua, con miradores, historia y canopy.",
+          "lat": 12.13943,
+          "lng": -86.27034
         },
         {
           "name": "Laguna de Xiloá y Apoyeque",
           "type": "Recreación autorizada, paisaje volcánico y naturaleza",
-          "desc": "Lagunas de origen volcánico en la península de Chiltepe; Xiloá es balneario y Apoyeque una reserva natural."
+          "desc": "Lagunas de origen volcánico en la península de Chiltepe; Xiloá es balneario y Apoyeque una reserva natural.",
+          "lat": 12.22151,
+          "lng": -86.32196
         },
         {
           "name": "Laguna de Asososca",
           "type": "Paisaje natural y observación desde áreas permitidas",
-          "desc": "Laguna cratérica que abastece de agua a Managua; se observa solo desde los miradores permitidos."
+          "desc": "Laguna cratérica que abastece de agua a Managua; se observa solo desde los miradores permitidos.",
+          "lat": 12.137778,
+          "lng": -86.313611
         },
         {
           "name": "Reserva Natural Chocoyero–El Brujo",
@@ -1231,6 +1306,27 @@
           "desc": "Pueblo pesquero y playa del Pacífico cercana a Pochomil, con formaciones rocosas y pesca artesanal.",
           "lat": 11.78467,
           "lng": -86.51594
+        },
+        {
+          "name": "Laguna de Apoyeque",
+          "type": "Laguna o lago · Senderismo de aventura",
+          "desc": "Laguna en la caldera del volcán Apoyeque, rodeada de vegetación y paisajes volcánicos; el acceso requiere planificación y guía local.",
+          "lat": 12.244931,
+          "lng": -86.341497
+        },
+        {
+          "name": "Lago Xolotlán (Lago de Managua)",
+          "type": "Laguna o lago · Paseos lacustres autorizados",
+          "desc": "Segundo gran lago de Nicaragua, ligado al paisaje de Managua y a la cadena volcánica del Pacífico.",
+          "lat": 12.339722,
+          "lng": -86.350556
+        },
+        {
+          "name": "Reserva Natural Península de Chiltepe",
+          "type": "Reserva natural · Senderismo",
+          "desc": "Área protegida cercana a Managua que integra las calderas y lagunas de Apoyeque y Xiloá.",
+          "lat": 12.24928,
+          "lng": -86.35086
         }
       ],
       "gastronomy": [
@@ -1602,7 +1698,9 @@
         {
           "name": "Cerro Mogotón (2,107 msnm)",
           "type": "Cima Más Alta de Nicaragua",
-          "desc": "El punto más alto de Nicaragua, en una reserva natural de pinares y bosque nuboso en la frontera norte."
+          "desc": "El punto más alto de Nicaragua, en una reserva natural de pinares y bosque nuboso en la frontera norte.",
+          "lat": 13.763062,
+          "lng": -86.399059
         },
         {
           "name": "Santuario de la Virgen de la Piedra (Dipilto)",
@@ -1708,7 +1806,9 @@
         {
           "name": "Reserva Biológica Indio Maíz",
           "type": "Selva Virgen & Jaguares",
-          "desc": "Una de las selvas mejor conservadas de Centroamérica; se visita por sus bordes con guías autorizados."
+          "desc": "Una de las selvas mejor conservadas de Centroamérica; se visita por sus bordes con guías autorizados.",
+          "lat": 12.91355,
+          "lng": -84.67987
         },
         {
           "name": "Archipiélago de Solentiname",
@@ -1823,7 +1923,9 @@
         {
           "name": "Reserva de Biosfera Bosawás",
           "type": "Patrimonio de la Humanidad UNESCO",
-          "desc": "Uno de los bosques tropicales más extensos de Centroamérica, territorio mayangna y miskitu."
+          "desc": "Uno de los bosques tropicales más extensos de Centroamérica, territorio mayangna y miskitu.",
+          "lat": 13.44305,
+          "lng": -85.14404
         },
         {
           "name": "Río Coco / Wangki",
@@ -1866,6 +1968,13 @@
           "name": "Finca Agroturística El Cortés",
           "type": "Agroturismo · Senderismo",
           "desc": "Finca de Siuna que une bosque denso y producción sostenible de cacao, granos y animales con la comunidad local."
+        },
+        {
+          "name": "Parque Nacional Saslaya",
+          "type": "Parque o área protegida · Turismo científico",
+          "desc": "Parque nacional del gran sistema de conservación de Bosawás, de bosque tropical y alta biodiversidad.",
+          "lat": 13.7,
+          "lng": -84.86
         }
       ],
       "gastronomy": [
