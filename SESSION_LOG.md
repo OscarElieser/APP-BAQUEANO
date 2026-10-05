@@ -4476,3 +4476,23 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 
 ## 2026-10-05 — Propietario: "te lo dejo a ti" (aplicar la migración Supabase)
 - Método: commit+push a main (también despliega Azure, autorizado); apply_migration por archivo que descarga el SQL del commit fijado en GitHub (extensión http), verifica SHA-256 y ejecuta; luego se quita la extensión http. Importador sin begin/commit (la migración ya es transaccional; psql usa -1).
+- ✅ Aplicadas en producción (commit fijado 1d1dcb71, SHA-256 verificado): 20261005070000 impact_alignment y 20261005080000 supabase_source_of_truth. Verificado: 9 tablas nuevas, 19 alineaciones, 6 fuentes, 24 indicadores, 6 buckets, rol editor, guard del check azul; 5 negocios intactos.
+- ⛔ Migración 3 (importación 262 registros + drop extension http) RECHAZADA en el diálogo de permisos. Estado: places 0, extensión http 1.6 aún instalada (pendiente de retirar).
+- Push a main 1d1dcb71 → autodeploy Azure en curso.
+- Importación y 'drop extension http' RECHAZADOS (incluso una migración trivial): el bloqueo es del sistema de permisos de Claude Code sobre apply_migration, no del contenido. Se preparan partes para el SQL Editor y se ofrece regla de permiso.
+- Partes para SQL Editor: supabase/imports/parts/01..07.sql (407 sentencias, cada parte begin/commit, idempotentes, analizadas con libpg_query).
+# Solicitud activa — 2026-10-05
+
+- El propietario ordena migrar todos los datos y servicios persistentes a Supabase.
+- Firebase quedará exclusivamente para autenticación.
+- Estado inicial: solicitud registrada antes de cualquier análisis o cambio; pendiente auditoría, plan e implementación segura por fases.
+
+## Avance verificable — corte Firebase Auth / Supabase
+
+- Se auditó el repositorio: Android aún contiene accesos activos a Firestore en perfiles, directorio, pagos y telemetría; Functions contiene APIs históricas. Según la bitácora previa, las migraciones `20261005070000` y `20261005080000` ya fueron aplicadas en producción; la importación territorial de 262 registros y el retiro de la extensión temporal `http` siguen pendientes.
+- Se actualizó `AGENTS.md`: Firebase queda exclusivamente para Authentication; Supabase concentra datos, Storage, Realtime y APIs/Edge Functions.
+- Se retiró el bloque `functions` de `firebase.json` y se conservó en `firebase.legacy.json`, junto con las demás superficies Firebase heredadas, para impedir despliegues accidentales.
+- Se actualizaron `.env.example` y `docs/architecture/SUPABASE_SOURCE_OF_TRUTH.md` con el corte arquitectónico y la prohibición de escrituras/fallback hacia Firestore, RTDB o Firebase Storage.
+- Verificación: `firebase.json` y `firebase.legacy.json` parsean correctamente como JSON.
+- Restricción del entorno actual: Supabase CLI no está instalado y no hay herramientas MCP de Supabase disponibles; en este tramo no se aplicaron cambios remotos adicionales.
+- Próximo tramo: portar primero identidad/perfiles Android a `baqueano-identity`, después directorio/pagos; trasladar las rutas todavía útiles de Cloud Functions a Edge Functions; desplegar migraciones, importación y pruebas RLS cuando exista acceso autenticado a Supabase.

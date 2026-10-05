@@ -1,12 +1,16 @@
 {
   "_comentario": [
     "BAQUEANO — CONFIGURACIÓN FIREBASE EN PAUSA (decisión del propietario, 2026-10-05).",
-    "POR QUÉ: el sitio público vive solo en baqueanonicaragua.com (Azure). Firebase se conserva para Authentication y APIs (Functions).",
-    "CÓMO: estos bloques salieron de firebase.json para que `firebase deploy` ya no publique Hosting, reglas de Firestore/Storage ni RTDB.",
+    "POR QUÉ: el sitio público vive en Azure y Supabase concentra datos, archivos y APIs. Firebase se conserva exclusivamente para Authentication.",
+    "CÓMO: estos bloques salieron de firebase.json para impedir despliegues accidentales de Hosting, Functions, Firestore, Storage o RTDB.",
     "Se guardan intactos para el futuro: para reactivar uno, copiar su bloque de vuelta a firebase.json.",
     "NO deshabilitar el sitio de Hosting app-baqueano en la consola: el handler de login /__/auth/* vive en app-baqueano.firebaseapp.com.",
     "Retiro de la copia pública web.app: firebase.hosting-redirect.json (despliegue único, requiere autorización)."
   ],
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs20"
+  },
   "hosting": {
     "site": "app-baqueano",
     "public": "website",

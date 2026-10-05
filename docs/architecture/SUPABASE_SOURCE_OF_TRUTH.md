@@ -9,7 +9,7 @@
 ⚙️ **CÓMO:** migración progresiva, sin big-bang: auditoría → respaldo → esquema → importación idempotente → lectura desde Supabase → retiro de dependencias.
 📦 **QUÉ:** este documento reúne la auditoría, el modelo, la migración, los conteos, los riesgos, el rollback y el estado real.
 
-Firebase sigue **solo para Authentication (Google) y APIs (Functions)** — decisión del propietario, 2026-10-05. Hosting, reglas de Firestore/Storage y RTDB quedan en pausa en `firebase.legacy.json`; el sitio público vive solo en Azure (`baqueanonicaragua.com`). Hoy no hay Cloud Functions desplegadas (plan Spark): las APIs activas son las Edge Functions de Supabase y `/api/azure/`. **No se migra la autenticación ahora:** primero los datos; después se evalúa Supabase Auth.
+Firebase queda **exclusivamente para Authentication** — decisión del propietario, 2026-10-05. Las APIs, datos, archivos y tiempo real se consolidan en Supabase. Hosting, Cloud Functions, reglas de Firestore/Storage y RTDB quedan como legado no desplegable en `firebase.legacy.json`; el sitio público vive solo en Azure (`baqueanonicaragua.com`). Las APIs activas y nuevas deben implementarse como Edge Functions de Supabase o, durante la transición, bajo `/api/azure/`. **La autenticación Firebase no se migra.**
 
 ## 1. Auditoría (2026-10-05, consultas reales de solo lectura)
 
@@ -21,7 +21,16 @@ Firebase sigue **solo para Authentication (Google) y APIs (Functions)** — deci
 | `appbaqueano` tiene **0 colecciones** (vacía) | `firestore_list_collections` |
 | La web y la app apuntan a `appbaqueano` | `js/firebase-config.js` (Proxy), `lib/**` con `databaseId: 'appbaqueano'` |
 
-**Consecuencia:** no hay datos en Firestore para migrar. Todo lo que el código "guarda" en Firestore hoy se pierde o es rechazado por las reglas. El caso más grave es Mi Negocio: escribe en `registro_negocios`, una colección que ni siquiera tiene regla, así que **las postulaciones de negocios solo llegan por WhatsApp**.
+**Consecuencia:** no hay datos en Firestore para migrar. Todo lo que el código todavía intenta guardar allí debe redirigirse a Supabase y no puede considerarse persistido. El caso más grave es Mi Negocio: escribe en `registro_negocios`, una colección que ni siquiera tiene regla, así que **las postulaciones de negocios solo llegan por WhatsApp**.
+
+### 1.1.1 Corte arquitectónico obligatorio
+
+- Firebase conserva únicamente Authentication y la emisión de ID tokens.
+- Supabase asume PostgreSQL/PostGIS, Storage, Realtime y Edge Functions.
+- `firebase.json` no contiene superficies desplegables; las configuraciones históricas viven en `firebase.legacy.json`.
+- Ningún cliente puede escribir en Firestore, RTDB o Firebase Storage, ni usarlos como fallback.
+- Ningún flujo nuevo usa Supabase Auth: `profiles` e `identity_links` complementan la identidad Firebase, no crean una segunda autoridad de sesión.
+- Cada Edge Function protegida verifica el ID token de Firebase y resuelve permisos desde tablas RBAC de Supabase.
 
 ### 1.2 Matriz de fuentes actuales
 
