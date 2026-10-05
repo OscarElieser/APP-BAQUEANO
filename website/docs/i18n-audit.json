@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T13:09:03.571Z",
+  "generatedAt": "2026-10-05T14:47:15.590Z",
   "languages": [
     "es",
     "en",
@@ -9,22 +9,22 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 3624,
-    "en": 3624,
-    "fr": 3624,
-    "it": 3624,
-    "pt": 3624,
-    "de": 3624
+    "es": 3668,
+    "en": 3668,
+    "fr": 3668,
+    "it": 3668,
+    "pt": 3668,
+    "de": 3668
   },
   "html": {
     "files": 31,
-    "total": 3607,
-    "translated": 3606,
+    "total": 3606,
+    "translated": 3605,
     "untranslated": 1
   },
   "js": {
     "files": 81,
-    "translated": 43,
+    "translated": 88,
     "untranslated": 731
   },
   "jsEditorial": {
@@ -183,8 +183,8 @@
     {
       "file": "baqueano-ia.html",
       "type": "html",
-      "total": 195,
-      "translated": 195,
+      "total": 194,
+      "translated": 194,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -543,11 +543,11 @@
     {
       "file": "js/baqueano-travel-session.js",
       "type": "js",
-      "total": 16,
-      "translated": 0,
+      "total": 61,
+      "translated": 45,
       "untranslated": 16,
       "editorialStrings": 0,
-      "coverage": 0
+      "coverage": 73.8
     },
     {
       "file": "js/baqui-evolved.js",

@@ -5,7 +5,7 @@
 -->
 # Auditoría estática de la salida publicada
 
-Generado: 2026-10-05T13:09:03.872Z · Páginas: 31 · URLs en sitemap: 23 · **Críticos: 0** · Advertencias: 65
+Generado: 2026-10-05T14:47:27.600Z · Páginas: 31 · URLs en sitemap: 23 · **Críticos: 0** · Advertencias: 64
 
 ## SEO por página
 
@@ -82,7 +82,6 @@ Generado: 2026-10-05T13:09:03.872Z · Páginas: 31 · URLs en sitemap: 23 · **C
 | ⚠️ advertencia | historia.html | anchor-missing | ancla #nicaraguaActual no existe en la página (puede crearse en tiempo de ejecución) |
 | ⚠️ advertencia | historia.html | anchor-missing | ancla #pueblosOriginarios no existe en la página (puede crearse en tiempo de ejecución) |
 | ⚠️ advertencia | historia.html | anchor-missing | ancla #personajes no existe en la página (puede crearse en tiempo de ejecución) |
-| ⚠️ advertencia | historia.html | anchor-missing | ancla #patrimonio no existe en la página (puede crearse en tiempo de ejecución) |
 | ⚠️ advertencia | historia.html | anchor-missing | ancla #fuentes no existe en la página (puede crearse en tiempo de ejecución) |
 | ⚠️ advertencia | historia.html | anchor-missing | ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución) |
 | ⚠️ advertencia | index.html | anchor-missing | perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático) |

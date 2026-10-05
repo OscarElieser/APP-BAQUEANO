@@ -237,6 +237,9 @@ for (const t of territories) {
     geopark: t.geopark && t.geopark.name ? t.geopark.name : '', image: realImage(t.heroImage),
     howToReach: t.howToReach || '', bestSeason: t.bestSeason || '', recommendations: t.recommendations || '',
     activities: firstItems(t.activities, 4), places: firstItems(t.places, 4), food: firstItems(t.gastronomy, 3),
+    // Todos los lugares del territorio con su descripción propia: BAQUI los usa
+    // para recomendar según intereses ("playa" → La Boquita, Las Peñitas…).
+    spots: (t.places || []).filter((p) => p && p.name).map((p) => ({ name: p.name, type: p.type || '', desc: short(p.desc || '', 160) })),
     municipalities: (t.municipalities || []).map((m) => m.name),
     // Datos con fuente oficial (Visita Nicaragua, INTUR) y su fecha de verificación.
     highlights: firstItems(t.officialHighlights, 2),

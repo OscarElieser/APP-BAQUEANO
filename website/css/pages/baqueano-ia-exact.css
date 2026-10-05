@@ -1498,3 +1498,23 @@ body .ia-tags-cloud .ia-dest-empty {
 @media (min-width: 760px) {
   .ia-discover { grid-template-columns: minmax(220px, 340px) minmax(0, 1fr); align-items: start; }
 }
+
+/* Reparto del presupuesto de la persona (js/baqueano-travel-session.js · renderBudgetSplit).
+   POR QUÉ: el total quedaba "Sin precios verificados" y no se veía ningún cálculo útil.
+   CÓMO: divide el presupuesto que la persona dio (total, por persona, por día) sin inventar precios.
+   QUÉ: bloque legible en móvil (2 columnas → 1 en pantallas chicas). */
+.ia-budget-share { margin-top: 12px; padding: 12px 14px; border: 1px solid rgba(22, 93, 111, 0.18); border-radius: 12px; background: rgba(22, 93, 111, 0.05); }
+.ia-budget-share h5 { margin: 0 0 8px; font-size: 0.9rem; font-weight: 800; color: #0F172A; }
+.ia-budget-share dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; margin: 0; }
+.ia-budget-share dt { font-size: 0.75rem; color: #475569; }
+.ia-budget-share dd { margin: 2px 0 0; font-weight: 800; color: #165D6F; overflow-wrap: anywhere; }
+.ia-budget-share small { display: block; margin-top: 8px; font-size: 0.72rem; color: #475569; line-height: 1.45; }
+@media (max-width: 420px) { .ia-budget-share dl { grid-template-columns: 1fr; } }
+/* Tarjeta de presupuesto en celular: medía 528 px en pantallas de 390 (2 columnas
+   lista + medidor de 140 px). En ≤600 px pasa a 1 columna y no se recorta. */
+.ia-budget-ready-section > * { min-width: 0; }
+@media (max-width: 600px) {
+  .ia-budget-split { grid-template-columns: 1fr; }
+  .ia-budget-split .ia-budget-gauge { justify-self: center; }
+  .ia-budget-card { padding: 18px 16px; }
+}

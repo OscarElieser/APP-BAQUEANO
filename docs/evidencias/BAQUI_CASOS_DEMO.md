@@ -18,7 +18,7 @@ La evaluación pide que BAQUI entienda una solicitud real (adultos, niños, pres
   cd website && BASE_URL=http://127.0.0.1:8765/ npm run test:baqui
   ```
 
-  Resultado (2026-10-05): **17/17 OK**, sin errores JS.
+  Resultado (2026-10-05, ampliado): **20/20 OK**, sin errores JS.
 
 ## 📦 QUÉ (casos verificados)
 
@@ -49,3 +49,16 @@ La evaluación pide que BAQUI entienda una solicitud real (adultos, niños, pres
 2. **Viajero:** "4 días".
 
    **Resultado:** itinerario de 4 días. Se conservan los viajeros, el presupuesto y la ruta. El mapa y el presupuesto se actualizan con la misma sesión.
+
+## Ampliación 2026-10-05 (pedido del propietario)
+
+| El viajero escribe | BAQUI responde |
+|---|---|
+| quiero ir a la playa, a los departamentos de **carazon**, rivas, leon, tengo un presupesto de 300 dolares, voy 5 personas | «Entendí "carazon" como Carazo». Ruta Carazo → Rivas → León · 5 adultos · $300 (≈ C$10,987) = **$60 por persona** · playas reales de cada departamento (La Boquita, Huehuete y El Tamarindo · San Juan del Sur, Maderas…, Tola · Las Peñitas y Poneloya) · pregunta los días |
+| por 4 días | **$75 por día para el grupo, $15 por persona por día**; los precios de servicios se suman solo con negocios verificados |
+| quiero conocer Nicaragua (me gustan los volcanes) | **Propone la ruta** con destinos del catálogo según intereses (Masaya → Cerro Negro → Ometepe) y permite quitar o agregar |
+
+- Errores de tipeo: distancia de edición ≤1 (≤2 en nombres de 8+ letras), solo contra los 17 departamentos y los destinos del catálogo.
+- Lugares por interés: `spots` de `data/travel-knowledge.json` (generado desde `js/territories-data.js`, cada lugar con su propia descripción).
+- Presupuesto: se divide el presupuesto **de la persona** (total, por persona, por día, por persona por día) con el tipo de cambio de referencia; nunca se inventan precios de servicios. El "C$ 10,000 máximo previsto" fijo se reemplazó por el tope real.
+- Textos en 6 idiomas (`baqui.trip.*`).
