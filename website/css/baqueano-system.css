@@ -1385,3 +1385,35 @@ html[data-bq-page="privacidad"] body .cloud strong { color: #B45309 !important; 
 html[data-bq-page="denuncias"] body .denuncias-inline-004 { color: #3D6A4C !important; }
 html[data-bq-page="denuncias"] body .denuncias-inline-009 { color: var(--baqueano-primary-text) !important; }
 html[data-bq-page="denuncias"] body .denuncias-inline-010 { color: #15803D !important; }
+
+/* ===================================================
+   RESPONSIVE SIN RECORTES (QA en navegador 2026-10-05)
+   🎯 POR QUÉ: requisito 14. html/body usan overflow-x: clip: no hay scroll
+      horizontal, pero lo que se sale queda CORTADO (índice de cookies a 360 px,
+      cabecera del archivo sonoro, botones de ambiental, destinos e historia a
+      320 px, tarjetas del archivo a 1280 px). Se midió con scripts/browser-qa.mjs.
+   ⚙️ CÓMO: los hijos de grid/flex pueden encogerse (min-width: 0) y las filas
+      de acciones pasan a varias líneas en pantallas chicas. Sin cambiar colores
+      ni tamaños en escritorio.
+   📦 QUÉ: todo elemento interactivo queda dentro del viewport de 320 a 2560 px.
+   =================================================== */
+html[data-bq-page="cookies"] body .cookies-main-layout > *,
+html[data-bq-page="cookies"] body .cookies-sidebar > * { min-width: 0; max-width: 100%; }
+html[data-bq-page="musica"] body .musica-archive-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+html[data-bq-page="musica"] body .musica-archive-grid > * { min-width: 0; }
+@media (max-width: 768px) {
+  html[data-bq-page="musica"] body .musica-head-row { flex-wrap: wrap; align-items: flex-start; gap: 12px; }
+  html[data-bq-page="musica"] body :is(.musica-head-title, .musica-head-actions) { min-width: 0; }
+  html[data-bq-page="musica"] body .musica-head-actions { flex-wrap: wrap; width: 100%; justify-content: space-between; }
+  html[data-bq-page="musica"] body .musica-sticky-bottom-bar { padding: 8px 12px; gap: 8px; }
+  html[data-bq-page="musica"] body .sticky-track-info { min-width: 0; flex: 1 1 auto; overflow: hidden; }
+  html[data-bq-page="musica"] body .sticky-controls { gap: 6px; flex: 0 0 auto; }
+}
+@media (max-width: 480px) {
+  html[data-bq-page="ambiental"] body :is(.amb-decalogo-header, .amb-decalogo-progress-side) { flex-wrap: wrap; min-width: 0; }
+  html[data-bq-page="ambiental"] body .amb-decalogo-progress-side { width: 100%; }
+  html:is([data-bq-page="destinos"], [data-bq-page="destino"]) body .destinos-ai-top-row { flex-wrap: wrap; min-width: 0; }
+  html:is([data-bq-page="destinos"], [data-bq-page="destino"]) body .destinos-ai-btn-purple { max-width: 100%; white-space: normal; }
+  html[data-bq-page="historia"] body .hist-cta-btns { flex-wrap: wrap; }
+  html[data-bq-page="historia"] body .hist-cta-btns > * { max-width: 100%; }
+}
