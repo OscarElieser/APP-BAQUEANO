@@ -5010,5 +5010,35 @@
     "player": {
       "seek": "Posición de la canción"
     }
+  },
+  "destinos": {
+    "verified": {
+      "kicker": "Información comprobada",
+      "title": "Lugares verificados por departamento",
+      "lead": "Fichas con fuente oficial (INTUR, MARENA, Visit Nicaragua y sitios oficiales): turismo rural, comunitario, agroturismo, naturaleza y servicios verificados.",
+      "filterDept": "Departamento o región",
+      "allDepts": "Todos los territorios",
+      "filterKind": "Tipo de experiencia",
+      "kindAll": "Todos",
+      "kindPlace": "Lugar y servicio verificado",
+      "seeDepartment": "Ver en {department}",
+      "plan": "Planificar con BAQUI",
+      "count": "{count} lugares verificados",
+      "error": "No se pudo cargar la lista. Recargá la página."
+    }
+  },
+  "places": {
+    "verified": {
+      "seal": "Verificado",
+      "activities": "Actividades",
+      "services": "Servicios",
+      "hours": "Horario",
+      "address": "Dirección",
+      "price": "Precio y horario",
+      "contactNote": "Contacto",
+      "website": "Sitio oficial",
+      "map": "Mapa de la iniciativa",
+      "sources": "Fuentes"
+    }
   }
 }

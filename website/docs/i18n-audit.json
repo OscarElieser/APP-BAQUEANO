@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T14:47:15.590Z",
+  "generatedAt": "2026-10-05T15:38:01.270Z",
   "languages": [
     "es",
     "en",
@@ -9,22 +9,22 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 3668,
-    "en": 3668,
-    "fr": 3668,
-    "it": 3668,
-    "pt": 3668,
-    "de": 3668
+    "es": 3690,
+    "en": 3690,
+    "fr": 3690,
+    "it": 3690,
+    "pt": 3690,
+    "de": 3690
   },
   "html": {
     "files": 31,
-    "total": 3606,
-    "translated": 3605,
+    "total": 3612,
+    "translated": 3611,
     "untranslated": 1
   },
   "js": {
-    "files": 81,
-    "translated": 88,
+    "files": 82,
+    "translated": 109,
     "untranslated": 731
   },
   "jsEditorial": {
@@ -79,6 +79,7 @@
     "js/definitive-index-interactions.js",
     "js/destination-community.js",
     "js/destinos-provenance.js",
+    "js/destinos-verified.js",
     "js/favoritos.js",
     "js/firebase-config.js",
     "js/firestore-mirror.js",
@@ -237,8 +238,8 @@
     {
       "file": "destinos.html",
       "type": "html",
-      "total": 124,
-      "translated": 124,
+      "total": 130,
+      "translated": 130,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -667,6 +668,15 @@
       "coverage": 100
     },
     {
+      "file": "js/destinos-verified.js",
+      "type": "js",
+      "total": 11,
+      "translated": 11,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/environmental-evidence.js",
       "type": "js",
       "total": 11,
@@ -858,11 +868,11 @@
     {
       "file": "js/madriz-territory-map.js",
       "type": "js",
-      "total": 2,
-      "translated": 0,
+      "total": 12,
+      "translated": 10,
       "untranslated": 2,
       "editorialStrings": 0,
-      "coverage": 0
+      "coverage": 83.3
     },
     {
       "file": "js/mi-viaje-interactions.js",

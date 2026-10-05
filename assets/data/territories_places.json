@@ -49,6 +49,21 @@
           "name": "Parque Arqueológico Piedras Pintadas",
           "type": "Petroglifos & Memoria Viva",
           "desc": "Rocas con petroglifos precolombinos que forman parte de la memoria ancestral de Madriz; se visitan con respeto y sin tocar los grabados."
+        },
+        {
+          "name": "Rosquillas Delicias del Norte",
+          "type": "Gastronomía y emprendimiento local",
+          "desc": "Taller de rosquillas somoteñas que INTUR y el Mapa Nacional de Turismo mencionan como referencia en Somoto."
+        },
+        {
+          "name": "Finca Entre Pinos",
+          "type": "Turismo rural · Senderismo",
+          "desc": "Cabañas entre pinos, cedros y robles en El Rodeo de Cusmapa, unidas por puentes colgantes de árbol en árbol."
+        },
+        {
+          "name": "Casa de Huésped La Ceibita",
+          "type": "Agroturismo · Senderismo",
+          "desc": "Casa de familias anfitrionas junto al Cañón de Somoto, con tours al cañón y oficios tradicionales del campo."
         }
       ],
       "gastronomy": [
@@ -169,6 +184,16 @@
           "name": "Isla Juan Venado",
           "type": "Manglares, fauna, lancha y kayak",
           "desc": "Reserva de estero y manglares frente a Las Peñitas, con aves acuáticas y playas de anidación de tortugas; se recorre en lancha."
+        },
+        {
+          "name": "Poco a Poco Hostel",
+          "type": "Hostal en el centro de León",
+          "desc": "Hostal en León con piscina, cocina compartida, jardín, bar, habitaciones privadas y dormitorios."
+        },
+        {
+          "name": "Rancho Los Alpes",
+          "type": "Turismo rural · Senderos",
+          "desc": "Rancho de descanso en la comarca San Carlos con balsas de bambú, kayak, tirolesa y taller de tortillas."
         }
       ],
       "gastronomy": [
@@ -286,6 +311,21 @@
           "name": "Ciudad de Rivas",
           "type": "Historia, mercados, arquitectura, gastronomía y servicios",
           "desc": "Cabecera departamental con iglesias, mercado y servicios; punto de paso entre San Juan del Sur, San Jorge y la frontera sur."
+        },
+        {
+          "name": "Morgan's Rock Reserve & Ecolodge",
+          "type": "Ecolodge y reserva privada en Playa Ocotal",
+          "desc": "Ecolodge en Playa Ocotal, San Juan del Sur, con reserva privada protegida, bungalows, villas y actividades de naturaleza."
+        },
+        {
+          "name": "Hostal Puesta del Sol (Ometepe)",
+          "type": "Turismo rural y comunitario · Senderismo",
+          "desc": "Hostal familiar en La Paloma, Moyogalpa, con habitaciones sencillas, playa del lago y clases de cocina nicaragüense."
+        },
+        {
+          "name": "Finca Magdalena (Ometepe)",
+          "type": "Turismo rural y comunitario · Senderismo",
+          "desc": "Finca agroturística emblemática de Altagracia, ejemplo de desarrollo comunitario, con café y petroglifos."
         }
       ],
       "gastronomy": [
@@ -485,6 +525,11 @@
           "name": "Taller Escuela Valentín López y Palo Solo",
           "type": "Artesanía, cultura y experiencias comunitarias",
           "desc": "Espacios de artesanía y tradición en Masaya donde se aprende de los oficios locales y se compra directo."
+        },
+        {
+          "name": "Posada Ecológica La Abuela – Laguna de Apoyo",
+          "type": "Hotel-restaurante y pase de día en la laguna",
+          "desc": "Hotel-restaurante a orillas de la Laguna de Apoyo con cabañas y pase de día para disfrutar del agua y el bosque."
         }
       ],
       "gastronomy": [
@@ -588,6 +633,31 @@
           "name": "Reserva Natural Laguna de Apoyo",
           "type": "Kayak, baño, senderismo, fotografía y aves",
           "desc": "Laguna de cráter de agua templada entre Granada y Masaya, ideal para nadar, remar en kayak y observar aves."
+        },
+        {
+          "name": "Hotel Darío",
+          "type": "Hotel boutique colonial en La Calzada",
+          "desc": "Hotel boutique de arquitectura colonial sobre la Calle La Calzada, en pleno centro histórico de Granada."
+        },
+        {
+          "name": "Treehouse Nicaragua",
+          "type": "Hostal y espacio de eventos junto al Mombacho",
+          "desc": "Hostal entre los árboles en la comarca Poste Rojo, a las afueras de Granada en el entorno del volcán Mombacho."
+        },
+        {
+          "name": "Finca El Rayo",
+          "type": "Turismo rural · Caminatas por senderos naturales",
+          "desc": "Finca rural entre paisajes volcánicos, flora y fauna, con sendero de petroglifos que conecta con el pasado precolombino."
+        },
+        {
+          "name": "Eco Finca El Buen Pastor",
+          "type": "Agroturismo · Caminatas",
+          "desc": "Casa de campo en Nandaime con cabañas, piscina y área de meditación, enfocada en la sostenibilidad."
+        },
+        {
+          "name": "Finca María Auxiliadora",
+          "type": "Turismo de naturaleza · Senderos",
+          "desc": "Refugio rural entre Granada y Diriomo con frutales, maderas, tres senderos y siembra participativa."
         }
       ],
       "gastronomy": [
@@ -690,6 +760,11 @@
           "name": "Catedral San Pedro",
           "type": "Arquitectura, religión y patrimonio urbano",
           "desc": "Catedral de la ciudad de Matagalpa, de arquitectura colonial tardía y centro de la vida urbana."
+        },
+        {
+          "name": "Albergue Tierra Alta Ecolodge",
+          "type": "Turismo rural · Senderos con frutos exóticos",
+          "desc": "Ecolodge en San Ramón con alimentos orgánicos de la finca, plantas medicinales y tours nocturnos de fauna."
         }
       ],
       "gastronomy": [
@@ -786,6 +861,31 @@
           "name": "Mirador San Luis",
           "type": "Paisaje, fotografía y artesanía",
           "desc": "Mirador en las montañas de Estelí con paisaje amplio, fotografía y artesanía local."
+        },
+        {
+          "name": "Finca Lindos Ojos",
+          "type": "Turismo rural · Caminatas",
+          "desc": "Finca de turismo rural dentro de la Reserva Natural Miraflor Moropotente, con bosques, aves y café orgánico."
+        },
+        {
+          "name": "Ecoposada Tisey",
+          "type": "Turismo rural · Senderismo",
+          "desc": "Posada ecológica en la Reserva Tisey-Estanzuela con miradores, senderos, cascadas y clima fresco de montaña."
+        },
+        {
+          "name": "Albergue Familiar Neblina del Bosque",
+          "type": "Turismo rural · Senderismo",
+          "desc": "Albergue familiar en el bosque nublado de Miraflor Moropotente, con huertos, hongos y recorridos botánicos."
+        },
+        {
+          "name": "ASOPASN · Programa Agrícola San Nicolás",
+          "type": "Turismo rural y comunitario · Senderismo",
+          "desc": "Iniciativa comunitaria en La Garnacha, San Nicolás, con paisajes de montaña, queso de cabra, hortalizas y miradores."
+        },
+        {
+          "name": "Finca Agroturística Fuente de Vida",
+          "type": "Agroturismo · Senderismo",
+          "desc": "Finca en Miraflor Moropotente para convivir con el campo: café, orquídeas, plantas medicinales, rosquillas y voluntariado."
         }
       ],
       "gastronomy": [
@@ -857,6 +957,21 @@
           "name": "Estero Padre Ramos",
           "type": "Santuario de Manglar & Tortugas",
           "desc": "Reserva de manglares y esteros donde anidan tortugas marinas; se recorre en lancha con guías comunitarios."
+        },
+        {
+          "name": "Rancho Maribel",
+          "type": "Turismo rural · Cabalgatas por la finca",
+          "desc": "Destino rural para vivir una auténtica experiencia campestre y la hospitalidad de la comunidad, cerca de Somotillo."
+        },
+        {
+          "name": "Campamento Ecológico Campuzano",
+          "type": "Turismo rural y comunitario · Observación de flora",
+          "desc": "Campamento comunitario en Ranchería con piscinas naturales, bosque para observar fauna y ranchos de descanso."
+        },
+        {
+          "name": "Cabañas El Manantial",
+          "type": "Turismo de naturaleza · Senderismo",
+          "desc": "Reserva Silvestre Privada en Cinco Pinos con bosques, huertos y vivero, y cabañas para dormir en la naturaleza."
         }
       ],
       "gastronomy": [
@@ -958,6 +1073,21 @@
           "name": "Tipitapa y Centro Turístico El Trapiche",
           "type": "Termalismo, recreación, historia y gastronomía",
           "desc": "Tipitapa, entre los dos grandes lagos, es conocida por sus aguas termales; El Trapiche ofrece piscinas y comida típica."
+        },
+        {
+          "name": "Hotel Bosque Las Nubes",
+          "type": "Agroturismo · Senderismo",
+          "desc": "Bosque nuboso de clima fresco en El Crucero, con árboles centenarios, senderos entre la niebla y café de la finca."
+        },
+        {
+          "name": "Finca Las Delicias",
+          "type": "Agroturismo · Senderismo",
+          "desc": "Finca cafetalera entre montañas y neblina con vistas al lago Xolotlán, el volcán Momotombo y Chiltepe."
+        },
+        {
+          "name": "Reserva Silvestre Privada Montibelli",
+          "type": "Turismo de naturaleza · Senderismo",
+          "desc": "Reserva de bosque con seis miradores hacia las sierras de Managua y los volcanes Masaya y Mombacho."
         }
       ],
       "gastronomy": [
@@ -1059,6 +1189,11 @@
           "name": "Dolores y fincas cafetaleras",
           "type": "Ciclismo, agroturismo, café y producción local",
           "desc": "Municipio de la meseta de Carazo con fincas de café, rutas en bicicleta y producción local."
+        },
+        {
+          "name": "Reserva Silvestre Privada La Mákina",
+          "type": "Turismo de naturaleza · Observación de aves",
+          "desc": "Santuario de biodiversidad camino a La Boquita con cascada, kayak, canopy y educación ambiental."
         }
       ],
       "gastronomy": [
@@ -1161,6 +1296,11 @@
           "name": "Aguas Calientes e Isla Arena",
           "type": "Geología, lancha, balneario y campamento",
           "desc": "Aguas termales a orillas del Cocibolca y una isla de arena a la que se llega en lancha."
+        },
+        {
+          "name": "Finca Los Ángeles",
+          "type": "Agroturismo · Cabalgatas",
+          "desc": "Propiedad agropecuaria de Juigalpa entre serranías, llanos, bosques y arroyos, abierta a la vida de campo."
         }
       ],
       "gastronomy": [
@@ -1262,6 +1402,11 @@
           "name": "Salto La Chorrera",
           "type": "Senderismo, aves, cafetales y miradores",
           "desc": "Cascada entre cafetales con senderos, aves y miradores."
+        },
+        {
+          "name": "Finca Poza Redonda Azul",
+          "type": "Turismo rural · Senderismo al cerro El Diamante",
+          "desc": "Finca agropecuaria sostenible en Teustepe con ganadería, granos, cítricos y una poza natural como atractivo principal."
         }
       ],
       "gastronomy": [
@@ -1464,6 +1609,16 @@
           "name": "Muelle de San Miguelito y Chocoyolandia",
           "type": "Atardeceres, gastronomía y balneario lacustre",
           "desc": "Muelle del Cocibolca con atardeceres, comida local y balneario lacustre."
+        },
+        {
+          "name": "Hostal Buen Amigo",
+          "type": "Turismo rural y comunitario · Caminatas",
+          "desc": "Hostal en la isla Mancarrón, Solentiname, para descansar y conocer las tradiciones artísticas del archipiélago."
+        },
+        {
+          "name": "Albergue Caimán (Los Guatuzos)",
+          "type": "Turismo rural y comunitario · Observación de flora",
+          "desc": "Albergue ecológico a orillas de los humedales del río Papaturro, en el Refugio de Vida Silvestre Los Guatuzos."
         }
       ],
       "gastronomy": [
@@ -1550,6 +1705,11 @@
           "name": "Triángulo Minero",
           "type": "Siuna, Bonanza y Rosita: naturaleza y memoria productiva",
           "desc": "Siuna, Bonanza y Rosita: municipios mineros con historia productiva y acceso a la naturaleza de Bosawás."
+        },
+        {
+          "name": "Finca Agroturística El Cortés",
+          "type": "Agroturismo · Senderismo",
+          "desc": "Finca de Siuna que une bosque denso y producción sostenible de cacao, granos y animales con la comunidad local."
         }
       ],
       "gastronomy": [
@@ -1644,6 +1804,11 @@
           "name": "Saltos Walpapigny y Busay",
           "type": "Senderismo, aves, naturaleza y aguas termales",
           "desc": "Caídas de agua en la RACCS rodeadas de bosque tropical, con aves y aguas termales en la zona."
+        },
+        {
+          "name": "Garífuna Secrets of the Jungle",
+          "type": "Turismo rural y comunitario · Tours a comunidades garífunas",
+          "desc": "Experiencia garífuna cerca de Orinoco, Laguna de Perlas: música, gastronomía, historias ancestrales y selva tropical."
         }
       ],
       "gastronomy": [

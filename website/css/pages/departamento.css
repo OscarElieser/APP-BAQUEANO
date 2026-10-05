@@ -2800,3 +2800,15 @@ html body main#mainContent .closing-card-alta-gama :is(p, .closing-desc):not([cl
 /* Listas dentro de fichas oscuras: las reglas globales de <li> las apagaban. */
 html body main#mainContent .bq-rich-feature :is(li, ol li) { color: #E2E8F0 !important; -webkit-text-fill-color: #E2E8F0 !important; }
 html body main#mainContent .bq-rich-feature li strong { color: #F4E6C1 !important; -webkit-text-fill-color: #F4E6C1 !important; }
+
+/* Ficha verificada (js/madriz-territory-map.js · verificationBlock).
+   POR QUÉ: mostrar los datos comprobados de la base verificada y del catálogo INTUR 2026.
+   CÓMO: sello, datos, contacto con enlaces táctiles de 24 px y fuentes; contraste AA sobre la ficha oscura.
+   QUÉ: .map-place-verified y sus partes. */
+.map-place-info .map-place-verified { margin: 0.4rem 0 0.6rem; padding: 0.6rem 0.7rem; border: 1px solid rgba(74, 122, 90, 0.55); border-radius: 12px; background: rgba(74, 122, 90, 0.16); }
+.map-place-info .map-place-verified-seal { margin: 0 0 0.4rem; color: #BBF7D0 !important; font-size: 0.76rem; font-weight: 800; letter-spacing: 0.02em; }
+.map-place-info .map-place-verified-links { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.6rem 0 0; }
+.map-place-info .map-place-verified-link { display: inline-flex; align-items: center; gap: 0.3rem; min-height: 28px; padding: 0.2rem 0.55rem; border-radius: 999px; background: rgba(255, 255, 255, 0.1); color: #FFFFFF !important; font-size: 0.76rem; font-weight: 700; text-decoration: none; overflow-wrap: anywhere; }
+.map-place-info .map-place-verified-link:focus-visible { outline: 2px solid #F65E01; outline-offset: 2px; }
+.map-place-info .map-place-verified-sources { margin: 0.6rem 0 0; color: #CBD5E1 !important; font-size: 0.72rem; line-height: 1.5; }
+.map-place-info .map-place-verified-sources a { color: #F4E6C1 !important; text-decoration: underline; }

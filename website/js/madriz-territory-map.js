@@ -276,6 +276,8 @@
           catalogReference: true,
           icon: String(result.icon || ''),
           desc: String(result.desc || ''),
+          // Datos comprobados con fuente (base verificada 2026-10-05, catálogo INTUR 2026).
+          verification: result.verification || null,
           // Precisa: el nombre completo se encontró en OpenStreetMap.
           // Aproximada: se ubicó por una parte del nombre o su municipio.
           approximate: fixed ? fixed.approximate : true,
@@ -420,6 +422,67 @@
     if (autoplay) autoplay.resumeSoon(1200);
   }
 
+  // ==========================================================================
+  // 🎯 POR QUÉ: la base verificada (docs/data/BASE_VERIFICADA_2026-10-05.md) y el
+  //    catálogo INTUR de turismo rural 2026 traen datos comprobados por lugar.
+  // ⚙️ CÓMO: se muestran tal cual, con su fuente y fecha; los precios y horarios
+  //    llevan la fecha de su publicación porque cambian. Sin calificaciones.
+  // 📦 QUÉ: verificationBlock(verification) → sello, datos, contacto y fuentes.
+  // ==========================================================================
+  const i18n = (key, fallback) => {
+    const lang = window.BaqueanoLanguage;
+    return (lang && typeof lang.t === 'function' && lang.t(key, { fallback })) || fallback;
+  };
+  function verificationBlock(v, el, icon) {
+    const box = el('div', 'map-place-verified');
+    const seal = el('p', 'map-place-verified-seal');
+    seal.append(icon('fa-circle-check'), ` ${i18n('places.verified.seal', 'Verificado')} · ${String(v.verifiedAt || '')}`);
+    box.append(seal);
+    if (v.facts && v.facts !== v.desc) box.append(el('p', 'map-place-info-text', String(v.facts)));
+    const rows = [
+      ['fa-person-hiking', i18n('places.verified.activities', 'Actividades'), v.activities],
+      ['fa-concierge-bell', i18n('places.verified.services', 'Servicios'), v.services],
+      ['fa-clock', i18n('places.verified.hours', 'Horario'), v.hours],
+      ['fa-map-pin', i18n('places.verified.address', 'Dirección'), v.address],
+      ['fa-tag', i18n('places.verified.price', 'Precio y horario'), v.price],
+      ['fa-circle-info', i18n('places.verified.contactNote', 'Contacto'), v.contact]
+    ].filter((row) => row[2]);
+    if (rows.length) {
+      const list = el('dl', 'map-place-info-extras');
+      rows.forEach(([name, label, value]) => { const dt = el('dt'); dt.append(icon(name), ` ${label}`); list.append(dt, el('dd', '', String(value))); });
+      box.append(list);
+    }
+    const links = el('p', 'map-place-verified-links');
+    const link = (href, iconName, text, external) => {
+      const a = el('a', 'map-place-verified-link', text);
+      const glyph = iconName.startsWith('fa-brands') ? el('i', iconName) : icon(iconName);
+      glyph.setAttribute('aria-hidden', 'true');
+      a.href = href; a.prepend(glyph, ' ');
+      if (external) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+      links.append(a);
+    };
+    (v.phones || []).forEach((phone) => link(`tel:${String(phone).replace(/[^\d+]/g, '')}`, 'fa-phone', String(phone)));
+    if (v.whatsapp) {
+      const digits = String(v.whatsapp).replace(/\D/g, '');
+      link(`https://wa.me/${digits.length === 8 ? '505' + digits : digits}`, 'fa-brands fa-whatsapp', `WhatsApp ${v.whatsapp}`, true);
+    }
+    if (v.email) link(`mailto:${v.email}`, 'fa-envelope', String(v.email));
+    if (v.website) link(v.website, 'fa-globe', i18n('places.verified.website', 'Sitio oficial'), true);
+    if (v.map) link(v.map, 'fa-map-location-dot', i18n('places.verified.map', 'Mapa de la iniciativa'), true);
+    if (links.childElementCount) box.append(links);
+    const sources = (v.sources || []).filter((item) => item && item.label);
+    if (sources.length) {
+      const src = el('p', 'map-place-verified-sources', `${i18n('places.verified.sources', 'Fuentes')}: `);
+      sources.forEach((item, index) => {
+        if (index) src.append(' · ');
+        if (item.url) { const a = el('a', '', item.label); a.href = item.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; src.append(a); }
+        else src.append(item.label);
+      });
+      box.append(src);
+    }
+    return box;
+  }
+
   function openPlaceInfo(place, card) {
     const shell = byId('madrizMapShell');
     if (!shell) return;
@@ -468,6 +531,7 @@
     // deduce por coincidencia de palabras: eso mostraba datos de OTRO lugar.
     const description = place.desc || (place.catalogReference ? '' : place.shortDescription);
     if (description) body.append(el('p', 'map-place-info-text', String(description)));
+    if (place.verification) body.append(verificationBlock(place.verification, el, icon));
     const territory = territoryInfo();
     const extras = [
       ['fa-calendar-days', 'Mejor época', territory && territory.bestSeason],

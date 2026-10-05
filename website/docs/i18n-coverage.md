@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T14:47:15.590Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3668 · en 3668 · fr 3668 · it 3668 · pt 3668 · de 3668
+Generado: 2026-10-05T15:38:01.270Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3690 · en 3690 · fr 3690 · it 3690 · pt 3690 · de 3690
 
-HTML: 3605/3606 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3611/3612 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -125,7 +125,7 @@ HTML: 3605/3606 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | js/global-music-player.js | js | 2 | 0 | 2 | 0 % |
 | js/historia-audioguia.js | js | 2 | 0 | 2 | 0 % |
 | js/home-community.js | js | 2 | 0 | 2 | 0 % |
-| js/madriz-territory-map.js | js | 2 | 0 | 2 | 0 % |
+| js/madriz-territory-map.js | js | 12 | 10 | 2 | 83.3 % |
 | js/ops-center/ops-ia-copilot.js | js | 2 | 0 | 2 | 0 % |
 | apps/admin/src/app/fuentes/page.tsx | tsx | 1 | 0 | 1 | 0 % |
 | apps/web/src/app/mapa/page.tsx | tsx | 1 | 0 | 1 | 0 % |
@@ -169,7 +169,7 @@ HTML: 3605/3606 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | denuncias.html | html | 39 | 39 | 0 | 100 % |
 | departamento.html | html | 78 | 78 | 0 | 100 % |
 | destino.html | html | 18 | 18 | 0 | 100 % |
-| destinos.html | html | 124 | 124 | 0 | 100 % |
+| destinos.html | html | 130 | 130 | 0 | 100 % |
 | experiencias.html | html | 155 | 155 | 0 | 100 % |
 | favoritos.html | html | 8 | 8 | 0 | 100 % |
 | gastronomia.html | html | 205 | 205 | 0 | 100 % |
@@ -186,6 +186,7 @@ HTML: 3605/3606 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | js/definitive-index-interactions.js | js | 0 | 0 | 0 | 100 % |
 | js/destination-community.js | js | 0 | 0 | 0 | 100 % |
 | js/destinos-provenance.js | js | 0 | 0 | 0 | 100 % |
+| js/destinos-verified.js | js | 11 | 11 | 0 | 100 % |
 | js/favoritos.js | js | 0 | 0 | 0 | 100 % |
 | js/firebase-config.js | js | 0 | 0 | 0 | 100 % |
 | js/firestore-mirror.js | js | 0 | 0 | 0 | 100 % |
