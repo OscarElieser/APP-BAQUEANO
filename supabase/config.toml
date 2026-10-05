@@ -24,3 +24,9 @@ enabled = true
 verify_jwt = false
 import_map = "./functions/baqueano-ops/deno.json"
 entrypoint = "./functions/baqueano-ops/index.ts"
+
+[functions.baqueano-sos]
+enabled = true
+verify_jwt = false
+import_map = "./functions/baqueano-sos/deno.json"
+entrypoint = "./functions/baqueano-sos/index.ts"

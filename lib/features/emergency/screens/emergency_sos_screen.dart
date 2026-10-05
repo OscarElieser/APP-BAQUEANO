@@ -12,6 +12,9 @@
 // - Interfaz reactiva con Glassmorphism profundo, tarjeta de pulso de auxilio,
 //   integración con geolocator para captura de coordenadas exactas y url_launcher
 //   para marcado telefónico 'tel:118'.
+// - Al llamar, la alerta se registra en paralelo en `baqueano-sos` (Supabase
+//   `sos_events`, visible en Ops Center) con la ubicación GPS real o el motivo
+//   por el que no la hay. Si falla o no hay sesión, la llamada sigue igual.
 // - Nunca se muestran coordenadas por defecto: si el GPS está apagado, sin
 //   permiso o falla, se informa el motivo y se deshabilitan "copiar" y "ver en
 //   mapa" (compartir una ubicación falsa en una emergencia es peligroso).
@@ -20,10 +23,13 @@
 // - `EmergencySosScreen`: Pantalla principal de contingencia y asistencia SOS.
 // ============================================================================
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
+import '../../../data/repositories/sos_repository.dart';
 import '../models/emergency_contact.dart';
 
 class EmergencySosScreen extends StatefulWidget {
@@ -45,6 +51,12 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
   bool _isLoadingGps = false;
 
   bool get _hasRealLocation => _currentCoordinates.isNotEmpty;
+
+  // Registro de la alerta en el Centro de Operaciones (complementario a la llamada).
+  final SosRepository _sosRepository = SosRepository();
+  Position? _position;
+  String _locationState = 'unavailable';
+  bool _sosReported = false;
 
   @override
   void initState() {
@@ -74,6 +86,7 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
     });
     try {
       if (!await Geolocator.isLocationServiceEnabled()) {
+        _locationState = 'disabled';
         if (mounted) {
           setState(() {
             _isLoadingGps = false;
@@ -88,6 +101,7 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
       }
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
+        _locationState = 'denied';
         if (mounted) {
           setState(() {
             _isLoadingGps = false;
@@ -102,6 +116,8 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
           timeLimit: Duration(seconds: 8),
         ),
       );
+      _position = position;
+      _locationState = 'gps';
       if (mounted) {
         setState(() {
           _currentCoordinates =
@@ -119,8 +135,37 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
     }
   }
 
+  /// Registra la alerta en paralelo; nunca retrasa ni condiciona la llamada.
+  Future<void> _reportSos(String dialed) async {
+    if (_sosReported) return;
+    final position = _position;
+    final result = await _sosRepository.report(
+      latitude: position?.latitude,
+      longitude: position?.longitude,
+      accuracyMeters: position?.accuracy,
+      locationStatus: _locationState,
+      dialedService: dialed,
+    );
+    if (result.status == SosReportStatus.recorded ||
+        result.status == SosReportStatus.throttled) {
+      _sosReported = true;
+    }
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(result.message),
+        backgroundColor: result.status == SosReportStatus.recorded
+            ? const Color(0xFF0F766E)
+            : const Color(0xFF475569),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
   Future<void> _callNumber(String phone) async {
     final uri = Uri.parse('tel:$phone');
+    // La llamada va primero; el aviso al Centro de Operaciones corre aparte.
+    unawaited(_reportSos(phone));
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {

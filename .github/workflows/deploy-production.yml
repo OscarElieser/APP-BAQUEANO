@@ -116,8 +116,12 @@ jobs:
           expect "ops overview sin sesión" 401 -X POST "$OPS" -H 'content-type: application/json' -d '{"action":"overview"}'
           expect "ops save con token falso" 401 -X POST "$OPS" -H 'content-type: application/json' -H 'x-firebase-token: falso.token.firma' -d '{"action":"save","entity":"destinations","values":{"name":"x"}}'
           expect "ops audit_list sin sesión" 401 -X POST "$OPS" -H 'content-type: application/json' -d '{"action":"audit_list"}'
+          SOS=https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-sos
+          expect "sos report sin sesión" 401 -X POST "$SOS" -H 'content-type: application/json' -d '{"action":"report","latitude":12.1,"longitude":-86.2}'
+          expect "sos queue con token falso" 401 -X POST "$SOS" -H 'content-type: application/json' -H 'x-firebase-token: falso.token.firma' -d '{"action":"queue"}'
+          expect "sos update sin sesión" 401 -X POST "$SOS" -H 'content-type: application/json' -d '{"action":"update","id":"00000000-0000-0000-0000-000000000000","status":"resolved"}'
           expect "lista pública de experiencias" 200 -X POST "$FN" -H 'content-type: application/json' -d '{"action":"list"}'
-          for t in staff_roles audit_logs ops_backup_entities profiles reservations; do
+          for t in staff_roles audit_logs ops_backup_entities profiles reservations sos_events; do
             body="$(curl -s --max-time 20 "$REST/$t?select=*&limit=1" -H "apikey: $ANON")"
             if [[ "$body" == "[]" || "$body" == *'"code"'* ]]; then echo "✅ anon no lee $t → ${body:0:80}"; else echo "::error::anon leyó $t"; exit 1; fi
           done
