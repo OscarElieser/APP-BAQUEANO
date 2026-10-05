@@ -4281,7 +4281,8 @@
     },
     "perfil": {
       "body": {
-        "title1": "My Profile | BAQUEANO Authentic Nicaragua"
+        "title1": "My Profile | BAQUEANO Authentic Nicaragua",
+        "metaDescription1": "Your information, bookings, travel preferences and achievements as a BAQUEANO Explorer in Nicaragua, all in one place."
       },
       "profHero": {
         "h11": "One traveler,",
@@ -4298,7 +4299,8 @@
         "span5": "Trips completed",
         "span6": "Next trip",
         "span7": "Saved destinations",
-        "span8": "Reviews written"
+        "span8": "Reviews written",
+        "aAriaLabel1": "Change photo"
       },
       "profTabsSection": {
         "a1": "Overview",
@@ -4365,7 +4367,146 @@
         "label2": "Preferred currency",
         "option3": "$ US dollar (USD)",
         "div1": "This helps show prices, content and recommendations more relevant to your experience.",
-        "h43": "Health, accessibility and well-being"
+        "h43": "Health, accessibility and well-being",
+        "small3": "Allergies or restrictions",
+        "small4": "Accessibility",
+        "div2": "This information is only shared when necessary and with your authorization (for example, for bookings or emergencies)."
+      },
+      "seguridad": {
+        "h41": "Account security",
+        "a1": "Set up security",
+        "small1": "Sign-in method",
+        "small2": "Verified email",
+        "small3": "Two-step authentication (2FA)",
+        "span1": "Last sign-in:"
+      },
+      "pagos": {
+        "h41": "Payments and billing",
+        "a1": "View history →",
+        "h61": "No saved payment methods",
+        "p1": "Your payments are processed securely through our partner providers.",
+        "a2": "Open secure checkout",
+        "strong1": "Recent transactions:",
+        "p2": "No transactions yet."
+      },
+      "profBottomCards": {
+        "h41": "Privacy and data",
+        "a1": "Manage",
+        "strong1": "Location permissions",
+        "small1": "We only use your location when you turn it on for maps and weather.",
+        "strong2": "Content personalization",
+        "small2": "Recommendations based on your travel interests.",
+        "strong3": "Analytics (optional)",
+        "small3": "It helps us improve the platform.",
+        "a2": "Download my data →",
+        "a3": "Request account deletion →",
+        "a4": "View Privacy Policy →"
+      },
+      "logros": {
+        "h41": "Your explorer identity",
+        "p1": "Keep discovering Nicaragua and unlock new levels and rewards.",
+        "strong1": "0 / 500 XP",
+        "span1": "Next level:",
+        "strong2": "Adventurer",
+        "strong3": "First trip",
+        "small1": "Not yet achieved",
+        "strong4": "Nature Lover",
+        "strong5": "Living Culture",
+        "small2": "Locked",
+        "strong6": "Guardian",
+        "a1": "See all my achievements →"
+      },
+      "profFinalCta": {
+        "h31": "Your next adventure starts from your profile",
+        "p1": "Plan, save, book and experience an authentic Nicaragua."
+      }
+    },
+    "privacidad": {
+      "body": {
+        "title1": "Privacy & Security of Your Data | BAQUEANO Nicaragua"
+      },
+      "privHero": {
+        "div1": "PRIVACY AND SECURITY",
+        "h11": "Your data,",
+        "span1": "under your control",
+        "p1": "At BAQUEANO we protect your information and use it only to offer you a safe, authentic and personalized travel experience in Nicaragua."
+      },
+      "privStripSection": {
+        "span1": "We don't sell your data",
+        "span2": "Location only when you turn it on",
+        "span3": "You can request deletion of your data",
+        "span4": "AI and external services clearly identified"
+      },
+      "privTopSplit": {
+        "h31": "What is this Privacy Policy?",
+        "p1": "We explain clearly and transparently what information we collect, how we use it, who we share it with and what your rights are when using BAQUEANO (website, Android app and digital services).",
+        "h41": "Your trust travels with us too",
+        "p2": "We protect your information so you can focus on what matters most: experiencing Nicaragua."
+      },
+      "priv3colsGrid": {
+        "h41": "What data do we collect?",
+        "small1": "Only the information needed to provide our services.",
+        "li1": "Account data (name, email, profile photo)",
+        "li2": "Profile information and travel preferences",
+        "li3": "Location (only when you turn it on)",
+        "li4": "Bookings, favorites and activity on the platform",
+        "li5": "Messages and support",
+        "li6": "Device information and app/site usage",
+        "h42": "What do we NOT collect?",
+        "small2": "We don't ask for sensitive or unnecessary information.",
+        "li7": "We don't collect card financial data",
+        "li8": "We don't ask for your national ID number",
+        "li9": "We don't access your contacts, photos or personal files (without your permission)",
+        "li10": "We don't sell your data to third parties",
+        "li11": "We don't collect information that isn't needed for the service to work",
+        "h43": "What do we use your data for?",
+        "small3": "We use your information to:",
+        "li12": "Provide and improve our tourism services",
+        "li13": "Personalize recommendations and routes",
+        "li14": "Manage bookings and payments (through partners)",
+        "li15": "Show relevant destinations, experiences and content",
+        "li16": "Communicate with you about your trip or requests",
+        "li17": "Ensure security, fraud prevention and continuous improvement of the platform"
+      },
+      "privFlowSection": {
+        "h31": "How does your information flow?",
+        "p1": "This is how data flows in BAQUEANO.",
+        "small1": "User",
+        "strong1": "BAQUEANO Web / Android App",
+        "small2": "You send your information securely.",
+        "small3": "Secure authentication and hosting.",
+        "small4": "Encrypted main database.",
+        "div1": "Experiences and routes",
+        "div2": "Baqueano Digital (AI)",
+        "div3": "Payments and partners",
+        "div4": "24/7 SOS (Assistance)",
+        "div5": "Anonymous continuous improvement"
+      },
+      "privFeatureGrid": {
+        "h41": "Geolocation and permissions",
+        "p1": "We only use your location when you turn it on to show you nearby destinations, routes, weather and local services.",
+        "span1": "You decide when to share your location. You can turn it off at any time.",
+        "p2": "Our AI tools may process your query (destination, days, budget) to generate recommendations.",
+        "div1": "✔ Your data is not used to train models.",
+        "div2": "✔ Conversations are used only to improve the service.",
+        "div3": "✔ AI providers identified (Gemini, Groq or others).",
+        "h42": "Security of your information",
+        "p3": "We apply technical and organizational measures to protect your personal data against unauthorized access.",
+        "div4": "✔ Secure connections (HTTPS and TLS/SSL encryption).",
+        "div5": "✔ Secure authentication with Firebase.",
+        "div6": "✔ Strict access control and backups.",
+        "h43": "Retention and deletion",
+        "p4": "We keep your data only for as long as necessary to fulfill the purposes of this policy.",
+        "div7": "✔ You can request deletion of your account at any time.",
+        "div8": "✔ Some information is kept only for legal obligations.",
+        "h44": "Your rights (ARCO)",
+        "p5": "You have the legal right to exercise sovereignty over your data:",
+        "div9": "✔ Access your personal data.",
+        "div10": "✔ Rectify incorrect information.",
+        "div11": "✔ Cancel or close your account.",
+        "div12": "✔ Object to processing and request portability.",
+        "h45": "External providers and services",
+        "p6": "We work with trusted services that meet security and privacy standards:"
       }
     }
   },

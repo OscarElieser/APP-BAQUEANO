@@ -4281,7 +4281,8 @@
     },
     "perfil": {
       "body": {
-        "title1": "Mi Perfil | BAQUEANO Nicaragua Auténtica"
+        "title1": "Mi Perfil | BAQUEANO Nicaragua Auténtica",
+        "metaDescription1": "Tu información, reservas, preferencias de viaje y logros como Explorador BAQUEANO en Nicaragua, en un solo lugar."
       },
       "profHero": {
         "h11": "Un viajero,",
@@ -4298,7 +4299,8 @@
         "span5": "Viajes completados",
         "span6": "Próximo viaje",
         "span7": "Destinos guardados",
-        "span8": "Reseñas realizadas"
+        "span8": "Reseñas realizadas",
+        "aAriaLabel1": "Cambiar foto"
       },
       "profTabsSection": {
         "a1": "Resumen",
@@ -4365,7 +4367,146 @@
         "label2": "Moneda preferida",
         "option3": "$ Dólar (USD)",
         "div1": "Esto ayuda a mostrar precios, contenido y recomendaciones más relevantes para tu experiencia.",
-        "h43": "Salud, accesibilidad y bienestar"
+        "h43": "Salud, accesibilidad y bienestar",
+        "small3": "Alergias o restricciones",
+        "small4": "Accesibilidad",
+        "div2": "Esta información solo se comparte cuando es necesaria y con tu autorización (por ejemplo, en reservas o emergencias)."
+      },
+      "seguridad": {
+        "h41": "Seguridad de la cuenta",
+        "a1": "Configurar seguridad",
+        "small1": "Método de acceso",
+        "small2": "Correo verificado",
+        "small3": "Autenticación en dos pasos (2FA)",
+        "span1": "Último acceso:"
+      },
+      "pagos": {
+        "h41": "Pagos y facturación",
+        "a1": "Ver historial →",
+        "h61": "No hay métodos de pago guardados",
+        "p1": "Tus pagos se procesan de forma segura a través de nuestros proveedores aliados.",
+        "a2": "Abrir checkout seguro",
+        "strong1": "Transacciones recientes:",
+        "p2": "Sin transacciones todavía."
+      },
+      "profBottomCards": {
+        "h41": "Privacidad y datos",
+        "a1": "Gestionar",
+        "strong1": "Permisos de ubicación",
+        "small1": "Usamos tu ubicación solo cuando la activás para mapas y clima.",
+        "strong2": "Personalización de contenido",
+        "small2": "Recomendaciones basadas en tus intereses de viaje.",
+        "strong3": "Analítica (opcional)",
+        "small3": "Nos ayuda a mejorar la plataforma.",
+        "a2": "Descargar mis datos →",
+        "a3": "Solicitar eliminación de cuenta →",
+        "a4": "Ver Política de Privacidad →"
+      },
+      "logros": {
+        "h41": "Tu identidad de explorador",
+        "p1": "Sigue descubriendo Nicaragua y desbloquea nuevos niveles y recompensas.",
+        "strong1": "0 / 500 XP",
+        "span1": "Próximo nivel:",
+        "strong2": "Aventurero",
+        "strong3": "Primer viaje",
+        "small1": "Por lograr",
+        "strong4": "Amante Natura",
+        "strong5": "Cultura Viva",
+        "small2": "Bloqueado",
+        "strong6": "Guardián",
+        "a1": "Ver todos mis logros →"
+      },
+      "profFinalCta": {
+        "h31": "Tu próxima aventura empieza desde tu perfil",
+        "p1": "Planifica, guarda, reserva y vive una Nicaragua auténtica."
+      }
+    },
+    "privacidad": {
+      "body": {
+        "title1": "Privacidad & Seguridad de tus Datos | BAQUEANO Nicaragua"
+      },
+      "privHero": {
+        "div1": "PRIVACIDAD Y SEGURIDAD",
+        "h11": "Tus datos,",
+        "span1": "bajo tu control",
+        "p1": "En BAQUEANO protegemos tu información y la usamos solo para ofrecerte una experiencia de viaje segura, auténtica y personalizada en Nicaragua."
+      },
+      "privStripSection": {
+        "span1": "No vendemos tus datos",
+        "span2": "Ubicación solo cuando la activás",
+        "span3": "Podés solicitar eliminación de tus datos",
+        "span4": "IA y servicios externos identificados claramente"
+      },
+      "privTopSplit": {
+        "h31": "¿Qué es esta Política de Privacidad?",
+        "p1": "Te explicamos de forma clara y transparente qué información recopilamos, cómo la usamos, con quién la compartimos y cuáles son tus derechos al utilizar BAQUEANO (sitio web, app Android y servicios digitales).",
+        "h41": "Tu confianza también viaja con nosotros",
+        "p2": "Protegemos tu información para que solo te enfoques en lo más importante: vivir Nicaragua."
+      },
+      "priv3colsGrid": {
+        "h41": "¿Qué datos recopilamos?",
+        "small1": "Solo la información necesaria para brindarte nuestros servicios.",
+        "li1": "Datos de cuenta (nombre, correo, foto de perfil)",
+        "li2": "Información de perfil y preferencias de viaje",
+        "li3": "Ubicación (solo cuando la activás)",
+        "li4": "Reservas, favoritos y actividades en la plataforma",
+        "li5": "Mensajes y soporte",
+        "li6": "Información de dispositivos y uso de la app/sitio",
+        "h42": "¿Qué NO recopilamos?",
+        "small2": "No solicitamos información sensible o innecesaria.",
+        "li7": "No recopilamos datos financieros de tarjetas",
+        "li8": "No solicitamos tu número de cédula",
+        "li9": "No accedemos a tus contactos, fotos o archivos personales (sin tu permiso)",
+        "li10": "No vendemos tus datos a terceros",
+        "li11": "No recopilamos información que no sea necesaria para el funcionamiento del servicio",
+        "h43": "¿Para qué usamos tus datos?",
+        "small3": "Utilizamos tu información para:",
+        "li12": "Brindar y mejorar nuestros servicios turísticos",
+        "li13": "Personalizar recomendaciones y rutas",
+        "li14": "Gestionar reservas y pagos (a través de aliados)",
+        "li15": "Mostrar destinos, experiencias y contenido relevante",
+        "li16": "Comunicarnos contigo sobre tu viaje o solicitudes",
+        "li17": "Garantizar la seguridad, prevención de fraudes y mejora continua de la plataforma"
+      },
+      "privFlowSection": {
+        "h31": "¿Cómo fluye tu información?",
+        "p1": "Así funciona el flujo de datos en BAQUEANO.",
+        "small1": "Usuario",
+        "strong1": "Web / App Android BAQUEANO",
+        "small2": "Envías tu información de forma segura.",
+        "small3": "Autenticación y Hosting seguro.",
+        "small4": "Base de datos principal cifrada.",
+        "div1": "Experiencias y rutas",
+        "div2": "Baqueano Digital (IA)",
+        "div3": "Pagos y aliados",
+        "div4": "SOS 24/7 (Asistencia)",
+        "div5": "Mejora continua anónima"
+      },
+      "privFeatureGrid": {
+        "h41": "Geolocalización y permisos",
+        "p1": "Solo usamos tu ubicación cuando la activás para mostrarte destinos cercanos, rutas, clima y servicios locales.",
+        "span1": "Tú decides cuándo compartir tu ubicación. Podés desactivarla en cualquier momento.",
+        "p2": "Nuestras herramientas de IA pueden procesar tu consulta (destino, días, presupuesto) para generar recomendaciones.",
+        "div1": "✔ No se usan tus datos para entrenar modelos.",
+        "div2": "✔ Las conversaciones se usan solo para mejorar el servicio.",
+        "div3": "✔ Proveedores de IA identificados (Gemini, Groq u otros).",
+        "h42": "Seguridad de tu información",
+        "p3": "Aplicamos medidas técnicas y organizativas para proteger tus datos personales contra accesos no autorizados.",
+        "div4": "✔ Conexiones seguras (HTTPS y cifrado TLS/SSL).",
+        "div5": "✔ Autenticación segura con Firebase.",
+        "div6": "✔ Control estricto de accesos y copias de seguridad.",
+        "h43": "Conservación y eliminación",
+        "p4": "Conservamos tus datos solo por el tiempo necesario para cumplir con las finalidades de esta política.",
+        "div7": "✔ Podés solicitar la eliminación de tu cuenta en cualquier momento.",
+        "div8": "✔ Ciertas informaciones se mantienen solo por obligaciones legales.",
+        "h44": "Tus derechos (ARCO)",
+        "p5": "Tenés derecho legal a ejercer la soberanía sobre tus datos:",
+        "div9": "✔ Acceder a tus datos personales.",
+        "div10": "✔ Rectificar información incorrecta.",
+        "div11": "✔ Cancelar o cerrar tu cuenta.",
+        "div12": "✔ Oponerte al tratamiento y solicitar portabilidad.",
+        "h45": "Proveedores y servicios externos",
+        "p6": "Trabajamos con servicios confiables que cumplen con estándares de seguridad y privacidad:"
       }
     }
   },
