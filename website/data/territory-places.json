@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T00:23:27.612Z",
+  "generatedAt": "2026-10-05T01:26:20.246Z",
   "source": "OpenStreetMap Nominatim — © OpenStreetMap contributors (ODbL). Contornos: geoBoundaries ADM1 (CC BY 4.0).",
   "rule": "Cada punto se acepta solo si cae dentro del contorno oficial de su territorio.",
   "territories": {
