@@ -4197,3 +4197,4 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - SEO: los alias con `meta refresh` (baqueano-ai.html) declaran el canonical del destino y salen del sitemap (23 URL). Prueba 11/11.
 - `docs/evidencias/MATRIZ_EVIDENCIAS_SPRINTS_1_2_3.md` marcada como HISTÓRICA (contenido conservado).
 - Acciones del propietario: desbloquear autodeploy de la VM, cerrar puerto 22 en NSG, restringir claves de navegador, videos S1-12/S3-20.
+- **Corrección CI (2026-10-05):** `deploy-production.yml` era YAML inválido desde `fba666b` (`Sitemap: https…` en escalar plano → "mapping values"); runs #78 y #79 fallaron en 0 s. Paso SEO reescrito con bloque `run: |`; los 7 workflows validados con `yaml.safe_load`.
