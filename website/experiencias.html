@@ -75,6 +75,58 @@
       margin: 0;
     }
 
+    .exp-hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn-exp-hero-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #F65E01, #E05400);
+      color: #FFFFFF;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(246, 94, 1, 0.35);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-exp-hero-primary:hover {
+      background: linear-gradient(135deg, #FF6F1A, #F65E01);
+      transform: translateY(-2px);
+      color: #FFFFFF;
+    }
+
+    .btn-exp-hero-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #FFFFFF;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-exp-hero-secondary:hover {
+      background: rgba(255, 255, 255, 0.22);
+      transform: translateY(-2px);
+      color: #FFFFFF;
+    }
+
     .exp-catalog-section {
       padding: 40px 0 60px;
     }
@@ -290,11 +342,19 @@
       <span data-i18n="pages.experiencias.expHero.span1" style="font-size: 0.8rem; font-weight: 800; letter-spacing: 0.15em; color: #4A7A5A; text-transform: uppercase;">TURISMO DE IMPACTO POSITIVO</span>
       <h1><span data-i18n="pages.experiencias.expHero.h11">Experiencias que te</span> <span data-i18n="pages.experiencias.expHero.span2">transforman</span></h1>
       <p data-i18n="pages.experiencias.expHero.p1">Viví Nicaragua a través de guías baqueanos locales: senderismo en cráteres, cañones milenarios, surfing salvaje y cosechas de café en las montañas.</p>
+      <div class="exp-hero-actions">
+        <a href="#catalogoExperiencias" class="btn-exp-hero-primary">
+          <i class="fa-solid fa-person-hiking"></i> <span data-i18n="testimonials.ctaExplore">Explorar experiencias</span> <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="baqueano-ia.html" class="btn-exp-hero-secondary">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="pages.index.heroNicaragua.a2">Planificar con IA</span>
+        </a>
+      </div>
     </div>
   </header>
 
   <!-- CATÁLOGO DE EXPERIENCIAS -->
-  <main class="exp-catalog-section">
+  <main class="exp-catalog-section" id="catalogoExperiencias">
     <div class="exact-container">
       <!-- Filtros -->
       <div class="exp-filter-bar">

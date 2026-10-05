@@ -4938,7 +4938,11 @@
     "n867022WNicaragua": "12.5061° N, 86.7022° O (Nicaragua)",
     "contacto": "Contact",
     "seguridad": "Sécurité",
-    "pagos": "Paiements"
+    "pagos": "Paiements",
+    "hoteles": "Hôtels",
+    "hostales": "Auberges",
+    "resorts": "Complexes hôteliers",
+    "otrosHospedajes": "Autres hébergements"
   },
   "ops": {
     "impact": {
@@ -4982,6 +4986,14 @@
       "pendingVerifications": "Vérifications en attente",
       "signIn": "Connectez-vous pour voir les indicateurs.",
       "error": "Les indicateurs n'ont pas pu être calculés : {error}"
+    },
+    "strategic": {
+      "title": "Impact et alignement stratégique",
+      "disclaimer": "Contribution ou alignement de BAQUEANO avec les priorités nationales. Ce n'est pas une reconnaissance officielle : aucun accord ni résolution institutionnelle n'est enregistré.",
+      "unavailable": "Données insuffisantes : le module d'impact n'est pas encore disponible sur le serveur (migration en attente).",
+      "colTerritory": "Territoire",
+      "coverageTable": "Couverture par département et région",
+      "matrix": "Matrice d'alignement national"
     }
   },
   "consent": {
@@ -5051,11 +5063,133 @@
       "website": "Site officiel",
       "map": "Carte de l'initiative",
       "sources": "Sources",
-      "zone": "Commune ou zone"
+      "zone": "Commune ou zone",
+      "checkNotice": "Vérifié auprès d'une source officielle",
+      "seeSheet": "Voir la fiche"
     },
     "access": {
       "viewArea": "Voir la zone sur la carte",
       "note": "L'emplacement indiqué correspond à la zone générale. Le point d'accès reste à confirmer."
+    }
+  },
+  "impact": {
+    "panel": {
+      "tourism": "Tourisme",
+      "local_economy": "Économie locale",
+      "community": "Communauté",
+      "culture": "Culture",
+      "environment": "Environnement",
+      "education": "Éducation",
+      "technology": "Technologie",
+      "inclusion": "Inclusion",
+      "safety": "Sécurité",
+      "territory": "Couverture territoriale"
+    },
+    "alignType": {
+      "direct": "Contribution directe",
+      "supporting": "Contribution de soutien",
+      "potential": "Capacité potentielle"
+    },
+    "needsReview": "À réviser",
+    "component": "Composant BAQUEANO",
+    "evidence": "Preuve",
+    "verifiedRange": "Vérifié le {verified} · expire le {expiry}",
+    "noData": "Données insuffisantes",
+    "framework": {
+      "pnlcp_dh_2022_2026": "Plan national de lutte contre la pauvreté et pour le développement humain 2022-2026",
+      "intur_2026": "INTUR — axes de travail 2026",
+      "ley_turismo_rural": "Tourisme rural et communautaire (INTUR)",
+      "ene_2024_2026": "Stratégie nationale d'éducation 2024-2026",
+      "marena_sinap": "MARENA — Système national des aires protégées"
+    },
+    "public": {
+      "kicker": "Notre impact",
+      "title": "Ce qu'apporte BAQUEANO, preuves à l'appui",
+      "lead": "Chaque capacité renvoie à la fonction qui la démontre. Les chiffres sont calculés dans notre base de données à l'ouverture de cette page.",
+      "how": {
+        "communities": "Rend visibles les communautés et le tourisme rural et communautaire",
+        "business": "Numérise les commerces locaux sans commission d'intermédiaire",
+        "discover": "Facilite la découverte des 17 départements et régions sur une carte",
+        "culture": "Valorise la musique, la gastronomie et les traditions",
+        "heritage": "Documente l'histoire et le patrimoine",
+        "rural": "Aide à trouver des fermes, des coopératives et des expériences paysannes",
+        "access": "Améliore l'accès à l'information en 6 langues",
+        "connect": "Met le voyageur en contact direct avec l'offre locale",
+        "sustainable": "Promeut des expériences durables avec des pratiques déclarées ou vérifiées",
+        "tech": "Utilise la technologie (BAQUI) pour planifier des voyages"
+      },
+      "indicatorsTitle": "Indicateurs réels",
+      "formula": "Couverture territoriale = communes avec contenu ÷ communes cataloguées × 100. Source : base de données BAQUEANO (Supabase).",
+      "updated": "Calculé : {time}.",
+      "alignTitle": "Contribution aux priorités nationales",
+      "disclaimer": "BAQUEANO présente des capacités fonctionnelles compatibles avec ces priorités. Il s'agit d'une contribution ou d'un alignement de BAQUEANO, ni d'une reconnaissance officielle ni d'une partie d'un plan institutionnel.",
+      "alignEmpty": "La matrice d'alignement avec sources officielles n'est pas encore publiée.",
+      "officialSource": "Source officielle",
+      "verifiedOn": "Consultée le {date}"
+    },
+    "ind": {
+      "destinos_publicados": "Destinations publiées",
+      "destinos_verificados": "Destinations vérifiées",
+      "rutas_creadas": "Itinéraires créés",
+      "experiencias_publicadas": "Expériences publiées",
+      "servicios_turisticos": "Services touristiques publiés",
+      "visitas_generadas": "Consultations de fiches générées",
+      "negocios_locales": "Commerces locaux",
+      "negocios_verificados": "Commerces vérifiés",
+      "emprendimientos_familiares": "Entreprises familiales",
+      "mujeres_emprendedoras": "Entreprises dirigées par des femmes",
+      "jovenes_emprendedores": "Entreprises de jeunes",
+      "cooperativas": "Coopératives",
+      "negocios_rurales": "Commerces ruraux",
+      "protagonistas_sin_categoria": "Commerces sans catégorie de protagoniste",
+      "comunidades_publicadas": "Communautés publiées",
+      "experiencias_comunitarias_verificadas": "Expériences communautaires vérifiées",
+      "experiencias_comunitarias_pendientes": "Expériences communautaires en attente de vérification",
+      "experiencias_comunitarias": "Expériences communautaires vérifiées",
+      "patrimonio": "Patrimoine documenté",
+      "gastronomia": "Gastronomie",
+      "musica": "Musique",
+      "artesania": "Artisanat",
+      "festividades": "Fêtes",
+      "personajes_historicos": "Personnages historiques",
+      "leyendas": "Légendes",
+      "cultura": "Fiches culturelles",
+      "practicas_reportadas": "Pratiques durables déclarées",
+      "practicas_verificadas": "Pratiques vérifiées par BAQUEANO",
+      "practicas_sostenibles_verificadas": "Pratiques durables vérifiées",
+      "oferta_con_criterio_responsable": "Offres avec critère responsable",
+      "lineamientos_vinculados": "Orientations éducatives liées",
+      "evidencias_sprint": "Preuves d'apprentissage (BAQUEANO LAB)",
+      "usuarios": "Utilisateurs",
+      "consultas_baqui": "Requêtes à BAQUI",
+      "sesiones_baqui": "Sessions BAQUI",
+      "itinerarios_generados": "Itinéraires générés",
+      "destinos_consultados": "Fiches de lieux consultées",
+      "negocios_visualizados": "Commerces consultés",
+      "aperturas_mapa": "Ouvertures de la carte",
+      "clics_como_llegar": "Clics sur « Itinéraire »",
+      "clics_whatsapp": "Clics WhatsApp",
+      "clics_llamar": "Clics d'appel",
+      "reservas_iniciadas": "Réservations commencées",
+      "reservas_completadas": "Réservations confirmées ou terminées",
+      "qr_generados": "Codes QR générés",
+      "atributos_accesibilidad_verificados": "Caractéristiques d'accessibilité vérifiées",
+      "entidades_con_accesibilidad_verificada": "Lieux avec accessibilité vérifiée",
+      "accesibilidad_verificada": "Accessibilité vérifiée",
+      "idiomas_interfaz": "Langues de l'interface",
+      "contactos_emergencia": "Contacts d'urgence",
+      "contactos_emergencia_verificados": "Contacts d'urgence vérifiés",
+      "contactos_con_ubicacion": "Contacts d'urgence avec localisation",
+      "alertas_sos": "Alertes SOS reçues",
+      "departamentos_catalogados": "Départements et régions catalogués",
+      "departamentos_con_contenido": "Départements et régions avec contenu",
+      "departamentos_cubiertos": "Départements couverts",
+      "municipios_catalogados": "Communes cataloguées",
+      "municipios_con_contenido": "Communes avec contenu",
+      "municipios_cubiertos": "Communes couvertes",
+      "cobertura_territorial_baqueano": "Couverture territoriale BAQUEANO",
+      "cobertura": "Couverture territoriale",
+      "contenido_costa_caribe": "Contenu sur la côte caraïbe (RACCN et RACCS)"
     }
   }
 }

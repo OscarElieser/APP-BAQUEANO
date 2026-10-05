@@ -20,7 +20,8 @@
 //
 // 📦 QUÉ (POST { action, ... }):
 // - Lectura (staff): whoami, overview, health, list, get, audit_list,
-//   kpis (kpi_dashboard SMART), db_health (db_health_report), duplicates.
+//   kpis (kpi_dashboard SMART), impact (strategic_impact_report + matriz de
+//   alineación nacional y fuentes), db_health (db_health_report), duplicates.
 // - Escritura (admin): save, set_status (publish|unpublish|archive|restore),
 //   verify (sello "Verificado por BAQUEANO" con trazabilidad), log.
 // ============================================================================
@@ -539,6 +540,23 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       const { data, error } = await service.rpc("kpi_dashboard", { p_from: from.toISOString(), p_to: to.toISOString() });
       if (error) throw new HttpError(500, "No se pudieron calcular los KPIs.");
       return { report: data };
+    }
+
+    case "impact": {
+      // BAQUEANO IMPACTO (migración 20261005070000): 10 paneles calculados en
+      // PostgreSQL + matriz de alineación nacional con su fuente y vigencia.
+      // La alineación es "contribución de BAQUEANO", nunca reconocimiento oficial.
+      const to = body.to ? new Date(String(body.to)) : new Date();
+      const from = body.from ? new Date(String(body.from)) : new Date(to.getTime() - 30 * 86400000);
+      if (Number.isNaN(from.getTime()) || Number.isNaN(to.getTime()) || from > to) throw new HttpError(400, "Período inválido.");
+      if (to.getTime() - from.getTime() > 366 * 86400000) throw new HttpError(400, "El período máximo es de un año.");
+      const [report, alignment, sources] = await Promise.all([
+        service.rpc("strategic_impact_report", { p_from: from.toISOString(), p_to: to.toISOString() }),
+        service.from("national_alignment").select("id,national_framework,axis_code,axis_name,lineamiento,description,baqueano_component,alignment_type,evidence,indicator_keys,source_name,source_url,verified_at,verification_expiry,status").order("sort_order"),
+        service.from("strategic_sources").select("id,institution,document,year,source_url,verified_at,last_verified_at,verification_expiry,status").order("id"),
+      ]);
+      if (report.error) throw new HttpError(500, "No se pudo calcular el impacto (¿migración impact_alignment aplicada?).");
+      return { report: report.data, alignment: alignment.data || [], sources: sources.data || [] };
     }
 
     case "db_health": {

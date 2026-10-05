@@ -60,16 +60,16 @@ Siguiente trabajo: la sección 4, desde el punto 2 (CTA principal).
 | 17 | Antispam en servidor | 🔴 | Pendiente bloque E: auditar Edge Functions (rate limit, validación, CORS, App Check). |
 | 18 | Botón WhatsApp | 🟢 | `noopener` y nombre accesible verificados en navegador. |
 | 19 | Analítica real con consentimiento | 🟢 | `js/baqueano-analytics.js` → RPC `track_event` (Supabase), sin datos personales, 17 eventos. |
-| 20 | Una CTA principal por pantalla | 🔴 | Revisión pendiente. |
+| 20 | Una CTA principal por pantalla | 🟢 | 28 páginas auditadas y certificadas con jerarquía visual primaria/secundaria (`docs/production-audit/cta-report.md`). |
 
-Informes en `docs/production-audit/`: `static-audit.md`, `accessibility-report.md`, `responsive-report.md`, `broken-links-report.md` y `lighthouse/`.
+Informes en `docs/production-audit/`: `static-audit.md`, `accessibility-report.md`, `responsive-report.md`, `broken-links-report.md`, `cta-report.md` y `lighthouse/`.
 
 Informes que aún faltan (bloque E): `20-point-checklist.md`, `lighthouse-mobile.md`, `lighthouse-desktop.md`, `seo-report.md`, `security-report.md`, `analytics-report.md` y `deployment-verification.md` (commit local = main = desplegado).
 
 ## 4. Pendientes en orden
 
 1. ~~Responsive sin recortes~~ ✅ hecho.
-2. **CTA principal** (requisito 20): una acción primaria por pantalla en las páginas principales.
+2. ~~CTA principal (requisito 20)~~ ✅ hecho (`docs/production-audit/cta-report.md`).
 3. **Bloque E:**
    - Antispam y seguridad de Edge Functions y formularios.
    - Los informes que faltan.

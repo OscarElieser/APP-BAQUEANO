@@ -100,6 +100,74 @@
       display: block;
     }
 
+    /* Acciones Principales Hero CTA (Jerarquía 20/20) */
+    .host-hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-host-hero-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: linear-gradient(135deg, var(--terracotta, #F65E01), #E05400);
+      color: #FFFFFF;
+      padding: 0.85rem 1.65rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(246, 94, 1, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-host-hero-primary:hover {
+      background: linear-gradient(135deg, #FF6F1A, #F65E01);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(246, 94, 1, 0.45);
+      color: #FFFFFF;
+    }
+
+    .btn-host-hero-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      color: #FFFFFF;
+      padding: 0.85rem 1.45rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-host-hero-secondary:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.45);
+      transform: translateY(-2px);
+      color: #FFFFFF;
+    }
+
+    @media (max-width: 600px) {
+      .host-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn-host-hero-primary,
+      .btn-host-hero-secondary {
+        justify-content: center;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
     /* Tarjeta de preview del modelo de negocio */
     .host-model-card {
       background: rgba(22, 93, 111, 0.08);

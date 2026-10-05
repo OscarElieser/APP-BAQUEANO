@@ -33,7 +33,7 @@
   function icon(name) { var i = el('i', name.indexOf('fa-brands') === 0 ? name : 'fa-solid ' + name); i.setAttribute('aria-hidden', 'true'); return i; }
 
   // Tipo legible: modalidad del catálogo INTUR o "Lugar verificado" (base verificada).
-  var CATEGORY_KIND = { playa: 'Playas', rio: 'Ríos', isla: 'Islas', cascada: 'Cascadas', laguna: 'Lagunas y lagos', volcan: 'Volcanes y cerros', reserva: 'Reservas naturales', cueva: 'Cuevas y cañones', mirador: 'Miradores', parque: 'Parques y áreas protegidas' };
+  var CATEGORY_KIND = { playa: 'Playas', rio: 'Ríos', isla: 'Islas', cascada: 'Cascadas', laguna: 'Lagunas y lagos', volcan: 'Volcanes y cerros', reserva: 'Reservas naturales', cueva: 'Cuevas y cañones', mirador: 'Miradores', parque: 'Parques y áreas protegidas', hospedaje: 'Hospedajes' };
   function kindOf(place) {
     var v = place.verification || {};
     if (place.category && CATEGORY_KIND[place.category]) return i18n('destinos.verified.kind.' + place.category, CATEGORY_KIND[place.category]);
@@ -92,12 +92,24 @@
     var desc = el('p', 'dest-verified-desc', place.desc);
     article.append(head, seal, desc);
     if (v.activities) { var act = el('p', 'dest-verified-meta'); act.append(el('strong', '', i18n('places.verified.activities', 'Actividades') + ': '), v.activities); article.append(act); }
+    if (v.address) { var addr = el('p', 'dest-verified-meta'); addr.append(el('strong', '', i18n('places.verified.address', 'Dirección') + ': '), v.address); article.append(addr); }
+    if (v.amenities && v.amenities.length) { var amen = el('p', 'dest-verified-meta'); amen.append(el('strong', '', i18n('places.verified.services', 'Servicios') + ': '), v.amenities.join(' · ')); article.append(amen); }
+    if (v.phones && v.phones.length) { var ph = el('p', 'dest-verified-meta'); ph.append(el('strong', '', i18n('places.verified.contactNote', 'Contacto') + ': '), v.phones.join(' · ')); article.append(ph); }
+    if (v.whatsapp) { var wa = el('p', 'dest-verified-meta'); wa.append(el('strong', '', 'WhatsApp: '), v.whatsapp); article.append(wa); }
     if (v.hours) { var hrs = el('p', 'dest-verified-meta'); hrs.append(el('strong', '', i18n('places.verified.hours', 'Horario') + ': '), v.hours); article.append(hrs); }
     if (v.price) { var price = el('p', 'dest-verified-meta'); price.append(el('strong', '', i18n('places.verified.price', 'Precio y horario') + ': '), v.price); article.append(price); }
     var actions = el('div', 'dest-verified-actions');
     var more = el('a', 'dest-verified-btn is-primary');
     more.href = 'departamento.html?id=' + encodeURIComponent(territory.id);
     more.append(icon('fa-map-location-dot'), ' ' + i18n('destinos.verified.seeDepartment', 'Ver en {department}', { department: territory.name }));
+    if (place.lat != null && place.lng != null && v.mapReady !== false) {
+      var route = el('a', 'dest-verified-btn');
+      route.href = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(place.lat + ',' + place.lng);
+      route.target = '_blank';
+      route.rel = 'noopener noreferrer';
+      route.append(icon('fa-diamond-turn-right'), ' ' + i18n('destinations.howToGet', 'Cómo llegar'));
+      actions.append(route);
+    }
     var plan = el('a', 'dest-verified-btn');
     plan.href = 'baqueano-ia.html?q=' + encodeURIComponent('Quiero visitar ' + place.name + ' en ' + territory.name);
     plan.append(icon('fa-wand-magic-sparkles'), ' ' + i18n('destinos.verified.plan', 'Planificar con BAQUI'));

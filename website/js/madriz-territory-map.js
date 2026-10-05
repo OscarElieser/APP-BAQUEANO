@@ -496,6 +496,9 @@
   function openPlaceInfo(place, card) {
     const shell = byId('madrizMapShell');
     if (!shell) return;
+    // BAQUEANO IMPACTO: ficha de lugar abierta (embudo place_view). Solo el id
+    // público del lugar; baqueano-analytics.js lo envía únicamente con consentimiento.
+    try { window.dispatchEvent(new CustomEvent('baqueano:impact', { detail: { event: 'place_view', entityType: 'place', entityId: place && place.id, source: 'territory' } })); } catch (_) { /* sin CustomEvent */ }
     if (!infoPanel || !shell.contains(infoPanel)) {
       infoPanel = document.createElement('aside');
       infoPanel.className = 'map-place-info';

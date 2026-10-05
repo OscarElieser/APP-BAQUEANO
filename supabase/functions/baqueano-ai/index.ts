@@ -294,13 +294,16 @@ function normalizeIntentText(value: unknown): string {
   return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 }
 
-function conversationIntent(prompt: string): "greeting" | "farewell" | "thanks" | "help" | "planning" | "tourism" {
+function conversationIntent(prompt: string): "greeting" | "farewell" | "thanks" | "help" | "impact" | "planning" | "tourism" {
   const text = normalizeIntentText(prompt);
   const words = text.split(/\s+/).filter(Boolean);
   if (words.length <= 8 && /^(hola|buenas|buenos dias|buenas tardes|buenas noches|hey|saludos|que tal)[!.? ]*$/.test(text)) return "greeting";
   if (/\b(adios|hasta luego|nos vemos|hasta pronto|me despido|chao|bye)\b/.test(text)) return "farewell";
   if (words.length <= 12 && /\b(gracias|muchas gracias|te agradezco|excelente ayuda)\b/.test(text)) return "thanks";
   if (/^(ayuda|que puedes hacer|como funciona|en que me ayudas)[!.? ]*$/.test(text)) return "help";
+  // BAQUEANO IMPACTO: preguntas sobre el aporte de la plataforma al país (no sobre un destino).
+  if (/\b(baqueano|baqui|plataforma|app|aplicacion)\b/.test(text)
+    && /\b(contribu\w*|aport\w*|impacto|alinea\w*|desarrollo (turistico|territorial|comunitario)|plan nacional|pnlcp|pndh|intur|economia creativa|estrategia nacional|politica\w* public\w*|prioridades nacionales)\b/.test(text)) return "impact";
   if (/\b(itinerario|planifica|planificar|ruta|viaje|vacaciones|dias|noches|presupuesto|viajeros|hospedaje|quedarme|recorrido)\b/.test(text)) return "planning";
   return "tourism";
 }
@@ -318,6 +321,61 @@ function internalKnowledgeAnswer(records: Array<{title: string; entityType: stri
   return messages[language] || messages.es;
 }
 
+// ============================================================================
+// 🧭 BAQUEANO IMPACTO — respuesta trazable sobre la contribución de BAQUEANO
+// 🎯 POR QUÉ: ante "¿Cómo contribuye BAQUEANO al desarrollo turístico de
+//    Nicaragua?" BAQUI debe distinguir siempre HECHO OFICIAL (lo que dice el
+//    documento oficial, con fuente) de CONTRIBUCIÓN DE BAQUEANO, y nunca afirmar
+//    reconocimiento institucional sin evidencia documental.
+// ⚙️ CÓMO: respuesta determinista (sin modelo generativo, no puede inventar):
+//    1) public_impact_summary() → indicadores reales de Supabase;
+//    2) national_alignment vigente → eje oficial + fuente + componente BAQUEANO.
+//    Sin datos → lo dice explícitamente ("todavía no tengo indicadores verificados").
+// 📦 QUÉ: buildImpactAnswer(supabase, language) → { message, sources, status }.
+// ============================================================================
+const IMPACT_LABELS: Record<string, Record<string, string>> = {
+  es: {intro: "Te lo explico separando lo oficial de lo que aporta BAQUEANO:", official: "HECHO OFICIAL", contribution: "CONTRIBUCIÓN DE BAQUEANO", indicators: "Indicadores reales (base de datos BAQUEANO, calculados ahora)", destinations: "destinos publicados", businesses: "negocios locales", community: "experiencias comunitarias verificadas", itineraries: "itinerarios generados", coverage: "cobertura territorial", municipalities: "municipios con contenido", noData: "Todavía no tengo indicadores verificados para responder con cifras.", disclaimer: "Importante: es una contribución o alineación de BAQUEANO. BAQUEANO no forma parte oficial de estos planes ni tiene un reconocimiento institucional registrado.", source: "Fuente", includes: "incluye"},
+  en: {intro: "Here is the answer, separating official facts from BAQUEANO's contribution:", official: "OFFICIAL FACT", contribution: "BAQUEANO'S CONTRIBUTION", indicators: "Real indicators (BAQUEANO database, calculated now)", destinations: "published destinations", businesses: "local businesses", community: "verified community experiences", itineraries: "itineraries generated", coverage: "territorial coverage", municipalities: "municipalities with content", noData: "I don't have verified indicators yet to answer with figures.", disclaimer: "Important: this is BAQUEANO's contribution or alignment. BAQUEANO is not officially part of these plans and has no registered institutional recognition.", source: "Source", includes: "includes"},
+  fr: {intro: "Voici la réponse, en séparant les faits officiels de la contribution de BAQUEANO :", official: "FAIT OFFICIEL", contribution: "CONTRIBUTION DE BAQUEANO", indicators: "Indicateurs réels (base de données BAQUEANO, calculés maintenant)", destinations: "destinations publiées", businesses: "commerces locaux", community: "expériences communautaires vérifiées", itineraries: "itinéraires générés", coverage: "couverture territoriale", municipalities: "communes avec contenu", noData: "Je n'ai pas encore d'indicateurs vérifiés pour répondre avec des chiffres.", disclaimer: "Important : il s'agit d'une contribution ou d'un alignement de BAQUEANO. BAQUEANO ne fait pas officiellement partie de ces plans et n'a aucune reconnaissance institutionnelle enregistrée.", source: "Source", includes: "comprend"},
+  it: {intro: "Ecco la risposta, separando i fatti ufficiali dal contributo di BAQUEANO:", official: "FATTO UFFICIALE", contribution: "CONTRIBUTO DI BAQUEANO", indicators: "Indicatori reali (database BAQUEANO, calcolati ora)", destinations: "destinazioni pubblicate", businesses: "attività locali", community: "esperienze comunitarie verificate", itineraries: "itinerari generati", coverage: "copertura territoriale", municipalities: "comuni con contenuti", noData: "Non ho ancora indicatori verificati per rispondere con dati.", disclaimer: "Importante: si tratta di un contributo o allineamento di BAQUEANO. BAQUEANO non fa parte ufficialmente di questi piani e non ha alcun riconoscimento istituzionale registrato.", source: "Fonte", includes: "include"},
+  pt: {intro: "Aqui está a resposta, separando fatos oficiais da contribuição do BAQUEANO:", official: "FATO OFICIAL", contribution: "CONTRIBUIÇÃO DO BAQUEANO", indicators: "Indicadores reais (banco de dados BAQUEANO, calculados agora)", destinations: "destinos publicados", businesses: "negócios locais", community: "experiências comunitárias verificadas", itineraries: "roteiros gerados", coverage: "cobertura territorial", municipalities: "municípios com conteúdo", noData: "Ainda não tenho indicadores verificados para responder com números.", disclaimer: "Importante: trata-se de uma contribuição ou alinhamento do BAQUEANO. O BAQUEANO não faz parte oficialmente desses planos nem tem reconhecimento institucional registrado.", source: "Fonte", includes: "inclui"},
+  de: {intro: "Hier die Antwort – offizielle Fakten getrennt vom Beitrag von BAQUEANO:", official: "OFFIZIELLE TATSACHE", contribution: "BEITRAG VON BAQUEANO", indicators: "Echte Kennzahlen (BAQUEANO-Datenbank, jetzt berechnet)", destinations: "veröffentlichte Reiseziele", businesses: "lokale Betriebe", community: "verifizierte Gemeinschaftserlebnisse", itineraries: "erstellte Reiserouten", coverage: "territoriale Abdeckung", municipalities: "Gemeinden mit Inhalten", noData: "Ich habe noch keine verifizierten Kennzahlen, um mit Zahlen zu antworten.", disclaimer: "Wichtig: Es handelt sich um einen Beitrag bzw. eine Ausrichtung von BAQUEANO. BAQUEANO ist nicht offiziell Teil dieser Pläne und hat keine registrierte institutionelle Anerkennung.", source: "Quelle", includes: "umfasst"},
+};
+
+async function buildImpactAnswer(supabase: ReturnType<typeof createClient> | null, language: string) {
+  const L = IMPACT_LABELS[language] || IMPACT_LABELS.es;
+  if (!supabase) return {message: `${L.noData}\n\n${L.disclaimer}`, sources: [] as Array<{label: string; url: string}>, status: "no_database"};
+  const [summaryRes, alignRes] = await Promise.all([
+    supabase.rpc("public_impact_summary"),
+    supabase.from("national_alignment")
+      .select("id,axis_name,baqueano_component,source_name,source_url,verified_at")
+      .eq("status", "active").gte("verification_expiry", new Date().toISOString().slice(0, 10))
+      .in("id", ["pnlcp_turismo_diversificacion", "pnlcp_economia_creativa", "intur_rural_comunitario", "intur26_enlazamiento"])
+      .order("sort_order"),
+  ]);
+  const summary = (summaryRes.error ? null : summaryRes.data) as Record<string, number | null> | null;
+  const rows = (alignRes.error ? [] : alignRes.data || []) as Array<Record<string, string>>;
+  const lines: string[] = [L.intro, ""];
+  rows.forEach((row) => {
+    lines.push(`• ${L.official}: ${row.source_name} ${L.includes} «${row.axis_name}» (${L.source}: ${row.source_url}).`);
+    lines.push(`  ${L.contribution}: ${row.baqueano_component}.`);
+  });
+  if (summary && Number.isFinite(Number(summary.destinos_publicados))) {
+    lines.push("", `${L.indicators}:`);
+    lines.push(`- ${summary.destinos_publicados} ${L.destinations}; ${summary.negocios_locales} ${L.businesses}; ${summary.experiencias_comunitarias} ${L.community}; ${summary.itinerarios_generados} ${L.itineraries}.`);
+    lines.push(`- ${summary.municipios_con_contenido}/${summary.municipios_catalogados} ${L.municipalities}` +
+      (summary.cobertura_territorial_baqueano != null ? ` (${L.coverage}: ${summary.cobertura_territorial_baqueano} %).` : "."));
+  } else {
+    lines.push("", L.noData);
+  }
+  lines.push("", L.disclaimer);
+  return {
+    message: lines.join("\n"),
+    sources: rows.map((row) => ({label: row.source_name, url: row.source_url})),
+    status: rows.length || summary ? "impact_grounded" : "impact_no_data",
+  };
+}
+
 async function buildGroundedTourismAnswer(prompt: string, history: unknown, internalContext: unknown, language: string, countryCode: string) {
   const apiKeys = [Deno.env.get("GEMINI_API_KEY"), Deno.env.get("BAQUEANONICARAGUA"), Deno.env.get("Gemini API Key")]
     .filter((value, index, values): value is string => Boolean(value) && values.indexOf(value) === index);
@@ -330,7 +388,7 @@ Personalidad: sos alguien de aquí que conoce el territorio y acompaña al viaje
 Información interna BAQUEANO recuperada primero: ${JSON.stringify(internalContext).slice(0, 8000)}.
 La información interna válida prevalece. Usa fuentes externas solamente para completar vacíos o datos operativos/actuales y cita su procedencia.
 Consulta y prioriza mediante URL Context: ${TRUSTED_SOURCE_URLS.join(" ")}.
-No inventes precios, teléfonos, horarios, disponibilidad ni hechos. Si el usuario pregunta algo ajeno al turismo de Nicaragua, explicá amablemente tu especialidad y ofrecé una alternativa turística relacionada.
+No inventes precios, teléfonos, horarios, disponibilidad ni hechos. Si hablás de políticas públicas o planes nacionales, distinguí siempre HECHO OFICIAL (con su fuente) de CONTRIBUCIÓN DE BAQUEANO; nunca digas que el Gobierno, INTUR, MARENA, MINED, INATEC o CNU reconocen oficialmente a BAQUEANO ni que BAQUEANO forma parte de un plan institucional. Si el usuario pregunta algo ajeno al turismo de Nicaragua, explicá amablemente tu especialidad y ofrecé una alternativa turística relacionada.
 No construyas un itinerario salvo que el usuario lo solicite. Para emergencias recomendá confirmar con autoridades oficiales.
 Historial reciente:\n${recentHistory || "Sin historial previo."}\nPregunta actual: ${prompt}`;
   const controller = new AbortController();
@@ -432,6 +490,24 @@ Deno.serve(async (req: Request) => {
     const internalSufficient = internalKnowledge.length > 0 && new BaqueanoKnowledgeService(supabase!).isSufficient(internalKnowledge);
 
     const intent = conversationIntent(prompt);
+    if (intent === "impact") {
+      const impact = await buildImpactAnswer(supabase, currentLanguage);
+      await logExchange(supabase, {
+        sessionKey, language: currentLanguage, channel, provider: "baqueano-impact",
+        userContent: prompt, assistantContent: impact.message, latencyMs: Date.now() - startedAt,
+        sources: [
+          {source_type: "internal_database", entity_type: "public_impact_summary", entity_id: null, title: "Indicadores BAQUEANO (Supabase)"},
+          ...impact.sources.map((src) => ({source_type: "official_url", title: src.label.slice(0, 200), url: src.url})),
+        ],
+      });
+      return new Response(JSON.stringify({
+        success: true, ok: true, type: "conversation", intent, message: impact.message,
+        provider: "baqueano-impact", groundingStatus: impact.status,
+        sources: impact.sources.map((src) => ({label: src.label, url: src.url, type: "official"})),
+        sourcePolicy: {internalFirst: true, internalSufficient: impact.status === "impact_grounded", externalUsed: false, officialVsContribution: true},
+        countryCode, currentLanguage, actions: []
+      }, null, 2), {status: 200, headers: CORS_HEADERS});
+    }
     if (intent !== "planning") {
       const localizedMessages: Record<string, Record<string, string>> = {
         es: {greeting: "¡Hola! Soy Baqüi. ¿Qué querés descubrir hoy?", farewell: "¡Que te vaya bien! Aquí te guardo lo que hablamos de tu viaje.", thanks: "¡Con gusto! Si querés seguimos armando el viaje.", help: "Te busco lugares, te armo rutas y, si algo no lo tenemos, lo consulto en fuentes confiables y te digo de dónde salió."},

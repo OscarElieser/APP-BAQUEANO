@@ -47,6 +47,7 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/pages/nosotros-exact.css?v=20260927-2">
+  <link rel="stylesheet" href="css/pages/impacto.css?v=20261005-impact-1">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
@@ -436,6 +437,55 @@
     </div>
   </section>
 
+  <!-- ============================================================
+       NUESTRO IMPACTO (BAQUEANO IMPACTO)
+       🎯 POR QUÉ: mostrar con evidencia cómo BAQUEANO contribuye al turismo,
+          la economía local y la identidad de Nicaragua, sin propaganda ni
+          reconocimientos que no existen.
+       ⚙️ CÓMO: cada afirmación enlaza a la función real que la demuestra; las
+          cifras salen SOLO de Supabase (public_impact_summary) y la matriz de
+          alineación de national_alignment, con fuente y fecha. Sin respuesta
+          del servidor se muestra "Sin datos suficientes" (js/impact-public.js).
+       📦 QUÉ: 10 capacidades con evidencia, indicadores reales y alineación.
+       ============================================================ -->
+  <section class="bq-impact" id="impacto" aria-labelledby="bqImpactTitle">
+    <div class="bq-impact-head">
+      <span class="bq-impact-kicker" data-i18n="impact.public.kicker">Nuestro impacto</span>
+      <h2 id="bqImpactTitle" data-i18n="impact.public.title">Lo que BAQUEANO aporta, con evidencia</h2>
+      <p data-i18n="impact.public.lead">Cada capacidad enlaza a la función que la demuestra. Las cifras se calculan en nuestra base de datos en el momento en que abrís esta página.</p>
+    </div>
+
+    <ul class="bq-impact-how" role="list">
+      <li><a href="destinos.html#destinosVerificados"><i class="fa-solid fa-people-roof" aria-hidden="true"></i><span data-i18n="impact.public.how.communities">Visibiliza comunidades y turismo rural y comunitario</span></a></li>
+      <li><a href="mi-negocio.html"><i class="fa-solid fa-store" aria-hidden="true"></i><span data-i18n="impact.public.how.business">Digitaliza negocios locales sin comisión de intermediación</span></a></li>
+      <li><a href="mapa.html"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i><span data-i18n="impact.public.how.discover">Facilita descubrir los 17 departamentos y regiones en un mapa</span></a></li>
+      <li><a href="musica.html"><i class="fa-solid fa-music" aria-hidden="true"></i><span data-i18n="impact.public.how.culture">Promueve música, gastronomía y tradiciones</span></a></li>
+      <li><a href="historia.html"><i class="fa-solid fa-landmark" aria-hidden="true"></i><span data-i18n="impact.public.how.heritage">Documenta historia y patrimonio</span></a></li>
+      <li><a href="destinos.html"><i class="fa-solid fa-tractor" aria-hidden="true"></i><span data-i18n="impact.public.how.rural">Facilita encontrar fincas, cooperativas y experiencias campesinas</span></a></li>
+      <li><a href="nosotros.html?lang=en#impacto" hreflang="en"><i class="fa-solid fa-language" aria-hidden="true"></i><span data-i18n="impact.public.how.access">Mejora el acceso a información en 6 idiomas</span></a></li>
+      <li><a href="destinos.html#destinosVerificados"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span data-i18n="impact.public.how.connect">Conecta directamente al turista con la oferta local</span></a></li>
+      <li><a href="ambiental.html"><i class="fa-solid fa-leaf" aria-hidden="true"></i><span data-i18n="impact.public.how.sustainable">Promueve experiencias sostenibles con prácticas reportadas o verificadas</span></a></li>
+      <li><a href="baqueano-ia.html"><i class="fa-solid fa-route" aria-hidden="true"></i><span data-i18n="impact.public.how.tech">Usa tecnología (BAQUI) para planificar viajes</span></a></li>
+    </ul>
+
+    <h3 class="bq-impact-sub" data-i18n="impact.public.indicatorsTitle">Indicadores reales</h3>
+    <div class="bq-impact-grid" id="bqImpactGrid" aria-live="polite" aria-busy="true">
+      <article class="bq-impact-stat"><strong data-impact-key="departamentos_con_contenido">—</strong><span data-i18n="impact.ind.departamentos_con_contenido">Departamentos y regiones con contenido</span></article>
+      <article class="bq-impact-stat"><strong data-impact-key="municipios_con_contenido">—</strong><span data-i18n="impact.ind.municipios_con_contenido">Municipios con contenido</span></article>
+      <article class="bq-impact-stat"><strong data-impact-key="cobertura_territorial_baqueano" data-impact-unit="%">—</strong><span data-i18n="impact.ind.cobertura_territorial_baqueano">Cobertura territorial BAQUEANO</span></article>
+      <article class="bq-impact-stat"><strong data-impact-key="destinos_publicados">—</strong><span data-i18n="impact.ind.destinos_publicados">Destinos publicados</span></article>
+      <article class="bq-impact-stat"><strong data-impact-key="negocios_locales">—</strong><span data-i18n="impact.ind.negocios_locales">Negocios locales</span></article>
+      <article class="bq-impact-stat"><strong data-impact-key="experiencias_comunitarias">—</strong><span data-i18n="impact.ind.experiencias_comunitarias">Experiencias comunitarias verificadas</span></article>
+      <article class="bq-impact-stat"><strong data-impact-key="itinerarios_generados">—</strong><span data-i18n="impact.ind.itinerarios_generados">Itinerarios generados</span></article>
+      <article class="bq-impact-stat"><strong data-impact-key="practicas_sostenibles_verificadas">—</strong><span data-i18n="impact.ind.practicas_sostenibles_verificadas">Prácticas sostenibles verificadas</span></article>
+    </div>
+    <p class="bq-impact-note" id="bqImpactNote" data-i18n="impact.public.formula">Cobertura territorial = municipios con contenido ÷ municipios catalogados × 100. Fuente: base de datos BAQUEANO (Supabase).</p>
+
+    <h3 class="bq-impact-sub" data-i18n="impact.public.alignTitle">Contribución a prioridades nacionales</h3>
+    <p class="bq-impact-disclaimer" data-i18n="impact.public.disclaimer">BAQUEANO presenta capacidades funcionales compatibles con estas prioridades. Es una contribución o alineación de BAQUEANO, no un reconocimiento oficial ni parte de un plan institucional.</p>
+    <div class="bq-impact-align" id="bqImpactAlign" aria-live="polite"></div>
+  </section>
+
   <!-- MANIFIESTO BAQUEANO -->
   <section class="nos-manifesto-section">
     <div class="nos-manifesto-card">
@@ -727,6 +777,7 @@
   </script>
 <script src="js/navigation.js?v=20261004-menu-2"></script>
 <script src="js/global-injector.js"></script>
+<script src="js/impact-public.js?v=20261005-impact-1" defer></script>
 </body>
 </html>
 

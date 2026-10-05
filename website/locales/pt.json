@@ -4938,7 +4938,11 @@
     "n867022WNicaragua": "12.5061° N, 86.7022° O (Nicarágua)",
     "contacto": "Contato",
     "seguridad": "Segurança",
-    "pagos": "Pagamentos"
+    "pagos": "Pagamentos",
+    "hoteles": "Hotéis",
+    "hostales": "Hostels",
+    "resorts": "Resorts",
+    "otrosHospedajes": "Outras hospedagens"
   },
   "ops": {
     "impact": {
@@ -4982,6 +4986,14 @@
       "pendingVerifications": "Verificações pendentes",
       "signIn": "Entre para ver os indicadores.",
       "error": "Não foi possível calcular os indicadores: {error}"
+    },
+    "strategic": {
+      "title": "Impacto e alinhamento estratégico",
+      "disclaimer": "Contribuição ou alinhamento do BAQUEANO com prioridades nacionais. Não é um reconhecimento oficial: não há convênio nem resolução institucional registrada.",
+      "unavailable": "Dados insuficientes: o módulo de impacto ainda não está disponível no servidor (migração pendente).",
+      "colTerritory": "Território",
+      "coverageTable": "Cobertura por departamento e região",
+      "matrix": "Matriz de alinhamento nacional"
     }
   },
   "consent": {
@@ -5051,11 +5063,133 @@
       "website": "Site oficial",
       "map": "Mapa da iniciativa",
       "sources": "Fontes",
-      "zone": "Município ou zona"
+      "zone": "Município ou zona",
+      "checkNotice": "Verificado com fonte oficial",
+      "seeSheet": "Ver ficha"
     },
     "access": {
       "viewArea": "Ver a área no mapa",
       "note": "A localização mostrada corresponde à área geral. O ponto de acesso está por confirmar."
+    }
+  },
+  "impact": {
+    "panel": {
+      "tourism": "Turismo",
+      "local_economy": "Economia local",
+      "community": "Comunidade",
+      "culture": "Cultura",
+      "environment": "Meio ambiente",
+      "education": "Educação",
+      "technology": "Tecnologia",
+      "inclusion": "Inclusão",
+      "safety": "Segurança",
+      "territory": "Cobertura territorial"
+    },
+    "alignType": {
+      "direct": "Contribuição direta",
+      "supporting": "Contribuição de apoio",
+      "potential": "Capacidade potencial"
+    },
+    "needsReview": "Requer revisão",
+    "component": "Componente BAQUEANO",
+    "evidence": "Evidência",
+    "verifiedRange": "Verificado em {verified} · vence em {expiry}",
+    "noData": "Dados insuficientes",
+    "framework": {
+      "pnlcp_dh_2022_2026": "Plano Nacional de Luta contra a Pobreza e para o Desenvolvimento Humano 2022-2026",
+      "intur_2026": "INTUR — eixos de trabalho 2026",
+      "ley_turismo_rural": "Turismo Rural e Comunitário (INTUR)",
+      "ene_2024_2026": "Estratégia Nacional de Educação 2024-2026",
+      "marena_sinap": "MARENA — Sistema Nacional de Áreas Protegidas"
+    },
+    "public": {
+      "kicker": "Nosso impacto",
+      "title": "O que o BAQUEANO oferece, com evidências",
+      "lead": "Cada capacidade leva à função que a demonstra. Os números são calculados em nosso banco de dados quando você abre esta página.",
+      "how": {
+        "communities": "Dá visibilidade a comunidades e ao turismo rural e comunitário",
+        "business": "Digitaliza negócios locais sem comissão de intermediação",
+        "discover": "Facilita descobrir os 17 departamentos e regiões em um mapa",
+        "culture": "Promove música, gastronomia e tradições",
+        "heritage": "Documenta história e patrimônio",
+        "rural": "Ajuda a encontrar fazendas, cooperativas e experiências camponesas",
+        "access": "Melhora o acesso à informação em 6 idiomas",
+        "connect": "Conecta o turista diretamente com a oferta local",
+        "sustainable": "Promove experiências sustentáveis com práticas declaradas ou verificadas",
+        "tech": "Usa tecnologia (BAQUI) para planejar viagens"
+      },
+      "indicatorsTitle": "Indicadores reais",
+      "formula": "Cobertura territorial = municípios com conteúdo ÷ municípios catalogados × 100. Fonte: banco de dados BAQUEANO (Supabase).",
+      "updated": "Calculado: {time}.",
+      "alignTitle": "Contribuição às prioridades nacionais",
+      "disclaimer": "O BAQUEANO apresenta capacidades funcionais compatíveis com essas prioridades. É uma contribuição ou alinhamento do BAQUEANO, não um reconhecimento oficial nem parte de um plano institucional.",
+      "alignEmpty": "A matriz de alinhamento com fontes oficiais ainda não foi publicada.",
+      "officialSource": "Fonte oficial",
+      "verifiedOn": "Consultada em {date}"
+    },
+    "ind": {
+      "destinos_publicados": "Destinos publicados",
+      "destinos_verificados": "Destinos verificados",
+      "rutas_creadas": "Rotas criadas",
+      "experiencias_publicadas": "Experiências publicadas",
+      "servicios_turisticos": "Serviços turísticos publicados",
+      "visitas_generadas": "Visitas a fichas geradas",
+      "negocios_locales": "Negócios locais",
+      "negocios_verificados": "Negócios verificados",
+      "emprendimientos_familiares": "Empreendimentos familiares",
+      "mujeres_emprendedoras": "Empreendimentos liderados por mulheres",
+      "jovenes_emprendedores": "Empreendimentos de jovens",
+      "cooperativas": "Cooperativas",
+      "negocios_rurales": "Negócios rurais",
+      "protagonistas_sin_categoria": "Negócios sem categoria de protagonista",
+      "comunidades_publicadas": "Comunidades publicadas",
+      "experiencias_comunitarias_verificadas": "Experiências comunitárias verificadas",
+      "experiencias_comunitarias_pendientes": "Experiências comunitárias aguardando verificação",
+      "experiencias_comunitarias": "Experiências comunitárias verificadas",
+      "patrimonio": "Patrimônio documentado",
+      "gastronomia": "Gastronomia",
+      "musica": "Música",
+      "artesania": "Artesanato",
+      "festividades": "Festividades",
+      "personajes_historicos": "Personagens históricos",
+      "leyendas": "Lendas",
+      "cultura": "Registros culturais",
+      "practicas_reportadas": "Práticas sustentáveis declaradas",
+      "practicas_verificadas": "Práticas verificadas pelo BAQUEANO",
+      "practicas_sostenibles_verificadas": "Práticas sustentáveis verificadas",
+      "oferta_con_criterio_responsable": "Ofertas com critério responsável",
+      "lineamientos_vinculados": "Diretrizes educacionais vinculadas",
+      "evidencias_sprint": "Evidências de aprendizagem (BAQUEANO LAB)",
+      "usuarios": "Usuários",
+      "consultas_baqui": "Consultas ao BAQUI",
+      "sesiones_baqui": "Sessões com o BAQUI",
+      "itinerarios_generados": "Roteiros gerados",
+      "destinos_consultados": "Fichas de lugares consultadas",
+      "negocios_visualizados": "Negócios visualizados",
+      "aperturas_mapa": "Aberturas do mapa",
+      "clics_como_llegar": "Cliques em «Como chegar»",
+      "clics_whatsapp": "Cliques no WhatsApp",
+      "clics_llamar": "Cliques para ligar",
+      "reservas_iniciadas": "Reservas iniciadas",
+      "reservas_completadas": "Reservas confirmadas ou concluídas",
+      "qr_generados": "Códigos QR gerados",
+      "atributos_accesibilidad_verificados": "Atributos de acessibilidade verificados",
+      "entidades_con_accesibilidad_verificada": "Lugares com acessibilidade verificada",
+      "accesibilidad_verificada": "Acessibilidade verificada",
+      "idiomas_interfaz": "Idiomas da interface",
+      "contactos_emergencia": "Contatos de emergência",
+      "contactos_emergencia_verificados": "Contatos de emergência verificados",
+      "contactos_con_ubicacion": "Contatos de emergência com localização",
+      "alertas_sos": "Alertas SOS recebidos",
+      "departamentos_catalogados": "Departamentos e regiões catalogados",
+      "departamentos_con_contenido": "Departamentos e regiões com conteúdo",
+      "departamentos_cubiertos": "Departamentos cobertos",
+      "municipios_catalogados": "Municípios catalogados",
+      "municipios_con_contenido": "Municípios com conteúdo",
+      "municipios_cubiertos": "Municípios cobertos",
+      "cobertura_territorial_baqueano": "Cobertura territorial BAQUEANO",
+      "cobertura": "Cobertura territorial",
+      "contenido_costa_caribe": "Conteúdo na Costa Caribe (RACCN e RACCS)"
     }
   }
 }

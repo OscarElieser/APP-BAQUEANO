@@ -2051,3 +2051,22 @@ tr[data-sos-status="open"] { box-shadow: inset 3px 0 0 #dc2626; }
 .ops-impact-health-list { list-style: none; margin: 0 0 0.5rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.4rem 1rem; }
 .ops-impact-health-list li { display: flex; justify-content: space-between; gap: 0.75rem; font-size: 0.82rem; color: var(--ops-text-secondary, #cbd5e1); border-bottom: 1px dashed rgba(255, 255, 255, 0.06); padding: 0.25rem 0; }
 .ops-impact-health-list li.is-warn strong { color: #F65E01; }
+/* BAQUEANO IMPACTO — Impacto y alineación estratégica (vista 26). 0 = sin registros (naranja), nunca relleno simulado. */
+.ops-strategic { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--ops-border-subtle); }
+.ops-strategic-panel { border-left: 3px solid #4A7A5A; }
+.ops-strategic-panel .ops-impact-label { font-weight: 700; color: #fff; font-size: 0.85rem; }
+.ops-strategic-panel .ops-impact-health-list { grid-template-columns: 1fr; }
+.ops-strategic-panel .ops-impact-health-list li.is-warn strong { color: #F4E6C1; }
+.ops-strategic-table-wrap { overflow-x: auto; border: 1px solid var(--ops-border-subtle); border-radius: 12px; }
+.ops-strategic-table-wrap:focus-visible { outline: 2px solid #F65E01; outline-offset: 2px; }
+.ops-strategic-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; color: var(--ops-text-secondary, #cbd5e1); }
+.ops-strategic-table th, .ops-strategic-table td { padding: 0.45rem 0.7rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+.ops-strategic-table thead th { color: #fff; background: var(--ops-surface-2); }
+.ops-strategic-table tr.is-empty th, .ops-strategic-table tr.is-empty td { color: rgba(244, 230, 193, 0.7); }
+.ops-strategic-align { background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-left: 3px solid #165D6F; border-radius: 12px; padding: 0.85rem 1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.ops-strategic-align.is-warn { border-left-color: #F65E01; }
+.ops-strategic-align strong { color: #fff; font-size: 0.88rem; }
+.ops-strategic-align p { margin: 0; font-size: 0.8rem; color: var(--ops-text-secondary, #cbd5e1); }
+.ops-strategic-badge { align-self: flex-start; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.55rem; border-radius: 999px; background: rgba(22, 93, 111, 0.35); color: #F4E6C1; }
+.ops-strategic-badge.is-warn { background: rgba(246, 94, 1, 0.25); color: #fff; }
+a.ops-impact-source { color: #F4E6C1; text-decoration: underline; }

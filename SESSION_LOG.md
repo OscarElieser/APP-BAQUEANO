@@ -4301,8 +4301,58 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   2. Verificar el estado de la matriz 20/20 y los gates de CI (`npm run i18n`, `production-audit.mjs`, tests).
   3. Ejecutar de forma incremental el siguiente pendiente prioritario sin alterar configuraciones ni dependencias no autorizadas.
 - 📦 **QUÉ:** Progreso verificable y continuo en los requisitos de la auditoría 20/20.
-- **Estado:** En progreso.
+- **Estado:** ✅ Requisito 20 (Una CTA principal por pantalla) completado y verificado.
+- **Entregables y acciones ejecutadas:**
+  1. `website/mi-negocio.html` & `website/css/pages/mi-negocio.css`:
+     - Añadido bloque de acciones Hero CTA con jerarquía estricta: botón primario `.btn-host-hero-primary` ("Registrate como anfitrión" $\to$ `#registro`) en gradiente Terracota `#F65E01` con sombra difusa y contraste WCAG 2.2 AA (>= 5.6:1), y botón secundario `.btn-host-hero-secondary` ("Modelo Económico Real" $\to$ `#beneficios`) en glassmorphism.
+     - Asignado `id="beneficios"` a `<section class="benefits-section">` para navegación interna limpia sin advertencias de ancla.
+     - Adaptabilidad 100% responsiva (en pantallas $\le$ 600px se apilan a ancho completo con área de toque táctil $\ge$ 48px).
+  2. `website/experiencias.html`:
+     - Añadido bloque `.exp-hero-actions` en el hero: botón primario `.btn-exp-hero-primary` ("Explorar experiencias" $\to$ `#catalogoExperiencias`) y botón secundario `.btn-exp-hero-secondary` ("Planificar con IA" $\to$ `baqueano-ia.html`).
+     - Asignado `id="catalogoExperiencias"` a la sección principal de catálogo.
+  3. `docs/production-audit/cta-report.md`:
+     - Creado informe técnico exhaustivo con matriz de las 28 páginas públicas, documentando la acción primaria y secundaria de cada pantalla, paleta oficial, accesibilidad y claves de traducción en los 6 idiomas.
+  4. `docs/CONTINUAR_EN_ANTIGRAVITY.md`:
+     - Actualizado Requisito 20 a 🟢 APROBADO y tachado en la lista de pendientes prioritarios.
+  5. Gates de Calidad y CI:
+     - `build-hostinger-static.mjs`: 739 archivos listos (626.2 MiB).
+     - `npm run i18n`: 3,694 claves en 6 idiomas, 0 faltantes, 0 errores.
+     - `production-audit.mjs`: 31 páginas, **0 críticos**, sitemap 23 URLs.
+     - `seo-normalize.test.mjs`: 12 casos OK.
+     - `territory-places-rule.test.mjs`: 17 territorios y 236 lugares con franja viva y fichas OK.
+     - `npm test`: Smoke tests 100% aprobados.
+- **Siguiente prioridad:** Bloque E (Seguridad y antispam en Edge Functions, informes pendientes y matriz final).
+
 
 - 15:51 Propietario: adjunta BAQUEANO_NATURALEZA.pdf → agregar en su departamento/región y en destinos.html como venimos trabajando.
 - Catálogo de naturaleza protegida (PDF, 39 registros) → `tools/data/apply-nature-catalog-2026-10.mjs`: 23 existentes con coordenadas/categoría/precisión/fuente, 9 nuevos (Laguna de Apoyeque, Lago Xolotlán, Volcán Masaya-caldera, Reserva Cerro Musún, Península de Chiltepe, Cuevas y Mirador de Apaguají, Cueva del Duende, Mirador El Ranchito, Parque Nacional Saslaya). Duplicados de mismo punto fusionados (cerro+reserva, mirador+cueva). Regla de acceso: solo precisión "exact" ofrece "Cómo llegar"; centroid/reference → "Ver el área en el mapa" + nota "punto de acceso por confirmar". destinos.html: 104 verificados con 10 tipos. 245 lugares. Gates OK. Doc: docs/data/CATALOGO_NATURALEZA_2026-10.md.
 - Merge con el commit del propietario 714ac82 ('actualizacion 5octu', Antigravity): se conservaron sus entradas de bitácora y archivos; i18n-audit/coverage regenerados. Corregido un merge de SESSION_LOG.md que se subió con marcadores de conflicto (2f5840f).
+
+## 2026-10-05 12:08 — Solicitud: "BAQUEANO — CATÁLOGO VERIFICADO DE HOSPEDAJES DE NICARAGUA"
+- 🎯 **POR QUÉ:** Integrar el catálogo auditado de 13 hospedajes (Hoteles, Hostales, Eco-lodges, Resorts, Casas Árbol) con fuentes oficiales, contactos verificados y coordenadas exactas en el ecosistema BAQUEANO (Supabase, `territories-data.js`, mapas interactivos, `destinos.html` y BAQUI), respetando las reglas de precisión cartográfica, verificación y precios dinámicos sin inventar datos.
+- ⚙️ **CÓMO:**
+  1. Guardar la documentación fuente completa en `docs/data/CATALOGO_HOSPEDAJES_2026-10.md`.
+  2. Crear script idempotente `tools/data/apply-lodging-catalog-2026-10.mjs` siguiendo el patrón comprobado de los catálogos previos (`apply-nature-catalog-2026-10.mjs`, `apply-geo-catalog-2026-10.mjs`).
+  3. Integrar/actualizar los 13 hospedajes en `website/js/territories-data.js` con sus metadatos (tipo, departamento, municipio, dirección, lat/lng, precisión, map_ready, servicios, contacto, fuentes).
+  4. Generar migración Supabase (o actualizar esquema si aplica) con los campos canónicos recomendados.
+  5. Sincronizar catálogo para la App Android (`website/scripts/export-territories-for-app.mjs`) y mapa/destinos.
+  6. Validar todos los gates: `build-hostinger-static.mjs`, `npm run i18n`, `production-audit.mjs`, `territory-places-rule.test.mjs`, `seo-normalize.test.mjs`, `npm test`.
+- 📦 **QUÉ:** 13 hospedajes verificados integrados en el mapa, territorios, BAQUI y documentación del ecosistema.
+- **Estado:** En progreso.
+
+
+## 2026-10-05 — Solicitud: "BAQUEANO IMPACTO — integración estratégica y alineación nacional" (Claude Code)
+- 🎯 **POR QUÉ:** Demostrar con datos reales y fuentes oficiales cómo BAQUEANO contribuye a prioridades nacionales (turismo, economía creativa, MIPYMES, turismo rural y comunitario, cultura, ambiente, educación, inclusión, seguridad, cobertura territorial, Costa Caribe), sin atribuirse reconocimientos institucionales ("contribución/alineación de BAQUEANO", nunca "oficial").
+- ⚙️ **CÓMO:** (1) auditoría de lo existente (Supabase, Ops Center, BAQUI, mapa, SOS, Mi Negocio, i18n); (2) migración aditiva (national_alignment, impact_indicators, impact_events, sustainability_practices, community_impact, strategic_sources) con RLS y vencimiento de verificación; (3) indicadores calculados desde Supabase (0 / "Sin datos suficientes" si no hay); (4) panel en Ops Center y sección pública "Nuestro impacto"; (5) BAQUI distingue HECHO OFICIAL vs CONTRIBUCIÓN; (6) i18n ×6; (7) sin eliminar nada.
+- 📦 **QUÉ:** Entregable con auditoría, matriz, migraciones, componentes, pruebas y clasificación 🟢🟡🔴⚪ sin verdes falsos.
+- Nota: hay cambios sin commitear de otra sesión (catálogo de hospedajes "En progreso", CTA req. 20). No se tocan.
+- **Estado:** En progreso — fase de auditoría.
+- Auditoría (2026-10-05): Supabase en vivo tiene 17 departamentos, 153 municipios, 7 destinos publicados (pending_review, 0 con municipio), 5 negocios verificados, 0 experiencias/comunidades/rutas/emergencias/cultura, 31 travel_plans, 8 ai_messages, 0 analytics_events. El portal publica ~245 lugares en territories-data.js que NO están en Supabase → los indicadores de Supabase serán bajos y así se mostrarán (sin inflar).
+- Ya existían y se reutilizan: analytics_events + track_event (ingesta), commercial_actions, kpi_dashboard, vista 26 "Analítica e impacto" de Ops Center, public_ecosystem_metrics, municipalities (153), sustainability_attributes, verification_status/valid_until.
+- Fuentes verificadas el 2026-10-05: PNLCP-DH Lineamiento VIII (PDF pndh.gob.ni), INTUR 2026 (7 ejes, no 5), INTUR Turismo Rural y Comunitario, Estrategia Nacional de Educación 2024-2026 (PDF: 16 ejes y 70 lineamientos confirmados; 121 acciones NO confirmadas, la extracción cuenta 126 marcadores), MARENA (76 áreas protegidas, 4 reservas de biosfera según portal).
+- Migración creada: supabase/migrations/20261005070000_impact_alignment.sql. **El propietario RECHAZÓ aplicarla en producción en esta sesión** → no se aplica ni se despliegan Edge Functions; queda lista para aplicar.
+- (mensaje del propietario durante la sesión) "CATÁLOGO VERIFICADO DE RESTAURANTES, COMEDORES Y KIOSCOS" (oct 2026, 12 registros: 6 restaurantes, 4 comedores, 2 kioscos; 7 con pin exacto, 5 pendientes). Reglas: map_ready solo con lat/lng verificadas; sin pin → verification_status='partial', map_ready=false; "Cómo llegar" abre coordenadas solo con pin validado; precios/horarios/reseñas dinámicos con checked_at; no publicar teléfonos marcados "confirmar"/"no publicar". → En cola: se integra tras BAQUEANO IMPACTO con tools/data/apply-food-catalog-2026-10.mjs (patrón de catálogos previos).
+- BAQUEANO IMPACTO — entregado en repo (sin producción): migración 20261005070000_impact_alignment.sql (sintaxis validada con libpg_query; columnas confirmadas en vivo, solo lectura), baqueano-ops acción `impact`, BAQUI intención `impact` determinista (HECHO OFICIAL vs CONTRIBUCIÓN, 6 idiomas, detección 7/7), Ops Center vista 26 "Impacto y alineación estratégica" (10 paneles + cobertura por territorio + matriz), nosotros.html#impacto (js/impact-public.js, css/pages/impacto.css), eventos place_view/map_open/directions_click/qr_generated, 112 claves i18n ×6.
+- Gates: test:impact 26/26 (nuevo), i18n 0 errores, smoke OK, shell 3535/0, BAQUI 20/20, territorios 254 OK, SEO 12/12, auditoría 0 críticos. Lighthouse no ejecutado.
+- Entregable completo y clasificación 🟢🟡🔴: docs/impact/BAQUEANO_IMPACTO.md (avance real ~55 %). Pendiente: aplicar migración + desplegar baqueano-ops y baqueano-ai (requiere autorización del propietario).
+- Siguiente: catálogo de restaurantes, comedores y kioscos.

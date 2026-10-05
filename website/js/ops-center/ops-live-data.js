@@ -922,6 +922,105 @@
     return wrap;
   }
 
+  // --------------------------------------------------------------------------
+  // IMPACTO Y ALINEACIÓN ESTRATÉGICA (BAQUEANO IMPACTO, vista 26)
+  // 🎯 Demostrar con datos reales cómo BAQUEANO contribuye a prioridades
+  //    nacionales, sin presentarlo como reconocimiento oficial.
+  // ⚙️ `baqueano-ops` → action `impact` → strategic_impact_report() +
+  //    national_alignment + strategic_sources. 10 paneles; 0 = sin registros;
+  //    sin respuesta del servidor → "Sin datos suficientes". Fuentes vencidas se
+  //    marcan "Requiere revisión". Textos con claves impact.* / ops.strategic.*.
+  // 📦 strategicView(data) devuelve la sección; renderImpact la agrega debajo
+  //    de los KPIs SMART existentes (no los reemplaza).
+  // --------------------------------------------------------------------------
+  const STRATEGIC_PANELS = ['tourism', 'local_economy', 'community', 'culture', 'environment', 'education', 'technology', 'inclusion', 'safety', 'territory'];
+  const PANEL_FALLBACK = {
+    tourism: 'Turismo', local_economy: 'Economía local', community: 'Comunidad', culture: 'Cultura', environment: 'Ambiente',
+    education: 'Educación', technology: 'Tecnología', inclusion: 'Inclusión', safety: 'Seguridad', territory: 'Cobertura territorial'
+  };
+  const humanize = (key) => String(key).replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase());
+  const ALIGN_TYPE_FALLBACK = { direct: 'Contribución directa', supporting: 'Contribución de apoyo', potential: 'Capacidad potencial' };
+
+  function strategicView(data) {
+    const wrap = el('section', 'ops-impact ops-strategic');
+    wrap.id = 'opsStrategicImpact';
+    wrap.setAttribute('aria-label', t('ops.strategic.title', 'Impacto y alineación estratégica'));
+    const head = el('div', 'ops-health-head');
+    head.append(el('h3', 'ops-health-title', t('ops.strategic.title', 'Impacto y alineación estratégica')));
+    if (data && data.report) head.append(el('span', 'ops-health-meta', t('ops.impact.generated', 'Calculado en Supabase · {time}', { time: new Date(data.report.generated_at).toLocaleString('es-NI') })));
+    wrap.append(head);
+    wrap.append(el('p', 'ops-impact-note', t('ops.strategic.disclaimer', 'Contribución o alineación de BAQUEANO con prioridades nacionales. No es un reconocimiento oficial: no existe convenio ni resolución institucional registrada.')));
+    if (!data || !data.report) {
+      wrap.append(el('p', 'ops-impact-note is-empty', t('ops.strategic.unavailable', 'Sin datos suficientes: el módulo de impacto aún no está disponible en el servidor (migración pendiente de aplicar).')));
+      return wrap;
+    }
+    const panels = data.report.panels || {};
+    const grid = el('div', 'ops-impact-grid');
+    STRATEGIC_PANELS.forEach((panel) => {
+      const values = panels[panel] || {};
+      const card = el('article', 'ops-impact-card ops-strategic-panel');
+      card.append(el('span', 'ops-impact-label', t(`impact.panel.${panel}`, PANEL_FALLBACK[panel])));
+      const list = el('ul', 'ops-impact-health-list');
+      Object.keys(values).filter((k) => k !== 'por_departamento').forEach((k) => {
+        const raw = values[k];
+        const li = el('li', raw === 0 ? 'is-warn' : '');
+        const shown = raw == null ? t('ops.impact.noData', 'Sin datos suficientes') : `${Number(raw).toLocaleString('es-NI')}${k === 'cobertura_territorial_baqueano' ? ' %' : ''}`;
+        li.append(el('span', '', t(`impact.ind.${k}`, humanize(k))), el('strong', '', shown));
+        list.append(li);
+      });
+      card.append(list);
+      grid.append(card);
+    });
+    wrap.append(grid);
+    const formula = (data.report.formula || {}).cobertura_territorial_baqueano;
+    if (formula) wrap.append(el('small', 'ops-impact-source', `${t('impact.ind.cobertura_territorial_baqueano', 'Cobertura territorial')}: ${formula}`));
+
+    // Cobertura por departamento/región (17 territorios)
+    const deps = ((panels.territory || {}).por_departamento) || [];
+    if (deps.length) {
+      const table = el('table', 'ops-strategic-table');
+      const thead = el('thead');
+      const hr = el('tr');
+      [['ops.strategic.colTerritory', 'Territorio'], ['impact.ind.destinos_publicados', 'Destinos'], ['impact.ind.negocios_locales', 'Negocios'], ['impact.ind.experiencias_publicadas', 'Experiencias'], ['impact.ind.municipios_catalogados', 'Municipios']]
+        .forEach(([key, label]) => { const th = el('th', '', t(key, label)); th.scope = 'col'; hr.append(th); });
+      thead.append(hr);
+      const tbody = el('tbody');
+      deps.forEach((d) => {
+        const tr = el('tr', (Number(d.destinos) + Number(d.negocios) + Number(d.experiencias)) === 0 ? 'is-empty' : '');
+        const th = el('th', '', d.name || d.department_id); th.scope = 'row'; th.setAttribute('translate', 'no');
+        tr.append(th, el('td', '', String(d.destinos)), el('td', '', String(d.negocios)), el('td', '', String(d.experiencias)), el('td', '', String(d.municipios)));
+        tbody.append(tr);
+      });
+      table.append(thead, tbody);
+      const box = el('div', 'ops-strategic-table-wrap');
+      box.setAttribute('role', 'region'); box.setAttribute('tabindex', '0');
+      box.setAttribute('aria-label', t('ops.strategic.coverageTable', 'Cobertura por departamento y región'));
+      box.append(table);
+      wrap.append(el('h4', 'ops-impact-subtitle', t('ops.strategic.coverageTable', 'Cobertura por departamento y región')), box);
+    }
+
+    // Matriz de alineación nacional
+    const rows = data.alignment || [];
+    wrap.append(el('h4', 'ops-impact-subtitle', t('ops.strategic.matrix', 'Matriz de alineación nacional')));
+    if (!rows.length) wrap.append(el('p', 'ops-impact-note is-empty', t('ops.impact.noData', 'Sin datos suficientes')));
+    const today = new Date().toISOString().slice(0, 10);
+    rows.forEach((row) => {
+      const expired = row.status !== 'active' || String(row.verification_expiry) < today;
+      const item = el('article', `ops-strategic-align ${expired ? 'is-warn' : ''}`);
+      item.append(el('strong', '', `${row.axis_code} · ${row.axis_name}`));
+      item.append(el('span', 'ops-strategic-badge', t(`impact.alignType.${row.alignment_type}`, ALIGN_TYPE_FALLBACK[row.alignment_type] || row.alignment_type)));
+      if (expired) item.append(el('span', 'ops-strategic-badge is-warn', t('impact.needsReview', 'Requiere revisión')));
+      item.append(el('p', '', row.description));
+      item.append(el('p', 'ops-impact-detail', `${t('impact.component', 'Componente BAQUEANO')}: ${row.baqueano_component} · ${t('impact.evidence', 'Evidencia')}: ${row.evidence}`));
+      const src = el('a', 'ops-impact-source', `${t('ops.impact.source', 'Fuente')}: ${row.source_name}`);
+      src.href = row.source_url; src.target = '_blank'; src.rel = 'noopener noreferrer';
+      item.append(src);
+      item.append(el('small', 'ops-impact-source', t('impact.verifiedRange', 'Verificado {verified} · vence {expiry}', { verified: row.verified_at, expiry: row.verification_expiry })));
+      wrap.append(item);
+    });
+    return wrap;
+  }
+
   async function renderImpact() {
     const view = document.getElementById('view-26-analitica');
     if (!view || impactState.loading) return;
@@ -931,11 +1030,14 @@
     try {
       const to = new Date();
       const from = new Date(to.getTime() - impactState.days * 86400000);
-      const [kpis, health] = await Promise.all([
+      const [kpis, health, strategic] = await Promise.all([
         call('kpis', { from: from.toISOString(), to: to.toISOString() }),
         call('db_health').catch(() => null),
+        call('impact', { from: from.toISOString(), to: to.toISOString() }).catch(() => null),
       ]);
-      mount('view-26-analitica', impactView(kpis.report, health && health.report), 'opsLiveImpact');
+      const section = impactView(kpis.report, health && health.report);
+      section.append(strategicView(strategic));
+      mount('view-26-analitica', section, 'opsLiveImpact');
     } catch (error) {
       mount('view-26-analitica', el('p', 'ops-impact-note is-error', t('ops.impact.error', 'No se pudieron calcular los indicadores: {error}', { error: error.message })), 'opsLiveImpact');
     } finally {

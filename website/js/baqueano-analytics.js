@@ -14,7 +14,10 @@
  * 📦 QUÉ: window.BaqueanoAnalytics.track(nombreCanonico, datos) + eventos
  *   automáticos: page_view, whatsapp_click, sos_click, language_change,
  *   favorite, search, business_register, testimonial_submit, baqui_message,
- *   itinerary_generate, phone_click.
+ *   itinerary_generate, phone_click, directions_click (enlaces de Google Maps /
+ *   "Cómo llegar"), map_open (mapa.html) y place_view/qr_generated por evento
+ *   'baqueano:impact' { event, entityType, entityId, departmentId } — BAQUEANO
+ *   IMPACTO: alimentan la vista impact_events (embudo descubrir → contactar).
  */
 (function (window, document) {
   'use strict';
@@ -28,6 +31,10 @@
     search: 'search_performed',
     destination_view: 'destination_viewed',
     business_view: 'business_viewed',
+    place_view: 'place_viewed',
+    map_open: 'map_opened',
+    directions_click: 'directions_clicked',
+    qr_generated: 'qr_generated',
     itinerary_generate: 'itinerary_generated',
     baqui_message: 'baqui_message_sent',
     login: 'login_completed',
@@ -134,6 +141,10 @@
       track('whatsapp_click', { entityType: closestAttr(link, 'data-business-id') ? 'business' : null, entityId: closestAttr(link, 'data-business-id') });
     } else if (/^tel:/i.test(href)) {
       track('phone_click', { entityType: closestAttr(link, 'data-business-id') ? 'business' : null, entityId: closestAttr(link, 'data-business-id') });
+    } else if (/google\.[a-z.]+\/maps|maps\.google\.|maps\.apple\.com|waze\.com\/ul|[?&]destination=/i.test(href)) {
+      // "Cómo llegar": solo el tipo de evento y el id público; nunca coordenadas del visitante.
+      var placeId = closestAttr(link, 'data-business-id') || closestAttr(link, 'data-place-id');
+      track('directions_click', { entityType: closestAttr(link, 'data-business-id') ? 'business' : (placeId ? 'place' : null), entityId: placeId });
     }
     if (target.closest('[onclick*="SosModal"], .open-sos-btn, [href="#sosModal"], [data-sos], .bq-sos-trigger, #bqSosFab')) track('sos_click', {});
   }, true);
@@ -163,11 +174,19 @@
     if (name === 'assistant_itinerary_requested') track('itinerary_generate', { source: 'baqui' });
   });
 
+  // Fichas de lugar, QR y otros hitos del embudo de impacto emitidos por los módulos.
+  var IMPACT_EVENTS = { place_view: true, qr_generated: true, business_view: true, map_open: true, directions_click: true, reservation_start: true };
+  window.addEventListener('baqueano:impact', function (event) {
+    var d = (event && event.detail) || {};
+    if (IMPACT_EVENTS[d.event]) track(d.event, { entityType: d.entityType, entityId: d.entityId, departmentId: d.departmentId, source: d.source });
+  });
+
   window.BaqueanoAnalytics = { track: track, events: Object.keys(EVENT_MAP), consentGranted: consentGranted };
 
   // Página vista (y, si corresponde, ficha de destino o negocio).
   track('page_view', {});
   var params = new URLSearchParams(window.location.search);
+  if (/mapa\.html$/.test(window.location.pathname)) track('map_open', { source: 'mapa' });
   if (/destino\.html$/.test(window.location.pathname) && (params.get('id') || params.get('slug'))) {
     track('destination_view', { entityType: 'destination', entityId: params.get('id') || params.get('slug') });
   }

@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T17:32:10.124Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3703 · en 3703 · fr 3703 · it 3703 · pt 3703 · de 3703
+Generado: 2026-10-05T18:50:10.740Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3821 · en 3821 · fr 3821 · it 3821 · pt 3821 · de 3821
 
-HTML: 3611/3612 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3644/3645 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -170,7 +170,7 @@ HTML: 3611/3612 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | departamento.html | html | 78 | 78 | 0 | 100 % |
 | destino.html | html | 18 | 18 | 0 | 100 % |
 | destinos.html | html | 130 | 130 | 0 | 100 % |
-| experiencias.html | html | 155 | 155 | 0 | 100 % |
+| experiencias.html | html | 157 | 157 | 0 | 100 % |
 | favoritos.html | html | 8 | 8 | 0 | 100 % |
 | gastronomia.html | html | 205 | 205 | 0 | 100 % |
 | historia.html | html | 176 | 176 | 0 | 100 % |
@@ -186,12 +186,14 @@ HTML: 3611/3612 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | js/definitive-index-interactions.js | js | 0 | 0 | 0 | 100 % |
 | js/destination-community.js | js | 0 | 0 | 0 | 100 % |
 | js/destinos-provenance.js | js | 0 | 0 | 0 | 100 % |
-| js/destinos-verified.js | js | 11 | 11 | 0 | 100 % |
+| js/destinos-verified.js | js | 15 | 15 | 0 | 100 % |
 | js/favoritos.js | js | 0 | 0 | 0 | 100 % |
 | js/firebase-config.js | js | 0 | 0 | 0 | 100 % |
 | js/firestore-mirror.js | js | 0 | 0 | 0 | 100 % |
 | js/firestore-realtime.js | js | 0 | 0 | 0 | 100 % |
 | js/hero-video-loader.js | js | 0 | 0 | 0 | 100 % |
+| js/impact-public.js | js | 6 | 6 | 0 | 100 % |
+| js/local-keys.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |
 | js/shared/roles.js | js | 0 | 0 | 0 | 100 % |
@@ -204,11 +206,11 @@ HTML: 3611/3612 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | js/website-business-catalog.js | js | 0 | 0 | 0 | 100 % |
 | js/website-operations-catalog.js | js | 0 | 0 | 0 | 100 % |
 | legal.html | html | 15 | 15 | 0 | 100 % |
-| mapa.html | html | 39 | 39 | 0 | 100 % |
-| mi-negocio.html | html | 186 | 186 | 0 | 100 % |
+| mapa.html | html | 43 | 43 | 0 | 100 % |
+| mi-negocio.html | html | 188 | 188 | 0 | 100 % |
 | mi-viaje.html | html | 113 | 113 | 0 | 100 % |
 | musica.html | html | 197 | 197 | 0 | 100 % |
-| nosotros.html | html | 143 | 143 | 0 | 100 % |
+| nosotros.html | html | 168 | 168 | 0 | 100 % |
 | offline.html | html | 24 | 24 | 0 | 100 % |
 | packages/i18n/src/index.tsx | tsx | 2 | 2 | 0 | 100 % |
 | packages/ui/src/index.tsx | tsx | 0 | 0 | 0 | 100 % |

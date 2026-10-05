@@ -4938,7 +4938,11 @@
     "n867022WNicaragua": "12.5061° N, 86.7022° W (Nicaragua)",
     "contacto": "Contact",
     "seguridad": "Security",
-    "pagos": "Payments"
+    "pagos": "Payments",
+    "hoteles": "Hotels",
+    "hostales": "Hostels",
+    "resorts": "Resorts",
+    "otrosHospedajes": "Other lodgings"
   },
   "ops": {
     "impact": {
@@ -4982,6 +4986,14 @@
       "pendingVerifications": "Pending verifications",
       "signIn": "Sign in to see the indicators.",
       "error": "The indicators could not be calculated: {error}"
+    },
+    "strategic": {
+      "title": "Impact and strategic alignment",
+      "disclaimer": "BAQUEANO's contribution or alignment with national priorities. It is not official recognition: no agreement or institutional resolution is on record.",
+      "unavailable": "Not enough data: the impact module is not yet available on the server (migration pending).",
+      "colTerritory": "Territory",
+      "coverageTable": "Coverage by department and region",
+      "matrix": "National alignment matrix"
     }
   },
   "consent": {
@@ -5051,11 +5063,133 @@
       "website": "Official website",
       "map": "Map of the initiative",
       "sources": "Sources",
-      "zone": "Municipality or area"
+      "zone": "Municipality or area",
+      "checkNotice": "Verified with official source",
+      "seeSheet": "View details"
     },
     "access": {
       "viewArea": "View the area on the map",
       "note": "The location shown is the general area. The access point is still to be confirmed."
+    }
+  },
+  "impact": {
+    "panel": {
+      "tourism": "Tourism",
+      "local_economy": "Local economy",
+      "community": "Community",
+      "culture": "Culture",
+      "environment": "Environment",
+      "education": "Education",
+      "technology": "Technology",
+      "inclusion": "Inclusion",
+      "safety": "Safety",
+      "territory": "Territorial coverage"
+    },
+    "alignType": {
+      "direct": "Direct contribution",
+      "supporting": "Supporting contribution",
+      "potential": "Potential capability"
+    },
+    "needsReview": "Needs review",
+    "component": "BAQUEANO component",
+    "evidence": "Evidence",
+    "verifiedRange": "Verified {verified} · expires {expiry}",
+    "noData": "Not enough data",
+    "framework": {
+      "pnlcp_dh_2022_2026": "National Plan to Fight Poverty and for Human Development 2022-2026",
+      "intur_2026": "INTUR — 2026 work priorities",
+      "ley_turismo_rural": "Rural and Community Tourism (INTUR)",
+      "ene_2024_2026": "National Education Strategy 2024-2026",
+      "marena_sinap": "MARENA — National System of Protected Areas"
+    },
+    "public": {
+      "kicker": "Our impact",
+      "title": "What BAQUEANO contributes, with evidence",
+      "lead": "Each capability links to the feature that demonstrates it. Figures are calculated in our database when you open this page.",
+      "how": {
+        "communities": "Gives visibility to communities and rural and community tourism",
+        "business": "Brings local businesses online with no intermediary commission",
+        "discover": "Makes it easy to discover the 17 departments and regions on a map",
+        "culture": "Promotes music, food and traditions",
+        "heritage": "Documents history and heritage",
+        "rural": "Helps you find farms, cooperatives and rural experiences",
+        "access": "Improves access to information in 6 languages",
+        "connect": "Connects travelers directly with local providers",
+        "sustainable": "Promotes sustainable experiences with reported or verified practices",
+        "tech": "Uses technology (BAQUI) to plan trips"
+      },
+      "indicatorsTitle": "Real indicators",
+      "formula": "Territorial coverage = municipalities with content ÷ catalogued municipalities × 100. Source: BAQUEANO database (Supabase).",
+      "updated": "Calculated: {time}.",
+      "alignTitle": "Contribution to national priorities",
+      "disclaimer": "BAQUEANO offers functional capabilities compatible with these priorities. This is BAQUEANO's contribution or alignment, not official recognition or part of an institutional plan.",
+      "alignEmpty": "The alignment matrix with official sources has not been published yet.",
+      "officialSource": "Official source",
+      "verifiedOn": "Consulted on {date}"
+    },
+    "ind": {
+      "destinos_publicados": "Published destinations",
+      "destinos_verificados": "Verified destinations",
+      "rutas_creadas": "Routes created",
+      "experiencias_publicadas": "Published experiences",
+      "servicios_turisticos": "Published tourism services",
+      "visitas_generadas": "Listing views generated",
+      "negocios_locales": "Local businesses",
+      "negocios_verificados": "Verified businesses",
+      "emprendimientos_familiares": "Family businesses",
+      "mujeres_emprendedoras": "Women-led businesses",
+      "jovenes_emprendedores": "Youth-led businesses",
+      "cooperativas": "Cooperatives",
+      "negocios_rurales": "Rural businesses",
+      "protagonistas_sin_categoria": "Businesses without a local-provider category",
+      "comunidades_publicadas": "Published communities",
+      "experiencias_comunitarias_verificadas": "Verified community experiences",
+      "experiencias_comunitarias_pendientes": "Community experiences pending verification",
+      "experiencias_comunitarias": "Verified community experiences",
+      "patrimonio": "Documented heritage",
+      "gastronomia": "Gastronomy",
+      "musica": "Music",
+      "artesania": "Crafts",
+      "festividades": "Festivities",
+      "personajes_historicos": "Historical figures",
+      "leyendas": "Legends",
+      "cultura": "Cultural records",
+      "practicas_reportadas": "Reported sustainable practices",
+      "practicas_verificadas": "Practices verified by BAQUEANO",
+      "practicas_sostenibles_verificadas": "Verified sustainable practices",
+      "oferta_con_criterio_responsable": "Offers with responsible criteria",
+      "lineamientos_vinculados": "Linked education guidelines",
+      "evidencias_sprint": "Learning evidence (BAQUEANO LAB)",
+      "usuarios": "Users",
+      "consultas_baqui": "BAQUI queries",
+      "sesiones_baqui": "BAQUI sessions",
+      "itinerarios_generados": "Itineraries generated",
+      "destinos_consultados": "Place listings viewed",
+      "negocios_visualizados": "Business listings viewed",
+      "aperturas_mapa": "Map opens",
+      "clics_como_llegar": "\"Get directions\" clicks",
+      "clics_whatsapp": "WhatsApp clicks",
+      "clics_llamar": "Call clicks",
+      "reservas_iniciadas": "Bookings started",
+      "reservas_completadas": "Bookings confirmed or completed",
+      "qr_generados": "QR codes generated",
+      "atributos_accesibilidad_verificados": "Verified accessibility features",
+      "entidades_con_accesibilidad_verificada": "Places with verified accessibility",
+      "accesibilidad_verificada": "Verified accessibility",
+      "idiomas_interfaz": "Interface languages",
+      "contactos_emergencia": "Emergency contacts",
+      "contactos_emergencia_verificados": "Verified emergency contacts",
+      "contactos_con_ubicacion": "Emergency contacts with location",
+      "alertas_sos": "SOS alerts received",
+      "departamentos_catalogados": "Catalogued departments and regions",
+      "departamentos_con_contenido": "Departments and regions with content",
+      "departamentos_cubiertos": "Departments covered",
+      "municipios_catalogados": "Catalogued municipalities",
+      "municipios_con_contenido": "Municipalities with content",
+      "municipios_cubiertos": "Municipalities covered",
+      "cobertura_territorial_baqueano": "BAQUEANO territorial coverage",
+      "cobertura": "Territorial coverage",
+      "contenido_costa_caribe": "Content on the Caribbean Coast (RACCN and RACCS)"
     }
   }
 }

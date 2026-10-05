@@ -1,0 +1,53 @@
+/*
+ * 🧭 BAQUEANO IMPACTO — estilos de "Nuestro impacto" (nosotros.html#impacto)
+ * 🎯 POR QUÉ: identidad BAQUEANO (no gubernamental): humana, visual y accesible.
+ * ⚙️ CÓMO: tokens propios con la paleta oficial (#F65E01, #165D6F, #4A7A5A, #0D1B2A),
+ *   grid fluido sin scroll horizontal a 320 px, foco visible y contraste AA.
+ * 📦 QUÉ: .bq-impact (cabecera, capacidades con evidencia, indicadores, alineación).
+ */
+.bq-impact {
+  --bqi-orange: #F65E01;
+  --bqi-teal: #165D6F;
+  --bqi-green: #4A7A5A;
+  --bqi-night: #0D1B2A;
+  --bqi-sand: #F4E6C1;
+  --bqi-text: #1E293B;
+  --bqi-muted: #475569;
+  --bqi-surface: #FFFFFF;
+  --bqi-bg: #F8FAFC;
+  background: var(--bqi-bg);
+  color: var(--bqi-text);
+  padding: clamp(48px, 7vw, 80px) max(16px, calc((100% - 1160px) / 2));
+}
+.bq-impact-head { max-width: 760px; margin-bottom: 28px; }
+.bq-impact-kicker { display: inline-block; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #B84300; }
+.bq-impact-head h2 { margin: 8px 0 12px; font-size: clamp(1.6rem, 3.4vw, 2.3rem); line-height: 1.15; color: var(--bqi-night); }
+.bq-impact-head p { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--bqi-muted); }
+.bq-impact-how { list-style: none; margin: 0 0 36px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 12px; }
+.bq-impact-how a { display: flex; align-items: flex-start; gap: 12px; min-height: 48px; padding: 14px 16px; border-radius: 14px; background: var(--bqi-surface); border: 1px solid #E2E8F0; color: var(--bqi-text); text-decoration: none; line-height: 1.45; transition: border-color 0.2s ease, transform 0.2s ease; }
+.bq-impact-how a:hover { border-color: var(--bqi-teal); transform: translateY(-2px); }
+.bq-impact-how a:focus-visible { outline: 3px solid var(--bqi-orange); outline-offset: 2px; }
+.bq-impact-how i { flex: 0 0 auto; width: 22px; margin-top: 2px; color: var(--bqi-teal); font-size: 1.05rem; text-align: center; }
+.bq-impact-sub { margin: 0 0 14px; font-size: 1.2rem; color: var(--bqi-night); }
+.bq-impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px; }
+.bq-impact-stat { display: flex; flex-direction: column; gap: 6px; padding: 18px; border-radius: 14px; background: var(--bqi-surface); border: 1px solid #E2E8F0; border-top: 4px solid var(--bqi-green); }
+.bq-impact-stat strong { font-size: clamp(1.4rem, 3vw, 1.9rem); line-height: 1.1; color: var(--bqi-teal); overflow-wrap: anywhere; }
+.bq-impact-stat span { font-size: 0.88rem; color: var(--bqi-muted); line-height: 1.4; }
+.bq-impact-stat.is-empty { border-top-color: #CBD5E1; }
+.bq-impact-stat.is-empty strong { font-size: 1rem; color: var(--bqi-muted); }
+.bq-impact-note { margin: 12px 0 36px; font-size: 0.82rem; color: var(--bqi-muted); }
+.bq-impact-disclaimer { margin: 0 0 16px; padding: 12px 14px; border-left: 4px solid var(--bqi-orange); background: #FFF7ED; border-radius: 0 10px 10px 0; font-size: 0.9rem; line-height: 1.5; color: var(--bqi-text); }
+.bq-impact-framework { margin-bottom: 10px; border-radius: 14px; background: var(--bqi-surface); border: 1px solid #E2E8F0; }
+.bq-impact-framework summary { cursor: pointer; min-height: 48px; display: flex; align-items: center; padding: 12px 16px; font-weight: 700; color: var(--bqi-night); }
+.bq-impact-framework summary:focus-visible { outline: 3px solid var(--bqi-orange); outline-offset: 2px; border-radius: 14px; }
+.bq-impact-align-list { list-style: none; margin: 0; padding: 0 16px 12px; }
+.bq-impact-align-list li { padding: 12px 0; border-top: 1px solid #F1F5F9; }
+.bq-impact-align-list p { margin: 4px 0; font-size: 0.9rem; line-height: 1.5; color: var(--bqi-text); }
+.bq-impact-align-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.bq-impact-badge { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; color: #fff; background: var(--bqi-teal); }
+.bq-impact-badge.is-supporting { background: var(--bqi-green); }
+.bq-impact-badge.is-potential { background: #5B6472; }
+.bq-impact-source { font-size: 0.8rem !important; color: var(--bqi-muted) !important; overflow-wrap: anywhere; }
+.bq-impact-source a { color: var(--bqi-teal); font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) { .bq-impact-how a { transition: none; } .bq-impact-how a:hover { transform: none; } }

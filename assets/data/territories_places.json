@@ -202,8 +202,10 @@
         },
         {
           "name": "Poco a Poco Hostel",
-          "type": "Hostal en el centro de León",
-          "desc": "Hostal en León con piscina, cocina compartida, jardín, bar, habitaciones privadas y dormitorios."
+          "type": "Hostal · Piscina y coworking",
+          "desc": "Hostal real en León con dormitorios y habitaciones privadas. Su web oficial confirma piscina, cocina, jardín, bar, rooftop, espacios de trabajo y tour desk.",
+          "lat": 12.43701,
+          "lng": -86.88182
         },
         {
           "name": "Rancho Los Alpes",
@@ -223,6 +225,13 @@
           "desc": "Tradicional balneario del litoral leonés y comunidad pesquera cercana a Las Peñitas.",
           "lat": 12.3783,
           "lng": -87.0422
+        },
+        {
+          "name": "Hotel El Convento",
+          "type": "Hotel · Patrimonio histórico",
+          "desc": "Hotel ubicado en el centro histórico de León, registrado como alojamiento en OpenStreetMap y GeoNames, a pocos minutos caminando de la Catedral de León.",
+          "lat": 12.43561,
+          "lng": -86.8819
         }
       ],
       "gastronomy": [
@@ -351,8 +360,10 @@
         },
         {
           "name": "Morgan's Rock Reserve & Ecolodge",
-          "type": "Ecolodge y reserva privada en Playa Ocotal",
-          "desc": "Ecolodge en Playa Ocotal, San Juan del Sur, con reserva privada protegida, bungalows, villas y actividades de naturaleza."
+          "type": "Eco-lodge / resort · Playa Ocotal",
+          "desc": "Eco-lodge y reserva privada en Playa Ocotal. Su web oficial confirma alojamiento y ubicación en San Juan del Sur, además de actividades y experiencias de naturaleza.",
+          "lat": 11.30552,
+          "lng": -85.92049
         },
         {
           "name": "Hostal Puesta del Sol (Ometepe)",
@@ -405,6 +416,20 @@
           "desc": "Bahía y comunidad costera de Tola incluida en la oferta turística oficial de la Costa Esmeralda.",
           "lat": 11.3911,
           "lng": -86.0326
+        },
+        {
+          "name": "Hotel Victoriano",
+          "type": "Hotel boutique · Frente a la playa",
+          "desc": "Hotel frente a la playa de San Juan del Sur. El sitio oficial confirma 25 habitaciones, piscina, restaurante, spa/masajes y alojamiento con Wi-Fi.",
+          "lat": 11.25069,
+          "lng": -85.87271
+        },
+        {
+          "name": "TOTOCO Eco Resort",
+          "type": "Eco-resort · Isla de Ometepe",
+          "desc": "Eco resort de Ometepe con cabañas de selva y enfoque regenerativo. Su sitio oficial confirma la dirección, teléfono y experiencias en la isla.",
+          "lat": 11.48042,
+          "lng": -85.52183
         }
       ],
       "gastronomy": [
@@ -747,13 +772,15 @@
         },
         {
           "name": "Hotel Darío",
-          "type": "Hotel boutique colonial en La Calzada",
-          "desc": "Hotel boutique de arquitectura colonial sobre la Calle La Calzada, en pleno centro histórico de Granada."
+          "type": "Hotel · Centro histórico",
+          "desc": "Establecimiento hotelero identificado cartográficamente en el centro histórico de Granada, sobre el corredor turístico de Calle La Calzada.",
+          "lat": 11.93027,
+          "lng": -85.95161
         },
         {
           "name": "Treehouse Nicaragua",
-          "type": "Hostal y espacio de eventos junto al Mombacho",
-          "desc": "Hostal entre los árboles en la comarca Poste Rojo, a las afueras de Granada en el entorno del volcán Mombacho."
+          "type": "Hostal / casas árbol · Selva",
+          "desc": "Hostal de selva con casas árbol, habitaciones privadas y dormitorio compartido. Su web oficial confirma su ubicación en km 57.5 de la carretera Granada-Nandaime."
         },
         {
           "name": "Finca El Rayo",
@@ -783,6 +810,13 @@
           "desc": "Isla volcánica del Lago Cocibolca, núcleo del Parque Nacional Archipiélago Zapatera y relevante por su patrimonio arqueológico.",
           "lat": 11.739,
           "lng": -85.835
+        },
+        {
+          "name": "Hotel Plaza Colón",
+          "type": "Hotel · Balcones y sostenibilidad",
+          "desc": "Hotel ubicado frente al Parque Central de Granada. Su web oficial confirma habitaciones, balcones, servicios hoteleros y prácticas de sostenibilidad certificadas.",
+          "lat": 11.92982,
+          "lng": -85.95451
         }
       ],
       "gastronomy": [
@@ -918,6 +952,20 @@
           "desc": "Área protegida de bosque húmedo tropical y bosque nuboso con cascadas y alta riqueza de flora y fauna.",
           "lat": 12.98536,
           "lng": -85.24221
+        },
+        {
+          "name": "Selva Negra Ecolodge",
+          "type": "Eco-lodge / finca cafetalera · Montaña",
+          "desc": "Hotel y finca cafetalera histórica en las montañas de Matagalpa. Su sitio oficial confirma senderismo, aviturismo, tours de café y cacao y experiencias de naturaleza.",
+          "lat": 12.99908,
+          "lng": -85.90928
+        },
+        {
+          "name": "Hotel San José Matagalpa",
+          "type": "Hotel · Centro urbano",
+          "desc": "Hotel urbano en el centro de Matagalpa. Su sitio oficial confirma habitaciones y su ubicación detrás de la Iglesia San José.",
+          "lat": 12.92163,
+          "lng": -85.91877
         }
       ],
       "gastronomy": [
@@ -1327,6 +1375,20 @@
           "desc": "Área protegida cercana a Managua que integra las calderas y lagunas de Apoyeque y Xiloá.",
           "lat": 12.24928,
           "lng": -86.35086
+        },
+        {
+          "name": "InterContinental Managua at Metrocentro Mall",
+          "type": "Hotel · Alojamiento y negocios",
+          "desc": "Hotel urbano de la cadena InterContinental. Su sitio oficial confirma alojamiento, piscina, restaurantes, gimnasio, estacionamiento y servicios de negocios.",
+          "lat": 12.1266,
+          "lng": -86.26488
+        },
+        {
+          "name": "Hyatt Place Managua",
+          "type": "Hotel · Negocios y ocio",
+          "desc": "Hotel de la marca Hyatt Place. Hyatt confirma habitaciones modernas, desayuno, Wi-Fi, piscina exterior y espacios para viajeros de negocios y ocio.",
+          "lat": 12.10173,
+          "lng": -86.24828
         }
       ],
       "gastronomy": [
@@ -2092,6 +2154,13 @@
           "desc": "Río del sureste de Nicaragua que desemboca en el mar Caribe al norte de Bluefields.",
           "lat": 12.08677,
           "lng": -83.74916
+        },
+        {
+          "name": "Yemaya Reefs",
+          "type": "Resort / hotel boutique · Little Corn Island",
+          "desc": "Hotel boutique frente al mar en Little Corn Island. Su web oficial confirma habitaciones frente a la playa, actividades acuáticas, wellness y prácticas de sostenibilidad.",
+          "lat": 12.30195,
+          "lng": -82.98502
         }
       ],
       "gastronomy": [

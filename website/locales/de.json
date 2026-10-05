@@ -4938,7 +4938,11 @@
     "n867022WNicaragua": "12.5061° N, 86.7022° W (Nicaragua)",
     "contacto": "Kontakt",
     "seguridad": "Sicherheit",
-    "pagos": "Zahlungen"
+    "pagos": "Zahlungen",
+    "hoteles": "Hotels",
+    "hostales": "Hostels",
+    "resorts": "Resorts",
+    "otrosHospedajes": "Andere Unterkünfte"
   },
   "ops": {
     "impact": {
@@ -4982,6 +4986,14 @@
       "pendingVerifications": "Ausstehende Prüfungen",
       "signIn": "Melde dich an, um die Kennzahlen zu sehen.",
       "error": "Die Kennzahlen konnten nicht berechnet werden: {error}"
+    },
+    "strategic": {
+      "title": "Wirkung und strategische Ausrichtung",
+      "disclaimer": "Beitrag bzw. Ausrichtung von BAQUEANO an nationalen Prioritäten. Keine offizielle Anerkennung: Es liegt keine Vereinbarung und kein institutioneller Beschluss vor.",
+      "unavailable": "Nicht genügend Daten: Das Wirkungsmodul ist auf dem Server noch nicht verfügbar (Migration ausstehend).",
+      "colTerritory": "Gebiet",
+      "coverageTable": "Abdeckung nach Departamento und Region",
+      "matrix": "Matrix der nationalen Ausrichtung"
     }
   },
   "consent": {
@@ -5051,11 +5063,133 @@
       "website": "Offizielle Website",
       "map": "Karte der Initiative",
       "sources": "Quellen",
-      "zone": "Gemeinde oder Gebiet"
+      "zone": "Gemeinde oder Gebiet",
+      "checkNotice": "Mit offizieller Quelle verifiziert",
+      "seeSheet": "Eintrag ansehen"
     },
     "access": {
       "viewArea": "Gebiet auf der Karte ansehen",
       "note": "Der gezeigte Ort ist das allgemeine Gebiet. Der Zugangspunkt ist noch zu bestätigen."
+    }
+  },
+  "impact": {
+    "panel": {
+      "tourism": "Tourismus",
+      "local_economy": "Lokale Wirtschaft",
+      "community": "Gemeinschaft",
+      "culture": "Kultur",
+      "environment": "Umwelt",
+      "education": "Bildung",
+      "technology": "Technologie",
+      "inclusion": "Inklusion",
+      "safety": "Sicherheit",
+      "territory": "Territoriale Abdeckung"
+    },
+    "alignType": {
+      "direct": "Direkter Beitrag",
+      "supporting": "Unterstützender Beitrag",
+      "potential": "Potenzielle Fähigkeit"
+    },
+    "needsReview": "Prüfung erforderlich",
+    "component": "BAQUEANO-Komponente",
+    "evidence": "Nachweis",
+    "verifiedRange": "Geprüft am {verified} · läuft ab am {expiry}",
+    "noData": "Nicht genügend Daten",
+    "framework": {
+      "pnlcp_dh_2022_2026": "Nationaler Plan zur Armutsbekämpfung und für menschliche Entwicklung 2022–2026",
+      "intur_2026": "INTUR — Arbeitsschwerpunkte 2026",
+      "ley_turismo_rural": "Ländlicher und gemeindebasierter Tourismus (INTUR)",
+      "ene_2024_2026": "Nationale Bildungsstrategie 2024–2026",
+      "marena_sinap": "MARENA — Nationales Schutzgebietssystem"
+    },
+    "public": {
+      "kicker": "Unsere Wirkung",
+      "title": "Was BAQUEANO beiträgt – mit Nachweisen",
+      "lead": "Jede Fähigkeit verweist auf die Funktion, die sie belegt. Die Zahlen werden beim Öffnen dieser Seite in unserer Datenbank berechnet.",
+      "how": {
+        "communities": "Macht Gemeinschaften sowie ländlichen und gemeindebasierten Tourismus sichtbar",
+        "business": "Bringt lokale Betriebe ohne Vermittlungsprovision ins Netz",
+        "discover": "Erleichtert das Entdecken der 17 Departamentos und Regionen auf einer Karte",
+        "culture": "Fördert Musik, Gastronomie und Traditionen",
+        "heritage": "Dokumentiert Geschichte und Kulturerbe",
+        "rural": "Hilft, Höfe, Genossenschaften und bäuerliche Erlebnisse zu finden",
+        "access": "Verbessert den Zugang zu Informationen in 6 Sprachen",
+        "connect": "Verbindet Reisende direkt mit lokalen Anbietern",
+        "sustainable": "Fördert nachhaltige Erlebnisse mit gemeldeten oder geprüften Praktiken",
+        "tech": "Nutzt Technologie (BAQUI) zur Reiseplanung"
+      },
+      "indicatorsTitle": "Echte Kennzahlen",
+      "formula": "Territoriale Abdeckung = Gemeinden mit Inhalten ÷ erfasste Gemeinden × 100. Quelle: BAQUEANO-Datenbank (Supabase).",
+      "updated": "Berechnet: {time}.",
+      "alignTitle": "Beitrag zu nationalen Prioritäten",
+      "disclaimer": "BAQUEANO bietet funktionale Fähigkeiten, die mit diesen Prioritäten vereinbar sind. Es handelt sich um einen Beitrag bzw. eine Ausrichtung von BAQUEANO, nicht um eine offizielle Anerkennung oder einen Teil eines institutionellen Plans.",
+      "alignEmpty": "Die Ausrichtungsmatrix mit offiziellen Quellen ist noch nicht veröffentlicht.",
+      "officialSource": "Offizielle Quelle",
+      "verifiedOn": "Abgerufen am {date}"
+    },
+    "ind": {
+      "destinos_publicados": "Veröffentlichte Reiseziele",
+      "destinos_verificados": "Geprüfte Reiseziele",
+      "rutas_creadas": "Erstellte Routen",
+      "experiencias_publicadas": "Veröffentlichte Erlebnisse",
+      "servicios_turisticos": "Veröffentlichte touristische Leistungen",
+      "visitas_generadas": "Erzeugte Eintragsaufrufe",
+      "negocios_locales": "Lokale Betriebe",
+      "negocios_verificados": "Geprüfte Betriebe",
+      "emprendimientos_familiares": "Familienbetriebe",
+      "mujeres_emprendedoras": "Von Frauen geführte Betriebe",
+      "jovenes_emprendedores": "Von Jugendlichen geführte Betriebe",
+      "cooperativas": "Genossenschaften",
+      "negocios_rurales": "Ländliche Betriebe",
+      "protagonistas_sin_categoria": "Betriebe ohne Akteurskategorie",
+      "comunidades_publicadas": "Veröffentlichte Gemeinschaften",
+      "experiencias_comunitarias_verificadas": "Geprüfte Gemeinschaftserlebnisse",
+      "experiencias_comunitarias_pendientes": "Gemeinschaftserlebnisse in Prüfung",
+      "experiencias_comunitarias": "Geprüfte Gemeinschaftserlebnisse",
+      "patrimonio": "Dokumentiertes Kulturerbe",
+      "gastronomia": "Gastronomie",
+      "musica": "Musik",
+      "artesania": "Kunsthandwerk",
+      "festividades": "Feste",
+      "personajes_historicos": "Historische Persönlichkeiten",
+      "leyendas": "Legenden",
+      "cultura": "Kultureinträge",
+      "practicas_reportadas": "Gemeldete nachhaltige Praktiken",
+      "practicas_verificadas": "Von BAQUEANO geprüfte Praktiken",
+      "practicas_sostenibles_verificadas": "Geprüfte nachhaltige Praktiken",
+      "oferta_con_criterio_responsable": "Angebote mit verantwortungsvollen Kriterien",
+      "lineamientos_vinculados": "Verknüpfte Bildungsleitlinien",
+      "evidencias_sprint": "Lernnachweise (BAQUEANO LAB)",
+      "usuarios": "Nutzer",
+      "consultas_baqui": "BAQUI-Anfragen",
+      "sesiones_baqui": "BAQUI-Sitzungen",
+      "itinerarios_generados": "Erstellte Reisepläne",
+      "destinos_consultados": "Aufgerufene Ortseinträge",
+      "negocios_visualizados": "Aufgerufene Betriebe",
+      "aperturas_mapa": "Kartenaufrufe",
+      "clics_como_llegar": "Klicks auf „Route“",
+      "clics_whatsapp": "WhatsApp-Klicks",
+      "clics_llamar": "Anruf-Klicks",
+      "reservas_iniciadas": "Begonnene Buchungen",
+      "reservas_completadas": "Bestätigte oder abgeschlossene Buchungen",
+      "qr_generados": "Erzeugte QR-Codes",
+      "atributos_accesibilidad_verificados": "Geprüfte Barrierefreiheitsmerkmale",
+      "entidades_con_accesibilidad_verificada": "Orte mit geprüfter Barrierefreiheit",
+      "accesibilidad_verificada": "Geprüfte Barrierefreiheit",
+      "idiomas_interfaz": "Sprachen der Oberfläche",
+      "contactos_emergencia": "Notfallkontakte",
+      "contactos_emergencia_verificados": "Geprüfte Notfallkontakte",
+      "contactos_con_ubicacion": "Notfallkontakte mit Standort",
+      "alertas_sos": "Empfangene SOS-Meldungen",
+      "departamentos_catalogados": "Erfasste Departamentos und Regionen",
+      "departamentos_con_contenido": "Departamentos und Regionen mit Inhalten",
+      "departamentos_cubiertos": "Abgedeckte Departamentos",
+      "municipios_catalogados": "Erfasste Gemeinden",
+      "municipios_con_contenido": "Gemeinden mit Inhalten",
+      "municipios_cubiertos": "Abgedeckte Gemeinden",
+      "cobertura_territorial_baqueano": "Territoriale Abdeckung von BAQUEANO",
+      "cobertura": "Territoriale Abdeckung",
+      "contenido_costa_caribe": "Inhalte an der Karibikküste (RACCN und RACCS)"
     }
   }
 }

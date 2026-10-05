@@ -351,11 +351,15 @@
       </div>
 
       <div class="map-cat-filter-chips">
-        <button data-i18n="pages.mapa.body.button1" type="button" class="map-chip-btn active" data-cat="all">Todos (10)</button>
+        <button data-i18n="pages.mapa.body.button1" type="button" class="map-chip-btn active" data-cat="all">Todos (22)</button>
         <button data-i18n="pages.mapa.body.button2" type="button" class="map-chip-btn" data-cat="volcan">🌋 Volcanes</button>
         <button data-i18n="pages.mapa.body.button3" type="button" class="map-chip-btn" data-cat="playa">🏖️ Playas</button>
         <button data-i18n="common.naturaleza" type="button" class="map-chip-btn" data-cat="naturaleza">🌿 Naturaleza</button>
         <button data-i18n="common.cultura" type="button" class="map-chip-btn" data-cat="cultura">🏛️ Cultura</button>
+        <button data-i18n="common.hoteles" type="button" class="map-chip-btn" data-cat="hoteles">🏨 Hoteles</button>
+        <button data-i18n="common.hostales" type="button" class="map-chip-btn" data-cat="hostales">🛏️ Hostales</button>
+        <button data-i18n="common.ecoLodges" type="button" class="map-chip-btn" data-cat="ecolodges">🌿 Eco-lodges</button>
+        <button data-i18n="common.resorts" type="button" class="map-chip-btn" data-cat="resorts">🌴 Resorts</button>
         <button data-i18n="pages.mapa.body.button4" type="button" class="map-chip-btn" data-cat="coop">🤝 Cooperativas</button>
       </div>
 
@@ -439,7 +443,21 @@
       { id: 'corn_island', name: 'Corn Island & Little Corn', lat: 12.1736, lng: -83.0560, cat: 'playa', dept: 'Caribe Sur', desc: 'Paraíso de arena blanca, aguas turquesas y arrecifes de coral en el Caribe.', img: 'assets/images/destinos/corn_island.jpg', color: '#0284C7' },
       { id: 'mombacho', name: 'Reserva Volcán Mombacho', lat: 11.8267, lng: -85.9681, cat: 'naturaleza', dept: 'Granada', desc: 'Bosque nuboso con orquídeas endémicas y vistas panorámicas a las Isletas.', img: 'assets/images/destinos/selva_negra.jpg', color: '#4A7A5A' },
       { id: 'san_ramon', name: 'Posada Rural San Ramón', lat: 11.5200, lng: -85.5500, cat: 'coop', dept: 'Rivas', desc: 'Cooperativa comunitaria en Ometepe con senderos a la cascada de San Ramón.', img: 'assets/images/destinos/Posada Rural San Ramón Ometepe.avif', color: '#4A7A5A' },
-      { id: 'las_penitas', name: 'Playa Las Peñitas & Juan Venado', lat: 12.3556, lng: -87.0319, cat: 'playa', dept: 'León', desc: 'Reserva Natural Isla Juan Venado con manglares y playas salvajes del Pacífico.', img: 'assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg', color: '#0284C7' }
+      { id: 'las_penitas', name: 'Playa Las Peñitas & Juan Venado', lat: 12.3556, lng: -87.0319, cat: 'playa', dept: 'León', desc: 'Reserva Natural Isla Juan Venado con manglares y playas salvajes del Pacífico.', img: 'assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg', color: '#0284C7' },
+
+      // Catálogo Verificado de Hospedajes de Nicaragua (05/10/2026 - Coordenadas Exactas y Referenciadas Validadas)
+      { id: 'hosp_intercontinental', name: 'InterContinental Managua at Metrocentro Mall', lat: 12.126600, lng: -86.264880, cat: 'hoteles', type: 'Hotel', dept: 'Managua', muni: 'Managua', desc: 'Hotel urbano de la cadena InterContinental frente a Metrocentro con piscina y gimnasio.', img: 'assets/images/destinos/cerro_negro.jpg', color: '#EAB308', verified: true, phone: '+505 2276-8989', amenities: ['Piscina', 'Restaurantes', 'Gimnasio', 'Estacionamiento'] },
+      { id: 'hosp_hyatt', name: 'Hyatt Place Managua', lat: 12.101730, lng: -86.248280, cat: 'hoteles', type: 'Hotel', dept: 'Managua', muni: 'Managua', desc: 'Hotel moderno en Carretera Masaya km 8.2 con piscina, desayuno y Wi-Fi.', img: 'assets/images/destinos/cerro_negro.jpg', color: '#EAB308', verified: true, phone: '+505 2252-7000', amenities: ['Desayuno', 'Piscina exterior', 'Wi-Fi', 'Bar'] },
+      { id: 'hosp_plaza_colon', name: 'Hotel Plaza Colón', lat: 11.929820, lng: -85.954510, cat: 'hoteles', type: 'Hotel', dept: 'Granada', muni: 'Granada', desc: 'Hotel histórico frente al Parque Central de Granada con balcones coloniales.', img: 'assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg', color: '#EAB308', verified: true, phone: '+505 2552-8489', whatsapp: '+505 8590-4062', amenities: ['Balcones coloniales', 'Wi-Fi', 'Sostenibilidad'] },
+      { id: 'hosp_dario', name: 'Hotel Darío', lat: 11.930270, lng: -85.951610, cat: 'hoteles', type: 'Hotel', dept: 'Granada', muni: 'Granada', desc: 'Establecimiento hotelero en el centro histórico sobre Calle La Calzada.', img: 'assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg', color: '#EAB308', verified: true, amenities: ['Centro histórico', 'Calle La Calzada'] },
+      { id: 'hosp_el_convento', name: 'Hotel El Convento', lat: 12.435610, lng: -86.881900, cat: 'hoteles', type: 'Hotel', dept: 'León', muni: 'León', desc: 'Hotel patrimonial en el centro histórico de León, cerca de la Catedral.', img: 'assets/images/destinos/cerro_negro.jpg', color: '#EAB308', verified: true, amenities: ['Arquitectura colonial', 'Patrimonio', 'Jardines'] },
+      { id: 'hosp_poco_a_poco', name: 'Poco a Poco Hostel', lat: 12.437010, lng: -86.881820, cat: 'hostales', type: 'Hostal', dept: 'León', muni: 'León', desc: 'Hostal real en León con piscina, cocina, bar, rooftop y espacios de trabajo.', img: 'assets/images/destinos/cerro_negro.jpg', color: '#F97316', verified: true, phone: '+505 8295-5534', amenities: ['Piscina', 'Rooftop', 'Cocina', 'Coworking'] },
+      { id: 'hosp_victoriano', name: 'Hotel Victoriano', lat: 11.250690, lng: -85.872710, cat: 'hoteles', type: 'Hotel boutique', dept: 'Rivas', muni: 'San Juan del Sur', desc: 'Hotel boutique frente a la playa de San Juan del Sur con piscina y spa.', img: 'assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg', color: '#EAB308', verified: true, phone: '+505 8679-0261', amenities: ['Frente a la playa', 'Piscina', 'Spa', 'Restaurante'] },
+      { id: 'hosp_morgans_rock', name: "Morgan's Rock Reserve & Ecolodge", lat: 11.305520, lng: -85.920490, cat: 'ecolodges', type: 'Eco-lodge / resort', dept: 'Rivas', muni: 'San Juan del Sur', desc: 'Eco-lodge y reserva privada en Playa Ocotal con bungalows y naturaleza.', img: 'assets/images/destinos/selva_negra.jpg', color: '#165D6F', verified: true, phone: '+505 8670-7676', whatsapp: '+505 8988-7176', amenities: ['Bungalows en selva', 'Playa privada', 'Reserva natural'] },
+      { id: 'hosp_selva_negra', name: 'Selva Negra Ecolodge', lat: 12.999080, lng: -85.909280, cat: 'ecolodges', type: 'Eco-lodge / finca cafetalera', dept: 'Matagalpa', muni: 'Matagalpa', desc: 'Hotel y finca cafetalera histórica en las montañas con senderismo y aviturismo.', img: 'assets/images/destinos/selva_negra.jpg', color: '#165D6F', verified: true, phone: '+505 8100-9100', amenities: ['Cafetal de sombra', 'Senderismo de montaña', 'Cabañas', 'Aviturismo'] },
+      { id: 'hosp_san_jose', name: 'Hotel San José Matagalpa', lat: 12.921630, lng: -85.918770, cat: 'hoteles', type: 'Hotel', dept: 'Matagalpa', muni: 'Matagalpa', desc: 'Hotel urbano en el centro de Matagalpa detrás de la Iglesia San José.', img: 'assets/images/destinos/selva_negra.jpg', color: '#EAB308', verified: true, phone: '+505 2772-2544', whatsapp: '+505 8534-9559', amenities: ['Centro urbano', 'Desayuno', 'Wi-Fi'] },
+      { id: 'hosp_totoco', name: 'TOTOCO Eco Resort', lat: 11.480420, lng: -85.521830, cat: 'resorts', type: 'Eco-resort', dept: 'Rivas', muni: 'Altagracia / Ometepe', desc: 'Eco resort con cabañas de selva y enfoque regenerativo en Balgüe, Isla de Ometepe.', img: 'assets/images/destinos/isla_de_ometepe.jpg', color: '#0EA5E9', verified: true, phone: '+505 5815-0757', amenities: ['Cabañas de selva', 'Piscina panorámica', 'Enfoque regenerativo'] },
+      { id: 'hosp_yemaya', name: 'Yemaya Reefs', lat: 12.301950, lng: -82.985020, cat: 'resorts', type: 'Resort / hotel boutique', dept: 'Caribe Sur', muni: 'Little Corn Island', desc: 'Hotel boutique frente al mar en Little Corn Island con spa y deportes acuáticos.', img: 'assets/images/destinos/corn_island.jpg', color: '#0EA5E9', verified: true, phone: '+505 5830-2200', whatsapp: '+505 8415-5543', amenities: ['Frente al mar', 'Wellness & Spa', 'Kayak & Snorkel'] }
     ];
 
     let mapInstance = null;
@@ -503,6 +521,31 @@
 
           marker.on('click', () => showPlaceDetails(place));
           marker.bindTooltip(`<strong>${place.name}</strong>`, { direction: 'top', offset: [0, -6], permanent: true, className: 'bq-map-pin-label' });
+
+          const isVerified = place.verified;
+          const checkIcon = isVerified ? `<i class="fa-solid fa-circle-check" style="color: #38BDF8;" title="Verificado con fuente oficial"></i>` : '';
+          const phoneHtml = place.phone ? `<p style="margin:2px 0; font-size:0.75rem;"><i class="fa-solid fa-phone"></i> ${place.phone}</p>` : '';
+          const waHtml = place.whatsapp ? `<p style="margin:2px 0; font-size:0.75rem;"><i class="fa-brands fa-whatsapp" style="color:#22C55E;"></i> ${place.whatsapp}</p>` : '';
+          const amenitiesHtml = place.amenities ? `<p style="margin:4px 0; font-size:0.73rem; color:#64748B;">${place.amenities.join(' · ')}</p>` : '';
+          const routeUrl = `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}`;
+          const popupHtml = `
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:210px; color:#0F172A; padding:2px;">
+              <h4 style="margin:0 0 4px; font-size:0.92rem; font-weight:700;">${place.name} ${checkIcon}</h4>
+              <p style="margin:0 0 4px; font-size:0.75rem; color:#165D6F; font-weight:600;">${place.type || place.cat.toUpperCase()} · ${place.muni || place.dept}</p>
+              ${amenitiesHtml}
+              ${phoneHtml}
+              ${waHtml}
+              <div style="display:flex; gap:6px; margin-top:8px;">
+                <a href="${routeUrl}" target="_blank" rel="noopener noreferrer" style="background:#F65E01; color:#fff; text-decoration:none; padding:4px 9px; border-radius:5px; font-size:0.74rem; font-weight:600; display:inline-flex; align-items:center; gap:4px;">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Cómo llegar
+                </a>
+                <a href="destinos.html?q=${encodeURIComponent(place.name)}" style="background:#165D6F; color:#fff; text-decoration:none; padding:4px 9px; border-radius:5px; font-size:0.74rem; font-weight:600; display:inline-flex; align-items:center; gap:4px;">
+                  Ver ficha
+                </a>
+              </div>
+            </div>
+          `;
+          marker.bindPopup(popupHtml, { maxWidth: 320 });
 
           markersList.push(marker);
         }
