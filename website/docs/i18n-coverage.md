@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T13:09:03.571Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3624 · en 3624 · fr 3624 · it 3624 · pt 3624 · de 3624
+Generado: 2026-10-05T14:47:15.590Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3668 · en 3668 · fr 3668 · it 3668 · pt 3668 · de 3668
 
-HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3605/3606 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -36,7 +36,7 @@ HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | js/index-features.js | js | 17 | 0 | 17 | 0 % |
 | js/testimonios.js | js | 17 | 0 | 17 | 0 % |
 | js/admin-ops.js | js | 16 | 0 | 16 | 0 % |
-| js/baqueano-travel-session.js | js | 16 | 0 | 16 | 0 % |
+| js/baqueano-travel-session.js | js | 61 | 45 | 16 | 73.8 % |
 | apps/admin/src/app/reservas/page.tsx | tsx | 15 | 0 | 15 | 0 % |
 | apps/admin/src/app/dashboard/page.tsx | tsx | 14 | 0 | 14 | 0 % |
 | js/musica-player.js | js | 14 | 0 | 14 | 0 % |
@@ -163,7 +163,7 @@ HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | aviso-legal.html | html | 93 | 93 | 0 | 100 % |
 | ayuda.html | html | 64 | 64 | 0 | 100 % |
 | baqueano-ai.html | html | 3 | 3 | 0 | 100 % |
-| baqueano-ia.html | html | 195 | 195 | 0 | 100 % |
+| baqueano-ia.html | html | 194 | 194 | 0 | 100 % |
 | cookies.html | html | 122 | 122 | 0 | 100 % |
 | cronicas.html | html | 50 | 50 | 0 | 100 % |
 | denuncias.html | html | 39 | 39 | 0 | 100 % |

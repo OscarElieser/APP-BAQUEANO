@@ -1,10 +1,10 @@
 {
  "summary": {
-  "generatedAt": "2026-10-05T13:09:03.872Z",
+  "generatedAt": "2026-10-05T14:47:27.600Z",
   "dir": "dist-hostinger",
   "pages": 31,
   "critical": 0,
-  "warnings": 65,
+  "warnings": 64,
   "sitemapUrls": 23
  },
  "seo": [
@@ -627,12 +627,6 @@
    "severity": "warning",
    "page": "historia.html",
    "rule": "anchor-missing",
-   "detail": "ancla #patrimonio no existe en la página (puede crearse en tiempo de ejecución)"
-  },
-  {
-   "severity": "warning",
-   "page": "historia.html",
-   "rule": "anchor-missing",
    "detail": "ancla #fuentes no existe en la página (puede crearse en tiempo de ejecución)"
   },
   {
@@ -1012,12 +1006,6 @@
   {
    "from": "historia.html",
    "link": "#personajes",
-   "status": "ancla no encontrada (estático)",
-   "severity": "warning"
-  },
-  {
-   "from": "historia.html",
-   "link": "#patrimonio",
    "status": "ancla no encontrada (estático)",
    "severity": "warning"
   },

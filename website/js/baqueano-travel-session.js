@@ -67,7 +67,7 @@
   //    clima, duración, dificultad y coordenadas. Se descarga una vez.
   // 📦 QUÉ: loadKnowledge(), findKnowledge(nombre), destinationNames().
   // ==========================================================================
-  const KNOWLEDGE_URL = 'data/travel-knowledge.json?v=2026-10-04b';
+  const KNOWLEDGE_URL = 'data/travel-knowledge.json?v=2026-10-05-spots';
   let knowledge = [];
   let knowledgePromise = null;
   function loadKnowledge() {
@@ -152,8 +152,92 @@
         remaining = remaining.split(key).join(' ');
       }
     });
+    // Tolerancia a errores de tipeo ("carazon" → Carazo, "esteli" ya se normaliza):
+    // solo contra los 17 departamentos y los destinos del catálogo, palabras de
+    // 5+ letras y distancia de edición 1 (2 en nombres de 8+ letras).
+    lastCorrections = [];
+    const words = remaining.split(/[^a-z0-9ñ]+/).filter((word) => word.length >= 5 && !TYPO_STOPWORDS.has(word));
+    fuzzyTargets().forEach(({ key, label }) => {
+      if (found.some((item) => normalize(item.label) === normalize(label))) return;
+      const size = key.split(' ').length;
+      for (let i = 0; i + size <= words.length; i += 1) {
+        const candidate = words.slice(i, i + size).join(' ');
+        if (candidate === key || Math.abs(candidate.length - key.length) > 2) continue;
+        if (editDistance(candidate, key) <= (key.length >= 8 ? 2 : 1)) {
+          found.push({ label, at: normalizedText.indexOf(candidate) });
+          lastCorrections.push({ typed: candidate, label });
+          break;
+        }
+      }
+    });
     // En el orden en que la persona los nombró.
     return [...new Map(found.sort((a, b) => a.at - b.at).map((item) => [normalize(item.label), item.label])).values()];
+  }
+
+  let lastCorrections = [];
+  const TYPO_STOPWORDS = new Set(['quiero', 'queremos', 'vamos', 'somos', 'personas', 'dolares', 'cordobas', 'presupuesto', 'tengo', 'tenemos',
+    'conocer', 'nicaragua', 'playa', 'playas', 'departamentos', 'departamento', 'adultos', 'ninos', 'viajar', 'visitar', 'semana', 'noches']);
+  function editDistance(a, b) {
+    const row = Array.from({ length: b.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= a.length; i += 1) {
+      let previous = row[0]; row[0] = i;
+      for (let j = 1; j <= b.length; j += 1) {
+        const current = row[j];
+        row[j] = Math.min(row[j] + 1, row[j - 1] + 1, previous + (a[i - 1] === b[j - 1] ? 0 : 1));
+        previous = current;
+      }
+    }
+    return row[b.length];
+  }
+  function fuzzyTargets() {
+    const targets = [];
+    knowledge.forEach((place) => {
+      if (place.kind === 'territorio') targets.push({ key: normalize(place.name), label: place.name });
+      if (place.kind === 'destino') place.aliases.filter((alias) => alias.length >= 5).forEach((alias) => targets.push({ key: alias, label: place.name }));
+    });
+    return targets.filter((item) => item.key.length >= 5);
+  }
+
+  // ==========================================================================
+  // 🎯 POR QUÉ: con "quiero conocer Nicaragua" BAQUI debe proponer la ruta, y
+  //    con "quiero playa" debe decir QUÉ playas reales hay en cada parada.
+  // ⚙️ CÓMO: solo lugares del catálogo BAQUEANO (data/travel-knowledge.json,
+  //    generado de territories-data.js): destinos por categoría e interés y los
+  //    lugares (spots) de cada departamento con su tipo. Nada inventado.
+  // 📦 QUÉ: wantsDiscovery(), proposeDestinations(), interestSpots().
+  // ==========================================================================
+  const DISCOVERY = /(conocer|recorrer|explorar|descubrir|ver)\s+(todo\s+|toda\s+|un poco de\s+)?nicaragua|no se (a )?donde|que me recomiend|recomienda(me|nos)?|sugier|sorprend|armame (una )?ruta|lo mejor de nicaragua/;
+  const INTEREST_DESTINOS = {
+    playas: ['sjds', 'cornisland'], volcanes: ['masaya', 'cerro_negro', 'ometepe'], cultura: ['granada', 'masaya'],
+    historia: ['granada'], naturaleza: ['ometepe', 'apoyo', 'miraflor', 'somoto'], aventura: ['cerro_negro', 'somoto'],
+    gastronomia: ['masaya', 'granada'], fotografia: ['isletas', 'ometepe']
+  };
+  // Ruta clásica del Pacífico, por cercanía, cuando no hay intereses.
+  const DEFAULT_DISCOVERY = ['granada', 'masaya', 'ometepe', 'cerro_negro'];
+  const SPOT_PATTERNS = {
+    playas: /playa|surf|bahia|costa|balneario/, volcanes: /volcan|crater/, naturaleza: /reserva|sendero|bosque|laguna|cascada|manglar|naturaleza/,
+    cultura: /museo|catedral|basilica|iglesia|colonial|patrimonio|cultura/, historia: /historia|museo|ruinas|patrimonio/, aventura: /surf|canopy|kayak|sandboard|caminata|aventura/
+  };
+  function wantsDiscovery(text) { return DISCOVERY.test(normalize(text)); }
+  function proposeDestinations(interests, days) {
+    const ids = [];
+    (interests || []).forEach((interest) => (INTEREST_DESTINOS[interest] || []).forEach((id) => { if (!ids.includes(id)) ids.push(id); }));
+    DEFAULT_DISCOVERY.forEach((id) => { if (ids.length < 3 && !ids.includes(id)) ids.push(id); });
+    const size = days ? Math.max(2, Math.min(5, Math.ceil(days / 2))) : 4;
+    return ids.slice(0, size).map((id) => knowledge.find((place) => place.id === id)?.name).filter(Boolean);
+  }
+  function interestSpots(route, interests) {
+    const patterns = (interests || []).map((name) => SPOT_PATTERNS[name]).filter(Boolean);
+    if (!patterns.length) return [];
+    const seen = new Set();
+    return route.map((stop) => {
+      const place = knowledge.find((p) => p.id === stop.knowledgeId);
+      const territory = place?.kind === 'territorio' ? place : knowledge.find((p) => p.kind === 'territorio' && p.id === place?.territory);
+      if (!territory || seen.has(territory.id)) return null;
+      seen.add(territory.id);
+      const spots = (territory.spots || []).filter((spot) => patterns.some((re) => re.test(normalize(spot.name + ' ' + spot.type)))).slice(0, 4).map((spot) => spot.name);
+      return spots.length ? { department: territory.name, spots } : null;
+    }).filter(Boolean);
   }
 
   const NUMBER_WORDS = Object.freeze({ un: 1, uno: 1, una: 1, dos: 2, tres: 3, cuatro: 4, cinco: 5, seis: 6, siete: 7, ocho: 8, nueve: 9, diez: 10, once: 11, doce: 12, catorce: 14, quince: 15 });
@@ -163,9 +247,14 @@
     const adults = travelSession.adults;
     const children = travelSession.children || 0;
     if (adults == null && !travelSession.travelers) return '';
-    if (adults == null) return `${travelSession.travelers} viajero${travelSession.travelers === 1 ? '' : 's'}`;
-    const a = `${adults} adulto${adults === 1 ? '' : 's'}`;
-    return children ? `${a} y ${children} niño${children === 1 ? '' : 's'}` : a;
+    if (adults == null) {
+      const count = travelSession.travelers;
+      return count === 1 ? i18n('baqui.trip.travelerOne', '1 viajero') : i18n('baqui.trip.travelerMany', '{count} viajeros', { count });
+    }
+    const a = adults === 1 ? i18n('baqui.trip.adultOne', '1 adulto') : i18n('baqui.trip.adultMany', '{count} adultos', { count: adults });
+    if (!children) return a;
+    const c = children === 1 ? i18n('baqui.trip.childOne', '1 niño') : i18n('baqui.trip.childMany', '{count} niños', { count: children });
+    return i18n('baqui.trip.adultsAndChildren', '{adults} y {children}', { adults: a, children: c });
   }
 
   // Montos en formato nicaragüense o anglosajón: "1.500", "1,500", "8,000",
@@ -245,6 +334,9 @@
       ['gastronomia', /gastronomia|comida/], ['historia', /historia/], ['aventura', /aventura|canopy|kayak/], ['fotografia', /fotografia|fotos/]];
     const interests = INTERESTS.filter(([, pattern]) => pattern.test(normalized)).map(([name]) => name);
     if (interests.length) next.interests = [...new Set([...(current.interests || []), ...interests])];
+    if (destinations.length) next.proposed = false;
+    next.discover = !next.destinations.length && wantsDiscovery(text);
+    next.typoCorrections = lastCorrections.slice();
     return next;
   }
 
@@ -444,7 +536,33 @@
     else { badge.className = 'ia-budget-status-pill over'; badge.textContent = `Supera el presupuesto por ${formatMoney(Math.abs(budget.remainingNio))}`; }
     const percentage = budget.maximumNio > 0 && budget.completeness !== STATUS.UNAVAILABLE ? Math.min(150, Math.round(budget.totalNio / budget.maximumNio * 100)) : 0;
     $('#iaGaugePct').textContent = budget.completeness === STATUS.UNAVAILABLE ? '—' : `${percentage}%`;
+    renderBudgetSplit();
     $('#lblBudgetUsed').textContent = budget.completeness === STATUS.UNAVAILABLE ? 'Precios por confirmar' : `${formatMoney(budget.totalNio)} estimado`;
+  }
+
+  // Reparto del presupuesto de la persona (no son precios de servicios).
+  function renderBudgetSplit() {
+    const total = $('#valTotalBudget'); if (!total) return;
+    const anchor = total.closest('div') || total.parentElement;
+    let box = $('#iaBudgetSplit');
+    const split = budgetSplit();
+    const max = $('#lblBudgetMax');
+    if (max) max.textContent = split ? '○ ' + i18n('baqui.trip.budgetMax', 'Tope: {total} (≈ {equivalent})', split) : '○ ' + i18n('baqui.trip.budgetMaxNone', 'Sin tope definido');
+    if (!split) { if (box) box.hidden = true; return; }
+    if (!box) {
+      box = document.createElement('div'); box.id = 'iaBudgetSplit'; box.className = 'ia-budget-share';
+      box.setAttribute('role', 'group');
+      anchor.insertAdjacentElement('afterend', box);
+    }
+    box.hidden = false;
+    box.setAttribute('aria-label', i18n('baqui.trip.splitTitle', 'Cómo se reparte tu presupuesto'));
+    const rows = [
+      [i18n('baqui.trip.splitTotal', 'Tu presupuesto'), `${split.total} · ≈ ${split.equivalent}`],
+      [i18n('baqui.trip.splitPerPerson', 'Por persona'), split.perPerson || i18n('baqui.trip.splitNeedTravelers', 'Decime cuántos viajan')],
+      [i18n('baqui.trip.splitPerDay', 'Por día (grupo)'), split.perDay || i18n('baqui.trip.splitNeedDays', 'Decime cuántos días')],
+      [i18n('baqui.trip.splitPerPersonDay', 'Por persona por día'), split.perPersonDay || '—']
+    ];
+    box.innerHTML = `<h5>${escapeHtml(i18n('baqui.trip.splitTitle', 'Cómo se reparte tu presupuesto'))}</h5><dl>${rows.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl><small>${escapeHtml(i18n('baqui.trip.splitNote', 'Es tu presupuesto dividido; los precios de servicios se suman solo cuando están verificados. Cambio de referencia: {rate} NIO por USD ({date}).', { rate: RATE.USD_NIO, date: RATE.verifiedAt }))}</small>`;
   }
 
   function renderRecommendations() {
@@ -654,6 +772,11 @@
     const button = $('#iaGenerateRouteBtn'); button.disabled = true; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Validando destinos…';
     try {
       await loadKnowledge();
+      if (travelSession.discover && !travelSession.destinations.length) {
+        travelSession.destinations = proposeDestinations(travelSession.interests, travelSession.days);
+        travelSession.proposed = true;
+      }
+      travelSession.discover = false;
       const resolved = await Promise.all(travelSession.destinations.map(resolveTravelEntity));
       travelSession.resolvedEntities = resolved;
       travelSession.route = optimizeRoute(resolved.filter((item) => item.type !== 'unresolved'));
@@ -670,26 +793,76 @@
   }
 
   // Resumen sin datos inventados: repite lo entendido y pide lo que falta.
+  // Textos con clave i18n (baqui.trip.*) y respaldo en español.
+  const i18n = (key, fallback, vars) => {
+    const lang = window.BaqueanoLanguage;
+    const value = lang && typeof lang.t === 'function' ? lang.t(key, Object.assign({ fallback }, vars || {})) : '';
+    return value || String(fallback).replace(/\{(\w+)\}/g, (_, token) => (vars && vars[token] != null ? vars[token] : '{' + token + '}'));
+  };
+  const money = (amount, currency) => new Intl.NumberFormat(currency === 'USD' ? 'en-US' : 'es-NI', { style: 'currency', currency, maximumFractionDigits: amount < 100 ? 2 : 0 }).format(amount);
+  const INTEREST_LABEL = {
+    playas: () => i18n('baqui.trip.interestBeaches', 'playas'), volcanes: () => i18n('baqui.trip.interestVolcanoes', 'volcanes'),
+    naturaleza: () => i18n('baqui.trip.interestNature', 'naturaleza'), cultura: () => i18n('baqui.trip.interestCulture', 'cultura'),
+    historia: () => i18n('baqui.trip.interestHistory', 'historia'), aventura: () => i18n('baqui.trip.interestAdventure', 'aventura'),
+    gastronomia: () => i18n('baqui.trip.interestFood', 'gastronomía'), fotografia: () => i18n('baqui.trip.interestPhoto', 'fotografía')
+  };
+
+  // Reparto del presupuesto QUE LA PERSONA DIO (no son precios de servicios):
+  // total, por persona, por día y por persona por día, con su equivalente.
+  function budgetSplit() {
+    const amount = finite(travelSession.budget.amount);
+    if (amount == null || amount <= 0) return null;
+    const currency = travelSession.budget.currency;
+    const people = finite(travelSession.travelers);
+    const days = finite(travelSession.days);
+    const other = currency === 'USD' ? { amount: amount * RATE.USD_NIO, currency: 'NIO' } : { amount: amount / RATE.USD_NIO, currency: 'USD' };
+    return {
+      total: money(amount, currency), equivalent: money(other.amount, other.currency),
+      perPerson: people ? money(amount / people, currency) : null,
+      perDay: days ? money(amount / days, currency) : null,
+      perPersonDay: people && days ? money(amount / people / days, currency) : null
+    };
+  }
+
   function sessionSummary() {
     const names = travelSession.route.map((item) => item.name);
-    if (!names.length) return 'Decime al menos un destino de Nicaragua y armo la ruta.';
+    if (!names.length) return i18n('baqui.trip.needDestination', 'Decime al menos un destino de Nicaragua o escribí "quiero conocer Nicaragua" y te propongo una ruta.');
+    const parts = [];
+    (travelSession.typoCorrections || []).forEach((fix) => parts.push(i18n('baqui.trip.typoFix', 'Entendí «{typed}» como {label}.', fix)));
+    const interests = (travelSession.interests || []).map((name) => (INTEREST_LABEL[name] ? INTEREST_LABEL[name]() : name)).join(', ');
+    if (travelSession.proposed) {
+      parts.push(i18n('baqui.trip.proposed', 'Te propongo esta ruta para conocer Nicaragua: {route}.', { route: names.join(' → ') })
+        + (interests ? ' ' + i18n('baqui.trip.proposedBecause', 'La elegí por lo que te interesa: {interests}.', { interests }) : '')
+        + ' ' + i18n('baqui.trip.proposedEdit', 'Podés quitar o agregar destinos cuando quieras.'));
+    } else {
+      parts.push(names.length > 1
+        ? i18n('baqui.trip.routeMany', 'Tengo tu ruta con {count} paradas: {route}.', { count: names.length, route: names.join(' → ') })
+        : i18n('baqui.trip.routeOne', 'Tengo tu ruta a {name}.', { name: names[0] }));
+    }
     const who = travelersLabel();
-    const money = travelSession.budget.amount != null
-      ? new Intl.NumberFormat(travelSession.budget.currency === 'USD' ? 'en-US' : 'es-NI', { style: 'currency', currency: travelSession.budget.currency, maximumFractionDigits: 0 }).format(travelSession.budget.amount)
-      : '';
-    const intro = names.length > 1
-      ? `Tengo tu ruta con ${names.length} paradas: ${names.join(' → ')}`
-      : `Tengo tu ruta a ${names[0]}`;
-    const perPerson = travelSession.budget.perPerson != null && travelSession.travelers
-      ? ` (${new Intl.NumberFormat(travelSession.budget.currency === 'USD' ? 'en-US' : 'es-NI', { style: 'currency', currency: travelSession.budget.currency, maximumFractionDigits: 0 }).format(travelSession.budget.perPerson)} por persona)`
-      : '';
-    const details = [who && `para ${who}`, money && `con ${money}${perPerson} en total`].filter(Boolean).join(' ');
+    const split = budgetSplit();
+    if (who) parts.push(i18n('baqui.trip.travelers', 'Viajan {who}.', { who }));
+    if (split) {
+      let line = i18n('baqui.trip.budgetTotal', 'Tu presupuesto: {total} (≈ {equivalent}).', split);
+      if (split.perPerson) line += ' ' + i18n('baqui.trip.budgetPerPerson', 'Son {perPerson} por persona.', split);
+      if (split.perPersonDay) line += ' ' + i18n('baqui.trip.budgetPerPersonDay', 'Con {days} días: {perDay} por día para el grupo, {perPersonDay} por persona por día.', Object.assign({ days: travelSession.days }, split));
+      parts.push(line);
+    }
+    const spots = interestSpots(travelSession.route, travelSession.interests);
+    if (spots.length) {
+      parts.push(i18n('baqui.trip.spotsIntro', 'Lugares de tu ruta según lo que buscás ({interests}):', { interests })
+        + ' ' + spots.map((item) => item.department + ': ' + item.spots.join(', ')).join(' · ') + '.');
+    }
+    parts.push(names.length > 1
+      ? i18n('baqui.trip.compare', 'Abajo, en "Cómo moverte" y "Alertas", ves la información real de cada lugar.')
+      : i18n('baqui.trip.compareOne', 'Abajo tenés cómo llegar y qué tener en cuenta.'));
     const missing = [];
-    if (!travelSession.days) missing.push('cuántos días quieren viajar');
-    if (!who) missing.push('cuántas personas viajan (y si van niños)');
-    const compare = names.length > 1 ? ' Abajo, en "Cómo moverte" y "Alertas", ves la información real de cada lugar para compararlos.' : ' Abajo tenés cómo llegar y qué tener en cuenta.';
-    const ask = missing.length ? ` Para repartir las paradas por día y afinar el presupuesto me falta saber ${missing.join(' y ')}.` : ' Los precios sin ficha vigente quedan por confirmar; no los invento.';
-    return `${intro}${details ? ' ' + details : ''}.${compare}${ask}`;
+    if (!travelSession.days) missing.push(i18n('baqui.trip.missingDays', 'cuántos días quieren viajar'));
+    if (!who) missing.push(i18n('baqui.trip.missingTravelers', 'cuántas personas viajan (y si van niños)'));
+    parts.push(missing.length
+      ? i18n('baqui.trip.missing', 'Para repartir las paradas por día y el presupuesto me falta saber {items}.', { items: missing.join(' ' + i18n('baqui.trip.and', 'y') + ' ') })
+      : i18n('baqui.trip.pricesPending', 'Los precios de hospedaje, transporte y comida se suman solo cuando hay negocios verificados; no los invento.'));
+    return parts.join(' ');
   }
 
   function addMessage(text, sender = 'user') {
@@ -867,7 +1040,7 @@
         window.history.replaceState(null, '', window.location.pathname);
       }
     } catch (_) { /* sin parámetros válidos: BAQUI arranca normal */ }
-    window.BaqueanoTravelSession = Object.freeze({ get: () => clone(travelSession), parseTravelIntent, resolveTravelEntity, generate: generateSession, renderDynamicRoute, calculateTripBudget, flags: FLAGS });
+    window.BaqueanoTravelSession = Object.freeze({ get: () => clone(travelSession), parseTravelIntent, resolveTravelEntity, loadKnowledge, generate: generateSession, renderDynamicRoute, calculateTripBudget, flags: FLAGS });
   }
 
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init, { once: true }) : init();

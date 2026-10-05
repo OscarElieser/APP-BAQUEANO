@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-05T13:07:49.144Z",
+ "generatedAt": "2026-10-05T14:48:47.603Z",
  "base": "http://127.0.0.1:8790/",
  "widths": [
   390,
@@ -421,16 +421,7 @@
    "page": "cookies.html",
    "width": 390,
    "overflowPx": 0,
-   "offscreen": [
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]"
-   ],
+   "offscreen": [],
    "imgNoAlt": [],
    "error": null,
    "axe": [],
@@ -1042,7 +1033,6 @@
     "nicaraguaActual",
     "pueblosOriginarios",
     "personajes",
-    "patrimonio",
     "fuentes"
    ],
    "whatsapp": [
@@ -1079,7 +1069,6 @@
     "nicaraguaActual",
     "pueblosOriginarios",
     "personajes",
-    "patrimonio",
     "fuentes"
    ],
    "whatsapp": [
@@ -1334,13 +1323,7 @@
    "page": "musica.html",
    "width": 390,
    "overflowPx": 0,
-   "offscreen": [
-    "button.musica-arrow-btn [399,429]",
-    "button.musica-arrow-btn [435,465]",
-    "button.sticky-btn-play [354,395]",
-    "button.player-ctrl-btn [409,450]",
-    "button.player-ctrl-btn [491,532]"
-   ],
+   "offscreen": [],
    "imgNoAlt": [],
    "error": null,
    "axe": [],
@@ -1365,9 +1348,7 @@
    "page": "musica.html",
    "width": 1366,
    "overflowPx": 0,
-   "offscreen": [
-    "button.track-play-btn [1622,1663]"
-   ],
+   "offscreen": [],
    "imgNoAlt": [],
    "error": null,
    "axe": [],
@@ -1384,9 +1365,7 @@
    "page": "nosotros.html",
    "width": 390,
    "overflowPx": 0,
-   "offscreen": [
-    "input. [289,499]"
-   ],
+   "offscreen": [],
    "imgNoAlt": [],
    "error": null,
    "axe": [],

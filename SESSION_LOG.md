@@ -4262,3 +4262,11 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 14:31 Propietario: "continuemos donde lo habíamos quedado antes de la pausa" → retomar responsive sin recortes (punto de pausa).
 - Responsive sin recortes: 2ª capa (nosotros formulario 1 columna ≤600, cabeceras "Ver más" de baqueano-ia/mi-viaje, ambiental, aliados, cookies, perfil). Medición 28 páginas × 320–600 px: 0 elementos interactivos fuera del viewport, 0 fallos. CSS ?v=20261005-a11y-3.
 - Propietario (08:34, BAQUI en producción): "quiero ir a la playa, a los departamentos de carazon, rivas, león; presupuesto 300 dólares; 5 personas" → BAQUI respondió solo Rivas → León (2 de 3). Pide: (1) reconocer los 3 departamentos (Carazo escrito "carazon"); (2) con "quiero conocer Nicaragua" BAQUI debe recomendar lugares por su cuenta; (3) el presupuesto no se calcula (todo "Por confirmar"). Regla vigente: BAQUI no inventa precios → calcular con el presupuesto del usuario (por persona/día) y precios verificados cuando existan.
+- BAQUI corregido y verificado (Playwright, build local; `npm run test:baqui` 20/20):
+  1. Tipeo: "carazon" → Carazo (editDistance ≤1/≤2, solo 17 departamentos y destinos del catálogo). Ruta Carazo → Rivas → León.
+  2. "Quiero conocer Nicaragua": BAQUI propone la ruta según intereses (catálogo, sin inventar) y lo marca como propuesta editable.
+  3. Presupuesto: reparto del presupuesto propio ($300/5 = $60 por persona; con 4 días $75/día grupo, $15/persona/día) en el chat y en un bloque nuevo de la tarjeta; tope real en lugar de "C$ 10,000 máximo previsto" fijo.
+  4. Intereses → lugares reales del departamento (`spots` en travel-knowledge.json desde territories-data.js).
+  5. Tarjeta de presupuesto medía 528 px en móvil de 390 → 1 columna ≤600 px. Clase nueva `ia-budget-share` (la existente `ia-budget-split` es el desglose).
+  6. i18n: 44 claves `baqui.trip.*` ×6; los mensajes salen en el idioma activo. Prueba fijada a ?lang=es.
+  - Gates: i18n 0 errores · auditoría estática 0 críticos · franja viva OK · browser-qa 390/1366 0 fallos.
