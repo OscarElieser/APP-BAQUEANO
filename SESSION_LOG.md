@@ -4203,3 +4203,11 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - Rama de trabajo: `claude/sleepy-goodall-kqogrq` (WIP i18n `de7ba00`). Traducir es-07…es-23 a en/fr/it/pt/de, fusionar en `website/locales/*.json` con `i18n-add-keys.mjs`, validar la puerta i18n y, si queda limpia, llevar las 30 páginas a `main`.
 - **Directiva del propietario (2026-10-05):** "el objetivo es tener el 100 %" y "guardar toda la información para continuar en otra computadora". El espacio de traducción pasa del scratchpad efímero a `tools/i18n-batches/` (es-00…23, tx-00…07, `merge.mjs` portable y `README.md` con estado y pasos). Cada lote se confirma y sube a `claude/sleepy-goodall-kqogrq` al terminar.
 - Lote 07 fusionado: 106 claves × 6 idiomas (total 1 888). Errores restantes de la puerta: 1 695, que son las claves de los lotes 08–23.
+
+### 2026-10-05 — i18n Fase 2 COMPLETADA: lotes 07–23 traducidos y 30 páginas migradas
+- Lotes 07–23 (1 811 claves) traducidos a en/fr/it/pt/de y fusionados; cada lote se subió a `claude/sleepy-goodall-kqogrq` al terminar (continuidad entre computadoras: `tools/i18n-batches/`).
+- Puerta i18n: **3 593 claves × 6 idiomas, 0 faltantes, 0 errores**; HTML 3 606/3 607 textos con clave; 73 archivos al 100 %; trinquete `i18n-baseline.json` bajado (`npm run i18n:baseline`). `assets/i18n` regenerado (paridad App 3 594 claves).
+- Pruebas: i18n-browser (19 rutas × 6 idiomas, persistencia) ✅; barrido Chromium 29 páginas × en/de → 0 claves sin resolver ✅; build 727 archivos ✅; verify-hostinger ✅; seo-normalize 11/11 ✅; franja viva 17/181 ✅; production-smoke ✅; paridad territorios ✅.
+- `global-shell.test.mjs` (no está en CI): 42 fallos de "header fuera de vista al hacer scroll" y CASO 5b **idénticos en `main` sin estos cambios** (verificado con worktree de origin/main en :5078) → preexistentes, no introducidos; quedan como pendiente.
+- Pendiente i18n: 731 textos JS dinámicos, 60 TSX, runtime de idioma del Ops Center.
+- Observación Kronox: varias páginas muestran precios/valoraciones de ejemplo (p. ej. "4.8 (320 reseñas)", "Desde C$ 600") — pendiente de retirar o marcar según la directiva de no inventar datos.

@@ -4523,7 +4523,8 @@
     },
     "terminos": {
       "body": {
-        "title1": "Términos & Condiciones de Uso | BAQUEANO Nicaragua"
+        "title1": "Términos & Condiciones de Uso | BAQUEANO Nicaragua",
+        "metaDescription1": "Términos y Condiciones de Uso de la plataforma BAQUEANO en Nicaragua. Información legal transparente, derechos del viajero y compromisos comunitarios."
       },
       "termHero": {
         "div1": "LEGAL",
@@ -4552,7 +4553,8 @@
         "p9": "Promovemos un turismo sostenible, respetuoso con las comunidades, la cultura y el medio ambiente."
       },
       "termSidebar": {
-        "h31": "Contenido"
+        "h31": "Contenido",
+        "asideAriaLabel1": "Índice de contenido"
       },
       "termIndexNav": {
         "a1": "Introducción",
@@ -4629,6 +4631,150 @@
         "h41": "5. Registro de cuenta",
         "p1": "Creación de credenciales, seguridad y responsabilidad del usuario.",
         "div1": "Para acceder a funciones como favoritos, historial de itinerarios en Mi Viaje o reportes de alertas ambientales, el usuario puede registrarse mediante correo electrónico o autenticación federada (Firebase Auth). Cada usuario es responsable de custodiar la confidencialidad de su contraseña."
+      },
+      "sec6": {
+        "h41": "6. Perfil de usuario",
+        "p1": "Información del perfil, privacidad y veracidad de los datos suministrados.",
+        "div1": "El usuario se compromete a ingresar información verídica y mantenerla actualizada. BAQUEANO se reserva el derecho de dar de baja perfiles ficticios o utilizados con fines de suplantación."
+      },
+      "sec7": {
+        "h41": "7. Prestadores de servicios",
+        "p1": "Rol de los emprendedores, cooperativas, guías y negocios locales.",
+        "div1": "Los prestadores locales operan de manera autónoma. BAQUEANO actúa como puente de visibilidad y facilitación tecnológica sin intermediación opresiva ni comisiones extractivas sobre sus tarifas base de subsistencia comunitaria."
+      },
+      "sec8": {
+        "h41": "8. Información de destinos",
+        "p1": "Datos geográficos, climáticos, culturales y de conservación.",
+        "div1": "Las fichas de los 29 destinos y reservas de Nicaragua se recopilan a partir de fuentes institucionales (INTUR, MARENA) y testimonios directos de guías locales. Aunque se actualizan periódicamente, los factores climáticos o de acceso físico en territorio pueden variar."
+      },
+      "sec9": {
+        "h41": "9. Reservas y pagos",
+        "p1": "Condiciones de contratación directa y pago en destino o vía pasarelas aliadas.",
+        "div1": "Los pagos se canalizan directamente al prestador local o a través de enlaces verificados de pago acordados con cooperativas. BAQUEANO no retiene fondos de los anfitriones ni cobra comisiones ocultas al explorador."
+      },
+      "sec10": {
+        "h41": "10. Cancelaciones y reembolsos",
+        "p1": "Políticas de anulación según el tipo de experiencia y condiciones climáticas.",
+        "div1": "Cada cooperativa y anfitrión establece sus ventanas de aviso previo para cancelación sin penalidad. En situaciones de alerta ambiental o climática oficial, se prioriza la reprogramación o reembolso completo."
+      },
+      "sec11": {
+        "h41": "11. Precios y disponibilidad",
+        "p1": "Transparencia en moneda nacional (Córdoba Oro C$) y referencia en USD.",
+        "div1": "Los precios oficiales se expresan en Córdobas (C$) y dólares estadounidenses de referencia. No existen cargos de servicio sorpresa al finalizar la reserva."
+      },
+      "sec12": {
+        "h41": "12. Verificación de negocios",
+        "p1": "Protocolo de auditoría territorial en 8 pasos.",
+        "div1": "El distintivo \"Verificado BAQUEANO\" certifica que nuestro equipo o la comunidad ha auditado presencialmente la titularidad, coordenadas GPS, contacto directo, fotos reales y prácticas de hospitalidad del prestador."
+      },
+      "sec13": {
+        "h41": "13. Baqueano IA",
+        "p1": "Alcance del asistente de viaje, algoritmos y descargo de responsabilidad.",
+        "div1": "Baqueano Digital utiliza modelos de IA generativa para estructurar rutas e itinerarios. Sus sugerencias son orientativas y deben contrastarse con los anfitriones locales y condiciones del terreno antes de iniciar la marcha."
+      },
+      "sec14": {
+        "h41": "14. Mapas y geolocalización",
+        "p1": "Precisión satelital, uso de GPS y mapas sin conexión.",
+        "div1": "Los mapas de la plataforma se apoyan en datos satelitales y cartografía de código abierto. En zonas agrestes o cráteres volcánicos, la señal GPS puede verse afectada por la orografía y vegetación."
+      },
+      "sec15": {
+        "h41": "15. Contenido generado por usuarios",
+        "p1": "Reseñas, fotos, valoraciones y alertas ciudadanas.",
+        "div1": "Los comentarios aportados por los viajeros deben ser verídicos y respetuosos. No se tolerará contenido difamatorio, lenguaje de odio o material que incite al daño ambiental de flora y fauna silvestre."
+      },
+      "sec16": {
+        "h41": "16. Conducta del usuario",
+        "p1": "Reglas de comportamiento ético en comunidades rurales e indígenas.",
+        "div1": "El viajero se compromete a respetar las normas locales de convivencia, solicitar permiso antes de fotografiar a habitantes o ceremonias ancestrales y acatar las directrices del baqueano o guía acompañante."
+      },
+      "sec17": {
+        "h41": "17. Propiedad intelectual",
+        "p1": "Derechos sobre la marca BAQUEANO, código, diseño e iconografía.",
+        "div1": "Todos los logotipos, diseños, código fuente, ilustraciones del Guardabarranco Baqüi y textos editoriales son propiedad exclusiva de BAQUEANO o cuentan con licencias legítimas de uso."
+      },
+      "sec18": {
+        "h41": "18. Uso de imágenes y medios",
+        "p1": "Fotografías reales del territorio y derechos de autor.",
+        "div1": "Las fotografías exhibidas corresponden a paisajes, productores y aliados de Nicaragua. Queda prohibida su reproducción comercial externa sin consentimiento previo por escrito."
+      },
+      "sec19": {
+        "h41": "19. Enlaces a terceros",
+        "p1": "Vínculos a servicios externos, WhatsApp y sitios oficiales.",
+        "div1": "La plataforma puede incluir enlaces a WhatsApp para contacto directo o a instituciones gubernamentales. BAQUEANO no controla las políticas de privacidad ni la operatividad de dichos servicios ajenos."
+      },
+      "sec20": {
+        "h41": "20. Limitación de responsabilidad",
+        "p1": "Exclusión de daños indirectos y riesgos inherentes al ecoturismo.",
+        "div1": "El ecoturismo y montañismo implican riesgos naturales (clima, senderos escarpados, fauna). El viajero asume conscientemente su propia integridad física y se compromete a contratar guías debidamente acreditados."
+      },
+      "sec21": {
+        "h41": "21. Exoneración de garantías",
+        "p1": "Servicio \"tal cual\" y disponibilidad continua de servidores.",
+        "div1": "Trabajamos con infraestructura en la nube de alta disponibilidad, pero no garantizamos que el servicio sea ininterrumpido en zonas sin cobertura de telefonía celular o durante mantenimientos programados."
+      },
+      "sec22": {
+        "h41": "22. Turismo responsable",
+        "p1": "Decálogo Verde, principios de no dejar rastro y respeto ecológico.",
+        "div1": "Todo usuario se compromete a no extraer muestras geológicas, fauna ni flora protegida, regresar con su propia basura y respetar los senderos señalizados en reservas de biosfera y parques nacionales."
+      },
+      "sec23": {
+        "h41": "23. Seguridad y emergencias (SOS)",
+        "p1": "Protocolo del botón SOS 24/7 y coordinación con autoridades.",
+        "div1": "La función SOS es un canal digital de enlace y orientación con coordenadas GPS precalculadas. No reemplaza a los cuerpos de socorro ni a las fuerzas de seguridad pública del Estado de Nicaragua."
+      },
+      "sec24": {
+        "h41": "24. Suspensión y cierre de cuentas",
+        "p1": "Medidas disciplinarias ante faltas graves o fraude.",
+        "div1": "BAQUEANO podrá suspender o inhabilitar de inmediato cuentas que incurran en fraude financiero, suplantación de identidad o desacato flagrante de las normas de conservación ambiental."
+      },
+      "sec25": {
+        "h41": "25. Modificaciones del servicio",
+        "p1": "Evolución técnica y mejoras progresivas de la plataforma.",
+        "div1": "Nos reservamos el derecho de añadir nuevas herramientas, optimizar algoritmos cartográficos o retirar funciones obsoletas en beneficio de la experiencia del viajero."
+      },
+      "sec26": {
+        "h41": "26. Modificaciones de los términos",
+        "p1": "Notificación de cambios sustanciales a la comunidad.",
+        "div1": "Cualquier cambio de fondo será debidamente comunicado con indicación de la fecha de última actualización en el encabezado de esta página."
+      },
+      "sec27": {
+        "h41": "27. Ley aplicable y jurisdicción",
+        "p1": "Marco legal de la República de Nicaragua.",
+        "div1": "Estos términos se rigen e interpretan de conformidad con la legislación vigente de la República de Nicaragua. Para cualquier controversia legal, las partes se someten a la jurisdicción de los tribunales de la ciudad de Managua."
+      },
+      "sec28": {
+        "h41": "28. Resolución de conflictos",
+        "p1": "Instancia previa de diálogo amigable y mediación comunitaria.",
+        "div1": "Ante cualquier discrepancia, las partes convienen en agotar previamente una etapa de diálogo amistoso y mediación directa con participación de los comités de guías locales y el equipo de BAQUEANO."
+      },
+      "sec29": {
+        "h41": "29. Contacto",
+        "p1": "Canales oficiales de atención legal y técnica.",
+        "div1": "Para dudas sobre estos términos, notificaciones formales o consultas éticas, podés escribir a nuestro equipo a través de",
+        "div2": "o en nuestros canales oficiales de mensajería."
+      },
+      "sec30": {
+        "h41": "30. Vigencia",
+        "p1": "Entrada en vigor y validez legal permanente.",
+        "div1": "Esta versión de los Términos y Condiciones entró en vigor el",
+        "div2": "y sustituye cualquier acuerdo previo relativo al uso de los servicios digitales de BAQUEANO."
+      },
+      "termToggleAllBtn": {
+        "span1": "Ver todas las secciones (30)"
+      },
+      "termRelatedCard": {
+        "p1": "También podés consultar nuestras políticas y avisos legales para mayor información.",
+        "a1": "Ver política de privacidad",
+        "a2": "Cookies y caché offline"
+      },
+      "termContactCard": {
+        "h41": "Contacto y vigencia",
+        "p1": "Si tenés preguntas sobre estos Términos y Condiciones, podés contactarnos a través de nuestros canales oficiales.",
+        "small1": "Última actualización",
+        "small2": "Versión"
+      },
+      "termSearchInput": {
+        "inputPlaceholder1": "Buscá un tema dentro de los términos y condiciones..."
       }
     }
   },

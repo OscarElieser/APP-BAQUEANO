@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T05:03:26.851Z",
+  "generatedAt": "2026-10-05T05:29:18.530Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 3506,
-    "en": 3506,
-    "fr": 3506,
-    "it": 3506,
-    "pt": 3506,
-    "de": 3506
+    "es": 3594,
+    "en": 3594,
+    "fr": 3594,
+    "it": 3594,
+    "pt": 3594,
+    "de": 3594
   },
   "html": {
     "files": 31,
@@ -42,6 +42,23 @@
     "admin.html",
     "aliados.html",
     "ambiental.html",
+    "apps/admin/src/app/layout.tsx",
+    "apps/admin/src/app/page.tsx",
+    "apps/admin/src/components/AdminCards.tsx",
+    "apps/admin/src/components/ui/AdminBadge.tsx",
+    "apps/admin/src/components/ui/AdminButton.tsx",
+    "apps/admin/src/components/ui/AdminTable.tsx",
+    "apps/web/src/app/layout.tsx",
+    "apps/web/src/app/loading.tsx",
+    "apps/web/src/app/mi-viaje/[tripId]/page.tsx",
+    "apps/web/src/app/page.tsx",
+    "apps/web/src/app/territorios/[slug]/page.tsx",
+    "apps/web/src/components/cards/DestinationCard.tsx",
+    "apps/web/src/components/DynamicBlockRenderer.tsx",
+    "apps/web/src/components/navigation/PublicNavigation.tsx",
+    "apps/web/src/components/navigation/ScrollProgress.tsx",
+    "apps/web/src/components/OfflineRegistration.tsx",
+    "apps/web/src/components/sections/DataSourceBanner.tsx",
     "aviso-legal.html",
     "ayuda.html",
     "baqueano-ai.html",
@@ -57,17 +74,6 @@
     "gastronomia.html",
     "historia.html",
     "index.html",
-    "legal.html",
-    "mapa.html",
-    "mi-negocio.html",
-    "mi-viaje.html",
-    "musica.html",
-    "nosotros.html",
-    "offline.html",
-    "perfil.html",
-    "privacidad.html",
-    "terminos.html",
-    "testimonios.html",
     "js/ai-assistant.js",
     "js/ayuda.js",
     "js/baqueano-api.js",
@@ -92,116 +98,21 @@
     "js/video-registry.js",
     "js/website-business-catalog.js",
     "js/website-operations-catalog.js",
-    "apps/admin/src/app/layout.tsx",
-    "apps/admin/src/app/page.tsx",
-    "apps/admin/src/components/AdminCards.tsx",
-    "apps/admin/src/components/ui/AdminBadge.tsx",
-    "apps/admin/src/components/ui/AdminButton.tsx",
-    "apps/admin/src/components/ui/AdminTable.tsx",
-    "apps/web/src/app/layout.tsx",
-    "apps/web/src/app/loading.tsx",
-    "apps/web/src/app/mi-viaje/[tripId]/page.tsx",
-    "apps/web/src/app/page.tsx",
-    "apps/web/src/app/territorios/[slug]/page.tsx",
-    "apps/web/src/components/DynamicBlockRenderer.tsx",
-    "apps/web/src/components/OfflineRegistration.tsx",
-    "apps/web/src/components/cards/DestinationCard.tsx",
-    "apps/web/src/components/navigation/PublicNavigation.tsx",
-    "apps/web/src/components/navigation/ScrollProgress.tsx",
-    "apps/web/src/components/sections/DataSourceBanner.tsx",
+    "legal.html",
+    "mapa.html",
+    "mi-negocio.html",
+    "mi-viaje.html",
+    "musica.html",
+    "nosotros.html",
+    "offline.html",
     "packages/i18n/src/index.tsx",
-    "packages/ui/src/index.tsx"
+    "packages/ui/src/index.tsx",
+    "perfil.html",
+    "privacidad.html",
+    "terminos.html",
+    "testimonios.html"
   ],
-  "errors": [
-    "terminos.html: clave inexistente en es.json → pages.terminos.body.metaDescription1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.termSidebar.asideAriaLabel1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.termSearchInput.inputPlaceholder1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec6.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec6.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec6.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec7.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec7.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec7.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec8.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec8.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec8.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec9.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec9.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec9.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec10.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec10.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec10.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec11.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec11.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec11.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec12.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec12.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec12.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec13.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec13.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec13.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec14.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec14.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec14.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec15.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec15.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec15.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec16.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec16.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec16.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec17.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec17.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec17.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec18.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec18.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec18.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec19.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec19.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec19.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec20.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec20.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec20.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec21.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec21.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec21.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec22.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec22.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec22.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec23.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec23.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec23.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec24.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec24.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec24.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec25.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec25.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec25.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec26.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec26.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec26.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec27.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec27.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec27.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec28.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec28.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec28.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec29.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec29.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec29.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec29.div2",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec30.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec30.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec30.div1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.sec30.div2",
-    "terminos.html: clave inexistente en es.json → pages.terminos.termToggleAllBtn.span1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.termRelatedCard.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.termRelatedCard.a1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.termRelatedCard.a2",
-    "terminos.html: clave inexistente en es.json → pages.terminos.termContactCard.h41",
-    "terminos.html: clave inexistente en es.json → pages.terminos.termContactCard.p1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.termContactCard.small1",
-    "terminos.html: clave inexistente en es.json → pages.terminos.termContactCard.small2"
-  ],
+  "errors": [],
   "files": [
     {
       "file": "404.html",
@@ -238,6 +149,766 @@
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
+    },
+    {
+      "file": "apps/admin/src/app/auditoria/page.tsx",
+      "type": "tsx",
+      "total": 10,
+      "translated": 0,
+      "untranslated": 10,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/categorias/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/confianza/page.tsx",
+      "type": "tsx",
+      "total": 19,
+      "translated": 0,
+      "untranslated": 19,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/configuracion/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/control-tower/page.tsx",
+      "type": "tsx",
+      "total": 49,
+      "translated": 0,
+      "untranslated": 49,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/cultura/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/dashboard/page.tsx",
+      "type": "tsx",
+      "total": 14,
+      "translated": 0,
+      "untranslated": 14,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/departamentos/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/desarrolladores/page.tsx",
+      "type": "tsx",
+      "total": 29,
+      "translated": 0,
+      "untranslated": 29,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/destinos/[id]/page.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/destinos/nuevo/page.tsx",
+      "type": "tsx",
+      "total": 18,
+      "translated": 0,
+      "untranslated": 18,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/destinos/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/dispositivos/page.tsx",
+      "type": "tsx",
+      "total": 25,
+      "translated": 0,
+      "untranslated": 25,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/fuentes/page.tsx",
+      "type": "tsx",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/gastronomia/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/historia/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/layout.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/admin/src/app/mi-negocio/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/movilidad/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/multimedia/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/municipios/page.tsx",
+      "type": "tsx",
+      "total": 12,
+      "translated": 0,
+      "untranslated": 12,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/negocios/[id]/page.tsx",
+      "type": "tsx",
+      "total": 5,
+      "translated": 0,
+      "untranslated": 5,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/negocios/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/operaciones-campo/page.tsx",
+      "type": "tsx",
+      "total": 30,
+      "translated": 0,
+      "untranslated": 30,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/page.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/admin/src/app/pagos/page.tsx",
+      "type": "tsx",
+      "total": 11,
+      "translated": 0,
+      "untranslated": 11,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/paises/page.tsx",
+      "type": "tsx",
+      "total": 38,
+      "translated": 0,
+      "untranslated": 38,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/plataforma/page.tsx",
+      "type": "tsx",
+      "total": 43,
+      "translated": 0,
+      "untranslated": 43,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/predictive/page.tsx",
+      "type": "tsx",
+      "total": 29,
+      "translated": 0,
+      "untranslated": 29,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/reservas/page.tsx",
+      "type": "tsx",
+      "total": 15,
+      "translated": 0,
+      "untranslated": 15,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/simulation/page.tsx",
+      "type": "tsx",
+      "total": 24,
+      "translated": 0,
+      "untranslated": 24,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/smart-points/page.tsx",
+      "type": "tsx",
+      "total": 29,
+      "translated": 0,
+      "untranslated": 29,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/sostenibilidad/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/spatial/page.tsx",
+      "type": "tsx",
+      "total": 58,
+      "translated": 0,
+      "untranslated": 58,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/strategic/briefing/page.tsx",
+      "type": "tsx",
+      "total": 22,
+      "translated": 0,
+      "untranslated": 22,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/strategic/page.tsx",
+      "type": "tsx",
+      "total": 52,
+      "translated": 0,
+      "untranslated": 52,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/strategic/scenarios/page.tsx",
+      "type": "tsx",
+      "total": 21,
+      "translated": 0,
+      "untranslated": 21,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/strategic/scorecard/page.tsx",
+      "type": "tsx",
+      "total": 13,
+      "translated": 0,
+      "untranslated": 13,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/suscripciones/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/usuarios/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/website-builder/page.tsx",
+      "type": "tsx",
+      "total": 10,
+      "translated": 0,
+      "untranslated": 10,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/components/AdminAuthGate.tsx",
+      "type": "tsx",
+      "total": 6,
+      "translated": 0,
+      "untranslated": 6,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/components/AdminCards.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/admin/src/components/AdminShell.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/components/ai/AdminCopilot.tsx",
+      "type": "tsx",
+      "total": 11,
+      "translated": 0,
+      "untranslated": 11,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/components/ModulePlaceholder.tsx",
+      "type": "tsx",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/components/ui/AdminBadge.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/admin/src/components/ui/AdminButton.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/admin/src/components/ui/AdminTable.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/alquiler-vehiculos/page.tsx",
+      "type": "tsx",
+      "total": 11,
+      "translated": 0,
+      "untranslated": 11,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/ayuda/page.tsx",
+      "type": "tsx",
+      "total": 11,
+      "translated": 0,
+      "untranslated": 11,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/baqueano-ai/page.tsx",
+      "type": "tsx",
+      "total": 72,
+      "translated": 0,
+      "untranslated": 72,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/confianza/metodologia/page.tsx",
+      "type": "tsx",
+      "total": 34,
+      "translated": 0,
+      "untranslated": 34,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/cultura/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/destinos/[slug]/page.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/destinos/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/developers/page.tsx",
+      "type": "tsx",
+      "total": 22,
+      "translated": 0,
+      "untranslated": 22,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/error.tsx",
+      "type": "tsx",
+      "total": 4,
+      "translated": 0,
+      "untranslated": 4,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/gastronomia/page.tsx",
+      "type": "tsx",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/historia/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/kiosk/[smartPointId]/page.tsx",
+      "type": "tsx",
+      "total": 20,
+      "translated": 0,
+      "untranslated": 20,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/layout.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/loading.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/mapa/page.tsx",
+      "type": "tsx",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/marca/page.tsx",
+      "type": "tsx",
+      "total": 5,
+      "translated": 0,
+      "untranslated": 5,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/mi-viaje/[tripId]/page.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/mi-viaje/page.tsx",
+      "type": "tsx",
+      "total": 4,
+      "translated": 0,
+      "untranslated": 4,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/not-found.tsx",
+      "type": "tsx",
+      "total": 4,
+      "translated": 0,
+      "untranslated": 4,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/notificaciones/page.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/open-data/page.tsx",
+      "type": "tsx",
+      "total": 10,
+      "translated": 0,
+      "untranslated": 10,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/p/[slug]/page.tsx",
+      "type": "tsx",
+      "total": 12,
+      "translated": 0,
+      "untranslated": 12,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/page.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/pasaporte/page.tsx",
+      "type": "tsx",
+      "total": 4,
+      "translated": 0,
+      "untranslated": 4,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/privacidad/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/research/page.tsx",
+      "type": "tsx",
+      "total": 24,
+      "translated": 0,
+      "untranslated": 24,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/rutas/[slug]/page.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/rutas/page.tsx",
+      "type": "tsx",
+      "total": 6,
+      "translated": 0,
+      "untranslated": 6,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/sostenibilidad/page.tsx",
+      "type": "tsx",
+      "total": 6,
+      "translated": 0,
+      "untranslated": 6,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/terminos/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/territorios/[slug]/page.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/territorios/page.tsx",
+      "type": "tsx",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/viaje/[tripId]/page.tsx",
+      "type": "tsx",
+      "total": 23,
+      "translated": 0,
+      "untranslated": 23,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/cards/DestinationCard.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/cards/PlaceCard.tsx",
+      "type": "tsx",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/cards/SavePlaceButton.tsx",
+      "type": "tsx",
+      "total": 1,
+      "translated": 0,
+      "untranslated": 1,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/DynamicBlockRenderer.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/map/InteractiveMap.tsx",
+      "type": "tsx",
+      "total": 7,
+      "translated": 0,
+      "untranslated": 7,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/navigation/PublicNavigation.tsx",
+      "type": "tsx",
+      "total": 58,
+      "translated": 58,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/navigation/ScrollProgress.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/navigation/SiteFooter.tsx",
+      "type": "tsx",
+      "total": 4,
+      "translated": 0,
+      "untranslated": 4,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/OfflineRegistration.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/sections/DataSourceBanner.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/sections/DestinationExplorer.tsx",
+      "type": "tsx",
+      "total": 10,
+      "translated": 0,
+      "untranslated": 10,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/sections/HeroSection.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/sections/HomeNarrative.tsx",
+      "type": "tsx",
+      "total": 21,
+      "translated": 0,
+      "untranslated": 21,
+      "coverage": 0
     },
     {
       "file": "aviso-legal.html",
@@ -379,105 +1050,6 @@
       "type": "html",
       "total": 215,
       "translated": 215,
-      "untranslated": 0,
-      "legacyPhrase": 0,
-      "coverage": 100
-    },
-    {
-      "file": "legal.html",
-      "type": "html",
-      "total": 15,
-      "translated": 15,
-      "untranslated": 0,
-      "legacyPhrase": 0,
-      "coverage": 100
-    },
-    {
-      "file": "mapa.html",
-      "type": "html",
-      "total": 39,
-      "translated": 39,
-      "untranslated": 0,
-      "legacyPhrase": 0,
-      "coverage": 100
-    },
-    {
-      "file": "mi-negocio.html",
-      "type": "html",
-      "total": 186,
-      "translated": 186,
-      "untranslated": 0,
-      "legacyPhrase": 0,
-      "coverage": 100
-    },
-    {
-      "file": "mi-viaje.html",
-      "type": "html",
-      "total": 113,
-      "translated": 113,
-      "untranslated": 0,
-      "legacyPhrase": 0,
-      "coverage": 100
-    },
-    {
-      "file": "musica.html",
-      "type": "html",
-      "total": 196,
-      "translated": 196,
-      "untranslated": 0,
-      "legacyPhrase": 0,
-      "coverage": 100
-    },
-    {
-      "file": "nosotros.html",
-      "type": "html",
-      "total": 143,
-      "translated": 143,
-      "untranslated": 0,
-      "legacyPhrase": 0,
-      "coverage": 100
-    },
-    {
-      "file": "offline.html",
-      "type": "html",
-      "total": 24,
-      "translated": 24,
-      "untranslated": 0,
-      "legacyPhrase": 0,
-      "coverage": 100
-    },
-    {
-      "file": "perfil.html",
-      "type": "html",
-      "total": 161,
-      "translated": 161,
-      "untranslated": 0,
-      "legacyPhrase": 0,
-      "coverage": 100
-    },
-    {
-      "file": "privacidad.html",
-      "type": "html",
-      "total": 88,
-      "translated": 88,
-      "untranslated": 0,
-      "legacyPhrase": 0,
-      "coverage": 100
-    },
-    {
-      "file": "terminos.html",
-      "type": "html",
-      "total": 193,
-      "translated": 193,
-      "untranslated": 0,
-      "legacyPhrase": 0,
-      "coverage": 100
-    },
-    {
-      "file": "testimonios.html",
-      "type": "html",
-      "total": 79,
-      "translated": 79,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -1230,764 +1802,67 @@
       "coverage": 100
     },
     {
-      "file": "apps/admin/src/app/auditoria/page.tsx",
-      "type": "tsx",
-      "total": 10,
-      "translated": 0,
-      "untranslated": 10,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/categorias/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/confianza/page.tsx",
-      "type": "tsx",
-      "total": 19,
-      "translated": 0,
-      "untranslated": 19,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/configuracion/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/control-tower/page.tsx",
-      "type": "tsx",
-      "total": 49,
-      "translated": 0,
-      "untranslated": 49,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/cultura/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/dashboard/page.tsx",
-      "type": "tsx",
-      "total": 14,
-      "translated": 0,
-      "untranslated": 14,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/departamentos/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/desarrolladores/page.tsx",
-      "type": "tsx",
-      "total": 29,
-      "translated": 0,
-      "untranslated": 29,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/destinos/[id]/page.tsx",
-      "type": "tsx",
-      "total": 8,
-      "translated": 0,
-      "untranslated": 8,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/destinos/nuevo/page.tsx",
-      "type": "tsx",
-      "total": 18,
-      "translated": 0,
-      "untranslated": 18,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/destinos/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/dispositivos/page.tsx",
-      "type": "tsx",
-      "total": 25,
-      "translated": 0,
-      "untranslated": 25,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/fuentes/page.tsx",
-      "type": "tsx",
-      "total": 1,
-      "translated": 0,
-      "untranslated": 1,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/gastronomia/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/historia/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/layout.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/admin/src/app/mi-negocio/page.tsx",
-      "type": "tsx",
-      "total": 3,
-      "translated": 0,
-      "untranslated": 3,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/movilidad/page.tsx",
-      "type": "tsx",
-      "total": 3,
-      "translated": 0,
-      "untranslated": 3,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/multimedia/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/municipios/page.tsx",
-      "type": "tsx",
-      "total": 12,
-      "translated": 0,
-      "untranslated": 12,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/negocios/[id]/page.tsx",
-      "type": "tsx",
-      "total": 5,
-      "translated": 0,
-      "untranslated": 5,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/negocios/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/operaciones-campo/page.tsx",
-      "type": "tsx",
-      "total": 30,
-      "translated": 0,
-      "untranslated": 30,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/page.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/admin/src/app/pagos/page.tsx",
-      "type": "tsx",
-      "total": 11,
-      "translated": 0,
-      "untranslated": 11,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/paises/page.tsx",
-      "type": "tsx",
-      "total": 38,
-      "translated": 0,
-      "untranslated": 38,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/plataforma/page.tsx",
-      "type": "tsx",
-      "total": 43,
-      "translated": 0,
-      "untranslated": 43,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/predictive/page.tsx",
-      "type": "tsx",
-      "total": 29,
-      "translated": 0,
-      "untranslated": 29,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/reservas/page.tsx",
-      "type": "tsx",
+      "file": "legal.html",
+      "type": "html",
       "total": 15,
-      "translated": 0,
-      "untranslated": 15,
-      "coverage": 0
+      "translated": 15,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
     },
     {
-      "file": "apps/admin/src/app/simulation/page.tsx",
-      "type": "tsx",
+      "file": "mapa.html",
+      "type": "html",
+      "total": 39,
+      "translated": 39,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "mi-negocio.html",
+      "type": "html",
+      "total": 186,
+      "translated": 186,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "mi-viaje.html",
+      "type": "html",
+      "total": 113,
+      "translated": 113,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "musica.html",
+      "type": "html",
+      "total": 196,
+      "translated": 196,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "nosotros.html",
+      "type": "html",
+      "total": 143,
+      "translated": 143,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "offline.html",
+      "type": "html",
       "total": 24,
-      "translated": 0,
-      "untranslated": 24,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/smart-points/page.tsx",
-      "type": "tsx",
-      "total": 29,
-      "translated": 0,
-      "untranslated": 29,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/sostenibilidad/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/spatial/page.tsx",
-      "type": "tsx",
-      "total": 58,
-      "translated": 0,
-      "untranslated": 58,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/strategic/briefing/page.tsx",
-      "type": "tsx",
-      "total": 22,
-      "translated": 0,
-      "untranslated": 22,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/strategic/page.tsx",
-      "type": "tsx",
-      "total": 52,
-      "translated": 0,
-      "untranslated": 52,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/strategic/scenarios/page.tsx",
-      "type": "tsx",
-      "total": 21,
-      "translated": 0,
-      "untranslated": 21,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/strategic/scorecard/page.tsx",
-      "type": "tsx",
-      "total": 13,
-      "translated": 0,
-      "untranslated": 13,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/suscripciones/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/usuarios/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/website-builder/page.tsx",
-      "type": "tsx",
-      "total": 10,
-      "translated": 0,
-      "untranslated": 10,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/components/AdminAuthGate.tsx",
-      "type": "tsx",
-      "total": 6,
-      "translated": 0,
-      "untranslated": 6,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/components/AdminCards.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
+      "translated": 24,
       "untranslated": 0,
+      "legacyPhrase": 0,
       "coverage": 100
-    },
-    {
-      "file": "apps/admin/src/components/AdminShell.tsx",
-      "type": "tsx",
-      "total": 8,
-      "translated": 0,
-      "untranslated": 8,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/components/ModulePlaceholder.tsx",
-      "type": "tsx",
-      "total": 2,
-      "translated": 0,
-      "untranslated": 2,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/components/ai/AdminCopilot.tsx",
-      "type": "tsx",
-      "total": 11,
-      "translated": 0,
-      "untranslated": 11,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/components/ui/AdminBadge.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/admin/src/components/ui/AdminButton.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/admin/src/components/ui/AdminTable.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/web/src/app/alquiler-vehiculos/page.tsx",
-      "type": "tsx",
-      "total": 11,
-      "translated": 0,
-      "untranslated": 11,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/ayuda/page.tsx",
-      "type": "tsx",
-      "total": 11,
-      "translated": 0,
-      "untranslated": 11,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/baqueano-ai/page.tsx",
-      "type": "tsx",
-      "total": 72,
-      "translated": 0,
-      "untranslated": 72,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/confianza/metodologia/page.tsx",
-      "type": "tsx",
-      "total": 34,
-      "translated": 0,
-      "untranslated": 34,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/cultura/page.tsx",
-      "type": "tsx",
-      "total": 3,
-      "translated": 0,
-      "untranslated": 3,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/destinos/[slug]/page.tsx",
-      "type": "tsx",
-      "total": 8,
-      "translated": 0,
-      "untranslated": 8,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/destinos/page.tsx",
-      "type": "tsx",
-      "total": 3,
-      "translated": 0,
-      "untranslated": 3,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/developers/page.tsx",
-      "type": "tsx",
-      "total": 22,
-      "translated": 0,
-      "untranslated": 22,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/error.tsx",
-      "type": "tsx",
-      "total": 4,
-      "translated": 0,
-      "untranslated": 4,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/gastronomia/page.tsx",
-      "type": "tsx",
-      "total": 2,
-      "translated": 0,
-      "untranslated": 2,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/historia/page.tsx",
-      "type": "tsx",
-      "total": 3,
-      "translated": 0,
-      "untranslated": 3,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/kiosk/[smartPointId]/page.tsx",
-      "type": "tsx",
-      "total": 20,
-      "translated": 0,
-      "untranslated": 20,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/layout.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/web/src/app/loading.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/web/src/app/mapa/page.tsx",
-      "type": "tsx",
-      "total": 1,
-      "translated": 0,
-      "untranslated": 1,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/marca/page.tsx",
-      "type": "tsx",
-      "total": 5,
-      "translated": 0,
-      "untranslated": 5,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/mi-viaje/[tripId]/page.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/web/src/app/mi-viaje/page.tsx",
-      "type": "tsx",
-      "total": 4,
-      "translated": 0,
-      "untranslated": 4,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/not-found.tsx",
-      "type": "tsx",
-      "total": 4,
-      "translated": 0,
-      "untranslated": 4,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/notificaciones/page.tsx",
-      "type": "tsx",
-      "total": 8,
-      "translated": 0,
-      "untranslated": 8,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/open-data/page.tsx",
-      "type": "tsx",
-      "total": 10,
-      "translated": 0,
-      "untranslated": 10,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/p/[slug]/page.tsx",
-      "type": "tsx",
-      "total": 12,
-      "translated": 0,
-      "untranslated": 12,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/page.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/web/src/app/pasaporte/page.tsx",
-      "type": "tsx",
-      "total": 4,
-      "translated": 0,
-      "untranslated": 4,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/privacidad/page.tsx",
-      "type": "tsx",
-      "total": 3,
-      "translated": 0,
-      "untranslated": 3,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/research/page.tsx",
-      "type": "tsx",
-      "total": 24,
-      "translated": 0,
-      "untranslated": 24,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/rutas/[slug]/page.tsx",
-      "type": "tsx",
-      "total": 8,
-      "translated": 0,
-      "untranslated": 8,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/rutas/page.tsx",
-      "type": "tsx",
-      "total": 6,
-      "translated": 0,
-      "untranslated": 6,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/sostenibilidad/page.tsx",
-      "type": "tsx",
-      "total": 6,
-      "translated": 0,
-      "untranslated": 6,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/terminos/page.tsx",
-      "type": "tsx",
-      "total": 3,
-      "translated": 0,
-      "untranslated": 3,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/territorios/[slug]/page.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/web/src/app/territorios/page.tsx",
-      "type": "tsx",
-      "total": 2,
-      "translated": 0,
-      "untranslated": 2,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/app/viaje/[tripId]/page.tsx",
-      "type": "tsx",
-      "total": 23,
-      "translated": 0,
-      "untranslated": 23,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/components/DynamicBlockRenderer.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/web/src/components/OfflineRegistration.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/web/src/components/cards/DestinationCard.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/web/src/components/cards/PlaceCard.tsx",
-      "type": "tsx",
-      "total": 1,
-      "translated": 0,
-      "untranslated": 1,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/components/cards/SavePlaceButton.tsx",
-      "type": "tsx",
-      "total": 1,
-      "translated": 0,
-      "untranslated": 1,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/components/map/InteractiveMap.tsx",
-      "type": "tsx",
-      "total": 7,
-      "translated": 0,
-      "untranslated": 7,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/components/navigation/PublicNavigation.tsx",
-      "type": "tsx",
-      "total": 58,
-      "translated": 58,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/web/src/components/navigation/ScrollProgress.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/web/src/components/navigation/SiteFooter.tsx",
-      "type": "tsx",
-      "total": 4,
-      "translated": 0,
-      "untranslated": 4,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/components/sections/DataSourceBanner.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
-    },
-    {
-      "file": "apps/web/src/components/sections/DestinationExplorer.tsx",
-      "type": "tsx",
-      "total": 10,
-      "translated": 0,
-      "untranslated": 10,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/components/sections/HeroSection.tsx",
-      "type": "tsx",
-      "total": 8,
-      "translated": 0,
-      "untranslated": 8,
-      "coverage": 0
-    },
-    {
-      "file": "apps/web/src/components/sections/HomeNarrative.tsx",
-      "type": "tsx",
-      "total": 21,
-      "translated": 0,
-      "untranslated": 21,
-      "coverage": 0
     },
     {
       "file": "packages/i18n/src/index.tsx",
@@ -2003,6 +1878,42 @@
       "total": 0,
       "translated": 0,
       "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "perfil.html",
+      "type": "html",
+      "total": 161,
+      "translated": 161,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "privacidad.html",
+      "type": "html",
+      "total": 88,
+      "translated": 88,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "terminos.html",
+      "type": "html",
+      "total": 193,
+      "translated": 193,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "testimonios.html",
+      "type": "html",
+      "total": 79,
+      "translated": 79,
+      "untranslated": 0,
+      "legacyPhrase": 0,
       "coverage": 100
     }
   ]

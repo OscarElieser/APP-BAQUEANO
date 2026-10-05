@@ -4523,7 +4523,8 @@
     },
     "terminos": {
       "body": {
-        "title1": "Conditions générales d'utilisation | BAQUEANO Nicaragua"
+        "title1": "Conditions générales d'utilisation | BAQUEANO Nicaragua",
+        "metaDescription1": "Conditions générales d'utilisation de la plateforme BAQUEANO au Nicaragua. Informations juridiques transparentes, droits des voyageurs et engagements communautaires."
       },
       "termHero": {
         "div1": "JURIDIQUE",
@@ -4552,7 +4553,8 @@
         "p9": "Nous promouvons un tourisme durable, respectueux des communautés, de la culture et de l'environnement."
       },
       "termSidebar": {
-        "h31": "Sommaire"
+        "h31": "Sommaire",
+        "asideAriaLabel1": "Table des matières"
       },
       "termIndexNav": {
         "a1": "Introduction",
@@ -4629,6 +4631,150 @@
         "h41": "5. Création de compte",
         "p1": "Création d'identifiants, sécurité et responsabilité de l'utilisateur.",
         "div1": "Pour accéder à des fonctions comme les favoris, l'historique des itinéraires dans Mon voyage ou les signalements d'alertes environnementales, l'utilisateur peut s'inscrire par e-mail ou par authentification fédérée (Firebase Auth). Chaque utilisateur est responsable de la confidentialité de son mot de passe."
+      },
+      "sec6": {
+        "h41": "6. Profil utilisateur",
+        "p1": "Informations de profil, confidentialité et exactitude des données fournies.",
+        "div1": "L'utilisateur s'engage à saisir des informations véridiques et à les tenir à jour. BAQUEANO se réserve le droit de supprimer les profils fictifs ou utilisés à des fins d'usurpation."
+      },
+      "sec7": {
+        "h41": "7. Prestataires de services",
+        "p1": "Le rôle des entrepreneurs, coopératives, guides et entreprises locales.",
+        "div1": "Les prestataires locaux fonctionnent de manière autonome. BAQUEANO sert de passerelle de visibilité et de facilitation technologique, sans intermédiation abusive ni commissions extractives sur leurs tarifs de base de subsistance communautaire."
+      },
+      "sec8": {
+        "h41": "8. Informations sur les destinations",
+        "p1": "Données géographiques, climatiques, culturelles et de conservation.",
+        "div1": "Les fiches des 29 destinations et réserves du Nicaragua sont établies à partir de sources institutionnelles (INTUR, MARENA) et de témoignages directs de guides locaux. Bien qu'elles soient régulièrement mises à jour, les conditions climatiques ou d'accès sur le terrain peuvent varier."
+      },
+      "sec9": {
+        "h41": "9. Réservations et paiements",
+        "p1": "Conditions de réservation directe et de paiement sur place ou via des passerelles partenaires.",
+        "div1": "Les paiements sont versés directement au prestataire local ou via des liens de paiement vérifiés convenus avec les coopératives. BAQUEANO ne retient pas les fonds des hôtes et ne facture aucun frais caché aux explorateurs."
+      },
+      "sec10": {
+        "h41": "10. Annulations et remboursements",
+        "p1": "Politiques d'annulation selon le type d'expérience et les conditions climatiques.",
+        "div1": "Chaque coopérative et hôte fixe ses délais de préavis pour une annulation sans pénalité. En cas d'alerte environnementale ou climatique officielle, la reprogrammation ou le remboursement intégral est privilégié."
+      },
+      "sec11": {
+        "h41": "11. Prix et disponibilités",
+        "p1": "Transparence en monnaie nationale (córdoba oro C$) avec référence en USD.",
+        "div1": "Les prix officiels sont exprimés en córdobas (C$) avec le dollar américain comme référence. Aucun frais de service surprise n'est ajouté en fin de réservation."
+      },
+      "sec12": {
+        "h41": "12. Vérification des entreprises",
+        "p1": "Protocole d'audit territorial en 8 étapes.",
+        "div1": "Le badge « Vérifié BAQUEANO » atteste que notre équipe ou la communauté a vérifié sur place la titularité, les coordonnées GPS, le contact direct, les photos réelles et les pratiques d'accueil du prestataire."
+      },
+      "sec13": {
+        "h41": "13. Baqueano IA",
+        "p1": "Portée de l'assistant de voyage, algorithmes et avertissement.",
+        "div1": "Baqueano Digital utilise des modèles d'IA générative pour structurer itinéraires et programmes. Ses suggestions sont indicatives et doivent être vérifiées auprès des hôtes locaux et selon les conditions du terrain avant le départ."
+      },
+      "sec14": {
+        "h41": "14. Cartes et géolocalisation",
+        "p1": "Précision satellite, utilisation du GPS et cartes hors ligne.",
+        "div1": "Les cartes de la plateforme s'appuient sur des données satellite et une cartographie open source. En zones accidentées ou dans les cratères volcaniques, le signal GPS peut être affecté par le relief et la végétation."
+      },
+      "sec15": {
+        "h41": "15. Contenu généré par les utilisateurs",
+        "p1": "Avis, photos, évaluations et alertes citoyennes.",
+        "div1": "Les commentaires des voyageurs doivent être véridiques et respectueux. Aucun contenu diffamatoire, discours haineux ou incitant à nuire à la faune et à la flore sauvages ne sera toléré."
+      },
+      "sec16": {
+        "h41": "16. Comportement de l'utilisateur",
+        "p1": "Règles de comportement éthique dans les communautés rurales et autochtones.",
+        "div1": "Le voyageur s'engage à respecter les règles locales de vie commune, à demander la permission avant de photographier des habitants ou des cérémonies ancestrales et à suivre les consignes du baqueano ou du guide accompagnateur."
+      },
+      "sec17": {
+        "h41": "17. Propriété intellectuelle",
+        "p1": "Droits sur la marque BAQUEANO, le code, le design et l'iconographie.",
+        "div1": "Tous les logos, designs, code source, illustrations du guardabarranco Baqüi et textes éditoriaux sont la propriété exclusive de BAQUEANO ou font l'objet de licences légitimes."
+      },
+      "sec18": {
+        "h41": "18. Utilisation des images et médias",
+        "p1": "Photographies réelles du territoire et droits d'auteur.",
+        "div1": "Les photographies présentées montrent des paysages, producteurs et partenaires du Nicaragua. Leur reproduction commerciale externe sans accord écrit préalable est interdite."
+      },
+      "sec19": {
+        "h41": "19. Liens vers des tiers",
+        "p1": "Liens vers des services externes, WhatsApp et des sites officiels.",
+        "div1": "La plateforme peut inclure des liens vers WhatsApp pour un contact direct ou vers des institutions publiques. BAQUEANO ne contrôle ni les politiques de confidentialité ni le fonctionnement de ces services externes."
+      },
+      "sec20": {
+        "h41": "20. Limitation de responsabilité",
+        "p1": "Exclusion des dommages indirects et risques inhérents à l'écotourisme.",
+        "div1": "L'écotourisme et l'alpinisme comportent des risques naturels (météo, sentiers escarpés, faune). Le voyageur assume en connaissance de cause sa propre intégrité physique et s'engage à faire appel à des guides dûment accrédités."
+      },
+      "sec21": {
+        "h41": "21. Exclusion de garanties",
+        "p1": "Service « en l'état » et disponibilité continue des serveurs.",
+        "div1": "Nous utilisons une infrastructure cloud à haute disponibilité, mais ne garantissons pas un service ininterrompu dans les zones sans couverture mobile ou pendant les maintenances programmées."
+      },
+      "sec22": {
+        "h41": "22. Tourisme responsable",
+        "p1": "Décalogue vert, principes « ne laisser aucune trace » et respect écologique.",
+        "div1": "Chaque utilisateur s'engage à ne prélever ni échantillons géologiques ni faune ou flore protégées, à rapporter ses propres déchets et à respecter les sentiers balisés dans les réserves de biosphère et parcs nationaux."
+      },
+      "sec23": {
+        "h41": "23. Sécurité et urgences (SOS)",
+        "p1": "Protocole du bouton SOS 24 h/24 et coordination avec les autorités.",
+        "div1": "La fonction SOS est un canal numérique de liaison et d'orientation avec des coordonnées GPS précalculées. Elle ne remplace ni les services de secours ni les forces de sécurité publique de l'État du Nicaragua."
+      },
+      "sec24": {
+        "h41": "24. Suspension et fermeture de compte",
+        "p1": "Mesures disciplinaires en cas de faute grave ou de fraude.",
+        "div1": "BAQUEANO peut suspendre ou désactiver immédiatement les comptes impliqués dans une fraude financière, une usurpation d'identité ou un mépris flagrant des règles de conservation de l'environnement."
+      },
+      "sec25": {
+        "h41": "25. Modifications du service",
+        "p1": "Évolution technique et améliorations progressives de la plateforme.",
+        "div1": "Nous nous réservons le droit d'ajouter de nouveaux outils, d'optimiser les algorithmes cartographiques ou de retirer des fonctions obsolètes au profit de l'expérience du voyageur."
+      },
+      "sec26": {
+        "h41": "26. Modifications des conditions",
+        "p1": "Notification des changements importants à la communauté.",
+        "div1": "Tout changement de fond sera dûment communiqué, avec la date de dernière mise à jour indiquée en haut de cette page."
+      },
+      "sec27": {
+        "h41": "27. Droit applicable et juridiction",
+        "p1": "Cadre juridique de la République du Nicaragua.",
+        "div1": "Les présentes conditions sont régies et interprétées conformément à la législation en vigueur de la République du Nicaragua. Pour tout litige, les parties se soumettent à la juridiction des tribunaux de la ville de Managua."
+      },
+      "sec28": {
+        "h41": "28. Règlement des litiges",
+        "p1": "Étape préalable de dialogue amiable et de médiation communautaire.",
+        "div1": "En cas de désaccord, les parties conviennent d'épuiser d'abord une étape de dialogue amiable et de médiation directe avec la participation des comités de guides locaux et de l'équipe BAQUEANO."
+      },
+      "sec29": {
+        "h41": "29. Contact",
+        "p1": "Canaux officiels d'assistance juridique et technique.",
+        "div1": "Pour toute question sur ces conditions, notification formelle ou demande d'ordre éthique, vous pouvez écrire à notre équipe via",
+        "div2": "ou sur nos canaux de messagerie officiels."
+      },
+      "sec30": {
+        "h41": "30. Durée",
+        "p1": "Entrée en vigueur et validité juridique permanente.",
+        "div1": "Cette version des conditions générales est entrée en vigueur le",
+        "div2": "et remplace tout accord antérieur relatif à l'utilisation des services numériques de BAQUEANO."
+      },
+      "termToggleAllBtn": {
+        "span1": "Voir toutes les sections (30)"
+      },
+      "termRelatedCard": {
+        "p1": "Vous pouvez aussi consulter nos politiques et mentions légales pour plus d'informations.",
+        "a1": "Voir la politique de confidentialité",
+        "a2": "Cookies et cache hors ligne"
+      },
+      "termContactCard": {
+        "h41": "Contact et durée",
+        "p1": "Si vous avez des questions sur ces conditions générales, vous pouvez nous contacter via nos canaux officiels.",
+        "small1": "Dernière mise à jour",
+        "small2": "Version"
+      },
+      "termSearchInput": {
+        "inputPlaceholder1": "Recherchez un sujet dans les conditions générales..."
       }
     }
   },
