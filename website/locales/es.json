@@ -3319,7 +3319,8 @@
     },
     "index": {
       "body": {
-        "title1": "Baqueano Nicaragua | Descubre lo que no sale en el mapa"
+        "title1": "Baqueano Nicaragua | Descubre lo que no sale en el mapa",
+        "metaDescription1": "Portal oficial de turismo comunitario y ecoturismo en Nicaragua. Explora volcanes, lagos, reservas de biósfera, playas y cooperativas campesinas."
       },
       "heroNicaragua": {
         "span1": "AUTÉNTICA",
@@ -3330,7 +3331,8 @@
         "a2": "Planificar con IA"
       },
       "categoriaStrip": {
-        "span1": "Turismo comunitario"
+        "span1": "Turismo comunitario",
+        "divAriaLabel1": "Categorías principales de viaje"
       },
       "vivirHeader": {
         "p1": "DESCUBRÍ NICARAGUA",
@@ -3345,7 +3347,229 @@
         "span2": "Descanso",
         "span3": "Corn Island · Caribe Sur",
         "span4": "Vigorón · Granada",
-        "span5": "Finca Magdalena · Ometepe"
+        "span5": "Finca Magdalena · Ometepe",
+        "span6": "Romance",
+        "span7": "Familia",
+        "span8": "Algo diferente",
+        "span9": "Cascada La Luna · Jinotega",
+        "span10": "— Comunidades, patrimonio oculto, emprendimientos y destinos que no aparecen en guías convencionales.",
+        "divAriaLabel1": "Elegí tu experiencia",
+        "divAriaLabel2": "Activar modo Lo que no sale en el mapa",
+        "spanAriaLabel1": "Hidden gems disponibles"
+      },
+      "inspireIntro": {
+        "p1": "Lugares únicos, historias reales y experiencias auténticas en cada rincón de Nicaragua."
+      },
+      "inspireFeature": {
+        "span1": "Rivas · Lago de Nicaragua",
+        "p1": "Naturaleza, cultura y comunidades que te conectan con la esencia de Nicaragua.",
+        "divAriaLabel1": "Colección de fotos del destino",
+        "buttonAriaLabel1": "Ver foto 1",
+        "imgAlt1": "Vista de Ometepe",
+        "buttonAriaLabel2": "Ver foto 2",
+        "imgAlt2": "Cascada San Ramón",
+        "buttonAriaLabel3": "Ver foto 3",
+        "imgAlt3": "Finca Magdalena",
+        "buttonAriaLabel4": "Ver foto 4",
+        "imgAlt4": "Tradición gastronómica"
+      },
+      "destinosInspiran": {
+        "h21": "Destinos que Inspiran",
+        "p1": "Lugares únicos, historias reales y experiencias auténticas."
+      },
+      "mapaAiSection": {
+        "h31": "Explorá Nicaragua en el mapa",
+        "p1": "Descubrí destinos, negocios locales y experiencias cerca de vos.",
+        "a1": "Abrir mapa interactivo",
+        "button1": "Negocios",
+        "divAriaLabel1": "Filtros de mapa"
+      },
+      "baqueanoDigitalCard": {
+        "p1": "Contame qué querés vivir y te creo un itinerario personalizado con destinos, precios y mapa.",
+        "a1": "🏖️ Quiero playa",
+        "imgAlt1": "Baqüi Asistente IA"
+      },
+      "btnLaunchIaPlanner": {
+        "a1": "Planificar mi aventura"
+      },
+      "porqueBaqueano": {
+        "h21": "¿Por qué BAQUEANO?",
+        "p1": "Tecnología al servicio de nuestra gente y de la naturaleza.",
+        "p2": "Rutas responsables y áreas protegidas",
+        "p3": "Contacto directo con emprendedores",
+        "h41": "Economía local",
+        "p4": "0% intermediación · Más oportunidades",
+        "h42": "Confianza",
+        "p5": "Negocios verificados y turismo seguro",
+        "p6": "Tradiciones que siguen vivas",
+        "h43": "Experiencias auténticas",
+        "p7": "Lo que no sale en el mapa"
+      },
+      "experienciasSection": {
+        "h21": "Experiencias Destacadas",
+        "p1": "Viví Nicaragua de una forma diferente.",
+        "h31": "Aventura en Volcanes",
+        "p2": "Adrenalina y paisajes únicos",
+        "p3": "Sabores del maíz",
+        "p4": "Historias que inspiran",
+        "h32": "Playas de Ensueño",
+        "p5": "Relajate en el Pacífico y Caribe",
+        "imgAlt1": "Gastronomía Ancestral de Nicaragua",
+        "imgAlt2": "Comunidades Vivas de Nicaragua"
+      },
+      "bannerAtardecer": {
+        "div1": "HAY UNA NICARAGUA",
+        "h21": "QUE NO APARECE",
+        "span1": "EN LOS MAPAS.",
+        "p1": "Viví experiencias auténticas, conectá con nuestra gente y sé parte de un turismo que cuida.",
+        "a1": "Crear mi ruta con IA"
+      },
+      "comunidadSeccion": {
+        "p1": "¿Tenés un negocio turístico? Formá parte de nuestra red de anfitriones.",
+        "h51": "Más visibilidad",
+        "span1": "Llegá a más viajeros",
+        "span2": "Crecemos juntos",
+        "h52": "Apoyo local",
+        "span3": "Impulsamos tu comunidad",
+        "imgAlt1": "Anfitrión Baqueano Campesino"
+      },
+      "bizRegisterModal": {
+        "span1": "Red de Anfitriones Baqueano",
+        "p1": "Completa los datos de tu establecimiento para ser auditado por la Mesa Técnica e integrado al mapa oficial y catálogo territorial."
+      },
+      "bizRegisterModalTitle": {
+        "h31": "Registrar Negocio o Cooperativa"
+      },
+      "registerBusinessForm": {
+        "label1": "Nombre del Negocio",
+        "label2": "Responsable",
+        "label3": "Breve descripción de lo que ofreces"
+      },
+      "bizType": {
+        "option1": "Selecciona tipo...",
+        "option2": "Comedor Tradicional / Restaurante Campesino",
+        "option3": "Hotel / Eco-Lodge",
+        "option4": "Hostal Comunitario",
+        "option5": "Hospedaje Rural Familiar",
+        "option6": "Guía Baqueano Comunitario",
+        "option7": "Cooperativa Agroecológica",
+        "option8": "Otro Emprendimiento Local"
+      },
+      "bizDepartment": {
+        "option1": "Selecciona departamento...",
+        "option2": "Rivas (Ometepe, SJDS)",
+        "option3": "Madriz (Somoto)",
+        "option4": "RACCS (Corn Island)"
+      },
+      "btnSubmitBizForm": {
+        "button1": "Enviar Postulación"
+      },
+      "sosModal": {
+        "h31": "Centro de Auxilio SOS & GPS 24/7",
+        "h51": "Policía",
+        "span1": "WhatsApp 24/7"
+      },
+      "heroModalVideoPlayer": {
+        "video1": "Tu navegador no soporta reproducción de video."
+      },
+      "videoModal": {
+        "span1": "Nicaragua: Tierra de Volcanes y Cultura Viva",
+        "span2": "Producción Oficial Baqueano",
+        "buttonAriaLabel1": "Cerrar video"
+      },
+      "heroExactSearch": {
+        "inputPlaceholder1": "¿Qué querés vivir en Nicaragua?",
+        "inputAriaLabel1": "Buscar en Nicaragua"
+      },
+      "hiddenGemToggle": {
+        "inputAriaLabel1": "Activar descubrimiento de lugares ocultos"
+      },
+      "inspireFilters": {
+        "navAriaLabel1": "Explorar por tipo de destino"
+      },
+      "destinoImagen": {
+        "imgAlt1": "Volcanes y costa de la Isla de Ometepe"
+      },
+      "btnNextGalleryItem": {
+        "buttonAriaLabel1": "Ver siguiente foto"
+      },
+      "inspireMapTerritorial": {
+        "asideAriaLabel1": "Mapa ilustrado de destinos destacados de Nicaragua",
+        "imgAlt1": "Choza comunitaria tradicional"
+      },
+      "nicaraguaMapRoot": {
+        "imgAlt1": "Mapa territorial ilustrado de Nicaragua con relieve, volcanes, lagos y costas",
+        "buttonAriaLabel1": "Destino Cañón de Somoto",
+        "buttonAriaLabel2": "Destino León",
+        "buttonAriaLabel3": "Destino Cerro Negro",
+        "buttonAriaLabel4": "Destino Granada",
+        "buttonAriaLabel5": "Destino Isla de Ometepe"
+      },
+      "destCardExact": {
+        "buttonAriaLabel1": "Guardar en favoritos",
+        "aAriaLabel1": "Ver detalles de Isla de Ometepe",
+        "imgAlt1": "Granada Colonial",
+        "aAriaLabel2": "Ver detalles de Granada",
+        "aAriaLabel3": "Ver detalles de San Juan del Sur",
+        "aAriaLabel4": "Ver detalles de Cerro Negro",
+        "aAriaLabel5": "Ver detalles de Cañón de Somoto"
+      },
+      "mapZoomIn": {
+        "buttonAriaLabel1": "Acercar mapa"
+      },
+      "mapZoomOut": {
+        "buttonAriaLabel1": "Alejar mapa"
+      },
+      "bizName": {
+        "inputPlaceholder1": "Ej: Comedor Doña María / Eco-Lodge Las Brisas"
+      },
+      "bizMunicipality": {
+        "inputPlaceholder1": "Ej: Altagracia, Somoto"
+      },
+      "bizDescription": {
+        "textareaPlaceholder1": "Describe tu servicio, comidas, recorridos o alojamiento..."
+      }
+    },
+    "legal": {
+      "body": {
+        "title1": "Centro Legal & Términos | Baqueano Nicaragua",
+        "metaDescription1": "Términos y condiciones, política de privacidad, cookies y aviso legal de Baqueano Nicaragua."
+      },
+      "legalHero": {
+        "h11": "Centro Jurídico & Cumplimiento",
+        "p1": "Conocé las bases legales, compromisos de privacidad y términos de servicio de la plataforma Baqueano."
+      },
+      "terminos": {
+        "p1": "Condiciones de uso del portal, políticas de reserva directa con anfitriones y normas comunitarias.",
+        "span1": "Leer documento →"
+      },
+      "privacidad": {
+        "p1": "Tratamiento ético de datos, geolocalización satelital y derechos del viajero y anfitrión."
+      },
+      "cookies": {
+        "p1": "Información sobre cookies técnicas, preferencias de navegación y analítica anónima."
+      },
+      "aviso": {
+        "p1": "Titularidad del portal Baqueano, propiedad intelectual y responsabilidades de las partes."
+      }
+    },
+    "mapa": {
+      "body": {
+        "title1": "Mapa Interactivo de Nicaragua | Baqueano",
+        "button1": "Todos (10)",
+        "button2": "🌋 Volcanes",
+        "button3": "🏖️ Playas"
+      },
+      "mapIntro": {
+        "span1": "Atlas interactivo de Nicaragua",
+        "p1": "Explorá destinos, volcanes, playas, naturaleza, cultura y comunidades locales desde un mapa diseñado para planificar mejor cada recorrido.",
+        "span2": "territorios",
+        "span3": "lugares destacados",
+        "span4": "categorías"
+      },
+      "mapPageTitle": {
+        "h11": "Descubrí Nicaragua",
+        "span1": "territorio por territorio"
       }
     }
   },
@@ -3444,7 +3668,9 @@
     "n867022WReferencia": "12.5061° N, 86.7022° W (Referencia Nacional)",
     "funcionaConElChipGnss": "Funciona con el chip GNSS de tu dispositivo, sin saldo.",
     "baquiAsistente": "Baqüi Asistente",
-    "explorarTerritorios": "Explorar territorios"
+    "explorarTerritorios": "Explorar territorios",
+    "explorarNicaragua": "Explorar Nicaragua",
+    "tipoDeNegocio": "Tipo de Negocio"
   },
   "ops": {
     "impact": {
