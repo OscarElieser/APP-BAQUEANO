@@ -12,6 +12,9 @@
 // - Interfaz reactiva con Glassmorphism profundo, tarjeta de pulso de auxilio,
 //   integración con geolocator para captura de coordenadas exactas y url_launcher
 //   para marcado telefónico 'tel:118'.
+// - Nunca se muestran coordenadas por defecto: si el GPS está apagado, sin
+//   permiso o falla, se informa el motivo y se deshabilitan "copiar" y "ver en
+//   mapa" (compartir una ubicación falsa en una emergencia es peligroso).
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGETS EXPUESTOS):
 // - `EmergencySosScreen`: Pantalla principal de contingencia y asistencia SOS.
@@ -34,8 +37,14 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _pulseController;
   late Animation<double> _pulseAnimation;
-  String _currentCoordinates = '12.136400, -86.251400';
+  // Sin ubicación real no se muestra ninguna: en una emergencia, compartir
+  // coordenadas por defecto (p. ej. Managua) enviaría a los rescatistas a un
+  // lugar equivocado.
+  String _currentCoordinates = '';
+  String _gpsStatus = 'Obteniendo tu ubicación GPS…';
   bool _isLoadingGps = false;
+
+  bool get _hasRealLocation => _currentCoordinates.isNotEmpty;
 
   @override
   void initState() {
@@ -59,11 +68,33 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
   }
 
   Future<void> _fetchCurrentLocation() async {
-    setState(() => _isLoadingGps = true);
+    setState(() {
+      _isLoadingGps = true;
+      _gpsStatus = 'Obteniendo tu ubicación GPS…';
+    });
     try {
-      final permission = await Geolocator.checkPermission();
+      if (!await Geolocator.isLocationServiceEnabled()) {
+        if (mounted) {
+          setState(() {
+            _isLoadingGps = false;
+            _gpsStatus = 'GPS desactivado. Actívalo y toca reintentar.';
+          });
+        }
+        return;
+      }
+      var permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
-        await Geolocator.requestPermission();
+        permission = await Geolocator.requestPermission();
+      }
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        if (mounted) {
+          setState(() {
+            _isLoadingGps = false;
+            _gpsStatus = 'Permiso de ubicación denegado. Puedes llamar igualmente.';
+          });
+        }
+        return;
       }
       final position = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
@@ -80,7 +111,10 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
       }
     } catch (_) {
       if (mounted) {
-        setState(() => _isLoadingGps = false);
+        setState(() {
+          _isLoadingGps = false;
+          _gpsStatus = 'No se pudo obtener la ubicación. Toca reintentar.';
+        });
       }
     }
   }
@@ -93,7 +127,7 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Marcando al número: $phone'),
+            content: Text('No se pudo abrir el marcador. Marca manualmente: $phone'),
             backgroundColor: const Color(0xFFC86432),
           ),
         );
@@ -102,6 +136,7 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
   }
 
   void _copyCoordinates() {
+    if (!_hasRealLocation) return;
     Clipboard.setData(ClipboardData(text: _currentCoordinates));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -125,6 +160,7 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
   }
 
   Future<void> _openGoogleMaps() async {
+    if (!_hasRealLocation) return;
     final uri = Uri.parse(
       'https://www.google.com/maps/search/?api=1&query=$_currentCoordinates',
     );
@@ -294,9 +330,11 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      _currentCoordinates,
-                      style: const TextStyle(
-                        color: Color(0xFF38BDF8),
+                      _hasRealLocation ? _currentCoordinates : _gpsStatus,
+                      style: TextStyle(
+                        color: _hasRealLocation
+                            ? const Color(0xFF38BDF8)
+                            : const Color(0xFFFBBF24),
                         fontFamily: 'monospace',
                         fontWeight: FontWeight.w700,
                         fontSize: 14,
@@ -307,7 +345,7 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(
-                      onPressed: _copyCoordinates,
+                      onPressed: _hasRealLocation ? _copyCoordinates : null,
                       icon: const Icon(Icons.copy_rounded, size: 18),
                       label: const Text(
                         'COPIAR COORDENADAS PARA GOOGLE MAPS / SMS',
@@ -331,7 +369,7 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton.icon(
-                      onPressed: _openGoogleMaps,
+                      onPressed: _hasRealLocation ? _openGoogleMaps : null,
                       icon: const Icon(Icons.map_rounded, size: 18, color: Color(0xFF38BDF8)),
                       label: const Text(
                         'VER MI UBICACIÓN EN GOOGLE MAPS',
