@@ -13,6 +13,10 @@
 // - Consultas optimizadas con paginación (`limit`, `startAfter`) y filtros combinables.
 // - Algoritmo de proximidad geográfica ("Cerca de ti") mediante `GeoLocationService`.
 // - Persistencia de guardados en Firestore (`user_saved_places`) y `SharedPreferences`.
+// - Orden de carga: asset local (arranque inmediato) → Firestore heredado →
+//   Supabase vía `CatalogRepository` (fuente oficial compartida con la Web y
+//   Ops Center; prevalece sobre las anteriores). Sin coordenadas reales, un
+//   destino de Supabase no entra al mapa.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & MÉTODOS EXPUESTOS):
 // - `PlacesService`: Motor de datos del directorio nacional.
@@ -28,18 +32,24 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../data/repositories/catalog_repository.dart';
 import '../models/place_model.dart';
 import 'geo_location_service.dart';
 
 class PlacesService {
   final GeoLocationService _geoService;
+  final CatalogRepository? _catalogRepository;
   List<PlaceModel> _cachedPlaces = [];
   Set<String> _savedPlaceIds = {};
   bool _savedLoaded = false;
 
   PlacesService({
     GeoLocationService? geoService,
-  }) : _geoService = geoService ?? GeoLocationService();
+    CatalogRepository? catalogRepository,
+    bool useSupabase = true,
+  })  : _geoService = geoService ?? GeoLocationService(),
+        _catalogRepository =
+            useSupabase ? (catalogRepository ?? CatalogRepository()) : null;
 
   static const String _savedPlacesPrefKey = 'baqueano_saved_places_ids';
 
@@ -100,6 +110,25 @@ class PlacesService {
       }
     } catch (e) {
       debugPrint('⚠️ [PlacesService] Error sincronizando con Firestore (modo offline): $e');
+    }
+
+    // 3. Supabase (fuente de verdad oficial, la misma que usa la Web y que
+    //    administra Ops Center). Se aplica al final para que prevalezca sobre
+    //    el asset local y el Firestore heredado.
+    try {
+      final repository = _catalogRepository;
+      if (repository != null) {
+        final snapshot = await repository.load();
+        if (snapshot.places.isNotEmpty) {
+          final map = {for (var p in _cachedPlaces) p.placeId: p};
+          for (final official in snapshot.places) {
+            map[official.placeId] = official;
+          }
+          _cachedPlaces = map.values.toList();
+        }
+      }
+    } catch (e) {
+      debugPrint('⚠️ [PlacesService] Supabase no disponible: $e');
     }
 
     return _cachedPlaces;
@@ -415,5 +444,8 @@ class PaginatedPlacesResult {
 
 final placesServiceProvider = Provider<PlacesService>((ref) {
   final geoService = ref.read(geoLocationServiceProvider);
-  return PlacesService(geoService: geoService);
+  return PlacesService(
+    geoService: geoService,
+    catalogRepository: ref.read(catalogRepositoryProvider),
+  );
 });

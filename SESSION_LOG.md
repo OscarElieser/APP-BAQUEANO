@@ -4084,3 +4084,9 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - **Siguiente (P1):** `supabase_flutter` + repositorios Supabase-first de destinos/negocios, lista blanca de acciones BAQUI, registro SOS, OpenAPI v1.
 
 - **2026-10-05 — Preferencia del propietario:** responder siempre en español.
+
+## 2026-10-05 — Directiva: paridad Web → APK con datos reales
+- 🎯 **POR QUÉ:** el propietario pide que todo lo que tiene la Web se aplique al APK; ambas 100% funcionales, con datos reales, mejoradas y adaptadas a móvil.
+- ⚙️ **CÓMO:** empezar por P1 de la auditoría /lib: capa de datos Supabase-first en Flutter (mismas tablas que la Web), con caché y respaldo local; después módulo por módulo (destinos, negocios, departamentos, testimonios, SOS, BAQUI).
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción.
+- **P1.1 aplicado — App lee Supabase (mismo dato que la Web):** `lib/core/api/supabase_rest_client.dart` (PostgREST con clave publicable, la misma de `website/js/supabase-config.js`; timeouts 6/15 s; 3 reintentos solo GET; errores tipados; sin dependencias nuevas) + `lib/data/repositories/catalog_repository.dart` (departments, destinations publicados, businesses verificados; caché local con fecha; descarta coordenadas nulas/fuera de Nicaragua; no inventa calificación; solo imágenes https). `PlacesService` (directorio, mapa, BAQUI RAG) ahora fusiona Supabase al final para que prevalezca sobre el asset local y Firestore heredado. Pruebas: `test/catalog_repository_test.dart` (10 casos). Datos reales hoy: 17 departamentos, 7 destinos con coordenadas, 5 negocios sin coordenadas (no van al mapa hasta verificarlas en Ops).
