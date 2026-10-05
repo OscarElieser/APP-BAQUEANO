@@ -36,3 +36,9 @@ enabled = true
 verify_jwt = false
 import_map = "./functions/baqueano-reservas/deno.json"
 entrypoint = "./functions/baqueano-reservas/index.ts"
+
+[functions.baqueano-identity]
+enabled = true
+verify_jwt = false
+import_map = "./functions/baqueano-identity/deno.json"
+entrypoint = "./functions/baqueano-identity/index.ts"
