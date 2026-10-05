@@ -7,7 +7,7 @@
  *   (`dist-hostinger/`) durante el build. Los HTML fuente no se tocan: el sitio
  *   oficial es uno solo y se decide en un único lugar (SITE). Idempotente: si una
  *   etiqueta ya existe, se reemplaza en vez de duplicarse.
- * 📦 QUÉ: `normalizeHtml(html, page)`, `buildSitemap(pages, lastmod)`,
+ * 📦 QUÉ: `normalizeHtml(html, page)`, `buildSitemap(pages, lastmod, excluded)`, `redirectTarget(html)`,
  *   `normalizeRobots(text)` y las listas de páginas indexables/no indexables.
  */
 
@@ -19,6 +19,13 @@ export const LANGUAGES = ['es', 'en', 'fr', 'it', 'pt', 'de'];
 export const NOINDEX_PAGES = new Set(['admin.html', 'offline.html', '404.html', 'i18n-test.html']);
 // Páginas personales: se pueden visitar, pero no aportan al sitemap.
 export const PERSONAL_PAGES = new Set(['perfil.html', 'favoritos.html', 'mi-viaje.html']);
+
+// Alias con <meta http-equiv="refresh" content="0; url=destino.html">: su
+// canónico es el destino y no entra al sitemap (evita contenido duplicado).
+export function redirectTarget(html) {
+  const match = String(html).match(/<meta\b[^>]*http-equiv=["']refresh["'][^>]*content=["']\s*\d+\s*;\s*url=([^"'#?\s]+\.html)/i);
+  return match ? match[1].replace(/^\.?\//, '') : null;
+}
 
 export function canonicalFor(page) {
   return page === 'index.html' ? `${SITE}/` : `${SITE}/${page}`;
@@ -52,7 +59,8 @@ export function normalizeHtml(html, page) {
   const before = html.slice(0, bounds.open);
   const after = html.slice(bounds.close);
   const additions = [];
-  const canonical = canonicalFor(page);
+  const alias = redirectTarget(html);
+  const canonical = canonicalFor(alias || page);
   const indexable = !NOINDEX_PAGES.has(page);
 
   // 1) Metadatos que apuntaban al dominio de respaldo → dominio oficial.
@@ -71,8 +79,8 @@ export function normalizeHtml(html, page) {
     //    Se agrupan junto al canonical para que reaplicar el build sea idempotente.
     head = head.replace(/\s*<link\b[^>]*hreflang=[^>]*>/gi, '');
     const canonicalBlock = [`<link rel="canonical" href="${escapeAttr(canonical)}">`]
-      .concat(LANGUAGES.map((lang) => `<link rel="alternate" hreflang="${lang}" href="${escapeAttr(`${canonical}?lang=${lang}`)}">`))
-      .concat(`<link rel="alternate" hreflang="x-default" href="${escapeAttr(canonical)}">`)
+      .concat(alias ? [] : LANGUAGES.map((lang) => `<link rel="alternate" hreflang="${lang}" href="${escapeAttr(`${canonical}?lang=${lang}`)}">`))
+      .concat(alias ? [] : [`<link rel="alternate" hreflang="x-default" href="${escapeAttr(canonical)}">`])
       .join('\n  ');
     if (/<link\b[^>]*rel=["']canonical["'][^>]*>/i.test(head)) {
       head = head.replace(/<link\b[^>]*rel=["']canonical["'][^>]*>/i, canonicalBlock);
@@ -85,7 +93,7 @@ export function normalizeHtml(html, page) {
     } else additions.push(ogUrl);
 
     // 4) Datos estructurados (solo si la página no declara los suyos).
-    if (!/application\/ld\+json/i.test(head)) {
+    if (!alias && !/application\/ld\+json/i.test(head)) {
       const website = { '@type': 'WebSite', '@id': `${SITE}/#website`, url: `${SITE}/`, name: 'Baqueano Nicaragua', inLanguage: LANGUAGES };
       const graph = page === 'index.html'
         ? [website, {
@@ -105,9 +113,9 @@ export function normalizeHtml(html, page) {
 }
 
 /** Sitemap del dominio oficial con alternativas por idioma. */
-export function buildSitemap(pages, lastmod) {
+export function buildSitemap(pages, lastmod, excluded = new Set()) {
   const entries = pages
-    .filter((page) => !NOINDEX_PAGES.has(page) && !PERSONAL_PAGES.has(page))
+    .filter((page) => !NOINDEX_PAGES.has(page) && !PERSONAL_PAGES.has(page) && !excluded.has(page))
     .sort((a, b) => (a === 'index.html' ? -1 : b === 'index.html' ? 1 : a.localeCompare(b)))
     .map((page) => {
       const loc = canonicalFor(page);

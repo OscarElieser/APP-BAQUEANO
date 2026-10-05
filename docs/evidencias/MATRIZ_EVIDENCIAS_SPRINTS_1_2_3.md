@@ -19,6 +19,13 @@
 - Enlaces a los reportes individuales de Sprint 1, Sprint 2 y Sprint 3.
 ============================================================================ -->
 
+> ⚠️ **DOCUMENTO HISTÓRICO (marcado 2026-10-05, auditoría Kronox 2026).** Esta matriz declaraba "100 % COMPLETADO"
+> sobre el commit `6cc4841` y enlaza rutas locales `file:///d:/` que no existen fuera del equipo del autor.
+> La medición vigente, con evidencia reproducible y clasificación ponderada, está en
+> [`docs/hackathon/development/FINAL_DEVELOPMENT_AUDIT.md`](../hackathon/development/FINAL_DEVELOPMENT_AUDIT.md)
+> y [`docs/audit/SPRINT1_REPOSITORY_AUDIT.md`](../audit/SPRINT1_REPOSITORY_AUDIT.md). Se conserva sin cambios para trazabilidad.
+
+
 # 🧭 MATRIZ CONSOLIDADA DE EVIDENCIAS: SPRINTS 1, 2 Y 3
 **Proyecto:** BAQUEANO Nicaragua — Hackathon 2026  
 **Entorno de Producción:** Microsoft Azure (`vm-baqueano-prod`)  

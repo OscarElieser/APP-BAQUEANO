@@ -4188,3 +4188,12 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - `tools/db/catalog-2026-10-05.txt`: instantánea del catálogo real (66 tablas) para el diccionario de datos.
 - **Pruebas:** seo-normalize 10/10, build 727 archivos, verify-hostinger 10 rutas, i18n 0 errores, franja viva 17/181.
 - **Pendiente inmediato:** DATA_DICTIONARY.md, SPRINT1_REPOSITORY_AUDIT.md, documentos `docs/hackathon/development/`.
+
+### 2026-10-05 — Kronox: auditoría Sprint 1, diccionario de datos y matriz de Desarrollo S1–S3
+- `docs/database/DATA_DICTIONARY.md` generado desde el catálogo real (66 tablas, 11 dominios) por `tools/db/gen-data-dictionary.mjs`.
+- `docs/audit/SPRINT1_REPOSITORY_AUDIT.md`: inventario (2 150 archivos), secretos, Git, legado/duplicados, producción en vivo, S1 = 72,1 %.
+- Fuente única `tools/kronox/development-requirements.mjs` → `gen-development-docs.mjs` genera SPRINT_1/2/3 y FINAL_DEVELOPMENT_AUDIT (CI `--check`). Cobertura ponderada: S1 72,1 % · S2 69,4 % · S3 59,0 % · **total 65,7 %** (antes 44,0 %). Desarrollo NO declarado terminado.
+- Informes temáticos en `docs/hackathon/development/`: E2E, SECURITY, PERFORMANCE (🔴, sin medición), ACCESSIBILITY (🟠), I18N, DATABASE, AZURE, ANDROID.
+- SEO: los alias con `meta refresh` (baqueano-ai.html) declaran el canonical del destino y salen del sitemap (23 URL). Prueba 11/11.
+- `docs/evidencias/MATRIZ_EVIDENCIAS_SPRINTS_1_2_3.md` marcada como HISTÓRICA (contenido conservado).
+- Acciones del propietario: desbloquear autodeploy de la VM, cerrar puerto 22 en NSG, restringir claves de navegador, videos S1-12/S3-20.

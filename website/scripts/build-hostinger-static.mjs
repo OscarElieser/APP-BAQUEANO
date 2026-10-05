@@ -7,7 +7,7 @@
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { buildSitemap, normalizeHtml, normalizeRobots } from './lib/seo-normalize.mjs';
+import { buildSitemap, normalizeHtml, normalizeRobots, redirectTarget } from './lib/seo-normalize.mjs';
 
 const root = process.cwd();
 const output = path.resolve(root, 'dist-hostinger');
@@ -54,11 +54,14 @@ for (const directory of publicDirectories) await copyTree(path.join(root, direct
 // SEO del dominio oficial solo en la copia publicada (los HTML fuente no cambian):
 // canonical, og:url, hreflang ×6 + x-default, manifest, JSON-LD, sitemap y robots.
 const publishedPages = (await fs.readdir(output)).filter((name) => name.endsWith('.html'));
+const aliasPages = new Set();
 for (const page of publishedPages) {
   const target = path.join(output, page);
-  await fs.writeFile(target, normalizeHtml(await fs.readFile(target, 'utf8'), page));
+  const html = await fs.readFile(target, 'utf8');
+  if (redirectTarget(html)) aliasPages.add(page);
+  await fs.writeFile(target, normalizeHtml(html, page));
 }
-await fs.writeFile(path.join(output, 'sitemap.xml'), buildSitemap(publishedPages, new Date().toISOString().slice(0, 10)));
+await fs.writeFile(path.join(output, 'sitemap.xml'), buildSitemap(publishedPages, new Date().toISOString().slice(0, 10), aliasPages));
 const robotsPath = path.join(output, 'robots.txt');
 await fs.writeFile(robotsPath, normalizeRobots(await fs.readFile(robotsPath, 'utf8')));
 

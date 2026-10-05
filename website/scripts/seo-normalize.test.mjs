@@ -11,7 +11,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
-import { SITE, LANGUAGES, buildSitemap, normalizeHtml, normalizeRobots } from './lib/seo-normalize.mjs';
+import { SITE, LANGUAGES, buildSitemap, normalizeHtml, normalizeRobots, redirectTarget } from './lib/seo-normalize.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const count = (text, re) => (text.match(re) || []).length;
@@ -68,6 +68,14 @@ check('sitemap oficial excluye noindex y páginas personales', () => {
   assert.equal(count(xml, /<loc>/g), 2);
   assert.ok(xml.includes(`<loc>${SITE}/</loc>`));
   assert.ok(!xml.includes('web.app') && !xml.includes('admin.html'));
+});
+check('alias con meta refresh: canónico al destino, sin hreflang ni sitemap', () => {
+  const alias = '<html><head><meta http-equiv="refresh" content="0; url=baqueano-ia.html"><title>r</title></head></html>';
+  assert.equal(redirectTarget(alias), 'baqueano-ia.html');
+  const out = normalizeHtml(alias, 'baqueano-ai.html');
+  assert.ok(out.includes(`<link rel="canonical" href="${SITE}/baqueano-ia.html">`));
+  assert.equal(count(out, /hreflang|ld\+json/g), 0);
+  assert.equal(count(buildSitemap(['baqueano-ai.html', 'baqueano-ia.html'], 'x', new Set(['baqueano-ai.html'])), /<loc>/g), 1);
 });
 check('robots apunta al sitemap oficial', () => {
   const out = normalizeRobots('User-agent: *\nSitemap: https://app-baqueano.web.app/sitemap.xml\n');
