@@ -3,9 +3,8 @@
 -- 🎯 Una sola fuente de verdad. ⚙️ Generado por website/scripts/migrate-territories-to-supabase.mjs;
 --    idempotente (ON CONFLICT legacy_source+legacy_key) y no pisa ediciones hechas en Ops Center.
 -- 📦 237 places · 25 businesses · 144 fuentes. NO editar a mano.
--- ⚠️ Requiere 20261005070000 y 20261005080000 aplicadas. Ejecutar SOLO con autorización del propietario.
+-- ⚠️ Requiere 20261005070000 y 20261005080000 aplicadas. Ejecutar en UNA transacción (migración o psql -1) y SOLO con autorización.
 -- ============================================================================
-begin;
 insert into public.places (id, slug, name, category, subcategory, type_label, icon, department_id, municipality_id, zone_text, description, short_description, latitude, longitude, location_precision, map_ready, address, verification_status, verified_at, source_name, source_url, source_type, attributes, is_published, legacy_source, legacy_key, created_by, updated_by)
 values ('pl-reserva-natural-tepesomoto-la-pataste', 'reserva-natural-tepesomoto-la-pataste', 'Reserva Natural Tepesomoto-La Pataste', 'reserva', null, 'Bosque Nuboso & Biodiversidad', 'fa-tree', 'madriz', null, null, 'Montaña protegida cerca de Somoto con bosque nuboso y pinares, fuente de agua para las comunidades y refugio de aves.', 'Montaña protegida cerca de Somoto con bosque nuboso y pinares, fuente de agua para las comunidades y refugio de aves.', null, null, 'missing', false, null, 'pending_review', null, null, null, null, '{}'::jsonb, true, 'territories-data.js', 'madriz::reserva natural tepesomoto la pataste', 'migration:territories', 'migration:territories')
 on conflict (legacy_source, legacy_key) where legacy_key is not null do update set
@@ -2799,4 +2798,3 @@ on conflict (entity_type, entity_id, source_name, source_url) do nothing;
 insert into public.data_migration_runs (run_key, source, mode, finished_at, totals, status)
 values ('territories-2026-10-05', 'website/js/territories-data.js', 'apply', now(), '{"total_fuente_original":266,"places":237,"businesses":25,"total_insertados":262,"total_actualizados":0,"total_duplicados":4,"total_pendientes":141,"total_parciales":6,"total_verificados":115,"total_sin_coordenadas":183,"total_coordenadas_descartadas":0,"total_sin_fuente":141,"total_map_ready":37,"total_sin_municipio":193,"total_categoria_inferida":177,"total_notas_precio":38}'::jsonb, 'ok')
 on conflict (run_key) do update set finished_at = now(), totals = excluded.totals, status = 'ok';
-commit;

@@ -279,9 +279,8 @@ export function toSql({ places, businesses, sources, report }) {
   lines.push('-- 🎯 Una sola fuente de verdad. ⚙️ Generado por website/scripts/migrate-territories-to-supabase.mjs;');
   lines.push('--    idempotente (ON CONFLICT legacy_source+legacy_key) y no pisa ediciones hechas en Ops Center.');
   lines.push(`-- 📦 ${places.length} places · ${businesses.length} businesses · ${sources.length} fuentes. NO editar a mano.`);
-  lines.push('-- ⚠️ Requiere 20261005070000 y 20261005080000 aplicadas. Ejecutar SOLO con autorización del propietario.');
+  lines.push('-- ⚠️ Requiere 20261005070000 y 20261005080000 aplicadas. Ejecutar en UNA transacción (migración o psql -1) y SOLO con autorización.');
   lines.push('-- ============================================================================');
-  lines.push('begin;');
   for (const p of places) {
     lines.push(`insert into public.places (id, slug, name, category, subcategory, type_label, icon, department_id, municipality_id, zone_text, description, short_description, latitude, longitude, location_precision, map_ready, address, verification_status, verified_at, source_name, source_url, source_type, attributes, is_published, legacy_source, legacy_key, created_by, updated_by)
 values (${q(p.id)}, ${q(p.slug)}, ${q(p.name)}, ${q(p.category)}, ${q(p.subcategory)}, ${q(p.type_label)}, ${q(p.icon)}, ${q(p.department_id)}, ${q(p.municipality_id)}, ${q(p.zone_text)}, ${q(p.description)}, ${q(p.short_description)}, ${qn(p.latitude)}, ${qn(p.longitude)}, ${q(p.location_precision)}, ${qb(p.map_ready)}, ${q(p.address)}, ${q(p.verification_status)}, ${p.verified_at ? `${q(p.verified_at)}::timestamptz` : 'null'}, ${q(p.source_name)}, ${q(p.source_url)}, ${p.source_name ? "'other'" : 'null'}, ${qj(p.attributes)}, true, ${q(LEGACY_SOURCE)}, ${q(p.legacy_key)}, ${q(MIGRATOR)}, ${q(MIGRATOR)})
@@ -312,7 +311,6 @@ on conflict (entity_type, entity_id, source_name, source_url) do nothing;`);
   lines.push(`insert into public.data_migration_runs (run_key, source, mode, finished_at, totals, status)
 values (${q(RUN_KEY)}, ${q(report.source)}, 'apply', now(), ${qj(report.totals)}, 'ok')
 on conflict (run_key) do update set finished_at = now(), totals = excluded.totals, status = 'ok';`);
-  lines.push('commit;');
   return `${lines.join('\n')}\n`;
 }
 
@@ -356,7 +354,7 @@ function main() {
       console.error('⛔ --apply requiere --confirm y DATABASE_URL (solo con autorización del propietario).');
       process.exit(2);
     }
-    const run = spawnSync('psql', [process.env.DATABASE_URL, '-v', 'ON_ERROR_STOP=1', '-f', SQL_OUT], { stdio: 'inherit' });
+    const run = spawnSync('psql', [process.env.DATABASE_URL, '-1', '-v', 'ON_ERROR_STOP=1', '-f', SQL_OUT], { stdio: 'inherit' });
     if (run.status !== 0) process.exit(run.status || 1);
     console.log('✅ Importación aplicada. Validá conteos con: select public.data_source_status();');
   }

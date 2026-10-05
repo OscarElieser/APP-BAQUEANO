@@ -21,6 +21,20 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 # ðŸ§­ BAQUEANO â€” BitÃ¡cora Persistente de Sesiones
 
 
+
+## 🧭 RESOLUCIÓN DE RECHAZO DE PUSH Y SINCRONIZACIÓN TOTAL CON GITHUB (05-10-2026 15:00)
+
+- **Consulta / Mandato del Usuario:**
+  > *"resolver quiero subir todo a github"*
+  > Ante error: `[rejected] main -> main (non-fast-forward) error: failed to push some refs to 'https://github.com/OscarElieser/APP-BAQUEANO.git'`
+
+- **Principio Innegociable y Golden Circle:**
+  - 🎯 **POR QUÉ:** Sincronizar todos los commits locales (incluyendo google3, google2, correcciones SEO, configuraciones Firebase/Supabase y auditorías) con GitHub origin/main sin pérdida de historial ni conflictos, asegurando que el repositorio remoto sea la fuente fidedigna y activa.
+  - ⚙️ **CÓMO:** (1) Registrar la solicitud en la bitácora (SESSION_LOG.md), (2) Analizar el commit remoto divergente (d31a3081 de github-actions[bot] que actualizó website/data/territory-places.json), (3) Integrar limpiamente con git pull --rebase origin main, (4) Validar que no haya conflictos y que todos los checks pasen, (5) Ejecutar git push origin main y confirmar estado final en remoto.
+  - 📦 **QUÉ:** Rama main 100% sincronizada en GitHub con todos los cambios y commits subidos exitosamente.
+
+---
+
 ## 🧭 RESOLUCIÓN Y VERIFICACIÓN EN VIVO: GOOGLE SEARCH CONSOLE (05-10-2026)
 
 - **Consulta / Imagen Reportada por el Usuario:**
@@ -4458,3 +4472,7 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 
 ## 2026-10-05 — Propietario: "¿ya se migró todo? quiero totalmente funcional Supabase"
 - Estado real: nada aplicado en producción (apply_migration rechazado 2 veces por el diálogo de permisos). Se reintenta con la orden explícita del propietario: 070000 → 080000 → importación → verificación → Edge Functions.
+- apply_migration rechazado por 3.ª vez (diálogo de permisos). No se reintenta ni se esquiva con execute_sql. Se ofrecen al propietario: aprobar el permiso o ejecutar los 3 archivos en el SQL Editor de Supabase; luego verificación de solo lectura por Claude.
+
+## 2026-10-05 — Propietario: "te lo dejo a ti" (aplicar la migración Supabase)
+- Método: commit+push a main (también despliega Azure, autorizado); apply_migration por archivo que descarga el SQL del commit fijado en GitHub (extensión http), verifica SHA-256 y ejecuta; luego se quita la extensión http. Importador sin begin/commit (la migración ya es transaccional; psql usa -1).
