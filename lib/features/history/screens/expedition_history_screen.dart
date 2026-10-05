@@ -10,6 +10,9 @@
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 // - `ConsumerStatefulWidget` reactivo conectado a `bookingCommunicationProvider`.
+// - 2026-10-05: encabeza "Mi Viaje" con `MyReservationsSection` (solicitudes
+//   reales del servidor, sin pagos en línea). La lista inferior es el registro
+//   local heredado de la sesión.
 // - Estado vacío elegante cuando el explorador aún no ha realizado reservas, con
 //   acceso directo al mapa para reservar su primera expedición.
 // - Filtrado por estado de pago (Todas, Confirmada, Pendiente, Completada) y
@@ -30,6 +33,7 @@ import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 import '../../../services/booking_and_communication_service.dart';
 import '../../checkout/widgets/baqueano_voucher_dialog.dart';
+import '../widgets/my_reservations_section.dart';
 
 class ExpeditionHistoryScreen extends ConsumerStatefulWidget {
   const ExpeditionHistoryScreen({super.key});
@@ -96,11 +100,15 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
             const SizedBox(height: 14),
 
             const SectionHeader(
-              tag: 'BITÁCORA DE VIAJES & PAGOS DIRECTOS',
-              title: '📜 Historial de Expediciones',
-              subtitle: 'Consulta tus expediciones reservadas en tiempo real, comprobantes oficiales de comercio justo y comunícate con tus anfitriones.',
+              tag: 'MI VIAJE · RESERVAS POR WHATSAPP Y TELÉFONO',
+              title: '🧳 Mi Viaje',
+              subtitle: 'Tus solicitudes de reserva guardadas, su estado real y el contacto directo con cada negocio verificado.',
             ),
             const SizedBox(height: 16),
+
+            // Solicitudes reales guardadas en Supabase (baqueano-reservas).
+            const MyReservationsSection(),
+            const SizedBox(height: 22),
 
             // Filtros de Estado
             SingleChildScrollView(

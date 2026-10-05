@@ -123,6 +123,10 @@ jobs:
           expect "sos report sin sesión" 401 -X POST "$SOS" -H 'content-type: application/json' -d '{"action":"report","latitude":12.1,"longitude":-86.2}'
           expect "sos queue con token falso" 401 -X POST "$SOS" -H 'content-type: application/json' -H 'x-firebase-token: falso.token.firma' -d '{"action":"queue"}'
           expect "sos update sin sesión" 401 -X POST "$SOS" -H 'content-type: application/json' -d '{"action":"update","id":"00000000-0000-0000-0000-000000000000","status":"resolved"}'
+          RES=https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-reservas
+          expect "reservas create sin sesión" 401 -X POST "$RES" -H 'content-type: application/json' -d '{"action":"create","business_id":"biz-coop-somoto","travel_date":"2030-01-01","people_count":2,"contact_phone":"88888888"}'
+          expect "reservas queue con token falso" 401 -X POST "$RES" -H 'content-type: application/json' -H 'x-firebase-token: falso.token.firma' -d '{"action":"queue"}'
+          expect "reservas update sin sesión" 401 -X POST "$RES" -H 'content-type: application/json' -d '{"action":"update","id":"00000000-0000-0000-0000-000000000000","status":"confirmed"}'
           expect "lista pública de experiencias" 200 -X POST "$FN" -H 'content-type: application/json' -d '{"action":"list"}'
           for t in staff_roles audit_logs ops_backup_entities profiles reservations sos_events; do
             body="$(curl -s --max-time 20 "$REST/$t?select=*&limit=1" -H "apikey: $ANON")"

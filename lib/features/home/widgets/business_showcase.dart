@@ -29,6 +29,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../data/repositories/catalog_repository.dart';
+import '../../checkout/widgets/reservation_request_sheet.dart';
 import '../../../core/models/cultural_models.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
@@ -365,6 +366,37 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
                   ),
                 ),
                 const SizedBox(height: 10),
+
+                // Botón 0: Solicitud de reserva registrada (sin pago en línea)
+                Builder(builder: (_) {
+                  final catalogBusiness = ref
+                      .read(catalogSnapshotProvider)
+                      .valueOrNull
+                      ?.businesses
+                      .where((b) => b.id == biz.id)
+                      .firstOrNull;
+                  if (catalogBusiness == null) return const SizedBox.shrink();
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          ReservationRequestSheet.show(context, business: catalogBusiness);
+                        },
+                        icon: const Icon(Icons.event_available_rounded, color: Colors.white, size: 18),
+                        label: const Text('Solicitar reserva'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.terracotta,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
 
                 // Botón 1: WhatsApp con mensaje solicitado (solo si hay número)
                 if (biz.whatsapp.isNotEmpty) SizedBox(

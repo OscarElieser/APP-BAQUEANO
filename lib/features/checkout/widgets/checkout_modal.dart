@@ -16,6 +16,9 @@
 //   (0% IVA para turistas extranjeros y 15% IVA para residentes locales).
 // - Registro de solicitud en estado honesto 'Pendiente de Confirmación'.
 // - Enlaces directos a WhatsApp y llamada telefónica con datos del anfitrión verificado.
+// - ⚠️ 2026-10-05: `show` delega en `ReservationRequestSheet` (solicitud real en
+//   Supabase + WhatsApp/llamada con el negocio verificado, sin pago en línea).
+//   Este modal mostraba anfitriones y precios ficticios; queda como `legacyShow`.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
 // - `CheckoutModal`: Formulario de reserva con datos de expedición, régimen fiscal,
@@ -41,6 +44,7 @@ import '../../../services/auth_service.dart';
 import '../../../services/booking_and_communication_service.dart';
 import '../../../services/passport_membership_service.dart';
 import 'baqueano_voucher_dialog.dart';
+import 'reservation_request_sheet.dart';
 
 /// Ficha técnica y de contacto oficial del emprendimiento campesino anfitrión
 class HostEnterpriseProfile {
@@ -142,7 +146,20 @@ class CheckoutModal extends ConsumerStatefulWidget {
 
   const CheckoutModal({super.key, required this.destination});
 
+  /// Punto de entrada usado por tarjetas de destino, galería, BAQUI y héroe.
+  /// Desde 2026-10-05 abre la solicitud de reserva por WhatsApp/teléfono con
+  /// negocios VERIFICADOS de Supabase (`ReservationRequestSheet`). El flujo
+  /// anterior (`legacyShow`) mostraba anfitriones, teléfonos y precios
+  /// ficticios; se conserva en código pero ya no se usa.
   static Future<void> show(BuildContext context, DestinationModel destination) {
+    return ReservationRequestSheet.show(
+      context,
+      destinationName: destination.title,
+      department: destination.department,
+    );
+  }
+
+  static Future<void> legacyShow(BuildContext context, DestinationModel destination) {
     final width = MediaQuery.of(context).size.width;
     if (width >= 700) {
       return showDialog(

@@ -37,6 +37,7 @@ import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
 import '../../../data/repositories/catalog_repository.dart';
+import '../../checkout/widgets/reservation_request_sheet.dart';
 import '../../directory/models/place_model.dart';
 
 class MapScreen extends ConsumerStatefulWidget {
@@ -712,6 +713,12 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                   label: const Text('Llamar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                   onPressed: () => _launchCall(phone),
                 ),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFF65E01)),
+                icon: const Icon(Icons.event_available_rounded, color: Colors.white, size: 18),
+                label: const Text('Solicitar reserva', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                onPressed: () => ReservationRequestSheet.show(context, business: biz),
+              ),
               if (biz.hasCoordinates)
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFC86432)),
