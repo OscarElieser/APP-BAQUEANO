@@ -15,9 +15,15 @@
 // - Se ejecuta en GitHub Actions (.github/workflows/geocode-territories.yml),
 //   no en el navegador del usuario.
 //
+// - Nombres compuestos ("San Juan del Sur y Cristo de la Misericordia",
+//   "Laguna La Bruja (Las Sabanas)"): si el nombre completo no aparece, se
+//   prueban sus partes, el municipio entre paréntesis y el nombre sin prefijos
+//   genéricos. Esos puntos se marcan `approx: true` (el mapa lo indica).
+// - Los lugares ya ubicados se conservan: solo se consultan los pendientes.
+//
 // 📦 QUÉ:
 // - data/territory-places.json: { territories: { id: [{ name, lat, lng,
-//   osm, label }] }, unresolved: { id: [nombres] } } con atribución ODbL.
+//   osm, label, approx? }] }, unresolved: { id: [nombres] } } con atribución ODbL.
 // ============================================================================
 import fs from 'node:fs';
 import path from 'node:path';
@@ -61,6 +67,22 @@ function searchName(value) {
     .trim();
 }
 
+const GENERIC_PREFIX = /^(centro hist[oó]rico( y| &)?|ciudad de|comunidad(es)? ind[ií]gena(s)?( de)?|comunidades|pueblo ganadero de|valle f[eé]rtil de|artesan[ií]as de|talleres? de cer[aá]mica de|aguas termales( de)?|playas? de|cascadas?|saltos?|cerros?( y)?|cuevas?|humedales de|muelle de|antigua|bah[ií]a de|isla|reserva( de biosfera| natural| silvestre privada)?|parque (natural|arqueol[oó]gico)|mirador|fincas? (agroecol[oó]gicas? )?de|f[aá]bricas de|galer[ií]a de|murales|centro ecotur[ií]stico|refugio)\s+/i;
+
+// Variantes de búsqueda, de la más precisa a la más general.
+function nameVariants(raw) {
+  const exact = searchName(raw);
+  const variants = [{ q: exact, approx: false }];
+  const add = (value, approx = true) => {
+    const v = searchName(value).replace(GENERIC_PREFIX, '').trim();
+    if (v.length >= 4 && !variants.some((x) => x.q.toLowerCase() === v.toLowerCase())) variants.push({ q: v, approx });
+  };
+  exact.split(/\s*(?:&|\by\b|–|—|,|\/)\s*/).filter(Boolean).forEach((part) => add(part));
+  add(exact);
+  (String(raw).match(/\(([^)]+)\)/g) || []).map((m) => m.slice(1, -1)).filter((m) => !/\d/.test(m)).forEach((m) => add(m));
+  return variants;
+}
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function query(q, bbox) {
@@ -93,6 +115,9 @@ const result = {
   unresolved: {}
 };
 
+let previous = { territories: {} };
+try { previous = JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch (_) { /* primera ejecución */ }
+
 for (const territory of territories) {
   const feature = boundaries.features.find((f) => f.properties.id === territory.id);
   if (!feature) { console.warn(`Sin contorno: ${territory.id}`); continue; }
@@ -100,13 +125,18 @@ for (const territory of territories) {
   result.territories[territory.id] = [];
   result.unresolved[territory.id] = [];
   for (const place of territory.places || []) {
-    const name = searchName(place.name);
+    const known = (previous.territories?.[territory.id] || []).find((p) => p.name === place.name && insideFeature(feature, p.lat, p.lng));
+    if (known) { result.territories[territory.id].push(known); continue; }
     let match = null;
-    for (const q of [`${name}, ${territory.name}, Nicaragua`, `${name}, Nicaragua`]) {
-      const candidates = await query(q, bbox);
-      await sleep(DELAY_MS);
-      match = (Array.isArray(candidates) ? candidates : []).find((c) => insideFeature(feature, Number(c.lat), Number(c.lon)));
-      if (match) break;
+    let approx = false;
+    for (const variant of nameVariants(place.name)) {
+      for (const q of [`${variant.q}, ${territory.name}, Nicaragua`, `${variant.q}, Nicaragua`]) {
+        const candidates = await query(q, bbox);
+        await sleep(DELAY_MS);
+        match = (Array.isArray(candidates) ? candidates : []).find((c) => insideFeature(feature, Number(c.lat), Number(c.lon)));
+        if (match) break;
+      }
+      if (match) { approx = variant.approx; break; }
     }
     if (match) {
       result.territories[territory.id].push({
@@ -114,7 +144,8 @@ for (const territory of territories) {
         lat: Math.round(Number(match.lat) * 1e5) / 1e5,
         lng: Math.round(Number(match.lon) * 1e5) / 1e5,
         osm: `${match.osm_type}/${match.osm_id}`,
-        label: String(match.display_name || '').split(',').slice(0, 3).join(',').trim()
+        label: String(match.display_name || '').split(',').slice(0, 3).join(',').trim(),
+        ...(approx ? { approx: true } : {})
       });
       console.log(`✓ ${territory.id} · ${place.name}`);
     } else {

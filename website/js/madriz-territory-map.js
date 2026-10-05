@@ -242,7 +242,9 @@
     list.forEach((entry) => {
       const lat = asNumber(entry.lat);
       const lng = asNumber(entry.lng);
-      if (lat !== null && lng !== null && insideTerritory(lat, lng)) known.set(String(entry.name), { latitude: lat, longitude: lng });
+      if (lat !== null && lng !== null && insideTerritory(lat, lng)) {
+        known.set(String(entry.name), { latitude: lat, longitude: lng, approximate: entry.approx === true, osmLabel: String(entry.label || '') });
+      }
     });
     let resolved = 0;
     for (let index = 0; index < catalogPlaces.length; index += 1) {
@@ -264,7 +266,11 @@
           latitude: result.latitude,
           longitude: result.longitude,
           verified: false,
-          catalogReference: true
+          catalogReference: true,
+          // Precisa: el nombre completo se encontró en OpenStreetMap.
+          // Aproximada: se ubicó por una parte del nombre o su municipio.
+          approximate: fixed ? fixed.approximate : true,
+          osmLabel: fixed ? fixed.osmLabel : ''
         });
       }
       setStatus(`Ubicando lugares de ${territoryName}: ${index + 1} de ${catalogPlaces.length}…`, 'loading');
@@ -383,7 +389,7 @@
     const meta = document.createElement('p');
     meta.className = 'madriz-map-popup-meta';
     meta.textContent = place.catalogReference
-      ? `${territoryName} · ubicación aproximada`
+      ? (place.approximate === false && place.osmLabel ? place.osmLabel : `${territoryName} · ubicación aproximada`)
       : String(place.municipality || territoryName);
     content.append(meta);
 
