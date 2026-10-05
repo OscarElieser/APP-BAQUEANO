@@ -4417,3 +4417,7 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - Agregar la etiqueta de verificación de Google Search Console al <head> de la página principal (website/index.html), sin eliminar el archivo google5c73d71f3e5f8337.html.
 - Estado: la etiqueta ya estaba en website/index.html:25 (commit 49b9d4e9 'google' del propietario) y el build Hostinger la conserva (dist-hostinger/index.html). Los dominios en vivo (baqueanonicaragua.com, www, app-baqueano.web.app) responden 200 pero AÚN NO la sirven → falta publicar. No se desplegó (requiere autorización).
 - Propietario: '¿cuál es más recomendable?' (método de verificación de Search Console) → recomendación: propiedad de Dominio con registro DNS TXT; mantener meta + archivo HTML como respaldo.
+- Propietario eligió verificación DNS por CNAME: host ues3nrtrlyrd → gv-kphjfbvtlhk32n.dv.googlehosted.com (baqueanonicaragua.com).
+- Captura DNS Hostinger del propietario: CNAME www→baqueanonicaragua.com, TXT @ "6317a1dae2f8e12255c20385d684203d", A @ 20.80.81.65. Falta el CNAME de Google.
+- Formulario Hostinger: tipo CNAME y objetivo cargados; campo Nombre vacío → indicar ues3nrtrlyrd.
+- ✅ CNAME ues3nrtrlyrd → gv-kphjfbvtlhk32n.dv.googlehosted.com publicado: responde en Hostinger (byte.dns-parking.com), Google 8.8.8.8 y Cloudflare 1.1.1.1. Registro A intacto (20.80.81.65). Siguiente: propietario pulsa Verificar en Search Console y envía sitemap.xml.
