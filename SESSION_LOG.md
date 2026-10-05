@@ -4257,3 +4257,5 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - Informes generados: docs/production-audit/{responsive,accessibility,broken-links}-report.md (scripts/browser-qa-report.mjs).
 - PAUSA solicitada por el propietario ("Hagamos una pausa… continuemos"). Estado: capa "RESPONSIVE SIN RECORTES" añadida al final de website/css/baqueano-system.css SIN PROBAR, guardada solo en la rama claude/sleepy-goodall-kqogrq (no en main). Al retomar: quitar la regla que oculta .player-ctrl-btn (≤480 px), subir versión ?v= de baqueano-system.css, build, browser-qa 16 anchos, regenerar informes, commit a main.
 - Consulta del propietario (en pausa): ¿se pueden llevar todas las conversaciones a Antigravity (con Claude conectado)? Respuesta: el historial de chat no se transfiere; la continuidad vive en el repo (SESSION_LOG.md, AGENTS.md, CLAUDE.md, docs/). Ofrecido: documento de traspaso.
+- Propietario: "si crea el documento para el traspaso" → creando docs/CONTINUAR_EN_ANTIGRAVITY.md.
+  → Creado docs/CONTINUAR_EN_ANTIGRAVITY.md (en rama y en main): punto de pausa, matriz 20/20 honesta, pendientes, comandos, acciones del propietario y reglas.
