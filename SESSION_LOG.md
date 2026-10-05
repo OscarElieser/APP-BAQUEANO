@@ -4280,10 +4280,6 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - Propietario (mensaje en curso): catálogo de playas, ríos, islas y cascadas con coordenadas (32 puntos) → siguiente.
 - Catálogo de playas, ríos, islas y cascadas (oct 2026, 32 puntos con coordenadas) → `tools/data/apply-geo-catalog-2026-10.mjs`: 10 lugares existentes con lat/lng/categoría/precisión/fuente, 22 nuevos. Departamento confirmado por contorno oficial: Río Tipitapa cae en Granada, Río Estelí en Madriz; Jiquilillo y Río Coco quedan sobre costa/frontera (mapa los ubica por nombre). Mapa y geocodificador usan la coordenada con fuente si cae dentro del contorno. Ficha: "Municipio o zona", sin repetir descripción. destinos.html: 75 verificados; filtros Playas 12 · Ríos 7 · Islas 7 · Cascadas 6 (= catálogo). Doc: docs/data/CATALOGO_GEO_2026-10.md. 236 lugares en total.
 - Coordenadas: 26 lugares verificados quedaban sin ubicar en OSM. geocode-territory-places.mjs ahora usa 'geoHint' (comunidad/municipio de la dirección oficial) como respaldo aproximado; 25 pistas cargadas con tools/data/apply-geo-hints-2026-10-05.mjs. El workflow geocode-territories recalcula al llegar a main.
-<<<<<<< HEAD
-- 15:51 Propietario: adjunta BAQUEANO_NATURALEZA.pdf → agregar en su departamento/región y en destinos.html como venimos trabajando.
-- Catálogo de naturaleza protegida (PDF, 39 registros) → `tools/data/apply-nature-catalog-2026-10.mjs`: 23 existentes con coordenadas/categoría/precisión/fuente, 9 nuevos (Laguna de Apoyeque, Lago Xolotlán, Volcán Masaya-caldera, Reserva Cerro Musún, Península de Chiltepe, Cuevas y Mirador de Apaguají, Cueva del Duende, Mirador El Ranchito, Parque Nacional Saslaya). Duplicados de mismo punto fusionados (cerro+reserva, mirador+cueva). Regla de acceso: solo precisión "exact" ofrece "Cómo llegar"; centroid/reference → "Ver el área en el mapa" + nota "punto de acceso por confirmar". destinos.html: 104 verificados con 10 tipos. 245 lugares. Gates OK. Doc: docs/data/CATALOGO_NATURALEZA_2026-10.md.
-=======
 
 ## 2026-10-05 09:56 — Sincronización completa con GitHub ("actualiza trae todo de github aqui")
 - 🎯 **POR QUÉ:** Sincronizar localmente los 14 nuevos commits remotos generados en GitHub (catálogos INTUR, base verificada 2026, mejoras en BAQUI, coordenadas de territorios y QA de 16 anchos).
@@ -4307,5 +4303,6 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - 📦 **QUÉ:** Progreso verificable y continuo en los requisitos de la auditoría 20/20.
 - **Estado:** En progreso.
 
-
->>>>>>> origin/main
+- 15:51 Propietario: adjunta BAQUEANO_NATURALEZA.pdf → agregar en su departamento/región y en destinos.html como venimos trabajando.
+- Catálogo de naturaleza protegida (PDF, 39 registros) → `tools/data/apply-nature-catalog-2026-10.mjs`: 23 existentes con coordenadas/categoría/precisión/fuente, 9 nuevos (Laguna de Apoyeque, Lago Xolotlán, Volcán Masaya-caldera, Reserva Cerro Musún, Península de Chiltepe, Cuevas y Mirador de Apaguají, Cueva del Duende, Mirador El Ranchito, Parque Nacional Saslaya). Duplicados de mismo punto fusionados (cerro+reserva, mirador+cueva). Regla de acceso: solo precisión "exact" ofrece "Cómo llegar"; centroid/reference → "Ver el área en el mapa" + nota "punto de acceso por confirmar". destinos.html: 104 verificados con 10 tipos. 245 lugares. Gates OK. Doc: docs/data/CATALOGO_NATURALEZA_2026-10.md.
+- Merge con el commit del propietario 714ac82 ('actualizacion 5octu', Antigravity): se conservaron sus entradas de bitácora y archivos; i18n-audit/coverage regenerados. Corregido un merge de SESSION_LOG.md que se subió con marcadores de conflicto (2f5840f).
