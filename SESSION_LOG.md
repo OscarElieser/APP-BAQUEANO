@@ -22,6 +22,19 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 
 
+
+## 🧭 INSTALACIÓN Y EJECUCIÓN DE APK ANDROID EN DISPOSITIVO FÍSICO (05-10-2026 15:38)
+
+- **Consulta / Mandato del Usuario:**
+  > *"ejecuta la apk android al telefono qu esta conectada"*
+
+- **Principio Innegociable y Golden Circle:**
+  - 🎯 **POR QUÉ:** Permitir al usuario explorar, validar e interactuar con la aplicación nativa BAQUEANO directamente en su dispositivo Android real conectado, verificando fluidez visual, diseño responsivo, franja viva, mapas y catálogo turístico sin errores.
+  - ⚙️ **CÓMO:** (1) Detectar dispositivos físicos Android conectados mediante ADB (`adb devices`) o Flutter (`flutter devices`), (2) Localizar el APK generado (`website/assets/BaqueanoNicaragua.apk` o `build/app/outputs/flutter-apk/app-release.apk`) o ejecutar directamente mediante `flutter run -d <device-id>` / `adb install -r`, (3) Iniciar la actividad principal de BAQUEANO en el teléfono.
+  - 📦 **QUÉ:** APK instalado y ejecutado en el teléfono físico conectado.
+
+---
+
 ## 🧭 RESOLUCIÓN DE RECHAZO DE PUSH Y SINCRONIZACIÓN TOTAL CON GITHUB (05-10-2026 15:00)
 
 - **Consulta / Mandato del Usuario:**
@@ -4496,3 +4509,49 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - Verificación: `firebase.json` y `firebase.legacy.json` parsean correctamente como JSON.
 - Restricción del entorno actual: Supabase CLI no está instalado y no hay herramientas MCP de Supabase disponibles; en este tramo no se aplicaron cambios remotos adicionales.
 - Próximo tramo: portar primero identidad/perfiles Android a `baqueano-identity`, después directorio/pagos; trasladar las rutas todavía útiles de Cloud Functions a Edge Functions; desplegar migraciones, importación y pruebas RLS cuando exista acceso autenticado a Supabase.
+## Solicitud activa — eliminar warnings y errores de Supabase — 2026-10-05
+
+- El propietario solicita resolver todos los warnings y errores visibles en las métricas de API Gateway y Postgres de Supabase.
+- Evidencia aportada: API Gateway muestra 134 warnings y 0 errores; Postgres muestra 0 warnings y 170 errores durante el intervalo visible.
+- Estado inicial: solicitud registrada antes del diagnóstico; se inspeccionarán logs, configuración, migraciones y clientes sin alterar datos destructivamente.
+
+### Resolución verificada
+
+- Diagnóstico en logs unificados: 2,198 de los errores recientes eran `42501 permission denied for table backup_operations`, generados por `baqueano-status`; la función consultaba una tabla privada con `SUPABASE_ANON_KEY` y ocultaba el fallo bajo HTTP 200.
+- Se corrigió `supabase/functions/baqueano-status/index.ts`: usa `SUPABASE_SERVICE_ROLE_KEY` solo dentro del runtime servidor, limita CORS, rechaza métodos no permitidos, ejecuta chequeos en paralelo y devuelve 503 ante degradación real.
+- Edge Function `baqueano-status` desplegada en producción como versión 102.
+- Prueba en vivo: 3/3 respuestas HTTP correctas, `ok=true`, `status=operational`, destinos=7, operaciones pendientes=0.
+- Verificación posterior al despliegue desde `2026-10-05T21:32:03Z`: solo eventos INFO/LOG; **0 warnings y 0 errores nuevos** en API Gateway, Postgres, PostgREST y Edge Functions.
+- Las barras históricas del panel no se pueden borrar; desaparecerán al salir del intervalo temporal seleccionado. No representan errores nuevos después de la versión 102.
+- Los asesores detectan recomendaciones independientes de seguridad/rendimiento (funciones con search_path mutable, extensión vector en public, permisos de funciones, políticas duplicadas e índices). No originan las barras corregidas y requieren una migración separada con pruebas RLS para no romper contratos públicos.
+## Consulta de seguridad — 2026-10-05
+
+- El propietario pregunta si la corrección de warnings/errores borró datos o puede causar problemas.
+- Respuesta verificada: no se ejecutaron DELETE, DROP, TRUNCATE, migraciones de esquema ni modificaciones de filas; solo se actualizó y desplegó `baqueano-status` versión 102.
+## Consulta sobre destinos importados — 2026-10-05
+
+- El propietario pregunta por los otros destinos/lugares subidos hoy después de observar que `baqueano-status` reporta 7 destinos.
+- Se verificará en Supabase la diferencia entre las tablas `destinations`, `places` y `businesses`, además del estado de la importación territorial, sin realizar escrituras.
+
+### Resultado de la verificación de solo lectura
+
+- `destinations`: 7 filas; ninguna creada hoy.
+- `places`: 0 filas.
+- `businesses`: 5 filas; ninguna creada hoy; 0 procedentes de `territories-data.js`.
+- `data_migration_runs`: 0 registros.
+- Conclusión: los 262 lugares/negocios preparados hoy no fueron insertados en producción. La bitácora previa confirma que se generaron los SQL `supabase/imports/parts/01..07.sql`, pero su ejecución fue rechazada/bloqueada. La corrección de `baqueano-status` no los eliminó.
+## Autorización de importación territorial — 2026-10-05
+
+- El propietario autoriza ejecutar en producción la importación territorial previamente preparada.
+- Alcance esperado: importar 237 lugares y 25 negocios desde `territories-data.js`, registrar la corrida y validar conteos, duplicados, RLS y logs.
+- Se preservarán los 7 destinos y 5 negocios existentes; la importación debe ser transaccional e idempotente.
+
+### Importación completada y verificada
+
+- El primer intento mediante una parte transportada por consola fue rechazado por truncamiento del payload; la transacción revirtió y se verificaron 0 filas importadas antes de continuar.
+- Se ejecutó el SQL canónico desde el commit `74a4ffa91526efac09843863e615c87e9947e859`, descargado por PostgreSQL mediante HTTPS y validado antes de ejecutar con SHA-256 `9adaa17210cfecdb14e5e13d71b5c29d4fb932450589f681f0389cf02f7a2b02`.
+- Resultado en producción: `places`=237 importados, `businesses`=30 totales (25 importados + 5 existentes), `destinations`=7 intactos, fuentes importadas=144, `map_ready` importados=37 y 0 filas sin departamento.
+- `data_migration_runs.run_key='territories-2026-10-05'` quedó con estado `ok` y el cuadre 237 + 25 + 4 duplicados = 266 registros fuente.
+- Se actualizó y desplegó `baqueano-status` versión 103 para reportar `destinations`, `places`, `businesses` y `catalog_total`.
+- Prueba en vivo: `operational`, destinos=7, lugares=237, negocios=30, catálogo total=274, operaciones pendientes=0.
+- Logs posteriores a la importación: únicamente INFO/LOG; 0 warnings y 0 errores nuevos.
