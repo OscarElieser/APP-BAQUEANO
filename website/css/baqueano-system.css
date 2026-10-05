@@ -1417,3 +1417,23 @@ html[data-bq-page="musica"] body .musica-archive-grid > * { min-width: 0; }
   html[data-bq-page="historia"] body .hist-cta-btns { flex-wrap: wrap; }
   html[data-bq-page="historia"] body .hist-cta-btns > * { max-width: 100%; }
 }
+/* Segunda medición (2026-10-05): cabeceras con enlace "Ver más", tarjetas de acción y formularios. */
+@media (max-width: 600px) {
+  html[data-bq-page="nosotros"] body #baqueanoContactForm > div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+  html[data-bq-page="nosotros"] body #baqueanoContactForm :is(label, input, select, textarea) { min-width: 0; max-width: 100%; }
+}
+@media (max-width: 480px) {
+  html:is([data-bq-page="baqueano-ia"], [data-bq-page="mi-viaje"]) body :is(.ia-recs-header, .rec-section-head) { flex-wrap: wrap; gap: 8px; }
+  html[data-bq-page="ambiental"] body .amb-passport-head { flex-wrap: wrap; gap: 10px; }
+  html[data-bq-page="ambiental"] body .amb-triple-grid > * { min-width: 0; max-width: 100%; }
+  html[data-bq-page="ambiental"] body .amb-triple-box { flex-wrap: wrap; }
+  html[data-bq-page="ambiental"] body .amb-btn-box { white-space: normal; max-width: 100%; }
+  html[data-bq-page="aliados"] body .aliados-map-split-grid > * { min-width: 0; max-width: 100%; }
+  html[data-bq-page="aliados"] body :is(.aliados-nearby-box, .aliados-nearby-head) { flex-wrap: wrap; min-width: 0; }
+  html[data-bq-page="aliados"] body :is(.aliados-nearby-list, .aliado-nearby-item) { min-width: 0; max-width: 100%; }
+  html[data-bq-page="aliados"] body .aliado-nearby-info { min-width: 0; flex: 1 1 auto; }
+  html[data-bq-page="cookies"] body .preferences-grid-panel > * { min-width: 0; max-width: 100%; }
+  html[data-bq-page="cookies"] body .pref-row-item { flex-wrap: wrap; gap: 10px; }
+  html[data-bq-page="cookies"] body :is(.pref-action-btn-neutral, #purgeStorageBtn) { white-space: normal; max-width: 100%; }
+  html[data-bq-page="perfil"] body .prof-final-actions { flex-wrap: wrap; }
+}
