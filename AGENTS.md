@@ -84,6 +84,10 @@ Use 21st MCP for UI discovery, component research, interface generation and visu
 
 OpenDesign (`nexu-io/open-design`, Apache-2.0) se instala en la computadora del propietario y se conecta a Antigravity / Claude Code por MCP (`od mcp install antigravity`). No se copia al repositorio ni forma parte del build de producción. Sus propuestas se adaptan a la arquitectura, paleta, i18n (6 idiomas), accesibilidad y seguridad de BAQUEANO; nunca se aplican a ciegas. Guía: `docs/architecture/OPEN_DESIGN_ANTIGRAVITY.md`.
 
+## GRAPHIFY (grafo de código para agentes, 2026-10-05)
+
+Graphify (fork `OscarElieser/graphify`, Apache-2.0) indexa el código de BAQUEANO (Android, web, Supabase, Azure, scripts y docs; excluye binarios e `ios/`, `web/` y `windows/` mediante `.graphifyignore`) en un grafo que los agentes consultan antes de leer archivos (`graphify query "…"`). La salida `graphify-out/` no se versiona y se regenera con `graphify update .` (solo AST, sin costo de API); en Claude Code lo hace el hook de inicio de sesión. En Antigravity: `graphify antigravity install`. El grafo orienta, no es evidencia. Guía: `docs/architecture/GRAPHIFY.md`.
+
 ## 4C MARKETING MODEL
 
 When implementing marketing, UX, discovery, booking or business features, evaluate the solution against BAQUEANO's 4C model: Consumer, Cost, Convenience and Communication. Refer to `docs/design/MARKETING_4C_BAQUEANO.md` and `docs/design/DESIGN.md`.

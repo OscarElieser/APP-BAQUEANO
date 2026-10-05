@@ -111,3 +111,6 @@ desktop.ini
 *.bak
 *.old
 
+
+# Graphify: grafo de código regenerable (docs/architecture/GRAPHIFY.md)
+graphify-out/

@@ -1,0 +1,39 @@
+# 🎯 POR QUÉ: Graphify (herramienta de desarrollo, fork OscarElieser/graphify) indexa el código de
+#   BAQUEANO en un grafo consultable por los agentes; los binarios, datos generados y plataformas
+#   fuera de alcance (AGENTS.md: solo Android + web) solo añadirían ruido.
+# ⚙️ CÓMO: sintaxis de .gitignore; se suma a .gitignore.
+# 📦 QUÉ: se indexan lib/, android/, website/ (código), supabase/, azure/, functions/, tools/, docs/.
+ios/
+web/
+windows/
+macos/
+linux/
+build/
+node_modules/
+website/dist-hostinger/
+website/assets/
+assets/
+website/locales/
+website/data/
+assets/i18n/
+website/docs/i18n-audit.json
+docs/production-audit/*.json
+docs/production-audit/lighthouse/
+tools/i18n-batches/
+tools/db/catalog-*.txt
+.runtime/
+.agents/skills/
+.github/skills/
+.obsidian/
+.genkit/
+*.apk
+*.mp4
+*.mp3
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.pdf
+*.lock
+package-lock.json
+pnpm-lock.yaml
