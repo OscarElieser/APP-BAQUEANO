@@ -311,7 +311,20 @@
       "planner": "Planificar viaje"
     },
     "welcome": "¡Hola! Soy Baqüi, tu guía guardabarranco. ¿Qué querés descubrir hoy?",
-    "open": "Abrí Baqüi, tu guía digital"
+    "open": "Abrí Baqüi, tu guía digital",
+    "homeCard": {
+      "status": "Guía activo",
+      "desc": "Tu guía territorial. Te digo qué conocer, cómo llegar, cuánto podés gastar, quién te recibe y cómo armar tu viaje.",
+      "capRoutes": "Rutas",
+      "capPrices": "Precios",
+      "capFood": "Comida",
+      "capLodging": "Hospedaje",
+      "capHistory": "Historia",
+      "capNearby": "Cercanía",
+      "capHosts": "Anfitriones",
+      "promptAria": "Contale a Baqüi qué querés vivir",
+      "promptPlaceholder": "Contame qué querés vivir..."
+    }
   },
   "trip": {
     "title": "Mi Viaje",

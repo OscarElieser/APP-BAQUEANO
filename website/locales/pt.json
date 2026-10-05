@@ -141,6 +141,19 @@
       "surprise": "Surpreenda-me",
       "hidden": "Fora do mapa",
       "planner": "Planejar viagem"
+    },
+    "homeCard": {
+      "status": "Guia ativo",
+      "desc": "Seu guia local. Eu digo o que conhecer, como chegar, quanto você pode gastar, quem te recebe e como montar sua viagem.",
+      "capRoutes": "Rotas",
+      "capPrices": "Preços",
+      "capFood": "Comida",
+      "capLodging": "Hospedagem",
+      "capHistory": "História",
+      "capNearby": "Por perto",
+      "capHosts": "Anfitriões",
+      "promptAria": "Conte ao Baqüi o que você quer viver",
+      "promptPlaceholder": "Conte o que você quer viver..."
     }
   },
   "footer": {

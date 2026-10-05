@@ -141,6 +141,19 @@
       "surprise": "Surprise me",
       "hidden": "Off the map",
       "planner": "Plan a trip"
+    },
+    "homeCard": {
+      "status": "Guide online",
+      "desc": "Your local guide. I tell you what to see, how to get there, how much you can spend, who will host you and how to plan your trip.",
+      "capRoutes": "Routes",
+      "capPrices": "Prices",
+      "capFood": "Food",
+      "capLodging": "Lodging",
+      "capHistory": "History",
+      "capNearby": "Nearby",
+      "capHosts": "Hosts",
+      "promptAria": "Tell Baqüi what you want to experience",
+      "promptPlaceholder": "Tell me what you want to experience..."
     }
   },
   "footer": {

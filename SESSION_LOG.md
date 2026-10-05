@@ -4234,3 +4234,14 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - Después: móvil 28–30 / escritorio 64; 2,7 MB; TBT móvil 1,5–2,2 s; CLS móvil 0 / escritorio 0,057. Regresión visual: 8 capturas (4 páginas × 390/1366) idénticas salvo la mascota animada.
   - Brecha honesta: móvil sigue lejos de 90 (FCP 8,5 s, LCP 16,7 s) por ~800 KB de CSS bloqueante (566 KB sin usar en la portada) y 27 animaciones no compuestas → requiere consolidar CSS crítico (refactor con riesgo visual, pendiente).
 - Graphify (fork OscarElieser/graphify, graphifyy 0.9.76, Apache-2.0) integrado como herramienta de desarrollo: `.graphifyignore` (solo código Android/web/Supabase/Azure/docs), skill `.claude/skills/graphify/`, `CLAUDE.md` (remite a AGENTS.md), hooks seguros (no-op sin graphify) + SessionStart que instala desde el fork y regenera; `graphify-out/` en .gitignore. Verificado: 9 607 nodos, 13 298 relaciones, 767 comunidades en 18 s; `graphify query` responde; hooks exit 0 con y sin graphify. Guía `docs/architecture/GRAPHIFY.md`; regla en AGENTS.md.
+
+## 2026-10-05 — Consulta del propietario: idioma EN mezclado en la portada (móvil)
+- Solicitud: "Ya viste está en inglés pero siempre me deja en español" (6 capturas de baqueanonicaragua.com con selector EN).
+- Síntoma: navbar/thumb-bar/chips traducidos (Home, Explore, Search, Nature, Community), pero quedan en español: hero "NO SE VISITA, SE DESCUBRE", "¿Por qué BAQUEANO?", subtítulos, "Explorá Nicaragua en el mapa", bloque BAQUI, "Experiencias Destacadas", "¿Qué querés vivir?".
+- Estado: investigando (fuente vs producción 56bd236).
+- Diagnóstico:
+  1. Causa principal: producción sigue en 56bd236 (autodeploy de la VM Azure bloqueado, acción del propietario). En 56bd236 `index.html` tenía 0 atributos data-i18n; en main tiene 156 y las 6 traducciones existen. Por eso solo cambian navbar/thumb-bar (shell JS) y el resto queda en español.
+  2. Fallo real en el código: `js/tres-pilares.js` inyectaba el bloque BAQUI de la portada ("Guía activo", 7 etiquetas, "Contame qué querés vivir...", aria-label) en español fijo y pisaba la descripción ya traducida.
+- Corrección: 11 claves `baqui.homeCard.*` en 6 idiomas (i18n:add); tres-pilares.js usa data-i18n/data-i18n-aria-label y llama a BaqueanoLanguage.translateElement; caché ?v=20261005-i18n-1; export:app-locales.
+- Prueba (Playwright sobre dist local): index?lang=en → todos los textos de las capturas en inglés (2 coincidencias restantes son nombres propios); bloque BAQUI correcto en en/es/fr. `npm run i18n`: 0 errores, 3620 claves × 6.
+- Pendiente del propietario para verlo en el teléfono: desbloquear el autodeploy de la VM (`sudo journalctl -u baqueano-autodeploy -n 100`, `df -h`).

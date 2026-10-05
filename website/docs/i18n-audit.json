@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T12:16:28.513Z",
+  "generatedAt": "2026-10-05T12:48:50.641Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 3610,
-    "en": 3610,
-    "fr": 3610,
-    "it": 3610,
-    "pt": 3610,
-    "de": 3610
+    "es": 3621,
+    "en": 3621,
+    "fr": 3621,
+    "it": 3621,
+    "pt": 3621,
+    "de": 3621
   },
   "html": {
     "files": 31,
@@ -23,8 +23,8 @@
     "untranslated": 1
   },
   "js": {
-    "files": 79,
-    "translated": 32,
+    "files": 81,
+    "translated": 41,
     "untranslated": 731
   },
   "jsEditorial": {
@@ -69,6 +69,7 @@
     "terminos.html",
     "testimonios.html",
     "js/ai-assistant.js",
+    "js/async-styles.js",
     "js/ayuda.js",
     "js/baqueano-analytics.js",
     "js/baqueano-api.js",
@@ -82,6 +83,7 @@
     "js/firebase-config.js",
     "js/firestore-mirror.js",
     "js/firestore-realtime.js",
+    "js/hero-video-loader.js",
     "js/ops-center/ops-community-moderation.js",
     "js/safety-gallery.js",
     "js/shared/roles.js",
@@ -405,6 +407,15 @@
     },
     {
       "file": "js/ai-assistant.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/async-styles.js",
       "type": "js",
       "total": 0,
       "translated": 0,
@@ -773,6 +784,15 @@
       "coverage": 0
     },
     {
+      "file": "js/hero-video-loader.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/historia-audioguia.js",
       "type": "js",
       "total": 2,
@@ -1108,11 +1128,11 @@
     {
       "file": "js/tres-pilares.js",
       "type": "js",
-      "total": 3,
-      "translated": 0,
+      "total": 12,
+      "translated": 9,
       "untranslated": 3,
       "editorialStrings": 0,
-      "coverage": 0
+      "coverage": 75
     },
     {
       "file": "js/user-session.js",

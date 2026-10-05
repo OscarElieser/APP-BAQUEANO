@@ -141,6 +141,19 @@
       "surprise": "Sorprendimi",
       "hidden": "Fuori dalla mappa",
       "planner": "Pianifica il viaggio"
+    },
+    "homeCard": {
+      "status": "Guida attiva",
+      "desc": "La tua guida locale. Ti dico cosa visitare, come arrivarci, quanto puoi spendere, chi ti accoglie e come organizzare il viaggio.",
+      "capRoutes": "Percorsi",
+      "capPrices": "Prezzi",
+      "capFood": "Cibo",
+      "capLodging": "Alloggio",
+      "capHistory": "Storia",
+      "capNearby": "Nelle vicinanze",
+      "capHosts": "Host locali",
+      "promptAria": "Racconta a Baqüi cosa vuoi vivere",
+      "promptPlaceholder": "Dimmi cosa vuoi vivere..."
     }
   },
   "footer": {

@@ -141,6 +141,19 @@
       "surprise": "Surprenez-moi",
       "hidden": "Hors de la carte",
       "planner": "Planifier un voyage"
+    },
+    "homeCard": {
+      "status": "Guide en ligne",
+      "desc": "Votre guide local. Je vous dis quoi visiter, comment y aller, combien dépenser, qui vous accueille et comment organiser votre voyage.",
+      "capRoutes": "Itinéraires",
+      "capPrices": "Prix",
+      "capFood": "Cuisine",
+      "capLodging": "Hébergement",
+      "capHistory": "Histoire",
+      "capNearby": "À proximité",
+      "capHosts": "Hôtes",
+      "promptAria": "Dites à Baqüi ce que vous voulez vivre",
+      "promptPlaceholder": "Dites-moi ce que vous voulez vivre..."
     }
   },
   "footer": {

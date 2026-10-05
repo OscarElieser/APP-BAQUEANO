@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T12:16:28.513Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3610 · en 3610 · fr 3610 · it 3610 · pt 3610 · de 3610
+Generado: 2026-10-05T12:48:50.641Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3621 · en 3621 · fr 3621 · it 3621 · pt 3621 · de 3621
 
 HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -115,7 +115,7 @@ HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | js/index-destinos-editorial.js | js | 3 | 0 | 3 | 0 % |
 | js/panorama-viewer.js | js | 3 | 0 | 3 | 0 % |
 | js/tourism-catalog-expansion.js | js | 3 | 0 | 3 | 0 % |
-| js/tres-pilares.js | js | 3 | 0 | 3 | 0 % |
+| js/tres-pilares.js | js | 12 | 9 | 3 | 75 % |
 | js/user-session.js | js | 3 | 0 | 3 | 0 % |
 | apps/admin/src/components/ModulePlaceholder.tsx | tsx | 2 | 0 | 2 | 0 % |
 | apps/web/src/app/gastronomia/page.tsx | tsx | 2 | 0 | 2 | 0 % |
@@ -176,6 +176,7 @@ HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | historia.html | html | 176 | 176 | 0 | 100 % |
 | index.html | html | 215 | 215 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
+| js/async-styles.js | js | 0 | 0 | 0 | 100 % |
 | js/ayuda.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-analytics.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-api.js | js | 0 | 0 | 0 | 100 % |
@@ -189,6 +190,7 @@ HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | js/firebase-config.js | js | 0 | 0 | 0 | 100 % |
 | js/firestore-mirror.js | js | 0 | 0 | 0 | 100 % |
 | js/firestore-realtime.js | js | 0 | 0 | 0 | 100 % |
+| js/hero-video-loader.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |
 | js/shared/roles.js | js | 0 | 0 | 0 | 100 % |

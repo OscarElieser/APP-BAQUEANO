@@ -17,6 +17,8 @@
  *   para que otros módulos (destinos, mapa, IA) reaccionen.
  * - API pública expuesta en window.BaqueanoPilares.
  * - Cero dependencias externas; se conecta con los datos existentes.
+ * - i18n: todo texto inyectado lleva clave data-i18n (baqui.homeCard.*); el
+ *   traductor global (MutationObserver) lo traduce al idioma activo.
  *
  * 📦 3. QUÉ (WHAT / FUNCIONALIDAD & ENTREGABLES):
  * - initVivirSelector() — Interactividad del selector experiencial.
@@ -254,7 +256,7 @@
       statusIndicator.className = "baqui-status-indicator";
       statusIndicator.innerHTML =
         '<span class="baqui-status-dot"></span>' +
-        '<span class="baqui-status-text">Guía activo</span>';
+        '<span class="baqui-status-text" data-i18n="baqui.homeCard.status">Guía activo</span>';
       titleRow.parentNode.insertBefore(statusIndicator, titleRow);
     }
 
@@ -264,13 +266,13 @@
       var caps = document.createElement("div");
       caps.className = "baqui-capabilities";
       caps.innerHTML = [
-        '<span class="baqui-cap-tag"><i class="fa-solid fa-route"></i> Rutas</span>',
-        '<span class="baqui-cap-tag"><i class="fa-solid fa-coins"></i> Precios</span>',
-        '<span class="baqui-cap-tag"><i class="fa-solid fa-utensils"></i> Comida</span>',
-        '<span class="baqui-cap-tag"><i class="fa-solid fa-bed"></i> Hospedaje</span>',
-        '<span class="baqui-cap-tag"><i class="fa-solid fa-book-open"></i> Historia</span>',
-        '<span class="baqui-cap-tag"><i class="fa-solid fa-location-dot"></i> Cercanía</span>',
-        '<span class="baqui-cap-tag"><i class="fa-solid fa-users"></i> Anfitriones</span>'
+        '<span class="baqui-cap-tag"><i class="fa-solid fa-route"></i> <span data-i18n="baqui.homeCard.capRoutes">Rutas</span></span>',
+        '<span class="baqui-cap-tag"><i class="fa-solid fa-coins"></i> <span data-i18n="baqui.homeCard.capPrices">Precios</span></span>',
+        '<span class="baqui-cap-tag"><i class="fa-solid fa-utensils"></i> <span data-i18n="baqui.homeCard.capFood">Comida</span></span>',
+        '<span class="baqui-cap-tag"><i class="fa-solid fa-bed"></i> <span data-i18n="baqui.homeCard.capLodging">Hospedaje</span></span>',
+        '<span class="baqui-cap-tag"><i class="fa-solid fa-book-open"></i> <span data-i18n="baqui.homeCard.capHistory">Historia</span></span>',
+        '<span class="baqui-cap-tag"><i class="fa-solid fa-location-dot"></i> <span data-i18n="baqui.homeCard.capNearby">Cercanía</span></span>',
+        '<span class="baqui-cap-tag"><i class="fa-solid fa-users"></i> <span data-i18n="baqui.homeCard.capHosts">Anfitriones</span></span>'
       ].join("");
       descText.parentNode.insertBefore(caps, descText.nextSibling);
     }
@@ -282,15 +284,21 @@
       promptArea.className = "baqui-prompt-area";
       promptArea.href = "baqueano-ai.html?prompt=contame-que-queres-vivir";
       promptArea.setAttribute("aria-label", "Contale a Baqüi qué querés vivir");
+      promptArea.setAttribute("data-i18n-aria-label", "baqui.homeCard.promptAria");
       promptArea.innerHTML =
-        '<span class="baqui-prompt-placeholder">Contame qué querés vivir...</span>' +
+        '<span class="baqui-prompt-placeholder" data-i18n="baqui.homeCard.promptPlaceholder">Contame qué querés vivir...</span>' +
         '<span class="baqui-prompt-send" aria-hidden="true"><i class="fa-solid fa-paper-plane"></i></span>';
       contentSide.appendChild(promptArea);
     }
 
-    // Actualizar el texto descriptivo para reflejar guía territorial real
+    // Actualizar el texto descriptivo para reflejar guía territorial real.
+    // Con clave i18n: antes se fijaba en español y pisaba la traducción (EN/FR/…).
     if (descText) {
+      descText.setAttribute("data-i18n", "baqui.homeCard.desc");
       descText.textContent = "Tu guía territorial. Te digo qué conocer, cómo llegar, cuánto podés gastar, quién te recibe y cómo armar tu viaje.";
+      if (window.BaqueanoLanguage && window.BaqueanoLanguage.translateElement) {
+        window.BaqueanoLanguage.translateElement(card);
+      }
     }
   }
 
