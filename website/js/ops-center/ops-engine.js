@@ -4096,6 +4096,7 @@
       if (tabId === '32-configuracion') return this.renderGlobalConfigModule();
       if (tabId === '33-estado') return this.renderSystemStatusModule();
       if (tabId === '20-sos') return this.renderSosModule();
+      if (tabId === '11-reservas') return this.renderReservationsModule();
       if (tabId === '35-backup') return this.renderBackupSyncModule();
       if (tabId === '36-comunidad') {
         if (window.BaqueanoCommunityModeration) return window.BaqueanoCommunityModeration.render(panel);
@@ -6052,6 +6053,34 @@
         </div>
       `;
       if (window.BaqueanoOpsData && typeof window.BaqueanoOpsData.renderSos === 'function') window.BaqueanoOpsData.renderSos({ force: true });
+    },
+
+    // Reservas (11-reservas). Auditoría 2026-10-05: sin pasarela de pago, la
+    // reserva es una solicitud coordinada por WhatsApp/teléfono. La vista
+    // editorial genérica (código, "método de pago", tarjeta) se reemplaza por
+    // la cola real de Supabase `reservations` vía baqueano-reservas.
+    renderReservationsModule() {
+      const panel = document.getElementById('view-11-reservas');
+      if (!panel) return;
+      panel.innerHTML = `
+        <div class="ops-view-header">
+          <div class="ops-view-title-group">
+            <h1><i class="fa-solid fa-calendar-check" style="color: var(--bq-accent);"></i> Reservas por WhatsApp y teléfono</h1>
+            <p class="ops-view-subtitle">SOLICITUDES REALES · SIN PAGO EN LÍNEA · PRECIO Y PAGO SE ACUERDAN CON EL NEGOCIO · FUENTE: SUPABASE reservations</p>
+          </div>
+        </div>
+        <div class="ops-table-container-matte">
+          <table class="ops-table-matte">
+            <caption class="ops-sr-only">Solicitudes de reserva registradas por viajeros</caption>
+            <thead>
+              <tr><th scope="col">Solicitud</th><th scope="col">Negocio</th><th scope="col">Viajero</th><th scope="col">Fecha y personas</th><th scope="col">Registrada</th><th scope="col">Gestión</th></tr>
+            </thead>
+            <tbody id="opsLiveReservations"></tbody>
+          </table>
+          <p class="ops-health-detail" id="opsLiveReservationsEmpty">Cargando solicitudes de reserva…</p>
+        </div>
+      `;
+      if (window.BaqueanoOpsData && typeof window.BaqueanoOpsData.renderReservations === 'function') window.BaqueanoOpsData.renderReservations({ force: true });
     },
 
     // 8.3g Módulo de Backup y Sincronización Multi-Nube (35-backup)

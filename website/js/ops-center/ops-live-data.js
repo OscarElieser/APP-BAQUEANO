@@ -19,7 +19,9 @@
 //
 // - Centro SOS (vista 20): cola real de `baqueano-sos` (sondeo de 30 s solo con
 //   la vista abierta); admin gestiona estados con nota, el auditor solo lee.
-// 📦 QUÉ: window.BaqueanoOpsData = { call, callSos, renderSos, refresh, loadTab, manages, save,
+// - Reservas (vista 11): solicitudes reales de `baqueano-reservas` (sin pago en
+//   línea); admin confirma/completa/rechaza/cancela con nota; auditor solo lee.
+// 📦 QUÉ: window.BaqueanoOpsData = { call, callSos, callReservations, renderSos, renderReservations, refresh, loadTab, manages, save,
 //   setStatus, verify, state }.
 // ============================================================================
 (function (window, document) {
@@ -29,6 +31,9 @@
   // Alertas SOS de la App/Web (tabla sos_events, acceso solo vía Edge Function).
   const SOS_ENDPOINT = 'https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-sos';
   const SOS_POLL_MS = 30 * 1000;
+  // Solicitudes de reserva por WhatsApp/teléfono (sin pago en línea).
+  const RES_ENDPOINT = 'https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-reservas';
+  const RES_POLL_MS = 60 * 1000;
   const REFRESH_MS = 5 * 60 * 1000;
 
   // Pestañas del Ops Center con datos en Supabase. `write` = edición habilitada.
@@ -78,6 +83,10 @@
 
   function callSos(action, payload) {
     return request(SOS_ENDPOINT, action, payload);
+  }
+
+  function callReservations(action, payload) {
+    return request(RES_ENDPOINT, action, payload);
   }
 
   async function request(endpoint, action, payload) {
@@ -619,6 +628,108 @@
   }
 
   // --------------------------------------------------------------------------
+  // Reservas (vista 11): solicitudes reales coordinadas por WhatsApp/teléfono
+  // --------------------------------------------------------------------------
+  const RES_LABEL = { pending: 'Solicitud enviada', confirmed: 'Confirmada', rejected: 'No disponible', cancelled: 'Cancelada', completed: 'Completada' };
+  const RES_ACTIONS = [['confirmed', 'Confirmar'], ['completed', 'Completada'], ['rejected', 'No disponible'], ['cancelled', 'Cancelar']];
+  let resLoading = null;
+
+  function resVisible() {
+    const view = document.getElementById('view-11-reservas');
+    return Boolean(view && view.offsetParent !== null && !document.hidden);
+  }
+
+  function waLink(phone, text) {
+    let digits = String(phone || '').replace(/[^0-9]/g, '');
+    if (digits.length === 8) digits = `505${digits}`; // número nicaragüense sin código de país
+    return digits ? `https://wa.me/${digits}?text=${encodeURIComponent(text)}` : null;
+  }
+
+  function reservationRow(item, readOnly) {
+    const tr = el('tr');
+    tr.dataset.resStatus = item.status;
+    const biz = item.businesses || {};
+
+    const codeCell = el('td');
+    const chip = el('span', 'ops-sos-chip', RES_LABEL[item.status] || item.status);
+    chip.dataset.state = item.status === 'pending' ? 'acknowledged' : (item.status === 'confirmed' || item.status === 'completed' ? 'resolved' : 'closed');
+    codeCell.appendChild(chip);
+    codeCell.appendChild(el('div', 'ops-sos-who', item.reservation_code));
+    codeCell.appendChild(el('div', 'ops-sos-meta', item.channel === 'web' ? 'Portal web' : 'App Android'));
+    tr.appendChild(codeCell);
+
+    const bizCell = el('td');
+    bizCell.appendChild(el('div', 'ops-sos-who', biz.name || item.business_id || '—'));
+    bizCell.appendChild(el('div', 'ops-sos-meta', [item.destination_name, biz.department].filter(Boolean).join(' · ') || item.service_title || ''));
+    tr.appendChild(bizCell);
+
+    const travelerCell = el('td');
+    travelerCell.appendChild(el('div', 'ops-sos-who', item.contact_name || 'Viajero'));
+    const contact = waLink(item.contact_phone, `Hola ${item.contact_name || ''}, te escribe el equipo BAQUEANO sobre tu solicitud ${item.reservation_code}.`);
+    if (contact) {
+      const link = el('a', 'ops-sos-geo', item.contact_phone);
+      link.href = contact; link.target = '_blank'; link.rel = 'noopener noreferrer';
+      travelerCell.appendChild(link);
+    }
+    tr.appendChild(travelerCell);
+
+    tr.appendChild(el('td', '', `${item.travel_date || '—'} · ${item.people_count || 1} pers.`));
+    tr.appendChild(el('td', '', new Date(item.created_at).toLocaleString('es-NI')));
+
+    const actions = el('td', 'ops-sos-actions');
+    if (item.notes) actions.appendChild(el('div', 'ops-sos-meta', `Nota: ${item.notes}`));
+    if (readOnly) {
+      actions.appendChild(el('span', 'ops-sos-meta', item.handled_by ? `Gestionó: ${item.handled_by}` : 'Solo lectura'));
+    } else {
+      RES_ACTIONS.filter(([status]) => status !== item.status).forEach(([status, label]) => {
+        const btn = el('button', 'ops-sos-btn', label);
+        btn.type = 'button';
+        btn.addEventListener('click', async () => {
+          const note = window.prompt(`${label} ${item.reservation_code}: nota para el historial (opcional)`, '');
+          if (note === null) return;
+          btn.disabled = true;
+          try {
+            await callReservations('update', { id: item.id, status, note });
+            toast(`Reserva ${item.reservation_code}: ${RES_LABEL[status].toLowerCase()}.`, 'success');
+            renderReservations({ force: true });
+          } catch (error) {
+            btn.disabled = false;
+            toast(`No se pudo actualizar la reserva: ${error.message}`, 'error');
+          }
+        });
+        actions.appendChild(btn);
+      });
+    }
+    tr.appendChild(actions);
+    return tr;
+  }
+
+  async function renderReservations(options) {
+    const opts = options || {};
+    if (!currentUser()) return;
+    if (resLoading && !opts.force) return resLoading;
+    resLoading = (async () => {
+      const body = document.getElementById('opsLiveReservations');
+      const empty = document.getElementById('opsLiveReservationsEmpty');
+      try {
+        const data = await callReservations('queue');
+        const items = Array.isArray(data.items) ? data.items : [];
+        if (body) body.replaceChildren(...items.map((item) => reservationRow(item, data.read_only === true)));
+        const pending = Number((data.counts && data.counts.pending) || 0);
+        state.reservations = { pending, counts: data.counts || {}, lastSync: Date.now() };
+        if (empty) {
+          empty.hidden = items.length > 0;
+          empty.textContent = 'Sin solicitudes de reserva. Aparecen cuando un viajero con sesión registra una solicitud desde la App o la web.';
+        }
+      } catch (error) {
+        if (body) body.replaceChildren();
+        if (empty) { empty.hidden = false; empty.textContent = `No se pudieron leer las reservas: ${error.message}`; }
+      }
+    })().finally(() => { resLoading = null; });
+    return resLoading;
+  }
+
+  // --------------------------------------------------------------------------
   // Ciclo de refresco
   // --------------------------------------------------------------------------
   let refreshing = null;
@@ -668,6 +779,7 @@
     Object.keys(TABS).forEach((tabId) => { loadTab(tabId).catch((e) => console.warn('[OpsData]', tabId, e.message)); });
     renderAudit();
     renderSos();
+    renderReservations();
   }
 
   function start() {
@@ -682,15 +794,16 @@
     window.setInterval(() => { if (!document.hidden && currentUser()) { refresh(); renderSos(); } }, REFRESH_MS);
     // SOS: sondeo cada 30 s solo mientras la vista está abierta y visible.
     window.setInterval(() => { if (currentUser() && sosVisible()) renderSos(); }, SOS_POLL_MS);
+    window.setInterval(() => { if (currentUser() && resVisible()) renderReservations(); }, RES_POLL_MS);
     document.addEventListener('click', (event) => {
       const target = event.target.closest && event.target.closest('#btnOpsSyncAll, [data-tab="27-auditoria"], [data-tab="20-sos"]');
       if (!target || !currentUser()) return;
-      if (target.id === 'btnOpsSyncAll') { refresh({ force: true, health: true }); renderSos({ force: true }); }
+      if (target.id === 'btnOpsSyncAll') { refresh({ force: true, health: true }); renderSos({ force: true }); renderReservations({ force: true }); }
       else if (target.dataset.tab === '20-sos') window.setTimeout(() => renderSos({ force: true }), 0);
       else window.setTimeout(renderAudit, 0); // después de que el motor dibuje la vista
     });
   }
 
-  window.BaqueanoOpsData = { call, callSos, refresh, loadTab, manages, save, setStatus, verify, onSignedIn, renderAudit, renderHealth, renderSos, state, TABS };
+  window.BaqueanoOpsData = { call, callSos, callReservations, refresh, loadTab, manages, save, setStatus, verify, onSignedIn, renderAudit, renderHealth, renderSos, renderReservations, state, TABS };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })(window, document);

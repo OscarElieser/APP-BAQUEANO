@@ -133,9 +133,12 @@ class ReservationRepository {
   static String formatDate(DateTime date) =>
       '${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
 
-  /// Solo dígitos para wa.me (`+505 8888-8888` → `50588888888`).
-  static String whatsappDigits(String phone) =>
-      phone.replaceAll(RegExp(r'[^0-9]'), '');
+  /// Solo dígitos para wa.me (`+505 8888-8888` → `50588888888`). Un número
+  /// nicaragüense de 8 dígitos sin código de país recibe el prefijo 505.
+  static String whatsappDigits(String phone) {
+    final digits = phone.replaceAll(RegExp(r'[^0-9]'), '');
+    return digits.length == 8 ? '505$digits' : digits;
+  }
 
   /// Mensaje prellenado para coordinar por WhatsApp (sin datos inventados).
   static String buildWhatsAppMessage({

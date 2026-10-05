@@ -57,6 +57,7 @@ void main() {
 
   test('normaliza teléfonos para wa.me y departamentos con tilde', () {
     expect(ReservationRepository.whatsappDigits('+505 8443-1289'), '50584431289');
+    expect(ReservationRepository.whatsappDigits('8443-1289'), '50584431289');
     expect(ReservationRequestSheet.normalizeDepartment('León'), 'leon');
     expect(ReservationRequestSheet.normalizeDepartment('rio_san_juan'), 'rio san juan');
     expect(ReservationRequestSheet.normalizeDepartment('Río San Juan'), 'rio san juan');
