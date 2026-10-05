@@ -12,6 +12,8 @@
 // - Rejilla adaptativa con `GridView.builder` que muestra tarjetas territoriales.
 // - Diálogo modal detallado `_showDepartmentDetails` que despliega la ficha completa
 //   con fotografías, datos geográficos y botón directo de expedición.
+// - La ficha incluye `DepartmentLiveSection`: franja viva de lugares (los mismos
+//   181 de la Web, verificados en CI) y destinos verificados de Supabase.
 //
 // 📦 3. QUÉ (WHAT / WIDGET EXPUESTO):
 // - `DepartmentsExplorerGrid`: Rejilla interactiva de los 17 territorios.
@@ -23,6 +25,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/country_history_models.dart';
+import 'department_live_section.dart';
 
 class DepartmentsExplorerGrid extends StatelessWidget {
   final List<CountryDepartment> departments;
@@ -117,6 +120,17 @@ class DepartmentsExplorerGrid extends StatelessWidget {
             ),
 
             const SizedBox(height: 18),
+            const Divider(color: AppColors.borderLight),
+            const SizedBox(height: 10),
+
+            // Paridad con departamento.html: franja viva de lugares con ficha
+            // propia y destinos verificados de Supabase (mismo dato que la Web).
+            DepartmentLiveSection(
+              key: ValueKey('live_${dept.id}'),
+              departmentId: dept.id,
+              departmentName: dept.name,
+            ),
+            const SizedBox(height: 10),
             const Divider(color: AppColors.borderLight),
 
             // Cultura

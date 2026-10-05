@@ -15,8 +15,10 @@
 //   de Nicaragua (`LatLng(12.8654, -85.2072)` con zoom adaptado a tablets y móviles).
 // - Soporte multimodo interactivo: Satelital Híbrido (Google Earth con relieve y vías),
 //   Topográfico de Terreno y Modo Nocturno con paleta oficial (`#082B35`, `#C86432`, `#D4AF37`).
-// - Marcadores georreferenciados dinámicos para destinos y cooperativas campesinas
-//   con filtrado reactivo de capas y animaciones suaves de cámara (`animateCamera`).
+// - Marcadores SOLO desde Supabase (`catalogSnapshotProvider`, mismo dato que la
+//   Web y Ops Center): destinos publicados con coordenadas válidas y negocios
+//   verificados que tengan coordenadas. Nunca se inventan posiciones, precios ni
+//   guías; filtros por categorías reales; línea de estado con fuente y conteo.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & VISTAS EXPUESTAS):
 // - `MapScreen`: Pantalla oficial de cartografía satelital mapeada en `/mapa`.
@@ -25,19 +27,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../core/data/catalog_data.dart';
-import '../../../core/models/cultural_models.dart';
-import '../../../core/models/destination_model.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
-import '../../checkout/widgets/checkout_modal.dart';
+import '../../../data/repositories/catalog_repository.dart';
+import '../../directory/models/place_model.dart';
 
-class MapScreen extends StatefulWidget {
+class MapScreen extends ConsumerStatefulWidget {
   final double? initialLat;
   final double? initialLng;
   final String? initialTitle;
@@ -50,10 +52,10 @@ class MapScreen extends StatefulWidget {
   });
 
   @override
-  State<MapScreen> createState() => _MapScreenState();
+  ConsumerState<MapScreen> createState() => _MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _MapScreenState extends ConsumerState<MapScreen> {
   GoogleMapController? _mapController;
 
   // Centro geográfico oficial de Nicaragua
@@ -63,9 +65,10 @@ class _MapScreenState extends State<MapScreen> {
   MapType _currentMapType = MapType.hybrid; // Satelital con vías y etiquetas por defecto
   bool _isDarkStyleApplied = false;
 
-  String _selectedFilter = 'Todos'; // 'Todos', 'Destinos', 'Negocios', 'volcanes', 'cascadas'
-  DestinationModel? _selectedDestination;
-  LocalBusiness? _selectedBusiness;
+  // 'Todos', 'Destinos', 'Negocios' o una categoría real de los destinos.
+  String _selectedFilter = 'Todos';
+  PlaceModel? _selectedPlace;
+  CatalogBusiness? _selectedBusiness;
 
   // Estilo cartográfico nocturno con paleta volcánica oficial
   static const String _darkMapStyleJson = '''[
@@ -83,12 +86,6 @@ class _MapScreenState extends State<MapScreen> {
     {"featureType": "water", "elementType": "geometry", "stylers": [{"color": "#021A24"}]},
     {"featureType": "water", "elementType": "labels.text.fill", "stylers": [{"color": "#38BDF8"}]}
   ]''';
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedDestination = CatalogData.destinations.first;
-  }
 
   @override
   void dispose() {
@@ -155,94 +152,121 @@ class _MapScreenState extends State<MapScreen> {
     } catch (_) {}
   }
 
-  void _openCheckout(DestinationModel dest) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (ctx) => CheckoutModal(destination: dest),
+  /// Abre la ruta en Google Maps hacia coordenadas reales verificadas.
+  Future<void> _openDirections(double lat, double lng) async {
+    final uri = Uri.parse(
+      'https://www.google.com/maps/dir/?api=1&destination=$lat,$lng',
     );
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else if (mounted) {
+        CustomToast.error(context, 'No se pudo abrir la navegación');
+      }
+    } catch (_) {
+      if (mounted) CustomToast.error(context, 'No se pudo abrir la navegación');
+    }
   }
 
-  Set<Marker> _buildMarkers() {
+  /// Pines del mapa: SOLO datos de Supabase con coordenadas válidas (el
+  /// repositorio descarta coordenadas nulas o fuera de Nicaragua). Antes se
+  /// pintaban destinos con precios fijos y negocios ficticios.
+  Set<Marker> _buildMarkers(CatalogSnapshot? catalog) {
     final Set<Marker> markers = {};
-
-    final showDestinations = _selectedFilter == 'Todos' ||
-        _selectedFilter == 'Destinos' ||
-        _selectedFilter == 'volcanes' ||
-        _selectedFilter == 'cascadas';
+    if (catalog == null) return markers;
 
     final showBusinesses = _selectedFilter == 'Todos' || _selectedFilter == 'Negocios';
+    final showPlaces = _selectedFilter != 'Negocios';
 
-    // Marcadores de Destinos Turísticos
-    if (showDestinations) {
-      for (final dest in CatalogData.destinations) {
-        if (_selectedFilter == 'volcanes' && dest.category != 'volcanes') continue;
-        if (_selectedFilter == 'cascadas' && dest.category != 'cascadas') continue;
-
-        final isSelected = _selectedDestination?.id == dest.id;
-
+    if (showPlaces) {
+      for (final place in catalog.places) {
+        if (_selectedFilter != 'Todos' &&
+            _selectedFilter != 'Destinos' &&
+            place.categoryId != _selectedFilter) {
+          continue;
+        }
+        final position = LatLng(place.latitude, place.longitude);
         markers.add(
           Marker(
-            markerId: MarkerId('dest_${dest.id}'),
-            position: LatLng(dest.latitude, dest.longitude),
+            markerId: MarkerId('place_${place.placeId}'),
+            position: position,
             infoWindow: InfoWindow(
-              title: dest.title,
-              snippet: '${dest.department} • \$${dest.priceUsd.toStringAsFixed(0)} USD',
-              onTap: () => _openCheckout(dest),
+              title: place.name,
+              snippet: '${place.departmentName} • ${place.categoryName}',
             ),
             icon: BitmapDescriptor.defaultMarkerWithHue(
-              dest.category == 'volcanes'
-                  ? BitmapDescriptor.hueOrange
-                  : dest.category == 'cascadas'
-                      ? BitmapDescriptor.hueCyan
-                      : BitmapDescriptor.hueYellow,
+              place.verified ? BitmapDescriptor.hueOrange : BitmapDescriptor.hueYellow,
             ),
-            zIndexInt: isSelected ? 2 : 1,
+            zIndexInt: _selectedPlace?.placeId == place.placeId ? 2 : 1,
             onTap: () {
               setState(() {
-                _selectedDestination = dest;
+                _selectedPlace = place;
                 _selectedBusiness = null;
               });
-              _mapController?.animateCamera(
-                CameraUpdate.newLatLngZoom(LatLng(dest.latitude, dest.longitude), 11.5),
-              );
+              _mapController?.animateCamera(CameraUpdate.newLatLngZoom(position, 11.5));
             },
           ),
         );
       }
     }
 
-    // Marcadores de Negocios Campesinos
     if (showBusinesses) {
-      for (final biz in CatalogData.localBusinesses) {
-        final isSelected = _selectedBusiness?.id == biz.id;
-
+      for (final biz in catalog.businesses.where((b) => b.verified && b.hasCoordinates)) {
+        final position = LatLng(biz.latitude!, biz.longitude!);
         markers.add(
           Marker(
             markerId: MarkerId('biz_${biz.id}'),
-            position: LatLng(biz.latitude, biz.longitude),
-            infoWindow: InfoWindow(
-              title: '${biz.icon} ${biz.name}',
-              snippet: '${biz.category} • ${biz.department}',
-            ),
+            position: position,
+            infoWindow: InfoWindow(title: biz.name, snippet: biz.department),
             icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-            zIndexInt: isSelected ? 2 : 1,
+            zIndexInt: _selectedBusiness?.id == biz.id ? 2 : 1,
             onTap: () {
               setState(() {
                 _selectedBusiness = biz;
-                _selectedDestination = null;
+                _selectedPlace = null;
               });
-              _mapController?.animateCamera(
-                CameraUpdate.newLatLngZoom(LatLng(biz.latitude, biz.longitude), 12.0),
-              );
+              _mapController?.animateCamera(CameraUpdate.newLatLngZoom(position, 12.0));
             },
           ),
         );
       }
     }
-
     return markers;
+  }
+
+  /// Línea de estado honesta: cuántos pines hay y de dónde salen.
+  Widget _buildDataStatus(AsyncValue<CatalogSnapshot> catalogAsync) {
+    final String text;
+    Color color = Colors.white70;
+    if (catalogAsync.isLoading && !catalogAsync.hasValue) {
+      text = 'Cargando lugares verificados…';
+    } else {
+      final catalog = catalogAsync.valueOrNull;
+      if (catalog == null || catalog.source == CatalogSource.none) {
+        text = 'Sin conexión y sin copia guardada: no hay pines que mostrar.';
+        color = const Color(0xFFFBBF24);
+      } else {
+        final businessPins = catalog.businesses.where((b) => b.verified && b.hasCoordinates).length;
+        final pending = catalog.businesses.where((b) => b.verified && !b.hasCoordinates).length;
+        final origin = catalog.source == CatalogSource.supabase ? 'Supabase (en vivo)' : 'copia guardada';
+        text = '${catalog.places.length} destinos y $businessPins negocios con coordenadas reales · fuente: $origin'
+            '${pending > 0 ? ' · $pending negocios verificados aún sin coordenadas' : ''}';
+      }
+    }
+    return Row(
+      children: [
+        Icon(Icons.verified_outlined, size: 14, color: color),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text(text, style: TextStyle(fontSize: 11.5, color: color, height: 1.4)),
+        ),
+        IconButton(
+          tooltip: 'Actualizar datos',
+          icon: const Icon(Icons.refresh_rounded, size: 18, color: Color(0xFFD4AF37)),
+          onPressed: () => ref.invalidate(catalogSnapshotProvider),
+        ),
+      ],
+    );
   }
 
   @override
@@ -250,6 +274,15 @@ class _MapScreenState extends State<MapScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
     final mapHeight = isDesktop ? 580.0 : 500.0;
+    final catalogAsync = ref.watch(catalogSnapshotProvider);
+    final catalog = catalogAsync.valueOrNull;
+    final categories = <String>{
+      for (final place in catalog?.places ?? const <PlaceModel>[]) place.categoryId,
+    }.where((c) => c.isNotEmpty).toList()
+      ..sort();
+    final categoryLabels = {
+      for (final place in catalog?.places ?? const <PlaceModel>[]) place.categoryId: place.categoryName,
+    };
 
     return ResponsiveScaffold(
       currentIndex: 2,
@@ -265,7 +298,7 @@ class _MapScreenState extends State<MapScreen> {
             const SectionHeader(
               tag: 'CARTOGRAFÍA SATELITAL & GOOGLE MAPS',
               title: '🌍 Mapa Satelital de Nicaragua',
-              subtitle: 'Explora imágenes satelitales auténticas de Google Maps. Descubre senderos, volcanes activos y cooperativas campesinas georreferenciadas con precisión.',
+              subtitle: 'Explora imágenes satelitales de Google Maps con los destinos y negocios verificados por BAQUEANO, los mismos de la web.',
             ),
             const SizedBox(height: 14),
 
@@ -278,8 +311,7 @@ class _MapScreenState extends State<MapScreen> {
                   'Todos',
                   'Destinos',
                   'Negocios',
-                  'volcanes',
-                  'cascadas',
+                  ...categories,
                 ].map((filter) {
                   final isSelected = _selectedFilter == filter;
                   return Padding(
@@ -297,7 +329,13 @@ class _MapScreenState extends State<MapScreen> {
                           ),
                         ),
                         child: Text(
-                          filter == 'Todos' ? '🗺️ Todos los Pines' : filter == 'Negocios' ? '🏪 Negocios Campesinos' : filter.toUpperCase(),
+                          filter == 'Todos'
+                              ? '🗺️ Todos los Pines'
+                              : filter == 'Negocios'
+                                  ? '🏪 Negocios Verificados'
+                                  : filter == 'Destinos'
+                                      ? '📍 Destinos'
+                                      : (categoryLabels[filter] ?? filter).toUpperCase(),
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
@@ -311,7 +349,9 @@ class _MapScreenState extends State<MapScreen> {
               ),
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
+            _buildDataStatus(catalogAsync),
+            const SizedBox(height: 8),
 
             // ----------------------------------------------------------------
             // LIENZO DE GOOGLE MAPS REAL CON IMÁGENES SATELITALES Y RELIEVE
@@ -350,7 +390,7 @@ class _MapScreenState extends State<MapScreen> {
                           ),
                           mapType: _currentMapType,
                           style: _isDarkStyleApplied ? _darkMapStyleJson : null,
-                          markers: _buildMarkers(),
+                          markers: _buildMarkers(catalog),
                           onMapCreated: _onMapCreated,
                           myLocationEnabled: false,
                           myLocationButtonEnabled: false,
@@ -515,8 +555,8 @@ class _MapScreenState extends State<MapScreen> {
             // ----------------------------------------------------------------
             // FICHA DETALLADA DEL PUNTO SELECCIONADO (DESTINO O NEGOCIO)
             // ----------------------------------------------------------------
-            if (_selectedDestination != null)
-              _buildDestinationDetailCard(_selectedDestination!)
+            if (_selectedPlace != null)
+              _buildPlaceDetailCard(_selectedPlace!)
             else if (_selectedBusiness != null)
               _buildBusinessDetailCard(_selectedBusiness!),
 
@@ -602,14 +642,14 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  Widget _buildBusinessDetailCard(LocalBusiness biz) {
+  Widget _cardDecorationWrapper({required Color accent, required Widget child}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
         gradient: AppGradients.cardGlass,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.6), width: 1.5),
+        border: Border.all(color: accent.withValues(alpha: 0.6), width: 1.5),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.35),
@@ -618,132 +658,79 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ],
       ),
+      child: child,
+    );
+  }
+
+  /// Ficha de un negocio verificado: solo campos que existen en Supabase.
+  Widget _buildBusinessDetailCard(CatalogBusiness biz) {
+    final phone = biz.phone ?? '';
+    final whatsapp = biz.whatsapp ?? '';
+    return _cardDecorationWrapper(
+      accent: const Color(0xFF10B981),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF082B35),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xFF10B981), width: 2),
-                ),
-                child: Center(
-                  child: Text(biz.icon, style: const TextStyle(fontSize: 28)),
-                ),
-              ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      biz.name,
-                      style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w800),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      '${biz.category} • ${biz.department}',
-                      style: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12, fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          Text(
+            biz.name,
+            style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w800),
           ),
-          const SizedBox(height: 16),
-          const Divider(color: Colors.white12),
+          const SizedBox(height: 2),
+          Text(
+            [biz.category, biz.department].where((p) => p.isNotEmpty).join(' • '),
+            style: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 14),
+          if (biz.hostName.isNotEmpty) ...[
+            _buildInfoRow(Icons.person_outline_rounded, 'Anfitrión', biz.hostName),
+            const SizedBox(height: 8),
+          ],
+          if (biz.address.isNotEmpty) ...[
+            _buildInfoRow(Icons.location_on_outlined, 'Dirección', biz.address),
+            const SizedBox(height: 8),
+          ],
+          if (biz.specialty.isNotEmpty) ...[
+            _buildInfoRow(Icons.star_border_rounded, 'Especialidad', biz.specialty),
+            const SizedBox(height: 8),
+          ],
           const SizedBox(height: 10),
-
-          // Ficha Completa del Negocio Campesino
-          _buildInfoRow(Icons.person_outline_rounded, 'Propietario / Responsable', biz.ownerName),
-          const SizedBox(height: 8),
-          _buildInfoRow(Icons.location_on_outlined, 'Dirección', biz.address),
-          const SizedBox(height: 8),
-          _buildInfoRow(Icons.phone_outlined, 'Teléfono', biz.contact),
-          const SizedBox(height: 8),
-          _buildInfoRow(Icons.email_outlined, 'Correo', biz.email),
-          const SizedBox(height: 8),
-          _buildInfoRow(Icons.schedule_outlined, 'Horario', biz.schedule),
-
-          const SizedBox(height: 18),
-
-          // Botones de Contacto y Reserva Directa
-          Row(
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
             children: [
-              Expanded(
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF25D366),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                  ),
+              if (whatsapp.isNotEmpty)
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF25D366)),
                   icon: const Icon(Icons.chat_rounded, color: Colors.white, size: 18),
                   label: const Text('WhatsApp', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                  onPressed: () => _launchWhatsApp(biz.whatsapp, biz.name),
+                  onPressed: () => _launchWhatsApp(whatsapp, biz.name),
                 ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF0284C7),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                  ),
+              if (phone.isNotEmpty)
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0284C7)),
                   icon: const Icon(Icons.phone_rounded, color: Colors.white, size: 18),
                   label: const Text('Llamar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                  onPressed: () => _launchCall(biz.contact),
+                  onPressed: () => _launchCall(phone),
                 ),
-              ),
+              if (biz.hasCoordinates)
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFC86432)),
+                  icon: const Icon(Icons.directions_rounded, color: Colors.white, size: 18),
+                  label: const Text('Cómo llegar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  onPressed: () => _openDirections(biz.latitude!, biz.longitude!),
+                ),
             ],
-          ),
-          const SizedBox(height: 12),
-
-          // Botón de Reserva y Cuentas de Pago
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFC86432),
-                padding: const EdgeInsets.symmetric(vertical: 13),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-              ),
-              icon: const Icon(Icons.account_balance_wallet_rounded, color: Colors.white, size: 18),
-              label: const Text('Reservar Ruta & Ver Cuentas de Pago', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
-              onPressed: () {
-                final dest = CatalogData.destinations.firstWhere(
-                  (d) => d.department.toLowerCase() == biz.department.toLowerCase(),
-                  orElse: () => CatalogData.destinations.first,
-                );
-                _openCheckout(dest);
-              },
-            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildDestinationDetailCard(DestinationModel dest) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(22),
-      decoration: BoxDecoration(
-        gradient: AppGradients.cardGlass,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFD4AF37).withValues(alpha: 0.5), width: 1.5),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.35),
-            blurRadius: 18,
-            offset: const Offset(0, 6),
-          ),
-        ],
-      ),
+  /// Ficha de un destino publicado en Supabase. Sin precios ni guías
+  /// inventados: muestra la fuente de verificación cuando existe.
+  Widget _buildPlaceDetailCard(PlaceModel place) {
+    return _cardDecorationWrapper(
+      accent: const Color(0xFFD4AF37),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -751,20 +738,27 @@ class _MapScreenState extends State<MapScreen> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(14),
-                child: Image.network(
-                  dest.imageUrl,
-                  width: 70,
-                  height: 70,
-                  fit: BoxFit.cover,
-                  cacheWidth: 200,
-                  cacheHeight: 200,
-                  errorBuilder: (_, __, ___) => Container(
-                    width: 70,
-                    height: 70,
-                    color: const Color(0xFF082B35),
-                    child: const Icon(Icons.landscape_rounded, color: Color(0xFFD4AF37)),
-                  ),
-                ),
+                child: place.imageUrl.isEmpty
+                    ? Container(
+                        width: 70,
+                        height: 70,
+                        color: const Color(0xFF082B35),
+                        child: const Icon(Icons.landscape_rounded, color: Color(0xFFD4AF37)),
+                      )
+                    : Image.network(
+                        place.imageUrl,
+                        width: 70,
+                        height: 70,
+                        fit: BoxFit.cover,
+                        cacheWidth: 200,
+                        cacheHeight: 200,
+                        errorBuilder: (_, __, ___) => Container(
+                          width: 70,
+                          height: 70,
+                          color: const Color(0xFF082B35),
+                          child: const Icon(Icons.landscape_rounded, color: Color(0xFFD4AF37)),
+                        ),
+                      ),
               ),
               const SizedBox(width: 14),
               Expanded(
@@ -772,57 +766,57 @@ class _MapScreenState extends State<MapScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      dest.title,
+                      place.name,
                       style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w800),
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      '${dest.department} • Dificultad: ${dest.difficulty}',
+                      '${place.departmentName} • ${place.categoryName}',
                       style: const TextStyle(color: Color(0xFFD4AF37), fontSize: 12, fontWeight: FontWeight.w600),
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      '🧭 Guía asignado: ${dest.guideName}',
-                      style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 11),
-                    ),
+                    if (place.verified) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        place.verificationSource == null
+                            ? '✅ Verificado por BAQUEANO'
+                            : '✅ Verificado · fuente: ${place.verificationSource}',
+                        style: TextStyle(color: Colors.white.withValues(alpha: 0.75), fontSize: 11),
+                      ),
+                    ],
                   ],
                 ),
               ),
             ],
           ),
+          if (place.description.isNotEmpty) ...[
+            const SizedBox(height: 14),
+            Text(
+              place.description,
+              maxLines: 5,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 12, height: 1.4),
+            ),
+          ],
+          if (place.address.isNotEmpty) ...[
+            const SizedBox(height: 10),
+            _buildInfoRow(Icons.alt_route_rounded, 'Cómo llegar', place.address),
+          ],
           const SizedBox(height: 16),
-          Text(
-            dest.description,
-            style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 12, height: 1.4),
-          ),
-          const SizedBox(height: 18),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Precio por Explorador', style: TextStyle(color: Colors.white54, fontSize: 10)),
-                    Text(
-                      '\$${dest.priceUsd.toStringAsFixed(0)} USD / C\$ ${dest.priceNio.toStringAsFixed(0)} NIO',
-                      style: const TextStyle(color: Color(0xFFD4AF37), fontSize: 13, fontWeight: FontWeight.w900),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 8),
               ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFC86432),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                ),
-                icon: const Icon(Icons.calendar_today_rounded, color: Colors.white, size: 15),
-                label: const Text('Reservar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12.5)),
-                onPressed: () => _openCheckout(dest),
+                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFC86432)),
+                icon: const Icon(Icons.directions_rounded, color: Colors.white, size: 18),
+                label: const Text('Cómo llegar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                onPressed: () => _openDirections(place.latitude, place.longitude),
+              ),
+              OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(side: const BorderSide(color: Color(0xFFD4AF37))),
+                icon: const Icon(Icons.info_outline_rounded, color: Color(0xFFD4AF37), size: 18),
+                label: const Text('Ver ficha', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                onPressed: () => context.push('/descubre-nicaragua/${Uri.encodeComponent(place.placeId)}'),
               ),
             ],
           ),

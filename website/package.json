@@ -22,7 +22,9 @@
     "test:i18n:browser": "node scripts/i18n-browser.test.mjs",
     "test:baqui": "node scripts/baqui-intent.test.mjs",
     "audit:visual": "node scripts/visual-audit.mjs",
-    "test:territorios": "node scripts/territory-places-rule.test.mjs"
+    "test:territorios": "node scripts/territory-places-rule.test.mjs",
+    "export:app-territories": "node scripts/export-territories-for-app.mjs",
+    "test:app-territories": "node scripts/export-territories-for-app.mjs --check"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
