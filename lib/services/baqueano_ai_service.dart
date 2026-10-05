@@ -86,14 +86,23 @@ class BaqueanoAiService extends ChangeNotifier {
 
   // 🛡️ AI GATEWAY & CREDENCIALES COMPILADAS (CERO LLAVES SECRETAS EXPUESTAS EN EL APK)
   // En producción, el cliente invoca el endpoint seguro del AI Gateway alojado en backend.
-  static const String _aiGatewayBaseUrl = String.fromEnvironment(
+  // Gateway oficial: Supabase Edge Function `baqueano-ai` (las llaves de los
+  // proveedores de IA viven como secretos del servidor, nunca en el APK).
+  static const String _aiGatewayUrl = String.fromEnvironment(
     'AI_GATEWAY_URL',
-    defaultValue: 'https://api.baqueano.app/ai/v1',
+    defaultValue:
+        'https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-ai',
   );
 
-  static String get _groqApiKey => const String.fromEnvironment('GROQ_API_KEY');
-  static String get _ollamaApiKey => const String.fromEnvironment('OLLAMA_API_KEY');
-  static String get _geminiApiKey => const String.fromEnvironment('GEMINI_API_KEY');
+  // Llaves de proveedores SOLO para depuración local. En builds release/profile
+  // `kDebugMode` es una constante falsa: el compilador elimina el literal y
+  // ninguna llave suministrada por --dart-define queda incrustada en el APK.
+  static const String _groqApiKey =
+      kDebugMode ? String.fromEnvironment('GROQ_API_KEY') : '';
+  static const String _ollamaApiKey =
+      kDebugMode ? String.fromEnvironment('OLLAMA_API_KEY') : '';
+  static const String _geminiApiKey =
+      kDebugMode ? String.fromEnvironment('GEMINI_API_KEY') : '';
 
   final BaqueanoRagRetriever _ragRetriever;
   AiProvider _currentProvider = AiProvider.auto;
@@ -469,7 +478,7 @@ class BaqueanoAiService extends ChangeNotifier {
     client.connectionTimeout = const Duration(seconds: 4);
 
     try {
-      final request = await client.postUrl(Uri.parse('$_aiGatewayBaseUrl/chat'));
+      final request = await client.postUrl(Uri.parse(_aiGatewayUrl));
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
 
       // 🔐 Inyección de Firebase Auth ID Token verificado server-side
@@ -492,6 +501,13 @@ class BaqueanoAiService extends ChangeNotifier {
       } catch (_) {}
 
       final payload = jsonEncode({
+        // Contrato de `baqueano-ai`: `prompt` + `currentLanguage`.
+        'prompt': userQuery,
+        'currentLanguage': Platform.localeName
+            .split(RegExp('[_.-]'))
+            .first
+            .toLowerCase(),
+        'countryCode': 'NI',
         'messages': [
           {'role': 'system', 'content': systemPrompt},
           {'role': 'user', 'content': userQuery},
@@ -500,20 +516,41 @@ class BaqueanoAiService extends ChangeNotifier {
       });
 
       request.write(payload);
-      final response = await request.close();
+      final response =
+          await request.close().timeout(const Duration(seconds: 20));
 
       if (response.statusCode == 200) {
-        final responseBody = await response.transform(utf8.decoder).join();
-        final json = jsonDecode(responseBody) as Map<String, dynamic>;
-        final reply = json['reply'] ?? json['text'] ?? json['content'];
-        if (reply != null && reply.toString().trim().isNotEmpty) {
-          return reply.toString().trim();
+        final responseBody = await response
+            .transform(utf8.decoder)
+            .join()
+            .timeout(const Duration(seconds: 20));
+        final decoded = jsonDecode(responseBody);
+        if (decoded is Map<String, dynamic>) {
+          final reply = _extractGatewayReply(decoded);
+          if (reply.isNotEmpty) return reply;
         }
       }
       throw Exception('Gateway error: ${response.statusCode}');
     } finally {
       client.close();
     }
+  }
+
+  /// Extrae el texto de respuesta del gateway. Acepta la forma conversacional
+  /// (`message`) y la de itinerario (`itinerary.title/summary`) de
+  /// `baqueano-ai`, más las claves heredadas `reply`/`text`/`content`.
+  static String _extractGatewayReply(Map<String, dynamic> json) {
+    for (final key in const ['message', 'reply', 'text', 'content']) {
+      final value = json[key];
+      if (value is String && value.trim().isNotEmpty) return value.trim();
+    }
+    final itinerary = json['itinerary'];
+    if (itinerary is Map) {
+      final title = itinerary['title']?.toString().trim() ?? '';
+      final summary = itinerary['summary']?.toString().trim() ?? '';
+      return [title, summary].where((part) => part.isNotEmpty).join('\n\n');
+    }
+    return '';
   }
 
   /// Inferencia mediante Groq Cloud (Llama 3.3 70B)
