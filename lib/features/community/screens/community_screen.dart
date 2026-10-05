@@ -36,7 +36,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../core/data/catalog_data.dart';
+import '../../../data/repositories/community_repository.dart';
 import '../../../core/models/cultural_models.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
@@ -56,7 +56,10 @@ class CommunityScreen extends ConsumerStatefulWidget {
 }
 
 class _CommunityScreenState extends ConsumerState<CommunityScreen> {
-  late List<ExplorerReview> _reviews;
+  // Experiencias reales publicadas (moderadas en Ops Center), las mismas de la Web.
+  List<ExplorerReview> _reviews = [];
+  bool _loadingReviews = true;
+  String? _reviewsError;
 
   // Estado del filtrado cronológico y Modo Galería Dinámica
   DateTime? _selectedDate;
@@ -69,11 +72,31 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
   @override
   void initState() {
     super.initState();
-    // Intención: Inicializar la lista mutable de reseñas combinando el catálogo base.
-    // Mecanismo: Copia profunda en memoria de CatalogData.explorerReviews.
-    // Importancia: Permite que los nuevos relatos publicados se inserten al instante en la cima.
-    _reviews = List.from(CatalogData.explorerReviews);
+    // Antes se copiaban relatos de ejemplo (`CatalogData.explorerReviews`,
+    // personas ficticias). Ahora se cargan las experiencias publicadas reales.
     _galleryPageController = PageController(viewportFraction: 0.92);
+    _loadReviews();
+  }
+
+  Future<void> _loadReviews() async {
+    setState(() {
+      _loadingReviews = true;
+      _reviewsError = null;
+    });
+    try {
+      final items = await ref.read(communityRepositoryProvider).listPublished();
+      if (!mounted) return;
+      setState(() {
+        _reviews = List.of(items);
+        _loadingReviews = false;
+      });
+    } catch (error) {
+      if (!mounted) return;
+      setState(() {
+        _reviewsError = error.toString();
+        _loadingReviews = false;
+      });
+    }
   }
 
   @override
@@ -169,17 +192,18 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
   }
 
   String _formatDateShort(DateTime d) {
-    final now = DateTime(2026, 9, 3);
-    final yesterday = DateTime(2026, 9, 2);
+    // Fecha real del dispositivo (antes estaba fija en el 3 de septiembre de 2026).
+    const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    final today = DateTime.now();
+    final now = DateTime(today.year, today.month, today.day);
+    final yesterday = now.subtract(const Duration(days: 1));
 
     if (d.year == now.year && d.month == now.month && d.day == now.day) {
-      return 'Hoy · 3 Sep';
+      return 'Hoy · ${now.day} ${months[now.month - 1]}';
     }
     if (d.year == yesterday.year && d.month == yesterday.month && d.day == yesterday.day) {
-      return 'Ayer · 2 Sep';
+      return 'Ayer · ${yesterday.day} ${months[yesterday.month - 1]}';
     }
-
-    const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
     return '${d.day} ${months[d.month - 1]}';
   }
 
@@ -201,6 +225,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
     String selectedDestination = 'Volcán Cerro Negro';
     double selectedRating = 5.0;
     String? selectedEcoAction;
+    bool isSubmitting = false;
     CountryDetectionResult detectionResult = CountryFlagHelper.detectFlag(countryController.text);
     final List<String> selectedPhotos = [];
     final ImagePicker picker = ImagePicker();
@@ -967,39 +992,41 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                             style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w800),
                           ),
                         ),
-                        onPressed: () {
-                          if (storyController.text.trim().isEmpty) {
+                        onPressed: isSubmitting ? null : () async {
+                          final story = storyController.text.trim();
+                          if (story.isEmpty) {
                             CustomToast.error(modalContext, 'Por favor escribe tu relato o experiencia.');
                             return;
                           }
 
                           HapticFeedback.mediumImpact();
-                          final now = DateTime.now();
-                          final dateStr = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
-
-                          final newReview = ExplorerReview(
-                            id: 'rev-${now.millisecondsSinceEpoch}',
-                            author: nameController.text.trim().isEmpty ? 'Explorador Baqueano' : nameController.text.trim(),
-                            countryFlag: detectionResult.flag,
-                            destination: selectedDestination,
-                            review: storyController.text.trim(),
-                            rating: selectedRating,
-                            photos: List.from(selectedPhotos),
-                            userPhotoUrl: googlePhotoUrl,
-                            isVerifiedGoogle: isGoogleVerified,
-                            date: dateStr,
-                            ecoAction: selectedEcoAction,
-                            isEcoGuardian: selectedEcoAction != null,
+                          // El relato va a moderación (Ops Center) por la misma API de la
+                          // Web; no se publica ni se otorga XP en el dispositivo.
+                          final body = selectedEcoAction == null
+                              ? story
+                              : '$story\n\nAcción verde: $selectedEcoAction';
+                          setModalState(() => isSubmitting = true);
+                          final result = await ref.read(communityRepositoryProvider).submit(
+                            title: 'Mi experiencia en $selectedDestination',
+                            body: body,
+                            destinationName: selectedDestination,
+                            rating: selectedRating.round(),
+                            experienceType: selectedEcoAction != null ? 'ecoturismo' : null,
                           );
+                          if (!modalContext.mounted) return;
+                          setModalState(() => isSubmitting = false);
 
-                          setState(() {
-                            _reviews.insert(0, newReview);
-                          });
-
+                          if (result.status != CommunitySubmitStatus.pendingReview) {
+                            CustomToast.error(modalContext, result.message);
+                            return;
+                          }
                           Navigator.of(modalContext).pop();
+                          if (!mounted) return;
                           CustomToast.success(
-                            context,
-                            '¡Relato publicado con éxito! Has ganado +200 XP en tu Pasaporte Baqueano.',
+                            this.context,
+                            selectedPhotos.isEmpty
+                                ? result.message
+                                : '${result.message} Las fotos aún no se suben desde la app: agrégalas desde la web.',
                           );
                         },
                       ),
@@ -1310,8 +1337,8 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                         ),
                         const SizedBox(height: 10),
 
-                        // Estrellas de calificación
-                        Row(
+                        // Estrellas de calificación (solo si el viajero valoró)
+                        if (rev.rating > 0) Row(
                           children: [
                             Row(
                               children: List.generate(5, (sIdx) {
@@ -1667,6 +1694,40 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
     );
   }
 
+  /// Estado honesto de la lista: cargando, error con reintento o sin datos.
+  Widget _buildReviewsStatus() {
+    final String text;
+    if (_loadingReviews) {
+      text = 'Cargando experiencias reales de la comunidad…';
+    } else if (_reviewsError != null) {
+      text = 'No se pudieron cargar las experiencias: $_reviewsError';
+    } else {
+      text = 'Aún no hay experiencias publicadas. Comparte la tuya: el equipo BAQUEANO la revisa y aparecerá aquí y en la web.';
+    }
+    return GlassContainer(
+      padding: const EdgeInsets.all(18),
+      borderRadius: BorderRadius.circular(18),
+      border: Border.all(color: AppColors.borderLight),
+      child: Column(
+        children: [
+          Text(
+            text,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.inter(fontSize: 13, color: AppColors.textMuted, height: 1.5),
+          ),
+          if (!_loadingReviews && _reviewsError != null) ...[
+            const SizedBox(height: 10),
+            TextButton.icon(
+              onPressed: _loadReviews,
+              icon: const Icon(Icons.refresh_rounded, color: AppColors.gold),
+              label: const Text('Reintentar', style: TextStyle(color: AppColors.gold)),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -1928,6 +1989,9 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
               ),
               const SizedBox(height: 14),
 
+              if (_reviews.isEmpty)
+                _buildReviewsStatus()
+              else
               ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -2017,7 +2081,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
 
                         Row(
                           children: [
-                            Row(
+                            if (rev.rating > 0) Row(
                               children: List.generate(5, (sIdx) {
                                 return Icon(
                                   sIdx < rev.rating.floor() ? Icons.star_rounded : Icons.star_outline_rounded,
