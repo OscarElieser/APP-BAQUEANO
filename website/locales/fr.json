@@ -5024,7 +5024,13 @@
       "seeDepartment": "Voir dans {department}",
       "plan": "Planifier avec BAQUI",
       "count": "{count} lieux vérifiés",
-      "error": "Impossible de charger la liste. Rechargez la page."
+      "error": "Impossible de charger la liste. Rechargez la page.",
+      "kind": {
+        "playa": "Plages",
+        "rio": "Rivières",
+        "isla": "Îles",
+        "cascada": "Cascades"
+      }
     }
   },
   "places": {
@@ -5038,7 +5044,8 @@
       "contactNote": "Contact",
       "website": "Site officiel",
       "map": "Carte de l'initiative",
-      "sources": "Sources"
+      "sources": "Sources",
+      "zone": "Commune ou zone"
     }
   }
 }

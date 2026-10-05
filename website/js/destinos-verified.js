@@ -9,7 +9,7 @@
  */
 (function (window, document) {
   'use strict';
-  var DATA_URL = 'js/territories-data.js?v=20261005-base-1';
+  var DATA_URL = 'js/territories-data.js?v=20261005-geo-2';
   var section = document.getElementById('destinosVerificados');
   if (!section) return;
   var grid = document.getElementById('destVerifiedGrid');
@@ -33,8 +33,10 @@
   function icon(name) { var i = el('i', name.indexOf('fa-brands') === 0 ? name : 'fa-solid ' + name); i.setAttribute('aria-hidden', 'true'); return i; }
 
   // Tipo legible: modalidad del catálogo INTUR o "Lugar verificado" (base verificada).
+  var CATEGORY_KIND = { playa: 'Playas', rio: 'Ríos', isla: 'Islas', cascada: 'Cascadas' };
   function kindOf(place) {
     var v = place.verification || {};
+    if (place.category && CATEGORY_KIND[place.category]) return i18n('destinos.verified.kind.' + place.category, CATEGORY_KIND[place.category]);
     return v.modality || i18n('destinos.verified.kindPlace', 'Lugar y servicio verificado');
   }
 

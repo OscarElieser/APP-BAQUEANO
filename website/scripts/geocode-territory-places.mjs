@@ -137,6 +137,12 @@ for (const territory of territories) {
   result.territories[territory.id] = [];
   result.unresolved[territory.id] = [];
   for (const place of territory.places || []) {
+    // Coordenada con fuente en territories-data.js (catálogo geográfico 2026-10-05):
+    // se usa tal cual si cae dentro del contorno; no se consulta Nominatim.
+    if (Number.isFinite(place.lat) && Number.isFinite(place.lng) && insideFeature(feature, place.lat, place.lng)) {
+      result.territories[territory.id].push({ name: place.name, lat: place.lat, lng: place.lng, source: 'catalog', label: place.name, ...(place.precision !== 'exact' ? { approx: true } : {}) });
+      continue;
+    }
     const known = (previous.territories?.[territory.id] || []).find((p) => p.name === place.name
       && insideFeature(feature, p.lat, p.lng) && plausible(place.name, p.label));
     if (known) { result.territories[territory.id].push(known); continue; }

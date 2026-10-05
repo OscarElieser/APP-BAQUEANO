@@ -5024,7 +5024,13 @@
       "seeDepartment": "Vedi in {department}",
       "plan": "Pianifica con BAQUI",
       "count": "{count} luoghi verificati",
-      "error": "Impossibile caricare l'elenco. Ricarica la pagina."
+      "error": "Impossibile caricare l'elenco. Ricarica la pagina.",
+      "kind": {
+        "playa": "Spiagge",
+        "rio": "Fiumi",
+        "isla": "Isole",
+        "cascada": "Cascate"
+      }
     }
   },
   "places": {
@@ -5038,7 +5044,8 @@
       "contactNote": "Contatto",
       "website": "Sito ufficiale",
       "map": "Mappa dell'iniziativa",
-      "sources": "Fonti"
+      "sources": "Fonti",
+      "zone": "Comune o zona"
     }
   }
 }

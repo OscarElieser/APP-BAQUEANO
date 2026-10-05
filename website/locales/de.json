@@ -5024,7 +5024,13 @@
       "seeDepartment": "In {department} ansehen",
       "plan": "Mit BAQUI planen",
       "count": "{count} geprüfte Orte",
-      "error": "Die Liste konnte nicht geladen werden. Bitte lade die Seite neu."
+      "error": "Die Liste konnte nicht geladen werden. Bitte lade die Seite neu.",
+      "kind": {
+        "playa": "Strände",
+        "rio": "Flüsse",
+        "isla": "Inseln",
+        "cascada": "Wasserfälle"
+      }
     }
   },
   "places": {
@@ -5038,7 +5044,8 @@
       "contactNote": "Kontakt",
       "website": "Offizielle Website",
       "map": "Karte der Initiative",
-      "sources": "Quellen"
+      "sources": "Quellen",
+      "zone": "Gemeinde oder Gebiet"
     }
   }
 }

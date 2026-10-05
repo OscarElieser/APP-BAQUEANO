@@ -257,7 +257,14 @@
     for (let index = 0; index < catalogPlaces.length; index += 1) {
       if (runId !== generation) break;
       const place = catalogPlaces[index] || {};
-      const fixed = known.get(String(place.name));
+      // Coordenada de catálogo con fuente (playas, ríos, islas y cascadas, 2026-10-05):
+      // tiene prioridad si cae dentro del contorno; "approximate" salvo precisión exacta.
+      const dataLat = asNumber(place.lat);
+      const dataLng = asNumber(place.lng);
+      const fromData = dataLat !== null && dataLng !== null && insideTerritory(dataLat, dataLng)
+        ? { latitude: dataLat, longitude: dataLng, approximate: place.precision !== 'exact', osmLabel: place.precision === 'exact' ? String(place.name) : '' }
+        : null;
+      const fixed = fromData || known.get(String(place.name));
       // Coordenada precalculada (validada dentro del contorno): sin red ni espera.
       const cached = fixed || cache[geocodeCacheId(place)];
       const result = fixed ? { ...place, ...fixed } : await geocodeCatalogPlace(place, runId, cache);
@@ -433,17 +440,18 @@
     const lang = window.BaqueanoLanguage;
     return (lang && typeof lang.t === 'function' && lang.t(key, { fallback })) || fallback;
   };
-  function verificationBlock(v, el, icon) {
+  function verificationBlock(v, el, icon, shownDescription) {
     const box = el('div', 'map-place-verified');
     const seal = el('p', 'map-place-verified-seal');
     seal.append(icon('fa-circle-check'), ` ${i18n('places.verified.seal', 'Verificado')} · ${String(v.verifiedAt || '')}`);
     box.append(seal);
-    if (v.facts && v.facts !== v.desc) box.append(el('p', 'map-place-info-text', String(v.facts)));
+    if (v.facts && v.facts !== shownDescription) box.append(el('p', 'map-place-info-text', String(v.facts)));
     const rows = [
       ['fa-person-hiking', i18n('places.verified.activities', 'Actividades'), v.activities],
       ['fa-concierge-bell', i18n('places.verified.services', 'Servicios'), v.services],
       ['fa-clock', i18n('places.verified.hours', 'Horario'), v.hours],
       ['fa-map-pin', i18n('places.verified.address', 'Dirección'), v.address],
+      ['fa-map', i18n('places.verified.zone', 'Municipio o zona'), v.zone],
       ['fa-tag', i18n('places.verified.price', 'Precio y horario'), v.price],
       ['fa-circle-info', i18n('places.verified.contactNote', 'Contacto'), v.contact]
     ].filter((row) => row[2]);
@@ -531,7 +539,7 @@
     // deduce por coincidencia de palabras: eso mostraba datos de OTRO lugar.
     const description = place.desc || (place.catalogReference ? '' : place.shortDescription);
     if (description) body.append(el('p', 'map-place-info-text', String(description)));
-    if (place.verification) body.append(verificationBlock(place.verification, el, icon));
+    if (place.verification) body.append(verificationBlock(place.verification, el, icon, description));
     const territory = territoryInfo();
     const extras = [
       ['fa-calendar-days', 'Mejor época', territory && territory.bestSeason],

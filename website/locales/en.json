@@ -5024,7 +5024,13 @@
       "seeDepartment": "See in {department}",
       "plan": "Plan with BAQUI",
       "count": "{count} verified places",
-      "error": "The list could not be loaded. Please reload the page."
+      "error": "The list could not be loaded. Please reload the page.",
+      "kind": {
+        "playa": "Beaches",
+        "rio": "Rivers",
+        "isla": "Islands",
+        "cascada": "Waterfalls"
+      }
     }
   },
   "places": {
@@ -5038,7 +5044,8 @@
       "contactNote": "Contact",
       "website": "Official website",
       "map": "Map of the initiative",
-      "sources": "Sources"
+      "sources": "Sources",
+      "zone": "Municipality or area"
     }
   }
 }

@@ -64,6 +64,13 @@
           "name": "Casa de Huésped La Ceibita",
           "type": "Agroturismo · Senderismo",
           "desc": "Casa de familias anfitrionas junto al Cañón de Somoto, con tours al cañón y oficios tradicionales del campo."
+        },
+        {
+          "name": "Río Estelí",
+          "type": "Río · Paisaje",
+          "desc": "Río principal de la cuenca de Estelí; su sistema fluvial se relaciona con el Salto de La Estanzuela.",
+          "lat": 13.49602,
+          "lng": -86.26757
         }
       ],
       "gastronomy": [
@@ -183,7 +190,9 @@
         {
           "name": "Isla Juan Venado",
           "type": "Manglares, fauna, lancha y kayak",
-          "desc": "Reserva de estero y manglares frente a Las Peñitas, con aves acuáticas y playas de anidación de tortugas; se recorre en lancha."
+          "desc": "Reserva de estero y manglares frente a Las Peñitas, con aves acuáticas y playas de anidación de tortugas; se recorre en lancha.",
+          "lat": 12.31306,
+          "lng": -86.94889
         },
         {
           "name": "Poco a Poco Hostel",
@@ -194,6 +203,20 @@
           "name": "Rancho Los Alpes",
           "type": "Turismo rural · Senderos",
           "desc": "Rancho de descanso en la comarca San Carlos con balsas de bambú, kayak, tirolesa y taller de tortillas."
+        },
+        {
+          "name": "Playa Las Peñitas",
+          "type": "Playa · Surf",
+          "desc": "Playa y comunidad pesquera cercana a León, junto a la Reserva Natural Isla Juan Venado; popular entre surfistas.",
+          "lat": 12.3614,
+          "lng": -87.0215
+        },
+        {
+          "name": "Playa Poneloya",
+          "type": "Playa · Baño",
+          "desc": "Tradicional balneario del litoral leonés y comunidad pesquera cercana a Las Peñitas.",
+          "lat": 12.3783,
+          "lng": -87.0422
         }
       ],
       "gastronomy": [
@@ -245,7 +268,9 @@
         {
           "name": "Reserva de Biosfera Isla de Ometepe",
           "type": "Dos volcanes, naturaleza, arqueología y turismo rural",
-          "desc": "Dos volcanes, Concepción y Maderas, unidos por un istmo en medio del Cocibolca; Reserva de Biosfera con petroglifos y comunidades rurales."
+          "desc": "Dos volcanes, Concepción y Maderas, unidos por un istmo en medio del Cocibolca; Reserva de Biosfera con petroglifos y comunidades rurales.",
+          "lat": 11.491051,
+          "lng": -85.554472
         },
         {
           "name": "Volcán Concepción",
@@ -275,7 +300,9 @@
         {
           "name": "Cascada de San Ramón",
           "type": "Caminata, bosque y paisaje natural de Altagracia",
-          "desc": "Cascada en la ladera del Volcán Maderas a la que se llega con una caminata por bosque."
+          "desc": "Cascada en la ladera del Volcán Maderas a la que se llega con una caminata por bosque.",
+          "lat": 11.43424,
+          "lng": -85.51924
         },
         {
           "name": "Museo El Ceibo y petroglifos de Ometepe",
@@ -326,6 +353,48 @@
           "name": "Finca Magdalena (Ometepe)",
           "type": "Turismo rural y comunitario · Senderismo",
           "desc": "Finca agroturística emblemática de Altagracia, ejemplo de desarrollo comunitario, con café y petroglifos."
+        },
+        {
+          "name": "Playa San Juan del Sur",
+          "type": "Playa · Natación",
+          "desc": "Bahía en forma de herradura, de oleaje generalmente suave y amplia infraestructura turística; uno de los destinos costeros más visitados del país.",
+          "lat": 11.2548,
+          "lng": -85.8729
+        },
+        {
+          "name": "Playa Maderas",
+          "type": "Playa · Surf",
+          "desc": "Playa reconocida por el surf, con oleaje consistente, acantilados y vegetación tropical, a unos minutos al norte de San Juan del Sur.",
+          "lat": 11.295,
+          "lng": -85.91
+        },
+        {
+          "name": "Playa Remanso",
+          "type": "Playa · Surf",
+          "desc": "Pequeña bahía al sur de San Juan del Sur, conocida por el surf y su ambiente tranquilo; el Mapa Nacional de Turismo la incluye entre las playas del municipio.",
+          "lat": 11.22249,
+          "lng": -85.84622
+        },
+        {
+          "name": "Playa El Coco",
+          "type": "Playa · Baño",
+          "desc": "Amplia playa de arena fina y oleaje relativamente tranquilo, ubicada al sur de San Juan del Sur.",
+          "lat": 11.1559,
+          "lng": -85.7998
+        },
+        {
+          "name": "Popoyo y Guasacate",
+          "type": "Playa · Surf avanzado",
+          "desc": "Zona costera de Tola reconocida internacionalmente por el surf; Popoyo destaca por la consistencia y la potencia de sus olas.",
+          "lat": 11.473,
+          "lng": -86.1279
+        },
+        {
+          "name": "Playa Gigante",
+          "type": "Playa · Baño",
+          "desc": "Bahía y comunidad costera de Tola incluida en la oferta turística oficial de la Costa Esmeralda.",
+          "lat": 11.3911,
+          "lng": -86.0326
         }
       ],
       "gastronomy": [
@@ -424,6 +493,13 @@
           "name": "Salto de Kayaska",
           "type": "Naturaleza y acceso hacia Bosawás desde Bocay",
           "desc": "Cascada en la zona de Bocay, puerta de acceso a la Reserva de Biosfera Bosawás."
+        },
+        {
+          "name": "Cascada La Bujona",
+          "type": "Cascada · Senderismo",
+          "desc": "Caída de agua registrada en OpenStreetMap en el departamento de Jinotega, próxima al sector de Paso El Limón.",
+          "lat": 13.08037,
+          "lng": -85.87418
         }
       ],
       "gastronomy": [
@@ -612,7 +688,9 @@
         {
           "name": "Isletas de Granada",
           "type": "Lancha, kayak, fauna, paisaje y fotografía",
-          "desc": "Cientos de pequeñas islas formadas por una antigua erupción del Mombacho, con aves y comunidades; se recorren en lancha."
+          "desc": "Cientos de pequeñas islas formadas por una antigua erupción del Mombacho, con aves y comunidades; se recorren en lancha.",
+          "lat": 11.89911,
+          "lng": -85.88519
         },
         {
           "name": "Lago Cocibolca",
@@ -658,6 +736,20 @@
           "name": "Finca María Auxiliadora",
           "type": "Turismo de naturaleza · Senderos",
           "desc": "Refugio rural entre Granada y Diriomo con frutales, maderas, tres senderos y siembra participativa."
+        },
+        {
+          "name": "Río Tipitapa",
+          "type": "Río · Paisaje",
+          "desc": "Curso de agua natural que conecta el Lago Xolotlán con el Lago Cocibolca en condiciones hidrológicas favorables.",
+          "lat": 12.08333,
+          "lng": -85.88333
+        },
+        {
+          "name": "Isla Zapatera",
+          "type": "Isla · Arqueología",
+          "desc": "Isla volcánica del Lago Cocibolca, núcleo del Parque Nacional Archipiélago Zapatera y relevante por su patrimonio arqueológico.",
+          "lat": 11.739,
+          "lng": -85.835
         }
       ],
       "gastronomy": [
@@ -765,6 +857,27 @@
           "name": "Albergue Tierra Alta Ecolodge",
           "type": "Turismo rural · Senderos con frutos exóticos",
           "desc": "Ecolodge en San Ramón con alimentos orgánicos de la finca, plantas medicinales y tours nocturnos de fauna."
+        },
+        {
+          "name": "Río Tuma",
+          "type": "Río · Baño en zonas habilitadas",
+          "desc": "Curso de agua importante de la región norte-central; el punto marca un sitio accesible cercano a El Tuma-La Dalia.",
+          "lat": 13.1025,
+          "lng": -85.74323
+        },
+        {
+          "name": "Cascada La Luna (El Tuma-La Dalia)",
+          "type": "Cascada · Senderismo",
+          "desc": "Cascada cercana a El Tuma-La Dalia, rodeada de vegetación y con actividades de aventura en su entorno.",
+          "lat": 13.11685,
+          "lng": -85.75101
+        },
+        {
+          "name": "Cascada Blanca (Río Yasica)",
+          "type": "Cascada · Baño en zonas autorizadas",
+          "desc": "Cascada del Río Yasica conocida como Cascada Blanca, en el corredor hacia El Tuma-La Dalia.",
+          "lat": 12.99124,
+          "lng": -85.82931
         }
       ],
       "gastronomy": [
@@ -886,6 +999,13 @@
           "name": "Finca Agroturística Fuente de Vida",
           "type": "Agroturismo · Senderismo",
           "desc": "Finca en Miraflor Moropotente para convivir con el campo: café, orquídeas, plantas medicinales, rosquillas y voluntariado."
+        },
+        {
+          "name": "Salto de La Estanzuela",
+          "type": "Cascada · Senderismo",
+          "desc": "Salto asociado al río Estelí y uno de los atractivos naturales más conocidos del municipio; su coordenada debe confirmarse en campo.",
+          "lat": 13.025,
+          "lng": -86.39
         }
       ],
       "gastronomy": [
@@ -972,6 +1092,13 @@
           "name": "Cabañas El Manantial",
           "type": "Turismo de naturaleza · Senderismo",
           "desc": "Reserva Silvestre Privada en Cinco Pinos con bosques, huertos y vivero, y cabañas para dormir en la naturaleza."
+        },
+        {
+          "name": "Playa Jiquilillo",
+          "type": "Playa · Baño",
+          "desc": "Extensa playa del Pacífico norte que el Mapa Nacional de Turismo identifica entre los destinos favoritos de sol y playa del país.",
+          "lat": 12.736,
+          "lng": -87.451
         }
       ],
       "gastronomy": [
@@ -1047,7 +1174,9 @@
         {
           "name": "Reserva Natural Chocoyero–El Brujo",
           "type": "Senderismo, bosque, aves e interpretación ambiental",
-          "desc": "Cascadas y paredes donde anidan miles de chocoyos, a poca distancia de la capital."
+          "desc": "Cascadas y paredes donde anidan miles de chocoyos, a poca distancia de la capital.",
+          "lat": 11.99,
+          "lng": -86.25
         },
         {
           "name": "Ticuantepe y El Crucero",
@@ -1088,6 +1217,20 @@
           "name": "Reserva Silvestre Privada Montibelli",
           "type": "Turismo de naturaleza · Senderismo",
           "desc": "Reserva de bosque con seis miradores hacia las sierras de Managua y los volcanes Masaya y Mombacho."
+        },
+        {
+          "name": "Playa Pochomil",
+          "type": "Playa · Baño",
+          "desc": "Playa amplia, plana y alargada; una de las más cercanas a Managua y con servicios turísticos.",
+          "lat": 11.77244,
+          "lng": -86.50435
+        },
+        {
+          "name": "Playa Masachapa",
+          "type": "Playa · Baño",
+          "desc": "Pueblo pesquero y playa del Pacífico cercana a Pochomil, con formaciones rocosas y pesca artesanal.",
+          "lat": 11.78467,
+          "lng": -86.51594
         }
       ],
       "gastronomy": [
@@ -1148,7 +1291,9 @@
         {
           "name": "La Boquita",
           "type": "Playa, gastronomía marina, familia y atardeceres",
-          "desc": "Balneario del Pacífico de Carazo con comedores de mariscos, pescadores y atardeceres."
+          "desc": "Balneario del Pacífico de Carazo con comedores de mariscos, pescadores y atardeceres.",
+          "lat": 11.67825,
+          "lng": -86.38236
         },
         {
           "name": "Casares",
@@ -1568,7 +1713,9 @@
         {
           "name": "Archipiélago de Solentiname",
           "type": "Islas de Pintores Primitivistas",
-          "desc": "Islas de pintores y talladores de madera de balsa en el Cocibolca."
+          "desc": "Islas de pintores y talladores de madera de balsa en el Cocibolca.",
+          "lat": 11.17283,
+          "lng": -84.99081
         },
         {
           "name": "Humedales de San Carlos & Malecón",
@@ -1619,6 +1766,13 @@
           "name": "Albergue Caimán (Los Guatuzos)",
           "type": "Turismo rural y comunitario · Observación de flora",
           "desc": "Albergue ecológico a orillas de los humedales del río Papaturro, en el Refugio de Vida Silvestre Los Guatuzos."
+        },
+        {
+          "name": "Río San Juan",
+          "type": "Río · Navegación",
+          "desc": "Río histórico que nace en el Lago Cocibolca y fluye hacia el Caribe; eje de naturaleza, historia, navegación y turismo del departamento.",
+          "lat": 11.119218,
+          "lng": -84.778118
         }
       ],
       "gastronomy": [
@@ -1674,7 +1828,9 @@
         {
           "name": "Río Coco / Wangki",
           "type": "Río Más Largo de Centroamérica",
-          "desc": "El río más largo de Centroamérica, frontera con Honduras y eje de la vida miskitu."
+          "desc": "El río más largo de Centroamérica, frontera con Honduras y eje de la vida miskitu.",
+          "lat": 14.99751,
+          "lng": -83.13809
         },
         {
           "name": "Bilwi (Puerto Cabezas) & Muelle Histórico",
@@ -1758,7 +1914,9 @@
         {
           "name": "Corn Island & Little Corn Island",
           "type": "Playas Turquesas & Arrecife",
-          "desc": "Islas caribeñas de arena blanca, arrecifes y cultura creole."
+          "desc": "Islas caribeñas de arena blanca, arrecifes y cultura creole.",
+          "lat": 12.1664,
+          "lng": -83.0514
         },
         {
           "name": "Cayos Perlas",
@@ -1793,7 +1951,9 @@
         {
           "name": "Little Corn Island y Otto Beach",
           "type": "Caminatas, snorkel, buceo y descanso",
-          "desc": "Isla pequeña y sin carros, con senderos, arrecifes y playas tranquilas como Otto Beach."
+          "desc": "Isla pequeña y sin carros, con senderos, arrecifes y playas tranquilas como Otto Beach.",
+          "lat": 12.2884,
+          "lng": -82.9812
         },
         {
           "name": "Awas y Orinoco",
@@ -1809,6 +1969,20 @@
           "name": "Garífuna Secrets of the Jungle",
           "type": "Turismo rural y comunitario · Tours a comunidades garífunas",
           "desc": "Experiencia garífuna cerca de Orinoco, Laguna de Perlas: música, gastronomía, historias ancestrales y selva tropical."
+        },
+        {
+          "name": "Río Grande de Matagalpa",
+          "type": "Río · Paisaje",
+          "desc": "Uno de los principales ríos de Nicaragua; recorre el país hacia el Caribe y drena una extensa cuenca.",
+          "lat": 12.90905,
+          "lng": -83.51531
+        },
+        {
+          "name": "Río Escondido",
+          "type": "Río · Navegación",
+          "desc": "Río del sureste de Nicaragua que desemboca en el mar Caribe al norte de Bluefields.",
+          "lat": 12.08677,
+          "lng": -83.74916
         }
       ],
       "gastronomy": [
