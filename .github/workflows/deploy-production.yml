@@ -98,13 +98,22 @@ jobs:
           echo "::error::Producción no sirvió ${short} en 13 minutos. Revise en la VM: journalctl -u baqueano-autodeploy -n 100"
           exit 1
       - name: API Azure y conexión con Supabase
+        # Corre aunque /health no coincida: la evidencia de seguridad no debe
+        # quedar oculta por un fallo de despliegue en la VM.
+        if: ${{ !cancelled() }}
         run: |
           curl -fsS --max-time 15 "$SITE/api/azure/health"; echo
           body="$(curl -fsS --max-time 20 "$SITE/api/azure/db")"; echo "$body"
           echo "$body" | grep -q '"provider":"supabase-postgresql","ok":true' || { echo "::error::Supabase no respondió desde Azure"; exit 1; }
       - name: Evidencia Sprint 1–3 completa
+        # Corre aunque /health no coincida: la evidencia de seguridad no debe
+        # quedar oculta por un fallo de despliegue en la VM.
+        if: ${{ !cancelled() }}
         run: node tools/verify-sprints.mjs --commit="${GITHUB_SHA::7}"
       - name: Pruebas negativas en vivo (RBAC y RLS)
+        # Corre aunque /health no coincida: la evidencia de seguridad no debe
+        # quedar oculta por un fallo de despliegue en la VM.
+        if: ${{ !cancelled() }}
         # Clave publicable: es pública por diseño (va en el sitio). Demuestra que
         # sin sesión o con token falso no se modera ni se leen tablas de servidor.
         env:
@@ -143,6 +152,9 @@ jobs:
             if [[ "$body" == "[]" || "$body" == *'"code"'* ]]; then echo "✅ anon no lee $t → ${body:0:80}"; else echo "::error::anon leyó $t"; exit 1; fi
           done
       - name: Cabeceras de seguridad y redirecciones
+        # Corre aunque /health no coincida: la evidencia de seguridad no debe
+        # quedar oculta por un fallo de despliegue en la VM.
+        if: ${{ !cancelled() }}
         run: |
           headers="$(curl -fsSI --max-time 15 "$SITE/")"
           for h in content-security-policy strict-transport-security x-frame-options x-content-type-options; do

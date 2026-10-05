@@ -1,0 +1,47 @@
+# ============================================================================
+# 🧭 BAQUEANO — EVIDENCIA DE PRODUCCIÓN KRONOX 2026
+# ============================================================================
+# 🎯 POR QUÉ: el jurado exige evidencia verificable (no capturas editables) de
+#   que producción sirve el commit de main, con HTTPS/TLS válido, cabeceras de
+#   seguridad, perímetro cerrado, páginas críticas, SEO/PWA y RLS efectiva.
+#   El job de verificación del despliegue se detiene si /health no coincide;
+#   este workflow registra TODOS los controles aunque alguno falle.
+# ⚙️ CÓMO: tools/kronox-prod-evidence.mjs desde un runner de GitHub (fuera de la
+#   VM). Resultado en el resumen del job y como artefacto JSON + Markdown.
+# 📦 QUÉ: manual (workflow_dispatch), diario y en cada push a main.
+# ============================================================================
+name: 🧪 Evidencia de producción (Kronox 2026)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 12 * * *'
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kronox-evidence
+  cancel-in-progress: true
+
+jobs:
+  evidence:
+    name: Controles en vivo de producción
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Ejecutar controles (no se detiene en el primer fallo)
+        run: node tools/kronox-prod-evidence.mjs --expected="${GITHUB_SHA}" --out=kronox-evidence
+      - name: Publicar evidencia como artefacto
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: kronox-prod-evidence-${{ github.run_number }}
+          path: kronox-evidence/
+          retention-days: 90
