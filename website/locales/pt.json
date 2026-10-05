@@ -4111,7 +4111,8 @@
     },
     "nosotros": {
       "body": {
-        "title1": "Sobre nós | BAQUEANO Nicarágua autêntica"
+        "title1": "Sobre nós | BAQUEANO Nicarágua autêntica",
+        "metaDescription1": "Conheça o propósito, a missão e a equipe do BAQUEANO Nicaragua. A ponte tecnológica para o turismo comunitário, soberano e regenerativo."
       },
       "nosHero": {
         "div1": "SOBRE NÓS",
@@ -4160,7 +4161,11 @@
         "h44": "4. Experiência local",
         "p5": "Natureza, cultura, gastronomia e vivências únicas.",
         "h45": "5. Impacto econômico direto",
-        "p6": "Benefício real para famílias e comunidades."
+        "p6": "Benefício real para famílias e comunidades.",
+        "imgAlt1": "Viajante",
+        "imgAlt2": "Território / comunidade",
+        "imgAlt3": "Experiência local",
+        "imgAlt4": "Impacto econômico direto"
       },
       "nosIdentitySection": {
         "p1": "DESCUBRA O QUE NÃO ESTÁ NO MAPA.",
@@ -4175,7 +4180,8 @@
         "h55": "Ouro ancestral pinolero",
         "p6": "Cultura e tradição",
         "strong1": "Inspirados em nossa terra,",
-        "p7": "nosso povo e nossas raízes ancestrais."
+        "p7": "nosso povo e nossas raízes ancestrais.",
+        "imgAlt1": "Petróglifo indígena"
       },
       "nosNumbersSection": {
         "h31": "BAQUEANO em números",
@@ -4187,7 +4193,179 @@
       },
       "nosManifestoSection": {
         "h31": "Manifesto BAQUEANO",
-        "p1": "Acreditamos numa Nicarágua que se descobre caminhando, navegando e compartilhando com seu povo. Nos caminhos fora das rotas convencionais vive nossa verdadeira riqueza: suas comunidades, seu patrimônio, sua natureza e sua cultura. Usamos a tecnologia como ferramenta ética para conectar, impulsionar e proteger o que é nosso, porque viajar também pode transformar vidas."
+        "p1": "Acreditamos numa Nicarágua que se descobre caminhando, navegando e compartilhando com seu povo. Nos caminhos fora das rotas convencionais vive nossa verdadeira riqueza: suas comunidades, seu patrimônio, sua natureza e sua cultura. Usamos a tecnologia como ferramenta ética para conectar, impulsionar e proteger o que é nosso, porque viajar também pode transformar vidas.",
+        "div1": "\"Mais territórios, mais histórias, uma só Nicarágua.\""
+      },
+      "equipo": {
+        "h31": "Nossa rede territorial",
+        "p1": "Trabalhamos lado a lado com quem torna possíveis experiências autênticas em todo o país.",
+        "h41": "Comunidades anfitriãs",
+        "h42": "Cooperativas locais",
+        "h43": "Guias e baqueanos",
+        "h44": "Empreendimentos locais",
+        "h45": "Eco-lodges e cabanas",
+        "h46": "Aliados estratégicos",
+        "h32": "Equipe e guardiões do território",
+        "p2": "Uma equipe multidisciplinar comprometida com um turismo mais humano e sustentável.",
+        "h47": "Coordenação",
+        "p3": "Estratégia e alianças comunitárias",
+        "h48": "Tecnologia",
+        "p4": "Desenvolvimento e inovação geoespacial",
+        "p5": "Vinculação e verificação territorial",
+        "h49": "Cultura e território",
+        "p6": "Conteúdo e memória viva",
+        "imgAlt1": "Guias",
+        "imgAlt2": "Empreendimentos"
+      },
+      "nosFinalCta": {
+        "h31": "A Nicarágua autêntica se constrói com seu povo",
+        "a1": "Fazer parte do BAQUEANO"
+      },
+      "contacto": {
+        "span1": "FALE CONOSCO",
+        "h21": "Tem algo a nos dizer?",
+        "p1": "Escreva para parcerias, relatar um problema, propor um destino comunitário ou simplesmente compartilhar sua experiência pela Nicarágua.",
+        "small1": "Resposta em minutos",
+        "span2": "E-mail",
+        "small2": "@baqueano.nic"
+      },
+      "baqueanoContactForm": {
+        "span1": "Tipo de consulta",
+        "option1": "Selecione uma opção...",
+        "option2": "Proposta de aliança comunitária",
+        "option3": "Propor um destino ou experiência",
+        "option4": "Cadastrar meu negócio no BAQUEANO",
+        "option5": "Quero ser guia baqueano",
+        "option6": "Relatar um problema ou denúncia",
+        "option7": "Imprensa & mídia",
+        "option8": "Outra consulta",
+        "span2": "Departamento da Nicarágua (opcional)",
+        "option9": "Selecione seu departamento...",
+        "option10": "RACN (Caribe Norte)",
+        "option11": "RACS (Caribe Sul)",
+        "span3": "Sua mensagem",
+        "p1": "Suas informações estão protegidas e nunca serão compartilhadas com terceiros.",
+        "inputPlaceholder1": "José Martínez",
+        "textareaPlaceholder1": "Conte sua ideia, experiência ou proposta para o ecoturismo comunitário da Nicarágua..."
+      }
+    },
+    "offline": {
+      "body": {
+        "title1": "Modo offline territorial | Baqueano Nicaragua"
+      },
+      "offlineWrapper": {
+        "span1": "Modo sobrevivência territorial",
+        "p1": "Tudo bem: aqui você tem salvos os números de emergência e os pontos de apoio dos lugares mais visitados. Quando a internet voltar, seguimos explorando.",
+        "div1": "📌 Protocolo de emergência em cânions e vulcões:",
+        "li1": "Ponto de encontro na Comunidade El Zapote ou no Posto de Guias La Patasta.",
+        "li2": "Posto de guarda-parques do Vulcão Maderas e Albergue Charco Verde.",
+        "li3": "Guarita comunitária de Rota e Posto de Guias San Jacinto.",
+        "strong1": "Conservação:",
+        "li4": "Fique na trilha marcada, economize bateria e procure a pousada ou comunidade mais próxima.",
+        "button1": "🔄 Testar a conexão",
+        "a1": "Ver início em cache",
+        "a2": "Catálogo em cache"
+      },
+      "section": {
+        "span1": "Socorro na rota e segurança",
+        "span2": "Atendimento médico e resgate",
+        "span3": "Incêndios e resgate em áreas naturais",
+        "sectionAriaLabel1": "Linhas diretas de emergência nacional",
+        "aTitle1": "Ligar para a Polícia Nacional",
+        "aTitle2": "Ligar para a Cruz Vermelha",
+        "aTitle3": "Ligar para os bombeiros"
+      },
+      "offlineStatus": {
+        "div1": "📡 Esperando sinal… Assim que voltar, reconectamos você automaticamente."
+      }
+    },
+    "perfil": {
+      "body": {
+        "title1": "Meu perfil | BAQUEANO Nicarágua autêntica"
+      },
+      "profHero": {
+        "h11": "Um viajante,",
+        "span1": "mil histórias",
+        "p1": "Seus dados, suas viagens e sua Nicarágua, do seu jeito."
+      },
+      "profUserSection": {
+        "span1": "Explorador",
+        "span2": "Explorador BAQUEANO",
+        "span3": "Membro desde",
+        "strong1": "Localização não preenchida",
+        "span4": "Moeda preferida:",
+        "strong2": "C$ Córdoba (NIO)",
+        "span5": "Viagens concluídas",
+        "span6": "Próxima viagem",
+        "span7": "Destinos salvos",
+        "span8": "Avaliações feitas"
+      },
+      "profTabsSection": {
+        "a1": "Resumo",
+        "a2": "Passaporte Baqueano"
+      },
+      "resumen": {
+        "p1": "Você ainda não tem uma viagem programada.",
+        "a1": "Montar minha viagem com o BAQUI",
+        "h41": "Favoritos recentes",
+        "p2": "Toque em ♥ num destino e ele aparece aqui."
+      },
+      "reservas": {
+        "button1": "Próximas 0",
+        "button2": "Concluídas 0",
+        "button3": "Canceladas 0",
+        "p1": "Você ainda não tem reservas."
+      },
+      "pasaporte": {
+        "h31": "PASSAPORTE BAQUEANO · EXPEDIÇÃO NICARÁGUA",
+        "p1": "Registro oficial de exploração territorial e preservação cultural comunitária",
+        "span1": "Progresso territorial: 0 de 17 departamentos explorados",
+        "span2": "0% do território nacional",
+        "strong1": "0 selos desbloqueados",
+        "strong2": "0 territórios em rota ativa",
+        "strong3": "17 territórios por descobrir",
+        "h51": "Selo Masaya",
+        "span3": "Por descobrir",
+        "h52": "Selo Rivas",
+        "h53": "Selo Granada",
+        "p2": "Ilhotas do Cocibolca & colonial",
+        "h54": "Selo Matagalpa",
+        "p3": "Selva Negra & rota do café",
+        "h55": "Selo León",
+        "p4": "Sandboard no Cerro Negro & catedral",
+        "h56": "Selo Madriz",
+        "h57": "Selo Caribe Sul",
+        "h58": "Selo Jinotega",
+        "p5": "Cidade das brumas & Datanlí",
+        "span4": "Cada selo comprova seu impacto econômico direto em cooperativas comunitárias.",
+        "a1": "Ver 17 departamentos",
+        "a2": "Adicionar destino à minha viagem"
+      },
+      "btnSharePassport": {
+        "button1": "Compartilhar passaporte"
+      },
+      "preferencias": {
+        "h41": "Minhas preferências de viagem",
+        "p1": "Selecione seus interesses para receber recomendações personalizadas.",
+        "span1": "Trilhas",
+        "span2": "Café",
+        "span3": "Cachoeiras",
+        "span4": "Turismo familiar",
+        "div1": "\"Mais experiências que conectam você à nossa terra.\""
+      },
+      "perfilPersonal": {
+        "h41": "Informações pessoais",
+        "strong1": "Não preenchido",
+        "small1": "Localização",
+        "small2": "Contato de emergência",
+        "h42": "Idioma e moeda",
+        "label1": "Idioma da plataforma",
+        "option1": "🇳🇮 Espanhol",
+        "option2": "🇺🇸 Inglês",
+        "label2": "Moeda preferida",
+        "option3": "$ Dólar (USD)",
+        "div1": "Isso ajuda a mostrar preços, conteúdo e recomendações mais relevantes para sua experiência.",
+        "h43": "Saúde, acessibilidade e bem-estar"
       }
     }
   },
@@ -4290,7 +4468,9 @@
     "explorarNicaragua": "Explorar a Nicarágua",
     "tipoDeNegocio": "Tipo de negócio",
     "n867022WNicaragua": "12.5061° N, 86.7022° O (Nicarágua)",
-    "contacto": "Contato"
+    "contacto": "Contato",
+    "seguridad": "Segurança",
+    "pagos": "Pagamentos"
   },
   "ops": {
     "impact": {

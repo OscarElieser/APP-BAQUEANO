@@ -4111,7 +4111,8 @@
     },
     "nosotros": {
       "body": {
-        "title1": "Chi siamo | BAQUEANO Nicaragua autentico"
+        "title1": "Chi siamo | BAQUEANO Nicaragua autentico",
+        "metaDescription1": "Scopri lo scopo, la missione e il team di BAQUEANO Nicaragua. Il ponte tecnologico per un turismo comunitario, sovrano e rigenerativo."
       },
       "nosHero": {
         "div1": "CHI SIAMO",
@@ -4160,7 +4161,11 @@
         "h44": "4. Esperienza locale",
         "p5": "Natura, cultura, gastronomia ed esperienze uniche.",
         "h45": "5. Impatto economico diretto",
-        "p6": "Beneficio reale per famiglie e comunità."
+        "p6": "Beneficio reale per famiglie e comunità.",
+        "imgAlt1": "Viaggiatore",
+        "imgAlt2": "Territorio / comunità",
+        "imgAlt3": "Esperienza locale",
+        "imgAlt4": "Impatto economico diretto"
       },
       "nosIdentitySection": {
         "p1": "SCOPRI CIÒ CHE NON È SULLA MAPPA.",
@@ -4175,7 +4180,8 @@
         "h55": "Oro ancestrale pinolero",
         "p6": "Cultura e tradizione",
         "strong1": "Ispirati dalla nostra terra,",
-        "p7": "dalla nostra gente e dalle nostre radici ancestrali."
+        "p7": "dalla nostra gente e dalle nostre radici ancestrali.",
+        "imgAlt1": "Petroglifo indigeno"
       },
       "nosNumbersSection": {
         "h31": "BAQUEANO in numeri",
@@ -4187,7 +4193,179 @@
       },
       "nosManifestoSection": {
         "h31": "Manifesto BAQUEANO",
-        "p1": "Crediamo in un Nicaragua che si scopre camminando, navigando e condividendo con la sua gente. Sui sentieri fuori dalle rotte convenzionali vive la nostra vera ricchezza: le sue comunità, il suo patrimonio, la sua natura e la sua cultura. Usiamo la tecnologia come strumento etico per collegare, dare impulso e proteggere ciò che è nostro, perché viaggiare può anche trasformare vite."
+        "p1": "Crediamo in un Nicaragua che si scopre camminando, navigando e condividendo con la sua gente. Sui sentieri fuori dalle rotte convenzionali vive la nostra vera ricchezza: le sue comunità, il suo patrimonio, la sua natura e la sua cultura. Usiamo la tecnologia come strumento etico per collegare, dare impulso e proteggere ciò che è nostro, perché viaggiare può anche trasformare vite.",
+        "div1": "\"Più territori, più storie, un solo Nicaragua.\""
+      },
+      "equipo": {
+        "h31": "La nostra rete territoriale",
+        "p1": "Lavoriamo fianco a fianco con chi rende possibili esperienze autentiche in tutto il paese.",
+        "h41": "Comunità ospitanti",
+        "h42": "Cooperative locali",
+        "h43": "Guide e baqueanos",
+        "h44": "Imprese locali",
+        "h45": "Eco-lodge e baite",
+        "h46": "Alleati strategici",
+        "h32": "Team e custodi del territorio",
+        "p2": "Un team multidisciplinare impegnato a sviluppare un turismo più umano e sostenibile.",
+        "h47": "Coordinamento",
+        "p3": "Strategia e alleanze comunitarie",
+        "h48": "Tecnologia",
+        "p4": "Sviluppo e innovazione geospaziale",
+        "p5": "Collegamento e verifica territoriale",
+        "h49": "Cultura e territorio",
+        "p6": "Contenuti e memoria viva",
+        "imgAlt1": "Guide",
+        "imgAlt2": "Imprese locali"
+      },
+      "nosFinalCta": {
+        "h31": "Il Nicaragua autentico si costruisce con la sua gente",
+        "a1": "Unisciti a BAQUEANO"
+      },
+      "contacto": {
+        "span1": "CONTATTACI",
+        "h21": "Hai qualcosa da dirci?",
+        "p1": "Scrivici per alleanze, segnalare un problema, proporre una destinazione comunitaria o semplicemente condividere la tua esperienza in Nicaragua.",
+        "small1": "Risposta in pochi minuti",
+        "span2": "Email",
+        "small2": "@baqueano.nic"
+      },
+      "baqueanoContactForm": {
+        "span1": "Tipo di richiesta",
+        "option1": "Seleziona un'opzione...",
+        "option2": "Proposta di alleanza comunitaria",
+        "option3": "Proponi una destinazione o un'esperienza",
+        "option4": "Registra la mia attività su BAQUEANO",
+        "option5": "Voglio diventare guida baqueano",
+        "option6": "Segnala un problema o un reclamo",
+        "option7": "Stampa & media",
+        "option8": "Altra richiesta",
+        "span2": "Dipartimento del Nicaragua (facoltativo)",
+        "option9": "Seleziona il tuo dipartimento...",
+        "option10": "RACN (Caraibi Nord)",
+        "option11": "RACS (Caraibi Sud)",
+        "span3": "Il tuo messaggio",
+        "p1": "Le tue informazioni sono protette e non saranno mai condivise con terzi.",
+        "inputPlaceholder1": "José Martínez",
+        "textareaPlaceholder1": "Raccontaci la tua idea, esperienza o proposta per l'ecoturismo comunitario in Nicaragua..."
+      }
+    },
+    "offline": {
+      "body": {
+        "title1": "Modalità offline territoriale | Baqueano Nicaragua"
+      },
+      "offlineWrapper": {
+        "span1": "Modalità sopravvivenza territoriale",
+        "p1": "Nessun problema: qui hai salvati i numeri di emergenza e i punti di supporto dei luoghi più visitati. Quando torna internet, continuiamo a esplorare.",
+        "div1": "📌 Protocollo di emergenza in canyon e vulcani:",
+        "li1": "Punto di collegamento nella comunità El Zapote o al posto guide La Patasta.",
+        "li2": "Posto dei guardaparco del vulcano Maderas e rifugio Charco Verde.",
+        "li3": "Casotto comunitario di Rota e posto guide di San Jacinto.",
+        "strong1": "Conservazione:",
+        "li4": "Resta sul sentiero segnato, risparmia batteria e cerca la locanda o comunità più vicina.",
+        "button1": "🔄 Prova la connessione",
+        "a1": "Vedi home in cache",
+        "a2": "Catalogo in cache"
+      },
+      "section": {
+        "span1": "Soccorso stradale e sicurezza",
+        "span2": "Assistenza medica e soccorso",
+        "span3": "Incendi e soccorso in natura",
+        "sectionAriaLabel1": "Numeri diretti di emergenza nazionale",
+        "aTitle1": "Chiama la Polizia nazionale",
+        "aTitle2": "Chiama la Croce Rossa",
+        "aTitle3": "Chiama i vigili del fuoco"
+      },
+      "offlineStatus": {
+        "div1": "📡 In attesa di segnale… Appena torna, ti riconnettiamo automaticamente."
+      }
+    },
+    "perfil": {
+      "body": {
+        "title1": "Il mio profilo | BAQUEANO Nicaragua autentico"
+      },
+      "profHero": {
+        "h11": "Un viaggiatore,",
+        "span1": "mille storie",
+        "p1": "I tuoi dati, i tuoi viaggi e il tuo Nicaragua, a modo tuo."
+      },
+      "profUserSection": {
+        "span1": "Esploratore",
+        "span2": "Esploratore BAQUEANO",
+        "span3": "Membro dal",
+        "strong1": "Posizione non completata",
+        "span4": "Valuta preferita:",
+        "strong2": "C$ Córdoba (NIO)",
+        "span5": "Viaggi completati",
+        "span6": "Prossimo viaggio",
+        "span7": "Destinazioni salvate",
+        "span8": "Recensioni scritte"
+      },
+      "profTabsSection": {
+        "a1": "Riepilogo",
+        "a2": "Passaporto Baqueano"
+      },
+      "resumen": {
+        "p1": "Non hai ancora un viaggio programmato.",
+        "a1": "Organizza il mio viaggio con BAQUI",
+        "h41": "Preferiti recenti",
+        "p2": "Tocca ♥ su una destinazione e comparirà qui."
+      },
+      "reservas": {
+        "button1": "Prossime 0",
+        "button2": "Completate 0",
+        "button3": "Annullate 0",
+        "p1": "Non hai ancora prenotazioni."
+      },
+      "pasaporte": {
+        "h31": "PASSAPORTO BAQUEANO · SPEDIZIONE NICARAGUA",
+        "p1": "Registro ufficiale di esplorazione territoriale e tutela culturale comunitaria",
+        "span1": "Progresso territoriale: 0 dipartimenti esplorati su 17",
+        "span2": "0% del territorio nazionale",
+        "strong1": "0 timbri sbloccati",
+        "strong2": "0 territori in itinerario attivo",
+        "strong3": "17 territori da scoprire",
+        "h51": "Timbro Masaya",
+        "span3": "Da scoprire",
+        "h52": "Timbro Rivas",
+        "h53": "Timbro Granada",
+        "p2": "Isolette del Cocibolca & città coloniale",
+        "h54": "Timbro Matagalpa",
+        "p3": "Selva Negra & rotta del caffè",
+        "h55": "Timbro León",
+        "p4": "Sandboarding al Cerro Negro & cattedrale",
+        "h56": "Timbro Madriz",
+        "h57": "Timbro Caraibi Sud",
+        "h58": "Timbro Jinotega",
+        "p5": "Città delle nebbie & Datanlí",
+        "span4": "Ogni timbro certifica il tuo impatto economico diretto sulle cooperative comunitarie.",
+        "a1": "Vedi i 17 dipartimenti",
+        "a2": "Aggiungi destinazione al mio viaggio"
+      },
+      "btnSharePassport": {
+        "button1": "Condividi il passaporto"
+      },
+      "preferencias": {
+        "h41": "Le mie preferenze di viaggio",
+        "p1": "Seleziona i tuoi interessi per ricevere consigli personalizzati.",
+        "span1": "Escursionismo",
+        "span2": "Caffè",
+        "span3": "Cascate",
+        "span4": "Turismo familiare",
+        "div1": "\"Più esperienze che ti collegano alla nostra terra.\""
+      },
+      "perfilPersonal": {
+        "h41": "Informazioni personali",
+        "strong1": "Non completato",
+        "small1": "Posizione",
+        "small2": "Contatto di emergenza",
+        "h42": "Lingua e valuta",
+        "label1": "Lingua della piattaforma",
+        "option1": "🇳🇮 Spagnolo",
+        "option2": "🇺🇸 Inglese",
+        "label2": "Valuta preferita",
+        "option3": "$ Dollaro USA (USD)",
+        "div1": "Questo aiuta a mostrare prezzi, contenuti e consigli più pertinenti alla tua esperienza.",
+        "h43": "Salute, accessibilità e benessere"
       }
     }
   },
@@ -4290,7 +4468,9 @@
     "explorarNicaragua": "Esplora il Nicaragua",
     "tipoDeNegocio": "Tipo di attività",
     "n867022WNicaragua": "12.5061° N, 86.7022° O (Nicaragua)",
-    "contacto": "Contatto"
+    "contacto": "Contatto",
+    "seguridad": "Sicurezza",
+    "pagos": "Pagamenti"
   },
   "ops": {
     "impact": {

@@ -4111,7 +4111,8 @@
     },
     "nosotros": {
       "body": {
-        "title1": "About Us | BAQUEANO Authentic Nicaragua"
+        "title1": "About Us | BAQUEANO Authentic Nicaragua",
+        "metaDescription1": "Learn about the purpose, mission and team of BAQUEANO Nicaragua. The technological bridge for community-based, sovereign and regenerative tourism."
       },
       "nosHero": {
         "div1": "ABOUT US",
@@ -4160,7 +4161,11 @@
         "h44": "4. Local experience",
         "p5": "Nature, culture, food and unique experiences.",
         "h45": "5. Direct economic impact",
-        "p6": "Real benefit for families and communities."
+        "p6": "Real benefit for families and communities.",
+        "imgAlt1": "Traveler",
+        "imgAlt2": "Territory / Community",
+        "imgAlt3": "Local experience",
+        "imgAlt4": "Direct economic impact"
       },
       "nosIdentitySection": {
         "p1": "DISCOVER WHAT'S NOT ON THE MAP.",
@@ -4175,7 +4180,8 @@
         "h55": "Ancestral Pinolero Gold",
         "p6": "Culture and tradition",
         "strong1": "Inspired by our land,",
-        "p7": "our people and our ancestral roots."
+        "p7": "our people and our ancestral roots.",
+        "imgAlt1": "Indigenous petroglyph"
       },
       "nosNumbersSection": {
         "h31": "BAQUEANO in numbers",
@@ -4187,7 +4193,179 @@
       },
       "nosManifestoSection": {
         "h31": "BAQUEANO Manifesto",
-        "p1": "We believe in a Nicaragua discovered by walking, sailing and sharing with its people. On the paths off the conventional routes lives our true wealth: its communities, its heritage, its nature and its culture. We use technology as an ethical tool to connect, empower and protect what is ours, because traveling can also transform lives."
+        "p1": "We believe in a Nicaragua discovered by walking, sailing and sharing with its people. On the paths off the conventional routes lives our true wealth: its communities, its heritage, its nature and its culture. We use technology as an ethical tool to connect, empower and protect what is ours, because traveling can also transform lives.",
+        "div1": "\"More territories, more stories, one Nicaragua.\""
+      },
+      "equipo": {
+        "h31": "Our territorial network",
+        "p1": "We work hand in hand with those who make authentic experiences possible across the country.",
+        "h41": "Host Communities",
+        "h42": "Local Cooperatives",
+        "h43": "Guides and Baqueanos",
+        "h44": "Local Businesses",
+        "h45": "Eco-Lodges and Cabins",
+        "h46": "Strategic Partners",
+        "h32": "Team and guardians of the territory",
+        "p2": "A multidisciplinary team committed to developing more human and sustainable tourism.",
+        "h47": "Coordination",
+        "p3": "Strategy and community partnerships",
+        "h48": "Technology",
+        "p4": "Geospatial development and innovation",
+        "p5": "Territorial outreach and verification",
+        "h49": "Culture and Territory",
+        "p6": "Content and living memory",
+        "imgAlt1": "Guides",
+        "imgAlt2": "Local businesses"
+      },
+      "nosFinalCta": {
+        "h31": "Authentic Nicaragua is built with its people",
+        "a1": "Join BAQUEANO"
+      },
+      "contacto": {
+        "span1": "CONTACT US",
+        "h21": "Have something to tell us?",
+        "p1": "Write to us about partnerships, to report a problem, propose a community destination or simply share your experience in Nicaragua.",
+        "small1": "Reply within minutes",
+        "span2": "Email",
+        "small2": "@baqueano.nic"
+      },
+      "baqueanoContactForm": {
+        "span1": "Type of inquiry",
+        "option1": "Select an option...",
+        "option2": "Community Partnership Proposal",
+        "option3": "Propose a Destination or Experience",
+        "option4": "Register my Business on BAQUEANO",
+        "option5": "I want to be a Baqueano Guide",
+        "option6": "Report a Problem or Complaint",
+        "option7": "Press & Media",
+        "option8": "Other inquiry",
+        "span2": "Department of Nicaragua (optional)",
+        "option9": "Select your department...",
+        "option10": "RACN (North Caribbean)",
+        "option11": "RACS (South Caribbean)",
+        "span3": "Your message",
+        "p1": "Your information is protected and will never be shared with third parties.",
+        "inputPlaceholder1": "José Martínez",
+        "textareaPlaceholder1": "Tell us your idea, experience or proposal for community ecotourism in Nicaragua..."
+      }
+    },
+    "offline": {
+      "body": {
+        "title1": "Territorial Offline Mode | Baqueano Nicaragua"
+      },
+      "offlineWrapper": {
+        "span1": "Territorial Survival Mode",
+        "p1": "Don't worry: here you have the emergency numbers and support points for the most visited places saved. When the internet is back, we'll keep exploring.",
+        "div1": "📌 Emergency Protocol in Canyons and Volcanoes:",
+        "li1": "Meeting point at El Zapote Community or La Patasta Guide Post.",
+        "li2": "Maderas Volcano ranger post and Charco Verde Lodge.",
+        "li3": "Rota Community Booth and San Jacinto Guide Post.",
+        "strong1": "Conservation:",
+        "li4": "Stay on the marked trail, save battery and look for the nearest inn or community.",
+        "button1": "🔄 Test the connection",
+        "a1": "View cached home",
+        "a2": "Cached catalog"
+      },
+      "section": {
+        "span1": "Roadside help and security",
+        "span2": "Medical care and rescue",
+        "span3": "Fires and wilderness rescue",
+        "sectionAriaLabel1": "National emergency direct lines",
+        "aTitle1": "Call the National Police",
+        "aTitle2": "Call the Red Cross",
+        "aTitle3": "Call the Fire Department"
+      },
+      "offlineStatus": {
+        "div1": "📡 Waiting for signal… As soon as it's back, we'll reconnect you automatically."
+      }
+    },
+    "perfil": {
+      "body": {
+        "title1": "My Profile | BAQUEANO Authentic Nicaragua"
+      },
+      "profHero": {
+        "h11": "One traveler,",
+        "span1": "a thousand stories",
+        "p1": "Your data, your trips and your Nicaragua, your way."
+      },
+      "profUserSection": {
+        "span1": "Explorer",
+        "span2": "BAQUEANO Explorer",
+        "span3": "Member since",
+        "strong1": "Location not set",
+        "span4": "Preferred currency:",
+        "strong2": "C$ Córdoba (NIO)",
+        "span5": "Trips completed",
+        "span6": "Next trip",
+        "span7": "Saved destinations",
+        "span8": "Reviews written"
+      },
+      "profTabsSection": {
+        "a1": "Overview",
+        "a2": "Baqueano Passport"
+      },
+      "resumen": {
+        "p1": "You don't have a trip scheduled yet.",
+        "a1": "Build my trip with BAQUI",
+        "h41": "Recent favorites",
+        "p2": "Tap ♥ on a destination and it shows up here."
+      },
+      "reservas": {
+        "button1": "Upcoming 0",
+        "button2": "Completed 0",
+        "button3": "Cancelled 0",
+        "p1": "You don't have any bookings yet."
+      },
+      "pasaporte": {
+        "h31": "BAQUEANO PASSPORT · NICARAGUA EXPEDITION",
+        "p1": "Official record of territorial exploration and community cultural preservation",
+        "span1": "Territorial progress: 0 of 17 departments explored",
+        "span2": "0% of the national territory",
+        "strong1": "0 stamps unlocked",
+        "strong2": "0 territories on active route",
+        "strong3": "17 territories to discover",
+        "h51": "Masaya Stamp",
+        "span3": "To Discover",
+        "h52": "Rivas Stamp",
+        "h53": "Granada Stamp",
+        "p2": "Cocibolca Islets & Colonial City",
+        "h54": "Matagalpa Stamp",
+        "p3": "Selva Negra & the Coffee Route",
+        "h55": "León Stamp",
+        "p4": "Cerro Negro Sandboarding & Cathedral",
+        "h56": "Madriz Stamp",
+        "h57": "South Caribbean Stamp",
+        "h58": "Jinotega Stamp",
+        "p5": "City of Mists & Datanlí",
+        "span4": "Each stamp certifies your direct economic impact on community cooperatives.",
+        "a1": "See 17 Departments",
+        "a2": "Add Destination to My Trip"
+      },
+      "btnSharePassport": {
+        "button1": "Share Passport"
+      },
+      "preferencias": {
+        "h41": "My travel preferences",
+        "p1": "Select your interests to receive personalized recommendations.",
+        "span1": "Hiking",
+        "span2": "Coffee",
+        "span3": "Waterfalls",
+        "span4": "Family tourism",
+        "div1": "\"More experiences that connect you with our land.\""
+      },
+      "perfilPersonal": {
+        "h41": "Personal information",
+        "strong1": "Not completed",
+        "small1": "Location",
+        "small2": "Emergency contact",
+        "h42": "Language and currency",
+        "label1": "Platform language",
+        "option1": "🇳🇮 Spanish",
+        "option2": "🇺🇸 English",
+        "label2": "Preferred currency",
+        "option3": "$ US dollar (USD)",
+        "div1": "This helps show prices, content and recommendations more relevant to your experience.",
+        "h43": "Health, accessibility and well-being"
       }
     }
   },
@@ -4290,7 +4468,9 @@
     "explorarNicaragua": "Explore Nicaragua",
     "tipoDeNegocio": "Type of business",
     "n867022WNicaragua": "12.5061° N, 86.7022° W (Nicaragua)",
-    "contacto": "Contact"
+    "contacto": "Contact",
+    "seguridad": "Security",
+    "pagos": "Payments"
   },
   "ops": {
     "impact": {

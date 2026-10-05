@@ -4111,7 +4111,8 @@
     },
     "nosotros": {
       "body": {
-        "title1": "Über uns | BAQUEANO – das authentische Nicaragua"
+        "title1": "Über uns | BAQUEANO – das authentische Nicaragua",
+        "metaDescription1": "Lerne Zweck, Mission und Team von BAQUEANO Nicaragua kennen – die technologische Brücke für gemeindebasierten, souveränen und regenerativen Tourismus."
       },
       "nosHero": {
         "div1": "ÜBER UNS",
@@ -4160,7 +4161,11 @@
         "h44": "4. Lokales Erlebnis",
         "p5": "Natur, Kultur, Küche und einzigartige Erlebnisse.",
         "h45": "5. Direkte wirtschaftliche Wirkung",
-        "p6": "Echter Nutzen für Familien und Gemeinden."
+        "p6": "Echter Nutzen für Familien und Gemeinden.",
+        "imgAlt1": "Reisende",
+        "imgAlt2": "Region / Gemeinde",
+        "imgAlt3": "Lokales Erlebnis",
+        "imgAlt4": "Direkte wirtschaftliche Wirkung"
       },
       "nosIdentitySection": {
         "p1": "ENTDECKE, WAS NICHT AUF DER KARTE STEHT.",
@@ -4175,7 +4180,8 @@
         "h55": "Überliefertes Pinolero-Gold",
         "p6": "Kultur und Tradition",
         "strong1": "Inspiriert von unserer Erde,",
-        "p7": "unseren Menschen und unseren uralten Wurzeln."
+        "p7": "unseren Menschen und unseren uralten Wurzeln.",
+        "imgAlt1": "Indigene Petroglyphe"
       },
       "nosNumbersSection": {
         "h31": "BAQUEANO in Zahlen",
@@ -4187,7 +4193,179 @@
       },
       "nosManifestoSection": {
         "h31": "BAQUEANO-Manifest",
-        "p1": "Wir glauben an ein Nicaragua, das man zu Fuß, auf dem Wasser und im Austausch mit seinen Menschen entdeckt. Abseits der üblichen Routen liegt unser wahrer Reichtum: seine Gemeinden, sein Erbe, seine Natur und seine Kultur. Wir nutzen Technologie als ethisches Werkzeug, um zu verbinden, zu stärken und zu schützen, was uns gehört – denn Reisen kann auch Leben verändern."
+        "p1": "Wir glauben an ein Nicaragua, das man zu Fuß, auf dem Wasser und im Austausch mit seinen Menschen entdeckt. Abseits der üblichen Routen liegt unser wahrer Reichtum: seine Gemeinden, sein Erbe, seine Natur und seine Kultur. Wir nutzen Technologie als ethisches Werkzeug, um zu verbinden, zu stärken und zu schützen, was uns gehört – denn Reisen kann auch Leben verändern.",
+        "div1": "„Mehr Regionen, mehr Geschichten, ein Nicaragua.“"
+      },
+      "equipo": {
+        "h31": "Unser regionales Netzwerk",
+        "p1": "Wir arbeiten Hand in Hand mit denen, die im ganzen Land authentische Erlebnisse möglich machen.",
+        "h41": "Gastgebergemeinden",
+        "h42": "Lokale Kooperativen",
+        "h43": "Guides und Baqueanos",
+        "h44": "Lokale Betriebe",
+        "h45": "Eco-Lodges und Hütten",
+        "h46": "Strategische Partner",
+        "h32": "Team und Hüter des Landes",
+        "p2": "Ein interdisziplinäres Team, das sich für einen menschlicheren und nachhaltigeren Tourismus einsetzt.",
+        "h47": "Koordination",
+        "p3": "Strategie und Gemeindepartnerschaften",
+        "h48": "Technologie",
+        "p4": "Geodatenentwicklung und Innovation",
+        "p5": "Regionale Vernetzung und Prüfung",
+        "h49": "Kultur und Region",
+        "p6": "Inhalte und lebendige Erinnerung",
+        "imgAlt1": "Guides",
+        "imgAlt2": "Lokale Betriebe"
+      },
+      "nosFinalCta": {
+        "h31": "Das authentische Nicaragua entsteht mit seinen Menschen",
+        "a1": "BAQUEANO beitreten"
+      },
+      "contacto": {
+        "span1": "KONTAKT",
+        "h21": "Möchtest du uns etwas sagen?",
+        "p1": "Schreib uns für Partnerschaften, um ein Problem zu melden, ein Gemeindeziel vorzuschlagen oder einfach deine Erfahrung in Nicaragua zu teilen.",
+        "small1": "Antwort in wenigen Minuten",
+        "span2": "E-Mail",
+        "small2": "@baqueano.nic"
+      },
+      "baqueanoContactForm": {
+        "span1": "Art der Anfrage",
+        "option1": "Option auswählen...",
+        "option2": "Vorschlag für eine Gemeindepartnerschaft",
+        "option3": "Reiseziel oder Erlebnis vorschlagen",
+        "option4": "Meinen Betrieb bei BAQUEANO registrieren",
+        "option5": "Ich möchte Baqueano-Guide werden",
+        "option6": "Problem oder Beschwerde melden",
+        "option7": "Presse & Medien",
+        "option8": "Sonstige Anfrage",
+        "span2": "Departamento in Nicaragua (optional)",
+        "option9": "Wähle dein Departamento...",
+        "option10": "RACN (Nordkaribik)",
+        "option11": "RACS (Südkaribik)",
+        "span3": "Deine Nachricht",
+        "p1": "Deine Daten sind geschützt und werden niemals an Dritte weitergegeben.",
+        "inputPlaceholder1": "José Martínez",
+        "textareaPlaceholder1": "Erzähl uns deine Idee, Erfahrung oder deinen Vorschlag für gemeindebasierten Ökotourismus in Nicaragua..."
+      }
+    },
+    "offline": {
+      "body": {
+        "title1": "Regionaler Offline-Modus | Baqueano Nicaragua"
+      },
+      "offlineWrapper": {
+        "span1": "Überlebensmodus vor Ort",
+        "p1": "Kein Problem: Hier hast du die Notrufnummern und Anlaufstellen der meistbesuchten Orte gespeichert. Sobald das Internet zurück ist, erkunden wir weiter.",
+        "div1": "📌 Notfallprotokoll in Canyons und an Vulkanen:",
+        "li1": "Treffpunkt in der Gemeinde El Zapote oder am Guide-Posten La Patasta.",
+        "li2": "Rangerposten am Vulkan Maderas und Herberge Charco Verde.",
+        "li3": "Gemeindehütte Rota und Guide-Posten San Jacinto.",
+        "strong1": "Naturschutz:",
+        "li4": "Bleib auf dem markierten Weg, spar Akku und such die nächste Herberge oder Gemeinde.",
+        "button1": "🔄 Verbindung testen",
+        "a1": "Startseite aus dem Cache",
+        "a2": "Katalog aus dem Cache"
+      },
+      "section": {
+        "span1": "Hilfe unterwegs und Sicherheit",
+        "span2": "Medizinische Hilfe und Rettung",
+        "span3": "Brände und Rettung in der Wildnis",
+        "sectionAriaLabel1": "Nationale Notruf-Direktnummern",
+        "aTitle1": "Nationalpolizei anrufen",
+        "aTitle2": "Rotes Kreuz anrufen",
+        "aTitle3": "Feuerwehr anrufen"
+      },
+      "offlineStatus": {
+        "div1": "📡 Warte auf Empfang… Sobald er zurück ist, verbinden wir dich automatisch."
+      }
+    },
+    "perfil": {
+      "body": {
+        "title1": "Mein Profil | BAQUEANO – das authentische Nicaragua"
+      },
+      "profHero": {
+        "h11": "Eine Person auf Reisen,",
+        "span1": "tausend Geschichten",
+        "p1": "Deine Daten, deine Reisen und dein Nicaragua – wie du es willst."
+      },
+      "profUserSection": {
+        "span1": "Entdecker",
+        "span2": "BAQUEANO-Entdecker",
+        "span3": "Mitglied seit",
+        "strong1": "Standort nicht angegeben",
+        "span4": "Bevorzugte Währung:",
+        "strong2": "C$ Córdoba (NIO)",
+        "span5": "Abgeschlossene Reisen",
+        "span6": "Nächste Reise",
+        "span7": "Gespeicherte Reiseziele",
+        "span8": "Verfasste Bewertungen"
+      },
+      "profTabsSection": {
+        "a1": "Übersicht",
+        "a2": "Baqueano-Pass"
+      },
+      "resumen": {
+        "p1": "Du hast noch keine Reise geplant.",
+        "a1": "Meine Reise mit BAQUI planen",
+        "h41": "Neueste Favoriten",
+        "p2": "Tippe bei einem Reiseziel auf ♥ und es erscheint hier."
+      },
+      "reservas": {
+        "button1": "Anstehend 0",
+        "button2": "Abgeschlossen 0",
+        "button3": "Storniert 0",
+        "p1": "Du hast noch keine Buchungen."
+      },
+      "pasaporte": {
+        "h31": "BAQUEANO-PASS · EXPEDITION NICARAGUA",
+        "p1": "Offizielles Register der Erkundung und des gemeinschaftlichen Kulturerhalts",
+        "span1": "Fortschritt: 0 von 17 Departamentos erkundet",
+        "span2": "0 % des Staatsgebiets",
+        "strong1": "0 Stempel freigeschaltet",
+        "strong2": "0 Gebiete auf aktiver Route",
+        "strong3": "17 Gebiete zu entdecken",
+        "h51": "Stempel Masaya",
+        "span3": "Zu entdecken",
+        "h52": "Stempel Rivas",
+        "h53": "Stempel Granada",
+        "p2": "Inselchen des Cocibolca & Kolonialstadt",
+        "h54": "Stempel Matagalpa",
+        "p3": "Selva Negra & Kaffeeroute",
+        "h55": "Stempel León",
+        "p4": "Sandboarding am Cerro Negro & Kathedrale",
+        "h56": "Stempel Madriz",
+        "h57": "Stempel Südkaribik",
+        "h58": "Stempel Jinotega",
+        "p5": "Stadt der Nebel & Datanlí",
+        "span4": "Jeder Stempel belegt deine direkte wirtschaftliche Wirkung für Gemeindekooperativen.",
+        "a1": "17 Departamentos ansehen",
+        "a2": "Reiseziel zu meiner Reise hinzufügen"
+      },
+      "btnSharePassport": {
+        "button1": "Pass teilen"
+      },
+      "preferencias": {
+        "h41": "Meine Reisevorlieben",
+        "p1": "Wähle deine Interessen, um persönliche Empfehlungen zu erhalten.",
+        "span1": "Wandern",
+        "span2": "Kaffee",
+        "span3": "Wasserfälle",
+        "span4": "Familientourismus",
+        "div1": "„Mehr Erlebnisse, die dich mit unserem Land verbinden.“"
+      },
+      "perfilPersonal": {
+        "h41": "Persönliche Angaben",
+        "strong1": "Nicht ausgefüllt",
+        "small1": "Standort",
+        "small2": "Notfallkontakt",
+        "h42": "Sprache und Währung",
+        "label1": "Sprache der Plattform",
+        "option1": "🇳🇮 Spanisch",
+        "option2": "🇺🇸 Englisch",
+        "label2": "Bevorzugte Währung",
+        "option3": "$ US-Dollar (USD)",
+        "div1": "So zeigen wir Preise, Inhalte und Empfehlungen, die besser zu deinem Erlebnis passen.",
+        "h43": "Gesundheit, Barrierefreiheit und Wohlbefinden"
       }
     }
   },
@@ -4290,7 +4468,9 @@
     "explorarNicaragua": "Nicaragua erkunden",
     "tipoDeNegocio": "Art des Betriebs",
     "n867022WNicaragua": "12.5061° N, 86.7022° W (Nicaragua)",
-    "contacto": "Kontakt"
+    "contacto": "Kontakt",
+    "seguridad": "Sicherheit",
+    "pagos": "Zahlungen"
   },
   "ops": {
     "impact": {
