@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T00:12:29.936Z",
+  "generatedAt": "2026-10-05T00:23:27.612Z",
   "source": "OpenStreetMap Nominatim — © OpenStreetMap contributors (ODbL). Contornos: geoBoundaries ADM1 (CC BY 4.0).",
   "rule": "Cada punto se acepta solo si cae dentro del contorno oficial de su territorio.",
   "territories": {
@@ -230,10 +230,10 @@
       },
       {
         "name": "Maderas, Marsella, Remanso, Hermosa y El Coco",
-        "lat": 11.44452,
-        "lng": -85.51197,
-        "osm": "node/175897822",
-        "label": "Volcán Maderas, Altagracia, Rivas",
+        "lat": 11.28484,
+        "lng": -85.90338,
+        "osm": "relation/5932428",
+        "label": "Playa Marsella, Paquita, San Juan del Sur",
         "approx": true
       },
       {
@@ -413,14 +413,6 @@
         "approx": true
       },
       {
-        "name": "Catedral de Granada y Parque Colón",
-        "lat": 11.9297,
-        "lng": -85.94707,
-        "osm": "way/419263427",
-        "label": "Hotel Granada, Frente a Iglesia Guadalupe a tan solo 400 mts de la Catedral de Granada hacia el lago, Calle La Calzada",
-        "approx": true
-      },
-      {
         "name": "Isletas de Granada",
         "lat": 11.8723,
         "lng": -85.89949,
@@ -519,13 +511,6 @@
       }
     ],
     "esteli": [
-      {
-        "name": "Reserva Natural Tisey-La Estanzuela",
-        "lat": 12.98612,
-        "lng": -86.36509,
-        "osm": "node/2625472896",
-        "label": "Eco-Posada Tisey, NN-35A, La Tejera"
-      },
       {
         "name": "Reserva Natural Miraflor",
         "lat": 13.21698,
@@ -1123,6 +1108,7 @@
       "Petroglifos de El Cailagua"
     ],
     "granada": [
+      "Catedral de Granada y Parque Colón",
       "Iglesia y Torre de La Merced",
       "Convento e Iglesia San Francisco",
       "Casa de los Leones",
@@ -1134,6 +1120,7 @@
       "Macizo de Peñas Blancas"
     ],
     "esteli": [
+      "Reserva Natural Tisey-La Estanzuela",
       "Galería de Esculturas en Piedra de Don Alberto",
       "Fábricas de Puros Artesanales",
       "Murales Revolucionarios y Urbanos"
