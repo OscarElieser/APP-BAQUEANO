@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T17:32:36.963Z",
+  "generatedAt": "2026-10-05T18:55:33.902Z",
   "source": "OpenStreetMap Nominatim — © OpenStreetMap contributors (ODbL). Contornos: geoBoundaries ADM1 (CC BY 4.0).",
   "rule": "Cada punto se acepta solo si cae dentro del contorno oficial de su territorio.",
   "territories": {
@@ -198,10 +198,10 @@
       },
       {
         "name": "Poco a Poco Hostel",
-        "lat": 12.43699,
-        "lng": -86.88114,
-        "osm": "node/4595638290",
-        "label": "Poco a Poco Hostal, 2da Calle Nor Oeste, León"
+        "lat": 12.43701,
+        "lng": -86.88182,
+        "source": "catalog",
+        "label": "Poco a Poco Hostel"
       },
       {
         "name": "Rancho Los Alpes",
@@ -224,6 +224,13 @@
         "lng": -87.0422,
         "source": "catalog",
         "label": "Playa Poneloya"
+      },
+      {
+        "name": "Hotel El Convento",
+        "lat": 12.43561,
+        "lng": -86.8819,
+        "source": "catalog",
+        "label": "Hotel El Convento"
       }
     ],
     "rivas": [
@@ -328,11 +335,10 @@
       },
       {
         "name": "Morgan's Rock Reserve & Ecolodge",
-        "lat": 11.30556,
-        "lng": -85.92063,
-        "osm": "relation/5927937",
-        "label": "Playa Ocotal, San Juan del Sur, Rivas",
-        "approx": true
+        "lat": 11.30552,
+        "lng": -85.92049,
+        "source": "catalog",
+        "label": "Morgan's Rock Reserve & Ecolodge"
       },
       {
         "name": "Hostal Puesta del Sol (Ometepe)",
@@ -390,6 +396,21 @@
         "lng": -86.0326,
         "source": "catalog",
         "label": "Playa Gigante"
+      },
+      {
+        "name": "Hotel Victoriano",
+        "lat": 11.25069,
+        "lng": -85.87271,
+        "source": "catalog",
+        "label": "Hotel Victoriano"
+      },
+      {
+        "name": "TOTOCO Eco Resort",
+        "lat": 11.48042,
+        "lng": -85.52183,
+        "source": "catalog",
+        "label": "TOTOCO Eco Resort",
+        "approx": true
       }
     ],
     "jinotega": [
@@ -606,8 +627,8 @@
         "name": "Hotel Darío",
         "lat": 11.93027,
         "lng": -85.95161,
-        "osm": "node/3877517017",
-        "label": "Hotel Dario, Calle La Calzada, Granada"
+        "source": "catalog",
+        "label": "Hotel Darío"
       },
       {
         "name": "Treehouse Nicaragua",
@@ -654,6 +675,13 @@
         "source": "catalog",
         "label": "Isla Zapatera",
         "approx": true
+      },
+      {
+        "name": "Hotel Plaza Colón",
+        "lat": 11.92982,
+        "lng": -85.95451,
+        "source": "catalog",
+        "label": "Hotel Plaza Colón"
       }
     ],
     "matagalpa": [
@@ -759,6 +787,21 @@
         "source": "catalog",
         "label": "Reserva Natural Cerro Musún",
         "approx": true
+      },
+      {
+        "name": "Selva Negra Ecolodge",
+        "lat": 12.99908,
+        "lng": -85.90928,
+        "source": "catalog",
+        "label": "Selva Negra Ecolodge",
+        "approx": true
+      },
+      {
+        "name": "Hotel San José Matagalpa",
+        "lat": 12.92163,
+        "lng": -85.91877,
+        "source": "catalog",
+        "label": "Hotel San José Matagalpa"
       }
     ],
     "esteli": [
@@ -1100,6 +1143,20 @@
         "source": "catalog",
         "label": "Reserva Natural Península de Chiltepe",
         "approx": true
+      },
+      {
+        "name": "InterContinental Managua at Metrocentro Mall",
+        "lat": 12.1266,
+        "lng": -86.26488,
+        "source": "catalog",
+        "label": "InterContinental Managua at Metrocentro Mall"
+      },
+      {
+        "name": "Hyatt Place Managua",
+        "lat": 12.10173,
+        "lng": -86.24828,
+        "source": "catalog",
+        "label": "Hyatt Place Managua"
       }
     ],
     "carazo": [
@@ -1689,7 +1746,8 @@
       "Cayos Perlas",
       "Isla Rama Cay",
       "Playas de Corn Island",
-      "Saltos Walpapigny y Busay"
+      "Saltos Walpapigny y Busay",
+      "Yemaya Reefs"
     ]
   }
 }
