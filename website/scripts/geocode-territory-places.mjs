@@ -148,7 +148,10 @@ for (const territory of territories) {
     if (known) { result.territories[territory.id].push(known); continue; }
     let match = null;
     let approx = false;
-    for (const variant of nameVariants(place.name)) {
+    // Respaldo con fuente: comunidad o municipio de la dirección oficial (geoHint),
+    // siempre como punto aproximado. Nunca se inventa una coordenada.
+    const variants = [...nameVariants(place.name), ...(place.geoHint ? [{ q: String(place.geoHint), approx: true }] : [])];
+    for (const variant of variants) {
       for (const q of [`${variant.q}, ${territory.name}, Nicaragua`, `${variant.q}, Nicaragua`]) {
         const candidates = await query(q, bbox);
         await sleep(DELAY_MS);
