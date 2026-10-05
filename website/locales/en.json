@@ -2355,7 +2355,8 @@
     },
     "cookies": {
       "body": {
-        "title1": "Cookies and Local Storage | BAQUEANO Nicaragua"
+        "title1": "Cookies and Local Storage | BAQUEANO Nicaragua",
+        "metaDescription1": "Transparency about the use of cookies, storage technologies and local data to give you a safe, offline-ready travel experience in Nicaragua."
       },
       "cookiesHeroSection": {
         "h11": "Cookies,",
@@ -2414,7 +2415,8 @@
         "div1": "⚙️ Preferences and settings",
         "div2": "🗺️ Routes and destinations",
         "div3": "💼 Bookings and payments",
-        "div4": "📦 Offline content"
+        "div4": "📦 Offline content",
+        "imgAlt1": "Baqueano App"
       },
       "general": {
         "h31": "What are cookies and local storage?",
@@ -2426,6 +2428,358 @@
       "ubicacion": {
         "h41": "Location and maps",
         "p1": "Use of your location and how maps work."
+      },
+      "cookiesCategoriesGrid": {
+        "h41": "Preference cookies",
+        "p1": "They store your language, theme and region settings."
+      },
+      "externos": {
+        "h41": "External services",
+        "p1": "Third-party technologies we use."
+      },
+      "offline": {
+        "h41": "Local storage and offline mode",
+        "p1": "How we store maps, routes and content."
+      },
+      "duracion": {
+        "h41": "Duration, deletion and user control",
+        "p1": "How to manage and delete your data."
+      },
+      "preferencesControlCard": {
+        "h31": "External services we use",
+        "p1": "We work with trusted services that meet security and privacy standards.",
+        "span1": "Authentication and Hosting",
+        "p2": "Security, account management and content delivery.",
+        "span2": "Main database",
+        "p3": "Destinations, experiences, businesses and bookings.",
+        "h41": "OpenStreetMap + Leaflet",
+        "p4": "Interactive maps and tourist routes without commercial tracking.",
+        "h42": "Google Fonts",
+        "span3": "Web fonts",
+        "p5": "Improves readability and the visual experience.",
+        "h43": "Other services",
+        "span4": "(AI, weather, payments)",
+        "p6": "Integrations to improve your travel experience."
+      },
+      "cookiesMainLayout": {
+        "h31": "Reference legal framework",
+        "p1": "The use of data at BAQUEANO complies with current regulations in Nicaragua and international best practices:",
+        "li1": "— General Tourism Law",
+        "li2": "— Law on Incentives for Tourism Development",
+        "li3": "— Environmental Protection Law",
+        "strong1": "Law 787",
+        "li4": "— Personal Data Protection Law",
+        "li5": "Other regulations related to e-commerce and digital services"
+      },
+      "faq": {
+        "h31": "Frequently asked questions",
+        "span1": "Can I use BAQUEANO without optional cookies?",
+        "div1": "Yes, absolutely. You can explore destinations, read articles and check maps without enabling analytics or secondary preference cookies.",
+        "span2": "How do I delete my local data?",
+        "div2": "You can click the red button above, \"Clear BAQUEANO storage\", or clear your browser storage at any time.",
+        "span3": "Is my location stored?",
+        "div3": "We do not store a history of your location on our servers. It is only processed on your device to center maps and calculate routes.",
+        "span4": "What happens if I use airplane mode?",
+        "div4": "All content previously downloaded to the Service Worker and LocalStorage will keep working normally thanks to offline mode.",
+        "span5": "Are cookies shared with third parties?",
+        "div5": "We do not sell or share your cookies with third-party advertising agencies under any circumstances."
+      },
+      "legalBottomStrip": {
+        "p1": "See our related policies:",
+        "a1": "📜 Terms and Conditions",
+        "a2": "🛡️ Privacy Policy",
+        "a3": "⚖️ Legal Notice",
+        "div1": "Questions about cookies?",
+        "p2": "If you have questions about the use of cookies or local storage, write to us at:",
+        "a4": "Contact the team"
+      }
+    },
+    "cronicas": {
+      "body": {
+        "title1": "Chronicles & Territorial Stories | Baqueano Nicaragua",
+        "metaDescription1": "Territorial stories, community voices and responsible travel chronicles across Nicaragua. Discover what isn't on the map."
+      },
+      "bqMagazineMasthead": {
+        "span1": "Voices of the Land · Special Edition",
+        "h11": "Chronicles you can walk",
+        "span2": "Nicaragua · Field Notebook 2026"
+      },
+      "bqMagSectionNav": {
+        "a1": "All chronicles",
+        "a2": "Trails and Volcanoes",
+        "a3": "Coffee Route",
+        "a4": "Memory and Tradition",
+        "a5": "Caribbean and Peoples",
+        "navAriaLabel1": "Magazine sections"
+      },
+      "bqMagLeftRail": {
+        "span1": "12 stories",
+        "span2": "18 stories",
+        "span3": "Selva Negra & the North",
+        "span4": "15 stories",
+        "span5": "Cerro Negro & Poneloya",
+        "span6": "9 stories",
+        "span7": "14 stories",
+        "h31": "Baqueanos of the Month",
+        "p1": "Rural hosts and local sages who share their knowledge without intermediaries.",
+        "asideAriaLabel1": "Topics and territories"
+      },
+      "bqMagLeadArticle": {
+        "span1": "Lead Chronicle · Rivas",
+        "h21": "Two volcanoes and many communities: the island heartbeat",
+        "p1": "A deep journey through Ometepe beyond the summits of Concepción and Maderas. On agroecological farms, plantain cooperatives and trails of ancestral petroglyphs, farming families preserve a hospitality that resists mass tourism and honors the water of the Great Lake.",
+        "span2": "By Martín Morales · Baqueano from Altagracia",
+        "div1": "7 min read · Verified on site",
+        "imgAlt1": "Two volcanoes and communities on Ometepe",
+        "imgAlt2": "Baqueano Guardabarranco"
+      },
+      "bqMagCardSm": {
+        "span1": "Geopark · Madriz",
+        "h31": "The canyon told by those who paddle the Coco",
+        "p1": "How the community cooperative turned the canyon's rescue into a model of environmental stewardship and dignified rural employment.",
+        "a1": "Read full story",
+        "span2": "Mountains · Matagalpa",
+        "h32": "From bean to cup: the cloud forest at harvest",
+        "p2": "The hands that harvest shade-grown coffee, the song of the quetzal and the ancestral corn recipes of the northern highlands.",
+        "imgAlt1": "Coffee plantations of Matagalpa"
+      },
+      "bqMagRightRail": {
+        "h31": "Most Read",
+        "h41": "The 365 Islets: the secret of the colonial fishermen",
+        "span1": "Granada · 4 min read",
+        "h42": "Bluefields rondón: a story of firewood and coconut",
+        "span2": "South Caribbean · 5 min read",
+        "h43": "The silent guard of the Guardabarranco",
+        "span3": "Nature · 6 min read",
+        "blockquote1": "\"A true baqueano doesn't just show you the trail; they teach you to listen to the mountain and respect those who care for it.\"",
+        "cite1": "— Don Silvio Gutiérrez, Community Guide from Somoto",
+        "asideAriaLabel1": "Featured reads"
+      },
+      "bqMagazineContainer": {
+        "sectionAriaLabel1": "Territorial Chronicles Magazine"
+      }
+    },
+    "denuncias": {
+      "body": {
+        "title1": "Environmental Ethics Channel & Reports | Baqueano Nicaragua",
+        "metaDescription1": "Baqueano Nicaragua's ethics and environmental reporting channel. Report ecological crimes and support community brigades and MARENA."
+      },
+      "reportHeroSection": {
+        "span1": "Ecological Watch & Territorial Sovereignty",
+        "h11": "🌳 Ethics Channel & Environmental Reports",
+        "p1": "Together we protect Nicaragua's natural heritage. Report any ecological damage in full confidence to support territorial records and its proper referral to the relevant authorities and community brigades.",
+        "span2": "Confidential Ecological Report Form",
+        "h41": "MARENA Green Line",
+        "p2": "National environmental emergencies:",
+        "h42": "Forest fires",
+        "p3": "Nicaragua Fire Department & SINAPRED:",
+        "h43": "Baqueano Liaison Desk",
+        "p4": "Direct territorial WhatsApp:"
+      },
+      "ecoReportForm": {
+        "label1": "Type of environmental incident *",
+        "label2": "Department or Region *",
+        "label3": "Exact location or landmark *",
+        "label4": "Detailed description of the incident *",
+        "label5": "Contact name (optional – may be anonymous)",
+        "label6": "Phone or WhatsApp (optional, for follow-up)",
+        "span1": "Send report to the Environmental Brigade"
+      },
+      "reportType": {
+        "option1": "Select a category...",
+        "option2": "Illegal logging or clearing in a reserve",
+        "option3": "Poaching or wildlife trafficking",
+        "option4": "Pollution of a river, lagoon or tributary",
+        "option5": "Forest fire or uncontrolled agricultural burning",
+        "option6": "Solid waste buildup or illegal dump",
+        "option7": "Other ecosystem disturbance"
+      },
+      "reportDepartment": {
+        "option1": "Select the territory...",
+        "option2": "Madriz (Somoto Canyon)",
+        "option3": "Rivas (Ometepe Island / San Juan del Sur)",
+        "option4": "León (Cerro Negro / Telica volcanoes)",
+        "option5": "Masaya (Masaya Volcano / Apoyo Lagoon)",
+        "option6": "Matagalpa (Peñas Blancas / Selva Negra)",
+        "option7": "Jinotega (Bosawás / Datanlí El Diablo)",
+        "option8": "Río San Juan (Indio Maíz / El Castillo)",
+        "option9": "RACCS (Corn Island / Bluefields)",
+        "option10": "RACCN (Waspam / Bilwi)",
+        "option11": "Another department of Nicaragua"
+      },
+      "reportLocation": {
+        "inputPlaceholder1": "E.g. El Aguacate trail, 2 km north of the community entrance..."
+      },
+      "reportDetails": {
+        "textareaPlaceholder1": "Tell us what you saw, how serious it is, who might be involved and, if you have them, the GPS coordinates…"
+      },
+      "reportName": {
+        "inputPlaceholder1": "Anonymous or your name"
+      }
+    },
+    "departamento": {
+      "deptPageTitle": {
+        "title1": "Departmental Travel Guide | Baqueano Nicaragua"
+      },
+      "deptBadgeText": {
+        "span1": "Sovereign Territory"
+      },
+      "deptTitle": {
+        "h11": "Exploring the territory…"
+      },
+      "btnExploreMap": {
+        "a1": "Explore on the Map"
+      },
+      "btnQuoteTrip": {
+        "a1": "Plan a Visit"
+      },
+      "deptManifestoCooperatives": {
+        "span1": "Local network"
+      },
+      "deptManifestoTitle": {
+        "h21": "Understand the territory before you travel it."
+      },
+      "madrizManifestoStrip": {
+        "a1": "Explore places",
+        "a2": "Get to know the municipalities",
+        "button1": "Plan a visit"
+      },
+      "deptSectionBlock": {
+        "h31": "1. History, Origins & Living Memory",
+        "h32": "2. Typical Food & Flavors of Identity",
+        "h33": "3. Main Tourist Sites & Protected Areas",
+        "div1": "TERRITORIAL CARTOGRAPHY",
+        "h34": "4. Activities & Living Experiences on Site",
+        "h35": "5. Culture, Patron Saint Festivals & Community Tradition",
+        "h36": "6. Practical Travel Guide & Logistics",
+        "h51": "Best time to visit",
+        "h52": "How to get there",
+        "h53": "The Baqueano's recommendations",
+        "p1": "Ready to explore this territory with a certified rural guide?",
+        "a1": "View on Satellite Map",
+        "a2": "Meet Partner Cooperatives"
+      },
+      "deptTerritorialProfile": {
+        "h41": "Municipalities and tourism identity"
+      },
+      "territoryMapTitle": {
+        "h21": "Exact location of the territory"
+      },
+      "territoryMapDescription": {
+        "p1": "Map centered on the official coordinates of the selected department or region."
+      },
+      "territoryMapShell": {
+        "span1": "BAQUEANO territorial data"
+      },
+      "territoryMapExpand": {
+        "button1": "Expand",
+        "buttonAriaLabel1": "Expand map"
+      },
+      "territoryMapStatus": {
+        "div1": "Preparing territorial location…"
+      },
+      "header": {
+        "span1": "HONEST PLANNING"
+      },
+      "deptPlanningTitle": {
+        "h21": "How to get there, when to travel and how much it costs"
+      },
+      "article": {
+        "h31": "Conditions",
+        "h32": "Real prices",
+        "p1": "Prices must be recently published or checked directly. We do not show estimates as current rates."
+      },
+      "deptPlanningSosTitle": {
+        "h31": "Territory SOS"
+      },
+      "madrizClosingStrip": {
+        "span1": "YOUR EXPEDITION STARTS HERE",
+        "button1": "Build my adventure"
+      },
+      "deptClosingTitle": {
+        "h21": "You now know a little about this territory. Now live it."
+      },
+      "deptClosingMunicipalities": {
+        "a1": "Explore the territory"
+      },
+      "deptClosingNature": {
+        "a1": "Discover nature"
+      },
+      "deptClosingFood": {
+        "a1": "Taste local flavors"
+      },
+      "deptClosingMusic": {
+        "a1": "Listen to the territory"
+      },
+      "deptOfficialSourcesSection": {
+        "h31": "7. Verified official information"
+      },
+      "selectorTerritoriosSection": {
+        "h31": "8. Explore Another Department or Region (17 Territories)",
+        "p1": "Select any of Nicaragua's 15 departments and 2 autonomous regions to switch this official guide to that territory instantly:"
+      },
+      "sosModal": {
+        "span1": "Dial 128",
+        "span2": "Dial 115",
+        "span3": "Dial 118"
+      },
+      "downloadModal": {
+        "p1": "Save the secure file baqueanonicaragua.apk to your storage.",
+        "p2": "In Android Settings, allow direct installation for your browser.",
+        "p3": "Open the app and enjoy offline maps and trails without intermediaries."
+      },
+      "territoryMap": {
+        "divAriaLabel1": "Interactive map of the selected territory"
+      },
+      "territoryMapPlacesCarousel": {
+        "divAriaLabel1": "Places available on the map"
+      },
+      "body": {
+        "metaDescription1": "Discover the history, food, tourist sites and authentic routes of Nicaragua's departments."
+      }
+    },
+    "destino": {
+      "body": {
+        "title1": "Destination Profile | Baqueano Nicaragua",
+        "metaDescription1": "Official territorial information, travel logistics, costs and verified community hosts in Nicaragua."
+      },
+      "mainContent": {
+        "a1": "Back to the Destination Catalog",
+        "span1": "8-Point Territorial Verification"
+      },
+      "destinoContentCard": {
+        "h21": "Looking for what's around here…",
+        "p1": "Checking Baqueano's Nicaragua Master Database."
+      },
+      "reportModalTitle": {
+        "h31": "Report Data or Suggest a Correction"
+      },
+      "bqReportModal": {
+        "p1": "Your contribution keeps Nicaragua's territorial inventory up to date with no commissions or intermediaries."
+      },
+      "bqReportForm": {
+        "label1": "What information would you like to update?",
+        "label2": "Suggested detail or correction:",
+        "button1": "Send report"
+      },
+      "reportCategory": {
+        "option1": "Prices / local rates",
+        "option2": "Access route / transport",
+        "option3": "Opening hours",
+        "option4": "Cooperative / local guide contact",
+        "option5": "Environmental or safety recommendation",
+        "option6": "Other territorial detail"
+      },
+      "reportDetails": {
+        "textareaPlaceholder1": "Briefly describe the updated information..."
+      }
+    },
+    "destinos": {
+      "body": {
+        "title1": "Destinations in Nicaragua | Baqueano Nicaragua"
+      },
+      "destinosHeroExact": {
+        "h11": "Destinations in Nicaragua"
       }
     }
   },
@@ -2490,7 +2844,24 @@
     "verMasRecomendaciones": "See more recommendations →",
     "enviarMensaje": "Send message",
     "deSeptiembreDe2026": "September 26, 2026",
-    "tu": "You"
+    "tu": "You",
+    "comunidadesVivas": "Living Communities",
+    "conocerAnfitriones": "Meet the hosts",
+    "centroDeAuxilioSos247": "24/7 SOS Help Center",
+    "lineasDeEmergenciaNacionalY": "National emergency lines and satellite geolocation on the trail",
+    "tusCoordenadasGps": "YOUR GPS COORDINATES:",
+    "obteniendoSenalGps": "Getting GPS signal...",
+    "cruzRoja": "Red Cross",
+    "mesaBaqueano": "Baqueano Desk",
+    "whatsappSos": "WhatsApp SOS",
+    "enviarAlertaConCoordenadasGps": "Send alert with GPS coordinates",
+    "copiarCoordenadasAlPortapapeles": "Copy coordinates to clipboard",
+    "instalarBaqueanoParaAndroid": "Install Baqueano for Android",
+    "descargaDirectaDelPaqueteFirmado": "Direct download of the signed v1.0.0 package (official version) for your Android smartphone.",
+    "descargaElApk": "Download the APK",
+    "habilitaFuentesDesconocidas": "Enable Unknown Sources",
+    "comienzaLaAventura": "Start the adventure!",
+    "baqueanoApk": "Baqueano APK"
   },
   "ops": {
     "impact": {
