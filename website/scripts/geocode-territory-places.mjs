@@ -83,6 +83,18 @@ function nameVariants(raw) {
   return variants;
 }
 
+// Una coincidencia parcial no puede ser otra cosa: "Maderas" (playa) no es el
+// Volcán Maderas; "Catedral de Granada" no es un hotel que la menciona.
+const FOREIGN_KINDS = [
+  { re: /^volc[aá]n\b/i, unless: /volc[aá]n/i },
+  { re: /\b(hotel|hostal|hostel|posada|restaurante?|bar|tienda|farmacia)\b/i, unless: /\b(hotel|hostal|hostel|posada|restaurante?|bar|tienda|farmacia)\b/i }
+];
+const HOSPITALITY_TYPES = new Set(['hotel', 'guest_house', 'hostel', 'motel', 'restaurant', 'bar', 'cafe', 'fast_food', 'shop', 'supermarket', 'pharmacy']);
+function plausible(placeName, label, type) {
+  if (HOSPITALITY_TYPES.has(String(type || '')) && !FOREIGN_KINDS[1].unless.test(placeName)) return false;
+  return !FOREIGN_KINDS.some((rule) => rule.re.test(String(label || '').split(',')[0].trim()) && !rule.unless.test(placeName));
+}
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function query(q, bbox) {
@@ -125,7 +137,8 @@ for (const territory of territories) {
   result.territories[territory.id] = [];
   result.unresolved[territory.id] = [];
   for (const place of territory.places || []) {
-    const known = (previous.territories?.[territory.id] || []).find((p) => p.name === place.name && insideFeature(feature, p.lat, p.lng));
+    const known = (previous.territories?.[territory.id] || []).find((p) => p.name === place.name
+      && insideFeature(feature, p.lat, p.lng) && plausible(place.name, p.label));
     if (known) { result.territories[territory.id].push(known); continue; }
     let match = null;
     let approx = false;
@@ -133,7 +146,8 @@ for (const territory of territories) {
       for (const q of [`${variant.q}, ${territory.name}, Nicaragua`, `${variant.q}, Nicaragua`]) {
         const candidates = await query(q, bbox);
         await sleep(DELAY_MS);
-        match = (Array.isArray(candidates) ? candidates : []).find((c) => insideFeature(feature, Number(c.lat), Number(c.lon)));
+        match = (Array.isArray(candidates) ? candidates : []).find((c) => insideFeature(feature, Number(c.lat), Number(c.lon))
+          && plausible(place.name, c.display_name, c.type));
         if (match) break;
       }
       if (match) { approx = variant.approx; break; }
