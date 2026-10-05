@@ -4082,3 +4082,5 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - **Auditoría `/lib` publicada:** `docs/audit/LIB_FLUTTER_ECOSISTEMA_AUDITORIA_2026-10-05.md` (inventario, hallazgos C/A/M/B, matriz por módulo, matriz de integración con rúbrica de porcentajes, respuestas 1–20, arquitectura objetivo, roadmap P0–P5). Críticos: L-C1 llaves de IA compilables en el APK; L-C2 BAQUI apuntaba a `api.baqueano.app` (host inexistente → siempre offline en release); L-C3 la App no lee Supabase (0 uso). Correctos: rol solo desde el claim; pagos vía callable con validación.
 - **P0 aplicado (`lib/services/baqueano_ai_service.dart`):** llaves Groq/Ollama/Gemini solo con `kDebugMode` (eliminadas del binario release); gateway por defecto → Edge Function `baqueano-ai` (contrato `prompt`/`currentLanguage`, lectura `message`/`itinerary`), timeouts 20 s. Nada eliminado. Sin Flutter SDK en el contenedor: validación en `flutter_ci.yml`.
 - **Siguiente (P1):** `supabase_flutter` + repositorios Supabase-first de destinos/negocios, lista blanca de acciones BAQUI, registro SOS, OpenAPI v1.
+
+- **2026-10-05 — Preferencia del propietario:** responder siempre en español.
