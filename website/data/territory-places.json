@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T01:26:20.246Z",
+  "generatedAt": "2026-10-05T15:40:47.941Z",
   "source": "OpenStreetMap Nominatim — © OpenStreetMap contributors (ODbL). Contornos: geoBoundaries ADM1 (CC BY 4.0).",
   "rule": "Cada punto se acepta solo si cae dentro del contorno oficial de su territorio.",
   "territories": {
@@ -159,6 +159,13 @@
         "lng": -86.94878,
         "osm": "relation/17913378",
         "label": "Isla del Venado, León, 21000"
+      },
+      {
+        "name": "Poco a Poco Hostel",
+        "lat": 12.43699,
+        "lng": -86.88114,
+        "osm": "node/4595638290",
+        "label": "Poco a Poco Hostal, 2da Calle Nor Oeste, León"
       }
     ],
     "rivas": [
@@ -256,6 +263,21 @@
         "lng": -85.82874,
         "osm": "relation/5743428",
         "label": "Rivas, 47000, Nicaragua",
+        "approx": true
+      },
+      {
+        "name": "Hostal Puesta del Sol (Ometepe)",
+        "lat": 11.25252,
+        "lng": -85.87066,
+        "osm": "way/417334395",
+        "label": "Posada Puesta del Sol, Avenida Real, San Juan del Sur"
+      },
+      {
+        "name": "Finca Magdalena (Ometepe)",
+        "lat": 11.49839,
+        "lng": -85.62554,
+        "osm": "relation/6409432",
+        "label": "Isla de Ometepe, Rivas, Nicaragua",
         "approx": true
       }
     ],
@@ -401,6 +423,14 @@
         "osm": "node/2714691374",
         "label": "Palo Solo, La Concepción, Masaya",
         "approx": true
+      },
+      {
+        "name": "Posada Ecológica La Abuela – Laguna de Apoyo",
+        "lat": 11.94237,
+        "lng": -86.04406,
+        "osm": "node/2539247442",
+        "label": "La Posada Ecologica Abuela, Secret Path to Laguna Unerum, Laguna Nº 1",
+        "approx": true
       }
     ],
     "granada": [
@@ -440,6 +470,27 @@
         "lng": -86.03597,
         "osm": "relation/19370003",
         "label": "Reserva Natural Laguna de Apoyo, El Guapinol, Diriá"
+      },
+      {
+        "name": "Hotel Darío",
+        "lat": 11.93027,
+        "lng": -85.95161,
+        "osm": "node/3877517017",
+        "label": "Hotel Dario, Calle La Calzada, Granada"
+      },
+      {
+        "name": "Finca El Rayo",
+        "lat": 11.88695,
+        "lng": -85.89633,
+        "osm": "node/11211112157",
+        "label": "Finca El Rayo, Puerto El Rayo, Granada"
+      },
+      {
+        "name": "Finca María Auxiliadora",
+        "lat": 11.83487,
+        "lng": -85.93411,
+        "osm": "node/11209087574",
+        "label": "El Aguacate, Granada, 43000"
       }
     ],
     "matagalpa": [
@@ -676,6 +727,20 @@
         "osm": "relation/5735801",
         "label": "Tipitapa, Managua, 15100",
         "approx": true
+      },
+      {
+        "name": "Hotel Bosque Las Nubes",
+        "lat": 11.99039,
+        "lng": -86.29683,
+        "osm": "node/3114052680",
+        "label": "Hotel Bosque Las Nubes, NN-168, Las Nubes"
+      },
+      {
+        "name": "Finca Las Delicias",
+        "lat": 12.01052,
+        "lng": -86.28138,
+        "osm": "node/12688850468",
+        "label": "Finca Las Delicias, Ticuantepe, Managua"
       }
     ],
     "carazo": [
@@ -1007,6 +1072,14 @@
         "osm": "relation/5758807",
         "label": "San Miguelito, Río San Juan, 92100",
         "approx": true
+      },
+      {
+        "name": "Albergue Caimán (Los Guatuzos)",
+        "lat": 11.03826,
+        "lng": -85.04148,
+        "osm": "relation/16339033",
+        "label": "Refugio de Vida Silvestre Los Guatuzos, Río San Juan, Nicaragua",
+        "approx": true
       }
     ],
     "raccn": [
@@ -1093,13 +1166,18 @@
   },
   "unresolved": {
     "madriz": [
-      "Reserva Natural Tepesomoto-La Pataste"
+      "Reserva Natural Tepesomoto-La Pataste",
+      "Rosquillas Delicias del Norte",
+      "Finca Entre Pinos",
+      "Casa de Huésped La Ceibita"
     ],
     "leon": [
-      "Centro de Arte Fundación Ortiz Gurdián"
+      "Centro de Arte Fundación Ortiz Gurdián",
+      "Rancho Los Alpes"
     ],
     "rivas": [
-      "Corredor de playas de Tola"
+      "Corredor de playas de Tola",
+      "Morgan's Rock Reserve & Ecolodge"
     ],
     "jinotega": [
       "Salto La Mocuana"
@@ -1113,38 +1191,53 @@
       "Convento e Iglesia San Francisco",
       "Casa de los Leones",
       "Antigua Estación del Ferrocarril",
-      "Lago Cocibolca"
+      "Lago Cocibolca",
+      "Treehouse Nicaragua",
+      "Eco Finca El Buen Pastor"
     ],
     "matagalpa": [
       "Villa Chagüitillo",
-      "Macizo de Peñas Blancas"
+      "Macizo de Peñas Blancas",
+      "Albergue Tierra Alta Ecolodge"
     ],
     "esteli": [
       "Reserva Natural Tisey-La Estanzuela",
       "Galería de Esculturas en Piedra de Don Alberto",
       "Fábricas de Puros Artesanales",
-      "Murales Revolucionarios y Urbanos"
+      "Murales Revolucionarios y Urbanos",
+      "Finca Lindos Ojos",
+      "Ecoposada Tisey",
+      "Albergue Familiar Neblina del Bosque",
+      "ASOPASN · Programa Agrícola San Nicolás",
+      "Finca Agroturística Fuente de Vida"
     ],
     "chinandega": [
-      "Basílica Menor de Nuestra Señora del Trono"
+      "Basílica Menor de Nuestra Señora del Trono",
+      "Rancho Maribel",
+      "Campamento Ecológico Campuzano",
+      "Cabañas El Manantial"
     ],
     "managua": [
-      "Reserva Natural Chocoyero–El Brujo"
+      "Reserva Natural Chocoyero–El Brujo",
+      "Reserva Silvestre Privada Montibelli"
     ],
     "carazo": [
       "Reserva Silvestre Privada Tonantzin",
-      "Reserva Silvestre Privada FRANIN"
+      "Reserva Silvestre Privada FRANIN",
+      "Reserva Silvestre Privada La Mákina"
     ],
     "chontales": [
       "Pirámides de Garro Grande",
       "Archipiélago El Nancital",
-      "Aguas Calientes e Isla Arena"
+      "Aguas Calientes e Isla Arena",
+      "Finca Los Ángeles"
     ],
     "boaco": [
       "Centro Histórico & Calles Escalonadas de Boaco",
       "Mirador El Faro",
       "Reserva Natural Filas de Masigüe",
-      "Comunidad Las Lagunas"
+      "Comunidad Las Lagunas",
+      "Finca Poza Redonda Azul"
     ],
     "nueva-segovia": [
       "Ocotal Colonial & Casa de la Cultura",
@@ -1152,18 +1245,22 @@
       "Cruz de la Fe",
       "Aguas termales Don Alfonso"
     ],
-    "rio-san-juan": [],
+    "rio-san-juan": [
+      "Hostal Buen Amigo"
+    ],
     "raccn": [
       "Reserva de Biosfera Bosawás",
       "Río Coco / Wangki",
       "Sabanas de Pino",
-      "Triángulo Minero"
+      "Triángulo Minero",
+      "Finca Agroturística El Cortés"
     ],
     "raccs": [
       "Cayos Perlas",
       "Isla Rama Cay",
       "Playas de Corn Island",
-      "Saltos Walpapigny y Busay"
+      "Saltos Walpapigny y Busay",
+      "Garífuna Secrets of the Jungle"
     ]
   }
 }
