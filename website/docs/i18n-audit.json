@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T03:16:18.403Z",
+  "generatedAt": "2026-10-05T04:15:10.994Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 825,
-    "en": 825,
-    "fr": 825,
-    "it": 825,
-    "pt": 825,
-    "de": 825
+    "es": 1783,
+    "en": 1783,
+    "fr": 1783,
+    "it": 1783,
+    "pt": 1783,
+    "de": 1783
   },
   "html": {
     "files": 31,
@@ -24,7 +24,7 @@
   },
   "js": {
     "files": 78,
-    "translated": 14,
+    "translated": 16,
     "untranslated": 731
   },
   "jsEditorial": {
@@ -90,7 +90,7 @@
       "total": 97,
       "translated": 0,
       "untranslated": 97,
-      "legacyPhrase": 49,
+      "legacyPhrase": 65,
       "coverage": 0
     },
     {
@@ -99,7 +99,7 @@
       "total": 479,
       "translated": 0,
       "untranslated": 479,
-      "legacyPhrase": 24,
+      "legacyPhrase": 416,
       "coverage": 0
     },
     {
@@ -108,7 +108,7 @@
       "total": 250,
       "translated": 0,
       "untranslated": 250,
-      "legacyPhrase": 27,
+      "legacyPhrase": 186,
       "coverage": 0
     },
     {
@@ -117,7 +117,7 @@
       "total": 166,
       "translated": 0,
       "untranslated": 166,
-      "legacyPhrase": 26,
+      "legacyPhrase": 136,
       "coverage": 0
     },
     {
@@ -126,7 +126,7 @@
       "total": 164,
       "translated": 0,
       "untranslated": 164,
-      "legacyPhrase": 49,
+      "legacyPhrase": 132,
       "coverage": 0
     },
     {
@@ -135,7 +135,7 @@
       "total": 67,
       "translated": 0,
       "untranslated": 67,
-      "legacyPhrase": 6,
+      "legacyPhrase": 64,
       "coverage": 0
     },
     {
@@ -144,7 +144,7 @@
       "total": 47,
       "translated": 0,
       "untranslated": 47,
-      "legacyPhrase": 31,
+      "legacyPhrase": 35,
       "coverage": 0
     },
     {
@@ -153,7 +153,7 @@
       "total": 264,
       "translated": 0,
       "untranslated": 264,
-      "legacyPhrase": 61,
+      "legacyPhrase": 192,
       "coverage": 0
     },
     {
@@ -162,7 +162,7 @@
       "total": 194,
       "translated": 0,
       "untranslated": 194,
-      "legacyPhrase": 46,
+      "legacyPhrase": 60,
       "coverage": 0
     },
     {
@@ -171,7 +171,7 @@
       "total": 52,
       "translated": 0,
       "untranslated": 52,
-      "legacyPhrase": 1,
+      "legacyPhrase": 2,
       "coverage": 0
     },
     {
@@ -180,7 +180,7 @@
       "total": 181,
       "translated": 0,
       "untranslated": 181,
-      "legacyPhrase": 18,
+      "legacyPhrase": 20,
       "coverage": 0
     },
     {
@@ -189,7 +189,7 @@
       "total": 223,
       "translated": 0,
       "untranslated": 223,
-      "legacyPhrase": 22,
+      "legacyPhrase": 27,
       "coverage": 0
     },
     {
@@ -198,7 +198,7 @@
       "total": 58,
       "translated": 0,
       "untranslated": 58,
-      "legacyPhrase": 27,
+      "legacyPhrase": 28,
       "coverage": 0
     },
     {
@@ -207,7 +207,7 @@
       "total": 169,
       "translated": 0,
       "untranslated": 169,
-      "legacyPhrase": 68,
+      "legacyPhrase": 71,
       "coverage": 0
     },
     {
@@ -216,7 +216,7 @@
       "total": 181,
       "translated": 0,
       "untranslated": 181,
-      "legacyPhrase": 28,
+      "legacyPhrase": 30,
       "coverage": 0
     },
     {
@@ -234,7 +234,7 @@
       "total": 260,
       "translated": 0,
       "untranslated": 260,
-      "legacyPhrase": 34,
+      "legacyPhrase": 44,
       "coverage": 0
     },
     {
@@ -243,7 +243,7 @@
       "total": 221,
       "translated": 0,
       "untranslated": 221,
-      "legacyPhrase": 28,
+      "legacyPhrase": 30,
       "coverage": 0
     },
     {
@@ -261,7 +261,7 @@
       "total": 284,
       "translated": 0,
       "untranslated": 284,
-      "legacyPhrase": 103,
+      "legacyPhrase": 109,
       "coverage": 0
     },
     {
@@ -270,7 +270,7 @@
       "total": 62,
       "translated": 0,
       "untranslated": 62,
-      "legacyPhrase": 35,
+      "legacyPhrase": 36,
       "coverage": 0
     },
     {
@@ -279,7 +279,7 @@
       "total": 64,
       "translated": 0,
       "untranslated": 64,
-      "legacyPhrase": 20,
+      "legacyPhrase": 27,
       "coverage": 0
     },
     {
@@ -288,7 +288,7 @@
       "total": 329,
       "translated": 0,
       "untranslated": 329,
-      "legacyPhrase": 25,
+      "legacyPhrase": 31,
       "coverage": 0
     },
     {
@@ -297,7 +297,7 @@
       "total": 185,
       "translated": 0,
       "untranslated": 185,
-      "legacyPhrase": 52,
+      "legacyPhrase": 62,
       "coverage": 0
     },
     {
@@ -306,7 +306,7 @@
       "total": 255,
       "translated": 0,
       "untranslated": 255,
-      "legacyPhrase": 31,
+      "legacyPhrase": 40,
       "coverage": 0
     },
     {
@@ -315,7 +315,7 @@
       "total": 199,
       "translated": 0,
       "untranslated": 199,
-      "legacyPhrase": 34,
+      "legacyPhrase": 41,
       "coverage": 0
     },
     {
@@ -324,7 +324,7 @@
       "total": 68,
       "translated": 0,
       "untranslated": 68,
-      "legacyPhrase": 34,
+      "legacyPhrase": 35,
       "coverage": 0
     },
     {
@@ -333,7 +333,7 @@
       "total": 217,
       "translated": 0,
       "untranslated": 217,
-      "legacyPhrase": 49,
+      "legacyPhrase": 55,
       "coverage": 0
     },
     {
@@ -342,7 +342,7 @@
       "total": 144,
       "translated": 0,
       "untranslated": 144,
-      "legacyPhrase": 30,
+      "legacyPhrase": 34,
       "coverage": 0
     },
     {
@@ -351,7 +351,7 @@
       "total": 249,
       "translated": 0,
       "untranslated": 249,
-      "legacyPhrase": 35,
+      "legacyPhrase": 46,
       "coverage": 0
     },
     {
@@ -852,11 +852,11 @@
     {
       "file": "js/ops-center/ops-engine.js",
       "type": "js",
-      "total": 322,
-      "translated": 0,
+      "total": 324,
+      "translated": 2,
       "untranslated": 322,
       "editorialStrings": 0,
-      "coverage": 0
+      "coverage": 0.6
     },
     {
       "file": "js/ops-center/ops-ia-copilot.js",

@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T03:16:18.403Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 825 · en 825 · fr 825 · it 825 · pt 825 · de 825
+Generado: 2026-10-05T04:15:10.994Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 1783 · en 1783 · fr 1783 · it 1783 · pt 1783 · de 1783
 
 HTML: 4/5222 textos con clave (5218 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -8,7 +8,7 @@ HTML: 4/5222 textos con clave (5218 pendientes) · JS: 731 textos dinámicos pen
 |---|---|---:|---:|---:|---:|
 | admin.html | html | 479 | 0 | 479 | 0 % |
 | mi-negocio.html | html | 329 | 0 | 329 | 0 % |
-| js/ops-center/ops-engine.js | js | 322 | 0 | 322 | 0 % |
+| js/ops-center/ops-engine.js | js | 324 | 2 | 322 | 0.6 % |
 | index.html | html | 284 | 0 | 284 | 0 % |
 | baqueano-ia.html | html | 264 | 0 | 264 | 0 % |
 | gastronomia.html | html | 260 | 0 | 260 | 0 % |

@@ -23,6 +23,11 @@
 // 📦 3. QUÉ (WHAT / ENTREGABLES & CONTRATOS):
 // - Endpoint HTTP POST /baqueano-ai
 // - Retorna JSON: `{ success: true, ok: true, provider: "baqueano-edge-ai", itinerary: { ... }, planId: "..." }`
+// - Trazabilidad (2026-10-05, migración 20261005053000): cada intercambio se
+//   registra con `baqui_log_exchange` (sesión, mensajes recortados y sin correos
+//   ni teléfonos, proveedor, latencia, fuentes RAG). `userUid` del cuerpo NO se
+//   guarda como identidad: no está verificado. El registro nunca bloquea la
+//   respuesta (si falla, solo se informa en consola).
 // ============================================================================
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
@@ -351,11 +356,51 @@ Historial reciente:\n${recentHistory || "Sin historial previo."}\nPregunta actua
   } finally { clearTimeout(timeout); }
 }
 
+type LoggedSource = {source_type: string; entity_type?: string | null; entity_id?: string | null; title: string; url?: string | null};
+
+/** Quita correos y teléfonos y recorta: BAQUI no guarda PII innecesaria. */
+function minimizeText(value: string, max = 1000): string {
+  return value
+    .replace(/[\w.+-]+@[\w-]+\.[\w.]+/g, "[correo]")
+    .replace(/\+?\d[\d\s().-]{6,}\d/g, "[teléfono]")
+    .slice(0, max);
+}
+
+async function logExchange(
+  supabase: ReturnType<typeof createClient> | null,
+  entry: {sessionKey: string; language: string; channel: string; provider: string; userContent: string;
+          assistantContent: string; latencyMs: number; sources: LoggedSource[]; toolCalls?: unknown[]},
+) {
+  if (!supabase) return;
+  try {
+    const {error} = await supabase.rpc("baqui_log_exchange", {
+      p_session_key: entry.sessionKey,
+      p_user_id: null,
+      p_legacy_uid: null,
+      p_language: entry.language,
+      p_channel: entry.channel,
+      p_provider: entry.provider,
+      p_model: entry.provider === "baqueano-supabase-grounded-web" ? GROUNDED_MODEL : null,
+      p_user_content: minimizeText(entry.userContent),
+      p_assistant_content: minimizeText(entry.assistantContent, 2000),
+      p_tokens_input: null,
+      p_tokens_output: null,
+      p_latency_ms: Math.max(0, Math.round(entry.latencyMs)),
+      p_tool_calls: entry.toolCalls || [],
+      p_sources: entry.sources.slice(0, 20),
+    });
+    if (error) console.warn("[baqueano-ai] baqui_log_exchange:", error.message);
+  } catch (logErr) {
+    console.warn("[baqueano-ai] No se pudo registrar el intercambio:", logErr);
+  }
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: CORS_HEADERS });
   }
 
+  const startedAt = Date.now();
   try {
     let body: Record<string, unknown> = {};
     if (req.method === "POST") {
@@ -380,6 +425,9 @@ Deno.serve(async (req: Request) => {
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
     const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
     const supabase = supabaseUrl && serviceKey ? createClient(supabaseUrl, serviceKey) : null;
+    const rawSession = String(body.sessionId || body.session_id || "");
+    const sessionKey = /^[A-Za-z0-9_-]{6,120}$/.test(rawSession) ? rawSession : `anon-${crypto.randomUUID()}`;
+    const channel = ["web", "android", "ios"].includes(String(body.channel)) ? String(body.channel) : "web";
     const internalKnowledge = supabase ? await new BaqueanoKnowledgeService(supabase).search(prompt) : [];
     const internalSufficient = internalKnowledge.length > 0 && new BaqueanoKnowledgeService(supabase!).isSufficient(internalKnowledge);
 
@@ -397,6 +445,15 @@ Deno.serve(async (req: Request) => {
       const internalAnswer = intent === "tourism" && internalSufficient ? internalKnowledgeAnswer(internalKnowledge, currentLanguage) : null;
       const groundedAnswer = localMessages[intent] || internalAnswer ? null : await buildGroundedTourismAnswer(prompt, body.history, internalKnowledge, currentLanguage, countryCode);
       const message = localMessages[intent] || internalAnswer || groundedAnswer?.message || "Todavía no tengo ese dato verificado.";
+      const conversationProvider = localMessages[intent] ? "baqueano-conversation" : "baqueano-supabase-grounded-web";
+      await logExchange(supabase, {
+        sessionKey, language: currentLanguage, channel, provider: conversationProvider,
+        userContent: prompt, assistantContent: message, latencyMs: Date.now() - startedAt,
+        sources: [
+          ...internalKnowledge.map((item) => ({source_type: "internal_database", entity_type: item.entityType, entity_id: item.entityId, title: (item.title || item.entityType).slice(0, 200)})),
+          ...((groundedAnswer?.sources || []) as Array<{label?: string; url?: string}>).map((src) => ({source_type: "official_url", title: String(src.label || src.url || "Fuente externa").slice(0, 200), url: /^https?:\/\/\S+$/.test(String(src.url || "")) ? String(src.url) : null})),
+        ],
+      });
       return new Response(JSON.stringify({
         success: true, ok: true, type: "conversation", intent, message,
         provider: localMessages[intent] ? "baqueano-conversation" : "baqueano-supabase-grounded-web",
@@ -483,6 +540,18 @@ Deno.serve(async (req: Request) => {
         console.warn("[Baqueano AI Edge] No se pudo guardar en travel_plans:", dbErr);
       }
     }
+
+    await logExchange(supabase, {
+      sessionKey, language: currentLanguage, channel, provider,
+      userContent: prompt || `${daysRequested} días en ${territory.department}`,
+      assistantContent: `${generatedItinerary.title}. ${generatedItinerary.summary || ""}`,
+      latencyMs: Date.now() - startedAt,
+      toolCalls: [{tool: "build_itinerary", department: territory.department, days: daysRequested, plan_id: planId}],
+      sources: [
+        {source_type: "internal_database", entity_type: "territory", entity_id: territory.department, title: `Catálogo territorial BAQUEANO: ${territory.title}`},
+        ...((generatedItinerary.sources || []) as Array<{label?: string; url?: string}>).map((src) => ({source_type: "official_url", title: String(src.label || src.url || "Fuente externa").slice(0, 200), url: /^https?:\/\/\S+$/.test(String(src.url || "")) ? String(src.url) : null})),
+      ],
+    });
 
     return new Response(
       JSON.stringify(

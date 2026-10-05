@@ -21,7 +21,9 @@
 //   la vista abierta); admin gestiona estados con nota, el auditor solo lee.
 // - Reservas (vista 11): solicitudes reales de `baqueano-reservas` (sin pago en
 //   línea); admin confirma/completa/rechaza/cancela con nota; auditor solo lee.
-// 📦 QUÉ: window.BaqueanoOpsData = { call, callSos, callReservations, renderSos, renderReservations, refresh, loadTab, manages, save,
+// - Analítica / Impacto (vista 26): KPIs SMART de `kpi_dashboard()` y reporte
+//   DB HEALTH vía `baqueano-ops`; sin denominador → "Sin datos suficientes".
+// 📦 QUÉ: window.BaqueanoOpsData = { call, callSos, callReservations, renderSos, renderReservations, renderImpact, refresh, loadTab, manages, save,
 //   setStatus, verify, state }.
 // ============================================================================
 (function (window, document) {
@@ -796,14 +798,151 @@
     window.setInterval(() => { if (currentUser() && sosVisible()) renderSos(); }, SOS_POLL_MS);
     window.setInterval(() => { if (currentUser() && resVisible()) renderReservations(); }, RES_POLL_MS);
     document.addEventListener('click', (event) => {
-      const target = event.target.closest && event.target.closest('#btnOpsSyncAll, [data-tab="27-auditoria"], [data-tab="20-sos"]');
+      const target = event.target.closest && event.target.closest('#btnOpsSyncAll, [data-tab="27-auditoria"], [data-tab="20-sos"], [data-tab="26-analitica"]');
       if (!target || !currentUser()) return;
       if (target.id === 'btnOpsSyncAll') { refresh({ force: true, health: true }); renderSos({ force: true }); renderReservations({ force: true }); }
       else if (target.dataset.tab === '20-sos') window.setTimeout(() => renderSos({ force: true }), 0);
+      else if (target.dataset.tab === '26-analitica') window.setTimeout(renderImpact, 0);
       else window.setTimeout(renderAudit, 0); // después de que el motor dibuje la vista
     });
   }
 
-  window.BaqueanoOpsData = { call, callSos, callReservations, refresh, loadTab, manages, save, setStatus, verify, onSignedIn, renderAudit, renderHealth, renderSos, renderReservations, state, TABS };
+  // --------------------------------------------------------------------------
+  // Analítica / Impacto (vista 26): KPIs SMART calculados en PostgreSQL
+  // 🎯 Ningún KPI importante puede depender de una cifra escrita a mano.
+  // ⚙️ `baqueano-ops` → kpi_dashboard() y db_health_report(). Cada tarjeta
+  //    muestra valor, numerador/denominador y fuente; sin denominador dice
+  //    "Sin datos suficientes". Textos con claves `ops.impact.*` (6 idiomas).
+  // 📦 renderImpact({ days }) dibuja la vista y el reporte DB HEALTH.
+  // --------------------------------------------------------------------------
+  const impactState = { days: 30, loading: false };
+  function t(key, fallback, params) {
+    let text = fallback;
+    try {
+      if (window.BaqueanoLanguage && typeof window.BaqueanoLanguage.t === 'function') text = window.BaqueanoLanguage.t(key, { fallback });
+    } catch (_) { text = fallback; }
+    if (params) Object.keys(params).forEach((name) => { text = String(text).split(`{${name}}`).join(String(params[name])); });
+    return text;
+  }
+  const kNum = (v) => (v == null || Number.isNaN(Number(v)) ? null : Number(v));
+  const kFmt = (v, suffix) => (kNum(v) == null ? t('ops.impact.noData', 'Sin datos suficientes') : `${Number(v).toLocaleString('es-NI')}${suffix || ''}`);
+
+  function impactCard(titleKey, title, value, detail, source, status) {
+    const card = el('article', `ops-impact-card ${status === 'insufficient_data' || value == null ? 'is-empty' : 'is-real'}`);
+    card.append(el('span', 'ops-impact-label', t(titleKey, title)));
+    card.append(el('strong', 'ops-impact-value', value == null ? t('ops.impact.noData', 'Sin datos suficientes') : String(value)));
+    if (detail) card.append(el('p', 'ops-impact-detail', detail));
+    card.append(el('small', 'ops-impact-source', `${t('ops.impact.source', 'Fuente')}: ${source}`));
+    return card;
+  }
+
+  function impactView(report, health) {
+    const k = (report && report.kpis) || {};
+    const wrap = el('section', 'ops-impact');
+    wrap.setAttribute('aria-label', t('ops.impact.title', 'Analítica e impacto'));
+    const head = el('div', 'ops-health-head');
+    head.append(el('h3', 'ops-health-title', t('ops.impact.title', 'Analítica e impacto')));
+    head.append(el('span', 'ops-health-meta', report ? t('ops.impact.generated', 'Calculado en Supabase · {time}', { time: new Date(report.generated_at).toLocaleString('es-NI') }) : t('ops.impact.loading', 'Calculando en el servidor…')));
+    const select = el('select', 'ops-impact-period');
+    select.setAttribute('aria-label', t('ops.impact.period', 'Período'));
+    [7, 30, 90, 365].forEach((d) => {
+      const o = el('option', '', t('ops.impact.lastDays', 'Últimos {days} días', { days: d }));
+      o.value = String(d);
+      if (d === impactState.days) o.selected = true;
+      select.append(o);
+    });
+    select.addEventListener('change', () => { impactState.days = Number(select.value) || 30; renderImpact(); });
+    head.append(select);
+    wrap.append(head);
+    wrap.append(el('p', 'ops-impact-note', t('ops.impact.note', 'Todas las cifras se calculan con consultas reproducibles sobre datos reales (kpi_dashboard). Registrado no es lo mismo que activado.')));
+
+    const grid = el('div', 'ops-impact-grid');
+    const users = k.users_registered || {};
+    grid.append(impactCard('ops.impact.users', 'Usuarios registrados', kNum(users.value), t('ops.impact.newInPeriod', 'Nuevos en el período: {n}', { n: kFmt(users.new_in_period) }), 'profiles'));
+    const act = k.actors_activated || {};
+    grid.append(impactCard('ops.impact.activated', 'Usuarios activados', act.status === 'ok' ? act.value : null,
+      act.status === 'ok' ? t('ops.impact.rate', 'Tasa: {pct} de {den} actores', { pct: kFmt(act.rate_pct, ' %'), den: kFmt(act.denominator_actors_seen) }) : act.definition,
+      'analytics_events · v_actor_activation', act.status));
+    const active = k.active_actors || {};
+    grid.append(impactCard('ops.impact.active', 'Usuarios activos (7 / 30 días)', (kNum(active.last_7_days) || kNum(active.last_30_days)) ? `${kFmt(active.last_7_days)} / ${kFmt(active.last_30_days)}` : null, null, 'analytics_events'));
+    const ret = k.retention_d7 || {};
+    grid.append(impactCard('ops.impact.retention', 'Retención a 7 días', ret.status === 'ok' ? kFmt(ret.value_pct, ' %') : null,
+      ret.status === 'ok' ? `${kFmt(ret.numerator)} / ${kFmt(ret.denominator)}` : null, 'analytics_events', ret.status));
+    const biz = k.businesses || {};
+    grid.append(impactCard('ops.impact.businesses', 'Negocios (publicados / verificados)', kNum(biz.total) ? `${kFmt(biz.published)} / ${kFmt(biz.verified)}` : null,
+      t('ops.impact.businessesDetail', 'Total {total} · fichas completas {complete} · completitud media {avg}', { total: kFmt(biz.total), complete: kFmt(biz.complete_profiles), avg: kFmt(biz.avg_profile_completion_pct, ' %') }), 'businesses · v_business_completion_score'));
+    const cat = k.catalog || {};
+    grid.append(impactCard('ops.impact.catalog', 'Destinos y experiencias publicados', `${kFmt(cat.destinations_published)} / ${kFmt(cat.experiences_published)}`,
+      t('ops.impact.catalogDetail', 'Destinos con fuente: {src} · municipios: {m}', { src: kFmt(cat.destinations_with_source), m: kFmt(cat.municipalities) }), 'destinations · experiences'));
+    const reservations = k.reservations || {};
+    const resTotal = Object.values(reservations).reduce((a, b) => a + Number(b || 0), 0);
+    grid.append(impactCard('ops.impact.reservations', 'Solicitudes de reserva', resTotal || null,
+      Object.keys(reservations).map((key) => `${key}: ${reservations[key]}`).join(' · ') || null, 'reservations'));
+    const conv = k.commercial_conversion || {};
+    grid.append(impactCard('ops.impact.conversion', 'Conversión comercial', conv.status === 'ok' ? kFmt(conv.value_pct, ' %') : null,
+      conv.status === 'ok' ? t('ops.impact.conversionDetail', '{num} de {den} actores expuestos · {total} acciones', { num: kFmt(conv.numerator_actors_with_qualified_action), den: kFmt(conv.denominator_exposed_actors), total: kFmt(conv.qualified_actions_total) }) : conv.definition,
+      'commercial_actions / analytics_events', conv.status));
+    const fb = k.feedback || {};
+    grid.append(impactCard('ops.impact.feedback', 'Valoración positiva', fb.status === 'ok' ? kFmt(fb.positive_pct, ' %') : null,
+      fb.status === 'ok' ? t('ops.impact.feedbackDetail', '{pos} de {total} evaluaciones (≥ 4) · promedio {avg}', { pos: kFmt(fb.positive), total: kFmt(fb.total), avg: kFmt(fb.avg_rating) }) : null, 'user_feedback', fb.status));
+    const baqui = k.baqui || {};
+    grid.append(impactCard('ops.impact.baqui', 'Uso de BAQUI', baqui.status === 'ok' ? kFmt(baqui.answers) : null,
+      baqui.status === 'ok' ? t('ops.impact.baquiDetail', '{s} sesiones · latencia media {l} · {src} respuestas con fuente', { s: kFmt(baqui.sessions), l: kFmt(baqui.avg_latency_ms, ' ms'), src: kFmt(baqui.answers_with_sources) }) : null,
+      'ai_sessions · ai_messages · ai_message_sources', baqui.status));
+    const resp = k.responsible_offer || {};
+    grid.append(impactCard('ops.impact.responsible', 'Oferta con criterios responsables', resp.status === 'ok' ? kFmt(resp.value_pct, ' %') : null,
+      resp.status === 'ok' ? `${kFmt(resp.numerator)} / ${kFmt(resp.denominator)}` : resp.definition, 'businesses · experiences (sustainability_attributes)', resp.status));
+    wrap.append(grid);
+
+    if (health) {
+      const s = health.structure || {};
+      const q = health.data_quality || {};
+      const hb = el('div', 'ops-impact-health');
+      hb.append(el('h4', 'ops-impact-subtitle', t('ops.impact.dbHealth', 'Salud de la base de datos')));
+      const list = el('ul', 'ops-impact-health-list');
+      const line = (key, label, value, warn) => {
+        const li = el('li', warn ? 'is-warn' : '');
+        li.append(el('span', '', t(key, label)), el('strong', '', String(value)));
+        list.append(li);
+      };
+      line('ops.impact.tables', 'Tablas', s.tables);
+      line('ops.impact.rls', 'Tablas con RLS', `${s.rls_enabled}/${s.tables}`, s.rls_enabled !== s.tables);
+      line('ops.impact.fks', 'Claves foráneas', s.foreign_keys);
+      line('ops.impact.indexes', 'Índices', s.indexes);
+      line('ops.impact.noSource', 'Contenido publicado sin fuente', q.content_published_without_source, q.content_published_without_source > 0);
+      line('ops.impact.noCoords', 'Negocios sin coordenadas', q.businesses_without_coordinates, q.businesses_without_coordinates > 0);
+      line('ops.impact.sharedPhones', 'Teléfonos repetidos entre negocios', q.shared_business_phones, q.shared_business_phones > 0);
+      line('ops.impact.duplicates', 'Posibles duplicados (negocios / destinos)', `${q.possible_duplicate_businesses} / ${q.possible_duplicate_destinations}`, (q.possible_duplicate_businesses + q.possible_duplicate_destinations) > 0);
+      line('ops.impact.orphanProfiles', 'Perfiles sin usuario de Auth', q.profiles_without_auth_user, q.profiles_without_auth_user > 0);
+      line('ops.impact.pendingVerifications', 'Verificaciones pendientes', (health.operations || {}).pending_verifications);
+      hb.append(list);
+      hb.append(el('small', 'ops-impact-source', `${t('ops.impact.source', 'Fuente')}: db_health_report()`));
+      wrap.append(hb);
+    }
+    return wrap;
+  }
+
+  async function renderImpact() {
+    const view = document.getElementById('view-26-analitica');
+    if (!view || impactState.loading) return;
+    if (!currentUser()) { mount('view-26-analitica', el('p', 'ops-impact-note', t('ops.impact.signIn', 'Iniciá sesión para ver los indicadores.')), 'opsLiveImpact'); return; }
+    impactState.loading = true;
+    mount('view-26-analitica', impactView(null, null), 'opsLiveImpact');
+    try {
+      const to = new Date();
+      const from = new Date(to.getTime() - impactState.days * 86400000);
+      const [kpis, health] = await Promise.all([
+        call('kpis', { from: from.toISOString(), to: to.toISOString() }),
+        call('db_health').catch(() => null),
+      ]);
+      mount('view-26-analitica', impactView(kpis.report, health && health.report), 'opsLiveImpact');
+    } catch (error) {
+      mount('view-26-analitica', el('p', 'ops-impact-note is-error', t('ops.impact.error', 'No se pudieron calcular los indicadores: {error}', { error: error.message })), 'opsLiveImpact');
+    } finally {
+      impactState.loading = false;
+    }
+  }
+
+  window.BaqueanoOpsData = { call, callSos, callReservations, refresh, loadTab, manages, save, setStatus, verify, onSignedIn, renderAudit, renderHealth, renderSos, renderReservations, renderImpact, state, TABS };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })(window, document);

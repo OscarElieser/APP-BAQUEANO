@@ -19,7 +19,8 @@
 //    (REAL | SIN_DATOS | NO_CONFIGURADO | ERROR) y `source`.
 //
 // 📦 QUÉ (POST { action, ... }):
-// - Lectura (staff): whoami, overview, health, list, get, audit_list.
+// - Lectura (staff): whoami, overview, health, list, get, audit_list,
+//   kpis (kpi_dashboard SMART), db_health (db_health_report), duplicates.
 // - Escritura (admin): save, set_status (publish|unpublish|archive|restore),
 //   verify (sello "Verificado por BAQUEANO" con trazabilidad), log.
 // ============================================================================
@@ -63,9 +64,9 @@ type Entity = {
 const ENTITIES: Record<string, Entity> = {
   destinations: {
     table: "destinations", order: "name", search: "name", softDelete: true, statusColumn: "status", idPrefix: "dest",
-    select: "id,name,department_id,category,short_desc,description,latitude,longitude,cover_image,status,verified,confidence_status,last_verified_at,verification_notes,source_name,source_url,best_season,how_to_reach,vibe_tags,hidden_gem,metadata,created_at,updated_at,deleted_at",
+    select: "id,name,department_id,municipality_id,category,short_desc,description,latitude,longitude,cover_image,status,verified,confidence_status,verification_status,verified_at,last_verified_at,verification_notes,source_name,source_url,source_type,valid_until,best_season,how_to_reach,vibe_tags,hidden_gem,metadata,created_at,updated_at,deleted_at",
     write: {
-      name: "text", department_id: "id", category: "text", short_desc: "longtext", description: "longtext",
+      name: "text", department_id: "id", municipality_id: "id", category: "text", short_desc: "longtext", description: "longtext",
       latitude: "lat", longitude: "lng", cover_image: "url", status: "status", source_name: "text", source_url: "url",
       best_season: "longtext", how_to_reach: "longtext", vibe_tags: "tags", hidden_gem: "bool",
     },
@@ -73,16 +74,17 @@ const ENTITIES: Record<string, Entity> = {
   },
   businesses: {
     table: "businesses", order: "name", search: "name", softDelete: true, idPrefix: "biz",
-    select: "id,name,category,department,municipality,phone,whatsapp,address,latitude,longitude,cover_image,verified,host_name,host_story,day_pass_available,hidden_gem,metadata,created_at,updated_at,deleted_at",
+    select: "id,name,category,department,municipality,department_id,municipality_id,status,verification_status,verified_at,source_name,source_url,source_type,valid_until,description,email,website_url,opening_hours,sustainability_attributes,phone,whatsapp,address,latitude,longitude,cover_image,verified,host_name,host_story,day_pass_available,hidden_gem,metadata,created_at,updated_at,deleted_at",
     write: {
       name: "text", category: "text", department: "text", municipality: "text", phone: "phone", whatsapp: "phone",
       address: "longtext", latitude: "lat", longitude: "lng", cover_image: "url", host_name: "text", host_story: "longtext",
-      day_pass_available: "bool", hidden_gem: "bool",
+      day_pass_available: "bool", hidden_gem: "bool", department_id: "id", municipality_id: "id", description: "longtext",
+      website_url: "url", source_name: "text", source_url: "url",
     },
     required: ["name"],
   },
   departments: { table: "departments", order: "name", search: "name", select: "id,name,capital,short_desc,banner_image,created_at" },
-  municipalities: { table: "municipalities", order: "name", search: "name", select: "id,department_id,name,created_at" },
+  municipalities: { table: "municipalities", order: "name", search: "name", select: "id,department_id,name,latitude,longitude,location_precision,source_name,created_at,updated_at" },
   experiences: { table: "experiences", order: "title", search: "title", statusColumn: "status", select: "id,title,category,department_id,destination_id,business_id,price_nio,price_usd,verified,status,latitude,longitude,updated_at" },
   day_passes: { table: "day_passes", order: "title", search: "title", statusColumn: "status", select: "id,business_id,title,price_adult_nio,price_child_nio,price_usd,schedule_hours,requires_reservation,status,updated_at" },
   tourism_services: { table: "tourism_services", order: "title", search: "title", statusColumn: "status", select: "id,title,service_type,destination_id,business_id,price_min,price_max,currency,price_unit,source_name,verified_at,valid_until,status,updated_at" },
@@ -438,6 +440,14 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
         const { data } = await service.from("departments").select("id").eq("id", patch.department_id).maybeSingle();
         if (!data) throw new HttpError(400, "El departamento no existe.");
       }
+      if (patch.municipality_id) {
+        // El municipio debe existir y pertenecer al departamento indicado (o al ya guardado).
+        const { data } = await service.from("municipalities").select("id,department_id").eq("id", patch.municipality_id).maybeSingle();
+        if (!data) throw new HttpError(400, "El municipio no existe.");
+        const department = patch.department_id || (before && before.department_id);
+        if (department && data.department_id !== department) throw new HttpError(400, "El municipio no pertenece al departamento indicado.");
+        if (!department) patch.department_id = data.department_id;
+      }
       patch.updated_at = new Date().toISOString();
       let saved;
       if (before) {
@@ -503,13 +513,49 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       if (body.entity === "destinations") {
         patch.last_verified_at = verified ? now : null;
         patch.verification_notes = notes;
-        patch.confidence_status = verified ? "verified" : "pending";
+        // El CHECK de destinations admite verified_baqueano/confirmed/pending/community.
+        patch.confidence_status = verified ? "verified_baqueano" : "pending";
         if (source) patch.source_name = source.slice(0, 160);
       }
+      // Trazabilidad homogénea (migración 20261005052100): estado, fecha, fuente y vigencia.
+      patch.verification_status = verified ? "verified" : "pending_review";
+      patch.verified_at = verified ? now : null;
+      if (source) { patch.source_name = source.slice(0, 160); patch.source_type = "field_audit"; }
+      if (evidence) patch.source_url = evidence;
+      if (nextReview) patch.valid_until = nextReview.toISOString().slice(0, 10);
+      if (body.entity === "businesses") patch.status = verified ? "published" : "pending_review";
       const { data: after, error } = await service.from(entity.table).update(patch).eq("id", id).select(entity.select).single();
       if (error) throw new HttpError(500, "No se pudo registrar la verificación.");
       await audit(service, req, actor, { action: verified ? "verify" : "unverify", module: String(body.entity), entity: entity.table, id, description: `${verified ? "Verificó" : "Retiró verificación de"} ${(after as Record<string, unknown>).name || id}`, before, after });
       return { item: after };
+    }
+
+    case "kpis": {
+      // KPIs SMART calculados en PostgreSQL (kpi_dashboard). Lectura: todo el personal.
+      const to = body.to ? new Date(String(body.to)) : new Date();
+      const from = body.from ? new Date(String(body.from)) : new Date(to.getTime() - 30 * 86400000);
+      if (Number.isNaN(from.getTime()) || Number.isNaN(to.getTime()) || from > to) throw new HttpError(400, "Período inválido.");
+      if (to.getTime() - from.getTime() > 366 * 86400000) throw new HttpError(400, "El período máximo es de un año.");
+      const { data, error } = await service.rpc("kpi_dashboard", { p_from: from.toISOString(), p_to: to.toISOString() });
+      if (error) throw new HttpError(500, "No se pudieron calcular los KPIs.");
+      return { report: data };
+    }
+
+    case "db_health": {
+      const { data, error } = await service.rpc("db_health_report");
+      if (error) throw new HttpError(500, "No se pudo generar el reporte de salud de la base de datos.");
+      return { report: data };
+    }
+
+    case "duplicates": {
+      const [biz, dest, phones] = await Promise.all([
+        service.from("v_possible_duplicate_businesses").select("*").limit(50),
+        service.from("v_possible_duplicate_destinations").select("*").limit(50),
+        service.from("v_shared_business_phones").select("*").limit(50),
+      ]);
+      if (biz.error || dest.error || phones.error) throw new HttpError(500, "No se pudieron consultar los posibles duplicados.");
+      // Solo sugerencias: nunca se fusiona automáticamente.
+      return { businesses: biz.data, destinations: dest.data, shared_phones: phones.data };
     }
 
     case "log": {

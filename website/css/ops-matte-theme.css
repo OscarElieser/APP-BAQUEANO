@@ -2026,3 +2026,28 @@ body.ops-readonly [onclick*="saveGlobal"] {
 #badgeActiveSos.is-alert { background: #dc2626; color: #fff; }
 tr[data-sos-status="open"] { box-shadow: inset 3px 0 0 #dc2626; }
 .ops-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* ============================================================================
+   🧭 ANALÍTICA / IMPACTO (vista 26) — KPIs reales del backend
+   🎯 Tarjetas que distinguen dato real de "Sin datos suficientes".
+   ⚙️ Rejilla fluida (auto-fit) para móvil, tablet y escritorio.
+   📦 .ops-impact-*
+   ============================================================================ */
+.ops-impact { display: flex; flex-direction: column; gap: 1rem; }
+.ops-impact-period { background: var(--ops-surface-2); color: #fff; border: 1px solid var(--ops-border-subtle); border-radius: 8px; padding: 0.35rem 0.6rem; }
+.ops-impact-note { margin: 0; font-size: 0.82rem; color: var(--ops2-muted, #94a3b8); }
+.ops-impact-note.is-error { color: #fca5a5; }
+.ops-impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.85rem; }
+.ops-impact-card { background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.ops-impact-card.is-real { border-left: 3px solid #165D6F; }
+.ops-impact-card.is-empty { border-left: 3px solid rgba(244, 230, 193, 0.35); }
+.ops-impact-label { font-size: 0.78rem; color: var(--ops-text-secondary, #cbd5e1); }
+.ops-impact-value { font-size: 1.45rem; color: #fff; line-height: 1.2; }
+.ops-impact-card.is-empty .ops-impact-value { font-size: 0.95rem; color: #F4E6C1; }
+.ops-impact-detail { margin: 0; font-size: 0.78rem; color: var(--ops2-muted, #94a3b8); }
+.ops-impact-source { font-size: 0.7rem; color: rgba(148, 163, 184, 0.85); }
+.ops-impact-health { background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: 12px; padding: 1rem; }
+.ops-impact-subtitle { margin: 0 0 0.6rem; color: #fff; font-size: 0.95rem; }
+.ops-impact-health-list { list-style: none; margin: 0 0 0.5rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.4rem 1rem; }
+.ops-impact-health-list li { display: flex; justify-content: space-between; gap: 0.75rem; font-size: 0.82rem; color: var(--ops-text-secondary, #cbd5e1); border-bottom: 1px dashed rgba(255, 255, 255, 0.06); padding: 0.25rem 0; }
+.ops-impact-health-list li.is-warn strong { color: #F65E01; }

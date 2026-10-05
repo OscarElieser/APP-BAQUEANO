@@ -5655,8 +5655,29 @@
     },
 
 
-    // 8.3b Módulo de Analítica Web vs Android (26-analitica)
+    // 8.3b Analítica / Impacto (26-analitica)
+    // 🎯 La versión anterior mostraba cifras fijas (sesiones, conversión,
+    //    consultas) que no salían de ninguna base de datos. El propietario
+    //    prohíbe presentar números simulados como producción.
+    // ⚙️ Ahora la vista solo dibuja su encabezado y delega en
+    //    BaqueanoOpsData.renderImpact(), que pide kpi_dashboard() y
+    //    db_health_report() al servidor. El marcado anterior se conserva como
+    //    `renderAnalyticsModuleLegacyStatic` (no se invoca) por trazabilidad.
     renderAnalyticsModule() {
+      const panel = document.getElementById('view-26-analitica');
+      if (!panel) return;
+      panel.innerHTML = `
+        <div class="ops-view-header">
+          <div class="ops-view-title-group">
+            <h1><i class="fa-solid fa-chart-line" style="color: var(--bq-secondary);"></i> <span data-i18n="ops.impact.title">Analítica e impacto</span></h1>
+            <p class="ops-view-subtitle" data-i18n="ops.impact.subtitle">KPIs SMART calculados en Supabase · sin cifras simuladas</p>
+          </div>
+        </div>`;
+      if (window.BaqueanoOpsData && typeof window.BaqueanoOpsData.renderImpact === 'function') window.BaqueanoOpsData.renderImpact();
+    },
+
+    // HEREDADO (no se invoca): cifras estáticas sin fuente. Conservado solo como registro histórico.
+    renderAnalyticsModuleLegacyStatic() {
       const panel = document.getElementById('view-26-analitica');
       if (!panel) return;
 

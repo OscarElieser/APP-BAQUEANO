@@ -949,5 +949,1433 @@
   "errors": {
     "sessionExpired": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.",
     "network": "Keine Verbindung. Prüfe dein Internet und versuche es erneut."
+  },
+  "pages": {
+    "page": {
+      "body": {
+        "title1": "404 — Dieser Weg führt nirgendwohin | BAQUEANO Nicaragua",
+        "metaDescription1": "Dieser Weg führt nirgendwohin, aber Nicaragua hat mit BAQUEANO noch viele weitere zu entdecken."
+      },
+      "sideSignpostBaquiWrap": {
+        "div1": "NEUE REISEZIELE",
+        "div2": "GROSSE GESCHICHTEN",
+        "div3": "WEITER ENTDECKEN",
+        "imgAlt1": "BAQUI, der Entdecker-Sägeracke, mit seiner Karte"
+      },
+      "center404MessageBlock": {
+        "h11": "Dieser Weg",
+        "span1": "führt nirgendwohin",
+        "p1": "Die Adresse ist möglicherweise falsch geschrieben oder die Seite wurde verschoben.",
+        "p2": "Keine Sorge: Es gibt viele weitere Wege, und einige stehen auf keiner Karte. Lass uns weiter entdecken.",
+        "a1": "Zurück zur Startseite →",
+        "a2": "Reiseziele entdecken →"
+      },
+      "whatNowFloatingCard": {
+        "h21": "Und jetzt?",
+        "p1": "Du kannst weiter entdecken:",
+        "span1": "Vulkane, Strände und mehr",
+        "span2": "Touren und Aktivitäten",
+        "span3": "Entdecke das ganze Land",
+        "span4": "Registriere dein Unternehmen",
+        "imgAlt1": "Vulkane und Strände"
+      }
+    },
+    "admin": {
+      "body": {
+        "title1": "Baqueano Ops Center | Betriebs- und Verwaltungszentrale",
+        "metaDescription1": "Betriebs- und Leitzentrale von Baqueano Nicaragua. Zentrale Verwaltung von Inhalten, Unternehmen, Telemetrie und Sicherheit."
+      },
+      "adminLoginGate": {
+        "h11": "BAQUEANO OPS CENTER",
+        "p1": "Digitale Betriebs- und Leitzentrale. Zugang nur für die Leitung und autorisierte Prüfer.",
+        "span1": "Google-Anmeldung · Rolle auf dem Server geprüft",
+        "a1": "Zurück zum Portal"
+      },
+      "btnGoogleLogin": {
+        "span1": "Mit Google-Konto anmelden"
+      },
+      "opsSidebarMatte": {
+        "span1": "Ops Command"
+      },
+      "opsSidebarNav": {
+        "div1": "01 — Entdeckung & Katalog",
+        "span1": "Management-Dashboard",
+        "span2": "● Live",
+        "span3": "Content-CMS",
+        "span4": "Geografische Karte",
+        "div2": "02 — Betrieb & Unternehmen",
+        "span5": "Unternehmen & Partner",
+        "span6": "Prüfungen",
+        "span7": "Abonnements",
+        "span8": "Echte Reservierungen",
+        "span9": "Zahlungen & Belege",
+        "span10": "Benutzer",
+        "span11": "Community · Moderation",
+        "span12": "Guides / Baqueanos",
+        "div3": "03 — Gastronomie & Kulturerbe",
+        "span13": "Landesgeschichte",
+        "span14": "Kultur & Klang",
+        "span15": "Umweltkampagne",
+        "span16": "SOS-Zentrale 24/7",
+        "div4": "04 — Website & Multimedia",
+        "span17": "Mediathek",
+        "span18": "BAQUEANO KI",
+        "span19": "Website-Baukasten",
+        "span20": "Android-Monitor",
+        "div5": "05 — Analyse & Prüfung",
+        "span21": "Analytics Web vs. Android",
+        "span22": "Audit-Protokolle",
+        "span23": "Sicherheit & RBAC",
+        "div6": "06 — Governance & System",
+        "span24": "Offizielle Quellen",
+        "span25": "Gesetzgebung (Gesetz 306)",
+        "span26": "SEO-Zentrale",
+        "span27": "Globale Einstellungen",
+        "span28": "Systemstatus",
+        "span29": "Tarifverwaltung",
+        "span30": "Backup & Synchronisierung"
+      },
+      "badgeCount35": {
+        "span1": "Sync"
+      },
+      "opsTopbarMatte": {
+        "span1": "Nationale Leitzentrale",
+        "span2": "PRODUKTION"
+      },
+      "opsLiveDate": {
+        "div1": "HEUTE"
+      },
+      "btnOpsBackupAction": {
+        "span1": "Backup",
+        "buttonTitle1": "Sicherung & Wiederherstellung mit Datum und Uhrzeit"
+      },
+      "opsTopUserAvatar": {
+        "div1": "AD"
+      },
+      "opsTopUserName": {
+        "span1": "Administrator"
+      },
+      "opsTopUserRole": {
+        "span1": "Superadministrator"
+      },
+      "opsCommandPaletteTrigger": {
+        "span1": "Reiseziel, Unternehmen, Benutzer oder Befehl suchen...",
+        "span2": "Strg+K"
+      },
+      "view01Dashboard": {
+        "h11": "BAQUEANO-Betriebszentrale",
+        "p1": "OFFIZIELLE ARCHITEKTUR: FIREBASE (AUTHENTIFIZIERUNG & HOSTING) + SUPABASE (HAUPTDATENBANK)",
+        "button1": "Ausgangskatalog migrieren",
+        "span1": "Veröffentlichte Reiseziele",
+        "div1": "Insgesamt registriert:",
+        "span2": "Geprüfte Unternehmen",
+        "div2": "Ausstehende Prüfung:",
+        "span3": "Aktive SOS-Alarme",
+        "div3": "Echte Notfälle in Bearbeitung",
+        "span4": "Benutzer im Ökosystem",
+        "div4": "Authentifizierte Konten",
+        "h31": "Baqueano-Ökosystem: Web vs. Android",
+        "strong1": "Webportal",
+        "span5": "Aktiv",
+        "div5": "Öffentlicher Katalog, Gastgeberformular, Angebotsrechner in zwei Währungen nach Gesetz 306 und Satellitenkarte.",
+        "strong2": "Android-App",
+        "span6": "Produktion",
+        "div6": "Offline-Synchronisierung von Wegen, SOS-Notfallprotokoll, Favoriten der Entdecker.",
+        "h32": "Geprüfte letzte Aktivitäten",
+        "button2": "Verlauf löschen",
+        "buttonTitle1": "Gesamten Prüfverlauf löschen"
+      },
+      "opsMetricsLastUpdated": {
+        "span1": "Wird aktualisiert..."
+      },
+      "btnOpsSyncAll": {
+        "button1": "Synchronisieren"
+      },
+      "opsDataSourceBanner": {
+        "strong1": "Datenquelle:",
+        "span1": "Supabase ist die Hauptdatenbank; Firebase authentifiziert das Team. Echte Zahlen werden geladen…"
+      },
+      "opsDataSourceState": {
+        "span1": "Synchronisierung"
+      },
+      "opsAuditFeed": {
+        "div1": "Warte auf Audit-Ereignisse..."
+      },
+      "view03Destinos": {
+        "h11": "Reisezielkatalog",
+        "p1": "REDAKTIONELLE VERWALTUNG VON WEGEN, VULKANEN, STRÄNDEN UND SCHUTZGEBIETEN",
+        "button1": "Neues Reiseziel",
+        "th1": "Reiseziel / Gemeinde",
+        "th2": "Status",
+        "th3": "Geprüfter Tarif",
+        "th4": "Aktionen"
+      },
+      "destinationsEmptyState": {
+        "div1": "0 Reiseziele in Firestore registriert",
+        "div2": "In der Produktionsdatenbank wurden keine Reiseziele gefunden. Verwende die Schaltfläche „Neues Reiseziel“, um das erste hinzuzufügen."
+      },
+      "view08Negocios": {
+        "h11": "Gemeinschaftsunternehmen & Gastgeber",
+        "p1": "PRÜFUNG, FREIGABE, VERIFIZIERUNG UND VERÖFFENTLICHUNG NACH GESETZ 1210/1211",
+        "th1": "Unternehmen / Kontakt",
+        "th2": "Prüfsiegel",
+        "th3": "Prüfung"
+      },
+      "businessesEmptyState": {
+        "div1": "Keine Unternehmen warten auf Prüfung",
+        "div2": "Alle registrierten Gemeinschaftsunternehmen sind aktuell oder die Sammlung enthält keine Einträge."
+      },
+      "view20Sos": {
+        "h11": "SOS-Notfallzentrale",
+        "p1": "ECHTE TELEMETRIE VON ANDROID-GERÄTEN UND DEM WEBPORTAL",
+        "th1": "Alarm",
+        "th2": "Typ",
+        "th3": "GPS-Koordinaten",
+        "th4": "Herkunft",
+        "th5": "Gemeldete Uhrzeit"
+      },
+      "sosEmptyState": {
+        "div1": "Keine aktiven SOS-Alarme",
+        "div2": "Im ganzen Land ist es ruhig. Derzeit hat kein Android-Gerät und kein Webnutzer einen Alarm ausgelöst."
+      },
+      "view24Builder": {
+        "h11": "Blockbasierter Website-Baukasten",
+        "p1": "DYNAMISCHE KONFIGURATION VON SEITEN, ABSCHNITTEN, BANNERN UND NAVIGATIONSLEISTEN",
+        "button1": "Änderungen speichern",
+        "h31": "Globales Ankündigungsbanner",
+        "label1": "Ankündigungstext auf Website & Android:"
+      },
+      "view25Android": {
+        "h11": "Android-Monitor & Telemetrie",
+        "p1": "ABFRAGBARE ECHTE DATEN AUS DER BAQUEANO-NICARAGUA-APK",
+        "span1": "Android-Geräte",
+        "div1": "Registrierte Sitzungen",
+        "span2": "Offizielle Version",
+        "div2": "Signiertes APK-Paket",
+        "div3": "Geprüfte Android-Informationen",
+        "div4": "Die angezeigten Kennzahlen stammen ausschließlich aus den Sammlungen",
+        "div5": "und",
+        "div6": ". Es werden keine fiktiven Ereignisse erzeugt, die die APK nicht sendet."
+      },
+      "view02Contenido": {
+        "div1": "Redaktionelle Inhalte aktuell",
+        "div2": "Alle Artikel und Seiten sind mit Cloud Firestore synchronisiert."
+      },
+      "view04Territorios": {
+        "h11": "Nationale Gebiete",
+        "div1": "15 Departements & 2 autonome Regionen",
+        "div2": "Souveräne Gebietsstruktur, verknüpft mit der nationalen Kartengrundlage."
+      },
+      "view05Municipios": {
+        "div1": "Geprüfte Gemeindeabdeckung",
+        "div2": "Keine Gemeinden warten auf eine Gebietsprüfung."
+      },
+      "view06Experiencias": {
+        "h11": "Touristische Erlebnisse",
+        "div1": "Aktive Kategorien",
+        "div2": "Wandern, Vulkane, Surfen, Flüsse, Natur und ländliche Küche."
+      },
+      "view07Mapa": {
+        "div1": "Georeferenzierte Punkte",
+        "div2": "Anzeige geprüfter gültiger Koordinaten ohne fiktive Hochrechnungen."
+      },
+      "view09Verificaciones": {
+        "div1": "Siegel „Von BAQUEANO geprüft“",
+        "div2": "Akkreditierungskontrolle vor Ort und Konformitätsprüfung nach den Gesetzen 1210 und 1211."
+      },
+      "view10Suscripciones": {
+        "div1": "0 auslaufende Abonnements",
+        "div2": "Es gibt keine auslaufenden oder gesperrten Partnerabonnements."
+      },
+      "view11Reservas": {
+        "div1": "0 ausstehende Reservierungen",
+        "div2": "Es gibt keine Ausflugs- oder Touranfragen, die auf Bestätigung warten."
+      },
+      "view12Pagos": {
+        "div1": "Derzeit ist keine Zahlung ausstehend",
+        "div2": "Es werden nur Überweisungsbelege und geprüfte Zahlungen mit steuerlichem Nachweis bearbeitet."
+      },
+      "view13Usuarios": {
+        "h11": "Benutzerverzeichnis",
+        "div1": "Sichere Identitätsverwaltung",
+        "div2": "Rollensteuerung und Sperrung nach Datenschutz- und Least-Privilege-Richtlinien."
+      },
+      "view14Guias": {
+        "div1": "Ländliches Verzeichnis",
+        "div2": "Prüfung zertifizierter lokaler Guides, die aus dem jeweiligen Gebiet stammen."
+      },
+      "view15Gastronomia": {
+        "div1": "Traditioneller Geschmack",
+        "div2": "Georeferenzierte Rezepte, typische Garküchen und Volksköchinnen."
+      },
+      "view16Historia": {
+        "div1": "Souveräne Zeitleiste",
+        "div2": "Historische Meilensteine, Nationalhelden und überprüfbares Kulturerbe."
+      },
+      "view17Cultura": {
+        "div1": "Klangerbe",
+        "div2": "Archiv für Marimba, traditionelle Tänze und nicaraguanische Folklore."
+      },
+      "view18Sostenibilidad": {
+        "div1": "Null Fußabdruck & Naturschutz",
+        "div2": "Ökologische Indikatoren und Berechnung des Nutzens für ländliche Gemeinden."
+      },
+      "view19Ambiental": {
+        "div1": "0 aktive Umweltmeldungen",
+        "div2": "Es liegen keine Bürgermeldungen vor, die an die Gemeinde weitergeleitet werden müssen."
+      },
+      "view21Multimedia": {
+        "div1": "Cloud-Storage-Speicher",
+        "div2": "Verwaltung von Fotos, Karten und Abzeichen im offiziellen Bucket ohne Duplikate."
+      },
+      "view22Notificaciones": {
+        "div1": "Kommunikationszentrale",
+        "div2": "Gezielte Mitteilungen an Webnutzer und autorisierte Android-Geräte."
+      },
+      "view23Ai": {
+        "h11": "BAQUEANO-KI-Zentrale & Ops-KI",
+        "p1": "ÜBERWACHUNG DES DIGITALEN TOURISMUS-BAQUEANO · OSCARS VERWALTUNGS-COPILOT · MODELLTELEMETRIE",
+        "button1": "Briefing anhören",
+        "button2": "Commander öffnen",
+        "span1": "Erfasste BAQUI-Interaktionen",
+        "div1": "Wird aus Supabase geladen…",
+        "span2": "Verwendete Anbieter",
+        "span3": "Erfasste Tokens",
+        "span4": "Tatsächliche mittlere Latenz",
+        "h31": "Baqueano Commander (aktive Konsole)",
+        "p2": "Frag deinen persönlichen Assistenten nach Betriebsstatus, Reservierungen, Unternehmen oder simuliere Änderungen.",
+        "button3": "Wie steht es um BAQUEANO?",
+        "button4": "Zusammenfassung von heute",
+        "button5": "Ausstehende Reservierungen",
+        "button6": "Simulationsmodus",
+        "h32": "RAG-Wissensquellen & Qualität",
+        "p3": "Prüfung der Dokumente, auf denen die Antworten des digitalen Tourismus-Baqueano beruhen.",
+        "div2": "Baqueano-Gebietsdatenbank",
+        "div3": "29 Reiseziele, 153 Gemeinden, Tarife nach Gesetz 306",
+        "span5": "🟢 Geprüft",
+        "div4": "INTUR & VisitaNicaragua",
+        "div5": "Nationale Routen, Naturschutzgebiete, nationaler Kalender",
+        "span6": "🟢 Verbunden",
+        "div6": "Geoparks, Schutzgebiete, Umweltvorschriften",
+        "div7": "Inhaltsvorschlag erkannt",
+        "div8": "27 Reisende fragten nach",
+        "em1": "Transport und Fähren Managua–Ometepe",
+        "div9": "diese Woche. Es wird empfohlen, die Gemeindeseite von Rivas mit aktuellen Fahrplänen und Kosten zu ergänzen."
+      },
+      "opsAiDataNote": {
+        "strong1": "BAQUI-Telemetrie:",
+        "span1": "es werden nur in Supabase erfasste Daten angezeigt (",
+        "span2": "). Ohne Einträge zeigt jeder Indikator „Keine Daten“."
+      },
+      "commanderInlineFeed": {
+        "strong1": "Baqueano Ops-KI:",
+        "div1": ", sieh im",
+        "div2": "nach, um den tatsächlichen Zustand jedes Dienstes zu sehen. Was möchtest du gerade überwachen?"
+      },
+      "view26Analitica": {
+        "div1": "Aggregierte & ethische Analytik",
+        "div2": "Messung ohne Eingriff in die Privatsphäre, mit Firebase Analytics und Firestore."
+      },
+      "view27Auditoria": {
+        "h11": "Prüfverlauf und -protokoll",
+        "p1": "SERVER-AUDIT IN SUPABASE (OBEN) · ALTES FIRESTORE-PROTOKOLL (UNTEN)",
+        "button1": "Verlauf leeren",
+        "div1": "Prüfverlauf wird geladen...",
+        "div2": "Einträge werden mit Cloud Firestore und Supabase synchronisiert.",
+        "buttonTitle1": "Gesamten Verlauf leeren"
+      },
+      "view28Seguridad": {
+        "div1": "Strenge Zugriffsrichtlinien",
+        "div2": "Least-Privilege-Regeln, geprüfte Tokens und Schutz vor Rechteausweitung."
+      },
+      "view29Fuentes": {
+        "div1": "Verknüpfte offizielle Stellen",
+        "div2": "INTUR, MARENA, INETER und kommunale Gemeindeverwaltungen."
+      },
+      "view30Legislacion": {
+        "h11": "Gesetzgebung & Gesetz 306",
+        "div1": "Rechtsrahmen für Ökotourismus",
+        "div2": "Anreize nach Gesetz Nr. 306 und territoriale Transparenz nach den Gesetzen 1210 und 1211."
+      },
+      "view31Seo": {
+        "div1": "Metadaten & OpenGraph",
+        "div2": "Kanonische Titel, strukturierte Beschreibungen und Indexierung ohne Codeänderungen."
+      },
+      "view32Configuracion": {
+        "div1": "Systemparameter",
+        "div2": "Notrufnummern, Wechselkurse für zwei Währungen und Funktionsschalter."
+      },
+      "view33Estado": {
+        "div1": "Laufende Dienste",
+        "div2": "Firebase Auth (aktiv) • Cloud Firestore (aktiv) • Storage (aktiv) • Hosting (aktiv)."
+      },
+      "view36Comunidad": {
+        "div1": "Freigabe von Beiträgen, Meldungen und Kommentaren der Community."
+      },
+      "view34Tarifas": {
+        "div1": "Überprüfbarer Preiskatalog",
+        "div2": "Leistungen, Gültigkeit, Quelle, Währung, Verfügbarkeit und historische Nachverfolgbarkeit."
+      },
+      "view35Backup": {
+        "h11": "System → Backup und Synchronisierung",
+        "p1": "ARCHITEKTUR FIREBASE ZUERST, SUPABASE ALS RESERVE · FAILOVER-PRÜFUNG UND TRANSAKTIONSSICHERUNG",
+        "button1": "Fehler anzeigen",
+        "button2": "Telemetrie aktualisieren",
+        "strong1": "Firebase (primär)",
+        "div1": "Auth, Firestore, Hosting, App Check und Secret Manager.",
+        "span1": "Netzwerkstatus:",
+        "strong2": "Supabase (Reserve)",
+        "div2": "PostgreSQL, PostGIS, pgvector, Realtime und Notfallbetrieb.",
+        "strong3": "Firebase Storage",
+        "div3": "Primärer CDN-Speicher für Bilder und Dateien.",
+        "span2": "Bucket-Status:",
+        "strong4": "Supabase Storage",
+        "div4": "Sekundäre Kopie und Spiegelung mit SHA-256-Integrität.",
+        "span3": "Ausstehende Vorgänge",
+        "div5": "Warten auf Synchronisierung",
+        "span4": "Synchronisierte Vorgänge",
+        "div6": "In der Hauptdatenbank bestätigt",
+        "span5": "Fehlgeschlagene Vorgänge",
+        "div7": "Erfordern manuelle Wiederholung",
+        "span6": "Erkannte Konflikte",
+        "div8": "Per Zeitstempel gelöst",
+        "h41": "Schutz- und Resilienzrichtlinie",
+        "strong5": "Leitprinzip:",
+        "div9": "Firebase ist das Primärsystem. Supabase hält die relationale und georäumliche Sicherung vor.",
+        "strong6": "Circuit-Breaker-Schalter:",
+        "div10": "Kontinuierliche Verbindungsüberwachung, um Anfragen in eine lokale Notfallwarteschlange umzuleiten.",
+        "strong7": "Datenresilienz:",
+        "div11": "Entwickelt, um Datenverlust durch eine Notfallwarteschlange und eine Sekundärsicherung zu minimieren.",
+        "strong8": "Dateiintegrität:",
+        "div12": "SHA-256-Hash wird bei jeder Replikation zwischen Buckets geprüft.",
+        "h42": "Synchronisierungsverlauf",
+        "span7": "Letzte erfasste Sicherung:",
+        "span8": "Letzte erfolgreiche Synchronisierung:",
+        "span9": "Firestore-Circuit-Breaker:"
+      },
+      "btnOpsRetrySync": {
+        "button1": "Synchronisierung wiederholen"
+      },
+      "statusBadgeFirebase": {
+        "span1": "🟢 IN BETRIEB"
+      },
+      "stateTextFirebase": {
+        "strong1": "ONLINE"
+      },
+      "txtLastBackupTimestamp": {
+        "strong1": "Wird geprüft..."
+      },
+      "badgeCircuitBreaker": {
+        "span1": "GESCHLOSSEN (normal)"
+      },
+      "syncErrorsSection": {
+        "h31": "Warteschlange der Transaktionsvorgänge",
+        "th1": "Vorgangs-ID",
+        "th2": "Entität",
+        "th3": "Wiederholungen",
+        "th4": "Letzter Fehler / Detail"
+      },
+      "syncOperationsCount": {
+        "span1": "Wird geladen..."
+      },
+      "syncOperationsTableBody": {
+        "td1": "Status des zentralen Sicherungsdienstes wird abgefragt..."
+      },
+      "opsCommandResultsList": {
+        "span1": "Haupt-Dashboard öffnen",
+        "span2": "Reiseziele verwalten",
+        "span3": "Ausstehende Unternehmen prüfen",
+        "span4": "SOS-Zentrale überwachen",
+        "span5": "Website-Baukasten öffnen",
+        "span6": "Prüfprotokoll anzeigen",
+        "span7": "System: Backup und Synchronisierung"
+      },
+      "opsConfirmTitle": {
+        "h31": "Aktion bestätigen?"
+      },
+      "opsConfirmDesc": {
+        "p1": "Diese Aktion wirkt sich auf Einträge der Produktionsdatenbank aus."
+      },
+      "previewModalTitle": {
+        "h31": "Vorschau"
+      },
+      "opsSectionModalTitle": {
+        "h31": "Abschnitt bearbeiten"
+      },
+      "opsSectionModalSubtitle": {
+        "span1": "Seite: index.html"
+      },
+      "lblSecFormTitle": {
+        "label1": "Abschnittstitel / Überschrift *"
+      },
+      "lblSecFormType": {
+        "label1": "Komponententyp"
+      },
+      "secFormType": {
+        "option1": "Kopfzeile & Navigationsleiste",
+        "option2": "Filmischer Haupt-Hero",
+        "option3": "Inhalts-/Textblock",
+        "option4": "Kartenraster / Highlights",
+        "option5": "Interaktive Karte & Koordinaten",
+        "option6": "Formular / Angebotsrechner / Registrierung",
+        "option7": "Handlungsaufforderung (CTA)",
+        "option8": "Ankündigungs-/Warnbanner",
+        "option9": "Erfahrungsberichte & Bewertungen",
+        "option10": "Institutionelle Fußzeile",
+        "option11": "Benutzerdefinierter Block",
+        "option12": "HTML-Element erkannt"
+      },
+      "lblSecFormSubtitle": {
+        "label1": "Untertitel / Kultureller Vorspann"
+      },
+      "lblSecFormBadge": {
+        "label1": "Oberes Abzeichen"
+      },
+      "lblSecFormContent": {
+        "label1": "Inhalt / Beschreibung / Rechtstext"
+      },
+      "lblSecFormCtaText": {
+        "label1": "Hauptschaltfläche: Text"
+      },
+      "lblSecFormCtaLink": {
+        "label1": "Hauptschaltfläche: Link / URL"
+      },
+      "lblSecFormCta2Text": {
+        "label1": "Zweite Schaltfläche: Text (optional)"
+      },
+      "lblSecFormCta2Link": {
+        "label1": "Zweite Schaltfläche: Link / URL"
+      },
+      "lblSecFormImage": {
+        "label1": "URL für Foto / Multimedia-Hintergrund"
+      },
+      "btnUploadSectionMedia": {
+        "button1": "In Storage hochladen"
+      },
+      "opsSectionModalBody": {
+        "label1": "Veröffentlichungsstatus",
+        "label2": "Anzeigereihenfolge (Sortierung)"
+      },
+      "secFormStatus": {
+        "option1": "Veröffentlicht (auf der Website sichtbar)",
+        "option2": "Entwurf (auf der Website verborgen)",
+        "option3": "Im Papierkorb (deaktiviert)"
+      },
+      "btnSaveSectionModal": {
+        "button1": "Live-Änderungen speichern"
+      },
+      "opsBulkCount": {
+        "span1": "0 ausgewählt"
+      },
+      "btnBulkPublish": {
+        "button1": "Veröffentlichen"
+      },
+      "btnBulkArchive": {
+        "button1": "Archivieren"
+      },
+      "btnBulkTrash": {
+        "button1": "Papierkorb"
+      },
+      "opsDrawerTitle": {
+        "h21": "Neuer Eintrag"
+      },
+      "opsDrawerSubtitle": {
+        "p1": "Verwaltungsmodul"
+      },
+      "opsEntityDrawer": {
+        "button1": "Allgemein",
+        "button2": "Tarife & Kontakt",
+        "button3": "Multimedia",
+        "button4": "SEO"
+      },
+      "paneGeneral": {
+        "strong1": "Offizielles Verifizierungsabzeichen (manueller Haken)",
+        "span1": "Wie bei TikTok, Instagram, X und Facebook: Aktiviere den Verifizierungs- und Echtheitshaken, der auf Website und App sichtbar ist.",
+        "label1": "Offizieller Name / Titel *",
+        "label2": "Sprechender URL-Slug",
+        "label3": "Redaktioneller Status",
+        "label4": "Anzeigereihenfolge",
+        "label5": "Kurzfassung",
+        "label6": "Ausführliche Beschreibung / Erweiterter Inhalt"
+      },
+      "entityStatus": {
+        "option1": "Veröffentlicht",
+        "option2": "Archiviert"
+      },
+      "paneLocation": {
+        "label1": "Departement / Region",
+        "label2": "Adresse / Anfahrtshinweis",
+        "label3": "GPS-Breitengrad (z. B. 12.1364)",
+        "label4": "GPS-Längengrad (z. B. -86.2514)"
+      },
+      "entityDepartment": {
+        "option1": "National / Gebietsübergreifend",
+        "option2": "RACCN (Nordkaribik)",
+        "option3": "RACCS (Südkaribik)"
+      },
+      "panePricing": {
+        "label1": "Tarif in Córdoba (C$ NIO)",
+        "label2": "Tarif in Dollar ($ USD)",
+        "label3": "Festnetztelefon",
+        "label4": "Direkt per WhatsApp",
+        "label5": "Website / soziales Netzwerk",
+        "label6": "Tagespass / Paket / Ausstattung"
+      },
+      "entityDropzone": {
+        "div1": "Klicken, um in Firebase Storage hochzuladen",
+        "div2": "Unterstützt JPG, PNG, WebP in hoher Auflösung"
+      },
+      "paneMedia": {
+        "label1": "Dauerhafte Bild-URL"
+      },
+      "btnRemovePreview": {
+        "button1": "Bild entfernen"
+      },
+      "paneSeo": {
+        "label1": "Kanonischer Meta-Titel",
+        "label2": "Meta-Beschreibung",
+        "label3": "Schlüsselwörter"
+      },
+      "opsDrawerSaveDraftBtn": {
+        "button1": "Entwurf speichern"
+      },
+      "opsDrawerSavePublishBtn": {
+        "button1": "Eintrag veröffentlichen"
+      },
+      "opsBackupModal": {
+        "h21": "Sicherung & Wiederherstellung",
+        "p1": "Erstellt eine vollständige datierte Sicherung (Jahr, Monat, Tag und genaue Uhrzeit) mit allen 33 Modulen, Reisezielen, Gesetzen und Einstellungen des Ökosystems für sichere Wiederherstellungen jederzeit.",
+        "h41": "Sicherung exportieren",
+        "p2": "Lädt eine .json-Datei mit offiziellem Zeitstempel herunter (Datum, Tag und Uhrzeit).",
+        "button1": "Sicherung herunterladen",
+        "h42": "Sicherung wiederherstellen",
+        "p3": "Stellt den gesamten Katalog und alle Module aus einer früheren Kopie wieder her.",
+        "button2": "Datei laden",
+        "span1": "Verschlüsselte souveräne Sicherung mit Datum, Tag und Uhrzeit, kompatibel mit Firebase Firestore und Supabase.",
+        "buttonAriaLabel1": "Sicherung schließen"
+      },
+      "opsSidebarToggleBtn": {
+        "buttonTitle1": "Menü einklappen"
+      },
+      "badgeCount02": {
+        "spanTitle1": "Noch keine echte Datenquelle (Integration ausstehend)"
+      },
+      "badgeDestinosCount": {
+        "spanTitle1": "Echte Daten werden aus Supabase geladen…"
+      },
+      "btnOpsIaCommander": {
+        "buttonTitle1": "Baqueano Commander — Persönlicher Assistent des Administrators"
+      },
+      "btnLogoutAdmin": {
+        "buttonTitle1": "Abmelden"
+      },
+      "cfgAnnouncementText": {
+        "inputPlaceholder1": "Beispiel: EXKLUSIVE ANGEBOTE! Entdecke die besten Aktionen lokaler Unternehmen."
+      },
+      "commanderInlineInput": {
+        "inputPlaceholder1": "Gib deinen Auftrag für die Ops-KI ein..."
+      },
+      "opsCommandSearchInput": {
+        "inputPlaceholder1": "Befehl eingeben oder zu einem Modul wechseln..."
+      },
+      "secFormTitle": {
+        "inputPlaceholder1": "z. B. Den Weg öffnen die Gemeinden"
+      },
+      "secFormSubtitle": {
+        "inputPlaceholder1": "z. B. Authentischer Ökotourismus in Nicaragua ohne Vermittler"
+      },
+      "secFormBadgeText": {
+        "inputPlaceholder1": "z. B. Satelliten-GPS 24/7, Gesetz 306 usw."
+      },
+      "secFormContent": {
+        "textareaPlaceholder1": "Beschreibender Text, Absätze, Urheberrechtshinweise oder Manifest, das in dieser Komponente erscheint..."
+      },
+      "secFormCtaText": {
+        "inputPlaceholder1": "z. B. Nicaragua in 3D entdecken"
+      },
+      "secFormCtaLink": {
+        "inputPlaceholder1": "z. B. #mapaVivo3dSection oder destinos.html"
+      },
+      "secFormCta2Text": {
+        "inputPlaceholder1": "z. B. Android-APK herunterladen"
+      },
+      "secFormCta2Link": {
+        "inputPlaceholder1": "z. B. assets/baqueanonicaragua.apk"
+      },
+      "secFormImageUrl": {
+        "inputPlaceholder1": "https://firebasestorage.googleapis.com/... oder assets/images/..."
+      },
+      "entityTitle": {
+        "inputPlaceholder1": "z. B. Somoto-Canyon, Vulkan Mombacho..."
+      },
+      "entitySlug": {
+        "inputPlaceholder1": "z. B. canon-de-somoto"
+      },
+      "entityCategory": {
+        "inputPlaceholder1": "Strände, Vulkane, Flüsse, Wandern..."
+      },
+      "entityShortDesc": {
+        "inputPlaceholder1": "Kurze Zusammenfassung für Listen und mobile Karten"
+      },
+      "entityDescription": {
+        "textareaPlaceholder1": "Ausführliche Beschreibung, Zugangsregeln, Empfehlungen der Einheimischen..."
+      },
+      "entityMunicipality": {
+        "inputPlaceholder1": "z. B. Tola, San Juan del Sur, Matagalpa..."
+      },
+      "entityAddress": {
+        "inputPlaceholder1": "z. B. Von der Kirche 2 Blocks nach Norden..."
+      },
+      "entityDayPass": {
+        "inputPlaceholder1": "Poolzugang, typisches Mittagessen, geführte Wanderung..."
+      },
+      "entityPreviewImg": {
+        "imgAlt1": "Vorschau"
+      },
+      "entityMetaTitle": {
+        "inputPlaceholder1": "Titel für Google und OpenGraph"
+      },
+      "entityMetaDesc": {
+        "textareaPlaceholder1": "Für Suchmaschinen optimierte Beschreibung (max. 160 Zeichen)"
+      },
+      "entityKeywords": {
+        "inputPlaceholder1": "Nicaragua, ländlicher Tourismus, Vulkane, Baqueano"
+      }
+    },
+    "aliados": {
+      "body": {
+        "title1": "Baqueano-Partner | Lerne die Menschen kennen, die das Erlebnis möglich machen",
+        "metaDescription1": "Kooperativen, Eco-Lodges, Unterkünfte, Garküchen, Guides und lokale Unternehmer in ganz Nicaragua. Direkter Kontakt und verantwortungsvoller Tourismus."
+      },
+      "aliadosHeroExact": {
+        "div1": "BAQUEANO-PARTNER",
+        "h11": "Lerne die Menschen kennen, die",
+        "span1": "das Erlebnis möglich machen",
+        "p1": "Kooperativen, Eco-Lodges, Unterkünfte, Garküchen, Guides und lokale Unternehmer. Direkter Kontakt, verantwortungsvoller Tourismus und authentische Erlebnisse in ganz Nicaragua.",
+        "a1": "Partner entdecken",
+        "a2": "So prüfen wir",
+        "span2": "Tourismus, der Gemeinschaften stärkt 🍃"
+      },
+      "aliadosMetricsStrip": {
+        "span1": "Geprüfte Partner auf dieser Plattform",
+        "span2": "Bäuerliche Kooperativen (4)",
+        "span3": "Eco-Lodges und Hütten (3)",
+        "span4": "Küste & Strände (2)",
+        "span5": "Herrenhäuser & Kultur (2)",
+        "strong1": "Von BAQUEANO geprüft",
+        "sectionAriaLabel1": "Netzwerkkennzahlen"
+      },
+      "filterCat": {
+        "option1": "Kategorie: alle",
+        "option2": "Strandhotels",
+        "option3": "Lokale Guides",
+        "option4": "Gastronomie und Dachterrasse",
+        "selectAriaLabel1": "Nach Kategorie filtern"
+      },
+      "filterExp": {
+        "option1": "Art des Erlebnisses: alle",
+        "option2": "Wandern und Canyons",
+        "option3": "Vulkane und Sandboarding",
+        "option4": "Surfen und Erholung",
+        "option5": "Agrotourismus und Kaffee",
+        "option6": "Kultur und Kulturerbe",
+        "selectAriaLabel1": "Nach Erlebnis filtern"
+      },
+      "filterVerif": {
+        "option1": "Geprüft: alle",
+        "option2": "100 % vor Ort geprüft",
+        "selectAriaLabel1": "Nach Prüfung filtern"
+      },
+      "btnFilterAliados": {
+        "button1": "Partner suchen"
+      },
+      "aliadosShowcaseSection": {
+        "h21": "Ausgewählte Partner",
+        "p1": "Authentische Erlebnisse, direkter Kontakt und Tourismus, der Gemeinschaften verändert.",
+        "a1": "Alle Partner ansehen"
+      },
+      "aliadoCardExact": {
+        "h31": "Koop. Cañón de Somoto",
+        "p1": "Wandern, Abseilen und Touren im majestätischen Somoto-Canyon mit Guides aus der Gemeinde.",
+        "div1": "Geprüft: 12. Aug. 2026",
+        "a1": "Profil ansehen",
+        "h32": "Posada Ecológica La Abuela",
+        "p2": "Ländliche Unterkunft, Hochlandkaffee und Nebelwaldpfade im Herzen des Nordens.",
+        "div2": "Geprüft: 05. Aug. 2026",
+        "h33": "Arenas Beach Hotel & Cabañas",
+        "div3": "Las Peñitas, León",
+        "p3": "Direkt am Meer: Erholung, Surfen und Wassersport an der Pazifikküste von León.",
+        "div4": "Geprüft: 28. Juli 2026",
+        "h34": "Baqueanos Cerro Negro",
+        "p4": "Aufstieg zum jüngsten Vulkan Mittelamerikas, Sandboarding und zertifizierte lokale Guides.",
+        "div5": "Geprüft: 18. Aug. 2026",
+        "h35": "Finca Magdalena & Ometepe",
+        "p5": "Gemeinschaftlicher Agrotourismus, ländliche Küche und Wanderung zum Vulkan Maderas.",
+        "div6": "Geprüft: 22. Aug. 2026",
+        "h36": "San Simián Eco-Lodge",
+        "p6": "Ökohütten am Seeufer, Vogelbeobachtung und nachhaltige Erholung.",
+        "div7": "Geprüft: 10. Aug. 2026",
+        "h37": "Morgan's Rock",
+        "p7": "Eco-Lodge inmitten eines Privatwaldes mit einem Nistplatz für Meeresschildkröten.",
+        "div8": "Geprüft: 15. Aug. 2026",
+        "h38": "Hola Ola Eco-Hostal",
+        "div9": "Popoyo, Rivas",
+        "p8": "Surfen, Strand und Gemeinschaftsgefühl zwischen Reisenden und örtlichen Fischerfamilien.",
+        "div10": "Geprüft: 08. Aug. 2026",
+        "h39": "Feel at Home Campestre",
+        "p9": "Familienunterkunft, Natur, Handwerksworkshops und typische Küche in den Pueblos Blancos.",
+        "div11": "Geprüft: 16. Aug. 2026",
+        "h310": "Sohla Rooftop Granada",
+        "p10": "Nicaraguanische Fusionsküche, Signature-Cocktails und Panoramablick auf die Große Sultanin und den Vulkan.",
+        "div12": "Geprüft: 20. Aug. 2026"
+      },
+      "aliadosMapSplitSection": {
+        "h31": "Entdecke unsere Partner auf der Karte",
+        "p1": "Entdecke, wo diese Erlebnisse zu Hause sind, und plane deine Route durch Nicaragua.",
+        "a1": "Ganze Karte ansehen",
+        "h41": "Geprüfte Partner in der Nähe",
+        "a2": "Auf der Karte ansehen →",
+        "div1": "~ 12 km · Geprüft",
+        "div2": "~ 35 km · Geprüft",
+        "div3": "~ 48 km · Geprüft",
+        "imgAlt1": "Posada La Abuela",
+        "imgAlt2": "Sohla Rooftop"
+      },
+      "comoVerificamos": {
+        "h31": "Wie prüfen wir unsere Partner?",
+        "p1": "Für sichere, authentische und hochwertige Erlebnisse.",
+        "a1": "Mehr über den Ablauf erfahren →",
+        "h41": "1. Identifizierung und Inhaberschaft",
+        "p2": "Angaben zum Unternehmen oder zur Kooperative.",
+        "h42": "2. GPS-Standort",
+        "p3": "Koordinaten und Besuch vor Ort.",
+        "h43": "3. Direkter Kontakt",
+        "p4": "Kommunikation mit der verantwortlichen Person.",
+        "h44": "4. Echte Fotos",
+        "p5": "Aktuelle Bilder des Ortes.",
+        "h45": "5. Transparenter Tarif",
+        "p6": "Klare, überprüfbare Preise.",
+        "h46": "6. Sicherheit & Service",
+        "p7": "Bedingungen und Empfehlungen.",
+        "h47": "7. Prüfdatum",
+        "p8": "Letzte Prüfung vor Ort.",
+        "h48": "8. Prüfer aus der Gemeinde",
+        "p9": "Bestätigung durch die örtliche Gemeinschaft."
+      },
+      "impacto": {
+        "h31": "Wirkung in unseren Gemeinschaften",
+        "p1": "Tourismus schafft echte Chancen für nicaraguanische Familien.",
+        "p2": "Partnerunternehmer",
+        "p3": "Begünstigte Gemeinschaften",
+        "p4": "Vermittlungsprovision",
+        "p5": "„Mehr Reisende, mehr Chancen für unsere Leute.“",
+        "span1": "Authentisches Nicaragua 🍃"
+      },
+      "aliadosBizCtaSection": {
+        "p1": "Werde Teil des BAQUEANO-Netzwerks und zeige dein Erlebnis Reisenden aus aller Welt. Gemeinsam fördern wir fairen und verantwortungsvollen Tourismus.",
+        "a1": "Mein Unternehmen bewerben",
+        "span1": "Kleine Unternehmen, große Geschichten",
+        "span2": "Wir wachsen gemeinsam"
+      },
+      "aliadosTriadSection": {
+        "p1": "Deine Sicherheit gehört auch zur Reise.",
+        "p2": "Plane deine Route, lerne Partner kennen und erlebe Authentisches mit unserer KI.",
+        "h51": "Entdecke mehr von Nicaragua",
+        "p3": "Entdecke Reiseziele, Kultur, Gastronomie und Natur an einem Ort."
+      },
+      "bizModalTitle": {
+        "h31": "Mein Unternehmen beim BAQUEANO-Netzwerk bewerben"
+      },
+      "bizRegisterModal": {
+        "p1": "Tritt der offiziellen Plattform ohne überhöhte Provisionen bei und stärke deine Kooperative, Unterkunft oder Dienstleistung."
+      },
+      "bizRegisterForm": {
+        "label1": "Name des Unternehmens oder der Kooperative *",
+        "label2": "Name der verantwortlichen Person *",
+        "label3": "Direkt per WhatsApp *",
+        "label4": "Departement / Region *",
+        "label5": "Art der touristischen Dienstleistung",
+        "label6": "Kurze Beschreibung des angebotenen Erlebnisses",
+        "button1": "Bewerbung für eine kostenlose Prüfung senden"
+      },
+      "bizDept": {
+        "option1": "Gebiet auswählen..."
+      },
+      "bizServiceType": {
+        "option1": "Ländliche Unterkunft / Eco-Lodge / Hütten",
+        "option2": "Gemeinschaftliche Tourismuskooperative",
+        "option3": "Typische Garküche / Ländliches Restaurant",
+        "option4": "Baqueano-Guide für Wanderungen / Vulkane",
+        "option5": "Lokaler Touristentransport"
+      },
+      "sosGpsDisplay": {
+        "div1": "Satellitenkoordinaten werden ermittelt..."
+      },
+      "sosModal": {
+        "small1": "Funktioniert mit dem GNSS-Chip deines Geräts, ganz ohne Guthaben."
+      },
+      "filterDepto": {
+        "selectAriaLabel1": "Nach Departement filtern"
+      },
+      "bizName": {
+        "inputPlaceholder1": "z. B. Kooperative Las Brisas"
+      },
+      "bizContact": {
+        "inputPlaceholder1": "z. B. Denis Mayorga"
+      },
+      "bizDesc": {
+        "textareaPlaceholder1": "Erzähl uns, was dein Erlebnis einzigartig macht..."
+      }
+    },
+    "ambiental": {
+      "body": {
+        "title1": "Hüter des Landes | Baqueano Nicaragua",
+        "metaDescription1": "Grüner Dekalog des Entdeckers, Umweltmeldungen von Bürgern und ein Naturschutzpass in Nicaragua."
+      },
+      "ambHeroExact": {
+        "span1": "HÜTER DES LANDES",
+        "h11": "Schütze, was du",
+        "span2": "entdecken willst",
+        "p1": "Unsere Wälder, Kraterlagunen, Flüsse und Gemeinschaften sind heilig. Echter Tourismus nimmt nichts weg: Er schützt, respektiert und hinterlässt den Weg sauberer, als er ihn vorgefunden hat.",
+        "a1": "Den Dekalog annehmen",
+        "a2": "Umweltschaden melden",
+        "div1": "Natürliches Nicaragua",
+        "div2": "Immer lebendig"
+      },
+      "ambMetricsSection": {
+        "h51": "Verantwortungsvolle Entdecker",
+        "p1": "Heute schützen, morgen mehr",
+        "p2": "Verpflichtungen des Dekalogs",
+        "h52": "Deine Hüterstufe",
+        "p3": "Starte dein Abenteuer",
+        "h53": "Entdeckerpass",
+        "p4": "Sammle Aktionen und schalte Stufen frei"
+      },
+      "decalogoSeccion": {
+        "h21": "Der grüne Dekalog des Baqueano-Entdeckers",
+        "p1": "Kleine Taten, große Veränderungen. Nimm diese 10 Gebote an und hilf mit, Nicaragua zu bewahren.",
+        "span1": "Hüterstufe:",
+        "span2": "von 10 Verpflichtungen (",
+        "h41": "Weg & Abfall",
+        "span3": "Hinterlasse nur Fußspuren, nimm nur Erinnerungen mit.",
+        "h51": "Null-Plastik-Regel",
+        "p2": "Ich verwende keine Tüten und keine Einwegartikel. Ich trage meine wiederverwendbare Flasche bei mir.",
+        "h52": "Alles an seinem Platz",
+        "p3": "Ich hinterlasse keinen Müll. Ich nehme ihn bis zu einer Recyclingstelle mit.",
+        "h53": "Saubere Wege",
+        "p4": "Ich gehe nur auf zugelassenen Wegen.",
+        "h54": "Ich beachte die Beschilderung",
+        "p5": "Ich folge den Hinweisen und schone die Infrastruktur.",
+        "h42": "Wasser & Flora",
+        "span4": "Wasser und Leben schenken uns Zukunft.",
+        "h55": "Schütze unsere Gewässer",
+        "p6": "Ich verschmutze keine Flüsse, Lagunen, Strände oder Quellen.",
+        "h56": "Ich schütze Flora und Fauna",
+        "p7": "Ich entnehme keine Pflanzen und störe keine Tiere.",
+        "h57": "Ich bewahre die Ökosysteme",
+        "p8": "Ich respektiere Schutzgebiete und Regenerationszonen.",
+        "h43": "Gemeinschaft & Obhut",
+        "span5": "Das Land sind auch seine Menschen.",
+        "h58": "Respekt vor den Gemeinschaften",
+        "p9": "Ich schätze ihre Kultur, ihre Bräuche und ihre Lebensweise.",
+        "h59": "Ich unterstütze verantwortungsvollen Tourismus",
+        "p10": "Ich bevorzuge lokale Anbieter und gemeinschaftliche Erlebnisse.",
+        "h510": "Ich bin Botschafter Nicaraguas",
+        "p11": "Ich teile gute Praktiken und motiviere andere, achtsam zu sein.",
+        "h31": "Dein digitaler Ausweis",
+        "p12": "Nimm die 10 Verpflichtungen an und erhalte dein Abzeichen als Naturhüter.",
+        "li1": "Digitales Zertifikat",
+        "li2": "Sammle Punkte in deinem Pass",
+        "li3": "Zugang zu Auszeichnungen",
+        "li4": "Werde Teil der Gemeinschaft",
+        "imgAlt1": "Hüterabzeichen"
+      },
+      "btnSignAllDecalogo": {
+        "button1": "Alle unterschreiben"
+      },
+      "btnVerProgresoCredencial": {
+        "button1": "Meinen Fortschritt ansehen"
+      },
+      "alertaCiudadanaSeccion": {
+        "h31": "Bürger-Umweltmeldung",
+        "p1": "Hilf uns, die Naturräume Nicaraguas zu schützen. Wenn du eine umweltschädliche Aktivität bemerkst, kannst du sie vertraulich melden.",
+        "a1": "Meldung erstellen"
+      },
+      "reportFormPanel": {
+        "span1": "❶ Standort",
+        "span2": "❷ Details",
+        "span3": "❸ Nachweise"
+      },
+      "ambientalReportForm": {
+        "option1": "Art des Schadens auswählen",
+        "option2": "Unerlaubte Abholzung oder Rodung",
+        "option3": "Müllkippe oder Müllansammlung auf einem Weg",
+        "option4": "Verschmutzung einer Wasserquelle oder eines Strandes",
+        "option5": "Brandrodung oder unkontrolliertes Feuer",
+        "option6": "Illegale Entnahme von Tieren oder Pflanzen",
+        "strong1": "Fotos oder Videos hinzufügen",
+        "span1": "Du kannst Fotos oder Videos des Ortes hochladen.",
+        "label1": "Meine Meldung vertraulich behandeln",
+        "button1": "Meldung senden",
+        "textareaPlaceholder1": "Beschreibe, was du beobachtet hast (optional)"
+      },
+      "ambPassportSection": {
+        "h21": "Baqueano-Entdeckerpass",
+        "p1": "Mit jeder Aktion sammelst du Punkte und schaltest neue Stufen frei. Entdecke, schütze und werde Teil eines lebendigeren Nicaraguas.",
+        "a1": "Meinen Pass ansehen",
+        "span1": "Stufe 1",
+        "h41": "Somoto-Wanderer",
+        "span2": "Stufe 2",
+        "h42": "Lava-Entdecker",
+        "span3": "Stufe 3",
+        "h43": "Hüter der Wassereinzugsgebiete",
+        "span4": "Stufe 4",
+        "h44": "Verbündeter der Kaffeeplantage",
+        "span5": "Stufe 5",
+        "h45": "Vogelbeobachter",
+        "span6": "Stufe 6",
+        "h46": "Hüter von Bosawás"
+      },
+      "ambInspiringSection": {
+        "h21": "Aktionen, die inspirieren",
+        "p1": "Echte Geschichten von Reisenden, Gemeinschaften und Freiwilligen, die sich um Nicaragua kümmern."
+      },
+      "ambInspiringCard": {
+        "h41": "Strandsäuberung",
+        "p1": "Kleine Taten, große Veränderungen.",
+        "h42": "Gemeinschaftliche Aufforstung",
+        "p2": "Bäume für die Zukunft.",
+        "p3": "Reisen heißt auch Verantwortung tragen.",
+        "h43": "Hütende Gemeinschaften",
+        "p4": "Kultur und Natur vereint.",
+        "h44": "Tierwelt, die uns inspiriert",
+        "p5": "Schützen wir ihr Zuhause."
+      },
+      "ambTripleSection": {
+        "p1": "Deine Sicherheit gehört auch zur Achtsamkeit",
+        "button1": "Hilfe",
+        "p2": "Tritt dem BAQUEANO-Netzwerk bei und fördere verantwortungsvollen Tourismus.",
+        "h41": "Tritt der Gemeinschaft bei",
+        "p3": "Gemeinsam für ein saubereres und nachhaltigeres Nicaragua.",
+        "a1": "Ich mache mit"
+      }
+    },
+    "avisoLegal": {
+      "body": {
+        "title1": "Impressum & geistiges Eigentum | BAQUEANO Nicaragua",
+        "metaDescription1": "Rechtsrahmen, Transparenz und Betriebsbedingungen von BAQUEANO, der digitalen Plattform für authentischen, verantwortungsvollen und sicheren Tourismus in Nicaragua."
+      },
+      "legalHeroSection": {
+        "h11": "Impressum &",
+        "span1": "geistiges Eigentum",
+        "p1": "Rechtsrahmen, Transparenz und Betriebsbedingungen von BAQUEANO, einer digitalen Plattform für authentischen, verantwortungsvollen und sicheren Tourismus in Nicaragua.",
+        "strong1": "18. September 2026",
+        "div1": "⚖️ Anwendbares Recht:"
+      },
+      "essentialSection": {
+        "h21": "Das Wichtigste aus dem Impressum",
+        "p1": "Erfahre das Wichtigste zu Betrieb, Nutzung, geistigem Eigentum und Rechtsrahmen von BAQUEANO.",
+        "h31": "Inhaberschaft und Verantwortlicher",
+        "p2": "Betrieben von Managua, Nicaragua, aus. Landesweite Reichweite.",
+        "h32": "Art der Plattform",
+        "p3": "Digitale Vermittlung, Information und Unterstützung zwischen Reisenden und lokalen Anbietern.",
+        "h33": "Institutionelle Unabhängigkeit",
+        "p4": "Unabhängige Initiative. Sie vertritt keine staatlichen Institutionen.",
+        "h34": "Rechtsrahmen",
+        "p5": "Einhaltung der Gesetze zu Tourismus, Umwelt, E-Commerce und Datenschutz.",
+        "p6": "Geschützte Marke, Inhalte, Oberflächen, Code und Datenbank.",
+        "h35": "Rechtlicher Kontakt",
+        "p7": "Managua, Nicaragua."
+      },
+      "legalSidebar": {
+        "div1": "Inhaltsverzeichnis des Impressums",
+        "span1": "Anwendbarer Rechtsrahmen",
+        "div2": "„Technologie, die unser Land verbindet – verantwortungsvoll.“"
+      },
+      "titularidad": {
+        "p1": "BAQUEANO ist eine digitale Plattform, die von Managua, Nicaragua, aus betrieben und verwaltet wird und im ganzen Land verfügbar ist. Sie fördert nachhaltigen Tourismus mithilfe von Technologie und erleichtert den Kontakt zwischen Reisenden und lokalen Anbietern (Unternehmer, Guides, Kooperativen, Fincas, Unterkünfte, Garküchen und Erlebnisse).",
+        "imgAlt1": "Kathedrale von León, Weltkulturerbe"
+      },
+      "naturaleza": {
+        "p1": "BAQUEANO ist eine technologische Plattform für Information, direkten Kontakt und digitale Unterstützung. Sie erbringt selbst keine touristischen Leistungen, sondern bietet Werkzeuge, mit denen Reisende Ziele entdecken, lokale Anbieter kontaktieren und ihre Erlebnisse sicher und verantwortungsvoll planen können.",
+        "p2": "Geprüfte touristische, kulturelle und naturkundliche Inhalte.",
+        "p3": "Zwischen Reisenden und lokalen Anbietern, ohne Missbrauch.",
+        "p4": "Routen, Entfernungen und Sehenswürdigkeiten in Echtzeit.",
+        "p5": "Reiseassistent mit persönlichen Empfehlungen.",
+        "imgAlt1": "Insel Ometepe, Biosphärenreservat"
+      },
+      "independencia": {
+        "p1": "BAQUEANO ist eine unabhängige Initiative und vertritt keine staatliche Institution. Stellen wie INTUR, MARENA, Gemeindeverwaltungen, Nationalpolizei, Feuerwehr, Rotes Kreuz oder andere Organisationen werden nur zur Orientierung der Nutzer erwähnt. Ihre Nennung bedeutet weder Förderung noch Zugehörigkeit oder offizielle Vertretung dieser Institutionen.",
+        "strong1": "BAQUEANO ist keine offizielle Website des Staates Nicaragua.",
+        "p2": "Wir sind eine unabhängige Plattform zur Förderung von nachhaltigem und gemeinschaftlichem Tourismus."
+      },
+      "marcoNormativo": {
+        "p1": "Der Betrieb von BAQUEANO unterliegt den geltenden Gesetzen der Republik Nicaragua, darunter:",
+        "p2": "Legt den Rahmen für Entwicklung, Regulierung und Förderung des Tourismus in Nicaragua fest.",
+        "span1": "Gesetz über Anreize für die Tourismusbranche",
+        "p3": "Fördert nachhaltige Investitionen und Aktivitäten im Tourismus.",
+        "span2": "Umweltschutzgesetz",
+        "p4": "Regelt den Erhalt natürlicher Ressourcen und die nachhaltige Nutzung des Naturerbes.",
+        "h31": "Gesetz 306",
+        "span3": "E-Commerce-Gesetz",
+        "p5": "Regelt digitale Transaktionen, die Gültigkeit elektronischer Informationen und Online-Dienste."
+      },
+      "propiedadIntelectual": {
+        "p1": "Alle Inhalte, das Design, das Logo, die visuelle Identität, Oberflächen, der Quellcode, die Datenbank, Texte, Fotos, Karten, Symbole und sonstigen Elemente von BAQUEANO sind durch Gesetze zum geistigen Eigentum und Urheberrecht geschützt. Ihre Vervielfältigung, Verbreitung, Änderung oder unbefugte Nutzung ohne vorherige schriftliche Zustimmung des Inhabers ist untersagt.",
+        "p2": "Eingetragene Marke und geschützte Elemente.",
+        "imgAlt1": "BAQUEANO-Logo"
+      },
+      "contactoLegal": {
+        "p1": "Bei Fragen zu diesem Impressum, zum geistigen Eigentum oder zu anderen rechtlichen Themen kannst du uns über unsere offiziellen Kanäle kontaktieren:",
+        "span1": "Sitz",
+        "span2": "Sprechzeiten",
+        "span3": "Mo – Fr: 8:00 – 17:00 Uhr"
+      },
+      "legalBottomStrip": {
+        "p1": "Mehr über unsere Richtlinien und Bedingungen.",
+        "a1": "Cookies und Offline-Cache",
+        "a2": "Umweltrichtlinie",
+        "div1": "Transparenz und Versionen",
+        "p2": "Verlauf und Änderungskontrolle dieses Dokuments.",
+        "div2": "Version:"
+      }
+    },
+    "ayuda": {
+      "body": {
+        "title1": "Hilfe-Center | Baqueano Nicaragua",
+        "metaDescription1": "Hilfe-Center von Baqueano Nicaragua: Antworten zu Reisen, Favoriten, Reservierungen, Unternehmen, Sicherheit und Konto."
+      },
+      "helpHero": {
+        "span1": "Wir sind da, um dir zu helfen",
+        "h11": "Wie können wir dir helfen?",
+        "p1": "Finde Antworten und gelange direkt zu jedem Baqueano-Werkzeug."
+      },
+      "helpSearchForm": {
+        "label1": "Im Hilfe-Center suchen"
+      },
+      "helpSearchStatus": {
+        "p1": "Du kannst auch eine Kategorie wählen."
+      },
+      "helpSosCard": {
+        "small1": "HILFE UNTERWEGS",
+        "h21": "Hast du einen Notfall?",
+        "p1": "Greife auf GPS-Standort, Polizei, Rotes Kreuz, Feuerwehr und nationale Notdienste zu.",
+        "button1": "SOS-Zentrale öffnen"
+      },
+      "helpSection": {
+        "span1": "SCHNELLZUGRIFF",
+        "p1": "Jede Option führt dich zur passenden Funktion.",
+        "strong1": "Meine Reise planen",
+        "span2": "Route erstellen und anpassen",
+        "span3": "Gespeicherte Reiseziele ansehen",
+        "span4": "Gebuchte Reisen ansehen",
+        "strong2": "Unternehmen registrieren",
+        "span5": "Ein Unternehmen veröffentlichen",
+        "strong3": "Vorfall melden",
+        "span6": "Den vertraulichen Kanal nutzen",
+        "strong4": "Konto und Zugang",
+        "span7": "Profil verwalten"
+      },
+      "quickTitle": {
+        "h21": "Erledige, was du brauchst"
+      },
+      "preguntas": {
+        "span1": "HÄUFIGE FRAGEN",
+        "h21": "Schnelle Antworten",
+        "p1": "Suche oben oder öffne eine Frage. Wenn du keine Lösung findest, kannst du uns kontaktieren."
+      },
+      "helpFaqList": {
+        "summary1": "Wie speichere und finde ich meine Lieblingsziele?",
+        "p1": "Nutze bei jedem Reiseziel die Herz-Schaltfläche. Gehe danach zu",
+        "p2": ", wo du gespeicherte Einträge ansehen oder entfernen kannst.",
+        "summary2": "Wie erstelle oder ändere ich eine Reiseroute?",
+        "p3": "Gehe zu",
+        "p4": ", um Gebiete, Tage und Budget auszuwählen. Du kannst auch",
+        "p5": "nutzen, um einen Vorschlag zu erhalten und das Wetter zu prüfen.",
+        "summary3": "Wo erscheinen meine Reservierungen?",
+        "p6": "Du findest sie im Bereich Reservierungen in deinem",
+        "a1": "Profil",
+        "p7": ". Wenn du noch nicht angemeldet bist, fordert dich die Plattform zur Anmeldung auf.",
+        "summary4": "Wie registriere ich mein Tourismusunternehmen?",
+        "p8": "Besuche",
+        "p9": ", fülle die angeforderten Angaben aus und sende den Vorschlag zur Prüfung.",
+        "summary5": "Wie melde ich einen Vorfall?",
+        "p10": "Nutze den",
+        "a2": "Meldekanal",
+        "p11": ". Bei unmittelbarer Gefahr öffne die SOS-Schaltfläche im Menü.",
+        "summary6": "Wie werden Cookies und meine Daten verwaltet?",
+        "p12": "Deine Cookie-Auswahl wird auf dem Gerät gespeichert, damit wir nicht ständig nachfragen. Lies die",
+        "a3": "Cookie-Richtlinie",
+        "p13": "und die",
+        "a4": "Datenschutzerklärung",
+        "summary7": "Was umfasst die SOS-Zentrale?",
+        "p14": "Sie umfasst GPS-Standort, Sicherheitshinweise und Zugang zu Polizei 118, Rotem Kreuz 128, Feuerwehr 115 und Notruf 911."
+      },
+      "helpContact": {
+        "span1": "BRAUCHST DU MEHR HILFE?",
+        "h21": "Lass uns reden",
+        "p1": "Erzähl uns, was du tun wolltest und auf welcher Seite es passiert ist.",
+        "a1": "Per WhatsApp schreiben",
+        "a2": "E-Mail senden"
+      },
+      "helpSearch": {
+        "inputPlaceholder1": "Z. B.: Reiseziel speichern, Reservierungen oder Unternehmen registrieren"
+      }
+    },
+    "baqueanoAi": {
+      "body": {
+        "title1": "Baqueano Digital | Weiterleitung zu Baqueano KI...",
+        "p1": "Wir bringen dich zu BAQUI… Falls nichts passiert,",
+        "a1": "geht es hier entlang"
+      }
+    },
+    "baqueanoIa": {
+      "body": {
+        "title1": "BAQUI | Deine Reise durch Nicaragua, mit dir geplant"
+      },
+      "iaHero": {
+        "h11": "Deine Reise durch Nicaragua,",
+        "span1": "mit dir geplant.",
+        "p1": "Ein KI-Copilot, der das Beste Nicaraguas kombiniert, um einzigartige, realistische und maßgeschneiderte Routen zu erstellen.",
+        "span2": "Plane deine Reise im Gespräch mit BAQUI",
+        "span3": "Persönliche Routen auf Karte und Reiseplan",
+        "span4": "Echte Empfehlungen, bereit zum Buchen"
+      },
+      "iaTriadSection": {
+        "p1": "Dein Reise-Copilot für Nicaragua",
+        "span1": "Online",
+        "span2": "Probier diese Ideen aus:",
+        "button1": "🌋 Abenteuer",
+        "button2": "🏖️ Strand",
+        "button3": "👨‍👩‍👧 Familie",
+        "button4": "❤️ Paar",
+        "button5": "💰 Günstig",
+        "div1": "1 Std. 15 Min.",
+        "span3": "Tag 1",
+        "p2": "Natur · Abenteuer",
+        "span4": "Tag 2",
+        "p3": "Geschichte · Kultur",
+        "p4": "Natur · Entspannung",
+        "span5": "Von der KI vorgeschlagene Route",
+        "span6": "Meine Reiseziele",
+        "h31": "Dein Abenteuer",
+        "label1": "Gebiet / Reiseziele",
+        "p5": "Du wählst die Vorlieben; die KI ordnet und aktualisiert die Route automatisch.",
+        "label2": "Reisetage",
+        "label3": "Reisende",
+        "label4": "Maximales Budget",
+        "label5": "Reisetempo",
+        "div2": "Gemütlich",
+        "div3": "Ausgewogen"
+      },
+      "iaChatMessages": {
+        "div1": "Hallo! 🖐️ Ich bin",
+        "div2": ", dein Reiseführer. Sag mir, welche Art von Reise du machen möchtest, und ich helfe dir, eine persönliche Route mit Zielen, Aktivitäten, Unterkünften, Preisen und Karte zu erstellen.",
+        "div3": "Ich möchte eine 3-tägige Reise ab Managua, um den Vulkan Masaya, Granada und die Isletas zu sehen, mit Aktivitäten im Freien.",
+        "div4": "Ausgezeichnete Wahl! Ich habe dir eine 3-Tage-Route mit Natur, Kultur und lokalen Erlebnissen vorbereitet. Ich suche schon nach den besten Optionen... 👇"
+      },
+      "iaConfigResetBtn": {
+        "button1": "Zurücksetzen"
+      },
+      "iaBudgetCurrency": {
+        "option1": "USD",
+        "option2": "NIO"
+      },
+      "iaBudgetConversion": {
+        "small1": "Gib dein tatsächliches Limit ein."
+      },
+      "iaGenerateRouteBtn": {
+        "button1": "Route mit KI erstellen"
+      },
+      "iaItinerarySection": {
+        "h31": "Dein von BAQUI erstellter Reiseplan",
+        "p1": "Eine optimierte Route mit Zeiten, Entfernungen, Aktivitäten und echten Empfehlungen."
+      },
+      "iaBtnPersonalizar": {
+        "button1": "Mit KI anpassen"
+      },
+      "iaDayCard": {
+        "small1": "Fr., 10. Jan. 2027",
+        "div1": "Abfahrt in Managua",
+        "small2": "Privattransport",
+        "small3": "Erkundung von Krater und Museum",
+        "div2": "Typisches Mittagessen",
+        "small4": "Lokales Restaurant",
+        "small5": "Panoramablick auf die Lagune",
+        "div3": "Rückkehr nach Managua",
+        "small6": "Tagesende",
+        "span1": "45 km",
+        "span2": "Geschätzte Kosten:",
+        "span3": "(49 USD)",
+        "button1": "Tag bearbeiten",
+        "h41": "Granada und ihre Inselchen",
+        "small7": "Sa., 11. Jan. 2027",
+        "div4": "Stadtrundgang Granada",
+        "small8": "Kathedrale, Kolonialstraßen",
+        "div5": "Bootstour zu den Inselchen",
+        "small9": "Natur und Tierwelt",
+        "div6": "Mittagessen am See",
+        "small10": "Nicaraguanische Küche",
+        "div7": "Sonnenuntergang an der Uferpromenade",
+        "small11": "Freizeit und Fotos",
+        "div8": "Abendessen und Nacht in Granada",
+        "small12": "Koloniale Nacht",
+        "span4": "120 km",
+        "span5": "(60 USD)",
+        "span6": "Tag 3",
+        "small13": "So., 12. Jan. 2027",
+        "div9": "Transfer zu den Inselchen",
+        "small14": "Transport + Boot",
+        "div10": "Wanderung am Mombacho",
+        "div11": "Mittagessen auf dem Land",
+        "small15": "Lokale Aromen",
+        "div12": "Kajakfahren bei den Inselchen",
+        "small16": "Natur und Vögel",
+        "small17": "Ende der Route",
+        "span7": "110 km",
+        "span8": "(68 USD)"
+      },
+      "iaBudgetCard": {
+        "h41": "Geschätztes Budget deiner Reise",
+        "p1": "Geprüfte Aufschlüsselung für 2 Reisende — 3 Tage (echte Kosten in Nicaragua)",
+        "span1": "Transportmittel:",
+        "span2": "Art des Lokals:",
+        "span3": "Unterkunftsart:",
+        "span4": "Aktivitäten & lokale Guides"
+      },
+      "iaBudgetStatusBadge": {
+        "span1": "Im Budget"
+      },
+      "chipsTransport": {
+        "button1": "Mit dem Bus (C$ 360)",
+        "button2": "Eigenes Auto / Benzin (C$ 1.200)",
+        "button3": "Mietwagen (C$ 3.800)"
+      },
+      "chipsFood": {
+        "button1": "Volksgarküchen (C$ 1.200)",
+        "button2": "Typische Restaurants (C$ 2.000)",
+        "button3": "Touristenrestaurants (C$ 4.200)"
+      },
+      "chipsStay": {
+        "button1": "Hostel / Pension (C$ 1.400)",
+        "button2": "Standardhotel (C$ 3.000)",
+        "button3": "Hausmiete (C$ 4.800)"
+      },
+      "lblStayType": {
+        "small1": "(Hotel)"
+      },
+      "valStayRow": {
+        "small1": "(82 USD)"
+      },
+      "lblTransportType": {
+        "small1": "(Eigenes Auto)"
+      },
+      "valTransportRow": {
+        "small1": "(33 USD)"
+      },
+      "lblFoodType": {
+        "small1": "(Typ. Restaurants)"
+      },
+      "valFoodRow": {
+        "small1": "(55 USD)"
+      }
+    }
+  },
+  "common": {
+    "territorio": "Gebiet",
+    "correoElectronico": "E-Mail",
+    "turismoResponsable": "Verantwortungsvoller Tourismus",
+    "departamentoTodos": "Departement: alle",
+    "cooperativas": "Kooperativen",
+    "ecoLodges": "Eco-Lodges",
+    "cercaDeMi": "In meiner Nähe",
+    "tenesUnNegocioTuristico": "Hast du ein Tourismusunternehmen?",
+    "sos247": "SOS 24/7",
+    "centroSosAuxilioInmediato": "SOS-Zentrale & Soforthilfe",
+    "tuUbicacionGpsEstaActiva": "Dein GPS-Standort ist aktiv für Hilfe unterwegs und den direkten Kontakt zu Rettungskräften.",
+    "gpsSatelitalAutonomo": "Autonomes Satelliten-GPS",
+    "policiaNacional118": "Nationalpolizei (118)",
+    "cruzRoja128": "Rotes Kreuz (128)",
+    "bomberosUnificados115": "Vereinigte Feuerwehr (115)",
+    "anterior": "Zurück",
+    "siguiente": "Weiter",
+    "baquiGuardabarranco": "Baqüi, der Sägeracke",
+    "verMasHistorias": "Weitere Geschichten ansehen",
+    "registrarMiNegocio": "Mein Unternehmen registrieren",
+    "nicaraguaAutentica": "AUTHENTISCHES NICARAGUA",
+    "legal": "🛡️ RECHTLICHES",
+    "ultimaActualizacion": "📅 Zuletzt aktualisiert:",
+    "version": "📄 Version:",
+    "nicaraguaAutentica1": "Authentisches Nicaragua",
+    "propiedadIntelectual": "Geistiges Eigentum",
+    "informacionDeDestinos": "Informationen zu Reisezielen",
+    "conexionDirecta": "Direkter Kontakt",
+    "mapasYGeolocalizacion": "Karten und Geolokalisierung",
+    "ley1210": "Gesetz 1210",
+    "leyGeneralDeTurismo": "Allgemeines Tourismusgesetz",
+    "ley1211": "Gesetz 1211",
+    "ley842": "Gesetz 842",
+    "documentosRelacionados": "Verwandte Dokumente",
+    "ultimaActualizacion1": "Zuletzt aktualisiert:",
+    "descargarVersionPdf": "PDF-Version herunterladen",
+    "irAInicioBaqueano": "Zur BAQUEANO-Startseite",
+    "buscarEnLaPlataforma": "Auf der Plattform suchen",
+    "patrimonioAncestralNicaraguense": "Nicaraguanisches Erbe der Vorfahren",
+    "misReservas": "Meine Reservierungen",
+    "naturaleza": "🌿 Natur",
+    "cultura": "🏛️ Kultur",
+    "itinerario": "Reiseplan",
+    "hospedajes": "Unterkünfte",
+    "comida": "Essen",
+    "preferencias": "Vorlieben",
+    "fotografia": "Fotografie",
+    "guardarEnMiViaje": "In „Meine Reise“ speichern",
+    "descargarPdf": "PDF herunterladen",
+    "generarQr": "QR-Code erstellen",
+    "transporte": "Transport"
+  },
+  "ops": {
+    "impact": {
+      "title": "Analytik und Wirkung",
+      "subtitle": "SMART-KPIs in Supabase berechnet · keine simulierten Zahlen",
+      "noData": "Nicht genügend Daten",
+      "source": "Quelle",
+      "generated": "In Supabase berechnet · {time}",
+      "loading": "Wird auf dem Server berechnet…",
+      "period": "Zeitraum",
+      "lastDays": "Letzte {days} Tage",
+      "note": "Alle Zahlen werden mit reproduzierbaren Abfragen auf echten Daten berechnet (kpi_dashboard). Registriert ist nicht gleich aktiviert.",
+      "users": "Registrierte Benutzer",
+      "newInPeriod": "Neu im Zeitraum: {n}",
+      "activated": "Aktivierte Benutzer",
+      "rate": "Quote: {pct} von {den} Akteuren",
+      "active": "Aktive Benutzer (7 / 30 Tage)",
+      "retention": "7-Tage-Bindung",
+      "businesses": "Unternehmen (veröffentlicht / geprüft)",
+      "businessesDetail": "Gesamt {total} · vollständige Profile {complete} · durchschnittliche Vollständigkeit {avg}",
+      "catalog": "Veröffentlichte Reiseziele und Erlebnisse",
+      "catalogDetail": "Reiseziele mit Quelle: {src} · Gemeinden: {m}",
+      "reservations": "Reservierungsanfragen",
+      "conversion": "Kommerzielle Konversion",
+      "conversionDetail": "{num} von {den} erreichten Akteuren · {total} Aktionen",
+      "feedback": "Positive Bewertung",
+      "feedbackDetail": "{pos} von {total} Bewertungen (≥ 4) · Durchschnitt {avg}",
+      "baqui": "BAQUI-Nutzung",
+      "baquiDetail": "{s} Sitzungen · mittlere Latenz {l} · {src} Antworten mit Quelle",
+      "responsible": "Angebot mit verantwortungsvollen Kriterien",
+      "dbHealth": "Datenbankzustand",
+      "tables": "Tabellen",
+      "rls": "Tabellen mit RLS",
+      "fks": "Fremdschlüssel",
+      "indexes": "Indizes",
+      "noSource": "Veröffentlichte Inhalte ohne Quelle",
+      "noCoords": "Unternehmen ohne Koordinaten",
+      "sharedPhones": "Telefonnummern, die mehrere Unternehmen teilen",
+      "duplicates": "Mögliche Duplikate (Unternehmen / Reiseziele)",
+      "orphanProfiles": "Profile ohne Auth-Benutzer",
+      "pendingVerifications": "Ausstehende Prüfungen",
+      "signIn": "Melde dich an, um die Kennzahlen zu sehen.",
+      "error": "Die Kennzahlen konnten nicht berechnet werden: {error}"
+    }
   }
 }
