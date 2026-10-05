@@ -4423,7 +4423,8 @@
     },
     "privacidad": {
       "body": {
-        "title1": "Privacidade & segurança dos seus dados | BAQUEANO Nicaragua"
+        "title1": "Privacidade & segurança dos seus dados | BAQUEANO Nicaragua",
+        "metaDescription1": "Política de privacidade do BAQUEANO Nicaragua. Seus dados sob seu controle: zero venda de informações, privacidade na IA e segurança na nuvem."
       },
       "privHero": {
         "div1": "PRIVACIDADE E SEGURANÇA",
@@ -4506,7 +4507,128 @@
         "div11": "✔ Cancelar ou encerrar sua conta.",
         "div12": "✔ Opor-se ao tratamento e solicitar portabilidade.",
         "h45": "Provedores e serviços externos",
-        "p6": "Trabalhamos com serviços confiáveis que cumprem padrões de segurança e privacidade:"
+        "p6": "Trabalhamos com serviços confiáveis que cumprem padrões de segurança e privacidade:",
+        "div13": "Google Cloud",
+        "div14": "Gemini",
+        "div15": "Groq",
+        "div16": "Outros parceiros"
+      },
+      "privBottomStrip": {
+        "h41": "Nossos documentos legais",
+        "a1": "Aviso legal (Lei 1210 / 1211)",
+        "h42": "Contato sobre privacidade",
+        "p1": "Se você tiver dúvidas ou quiser exercer seus direitos ARCO:",
+        "div1": "Versão do documento:"
+      }
+    },
+    "terminos": {
+      "body": {
+        "title1": "Termos & condições de uso | BAQUEANO Nicaragua"
+      },
+      "termHero": {
+        "div1": "JURÍDICO",
+        "h11": "Termos &",
+        "span1": "condições de uso",
+        "p1": "Web, app Android e serviços digitais do BAQUEANO.",
+        "p2": "Leia com calma nossos termos. Aqui você encontrará como a plataforma funciona, seus direitos e responsabilidades e nosso compromisso com um turismo seguro, autêntico e responsável na Nicarágua.",
+        "span2": "Última atualização: 26 de setembro de 2026",
+        "span3": "Versão 1.0"
+      },
+      "termSummarySection": {
+        "h31": "Pontos-chave antes de continuar",
+        "p1": "Um resumo do mais importante que você deve saber sobre o uso do BAQUEANO.",
+        "h41": "O Baqueano é uma plataforma tecnológica",
+        "p2": "Conecta viajantes com destinos, experiências e prestadores locais na Nicarágua.",
+        "h42": "Prestadores locais",
+        "p3": "Os serviços são oferecidos por empreendedores, guias, cooperativas e negócios locais.",
+        "h43": "Reservas e pagamentos",
+        "p4": "A disponibilidade, os preços e as condições são gerenciados por cada prestador ou por meio de parceiros.",
+        "h44": "Negócios verificados",
+        "p5": "O selo verificado indica que o negócio passou pelo nosso processo de validação interna; não é certificação estatal.",
+        "p6": "Oferece recomendações e cria rotas personalizadas. Pode conter erros e não substitui fontes oficiais.",
+        "p7": "É uma ferramenta complementar para orientação e contato com serviços de emergência locais.",
+        "h45": "Proteção de dados",
+        "p8": "Cuidamos de suas informações pessoais segundo nossa rigorosa Política de Privacidade, sem venda a terceiros.",
+        "p9": "Promovemos um turismo sustentável, respeitoso com as comunidades, a cultura e o meio ambiente."
+      },
+      "termSidebar": {
+        "h31": "Conteúdo"
+      },
+      "termIndexNav": {
+        "a1": "Introdução",
+        "a2": "Definições",
+        "a3": "Aceitação dos termos",
+        "a4": "Uso da plataforma",
+        "a5": "Cadastro de conta",
+        "a6": "Perfil de usuário",
+        "a7": "Prestadores de serviços",
+        "a8": "Cancelamentos e reembolsos",
+        "a9": "Preços e disponibilidade",
+        "a10": "Verificação de negócios",
+        "a11": "Conteúdo gerado por usuários",
+        "a12": "Conduta do usuário",
+        "a13": "Uso de imagens e mídia",
+        "a14": "Links de terceiros",
+        "a15": "Limitação de responsabilidade",
+        "a16": "Isenção de garantias",
+        "a17": "Segurança e emergências (SOS)",
+        "a18": "Suspensão e encerramento de contas",
+        "a19": "Modificações do serviço",
+        "a20": "Modificações dos termos",
+        "a21": "Lei aplicável e jurisdição",
+        "a22": "Resolução de conflitos",
+        "a23": "Vigência"
+      },
+      "termSearchCard": {
+        "h31": "O que você quer consultar?",
+        "span1": "Buscas frequentes:",
+        "button1": "IA",
+        "button2": "Dados",
+        "button3": "Prestadores"
+      },
+      "termMain": {
+        "div1": "Verificado pelo BAQUEANO não é certificação oficial",
+        "div2": "É um processo de validação interna, comunitária e operacional da plataforma.",
+        "div3": "A IA pode conter erros",
+        "div4": "Não substitui fontes oficiais, regulamentações locais nem assessoria profissional de viagem.",
+        "div5": "O SOS é uma ferramenta complementar",
+        "div6": "Em emergências reais, contate imediatamente a Polícia Nacional (118) ou os bombeiros (115).",
+        "div7": "A geolocalização é usada apenas quando você a habilita",
+        "div8": "É solicitada apenas para funções específicas (mapa interativo, rotas e emergências)."
+      },
+      "sec1": {
+        "h41": "1. Introdução",
+        "p1": "Âmbito de aplicação e marco geral da plataforma BAQUEANO.",
+        "div1": "Estes Termos e Condições regulam o uso da plataforma digital",
+        "div2": "(site, aplicativo Android e serviços digitais relacionados), operada com o objetivo de promover o turismo sustentável, a cultura viva, a natureza e o fortalecimento das comunidades locais da Nicarágua. Ao acessar, navegar ou interagir com nossos canais, o usuário declara ter lido, compreendido e aceitado a totalidade destas disposições."
+      },
+      "sec2": {
+        "h41": "2. Definições",
+        "p1": "Conceitos-chave usados na plataforma.",
+        "div1": "Para os efeitos destes termos:",
+        "div2": "refere-se à solução tecnológica e institucional;",
+        "strong1": "\"Viajante\"",
+        "strong2": "\"Explorador\"",
+        "div3": "refere-se a qualquer pessoa que consulta ou reserva;",
+        "strong3": "\"Prestador\"",
+        "div4": "abrange guias credenciados, baqueanos locais, cooperativas comunitárias e empreendedores turísticos;",
+        "strong4": "\"Baqueano Digital / IA\"",
+        "div5": "refere-se aos modelos de inteligência artificial e recomendação territorial."
+      },
+      "sec3": {
+        "h41": "3. Aceitação dos termos",
+        "p1": "Consentimento informado e atualizações normativas.",
+        "div1": "O acesso e o uso dos serviços constituem aceitação expressa destes Termos e da nossa Política de Privacidade. Quem não concordar com algum dos itens deverá abster-se de utilizar a plataforma. Toda atualização publicada nesta mesma URL entrará em vigor imediatamente."
+      },
+      "sec4": {
+        "h41": "4. Uso da plataforma",
+        "p1": "Condições de uso, alcance dos serviços e restrições.",
+        "div1": "A plataforma destina-se exclusivamente a fins informativos, de planejamento e conexão comunitária. Fica proibido qualquer uso ilícito, a extração automatizada massiva de dados (scraping não autorizado) e qualquer conduta que viole a soberania territorial ou ambiental das reservas naturais da Nicarágua."
+      },
+      "sec5": {
+        "h41": "5. Cadastro de conta",
+        "p1": "Criação de credenciais, segurança e responsabilidade do usuário.",
+        "div1": "Para acessar funções como favoritos, histórico de roteiros em Minha Viagem ou relatos de alertas ambientais, o usuário pode se cadastrar por e-mail ou autenticação federada (Firebase Auth). Cada usuário é responsável por guardar a confidencialidade de sua senha."
       }
     }
   },

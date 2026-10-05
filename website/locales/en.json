@@ -4423,7 +4423,8 @@
     },
     "privacidad": {
       "body": {
-        "title1": "Privacy & Security of Your Data | BAQUEANO Nicaragua"
+        "title1": "Privacy & Security of Your Data | BAQUEANO Nicaragua",
+        "metaDescription1": "BAQUEANO Nicaragua privacy policy. Your data under your control: no selling of information, AI privacy and cloud security."
       },
       "privHero": {
         "div1": "PRIVACY AND SECURITY",
@@ -4506,7 +4507,128 @@
         "div11": "✔ Cancel or close your account.",
         "div12": "✔ Object to processing and request portability.",
         "h45": "External providers and services",
-        "p6": "We work with trusted services that meet security and privacy standards:"
+        "p6": "We work with trusted services that meet security and privacy standards:",
+        "div13": "Google Cloud",
+        "div14": "Gemini",
+        "div15": "Groq",
+        "div16": "Other partners"
+      },
+      "privBottomStrip": {
+        "h41": "Our legal documents",
+        "a1": "Legal Notice (Law 1210 / 1211)",
+        "h42": "Privacy contact",
+        "p1": "If you have questions or want to exercise your ARCO rights:",
+        "div1": "Document version:"
+      }
+    },
+    "terminos": {
+      "body": {
+        "title1": "Terms & Conditions of Use | BAQUEANO Nicaragua"
+      },
+      "termHero": {
+        "div1": "LEGAL",
+        "h11": "Terms &",
+        "span1": "Conditions of Use",
+        "p1": "BAQUEANO website, Android app and digital services.",
+        "p2": "Take your time to read our terms. Here you'll find how the platform works, your rights and responsibilities, and our commitment to safe, authentic and responsible tourism in Nicaragua.",
+        "span2": "Last updated: September 26, 2026",
+        "span3": "Version 1.0"
+      },
+      "termSummarySection": {
+        "h31": "Key points before you continue",
+        "p1": "A summary of the most important things you should know about using BAQUEANO.",
+        "h41": "Baqueano is a technology platform",
+        "p2": "It connects travelers with destinations, experiences and local providers in Nicaragua.",
+        "h42": "Local providers",
+        "p3": "Services are offered by local entrepreneurs, guides, cooperatives and businesses.",
+        "h43": "Bookings and payments",
+        "p4": "Availability, prices and conditions are managed by each provider or through partners.",
+        "h44": "Verified businesses",
+        "p5": "The verified seal means the business has gone through our internal validation process; it is not a state certification.",
+        "p6": "It gives recommendations and creates personalized routes. It may contain errors and does not replace official sources.",
+        "p7": "It is a complementary tool for guidance and contact with local emergency services.",
+        "h45": "Data protection",
+        "p8": "We care for your personal information under our strict Privacy Policy, with no selling to third parties.",
+        "p9": "We promote sustainable tourism that respects communities, culture and the environment."
+      },
+      "termSidebar": {
+        "h31": "Contents"
+      },
+      "termIndexNav": {
+        "a1": "Introduction",
+        "a2": "Definitions",
+        "a3": "Acceptance of the terms",
+        "a4": "Use of the platform",
+        "a5": "Account registration",
+        "a6": "User profile",
+        "a7": "Service providers",
+        "a8": "Cancellations and refunds",
+        "a9": "Prices and availability",
+        "a10": "Business verification",
+        "a11": "User-generated content",
+        "a12": "User conduct",
+        "a13": "Use of images and media",
+        "a14": "Third-party links",
+        "a15": "Limitation of liability",
+        "a16": "Disclaimer of warranties",
+        "a17": "Safety and emergencies (SOS)",
+        "a18": "Account suspension and closure",
+        "a19": "Changes to the service",
+        "a20": "Changes to the terms",
+        "a21": "Applicable law and jurisdiction",
+        "a22": "Dispute resolution",
+        "a23": "Term"
+      },
+      "termSearchCard": {
+        "h31": "What would you like to look up?",
+        "span1": "Frequent searches:",
+        "button1": "AI",
+        "button2": "Data",
+        "button3": "Providers"
+      },
+      "termMain": {
+        "div1": "BAQUEANO Verified is not an official certification",
+        "div2": "It is an internal community and operational validation process of the platform.",
+        "div3": "AI may contain errors",
+        "div4": "It does not replace official sources, local regulations or professional travel advice.",
+        "div5": "SOS is a complementary tool",
+        "div6": "In real emergencies, contact the National Police (118) or the Fire Department (115) immediately.",
+        "div7": "Geolocation is used only when you enable it",
+        "div8": "It is requested only for specific features (interactive map, routes and emergencies)."
+      },
+      "sec1": {
+        "h41": "1. Introduction",
+        "p1": "Scope and general framework of the BAQUEANO platform.",
+        "div1": "These Terms and Conditions govern the use of the digital platform",
+        "div2": "(website, Android application and related digital services), operated to promote sustainable tourism, living culture, nature and the strengthening of local communities in Nicaragua. By entering, browsing or interacting with our channels, the user declares having read, understood and accepted all of these provisions."
+      },
+      "sec2": {
+        "h41": "2. Definitions",
+        "p1": "Key concepts used on the platform.",
+        "div1": "For the purposes of these terms:",
+        "div2": "refers to the technological and institutional solution;",
+        "strong1": "\"Traveler\"",
+        "strong2": "\"Explorer\"",
+        "div3": "refers to any person who browses or books;",
+        "strong3": "\"Provider\"",
+        "div4": "includes accredited guides, local baqueanos, community cooperatives and tourism entrepreneurs;",
+        "strong4": "\"Baqueano Digital / AI\"",
+        "div5": "refers to the artificial intelligence and territorial recommendation models."
+      },
+      "sec3": {
+        "h41": "3. Acceptance of the terms",
+        "p1": "Informed consent and regulatory updates.",
+        "div1": "Access to and use of the services constitutes express acceptance of these Terms and our Privacy Policy. Anyone who disagrees with any section must refrain from using the platform. Any update published at this same URL takes effect immediately."
+      },
+      "sec4": {
+        "h41": "4. Use of the platform",
+        "p1": "Terms of use, scope of services and restrictions.",
+        "div1": "The platform is intended exclusively for information, planning and community connection purposes. Any unlawful use, massive automated data extraction (unauthorized scraping) and any conduct that violates the territorial or environmental sovereignty of Nicaragua's nature reserves are prohibited."
+      },
+      "sec5": {
+        "h41": "5. Account registration",
+        "p1": "Creating credentials, security and user responsibility.",
+        "div1": "To access features such as favorites, itinerary history in My Trip or environmental alert reports, users can register by email or federated authentication (Firebase Auth). Each user is responsible for keeping their password confidential."
       }
     }
   },

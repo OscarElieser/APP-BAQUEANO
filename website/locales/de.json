@@ -4423,7 +4423,8 @@
     },
     "privacidad": {
       "body": {
-        "title1": "Datenschutz & Sicherheit deiner Daten | BAQUEANO Nicaragua"
+        "title1": "Datenschutz & Sicherheit deiner Daten | BAQUEANO Nicaragua",
+        "metaDescription1": "Datenschutzerklärung von BAQUEANO Nicaragua. Deine Daten unter deiner Kontrolle: kein Datenverkauf, Datenschutz bei KI und Cloud-Sicherheit."
       },
       "privHero": {
         "div1": "DATENSCHUTZ UND SICHERHEIT",
@@ -4506,7 +4507,128 @@
         "div11": "✔ Löschung oder Schließung deines Kontos.",
         "div12": "✔ Widerspruch gegen die Verarbeitung und Datenübertragbarkeit.",
         "h45": "Externe Anbieter und Dienste",
-        "p6": "Wir arbeiten mit vertrauenswürdigen Diensten, die Sicherheits- und Datenschutzstandards erfüllen:"
+        "p6": "Wir arbeiten mit vertrauenswürdigen Diensten, die Sicherheits- und Datenschutzstandards erfüllen:",
+        "div13": "Google Cloud",
+        "div14": "Gemini",
+        "div15": "Groq",
+        "div16": "Weitere Partner"
+      },
+      "privBottomStrip": {
+        "h41": "Unsere Rechtsdokumente",
+        "a1": "Impressum (Gesetz 1210 / 1211)",
+        "h42": "Datenschutzkontakt",
+        "p1": "Wenn du Fragen hast oder deine ARCO-Rechte ausüben möchtest:",
+        "div1": "Dokumentversion:"
+      }
+    },
+    "terminos": {
+      "body": {
+        "title1": "Nutzungsbedingungen | BAQUEANO Nicaragua"
+      },
+      "termHero": {
+        "div1": "RECHTLICHES",
+        "h11": "Allgemeine",
+        "span1": "Nutzungsbedingungen",
+        "p1": "Website, Android-App und digitale Dienste von BAQUEANO.",
+        "p2": "Lies unsere Bedingungen in Ruhe. Hier erfährst du, wie die Plattform funktioniert, welche Rechte und Pflichten du hast und wie wir uns für sicheren, authentischen und verantwortungsvollen Tourismus in Nicaragua einsetzen.",
+        "span2": "Zuletzt aktualisiert: 26. September 2026",
+        "span3": "Version 1.0"
+      },
+      "termSummarySection": {
+        "h31": "Das Wichtigste vorab",
+        "p1": "Eine Zusammenfassung des Wichtigsten zur Nutzung von BAQUEANO.",
+        "h41": "Baqueano ist eine Technologieplattform",
+        "p2": "Sie verbindet Reisende mit Reisezielen, Erlebnissen und lokalen Anbietern in Nicaragua.",
+        "h42": "Lokale Anbieter",
+        "p3": "Die Leistungen werden von lokalen Unternehmern, Guides, Kooperativen und Betrieben angeboten.",
+        "h43": "Buchungen und Zahlungen",
+        "p4": "Verfügbarkeit, Preise und Bedingungen verwaltet jeder Anbieter selbst oder über Partner.",
+        "h44": "Geprüfte Betriebe",
+        "p5": "Das Prüfsiegel bedeutet, dass der Betrieb unsere interne Prüfung durchlaufen hat; es ist keine staatliche Zertifizierung.",
+        "p6": "Gibt Empfehlungen und erstellt persönliche Routen. Kann Fehler enthalten und ersetzt keine offiziellen Quellen.",
+        "p7": "Ein ergänzendes Werkzeug zur Orientierung und zur Kontaktaufnahme mit lokalen Notdiensten.",
+        "h45": "Datenschutz",
+        "p8": "Wir schützen deine personenbezogenen Daten gemäß unserer strengen Datenschutzerklärung – ohne Verkauf an Dritte.",
+        "p9": "Wir fördern nachhaltigen Tourismus, der Gemeinden, Kultur und Umwelt respektiert."
+      },
+      "termSidebar": {
+        "h31": "Inhalt"
+      },
+      "termIndexNav": {
+        "a1": "Einleitung",
+        "a2": "Begriffsbestimmungen",
+        "a3": "Annahme der Bedingungen",
+        "a4": "Nutzung der Plattform",
+        "a5": "Kontoregistrierung",
+        "a6": "Nutzerprofil",
+        "a7": "Dienstleister",
+        "a8": "Stornierungen und Erstattungen",
+        "a9": "Preise und Verfügbarkeit",
+        "a10": "Prüfung von Betrieben",
+        "a11": "Nutzergenerierte Inhalte",
+        "a12": "Verhalten der Nutzer",
+        "a13": "Nutzung von Bildern und Medien",
+        "a14": "Links zu Dritten",
+        "a15": "Haftungsbeschränkung",
+        "a16": "Gewährleistungsausschluss",
+        "a17": "Sicherheit und Notfälle (SOS)",
+        "a18": "Sperrung und Schließung von Konten",
+        "a19": "Änderungen des Dienstes",
+        "a20": "Änderungen der Bedingungen",
+        "a21": "Anwendbares Recht und Gerichtsstand",
+        "a22": "Streitbeilegung",
+        "a23": "Geltungsdauer"
+      },
+      "termSearchCard": {
+        "h31": "Wonach suchst du?",
+        "span1": "Häufige Suchen:",
+        "button1": "KI",
+        "button2": "Daten",
+        "button3": "Anbieter"
+      },
+      "termMain": {
+        "div1": "„Von BAQUEANO geprüft“ ist keine offizielle Zertifizierung",
+        "div2": "Es ist eine interne, gemeinschaftliche und betriebliche Prüfung der Plattform.",
+        "div3": "KI kann Fehler enthalten",
+        "div4": "Sie ersetzt keine offiziellen Quellen, lokalen Vorschriften oder professionelle Reiseberatung.",
+        "div5": "SOS ist ein ergänzendes Werkzeug",
+        "div6": "Bei echten Notfällen wende dich sofort an die Nationalpolizei (118) oder die Feuerwehr (115).",
+        "div7": "Die Standortbestimmung wird nur genutzt, wenn du sie aktivierst",
+        "div8": "Sie wird nur für bestimmte Funktionen abgefragt (interaktive Karte, Routen und Notfälle)."
+      },
+      "sec1": {
+        "h41": "1. Einleitung",
+        "p1": "Geltungsbereich und allgemeiner Rahmen der BAQUEANO-Plattform.",
+        "div1": "Diese Nutzungsbedingungen regeln die Nutzung der digitalen Plattform",
+        "div2": "(Website, Android-App und zugehörige digitale Dienste), die betrieben wird, um nachhaltigen Tourismus, lebendige Kultur, Natur und die Stärkung lokaler Gemeinden in Nicaragua zu fördern. Mit dem Aufrufen, Durchsuchen oder Nutzen unserer Kanäle erklärt die Person, diese Bestimmungen vollständig gelesen, verstanden und akzeptiert zu haben."
+      },
+      "sec2": {
+        "h41": "2. Begriffsbestimmungen",
+        "p1": "Zentrale Begriffe der Plattform.",
+        "div1": "Im Sinne dieser Bedingungen:",
+        "div2": "bezeichnet die technologische und institutionelle Lösung;",
+        "strong1": "„Reisende“",
+        "strong2": "„Entdecker“",
+        "div3": "bezeichnet jede Person, die Inhalte abruft oder bucht;",
+        "strong3": "„Anbieter“",
+        "div4": "umfasst akkreditierte Guides, lokale Baqueanos, Gemeindekooperativen und Tourismusunternehmer;",
+        "strong4": "„Baqueano Digital / KI“",
+        "div5": "bezeichnet die Modelle für künstliche Intelligenz und regionale Empfehlungen."
+      },
+      "sec3": {
+        "h41": "3. Annahme der Bedingungen",
+        "p1": "Informierte Einwilligung und Aktualisierungen.",
+        "div1": "Zugriff auf und Nutzung der Dienste gelten als ausdrückliche Annahme dieser Bedingungen und unserer Datenschutzerklärung. Wer mit einem Abschnitt nicht einverstanden ist, darf die Plattform nicht nutzen. Unter dieser URL veröffentlichte Aktualisierungen treten sofort in Kraft."
+      },
+      "sec4": {
+        "h41": "4. Nutzung der Plattform",
+        "p1": "Nutzungsbedingungen, Leistungsumfang und Einschränkungen.",
+        "div1": "Die Plattform dient ausschließlich der Information, Planung und Vernetzung mit Gemeinden. Untersagt sind jede rechtswidrige Nutzung, massenhafte automatisierte Datenabfrage (unbefugtes Scraping) und jedes Verhalten, das die territoriale oder ökologische Souveränität der Naturschutzgebiete Nicaraguas verletzt."
+      },
+      "sec5": {
+        "h41": "5. Kontoregistrierung",
+        "p1": "Erstellung von Zugangsdaten, Sicherheit und Verantwortung der Nutzer.",
+        "div1": "Für Funktionen wie Favoriten, den Routenverlauf in „Meine Reise“ oder Umweltmeldungen kannst du dich per E-Mail oder über föderierte Anmeldung (Firebase Auth) registrieren. Jede Person ist für die Geheimhaltung ihres Passworts verantwortlich."
       }
     }
   },
