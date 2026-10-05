@@ -1,6 +1,6 @@
 # 🧭 Arquitectura oficial de BAQUEANO (única vigente)
 
-> Versión 2026-10-05. Alineada con `AGENTS.md`, regla 5: directiva del propietario del 2026-10-03. Este documento sustituye cualquier versión anterior. Ante una contradicción, prevalecen `AGENTS.md` y este archivo.
+> Versión 2026-10-05 (b). Alineada con `AGENTS.md`, regla 5: **directiva del propietario del 2026-10-05**, que sustituye a la del 2026-10-03. Este documento sustituye cualquier versión anterior. Ante una contradicción, prevalecen `AGENTS.md` y este archivo.
 
 ## 🎯 POR QUÉ (Propósito)
 
@@ -29,16 +29,17 @@ Este documento fija **una sola** descripción, verificable en el código y en pr
                │                                            │
                ├──────────── Firebase Authentication ◄──────┤   IDENTIDAD (UID + ID token)
                │                                            │
-               │            Cloud Firestore  ◄──────────────┤   ESCRITURA PRIORITARIA
-               │  (Ops Center y app escriben aquí primero)  │
-               │                    │                       │
-               │       baqueano-mirror (Edge Function, token verificado)
+               │   Edge Functions (token Firebase + RBAC + auditoría)
                │                    ▼                       │
-               └──────────►  SUPABASE PostgreSQL  ◄─────────┘   ESPEJO COMPLETO + LECTURA WEB
+               └──────────►  SUPABASE PostgreSQL  ◄─────────┘   BASE DE DATOS PRINCIPAL
+                                    ▲
+                     Cloud Firestore (origen HEREDADO de Android) ── baqueano-mirror ──┘
+                     (integración pendiente: Android migrará a leer/escribir Supabase)
                      RLS · Storage · Edge Functions · pgvector
                      ├─ baqueano-community  (experiencias, moderación, RBAC)
                      ├─ baqueano-ai         (BAQUI, RAG sobre datos verificados)
-                     ├─ baqueano-mirror     (réplica Firestore → Supabase)
+                     ├─ baqueano-ops        (API administrativa del Ops Center: lecturas, conteos, salud y auditoría)
+                     ├─ baqueano-mirror     (réplica Firestore heredado → Supabase)
                      └─ baqueano-status     (salud)
 
   Firebase Hosting https://app-baqueano.web.app → solo respaldo técnico (no canonical)
@@ -51,15 +52,15 @@ Este documento fija **una sola** descripción, verificable en el código y en pr
 | **Hostinger** | Dominio y DNS de `baqueanonicaragua.com`, que apunta a Azure | `docs/deployment/AZURE_DEPLOYMENT.md` |
 | **Azure VM** | Sirve el sitio y la API (Nginx, TLS, cabeceras de seguridad); se actualiza sola desde `main` | `azure/`, `.github/workflows/deploy-production.yml` (job verify-azure) |
 | **Firebase Authentication** | Identidad: Google Sign-In, sesión, UID e ID token RS256 | `website/js/user-session.js`, `lib/` |
-| **Cloud Firestore** | Fuente de datos **prioritaria**: toda escritura nueva va primero aquí (Ops Center y Android) | `firestore.rules`, `website/js/firestore-mirror.js` |
-| **Supabase** | **Espejo completo** de cada colección, con la misma capacidad. Es la lectura del sitio, la comunidad, BAQUI y la consulta desde Azure. Aplica RLS | `supabase/migrations/`, `supabase/functions/`, `supabase/tests/` |
+| **Cloud Firestore** | **Origen heredado** de la app Android; se replica en Supabase con `baqueano-mirror` hasta migrar Android (pendiente). No es fuente oficial | `firestore.rules`, `website/js/firestore-mirror.js` |
+| **Supabase** | **Base de datos principal y única fuente de verdad**: catálogo, negocios, reservas, contenido, auditoría, BAQUI. Lectura del sitio y del Ops Center; escritura administrativa vía Edge Functions. Aplica RLS | `supabase/migrations/`, `supabase/functions/`, `supabase/tests/` |
 | **Edge Functions** | Toda escritura en Supabase hecha en nombre de un usuario: verifican el token de Firebase y deciden el rol | `supabase/functions/*` |
 | **Firebase Hosting** | Respaldo técnico; nunca canonical | `firebase.json` |
 | **Android** | App Flutter separada (`lib/`, `android/`). No se tocan `ios/` ni `web/` | `pubspec.yaml` |
 
 ### Reglas de datos
 
-1. **Escritura:** Firestore primero. Después `baqueano-mirror` replica en Supabase con el mismo alcance. La clave pública del navegador **no** escribe tablas de servidor (`SUPABASE_BROWSER_WRITES = false` en el Ops Center).
+1. **Escritura:** directo a Supabase a través de Edge Functions (`baqueano-ops`, `baqueano-community`) con token de Firebase verificado, RBAC y auditoría. La clave pública del navegador **no** escribe tablas de servidor (`SUPABASE_BROWSER_WRITES = false` en el Ops Center). Lo que Android aún escribe en Firestore llega a Supabase por `baqueano-mirror`.
 2. **Lectura pública del sitio:** Supabase, con RLS (solo contenido publicado y columnas públicas).
 3. **Contenido de usuarios** (experiencias, comentarios, fotos y videos): solo por la Edge Function `baqueano-community`, que verifica el token de Firebase, sanea, limita frecuencia y comprueba el tipo real de archivo.
 4. **`SUPABASE_SERVICE_ROLE_KEY`:** solo existe en el servidor (Edge Functions). Nunca en HTML, JavaScript público, APK ni el repositorio.

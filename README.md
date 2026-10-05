@@ -1,7 +1,7 @@
 # 🌋 BAQUEANO NICARAGUA
 
 > **Arquitectura oficial (única vigente):** [`docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md`](docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md).
-> **Hostinger** (DNS) → **Azure VM** (Nginx + Website + API) · **Firebase Authentication** (identidad) · **Cloud Firestore** (escritura prioritaria) → espejo verificado → **Supabase PostgreSQL** (espejo completo con RLS: lectura del sitio, comunidad, BAQUI y API de Azure) · Firebase Hosting solo como respaldo técnico. Roles: [`docs/security/ROLES_Y_PERMISOS.md`](docs/security/ROLES_Y_PERMISOS.md).
+> **Hostinger** (DNS) → **Azure VM** (Nginx + Website + API) · **Firebase** (Authentication + Hosting de respaldo) · **Supabase PostgreSQL** = **base de datos principal** (RLS, PostGIS, pgvector; escritura administrativa vía Edge Functions con RBAC y auditoría) · Firestore solo como origen heredado de Android, replicado en Supabase hasta su migración. Roles: [`docs/security/ROLES_Y_PERMISOS.md`](docs/security/ROLES_Y_PERMISOS.md).
 
 ## Plataforma Tecnológica para Turismo Sostenible, Conservación y Bienestar Comunitario
 
@@ -216,7 +216,7 @@ Inspirado en los lagos, volcanes, la cerámica de San Juan de Oriente y la tierr
 
 ## 🗄️ Arquitectura de Base de Datos, Normas de Seguridad (PCI-DSS, RBAC, PII) & Offline-First
 
-La base de datos de **BAQUEANO** sigue la [arquitectura oficial](docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md): **Cloud Firestore** recibe primero toda escritura (app Android y Ops Center) y la Edge Function `baqueano-mirror` la replica con el mismo alcance en **Supabase PostgreSQL** (espejo completo con RLS, que alimenta el sitio web, la comunidad, BAQUI y la API de Azure). En Android, Firestore se combina con almacenamiento persistente local y empaquetado de arranque, permitiendo operación ininterrumpida en cumbres volcánicas y selvas de Nicaragua sin cobertura móvil.
+La base de datos de **BAQUEANO** sigue la [arquitectura oficial](docs/architecture/ARQUITECTURA_OFICIAL_BAQUEANO.md): **Supabase PostgreSQL** es la base de datos principal (sitio web, Ops Center, comunidad, BAQUI y API de Azure); la app Android todavía usa **Cloud Firestore** como origen heredado, que `baqueano-mirror` replica en Supabase hasta completar su migración. En Android, Firestore se combina con almacenamiento persistente local y empaquetado de arranque, permitiendo operación ininterrumpida en cumbres volcánicas y selvas de Nicaragua sin cobertura móvil.
 
 ```text
        ┌──────────────────────────────────────────────────────────────────┐
@@ -460,8 +460,8 @@ flutter run -d [DEVICE_ID]
 | Infraestructura | Azure VM `vm-baqueano-prod` · Ubuntu Server 22.04 LTS · NSG | Servidor del Hackathon Nicaragua 2026 |
 | Servidor web | Nginx + TLS Let's Encrypt (HTTPS/443, HTTP/80 solo redirección) | Sirve el Website estático de `website/` |
 | API | Node.js 20 en `127.0.0.1:3000`, systemd, expuesta solo vía Nginx en `/api/azure/*` | Demuestra Azure → datos |
-| Datos (escritura) | Cloud Firestore | Fuente prioritaria: toda escritura nueva va primero aquí |
-| Datos (espejo y lectura web) | Supabase PostgreSQL (RLS + Edge Functions) | Espejo completo; lectura del sitio, comunidad, BAQUI y API de Azure |
+| Datos (fuente principal) | Supabase PostgreSQL (RLS + Edge Functions) | Base de datos principal: catálogo, negocios, contenido, auditoría, BAQUI |
+| Datos (heredado Android) | Cloud Firestore → `baqueano-mirror` | Replicado en Supabase hasta migrar la app |
 | BD en Azure | PostgreSQL local solo `localhost` | Evidencia de la rúbrica, sin datos productivos |
 | Autenticación | Firebase Authentication (Google) | Identidad |
 | Hosting alternativo | Firebase Hosting `https://app-baqueano.web.app` | Respaldo técnico |
