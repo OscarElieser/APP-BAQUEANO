@@ -80,6 +80,10 @@ Integrar los procedimientos especializados del plugin global `agent-skills` de A
 
 Use 21st MCP for UI discovery, component research, interface generation and visual refinement. Never copy components blindly. Adapt them to BAQUEANO architecture, design system, accessibility, security and performance standards. 21st is a design/development tool and must not override BAQUEANO architecture or business logic.
 
+## OPENDESIGN (herramienta local de diseño, 2026-10-05)
+
+OpenDesign (`nexu-io/open-design`, Apache-2.0) se instala en la computadora del propietario y se conecta a Antigravity / Claude Code por MCP (`od mcp install antigravity`). No se copia al repositorio ni forma parte del build de producción. Sus propuestas se adaptan a la arquitectura, paleta, i18n (6 idiomas), accesibilidad y seguridad de BAQUEANO; nunca se aplican a ciegas. Guía: `docs/architecture/OPEN_DESIGN_ANTIGRAVITY.md`.
+
 ## 4C MARKETING MODEL
 
 When implementing marketing, UX, discovery, booking or business features, evaluate the solution against BAQUEANO's 4C model: Consumer, Cost, Convenience and Communication. Refer to `docs/design/MARKETING_4C_BAQUEANO.md` and `docs/design/DESIGN.md`.
