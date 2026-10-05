@@ -3956,7 +3956,8 @@
     },
     "musica": {
       "body": {
-        "title1": "Música & patrimônio sonoro | Baqueano Nicaragua"
+        "title1": "Música & patrimônio sonoro | Baqueano Nicaragua",
+        "metaDescription1": "Música, identidade e tradição que conectam nosso povo. Ouça son nica, marimba, trova camponesa e ritmos do Caribe."
       },
       "musicaHeroExact": {
         "h11": "O SOM DA NICARÁGUA",
@@ -4006,7 +4007,187 @@
         "h45": "Katia Cardenal",
         "p15": "Música com sentido",
         "h46": "Norma Helena Gadea",
-        "p16": "A flor da canção"
+        "p16": "A flor da canção",
+        "h47": "Alejandro Vega Matus",
+        "p17": "Cronista musical",
+        "h23": "História viva do som nicaraguense",
+        "p18": "Momentos, expressões e movimentos que marcaram nossa identidade.",
+        "a3": "Ver toda a história →",
+        "h36": "O son nica",
+        "p19": "Raízes de um povo",
+        "p20": "A canção que nos representa",
+        "h37": "Marimba de arco",
+        "p21": "Patrimônio ancestral",
+        "p22": "Arte, sátira e resistência",
+        "h24": "Instrumentos tradicionais",
+        "p23": "Sons que nascem da nossa terra.",
+        "a4": "Ver todos os instrumentos →",
+        "p24": "Patrimônio da Humanidade",
+        "h48": "Violão nicaraguense",
+        "p25": "Acompanha nossa identidade",
+        "h49": "Pito (flauta)",
+        "p26": "Sons do povo",
+        "h410": "Tambor",
+        "p27": "Ritmo que une",
+        "h411": "Quijongo",
+        "p28": "Herança afro-indígena",
+        "h412": "Percussão",
+        "p29": "Energia do Caribe",
+        "h38": "Baqueano Digital: que música você quer curtir hoje?",
+        "p30": "Recomendo canções, artistas, rotas culturais e experiências conforme o território que você está explorando.",
+        "button1": "🎵 Quero son nica",
+        "button2": "🌊 Música do Caribe",
+        "button3": "🪵 Marimba",
+        "button4": "📜 Canções históricas",
+        "button5": "⭐ Artistas em destaque",
+        "button6": "🗺️ Rotas musicais",
+        "h25": "Escute a Nicarágua, conheça sua história",
+        "p31": "De seus povos, sua gente e suas paisagens nascem sons que transcendem.",
+        "a5": "Explorar experiências musicais →"
+      },
+      "mapaSonoro": {
+        "h31": "Mapa sonoro da Nicarágua",
+        "p1": "Explore como soam nossos territórios. Descubra os ritmos, artistas e expressões musicais de cada região.",
+        "h51": "Filtrar mapa sonoro",
+        "p2": "Berço de compositores, serenatas e tradição musical diante do Grande Lago Cocibolca.",
+        "a1": "Explorar Granada →",
+        "imgAlt1": "Granada musical"
+      },
+      "soundFilterDepto": {
+        "option1": "Masaya (marimba)",
+        "option2": "Granada (serenatas)",
+        "option3": "León (trova)",
+        "option4": "Caribe (Palo de Mayo)",
+        "option5": "Matagalpa (polcas)",
+        "selectAriaLabel1": "Filtrar departamento"
+      },
+      "soundFilterGenre": {
+        "option1": "Gênero musical: todos",
+        "selectAriaLabel1": "Filtrar gênero"
+      },
+      "soundFilterEpoch": {
+        "option1": "Época: todas",
+        "option2": "Contemporâneo",
+        "selectAriaLabel1": "Filtrar época"
+      },
+      "archivoSonoro": {
+        "h21": "Arquivo sonoro",
+        "p1": "Gravações, canções e compilações para ouvir e aprender.",
+        "span1": "Gravações preservadas",
+        "a1": "Ver arquivo completo →"
+      },
+      "tracksGrid": {
+        "h51": "Son de Mi Tierra",
+        "p1": "Anônimo",
+        "h52": "Sirena del Lago",
+        "h53": "Nicaragua Nicaragüita",
+        "h54": "El Solar de Monimbó",
+        "h55": "Palo de Mayo",
+        "h56": "Dança do Güegüense",
+        "p2": "Folclore nacional"
+      },
+      "stickyMusicBar": {
+        "span1": "15 | EN",
+        "asideAriaLabel1": "Player persistente",
+        "buttonTitle1": "Pausar / Reproduzir",
+        "buttonTitle2": "Lista de reprodução"
+      },
+      "musicaFeaturedPlayerSection": {
+        "buttonTitle1": "Curtir",
+        "buttonTitle2": "Aleatório",
+        "buttonTitle3": "Repetir",
+        "inputAriaLabel1": "Volume"
+      },
+      "btnMainPlay": {
+        "buttonTitle1": "Reproduzir"
+      },
+      "trackSearchInput": {
+        "inputPlaceholder1": "Buscar canção, artista, gênero ou território...",
+        "inputAriaLabel1": "Buscar no arquivo sonoro"
+      },
+      "stickyTrackThumb": {
+        "imgAlt1": "Faixa ativa"
+      }
+    },
+    "nosotros": {
+      "body": {
+        "title1": "Sobre nós | BAQUEANO Nicarágua autêntica"
+      },
+      "nosHero": {
+        "div1": "SOBRE NÓS",
+        "h11": "DESCUBRA O QUE",
+        "span1": "NÃO ESTÁ NO MAPA",
+        "p1": "O BAQUEANO é a ponte tecnológica entre o conhecimento territorial e os viajantes que buscam experiências autênticas, seguras e responsáveis.",
+        "a1": "Conhecer nosso propósito"
+      },
+      "proposito": {
+        "h31": "Nossa razão de existir",
+        "p1": "Conectamos viajantes com comunidades, empreendedores locais, guias, cooperativas e lugares únicos, para que o turismo gere oportunidades reais, conserve nosso patrimônio e mantenha viva a identidade da Nicarágua.",
+        "p2": "Valorizamos nossa natureza, cultura e história.",
+        "p3": "Impulsionamos quem torna cada experiência possível.",
+        "h41": "Tecnologia responsável",
+        "p4": "Usamos a tecnologia para aproximar, não para substituir."
+      },
+      "mision": {
+        "h31": "Nossa missão",
+        "p1": "Impulsionar comunidades rurais, cooperativas, empreendimentos locais, guias e baqueanos por meio de tecnologia digital acessível e inteligência artificial responsável, para gerar oportunidades reais e um turismo mais justo e sustentável.",
+        "h32": "Nossa visão",
+        "p2": "Tornar o BAQUEANO um ecossistema digital de referência para o turismo comunitário, sustentável e regenerativo da Nicarágua, com projeção regional, reconhecido pelo impacto positivo nas comunidades, no patrimônio e na conservação do território."
+      },
+      "nosMeaningSection": {
+        "h31": "O que significa ser BAQUEANO?",
+        "span1": "Mais que viajar, é viver, aprender e deixar marca.",
+        "h41": "Conhecer",
+        "p1": "Exploramos com curiosidade e mente aberta.",
+        "h42": "Conectar",
+        "p2": "Unimos pessoas, comunidades e territórios.",
+        "h43": "Proteger",
+        "p3": "Cuidamos da nossa natureza e patrimônio.",
+        "h44": "Respeitar",
+        "p4": "Valorizamos nossas raízes, culturas e tradições.",
+        "p5": "Difundimos o que há de bom em nosso povo.",
+        "p6": "Levamos você a lugares que não estão no mapa."
+      },
+      "nosModelSection": {
+        "h31": "Como funciona nosso modelo",
+        "p1": "A tecnologia facilita o encontro, mas o protagonismo é sempre local.",
+        "h41": "1. Viajante",
+        "p2": "Busca experiências autênticas e seguras na Nicarágua.",
+        "h42": "2. Baqueano Digital",
+        "p3": "Conecta, informa e personaliza a rota com IA.",
+        "h43": "3. Território / comunidade",
+        "p4": "Guias, cooperativas e empreendedores locais.",
+        "h44": "4. Experiência local",
+        "p5": "Natureza, cultura, gastronomia e vivências únicas.",
+        "h45": "5. Impacto econômico direto",
+        "p6": "Benefício real para famílias e comunidades."
+      },
+      "nosIdentitySection": {
+        "p1": "DESCUBRA O QUE NÃO ESTÁ NO MAPA.",
+        "h51": "Verde selva profundo",
+        "p2": "Natureza e vida",
+        "h52": "Teal águas de cratera",
+        "p3": "Confiança e território",
+        "h53": "Areia costeira",
+        "p4": "Nossas praias e raízes",
+        "h54": "Terracota fogo",
+        "p5": "Energia e aventura",
+        "h55": "Ouro ancestral pinolero",
+        "p6": "Cultura e tradição",
+        "strong1": "Inspirados em nossa terra,",
+        "p7": "nosso povo e nossas raízes ancestrais."
+      },
+      "nosNumbersSection": {
+        "h31": "BAQUEANO em números",
+        "small1": "Indicadores atuais da nossa plataforma territorial comunitária.",
+        "div1": "territórios administrativos da Nicarágua",
+        "div2": "áreas e territórios referenciados",
+        "div3": "comissão de intermediação direta com prestadores",
+        "div4": "com prestadores e comunidades locais"
+      },
+      "nosManifestoSection": {
+        "h31": "Manifesto BAQUEANO",
+        "p1": "Acreditamos numa Nicarágua que se descobre caminhando, navegando e compartilhando com seu povo. Nos caminhos fora das rotas convencionais vive nossa verdadeira riqueza: suas comunidades, seu patrimônio, sua natureza e sua cultura. Usamos a tecnologia como ferramenta ética para conectar, impulsionar e proteger o que é nosso, porque viajar também pode transformar vidas."
       }
     }
   },

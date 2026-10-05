@@ -3956,7 +3956,8 @@
     },
     "musica": {
       "body": {
-        "title1": "Musik & Klangerbe | Baqueano Nicaragua"
+        "title1": "Musik & Klangerbe | Baqueano Nicaragua",
+        "metaDescription1": "Musik, Identität und Tradition, die unsere Menschen verbinden. Hör Son Nica, Marimba, ländliche Trova und karibische Rhythmen."
       },
       "musicaHeroExact": {
         "h11": "DER KLANG NICARAGUAS",
@@ -4006,7 +4007,187 @@
         "h45": "Katia Cardenal",
         "p15": "Musik mit Bedeutung",
         "h46": "Norma Helena Gadea",
-        "p16": "Die Blume des Liedes"
+        "p16": "Die Blume des Liedes",
+        "h47": "Alejandro Vega Matus",
+        "p17": "Musikalischer Chronist",
+        "h23": "Lebendige Geschichte des nicaraguanischen Klangs",
+        "p18": "Momente, Ausdrucksformen und Bewegungen, die unsere Identität prägten.",
+        "a3": "Ganze Geschichte ansehen →",
+        "h36": "Der Son Nica",
+        "p19": "Wurzeln eines Volkes",
+        "p20": "Das Lied, das uns verkörpert",
+        "h37": "Bogenmarimba",
+        "p21": "Überliefertes Erbe",
+        "p22": "Kunst, Satire und Widerstand",
+        "h24": "Traditionelle Instrumente",
+        "p23": "Klänge, die aus unserer Erde entstehen.",
+        "a4": "Alle Instrumente ansehen →",
+        "p24": "Welterbe",
+        "h48": "Nicaraguanische Gitarre",
+        "p25": "Begleitet unsere Identität",
+        "h49": "Pito (Flöte)",
+        "p26": "Klänge des Volkes",
+        "h410": "Trommel",
+        "p27": "Ein Rhythmus, der verbindet",
+        "h411": "Quijongo",
+        "p28": "Afroindigenes Erbe",
+        "h412": "Perkussion",
+        "p29": "Energie der Karibik",
+        "h38": "Baqueano Digital: Welche Musik möchtest du heute hören?",
+        "p30": "Ich empfehle dir Lieder, Künstler, Kulturrouten und Erlebnisse passend zur Region, die du erkundest.",
+        "button1": "🎵 Ich will Son Nica",
+        "button2": "🌊 Karibische Musik",
+        "button3": "🪵 Marimba",
+        "button4": "📜 Historische Lieder",
+        "button5": "⭐ Ausgewählte Künstler",
+        "button6": "🗺️ Musikrouten",
+        "h25": "Hör Nicaragua zu, lerne seine Geschichte kennen",
+        "p31": "Aus seinen Dörfern, seinen Menschen und Landschaften entstehen Klänge, die nachwirken.",
+        "a5": "Musikerlebnisse entdecken →"
+      },
+      "mapaSonoro": {
+        "h31": "Klangkarte Nicaraguas",
+        "p1": "Erkunde, wie unsere Regionen klingen. Entdecke Rhythmen, Künstler und musikalische Ausdrucksformen jeder Region.",
+        "h51": "Klangkarte filtern",
+        "p2": "Wiege von Komponisten, Serenaden und Musiktradition am Ufer des großen Cocibolca-Sees.",
+        "a1": "Granada entdecken →",
+        "imgAlt1": "Musikalisches Granada"
+      },
+      "soundFilterDepto": {
+        "option1": "Masaya (Marimba)",
+        "option2": "Granada (Serenaden)",
+        "option3": "León (Trova)",
+        "option4": "Karibik (Palo de Mayo)",
+        "option5": "Matagalpa (Polkas)",
+        "selectAriaLabel1": "Departamento filtern"
+      },
+      "soundFilterGenre": {
+        "option1": "Musikgenre: alle",
+        "selectAriaLabel1": "Genre filtern"
+      },
+      "soundFilterEpoch": {
+        "option1": "Epoche: alle",
+        "option2": "Zeitgenössisch",
+        "selectAriaLabel1": "Epoche filtern"
+      },
+      "archivoSonoro": {
+        "h21": "Klangarchiv",
+        "p1": "Aufnahmen, Lieder und Sammlungen zum Hören und Lernen.",
+        "span1": "Erhaltene Aufnahmen",
+        "a1": "Ganzes Archiv ansehen →"
+      },
+      "tracksGrid": {
+        "h51": "Son de Mi Tierra",
+        "p1": "Anonym",
+        "h52": "Sirena del Lago",
+        "h53": "Nicaragua Nicaragüita",
+        "h54": "El Solar de Monimbó",
+        "h55": "Palo de Mayo",
+        "h56": "Tanz des Güegüense",
+        "p2": "Nationale Folklore"
+      },
+      "stickyMusicBar": {
+        "span1": "15 | EN",
+        "asideAriaLabel1": "Dauerhafter Player",
+        "buttonTitle1": "Pause / Abspielen",
+        "buttonTitle2": "Wiedergabeliste"
+      },
+      "musicaFeaturedPlayerSection": {
+        "buttonTitle1": "Gefällt mir",
+        "buttonTitle2": "Zufallswiedergabe",
+        "buttonTitle3": "Wiederholen",
+        "inputAriaLabel1": "Lautstärke"
+      },
+      "btnMainPlay": {
+        "buttonTitle1": "Abspielen"
+      },
+      "trackSearchInput": {
+        "inputPlaceholder1": "Lied, Künstler, Genre oder Region suchen...",
+        "inputAriaLabel1": "Im Klangarchiv suchen"
+      },
+      "stickyTrackThumb": {
+        "imgAlt1": "Aktueller Titel"
+      }
+    },
+    "nosotros": {
+      "body": {
+        "title1": "Über uns | BAQUEANO – das authentische Nicaragua"
+      },
+      "nosHero": {
+        "div1": "ÜBER UNS",
+        "h11": "ENTDECKE, WAS",
+        "span1": "NICHT AUF DER KARTE STEHT",
+        "p1": "BAQUEANO ist die technologische Brücke zwischen regionalem Wissen und Reisenden, die authentische, sichere und verantwortungsvolle Erlebnisse suchen.",
+        "a1": "Unseren Zweck kennenlernen"
+      },
+      "proposito": {
+        "h31": "Unser Daseinsgrund",
+        "p1": "Wir verbinden Reisende mit Gemeinden, lokalen Unternehmern, Guides, Kooperativen und einzigartigen Orten, damit Tourismus echte Chancen schafft, unser Erbe bewahrt und Nicaraguas Identität lebendig hält.",
+        "p2": "Wir schätzen unsere Natur, Kultur und Geschichte.",
+        "p3": "Wir stärken die Menschen, die jedes Erlebnis möglich machen.",
+        "h41": "Verantwortungsvolle Technologie",
+        "p4": "Wir nutzen Technologie, um zu verbinden, nicht um zu ersetzen."
+      },
+      "mision": {
+        "h31": "Unsere Mission",
+        "p1": "Ländliche Gemeinden, Kooperativen, lokale Betriebe, Guides und Baqueanos mit zugänglicher Digitaltechnik und verantwortungsvoller KI stärken, um echte Chancen und einen gerechteren, nachhaltigeren Tourismus zu schaffen.",
+        "h32": "Unsere Vision",
+        "p2": "BAQUEANO zu einem führenden digitalen Ökosystem für gemeindebasierten, nachhaltigen und regenerativen Tourismus in Nicaragua machen – mit regionaler Reichweite und anerkannt für seine positive Wirkung auf Gemeinden, Kulturerbe und Naturschutz."
+      },
+      "nosMeaningSection": {
+        "h31": "Was bedeutet es, BAQUEANO zu sein?",
+        "span1": "Mehr als reisen: erleben, lernen und Spuren hinterlassen.",
+        "h41": "Kennenlernen",
+        "p1": "Wir erkunden mit Neugier und Offenheit.",
+        "h42": "Verbinden",
+        "p2": "Wir bringen Menschen, Gemeinden und Regionen zusammen.",
+        "h43": "Schützen",
+        "p3": "Wir bewahren unsere Natur und unser Erbe.",
+        "h44": "Respektieren",
+        "p4": "Wir schätzen unsere Wurzeln, Kulturen und Traditionen.",
+        "p5": "Wir zeigen das Beste unserer Menschen.",
+        "p6": "Wir bringen dich an Orte, die nicht auf der Karte stehen."
+      },
+      "nosModelSection": {
+        "h31": "So funktioniert unser Modell",
+        "p1": "Technologie erleichtert die Begegnung, doch die Hauptrolle spielen immer die Menschen vor Ort.",
+        "h41": "1. Reisende",
+        "p2": "Suchen authentische und sichere Erlebnisse in Nicaragua.",
+        "h42": "2. Baqueano Digital",
+        "p3": "Verbindet, informiert und personalisiert die Route mit KI.",
+        "h43": "3. Region / Gemeinde",
+        "p4": "Lokale Guides, Kooperativen und Unternehmer.",
+        "h44": "4. Lokales Erlebnis",
+        "p5": "Natur, Kultur, Küche und einzigartige Erlebnisse.",
+        "h45": "5. Direkte wirtschaftliche Wirkung",
+        "p6": "Echter Nutzen für Familien und Gemeinden."
+      },
+      "nosIdentitySection": {
+        "p1": "ENTDECKE, WAS NICHT AUF DER KARTE STEHT.",
+        "h51": "Tiefes Dschungelgrün",
+        "p2": "Natur und Leben",
+        "h52": "Kraterwasser-Petrol",
+        "p3": "Vertrauen und Region",
+        "h53": "Küstensand",
+        "p4": "Unsere Strände und Wurzeln",
+        "h54": "Feuer-Terrakotta",
+        "p5": "Energie und Abenteuer",
+        "h55": "Überliefertes Pinolero-Gold",
+        "p6": "Kultur und Tradition",
+        "strong1": "Inspiriert von unserer Erde,",
+        "p7": "unseren Menschen und unseren uralten Wurzeln."
+      },
+      "nosNumbersSection": {
+        "h31": "BAQUEANO in Zahlen",
+        "small1": "Aktuelle Kennzahlen unserer gemeinschaftlichen Regionalplattform.",
+        "div1": "Verwaltungsgebiete Nicaraguas",
+        "div2": "erfasste Gebiete und Regionen",
+        "div3": "Vermittlungsprovision bei Anbietern",
+        "div4": "mit lokalen Anbietern und Gemeinden"
+      },
+      "nosManifestoSection": {
+        "h31": "BAQUEANO-Manifest",
+        "p1": "Wir glauben an ein Nicaragua, das man zu Fuß, auf dem Wasser und im Austausch mit seinen Menschen entdeckt. Abseits der üblichen Routen liegt unser wahrer Reichtum: seine Gemeinden, sein Erbe, seine Natur und seine Kultur. Wir nutzen Technologie als ethisches Werkzeug, um zu verbinden, zu stärken und zu schützen, was uns gehört – denn Reisen kann auch Leben verändern."
       }
     }
   },
