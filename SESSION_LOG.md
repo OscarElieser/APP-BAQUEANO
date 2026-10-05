@@ -4044,3 +4044,9 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - **Mapa: coordenadas 76 → 143 de 181** (67 aproximadas, todas dentro del contorno de su territorio; verificado). Filtro de plausibilidad agregado: una coincidencia parcial no puede ser volcán, hotel o comercio si el nombre no lo dice (corrige "Maderas…" → Volcán Maderas y "Catedral de Granada" → hotel); 3 puntos se recalculan en la siguiente ejecución del workflow. Reglas Firestore en CI: success.
 - **Mapa final de esta ronda:** 141/181 lugares con pin (66 aproximados), 0 fuera de su territorio; "Maderas, Marsella…" ahora en Playa Marsella (San Juan del Sur). Catedral de Granada y Tisey quedan sin pin antes que mal ubicados. Prueba en navegador con MapLibre: Rivas 13 pines, Granada 6; popup preciso muestra la etiqueta OSM ("Reserva de Biósfera Isla de Ometepe…"), el aproximado "Rivas · ubicación aproximada"; 0 errores JS.
 - **Estado al cierre:** todos los puntos de la evaluación externa tienen entregable y evidencia (`docs/evidencias/MATRIZ_CUMPLIMIENTO_EVALUACION_EXTERNA.md`). Pendiente del propietario: correo Auditor, `firebase deploy --only firestore:rules`, importar CSV a Trello, ajuste de Copilot code scanning.
+
+## 2026-10-05 — Correo de la cuenta Auditor
+- 🎯 **POR QUÉ:** el propietario indica la cuenta para demostrar el rol Auditor al jurado.
+- ⚙️ **CÓMO:** alta en `public.staff_roles` (rol `auditor`, activo) con el correo normalizado en minúsculas; la Edge Function lo reconoce si Firebase tiene el correo verificado.
+- 📦 **QUÉ:** solicitud registrada antes de cualquier acción: evaluadorhackathonkronox26@gmail.com → auditor.
+- **Hecho:** cuenta Auditor activa en producción (`staff_roles`) + migración `20261005010000_staff_roles_auditor_jurado.sql`; matriz actualizada. Para paneles de Firestore: `tools/set-role-claim.mjs evaluadorhackathonkronox26@gmail.com auditor` + deploy de reglas (propietario).
