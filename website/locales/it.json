@@ -2834,7 +2834,8 @@
     },
     "experiencias": {
       "body": {
-        "title1": "Esperienze di avventura & cultura | Baqueano Nicaragua"
+        "title1": "Esperienze di avventura & cultura | Baqueano Nicaragua",
+        "metaDescription1": "Scopri le migliori esperienze del Nicaragua: sandboarding sul Cerro Negro, rappel nel canyon di Somoto, rotte del caffè e surf sul Pacifico."
       },
       "expHero": {
         "span1": "TURISMO A IMPATTO POSITIVO",
@@ -2879,7 +2880,12 @@
         "span12": "Facile · Acquatico",
         "h38": "Snorkeling sulle barriere coralline",
         "p8": "Acque turchesi dei Caraibi, squali nutrice, aquile di mare e giardini di corallo incontaminati con pescatori raizales.",
-        "span13": "Da 35 USD / C$ 1.280"
+        "span13": "Da 35 USD / C$ 1.280",
+        "imgAlt1": "Sandboarding Cerro Negro",
+        "imgAlt2": "Caffè Miraflor",
+        "imgAlt3": "Kayak tra le isolette",
+        "imgAlt4": "Surf a Playa Maderas",
+        "imgAlt5": "Snorkeling a Corn Island"
       },
       "paquetesOficiales": {
         "span1": "OFFERTA TERRITORIALE INTEGRATA",
@@ -2921,7 +2927,132 @@
         "strong8": "Nota:",
         "div12": "Trasporto in barca da San Carlos a parte",
         "h35": "CANYON CERROS PEGADOS (ZIPOTE VAGO)",
-        "p5": "Spedizione d'avventura nella cordigliera settentrionale con il team locale Zipote Vago Tours. Pareti rocciose, trekking in montagna, pozze naturali e gastronomia tradizionale segoviana."
+        "p5": "Spedizione d'avventura nella cordigliera settentrionale con il team locale Zipote Vago Tours. Pareti rocciose, trekking in montagna, pozze naturali e gastronomia tradizionale segoviana.",
+        "div13": "Trasporto 4x4, caffè con rosquillas, sentieri, guida locale e pranzo",
+        "div14": "Alta ·",
+        "div15": "Giovani e adulti",
+        "span5": "RACCS · CARAIBI SUD",
+        "h36": "ESPERIENZA CAYOS PERLAS",
+        "p6": "Isolotti corallini incontaminati nel Mar dei Caraibi. Partenza da Laguna de Perlas, trasporto in barca sicuro con giubbotti, barriera corallina, colazione creola, pranzo caraibico e kayak.",
+        "div16": "Motoscafo, guida accreditata, snorkeling e kayak",
+        "strong9": "Soggetto a:",
+        "div17": "Condizioni del mare e del vento"
+      },
+      "rutasRioSanJuan": {
+        "span1": "PORTALE SPECIALIZZATO RIOSANJUAN.COM.NI",
+        "h21": "Itinerari tematici e turismo comunitario nel Río San Juan",
+        "p1": "Collegare il Grande Lago Cocibolca ai Caraibi attraverso quattro grandi rotte di navigazione, storia viva, biodiversità e convivenza con il popolo indigeno rama.",
+        "h41": "Rotta dell'oro (6 giorni)",
+        "p2": "La leggendaria rotta interoceanica della corsa all'oro del XIX secolo: Managua → San Juan del Sur → Río San Juan → El Castillo → Greytown → Riserva Indio Maíz.",
+        "span2": "Navigazione fluviale & giungla",
+        "h42": "Rotta coloniale",
+        "p3": "Il commercio coloniale spagnolo, le fortificazioni lungo il fiume e l'epopea del Desaguadero. Include la Fortezza dell'Immacolata Concezione, musei e il villaggio di El Castillo.",
+        "span3": "Storia militare e bastioni",
+        "h43": "Rotta degli uccelli (+270 specie)",
+        "p4": "Birdwatching nelle zone umide di San Carlos, San Miguelito, Solentiname e del Rifugio Los Guatuzos. Aironi, martin pescatori, spatole rosate e amazzoni fronterossa.",
+        "span4": "Avvistamento all'alba in kayak",
+        "h44": "Rotta dei naturalisti",
+        "p5": "Esplorazione delle riserve biologiche Indio Maíz e Bartola. Foresta tropicale primaria, caimani, scimmie urlatrici, lamantini e ceibe millenarie con i baqueanos.",
+        "span5": "Guida nativa obbligatoria",
+        "span6": "CONVIVENZA CON GLI INDIGENI RAMA",
+        "h31": "Riserva Cantagallo: biosfera e saggezza ancestrale",
+        "p6": "Alloggio comunitario e convivenza diretta con famiglie del popolo indigeno rama. Percorsi guidati da leader ancestrali tra formazioni di basalto colonnare, acque termali medicinali e sentieri incontaminati.",
+        "a1": "Scopri l'esperienza rama"
+      },
+      "sosModal": {
+        "h31": "Centro SOS",
+        "p1": "La tua posizione GPS è attiva per il soccorso.",
+        "div1": "GPS satellitare"
+      }
+    },
+    "favoritos": {
+      "body": {
+        "title1": "I miei preferiti | BAQUEANO Nicaragua",
+        "metaDescription1": "Consulta e gestisci le tue destinazioni preferite salvate in BAQUEANO Nicaragua."
+      },
+      "favoritesHero": {
+        "span1": "LA TUA COLLEZIONE",
+        "h11": "I miei luoghi preferiti",
+        "p1": "Salva le destinazioni che vuoi conoscere e ritrovale qui quando sarai pronto a pianificare la tua prossima avventura.",
+        "span2": "luoghi salvati su questo dispositivo"
+      },
+      "favoritesEmpty": {
+        "h21": "Non hai ancora salvato luoghi",
+        "p1": "Esplora il Nicaragua e tocca il cuore di qualsiasi destinazione per aggiungerla a questa collezione."
+      }
+    },
+    "gastronomia": {
+      "body": {
+        "title1": "Gastronomia ancestrale dei figli del mais | Baqueano Nicaragua"
+      },
+      "gastroHeroExact": {
+        "h11": "Gastronomia ancestrale dei",
+        "span1": "Figli del mais",
+        "p1": "Sapori, tradizioni e saperi che danno vita alla nostra cultura. Scopri la ricchezza gastronomica del Nicaragua in ogni territorio, dalle radici indigene alle influenze afrocaraibiche.",
+        "a1": "Esplora i sapori →",
+        "a2": "Dove assaggiarlo",
+        "span2": "Il Nicaragua si assapora 🍃"
+      },
+      "gastroCatSection": {
+        "button1": "Piatti tipici",
+        "button2": "Dolci",
+        "button3": "Mais ancestrale",
+        "button4": "Nord",
+        "button5": "Centro"
+      },
+      "saboresNuestraHistoria": {
+        "h21": "Sapori che raccontano la nostra storia",
+        "p1": "Piatti tradizionali con identità, storia e l'autentico sapore del Nicaragua.",
+        "a1": "Vedi tutti i piatti →"
+      },
+      "dishCardExact": {
+        "h31": "Gallo pinto",
+        "span1": "Tutto il paese",
+        "p1": "Il sapore che ci unisce ogni mattina: riso e fagioli creoli fritti con cipolla e peperone.",
+        "button1": "Scopri la storia",
+        "h32": "Nacatamal della domenica",
+        "p2": "Una tradizione familiare domenicale avvolta in foglia di platano che attraversa le generazioni.",
+        "h33": "Vigorón di Granada",
+        "p3": "Manioca lessata morbida, cotenna croccante con carne e insalata di cavolo con mimbro.",
+        "h34": "Quesillo",
+        "p4": "Lo spuntino di strada irresistibile: tortilla calda, formaggio intrecciato, cipolla tritata e panna.",
+        "h35": "Baho",
+        "span2": "Caraibi Sud & Pacifico",
+        "p5": "Cotto al vapore di tradizione afrocaraibica: manzo essiccato, platano maturo e manioca.",
+        "h36": "Indio viejo",
+        "p6": "Uno stufato con una storia profonda e radici indigene: impasto di mais con carne sfilacciata.",
+        "h37": "Rondón costiero",
+        "span3": "Caraibi Sud (Bluefields)",
+        "p7": "Zuppa isolana con sapori di mare: pesce, frutti di mare, manioca, quequisque e latte di cocco fresco.",
+        "h38": "Güirilas",
+        "p8": "Tortilla dolce tradizionale di mais tenero, servita con cagliata fresca e panna.",
+        "p9": "Regina delle zuppe domenicali: trippa e zampa di manzo con verdure contadine, quequisque, pannocchia e riso.",
+        "h39": "Fritanga tradizionale",
+        "span4": "Managua & tutto il paese",
+        "p10": "L'anima notturna dei quartieri nicaraguensi: carne alla brace, fette di platano con formaggio fritto e insalata creola."
+      },
+      "gastroSectionCommon": {
+        "h31": "Mappa gastronomica del Nicaragua",
+        "p1": "Esplora i sapori di ogni dipartimento e scopri dove assaggiarli.",
+        "h51": "Filtra per:",
+        "h41": "Bevande della nostra terra",
+        "h52": "Pinolillo",
+        "p2": "La bevanda simbolo del Nicaragua a base di mais tostato e cacao.",
+        "h53": "Cacao con latte"
+      },
+      "gastroMapDepto": {
+        "option1": "Caraibi Sud"
+      },
+      "gastroMapTipo": {
+        "option1": "Tipo: tutti",
+        "option2": "Mais tradizionale",
+        "option3": "Frutti di mare",
+        "option4": "Carni e stufati"
+      },
+      "gastroMapPrecio": {
+        "option1": "Prezzo: tutti",
+        "option2": "Economico (C$ 60 - C$ 150)",
+        "option3": "Medio (C$ 150 - C$ 350)"
       }
     }
   },
@@ -3012,7 +3143,10 @@
     "quieroAventura": "🧗 Voglio avventura",
     "algoCerca": "📍 Qualcosa vicino",
     "sumateALaComunidadBaqueano": "Unisciti alla community BAQUEANO",
-    "favorito": "Preferito"
+    "favorito": "Preferito",
+    "policia118": "Polizia (118)",
+    "abrirMapaInteractivo": "Apri la mappa interattiva →",
+    "verTodas": "Vedi tutte →"
   },
   "ops": {
     "impact": {

@@ -2834,7 +2834,8 @@
     },
     "experiencias": {
       "body": {
-        "title1": "Expériences d'aventure & de culture | Baqueano Nicaragua"
+        "title1": "Expériences d'aventure & de culture | Baqueano Nicaragua",
+        "metaDescription1": "Découvrez les meilleures expériences du Nicaragua : sandboard au Cerro Negro, rappel dans le canyon de Somoto, routes du café et surf sur le Pacifique."
       },
       "expHero": {
         "span1": "TOURISME À IMPACT POSITIF",
@@ -2879,7 +2880,12 @@
         "span12": "Facile · Aquatique",
         "h38": "Snorkeling sur les récifs coralliens",
         "p8": "Eaux turquoise des Caraïbes, requins-nourrices, raies léopards et jardins de corail vierges avec des pêcheurs raizales.",
-        "span13": "À partir de 35 USD / 1 280 C$"
+        "span13": "À partir de 35 USD / 1 280 C$",
+        "imgAlt1": "Sandboard au Cerro Negro",
+        "imgAlt2": "Café de Miraflor",
+        "imgAlt3": "Kayak dans les îlots",
+        "imgAlt4": "Surf à Playa Maderas",
+        "imgAlt5": "Snorkeling à Corn Island"
       },
       "paquetesOficiales": {
         "span1": "OFFRE TERRITORIALE INTÉGRÉE",
@@ -2921,7 +2927,132 @@
         "strong8": "Remarque :",
         "div12": "Transport fluvial depuis San Carlos en supplément",
         "h35": "CANYON CERROS PEGADOS (ZIPOTE VAGO)",
-        "p5": "Expédition d'aventure dans la cordillère du nord avec l'équipe locale Zipote Vago Tours. Falaises, randonnée en montagne, bassins naturels et gastronomie traditionnelle ségovienne."
+        "p5": "Expédition d'aventure dans la cordillère du nord avec l'équipe locale Zipote Vago Tours. Falaises, randonnée en montagne, bassins naturels et gastronomie traditionnelle ségovienne.",
+        "div13": "Transport 4x4, café et rosquillas, sentiers, guide local et déjeuner",
+        "div14": "Élevée ·",
+        "div15": "Jeunes et adultes",
+        "span5": "RACCS · CARAÏBES SUD",
+        "h36": "EXPÉRIENCE CAYOS PERLAS",
+        "p6": "Îlots coralliens vierges en mer des Caraïbes. Départ de Laguna de Perlas, transport en bateau sécurisé avec gilets, récif corallien, petit-déjeuner créole, déjeuner caribéen et kayaks.",
+        "div16": "Bateau rapide, guide accrédité, snorkeling et kayaks",
+        "strong9": "Sous réserve de :",
+        "div17": "Conditions de mer et de vent"
+      },
+      "rutasRioSanJuan": {
+        "span1": "PORTAIL SPÉCIALISÉ RIOSANJUAN.COM.NI",
+        "h21": "Itinéraires thématiques et tourisme communautaire au Río San Juan",
+        "p1": "Relier le Grand Lac Cocibolca aux Caraïbes par quatre grandes routes de navigation, l'histoire vivante, la biodiversité et la vie partagée avec le peuple autochtone rama.",
+        "h41": "Route de l'or (6 jours)",
+        "p2": "La légendaire route interocéanique de la ruée vers l'or du XIXe siècle : Managua → San Juan del Sur → Río San Juan → El Castillo → Greytown → Réserve Indio Maíz.",
+        "span2": "Navigation fluviale & jungle",
+        "h42": "Route coloniale",
+        "p3": "Le commerce colonial espagnol, les fortifications riveraines et l'épopée du Desaguadero. Comprend la forteresse de l'Immaculée Conception, des musées et le village d'El Castillo.",
+        "span3": "Histoire militaire et bastions",
+        "h43": "Route des oiseaux (+270 espèces)",
+        "p4": "Observation des oiseaux dans les zones humides de San Carlos, San Miguelito, Solentiname et du refuge Los Guatuzos. Hérons, martins-pêcheurs, spatules rosées et amazones à lores rouges.",
+        "span4": "Observation matinale en kayak",
+        "h44": "Route des naturalistes",
+        "p5": "Exploration des réserves biologiques Indio Maíz et Bartola. Forêt tropicale primaire, caïmans, singes hurleurs, lamantins et fromagers millénaires avec des baqueanos.",
+        "span5": "Guide autochtone obligatoire",
+        "span6": "IMMERSION CHEZ LES RAMAS",
+        "h31": "Réserve Cantagallo : biosphère et sagesse ancestrale",
+        "p6": "Hébergement communautaire et vie partagée avec des familles du peuple autochtone rama. Visites guidées par des leaders ancestraux à travers des orgues basaltiques, des sources chaudes médicinales et des sentiers vierges.",
+        "a1": "Découvrir l'expérience rama"
+      },
+      "sosModal": {
+        "h31": "Centre SOS",
+        "p1": "Votre position GPS est active pour les secours.",
+        "div1": "GPS satellite"
+      }
+    },
+    "favoritos": {
+      "body": {
+        "title1": "Mes favoris | BAQUEANO Nicaragua",
+        "metaDescription1": "Consultez et gérez vos destinations favorites enregistrées dans BAQUEANO Nicaragua."
+      },
+      "favoritesHero": {
+        "span1": "VOTRE COLLECTION",
+        "h11": "Mes lieux favoris",
+        "p1": "Enregistrez les destinations que vous voulez découvrir et retrouvez-les ici quand vous serez prêt à planifier votre prochaine aventure.",
+        "span2": "lieux enregistrés sur cet appareil"
+      },
+      "favoritesEmpty": {
+        "h21": "Vous n'avez encore enregistré aucun lieu",
+        "p1": "Explorez le Nicaragua et appuyez sur le cœur d'une destination pour l'ajouter à cette collection."
+      }
+    },
+    "gastronomia": {
+      "body": {
+        "title1": "Gastronomie ancestrale des enfants du maïs | Baqueano Nicaragua"
+      },
+      "gastroHeroExact": {
+        "h11": "Gastronomie ancestrale des",
+        "span1": "Enfants du maïs",
+        "p1": "Saveurs, traditions et savoirs qui font vivre notre culture. Découvrez la richesse gastronomique du Nicaragua dans chaque territoire, des racines autochtones aux influences afro-caribéennes.",
+        "a1": "Explorer les saveurs →",
+        "a2": "Où le goûter",
+        "span2": "Le Nicaragua se savoure 🍃"
+      },
+      "gastroCatSection": {
+        "button1": "Plats typiques",
+        "button2": "Douceurs",
+        "button3": "Maïs ancestral",
+        "button4": "Nord",
+        "button5": "Centre"
+      },
+      "saboresNuestraHistoria": {
+        "h21": "Des saveurs qui racontent notre histoire",
+        "p1": "Plats traditionnels avec identité, histoire et le goût authentique du Nicaragua.",
+        "a1": "Voir tous les plats →"
+      },
+      "dishCardExact": {
+        "h31": "Gallo pinto",
+        "span1": "Tout le pays",
+        "p1": "La saveur qui nous unit chaque matin : riz et haricots créoles frits avec oignon et poivron.",
+        "button1": "Découvrir son histoire",
+        "h32": "Nacatamal du dimanche",
+        "p2": "Une tradition familiale du dimanche, enveloppée dans une feuille de bananier, qui traverse les générations.",
+        "h33": "Vigorón de Granada",
+        "p3": "Manioc cuit tendre, couenne croustillante avec viande et salade de chou au mimbro.",
+        "h34": "Quesillo",
+        "p4": "L'en-cas de rue irrésistible : tortilla chaude, fromage tressé, oignon haché et crème.",
+        "h35": "Baho",
+        "span2": "Caraïbes Sud & Pacifique",
+        "p5": "Plat cuit à la vapeur de tradition afro-caribéenne : bœuf séché, banane plantain mûre et manioc.",
+        "h36": "Indio viejo",
+        "p6": "Un ragoût à l'histoire profonde et aux racines autochtones : pâte de maïs délayée avec viande effilochée.",
+        "h37": "Rondón côtier",
+        "span3": "Caraïbes Sud (Bluefields)",
+        "p7": "Soupe insulaire aux saveurs de la mer : poisson, fruits de mer, manioc, quequisque et lait de coco frais.",
+        "h38": "Güirilas",
+        "p8": "Tortilla sucrée traditionnelle à base de maïs tendre, servie avec du caillé frais et de la crème.",
+        "p9": "Reine des soupes du dimanche : tripes et pied de bœuf avec légumes paysans, quequisque, épi de maïs et riz.",
+        "h39": "Fritanga traditionnelle",
+        "span4": "Managua & tout le pays",
+        "p10": "L'âme nocturne des quartiers nicaraguayens : viande grillée au charbon, tranches de plantain au fromage frit et salade créole."
+      },
+      "gastroSectionCommon": {
+        "h31": "Carte gastronomique du Nicaragua",
+        "p1": "Explorez les saveurs de chaque département et découvrez où les goûter.",
+        "h51": "Filtrer par :",
+        "h41": "Boissons de notre terre",
+        "h52": "Pinolillo",
+        "p2": "La boisson emblématique du Nicaragua à base de maïs grillé et de cacao.",
+        "h53": "Cacao au lait"
+      },
+      "gastroMapDepto": {
+        "option1": "Caraïbes Sud"
+      },
+      "gastroMapTipo": {
+        "option1": "Type : tous",
+        "option2": "Maïs traditionnel",
+        "option3": "Fruits de mer",
+        "option4": "Viandes et ragoûts"
+      },
+      "gastroMapPrecio": {
+        "option1": "Prix : tous",
+        "option2": "Économique (60 - 150 C$)",
+        "option3": "Moyen (150 - 350 C$)"
       }
     }
   },
@@ -3012,7 +3143,10 @@
     "quieroAventura": "🧗 Je veux de l'aventure",
     "algoCerca": "📍 Quelque chose à proximité",
     "sumateALaComunidadBaqueano": "Rejoignez la communauté BAQUEANO",
-    "favorito": "Favori"
+    "favorito": "Favori",
+    "policia118": "Police (118)",
+    "abrirMapaInteractivo": "Ouvrir la carte interactive →",
+    "verTodas": "Tout voir →"
   },
   "ops": {
     "impact": {

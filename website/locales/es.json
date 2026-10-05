@@ -2834,7 +2834,8 @@
     },
     "experiencias": {
       "body": {
-        "title1": "Experiencias de Aventura & Cultura | Baqueano Nicaragua"
+        "title1": "Experiencias de Aventura & Cultura | Baqueano Nicaragua",
+        "metaDescription1": "Descubrí las mejores experiencias de Nicaragua: sandboarding en Cerro Negro, rappel en Cañón de Somoto, rutas del café y surf en el Pacífico."
       },
       "expHero": {
         "span1": "TURISMO DE IMPACTO POSITIVO",
@@ -2879,7 +2880,12 @@
         "span12": "Fácil · Acuático",
         "h38": "Snorkel en Arrecifes de Coral",
         "p8": "Aguas turquesas del Caribe, tiburones nodriza, rayas águila y jardines de coral virgen con pescadores raizales.",
-        "span13": "Desde $35 USD / C$ 1,280"
+        "span13": "Desde $35 USD / C$ 1,280",
+        "imgAlt1": "Sandboarding Cerro Negro",
+        "imgAlt2": "Café Miraflor",
+        "imgAlt3": "Kayak Isletas",
+        "imgAlt4": "Surf Playa Maderas",
+        "imgAlt5": "Snorkel Corn Island"
       },
       "paquetesOficiales": {
         "span1": "OFERTA TERRITORIAL INTEGRADA",
@@ -2921,7 +2927,132 @@
         "strong8": "Nota:",
         "div12": "Transporte acuático desde San Carlos por separado",
         "h35": "CAÑÓN CERROS PEGADOS (ZIPOTE VAGO)",
-        "p5": "Expedición de aventura en la cordillera norteña con el equipo local Zipote Vago Tours. Farallones, senderismo de montaña, pozas naturales y gastronomía tradicional segoviana."
+        "p5": "Expedición de aventura en la cordillera norteña con el equipo local Zipote Vago Tours. Farallones, senderismo de montaña, pozas naturales y gastronomía tradicional segoviana.",
+        "div13": "Transporte 4x4, café con rosquillas, senderos, guía local y almuerzo",
+        "div14": "Alta ·",
+        "div15": "Jóvenes y adultos",
+        "span5": "RACCS · CARIBE SUR",
+        "h36": "EXPERIENCIA CAYOS PERLAS",
+        "p6": "Islotes coralinos vírgenes en el Mar Caribe. Salida desde Laguna de Perlas, transporte acuático seguro con chalecos, arrecife de coral, desayuno criollo, almuerzo caribeño y kayaks.",
+        "div16": "Lancha rápida, guía acreditado, snorkeling y kayaks",
+        "strong9": "Sujeto a:",
+        "div17": "Condiciones del mar y viento"
+      },
+      "rutasRioSanJuan": {
+        "span1": "PORTAL ESPECIALIZADO RIOSANJUAN.COM.NI",
+        "h21": "Rutas Temáticas y Turismo Comunitario en Río San Juan",
+        "p1": "Conectando el Gran Lago Cocibolca con el Caribe a través de cuatro grandes rutas de navegación, historia viva, biodiversidad y convivencia con pueblos originarios Rama.",
+        "h41": "Ruta del Oro (6 Días)",
+        "p2": "La legendaria ruta interoceánica de la fiebre del oro del siglo XIX: Managua → San Juan del Sur → Río San Juan → El Castillo → Greytown → Reserva Indio Maíz.",
+        "span2": "Navegación fluvial & selva",
+        "h42": "Ruta Colonial",
+        "p3": "El comercio colonial español, las fortificaciones ribereñas y la gesta del Desaguadero. Incluye la Fortaleza Inmaculada Concepción, museos y poblado de El Castillo.",
+        "span3": "Historia militar y baluartes",
+        "h43": "Ruta de las Aves (+270 Especies)",
+        "p4": "Aviturismo en los humedales de San Carlos, San Miguelito, Solentiname y Refugio Los Guatuzos. Garzas, martín pescador, espátulas rosadas y loras frentirrojas.",
+        "span4": "Avistamiento temprano en kayak",
+        "h44": "Ruta de los Naturalistas",
+        "p5": "Exploración de la Reserva Biológica Indio Maíz y Bartola. Selva tropical primaria, caimanes/cuajipales, monos congo, manatíes y ceibas milenarias con baqueanos.",
+        "span5": "Guía nativo obligatorio",
+        "span6": "CONVIVENCIA INDÍGENA RAMA",
+        "h31": "Reserva Cantagallo: Biósfera y Sabiduría Ancestral",
+        "p6": "Alojamiento comunitario y convivencia directa con familias del pueblo originario Rama. Recorridos guiados por líderes ancestrales a través de formaciones de basalto columnar, aguas termales medicinales y senderos vírgenes.",
+        "a1": "Conocer Experiencia Rama"
+      },
+      "sosModal": {
+        "h31": "Centro SOS",
+        "p1": "Tu ubicación GPS está activa para auxilio.",
+        "div1": "GPS Satelital"
+      }
+    },
+    "favoritos": {
+      "body": {
+        "title1": "Mis Favoritos | BAQUEANO Nicaragua",
+        "metaDescription1": "Consultá y administrá tus destinos favoritos guardados en BAQUEANO Nicaragua."
+      },
+      "favoritesHero": {
+        "span1": "TU COLECCIÓN",
+        "h11": "Mis lugares favoritos",
+        "p1": "Guardá destinos que querés conocer y encontralos aquí cuando estés listo para planificar tu próxima aventura.",
+        "span2": "lugares guardados en este dispositivo"
+      },
+      "favoritesEmpty": {
+        "h21": "Todavía no guardaste lugares",
+        "p1": "Explorá Nicaragua y presioná el corazón de cualquier destino para agregarlo a esta colección."
+      }
+    },
+    "gastronomia": {
+      "body": {
+        "title1": "Gastronomía Ancestral de los Hijos del Maíz | Baqueano Nicaragua"
+      },
+      "gastroHeroExact": {
+        "h11": "Gastronomía Ancestral de los",
+        "span1": "Hijos del Maíz",
+        "p1": "Sabores, tradiciones y saberes que dan vida a nuestra cultura. Descubrí la riqueza gastronómica de Nicaragua en cada territorio, desde sus raíces indígenas hasta sus influencias afrocaribeñas.",
+        "a1": "Explorar sabores →",
+        "a2": "Dónde probarlo",
+        "span2": "Nicaragua se saborea 🍃"
+      },
+      "gastroCatSection": {
+        "button1": "Platos típicos",
+        "button2": "Dulces",
+        "button3": "Maíz ancestral",
+        "button4": "Norte",
+        "button5": "Centro"
+      },
+      "saboresNuestraHistoria": {
+        "h21": "Sabores que cuentan nuestra historia",
+        "p1": "Platos tradicionales con identidad, historia y el auténtico sabor de Nicaragua.",
+        "a1": "Ver todos los platos →"
+      },
+      "dishCardExact": {
+        "h31": "Gallo Pinto",
+        "span1": "Todo el país",
+        "p1": "El sabor que nos une cada mañana: arroz y frijol criollo fritos con cebolla y chiltoma.",
+        "button1": "Conocer historia",
+        "h32": "Nacatamal de Domingo",
+        "p2": "Una tradición familiar dominical que trasciende generaciones en hoja de plátano.",
+        "h33": "Vigorón Granadino",
+        "p3": "Yuca cocida suave, chicharrón crujiente con carne y ensalada de repollo con mimbro.",
+        "h34": "Quesillo",
+        "p4": "El antojo callejero que enamora: tortilla caliente, queso trenzado, cebolla picada y crema.",
+        "h35": "Baho",
+        "span2": "Caribe Sur & Pacífico",
+        "p5": "Cocido al vapor de tradición afrocaribeña: carne de res cecinada, plátano maduro y yuca.",
+        "h36": "Indio Viejo",
+        "p6": "Un guiso con profunda historia y raíces indígenas: masa de maíz deshecha con carne mechada.",
+        "h37": "Rondón Costeño",
+        "span3": "Caribe Sur (Bluefields)",
+        "p7": "Sopa isleña con sabores del mar: pescado, mariscos, yuca, quequisque y leche de coco fresca.",
+        "h38": "Güirilas",
+        "p8": "Tortilla dulce tradicional de maíz tierno (choclo) servida con cuajada fresca y crema.",
+        "p9": "Reina de las sopas dominicales: toalla y pata de res con verduras campesinas, quequisque, elote y arroz.",
+        "h39": "Fritanga Tradicional",
+        "span4": "Managua & Todo el país",
+        "p10": "El alma nocturna de los barrios nicaragüenses: carne asada al carbón, tajadas con queso frito y ensalada criolla."
+      },
+      "gastroSectionCommon": {
+        "h31": "Mapa gastronómico de Nicaragua",
+        "p1": "Explorá los sabores de cada departamento y descubrí dónde probarlos.",
+        "h51": "Filtrar por:",
+        "h41": "Bebidas de nuestra tierra",
+        "h52": "Pinolillo",
+        "p2": "La bebida emblemática de Nicaragua a base de maíz tostado y cacao.",
+        "h53": "Cacao con leche"
+      },
+      "gastroMapDepto": {
+        "option1": "Caribe Sur"
+      },
+      "gastroMapTipo": {
+        "option1": "Tipo: Todos",
+        "option2": "Maíz tradicional",
+        "option3": "Mariscos",
+        "option4": "Carnes y guisos"
+      },
+      "gastroMapPrecio": {
+        "option1": "Precio: Todos",
+        "option2": "Económico (C$ 60 - C$ 150)",
+        "option3": "Medio (C$ 150 - C$ 350)"
       }
     }
   },
@@ -3012,7 +3143,10 @@
     "quieroAventura": "🧗 Quiero aventura",
     "algoCerca": "📍 Algo cerca",
     "sumateALaComunidadBaqueano": "Sumate a la comunidad BAQUEANO",
-    "favorito": "Favorito"
+    "favorito": "Favorito",
+    "policia118": "Policía (118)",
+    "abrirMapaInteractivo": "Abrir mapa interactivo →",
+    "verTodas": "Ver todas →"
   },
   "ops": {
     "impact": {

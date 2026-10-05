@@ -2834,7 +2834,8 @@
     },
     "experiencias": {
       "body": {
-        "title1": "Adventure & Culture Experiences | Baqueano Nicaragua"
+        "title1": "Adventure & Culture Experiences | Baqueano Nicaragua",
+        "metaDescription1": "Discover Nicaragua's best experiences: sandboarding on Cerro Negro, rappelling in Somoto Canyon, coffee routes and surfing on the Pacific."
       },
       "expHero": {
         "span1": "POSITIVE-IMPACT TOURISM",
@@ -2879,7 +2880,12 @@
         "span12": "Easy · Water",
         "h38": "Snorkeling on Coral Reefs",
         "p8": "Turquoise Caribbean waters, nurse sharks, eagle rays and pristine coral gardens with Raizal fishermen.",
-        "span13": "From $35 USD / C$ 1,280"
+        "span13": "From $35 USD / C$ 1,280",
+        "imgAlt1": "Sandboarding Cerro Negro",
+        "imgAlt2": "Miraflor coffee",
+        "imgAlt3": "Kayaking the Islets",
+        "imgAlt4": "Surfing at Playa Maderas",
+        "imgAlt5": "Snorkeling at Corn Island"
       },
       "paquetesOficiales": {
         "span1": "INTEGRATED TERRITORIAL OFFER",
@@ -2921,7 +2927,132 @@
         "strong8": "Note:",
         "div12": "Boat transport from San Carlos is separate",
         "h35": "CERROS PEGADOS CANYON (ZIPOTE VAGO)",
-        "p5": "Adventure expedition in the northern mountain range with the local team Zipote Vago Tours. Cliffs, mountain hiking, natural pools and traditional Segovian food."
+        "p5": "Adventure expedition in the northern mountain range with the local team Zipote Vago Tours. Cliffs, mountain hiking, natural pools and traditional Segovian food.",
+        "div13": "4x4 transport, coffee with rosquillas, trails, local guide and lunch",
+        "div14": "High ·",
+        "div15": "Young people and adults",
+        "span5": "RACCS · SOUTH CARIBBEAN",
+        "h36": "PEARL CAYS EXPERIENCE",
+        "p6": "Pristine coral islets in the Caribbean Sea. Departure from Pearl Lagoon, safe boat transport with life jackets, coral reef, Creole breakfast, Caribbean lunch and kayaks.",
+        "div16": "Speedboat, accredited guide, snorkeling and kayaks",
+        "strong9": "Subject to:",
+        "div17": "Sea and wind conditions"
+      },
+      "rutasRioSanJuan": {
+        "span1": "SPECIALIZED PORTAL RIOSANJUAN.COM.NI",
+        "h21": "Themed Routes and Community Tourism in Río San Juan",
+        "p1": "Connecting the Great Lake Cocibolca with the Caribbean through four great navigation routes, living history, biodiversity and life alongside the Rama indigenous people.",
+        "h41": "Gold Route (6 days)",
+        "p2": "The legendary interoceanic gold-rush route of the 19th century: Managua → San Juan del Sur → Río San Juan → El Castillo → Greytown → Indio Maíz Reserve.",
+        "span2": "River navigation & jungle",
+        "h42": "Colonial Route",
+        "p3": "Spanish colonial trade, riverside fortifications and the saga of the Desaguadero. Includes the Fortress of the Immaculate Conception, museums and the village of El Castillo.",
+        "span3": "Military history and bastions",
+        "h43": "Bird Route (270+ species)",
+        "p4": "Birdwatching in the wetlands of San Carlos, San Miguelito, Solentiname and Los Guatuzos Refuge. Herons, kingfishers, roseate spoonbills and red-lored parrots.",
+        "span4": "Early-morning birdwatching by kayak",
+        "h44": "Naturalists' Route",
+        "p5": "Exploring the Indio Maíz and Bartola biological reserves. Primary rainforest, caimans, howler monkeys, manatees and ancient ceiba trees with baqueanos.",
+        "span5": "Native guide required",
+        "span6": "RAMA INDIGENOUS HOMESTAY",
+        "h31": "Cantagallo Reserve: Biosphere and Ancestral Wisdom",
+        "p6": "Community lodging and direct homestays with families of the Rama indigenous people. Tours guided by ancestral leaders through columnar basalt formations, medicinal hot springs and pristine trails.",
+        "a1": "Discover the Rama Experience"
+      },
+      "sosModal": {
+        "h31": "SOS Center",
+        "p1": "Your GPS location is active for emergency help.",
+        "div1": "Satellite GPS"
+      }
+    },
+    "favoritos": {
+      "body": {
+        "title1": "My Favorites | BAQUEANO Nicaragua",
+        "metaDescription1": "View and manage your favorite destinations saved in BAQUEANO Nicaragua."
+      },
+      "favoritesHero": {
+        "span1": "YOUR COLLECTION",
+        "h11": "My favorite places",
+        "p1": "Save destinations you want to visit and find them here when you're ready to plan your next adventure.",
+        "span2": "places saved on this device"
+      },
+      "favoritesEmpty": {
+        "h21": "You haven't saved any places yet",
+        "p1": "Explore Nicaragua and tap the heart on any destination to add it to this collection."
+      }
+    },
+    "gastronomia": {
+      "body": {
+        "title1": "Ancestral Cuisine of the Children of Corn | Baqueano Nicaragua"
+      },
+      "gastroHeroExact": {
+        "h11": "Ancestral Cuisine of the",
+        "span1": "Children of Corn",
+        "p1": "Flavors, traditions and knowledge that bring our culture to life. Discover Nicaragua's culinary richness in every territory, from its indigenous roots to its Afro-Caribbean influences.",
+        "a1": "Explore flavors →",
+        "a2": "Where to try it",
+        "span2": "Nicaragua you can taste 🍃"
+      },
+      "gastroCatSection": {
+        "button1": "Typical dishes",
+        "button2": "Sweets",
+        "button3": "Ancestral corn",
+        "button4": "North",
+        "button5": "Center"
+      },
+      "saboresNuestraHistoria": {
+        "h21": "Flavors that tell our story",
+        "p1": "Traditional dishes with identity, history and the authentic taste of Nicaragua.",
+        "a1": "See all dishes →"
+      },
+      "dishCardExact": {
+        "h31": "Gallo Pinto",
+        "span1": "Nationwide",
+        "p1": "The flavor that unites us every morning: rice and Creole beans fried with onion and sweet pepper.",
+        "button1": "Discover its story",
+        "h32": "Sunday Nacatamal",
+        "p2": "A Sunday family tradition wrapped in plantain leaf that spans generations.",
+        "h33": "Granada Vigorón",
+        "p3": "Soft boiled cassava, crispy pork rind with meat and cabbage salad with mimbro.",
+        "h34": "Quesillo",
+        "p4": "The irresistible street snack: hot tortilla, braided cheese, chopped onion and cream.",
+        "h35": "Baho",
+        "span2": "South Caribbean & Pacific",
+        "p5": "Steam-cooked dish of Afro-Caribbean tradition: cured beef, ripe plantain and cassava.",
+        "h36": "Indio Viejo",
+        "p6": "A stew with deep history and indigenous roots: corn dough with shredded meat.",
+        "h37": "Coastal Rondón",
+        "span3": "South Caribbean (Bluefields)",
+        "p7": "Island soup with flavors of the sea: fish, seafood, cassava, quequisque and fresh coconut milk.",
+        "h38": "Güirilas",
+        "p8": "Traditional sweet tortilla made from tender corn, served with fresh curd cheese and cream.",
+        "p9": "Queen of Sunday soups: beef tripe and hoof with country vegetables, quequisque, corn on the cob and rice.",
+        "h39": "Traditional Fritanga",
+        "span4": "Managua & nationwide",
+        "p10": "The night soul of Nicaraguan neighborhoods: charcoal-grilled meat, plantain slices with fried cheese and Creole salad."
+      },
+      "gastroSectionCommon": {
+        "h31": "Nicaragua's food map",
+        "p1": "Explore the flavors of each department and discover where to try them.",
+        "h51": "Filter by:",
+        "h41": "Drinks from our land",
+        "h52": "Pinolillo",
+        "p2": "Nicaragua's emblematic drink made from toasted corn and cacao.",
+        "h53": "Cacao with milk"
+      },
+      "gastroMapDepto": {
+        "option1": "South Caribbean"
+      },
+      "gastroMapTipo": {
+        "option1": "Type: All",
+        "option2": "Traditional corn",
+        "option3": "Seafood",
+        "option4": "Meats and stews"
+      },
+      "gastroMapPrecio": {
+        "option1": "Price: All",
+        "option2": "Budget (C$ 60 - C$ 150)",
+        "option3": "Mid-range (C$ 150 - C$ 350)"
       }
     }
   },
@@ -3012,7 +3143,10 @@
     "quieroAventura": "🧗 I want adventure",
     "algoCerca": "📍 Something nearby",
     "sumateALaComunidadBaqueano": "Join the BAQUEANO community",
-    "favorito": "Favorite"
+    "favorito": "Favorite",
+    "policia118": "Police (118)",
+    "abrirMapaInteractivo": "Open interactive map →",
+    "verTodas": "See all →"
   },
   "ops": {
     "impact": {
