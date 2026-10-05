@@ -308,7 +308,7 @@
   window.shareRoute = function() {
     var text = '🗺️ Mi ruta BAQUEANO Nicaragua:\n' +
       trip.days.map(function(d) { return '• ' + d.badge + ': ' + d.title; }).join('\n') +
-      '\n\n🌿 Sin intermediarios · app-baqueano.web.app';
+      '\n\n🌿 Sin intermediarios · baqueanonicaragua.com';
     window.open('https://wa.me/?text=' + encodeURIComponent(text + '\n' + window.location.href), '_blank', 'noopener,noreferrer');
     toast('Abriendo WhatsApp para compartir la ruta', 'info');
     return;

@@ -14,9 +14,9 @@
 #                        2 min, modelo pull). Este job espera a que
 #                        https://baqueanonicaragua.com/health muestre el commit
 #                        subido y verifica API, Supabase y cabeceras.
-#   3. firebase-hosting→ publica el mismo Website en app-baqueano.web.app
-#                        (respaldo técnico) si existe el secreto
-#                        FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO.
+#   3. firebase-hosting→ EN PAUSA (propietario, 2026-10-05): el sitio público vive
+#                        solo en baqueanonicaragua.com. El job queda comentado al
+#                        final para reactivarlo en el futuro (ver firebase.legacy.json).
 #
 # SEGURIDAD:
 #   - GitHub no tiene acceso SSH a la VM (sin claves del servidor en GitHub).
@@ -25,7 +25,7 @@
 #
 # RELACIÓN: azure/autodeploy.sh, azure/deploy.sh, docs/deployment/AZURE_DEPLOYMENT.md.
 # =====================================================
-name: 🚀 BAQUEANO Producción (Azure + Firebase)
+name: 🚀 BAQUEANO Producción (Azure)
 
 on:
   push:
@@ -215,22 +215,23 @@ jobs:
           test "$(curl -s -o /dev/null -w '%{http_code}' "$SITE/README.md")" = "404"
           echo "✅ Cabeceras, redirección HTTPS y bloqueo de archivos internos correctos"
 
-  firebase-hosting:
-    name: 🔥 Publicar respaldo en Firebase Hosting
-    needs: [checks, browser-qa]
-    runs-on: ubuntu-latest
-    env:
-      HAS_FIREBASE_SECRET: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO != '' }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Aviso si falta el secreto
-        if: env.HAS_FIREBASE_SECRET != 'true'
-        run: echo "::notice::Secreto FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO no configurado; se omite Firebase Hosting (ver docs/deployment/AZURE_DEPLOYMENT.md)."
-      - name: Desplegar Hosting (canal live)
-        if: env.HAS_FIREBASE_SECRET == 'true'
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO }}
-          projectId: app-baqueano
-          channelId: live
+  # ── EN PAUSA (2026-10-05): publicación en Firebase Hosting. Descomentar para reactivar. ──
+  # firebase-hosting:
+  #   name: 🔥 Publicar respaldo en Firebase Hosting
+  #   needs: [checks, browser-qa]
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     HAS_FIREBASE_SECRET: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO != '' }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Aviso si falta el secreto
+  #       if: env.HAS_FIREBASE_SECRET != 'true'
+  #       run: echo "::notice::Secreto FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO no configurado; se omite Firebase Hosting (ver docs/deployment/AZURE_DEPLOYMENT.md)."
+  #     - name: Desplegar Hosting (canal live)
+  #       if: env.HAS_FIREBASE_SECRET == 'true'
+  #       uses: FirebaseExtended/action-hosting-deploy@v0
+  #       with:
+  #         repoToken: ${{ secrets.GITHUB_TOKEN }}
+  #         firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO }}
+  #         projectId: app-baqueano
+  #         channelId: live

@@ -4421,3 +4421,40 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - Captura DNS Hostinger del propietario: CNAME www→baqueanonicaragua.com, TXT @ "6317a1dae2f8e12255c20385d684203d", A @ 20.80.81.65. Falta el CNAME de Google.
 - Formulario Hostinger: tipo CNAME y objetivo cargados; campo Nombre vacío → indicar ues3nrtrlyrd.
 - ✅ CNAME ues3nrtrlyrd → gv-kphjfbvtlhk32n.dv.googlehosted.com publicado: responde en Hostinger (byte.dns-parking.com), Google 8.8.8.8 y Cloudflare 1.1.1.1. Registro A intacto (20.80.81.65). Siguiente: propietario pulsa Verificar en Search Console y envía sitemap.xml.
+
+## 2026-10-05 — Solicitud: "SUPABASE = SOURCE OF TRUTH" (migración de datos a Supabase, 30 fases) (Claude Code)
+- 🎯 **POR QUÉ:** una sola fuente principal de datos (Supabase) para web, app, Ops Center, BAQUI, mapa, Mi Negocio e Impacto. Firestore pasa a LEGADO/solo lectura; territories-data.js y JSON dejan de crecer como fuentes paralelas. Firebase se mantiene para Hosting, Auth (Google), Analytics, App Check.
+- ⚙️ **CÓMO:** auditoría → respaldo (/backups/migration-20261005/) → esquema reutilizando tablas existentes (places, businesses, municipalities 153, emergencies, culture…) → migraciones en supabase/migrations/ → script idempotente territories-data.js → Supabase (dry-run) → capa de servicios web → panel "Estado del sistema de datos" en Ops Center → BAQUI Supabase-first → preparación Flutter → pruebas → rollback.
+- ⛔ **Fase 30 / memoria:** NO db push, NO importación real, NO deploy sin autorización explícita del propietario.
+- 📦 **QUÉ:** entregable con clasificación 🟢🟡🔴⚪ sin verdes falsos.
+- **Estado:** En progreso — Fase 1 (auditoría).
+- (avance migración) Auditoría: Firestore `appbaqueano` VACÍO (0 colecciones; no existe `(default)`): no hay datos que migrar desde Firestore; registros de Mi Negocio (colección registro_negocios, sin regla) se perdían. Supabase: places 0, destinations 7, businesses 5 (sin source_url), municipalities 153, Storage 6 buckets con 0 objetos. Flutter ya tiene SupabaseRestClient + repositorios. Respaldo: backups/migration-20261005/ (gitignored, SHA256SUMS). Migración 20261005080000_supabase_source_of_truth.sql escrita y parseada (60 sentencias). Importador website/scripts/migrate-territories-to-supabase.mjs escrito.
+
+## 2026-10-05 — Solicitud: SEO técnico "eliminar TutorNode de Google" (24 fases) (Claude Code)
+- 🎯 **POR QUÉ:** Google muestra "Login - TutorNode / Correo Electrónico / Contraseña / Crear una ahora" para baqueanonicaragua.com; debe identificar a BAQUEANO Nicaragua.
+- ⚙️ **CÓMO:** auditoría completa (repo + sitio en vivo + dominio/servidor) → causa real → cambios propuestos → esperar autorización. NO commit, NO push, NO deploy, NO tocar google5c73d71f3e5f8337.html.
+- **Estado:** En progreso — auditoría (se termina antes el dry-run del importador de Supabase).
+- (migración Supabase) Importador dry-run: 266 fuente → 237 places + 25 businesses + 4 duplicados (ya existen como destinations) = cuadra; 115 verificados, 6 parciales, 141 pendientes; 37 map_ready; SQL supabase/imports/20261005_territories_import.sql (409 sentencias, idempotente --check). Doc: docs/architecture/SUPABASE_SOURCE_OF_TRUTH.md (avance ~35 %). Regla 5b agregada a AGENTS.md. Pendiente: capa de servicios web, mapa, Ops CMS + panel, Mi Negocio register_business, BAQUI, Flutter repos, guard Firestore legado; aplicar en producción requiere autorización.
+- (SEO TutorNode) Auditoría sin cambios en el sitio: 0 referencias a TutorNode en repo, historial git, sitio en vivo (Googlebot UA) y servidor Azure. Dominio registrado 2026-09-30; Wayback 2026-10-01 = página parqueada de Hostinger. Causa: índice viejo de Google del rastreo en la ventana en que el dominio apuntaba a otro servidor/configuración (1–2 oct); agravado porque la release en vivo (56bd236) declara canonical https://app-baqueano.web.app/. El build actual de main ya lo corrige pero no está desplegado. Doc: docs/seo/AUDITORIA_TUTORNODE_2026-10-05.md. Esperando autorización (P1 deploy, P2–P8).
+- Propietario: captura de Search Console con propiedad de Dominio baqueanonicaragua.com (verificada) + prefijo https://www.baqueanonicaragua.com/.
+- Propietario pregunta: ¿quitar Firebase Hosting y dejar solo Hostinger? → análisis de dependencias (sin cambios).
+- Propietario envió sitemap.xml en Search Console: estado 'No se ha podido obtener' (5 oct 2026). Diagnóstico en curso.
+- Propietario: '¿vuelvo a subir sitemap.xml?' → aún no: el sitemap en vivo sigue con URLs de web.app hasta desplegar el build actual.
+
+## 2026-10-05 — Decisión del propietario: dejar Firebase Hosting; conservar solo Authentication y APIs (Cloud Functions); el resto "comentado para futuro" + consulta del estado de la migración a Supabase
+- 🎯 POR QUÉ: un solo sitio público (baqueanonicaragua.com en Azure), sin copia en app-baqueano.web.app (SEO: canonical/sitemap duplicados).
+- ⚙️ CÓMO: sin borrar nada: firebase.json conserva functions; hosting/firestore/storage/database/emulators pasan a un archivo de configuración legado documentado (JSON no admite comentarios); nginx /api/ deja de depender del Hosting; workflow sin publicación a Firebase Hosting (comentado). Auth intacto (/__/auth/ en app-baqueano.firebaseapp.com NO se deshabilita). Sin deploy ni commit.
+- Estado: en progreso.
+- Hecho (repo, sin deploy): firebase.json solo con functions; hosting/firestore/storage/database/emulators → firebase.legacy.json (con _comentario, intactos); firebase.hosting-redirect.json + tools/firebase-retired-site/ para retiro único de web.app con 301 (requiere autorización); workflow deploy-production.yml: job firebase-hosting comentado (YAML válido, jobs: checks, browser-qa, verify-azure); nginx /api/ → web.app comentado; texto compartir de Mi Viaje → baqueanonicaragua.com; AGENTS.md §5 actualizado. Respaldos de los 3 archivos en backups/migration-20261005/.
+- Hallazgos: 0 Cloud Functions desplegadas (functions_list_functions vacío; Billing no habilitado = plan Spark); /api/* da 404 en dominio, web.app y cloudfunctions.net. El login depende de /__/auth/* en app-baqueano.firebaseapp.com (proxy nginx) → no deshabilitar el sitio de Hosting.
+- Gates: smoke OK, auditoría 0 críticos, i18n OK.
+
+## 2026-10-05 — Propietario: "te autorizo" (los 4 puntos)
+- Autoriza: (1) desplegar en Azure (commit + push a main → autodeploy de la VM), (2) 301 de app-baqueano.web.app en Firebase Hosting (despliegue único), (3) seguir con el código de la migración a Supabase, (4) aplicar la migración en Supabase.
+- Plan seguro: respaldo lógico propio de todas las tablas con datos antes de (4); aplicar 070000 → 080000 → importación; verificar conteos con data_source_status(); desplegar Edge Functions modificadas; commit solo de archivos de estas tareas; verificar health/canonical/sitemap/robots en vivo; luego 301 y verificar que el login (/__/auth/) siga respondiendo.
+- Estado: en progreso.
+- apply_migration 070000 RECHAZADO otra vez (permiso de herramienta); no se reintenta. Hecho en BD: esquema backup_20261005 (15 tablas con datos, sin acceso anon/authenticated).
+- Propietario pregunta: ¿subir ZIP a Hostinger más adelante (Azure temporal)? → análisis de dependencias de Azure.
+
+## 2026-10-05 — Propietario: "¿ya se migró todo? quiero totalmente funcional Supabase"
+- Estado real: nada aplicado en producción (apply_migration rechazado 2 veces por el diálogo de permisos). Se reintenta con la orden explícita del propietario: 070000 → 080000 → importación → verificación → Edge Functions.

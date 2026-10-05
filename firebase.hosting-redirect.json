@@ -1,0 +1,18 @@
+{
+  "_comentario": [
+    "Despliegue ÚNICO para retirar la copia pública de app-baqueano.web.app sin romper el login.",
+    "Uso (solo con autorización): firebase deploy --only hosting --config firebase.hosting-redirect.json",
+    "Todo se redirige 301 a https://baqueanonicaragua.com/ conservando la ruta. Las URL reservadas /__/ (Auth) las sirve Firebase siempre y no se ven afectadas."
+  ],
+  "hosting": {
+    "site": "app-baqueano",
+    "public": "tools/firebase-retired-site",
+    "redirects": [
+      {
+        "regex": "^/(?P<path>.*)$",
+        "destination": "https://baqueanonicaragua.com/:path",
+        "type": 301
+      }
+    ]
+  }
+}

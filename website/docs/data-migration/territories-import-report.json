@@ -1,0 +1,163 @@
+{
+  "run_key": "territories-2026-10-05",
+  "source": "website/js/territories-data.js",
+  "totals": {
+    "total_fuente_original": 266,
+    "places": 237,
+    "businesses": 25,
+    "total_insertados": 262,
+    "total_actualizados": 0,
+    "total_duplicados": 4,
+    "total_pendientes": 141,
+    "total_parciales": 6,
+    "total_verificados": 115,
+    "total_sin_coordenadas": 183,
+    "total_coordenadas_descartadas": 0,
+    "total_sin_fuente": 141,
+    "total_map_ready": 37,
+    "total_sin_municipio": 193,
+    "total_categoria_inferida": 177,
+    "total_notas_precio": 38
+  },
+  "duplicates": [
+    {
+      "reason": "ya_existe_en_supabase",
+      "territory": "madriz",
+      "name": "Monumento Nacional Cañón de Somoto",
+      "existing_id": "dest_canon_somoto",
+      "existing_kind": "destination"
+    },
+    {
+      "reason": "ya_existe_en_supabase",
+      "territory": "leon",
+      "name": "Volcán Cerro Negro",
+      "existing_id": "dest_cerro_negro",
+      "existing_kind": "destination"
+    },
+    {
+      "reason": "ya_existe_en_supabase",
+      "territory": "masaya",
+      "name": "Reserva Natural Laguna de Apoyo",
+      "existing_id": "dest_laguna_apoyo",
+      "existing_kind": "destination"
+    },
+    {
+      "reason": "ya_existe_en_supabase",
+      "territory": "granada",
+      "name": "Reserva Natural Volcán Mombacho",
+      "existing_id": "dest_volcan_mombacho",
+      "existing_kind": "destination"
+    }
+  ],
+  "review": [
+    {
+      "territory": "matagalpa",
+      "name": "Reserva Silvestre Selva Negra",
+      "similar_to": "dest_selva_negra",
+      "existing_name": "Reserva Ecológica Selva Negra",
+      "similarity": 0.5,
+      "near_150m": false
+    },
+    {
+      "territory": "matagalpa",
+      "name": "Selva Negra Ecolodge",
+      "similar_to": "dest_selva_negra",
+      "existing_name": "Reserva Ecológica Selva Negra",
+      "similarity": 0.5,
+      "near_150m": true
+    },
+    {
+      "territory": "raccs",
+      "name": "Corn Island & Little Corn Island",
+      "similar_to": "dest_corn_island",
+      "existing_name": "Islas del Maíz (Great & Little Corn Island)",
+      "similarity": 0.5,
+      "near_150m": false
+    }
+  ],
+  "discarded_coordinates": [],
+  "unmatched_municipalities": [
+    {
+      "territory": "rivas",
+      "name": "Volcán Concepción",
+      "zone": "Isla de Ometepe"
+    },
+    {
+      "territory": "jinotega",
+      "name": "Cerro Kilambé y aguas termales de El Caño",
+      "zone": "El Cuá / San José de Bocay / Wiwilí"
+    },
+    {
+      "territory": "masaya",
+      "name": "Volcán Masaya (caldera Santiago)",
+      "zone": "Nindirí / Masaya"
+    },
+    {
+      "territory": "granada",
+      "name": "Río Tipitapa",
+      "zone": "Tipitapa"
+    },
+    {
+      "territory": "matagalpa",
+      "name": "Reserva Natural Cerro Musún",
+      "zone": "Río Blanco / Matiguás / Paiwas"
+    },
+    {
+      "territory": "esteli",
+      "name": "Reserva Natural Tisey-La Estanzuela",
+      "zone": "Estelí / San Nicolás / El Sauce"
+    },
+    {
+      "territory": "nueva-segovia",
+      "name": "Cerro Mogotón (2,107 msnm)",
+      "zone": "Frontera Nicaragua-Honduras"
+    },
+    {
+      "territory": "rio-san-juan",
+      "name": "Reserva Biológica Indio Maíz",
+      "zone": "Sureste de Nicaragua"
+    },
+    {
+      "territory": "rio-san-juan",
+      "name": "Río San Juan",
+      "zone": "San Carlos / El Castillo / San Juan de Nicaragua"
+    },
+    {
+      "territory": "raccn",
+      "name": "Reserva de Biosfera Bosawás",
+      "zone": "Norte y Caribe Norte"
+    },
+    {
+      "territory": "raccs",
+      "name": "Río Grande de Matagalpa",
+      "zone": "Cuenca del Río Grande"
+    },
+    {
+      "territory": "raccs",
+      "name": "Río Escondido",
+      "zone": "Bluefields / El Rama"
+    }
+  ],
+  "existing_without_source": [
+    {
+      "id": "biz-red-ometepe",
+      "name": "Red Comunitaria Ometepe Viva"
+    },
+    {
+      "id": "biz-lancheros-isletas",
+      "name": "Asoc. Lancheros Tradicionales de Granada"
+    },
+    {
+      "id": "biz-selva-negra-lodge",
+      "name": "Finca Comunitaria Nebliselva"
+    },
+    {
+      "id": "biz-cerro-negro-exp",
+      "name": "Baqueanos del Cerro Negro"
+    },
+    {
+      "id": "biz-coop-somoto",
+      "name": "Coop. Guías Comunitarios del Cañón de Somoto"
+    }
+  ]
+}
