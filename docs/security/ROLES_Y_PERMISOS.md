@@ -73,6 +73,21 @@ values ('correo.auditor@ejemplo.com', 'auditor', 'oscarelieser.informatica.inate
 | `roles.js`: 10 casos (claim, matriz, servidor, correo sin verificar, rol desconocido, sin red) | 10/10 OK | Unitaria |
 | Ops Center: métodos de escritura envueltos; con rol de solo lectura devuelven `false` y muestran aviso; `exportFullBackup` permitido | OK | Navegador (Playwright) |
 
-### Limitación conocida
+### Firestore (paneles del Ops Center)
 
-Las lecturas del Ops Center que vienen de **Firestore** dependen de `isAdmin()` en `firestore.rules`. Para que un auditor vea esos paneles hay que darle el custom claim `role: "auditor"` y añadir la lectura correspondiente en las reglas. Ese despliegue es manual (`firebase deploy --only firestore:rules`), porque el repositorio no tiene credencial de Firebase. Los paneles servidos por Supabase (moderación de la comunidad) ya funcionan para el auditor.
+`firestore.rules` reconoce al **Auditor** por el custom claim `role: "auditor"` con correo verificado:
+- **Puede leer:** contenido (borradores incluidos), auditoría, telemetría, reportes ambientales, roles, versiones Android y ajustes de IA.
+- **No puede:** escribir, ni ver SOS, pagos, reservas o mensajes.
+
+La auditoría es **inmutable**: nadie la edita y solo el Superadmin depura registros. Antes, un segundo bloque `match /audit_logs` con `allow read, write: if isAdmin()` anulaba esa inmutabilidad; ese bloque se eliminó.
+
+- **Pruebas:** `tools/firestore-rules.test.mjs`, 16 casos en el emulador (16/16 OK). Corren en CI con `.github/workflows/firestore-rules.yml`.
+- **Asignar el claim** (Superadmin, con su credencial de servicio y fuera del repositorio):
+
+  ```bash
+  GOOGLE_APPLICATION_CREDENTIALS=~/baqueano-sa.json node tools/set-role-claim.mjs correo.auditor@ejemplo.com auditor
+  ```
+
+- **Publicar las reglas** (manual, el repositorio no tiene credencial de Firebase): `firebase deploy --only firestore:rules`.
+
+Mientras no se despliegue, los paneles servidos por Supabase (moderación de la comunidad) ya funcionan para el Auditor mediante `public.staff_roles`.

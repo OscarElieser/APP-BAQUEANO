@@ -7423,6 +7423,8 @@
       'saveGlobalSettings', 'saveGlobalSeoConfig']
   };
 
+  const SUPER_ADMIN_ONLY = new Set(['deleteAuditLog', 'clearAuditLogs']);
+
   function opsCanWrite() {
     const role = OpsState.currentRole;
     if (window.BaqueanoRoles && typeof window.BaqueanoRoles.canWriteOps === 'function') {
@@ -7439,6 +7441,12 @@
       const guarded = function (...args) {
         if (!opsCanWrite()) {
           OpsToast.show('Rol Auditor: acceso de solo lectura. Esta acción requiere un administrador.', 'warning', 4200);
+          return Promise.resolve(false);
+        }
+        // La auditoría es inmutable (firestore.rules): solo el superadministrador
+        // depura registros por retención.
+        if (SUPER_ADMIN_ONLY.has(name) && OpsState.currentRole !== 'super_admin') {
+          OpsToast.show('La auditoría es inmutable: solo el Superadministrador puede depurar registros.', 'warning', 4200);
           return Promise.resolve(false);
         }
         return original.apply(this, args);

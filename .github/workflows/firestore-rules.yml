@@ -1,0 +1,44 @@
+# ============================================================================
+# 🧭 BAQUEANO — PRUEBAS DE firestore.rules (EMULADOR)
+# ============================================================================
+# 🎯 POR QUÉ: los roles (Explorador, Auditor, Admin y Superadmin) y la
+#    auditoría inmutable deben demostrarse con pruebas, no con palabras.
+# ⚙️ CÓMO: emulador de Firestore + @firebase/rules-unit-testing; no usa
+#    credenciales ni toca producción.
+# 📦 QUÉ: tools/firestore-rules.test.mjs (16 casos) en cada cambio de reglas.
+# ============================================================================
+name: 🔐 Reglas Firestore
+
+on:
+  push:
+    branches: [main]
+    paths: [firestore.rules, tools/firestore-rules.test.mjs, .github/workflows/firestore-rules.yml]
+  pull_request:
+    paths: [firestore.rules, tools/firestore-rules.test.mjs]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rules:
+    name: 🔐 Emulador de Firestore
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Herramientas de prueba
+        run: npm install --no-save --prefix tools firebase-tools@13 @firebase/rules-unit-testing@3 firebase@10
+      - name: Probar reglas en el emulador
+        run: |
+          printf '{"firestore":{"rules":"%s/firestore.rules"},"emulators":{"firestore":{"port":8085},"ui":{"enabled":false}}}' "$GITHUB_WORKSPACE" > /tmp/firebase.rules-test.json
+          tools/node_modules/.bin/firebase emulators:exec \
+            --config /tmp/firebase.rules-test.json --project baqueano-rules-test --only firestore \
+            "node tools/firestore-rules.test.mjs"

@@ -43,6 +43,28 @@ service cloud.firestore {
           ]));
     }
 
+    // Superadministrador: único que puede depurar la auditoría.
+    function isSuperAdmin() {
+      return isSignedIn()
+        && (request.auth.token.role == 'super_admin'
+          || (request.auth.token.email_verified == true
+            && request.auth.token.email == 'oscarelieser.informatica.inatec@gmail.com'));
+    }
+
+    // AUDITOR (solo lectura, docs/security/ROLES_Y_PERMISOS.md): custom claim
+    // `role: auditor` con correo verificado. Lee contenido y paneles operativos
+    // del Ops Center; nunca escribe ni ve datos privados (SOS, pagos, reservas
+    // ni mensajes).
+    function isAuditor() {
+      return isSignedIn()
+        && request.auth.token.email_verified == true
+        && request.auth.token.role == 'auditor';
+    }
+
+    function isStaffReader() {
+      return isAdmin() || isAuditor();
+    }
+
     function isOwner(ownerUid) {
       return isSignedIn() && ownerUid == request.auth.uid;
     }
@@ -144,7 +166,7 @@ service cloud.firestore {
 
     // Catálogo público: solo contenido aprobado. Toda escritura es administrativa.
     match /destinations/{destinationId} {
-      allow read: if isPublished() || isAdmin();
+      allow read: if isPublished() || isStaffReader();
       allow write: if isAdmin();
     }
 
@@ -222,12 +244,12 @@ service cloud.firestore {
     }
 
     match /multimedia/{mediaId} {
-      allow read: if isPublished() || isAdmin();
+      allow read: if isPublished() || isStaffReader();
       allow write: if isAdmin();
     }
 
     match /countries/{countryId} {
-      allow read: if isPublished() || isAdmin();
+      allow read: if isPublished() || isStaffReader();
       allow write: if isAdmin();
     }
 
@@ -237,7 +259,8 @@ service cloud.firestore {
     }
 
     match /android_releases/{releaseId} {
-      allow read, write: if isAdmin();
+      allow read: if isStaffReader();
+      allow write: if isAdmin();
     }
 
     // Una solicitud puede guardarse offline, pero no contiene precios ni aprobación.
@@ -347,10 +370,14 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // Auditoría: nadie la edita; solo el superadministrador depura registros
+    // (retención). Antes un segundo bloque `match /audit_logs` con
+    // `allow read, write: if isAdmin()` anulaba esta inmutabilidad.
     match /audit_logs/{logId} {
-      allow read: if isAdmin();
+      allow read: if isStaffReader();
       allow create: if isAdmin();
-      allow update, delete: if false;
+      allow update: if false;
+      allow delete: if isSuperAdmin();
     }
 
     // Telemetría anónima: esquema cerrado y tamaños acotados para que nadie la
@@ -367,7 +394,8 @@ service cloud.firestore {
         && isShortText(request.resource.data, 'userAgent', 400)
         && isShortText(request.resource.data, 'userId', 200)
         && isShortText(request.resource.data, 'sessionId', 100);
-      allow read, delete: if isAdmin();
+      allow read: if isStaffReader();
+      allow delete: if isAdmin();
       allow update: if false;
     }
 
@@ -389,7 +417,7 @@ service cloud.firestore {
     }
 
     match /places/{placeId} {
-      allow read: if isPublished() || isAdmin();
+      allow read: if isPublished() || isStaffReader();
       allow write: if isAdmin();
     }
 
@@ -409,33 +437,34 @@ service cloud.firestore {
     }
 
     match /experiences/{expId} {
-      allow read: if isPublished() || isAdmin();
+      allow read: if isPublished() || isStaffReader();
       allow write: if isAdmin();
     }
 
     match /cultural_items/{itemId} {
-      allow read: if isPublished() || isAdmin();
+      allow read: if isPublished() || isStaffReader();
       allow write: if isAdmin();
     }
 
     match /gastronomy/{dishId} {
-      allow read: if isPublished() || isAdmin();
+      allow read: if isPublished() || isStaffReader();
       allow write: if isAdmin();
     }
 
     match /history_timeline/{periodId} {
-      allow read: if isPublished() || isAdmin();
+      allow read: if isPublished() || isStaffReader();
       allow write: if isAdmin();
     }
 
     match /sustainability_initiatives/{initId} {
-      allow read: if isPublished() || isAdmin();
+      allow read: if isPublished() || isStaffReader();
       allow write: if isAdmin();
     }
 
     match /environmental_reports/{reportId} {
       allow create: if isSignedIn();
-      allow read, update, delete: if isAdmin();
+      allow read: if isStaffReader();
+      allow update, delete: if isAdmin();
     }
 
     match /emergency_directory/{dirId} {
@@ -464,21 +493,20 @@ service cloud.firestore {
     }
 
     match /roles/{roleId} {
-      allow read: if isAdmin();
+      allow read: if isStaffReader();
       allow write: if isAdmin();
     }
 
     match /ai_tasks/{taskId} {
-      allow read, write: if isAdmin();
+      allow read: if isStaffReader();
+      allow write: if isAdmin();
     }
 
     match /ai_settings/{settingId} {
-      allow read, write: if isAdmin();
+      allow read: if isStaffReader();
+      allow write: if isAdmin();
     }
 
-    match /audit_logs/{logId} {
-      allow read, write: if isAdmin();
-    }
 
     match /user_saved_places/{savedId} {
       allow read: if isSignedIn()
