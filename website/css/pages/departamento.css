@@ -912,12 +912,14 @@ button.territory-pill-card span {
 }
 .map-place-info-chip {
   display: inline-block;
+  max-width: 100%;
   padding: 0.2rem 0.6rem;
+  line-height: 1.35;
   color: #0F172A;
   font-size: 0.72rem;
   font-weight: 700;
   background: #F4E6C1;
-  border-radius: 999px;
+  border-radius: 10px;
 }
 .map-place-info-close {
   flex: 0 0 auto;
@@ -948,6 +950,7 @@ button.territory-pill-card span {
   color: #E2E8F0 !important;
   font-size: 0.8rem;
 }
+.map-place-info .map-place-info-facts li { color: #E2E8F0 !important; }
 .map-place-info .map-place-info-facts strong,
 .map-place-info .map-place-info-extras dt { color: #FFFFFF !important; }
 .map-place-info-extras { margin: 0.4rem 0 0; }
@@ -991,13 +994,26 @@ button.territory-pill-card span {
 
 @media (max-width: 640px) {
   .map-place-info {
-    top: auto;
-    right: 10px;
-    left: 10px;
-    bottom: 128px;
+    top: 12px;
+    right: 8px;
+    left: 8px;
+    bottom: auto;
     width: auto;
-    max-height: 58%;
+    max-height: calc(100% - 150px);
+    padding: 0.85rem 0.9rem 0.95rem;
+    border-radius: 18px;
   }
+  .map-place-info-icon {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+    font-size: 1rem;
+    border-radius: 12px;
+  }
+  .map-place-info h3 { font-size: 0.95rem; }
+  .map-place-info-chip { font-size: 0.68rem; }
+  .map-place-info-close { width: 32px; height: 32px; }
+  .map-place-info-btn { flex-basis: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
