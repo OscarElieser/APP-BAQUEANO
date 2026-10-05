@@ -18,7 +18,7 @@
   var LOCALES = Object.freeze({ es: 'es-NI', en: 'en-US', fr: 'fr-FR', it: 'it-IT', pt: 'pt-BR', de: 'de-DE' });
   var STORAGE_KEY = 'baqueano_language_v2';
   var LEGACY_STORAGE_KEYS = Object.freeze(['baqueano_language_v1', 'baqueano_language']);
-  var VERSION = '2026.10.04-galeria-1';
+  var VERSION = '2026.10.05-i18n-completo-1';
   var cache = new Map();
   var semanticFallbackKeys = new Map();
   var originals = new WeakMap();
@@ -217,11 +217,20 @@
     return { lang: currentLanguage, language: currentLanguage, locale: LOCALES[currentLanguage] };
   }
 
+  // Cada cambio recibe un número; si mientras se descarga un catálogo la
+  // persona elige otro idioma (o la carga inicial termina tarde), solo se
+  // aplica la elección más reciente. Antes la carga inicial en inglés podía
+  // pisar un "Español" elegido segundos después.
+  var languageRequest = 0;
+
   async function changeLanguage(language, options) {
     var next = normalizeLanguage(language);
+    var request = ++languageRequest;
     fallbackCatalog = fallbackCatalog || await loadCatalog('es');
     if (!semanticFallbackKeys.size) indexCanonicalPhrases(fallbackCatalog, '');
-    activeCatalog = next === 'es' ? fallbackCatalog : await loadCatalog(next);
+    var catalog = next === 'es' ? fallbackCatalog : await loadCatalog(next);
+    if (request !== languageRequest) return currentLanguage;
+    activeCatalog = catalog;
     currentLanguage = next;
     try {
       localStorage.setItem(STORAGE_KEY, currentLanguage);

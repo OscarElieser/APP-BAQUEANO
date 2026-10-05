@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "locale": "es-NI",
+    "version": "2026.10.05"
+  },
   "language": {
     "change": "Cambiar idioma",
     "es": "Español",
@@ -62,7 +66,8 @@
     "privacy": "Política de Privacidad",
     "cookies": "Política de Cookies",
     "legal_notice": "Aviso Legal",
-    "copyright": "© {year} Baqueano Nicaragua."
+    "copyright": "© {year} Baqueano Nicaragua.",
+    "madeIn": "Hecho en Nicaragua"
   },
   "actions": {
     "search": "Buscar",
@@ -98,7 +103,8 @@
     "viewMap": "Ver en mapa",
     "openMenu": "Abrir menú",
     "prevPage": "Página anterior",
-    "nextPage": "Página siguiente"
+    "nextPage": "Página siguiente",
+    "retry": "Intentar de nuevo"
   },
   "status": {
     "loading": "Explorando Nicaragua…",
@@ -284,7 +290,9 @@
       "surprise": "Sorpréndeme",
       "hidden": "No sale en el mapa",
       "planner": "Planificar viaje"
-    }
+    },
+    "welcome": "¡Hola! Soy Baqüi, tu guía guardabarranco. ¿Qué querés descubrir hoy?",
+    "open": "Abrí Baqüi, tu guía digital"
   },
   "trip": {
     "title": "Mi Viaje",
@@ -789,5 +797,9 @@
     "publishing": "Publicando…",
     "commentThanks": "Comentario publicado. ¡Gracias por sumar a la comunidad!",
     "carouselLabel": "Testimonios de la comunidad"
+  },
+  "seo": {
+    "defaultTitle": "BAQUEANO — Descubrí Nicaragua",
+    "defaultDescription": "Explorá destinos, cultura y experiencias auténticas de Nicaragua."
   }
 }

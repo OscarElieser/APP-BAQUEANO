@@ -1,30 +1,24 @@
 {
-  "generatedAt": "2026-10-01T19:45:38.810Z",
-  "pages": 29,
-  "baseKeys": 342,
-  "errors": [
-    "en: 297 claves ausentes (language.select, nav.profile, nav.favorites, nav.assistant, nav.legal, nav.about, nav.register, nav.complaints, nav.allies, nav.admin, nav.skipNav, nav.aria, …)",
-    "fr: 297 claves ausentes (language.select, nav.profile, nav.favorites, nav.assistant, nav.legal, nav.about, nav.register, nav.complaints, nav.allies, nav.admin, nav.skipNav, nav.aria, …)",
-    "it: 297 claves ausentes (language.select, nav.profile, nav.favorites, nav.assistant, nav.legal, nav.about, nav.register, nav.complaints, nav.allies, nav.admin, nav.skipNav, nav.aria, …)",
-    "pt: 297 claves ausentes (language.select, nav.profile, nav.favorites, nav.assistant, nav.legal, nav.about, nav.register, nav.complaints, nav.allies, nav.admin, nav.skipNav, nav.aria, …)",
-    "de: 297 claves ausentes (language.select, nav.profile, nav.favorites, nav.assistant, nav.legal, nav.about, nav.register, nav.complaints, nav.allies, nav.admin, nav.skipNav, nav.aria, …)"
-  ],
+  "generatedAt": "2026-10-05T00:02:48.610Z",
+  "pages": 30,
+  "baseKeys": 698,
+  "errors": [],
   "warnings": [
     {
       "file": "404.html",
-      "unkeyedVisibleTextEstimate": 86
+      "unkeyedVisibleTextEstimate": 82
     },
     {
       "file": "aliados.html",
-      "unkeyedVisibleTextEstimate": 253
+      "unkeyedVisibleTextEstimate": 248
     },
     {
       "file": "ambiental.html",
-      "unkeyedVisibleTextEstimate": 149
+      "unkeyedVisibleTextEstimate": 144
     },
     {
       "file": "aviso-legal.html",
-      "unkeyedVisibleTextEstimate": 154
+      "unkeyedVisibleTextEstimate": 143
     },
     {
       "file": "ayuda.html",
@@ -36,23 +30,23 @@
     },
     {
       "file": "baqueano-ia.html",
-      "unkeyedVisibleTextEstimate": 303
+      "unkeyedVisibleTextEstimate": 264
     },
     {
       "file": "cookies.html",
-      "unkeyedVisibleTextEstimate": 185
+      "unkeyedVisibleTextEstimate": 172
     },
     {
       "file": "cronicas.html",
-      "unkeyedVisibleTextEstimate": 21
+      "unkeyedVisibleTextEstimate": 40
     },
     {
       "file": "denuncias.html",
-      "unkeyedVisibleTextEstimate": 183
+      "unkeyedVisibleTextEstimate": 174
     },
     {
       "file": "departamento.html",
-      "unkeyedVisibleTextEstimate": 221
+      "unkeyedVisibleTextEstimate": 212
     },
     {
       "file": "destino.html",
@@ -60,11 +54,11 @@
     },
     {
       "file": "destinos.html",
-      "unkeyedVisibleTextEstimate": 176
+      "unkeyedVisibleTextEstimate": 174
     },
     {
       "file": "experiencias.html",
-      "unkeyedVisibleTextEstimate": 191
+      "unkeyedVisibleTextEstimate": 173
     },
     {
       "file": "favoritos.html",
@@ -72,15 +66,15 @@
     },
     {
       "file": "gastronomia.html",
-      "unkeyedVisibleTextEstimate": 238
+      "unkeyedVisibleTextEstimate": 229
     },
     {
       "file": "historia.html",
-      "unkeyedVisibleTextEstimate": 223
+      "unkeyedVisibleTextEstimate": 220
     },
     {
       "file": "index.html",
-      "unkeyedVisibleTextEstimate": 252
+      "unkeyedVisibleTextEstimate": 247
     },
     {
       "file": "legal.html",
@@ -88,39 +82,43 @@
     },
     {
       "file": "mapa.html",
-      "unkeyedVisibleTextEstimate": 59
+      "unkeyedVisibleTextEstimate": 58
     },
     {
       "file": "mi-negocio.html",
-      "unkeyedVisibleTextEstimate": 337
+      "unkeyedVisibleTextEstimate": 291
     },
     {
       "file": "mi-viaje.html",
-      "unkeyedVisibleTextEstimate": 185
+      "unkeyedVisibleTextEstimate": 182
     },
     {
       "file": "musica.html",
-      "unkeyedVisibleTextEstimate": 183
+      "unkeyedVisibleTextEstimate": 177
     },
     {
       "file": "nosotros.html",
-      "unkeyedVisibleTextEstimate": 191
+      "unkeyedVisibleTextEstimate": 182
     },
     {
       "file": "offline.html",
-      "unkeyedVisibleTextEstimate": 59
+      "unkeyedVisibleTextEstimate": 54
     },
     {
       "file": "perfil.html",
-      "unkeyedVisibleTextEstimate": 235
+      "unkeyedVisibleTextEstimate": 211
     },
     {
       "file": "privacidad.html",
-      "unkeyedVisibleTextEstimate": 144
+      "unkeyedVisibleTextEstimate": 140
     },
     {
       "file": "terminos.html",
-      "unkeyedVisibleTextEstimate": 245
+      "unkeyedVisibleTextEstimate": 212
+    },
+    {
+      "file": "testimonios.html",
+      "unkeyedVisibleTextEstimate": 59
     },
     {
       "file": "js/admin-ops.js",
@@ -131,12 +129,16 @@
       "hardcodedDynamicTextEstimate": 1
     },
     {
+      "file": "js/auth-panel.js",
+      "hardcodedDynamicTextEstimate": 9
+    },
+    {
       "file": "js/baqueano-3d-map.js",
-      "hardcodedDynamicTextEstimate": 3
+      "hardcodedDynamicTextEstimate": 2
     },
     {
       "file": "js/baqueano-ai.js",
-      "hardcodedDynamicTextEstimate": 7
+      "hardcodedDynamicTextEstimate": 6
     },
     {
       "file": "js/baqueano-assistant.js",
@@ -152,7 +154,7 @@
     },
     {
       "file": "js/baqueano-travel-session.js",
-      "hardcodedDynamicTextEstimate": 12
+      "hardcodedDynamicTextEstimate": 16
     },
     {
       "file": "js/baqui-evolved.js",
@@ -184,7 +186,7 @@
     },
     {
       "file": "js/destinos-gastronomia.js",
-      "hardcodedDynamicTextEstimate": 8
+      "hardcodedDynamicTextEstimate": 7
     },
     {
       "file": "js/destinos-interactions.js",
@@ -192,7 +194,7 @@
     },
     {
       "file": "js/environmental-evidence.js",
-      "hardcodedDynamicTextEstimate": 7
+      "hardcodedDynamicTextEstimate": 6
     },
     {
       "file": "js/environmental.js",
@@ -208,7 +210,7 @@
     },
     {
       "file": "js/global-injector.js",
-      "hardcodedDynamicTextEstimate": 13
+      "hardcodedDynamicTextEstimate": 11
     },
     {
       "file": "js/global-language.js",
@@ -219,8 +221,24 @@
       "hardcodedDynamicTextEstimate": 2
     },
     {
+      "file": "js/global-search.js",
+      "hardcodedDynamicTextEstimate": 6
+    },
+    {
       "file": "js/hero-experience.js",
       "hardcodedDynamicTextEstimate": 1
+    },
+    {
+      "file": "js/historia-audioguia.js",
+      "hardcodedDynamicTextEstimate": 2
+    },
+    {
+      "file": "js/historia-epocas.js",
+      "hardcodedDynamicTextEstimate": 4
+    },
+    {
+      "file": "js/home-community.js",
+      "hardcodedDynamicTextEstimate": 2
     },
     {
       "file": "js/index-destinos-editorial.js",
@@ -228,7 +246,7 @@
     },
     {
       "file": "js/index-features.js",
-      "hardcodedDynamicTextEstimate": 17
+      "hardcodedDynamicTextEstimate": 13
     },
     {
       "file": "js/legal-scrollspy.js",
@@ -240,7 +258,7 @@
     },
     {
       "file": "js/madriz-territory-map.js",
-      "hardcodedDynamicTextEstimate": 3
+      "hardcodedDynamicTextEstimate": 4
     },
     {
       "file": "js/mi-viaje-interactions.js",
@@ -252,15 +270,15 @@
     },
     {
       "file": "js/navigation.js",
-      "hardcodedDynamicTextEstimate": 16
+      "hardcodedDynamicTextEstimate": 14
     },
     {
       "file": "js/nicaragua-real-map.js",
-      "hardcodedDynamicTextEstimate": 5
+      "hardcodedDynamicTextEstimate": 4
     },
     {
       "file": "js/panorama-viewer.js",
-      "hardcodedDynamicTextEstimate": 4
+      "hardcodedDynamicTextEstimate": 3
     },
     {
       "file": "js/persistent-audio-player.js",
@@ -268,7 +286,7 @@
     },
     {
       "file": "js/platform-enhancements.js",
-      "hardcodedDynamicTextEstimate": 14
+      "hardcodedDynamicTextEstimate": 11
     },
     {
       "file": "js/public-cms-sync.js",
@@ -283,8 +301,12 @@
       "hardcodedDynamicTextEstimate": 1
     },
     {
+      "file": "js/testimonios.js",
+      "hardcodedDynamicTextEstimate": 11
+    },
+    {
       "file": "js/theme-switcher.js",
-      "hardcodedDynamicTextEstimate": 4
+      "hardcodedDynamicTextEstimate": 2
     },
     {
       "file": "js/tourism-catalog-expansion.js",
@@ -292,6 +314,10 @@
     },
     {
       "file": "js/tres-pilares.js",
+      "hardcodedDynamicTextEstimate": 3
+    },
+    {
+      "file": "js/user-session.js",
       "hardcodedDynamicTextEstimate": 3
     }
   ]

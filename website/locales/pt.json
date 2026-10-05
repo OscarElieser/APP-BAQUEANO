@@ -1,7 +1,7 @@
 {
   "meta": {
     "locale": "pt-BR",
-    "version": "2026.10.01"
+    "version": "2026.10.05"
   },
   "language": {
     "change": "Mudar idioma",
@@ -10,7 +10,8 @@
     "fr": "Français",
     "it": "Italiano",
     "pt": "Português",
-    "de": "Deutsch"
+    "de": "Deutsch",
+    "select": "Selecione o idioma"
   },
   "nav": {
     "quick": "Acesso rápido",
@@ -24,7 +25,21 @@
     "gastronomy": "Gastronomia",
     "music": "Música",
     "trip": "Minha viagem",
-    "more": "Mais"
+    "more": "Mais",
+    "profile": "Meu perfil",
+    "favorites": "Favoritos",
+    "assistant": "Baqueano digital",
+    "legal": "Legal",
+    "about": "Quem somos",
+    "register": "Cadastre seu negócio",
+    "complaints": "Canal de denúncias",
+    "allies": "Rede de parceiros",
+    "admin": "Ops Center",
+    "skipNav": "Ir para o conteúdo principal",
+    "aria": "Navegação principal",
+    "brandAria": "Baqueano Nicaragua — Início",
+    "menuOpen": "Abrir menu",
+    "menuClose": "Fechar menu"
   },
   "actions": {
     "search": "Buscar",
@@ -39,14 +54,44 @@
     "readMore": "Leia mais",
     "details": "Ver detalhes",
     "share": "Compartilhar",
-    "retry": "Tentar novamente"
+    "retry": "Tentar novamente",
+    "download": "Baixar",
+    "filter": "Filtrar",
+    "clear": "Limpar",
+    "apply": "Aplicar",
+    "confirm": "Confirmar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "add": "Adicionar",
+    "remove": "Remover",
+    "explore": "Explorar",
+    "discover": "Descobrir",
+    "plan": "Planejar",
+    "book": "Reservar",
+    "contact": "Contatar",
+    "login": "Entrar",
+    "logout": "Sair",
+    "register": "Cadastrar-se",
+    "viewAll": "Ver todos",
+    "viewMap": "Ver no mapa",
+    "openMenu": "Abrir menu",
+    "prevPage": "Página anterior",
+    "nextPage": "Próxima página"
   },
   "status": {
     "loading": "Explorando a Nicarágua…",
     "empty": "Nada por aqui ainda. Vamos tentar outra busca.",
     "saved": "Salvo com sucesso.",
     "error": "Não foi possível concluir a ação. Tente novamente.",
-    "offline": "Sem conexão"
+    "offline": "Sem conexão",
+    "success": "Pronto!",
+    "retry": "Tentar novamente",
+    "saving": "Salvando…",
+    "sending": "Enviando…",
+    "sent": "Enviado",
+    "required": "Precisamos deste dado",
+    "invalid": "Revise este campo",
+    "notFound": "Não encontrado"
   },
   "baqui": {
     "welcome": "Olá! Sou Baqüi, seu guia guardabarranco. O que você quer descobrir hoje?",
@@ -58,12 +103,54 @@
     "stop": "Parar",
     "listen": "Ouvir",
     "openPanel": "Abrir painel",
-    "later": "Agora não"
+    "later": "Agora não",
+    "title": "Baqueano digital",
+    "subtitle": "Seu guia de viagem inteligente",
+    "closePanel": "Fechar assistente",
+    "thinking": "Pensando...",
+    "error": "Me perdi com essa pergunta. Pode dizer de outro jeito?",
+    "greeting": "Olá! Sou o BAQUI, seu baqueano digital. O que você quer descobrir hoje?",
+    "suggestions": {
+      "adventure": "Aventura e vulcões",
+      "culture": "Cultura e patrimônio",
+      "gastronomy": "Comida típica",
+      "communities": "Comunidades locais",
+      "surprise": "Surpreenda-me"
+    },
+    "modes": {
+      "discover": "O que você quer viver?",
+      "surprise": "Surpreenda-me",
+      "hidden": "Fora do mapa",
+      "planner": "Planejar viagem"
+    }
   },
   "footer": {
     "rights": "Todos os direitos reservados.",
     "tagline": "Descubra o que os mapas não mostram",
-    "madeIn": "Feito na Nicarágua"
+    "madeIn": "Feito na Nicarágua",
+    "explore": "Explore",
+    "culture": "Cultura",
+    "community": "Comunidade",
+    "legal": "Legal",
+    "destinations": "Destinos",
+    "interactive_map": "Mapa interativo",
+    "experiences": "Experiências",
+    "departments": "Departamentos",
+    "history_memory": "História e memória",
+    "ancestral_gastronomy": "Gastronomia ancestral",
+    "folk_music": "Sons folclóricos",
+    "environmental": "Proteção ambiental",
+    "allies": "Rede de parceiros",
+    "about": "Quem somos",
+    "register_business": "Cadastre seu negócio",
+    "complaints": "Canal de denúncias",
+    "profile": "Meu perfil",
+    "trip": "Minha viagem",
+    "terms": "Termos de uso",
+    "privacy": "Política de privacidade",
+    "cookies": "Política de cookies",
+    "legal_notice": "Aviso legal",
+    "copyright": "© {year} Baqueano Nicaragua."
   },
   "seo": {
     "defaultTitle": "BAQUEANO — Descubra a Nicarágua",
@@ -428,5 +515,291 @@
     "publishing": "Publicando…",
     "commentThanks": "Comentário publicado. Obrigado por contribuir com a comunidade!",
     "carouselLabel": "Depoimentos da comunidade"
+  },
+  "home": {
+    "hero": {
+      "title": "Descubra o que não está no mapa",
+      "subtitle": "Turismo comunitário e ecoturismo na Nicarágua",
+      "cta": "Explorar destinos",
+      "videoAlt": "Natureza e cultura da Nicarágua"
+    },
+    "destinations": {
+      "title": "DESTINOS QUE",
+      "subtitle": "Inspiram",
+      "featured": "Destino em destaque",
+      "exploreBtn": "Explorar destino",
+      "viewAll": "Ver todos os destinos",
+      "mapTitle": "Mapa territorial da Nicarágua",
+      "moreThanDest": "Mais que um destino",
+      "moreThanDesc": "Cada lugar tem histórias, pessoas e tradições que o tornam único.",
+      "filters": {
+        "all": "Todos",
+        "nature": "Natureza",
+        "culture": "Cultura",
+        "volcanoes": "Vulcões",
+        "beaches": "Praias",
+        "gastronomy": "Gastronomia",
+        "communities": "Comunidades",
+        "heritage": "Patrimônio",
+        "museums": "Museus"
+      }
+    },
+    "pillars": {
+      "title": "Os três pilares do BAQUEANO",
+      "community": {
+        "title": "Comunidades",
+        "desc": "Conectamos viajantes com comunidades camponesas e cooperativas locais, verdadeiras guardiãs do território."
+      },
+      "sustainability": {
+        "title": "Sustentabilidade",
+        "desc": "Cada rota, cada guia e cada experiência são pensados para proteger os ecossistemas e apoiar a economia local."
+      },
+      "authenticity": {
+        "title": "Autenticidade",
+        "desc": "Nada é encenado. As experiências são reais, vivas e construídas de dentro do território."
+      }
+    },
+    "sos": {
+      "title": "Emergências",
+      "subtitle": "Assistência imediata para viajantes na Nicarágua",
+      "police": "Polícia Nacional",
+      "medical": "Cruz Vermelha / Ministério da Saúde",
+      "fire": "Bombeiros",
+      "general": "Emergências gerais",
+      "close": "Fechar"
+    }
+  },
+  "destinations": {
+    "title": "Destinos",
+    "subtitle": "Descubra a Nicarágua como nunca antes",
+    "search": "Buscar destino...",
+    "featured": "Destaque",
+    "region": "Região",
+    "category": "Categoria",
+    "difficulty": "Dificuldade",
+    "duration": "Duração",
+    "bestSeason": "Melhor época",
+    "howToGet": "Como chegar",
+    "whatToSee": "O que ver",
+    "localGuides": "Guias locais",
+    "experiences": "Experiências",
+    "gallery": "Galeria",
+    "noResults": "Não encontramos destinos com esses filtros.",
+    "exploreBtn": "Explorar",
+    "viewDossier": "Ver dossiê completo"
+  },
+  "departments": {
+    "title": "Departamentos",
+    "subtitle": "Explore a Nicarágua departamento por departamento",
+    "capital": "Sede",
+    "population": "População",
+    "area": "Área",
+    "municipalities": "Municípios",
+    "attractions": "Atrações",
+    "gastronomy": "Comida típica",
+    "events": "Festas e eventos",
+    "history": "História",
+    "environment": "Meio ambiente",
+    "howToGet": "Como chegar"
+  },
+  "map": {
+    "title": "Mapa da Nicarágua",
+    "subtitle": "Explore o território de forma interativa",
+    "search": "Buscar lugar...",
+    "zoomIn": "Aproximar",
+    "zoomOut": "Afastar",
+    "myLocation": "Minha localização",
+    "noResults": "Nenhum lugar encontrado."
+  },
+  "experiences": {
+    "title": "Experiências",
+    "subtitle": "Viva a Nicarágua por dentro",
+    "duration": "Duração",
+    "groupSize": "Tamanho do grupo",
+    "price": "Preço",
+    "included": "Inclui",
+    "notIncluded": "Não inclui",
+    "requirements": "Requisitos",
+    "book": "Reservar experiência",
+    "contact": "Consultar disponibilidade"
+  },
+  "history": {
+    "title": "História e memória",
+    "subtitle": "As raízes profundas da Nicarágua",
+    "timeline": "Linha do tempo",
+    "readMore": "Leia mais sobre este período"
+  },
+  "gastronomy": {
+    "title": "Gastronomia ancestral",
+    "subtitle": "Os sabores que contam a história da Nicarágua",
+    "ingredients": "Ingredientes",
+    "recipe": "Receita",
+    "region": "Região de origem",
+    "traditional": "Tradicional",
+    "dishes": "Pratos",
+    "drinks": "Bebidas",
+    "desserts": "Sobremesas"
+  },
+  "music": {
+    "title": "Sons folclóricos",
+    "subtitle": "A música como identidade do povo nicaraguense",
+    "genre": "Gênero",
+    "instrument": "Instrumento",
+    "region": "Região",
+    "listen": "Ouvir",
+    "artists": "Artistas",
+    "festivals": "Festivais"
+  },
+  "environmental": {
+    "title": "Proteção ambiental",
+    "subtitle": "Protegendo o patrimônio natural da Nicarágua",
+    "reserves": "Reservas",
+    "species": "Espécies protegidas",
+    "ecosystems": "Ecossistemas",
+    "conservation": "Conservação"
+  },
+  "trip": {
+    "title": "Minha viagem",
+    "subtitle": "Planeje sua aventura pela Nicarágua",
+    "addDestination": "Adicionar destino",
+    "addExperience": "Adicionar experiência",
+    "addNote": "Adicionar nota",
+    "totalDays": "Total de dias",
+    "budget": "Orçamento estimado",
+    "share": "Compartilhar roteiro",
+    "export": "Exportar PDF",
+    "emptyTitle": "Sua viagem está vazia",
+    "emptyDesc": "Comece a adicionar destinos e experiências para montar seu roteiro.",
+    "day": "Dia",
+    "morning": "Manhã",
+    "afternoon": "Tarde",
+    "evening": "Noite",
+    "notes": "Notas"
+  },
+  "profile": {
+    "title": "Meu perfil",
+    "name": "Nome",
+    "email": "E-mail",
+    "phone": "Telefone",
+    "country": "País de origem",
+    "language": "Idioma preferido",
+    "interests": "Interesses",
+    "saved": "Salvos",
+    "trips": "Minhas viagens",
+    "settings": "Configurações",
+    "logout": "Sair",
+    "editProfile": "Editar perfil",
+    "favorites": "Meus favoritos"
+  },
+  "favorites": {
+    "title": "Favoritos",
+    "subtitle": "Os lugares que você salvou",
+    "empty": "Você ainda não tem favoritos salvos.",
+    "emptyDesc": "Explore destinos e marque-os como favoritos para vê-los aqui.",
+    "remove": "Remover dos favoritos",
+    "add": "Adicionar aos favoritos",
+    "added": "Adicionado aos favoritos",
+    "removed": "Removido dos favoritos"
+  },
+  "search": {
+    "placeholder": "Busque destinos, experiências, gastronomia…",
+    "results": "Resultados",
+    "noResults": "Não encontramos nada com \"{query}\". Tente outra palavra ou um lugar próximo.",
+    "suggestions": "Sugestões",
+    "recent": "Buscas recentes",
+    "clear": "Limpar busca"
+  },
+  "forms": {
+    "name": "Nome",
+    "lastName": "Sobrenome",
+    "fullName": "Nome completo",
+    "email": "E-mail",
+    "phone": "Telefone",
+    "message": "Mensagem",
+    "subject": "Assunto",
+    "country": "País",
+    "date": "Data",
+    "password": "Senha",
+    "submit": "Enviar",
+    "required": "* Campo obrigatório",
+    "invalidEmail": "Esse e-mail parece incompleto. Revise, por favor.",
+    "success": "Pronto! Recebemos sua mensagem.",
+    "error": "Não foi possível enviar. Verifique sua conexão e tente novamente.",
+    "namePlaceholder": "Seu nome",
+    "emailPlaceholder": "voce@email.com",
+    "messagePlaceholder": "Escreva sua mensagem aqui…",
+    "selectOption": "Selecione uma opção",
+    "contactTitle": "Fale conosco",
+    "contactDesc": "Escreva para nós e ajudaremos você a montar sua viagem pela Nicarágua."
+  },
+  "about": {
+    "title": "Quem somos",
+    "subtitle": "O ecossistema digital do turismo nicaraguense",
+    "mission": "Missão",
+    "vision": "Visão",
+    "values": "Valores",
+    "team": "Nossa equipe",
+    "story": "Nossa história"
+  },
+  "legal": {
+    "terms": {
+      "title": "Termos de uso"
+    },
+    "privacy": {
+      "title": "Política de privacidade"
+    },
+    "cookies": {
+      "title": "Política de cookies",
+      "accept": "Aceitar todos",
+      "reject": "Recusar opcionais",
+      "banner": "Usamos cookies para melhorar sua experiência.",
+      "learnMore": "Saiba mais"
+    },
+    "legalNotice": {
+      "title": "Aviso legal"
+    }
+  },
+  "offline": {
+    "title": "Sem conexão",
+    "subtitle": "O sinal caiu",
+    "desc": "O que você já carregou continua aqui. Quando a internet voltar, seguimos.",
+    "retry": "Testar conexão"
+  },
+  "notFound": {
+    "title": "Este caminho não leva a lugar nenhum",
+    "subtitle": "Nem no mapa, nem fora dele",
+    "desc": "Talvez o endereço esteja errado ou a página tenha mudado de lugar. Vamos voltar a explorar.",
+    "homeBtn": "Voltar ao início",
+    "exploreBtn": "Explorar destinos"
+  },
+  "cookie": {
+    "banner": {
+      "text": "Usamos cookies para melhorar sua experiência no BAQUEANO.",
+      "accept": "Aceitar",
+      "decline": "Recusar",
+      "learnMore": "Saiba mais"
+    }
+  },
+  "allies": {
+    "title": "Rede de parceiros",
+    "subtitle": "Comunidades e empresas que tornam possível o turismo responsável na Nicarágua"
+  },
+  "business": {
+    "register": {
+      "title": "Cadastre seu negócio",
+      "subtitle": "Faça parte do ecossistema BAQUEANO",
+      "submit": "Enviar cadastro",
+      "success": "Seu negócio foi cadastrado com sucesso!"
+    }
+  },
+  "accessibility": {
+    "skipNav": "Pular para o conteúdo principal",
+    "closeModal": "Fechar janela",
+    "openMenu": "Abrir menu de navegação",
+    "closeMenu": "Fechar menu de navegação",
+    "logo": "Baqueano Nicaragua — Voltar ao início",
+    "darkMode": "Ativar modo escuro",
+    "lightMode": "Ativar modo claro",
+    "language": "Mudar idioma"
   }
 }
