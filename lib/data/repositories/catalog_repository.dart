@@ -66,6 +66,7 @@ class CatalogBusiness {
   final bool verified;
   final String hostName;
   final String hostStory;
+  final String specialty;
 
   const CatalogBusiness({
     required this.id,
@@ -82,6 +83,7 @@ class CatalogBusiness {
     this.verified = false,
     this.hostName = '',
     this.hostStory = '',
+    this.specialty = '',
   });
 
   bool get hasCoordinates => latitude != null && longitude != null;
@@ -148,7 +150,7 @@ class CatalogRepository {
         }),
         _client.select('businesses', query: {
           'select':
-              'id,name,category,department,municipality,phone,whatsapp,address,latitude,longitude,cover_image,verified,host_name,host_story',
+              'id,name,category,department,municipality,phone,whatsapp,address,latitude,longitude,cover_image,verified,host_name,host_story,metadata',
           'order': 'name.asc',
           'limit': '500',
         }),
@@ -299,6 +301,8 @@ class CatalogRepository {
     final lat = _finite(row['latitude']);
     final lng = _finite(row['longitude']);
     final validCoords = _insideNicaragua(lat, lng);
+    final rawMetadata = row['metadata'];
+    final metadata = rawMetadata is Map ? rawMetadata : const {};
     return CatalogBusiness(
       id: id,
       name: name,
@@ -312,8 +316,11 @@ class CatalogRepository {
       longitude: validCoords ? lng : null,
       coverImage: _httpsOrEmpty(row['cover_image']),
       verified: row['verified'] == true,
-      hostName: _str(row['host_name']),
+      hostName: _str(row['host_name']).isNotEmpty
+          ? _str(row['host_name'])
+          : _str(metadata['host']),
       hostStory: _str(row['host_story']),
+      specialty: _str(metadata['specialty']),
     );
   }
 

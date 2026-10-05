@@ -14,30 +14,83 @@
 // - `ListView.separated` horizontal con `BouncingScrollPhysics` nativa y suave inercia.
 // - Ficha modal detallada (`_showBusinessDetailsModal`) con enlaces directos a WhatsApp,
 //   llamadas telefónicas y ubicación georreferenciada en el mapa satelital.
+// - Fuente: negocios VERIFICADOS de Supabase (`catalogSnapshotProvider`), los
+//   mismos que muestra la Web y administra Ops Center. Sin datos ficticios:
+//   teléfono, WhatsApp, anfitrión, calificación y horario solo aparecen si
+//   existen; sin negocios verificados se muestra un estado vacío honesto.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
 // - `BusinessShowcase`: Vitrina interactiva de negocios locales campesinos.
 // ============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../core/data/catalog_data.dart';
+import '../../../data/repositories/catalog_repository.dart';
 import '../../../core/models/cultural_models.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/section_header.dart';
 
-class BusinessShowcase extends StatefulWidget {
+class BusinessShowcase extends ConsumerStatefulWidget {
   const BusinessShowcase({super.key});
 
   @override
-  State<BusinessShowcase> createState() => _BusinessShowcaseState();
+  ConsumerState<BusinessShowcase> createState() => _BusinessShowcaseState();
 }
 
-class _BusinessShowcaseState extends State<BusinessShowcase> {
+class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
+  static const Map<String, String> _categoryIcons = {
+    'guia': '🧭',
+    'hospedaje': '🛖',
+    'transporte': '🛶',
+    'restaurante': '🍲',
+    'gastronomia': '🍲',
+    'artesania': '🏺',
+  };
+
+  static const Map<String, String> _categoryLabels = {
+    'guia': 'Guía local',
+    'hospedaje': 'Hospedaje',
+    'transporte': 'Transporte',
+    'restaurante': 'Restaurante',
+    'gastronomia': 'Gastronomía',
+    'artesania': 'Artesanía',
+  };
+
+  /// Adapta un negocio real de Supabase al modelo visual de la vitrina sin
+  /// rellenar con valores ficticios: lo que no existe queda vacío y se oculta.
+  static LocalBusiness _fromCatalog(CatalogBusiness business) {
+    final category = business.category.toLowerCase();
+    final story = business.hostStory.isNotEmpty
+        ? business.hostStory
+        : business.specialty;
+    return LocalBusiness(
+      id: business.id,
+      name: business.name,
+      category: _categoryLabels[category] ?? business.category,
+      department: business.department,
+      description: story,
+      contact: business.phone ?? '',
+      ownerName: business.hostName,
+      whatsapp: business.whatsapp ?? '',
+      email: '',
+      address: [business.address, business.municipality]
+          .where((part) => part.isNotEmpty)
+          .join(', '),
+      latitude: business.latitude ?? double.nan,
+      longitude: business.longitude ?? double.nan,
+      schedule: '',
+      services: business.specialty.isEmpty ? const [] : [business.specialty],
+      icon: _categoryIcons[category] ?? '🏪',
+      badge: business.verified ? 'Verificado' : 'Sin verificar',
+      rating: 0,
+    );
+  }
+
   /// Negocio actualmente presionado para feedback táctil
   LocalBusiness? _selectedBiz;
 
@@ -51,6 +104,10 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
 
   Future<void> _launchWhatsApp(BuildContext context, String phone, String bizName) async {
     final cleanPhone = phone.replaceAll(RegExp(r'[^0-9]'), '');
+    if (cleanPhone.isEmpty) {
+      CustomToast.error(context, 'Este negocio no tiene WhatsApp registrado');
+      return;
+    }
     final message = 'Hola, miré tu negocio $bizName en la app o web de Baqueano y quería información sobre sus servicios.';
     final uri = Uri.parse('https://wa.me/$cleanPhone?text=${Uri.encodeComponent(message)}');
     try {
@@ -273,13 +330,24 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                _buildModalRow(Icons.person_rounded, 'Anfitrión o Responsable', biz.ownerName),
-                const SizedBox(height: 10),
-                _buildModalRow(Icons.location_on_rounded, 'Ubicación Comunitaria', '${biz.address}, ${biz.department}'),
-                const SizedBox(height: 10),
-                _buildModalRow(Icons.star_rounded, 'Calificación Verificada', '${biz.rating} ⭐ de exploradores Baqueano'),
-                const SizedBox(height: 10),
-                _buildModalRow(Icons.access_time_rounded, 'Horario de Atención', biz.schedule),
+                if (biz.ownerName.isNotEmpty) ...[
+                  _buildModalRow(Icons.person_rounded, 'Anfitrión o Responsable', biz.ownerName),
+                  const SizedBox(height: 10),
+                ],
+                _buildModalRow(
+                  Icons.location_on_rounded,
+                  'Ubicación Comunitaria',
+                  [biz.address, biz.department].where((part) => part.isNotEmpty).join(', '),
+                ),
+                // Solo se muestra calificación u horario si existen datos reales.
+                if (biz.rating > 0) ...[
+                  const SizedBox(height: 10),
+                  _buildModalRow(Icons.star_rounded, 'Calificación Verificada', '${biz.rating} ⭐ de exploradores Baqueano'),
+                ],
+                if (biz.schedule.isNotEmpty) ...[
+                  const SizedBox(height: 10),
+                  _buildModalRow(Icons.access_time_rounded, 'Horario de Atención', biz.schedule),
+                ],
                 if (biz.services.isNotEmpty) ...[
                   const SizedBox(height: 10),
                   _buildModalRow(Icons.check_circle_outline_rounded, 'Servicios', biz.services.join(' • ')),
@@ -298,8 +366,8 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                 ),
                 const SizedBox(height: 10),
 
-                // Botón 1: WhatsApp con mensaje solicitado
-                SizedBox(
+                // Botón 1: WhatsApp con mensaje solicitado (solo si hay número)
+                if (biz.whatsapp.isNotEmpty) SizedBox(
                   width: double.infinity,
                   child: ElevatedButton.icon(
                     onPressed: () => _launchWhatsApp(ctx, biz.whatsapp, biz.name),
@@ -358,8 +426,8 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
+                    if (biz.contact.isNotEmpty) const SizedBox(width: 8),
+                    if (biz.contact.isNotEmpty) Expanded(
                       child: OutlinedButton.icon(
                         onPressed: () => _launchPhone(ctx, biz.contact),
                         icon: const Icon(Icons.call_rounded, color: AppColors.gold, size: 16),
@@ -416,7 +484,15 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    final businesses = CatalogData.localBusinesses;
+    final catalog = ref.watch(catalogSnapshotProvider);
+    final businesses = catalog.maybeWhen(
+      data: (snapshot) => snapshot.businesses
+          .where((business) => business.verified)
+          .map(_fromCatalog)
+          .toList(growable: false),
+      orElse: () => const <LocalBusiness>[],
+    );
+    final isLoading = catalog.isLoading;
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
 
@@ -470,6 +546,23 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
 
         const SizedBox(height: 14),
 
+        // Estado honesto: cargando o sin negocios verificados (nunca ficticios).
+        if (businesses.isEmpty)
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: isDesktop ? 48.0 : 20.0),
+            child: Text(
+              isLoading
+                  ? 'Cargando negocios verificados…'
+                  : 'Aún no hay negocios verificados publicados. Cuando el equipo los verifique en el Ops Center aparecerán aquí y en la web.',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.inter(
+                fontSize: 13,
+                color: Colors.white.withValues(alpha: 0.75),
+                height: 1.5,
+              ),
+            ),
+          )
+        else
         // Carrusel horizontal aislado con RepaintBoundary para 120 FPS
         RepaintBoundary(
           child: SizedBox(
@@ -482,7 +575,7 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
               separatorBuilder: (_, __) => const SizedBox(width: 16),
               itemBuilder: (context, index) {
                 final biz = businesses[index];
-                final isSelected = _selectedBiz == biz;
+                final isSelected = _selectedBiz?.id == biz.id;
 
                 return AnimatedScale(
                   scale: isSelected ? 1.03 : 1.0,
@@ -562,7 +655,8 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            '👤 ${biz.ownerName} • ${biz.department}',
+                            [if (biz.ownerName.isNotEmpty) '👤 ${biz.ownerName}', biz.department]
+                                .join(' • '),
                             style: const TextStyle(
                               fontSize: 11,
                               color: Color(0xFFD4AF37),
@@ -606,8 +700,8 @@ class _BusinessShowcaseState extends State<BusinessShowcase> {
                               ),
                               const SizedBox(width: 8),
 
-                              // Llamar
-                              InkWell(
+                              // Llamar (solo si hay teléfono registrado)
+                              if (biz.contact.isNotEmpty) InkWell(
                                 onTap: () => _launchPhone(context, biz.contact),
                                 borderRadius: BorderRadius.circular(10),
                                 child: Container(

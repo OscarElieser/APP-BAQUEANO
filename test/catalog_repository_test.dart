@@ -112,6 +112,30 @@ void main() {
     });
   });
 
+  group('CatalogRepository.businessFromRow metadata', () {
+    test('toma anfitrión y especialidad de metadata si faltan columnas', () {
+      final business = CatalogRepository.businessFromRow({
+        'id': 'biz-red-ometepe',
+        'name': 'Red Comunitaria Ometepe Viva',
+        'host_name': null,
+        'metadata': {'host': 'Doña María Luisa', 'specialty': 'Posadas rurales'},
+        'verified': true,
+      });
+      expect(business!.hostName, 'Doña María Luisa');
+      expect(business.specialty, 'Posadas rurales');
+    });
+
+    test('ignora metadata con formato inválido', () {
+      final business = CatalogRepository.businessFromRow({
+        'id': 'biz-x',
+        'name': 'Negocio',
+        'metadata': 'texto',
+      });
+      expect(business!.hostName, isEmpty);
+      expect(business.specialty, isEmpty);
+    });
+  });
+
   group('CatalogRepository.snapshotFromRaw', () {
     test('arma el catálogo completo y conserva el origen', () {
       final snapshot = CatalogRepository.snapshotFromRaw(
