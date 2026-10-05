@@ -8,6 +8,8 @@
 #
 # ARQUITECTURA:
 #   1. checks          → valida scripts de Azure y la API (sintaxis).
+#   1b. browser-qa     → Playwright + axe sobre el build: 28 páginas × 16 anchos
+#                        (responsive, WCAG 2.2 AA, cajón móvil, WhatsApp). Bloquea Firebase.
 #   2. verify-azure    → la VM se actualiza SOLA (azure/autodeploy.sh, cada
 #                        2 min, modelo pull). Este job espera a que
 #                        https://baqueanonicaragua.com/health muestre el commit
@@ -80,6 +82,44 @@ jobs:
         run: node scripts/production-audit.mjs --out=../docs/production-audit
       - name: Evidencia Kronox al día (documentos generados = fuente única)
         run: node tools/kronox/gen-development-docs.mjs --check
+
+  browser-qa:
+    # Requisitos 10, 13, 14, 15, 16 y 18 del checklist 20/20, medidos en un navegador
+    # real: 28 páginas × 16 anchos (320–2560 px), sin desborde horizontal, axe WCAG 2.2 AA
+    # sin violaciones críticas ni graves, cajón móvil desplazable, WhatsApp seguro.
+    name: 🧪 QA en navegador (responsive + accesibilidad)
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Herramientas de prueba aisladas (Playwright + axe-core, sin tocar dependencias del sitio)
+        run: |
+          mkdir -p "$RUNNER_TEMP/qa"
+          npm --prefix "$RUNNER_TEMP/qa" install --no-audit --no-fund @playwright/test@1.63.0 axe-core@4
+          ln -s "$RUNNER_TEMP/qa/node_modules" website/node_modules
+          "$RUNNER_TEMP/qa/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Build estático del Website
+        working-directory: website
+        run: node scripts/build-hostinger-static.mjs
+      - name: QA en navegador sobre la salida publicada
+        working-directory: website
+        env:
+          BASE_URL: http://127.0.0.1:8790/
+          QA_WORKERS: '4'
+        run: |
+          python3 -m http.server 8790 --bind 127.0.0.1 --directory dist-hostinger >/dev/null 2>&1 &
+          for i in $(seq 1 20); do curl -fsS -o /dev/null http://127.0.0.1:8790/index.html && break; sleep 1; done
+          node scripts/browser-qa.mjs
+      - name: Evidencia (browser-qa.json)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-qa
+          path: docs/production-audit/browser-qa.json
+          if-no-files-found: ignore
 
   verify-azure:
     name: ☁️ Verificar despliegue en Azure
@@ -177,7 +217,7 @@ jobs:
 
   firebase-hosting:
     name: 🔥 Publicar respaldo en Firebase Hosting
-    needs: checks
+    needs: [checks, browser-qa]
     runs-on: ubuntu-latest
     env:
       HAS_FIREBASE_SECRET: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_BAQUEANO != '' }}

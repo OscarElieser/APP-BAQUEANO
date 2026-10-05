@@ -47,6 +47,9 @@
      llega a AA 4.5:1 en texto de botón). Se oscurece al 80 % → 4.79:1. */
   --baqueano-primary-fill: #C54B01;
   --baqueano-primary-fill-hover: #A74001;
+  /* Texto naranja pequeño sobre fondos claros: mismo matiz, 5.6:1 con blanco
+     (el naranja de marca queda para rellenos grandes, iconos y fondos oscuros). */
+  --baqueano-primary-text: #B34400;
   --baqueano-secondary: var(--petroleo-teal, #165D6F);     /* laguna: navegación, info */
   --baqueano-secondary-hover: var(--petroleo-dark, #0E4655);
   --baqueano-accent: #4A7A5A;                              /* selva: naturaleza, éxito */
@@ -551,6 +554,11 @@ body :is(input[type="checkbox"], input[type="radio"]) {
   accent-color: var(--baqueano-primary);
   width: 1.15em;
   height: 1.15em;
+}
+/* WCAG 2.2 · 2.5.8: casillas sueltas con área táctil mínima de 24 px. */
+body input.bq-target-24 {
+  min-width: 24px;
+  min-height: 24px;
 }
 body :is([class*="form-hint"], [class*="field-hint"], [class*="helper"], small[class*="hint"]) {
   font-size: var(--baqueano-size-caption);
@@ -1325,3 +1333,55 @@ body #mainNavbar .navbar-login-btn.is-logged-in {
 }
 body .navbar-login-btn.is-logged-in:is(:hover, :focus-visible) { background: #A93226 !important; }
 body .navbar-login-btn.is-logged-in[aria-busy="true"] { opacity: 0.7; pointer-events: none; }
+
+/* ===================================================
+   CONTRASTE WCAG 2.2 AA · 1.4.3 (auditoría axe 2026-10-05)
+   🎯 POR QUÉ: requisito 13 del checklist 20/20. axe-core (scripts/browser-qa.mjs,
+      390 y 1366 px) midió 36 casos de texto por debajo de 4.5:1 en 18 páginas;
+      el más repetido, el naranja de marca #F65E01 en texto pequeño sobre blanco (3.22:1).
+   ⚙️ CÓMO: solo se oscurece el color del TEXTO (o el relleno detrás de texto blanco)
+      dentro del mismo matiz; no cambia tamaños, márgenes ni el diseño. Cada regla
+      está acotada a la página (data-bq-page) para no tocar fondos oscuros, donde
+      el naranja de marca sí cumple (5.6:1 sobre #0F172A).
+   📦 QUÉ: proporciones resultantes ≥ 4.5:1, verificadas de nuevo con axe.
+   =================================================== */
+/* Etiquetas, ubicaciones y enlaces en naranja sobre blanco/claro → 5.1–5.6:1 */
+html[data-bq-page="ayuda"] body :is(span[data-i18n="pages.ayuda.helpSection.span1"], span[data-i18n="pages.ayuda.quickTitle.h21"], span[data-i18n="pages.ayuda.preguntas.span1"]),
+html[data-bq-page="departamento"] body .sub-label-tag,
+html[data-bq-page="experiencias"] body :is(.exp-card-loc, .exp-card-loc span, .exp-pkg-card strong, span[style*="#F65E01" i] span),
+html[data-bq-page="gastronomia"] body :is(.dish-region, .dish-region span),
+html[data-bq-page="historia"] body :is(.hist-era-card span.dates, .hist-territory-kicker, .hist-site-card > div[style*="#F65E01" i]),
+html[data-bq-page="legal"] body .legal-card-link,
+html[data-bq-page="mi-negocio"] body .legal-framework-section div[style*="#F65E01" i],
+html[data-bq-page="mi-viaje"] body :is(.viaje-tab-btn.active span, button[onclick^="removeDay"], button[data-tab="mapa"]),
+html[data-bq-page="nosotros"] body span[data-i18n="pages.nosotros.contacto.span1"],
+html[data-bq-page="favoritos"] body .favorites-eyebrow span,
+html[data-bq-page="cookies"] body .cookies-badge-pill { color: var(--baqueano-primary-text) !important; }
+
+/* Texto blanco sobre rellenos de color → rellenos un tono más oscuros */
+html[data-bq-page="baqueano-ia"] body .ia-card-badge.d1 { background: var(--baqueano-primary-fill) !important; }
+html[data-bq-page="destinos"] body :is(.destinos-preview-btn, .dest-catalog-tag.blue),
+html[data-bq-page="destino"] body :is(.destinos-preview-btn, .dest-catalog-tag.blue),
+html[data-bq-page="aliados"] body .aliados-triad-item.explore { background: #0369A1 !important; }
+html[data-bq-page="destinos"] body .dest-catalog-tag.purple,
+html[data-bq-page="destino"] body .dest-catalog-tag.purple { background: #7C3AED !important; }
+html[data-bq-page="aliados"] body .aliados-triad-item :is(.triad-text p, .triad-text h5) { color: #FFFFFF !important; }
+html[data-bq-page="aliados"] body .aliados-triad-item.sos { background: #B91C1C !important; }
+html[data-bq-page="cookies"] body #purgeStorageBtn { background: #B91C1C !important; border-color: #B91C1C !important; }
+html[data-bq-page="departamento"] body .artisan-tag { color: #FFFFFF !important; } /* sobre --baqueano-primary-fill: 4.79:1 */
+html[data-bq-page="mapa"] body .btn-map-action[onclick^="openSosModal"] { color: #FFFFFF !important; }
+html[data-bq-page="mapa"] body .map-live-badge > span:nth-child(2) { color: #FFFFFF !important; }
+
+/* Grises, verdes, azules y ámbar sobre claro */
+html[data-bq-page="ayuda"] body p[data-i18n="pages.ayuda.preguntas.p1"],
+html[data-bq-page="baqueano-ia"] body .ia-overlay-desc { color: #475569 !important; }
+html[data-bq-page="nosotros"] body p[style*="#94A3B8" i] { color: #64748B !important; }
+html[data-bq-page="departamento"] body :is(.m-badge-accent, .event-mini-badge) { color: #3D6A4C !important; }
+html[data-bq-page="departamento"] body .seal-patrimonio,
+html[data-bq-page="cookies"] body .flow-node-user > p { color: #1D4ED8 !important; }
+html[data-bq-page="historia"] body .hist-site-card [style*="#0284C7" i] { color: #0369A1 !important; }
+html[data-bq-page="gastronomia"] body .place-rating span,
+html[data-bq-page="privacidad"] body .cloud strong { color: #B45309 !important; }
+html[data-bq-page="denuncias"] body .denuncias-inline-004 { color: #3D6A4C !important; }
+html[data-bq-page="denuncias"] body .denuncias-inline-009 { color: var(--baqueano-primary-text) !important; }
+html[data-bq-page="denuncias"] body .denuncias-inline-010 { color: #15803D !important; }

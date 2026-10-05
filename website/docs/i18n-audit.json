@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T12:48:50.641Z",
+  "generatedAt": "2026-10-05T13:09:03.571Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 3621,
-    "en": 3621,
-    "fr": 3621,
-    "it": 3621,
-    "pt": 3621,
-    "de": 3621
+    "es": 3624,
+    "en": 3624,
+    "fr": 3624,
+    "it": 3624,
+    "pt": 3624,
+    "de": 3624
   },
   "html": {
     "files": 31,
@@ -24,7 +24,7 @@
   },
   "js": {
     "files": 81,
-    "translated": 41,
+    "translated": 43,
     "untranslated": 731
   },
   "jsEditorial": {
@@ -291,8 +291,8 @@
     {
       "file": "index.html",
       "type": "html",
-      "total": 215,
-      "translated": 215,
+      "total": 214,
+      "translated": 214,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -336,8 +336,8 @@
     {
       "file": "musica.html",
       "type": "html",
-      "total": 196,
-      "translated": 196,
+      "total": 197,
+      "translated": 197,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -849,11 +849,11 @@
     {
       "file": "js/madriz-experience.js",
       "type": "js",
-      "total": 7,
-      "translated": 0,
+      "total": 9,
+      "translated": 2,
       "untranslated": 7,
       "editorialStrings": 0,
-      "coverage": 0
+      "coverage": 22.2
     },
     {
       "file": "js/madriz-territory-map.js",

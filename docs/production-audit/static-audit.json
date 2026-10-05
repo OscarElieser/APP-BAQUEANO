@@ -1,10 +1,10 @@
 {
  "summary": {
-  "generatedAt": "2026-10-05T12:27:56.877Z",
+  "generatedAt": "2026-10-05T13:09:03.872Z",
   "dir": "dist-hostinger",
   "pages": 31,
   "critical": 0,
-  "warnings": 67,
+  "warnings": 65,
   "sitemapUrls": 23
  },
  "seo": [
@@ -453,12 +453,6 @@
    "severity": "warning",
    "page": "ambiental.html",
    "rule": "anchor-missing",
-   "detail": "ancla #bizRegisterModal no existe en la página (puede crearse en tiempo de ejecución)"
-  },
-  {
-   "severity": "warning",
-   "page": "ambiental.html",
-   "rule": "anchor-missing",
    "detail": "ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución)"
   },
   {
@@ -526,12 +520,6 @@
    "page": "cookies.html",
    "rule": "anchor-missing",
    "detail": "nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático)"
-  },
-  {
-   "severity": "warning",
-   "page": "cookies.html",
-   "rule": "anchor-missing",
-   "detail": "ancla #control no existe en la página (puede crearse en tiempo de ejecución)"
   },
   {
    "severity": "warning",
@@ -855,12 +843,6 @@
   },
   {
    "from": "ambiental.html",
-   "link": "#bizRegisterModal",
-   "status": "ancla no encontrada (estático)",
-   "severity": "warning"
-  },
-  {
-   "from": "ambiental.html",
    "link": "#sosModal",
    "status": "ancla no encontrada (estático)",
    "severity": "warning"
@@ -928,12 +910,6 @@
   {
    "from": "cookies.html",
    "link": "nosotros.html#faq",
-   "status": "ancla no encontrada (estático)",
-   "severity": "warning"
-  },
-  {
-   "from": "cookies.html",
-   "link": "#control",
    "status": "ancla no encontrada (estático)",
    "severity": "warning"
   },

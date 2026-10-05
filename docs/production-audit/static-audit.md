@@ -5,7 +5,7 @@
 -->
 # Auditoría estática de la salida publicada
 
-Generado: 2026-10-05T12:27:56.877Z · Páginas: 31 · URLs en sitemap: 23 · **Críticos: 0** · Advertencias: 67
+Generado: 2026-10-05T13:09:03.872Z · Páginas: 31 · URLs en sitemap: 23 · **Críticos: 0** · Advertencias: 65
 
 ## SEO por página
 
@@ -53,7 +53,6 @@ Generado: 2026-10-05T12:27:56.877Z · Páginas: 31 · URLs en sitemap: 23 · **C
 | ⚠️ advertencia | aliados.html | anchor-missing | nosotros.html#blog: ancla #blog no encontrada en nosotros.html (estático) |
 | ⚠️ advertencia | aliados.html | anchor-missing | nosotros.html#faqs: ancla #faqs no encontrada en nosotros.html (estático) |
 | ⚠️ advertencia | ambiental.html | anchor-missing | ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución) |
-| ⚠️ advertencia | ambiental.html | anchor-missing | ancla #bizRegisterModal no existe en la página (puede crearse en tiempo de ejecución) |
 | ⚠️ advertencia | ambiental.html | anchor-missing | ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución) |
 | ⚠️ advertencia | aviso-legal.html | anchor-missing | perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático) |
 | ⚠️ advertencia | aviso-legal.html | anchor-missing | nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático) |
@@ -66,7 +65,6 @@ Generado: 2026-10-05T12:27:56.877Z · Páginas: 31 · URLs en sitemap: 23 · **C
 | ⚠️ advertencia | baqueano-ia.html | anchor-missing | aliados.html#postular: ancla #postular no encontrada en aliados.html (estático) |
 | ⚠️ advertencia | cookies.html | anchor-missing | perfil.html#tab-viajes: ancla #tab-viajes no encontrada en perfil.html (estático) |
 | ⚠️ advertencia | cookies.html | anchor-missing | nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático) |
-| ⚠️ advertencia | cookies.html | anchor-missing | ancla #control no existe en la página (puede crearse en tiempo de ejecución) |
 | ⚠️ advertencia | cookies.html | anchor-missing | index.html#faq: ancla #faq no encontrada en index.html (estático) |
 | ⚠️ advertencia | departamento.html | anchor-missing | destinos.html#cotizadorModal: ancla #cotizadorModal no encontrada en destinos.html (estático) |
 | ⚠️ advertencia | destino.html | anchor-missing | nosotros.html#faq: ancla #faq no encontrada en nosotros.html (estático) |

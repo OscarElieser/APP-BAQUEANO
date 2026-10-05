@@ -60,7 +60,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
-  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-16">
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-1">
 </head>
 
 <body class="page-musica-exact">
@@ -844,7 +844,7 @@
     </div>
 
     <div class="sticky-progress-wrap">
-      <div class="sticky-progress-bar">
+      <div class="sticky-progress-bar" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0:00" data-i18n-aria-label="a11y.player.seek" aria-label="Posición de la canción">
         <div class="sticky-progress-fill" id="stickyProgressFill"></div>
       </div>
       <span class="player-time-display" id="stickyTimeDisplay">1:24 / 3:52</span>
@@ -1079,7 +1079,7 @@
       });
     }
   </script>
-<script src="js/musica-player.js?v=20260929-1"></script>
+<script src="js/musica-player.js?v=20261005-a11y-1"></script>
 <script src="js/navigation.js?v=20261004-menu-2"></script>
 <script src="js/global-injector.js"></script>
 </body>

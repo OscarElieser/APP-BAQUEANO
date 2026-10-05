@@ -59,7 +59,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
-  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-16">
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-1">
   <!-- Póster del hero = elemento LCP: se pide primero; el video se carga después (js/hero-video-loader.js). -->
   <link rel="preload" as="image" href="assets/images/heroes/hero-ometepe-1280.webp" imagesrcset="assets/images/heroes/hero-ometepe-768.webp 768w, assets/images/heroes/hero-ometepe-1280.webp 1280w" imagesizes="100vw" fetchpriority="high" type="image/webp">
   <script src="js/hero-video-loader.js?v=20261005-1" defer></script>
@@ -342,11 +342,11 @@
              comunidades, patrimonio poco conocido, emprendimientos y destinos
              ocultos marcados con hidden_gem=true.
              ================================================================ -->
-        <div data-i18n-aria-label="pages.index.vivirSelector.divAriaLabel2" class="hidden-gem-bar" role="switch" aria-label="Activar modo Lo que no sale en el mapa">
+        <div data-i18n-aria-label="pages.index.vivirSelector.divAriaLabel2" class="hidden-gem-bar" role="group" aria-label="Activar modo Lo que no sale en el mapa">
           <i class="fa-solid fa-gem hidden-gem-icon" aria-hidden="true"></i>
           <span class="hidden-gem-text">
             <em data-i18n="home.hero.title">Descubrí lo que no sale en el mapa</em> <span data-i18n="pages.index.vivirSelector.span10">— Comunidades, patrimonio oculto, emprendimientos y destinos que no aparecen en guías convencionales.</span>
-            <span data-i18n-aria-label="pages.index.vivirSelector.spanAriaLabel1" class="hidden-gem-count" aria-label="Hidden gems disponibles">0</span>
+            <span class="hidden-gem-count" hidden></span>
           </span>
           <label class="hidden-gem-switch">
             <input data-i18n-aria-label="pages.index.hiddenGemToggle.inputAriaLabel1" type="checkbox" id="hiddenGemToggle" aria-label="Activar descubrimiento de lugares ocultos">
@@ -1477,7 +1477,7 @@
   </script>
 <script src="js/baqueano-master-catalog.js"></script>
 <script src="js/index-destinos-editorial.js?v=20260930-1"></script>
-<script src="js/tres-pilares.js?v=20261005-i18n-1"></script>
+<script src="js/tres-pilares.js?v=20261005-a11y-1"></script>
 <script src="js/navigation.js?v=20261004-menu-2"></script>
 <script src="js/global-injector.js"></script>
 <!-- Testimonios de la portada = comunidad real (misma fuente que testimonios.html). -->

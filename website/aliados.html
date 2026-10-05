@@ -63,7 +63,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
-  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-16">
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-1">
 </head>
 
 <body class="page-aliados-exact">
@@ -507,33 +507,33 @@
             <div class="aliado-nearby-item">
               <img data-i18n-alt="pages.aliados.aliadoCardExact.h31" loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Coop. Cañón de Somoto" class="aliado-nearby-img" width="399" height="501">
               <div class="aliado-nearby-info">
-                <div data-i18n="pages.aliados.aliadoCardExact.h31" class="aliado-nearby-name">Coop. Cañón de Somoto</div>
+                <div id="aliadoNearbyName1" data-i18n="pages.aliados.aliadoCardExact.h31" class="aliado-nearby-name">Coop. Cañón de Somoto</div>
                 <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> Somoto, Madriz</div>
                 <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.div1">~ 12 km · Verificado</span></div>
               </div>
-              <a href="departamento.html?id=madriz" class="aliado-nearby-arrow"><i class="fa-solid fa-chevron-right"></i></a>
+              <a href="departamento.html?id=madriz" class="aliado-nearby-arrow" aria-labelledby="aliadoNearbyName1"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
             </div>
 
             <!-- 2. Posada Ecológica La Abuela -->
             <div class="aliado-nearby-item">
               <img data-i18n-alt="pages.aliados.aliadosMapSplitSection.imgAlt1" loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Posada La Abuela" class="aliado-nearby-img">
               <div class="aliado-nearby-info">
-                <div data-i18n="pages.aliados.aliadoCardExact.h32" class="aliado-nearby-name">Posada Ecológica La Abuela</div>
+                <div id="aliadoNearbyName2" data-i18n="pages.aliados.aliadoCardExact.h32" class="aliado-nearby-name">Posada Ecológica La Abuela</div>
                 <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> San Ramón, Matagalpa</div>
                 <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.div2">~ 35 km · Verificado</span></div>
               </div>
-              <a href="departamento.html?id=matagalpa" class="aliado-nearby-arrow"><i class="fa-solid fa-chevron-right"></i></a>
+              <a href="departamento.html?id=matagalpa" class="aliado-nearby-arrow" aria-labelledby="aliadoNearbyName2"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
             </div>
 
             <!-- 3. Sohla Rooftop Granada -->
             <div class="aliado-nearby-item">
               <img data-i18n-alt="pages.aliados.aliadosMapSplitSection.imgAlt2" loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Sohla Rooftop" class="aliado-nearby-img" width="401" height="498">
               <div class="aliado-nearby-info">
-                <div data-i18n="pages.aliados.aliadoCardExact.h310" class="aliado-nearby-name">Sohla Rooftop Granada</div>
+                <div id="aliadoNearbyName3" data-i18n="pages.aliados.aliadoCardExact.h310" class="aliado-nearby-name">Sohla Rooftop Granada</div>
                 <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
                 <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.div3">~ 48 km · Verificado</span></div>
               </div>
-              <a href="departamento.html?id=granada" class="aliado-nearby-arrow"><i class="fa-solid fa-chevron-right"></i></a>
+              <a href="departamento.html?id=granada" class="aliado-nearby-arrow" aria-labelledby="aliadoNearbyName3"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
@@ -1043,6 +1043,13 @@
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
       }
+    }
+
+    // Enlaces desde otras páginas (Nosotros, Ambiental) llegan con #bizRegisterModal:
+    // se abre el formulario directamente en lugar de dejar un ancla sin efecto.
+    if (window.location.hash === '#bizRegisterModal') {
+      document.addEventListener('DOMContentLoaded', function () { openBizRegisterModal(); });
+      if (document.readyState !== 'loading') openBizRegisterModal();
     }
 
     function closeBizRegisterModal() {

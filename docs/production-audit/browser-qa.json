@@ -1,23 +1,9 @@
 {
- "generatedAt": "2026-10-05T12:44:50.593Z",
+ "generatedAt": "2026-10-05T13:07:49.144Z",
  "base": "http://127.0.0.1:8790/",
  "widths": [
-  320,
-  360,
-  375,
   390,
-  412,
-  430,
-  480,
-  600,
-  768,
-  820,
-  1024,
-  1280,
-  1366,
-  1440,
-  1920,
-  2560
+  1366
  ],
  "pages": [
   "index.html",
@@ -67,49 +53,17 @@
    "present": true
   }
  ],
- "fails": [
-  "cookies.html@390: axe crítico label (2)",
-  "cookies.html@1366: axe crítico label (2)",
-  "index.html@390: axe crítico aria-required-attr (1)",
-  "index.html@1366: axe crítico aria-required-attr (1)",
-  "musica.html@1366: axe crítico aria-required-attr (1)"
- ],
+ "fails": [],
  "results": [
   {
    "page": "404.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
    "axe": [],
-   "missingAnchors": [
-    "mainContent"
-   ],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -128,79 +82,13 @@
   },
   {
    "page": "404.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
    "axe": [],
-   "missingAnchors": [
-    "mainContent"
-   ],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -210,76 +98,13 @@
    ]
   },
   {
-   "page": "404.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "404.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [
-    "a.aliados-nearby-link [253,354]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "aliados.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 3,
-     "sample": ".sos > .triad-left > .triad-text > p | .explore > .triad-left > .triad-text > h5 | .explore > .triad-left > .triad-text > p"
-    },
-    {
-     "id": "link-name",
-     "impact": "serious",
-     "nodes": 3,
-     "sample": ".aliado-nearby-arrow[href=\"departamento.html?id=madriz\"] | .aliado-nearby-arrow[href=\"departamento.html?id=matagalpa\"] | .aliado-nearby-arrow[href=\"departamento.html?id=granada\"]"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -349,89 +174,12 @@
   },
   {
    "page": "aliados.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 3,
-     "sample": ".sos > .triad-left > .triad-text > p | .explore > .triad-left > .triad-text > h5 | .explore > .triad-left > .triad-text > p"
-    },
-    {
-     "id": "link-name",
-     "impact": "serious",
-     "nodes": 3,
-     "sample": ".aliado-nearby-arrow[href=\"departamento.html?id=madriz\"] | .aliado-nearby-arrow[href=\"departamento.html?id=matagalpa\"] | .aliado-nearby-arrow[href=\"departamento.html?id=granada\"]"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -492,68 +240,6 @@
    ]
   },
   {
-   "page": "aliados.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aliados.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [
-    "#btnSignAllDecalogo [291,370]",
-    "a.amb-btn-green [259,356]",
-    "button.amb-btn-box [282,365]",
-    "a.amb-btn-box [139,365]",
-    "a.amb-btn-box [207,365]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [
-    "#btnSignAllDecalogo [300,380]",
-    "a.amb-btn-green [268,364]",
-    "button.amb-btn-box [282,365]",
-    "a.amb-btn-box [139,365]",
-    "a.amb-btn-box [207,365]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [
-    "#btnSignAllDecalogo [306,385]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "ambiental.html",
    "width": 390,
    "overflowPx": 0,
@@ -561,9 +247,7 @@
    "imgNoAlt": [],
    "error": null,
    "axe": [],
-   "missingAnchors": [
-    "bizRegisterModal"
-   ],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -582,79 +266,13 @@
   },
   {
    "page": "ambiental.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
    "axe": [],
-   "missingAnchors": [
-    "bizRegisterModal"
-   ],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -664,54 +282,6 @@
    ]
   },
   {
-   "page": "ambiental.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ambiental.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "aviso-legal.html",
    "width": 390,
    "overflowPx": 0,
@@ -719,9 +289,7 @@
    "imgNoAlt": [],
    "error": null,
    "axe": [],
-   "missingAnchors": [
-    "mainContent"
-   ],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -740,79 +308,13 @@
   },
   {
    "page": "aviso-legal.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
    "axe": [],
-   "missingAnchors": [
-    "mainContent"
-   ],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -822,68 +324,13 @@
    ]
   },
   {
-   "page": "aviso-legal.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "aviso-legal.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "ayuda.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 4,
-     "sample": "span[data-i18n=\"pages.ayuda.helpSection.span1\"] | span[data-i18n=\"pages.ayuda.quickTitle.h21\"] | span[data-i18n=\"pages.ayuda.preguntas.span1\"]"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -908,83 +355,12 @@
   },
   {
    "page": "ayuda.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 4,
-     "sample": "span[data-i18n=\"pages.ayuda.helpSection.span1\"] | span[data-i18n=\"pages.ayuda.quickTitle.h21\"] | span[data-i18n=\"pages.ayuda.preguntas.span1\"]"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -1000,72 +376,13 @@
    ]
   },
   {
-   "page": "ayuda.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "ayuda.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [
-    "a. [232,375]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [
-    "a. [232,375]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "baqueano-ia.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 4,
-     "sample": ".d1 | .masaya > .ia-overlay-desc | .granada > .ia-overlay-desc"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -1085,83 +402,12 @@
   },
   {
    "page": "baqueano-ia.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 4,
-     "sample": ".d1 | .masaya > .ia-overlay-desc | .granada > .ia-overlay-desc"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -1170,81 +416,6 @@
      "name": "WhatsApp"
     }
    ]
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "baqueano-ia.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]",
-    "a.cookies-index-link [41,403]"
-   ],
-   "imgNoAlt": [],
-   "error": null
   },
   {
    "page": "cookies.html",
@@ -1262,24 +433,8 @@
    ],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 2,
-     "sample": ".cookies-badge-pill | #purgeStorageBtn > span"
-    },
-    {
-     "id": "label",
-     "impact": "critical",
-     "nodes": 2,
-     "sample": "#prefToggle | #analyticsToggle"
-    }
-   ],
-   "missingAnchors": [
-    "mainContent",
-    "control"
-   ],
+   "axe": [],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -1298,97 +453,13 @@
   },
   {
    "page": "cookies.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [
-    "a.sidebar-index-link [20,424]",
-    "a.sidebar-index-link [20,424]",
-    "a.sidebar-index-link [20,424]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 3,
-     "sample": ".cookies-badge-pill | #purgeStorageBtn > span | .flow-node-user > p"
-    },
-    {
-     "id": "label",
-     "impact": "critical",
-     "nodes": 2,
-     "sample": "#prefToggle | #analyticsToggle"
-    }
-   ],
-   "missingAnchors": [
-    "mainContent",
-    "control"
-   ],
+   "axe": [],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -1396,54 +467,6 @@
      "name": "WhatsApp"
     }
    ]
-  },
-  {
-   "page": "cookies.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cookies.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
   },
   {
    "page": "cronicas.html",
@@ -1472,70 +495,6 @@
   },
   {
    "page": "cronicas.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
@@ -1552,68 +511,13 @@
    ]
   },
   {
-   "page": "cronicas.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "cronicas.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "denuncias.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 3,
-     "sample": ".denuncias-inline-008 > .denuncias-inline-004 | .denuncias-inline-008 > .denuncias-inline-009 | .denuncias-inline-008 > .denuncias-inline-010"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -1633,83 +537,12 @@
   },
   {
    "page": "denuncias.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 3,
-     "sample": ".denuncias-inline-008 > .denuncias-inline-004 | .denuncias-inline-008 > .denuncias-inline-009 | .denuncias-inline-008 > .denuncias-inline-010"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -1720,80 +553,13 @@
    ]
   },
   {
-   "page": "denuncias.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "denuncias.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "departamento.html?depto=madriz",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "aria-prohibited-attr",
-     "impact": "serious",
-     "nodes": 1,
-     "sample": "#mapPlacesCarousel"
-    },
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 9,
-     "sample": ".m-badge-accent | .video-gallery-header > .sub-label-tag | .madriz-map-heading > .sub-label-tag"
-    },
-    {
-     "id": "scrollable-region-focusable",
-     "impact": "serious",
-     "nodes": 2,
-     "sample": ".timeline-madriz-strip | .matrix-table-wrap"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -1828,89 +594,12 @@
   },
   {
    "page": "departamento.html?depto=madriz",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "aria-prohibited-attr",
-     "impact": "serious",
-     "nodes": 1,
-     "sample": "#mapPlacesCarousel"
-    },
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 9,
-     "sample": ".m-badge-accent | .video-gallery-header > .sub-label-tag | .madriz-map-heading > .sub-label-tag"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -1936,70 +625,13 @@
    ]
   },
   {
-   "page": "departamento.html?depto=madriz",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "departamento.html?depto=madriz",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [
-    "a.destinos-ai-btn-purple [45,337]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "destino.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 5,
-     "sample": ".destinos-preview-btn | span[data-i18n=\"testimonials.types.montana\"] | .blue.dest-catalog-tag[data-i18n=\"common.riosYLagunas\"]"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -2019,83 +651,12 @@
   },
   {
    "page": "destino.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 5,
-     "sample": ".destinos-preview-btn | span[data-i18n=\"testimonials.types.montana\"] | .blue.dest-catalog-tag[data-i18n=\"common.riosYLagunas\"]"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -2106,70 +667,13 @@
    ]
   },
   {
-   "page": "destino.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destino.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [
-    "a.destinos-ai-btn-purple [45,337]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "destinos.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 5,
-     "sample": ".destinos-preview-btn | span[data-i18n=\"testimonials.types.montana\"] | .blue.dest-catalog-tag[data-i18n=\"common.riosYLagunas\"]"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -2189,83 +693,12 @@
   },
   {
    "page": "destinos.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 5,
-     "sample": ".destinos-preview-btn | span[data-i18n=\"testimonials.types.montana\"] | .blue.dest-catalog-tag[data-i18n=\"common.riosYLagunas\"]"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -2276,74 +709,13 @@
    ]
   },
   {
-   "page": "destinos.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "destinos.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "experiencias.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 15,
-     "sample": ".exp-main-card[data-cat=\"volcan\"]:nth-child(1) > .exp-card-body > .exp-card-loc | .exp-main-card[data-cat=\"rio\"]:nth-child(2) > .exp-card-body > .exp-card-loc | .exp-main-card[data-cat=\"volcan\"]:nth-child(3) > .exp-card-body > .exp-card-loc"
-    },
-    {
-     "id": "target-size",
-     "impact": "serious",
-     "nodes": 5,
-     "sample": "button[data-banner-index=\"0\"] | button[data-banner-index=\"1\"] | button[data-banner-index=\"2\"]"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -2438,89 +810,12 @@
   },
   {
    "page": "experiencias.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 15,
-     "sample": ".exp-main-card[data-cat=\"volcan\"]:nth-child(1) > .exp-card-body > .exp-card-loc | .exp-main-card[data-cat=\"rio\"]:nth-child(2) > .exp-card-body > .exp-card-loc | .exp-main-card[data-cat=\"volcan\"]:nth-child(3) > .exp-card-body > .exp-card-loc"
-    },
-    {
-     "id": "target-size",
-     "impact": "serious",
-     "nodes": 4,
-     "sample": "button[data-banner-index=\"1\"] | button[data-banner-index=\"2\"] | button[data-banner-index=\"3\"]"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -2606,68 +901,13 @@
    ]
   },
   {
-   "page": "experiencias.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "experiencias.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "favoritos.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 1,
-     "sample": ".favorites-eyebrow > span"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -2687,83 +927,12 @@
   },
   {
    "page": "favoritos.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 1,
-     "sample": ".favorites-eyebrow > span"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -2774,74 +943,13 @@
    ]
   },
   {
-   "page": "favoritos.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "favoritos.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "gastronomia.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 14,
-     "sample": "article[data-cat=\"todos pacifico norte centro\"] > .dish-body > .dish-region > span | article[data-cat=\"todos maiz pacifico norte\"] > .dish-body > .dish-region > span | .dish-card-exact[data-cat=\"todos pacifico\"]:nth-child(3) > .dish-body > .dish-region"
-    },
-    {
-     "id": "target-size",
-     "impact": "serious",
-     "nodes": 2,
-     "sample": "#checkGastroVerif | #checkGastroCerca"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -2881,89 +989,12 @@
   },
   {
    "page": "gastronomia.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 14,
-     "sample": "article[data-cat=\"todos pacifico norte centro\"] > .dish-body > .dish-region > span | article[data-cat=\"todos maiz pacifico norte\"] > .dish-body > .dish-region > span | .dish-card-exact[data-cat=\"todos pacifico\"]:nth-child(3) > .dish-body > .dish-region"
-    },
-    {
-     "id": "target-size",
-     "impact": "serious",
-     "nodes": 2,
-     "sample": "#checkGastroVerif | #checkGastroCerca"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -2994,70 +1025,13 @@
    ]
   },
   {
-   "page": "gastronomia.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [
-    "a.hist-btn-glass [210,339]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "historia.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 12,
-     "sample": ".hist-era-card:nth-child(1) > .dates | .hist-era-card:nth-child(2) > .dates | .hist-era-card:nth-child(3) > .dates"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [
     "epocaPrehispanica",
     "resistenciaIndigena",
@@ -3089,83 +1063,12 @@
   },
   {
    "page": "historia.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 12,
-     "sample": ".hist-era-card:nth-child(1) > .dates | .hist-era-card:nth-child(2) > .dates | .hist-era-card:nth-child(3) > .dates"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [
     "epocaPrehispanica",
     "resistenciaIndigena",
@@ -3188,74 +1091,13 @@
    ]
   },
   {
-   "page": "historia.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "historia.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "index.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "aria-required-attr",
-     "impact": "critical",
-     "nodes": 1,
-     "sample": ".hidden-gem-bar"
-    },
-    {
-     "id": "nested-interactive",
-     "impact": "serious",
-     "nodes": 1,
-     "sample": ".hidden-gem-bar"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -3285,89 +1127,12 @@
   },
   {
    "page": "index.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "aria-required-attr",
-     "impact": "critical",
-     "nodes": 1,
-     "sample": ".hidden-gem-bar"
-    },
-    {
-     "id": "nested-interactive",
-     "impact": "serious",
-     "nodes": 1,
-     "sample": ".hidden-gem-bar"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -3388,71 +1153,14 @@
    ]
   },
   {
-   "page": "index.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "index.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "legal.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 4,
-     "sample": "#terminos > .legal-card-link[data-i18n=\"pages.legal.terminos.span1\"] | #privacidad > .legal-card-link[data-i18n=\"pages.legal.terminos.span1\"] | #cookies > .legal-card-link[data-i18n=\"pages.legal.terminos.span1\"]"
-    }
-   ],
-   "missingAnchors": [
-    "mainContent"
-   ],
+   "axe": [],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -3471,86 +1179,13 @@
   },
   {
    "page": "legal.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 4,
-     "sample": "#terminos > .legal-card-link[data-i18n=\"pages.legal.terminos.span1\"] | #privacidad > .legal-card-link[data-i18n=\"pages.legal.terminos.span1\"] | #cookies > .legal-card-link[data-i18n=\"pages.legal.terminos.span1\"]"
-    }
-   ],
-   "missingAnchors": [
-    "mainContent"
-   ],
+   "axe": [],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -3560,68 +1195,13 @@
    ]
   },
   {
-   "page": "legal.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "legal.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "mapa.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 2,
-     "sample": ".btn-map-action[onclick=\"openSosModal(event)\"][type=\"button\"] | .map-live-badge > span:nth-child(2)"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -3646,83 +1226,12 @@
   },
   {
    "page": "mapa.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 2,
-     "sample": ".btn-map-action[onclick=\"openSosModal(event)\"][type=\"button\"] | .map-live-badge > span:nth-child(2)"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -3738,68 +1247,13 @@
    ]
   },
   {
-   "page": "mapa.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mapa.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "mi-negocio.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 1,
-     "sample": ".legal-framework-section > .container > div:nth-child(2) > div:nth-child(2) > div > span"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -3819,83 +1273,12 @@
   },
   {
    "page": "mi-negocio.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 1,
-     "sample": ".legal-framework-section > .container > div:nth-child(2) > div:nth-child(2) > div > span"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -3906,75 +1289,14 @@
    ]
   },
   {
-   "page": "mi-negocio.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [
-    "a. [215,352]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [
-    "a. [230,368]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "mi-viaje.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 5,
-     "sample": ".viaje-tab-btn.active[role=\"tab\"] > span | button[onclick=\"removeDay(1)\"] | button[onclick=\"removeDay(2)\"]"
-    }
-   ],
-   "missingAnchors": [
-    "mainContent"
-   ],
+   "axe": [],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -3993,86 +1315,13 @@
   },
   {
    "page": "mi-viaje.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 5,
-     "sample": ".viaje-tab-btn.active[role=\"tab\"] > span | button[onclick=\"removeDay(1)\"] | button[onclick=\"removeDay(2)\"]"
-    }
-   ],
-   "missingAnchors": [
-    "mainContent"
-   ],
+   "axe": [],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -4080,77 +1329,6 @@
      "name": "WhatsApp"
     }
    ]
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [
-    "button.musica-arrow-btn [309,339]",
-    "a.musica-view-link [319,377]",
-    "button.musica-arrow-btn [389,419]",
-    "button.musica-arrow-btn [425,455]",
-    "button.player-ctrl-btn [299,340]",
-    "button.sticky-btn-play [354,395]",
-    "button.player-ctrl-btn [409,450]",
-    "button.player-ctrl-btn [491,532]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [
-    "a.musica-view-link [321,379]",
-    "button.musica-arrow-btn [391,421]",
-    "button.musica-arrow-btn [427,457]",
-    "button.sticky-btn-play [354,395]",
-    "button.player-ctrl-btn [409,450]",
-    "button.player-ctrl-btn [491,532]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [
-    "a.musica-view-link [325,383]",
-    "button.musica-arrow-btn [395,425]",
-    "button.musica-arrow-btn [431,461]",
-    "button.sticky-btn-play [354,395]",
-    "button.player-ctrl-btn [409,450]",
-    "button.player-ctrl-btn [491,532]"
-   ],
-   "imgNoAlt": [],
-   "error": null
   },
   {
    "page": "musica.html",
@@ -4185,88 +1363,6 @@
   },
   {
    "page": "musica.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [
-    "button.musica-arrow-btn [404,434]",
-    "button.musica-arrow-btn [440,470]",
-    "button.player-ctrl-btn [409,450]",
-    "button.player-ctrl-btn [491,532]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [
-    "button.musica-arrow-btn [409,439]",
-    "button.musica-arrow-btn [445,475]",
-    "button.player-ctrl-btn [409,450]",
-    "button.player-ctrl-btn [491,532]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [
-    "button.player-ctrl-btn [491,532]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [
-    "button.track-play-btn [782,823]",
-    "button.track-play-btn [782,823]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [
-    "button.track-play-btn [1280,1321]",
-    "button.track-play-btn [1579,1620]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [
@@ -4274,14 +1370,7 @@
    ],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "aria-required-attr",
-     "impact": "critical",
-     "nodes": 1,
-     "sample": ".sticky-progress-bar"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -4292,64 +1381,6 @@
    ]
   },
   {
-   "page": "musica.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [
-    "button.track-play-btn [1659,1700]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [
-    "button.track-play-btn [1899,1940]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "musica.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [
-    "input. [289,499]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [
-    "input. [289,499]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [
-    "input. [289,499]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "nosotros.html",
    "width": 390,
    "overflowPx": 0,
@@ -4358,14 +1389,7 @@
    ],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 2,
-     "sample": "span[data-i18n=\"pages.nosotros.contacto.span1\"] | div:nth-child(5) > p > span"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -4390,89 +1414,12 @@
   },
   {
    "page": "nosotros.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [
-    "input. [289,499]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [
-    "input. [289,499]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [
-    "input. [289,499]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 2,
-     "sample": "span[data-i18n=\"pages.nosotros.contacto.span1\"] | div:nth-child(5) > p > span"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -4488,54 +1435,6 @@
    ]
   },
   {
-   "page": "nosotros.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "nosotros.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "offline.html",
    "width": 390,
    "overflowPx": 0,
@@ -4543,9 +1442,7 @@
    "imgNoAlt": [],
    "error": null,
    "axe": [],
-   "missingAnchors": [
-    "mainContent"
-   ],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -4564,79 +1461,13 @@
   },
   {
    "page": "offline.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
    "axe": [],
-   "missingAnchors": [
-    "mainContent"
-   ],
+   "missingAnchors": [],
    "whatsapp": [
     {
      "href": "https://wa.me/50584431289",
@@ -4644,56 +1475,6 @@
      "name": "WhatsApp"
     }
    ]
-  },
-  {
-   "page": "offline.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "offline.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [
-    "a.nos-btn-glass [189,348]"
-   ],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
   },
   {
    "page": "perfil.html",
@@ -4722,70 +1503,6 @@
   },
   {
    "page": "perfil.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
@@ -4802,68 +1519,13 @@
    ]
   },
   {
-   "page": "perfil.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "perfil.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
    "page": "privacidad.html",
    "width": 390,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 1,
-     "sample": ".cloud > div:nth-child(1) > strong"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -4883,83 +1545,12 @@
   },
   {
    "page": "privacidad.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "axe": [
-    {
-     "id": "color-contrast",
-     "impact": "serious",
-     "nodes": 1,
-     "sample": ".cloud > div:nth-child(1) > strong"
-    }
-   ],
+   "axe": [],
    "missingAnchors": [],
    "whatsapp": [
     {
@@ -4968,54 +1559,6 @@
      "name": "WhatsApp"
     }
    ]
-  },
-  {
-   "page": "privacidad.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "privacidad.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
   },
   {
    "page": "terminos.html",
@@ -5044,70 +1587,6 @@
   },
   {
    "page": "terminos.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
@@ -5122,54 +1601,6 @@
      "name": "WhatsApp"
     }
    ]
-  },
-  {
-   "page": "terminos.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "terminos.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
   },
   {
    "page": "testimonios.html",
@@ -5198,70 +1629,6 @@
   },
   {
    "page": "testimonios.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
    "width": 1366,
    "overflowPx": 0,
    "offscreen": [],
@@ -5276,30 +1643,6 @@
      "name": "WhatsApp"
     }
    ]
-  },
-  {
-   "page": "testimonios.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
-  },
-  {
-   "page": "testimonios.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null
   }
  ]
 }

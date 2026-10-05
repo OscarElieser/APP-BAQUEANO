@@ -4955,5 +4955,14 @@
     "analyticsDesc": "Anonyme Messungen zur Verbesserung des Dienstes.",
     "save": "Auswahl speichern",
     "footerLink": "Cookie-Einstellungen"
+  },
+  "a11y": {
+    "madriz": {
+      "timelineRegion": "Zeitleiste von Madriz",
+      "maizeMatrixRegion": "Tabelle der Mais-Gastronomie"
+    },
+    "player": {
+      "seek": "Position im Lied"
+    }
   }
 }

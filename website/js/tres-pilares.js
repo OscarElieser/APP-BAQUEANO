@@ -220,13 +220,10 @@
       }
     }
 
-    // Si no hay catálogo, usar conteo base conocido de la plataforma
-    if (count === 0) {
-      // Estimado conservador basado en destinos y negocios ya conocidos
-      count = 12;
-    }
-
-    countEl.textContent = count;
+    // Sin catálogo no hay conteo real: se oculta en lugar de mostrar un número
+    // estimado (regla: nunca presentar datos que no podemos demostrar).
+    countEl.hidden = count === 0;
+    countEl.textContent = count > 0 ? String(count) : "";
   }
 
 

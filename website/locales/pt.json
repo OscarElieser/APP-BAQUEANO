@@ -4955,5 +4955,14 @@
     "analyticsDesc": "Medições anônimas para melhorar o serviço.",
     "save": "Salvar seleção",
     "footerLink": "Configurar cookies"
+  },
+  "a11y": {
+    "madriz": {
+      "timelineRegion": "Linha do tempo de Madriz",
+      "maizeMatrixRegion": "Tabela da gastronomia do milho"
+    },
+    "player": {
+      "seek": "Posição da música"
+    }
   }
 }

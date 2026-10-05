@@ -4955,5 +4955,14 @@
     "analyticsDesc": "Mesures anonymes pour améliorer le service.",
     "save": "Enregistrer la sélection",
     "footerLink": "Paramètres des cookies"
+  },
+  "a11y": {
+    "madriz": {
+      "timelineRegion": "Chronologie de Madriz",
+      "maizeMatrixRegion": "Tableau de la gastronomie du maïs"
+    },
+    "player": {
+      "seek": "Position de la chanson"
+    }
   }
 }

@@ -4955,5 +4955,14 @@
     "analyticsDesc": "Mediciones anónimas para mejorar el servicio.",
     "save": "Guardar selección",
     "footerLink": "Configurar cookies"
+  },
+  "a11y": {
+    "madriz": {
+      "timelineRegion": "Línea de tiempo de Madriz",
+      "maizeMatrixRegion": "Matriz de gastronomía del maíz"
+    },
+    "player": {
+      "seek": "Posición de la canción"
+    }
   }
 }

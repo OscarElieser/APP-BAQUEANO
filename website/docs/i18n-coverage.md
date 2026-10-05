@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T12:48:50.641Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3621 · en 3621 · fr 3621 · it 3621 · pt 3621 · de 3621
+Generado: 2026-10-05T13:09:03.571Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3624 · en 3624 · fr 3624 · it 3624 · pt 3624 · de 3624
 
 HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -84,7 +84,7 @@ HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | apps/web/src/components/map/InteractiveMap.tsx | tsx | 7 | 0 | 7 | 0 % |
 | js/destinos-gastronomia.js | js | 7 | 0 | 7 | 0 % |
 | js/global-search.js | js | 7 | 0 | 7 | 0 % |
-| js/madriz-experience.js | js | 7 | 0 | 7 | 0 % |
+| js/madriz-experience.js | js | 9 | 2 | 7 | 22.2 % |
 | apps/admin/src/components/AdminAuthGate.tsx | tsx | 6 | 0 | 6 | 0 % |
 | apps/web/src/app/rutas/page.tsx | tsx | 6 | 0 | 6 | 0 % |
 | apps/web/src/app/sostenibilidad/page.tsx | tsx | 6 | 0 | 6 | 0 % |
@@ -174,7 +174,7 @@ HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | favoritos.html | html | 8 | 8 | 0 | 100 % |
 | gastronomia.html | html | 205 | 205 | 0 | 100 % |
 | historia.html | html | 176 | 176 | 0 | 100 % |
-| index.html | html | 215 | 215 | 0 | 100 % |
+| index.html | html | 214 | 214 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
 | js/async-styles.js | js | 0 | 0 | 0 | 100 % |
 | js/ayuda.js | js | 0 | 0 | 0 | 100 % |
@@ -206,7 +206,7 @@ HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | mapa.html | html | 39 | 39 | 0 | 100 % |
 | mi-negocio.html | html | 186 | 186 | 0 | 100 % |
 | mi-viaje.html | html | 113 | 113 | 0 | 100 % |
-| musica.html | html | 196 | 196 | 0 | 100 % |
+| musica.html | html | 197 | 197 | 0 | 100 % |
 | nosotros.html | html | 143 | 143 | 0 | 100 % |
 | offline.html | html | 24 | 24 | 0 | 100 % |
 | packages/i18n/src/index.tsx | tsx | 2 | 2 | 0 | 100 % |

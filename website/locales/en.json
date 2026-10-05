@@ -4955,5 +4955,14 @@
     "analyticsDesc": "Anonymous measurements to improve the service.",
     "save": "Save selection",
     "footerLink": "Cookie settings"
+  },
+  "a11y": {
+    "madriz": {
+      "timelineRegion": "Madriz timeline",
+      "maizeMatrixRegion": "Maize gastronomy table"
+    },
+    "player": {
+      "seek": "Song position"
+    }
   }
 }

@@ -55,7 +55,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <link rel="shortcut icon" href="assets/Mesa de trabajo 1.webp?v=20260930-mesa-1">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
-  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261003-16">
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-1">
 </head>
 <body>
 
@@ -263,7 +263,7 @@
           <li><a data-i18n="pages.cookies.cookiesSidebar.a5" href="#ubicacion" class="cookies-index-link">5. Ubicación y mapas</a></li>
           <li><a data-i18n="pages.cookies.cookiesSidebar.a6" href="#externos" class="cookies-index-link">6. Servicios externos</a></li>
           <li><a data-i18n="pages.cookies.cookiesSidebar.a7" href="#duracion" class="cookies-index-link">7. Duración y borrado</a></li>
-          <li><a data-i18n="pages.cookies.cookiesSidebar.a8" href="#control" class="cookies-index-link">8. Control del usuario</a></li>
+          <li><a data-i18n="pages.cookies.cookiesSidebar.a8" href="#preferencias" class="cookies-index-link">8. Control del usuario</a></li>
           <li><a data-i18n="pages.cookies.cookiesSidebar.a9" href="#faq" class="cookies-index-link">9. Preguntas frecuentes</a></li>
         </ul>
       </div>
@@ -311,12 +311,12 @@
               <div class="pref-row-left">
                 <div class="pref-icon-circle item-icon-orange">🟧</div>
                 <div class="pref-meta">
-                  <h4 data-i18n="common.preferencias">Preferencias</h4>
+                  <h4 id="prefToggleLabel" data-i18n="common.preferencias">Preferencias</h4>
                   <p data-i18n="pages.cookies.preferencias.p3">Guardan tu idioma, tema, región y configuraciones.</p>
                 </div>
               </div>
               <label class="switch-label">
-                <input type="checkbox" id="prefToggle" checked>
+                <input type="checkbox" id="prefToggle" checked aria-labelledby="prefToggleLabel">
                 <span class="switch-slider"></span>
               </label>
             </div>
@@ -338,12 +338,12 @@
               <div class="pref-row-left">
                 <div class="pref-icon-circle item-icon-blue">🔵</div>
                 <div class="pref-meta">
-                  <h4 data-i18n="pages.cookies.preferencias.h43">Analítica opcional</h4>
+                  <h4 id="analyticsToggleLabel" data-i18n="pages.cookies.preferencias.h43">Analítica opcional</h4>
                   <p data-i18n="pages.cookies.preferencias.p5">Nos ayuda a mejorar la experiencia de BAQUEANO.</p>
                 </div>
               </div>
               <label class="switch-label">
-                <input type="checkbox" id="analyticsToggle">
+                <input type="checkbox" id="analyticsToggle" aria-labelledby="analyticsToggleLabel">
                 <span class="switch-slider"></span>
               </label>
             </div>

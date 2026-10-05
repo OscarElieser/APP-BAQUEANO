@@ -326,7 +326,7 @@
             <div class="madriz-map-status" id="madrizMapStatus" role="status" aria-live="polite">
               <i class="fa-solid fa-circle-notch fa-spin"></i> Consultando lugares publicados…
             </div>
-            <div id="mapPlacesCarousel" class="map-places-carousel" aria-label="Lugares disponibles en el mapa"></div>
+            <div id="mapPlacesCarousel" class="map-places-carousel" role="region" aria-label="Lugares disponibles en el mapa"></div>
           </div>
         </div>
       </section>
@@ -448,7 +448,7 @@
               humana se remonta a miles de años: valles y cañones resguardan petroglifos, cerámica precolombina
               y una memoria comunitaria viva en Totogalpa, San Lucas y Telpaneca.
             </p>
-            <div class="timeline-madriz-strip">
+            <div class="timeline-madriz-strip" tabindex="0" role="region" data-i18n-aria-label="a11y.madriz.timelineRegion" aria-label="Línea de tiempo de Madriz">
               <div class="t-step">
                 <span class="t-pill">1</span>
                 <h5>Pueblos Originarios</h5>
@@ -766,7 +766,7 @@
             </p>
 
             <h4 class="sub-table-title"><i class="fa-solid fa-wheat-awn"></i> Matriz de Gastronomía Ancestral del Maíz</h4>
-            <div class="matrix-table-wrap">
+            <div class="matrix-table-wrap" tabindex="0" role="region" data-i18n-aria-label="a11y.madriz.maizeMatrixRegion" aria-label="Matriz de gastronomía del maíz">
               <table class="madriz-matrix-table">
                 <thead>
                   <tr>

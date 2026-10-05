@@ -10,7 +10,7 @@
  *   (wcag2a/aa, wcag21aa, wcag22aa), anclas #id inexistentes, WhatsApp y cajón móvil.
  * 📦 QUÉ: `BASE_URL=http://127.0.0.1:8790/ AXE_PATH=… node scripts/browser-qa.mjs [--widths=320,390]`
  *   → docs/production-audit/browser-qa.json; código 1 si hay desborde horizontal,
- *   violaciones axe críticas, imágenes sin alt o enlaces de WhatsApp inseguros.
+ *   violaciones axe críticas o graves, imágenes sin alt o enlaces de WhatsApp inseguros.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -119,7 +119,7 @@ for (const r of results) {
   if (r.error) fails.push(`${r.page}@${r.width}: error ${r.error}`);
   if (r.overflowPx > 1) fails.push(`${r.page}@${r.width}: desborde horizontal ${r.overflowPx}px`);
   if (r.imgNoAlt.length) fails.push(`${r.page}@${r.width}: ${r.imgNoAlt.length} img sin alt`);
-  for (const v of r.axe || []) if (v.impact === 'critical') fails.push(`${r.page}@${r.width}: axe crítico ${v.id} (${v.nodes})`);
+  for (const v of r.axe || []) if (['critical', 'serious'].includes(v.impact)) fails.push(`${r.page}@${r.width}: axe ${v.impact} ${v.id} (${v.nodes}) ${v.sample.slice(0, 90)}`);
   for (const w of r.whatsapp || []) if (!w.safe || !w.name) fails.push(`${r.page}@${r.width}: WhatsApp inseguro o sin nombre accesible ${w.href}`);
   if (r.drawer && r.drawer.present && !(r.drawer.open && r.drawer.lastReachable && r.drawer.closes)) fails.push(`${r.page}@390: cajón móvil ${JSON.stringify(r.drawer)}`);
 }

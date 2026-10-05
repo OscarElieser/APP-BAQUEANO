@@ -60,7 +60,7 @@
       { id: 'bq-index-ui',  href: 'css/pages/index-exact.css?v=20260927-exact-1' },
       { id: 'bq-headings',  href: 'css/headings-system.css?v=20260927-1' },
       { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20261004-menu-2' },
-      { id: 'bq-platform-enhancements', href: 'css/platform-enhancements.css?v=20260930-1' },
+      { id: 'bq-platform-enhancements', href: 'css/platform-enhancements.css?v=20261005-a11y-1' },
       { id: 'bq-accessibility', href: 'css/accessibility.css?v=20260930-1' },
       { 
         id: 'bq-fa',        
@@ -74,7 +74,7 @@
       // Capa de identidad "Cartografía viva": correcciones de contraste y responsive.
       { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261004-menu-1' },
       // Sistema de diseño global: SIEMPRE la última hoja. Ver css/baqueano-system.css
-      { id: 'bq-system',    href: 'css/baqueano-system.css?v=20261003-16' }
+      { id: 'bq-system',    href: 'css/baqueano-system.css?v=20261005-a11y-1' }
     ];
     needed.forEach(function(css) {
       if (css.id === 'bq-fonts' && document.querySelector('link[href*="fonts.googleapis.com/css2"]')) return;
@@ -812,7 +812,14 @@
 
   function ensureMainContentTarget() {
     if (document.getElementById('mainContent')) return;
-    var main = document.querySelector('main, [role="main"], .page-content, .hero-exact-shell, .destinos-main-container, .main-container, section');
+    // Prioridad real (querySelector con lista devuelve el primero en el DOCUMENTO,
+    // no el primer selector): antes podía elegir una <section> previa al <main>
+    // que el shell luego reemplaza, y "Saltar al contenido" quedaba roto.
+    var candidates = ['main', '[role="main"]', '.page-content', '.hero-exact-shell', '.destinos-main-container', '.main-container', 'section'];
+    var main = null;
+    for (var i = 0; i < candidates.length && !main; i++) {
+      main = document.querySelector(candidates[i] + ':not(#mainNavbar *):not(#siteFooter *)');
+    }
     if (main) {
       main.id = 'mainContent';
       if (!main.hasAttribute('tabindex')) {
