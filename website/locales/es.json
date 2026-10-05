@@ -2131,7 +2131,8 @@
     },
     "baqueanoIa": {
       "body": {
-        "title1": "BAQUI | Tu viaje por Nicaragua, pensado contigo"
+        "title1": "BAQUI | Tu viaje por Nicaragua, pensado contigo",
+        "metaDescription1": "Copiloto de IA para planificar rutas auténticas, realistas y personalizadas en Nicaragua con mapa satelital, itinerarios y anfitriones locales."
       },
       "iaHero": {
         "h11": "Tu viaje por Nicaragua,",
@@ -2179,7 +2180,8 @@
       },
       "iaBudgetCurrency": {
         "option1": "USD",
-        "option2": "NIO"
+        "option2": "NIO",
+        "selectAriaLabel1": "Moneda del presupuesto"
       },
       "iaBudgetConversion": {
         "small1": "Ingresá tu límite real."
@@ -2233,7 +2235,8 @@
         "small16": "Naturaleza y aves",
         "small17": "Fin de la ruta",
         "span7": "110 km",
-        "span8": "(USD 68)"
+        "span8": "(USD 68)",
+        "imgAlt1": "Calle La Calzada, Granada"
       },
       "iaBudgetCard": {
         "h41": "Presupuesto estimado de tu viaje",
@@ -2241,7 +2244,13 @@
         "span1": "Modalidad de Transporte:",
         "span2": "Tipo de Local Gastronómico:",
         "span3": "Estilo de Hospedaje:",
-        "span4": "Actividades & Guías locales"
+        "span4": "Actividades & Guías locales",
+        "span5": "Otros gastos & Utilerías",
+        "small1": "(Artesanías, recuerdos, niños)",
+        "span6": "Total estimado:",
+        "span7": "○ C$ 10,000 máximo previsto",
+        "strong1": "Transparencia de Costos en Nicaragua:",
+        "div1": "Hablamos claro: en Nicaragua comer en un comedor popular cuesta C$ 120-180 por plato, mientras que restaurantes turísticos rondan C$ 500-900. El bus interurbano es la alternativa más económica, el carro propio ahorra si se comparte gasolina, y alquilar vehículo ofrece mayor agilidad. Incluimos además utilerías, artesanías y apoyo voluntario a las comunidades."
       },
       "iaBudgetStatusBadge": {
         "span1": "Dentro del presupuesto"
@@ -2249,17 +2258,26 @@
       "chipsTransport": {
         "button1": "En Bus (C$ 360)",
         "button2": "Carro propio / Gasolina (C$ 1,200)",
-        "button3": "Alquilar carro (C$ 3,800)"
+        "button3": "Alquilar carro (C$ 3,800)",
+        "buttonTitle1": "Bus interurbano / expreso popular",
+        "buttonTitle2": "Vehículo propio: gasolina según kilometraje de ruta",
+        "buttonTitle3": "Alquiler de vehículo + combustible"
       },
       "chipsFood": {
         "button1": "Comedores populares (C$ 1,200)",
         "button2": "Restaurantes típicos (C$ 2,000)",
-        "button3": "Restaurantes turísticos (C$ 4,200)"
+        "button3": "Restaurantes turísticos (C$ 4,200)",
+        "buttonTitle1": "Comedores populares, fritangas y mercados locales (C$ 120-180 por plato)",
+        "buttonTitle2": "Restaurantes típicos tradicionales con platos completos (C$ 300-400)",
+        "buttonTitle3": "Restaurantes turísticos y locales frente al lago o mar (C$ 600-900)"
       },
       "chipsStay": {
         "button1": "Hostal / Posada (C$ 1,400)",
         "button2": "Hotel estándar (C$ 3,000)",
-        "button3": "Alquiler de casa (C$ 4,800)"
+        "button3": "Alquiler de casa (C$ 4,800)",
+        "buttonTitle1": "Hostales y posadas rurales comunitarias",
+        "buttonTitle2": "Hotel estándar o boutique colonial",
+        "buttonTitle3": "Alquiler de casa completa, cabaña o Airbnb"
       },
       "lblStayType": {
         "small1": "(Hotel)"
@@ -2278,6 +2296,136 @@
       },
       "valFoodRow": {
         "small1": "(USD 55)"
+      },
+      "valActivityRow": {
+        "small1": "(USD 63)"
+      },
+      "valOtherRow": {
+        "small1": "(USD 22)"
+      },
+      "iaBudgetGauge": {
+        "small1": "del presupuesto"
+      },
+      "lblBudgetUsed": {
+        "span1": "● C$ 9,300 usado"
+      },
+      "iaBudgetReadySection": {
+        "p1": "Podés ajustar destinos, días, presupuesto o tipo de experiencias y BAQUI la actualizará al instante."
+      },
+      "iaBtnModifyBottom": {
+        "button1": "Modificar con IA"
+      },
+      "iaRecsSection": {
+        "p1": "Todavía no hay servicios vinculados y verificables para esta ruta. BAQUEANO no mostrará recomendaciones ficticias."
+      },
+      "iaUtilitySection": {
+        "h41": "Conocé cada parada de tu ruta",
+        "p1": "Contale a BAQUI a dónde querés ir: acá vas a ver qué hacer, qué conocer y qué probar en cada lugar de tu ruta.",
+        "h42": "Cómo moverte en tu ruta",
+        "p2": "Agregá destinos y te digo cómo llegar a cada uno.",
+        "h43": "Alertas y recomendaciones",
+        "p3": "Las alertas y recomendaciones se ajustan a cada lugar de tu ruta."
+      },
+      "iaRouteWeather": {
+        "h41": "Clima en tu ruta",
+        "small1": "Humedad",
+        "small2": "Viento",
+        "small3": "Lluvia",
+        "div1": "Open-Meteo ·"
+      },
+      "iaWeatherTemperature": {
+        "strong1": "Consultando…"
+      },
+      "iaWeatherCondition": {
+        "small1": "Obteniendo datos meteorológicos reales"
+      },
+      "iaWeatherWind": {
+        "strong1": "-- km/h"
+      },
+      "iaWeatherUpdated": {
+        "span1": "Actualizando"
+      },
+      "iaChatMicBtn": {
+        "buttonTitle1": "Hablar con BAQUI",
+        "buttonAriaLabel1": "Iniciar dictado"
+      },
+      "iaChatInput": {
+        "inputPlaceholder1": "Escribí aquí tu idea de viaje..."
+      }
+    },
+    "cookies": {
+      "body": {
+        "title1": "Cookies y Almacenamiento Local | BAQUEANO Nicaragua"
+      },
+      "cookiesHeroSection": {
+        "h11": "Cookies,",
+        "span1": "almacenamiento local y uso sin conexión",
+        "p1": "Transparencia sobre cómo utilizamos cookies, tecnologías de almacenamiento y datos locales para brindarte una experiencia de viaje segura, auténtica y personalizada en Nicaragua."
+      },
+      "trustStripSection": {
+        "h31": "Sin publicidad invasiva",
+        "p1": "No usamos cookies para mostrar publicidad de terceros ni rastrear tus hábitos.",
+        "h32": "Ubicación solo con permiso",
+        "p2": "Tu ubicación se solicita únicamente cuando la activas para rutas y mapas.",
+        "h33": "Control de almacenamiento",
+        "p3": "Puedes gestionar y eliminar tus datos locales cuando lo desees con un clic.",
+        "h34": "Modo offline",
+        "p4": "Disfrutá contenido, mapas, rutas y guías aun sin señal en zonas remotas."
+      },
+      "cookiesSidebar": {
+        "div1": "Índice de la política",
+        "a1": "1. Información general",
+        "a2": "2. Cookies esenciales",
+        "a3": "3. Preferencias",
+        "a4": "4. Almacenamiento local y modo offline",
+        "a5": "5. Ubicación y mapas",
+        "a6": "6. Servicios externos",
+        "a7": "7. Duración y borrado",
+        "a8": "8. Control del usuario",
+        "a9": "9. Preguntas frecuentes",
+        "div2": "“Tu información también viaja segura.”"
+      },
+      "preferencias": {
+        "h21": "Tus preferencias de cookies y almacenamiento",
+        "p1": "Podés personalizar el uso de cookies y datos locales según tus preferencias. Las cookies esenciales y el almacenamiento necesario son obligatorios para el funcionamiento del sitio.",
+        "h41": "Cookies esenciales",
+        "p2": "Necesarias para el funcionamiento, seguridad y autenticación.",
+        "span1": "🔒 Siempre activas",
+        "p3": "Guardan tu idioma, tema, región y configuraciones.",
+        "h42": "Contenido offline",
+        "p4": "Rutas, guías, mapas y recursos para uso sin conexión.",
+        "button1": "🗄️ Administrar datos",
+        "h43": "Analítica opcional",
+        "p5": "Nos ayuda a mejorar la experiencia de BAQUEANO.",
+        "h31": "Vos tenés el control",
+        "p6": "Podés cambiar tus preferencias en cualquier momento y eliminar tus datos locales desde este dispositivo."
+      },
+      "purgeStorageBtn": {
+        "button1": "🗑️ Borrar almacenamiento BAQUEANO"
+      },
+      "flowDiagramCard": {
+        "h31": "¿Cómo funcionan los datos en BAQUEANO?",
+        "p1": "Así se conectan las tecnologías para brindarte una experiencia segura y personalizada.",
+        "p2": "Usuario viajero",
+        "h51": "Web / App BAQUEANO",
+        "p3": "Sitio web y aplicación Android",
+        "p4": "Autenticación y Hosting: Gestión de cuentas y seguridad.",
+        "p5": "Base de datos principal: Destinos, reservas y contenido.",
+        "div1": "⚙️ Preferencias y configuración",
+        "div2": "🗺️ Rutas y destinos",
+        "div3": "💼 Reservas y pagos",
+        "div4": "📦 Contenido offline"
+      },
+      "general": {
+        "h31": "¿Qué son las cookies y el almacenamiento local?",
+        "p1": "Las cookies son pequeños archivos de texto que se guardan en tu navegador o dispositivo para recordar información y mejorar tu experiencia. Además, BAQUEANO utiliza tecnologías de almacenamiento local (LocalStorage, SessionStorage e IndexedDB) y Service Workers para permitir funciones avanzadas como el modo offline, rutas guardadas y un mejor rendimiento en expediciones sin señal."
+      },
+      "esenciales": {
+        "p1": "Necesarias para el funcionamiento y seguridad."
+      },
+      "ubicacion": {
+        "h41": "Ubicación y mapas",
+        "p1": "Uso de tu ubicación y funcionamiento de mapas."
       }
     }
   },
@@ -2332,7 +2480,17 @@
     "guardarEnMiViaje": "Guardar en Mi Viaje",
     "descargarPdf": "Descargar PDF",
     "generarQr": "Generar QR",
-    "transporte": "Transporte"
+    "transporte": "Transporte",
+    "usd254": "(USD 254)",
+    "tuRutaEstaLista": "Tu ruta está lista 🌿",
+    "compartirRuta": "Compartir ruta",
+    "reservarTodo": "Reservar todo",
+    "recomendacionesVerificadasParaTuRuta": "Recomendaciones verificadas para tu ruta",
+    "hospedajesRestaurantesGuiasYExperiencias": "Hospedajes, restaurantes, guías y experiencias locales seleccionadas para este itinerario.",
+    "verMasRecomendaciones": "Ver más recomendaciones →",
+    "enviarMensaje": "Enviar mensaje",
+    "deSeptiembreDe2026": "26 de septiembre de 2026",
+    "tu": "Tú"
   },
   "ops": {
     "impact": {

@@ -4198,3 +4198,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - `docs/evidencias/MATRIZ_EVIDENCIAS_SPRINTS_1_2_3.md` marcada como HISTÓRICA (contenido conservado).
 - Acciones del propietario: desbloquear autodeploy de la VM, cerrar puerto 22 en NSG, restringir claves de navegador, videos S1-12/S3-20.
 - **Corrección CI (2026-10-05):** `deploy-production.yml` era YAML inválido desde `fba666b` (`Sitemap: https…` en escalar plano → "mapping values"); runs #78 y #79 fallaron en 0 s. Paso SEO reescrito con bloque `run: |`; los 7 workflows validados con `yaml.safe_load`.
+
+### 2026-10-05 — Solicitud: "continua con las traducciones en los lotes 07-23"
+- Rama de trabajo: `claude/sleepy-goodall-kqogrq` (WIP i18n `de7ba00`). Traducir es-07…es-23 a en/fr/it/pt/de, fusionar en `website/locales/*.json` con `i18n-add-keys.mjs`, validar la puerta i18n y, si queda limpia, llevar las 30 páginas a `main`.
+- **Directiva del propietario (2026-10-05):** "el objetivo es tener el 100 %" y "guardar toda la información para continuar en otra computadora". El espacio de traducción pasa del scratchpad efímero a `tools/i18n-batches/` (es-00…23, tx-00…07, `merge.mjs` portable y `README.md` con estado y pasos). Cada lote se confirma y sube a `claude/sleepy-goodall-kqogrq` al terminar.
+- Lote 07 fusionado: 106 claves × 6 idiomas (total 1 888). Errores restantes de la puerta: 1 695, que son las claves de los lotes 08–23.

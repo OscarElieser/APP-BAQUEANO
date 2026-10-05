@@ -2131,7 +2131,8 @@
     },
     "baqueanoIa": {
       "body": {
-        "title1": "BAQUI | Your trip through Nicaragua, planned with you"
+        "title1": "BAQUI | Your trip through Nicaragua, planned with you",
+        "metaDescription1": "AI copilot to plan authentic, realistic and personalized routes in Nicaragua with satellite map, itineraries and local hosts."
       },
       "iaHero": {
         "h11": "Your trip through Nicaragua,",
@@ -2179,7 +2180,8 @@
       },
       "iaBudgetCurrency": {
         "option1": "USD",
-        "option2": "NIO"
+        "option2": "NIO",
+        "selectAriaLabel1": "Budget currency"
       },
       "iaBudgetConversion": {
         "small1": "Enter your real limit."
@@ -2233,7 +2235,8 @@
         "small16": "Nature and birds",
         "small17": "End of the route",
         "span7": "110 km",
-        "span8": "(USD 68)"
+        "span8": "(USD 68)",
+        "imgAlt1": "La Calzada street, Granada"
       },
       "iaBudgetCard": {
         "h41": "Estimated budget for your trip",
@@ -2241,7 +2244,13 @@
         "span1": "Transport mode:",
         "span2": "Type of eatery:",
         "span3": "Lodging style:",
-        "span4": "Activities & Local guides"
+        "span4": "Activities & Local guides",
+        "span5": "Other expenses & supplies",
+        "small1": "(Crafts, souvenirs, children)",
+        "span6": "Estimated total:",
+        "span7": "○ C$ 10,000 planned maximum",
+        "strong1": "Cost transparency in Nicaragua:",
+        "div1": "Straight talk: in Nicaragua, eating at a local eatery costs C$ 120-180 per dish, while tourist restaurants run C$ 500-900. The intercity bus is the cheapest option, your own car saves money if you share fuel, and renting a vehicle gives you more flexibility. We also include supplies, crafts and voluntary support for communities."
       },
       "iaBudgetStatusBadge": {
         "span1": "Within budget"
@@ -2249,17 +2258,26 @@
       "chipsTransport": {
         "button1": "By bus (C$ 360)",
         "button2": "Own car / Gas (C$ 1,200)",
-        "button3": "Rent a car (C$ 3,800)"
+        "button3": "Rent a car (C$ 3,800)",
+        "buttonTitle1": "Intercity bus / popular express",
+        "buttonTitle2": "Own vehicle: fuel based on route mileage",
+        "buttonTitle3": "Vehicle rental + fuel"
       },
       "chipsFood": {
         "button1": "Popular eateries (C$ 1,200)",
         "button2": "Traditional restaurants (C$ 2,000)",
-        "button3": "Tourist restaurants (C$ 4,200)"
+        "button3": "Tourist restaurants (C$ 4,200)",
+        "buttonTitle1": "Local eateries, fritangas and local markets (C$ 120-180 per dish)",
+        "buttonTitle2": "Traditional restaurants with full meals (C$ 300-400)",
+        "buttonTitle3": "Tourist restaurants and venues by the lake or sea (C$ 600-900)"
       },
       "chipsStay": {
         "button1": "Hostel / Guesthouse (C$ 1,400)",
         "button2": "Standard hotel (C$ 3,000)",
-        "button3": "House rental (C$ 4,800)"
+        "button3": "House rental (C$ 4,800)",
+        "buttonTitle1": "Hostels and rural community inns",
+        "buttonTitle2": "Standard hotel or colonial boutique",
+        "buttonTitle3": "Whole house, cabin or Airbnb rental"
       },
       "lblStayType": {
         "small1": "(Hotel)"
@@ -2278,6 +2296,136 @@
       },
       "valFoodRow": {
         "small1": "(USD 55)"
+      },
+      "valActivityRow": {
+        "small1": "(USD 63)"
+      },
+      "valOtherRow": {
+        "small1": "(USD 22)"
+      },
+      "iaBudgetGauge": {
+        "small1": "of the budget"
+      },
+      "lblBudgetUsed": {
+        "span1": "● C$ 9,300 used"
+      },
+      "iaBudgetReadySection": {
+        "p1": "You can adjust destinations, days, budget or type of experiences and BAQUI will update it instantly."
+      },
+      "iaBtnModifyBottom": {
+        "button1": "Modify with AI"
+      },
+      "iaRecsSection": {
+        "p1": "There are no linked, verifiable services for this route yet. BAQUEANO will not show fictitious recommendations."
+      },
+      "iaUtilitySection": {
+        "h41": "Get to know each stop on your route",
+        "p1": "Tell BAQUI where you want to go: here you'll see what to do, what to see and what to taste at each place on your route.",
+        "h42": "How to get around on your route",
+        "p2": "Add destinations and I'll tell you how to get to each one.",
+        "h43": "Alerts and recommendations",
+        "p3": "Alerts and recommendations adapt to each place on your route."
+      },
+      "iaRouteWeather": {
+        "h41": "Weather on your route",
+        "small1": "Humidity",
+        "small2": "Wind",
+        "small3": "Rain",
+        "div1": "Open-Meteo ·"
+      },
+      "iaWeatherTemperature": {
+        "strong1": "Checking…"
+      },
+      "iaWeatherCondition": {
+        "small1": "Getting real weather data"
+      },
+      "iaWeatherWind": {
+        "strong1": "-- km/h"
+      },
+      "iaWeatherUpdated": {
+        "span1": "Updating"
+      },
+      "iaChatMicBtn": {
+        "buttonTitle1": "Talk to BAQUI",
+        "buttonAriaLabel1": "Start dictation"
+      },
+      "iaChatInput": {
+        "inputPlaceholder1": "Write your trip idea here..."
+      }
+    },
+    "cookies": {
+      "body": {
+        "title1": "Cookies and Local Storage | BAQUEANO Nicaragua"
+      },
+      "cookiesHeroSection": {
+        "h11": "Cookies,",
+        "span1": "local storage and offline use",
+        "p1": "Transparency about how we use cookies, storage technologies and local data to give you a safe, authentic and personalized travel experience in Nicaragua."
+      },
+      "trustStripSection": {
+        "h31": "No intrusive advertising",
+        "p1": "We don't use cookies to show third-party ads or track your habits.",
+        "h32": "Location only with permission",
+        "p2": "Your location is requested only when you enable it for routes and maps.",
+        "h33": "Storage control",
+        "p3": "You can manage and delete your local data whenever you want with one click.",
+        "h34": "Offline mode",
+        "p4": "Enjoy content, maps, routes and guides even without signal in remote areas."
+      },
+      "cookiesSidebar": {
+        "div1": "Policy index",
+        "a1": "1. General information",
+        "a2": "2. Essential cookies",
+        "a3": "3. Preferences",
+        "a4": "4. Local storage and offline mode",
+        "a5": "5. Location and maps",
+        "a6": "6. External services",
+        "a7": "7. Duration and deletion",
+        "a8": "8. User control",
+        "a9": "9. Frequently asked questions",
+        "div2": "“Your information travels safely too.”"
+      },
+      "preferencias": {
+        "h21": "Your cookie and storage preferences",
+        "p1": "You can customize the use of cookies and local data to your preferences. Essential cookies and necessary storage are required for the site to work.",
+        "h41": "Essential cookies",
+        "p2": "Required for operation, security and authentication.",
+        "span1": "🔒 Always active",
+        "p3": "They store your language, theme, region and settings.",
+        "h42": "Offline content",
+        "p4": "Routes, guides, maps and resources for offline use.",
+        "button1": "🗄️ Manage data",
+        "h43": "Optional analytics",
+        "p5": "Helps us improve the BAQUEANO experience.",
+        "h31": "You're in control",
+        "p6": "You can change your preferences at any time and delete your local data from this device."
+      },
+      "purgeStorageBtn": {
+        "button1": "🗑️ Clear BAQUEANO storage"
+      },
+      "flowDiagramCard": {
+        "h31": "How does data work in BAQUEANO?",
+        "p1": "This is how the technologies connect to give you a safe, personalized experience.",
+        "p2": "Traveler user",
+        "h51": "BAQUEANO Web / App",
+        "p3": "Website and Android app",
+        "p4": "Authentication and Hosting: account management and security.",
+        "p5": "Main database: destinations, bookings and content.",
+        "div1": "⚙️ Preferences and settings",
+        "div2": "🗺️ Routes and destinations",
+        "div3": "💼 Bookings and payments",
+        "div4": "📦 Offline content"
+      },
+      "general": {
+        "h31": "What are cookies and local storage?",
+        "p1": "Cookies are small text files saved in your browser or device to remember information and improve your experience. BAQUEANO also uses local storage technologies (LocalStorage, SessionStorage and IndexedDB) and Service Workers to enable advanced features such as offline mode, saved routes and better performance on expeditions without signal."
+      },
+      "esenciales": {
+        "p1": "Required for operation and security."
+      },
+      "ubicacion": {
+        "h41": "Location and maps",
+        "p1": "Use of your location and how maps work."
       }
     }
   },
@@ -2332,7 +2480,17 @@
     "guardarEnMiViaje": "Save to My Trip",
     "descargarPdf": "Download PDF",
     "generarQr": "Generate QR",
-    "transporte": "Transport"
+    "transporte": "Transport",
+    "usd254": "(USD 254)",
+    "tuRutaEstaLista": "Your route is ready 🌿",
+    "compartirRuta": "Share route",
+    "reservarTodo": "Book everything",
+    "recomendacionesVerificadasParaTuRuta": "Verified recommendations for your route",
+    "hospedajesRestaurantesGuiasYExperiencias": "Lodging, restaurants, guides and local experiences selected for this itinerary.",
+    "verMasRecomendaciones": "See more recommendations →",
+    "enviarMensaje": "Send message",
+    "deSeptiembreDe2026": "September 26, 2026",
+    "tu": "You"
   },
   "ops": {
     "impact": {

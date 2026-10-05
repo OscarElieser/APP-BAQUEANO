@@ -2131,7 +2131,8 @@
     },
     "baqueanoIa": {
       "body": {
-        "title1": "BAQUI | Votre voyage au Nicaragua, pensé avec vous"
+        "title1": "BAQUI | Votre voyage au Nicaragua, pensé avec vous",
+        "metaDescription1": "Copilote IA pour planifier des itinéraires authentiques, réalistes et personnalisés au Nicaragua avec carte satellite, itinéraires et hôtes locaux."
       },
       "iaHero": {
         "h11": "Votre voyage au Nicaragua,",
@@ -2179,7 +2180,8 @@
       },
       "iaBudgetCurrency": {
         "option1": "USD",
-        "option2": "NIO"
+        "option2": "NIO",
+        "selectAriaLabel1": "Devise du budget"
       },
       "iaBudgetConversion": {
         "small1": "Saisissez votre limite réelle."
@@ -2233,7 +2235,8 @@
         "small16": "Nature et oiseaux",
         "small17": "Fin de l'itinéraire",
         "span7": "110 km",
-        "span8": "(68 USD)"
+        "span8": "(68 USD)",
+        "imgAlt1": "Rue La Calzada, Granada"
       },
       "iaBudgetCard": {
         "h41": "Budget estimé de votre voyage",
@@ -2241,7 +2244,13 @@
         "span1": "Mode de transport :",
         "span2": "Type d'établissement :",
         "span3": "Type d'hébergement :",
-        "span4": "Activités et guides locaux"
+        "span4": "Activités et guides locaux",
+        "span5": "Autres dépenses et fournitures",
+        "small1": "(Artisanat, souvenirs, enfants)",
+        "span6": "Total estimé :",
+        "span7": "○ 10 000 C$ maximum prévu",
+        "strong1": "Transparence des coûts au Nicaragua :",
+        "div1": "Parlons franchement : au Nicaragua, manger dans un comedor populaire coûte 120-180 C$ par plat, tandis que les restaurants touristiques tournent autour de 500-900 C$. Le bus interurbain est l'option la plus économique, la voiture personnelle fait économiser si l'on partage l'essence, et la location offre plus de souplesse. Nous incluons aussi les fournitures, l'artisanat et le soutien volontaire aux communautés."
       },
       "iaBudgetStatusBadge": {
         "span1": "Dans le budget"
@@ -2249,17 +2258,26 @@
       "chipsTransport": {
         "button1": "En bus (C$ 360)",
         "button2": "Voiture personnelle / Essence (C$ 1 200)",
-        "button3": "Louer une voiture (C$ 3 800)"
+        "button3": "Louer une voiture (C$ 3 800)",
+        "buttonTitle1": "Bus interurbain / express populaire",
+        "buttonTitle2": "Véhicule personnel : essence selon le kilométrage de l'itinéraire",
+        "buttonTitle3": "Location de véhicule + carburant"
       },
       "chipsFood": {
         "button1": "Cantines populaires (C$ 1 200)",
         "button2": "Restaurants typiques (C$ 2 000)",
-        "button3": "Restaurants touristiques (C$ 4 200)"
+        "button3": "Restaurants touristiques (C$ 4 200)",
+        "buttonTitle1": "Comedores populaires, fritangas et marchés locaux (120-180 C$ par plat)",
+        "buttonTitle2": "Restaurants typiques traditionnels avec plats complets (300-400 C$)",
+        "buttonTitle3": "Restaurants touristiques et établissements face au lac ou à la mer (600-900 C$)"
       },
       "chipsStay": {
         "button1": "Auberge / Pension (C$ 1 400)",
         "button2": "Hôtel standard (C$ 3 000)",
-        "button3": "Location de maison (C$ 4 800)"
+        "button3": "Location de maison (C$ 4 800)",
+        "buttonTitle1": "Auberges et gîtes ruraux communautaires",
+        "buttonTitle2": "Hôtel standard ou boutique coloniale",
+        "buttonTitle3": "Location de maison entière, cabane ou Airbnb"
       },
       "lblStayType": {
         "small1": "(Hôtel)"
@@ -2278,6 +2296,136 @@
       },
       "valFoodRow": {
         "small1": "(55 USD)"
+      },
+      "valActivityRow": {
+        "small1": "(USD 63)"
+      },
+      "valOtherRow": {
+        "small1": "(USD 22)"
+      },
+      "iaBudgetGauge": {
+        "small1": "du budget"
+      },
+      "lblBudgetUsed": {
+        "span1": "● 9 300 C$ utilisés"
+      },
+      "iaBudgetReadySection": {
+        "p1": "Vous pouvez ajuster les destinations, les jours, le budget ou le type d'expériences et BAQUI le mettra à jour instantanément."
+      },
+      "iaBtnModifyBottom": {
+        "button1": "Modifier avec l'IA"
+      },
+      "iaRecsSection": {
+        "p1": "Il n'y a pas encore de services liés et vérifiables pour cet itinéraire. BAQUEANO n'affichera pas de recommandations fictives."
+      },
+      "iaUtilitySection": {
+        "h41": "Découvrez chaque étape de votre itinéraire",
+        "p1": "Dites à BAQUI où vous voulez aller : vous verrez ici quoi faire, quoi découvrir et quoi goûter à chaque étape de votre itinéraire.",
+        "h42": "Comment vous déplacer sur votre itinéraire",
+        "p2": "Ajoutez des destinations et je vous dirai comment rejoindre chacune.",
+        "h43": "Alertes et recommandations",
+        "p3": "Les alertes et recommandations s'adaptent à chaque lieu de votre itinéraire."
+      },
+      "iaRouteWeather": {
+        "h41": "Météo sur votre itinéraire",
+        "small1": "Humidité",
+        "small2": "Vent",
+        "small3": "Pluie",
+        "div1": "Open-Meteo ·"
+      },
+      "iaWeatherTemperature": {
+        "strong1": "Consultation…"
+      },
+      "iaWeatherCondition": {
+        "small1": "Récupération de données météo réelles"
+      },
+      "iaWeatherWind": {
+        "strong1": "-- km/h"
+      },
+      "iaWeatherUpdated": {
+        "span1": "Mise à jour"
+      },
+      "iaChatMicBtn": {
+        "buttonTitle1": "Parler à BAQUI",
+        "buttonAriaLabel1": "Démarrer la dictée"
+      },
+      "iaChatInput": {
+        "inputPlaceholder1": "Écrivez ici votre idée de voyage..."
+      }
+    },
+    "cookies": {
+      "body": {
+        "title1": "Cookies et stockage local | BAQUEANO Nicaragua"
+      },
+      "cookiesHeroSection": {
+        "h11": "Cookies,",
+        "span1": "stockage local et utilisation hors ligne",
+        "p1": "Transparence sur notre utilisation des cookies, des technologies de stockage et des données locales pour vous offrir une expérience de voyage sûre, authentique et personnalisée au Nicaragua."
+      },
+      "trustStripSection": {
+        "h31": "Pas de publicité intrusive",
+        "p1": "Nous n'utilisons pas de cookies pour afficher de la publicité tierce ni suivre vos habitudes.",
+        "h32": "Localisation uniquement avec autorisation",
+        "p2": "Votre position n'est demandée que lorsque vous l'activez pour les itinéraires et les cartes.",
+        "h33": "Contrôle du stockage",
+        "p3": "Vous pouvez gérer et supprimer vos données locales quand vous le souhaitez, en un clic.",
+        "h34": "Mode hors ligne",
+        "p4": "Profitez des contenus, cartes, itinéraires et guides même sans réseau dans les zones isolées."
+      },
+      "cookiesSidebar": {
+        "div1": "Sommaire de la politique",
+        "a1": "1. Informations générales",
+        "a2": "2. Cookies essentiels",
+        "a3": "3. Préférences",
+        "a4": "4. Stockage local et mode hors ligne",
+        "a5": "5. Localisation et cartes",
+        "a6": "6. Services externes",
+        "a7": "7. Durée et suppression",
+        "a8": "8. Contrôle de l'utilisateur",
+        "a9": "9. Questions fréquentes",
+        "div2": "« Vos informations voyagent aussi en sécurité. »"
+      },
+      "preferencias": {
+        "h21": "Vos préférences de cookies et de stockage",
+        "p1": "Vous pouvez personnaliser l'utilisation des cookies et des données locales selon vos préférences. Les cookies essentiels et le stockage nécessaire sont obligatoires pour le fonctionnement du site.",
+        "h41": "Cookies essentiels",
+        "p2": "Nécessaires au fonctionnement, à la sécurité et à l'authentification.",
+        "span1": "🔒 Toujours actifs",
+        "p3": "Ils mémorisent votre langue, thème, région et paramètres.",
+        "h42": "Contenu hors ligne",
+        "p4": "Itinéraires, guides, cartes et ressources pour une utilisation hors ligne.",
+        "button1": "🗄️ Gérer les données",
+        "h43": "Analyse facultative",
+        "p5": "Nous aide à améliorer l'expérience BAQUEANO.",
+        "h31": "Vous gardez le contrôle",
+        "p6": "Vous pouvez modifier vos préférences à tout moment et supprimer vos données locales de cet appareil."
+      },
+      "purgeStorageBtn": {
+        "button1": "🗑️ Effacer le stockage BAQUEANO"
+      },
+      "flowDiagramCard": {
+        "h31": "Comment fonctionnent les données dans BAQUEANO ?",
+        "p1": "Voici comment les technologies se connectent pour vous offrir une expérience sûre et personnalisée.",
+        "p2": "Utilisateur voyageur",
+        "h51": "Web / App BAQUEANO",
+        "p3": "Site web et application Android",
+        "p4": "Authentification et hébergement : gestion des comptes et sécurité.",
+        "p5": "Base de données principale : destinations, réservations et contenus.",
+        "div1": "⚙️ Préférences et paramètres",
+        "div2": "🗺️ Itinéraires et destinations",
+        "div3": "💼 Réservations et paiements",
+        "div4": "📦 Contenu hors ligne"
+      },
+      "general": {
+        "h31": "Que sont les cookies et le stockage local ?",
+        "p1": "Les cookies sont de petits fichiers texte enregistrés dans votre navigateur ou appareil pour mémoriser des informations et améliorer votre expérience. BAQUEANO utilise aussi des technologies de stockage local (LocalStorage, SessionStorage et IndexedDB) et des Service Workers pour permettre des fonctions avancées comme le mode hors ligne, les itinéraires enregistrés et de meilleures performances lors d'expéditions sans réseau."
+      },
+      "esenciales": {
+        "p1": "Nécessaires au fonctionnement et à la sécurité."
+      },
+      "ubicacion": {
+        "h41": "Localisation et cartes",
+        "p1": "Utilisation de votre position et fonctionnement des cartes."
       }
     }
   },
@@ -2332,7 +2480,17 @@
     "guardarEnMiViaje": "Enregistrer dans Mon voyage",
     "descargarPdf": "Télécharger le PDF",
     "generarQr": "Générer un QR",
-    "transporte": "Transport"
+    "transporte": "Transport",
+    "usd254": "(USD 254)",
+    "tuRutaEstaLista": "Votre itinéraire est prêt 🌿",
+    "compartirRuta": "Partager l'itinéraire",
+    "reservarTodo": "Tout réserver",
+    "recomendacionesVerificadasParaTuRuta": "Recommandations vérifiées pour votre itinéraire",
+    "hospedajesRestaurantesGuiasYExperiencias": "Hébergements, restaurants, guides et expériences locales sélectionnés pour cet itinéraire.",
+    "verMasRecomendaciones": "Voir plus de recommandations →",
+    "enviarMensaje": "Envoyer le message",
+    "deSeptiembreDe2026": "26 septembre 2026",
+    "tu": "Vous"
   },
   "ops": {
     "impact": {

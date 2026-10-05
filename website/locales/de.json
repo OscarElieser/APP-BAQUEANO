@@ -2131,7 +2131,8 @@
     },
     "baqueanoIa": {
       "body": {
-        "title1": "BAQUI | Deine Reise durch Nicaragua, mit dir geplant"
+        "title1": "BAQUI | Deine Reise durch Nicaragua, mit dir geplant",
+        "metaDescription1": "KI-Copilot zur Planung authentischer, realistischer und persönlicher Routen in Nicaragua mit Satellitenkarte, Reiseplänen und lokalen Gastgebern."
       },
       "iaHero": {
         "h11": "Deine Reise durch Nicaragua,",
@@ -2179,7 +2180,8 @@
       },
       "iaBudgetCurrency": {
         "option1": "USD",
-        "option2": "NIO"
+        "option2": "NIO",
+        "selectAriaLabel1": "Budgetwährung"
       },
       "iaBudgetConversion": {
         "small1": "Gib dein tatsächliches Limit ein."
@@ -2233,7 +2235,8 @@
         "small16": "Natur und Vögel",
         "small17": "Ende der Route",
         "span7": "110 km",
-        "span8": "(68 USD)"
+        "span8": "(68 USD)",
+        "imgAlt1": "Straße La Calzada, Granada"
       },
       "iaBudgetCard": {
         "h41": "Geschätztes Budget deiner Reise",
@@ -2241,7 +2244,13 @@
         "span1": "Transportmittel:",
         "span2": "Art des Lokals:",
         "span3": "Unterkunftsart:",
-        "span4": "Aktivitäten & lokale Guides"
+        "span4": "Aktivitäten & lokale Guides",
+        "span5": "Sonstige Ausgaben & Bedarf",
+        "small1": "(Kunsthandwerk, Souvenirs, Kinder)",
+        "span6": "Geschätzte Summe:",
+        "span7": "○ 10.000 C$ geplantes Maximum",
+        "strong1": "Kostentransparenz in Nicaragua:",
+        "div1": "Klartext: In Nicaragua kostet ein Gericht in einer einfachen Garküche C$ 120-180, in Touristenrestaurants C$ 500-900. Der Überlandbus ist die günstigste Option, das eigene Auto spart, wenn man sich das Benzin teilt, und ein Mietwagen bietet mehr Flexibilität. Wir berücksichtigen auch Bedarfsartikel, Kunsthandwerk und freiwillige Unterstützung der Gemeinden."
       },
       "iaBudgetStatusBadge": {
         "span1": "Im Budget"
@@ -2249,17 +2258,26 @@
       "chipsTransport": {
         "button1": "Mit dem Bus (C$ 360)",
         "button2": "Eigenes Auto / Benzin (C$ 1.200)",
-        "button3": "Mietwagen (C$ 3.800)"
+        "button3": "Mietwagen (C$ 3.800)",
+        "buttonTitle1": "Überlandbus / einfacher Expressbus",
+        "buttonTitle2": "Eigenes Fahrzeug: Benzin nach Streckenkilometern",
+        "buttonTitle3": "Mietwagen + Kraftstoff"
       },
       "chipsFood": {
         "button1": "Volksgarküchen (C$ 1.200)",
         "button2": "Typische Restaurants (C$ 2.000)",
-        "button3": "Touristenrestaurants (C$ 4.200)"
+        "button3": "Touristenrestaurants (C$ 4.200)",
+        "buttonTitle1": "Einfache Garküchen, Fritangas und lokale Märkte (C$ 120-180 pro Gericht)",
+        "buttonTitle2": "Traditionelle Restaurants mit vollständigen Gerichten (C$ 300-400)",
+        "buttonTitle3": "Touristenrestaurants und Lokale am See oder Meer (C$ 600-900)"
       },
       "chipsStay": {
         "button1": "Hostel / Pension (C$ 1.400)",
         "button2": "Standardhotel (C$ 3.000)",
-        "button3": "Hausmiete (C$ 4.800)"
+        "button3": "Hausmiete (C$ 4.800)",
+        "buttonTitle1": "Hostels und ländliche Gemeinschaftsherbergen",
+        "buttonTitle2": "Standardhotel oder koloniales Boutiquehotel",
+        "buttonTitle3": "Miete eines ganzen Hauses, einer Hütte oder Airbnb"
       },
       "lblStayType": {
         "small1": "(Hotel)"
@@ -2278,6 +2296,136 @@
       },
       "valFoodRow": {
         "small1": "(55 USD)"
+      },
+      "valActivityRow": {
+        "small1": "(USD 63)"
+      },
+      "valOtherRow": {
+        "small1": "(USD 22)"
+      },
+      "iaBudgetGauge": {
+        "small1": "des Budgets"
+      },
+      "lblBudgetUsed": {
+        "span1": "● 9.300 C$ verbraucht"
+      },
+      "iaBudgetReadySection": {
+        "p1": "Du kannst Ziele, Tage, Budget oder Art der Erlebnisse anpassen, und BAQUI aktualisiert sie sofort."
+      },
+      "iaBtnModifyBottom": {
+        "button1": "Mit KI anpassen"
+      },
+      "iaRecsSection": {
+        "p1": "Für diese Route gibt es noch keine verknüpften, überprüfbaren Angebote. BAQUEANO zeigt keine erfundenen Empfehlungen."
+      },
+      "iaUtilitySection": {
+        "h41": "Lerne jeden Halt deiner Route kennen",
+        "p1": "Sag BAQUI, wohin du willst: Hier siehst du, was du an jedem Ort deiner Route tun, entdecken und probieren kannst.",
+        "h42": "So bewegst du dich auf deiner Route",
+        "p2": "Füge Ziele hinzu und ich sage dir, wie du jedes erreichst.",
+        "h43": "Hinweise und Empfehlungen",
+        "p3": "Hinweise und Empfehlungen passen sich jedem Ort deiner Route an."
+      },
+      "iaRouteWeather": {
+        "h41": "Wetter auf deiner Route",
+        "small1": "Luftfeuchtigkeit",
+        "small2": "Wind",
+        "small3": "Regen",
+        "div1": "Open-Meteo ·"
+      },
+      "iaWeatherTemperature": {
+        "strong1": "Wird abgefragt…"
+      },
+      "iaWeatherCondition": {
+        "small1": "Echte Wetterdaten werden geladen"
+      },
+      "iaWeatherWind": {
+        "strong1": "-- km/h"
+      },
+      "iaWeatherUpdated": {
+        "span1": "Wird aktualisiert"
+      },
+      "iaChatMicBtn": {
+        "buttonTitle1": "Mit BAQUI sprechen",
+        "buttonAriaLabel1": "Diktat starten"
+      },
+      "iaChatInput": {
+        "inputPlaceholder1": "Schreib hier deine Reiseidee..."
+      }
+    },
+    "cookies": {
+      "body": {
+        "title1": "Cookies und lokale Speicherung | BAQUEANO Nicaragua"
+      },
+      "cookiesHeroSection": {
+        "h11": "Cookies,",
+        "span1": "lokale Speicherung und Offline-Nutzung",
+        "p1": "Transparenz darüber, wie wir Cookies, Speichertechnologien und lokale Daten nutzen, um dir ein sicheres, authentisches und persönliches Reiseerlebnis in Nicaragua zu bieten."
+      },
+      "trustStripSection": {
+        "h31": "Keine aufdringliche Werbung",
+        "p1": "Wir verwenden keine Cookies, um Werbung Dritter anzuzeigen oder deine Gewohnheiten zu verfolgen.",
+        "h32": "Standort nur mit Erlaubnis",
+        "p2": "Dein Standort wird nur abgefragt, wenn du ihn für Routen und Karten aktivierst.",
+        "h33": "Speicherkontrolle",
+        "p3": "Du kannst deine lokalen Daten jederzeit mit einem Klick verwalten und löschen.",
+        "h34": "Offline-Modus",
+        "p4": "Nutze Inhalte, Karten, Routen und Reiseführer auch ohne Empfang in abgelegenen Gebieten."
+      },
+      "cookiesSidebar": {
+        "div1": "Inhaltsverzeichnis der Richtlinie",
+        "a1": "1. Allgemeine Informationen",
+        "a2": "2. Notwendige Cookies",
+        "a3": "3. Einstellungen",
+        "a4": "4. Lokale Speicherung und Offline-Modus",
+        "a5": "5. Standort und Karten",
+        "a6": "6. Externe Dienste",
+        "a7": "7. Dauer und Löschung",
+        "a8": "8. Kontrolle durch die Nutzer",
+        "a9": "9. Häufige Fragen",
+        "div2": "„Auch deine Daten reisen sicher.“"
+      },
+      "preferencias": {
+        "h21": "Deine Cookie- und Speichereinstellungen",
+        "p1": "Du kannst die Nutzung von Cookies und lokalen Daten nach deinen Wünschen anpassen. Notwendige Cookies und erforderliche Speicherung sind für den Betrieb der Website unverzichtbar.",
+        "h41": "Notwendige Cookies",
+        "p2": "Erforderlich für Betrieb, Sicherheit und Anmeldung.",
+        "span1": "🔒 Immer aktiv",
+        "p3": "Sie speichern Sprache, Design, Region und Einstellungen.",
+        "h42": "Offline-Inhalte",
+        "p4": "Routen, Reiseführer, Karten und Ressourcen für die Offline-Nutzung.",
+        "button1": "🗄️ Daten verwalten",
+        "h43": "Optionale Analyse",
+        "p5": "Hilft uns, das BAQUEANO-Erlebnis zu verbessern.",
+        "h31": "Du hast die Kontrolle",
+        "p6": "Du kannst deine Einstellungen jederzeit ändern und deine lokalen Daten von diesem Gerät löschen."
+      },
+      "purgeStorageBtn": {
+        "button1": "🗑️ BAQUEANO-Speicher löschen"
+      },
+      "flowDiagramCard": {
+        "h31": "Wie funktionieren Daten bei BAQUEANO?",
+        "p1": "So greifen die Technologien ineinander, um dir ein sicheres, persönliches Erlebnis zu bieten.",
+        "p2": "Reisende Person",
+        "h51": "BAQUEANO Web / App",
+        "p3": "Website und Android-App",
+        "p4": "Authentifizierung und Hosting: Kontoverwaltung und Sicherheit.",
+        "p5": "Hauptdatenbank: Reiseziele, Buchungen und Inhalte.",
+        "div1": "⚙️ Einstellungen und Konfiguration",
+        "div2": "🗺️ Routen und Reiseziele",
+        "div3": "💼 Buchungen und Zahlungen",
+        "div4": "📦 Offline-Inhalte"
+      },
+      "general": {
+        "h31": "Was sind Cookies und lokale Speicherung?",
+        "p1": "Cookies sind kleine Textdateien, die in deinem Browser oder Gerät gespeichert werden, um Informationen zu merken und dein Erlebnis zu verbessern. BAQUEANO nutzt außerdem lokale Speichertechnologien (LocalStorage, SessionStorage und IndexedDB) und Service Worker, um erweiterte Funktionen wie Offline-Modus, gespeicherte Routen und bessere Leistung auf Touren ohne Empfang zu ermöglichen."
+      },
+      "esenciales": {
+        "p1": "Erforderlich für Betrieb und Sicherheit."
+      },
+      "ubicacion": {
+        "h41": "Standort und Karten",
+        "p1": "Nutzung deines Standorts und Funktionsweise der Karten."
       }
     }
   },
@@ -2332,7 +2480,17 @@
     "guardarEnMiViaje": "In „Meine Reise“ speichern",
     "descargarPdf": "PDF herunterladen",
     "generarQr": "QR-Code erstellen",
-    "transporte": "Transport"
+    "transporte": "Transport",
+    "usd254": "(USD 254)",
+    "tuRutaEstaLista": "Deine Route ist fertig 🌿",
+    "compartirRuta": "Route teilen",
+    "reservarTodo": "Alles buchen",
+    "recomendacionesVerificadasParaTuRuta": "Geprüfte Empfehlungen für deine Route",
+    "hospedajesRestaurantesGuiasYExperiencias": "Unterkünfte, Restaurants, Guides und lokale Erlebnisse, ausgewählt für diese Reiseroute.",
+    "verMasRecomendaciones": "Weitere Empfehlungen →",
+    "enviarMensaje": "Nachricht senden",
+    "deSeptiembreDe2026": "26. September 2026",
+    "tu": "Du"
   },
   "ops": {
     "impact": {

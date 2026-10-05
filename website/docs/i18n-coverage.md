@@ -1,45 +1,16 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T04:15:10.994Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 1783 · en 1783 · fr 1783 · it 1783 · pt 1783 · de 1783
+Generado: 2026-10-05T04:43:17.386Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 1889 · en 1889 · fr 1889 · it 1889 · pt 1889 · de 1889
 
-HTML: 4/5222 textos con clave (5218 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3606/3607 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
-| admin.html | html | 479 | 0 | 479 | 0 % |
-| mi-negocio.html | html | 329 | 0 | 329 | 0 % |
 | js/ops-center/ops-engine.js | js | 324 | 2 | 322 | 0.6 % |
-| index.html | html | 284 | 0 | 284 | 0 % |
-| baqueano-ia.html | html | 264 | 0 | 264 | 0 % |
-| gastronomia.html | html | 260 | 0 | 260 | 0 % |
-| musica.html | html | 255 | 0 | 255 | 0 % |
-| aliados.html | html | 250 | 0 | 250 | 0 % |
-| terminos.html | html | 249 | 0 | 249 | 0 % |
-| departamento.html | html | 223 | 0 | 223 | 0 % |
-| historia.html | html | 221 | 0 | 221 | 0 % |
-| perfil.html | html | 217 | 0 | 217 | 0 % |
-| nosotros.html | html | 199 | 0 | 199 | 0 % |
-| cookies.html | html | 194 | 0 | 194 | 0 % |
-| mi-viaje.html | html | 185 | 0 | 185 | 0 % |
-| denuncias.html | html | 181 | 0 | 181 | 0 % |
-| experiencias.html | html | 181 | 0 | 181 | 0 % |
-| destinos.html | html | 169 | 0 | 169 | 0 % |
-| ambiental.html | html | 166 | 0 | 166 | 0 % |
-| aviso-legal.html | html | 164 | 0 | 164 | 0 % |
-| privacidad.html | html | 144 | 0 | 144 | 0 % |
-| 404.html | html | 97 | 0 | 97 | 0 % |
-| testimonios.html | html | 80 | 0 | 80 | 0 % |
 | apps/web/src/app/baqueano-ai/page.tsx | tsx | 72 | 0 | 72 | 0 % |
-| offline.html | html | 68 | 0 | 68 | 0 % |
-| ayuda.html | html | 67 | 0 | 67 | 0 % |
-| mapa.html | html | 64 | 0 | 64 | 0 % |
-| legal.html | html | 62 | 0 | 62 | 0 % |
 | apps/admin/src/app/spatial/page.tsx | tsx | 58 | 0 | 58 | 0 % |
-| destino.html | html | 58 | 0 | 58 | 0 % |
 | apps/admin/src/app/strategic/page.tsx | tsx | 52 | 0 | 52 | 0 % |
-| cronicas.html | html | 52 | 0 | 52 | 0 % |
 | apps/admin/src/app/control-tower/page.tsx | tsx | 49 | 0 | 49 | 0 % |
-| baqueano-ai.html | html | 47 | 0 | 47 | 0 % |
 | apps/admin/src/app/plataforma/page.tsx | tsx | 43 | 0 | 43 | 0 % |
 | apps/admin/src/app/paises/page.tsx | tsx | 38 | 0 | 38 | 0 % |
 | js/theme-switcher.js | js | 37 | 0 | 37 | 0 % |
@@ -109,7 +80,6 @@ HTML: 4/5222 textos con clave (5218 pendientes) · JS: 731 textos dinámicos pen
 | apps/web/src/app/notificaciones/page.tsx | tsx | 8 | 0 | 8 | 0 % |
 | apps/web/src/app/rutas/[slug]/page.tsx | tsx | 8 | 0 | 8 | 0 % |
 | apps/web/src/components/sections/HeroSection.tsx | tsx | 8 | 0 | 8 | 0 % |
-| favoritos.html | html | 8 | 0 | 8 | 0 % |
 | js/chinandega-experience.js | js | 8 | 0 | 8 | 0 % |
 | apps/web/src/components/map/InteractiveMap.tsx | tsx | 7 | 0 | 7 | 0 % |
 | js/destinos-gastronomia.js | js | 7 | 0 | 7 | 0 % |
@@ -169,6 +139,10 @@ HTML: 4/5222 textos con clave (5218 pendientes) · JS: 731 textos dinámicos pen
 | js/legal-scrollspy.js | js | 1 | 0 | 1 | 0 % |
 | js/territory-carousel.js | js | 1 | 0 | 1 | 0 % |
 | js/territory-media-experience.js | js | 1 | 0 | 1 | 0 % |
+| 404.html | html | 25 | 25 | 0 | 100 % |
+| admin.html | html | 479 | 479 | 0 | 100 % |
+| aliados.html | html | 195 | 195 | 0 | 100 % |
+| ambiental.html | html | 121 | 121 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
 | apps/admin/src/app/page.tsx | tsx | 0 | 0 | 0 | 100 % |
 | apps/admin/src/components/AdminCards.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -186,6 +160,21 @@ HTML: 4/5222 textos con clave (5218 pendientes) · JS: 731 textos dinámicos pen
 | apps/web/src/components/navigation/ScrollProgress.tsx | tsx | 0 | 0 | 0 | 100 % |
 | apps/web/src/components/OfflineRegistration.tsx | tsx | 0 | 0 | 0 | 100 % |
 | apps/web/src/components/sections/DataSourceBanner.tsx | tsx | 0 | 0 | 0 | 100 % |
+| aviso-legal.html | html | 93 | 93 | 0 | 100 % |
+| ayuda.html | html | 64 | 64 | 0 | 100 % |
+| baqueano-ai.html | html | 3 | 3 | 0 | 100 % |
+| baqueano-ia.html | html | 195 | 195 | 0 | 100 % |
+| cookies.html | html | 122 | 122 | 0 | 100 % |
+| cronicas.html | html | 50 | 50 | 0 | 100 % |
+| denuncias.html | html | 39 | 39 | 0 | 100 % |
+| departamento.html | html | 78 | 78 | 0 | 100 % |
+| destino.html | html | 18 | 18 | 0 | 100 % |
+| destinos.html | html | 124 | 124 | 0 | 100 % |
+| experiencias.html | html | 155 | 155 | 0 | 100 % |
+| favoritos.html | html | 8 | 8 | 0 | 100 % |
+| gastronomia.html | html | 205 | 205 | 0 | 100 % |
+| historia.html | html | 176 | 176 | 0 | 100 % |
+| index.html | html | 215 | 215 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
 | js/ayuda.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-api.js | js | 0 | 0 | 0 | 100 % |
@@ -210,5 +199,16 @@ HTML: 4/5222 textos con clave (5218 pendientes) · JS: 731 textos dinámicos pen
 | js/video-registry.js | js | 0 | 0 | 0 | 100 % |
 | js/website-business-catalog.js | js | 0 | 0 | 0 | 100 % |
 | js/website-operations-catalog.js | js | 0 | 0 | 0 | 100 % |
+| legal.html | html | 15 | 15 | 0 | 100 % |
+| mapa.html | html | 39 | 39 | 0 | 100 % |
+| mi-negocio.html | html | 186 | 186 | 0 | 100 % |
+| mi-viaje.html | html | 113 | 113 | 0 | 100 % |
+| musica.html | html | 196 | 196 | 0 | 100 % |
+| nosotros.html | html | 143 | 143 | 0 | 100 % |
+| offline.html | html | 24 | 24 | 0 | 100 % |
 | packages/i18n/src/index.tsx | tsx | 2 | 2 | 0 | 100 % |
 | packages/ui/src/index.tsx | tsx | 0 | 0 | 0 | 100 % |
+| perfil.html | html | 161 | 161 | 0 | 100 % |
+| privacidad.html | html | 88 | 88 | 0 | 100 % |
+| terminos.html | html | 193 | 193 | 0 | 100 % |
+| testimonios.html | html | 79 | 79 | 0 | 100 % |
