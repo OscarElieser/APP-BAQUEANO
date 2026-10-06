@@ -61,7 +61,14 @@ async function inspect(pageName, width) {
       await page.addScriptTag({ path: AXE_PATH });
       const axe = await page.evaluate(async () => {
         const r = await window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] }, resultTypes: ['violations'] });
-        return r.violations.map((v) => ({ id: v.id, impact: v.impact, nodes: v.nodes.length, sample: v.nodes.slice(0, 3).map((n) => n.target.join(' ')).join(' | ') }));
+        // WCAG 2.5.8 (Target Size), excepción "Esencial": los pines de un mapa van donde está
+        // el lugar real (la guía oficial cita los mapas como ejemplo). Solo para esa regla y
+        // solo pines de MapLibre/Leaflet; el resto de reglas sí los evalúa.
+        const MAP_PIN = /maplibregl-marker|leaflet-marker-icon/;
+        return r.violations
+          .map((v) => (v.id === 'target-size' ? { ...v, nodes: v.nodes.filter((n) => !MAP_PIN.test(n.target.join(' ') + ' ' + (n.html || ''))) } : v))
+          .filter((v) => v.nodes.length)
+          .map((v) => ({ id: v.id, impact: v.impact, nodes: v.nodes.length, sample: v.nodes.slice(0, 3).map((n) => n.target.join(' ')).join(' | ') }));
       });
       row.axe = axe;
       Object.assign(row, await page.evaluate(() => {

@@ -430,11 +430,16 @@
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors', maxZoom: 18
     }).addTo(bqMap);
+    var seenSpots = {};
     trip.days.forEach(function(day) {
+      // Días en el mismo lugar: el pin se desplaza para que cada uno se pueda tocar (WCAG 2.5.8).
+      var spot = day.lat.toFixed(4) + ',' + day.lng.toFixed(4);
+      var stacked = seenSpots[spot] || 0;
+      seenSpots[spot] = stacked + 1;
       var icon = L.divIcon({
         className: '',
         html: '<div style="background:#F65E01;color:#FFF;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;box-shadow:0 2px 8px rgba(246,94,1,.5);border:2px solid #FFF">' + day.id + '</div>',
-        iconSize: [34, 34], iconAnchor: [17, 34]
+        iconSize: [34, 34], iconAnchor: [17 - stacked * 38, 34]
       });
       L.marker([day.lat, day.lng], { icon: icon }).addTo(bqMap)
         .bindPopup('<strong>Día ' + day.id + '</strong><br>' + day.location + '<br><small>' + day.title + '</small>');

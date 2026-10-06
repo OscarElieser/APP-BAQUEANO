@@ -645,6 +645,7 @@
     if (event.key === 'Escape' && infoPanel && !infoPanel.hidden) closePlaceInfo();
   });
 
+  const sharedSpots = new Map();
   function addPlace(place, bounds) {
     const markerButton = document.createElement('button');
     markerButton.type = 'button';
@@ -655,7 +656,14 @@
 
     // La ficha informativa (openPlaceInfo) reemplaza al globo emergente: una
     // sola fuente de información por lugar, sin duplicados sobre el mapa.
-    const marker = new window.maplibregl.Marker({ element: markerButton, anchor: 'bottom' })
+    // Varios lugares pueden compartir coordenada (p. ej. ubicados por su municipio):
+    // se abren en abanico para que cada pin se pueda tocar por separado (WCAG 2.5.8).
+    const spotKey = `${Number(place.latitude).toFixed(4)},${Number(place.longitude).toFixed(4)}`;
+    const stacked = sharedSpots.get(spotKey) || 0;
+    sharedSpots.set(spotKey, stacked + 1);
+    const angle = stacked * 2.399963; // ángulo áureo: reparto uniforme sin superposición
+    const radius = stacked ? 30 + 6 * Math.floor(stacked / 6) : 0;
+    const marker = new window.maplibregl.Marker({ element: markerButton, anchor: 'bottom', offset: [Math.round(Math.cos(angle) * radius), Math.round(Math.sin(angle) * radius)] })
       .setLngLat([Number(place.longitude), Number(place.latitude)])
       .addTo(map);
     markers.push(marker);
@@ -832,6 +840,7 @@
     if (infoPanel) { infoPanel.remove(); infoPanel = null; }
     markers.forEach((marker) => marker.remove());
     markers = [];
+    sharedSpots.clear();
     territoryFeature = null;
     if (map) {
       map.remove();
