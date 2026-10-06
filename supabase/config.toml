@@ -62,3 +62,10 @@ enabled = true
 verify_jwt = false
 import_map = "./functions/baqueano-presence/deno.json"
 entrypoint = "./functions/baqueano-presence/index.ts"
+
+[functions.baqueano-notifications]
+# Centro de notificaciones: token de Firebase verificado; cada persona solo ve las suyas.
+enabled = true
+verify_jwt = false
+import_map = "./functions/baqueano-notifications/deno.json"
+entrypoint = "./functions/baqueano-notifications/index.ts"

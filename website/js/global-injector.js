@@ -920,6 +920,14 @@
       presenceScript.defer = true;
       document.body.appendChild(presenceScript);
     }
+    // Campana de notificaciones (2026-10-06): solo aparece con sesión de Firebase.
+    if (!window.BaqueanoNotifications && !document.querySelector('script[data-bq-notify]')) {
+      var notifyScript = document.createElement('script');
+      notifyScript.src = 'js/baqueano-notifications.js?v=20261006-1';
+      notifyScript.dataset.bqNotify = 'true';
+      notifyScript.defer = true;
+      document.body.appendChild(notifyScript);
+    }
     if (!document.querySelector('script[data-platform-enhancements]')) {
       var enhancementScript = document.createElement('script');
       enhancementScript.src = 'js/platform-enhancements.js?v=20261006-pdf-1';
@@ -935,7 +943,7 @@
     }
     if (!window.__BAQUEANO_I18N_LOADED__ && !document.querySelector('script[data-global-language]')) {
       var languageScript = document.createElement('script');
-      languageScript.src = 'js/global-language.js?v=20261006-a11y-1';
+      languageScript.src = 'js/global-language.js?v=20261006-opiniones-1';
       languageScript.defer = true;
       languageScript.dataset.globalLanguage = 'true';
       document.body.appendChild(languageScript);

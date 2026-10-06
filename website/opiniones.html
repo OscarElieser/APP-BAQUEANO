@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css?v=20260929-help-1">
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
-  <link rel="stylesheet" href="css/pages/opiniones.css?v=20261006-1">
+  <link rel="stylesheet" href="css/pages/opiniones.css?v=20261006-galeria-1">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -83,6 +83,7 @@
           <p class="pr-mine-status" id="prMineStatus"></p>
           <p class="pr-mine-reason" id="prMineReason" hidden></p>
           <div class="pr-mine-actions">
+            <button type="button" class="pr-btn pr-btn-ghost" id="prEdit"><i class="fa-solid fa-pen" aria-hidden="true"></i> <span data-i18n="platformReviews.editMine">Editar mi opinión</span></button>
             <button type="button" class="pr-btn pr-btn-ghost" id="prWithdraw"><i class="fa-solid fa-eye-slash" aria-hidden="true"></i> <span data-i18n="platformReviews.withdraw">Retirar mi opinión</span></button>
             <button type="button" class="pr-btn pr-btn-danger" id="prDelete"><i class="fa-solid fa-trash-can" aria-hidden="true"></i> <span data-i18n="platformReviews.deleteMine">Eliminar mi opinión y mis datos</span></button>
             <a class="pr-btn pr-btn-ghost" href="ayuda.html"><i class="fa-solid fa-life-ring" aria-hidden="true"></i> <span data-i18n="platformReviews.reportProblem">Reportar un problema</span></a>
@@ -166,6 +167,7 @@
             <p class="pr-error" id="prLoginError" role="alert" hidden></p>
           </div>
 
+          <p class="pr-help" id="prReplaceNote" hidden data-i18n="platformReviews.replaceNote">Ya tenés una opinión activa: lo que envíes ahora la reemplaza y vuelve a revisión. La versión anterior queda en "Mis opiniones".</p>
           <p class="pr-error pr-form-error" id="prFormError" role="alert" hidden></p>
           <button type="submit" class="pr-btn pr-btn-primary" id="prSubmit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> <span id="prSubmitLabel" data-i18n="platformReviews.submit">PUBLICAR MI OPINIÓN</span></button>
         </form>
@@ -176,6 +178,13 @@
           <p data-i18n="platformReviews.thanksText">Tu opinión fue recibida y será revisada según nuestras Normas de la Comunidad antes de publicarse.</p>
         </div>
         <p class="pr-status-msg" id="prStatusMsg" role="status" hidden></p>
+
+        <!-- 2026-10-06: historial real del usuario (my_history en baqueano-reviews). -->
+        <section class="pr-history" id="prHistory" aria-labelledby="prHistoryTitle" hidden tabindex="-1">
+          <h3 id="prHistoryTitle" data-i18n="platformReviews.historyTitle">Mis opiniones</h3>
+          <p class="pr-muted" id="prHistoryEmpty" hidden data-i18n="platformReviews.historyEmpty">Todavía no enviaste ninguna opinión.</p>
+          <ol class="pr-history-list" id="prHistoryList"></ol>
+        </section>
       </section>
 
       <aside class="pr-card pr-trust" aria-labelledby="prTrustTitle">
@@ -192,8 +201,24 @@
       <section class="pr-list-section" aria-labelledby="prListTitle">
         <h2 id="prListTitle" data-i18n="platformReviews.listTitle">Opiniones de la comunidad</h2>
         <p class="pr-muted" id="prListEmpty" hidden data-i18n="platformReviews.listEmpty">Todavía no hay opiniones publicadas. ¡La tuya puede ser la primera!</p>
-        <ul class="pr-list" id="prList"></ul>
-        <button type="button" class="pr-btn pr-btn-ghost" id="prMore" hidden data-i18n="platformReviews.loadMore">Ver más opiniones</button>
+        <!-- Galería de opiniones (2026-10-06): carrusel infinito con pausa, flechas, teclado y gestos.
+             Usa las mismas opiniones aprobadas que la lista y carga páginas de 12 a medida que avanza. -->
+        <div class="pr-gallery" id="prGallery" role="region" aria-roledescription="carrusel" aria-labelledby="prListTitle" hidden>
+          <div class="pr-gallery-controls">
+            <button type="button" class="pr-gallery-btn" id="prGalleryPrev" data-i18n-aria-label="platformReviews.galleryPrev" aria-label="Opinión anterior"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+            <button type="button" class="pr-gallery-btn pr-gallery-toggle" id="prGalleryToggle" aria-pressed="false"><i class="fa-solid fa-pause" aria-hidden="true"></i> <span id="prGalleryToggleLabel" data-i18n="platformReviews.galleryPause">Pausar</span></button>
+            <button type="button" class="pr-gallery-btn" id="prGalleryNext" data-i18n-aria-label="platformReviews.galleryNext" aria-label="Opinión siguiente"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+            <span class="pr-gallery-pos" id="prGalleryPos" aria-live="polite"></span>
+          </div>
+          <div class="pr-gallery-viewport" id="prGalleryViewport" tabindex="0" data-i18n-aria-label="platformReviews.galleryKeys" aria-label="Opiniones: usá las flechas izquierda y derecha para recorrerlas">
+            <div class="pr-gallery-track" id="prGalleryTrack"></div>
+          </div>
+        </div>
+        <details class="pr-list-details" id="prListDetails">
+          <summary data-i18n="platformReviews.listAll">Ver todas las opiniones en lista</summary>
+          <ul class="pr-list" id="prList"></ul>
+          <button type="button" class="pr-btn pr-btn-ghost" id="prMore" hidden data-i18n="platformReviews.loadMore">Ver más opiniones</button>
+        </details>
       </section>
     </div>
 
@@ -228,7 +253,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="js/firebase-config.js?v=20261004-1"></script>
-  <script src="js/platform-reviews.js?v=20261006-dialog-1" defer></script>
+  <script src="js/platform-reviews.js?v=20261006-galeria-1" defer></script>
   <script src="js/navigation.js?v=20261006-dialog-1"></script>
   <script src="js/global-injector.js"></script>
 </body>

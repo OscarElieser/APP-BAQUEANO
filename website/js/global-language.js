@@ -18,7 +18,7 @@
   var LOCALES = Object.freeze({ es: 'es-NI', en: 'en-US', fr: 'fr-FR', it: 'it-IT', pt: 'pt-BR', de: 'de-DE' });
   var STORAGE_KEY = 'baqueano_language_v2';
   var LEGACY_STORAGE_KEYS = Object.freeze(['baqueano_language_v1', 'baqueano_language']);
-  var VERSION = '2026.10.05-i18n-completo-1';
+  var VERSION = '2026.10.06-opiniones-1';
   var cache = new Map();
   var semanticFallbackKeys = new Map();
   var originals = new WeakMap();
@@ -97,7 +97,11 @@
   async function loadCatalog(language) {
     var safeLanguage = normalizeLanguage(language);
     if (cache.has(safeLanguage)) return cache.get(safeLanguage);
-    var request = fetch('locales/' + safeLanguage + '.json?v=' + VERSION, { credentials: 'same-origin', cache: 'force-cache' })
+    // 2026-10-06: 'no-cache' (revalida con ETag/Last-Modified, un 304 barato) en lugar de
+    // 'force-cache'. Con force-cache el navegador seguía usando catálogos viejos aunque
+    // locales/*.json cambiara: el inglés quedaba a medias en opiniones.html y ni F5 lo
+    // arreglaba. Así un catálogo nuevo llega sin depender de cambiar VERSION a mano.
+    var request = fetch('locales/' + safeLanguage + '.json?v=' + VERSION, { credentials: 'same-origin', cache: 'no-cache' })
       .then(function parse(response) {
         if (!response.ok) throw new Error('HTTP ' + response.status);
         return response.json();
@@ -250,6 +254,7 @@
       LEGACY_STORAGE_KEYS.forEach(function removeLegacy(key) { localStorage.removeItem(key); });
     } catch (_) { /* sin persistencia: el idioma aplica solo a esta página */ }
     closeMenu();
+    syncUrlLanguage(currentLanguage);
     applyTranslations(document.body);
     if (!options || !options.silent) {
       var detail = languageChangedDetail();
@@ -259,6 +264,18 @@
       window.dataLayer?.push({ event: 'language_changed', language: currentLanguage });
     }
     return currentLanguage;
+  }
+
+  // Si la URL trae ?lang=xx (enlaces hreflang), se actualiza al idioma elegido: antes la URL
+  // seguía diciendo ?lang=en y un F5 o un enlace compartido devolvía el inglés aunque la
+  // persona hubiera elegido español.
+  function syncUrlLanguage(language) {
+    try {
+      var url = new URL(window.location.href);
+      if (!url.searchParams.has('lang') || url.searchParams.get('lang') === language) return;
+      url.searchParams.set('lang', language);
+      window.history.replaceState(window.history.state, '', url.toString());
+    } catch (_) { /* history bloqueado: el idioma aplica igual */ }
   }
 
   function openMenu(button) {
@@ -370,6 +387,13 @@
     if (!event.target.closest('.bq-language-menu,.global-language,.navbar-lang-pill')) closeMenu();
   });
   document.addEventListener('keydown', function closeOnEscape(event) { if (event.key === 'Escape') closeMenu(); });
+  // Sincronización entre pestañas: si la persona cambia el idioma en otra pestaña de
+  // BAQUEANO, esta se actualiza al instante, sin F5.
+  window.addEventListener('storage', function syncAcrossTabs(event) {
+    if (event.key !== STORAGE_KEY || !event.newValue) return;
+    var next = normalizeLanguage(event.newValue);
+    if (next !== currentLanguage) changeLanguage(next);
+  });
 
   window.BaqueanoLanguage = Object.freeze({
     get: function getLanguage() { return currentLanguage; },

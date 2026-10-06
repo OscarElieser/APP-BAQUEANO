@@ -4894,3 +4894,21 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Pruebas: SQL revertido, HTTP real (200/403/401), Playwright + axe 390/1366 (0 fallas), QA 60/60, i18n 0 errores.
     - Pendiente: compilar el APK con la presencia (aquí no hay Flutter) y que el propietario pruebe con su cuenta real.
     - Informe: docs/auditoria-2026-10-06/PRESENCIA-OPS-CENTER.md.
+  - Resultado — opiniones, idioma y notificaciones (F4/F5/F6 del pedido):
+    - Causa real del idioma en opiniones.html:
+      1. los catálogos se pedían con `force-cache` y una versión fija desde el 05/10, así que el navegador seguía usando JSON viejos sin las claves de opiniones (inglés a medias, y ni F5 lo arreglaba);
+      2. `?lang=en` en la URL volvía a imponer el inglés al recargar;
+      3. no había sincronización entre pestañas.
+      Se corrigió con `no-cache` (revalidación ETag), la URL se actualiza al idioma elegido y el evento `storage` mantiene sincronizadas las pestañas. Probado con Playwright.
+    - Opiniones:
+      - después de enviar, el formulario queda limpio (comentario, estrellas, sugerencia y consentimiento), con el mensaje pedido y sin envíos duplicados;
+      - "Editar mi opinión" solo con un botón explícito (antes el comentario se rellenaba solo);
+      - "Mis opiniones" con el historial real (acción `my_history`);
+      - galería infinita con autoplay, pausa y continuar, flechas, teclado, deslizamiento, reducir movimiento y páginas de 12.
+      - Se mantiene la regla de una opinión activa por cuenta (Política de Opiniones; cambiarla es una decisión legal del propietario).
+    - Notificaciones:
+      - tabla `notifications` (RLS, solo service_role, sin DELETE);
+      - Edge Function `baqueano-notifications` (count, list por cursor, mark_read, archive, unarchive);
+      - `baqueano-reviews` v2 avisa al aprobar, rechazar o responder;
+      - campana 🔔 con contador sincronizado entre pestañas y panel accesible.
+    - Pruebas: HTTP real (200/401/403); Playwright con galería, envío, doble clic, idioma EN/ES y campana, más axe 390/1366 sin fallas; QA 60/60; i18n 0 errores.

@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-06T22:29:31.581Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4448 · en 4448 · fr 4448 · it 4448 · pt 4448 · de 4448
+Generado: 2026-10-06T22:52:16.995Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4492 · en 4492 · fr 4492 · it 4492 · pt 4492 · de 4492
 
-HTML: 3804/3805 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3813/3814 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -183,6 +183,7 @@ HTML: 3804/3805 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/baqueano-api.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-dialog.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-master-catalog.js | js | 0 | 0 | 0 | 100 % |
+| js/baqueano-notifications.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-pdf.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-presence.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-traffic-tracker.js | js | 0 | 0 | 0 | 100 % |
@@ -232,7 +233,7 @@ HTML: 3804/3805 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | normas-comunidad.html | html | 28 | 28 | 0 | 100 % |
 | nosotros.html | html | 169 | 169 | 0 | 100 % |
 | offline.html | html | 24 | 24 | 0 | 100 % |
-| opiniones.html | html | 76 | 76 | 0 | 100 % |
+| opiniones.html | html | 85 | 85 | 0 | 100 % |
 | packages/i18n/src/index.tsx | tsx | 2 | 2 | 0 | 100 % |
 | packages/ui/src/index.tsx | tsx | 0 | 0 | 0 | 100 % |
 | perfil.html | html | 161 | 161 | 0 | 100 % |

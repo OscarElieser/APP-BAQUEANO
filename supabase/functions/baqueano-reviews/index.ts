@@ -23,7 +23,8 @@
 //
 // 📦 QUÉ (POST { action, ... }):
 // - Público: summary, list.
-// - Con sesión: whoami, mine, submit, withdraw, delete_mine, report.
+// - Con sesión: whoami, mine, my_history, submit, withdraw, delete_mine, report.
+// - 2026-10-06: aprobar, rechazar o responder crea un aviso en la campana del autor (_shared/notify.ts).
 // - Equipo: mod_list (admin y auditor), moderate, respond, resolve_report (solo admin y superadmin).
 // ============================================================================
 
@@ -31,6 +32,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient, type SupabaseClient } from "jsr:@supabase/supabase-js@2";
 import { createRemoteJWKSet, jwtVerify } from "npm:jose@5.9.6";
 import { effectiveStaffRole } from "../_shared/staff-revocation.ts";
+import { notify } from "../_shared/notify.ts";
 
 const FIREBASE_PROJECT_ID = "app-baqueano";
 const JWKS = createRemoteJWKSet(
@@ -87,7 +89,7 @@ function cleanText(value: unknown, max: number, opts: { required?: boolean; min?
   if (typeof value !== "string") throw new HttpError(400, `${opts.label} no es texto.`, `${opts.code}_invalid`);
   let text = value.normalize("NFC")
     .replace(/[\u0000-\u0009\u000B-\u001F\u007F]/g, " ")
-    .replace(/[​-‏‪-‮⁦-⁩]/g, "")
+    .replace(/[\u200B-\u200F\u202A-\u202E\u2066-\u2069]/g, "")
     .replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim();
   if (!text) {
     if (opts.required) throw new HttpError(400, `Falta ${opts.label}.`, `${opts.code}_required`);
@@ -261,6 +263,30 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       const a = requireActor(actor);
       return { review: await loadMine(service, a.uid), consentVersion: CONSENT_VERSION };
     }
+    // 2026-10-06 — "Mis opiniones": historial real del propio usuario (versiones, estados y
+    // motivos de moderación). Solo lectura; sale de platform_reviews + platform_review_events
+    // filtrados por el UID verificado. Lo borrado a pedido (erased) no devuelve texto.
+    case "my_history": {
+      const a = requireActor(actor);
+      const { data: rows, error } = await service.from("platform_reviews")
+        .select("id, status, rating, comment, created_at, updated_at, published_at, moderation_reason, erased_at, edit_count")
+        .eq("user_id", a.uid).order("created_at", { ascending: false }).limit(20);
+      if (error) throw new HttpError(500, "No se pudo leer tu historial.", "read_failed");
+      const ids = (rows || []).map((r: Record<string, unknown>) => r.id);
+      let events: unknown[] = [];
+      if (ids.length) {
+        const { data: ev, error: evError } = await service.from("platform_review_events")
+          .select("review_id, action, from_status, to_status, reason, snapshot, created_at")
+          .in("review_id", ids).order("created_at", { ascending: false }).limit(80);
+        if (evError) throw new HttpError(500, "No se pudo leer tu historial.", "read_failed");
+        events = (ev || []).map((e: Record<string, unknown>) => {
+          const snap = (e.snapshot || null) as Record<string, unknown> | null;
+          return { review_id: e.review_id, action: e.action, from_status: e.from_status, to_status: e.to_status, reason: e.reason, at: e.created_at,
+            previous: snap ? { rating: snap.rating ?? null, comment: snap.comment ?? null } : null };
+        });
+      }
+      return { reviews: rows || [], events };
+    }
     case "submit": {
       const a = requireActor(actor);
       await limitIp(service, req);
@@ -383,7 +409,7 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       const target = map[decision];
       if (!target) throw new HttpError(400, "Acción de moderación desconocida.", "decision_invalid");
       const reason = cleanText(body.reason, 500, { required: target.needsReason, min: target.needsReason ? 5 : 0, label: "el motivo", code: "reason" });
-      const { data: before } = await service.from("platform_reviews").select("id, status, rating, moderation_reason, erased_at").eq("id", id).maybeSingle();
+      const { data: before } = await service.from("platform_reviews").select("id, user_id, status, rating, moderation_reason, erased_at").eq("id", id).maybeSingle();
       if (!before) throw new HttpError(404, "La opinión no existe.", "not_found");
       if (before.status === "withdrawn" || before.erased_at) throw new HttpError(409, "La opinión fue retirada por su autor.", "withdrawn");
       const now = new Date().toISOString();
@@ -393,6 +419,18 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       if (error) throw new HttpError(500, "No se pudo aplicar la moderación.", "moderate_failed");
       await logEvent(service, { review_id: id, actor_type: "admin", actor_ref: a.email || a.uid, actor_role: a.role, action: target.event, from_status: before.status, to_status: target.status, reason });
       await audit(service, req, a, { action: `review_${decision}`, id, reason, before: { status: before.status }, after: { status: target.status }, description: `Opinión ${id}: ${before.status} → ${target.status}` });
+      // Aviso al autor en su campana (web y Android). No bloquea la moderación si falla.
+      if (target.status === "approved" || target.status === "rejected") {
+        await notify(service, {
+          recipient: String(before.user_id), source: "opiniones", refId: id,
+          type: target.status === "approved" ? "review_approved" : "review_rejected",
+          titleKey: target.status === "approved" ? "notify.reviewApprovedTitle" : "notify.reviewRejectedTitle",
+          bodyKey: target.status === "approved" ? "notify.reviewApprovedBody" : "notify.reviewRejectedBody",
+          params: target.status === "rejected" && reason ? { reason: reason.slice(0, 300) } : {},
+          link: "/opiniones.html#prHistory",
+          dedupeKey: `review:${id}:${target.status}:${now}`,
+        });
+      }
       return { status: target.status };
     }
     case "respond": {
@@ -401,7 +439,7 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       const remove = body.remove === true;
       const text = remove ? null : cleanText(body.text, 1000, { required: true, min: 2, label: "la respuesta", code: "response" });
       if (text) assertPublicSafe(text, "la respuesta", "response");
-      const { data: before } = await service.from("platform_reviews").select("id, response_text").eq("id", id).maybeSingle();
+      const { data: before } = await service.from("platform_reviews").select("id, user_id, response_text").eq("id", id).maybeSingle();
       if (!before) throw new HttpError(404, "La opinión no existe.", "not_found");
       const now = new Date().toISOString();
       const { error } = await service.from("platform_reviews").update(remove
@@ -410,6 +448,13 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       if (error) throw new HttpError(500, "No se pudo guardar la respuesta.", "respond_failed");
       await logEvent(service, { review_id: id, actor_type: "admin", actor_ref: a.email || a.uid, actor_role: a.role, action: remove ? "response_removed" : "responded" });
       await audit(service, req, a, { action: remove ? "review_response_removed" : "review_responded", id, before: { response_text: before.response_text }, after: { response_text: text }, description: `Respuesta institucional en opinión ${id}` });
+      if (!remove) {
+        await notify(service, {
+          recipient: String(before.user_id), source: "opiniones", refId: id, type: "review_response",
+          titleKey: "notify.reviewResponseTitle", bodyKey: "notify.reviewResponseBody",
+          link: "/opiniones.html#prHistory", dedupeKey: `review:${id}:response:${now}`,
+        });
+      }
       return { responded: !remove };
     }
     case "resolve_report": {

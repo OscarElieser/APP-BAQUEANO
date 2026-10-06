@@ -23,7 +23,8 @@
   var DRAFT_KEY = 'baqueano_platform_review_draft_v1';
   var AVATAR_HOSTS = /^https:\/\/([a-z0-9-]+\.)*(googleusercontent\.com|firebasestorage\.googleapis\.com)\//i;
   var $ = function (id) { return document.getElementById(id); };
-  var state = { user: null, summary: null, reviews: [], page: 0, hasMore: false, mine: null, reportId: null, pendingSubmit: false };
+  var state = { user: null, summary: null, reviews: [], page: 0, hasMore: false, mine: null, reportId: null, pendingSubmit: false,
+    submitting: false, history: null, g: { index: 0, timer: null, paused: false, hold: false, loading: false } };
 
   function t(key, fallback, vars) {
     var lang = window.BaqueanoLanguage;
@@ -170,6 +171,103 @@
     list.replaceChildren.apply(list, state.reviews.map(reviewNode));
     show($('prListEmpty'), !state.reviews.length);
     show($('prMore'), state.hasMore);
+    renderGallery();
+  }
+
+  // ---------------------------------------------------------------- galería (2026-10-06)
+  // Carrusel infinito: autoplay cada 7 s, pausa/continuar, flechas, teclado y deslizamiento.
+  // Con "reducir movimiento" no avanza solo. Al acercarse al final pide la siguiente página
+  // (12 opiniones); sin más páginas vuelve al principio. Nunca carga todo de una vez.
+  var reduceMotion = false;
+  try { reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) { reduceMotion = false; }
+  function galleryCard(r, i, total) {
+    // Mismo contenido que la tarjeta de la lista, pero en un <div role="group"> (un <li> con
+    // role=group dentro de una lista no es válido para lectores de pantalla).
+    var source = reviewNode(r);
+    var li = el('div', source.className + ' pr-gallery-slide');
+    while (source.firstChild) li.append(source.firstChild);
+    li.setAttribute('role', 'group');
+    li.setAttribute('aria-roledescription', t('gallerySlide', 'opinión'));
+    li.setAttribute('aria-label', t('galleryPos', '{n} de {total}', { n: i + 1, total: total }));
+    return li;
+  }
+  function renderGallery() {
+    var box = $('prGallery'); if (!box) return;
+    var list = state.reviews;
+    show(box, list.length > 0);
+    if (!list.length) return;
+    if (state.g.index >= list.length) state.g.index = 0;
+    var track = $('prGalleryTrack');
+    track.replaceChildren.apply(track, list.map(function (r, i) { return galleryCard(r, i, list.length); }));
+    paintGallery(false);
+    renderToggle();
+    scheduleGallery();
+  }
+  function paintGallery(focus) {
+    var slides = $('prGalleryTrack').children;
+    for (var i = 0; i < slides.length; i += 1) {
+      var on = i === state.g.index;
+      slides[i].hidden = !on;
+      slides[i].setAttribute('aria-hidden', on ? 'false' : 'true');
+    }
+    var total = state.reviews.length + (state.hasMore ? '+' : '');
+    $('prGalleryPos').textContent = t('galleryPos', '{n} de {total}', { n: state.g.index + 1, total: total });
+    if (focus && slides[state.g.index]) slides[state.g.index].focus({ preventScroll: true });
+  }
+  function moveGallery(step) {
+    var n = state.reviews.length; if (!n) return;
+    var next = state.g.index + step;
+    if (next >= n) {
+      if (state.hasMore && !state.g.loading) {
+        state.g.loading = true;
+        loadPage(state.page + 1).then(function () { state.g.loading = false; state.g.index = Math.min(next, state.reviews.length - 1); paintGallery(false); });
+        return;
+      }
+      next = 0;
+    }
+    if (next < 0) next = n - 1;
+    state.g.index = next;
+    paintGallery(false);
+  }
+  function scheduleGallery() {
+    window.clearTimeout(state.g.timer);
+    if (state.g.paused || state.g.hold || reduceMotion || document.hidden || state.reviews.length < 2) return;
+    state.g.timer = window.setTimeout(function () { moveGallery(1); scheduleGallery(); }, 7000);
+  }
+  function renderToggle() {
+    var btn = $('prGalleryToggle'); if (!btn) return;
+    var paused = state.g.paused || reduceMotion;
+    btn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+    btn.querySelector('i').className = paused ? 'fa-solid fa-play' : 'fa-solid fa-pause';
+    // La clave sigue al estado: así el motor de idioma traduce la etiqueta correcta al cambiar de idioma.
+    var label = $('prGalleryToggleLabel');
+    label.setAttribute('data-i18n', paused ? 'platformReviews.galleryPlay' : 'platformReviews.galleryPause');
+    label.textContent = paused ? t('galleryPlay', 'Continuar') : t('galleryPause', 'Pausar');
+  }
+  function bindGallery() {
+    var vp = $('prGalleryViewport'); if (!vp) return;
+    $('prGalleryPrev').addEventListener('click', function () { moveGallery(-1); scheduleGallery(); });
+    $('prGalleryNext').addEventListener('click', function () { moveGallery(1); scheduleGallery(); });
+    $('prGalleryToggle').addEventListener('click', function () {
+      if (reduceMotion) { reduceMotion = false; state.g.paused = false; } else state.g.paused = !state.g.paused;
+      renderToggle(); scheduleGallery();
+    });
+    vp.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); moveGallery(1); scheduleGallery(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); moveGallery(-1); scheduleGallery(); }
+    });
+    // Pausa mientras el puntero o el foco están sobre la galería (WCAG 2.2.2).
+    var box = $('prGallery');
+    ['mouseenter', 'focusin'].forEach(function (ev) { box.addEventListener(ev, function () { state.g.hold = true; scheduleGallery(); }); });
+    ['mouseleave', 'focusout'].forEach(function (ev) { box.addEventListener(ev, function () { state.g.hold = false; scheduleGallery(); }); });
+    var startX = null;
+    vp.addEventListener('pointerdown', function (e) { startX = e.clientX; });
+    vp.addEventListener('pointerup', function (e) {
+      if (startX == null) return;
+      var dx = e.clientX - startX; startX = null;
+      if (Math.abs(dx) > 45) { moveGallery(dx < 0 ? 1 : -1); scheduleGallery(); }
+    });
+    document.addEventListener('visibilitychange', scheduleGallery);
   }
   function loadPage(page) {
     return call('list', { page: page }).then(function (d) {
@@ -249,6 +347,8 @@
     setError('prFormError', null, '');
     if (!validate()) return;
     if (!firebaseUser()) { state.pendingSubmit = true; showLogin(true); return; }
+    if (state.submitting) return; // evita duplicados por doble clic
+    state.submitting = true;
     var btn = $('prSubmit');
     btn.disabled = true;
     var label = $('prSubmitLabel').textContent;
@@ -260,17 +360,35 @@
     }).then(function (d) {
       clearDraft();
       state.mine = d.review || null;
+      resetForm();
       renderMine();
       show($('prThanks'), true);
       $('prThanks').focus();
+      loadHistory();
     }, function (error) {
       if (error.status === 401) { state.pendingSubmit = true; showLogin(true); }
       setError('prFormError', null, error.message);
     }).then(function () {
+      state.submitting = false;
       btn.disabled = false;
       $('prSubmitLabel').textContent = label;
       renderSubmitLabel();
     });
+  }
+
+  // Después de un envío correcto el formulario queda limpio y listo para otra vez:
+  // comentario, sugerencia, estrellas y consentimiento vacíos (el consentimiento se pide en
+  // cada publicación). La opinión enviada sigue visible en "Mi opinión" y en "Mis opiniones".
+  function resetForm() {
+    $('prComment').value = '';
+    $('prImprovement').value = '';
+    document.querySelectorAll('input[name="rating"]').forEach(function (r) { r.checked = false; });
+    paintStars(0);
+    updateRatingText();
+    $('prConsent').checked = false;
+    $('prShowAvatar').checked = true;
+    ['prCommentError', 'prRatingError', 'prConsentError', 'prFormError'].forEach(function (id) { var n = $(id); if (n) { n.textContent = ''; n.hidden = true; } });
+    updateCounter();
   }
 
   // ---------------------------------------------------------------- mi opinión
@@ -280,6 +398,7 @@
   function renderMine() {
     var m = state.mine;
     show($('prMine'), !!m);
+    show($('prReplaceNote'), !!m);
     renderSubmitLabel();
     if (!m) return;
     var status = t('status.' + m.status, m.status);
@@ -289,17 +408,64 @@
     $('prMineReason').textContent = reason ? t('mineReason', 'Motivo del equipo: {reason}', { reason: m.moderation_reason }) : '';
     show($('prMineReason'), !!reason);
   }
+  // Solo con el botón "Editar mi opinión": antes se rellenaba sola y el comentario anterior
+  // quedaba "pegado" en el formulario después de enviarlo.
   function fillFromMine() {
     var m = state.mine;
     if (!m) return;
-    if (!$('prComment').value) $('prComment').value = m.comment || '';
-    if (!$('prImprovement').value) $('prImprovement').value = m.improvement || '';
-    if (!ratingValue() && m.rating) setRating(m.rating);
+    $('prComment').value = m.comment || '';
+    $('prImprovement').value = m.improvement || '';
+    if (m.rating) setRating(m.rating);
     $('prShowAvatar').checked = m.show_avatar !== false;
     updateCounter();
   }
   function loadMine() {
-    return call('mine').then(function (d) { state.mine = d.review || null; renderMine(); fillFromMine(); }, function () { state.mine = null; renderMine(); });
+    return call('mine').then(function (d) { state.mine = d.review || null; renderMine(); }, function () { state.mine = null; renderMine(); });
+  }
+
+  // ---------------------------------------------------------------- mis opiniones
+  var HISTORY_ACTIONS = { created: 'histCreated', edited: 'histEdited', approved: 'histApproved', rejected: 'histRejected', hidden: 'histHidden',
+    marked_reported: 'histReported', withdrawn: 'histWithdrawn', erased: 'histErased', responded: 'histResponded' };
+  var HISTORY_FALLBACK = { histCreated: 'Enviada', histEdited: 'Editada (vuelve a revisión)', histApproved: 'Aprobada y publicada', histRejected: 'No aprobada',
+    histHidden: 'Ocultada por moderación', histReported: 'En revisión por reportes', histWithdrawn: 'Retirada por vos', histErased: 'Eliminada a tu pedido', histResponded: 'BAQUEANO respondió' };
+  function loadHistory() {
+    if (!firebaseUser()) { state.history = null; renderHistory(); return Promise.resolve(); }
+    return call('my_history').then(function (d) { state.history = d; renderHistory(); }, function () { state.history = null; renderHistory(); });
+  }
+  function renderHistory() {
+    var box = $('prHistory'); if (!box) return;
+    var h = state.history;
+    show(box, !!(state.user && h));
+    if (!h) return;
+    var list = $('prHistoryList');
+    var rows = h.reviews || [];
+    show($('prHistoryEmpty'), !rows.length);
+    list.replaceChildren.apply(list, rows.map(function (r) {
+      var li = el('li', 'pr-history-item');
+      var head = el('div', 'pr-history-head');
+      var badge = el('span', 'pr-history-status', t('status.' + r.status, r.status));
+      badge.dataset.status = r.status;
+      head.append(badge);
+      if (r.rating) head.append(starsNode(Number(r.rating)));
+      var when = el('time', 'pr-review-date', fmtDate(r.created_at)); when.dateTime = r.created_at; head.append(when);
+      li.append(head);
+      li.append(el('p', 'pr-review-text', r.erased_at ? t('histErasedText', 'Eliminaste esta opinión y sus datos.') : (r.comment || '')));
+      if (r.moderation_reason && (r.status === 'rejected' || r.status === 'hidden')) li.append(el('p', 'pr-mine-reason', t('mineReason', 'Motivo del equipo: {reason}', { reason: r.moderation_reason })));
+      var evs = (h.events || []).filter(function (e) { return e.review_id === r.id; });
+      if (evs.length) {
+        var ol = el('ol', 'pr-history-events');
+        evs.forEach(function (e) {
+          var key = HISTORY_ACTIONS[e.action];
+          var item = el('li', null, (key ? t(key, HISTORY_FALLBACK[key]) : e.action) + ' · ' + fmtDate(e.at));
+          ol.append(item);
+        });
+        var det = el('details', 'pr-history-details');
+        det.append(el('summary', null, t('histTimeline', 'Ver historial ({n})', { n: evs.length })), ol);
+        li.append(det);
+      }
+      return li;
+    }));
+    if (location.hash === '#prHistory' && !state.historyFocused) { state.historyFocused = true; box.scrollIntoView({ block: 'start' }); box.focus({ preventScroll: true }); }
   }
   function withdraw(erase) {
     var question = erase
@@ -316,7 +482,7 @@
       var msg = $('prStatusMsg');
       msg.textContent = erase ? t('deleted', 'Tu opinión y tus datos fueron eliminados.') : t('withdrawn', 'Tu opinión fue retirada.');
       show(msg, true);
-      loadSummary(); loadPage(0);
+      loadSummary(); loadPage(0); loadHistory();
     }, function (error) { setError('prFormError', null, error.message); });
     });
   }
@@ -336,6 +502,7 @@
   function onSignedIn() {
     renderUser();
     restoreDraft();
+    loadHistory();
     loadMine().then(function () {
       if (state.pendingSubmit) {
         state.pendingSubmit = false;
@@ -379,7 +546,7 @@
   }
 
   // ---------------------------------------------------------------- arranque
-  function rerender() { renderSummary(); renderList(); renderMine(); updateRatingText(); if (state.user) renderUser(); }
+  function rerender() { renderSummary(); renderList(); renderMine(); renderHistory(); renderToggle(); updateRatingText(); if (state.user) renderUser(); }
 
   function init() {
     if (!$('prForm')) return;
@@ -401,6 +568,7 @@
       var s = window.BaqueanoSession;
       Promise.resolve(s && s.logout ? s.logout() : null).then(function () { state.mine = null; renderMine(); renderUser(); });
     });
+    $('prEdit').addEventListener('click', function () { fillFromMine(); show($('prThanks'), false); $('prComment').focus(); });
     $('prWithdraw').addEventListener('click', function () { withdraw(false); });
     $('prDelete').addEventListener('click', function () { withdraw(true); });
     $('prMore').addEventListener('click', function () { loadPage(state.page + 1); });
@@ -408,13 +576,14 @@
     $('prReportSend').addEventListener('click', sendReport);
     $('prReportDialog').addEventListener('cancel', function () { if (reportOpener) setTimeout(function () { reportOpener.focus(); }, 0); });
 
+    bindGallery();
     updateCounter();
     loadSummary();
     loadPage(0);
     try {
       if (window.firebase && window.firebase.auth) {
         window.firebase.auth().onAuthStateChanged(function (user) {
-          if (user) onSignedIn(); else { state.user = null; state.mine = null; renderUser(); renderMine(); restoreDraft(); }
+          if (user) onSignedIn(); else { state.user = null; state.mine = null; state.history = null; renderUser(); renderMine(); renderHistory(); restoreDraft(); }
         });
       }
     } catch (_) { /* sin Firebase: se puede leer pero no publicar */ }

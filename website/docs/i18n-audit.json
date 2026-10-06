@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T22:29:31.581Z",
+  "generatedAt": "2026-10-06T22:52:16.995Z",
   "languages": [
     "es",
     "en",
@@ -9,21 +9,21 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4448,
-    "en": 4448,
-    "fr": 4448,
-    "it": 4448,
-    "pt": 4448,
-    "de": 4448
+    "es": 4492,
+    "en": 4492,
+    "fr": 4492,
+    "it": 4492,
+    "pt": 4492,
+    "de": 4492
   },
   "html": {
     "files": 33,
-    "total": 3805,
-    "translated": 3804,
+    "total": 3814,
+    "translated": 3813,
     "untranslated": 1
   },
   "js": {
-    "files": 103,
+    "files": 104,
     "translated": 152,
     "untranslated": 722
   },
@@ -79,6 +79,7 @@
     "js/baqueano-api.js",
     "js/baqueano-dialog.js",
     "js/baqueano-master-catalog.js",
+    "js/baqueano-notifications.js",
     "js/baqueano-pdf.js",
     "js/baqueano-presence.js",
     "js/baqueano-traffic-tracker.js",
@@ -397,8 +398,8 @@
     {
       "file": "opiniones.html",
       "type": "html",
-      "total": 76,
-      "translated": 76,
+      "total": 85,
+      "translated": 85,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -576,6 +577,15 @@
     },
     {
       "file": "js/baqueano-master-catalog.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/baqueano-notifications.js",
       "type": "js",
       "total": 0,
       "translated": 0,
