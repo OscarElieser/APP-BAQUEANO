@@ -8,7 +8,7 @@
   'use strict';
   if (window.BaqueanoAssistant?.version === '6') return;
   if (!document.querySelector('link[data-baqueano-assistant]')) {
-    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20261003-microphone-1'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
+    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20261006-a11y-1'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
   }
 
   // 🎯 POR QUÉ: Firebase Hosting no expone /health y su 404 pintaba el asistente en rojo aunque Supabase estuviera operativo.
@@ -163,7 +163,10 @@
 
   function updateClock() {
     const now = new Intl.DateTimeFormat('es-NI', { timeZone: 'America/Managua', hour: '2-digit', minute: '2-digit', hour12: true }).format(new Date());
-    $('#bqClock').textContent = now; $('#bqMiniTime').textContent = now;
+    $('#bqClock').textContent = now;
+    // La hora del botón flotante se pinta por CSS (attr(data-time)): es decorativa y, como texto, no
+    // coincidía con el nombre accesible del botón (WCAG 2.5.3, auditoría 2026-10-06).
+    $('#bqMiniTime').dataset.time = now;
   }
 
   function weatherLabel(code) { if (code === 0) return 'Despejado'; if ([1,2,3].includes(code)) return 'Parcialmente nublado'; if ([45,48].includes(code)) return 'Neblina'; if ([51,53,55,61,63,65,80,81,82].includes(code)) return 'Lluvia'; if ([95,96,99].includes(code)) return 'Tormenta'; return 'Condición variable'; }

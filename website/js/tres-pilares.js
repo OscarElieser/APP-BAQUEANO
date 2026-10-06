@@ -280,8 +280,7 @@
       var promptArea = document.createElement("a");
       promptArea.className = "baqui-prompt-area";
       promptArea.href = "baqueano-ai.html?prompt=contame-que-queres-vivir";
-      promptArea.setAttribute("aria-label", "Contale a Baqüi qué querés vivir");
-      promptArea.setAttribute("data-i18n-aria-label", "baqui.homeCard.promptAria");
+      // Sin aria-label: el nombre del enlace es el texto visible traducido (WCAG 2.5.3, auditoría 2026-10-06).
       promptArea.innerHTML =
         '<span class="baqui-prompt-placeholder" data-i18n="baqui.homeCard.promptPlaceholder">Contame qué querés vivir...</span>' +
         '<span class="baqui-prompt-send" aria-hidden="true"><i class="fa-solid fa-paper-plane"></i></span>';

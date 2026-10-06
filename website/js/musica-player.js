@@ -97,7 +97,7 @@
 
   function wireControls() {
     $('#btnTrackProfile')?.addEventListener('click',()=>openProfile(TRACKS[currentIndex].artist,TRACKS[currentIndex]));
-    $$('.artist-card-exact').forEach(card=>{card.setAttribute('tabindex','0');card.setAttribute('role','button');card.setAttribute('aria-label',`Ver ficha de ${card.querySelector('.artist-name')?.textContent||'artista'}`);const open=()=>openProfile(card.querySelector('.artist-name')?.textContent.trim(),null);card.addEventListener('click',open);card.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();open();}});});
+    $$('.artist-card-exact').forEach(card=>{card.setAttribute('tabindex','0');card.setAttribute('role','button');card.setAttribute('title',`Ver ficha de ${card.querySelector('.artist-name')?.textContent||'artista'}`);const open=()=>openProfile(card.querySelector('.artist-name')?.textContent.trim(),null);card.addEventListener('click',open);card.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();open();}});});
     $$('.player-ctrl-btn[title="Anterior"]').forEach(button=>button.addEventListener('click',()=>step(-1)));
     $$('.player-ctrl-btn[title="Siguiente"]').forEach(button=>button.addEventListener('click',()=>step(1)));
     $$('.player-ctrl-btn[title="Aleatorio"]').forEach(button=>button.addEventListener('click',()=>{shuffle=!shuffle;$$('.player-ctrl-btn[title="Aleatorio"]').forEach(item=>item.classList.toggle('is-active',shuffle));notify(shuffle?'Orden aleatorio activado':'Orden normal activado');}));

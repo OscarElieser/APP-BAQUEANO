@@ -22,6 +22,21 @@
     return{id:button.dataset.favoriteId||(card&&card.dataset.destinationId)||slug(name),title:name,page:location.pathname.split('/').pop()||'index.html',image:image?image.getAttribute('src'):'',savedAt:new Date().toISOString()};
   }
 
+  // WCAG 2.5.3 (auditoría 2026-10-06): el contador visible va dentro del nombre accesible
+  // ("Favorito 3"). La etiqueta base es la que traiga el botón (traducida por la i18n);
+  // si la i18n la reescribe, se toma la nueva como base.
+  function nameWithCount(button,badge){
+    var current=button.getAttribute('aria-label')||'';
+    var base=current&&current===button.dataset.bqNamed?button.dataset.bqBase:(current||button.title||'Guardar');
+    var next=base+' '+badge.textContent;
+    button.dataset.bqBase=base;button.dataset.bqNamed=next;button.setAttribute('aria-label',next);
+  }
+  ['baqueano:languageChanged','baqueano:i18nReady'].forEach(function(name){
+    window.addEventListener(name,function(){setTimeout(function(){
+      document.querySelectorAll('.bq-like-count').forEach(function(badge){nameWithCount(badge.parentElement,badge);});
+    },0);});
+  });
+
   function initLikes(){
     var selector='.dest-heart-btn,.dest-highlight-heart,.dish-fav-btn,.aliado-fav-btn,.btn-player-heart,.btn-action-like';
     var counts=readJson(LIKE_KEY,{});
@@ -36,7 +51,7 @@
       if(!Number.isFinite(count))count=Number(button.dataset.initialLikes||0);
       var saved=favorites.some(function(entry){return(typeof entry==='string'?entry:entry.id)===data.id;});
       var badge=document.createElement('span');
-      badge.className='bq-like-count';badge.textContent=String(count);badge.setAttribute('aria-label',count+' Me gusta');button.appendChild(badge);
+      badge.className='bq-like-count';badge.textContent=String(count);badge.setAttribute('aria-hidden','true');button.appendChild(badge);nameWithCount(button,badge);
       button.setAttribute('aria-pressed',String(saved));button.classList.toggle('active',saved);
       button.addEventListener('click',function(){
         var before=button.getAttribute('aria-pressed')==='true';
@@ -46,7 +61,7 @@
           var nextCount=Math.max(0,Number(badge.textContent)+(next===before?0:(next?1:-1)));
           button.setAttribute('aria-pressed',String(next));button.classList.toggle('active',next);
           var icon=button.querySelector('i');if(icon)icon.className=(next?'fa-solid':'fa-regular')+' fa-heart';
-          badge.textContent=String(nextCount);badge.setAttribute('aria-label',nextCount+' Me gusta');counts[key]=nextCount;
+          badge.textContent=String(nextCount);nameWithCount(button,badge);counts[key]=nextCount;
           favorites=readJson(FAVORITE_KEY,favorites);if(!Array.isArray(favorites))favorites=[];
           favorites=favorites.filter(function(entry){return(typeof entry==='string'?entry:entry.id)!==data.id;});
           if(next)favorites.push(data);
@@ -75,7 +90,7 @@
       document.querySelectorAll(selector).forEach(function(track){
         if(track.dataset.bqGalleryReady==='true'||track.children.length<2)return;
         track.dataset.bqGalleryReady='true';track.classList.add('bq-continuous-gallery');
-        var button=document.createElement('button');button.type='button';button.className='bq-gallery-control';button.setAttribute('aria-label','Pausar movimiento de la galería');track.insertAdjacentElement('afterend',button);
+        var button=document.createElement('button');button.type='button';button.className='bq-gallery-control';track.insertAdjacentElement('afterend',button);
         button.addEventListener('click',function(){var paused=track.dataset.userPaused==='true';track.dataset.userPaused=String(!paused);if(paused)startGallery(track,button);else stopGallery(track,button);});
         track.addEventListener('pointerdown',function(){track.dataset.userPaused='true';stopGallery(track,button);},{passive:true});startGallery(track,button);
       });
