@@ -25,7 +25,7 @@ export interface KnowledgeRecord {
 // BAQUI usa service_role, que salta RLS. Cada dominio reaplica aquí el MISMO predicado de publicación
 // que RLS aplica al público (columnas verificadas en la base), y los campos privados nunca llegan al
 // modelo ni a la respuesta.
-type Publication = "none" | "status" | "status_not_deleted" | "is_published" | "business";
+type Publication = "none" | "status" | "status_not_deleted" | "is_published" | "business" | "event";
 const SEARCH_DOMAINS: ReadonlyArray<{table: string; title: string; publication: Publication}> = [
   {table: "departments", title: "name", publication: "none"}, {table: "municipalities", title: "name", publication: "none"},
   {table: "destinations", title: "name", publication: "status_not_deleted"}, {table: "places", title: "name", publication: "is_published"},
@@ -33,7 +33,7 @@ const SEARCH_DOMAINS: ReadonlyArray<{table: string; title: string; publication: 
   {table: "heritage", title: "name", publication: "status"}, {table: "museums", title: "name", publication: "status"},
   {table: "gastronomy", title: "dish_name", publication: "status"}, {table: "communities", title: "name", publication: "status"},
   {table: "experiences", title: "title", publication: "status"}, {table: "routes", title: "title", publication: "status"},
-  {table: "events", title: "title", publication: "status"}
+  {table: "events", title: "title", publication: "event"}
 ];
 const PRIVATE_FIELDS = new Set(["owner_uid", "owner_id", "commission_rate", "metadata", "created_by", "updated_by",
   "legacy_key", "legacy_source", "written_by_uid", "written_by_email", "user_uid", "user_id", "attributes", "internal_notes"]);
@@ -43,6 +43,7 @@ function published(request: any, publication: Publication) {
   if (publication === "status") return request.eq("status", "published");
   if (publication === "status_not_deleted") return request.eq("status", "published").is("deleted_at", null);
   if (publication === "is_published") return request.eq("is_published", true);
+  if (publication === "event") return request.in("status", ["published", "historical"]);
   if (publication === "business") return request.eq("status", "published").is("deleted_at", null);
   return request;
 }
