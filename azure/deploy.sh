@@ -15,7 +15,8 @@
 #   4. Copia los videos (no versionados en Git) desde /var/www/baqueano/media/videos.
 #   5. Escribe health.json con el commit y la fecha.
 #   6. Cambia el enlace "current" de forma atómica y recarga Nginx.
-#   7. Conserva las 5 últimas releases para poder volver atrás (rollback).
+#   7. Conserva las 3 últimas releases para poder volver atrás (rollback).
+#      Cada release pesa ~630 MB: con más copias el disco llegó al 100 % (Manual Maestro Azure, sección 7).
 #
 # SEGURIDAD:
 #   - Se ejecuta como usuario sin privilegios (baqueano); solo "nginx -t" y
@@ -36,7 +37,7 @@ REPO_DIR="${REPO_DIR:-$HOME/APP-BAQUEANO}"
 WEB_ROOT="/var/www/baqueano"
 RELEASES="${WEB_ROOT}/releases"
 MEDIA_VIDEOS="${WEB_ROOT}/media/videos"
-KEEP=5
+KEEP=3
 
 reload_nginx() {
   # POR QUÉ: las cabeceras versionadas deben llegar a producción junto con cada release.
@@ -76,6 +77,8 @@ reload_nginx() {
   # líneas TLS que Certbot haya añadido al virtual host canónico.
   sudo sed -i -E 's/listen 80 default_server;/listen 80;/' "${site_config}"
   sudo sed -i -E 's/listen \[::\]:80 default_server;/listen [::]:80;/' "${site_config}"
+  # El dominio canónico no lleva el comodín "_" (solo baqueano-ip.conf): evita "duplicate default server".
+  sudo sed -i -E 's/server_name baqueanonicaragua\.com _;/server_name baqueanonicaragua.com;/' "${site_config}"
   sudo nginx -t
   sudo systemctl reload nginx
 }

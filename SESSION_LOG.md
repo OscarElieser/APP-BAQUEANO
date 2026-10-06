@@ -4821,3 +4821,18 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Botones "no clicables" pendientes: los 4 funcionan con clic real.
     - CI de Android sobre 884c085: analyze, tests y APK debug en verde.
     - Informe final de 28 secciones con semáforo: `docs/auditoria-2026-10-06/INFORME-FINAL.md`.
+- 2026-10-06 · Pedido del propietario: desplegó a mano en la VM (`azure/deploy.sh`, commit 8dbde46, nginx -t OK) y avisa "YA ESTÁ SUBIDO". Acción: verificar producción con evidencia (workflow kronox-evidence) y revisar el aviso de videos (`/var/www/baqueano/media/videos` no existe).
+  - Resultado de la verificación del despliegue:
+    - `kronox-evidence` (ejecución 37501243499): 62 OK, 0 críticos; `/health` sirve 8dbde46.
+    - El propietario compartió el "Manual Maestro de Azure": guardado en `docs/deployment/`.
+    - `deploy.sh` alineado con el manual: KEEP=5 → 3 (cada release pesa ~630 MB) y normalización de `server_name`.
+- 2026-10-06 · Pedido del propietario: nueva función **Opiniones sobre BAQUEANO**. Requisitos:
+  - Formulario simple: comentario, estrellas, mejora opcional y consentimiento sin marcar.
+  - Sesión obligatoria (Google o cuenta BAQUEANO) con regreso automático al formulario.
+  - Moderación `pending/approved/rejected/hidden/reported` desde Ops Center, con auditoría y respuesta institucional.
+  - Promedio y distribución calculados solo con opiniones aprobadas en Supabase.
+  - Una opinión activa por usuario.
+  - Se muestra "Usuario BAQUEANO autenticado" (nunca "verificado") y la foto del usuario.
+  - i18n en 6 idiomas y accesibilidad.
+  - Política de Opiniones y Normas de Comunidad. Validación legal (Leyes 787 y 842) antes de producción.
+  - Separado de `testimonios.html`.

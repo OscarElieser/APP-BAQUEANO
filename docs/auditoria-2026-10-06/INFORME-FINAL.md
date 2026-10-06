@@ -304,7 +304,7 @@ Las claves nuevas de hoy (municipios, crónicas e historia) están en los 6 idio
 | Supabase (BD y RLS) | 🟢 |
 | Edge Functions | 🟡 código corregido, falta desplegar |
 | Web (código en `main`) | 🟢 |
-| Web (producción) | 🔴 congelada en un build viejo |
+| Web (producción) | 🟢 sirve `8dbde46`, desplegado a mano por el propietario el 2026-10-06 a las 16:57 UTC; `kronox-evidence` 62 OK y 0 críticos |
 | App Android | 🟢 |
 | Ops Center | 🟢 |
 | BAQUI | 🟡 |
@@ -313,6 +313,18 @@ Las claves nuevas de hoy (municipios, crónicas e historia) están en los 6 idio
 | Responsive y accesibilidad | 🟢 448/448 cargas sin fallas |
 | Rendimiento | 🔴 |
 | i18n | 🟢 HTML · 🟡 JS y TSX |
-| Azure | 🔴 autodeploy detenido y puerto 22 abierto |
+| Azure | 🟡 producción al día; falta restringir el puerto 22 (NSG) y confirmar que el timer de AutoDeploy sigue activo |
 
 **Global: 🟡.** El código está corregido y probado. Hasta que el propietario destrabe Azure y despliegue las Edge Functions, el público no ve estos cambios.
+
+## Actualización · 2026-10-06, 17:10 UTC
+
+- El propietario desplegó `8dbde46` a mano en la VM: `bash -n` y `nginx -t` en verde, y `deploy.sh` completo.
+- Evidencia independiente desde GitHub (`kronox-evidence`, ejecución 37501243499): **62 OK, 0 críticos**.
+  - `/health` sirve `8dbde46`.
+  - Canonical, hreflang y JSON-LD están presentes en producción. Antes de este despliegue faltaban.
+  - La única observación es el puerto 22 abierto.
+- Se alineó `azure/deploy.sh` con el Manual Maestro de Azure: `KEEP=3` y normalización de `server_name`. El manual quedó en `docs/deployment/MANUAL-MAESTRO-AZURE.md`.
+- **Pendiente:**
+  - Subir los videos del hero a `/var/www/baqueano/media/videos/hero/`.
+  - Restringir SSH en el NSG.
