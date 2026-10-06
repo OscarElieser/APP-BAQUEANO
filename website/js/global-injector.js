@@ -72,7 +72,7 @@
       // pide Google Fonts en su <head>, no se repite la petición.
       { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap' },
       // Capa de identidad "Cartografía viva": correcciones de contraste y responsive.
-      { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261004-menu-1' },
+      { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261006-player-1' },
       // Sistema de diseño global: SIEMPRE la última hoja. Ver css/baqueano-system.css
       { id: 'bq-system',    href: 'css/baqueano-system.css?v=20261005-a11y-3' }
     ];

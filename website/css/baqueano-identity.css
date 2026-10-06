@@ -568,7 +568,9 @@ body.nav-drawer-open .bq-thumbbar {
   }
 
   /* Aviso de cookies y reproductores fijos: por encima de la barra. */
-  body.bq-has-thumbbar :is(#bqCookieConsent, .bq-cookie-consent, .cookie-consent, .persistent-audio-player, .global-music-player, .bq-gallery-control) {
+  /* 2026-10-06: también la barra de música (#stickyMusicBar) y el mini reproductor; la
+     auditoría de botones en navegador real encontró sus controles tapados por esta barra. */
+  body.bq-has-thumbbar :is(#bqCookieConsent, .bq-cookie-consent, .cookie-consent, .persistent-audio-player, .global-music-player, .bq-gallery-control, #stickyMusicBar, .musica-sticky-bottom-bar, .baq-mini-player) {
     margin-bottom: calc(var(--bq-thumbbar-h) + env(safe-area-inset-bottom));
   }
 }

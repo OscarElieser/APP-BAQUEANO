@@ -1232,3 +1232,14 @@ QUÉ: botones activos, pista seleccionada, onda animada y mensaje de acción.
 .page-musica-exact .featured-player-waveform.is-playing span:nth-child(3n) { animation-delay:.3s; }
 @keyframes musicaWave { from { transform:scaleY(.45); } to { transform:scaleY(1); } }
 .musica-action-toast { position:fixed; right:24px; bottom:96px; z-index:99999; padding:12px 16px; background:#0F172A; color:#FFF; border-left:4px solid #F65E01; border-radius:10px; box-shadow:0 12px 34px rgba(15,23,42,.28); font-size:.82rem; font-weight:700; }
+
+/* 2026-10-06 (auditoría de botones, 390 px): la info de pista tapaba el corazón y el botón
+   de minimizar (absolute, right:12px) tapaba "Lista". En móvil la barra usa dos filas: pista y
+   corazón arriba, controles abajo; ambas reservan a la derecha el ancho del botón de minimizar. */
+@media (max-width: 768px) {
+  #stickyMusicBar.musica-sticky-bottom-bar { flex-wrap: wrap !important; row-gap: 6px; padding: 8px 60px 8px 12px !important; }
+  #stickyMusicBar .sticky-track-info { min-width: 0 !important; flex: 1 1 100% !important; }
+  #stickyMusicBar .sticky-meta { min-width: 0; overflow: hidden; }
+  #stickyMusicBar .sticky-meta h5, #stickyMusicBar .sticky-meta span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+  #stickyMusicBar .sticky-controls { flex: 1 1 auto; justify-content: flex-start; gap: 6px; }
+}
