@@ -816,7 +816,7 @@
           <p class="footer-newsletter-desc">
             Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
           </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
+          <form class="footer-newsletter-form" onsubmit="return window.BaqueanoNewsletterUnavailable ? window.BaqueanoNewsletterUnavailable(event) : false">
             <input type="email" class="footer-newsletter-input" placeholder="Tu correo electrónico" required aria-label="Correo electrónico para boletín">
             <button type="submit" class="footer-newsletter-btn">
               <i class="fa-solid fa-paper-plane"></i> Suscribirme
@@ -1033,10 +1033,10 @@
   <script defer src="js/public-cms-sync.js"></script>
 
   <!-- Scripts -->
-  <script defer src="js/navigation.js?v=20261006-reviews-1"></script>
+  <script defer src="js/navigation.js?v=20261006-dialog-1"></script>
   <script defer src="js/territories-data.js?v=20261005-nat-1"></script>
   <script defer src="js/territory-media-catalog.js?v=20260926-1"></script>
-  <script defer src="js/madriz-experience.js?v=20261005-a11y-1"></script>
+  <script defer src="js/madriz-experience.js?v=20261006-dialog-1"></script>
   <script defer src="js/chinandega-experience.js"></script>
   <script defer src="js/territory-media-experience.js?v=20260926-1"></script>
   <script defer src="js/territories-rich-data.js?v=20261004-1"></script>

@@ -5747,5 +5747,17 @@
     "referralSaved": "Inoltro registrato.",
     "cannotOpen": "Impossibile aprire la posta in arrivo",
     "noteRequired": "Scrivi una nota che spieghi il cambio di stato."
+  },
+  "dialog": {
+    "confirmTitle": "Confermi questa azione?",
+    "promptTitle": "Scrivi la tua risposta",
+    "cancel": "Annulla",
+    "ok": "Ho capito",
+    "accept": "Accetta",
+    "newsletterTitle": "Newsletter: in arrivo",
+    "newsletterBody": "La newsletter di BAQUEANO non è ancora disponibile: non abbiamo salvato la tua email. Nel frattempo seguici su Instagram e TikTok o scrivici dalla pagina Contatti.",
+    "handoffTitle": "Invia al team di BAQUEANO",
+    "handoffBody": "Perché il team lo riceva e possa risponderti, ti portiamo a Contatti con il messaggio già scritto. Aggiungi solo nome ed email.",
+    "handoffGo": "Vai a Contatti"
   }
 }

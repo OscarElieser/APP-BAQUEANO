@@ -4855,3 +4855,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Pruebas: Playwright + axe sin fallas; QA completa con 60 cargas y 0 fallos; i18n con 0 errores.
     - Pendiente: proveedor de correo (RESEND_API_KEY) y prueba en producción del mapa y de la subida de evidencias.
     - Skills pedidas (Task observer, Omniroute, Headroom, Claude mem, Claude code setup, Agents skills): no se instalaron. Son código de terceros que intercepta o guarda el tráfico y la memoria de la sesión; AGENTS.md exige revisarlo antes y el entorno no tiene acceso a sus repositorios. Queda como decisión del propietario.
+  - Resultado de la Fase 2:
+    - diálogo BAQUEANO global en lugar de alert/confirm/prompt;
+    - se retiraron 3 éxitos falsos más (boletín, reportes de destino solo locales, audio inexistente);
+    - los respaldos de BAQUI llevan a baqueano-ia.html?q=.
+    - QA: 60 cargas y 0 fallos; i18n con 0 errores.

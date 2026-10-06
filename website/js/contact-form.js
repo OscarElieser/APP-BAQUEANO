@@ -42,6 +42,14 @@
     status.style.cssText = 'display:none;margin-top:16px;padding:12px 14px;border-radius:10px;font-size:.88rem;line-height:1.5;';
     form.appendChild(status);
 
+    // Mensaje traído desde otra página (reporte de un destino, por ejemplo); se borra al leerlo.
+    try {
+      var prefill = JSON.parse(sessionStorage.getItem('baqueano_contact_prefill_v1') || 'null');
+      if (prefill) {
+        sessionStorage.removeItem('baqueano_contact_prefill_v1');
+        if (prefill.message && !form.mensaje.value) form.mensaje.value = prefill.message;
+      }
+    } catch (_) { /* sin almacenamiento */ }
     var motivo = new URLSearchParams(window.location.search).get('motivo');
     if (motivo && form.tipo && Array.prototype.some.call(form.tipo.options, function (o) { return o.value === motivo; })) form.tipo.value = motivo;
 

@@ -660,13 +660,17 @@
     }).catch(function () { section.hidden = true; });
   }
 
+  // Diálogos BAQUEANO en lugar de confirm()/prompt() del navegador (2026-10-06).
+  function bqAsk(message, options) { return window.BaqueanoDialog ? window.BaqueanoDialog.confirm(message, options || {}) : Promise.resolve(false); }
   function deleteTestimonial(id) {
-    if (!window.confirm('¿Eliminar tu experiencia y sus fotos? Esta acción no se puede deshacer.')) return;
+    bqAsk('¿Eliminar tu experiencia y sus fotos? Esta acción no se puede deshacer.', { danger: true, confirmText: 'Eliminar' }).then(function (ok) {
+    if (!ok) return;
     API.call('delete', { id: id }).then(function () {
       closeDialog($('#tmDetailDialog'));
       toast('Experiencia eliminada.', 'success');
       loadFeed(true); loadMine();
     }).catch(function (error) { toast(error.message, 'warning'); });
+    });
   }
 
   // ---------------- Eventos ----------------
@@ -702,16 +706,20 @@
       if (t.dataset.editComment) {
         var li = t.closest('.tm-comment');
         var text = li.querySelector('.tm-comment-text');
-        var updated = window.prompt('Editá tu comentario:', text.textContent);
-        if (updated == null || !updated.trim() || updated.trim() === text.textContent) return;
-        API.call('edit_comment', { id: t.dataset.editComment, body: updated.trim() }).then(function (res) { text.textContent = res.body; toast('Comentario actualizado.', 'success'); })
-          .catch(function (error) { toast(error.message, 'warning'); });
+        var editing = window.BaqueanoDialog ? window.BaqueanoDialog.prompt('Editá tu comentario:', { value: text.textContent, multiline: true, maxLength: 1000 }) : Promise.resolve(null);
+        editing.then(function (updated) {
+          if (updated == null || !updated.trim() || updated.trim() === text.textContent) return;
+          API.call('edit_comment', { id: t.dataset.editComment, body: updated.trim() }).then(function (res) { text.textContent = res.body; toast('Comentario actualizado.', 'success'); })
+            .catch(function (error) { toast(error.message, 'warning'); });
+        });
         return;
       }
       if (t.dataset.deleteComment) {
-        if (!window.confirm('¿Eliminar tu comentario?')) return;
-        API.call('delete_comment', { id: t.dataset.deleteComment }).then(function () { var node = t.closest('.tm-comment'); if (node) node.remove(); toast('Comentario eliminado.', 'success'); })
-          .catch(function (error) { toast(error.message, 'warning'); });
+        bqAsk('¿Eliminar tu comentario?', { danger: true, confirmText: 'Eliminar' }).then(function (ok) {
+          if (!ok) return;
+          API.call('delete_comment', { id: t.dataset.deleteComment }).then(function () { var node = t.closest('.tm-comment'); if (node) node.remove(); toast('Comentario eliminado.', 'success'); })
+            .catch(function (error) { toast(error.message, 'warning'); });
+        });
         return;
       }
       if (t.dataset.deleteTestimonial) { deleteTestimonial(t.dataset.deleteTestimonial); return; }

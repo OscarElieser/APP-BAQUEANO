@@ -305,7 +305,9 @@
     var question = erase
       ? t('deleteConfirm', '¿Eliminar tu opinión? Borramos el texto, tu nombre y tu foto; solo queda el registro de que existió, por trazabilidad.')
       : t('withdrawConfirm', '¿Retirar tu opinión? Dejará de mostrarse. Podés publicar otra más adelante.');
-    if (!window.confirm(question)) return;
+    var ask = window.BaqueanoDialog ? window.BaqueanoDialog.confirm(question, { danger: !!erase }) : Promise.resolve(false);
+    ask.then(function (accepted) {
+    if (!accepted) return;
     call(erase ? 'delete_mine' : 'withdraw').then(function () {
       state.mine = null;
       renderMine();
@@ -316,6 +318,7 @@
       show(msg, true);
       loadSummary(); loadPage(0);
     }, function (error) { setError('prFormError', null, error.message); });
+    });
   }
 
   // ---------------------------------------------------------------- sesión

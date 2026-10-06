@@ -87,3 +87,19 @@ QUÉ: matriz de hallazgos de las 29 referencias críticas y el orden de las fase
 - **Pendiente del propietario:**
   - configurar `RESEND_API_KEY` e `INTAKE_FROM_EMAIL` en Supabase para que los avisos por correo salgan; mientras tanto quedan "sin configurar", visibles en el Ops Center;
   - probar en producción el mapa (este entorno bloquea `cdnjs`) y la subida real de evidencias.
+
+## Avance — Fase 2 (diálogos y éxitos falsos), 2026-10-06
+
+- **`js/baqueano-dialog.js`:** diálogo global accesible (aviso, confirmación y texto) cargado por el shell en todas las páginas.
+  - `<dialog>` nativo, foco atrapado, ESC y botones de 44 px, en 6 idiomas.
+  - `window.alert` se redirige al diálogo.
+- **Migrados a diálogos asíncronos:**
+  - todos los `confirm()`/`prompt()` públicos que se ejecutan: testimonios (3), opiniones, Mi Viaje (eliminar día), BAQUI (3), cookies y navegación;
+  - quedan sin `confirm()`/`prompt()` nativos.
+- **Éxitos falsos retirados:**
+  - boletín "¡Gracias por unirte!": ahora avisa con honestidad "Próximamente; no guardamos tu correo";
+  - reportes de destino que solo quedaban en el navegador: ahora pasan al Contacto real con el texto ya escrito;
+  - "Sintetizando explicación geológica…" (audio inexistente y cifra sin fuente).
+- **BAQUI:** los respaldos "Baqüi te sugiere…" de música, gastronomía y destinos abren `baqueano-ia.html?q=` con la consulta real.
+- **Código muerto detectado:** `environmental.js`, `environmental-evidence.js`, `calculator.js`, `admin-ops.js` e `index-features.js` no los carga ninguna página. Contienen éxitos falsos y una orden de pago ficticia. Se conservan (regla "no eliminar") y no se ejecutan.
+- **Pruebas:** diálogo en 390 y 1366 px sin ventanas nativas y con axe sin fallas; QA del sitio con 60 cargas y 0 fallos; i18n con 0 errores.

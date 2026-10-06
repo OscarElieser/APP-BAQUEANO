@@ -5747,5 +5747,17 @@
     "referralSaved": "Transmission enregistrée.",
     "cannotOpen": "Impossible d'ouvrir la boîte de réception",
     "noteRequired": "Écrivez une note expliquant le changement d'état."
+  },
+  "dialog": {
+    "confirmTitle": "Confirmer cette action ?",
+    "promptTitle": "Saisissez votre réponse",
+    "cancel": "Annuler",
+    "ok": "Compris",
+    "accept": "Accepter",
+    "newsletterTitle": "Lettre d'information : bientôt",
+    "newsletterBody": "La lettre d'information BAQUEANO n'est pas encore disponible : nous n'avons pas enregistré votre e-mail. En attendant, suivez-nous sur Instagram et TikTok ou écrivez-nous depuis Contact.",
+    "handoffTitle": "Envoyer à l'équipe BAQUEANO",
+    "handoffBody": "Pour que l'équipe le reçoive et puisse vous répondre, nous vous emmenons vers Contact avec votre message déjà rédigé. Ajoutez simplement votre nom et votre e-mail.",
+    "handoffGo": "Aller à Contact"
   }
 }

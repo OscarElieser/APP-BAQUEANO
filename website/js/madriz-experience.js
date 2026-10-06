@@ -1381,7 +1381,8 @@
     if (window.BaqueanoAudio && window.BaqueanoAudio.playSample) {
       window.BaqueanoAudio.playSample();
     } else {
-      alert('Sintetizando explicación geológica del Cañón de Somoto: Formación volcánica terciaria de 13 millones de años.');
+      // Sin audio cargado no se simula una narración ni se citan cifras sin fuente.
+      alert('La audioguía geológica del Cañón de Somoto todavía no está disponible.');
     }
   }
 

@@ -658,14 +658,15 @@
 
     if (modalReportBtn) {
       modalReportBtn.addEventListener('click', () => {
-        const reason = prompt(`Reportar actualización para "${dest.title}":\n¿Qué dato deseas reportar o actualizar? (Precios, Ruta, Horarios, Cooperativa, Otro)`);
-        if (reason && reason.trim()) {
-          const reports = JSON.parse(localStorage.getItem('baqueano_data_reports') || '[]');
-          reports.push({ destId: dest.id, destTitle: dest.title, details: reason.trim(), date: new Date().toISOString() });
-          localStorage.setItem('baqueano_data_reports', JSON.stringify(reports));
-          if (window.bqToast) window.bqToast('Reporte registrado para moderación territorial. ¡Muchas gracias!', 'success');
-          else alert('Reporte registrado para moderación territorial. ¡Muchas gracias!');
-        }
+        // 2026-10-06: antes guardaba el reporte solo en este navegador y decía "registrado para
+        // moderación". Ahora se escribe en el diálogo BAQUEANO y se envía por el contacto real.
+        const ask = window.BaqueanoDialog
+          ? window.BaqueanoDialog.prompt(`¿Qué dato de "${dest.title}" deseas reportar o actualizar? (Precios, ruta, horarios, cooperativa, otro)`, { title: 'Reportar una actualización', multiline: true, maxLength: 1500 })
+          : Promise.resolve(null);
+        ask.then((reason) => {
+          if (!reason || !reason.trim()) return;
+          if (window.BaqueanoContactHandoff) window.BaqueanoContactHandoff('destino', `Actualización para "${dest.title}" (${dest.id}): ${reason.trim()}`);
+        });
       });
     }
 

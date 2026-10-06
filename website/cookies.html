@@ -756,16 +756,16 @@
     }
 
     function handlePurgeStorage() {
-      if (confirm('¿Estás seguro de que deseas eliminar los datos locales y la caché de BAQUEANO en este dispositivo? Tus preferencias se restablecerán a los valores predeterminados.')) {
-        try {
-          localStorage.clear();
-          sessionStorage.clear();
-          alert('El almacenamiento local de BAQUEANO ha sido purgado con éxito.');
-          window.location.reload();
-        } catch (e) {
-          alert('Los datos locales se han restablecido.');
-        }
-      }
+      var dialog = window.BaqueanoDialog;
+      var ask = dialog
+        ? dialog.confirm('Se eliminarán los datos locales y la caché de BAQUEANO en este dispositivo. Tus preferencias volverán a los valores predeterminados.', { title: '¿Borrar los datos de este dispositivo?', confirmText: 'Borrar datos', danger: true })
+        : Promise.resolve(false);
+      ask.then(function (accepted) {
+        if (!accepted) return;
+        try { localStorage.clear(); sessionStorage.clear(); } catch (e) { /* almacenamiento bloqueado */ }
+        dialog.notice('Listo: se borraron los datos locales de BAQUEANO en este dispositivo.', { tone: 'success' })
+          .then(function () { window.location.reload(); });
+      });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -825,7 +825,7 @@
       }
     });
   </script>
-<script src="js/navigation.js?v=20261006-reviews-1"></script>
+<script src="js/navigation.js?v=20261006-dialog-1"></script>
 <script src="js/global-injector.js"></script>
 </body>
 </html>

@@ -351,8 +351,8 @@
   </div>
 
   <script src="js/baqueano-master-catalog.js"></script>
-  <script src="js/destination-dossier.js?v=20260928-1"></script>
-  <script src="js/navigation.js?v=20261006-reviews-1"></script>
+  <script src="js/destination-dossier.js?v=20261006-dialog-1"></script>
+  <script src="js/navigation.js?v=20261006-dialog-1"></script>
   <script src="js/baqueano-api.js"></script>
   <script src="js/global-injector.js"></script>
   <!-- Experiencias aprobadas de la comunidad para este destino (Edge Function baqueano-community). -->
@@ -635,21 +635,14 @@
         e.preventDefault();
         const cat = document.getElementById('reportCategory').value;
         const details = document.getElementById('reportDetails').value.trim();
-        const reports = JSON.parse(localStorage.getItem('baqueano_data_reports') || '[]');
-        reports.push({
-          destId: dest.id,
-          destTitle: dest.title,
-          category: cat,
-          details: details,
-          date: new Date().toISOString()
-        });
-        localStorage.setItem('baqueano_data_reports', JSON.stringify(reports));
+        // 2026-10-06: el reporte ya no se queda solo en este navegador con un "enviado" falso;
+        // va al contacto real (Supabase, código BAQ-CONTACT) con el texto ya escrito.
         closeModal();
         reportForm.reset();
-        if (window.bqToast) {
-          window.bqToast('Reporte enviado a moderación territorial. ¡Muchas gracias!', 'success');
+        if (window.BaqueanoContactHandoff) {
+          window.BaqueanoContactHandoff('destino', 'Actualización para "' + dest.title + '" (' + dest.id + ') · ' + cat + ': ' + details);
         } else {
-          alert('Reporte enviado con éxito. ¡Gracias por colaborar!');
+          window.location.href = 'nosotros.html?motivo=destino#contacto';
         }
       });
     });

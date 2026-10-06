@@ -5747,5 +5747,17 @@
     "referralSaved": "Weiterleitung erfasst.",
     "cannotOpen": "Der Posteingang konnte nicht geöffnet werden",
     "noteRequired": "Schreib eine Notiz, die die Statusänderung erklärt."
+  },
+  "dialog": {
+    "confirmTitle": "Diese Aktion bestätigen?",
+    "promptTitle": "Gib deine Antwort ein",
+    "cancel": "Abbrechen",
+    "ok": "Verstanden",
+    "accept": "Annehmen",
+    "newsletterTitle": "Newsletter: demnächst",
+    "newsletterBody": "Der BAQUEANO-Newsletter ist noch nicht verfügbar: Wir haben deine E-Mail nicht gespeichert. Folge uns inzwischen auf Instagram und TikTok oder schreib uns über Kontakt.",
+    "handoffTitle": "An das BAQUEANO-Team senden",
+    "handoffBody": "Damit das Team es erhält und antworten kann, bringen wir dich zu Kontakt mit deiner fertigen Nachricht. Ergänze nur Namen und E-Mail.",
+    "handoffGo": "Zu Kontakt"
   }
 }

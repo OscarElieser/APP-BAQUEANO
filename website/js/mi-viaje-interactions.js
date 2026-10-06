@@ -230,12 +230,16 @@
       if (trip.days[i].id === dayId) { day = trip.days[i]; break; }
     }
     if (!day) return;
-    var accepted = window.confirm('¿Eliminar ' + day.badge + ' de este viaje? El resto del itinerario se conservará.');
-    if (!accepted) return;
-    trip.days = trip.days.filter(function(item) { return item.id !== dayId; });
-    persistTrip(trip);
-    renderItinerary();
-    toast(day.badge + ' eliminado del viaje.', 'info');
+    var ask = window.BaqueanoDialog
+      ? window.BaqueanoDialog.confirm('¿Eliminar ' + day.badge + ' de este viaje? El resto del itinerario se conservará.', { danger: true, confirmText: 'Eliminar día' })
+      : Promise.resolve(false);
+    ask.then(function (accepted) {
+      if (!accepted) return;
+      trip.days = trip.days.filter(function(item) { return item.id !== dayId; });
+      persistTrip(trip);
+      renderItinerary();
+      toast(day.badge + ' eliminado del viaje.', 'info');
+    });
   };
 
   window.editDay = function(dayId) {

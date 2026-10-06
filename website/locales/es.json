@@ -5747,5 +5747,17 @@
     "referralSaved": "Derivación registrada.",
     "cannotOpen": "No se pudo abrir el buzón",
     "noteRequired": "Escribí una nota que explique el cambio de estado."
+  },
+  "dialog": {
+    "confirmTitle": "¿Confirmás esta acción?",
+    "promptTitle": "Escribí tu respuesta",
+    "cancel": "Cancelar",
+    "ok": "Entendido",
+    "accept": "Aceptar",
+    "newsletterTitle": "Boletín: próximamente",
+    "newsletterBody": "El boletín de BAQUEANO todavía no está disponible: no guardamos tu correo. Mientras tanto, seguinos en Instagram y TikTok o escribinos desde Contacto.",
+    "handoffTitle": "Enviar al equipo de BAQUEANO",
+    "handoffBody": "Para que el equipo lo reciba y te pueda responder, te llevamos a Contacto con tu mensaje ya escrito. Solo agregá tu nombre y correo.",
+    "handoffGo": "Ir a Contacto"
   }
 }

@@ -5747,5 +5747,17 @@
     "referralSaved": "Referral recorded.",
     "cannotOpen": "The inbox couldn't be opened",
     "noteRequired": "Write a note explaining the status change."
+  },
+  "dialog": {
+    "confirmTitle": "Confirm this action?",
+    "promptTitle": "Type your answer",
+    "cancel": "Cancel",
+    "ok": "Got it",
+    "accept": "Accept",
+    "newsletterTitle": "Newsletter: coming soon",
+    "newsletterBody": "The BAQUEANO newsletter isn't available yet: we did not store your email. Meanwhile, follow us on Instagram and TikTok or write to us from Contact.",
+    "handoffTitle": "Send to the BAQUEANO team",
+    "handoffBody": "So the team receives it and can reply, we'll take you to Contact with your message already written. Just add your name and email.",
+    "handoffGo": "Go to Contact"
   }
 }

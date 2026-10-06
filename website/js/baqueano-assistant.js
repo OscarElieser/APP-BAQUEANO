@@ -177,8 +177,11 @@
     try { const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lng)}&current=temperature_2m,weather_code&timezone=America%2FManagua`); if (!response.ok) throw new Error('weather'); const data = await response.json(); const value = { place, temp: Math.round(data.current.temperature_2m), code: data.current.weather_code, time: Date.now() }; sessionStorage.setItem(KEYS.weather, JSON.stringify(value)); renderWeather(value); track('assistant_weather_loaded', { place }); } catch (_) { $('#bqWeather').textContent = 'No disponible'; }
   }
   function requestWeather() {
-    if (!navigator.geolocation || !confirm('¿Usar tu ubicación solo para consultar el clima actual? No se guardarán coordenadas precisas.')) return loadWeather();
+    if (!navigator.geolocation || !window.BaqueanoDialog) return loadWeather();
+    window.BaqueanoDialog.confirm('¿Usar tu ubicación solo para consultar el clima actual? No se guardarán coordenadas precisas.', { title: 'Ubicación para el clima' }).then(ok => {
+    if (!ok) return loadWeather();
     navigator.geolocation.getCurrentPosition(position => loadWeather(position.coords.latitude.toFixed(2), position.coords.longitude.toFixed(2), 'Tu ubicación'), () => loadWeather(), { enableHighAccuracy: false, timeout: 7000, maximumAge: 900000 });
+    });
   }
 
   function verifiedPromotions() {
@@ -864,7 +867,7 @@ Seguinos para descubrir contenido en video, historias de artesanos locales y el 
     if (action.type === 'check_weather') return requestWeather();
     if (action.type === 'play_audio') { document.querySelector('audio')?.play().catch(() => {}); return; }
     if (action.type === 'pause_audio') { document.querySelectorAll('audio').forEach(audio => audio.pause()); return; }
-    if (action.type === 'save_favorite') { if (!confirm('¿Guardar este destino en tus favoritos de este dispositivo?')) return; const favorites = safeJson(localStorage.getItem('baqueano_favorites'), []); if (action.id && !favorites.includes(action.id)) favorites.push(action.id); localStorage.setItem('baqueano_favorites', JSON.stringify(favorites)); appendMessage('Destino guardado en tus favoritos.', 'assistant'); return; }
+    if (action.type === 'save_favorite') { (window.BaqueanoDialog ? window.BaqueanoDialog.confirm('¿Guardar este destino en tus favoritos de este dispositivo?') : Promise.resolve(false)).then(ok => { if (!ok) return; const favorites = safeJson(localStorage.getItem('baqueano_favorites'), []); if (action.id && !favorites.includes(action.id)) favorites.push(action.id); localStorage.setItem('baqueano_favorites', JSON.stringify(favorites)); appendMessage('Destino guardado en tus favoritos.', 'assistant'); }); return; }
     if (action.url && /^https?:\/\//i.test(action.url) && !action.url.startsWith(location.origin)) {
       window.open(action.url, '_blank', 'noopener,noreferrer');
       return;
@@ -874,8 +877,9 @@ Seguinos para descubrir contenido en video, historias de artesanos locales y el 
 
   function requestNearby() {
     if (!navigator.geolocation) return appendMessage('Tu navegador no permite obtener ubicación. Elegí un departamento en el mapa.', 'assistant');
-    if (!confirm('¿Permitir ubicación solo para esta búsqueda? No se guardará tu coordenada precisa.')) return;
+    (window.BaqueanoDialog ? window.BaqueanoDialog.confirm('¿Permitir ubicación solo para esta búsqueda? No se guardará tu coordenada precisa.') : Promise.resolve(false)).then(ok => { if (!ok) return;
     navigator.geolocation.getCurrentPosition(position => { const lat = position.coords.latitude.toFixed(2), lng = position.coords.longitude.toFixed(2); location.href = `destinos.html#mapa?near=${encodeURIComponent(`${lat},${lng}`)}`; }, () => appendMessage('No fue posible obtener la ubicación. Podés elegir el territorio manualmente.', 'assistant'), { enableHighAccuracy: false, timeout: 7000, maximumAge: 300000 });
+    });
   }
 
   function isSnoozed() { return Number(session.hiddenUntil || 0) > Date.now(); }

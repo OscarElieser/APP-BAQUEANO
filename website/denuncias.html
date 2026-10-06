@@ -747,7 +747,7 @@
           <p class="footer-newsletter-desc">
             Recibe avisos de nuevas cooperativas aliadas, frutos de temporada y rutas ecoturísticas protegidas sin intermediarios.
           </p>
-          <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por unirte al Boletín de Senderos Baqueano!'); this.reset();">
+          <form class="footer-newsletter-form" onsubmit="return window.BaqueanoNewsletterUnavailable ? window.BaqueanoNewsletterUnavailable(event) : false">
             <input type="email" class="footer-newsletter-input" placeholder="Tu correo electrónico" required aria-label="Correo electrónico para boletín">
             <button type="submit" class="footer-newsletter-btn">
               <i class="fa-solid fa-paper-plane"></i> Suscribirme
@@ -896,8 +896,8 @@
   <script defer src="js/public-cms-sync.js"></script>
 
   <!-- Scripts Modulares -->
-  <script src="js/navigation.js?v=20261006-reviews-1"></script>
-  <script src="js/baqueano-assistant.js?v=20261006-a11y-1"></script>
+  <script src="js/navigation.js?v=20261006-dialog-1"></script>
+  <script src="js/baqueano-assistant.js?v=20261006-dialog-1"></script>
   <script src="js/persistent-audio-player.js?v=20260922-3"></script>
 <script src="js/global-injector.js"></script>
   <script defer src="js/intake-api.js?v=20261006-1"></script>

@@ -770,11 +770,11 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         window.BaqueanoAssistant.sendUserPrompt(promptText);
         return;
       }
-      alert('Baqüi Asistente: ' + promptText);
+      window.location.href = 'baqueano-ia.html?q=' + encodeURIComponent(promptText);
     }
   </script>
 <script src="js/baqueano-master-catalog.js"></script>
-<script src="js/navigation.js?v=20261006-reviews-1"></script>
+<script src="js/navigation.js?v=20261006-dialog-1"></script>
 <script src="js/global-injector.js"></script>
 </body>
 

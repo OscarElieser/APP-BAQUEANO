@@ -5747,5 +5747,17 @@
     "referralSaved": "Encaminhamento registrado.",
     "cannotOpen": "Não foi possível abrir a caixa de entrada",
     "noteRequired": "Escreva uma nota explicando a mudança de status."
+  },
+  "dialog": {
+    "confirmTitle": "Confirma esta ação?",
+    "promptTitle": "Escreva sua resposta",
+    "cancel": "Cancelar",
+    "ok": "Entendi",
+    "accept": "Aceitar",
+    "newsletterTitle": "Boletim: em breve",
+    "newsletterBody": "O boletim do BAQUEANO ainda não está disponível: não guardamos seu e-mail. Enquanto isso, siga-nos no Instagram e no TikTok ou escreva pelo Contato.",
+    "handoffTitle": "Enviar para a equipe do BAQUEANO",
+    "handoffBody": "Para que a equipe receba e possa responder, levamos você ao Contato com sua mensagem já escrita. Basta adicionar seu nome e e-mail.",
+    "handoffGo": "Ir para Contato"
   }
 }

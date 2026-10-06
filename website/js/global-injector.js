@@ -905,6 +905,13 @@
   }
 
   async function init() {
+    // Diálogo BAQUEANO accesible en lugar de alert()/confirm()/prompt() nativos (2026-10-06).
+    if (!window.BaqueanoDialog && !document.querySelector('script[data-bq-dialog]')) {
+      var dialogScript = document.createElement('script');
+      dialogScript.src = 'js/baqueano-dialog.js?v=20261006-1';
+      dialogScript.dataset.bqDialog = 'true';
+      document.body.appendChild(dialogScript);
+    }
     if (!document.querySelector('script[data-platform-enhancements]')) {
       var enhancementScript = document.createElement('script');
       enhancementScript.src = 'js/platform-enhancements.js?v=20261006-a11y-1';

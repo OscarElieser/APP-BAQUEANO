@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T21:25:59.925Z",
+  "generatedAt": "2026-10-06T21:32:25.423Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4275,
-    "en": 4275,
-    "fr": 4275,
-    "it": 4275,
-    "pt": 4275,
-    "de": 4275
+    "es": 4285,
+    "en": 4285,
+    "fr": 4285,
+    "it": 4285,
+    "pt": 4285,
+    "de": 4285
   },
   "html": {
     "files": 33,
@@ -23,9 +23,9 @@
     "untranslated": 1
   },
   "js": {
-    "files": 98,
+    "files": 99,
     "translated": 147,
-    "untranslated": 726
+    "untranslated": 725
   },
   "jsEditorial": {
     "files": 7,
@@ -76,6 +76,7 @@
     "js/ayuda.js",
     "js/baqueano-analytics.js",
     "js/baqueano-api.js",
+    "js/baqueano-dialog.js",
     "js/baqueano-master-catalog.js",
     "js/baqueano-traffic-tracker.js",
     "js/business-application.js",
@@ -543,6 +544,15 @@
       "coverage": 0
     },
     {
+      "file": "js/baqueano-dialog.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/baqueano-map.js",
       "type": "js",
       "total": 19,
@@ -707,9 +717,9 @@
     {
       "file": "js/destination-dossier.js",
       "type": "js",
-      "total": 6,
+      "total": 5,
       "translated": 0,
-      "untranslated": 6,
+      "untranslated": 5,
       "editorialStrings": 0,
       "coverage": 0
     },

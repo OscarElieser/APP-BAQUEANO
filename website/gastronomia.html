@@ -863,7 +863,7 @@
         window.BaqueanoAssistant.openDrawer();
         window.BaqueanoAssistant.sendUserPrompt(prompt);
       } else {
-        alert(`Baqüi te sugiere los mejores comedores y platillos para: "${prompt}".`);
+        window.location.href = 'baqueano-ia.html?q=' + encodeURIComponent(prompt);
       }
     }
 
@@ -1008,7 +1008,7 @@
       });
     }
   </script>
-<script src="js/navigation.js?v=20261006-reviews-1"></script>
+<script src="js/navigation.js?v=20261006-dialog-1"></script>
 <script src="js/global-injector.js"></script>
 </body>
 

@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-06T21:25:59.925Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4275 · en 4275 · fr 4275 · it 4275 · pt 4275 · de 4275
+Generado: 2026-10-06T21:32:25.423Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4285 · en 4285 · fr 4285 · it 4285 · pt 4285 · de 4285
 
-HTML: 3797/3798 textos con clave (1 pendientes) · JS: 726 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3797/3798 textos con clave (1 pendientes) · JS: 725 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -89,10 +89,10 @@ HTML: 3797/3798 textos con clave (1 pendientes) · JS: 726 textos dinámicos pen
 | apps/web/src/app/rutas/page.tsx | tsx | 6 | 0 | 6 | 0 % |
 | apps/web/src/app/sostenibilidad/page.tsx | tsx | 6 | 0 | 6 | 0 % |
 | js/baqueano-ai.js | js | 6 | 0 | 6 | 0 % |
-| js/destination-dossier.js | js | 6 | 0 | 6 | 0 % |
 | apps/admin/src/app/negocios/[id]/page.tsx | tsx | 5 | 0 | 5 | 0 % |
 | apps/web/src/app/marca/page.tsx | tsx | 5 | 0 | 5 | 0 % |
 | js/business-portal.js | js | 5 | 0 | 5 | 0 % |
+| js/destination-dossier.js | js | 5 | 0 | 5 | 0 % |
 | js/epic-music-player.js | js | 5 | 0 | 5 | 0 % |
 | js/nicaragua-real-map.js | js | 5 | 0 | 5 | 0 % |
 | js/route-builder.js | js | 5 | 0 | 5 | 0 % |
@@ -180,6 +180,7 @@ HTML: 3797/3798 textos con clave (1 pendientes) · JS: 726 textos dinámicos pen
 | js/ayuda.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-analytics.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-api.js | js | 0 | 0 | 0 | 100 % |
+| js/baqueano-dialog.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-master-catalog.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-traffic-tracker.js | js | 0 | 0 | 0 | 100 % |
 | js/business-application.js | js | 0 | 0 | 0 | 100 % |
