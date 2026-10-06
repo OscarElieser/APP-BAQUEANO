@@ -1246,6 +1246,10 @@ function ensureAccessibleControlNames(root = document) {
     if (control.getAttribute('aria-label') || control.getAttribute('aria-labelledby')) return;
     if (control.closest('label')) return;
     if (control.id && document.querySelector(`label[for="${CSS.escape(control.id)}"]`)) return;
+    // Auditoría 2026-10-06 (axe label-content-name-mismatch): un botón con texto visible ya tiene
+    // nombre accesible. Ponerle un aria-label derivado del id ("bq Menu Trigger account",
+    // "save Trip Btn") tapaba el texto traducido. Solo se completa si no hay texto ni imagen con alt.
+    if (control.matches('button') && (control.textContent.trim() || control.querySelector('img[alt]:not([alt=""])'))) return;
 
     const rawName = control.getAttribute('title')
       || control.getAttribute('placeholder')
@@ -1261,6 +1265,45 @@ function ensureAccessibleControlNames(root = document) {
     if (accessibleName) control.setAttribute('aria-label', accessibleName);
   });
 }
+
+/**
+ * POR QUE: WCAG 2.5.3 (Label in Name). El logo, el selector de idioma y el botón BAQUI muestran un
+ *   texto ("BAQUEANO", "ES", "BAQUI") que su aria-label no contenía ("Baqueano Nicaragua — Inicio",
+ *   "Cambiar idioma", "Abrir panel"). Quien usa control por voz dice lo que ve y el control no responde.
+ *   axe lo marca como grave en las 28 páginas (auditoría 2026-10-06).
+ * COMO: si el aria-label no incluye el texto visible, se antepone: "ES — Cambiar idioma". Se repite
+ *   cuando el idioma cambia o termina de cargar, porque la i18n vuelve a escribir los aria-label.
+ * QUE: ensureLabelInName() sobre los controles compartidos de cabecera, pie y barra inferior.
+ */
+const LABEL_IN_NAME_SELECTOR = '.exact-nav-brand, .footer-logo-row, .navbar-lang-pill, .bq-thumbbar-baqui';
+// El selector de idioma (global-language.js) y BAQUI (global-injector.js) ya traen el texto visible en
+// su nombre desde el origen; esta función queda como red de seguridad si otra capa los reescribe.
+function ensureLabelInName(root = document) {
+  // Los logos ya se nombran por su contenido (alt + "BAQUEANO" + lema): la etiqueta "Inicio" pasa a
+  // `title` como descripción y el nombre accesible coincide con lo que se ve.
+  root.querySelectorAll('.exact-nav-brand, .footer-logo-row').forEach((link) => {
+    const label = link.getAttribute('aria-label');
+    if (!label) return;
+    link.setAttribute('title', label);
+    link.removeAttribute('aria-label');
+  });
+  root.querySelectorAll('.navbar-lang-pill, .bq-thumbbar-baqui').forEach((control) => {
+    const current = (control.getAttribute('aria-label') || '').trim();
+    const visible = (control.innerText || control.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!current || !visible) return;
+    // Si el aria-label sigue siendo el que puso esta función, la etiqueta base es la guardada;
+    // si la i18n lo reescribió, la nueva etiqueta pasa a ser la base.
+    const base = current === control.dataset.bqLabelSet ? control.dataset.bqBaseLabel : current;
+    if (base.toLowerCase().includes(visible.toLowerCase())) return;
+    const next = `${visible} — ${base}`;
+    control.dataset.bqBaseLabel = base;
+    control.dataset.bqLabelSet = next;
+    control.setAttribute('aria-label', next);
+  });
+}
+['baqueano:languageChanged', 'baqueano:i18nReady'].forEach((name) => {
+  window.addEventListener(name, () => setTimeout(() => ensureLabelInName(), 0));
+});
 
 /**
  * Inicializa el acordeón desplegable y la interactividad del registro de negocios en el footer.
@@ -1528,6 +1571,7 @@ function mountGlobalNavigation() {
   initDynamicDestinationCount();
   initDropdownMiPais();
   ensureAccessibleControlNames(navbar);
+  ensureLabelInName();
   window.BaqueanoSession?.refreshNavbar?.();
 }
 window.BaqueanoNavigation = { mount: mountGlobalNavigation, closeDrawer: () => bqSetDrawerState(false) };
@@ -1548,6 +1592,8 @@ function initializeNavigationModules() {
   initFooterBizRegister();
   scheduleBaqueanoDigitalLoad();
   ensureAccessibleControlNames();
+  ensureLabelInName();
+  setTimeout(() => ensureLabelInName(), 1500); // pie y barra inferior se inyectan después del menú
   initInstantNavigation();
 }
 

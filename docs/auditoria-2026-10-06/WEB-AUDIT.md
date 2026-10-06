@@ -36,10 +36,11 @@
 
 - **Historia, los 7 "Conocer más":** abren su ficha en un `<dialog>` (`historia-epocas.js`).
 - **`offline.html`, "Probar conexión":** recarga a los 600 ms cuando hay red; el rastreador midió después de la recarga.
-- **"No clicable" en `#saveTripBtn`, `#purgeStorageBtn`, `#iaBtnPersonalizar` y `.bq-suggestion-close`:**
-  - Son elementos dentro de pestañas o secciones que no estaban visibles en ese momento.
-  - Se revisan en la siguiente pasada con interacción previa.
-  - Estado: 🟡 sin cerrar.
+- **"No clicable" en `#saveTripBtn`, `#purgeStorageBtn`, `#iaBtnPersonalizar` y `.bq-suggestion-close`:** segunda pasada con clic real en Playwright, aceptando primero el banner de cookies.
+  - `#iaBtnPersonalizar` (1366 px): cambia el DOM. 🟢
+  - `#purgeStorageBtn` (390 px): pide confirmación antes de borrar los datos locales. 🟢
+  - `#saveTripBtn` (1366 px): guarda el viaje y queda deshabilitado con ✓. El primer rastreo midió durante la carga. 🟢
+  - `.bq-suggestion-close`: vive dentro de `#bqSuggestion`, oculto hasta que aparece una sugerencia. No es un fallo. 🟢
 
 ## 4. Pendientes reales (no se resuelven inventando)
 

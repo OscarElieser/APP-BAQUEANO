@@ -199,7 +199,8 @@
     document.querySelectorAll('.global-language,.navbar-lang-pill').forEach(function updateButton(button) {
       var label = button.querySelector('span');
       if (label) label.textContent = currentLanguage.toUpperCase();
-      button.setAttribute('aria-label', translate('language.change', { fallback: 'Cambiar idioma' }));
+      // WCAG 2.5.3: el nombre accesible incluye el código visible ("ES — Cambiar idioma").
+      button.setAttribute('aria-label', currentLanguage.toUpperCase() + ' — ' + translate('language.change', { fallback: 'Cambiar idioma' }));
       button.setAttribute('aria-expanded', String(Boolean(document.querySelector('.bq-language-menu'))));
     });
   }

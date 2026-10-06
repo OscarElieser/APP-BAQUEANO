@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-06T11:56:53.677Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3952 · en 3952 · fr 3952 · it 3952 · pt 3952 · de 3952
+Generado: 2026-10-06T16:30:24.106Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3952 · en 3952 · fr 3952 · it 3952 · pt 3952 · de 3952
 
 HTML: 3661/3662 textos con clave (1 pendientes) · JS: 729 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -52,7 +52,7 @@ HTML: 3661/3662 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | js/calculator.js | js | 11 | 0 | 11 | 0 % |
 | js/environmental-evidence.js | js | 11 | 0 | 11 | 0 % |
 | js/environmental.js | js | 11 | 0 | 11 | 0 % |
-| js/global-injector.js | js | 32 | 21 | 11 | 65.6 % |
+| js/global-injector.js | js | 31 | 20 | 11 | 64.5 % |
 | apps/admin/src/app/auditoria/page.tsx | tsx | 10 | 0 | 10 | 0 % |
 | apps/admin/src/app/website-builder/page.tsx | tsx | 10 | 0 | 10 | 0 % |
 | apps/web/src/app/open-data/page.tsx | tsx | 10 | 0 | 10 | 0 % |

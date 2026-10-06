@@ -18,7 +18,7 @@
 //   `baqueano:shell-ready`, y navigation.js monta UNA vez el contenido y los
 //   controles del menú; user-session.js pinta el estado de sesión y el rol.
 // - Página pública nueva: basta con incluir, al final del <body>,
-//     <script src="js/navigation.js?v=20261004-menu-2"></script>
+//     <script src="js/navigation.js?v=20261006-a11y-2"></script>
 //     <script src="js/global-injector.js"></script>
 //   No hay que copiar menú, pie, idioma ni sesión.
 //
@@ -926,7 +926,7 @@
     }
     if (!window.__BAQUEANO_I18N_LOADED__ && !document.querySelector('script[data-global-language]')) {
       var languageScript = document.createElement('script');
-      languageScript.src = 'js/global-language.js?v=20261006-i18nready-1';
+      languageScript.src = 'js/global-language.js?v=20261006-a11y-1';
       languageScript.defer = true;
       languageScript.dataset.globalLanguage = 'true';
       document.body.appendChild(languageScript);
@@ -998,7 +998,7 @@
       '<a href="destinos.html"' + current('explore') + '><i class="fa-solid fa-compass" aria-hidden="true"></i><span data-i18n="nav.explore">Explorar</span></a>' +
       '<a href="mapa.html"' + current('map') + '><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i><span data-i18n="nav.map">Mapa</span></a>' +
       '<a href="mi-viaje.html"' + current('trip') + '><i class="fa-solid fa-route" aria-hidden="true"></i><span data-i18n="nav.trip">Mi Viaje</span></a>' +
-      '<button type="button" class="bq-thumbbar-baqui" aria-label="Hablar con BAQUI" data-i18n-aria-label="baqui.openPanel">' +
+      '<button type="button" class="bq-thumbbar-baqui">' +
         '<img src="assets/images/assistant/baqui.png" alt="" width="30" height="30" decoding="async">' +
         '<span class="notranslate">BAQUI</span>' +
       '</button>';
