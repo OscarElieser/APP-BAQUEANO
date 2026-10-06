@@ -167,6 +167,19 @@ function initBusinessPortal() {
 }
 
 async function submitBusinessRegistration(data, stepsContainer, successPanel, btnSubmit) {
+  // 2026-10-06: ya no se confirma un registro "local" ni se escribe en Firestore, que el Ops Center
+  // no ve. La solicitud real va al formulario único de la Red BAQUEANO (Supabase, código BAQ-BIZ,
+  // revisión en el Ops Center). La cédula no se pide: no hace falta para revisar la solicitud.
+  if (typeof window.openBusinessApplication === 'function') {
+    window.openBusinessApplication({
+      bzaName: data.bizName || '', bzaOwner: data.bizOwnerName || '', bzaDepartment: data.bizDepartment || '',
+      bzaMunicipality: data.bizMunicipality || '', bzaShort: (data.bizDescription || '').slice(0, 300),
+      bzaEmail: data.bizEmail || '', bzaPhone: data.bizPhone || '', bzaWhatsapp: data.bizWhatsapp || '',
+      bzaCapacity: data.bizCapacity ? String(data.bizCapacity) : '', bzaPrice: data.bizPrice ? 'C$ ' + data.bizPrice + ' por persona' : '',
+      bzaOfferings: data.bizServices || '', bzaImpact: data.bizCommunityBenefit || ''
+    }, btnSubmit);
+    return;
+  }
   const originalText = btnSubmit.innerHTML;
 
   try {

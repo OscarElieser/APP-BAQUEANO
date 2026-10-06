@@ -256,65 +256,162 @@
             <span data-i18n="pages.denuncias.reportHeroSection.span2">Formulario de Reporte Ecológico Confidencial</span>
           </h3>
 
-          <form id="ecoReportForm" onsubmit="event.preventDefault(); alert('✅ Tu reporte ha sido registrado con éxito en la Mesa Técnica Ambiental Baqueano para su debida canalización territorial.'); this.reset();">
+          <div class="eco-emergency-note" role="note">
+            <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+            <p data-i18n="ecoReport.emergencyNote">BAQUEANO no sustituye a los servicios de emergencia. Si hay peligro inmediato para personas o un incendio activo, llamá primero a Bomberos (115), Policía (118) o a la Línea Verde de MARENA.</p>
+          </div>
+
+          <form id="ecoReportForm" novalidate data-intake>
             <div class="denuncias-inline-005">
               <div class="report-form-group">
                 <label class="report-form-label" for="reportType"><span data-i18n="pages.denuncias.ecoReportForm.label1">Tipo de Incidencia Ambiental *</span></label>
-                <select id="reportType" class="report-select" required>
+                <select id="reportType" name="category" class="report-select" required>
                   <option data-i18n="pages.denuncias.reportType.option1" value="">Selecciona una categoría...</option>
-                  <option data-i18n="pages.denuncias.reportType.option2" value="tala">Tala ilegal o despale en reserva</option>
-                  <option data-i18n="pages.denuncias.reportType.option3" value="caza">Caza furtiva o tráfico de fauna silvestre</option>
-                  <option data-i18n="pages.denuncias.reportType.option4" value="contaminacion">Contaminación de río, laguna o afluente</option>
-                  <option data-i18n="pages.denuncias.reportType.option5" value="incendio">Foco de incendio forestal o quema agrícola descontrolada</option>
+                  <option data-i18n="pages.denuncias.reportType.option2" value="tala_ilegal">Tala ilegal o despale en reserva</option>
+                  <option data-i18n="pages.denuncias.reportType.option3" value="caza_trafico_fauna">Caza furtiva o tráfico de fauna silvestre</option>
+                  <option data-i18n="pages.denuncias.reportType.option4" value="contaminacion_agua">Contaminación de río, laguna o afluente</option>
+                  <option data-i18n="pages.denuncias.reportType.option5" value="quema">Foco de incendio forestal o quema agrícola descontrolada</option>
                   <option data-i18n="pages.denuncias.reportType.option6" value="basura">Acumulación de residuos sólidos o basurero clandestino</option>
+                  <option data-i18n="ecoReport.catMining" value="mineria">Minería sin control o extracción de material</option>
+                  <option data-i18n="ecoReport.catProtectedArea" value="invasion_area_protegida">Invasión de un área protegida</option>
+                  <option data-i18n="ecoReport.catNoise" value="ruido">Ruido que afecta fauna o comunidades</option>
                   <option data-i18n="pages.denuncias.reportType.option7" value="otro">Otra alteración del ecosistema</option>
                 </select>
               </div>
 
               <div class="report-form-group">
                 <label class="report-form-label" for="reportDepartment"><span data-i18n="pages.denuncias.ecoReportForm.label2">Departamento o Región *</span></label>
-                <select id="reportDepartment" class="report-select" required>
+                <select id="reportDepartment" name="department" class="report-select" required>
                   <option data-i18n="pages.denuncias.reportDepartment.option1" value="">Selecciona el territorio...</option>
-                  <option data-i18n="pages.denuncias.reportDepartment.option2" value="Madriz">Madriz (Cañón de Somoto)</option>
-                  <option data-i18n="pages.denuncias.reportDepartment.option3" value="Rivas">Rivas (Isla de Ometepe / San Juan del Sur)</option>
-                  <option data-i18n="pages.denuncias.reportDepartment.option4" value="León">León (Volcán Cerro Negro / Telica)</option>
-                  <option data-i18n="pages.denuncias.reportDepartment.option5" value="Masaya">Masaya (Volcán Masaya / Laguna de Apoyo)</option>
-                  <option data-i18n="pages.denuncias.reportDepartment.option6" value="Matagalpa">Matagalpa (Peñas Blancas / Selva Negra)</option>
-                  <option data-i18n="pages.denuncias.reportDepartment.option7" value="Jinotega">Jinotega (Bosawás / Datanlí El Diablo)</option>
-                  <option data-i18n="pages.denuncias.reportDepartment.option8" value="Río San Juan">Río San Juan (Indio Maíz / El Castillo)</option>
-                  <option data-i18n="pages.denuncias.reportDepartment.option9" value="Caribe Sur">RACCS (Corn Island / Bluefields)</option>
-                  <option data-i18n="pages.denuncias.reportDepartment.option10" value="Caribe Norte">RACCN (Waspam / Bilwi)</option>
-                  <option data-i18n="pages.denuncias.reportDepartment.option11" value="Otro">Otro Departamento de Nicaragua</option>
+                  <option value="Boaco">Boaco</option>
+                  <option value="Carazo">Carazo</option>
+                  <option value="Chinandega">Chinandega</option>
+                  <option value="Chontales">Chontales</option>
+                  <option value="Estelí">Estelí</option>
+                  <option value="Granada">Granada</option>
+                  <option value="Jinotega">Jinotega</option>
+                  <option value="León">León</option>
+                  <option value="Madriz">Madriz</option>
+                  <option value="Managua">Managua</option>
+                  <option value="Masaya">Masaya</option>
+                  <option value="Matagalpa">Matagalpa</option>
+                  <option value="Nueva Segovia">Nueva Segovia</option>
+                  <option value="Rivas">Rivas</option>
+                  <option value="Río San Juan">Río San Juan</option>
+                  <option value="RACCN" data-i18n="intake.regionRaccn">Costa Caribe Norte (RACCN)</option>
+                  <option value="RACCS" data-i18n="intake.regionRaccs">Costa Caribe Sur (RACCS)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="denuncias-inline-005">
+              <div class="report-form-group">
+                <label class="report-form-label" for="reportMunicipality"><span data-i18n="ecoReport.municipality">Municipio</span></label>
+                <select id="reportMunicipality" name="municipality" class="report-select" disabled>
+                  <option data-i18n="ecoReport.municipalityFirst" value="">Primero elegí el territorio</option>
+                </select>
+              </div>
+              <div class="report-form-group">
+                <label class="report-form-label" for="reportCommunity"><span data-i18n="ecoReport.community">Comunidad o comarca</span></label>
+                <input type="text" id="reportCommunity" name="community" class="report-input" maxlength="120" autocomplete="off">
+              </div>
+            </div>
+
+            <div class="report-form-group">
+              <label class="report-form-label" for="reportLocation"><span data-i18n="ecoReport.reference">Dirección o punto de referencia</span></label>
+              <input data-i18n-placeholder="pages.denuncias.reportLocation.inputPlaceholder1" type="text" id="reportLocation" name="reference" class="report-input" maxlength="600" placeholder="Ej. Sendero El Aguacate, 2 km al norte de la entrada comunitaria...">
+            </div>
+
+            <fieldset class="eco-map-fieldset">
+              <legend class="report-form-label" data-i18n="ecoReport.mapLegend">Ubicación en el mapa (recomendado)</legend>
+              <p class="eco-help" data-i18n="ecoReport.mapHelp">Tocá el mapa para marcar el punto y arrastrá el marcador si hace falta. Tu ubicación solo se usa si pulsás el botón.</p>
+              <div class="eco-map-actions">
+                <button type="button" class="eco-btn-secondary" id="ecoOpenMap"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> <span data-i18n="ecoReport.openMap">Marcar en el mapa</span></button>
+                <button type="button" class="eco-btn-secondary" id="ecoUseGps"><i class="fa-solid fa-location-crosshairs" aria-hidden="true"></i> <span data-i18n="ecoReport.useGps">Usar mi ubicación actual</span></button>
+                <button type="button" class="eco-btn-link" id="ecoClearPin" hidden><span data-i18n="ecoReport.clearPin">Quitar el punto</span></button>
+              </div>
+              <div id="ecoMap" class="eco-map" hidden role="application" data-i18n-aria-label="ecoReport.mapAria" aria-label="Mapa para marcar el lugar del incidente"></div>
+              <p id="ecoCoords" class="eco-coords" aria-live="polite"></p>
+            </fieldset>
+
+            <div class="denuncias-inline-005">
+              <div class="report-form-group">
+                <label class="report-form-label" for="reportWhen"><span data-i18n="ecoReport.when">Fecha y hora del incidente</span></label>
+                <input type="datetime-local" id="reportWhen" name="incidentAt" class="report-input">
+                <label class="eco-check"><input type="checkbox" id="reportWhenUnsure" name="incidentTimeUnsure"> <span data-i18n="ecoReport.whenUnsure">No estoy seguro de la fecha u hora</span></label>
+              </div>
+              <div class="report-form-group">
+                <label class="report-form-label" for="reportSeverity"><span data-i18n="ecoReport.severity">Gravedad percibida (opcional)</span></label>
+                <select id="reportSeverity" name="severity" class="report-select">
+                  <option value="" data-i18n="ecoReport.severityNone">Sin indicar</option>
+                  <option value="baja" data-i18n="ecoReport.severityLow">Baja</option>
+                  <option value="media" data-i18n="ecoReport.severityMedium">Media</option>
+                  <option value="alta" data-i18n="ecoReport.severityHigh">Alta</option>
                 </select>
               </div>
             </div>
 
             <div class="report-form-group">
-              <label class="report-form-label" for="reportLocation"><span data-i18n="pages.denuncias.ecoReportForm.label3">Ubicación Precisa o Punto de Referencia *</span></label>
-              <input data-i18n-placeholder="pages.denuncias.reportLocation.inputPlaceholder1" type="text" id="reportLocation" class="report-input" placeholder="Ej. Sendero El Aguacate, 2 km al norte de la entrada comunitaria..." required>
+              <label class="report-form-label" for="reportDetails"><span data-i18n="pages.denuncias.ecoReportForm.label4">Descripción Detallada del Hecho *</span></label>
+              <textarea data-i18n-placeholder="pages.denuncias.reportDetails.textareaPlaceholder1" id="reportDetails" name="description" rows="4" class="report-textarea" maxlength="4000" placeholder="Contanos qué viste, qué tan grave es, quiénes podrían estar involucrados y, si las tenés, las coordenadas GPS…" required></textarea>
             </div>
 
             <div class="report-form-group">
-              <label class="report-form-label" for="reportDetails"><span data-i18n="pages.denuncias.ecoReportForm.label4">Descripción Detallada del Hecho *</span></label>
-              <textarea data-i18n-placeholder="pages.denuncias.reportDetails.textareaPlaceholder1" id="reportDetails" rows="4" class="report-textarea" placeholder="Contanos qué viste, qué tan grave es, quiénes podrían estar involucrados y, si las tenés, las coordenadas GPS…" required></textarea>
+              <label class="report-form-label" for="reportEvidence"><span data-i18n="ecoReport.evidence">Evidencias: fotos o videos (recomendado)</span></label>
+              <input type="file" id="reportEvidence" class="report-input" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/quicktime" multiple>
+              <p class="eco-help" data-i18n="ecoReport.evidenceHelp">Hasta 6 archivos. Fotos de hasta 10 MB y videos de hasta 50 MB. Se guardan en privado: solo el equipo autorizado puede verlas.</p>
+              <ul id="ecoEvidenceList" class="eco-evidence-list" aria-live="polite"></ul>
             </div>
 
-            <div class="denuncias-inline-006">
+            <div class="report-form-group">
+              <label class="eco-check"><input type="checkbox" id="reportAnonymous" name="anonymous" checked> <span data-i18n="ecoReport.anonymous">Enviar de forma anónima</span></label>
+            </div>
+            <div class="denuncias-inline-006" id="ecoContactFields" hidden>
               <div class="report-form-group">
-                <label class="report-form-label" for="reportName"><span data-i18n="pages.denuncias.ecoReportForm.label5">Nombre de Contacto (Opcional - Puede ser Anónimo)</span></label>
-                <input data-i18n-placeholder="pages.denuncias.reportName.inputPlaceholder1" type="text" id="reportName" class="report-input" placeholder="Anónimo o tu nombre">
+                <label class="report-form-label" for="reportName"><span data-i18n="ecoReport.contactName">Tu nombre</span></label>
+                <input type="text" id="reportName" name="contactName" class="report-input" maxlength="120" autocomplete="name">
               </div>
               <div class="report-form-group">
-                <label class="report-form-label" for="reportContact"><span data-i18n="pages.denuncias.ecoReportForm.label6">Teléfono o WhatsApp (Opcional para Seguimiento)</span></label>
-                <input type="tel" id="reportContact" class="report-input" placeholder="+505 8000-0000">
+                <label class="report-form-label" for="reportContact"><span data-i18n="ecoReport.contactPhone">Teléfono o WhatsApp</span></label>
+                <input type="tel" id="reportContact" name="contactPhone" class="report-input" maxlength="40" autocomplete="tel" placeholder="+505 8000-0000">
+              </div>
+              <div class="report-form-group">
+                <label class="report-form-label" for="reportEmail"><span data-i18n="ecoReport.contactEmail">Correo electrónico</span></label>
+                <input type="email" id="reportEmail" name="contactEmail" class="report-input" maxlength="254" autocomplete="email">
               </div>
             </div>
 
-            <button type="submit" class="report-submit-btn">
+            <div class="report-form-group">
+              <label class="eco-check"><input type="checkbox" id="reportConsent" name="consent" required> <span><span data-i18n="ecoReport.consent">Confirmo que la información es verdadera según lo que sé y acepto que BAQUEANO la trate de forma confidencial según la</span> <a href="privacidad.html" data-i18n="intake.privacyPolicy">Política de Privacidad</a>.</span></label>
+            </div>
+            <input type="text" name="website" class="eco-trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <div id="ecoFormStatus" class="eco-status" role="alert" hidden></div>
+            <button type="submit" class="report-submit-btn" id="ecoSubmit">
               <i class="fa-solid fa-paper-plane"></i>
-              <span data-i18n="pages.denuncias.ecoReportForm.span1">Enviar Reporte a la Brigada Ambiental</span>
+              <span data-i18n="ecoReport.submit">Enviar reporte confidencial</span>
             </button>
           </form>
+
+          <div id="ecoReceipt" class="eco-receipt" hidden tabindex="-1"></div>
+
+          <details class="eco-lookup">
+            <summary data-i18n="ecoReport.lookupTitle">Consultar el estado de un reporte</summary>
+            <form id="ecoLookupForm" novalidate>
+              <div class="denuncias-inline-005">
+                <div class="report-form-group">
+                  <label class="report-form-label" for="ecoLookupCode" data-i18n="ecoReport.lookupCode">Código del reporte</label>
+                  <input type="text" id="ecoLookupCode" class="report-input" data-i18n-placeholder="ecoReport.lookupCodeExample" placeholder="BAQ-ECO-2026-000123" autocomplete="off" maxlength="40">
+                </div>
+                <div class="report-form-group">
+                  <label class="report-form-label" for="ecoLookupToken" data-i18n="ecoReport.lookupToken">Token privado</label>
+                  <input type="text" id="ecoLookupToken" class="report-input" autocomplete="off" maxlength="80">
+                </div>
+              </div>
+              <button type="submit" class="eco-btn-secondary"><span data-i18n="ecoReport.lookupButton">Consultar</span></button>
+              <div id="ecoLookupResult" class="eco-status" role="status" hidden></div>
+            </form>
+          </details>
         </div>
 
         <!-- LÍNEAS DIRECTAS DE EMERGENCIA AMBIENTAL -->
@@ -729,7 +826,7 @@
               <i class="fa-solid fa-envelope"></i>
               <div>
                 <span>Correo Oficial:</span><br>
-                <a href="mailto:contacto@baqueano.ni">contacto@baqueano.ni</a>
+                <a href="mailto:baqueanonicaragua@gmail.com">baqueanonicaragua@gmail.com</a>
               </div>
             </li>
             <li class="footer-contact-item">
@@ -803,5 +900,7 @@
   <script src="js/baqueano-assistant.js?v=20261006-a11y-1"></script>
   <script src="js/persistent-audio-player.js?v=20260922-3"></script>
 <script src="js/global-injector.js"></script>
+  <script defer src="js/intake-api.js?v=20261006-1"></script>
+  <script defer src="js/eco-report.js?v=20261006-1"></script>
 </body>
 </html>

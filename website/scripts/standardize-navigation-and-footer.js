@@ -130,7 +130,7 @@ files.forEach(file => {
   }
 
   // Sustituir mailto soporte en footer estático por WhatsApp
-  if (content.includes('href="mailto:soporte@baqueano.ni"')) {
+  if (content.includes('href="mailto:baqueanonicaragua@gmail.com"')) {
     content = content.replace(/href="mailto:soporte@baqueano\.ni"/g, 'href="https://wa.me/50584431289?text=Hola%20BAQUEANO%2C%20necesito%20asistencia" target="_blank" rel="noopener noreferrer"');
     changed = true;
   }

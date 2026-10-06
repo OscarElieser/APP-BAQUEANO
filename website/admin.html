@@ -194,6 +194,11 @@
             <span data-i18n="menu.platformReviews" class="ops-nav-item-label">Opiniones BAQUEANO</span>
             <span class="ops-nav-badge" id="badgeCount-37" style="display:none;">0</span>
           </a>
+          <a class="ops-nav-item" data-tab="38-buzon">
+            <i class="fa-solid fa-inbox ops-nav-item-icon"></i>
+            <span data-i18n="opsInbox.navLabel" class="ops-nav-item-label">Buzón (contacto, negocios, denuncias)</span>
+            <span class="ops-nav-badge" id="badgeCount-38" style="display:none;">0</span>
+          </a>
           <a class="ops-nav-item" data-tab="14-guias">
             <i class="fa-solid fa-person-hiking ops-nav-item-icon"></i>
             <span data-i18n="pages.admin.opsSidebarNav.span12" class="ops-nav-item-label">Guías / Baqueanos</span>
@@ -915,6 +920,9 @@
           <div class="ops-view-header"><h1><i class="fa-solid fa-star"></i> <span data-i18n="menu.platformReviews">Opiniones BAQUEANO</span></h1></div>
           <div class="ops-empty-state"><i class="fa-solid fa-star ops-empty-icon"></i><div data-i18n="menu.platformReviews" class="ops-empty-title">Opiniones BAQUEANO</div><div data-i18n="menu.platformReviewsDesc" class="ops-empty-desc">Calificá tu experiencia con la plataforma</div></div>
         </section>
+        <section class="ops-view-panel" id="view-38-buzon">
+          <div class="ops-view-header"><h1><i class="fa-solid fa-inbox"></i> <span data-i18n="opsInbox.navLabel">Buzón (contacto, negocios, denuncias)</span></h1></div>
+        </section>
         <section class="ops-view-panel" id="view-34-tarifas">
           <div class="ops-view-header"><h1><i class="fa-solid fa-tags"></i> <span data-i18n="pages.admin.opsSidebarNav.span29">Gestión de Tarifas</span></h1></div>
           <div class="ops-empty-state"><i class="fa-solid fa-database ops-empty-icon"></i><div data-i18n="pages.admin.view34Tarifas.div1" class="ops-empty-title">Catálogo verificable de precios</div><div data-i18n="pages.admin.view34Tarifas.div2" class="ops-empty-desc">Servicios, vigencia, fuente, moneda, disponibilidad y trazabilidad histórica.</div></div>
@@ -1582,7 +1590,7 @@
   <script src="js/video-registry.js?v=20260926-ops-fixed-uhd-1"></script>
   <!-- Matriz de roles compartida con el sitio público (autorización del Ops Center). -->
   <script src="js/shared/roles.js?v=20261005-rbac-1"></script>
-  <script src="js/ops-center/ops-engine.js?v=20261006-opiniones-1"></script>
+  <script src="js/ops-center/ops-engine.js?v=20261006-buzon-1"></script>
   <script src="js/ops-center/ops-live-data.js?v=20261006-paginas-1"></script>
   <script src="js/ops-center/ops-ia-copilot.js?v=20261005-ops2-1"></script>
   <!-- Moderación de la comunidad: cliente de la Edge Function + vista 36. -->
@@ -1590,6 +1598,8 @@
   <script defer src="js/ops-center/ops-community-moderation.js?v=20261005-rbac-1"></script>
   <!-- Opiniones sobre BAQUEANO: moderación vía Edge Function baqueano-reviews (vista 37). -->
   <script defer src="js/ops-center/ops-platform-reviews.js?v=20261006-1"></script>
+  <!-- Buzón real: contacto, solicitudes de negocios y denuncias (Edge Function baqueano-intake, vista 38). -->
+  <script defer src="js/ops-center/ops-intake-inbox.js?v=20261006-1"></script>
 
   <script>
     // Puente de compatibilidad global sin errores de consola

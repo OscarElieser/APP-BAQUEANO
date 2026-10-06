@@ -1039,6 +1039,12 @@
     // Control de Modales
     function openBizRegisterModal(e) {
       if (e && e.preventDefault) e.preventDefault();
+      // 2026-10-06: la postulación real (Supabase + código BAQ-BIZ + Ops Center) vive en el
+      // formulario único de la Red BAQUEANO. El modal anterior queda solo como respaldo sin red.
+      if (typeof window.openBusinessApplication === 'function') {
+        window.openBusinessApplication(null, e && e.currentTarget ? e.currentTarget : null);
+        return;
+      }
       const modal = document.getElementById('bizRegisterModal');
       if (modal) {
         modal.classList.add('is-open');
@@ -1063,8 +1069,9 @@
 
     function handleBizFormSubmit(e) {
       e.preventDefault();
-      alert('¡Gracias por postular tu negocio a la Red BAQUEANO! Nuestro equipo de campo se comunicará contigo vía WhatsApp en menos de 24 horas para coordinar la visita de verificación gratuita.');
+      // Sin éxito simulado: el envío real ocurre en el formulario único de la Red BAQUEANO.
       closeBizRegisterModal();
+      if (typeof window.openBusinessApplication === 'function') window.openBusinessApplication(null, null);
     }
 
     function openSosModal(e) {

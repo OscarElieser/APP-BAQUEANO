@@ -668,7 +668,7 @@
         <p data-i18n="pages.nosotros.contacto.p1" style="color:#64748B;font-size:1rem;max-width:520px;margin:0 auto">Escribinos para alianzas, reportar un problema, proponer un destino comunitario o simplemente compartir tu experiencia por Nicaragua.</p>
       </div>
 
-      <form id="baqueanoContactForm" novalidate
+      <form id="baqueanoContactForm" novalidate data-intake
         style="background:#FFF;border:1px solid #E2E8F0;border-radius:20px;padding:36px;box-shadow:0 4px 24px rgba(0,0,0,.06);">
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;">
@@ -698,6 +698,8 @@
             <option data-i18n="pages.nosotros.baqueanoContactForm.option5" value="guia">Quiero ser Guía Baqueano</option>
             <option data-i18n="pages.nosotros.baqueanoContactForm.option6" value="reporte">Reportar un Problema o Denuncia</option>
             <option data-i18n="pages.nosotros.baqueanoContactForm.option7" value="prensa">Prensa & Medios de Comunicación</option>
+            <option data-i18n="intake.contact.subjectPrivacy" value="privacidad">Privacidad y datos personales</option>
+            <option data-i18n="intake.contact.subjectCookies" value="cookies">Cookies</option>
             <option data-i18n="pages.nosotros.baqueanoContactForm.option8" value="otro">Otra consulta</option>
           </select>
         </label>
@@ -708,12 +710,23 @@
             style="border:1.5px solid #E2E8F0;border-radius:10px;padding:11px 14px;font-size:.9rem;font-family:'Inter',sans-serif;background:#FFF;outline:none;transition:border-color .2s"
             onfocus="this.style.borderColor='#165D6F'" onblur="this.style.borderColor='#E2E8F0'">
             <option data-i18n="pages.nosotros.baqueanoContactForm.option9" value="">Seleccioná tu departamento...</option>
-            <option>Managua</option><option>Granada</option><option>Masaya</option>
-            <option>Rivas</option><option>León</option><option>Chinandega</option>
-            <option>Estelí</option><option>Matagalpa</option><option>Jinotega</option>
-            <option>Nueva Segovia</option><option>Madriz</option><option>Boaco</option>
-            <option>Chontales</option><option data-i18n="pages.nosotros.baqueanoContactForm.option10">RACN (Caribe Norte)</option><option data-i18n="pages.nosotros.baqueanoContactForm.option11">RACS (Caribe Sur)</option>
-            <option>Río San Juan</option>
+            <option value="Boaco">Boaco</option>
+            <option value="Carazo">Carazo</option>
+            <option value="Chinandega">Chinandega</option>
+            <option value="Chontales">Chontales</option>
+            <option value="Estelí">Estelí</option>
+            <option value="Granada">Granada</option>
+            <option value="Jinotega">Jinotega</option>
+            <option value="León">León</option>
+            <option value="Madriz">Madriz</option>
+            <option value="Managua">Managua</option>
+            <option value="Masaya">Masaya</option>
+            <option value="Matagalpa">Matagalpa</option>
+            <option value="Nueva Segovia">Nueva Segovia</option>
+            <option value="Rivas">Rivas</option>
+            <option value="Río San Juan">Río San Juan</option>
+            <option value="RACCN" data-i18n="intake.regionRaccn">Costa Caribe Norte (RACCN)</option>
+            <option value="RACCS" data-i18n="intake.regionRaccs">Costa Caribe Sur (RACCS)</option>
           </select>
         </label>
 
@@ -731,7 +744,7 @@
           </button>
           <p style="font-size:.78rem;color:#94A3B8;margin:0">
             <i class="fa-solid fa-shield-halved" style="color:#4A7A5A"></i>
-            <span data-i18n="pages.nosotros.baqueanoContactForm.p1">Tu información está protegida y nunca será compartida con terceros.</span>
+            <span data-i18n="intake.contact.privacyNote">Tu información se usa solo para atender tu consulta y se maneja conforme a nuestra</span> <a href="privacidad.html" data-i18n="intake.privacyPolicy" style="color:#165D6F;font-weight:600">Política de Privacidad</a>.
           </p>
         </div>
 
@@ -739,23 +752,29 @@
 
       <!-- Canales alternativos -->
       <div style="display:flex;gap:16px;margin-top:28px;flex-wrap:wrap;">
-        <a href="https://wa.me/50588888888" target="_blank" rel="noopener"
+        <a href="https://wa.me/50584431289" target="_blank" rel="noopener"
           style="display:flex;align-items:center;gap:10px;background:#FFF;border:1px solid #E2E8F0;border-radius:12px;padding:14px 20px;text-decoration:none;color:#0B253A;font-weight:600;font-size:.88rem;flex:1;min-width:180px;transition:all .2s"
           onmouseover="this.style.borderColor='#25D366'" onmouseout="this.style.borderColor='#E2E8F0'">
           <i class="fa-brands fa-whatsapp" style="font-size:1.4rem;color:#25D366"></i>
-          <span>WhatsApp<br><small data-i18n="pages.nosotros.contacto.small1" style="color:#64748B;font-weight:400">Respuesta en minutos</small></span>
+          <span>WhatsApp<br><small style="color:#64748B;font-weight:400">+505 8443-1289</small></span>
         </a>
-        <a href="mailto:hola@baqueano.nic"
+        <a href="mailto:baqueanonicaragua@gmail.com"
           style="display:flex;align-items:center;gap:10px;background:#FFF;border:1px solid #E2E8F0;border-radius:12px;padding:14px 20px;text-decoration:none;color:#0B253A;font-weight:600;font-size:.88rem;flex:1;min-width:180px;transition:all .2s"
           onmouseover="this.style.borderColor='#F65E01'" onmouseout="this.style.borderColor='#E2E8F0'">
           <i class="fa-solid fa-envelope" style="font-size:1.4rem;color:#F65E01"></i>
-          <span><span data-i18n="pages.nosotros.contacto.span2">Email</span><br><small style="color:#64748B;font-weight:400">hola@baqueano.nic</small></span>
+          <span><span data-i18n="pages.nosotros.contacto.span2">Email</span><br><small style="color:#64748B;font-weight:400;overflow-wrap:anywhere">baqueanonicaragua@gmail.com</small></span>
         </a>
         <a href="https://www.instagram.com/baqueano_nicaragua" target="_blank" rel="noopener"
           style="display:flex;align-items:center;gap:10px;background:#FFF;border:1px solid #E2E8F0;border-radius:12px;padding:14px 20px;text-decoration:none;color:#0B253A;font-weight:600;font-size:.88rem;flex:1;min-width:180px;transition:all .2s"
           onmouseover="this.style.borderColor='#E1306C'" onmouseout="this.style.borderColor='#E2E8F0'">
           <i class="fa-brands fa-instagram" style="font-size:1.4rem;color:#E1306C"></i>
-          <span>Instagram<br><small data-i18n="pages.nosotros.contacto.small2" style="color:#64748B;font-weight:400">@baqueano.nic</small></span>
+          <span>Instagram<br><small style="color:#64748B;font-weight:400">@baqueano_nicaragua</small></span>
+        </a>
+        <a href="https://www.tiktok.com/@baqueano.nicaragu" target="_blank" rel="noopener"
+          style="display:flex;align-items:center;gap:10px;background:#FFF;border:1px solid #E2E8F0;border-radius:12px;padding:14px 20px;text-decoration:none;color:#0B253A;font-weight:600;font-size:.88rem;flex:1;min-width:180px;transition:all .2s"
+          onmouseover="this.style.borderColor='#0D1B2A'" onmouseout="this.style.borderColor='#E2E8F0'">
+          <i class="fa-brands fa-tiktok" style="font-size:1.4rem;color:#0D1B2A"></i>
+          <span>TikTok<br><small style="color:#64748B;font-weight:400">@baqueano.nicaragu</small></span>
         </a>
       </div>
     </div>
@@ -779,6 +798,8 @@
 <script src="js/navigation.js?v=20261006-reviews-1"></script>
 <script src="js/global-injector.js"></script>
 <script src="js/impact-public.js?v=20261005-impact-1" defer></script>
+  <script defer src="js/intake-api.js?v=20261006-1"></script>
+  <script defer src="js/contact-form.js?v=20261006-1"></script>
 </body>
 </html>
 

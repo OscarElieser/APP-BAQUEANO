@@ -1219,7 +1219,7 @@ function ensureUserSessionLoaded() {
     document.head.appendChild(script);
   };
   load('js/shared/roles.js?v=20261003-1', window.BaqueanoRoles);
-  load('js/user-session.js?v=20261003-2', window.BaqueanoSession);
+  load('js/user-session.js?v=20261006-volver-1', window.BaqueanoSession);
 }
 
 /**
@@ -1492,61 +1492,61 @@ function initFooterBizRegister() {
 
       if (!isValid) return;
 
-      const submitBtn = document.getElementById('btnSubmitBiz');
-      const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Registrando en Mesa Baqueano...';
-      }
-
-      const payload = {
-        name, businessType: type, owner, category, department, municipality,
-        address, phone, whatsapp: whatsapp || phone, email, website, price,
-        schedule, description, status: 'pendiente_auditoria', createdAt: new Date().toISOString()
+      // 2026-10-06: la postulación ya no termina en WhatsApp ni en un alert de éxito. Se continúa
+      // en el formulario único de la Red BAQUEANO (js/business-application.js), con sesión, código
+      // BAQ-BIZ y revisión en el Ops Center, y con lo que el usuario ya escribió.
+      const categoryMap = {
+        gastronomia: 'gastronomia', hoteles: 'alojamiento', hostales: 'alojamiento', hospedajes: 'alojamiento',
+        'casas-alquiler': 'alojamiento', museos: 'cultura', discotecas: 'otro'
       };
-
-      // Guardar en Firestore si está disponible
-      try {
-        if (window.firebase && firebase.firestore) {
-          await firebase.firestore().collection('registro_negocios').add(payload);
-        }
-      } catch (err) {
-        console.warn('[Baqueano Biz] Nota al guardar en Firestore:', err);
-      }
-
-      // Preparar mensaje de WhatsApp oficial (+505 8443-1289)
-      const waMsg = `🇳🇮 *NUEVA POSTULACIÓN DE NEGOCIO — BAQUEANO NICARAGUA*\n` +
-        `━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-        `🏪 *Negocio:* ${name}\n` +
-        `📌 *Tipo:* ${type}\n` +
-        `👤 *Propietario:* ${owner}\n` +
-        `📍 *Ubicación:* ${municipality}, ${department}\n` +
-        `🧭 *Dirección:* ${address}\n` +
-        `📞 *Teléfono:* ${phone}\n` +
-        `💬 *WhatsApp:* ${whatsapp || phone}\n` +
-        `💰 *Precio estimado:* C$ ${price || 'N/D'}\n` +
-        `📝 *Descripción:* ${description}\n` +
-        `━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-        `_Solicito incorporación a la Mesa Técnica y Catálogo Baqueano._`;
-
-      const cleanWa = '50584431289';
-      const waUrl = `https://wa.me/${cleanWa}?text=${encodeURIComponent(waMsg)}`;
-
-      alert(`¡Gracias ${owner}! Tu negocio "${name}" ha sido postulado exitosamente. Se abrirá el WhatsApp oficial de la Mesa Baqueano (+505 8443-1289) para finalizar la verificación territorial.`);
-      window.open(waUrl, '_blank', 'noopener,noreferrer');
-
-      form.reset();
-      if (previewBox) previewBox.style.display = 'none';
-      if (placeholder) placeholder.style.display = 'flex';
-      if (charCounter) charCounter.textContent = '0 / 300';
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnHtml;
-      }
+      const territory = department;
+      openBusinessApplication({
+        bzaName: name, bzaOwner: owner, bzaCategory: categoryMap[category] || '', bzaDepartment: territory,
+        bzaMunicipality: municipality, bzaAddress: address, bzaPhone: phone, bzaWhatsapp: whatsapp, bzaEmail: email,
+        bzaWebsite: /^https:\/\//i.test(website) ? website : '', bzaSchedule: schedule,
+        bzaPrice: price ? 'C$ ' + price : '', bzaShort: description, bzaOfferings: type
+      }, form.querySelector('button[type="submit"]'));
       closeBizForm();
     });
   }
 }
+
+// ============================================================================
+// 🎯 POR QUÉ: "Postular mi negocio" aparece en varias páginas; el formulario real
+//    (js/business-application.js + js/intake-api.js) solo se descarga al usarlo.
+// ⚙️ CÓMO: carga perezosa una sola vez y apertura con el prefill recibido.
+// 📦 QUÉ: openBusinessApplication(prefill, opener) y clic en [data-biz-apply] / [data-biz-mine].
+// ============================================================================
+function loadBusinessApplication() {
+  if (window.BaqueanoBusinessApply) return Promise.resolve(window.BaqueanoBusinessApply);
+  if (window.__bqBizLoading) return window.__bqBizLoading;
+  const load = (src) => new Promise((resolve, reject) => {
+    const s = document.createElement('script'); s.src = src; s.onload = resolve; s.onerror = reject; document.head.appendChild(s);
+  });
+  window.__bqBizLoading = (window.BaqueanoIntake ? Promise.resolve() : load('js/intake-api.js?v=20261006-1'))
+    .then(() => load('js/business-application.js?v=20261006-1'))
+    .then(() => window.BaqueanoBusinessApply);
+  if (!document.querySelector('link[href^="css/business-application.css"]')) {
+    const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'css/business-application.css?v=20261006-1'; document.head.appendChild(css);
+  }
+  return window.__bqBizLoading;
+}
+function openBusinessApplication(prefill, opener) {
+  loadBusinessApplication().then((apply) => { if (apply) apply.open(prefill || null, opener || null); }).catch(() => {
+    window.location.href = 'nosotros.html?motivo=negocio#contacto';
+  });
+}
+window.openBusinessApplication = openBusinessApplication;
+document.addEventListener('click', (e) => {
+  const target = e.target.closest && e.target.closest('[data-biz-apply],[data-biz-mine]');
+  if (!target || window.BaqueanoBusinessApply) return;
+  e.preventDefault();
+  loadBusinessApplication().then((apply) => {
+    if (!apply) return;
+    if (target.hasAttribute('data-biz-mine')) apply.openMine(target); else apply.open(null, target);
+  });
+});
+if (window.location.hash === '#bizApply') loadBusinessApplication();
 
 // ============================================================================
 // 🎯 POR QUÉ: los controladores del menú se enganchaban al menú que trae cada

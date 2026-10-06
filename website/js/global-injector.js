@@ -467,27 +467,21 @@
   //    onsubmit, sin role=search) y fuera del panel de acceso; los formularios
   //    que su página ya procesa en JS se listan en OWN_SUBMIT.
   // 📦 QUÉ: confirmación visual solo donde no existe otro manejador.
-  var OWN_SUBMIT = ['bqReportForm', 'businessRegForm', 'registerBusinessForm', 'helpSearchForm', 'bizRegisterForm', 'ecoReportForm'];
+  var OWN_SUBMIT = ['bqReportForm', 'businessRegForm', 'registerBusinessForm', 'helpSearchForm', 'bizRegisterForm', 'ecoReportForm',
+    'baqueanoContactForm', 'ambientalReportForm', 'ecoLookupForm', 'bzaForm', 'prForm'];
   function upgradeContactForms() {
     document.querySelectorAll('form:not([data-bq-wired])').forEach(function(form) {
       if (form.hasAttribute('action') || form.hasAttribute('onsubmit') || form.getAttribute('role') === 'search' ||
           form.classList.contains('bq-auth-form') || form.closest('#mainNavbar') || OWN_SUBMIT.indexOf(form.id) !== -1) return;
       form.setAttribute('data-bq-wired', '1');
+      // 2026-10-06: ya no se simula "¡Mensaje enviado!". Un formulario sin lógica propia no envía
+      // nada a ningún lado, así que se dice la verdad y se ofrece el canal real (nosotros.html → Supabase).
       form.addEventListener('submit', function(e) {
+        if (form.hasAttribute('data-intake')) return;
         e.preventDefault();
-        var btn = form.querySelector('[type="submit"]');
-        if (btn) {
-          var orig = btn.textContent;
-          btn.textContent = 'Enviando...';
-          btn.disabled = true;
-          setTimeout(function() {
-            btn.textContent = orig;
-            btn.disabled = false;
-            bqToast('¡Mensaje enviado con éxito! El equipo BAQUEANO te contactará pronto. 🌿');
-          }, 1200);
-        } else {
-          bqToast('¡Mensaje enviado con éxito! El equipo BAQUEANO te contactará pronto. 🌿');
-        }
+        var t = window.BaqueanoLanguage && window.BaqueanoLanguage.t ? function(k, f) { return window.BaqueanoLanguage.t(k, { fallback: f }); } : function(k, f) { return f; };
+        bqToast(t('intake.formUnavailable', 'Este formulario todavía no envía datos. Escribinos desde Contacto y te respondemos.'), 'warning');
+        setTimeout(function() { window.location.href = 'nosotros.html#contacto'; }, 2200);
       });
     });
   }

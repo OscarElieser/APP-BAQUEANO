@@ -1775,6 +1775,14 @@
       icon: 'fa-people-group',
       roleRequired: 'admin'
     },
+    // 38: Buzón real (Edge Function baqueano-intake): contacto, solicitudes de negocios y denuncias.
+    // Lo pinta js/ops-center/ops-intake-inbox.js; el servidor exige rol de equipo.
+    '38-buzon': {
+      isSystem: true,
+      title: 'Buzón BAQUEANO',
+      icon: 'fa-inbox',
+      roleRequired: 'admin'
+    },
     // 37: Opiniones sobre la plataforma (Edge Function baqueano-reviews).
     // Lo pinta js/ops-center/ops-platform-reviews.js; el servidor exige rol admin para actuar.
     '37-opiniones': {
@@ -4136,6 +4144,10 @@
       if (tabId === '20-sos') return this.renderSosModule();
       if (tabId === '11-reservas') return this.renderReservationsModule();
       if (tabId === '35-backup') return this.renderBackupSyncModule();
+      if (tabId === '38-buzon') {
+        if (window.BaqueanoOpsInbox) return window.BaqueanoOpsInbox.render(panel);
+        return;
+      }
       if (tabId === '37-opiniones') {
         if (window.BaqueanoPlatformReviewsModeration) return window.BaqueanoPlatformReviewsModeration.render(panel);
         return;

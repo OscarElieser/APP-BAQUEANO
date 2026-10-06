@@ -891,6 +891,18 @@
     }
   };
 
+  // Regreso tras iniciar sesión (2026-10-06): un formulario que exige sesión (postular negocio,
+  // opiniones) puede mandar a perfil.html?volver=pagina.html#ancla. Solo se aceptan páginas
+  // propias con este patrón exacto, para que nadie use el parámetro como redirección abierta.
+  function returnAfterLogin() {
+    try {
+      if (!/perfil\.html$/.test(window.location.pathname) && window.location.pathname !== '/perfil') return;
+      const target = new URLSearchParams(window.location.search).get('volver');
+      if (!target || !/^[a-z0-9-]+\.html(#[A-Za-z0-9_-]+)?$/.test(target)) return;
+      window.location.replace(target);
+    } catch (_) { /* sin redirección */ }
+  }
+
   function syncFirebaseIdentity(firebaseUser) {
     if (!firebaseUser) {
       liveIdentity = null;
@@ -904,6 +916,7 @@
       updateNavbar();
       return null;
     }
+    returnAfterLogin();
     const existing = loadSession();
     const email = (firebaseUser.email || '').trim().toLowerCase();
     // Rol privilegiado solo con correo verificado por Firebase.

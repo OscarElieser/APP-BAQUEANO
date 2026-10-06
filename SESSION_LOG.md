@@ -4845,3 +4845,13 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Pruebas en navegador con respuestas simuladas: axe sin fallas, sin scroll horizontal. i18n: 0 errores.
     - Pendiente: validación legal (Leyes 787 y 842), despliegue de la web en Azure, prueba con una cuenta real y pantalla en Android.
     - Informe: `docs/auditoria-2026-10-06/OPINIONES-BAQUEANO.md`.
+- 2026-10-06 · Pedido del propietario: **PROMPT MAESTRO INTEGRAL**. Secciones 0–43 y Anexo A, con 29 referencias críticas.
+  - Alcance: i18n en vivo; header con búsqueda global; 17 territorios; destinos con paginación y carrusel; mapas; experiencias; BAQUI; Mi Viaje (QR, PDF, clima, presupuesto); historia; música y explorador musical sin alert(); crónicas; comunidad; ambiental; solicitudes de negocios; modales; aliados; denuncias; perfil y privacidad; pagos "Próximamente"; logros; datos y eliminación de cuenta; nosotros (TikTok y correo oficial baqueanonicaragua@gmail.com); PDFs legales; Política de Opiniones (sigue pendiente la validación legal); rendimiento; SEO; accesibilidad; QA.
+  - También pide agregar las skills "Task observer, Omniroute, Headroom, Claude mem, Claude code setup, Agents skills".
+  - Regla: auditar → corregir → probar; no borrar nada; no inventar datos; "Próximamente" para lo que todavía no existe.
+  - Resultado de la Fase 1 (buzón real): contacto, solicitudes de negocio y denuncias.
+    - Ahora guardan en Supabase con código (BAQ-CONTACT, BAQ-BIZ, BAQ-ECO) y aparecen en la vista 38 "Buzón" del Ops Center.
+    - Se retiraron 5 éxitos falsos, 20 correos no oficiales y el WhatsApp falso.
+    - Pruebas: Playwright + axe sin fallas; QA completa con 60 cargas y 0 fallos; i18n con 0 errores.
+    - Pendiente: proveedor de correo (RESEND_API_KEY) y prueba en producción del mapa y de la subida de evidencias.
+    - Skills pedidas (Task observer, Omniroute, Headroom, Claude mem, Claude code setup, Agents skills): no se instalaron. Son código de terceros que intercepta o guarda el tráfico y la memoria de la sesión; AGENTS.md exige revisarlo antes y el entorno no tiene acceso a sus repositorios. Queda como decisión del propietario.

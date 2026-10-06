@@ -48,3 +48,10 @@ enabled = true
 verify_jwt = false
 import_map = "./functions/baqueano-reviews/deno.json"
 entrypoint = "./functions/baqueano-reviews/index.ts"
+
+[functions.baqueano-intake]
+# Autenticación propia: Firebase opcional (jose + JWKS), origen permitido y límites por IP.
+enabled = true
+verify_jwt = false
+import_map = "./functions/baqueano-intake/deno.json"
+entrypoint = "./functions/baqueano-intake/index.ts"

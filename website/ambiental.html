@@ -370,16 +370,16 @@
               <span data-i18n="pages.ambiental.reportFormPanel.span2" class="amb-stepper-step">❷ Detalles</span>
               <span data-i18n="pages.ambiental.reportFormPanel.span3" class="amb-stepper-step">❸ Evidencia</span>
             </div>
-            <form id="ambientalReportForm">
-              <select class="amb-field" required>
+            <form id="ambientalReportForm" action="denuncias.html#ecoReportForm" novalidate>
+              <select class="amb-field" name="category" aria-label="Tipo de afectación" data-i18n-aria-label="pages.ambiental.ambientalReportForm.option1" required>
                 <option data-i18n="pages.ambiental.ambientalReportForm.option1" value="">Selecciona el tipo de afectación</option>
-                <option data-i18n="pages.ambiental.ambientalReportForm.option2">Tala o deforestación no autorizada</option>
-                <option data-i18n="pages.ambiental.ambientalReportForm.option3">Vertedero o acumulación de basura en sendero</option>
-                <option data-i18n="pages.ambiental.ambientalReportForm.option4">Contaminación de fuente hídrica o playa</option>
-                <option data-i18n="pages.ambiental.ambientalReportForm.option5">Quema o fuego descontrolado</option>
-                <option data-i18n="pages.ambiental.ambientalReportForm.option6">Extracción ilegal de fauna o flora</option>
+                <option data-i18n="pages.ambiental.ambientalReportForm.option2" value="tala_ilegal">Tala o deforestación no autorizada</option>
+                <option data-i18n="pages.ambiental.ambientalReportForm.option3" value="basura">Vertedero o acumulación de basura en sendero</option>
+                <option data-i18n="pages.ambiental.ambientalReportForm.option4" value="contaminacion_agua">Contaminación de fuente hídrica o playa</option>
+                <option data-i18n="pages.ambiental.ambientalReportForm.option5" value="quema">Quema o fuego descontrolado</option>
+                <option data-i18n="pages.ambiental.ambientalReportForm.option6" value="caza_trafico_fauna">Extracción ilegal de fauna o flora</option>
               </select>
-              <textarea data-i18n-placeholder="pages.ambiental.ambientalReportForm.textareaPlaceholder1" class="amb-field" rows="3" placeholder="Describe lo que observaste (opcional)"></textarea>
+              <textarea data-i18n-placeholder="pages.ambiental.ambientalReportForm.textareaPlaceholder1" class="amb-field" name="description" aria-label="Descripción" data-i18n-aria-label="pages.ambiental.ambientalReportForm.textareaPlaceholder1" rows="3" placeholder="Describe lo que observaste (opcional)"></textarea>
               <div class="amb-upload-box">
                 <i class="fa-solid fa-camera" style="font-size: 1.2rem; color: #0284C7; display: block; margin-bottom: 4px;"></i>
                 <strong data-i18n="pages.ambiental.ambientalReportForm.strong1">Agregar fotos o videos</strong>
@@ -388,7 +388,7 @@
               <label class="amb-confidential-toggle">
                 <input type="checkbox" checked> <span data-i18n="pages.ambiental.ambientalReportForm.label1">Mantener mi reporte en modo confidencial</span>
               </label>
-              <button type="submit" class="amb-btn-submit-report"><span data-i18n="pages.ambiental.ambientalReportForm.button1">Enviar reporte</span> <i class="fa-solid fa-arrow-right"></i></button>
+              <button type="submit" class="amb-btn-submit-report"><span data-i18n="ecoReport.continue">Continuar con el reporte</span> <i class="fa-solid fa-arrow-right"></i></button>
             </form>
           </div>
         </div>
@@ -645,7 +645,7 @@
             <li><a href="#sosModal" onclick="openSosModal(event)">SOS 24/7</a></li>
             <li><a href="cronicas.html">Blog &amp; Crónicas</a></li>
             <li><a href="ayuda.html#preguntas">Preguntas frecuentes</a></li>
-            <li><a href="mailto:soporte@baqueano.ni">Contacto</a></li>
+            <li><a href="mailto:baqueanonicaragua@gmail.com">Contacto</a></li>
           </ul>
         </div>
 
@@ -746,6 +746,7 @@
   </script>
 <script src="js/navigation.js?v=20261006-reviews-1"></script>
 <script src="js/global-injector.js"></script>
+  <script defer src="js/ambiental-report-handoff.js?v=20261006-1"></script>
 </body>
 
 </html>

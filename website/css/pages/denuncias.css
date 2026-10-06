@@ -238,3 +238,48 @@ html body .report-submit-btn:hover { background: linear-gradient(135deg, #F65E01
 html body .hotline-card { background: #FFFFFF; border-color: #D8E3E7; box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07); }
 html body .hotline-icon-box { background: #EDF6F7; border-color: rgba(22, 93, 111, 0.2); color: #165D6F; }
 @media (max-width: 640px) { html body .report-card-wrap { padding: 1.25rem; border-radius: 18px; } html body .hotlines-grid { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
+   Denuncia confidencial real (2026-10-06): aviso de emergencia, mapa con punto
+   movible, evidencias, comprobante y consulta de estado. Móvil primero; el
+   texto mantiene contraste AA sobre fondo blanco.
+   ========================================================================== */
+.eco-emergency-note { display: flex; gap: 12px; align-items: flex-start; background: #FFF7ED; border: 1px solid #FDBA74; color: #7C2D12; border-radius: 12px; padding: 12px 14px; margin: 0 0 18px; }
+.eco-emergency-note i { color: #C2410C; margin-top: 3px; }
+.eco-emergency-note p { margin: 0; font-size: .88rem; line-height: 1.5; }
+.eco-map-fieldset { border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; margin: 0 0 18px; min-width: 0; }
+.eco-map-fieldset legend { padding: 0 6px; }
+.eco-help { font-size: .8rem; color: #475569; margin: 4px 0 10px; line-height: 1.5; }
+.eco-map-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.eco-btn-secondary { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border-radius: 10px; border: 1.5px solid #165D6F; background: #FFFFFF; color: #165D6F; font-weight: 700; font-size: .88rem; cursor: pointer; }
+.eco-btn-secondary:hover, .eco-btn-secondary:focus-visible { background: #165D6F; color: #FFFFFF; }
+.eco-btn-link { background: none; border: none; color: #165D6F; text-decoration: underline; font-weight: 600; cursor: pointer; min-height: 44px; padding: 0 8px; }
+.eco-map { height: 320px; width: 100%; border-radius: 10px; border: 1px solid #CBD5E1; }
+.eco-coords { font-size: .82rem; color: #0D1B2A; margin: 8px 0 0; font-family: ui-monospace, monospace; }
+.eco-check { display: flex; align-items: flex-start; gap: 8px; font-size: .86rem; color: #0D1B2A; margin-top: 8px; line-height: 1.45; cursor: pointer; }
+.eco-check input { width: 18px; height: 18px; margin-top: 2px; flex: 0 0 auto; accent-color: #165D6F; }
+.eco-check a { color: #165D6F; font-weight: 700; }
+.eco-evidence-list { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 8px; }
+.eco-evidence-list li { display: flex; align-items: center; gap: 10px; border: 1px solid #E2E8F0; border-radius: 10px; padding: 6px 8px; min-width: 0; }
+.eco-evidence-list img, .eco-video-thumb { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; flex: 0 0 auto; }
+.eco-video-thumb { display: inline-flex; align-items: center; justify-content: center; background: #0D1B2A; color: #FFFFFF; }
+.eco-file-name { flex: 1 1 auto; min-width: 0; font-size: .82rem; color: #0D1B2A; overflow-wrap: anywhere; }
+.eco-trap { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+.eco-status { margin: 12px 0; padding: 12px 14px; border-radius: 10px; font-size: .88rem; line-height: 1.5; }
+.eco-status.is-error { background: #FEF2F2; border: 1px solid #FCA5A5; color: #7F1D1D; }
+.eco-status.is-ok { background: #F0FDF4; border: 1px solid #86EFAC; color: #14532D; }
+.eco-receipt { background: #FFFFFF; border: 1px solid #86EFAC; border-radius: 16px; padding: 22px; color: #0D1B2A; }
+.eco-receipt h3 { margin: 0 0 8px; font-size: 1.2rem; color: #0D1B2A; }
+.eco-receipt p { color: #334155; font-size: .9rem; line-height: 1.55; }
+.eco-receipt dl { margin: 14px 0; display: grid; gap: 8px; }
+.eco-receipt-row { display: grid; grid-template-columns: minmax(110px, 40%) 1fr; gap: 10px; border-bottom: 1px solid #F1F5F9; padding-bottom: 6px; }
+.eco-receipt-row dt { font-weight: 700; font-size: .82rem; color: #475569; }
+.eco-receipt-row dd { margin: 0; font-size: .88rem; color: #0D1B2A; overflow-wrap: anywhere; }
+.eco-token-box { background: #F8FAFC; border: 1px dashed #94A3B8; border-radius: 12px; padding: 14px; margin: 12px 0; }
+.eco-token-box code { display: block; font-size: .95rem; font-weight: 700; color: #165D6F; overflow-wrap: anywhere; margin: 6px 0 10px; }
+.eco-receipt .eco-btn-secondary { margin: 6px 6px 0 0; }
+.eco-lookup { margin-top: 18px; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 14px; background: #FFFFFF; }
+.eco-lookup summary { cursor: pointer; font-weight: 700; color: #165D6F; min-height: 32px; }
+.eco-lookup form { margin-top: 12px; }
+.report-input[aria-invalid="true"], .report-select[aria-invalid="true"], .report-textarea[aria-invalid="true"] { border-color: #DC2626 !important; }
+@media (max-width: 640px) { .eco-receipt-row { grid-template-columns: 1fr; gap: 2px; } .eco-map { height: 260px; } }

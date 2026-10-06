@@ -1,0 +1,72 @@
+/*
+ * POR QUÉ: el formulario único de la Red BAQUEANO (js/business-application.js) se abre desde varias
+ *   páginas. Necesita un modal centrado, legible y accesible, no un panel pegado a un lado.
+ * CÓMO: <dialog> nativo:
+ *   - escritorio: min(92vw, 920px) con scroll interno;
+ *   - móvil: casi pantalla completa, respetando el área segura;
+ *   - contraste AA, objetivos táctiles de 44 px y foco visible.
+ * QUÉ: estilos .bza-* del diálogo, el formulario, el panel de inicio de sesión, el éxito y "Mis solicitudes".
+ */
+.bza-open, .bza-open body { overflow: hidden; }
+.bza-dialog {
+  width: min(92vw, 920px); max-height: 90vh; padding: 0; border: none; border-radius: 20px;
+  background: #FFFFFF; color: #0D1B2A; box-shadow: 0 30px 80px rgba(13, 27, 42, .35); overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.bza-dialog:not([open]) { display: none; }
+.bza-dialog::backdrop { background: rgba(13, 27, 42, .62); }
+.bza-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 20px 24px 14px; border-bottom: 1px solid #E2E8F0; background: #F8FAFC; }
+.bza-head h2 { margin: 0 0 4px; font-family: 'Montserrat', sans-serif; font-size: clamp(1.1rem, 2.6vw, 1.45rem); color: #0D1B2A; }
+.bza-head p { margin: 0; font-size: .88rem; color: #334155; }
+.bza-close { width: 44px; height: 44px; flex: 0 0 auto; border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; color: #0D1B2A; cursor: pointer; font-size: 1.1rem; }
+.bza-close:hover, .bza-close:focus-visible { background: #0D1B2A; color: #FFFFFF; }
+.bza-body { padding: 18px 24px 24px; overflow-y: auto; overscroll-behavior: contain; }
+.bza-section { border: 1px solid #E2E8F0; border-radius: 14px; padding: 14px 16px 6px; margin: 0 0 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 4px 16px; min-width: 0; }
+.bza-section legend { padding: 0 6px; font-weight: 800; font-size: .92rem; color: #165D6F; }
+.bza-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; min-width: 0; }
+.bza-field.is-wide { grid-column: 1 / -1; }
+.bza-label { font-size: .8rem; font-weight: 700; color: #334155; }
+.bza-input { width: 100%; box-sizing: border-box; min-height: 44px; border: 1.5px solid #CBD5E1; border-radius: 10px; padding: 10px 12px; font: inherit; font-size: .92rem; color: #0D1B2A; background: #FFFFFF; }
+textarea.bza-input { resize: vertical; }
+.bza-input:focus-visible { outline: 3px solid rgba(22, 93, 111, .35); border-color: #165D6F; }
+.bza-input[aria-invalid="true"] { border-color: #DC2626; }
+.bza-help { margin: 0; font-size: .78rem; color: #475569; line-height: 1.45; }
+.bza-counter { display: block; text-align: right; font-size: .75rem; color: #475569; margin-top: 4px; }
+.bza-checks { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+.bza-check { display: inline-flex; align-items: flex-start; gap: 8px; font-size: .86rem; color: #0D1B2A; line-height: 1.45; min-height: 32px; cursor: pointer; }
+.bza-check input { width: 18px; height: 18px; margin-top: 2px; accent-color: #165D6F; flex: 0 0 auto; }
+.bza-check a { color: #165D6F; font-weight: 700; }
+.bza-consents { display: grid; gap: 8px; margin: 4px 0 12px; }
+.bza-trap { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+.bza-status { margin: 8px 0; padding: 12px 14px; border-radius: 10px; font-size: .88rem; line-height: 1.5; background: #F0F9FF; border: 1px solid #BAE6FD; color: #0C4A6E; }
+.bza-status.is-error { background: #FEF2F2; border-color: #FCA5A5; color: #7F1D1D; }
+.bza-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; margin-top: 12px; }
+.bza-btn-primary, .bza-btn-ghost { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 20px; border-radius: 12px; font-weight: 700; font-size: .92rem; cursor: pointer; text-decoration: none; }
+.bza-btn-primary { background: #F65E01; color: #FFFFFF; border: none; }
+.bza-btn-primary:hover, .bza-btn-primary:focus-visible { background: #C2410C; }
+.bza-btn-primary[disabled] { opacity: .7; cursor: progress; }
+.bza-btn-ghost { background: #FFFFFF; color: #165D6F; border: 1.5px solid #165D6F; }
+.bza-btn-ghost:hover, .bza-btn-ghost:focus-visible { background: #165D6F; color: #FFFFFF; }
+.bza-login p { color: #334155; line-height: 1.55; }
+.bza-success { text-align: center; }
+.bza-success > i { font-size: 2.6rem; color: #4A7A5A; }
+.bza-success h3 { margin: 10px 0 6px; font-family: 'Montserrat', sans-serif; color: #0D1B2A; }
+.bza-success p { color: #334155; }
+.bza-code { font-family: ui-monospace, monospace; font-size: 1.15rem; font-weight: 800; color: #165D6F; }
+.bza-success .bza-actions { justify-content: center; }
+.bza-mine { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.bza-mine li { border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 14px; display: grid; gap: 4px; }
+.bza-code-sm { font-family: ui-monospace, monospace; font-size: .8rem; color: #475569; }
+.bza-pill { justify-self: start; padding: 3px 10px; border-radius: 999px; font-size: .78rem; font-weight: 700; background: #E0F2FE; color: #075985; }
+.bza-pill.is-approved, .bza-pill.is-published { background: #DCFCE7; color: #14532D; }
+.bza-pill.is-rejected { background: #FEE2E2; color: #7F1D1D; }
+.bza-pill.is-needs_information { background: #FEF3C7; color: #78350F; }
+@media (max-width: 640px) {
+  .bza-dialog { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; border-radius: 0; margin: 0; padding-bottom: env(safe-area-inset-bottom); }
+  .bza-head { padding: 14px 16px 10px; padding-top: max(14px, env(safe-area-inset-top)); }
+  .bza-body { padding: 14px 16px 20px; }
+  .bza-actions { justify-content: stretch; }
+  .bza-actions > * { flex: 1 1 auto; }
+}
+@media (prefers-reduced-motion: no-preference) { .bza-dialog[open] { animation: bza-in .18s ease-out; } }
+@keyframes bza-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }

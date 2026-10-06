@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-06T17:37:53.927Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4086 · en 4086 · fr 4086 · it 4086 · pt 4086 · de 4086
+Generado: 2026-10-06T21:25:59.925Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4275 · en 4275 · fr 4275 · it 4275 · pt 4275 · de 4275
 
-HTML: 3770/3771 textos con clave (1 pendientes) · JS: 729 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3797/3798 textos con clave (1 pendientes) · JS: 726 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -31,9 +31,9 @@ HTML: 3770/3771 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | apps/web/src/app/kiosk/[smartPointId]/page.tsx | tsx | 20 | 0 | 20 | 0 % |
 | apps/admin/src/app/confianza/page.tsx | tsx | 19 | 0 | 19 | 0 % |
 | js/baqueano-map.js | js | 19 | 0 | 19 | 0 % |
-| js/navigation.js | js | 28 | 9 | 19 | 32.1 % |
 | apps/admin/src/app/destinos/nuevo/page.tsx | tsx | 18 | 0 | 18 | 0 % |
 | js/index-features.js | js | 17 | 0 | 17 | 0 % |
+| js/navigation.js | js | 26 | 9 | 17 | 34.6 % |
 | js/testimonios.js | js | 17 | 0 | 17 | 0 % |
 | js/admin-ops.js | js | 16 | 0 | 16 | 0 % |
 | js/baqueano-travel-session.js | js | 61 | 45 | 16 | 73.8 % |
@@ -52,12 +52,12 @@ HTML: 3770/3771 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | js/calculator.js | js | 11 | 0 | 11 | 0 % |
 | js/environmental-evidence.js | js | 11 | 0 | 11 | 0 % |
 | js/environmental.js | js | 11 | 0 | 11 | 0 % |
-| js/global-injector.js | js | 31 | 20 | 11 | 64.5 % |
 | apps/admin/src/app/auditoria/page.tsx | tsx | 10 | 0 | 10 | 0 % |
 | apps/admin/src/app/website-builder/page.tsx | tsx | 10 | 0 | 10 | 0 % |
 | apps/web/src/app/open-data/page.tsx | tsx | 10 | 0 | 10 | 0 % |
 | apps/web/src/components/sections/DestinationExplorer.tsx | tsx | 10 | 0 | 10 | 0 % |
 | js/destinos-interactions.js | js | 10 | 0 | 10 | 0 % |
+| js/global-injector.js | js | 30 | 20 | 10 | 66.7 % |
 | apps/admin/src/app/categorias/page.tsx | tsx | 9 | 0 | 9 | 0 % |
 | apps/admin/src/app/configuracion/page.tsx | tsx | 9 | 0 | 9 | 0 % |
 | apps/admin/src/app/cultura/page.tsx | tsx | 9 | 0 | 9 | 0 % |
@@ -139,9 +139,9 @@ HTML: 3770/3771 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | js/territory-carousel.js | js | 1 | 0 | 1 | 0 % |
 | js/territory-media-experience.js | js | 1 | 0 | 1 | 0 % |
 | 404.html | html | 25 | 25 | 0 | 100 % |
-| admin.html | html | 483 | 483 | 0 | 100 % |
+| admin.html | html | 485 | 485 | 0 | 100 % |
 | aliados.html | html | 195 | 195 | 0 | 100 % |
-| ambiental.html | html | 129 | 129 | 0 | 100 % |
+| ambiental.html | html | 131 | 131 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
 | apps/admin/src/app/page.tsx | tsx | 0 | 0 | 0 | 100 % |
 | apps/admin/src/components/AdminCards.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -165,7 +165,7 @@ HTML: 3770/3771 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | baqueano-ia.html | html | 194 | 194 | 0 | 100 % |
 | cookies.html | html | 122 | 122 | 0 | 100 % |
 | cronicas.html | html | 51 | 51 | 0 | 100 % |
-| denuncias.html | html | 39 | 39 | 0 | 100 % |
+| denuncias.html | html | 61 | 61 | 0 | 100 % |
 | departamento.html | html | 78 | 78 | 0 | 100 % |
 | destino.html | html | 18 | 18 | 0 | 100 % |
 | destinos.html | html | 130 | 130 | 0 | 100 % |
@@ -175,13 +175,16 @@ HTML: 3770/3771 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | historia.html | html | 184 | 184 | 0 | 100 % |
 | index.html | html | 214 | 214 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
+| js/ambiental-report-handoff.js | js | 0 | 0 | 0 | 100 % |
 | js/async-styles.js | js | 0 | 0 | 0 | 100 % |
 | js/ayuda.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-analytics.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-api.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-master-catalog.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-traffic-tracker.js | js | 0 | 0 | 0 | 100 % |
+| js/business-application.js | js | 0 | 0 | 0 | 100 % |
 | js/community-api.js | js | 0 | 0 | 0 | 100 % |
+| js/contact-form.js | js | 0 | 0 | 0 | 100 % |
 | js/cronicas-filter.js | js | 0 | 0 | 0 | 100 % |
 | js/definitive-index-interactions.js | js | 0 | 0 | 0 | 100 % |
 | js/destination-community.js | js | 0 | 0 | 0 | 100 % |
@@ -189,6 +192,7 @@ HTML: 3770/3771 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | js/destinos-provenance.js | js | 0 | 0 | 0 | 100 % |
 | js/destinos-supabase.js | js | 8 | 8 | 0 | 100 % |
 | js/destinos-verified.js | js | 15 | 15 | 0 | 100 % |
+| js/eco-report.js | js | 0 | 0 | 0 | 100 % |
 | js/favoritos.js | js | 0 | 0 | 0 | 100 % |
 | js/firebase-config.js | js | 0 | 0 | 0 | 100 % |
 | js/firestore-mirror.js | js | 0 | 0 | 0 | 100 % |
@@ -197,7 +201,9 @@ HTML: 3770/3771 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | js/historia-audioguia.js | js | 0 | 0 | 0 | 100 % |
 | js/historia-enlaces.js | js | 0 | 0 | 0 | 100 % |
 | js/impact-public.js | js | 6 | 6 | 0 | 100 % |
+| js/intake-api.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-intake-inbox.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |
@@ -219,7 +225,7 @@ HTML: 3770/3771 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | mi-viaje.html | html | 113 | 113 | 0 | 100 % |
 | musica.html | html | 197 | 197 | 0 | 100 % |
 | normas-comunidad.html | html | 28 | 28 | 0 | 100 % |
-| nosotros.html | html | 168 | 168 | 0 | 100 % |
+| nosotros.html | html | 169 | 169 | 0 | 100 % |
 | offline.html | html | 24 | 24 | 0 | 100 % |
 | opiniones.html | html | 76 | 76 | 0 | 100 % |
 | packages/i18n/src/index.tsx | tsx | 2 | 2 | 0 | 100 % |

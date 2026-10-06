@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T17:37:53.927Z",
+  "generatedAt": "2026-10-06T21:25:59.925Z",
   "languages": [
     "es",
     "en",
@@ -9,23 +9,23 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4086,
-    "en": 4086,
-    "fr": 4086,
-    "it": 4086,
-    "pt": 4086,
-    "de": 4086
+    "es": 4275,
+    "en": 4275,
+    "fr": 4275,
+    "it": 4275,
+    "pt": 4275,
+    "de": 4275
   },
   "html": {
     "files": 33,
-    "total": 3771,
-    "translated": 3770,
+    "total": 3798,
+    "translated": 3797,
     "untranslated": 1
   },
   "js": {
-    "files": 92,
+    "files": 98,
     "translated": 147,
-    "untranslated": 729
+    "untranslated": 726
   },
   "jsEditorial": {
     "files": 7,
@@ -71,13 +71,16 @@
     "terminos.html",
     "testimonios.html",
     "js/ai-assistant.js",
+    "js/ambiental-report-handoff.js",
     "js/async-styles.js",
     "js/ayuda.js",
     "js/baqueano-analytics.js",
     "js/baqueano-api.js",
     "js/baqueano-master-catalog.js",
     "js/baqueano-traffic-tracker.js",
+    "js/business-application.js",
     "js/community-api.js",
+    "js/contact-form.js",
     "js/cronicas-filter.js",
     "js/definitive-index-interactions.js",
     "js/destination-community.js",
@@ -85,6 +88,7 @@
     "js/destinos-provenance.js",
     "js/destinos-supabase.js",
     "js/destinos-verified.js",
+    "js/eco-report.js",
     "js/favoritos.js",
     "js/firebase-config.js",
     "js/firestore-mirror.js",
@@ -93,7 +97,9 @@
     "js/historia-audioguia.js",
     "js/historia-enlaces.js",
     "js/impact-public.js",
+    "js/intake-api.js",
     "js/ops-center/ops-community-moderation.js",
+    "js/ops-center/ops-intake-inbox.js",
     "js/ops-center/ops-platform-reviews.js",
     "js/platform-reviews.js",
     "js/safety-gallery.js",
@@ -143,8 +149,8 @@
     {
       "file": "admin.html",
       "type": "html",
-      "total": 483,
-      "translated": 483,
+      "total": 485,
+      "translated": 485,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -161,8 +167,8 @@
     {
       "file": "ambiental.html",
       "type": "html",
-      "total": 129,
-      "translated": 129,
+      "total": 131,
+      "translated": 131,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -224,8 +230,8 @@
     {
       "file": "denuncias.html",
       "type": "html",
-      "total": 39,
-      "translated": 39,
+      "total": 61,
+      "translated": 61,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -368,8 +374,8 @@
     {
       "file": "nosotros.html",
       "type": "html",
-      "total": 168,
-      "translated": 168,
+      "total": 169,
+      "translated": 169,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -439,6 +445,15 @@
     },
     {
       "file": "js/ai-assistant.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/ambiental-report-handoff.js",
       "type": "js",
       "total": 0,
       "translated": 0,
@@ -591,6 +606,15 @@
       "coverage": 0
     },
     {
+      "file": "js/business-application.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/business-portal.js",
       "type": "js",
       "total": 5,
@@ -628,6 +652,15 @@
     },
     {
       "file": "js/community-api.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/contact-form.js",
       "type": "js",
       "total": 0,
       "translated": 0,
@@ -735,6 +768,15 @@
       "coverage": 100
     },
     {
+      "file": "js/eco-report.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/environmental-evidence.js",
       "type": "js",
       "total": 11,
@@ -809,11 +851,11 @@
     {
       "file": "js/global-injector.js",
       "type": "js",
-      "total": 31,
+      "total": 30,
       "translated": 20,
-      "untranslated": 11,
+      "untranslated": 10,
       "editorialStrings": 0,
-      "coverage": 64.5
+      "coverage": 66.7
     },
     {
       "file": "js/global-language.js",
@@ -933,6 +975,15 @@
       "coverage": 0
     },
     {
+      "file": "js/intake-api.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/legal-scrollspy.js",
       "type": "js",
       "total": 1,
@@ -980,11 +1031,11 @@
     {
       "file": "js/navigation.js",
       "type": "js",
-      "total": 28,
+      "total": 26,
       "translated": 9,
-      "untranslated": 19,
+      "untranslated": 17,
       "editorialStrings": 0,
-      "coverage": 32.1
+      "coverage": 34.6
     },
     {
       "file": "js/nicaragua-real-map.js",
@@ -1021,6 +1072,15 @@
       "untranslated": 2,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/ops-center/ops-intake-inbox.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/ops-center/ops-live-data.js",

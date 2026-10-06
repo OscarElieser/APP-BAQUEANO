@@ -9,7 +9,7 @@ code = code.replace(
   '<p class="bq-footer-tagline">DESCUBRÍ LO QUE NO SALE EN EL MAPA.</p>'
 );
 code = code.replace(
-  'https://wa.me/50588888888',
+  'https://wa.me/50584431289',
   'https://wa.me/50584431289'
 );
 code = code.replace(
