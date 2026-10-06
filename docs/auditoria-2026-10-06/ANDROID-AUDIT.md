@@ -45,4 +45,6 @@ Lo que el equipo publica en el Ops Center (Supabase) llega a la app en el siguie
    - El propietario debe confirmarlos o reemplazarlos por anfitriones verificados.
 3. **El filtro de presupuesto de la búsqueda** todavía compara contra los precios estáticos. Debe pasar a `tourism_services` cuando haya tarifas cargadas con fuente.
 4. **El voucher del checkout anterior** dibuja un QR decorativo. El flujo no está en uso; si se reactiva, el QR tiene que codificar el código real de la solicitud.
-5. **APK:** este entorno no tiene el SDK de Android, así que no se generó un APK. El CI (`flutter_ci.yml`) lo construye al llegar a `main`.
+5. **APK:**
+   - CI en GitHub sobre `884c085`, ejecución 37459922956: analyze, tests y **compilación del APK debug** en verde.
+   - El AAB firmado de release se omite porque el repositorio no tiene configurados los secretos de firma. Es acción del propietario.

@@ -4813,3 +4813,11 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Ops Center: paginación real (municipios 153/153, antes 100) y lugares (`places`) en el mapa del equipo.
     - BD: anon ya no lee `commission_rate`, `owner_uid`, `created_by`, `updated_by` ni `verified_by` de `businesses` (migración 20261006080000, aplicada y verificada; la app y la web siguen leyendo los 30 negocios).
     - Informes: `docs/auditoria-2026-10-06/ANDROID-AUDIT.md` y `OPS-CENTER-AUDIT.md`.
+  - Avance (accesibilidad, QA final e informe final):
+    - axe `label-content-name-mismatch` (WCAG 2.5.3): de 56 cargas con falla a 0.
+      - `navigation.js` ya no pisa con nombres derivados del id.
+      - Logos, idioma, BAQUI, favoritos, galería, mascota, pines y música corregidos.
+    - QA de navegador final: 28 páginas × 16 anchos = 448 cargas, 0 fallas (responsive, axe y enlaces).
+    - Botones "no clicables" pendientes: los 4 funcionan con clic real.
+    - CI de Android sobre 884c085: analyze, tests y APK debug en verde.
+    - Informe final de 28 secciones con semáforo: `docs/auditoria-2026-10-06/INFORME-FINAL.md`.

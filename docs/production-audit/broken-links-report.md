@@ -1,6 +1,6 @@
 # Informe de enlaces (requisitos 15 y 16)
 
-> Generado por `website/scripts/browser-qa-report.mjs` a partir de `browser-qa.json` (2026-10-05 14:55 UTC).
+> Generado por `website/scripts/browser-qa-report.mjs` a partir de `browser-qa.json` (2026-10-06 16:50 UTC).
 > Medición: Playwright (Chromium) sobre el build publicado servido en local (`http://127.0.0.1:8790/`), con el shell JS montado.
 > Dos capas: el auditor estático (`production-audit.mjs`) verifica que todo destino local exista en el build; el navegador verifica en ejecución las anclas `#id` y los enlaces de WhatsApp.
 

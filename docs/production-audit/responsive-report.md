@@ -1,6 +1,6 @@
 # Informe responsive (requisito 14)
 
-> Generado por `website/scripts/browser-qa-report.mjs` a partir de `browser-qa.json` (2026-10-05 14:55 UTC).
+> Generado por `website/scripts/browser-qa-report.mjs` a partir de `browser-qa.json` (2026-10-06 16:50 UTC).
 > Medición: Playwright (Chromium) sobre el build publicado servido en local (`http://127.0.0.1:8790/`), con el shell JS montado.
 > Criterio: sin desborde horizontal (`scrollWidth > innerWidth`), sin errores de carga; el cajón móvil (390 px) abre, permite llegar a la última opción y cierra.
 
