@@ -5540,5 +5540,9 @@
     "reportTitle": "Eine Bewertung melden",
     "reportText": "Jede angemeldete Person kann eine veröffentlichte Bewertung mit Begründung melden. Eine Meldung blendet die Bewertung nicht automatisch aus: Das Team prüft jede Meldung und dokumentiert die Entscheidung.",
     "backToReviews": "Zu den Bewertungen über BAQUEANO"
+  },
+  "opsReviews": {
+    "reasonRequired": "Gib eine Begründung mit mindestens 5 Zeichen an.",
+    "responseRequired": "Schreibe die Antwort, bevor du sie veröffentlichst."
   }
 }

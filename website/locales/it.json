@@ -5540,5 +5540,9 @@
     "reportTitle": "Segnalare un’opinione",
     "reportText": "Qualsiasi utente autenticato può segnalare un’opinione pubblicata indicando il motivo. La segnalazione non nasconde automaticamente l’opinione: il team esamina ogni segnalazione e registra la decisione.",
     "backToReviews": "Vai alle opinioni su BAQUEANO"
+  },
+  "opsReviews": {
+    "reasonRequired": "Scrivi un motivo di almeno 5 caratteri.",
+    "responseRequired": "Scrivi la risposta prima di pubblicarla."
   }
 }

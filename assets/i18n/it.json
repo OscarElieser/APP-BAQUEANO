@@ -1000,6 +1000,8 @@
   "ops.strategic.matrix": "Matrice di allineamento nazionale",
   "ops.strategic.title": "Impatto e allineamento strategico",
   "ops.strategic.unavailable": "Dati insufficienti: il modulo di impatto non è ancora disponibile sul server (migrazione in sospeso).",
+  "opsReviews.reasonRequired": "Scrivi un motivo di almeno 5 caratteri.",
+  "opsReviews.responseRequired": "Scrivi la risposta prima di pubblicarla.",
   "pages.admin.adminLoginGate.a1": "Torna al portale",
   "pages.admin.adminLoginGate.h11": "BAQUEANO OPS CENTER",
   "pages.admin.adminLoginGate.p1": "Centro digitale di operazioni e comando. Accesso riservato alla direzione e agli auditor autorizzati.",

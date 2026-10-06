@@ -5540,5 +5540,9 @@
     "reportTitle": "Denunciar uma opinião",
     "reportText": "Qualquer usuário conectado pode denunciar uma opinião publicada informando o motivo. Denunciar não oculta a opinião automaticamente: a equipe revisa cada denúncia e registra a decisão.",
     "backToReviews": "Ir para as opiniões sobre o BAQUEANO"
+  },
+  "opsReviews": {
+    "reasonRequired": "Escreva um motivo com pelo menos 5 caracteres.",
+    "responseRequired": "Escreva a resposta antes de publicá-la."
   }
 }

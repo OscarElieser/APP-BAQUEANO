@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-06T17:35:18.076Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4084 · en 4084 · fr 4084 · it 4084 · pt 4084 · de 4084
+Generado: 2026-10-06T17:37:53.927Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4086 · en 4086 · fr 4086 · it 4086 · pt 4086 · de 4086
 
-HTML: 3765/3766 textos con clave (1 pendientes) · JS: 729 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3770/3771 textos con clave (1 pendientes) · JS: 729 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -139,7 +139,7 @@ HTML: 3765/3766 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | js/territory-carousel.js | js | 1 | 0 | 1 | 0 % |
 | js/territory-media-experience.js | js | 1 | 0 | 1 | 0 % |
 | 404.html | html | 25 | 25 | 0 | 100 % |
-| admin.html | html | 479 | 479 | 0 | 100 % |
+| admin.html | html | 483 | 483 | 0 | 100 % |
 | aliados.html | html | 195 | 195 | 0 | 100 % |
 | ambiental.html | html | 129 | 129 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -198,6 +198,7 @@ HTML: 3765/3766 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | js/historia-enlaces.js | js | 0 | 0 | 0 | 100 % |
 | js/impact-public.js | js | 6 | 6 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |
 | js/services/places-service.js | js | 4 | 4 | 0 | 100 % |
@@ -223,7 +224,7 @@ HTML: 3765/3766 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | opiniones.html | html | 76 | 76 | 0 | 100 % |
 | packages/i18n/src/index.tsx | tsx | 2 | 2 | 0 | 100 % |
 | packages/ui/src/index.tsx | tsx | 0 | 0 | 0 | 100 % |
-| perfil.html | html | 161 | 161 | 0 | 100 % |
+| perfil.html | html | 162 | 162 | 0 | 100 % |
 | privacidad.html | html | 88 | 88 | 0 | 100 % |
 | terminos.html | html | 193 | 193 | 0 | 100 % |
 | testimonios.html | html | 79 | 79 | 0 | 100 % |

@@ -5540,5 +5540,9 @@
     "reportTitle": "Reporting a review",
     "reportText": "Any signed-in user can report a published review with a reason. Reporting does not hide the review automatically: the team reviews each report and records its decision.",
     "backToReviews": "Go to reviews of BAQUEANO"
+  },
+  "opsReviews": {
+    "reasonRequired": "Write a reason of at least 5 characters.",
+    "responseRequired": "Write the reply before publishing it."
   }
 }

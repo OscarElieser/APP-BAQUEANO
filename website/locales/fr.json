@@ -5540,5 +5540,9 @@
     "reportTitle": "Signaler un avis",
     "reportText": "Tout utilisateur connecté peut signaler un avis publié en indiquant le motif. Le signalement ne masque pas automatiquement l’avis : l’équipe examine chaque signalement et enregistre sa décision.",
     "backToReviews": "Aller aux avis sur BAQUEANO"
+  },
+  "opsReviews": {
+    "reasonRequired": "Indiquez un motif d'au moins 5 caractères.",
+    "responseRequired": "Rédigez la réponse avant de la publier."
   }
 }

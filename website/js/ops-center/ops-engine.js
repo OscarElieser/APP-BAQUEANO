@@ -1774,6 +1774,14 @@
       title: 'Comunidad · Moderación',
       icon: 'fa-people-group',
       roleRequired: 'admin'
+    },
+    // 37: Opiniones sobre la plataforma (Edge Function baqueano-reviews).
+    // Lo pinta js/ops-center/ops-platform-reviews.js; el servidor exige rol admin para actuar.
+    '37-opiniones': {
+      isSystem: true,
+      title: 'Opiniones BAQUEANO',
+      icon: 'fa-star',
+      roleRequired: 'admin'
     }
   };
 
@@ -4128,6 +4136,10 @@
       if (tabId === '20-sos') return this.renderSosModule();
       if (tabId === '11-reservas') return this.renderReservationsModule();
       if (tabId === '35-backup') return this.renderBackupSyncModule();
+      if (tabId === '37-opiniones') {
+        if (window.BaqueanoPlatformReviewsModeration) return window.BaqueanoPlatformReviewsModeration.render(panel);
+        return;
+      }
       if (tabId === '36-comunidad') {
         if (window.BaqueanoCommunityModeration) return window.BaqueanoCommunityModeration.render(panel);
         return;

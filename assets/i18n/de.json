@@ -1000,6 +1000,8 @@
   "ops.strategic.matrix": "Matrix der nationalen Ausrichtung",
   "ops.strategic.title": "Wirkung und strategische Ausrichtung",
   "ops.strategic.unavailable": "Nicht genügend Daten: Das Wirkungsmodul ist auf dem Server noch nicht verfügbar (Migration ausstehend).",
+  "opsReviews.reasonRequired": "Gib eine Begründung mit mindestens 5 Zeichen an.",
+  "opsReviews.responseRequired": "Schreibe die Antwort, bevor du sie veröffentlichst.",
   "pages.admin.adminLoginGate.a1": "Zurück zum Portal",
   "pages.admin.adminLoginGate.h11": "BAQUEANO OPS CENTER",
   "pages.admin.adminLoginGate.p1": "Digitale Betriebs- und Leitzentrale. Zugang nur für die Leitung und autorisierte Prüfer.",

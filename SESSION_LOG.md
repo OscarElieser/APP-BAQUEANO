@@ -4836,3 +4836,12 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - i18n en 6 idiomas y accesibilidad.
   - Política de Opiniones y Normas de Comunidad. Validación legal (Leyes 787 y 842) antes de producción.
   - Separado de `testimonios.html`.
+  - Resultado (Opiniones sobre BAQUEANO):
+    - BD `platform_reviews`: RLS, sin borrado directo, historial inmutable; el promedio se calcula solo con opiniones aprobadas.
+    - Edge Function `baqueano-reviews` desplegada y probada en vivo (401, 403 y 400 donde corresponde).
+    - Web: `opiniones.html` y `normas-comunidad.html`.
+    - Ops Center: vista 37 "Opiniones BAQUEANO" (aprobar, rechazar, ocultar o marcar con motivo; responder; resolver reportes; todo auditado).
+    - Perfil: pestaña "Mi opinión".
+    - Pruebas en navegador con respuestas simuladas: axe sin fallas, sin scroll horizontal. i18n: 0 errores.
+    - Pendiente: validación legal (Leyes 787 y 842), despliegue de la web en Azure, prueba con una cuenta real y pantalla en Android.
+    - Informe: `docs/auditoria-2026-10-06/OPINIONES-BAQUEANO.md`.

@@ -5540,5 +5540,9 @@
     "reportTitle": "Reportar una opinión",
     "reportText": "Cualquier usuario con sesión puede reportar una opinión publicada indicando el motivo. Reportar no oculta automáticamente la opinión: el equipo revisa cada reporte y registra su decisión.",
     "backToReviews": "Ir a las opiniones sobre BAQUEANO"
+  },
+  "opsReviews": {
+    "reasonRequired": "Escribí un motivo de al menos 5 caracteres.",
+    "responseRequired": "Escribí la respuesta antes de publicarla."
   }
 }
