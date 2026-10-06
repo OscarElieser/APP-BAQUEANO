@@ -1005,11 +1005,38 @@
       const action = event.target.closest('[data-baqui-action]')?.dataset.baquiAction;
       if (action === 'save') { const saved = JSON.parse(localStorage.getItem(SAVED_KEY) || '[]'); saved.push(clone(travelSession)); localStorage.setItem(SAVED_KEY, JSON.stringify(saved.slice(-20))); window.bqToast?.('Viaje guardado con su ruta y presupuesto actuales.', 'success'); }
       if (action === 'share') navigator.share?.({ title: 'Mi ruta BAQUEANO', text: travelSession.route.map((item) => item.name).join(' → '), url: location.href }).catch(() => {});
-      if (action === 'pdf') window.print();
+      // 2026-10-06: PDF real con la plantilla BAQUEANO (texto seleccionable) en lugar de imprimir la pantalla.
+      if (action === 'pdf') exportRoutePdf();
       if (action === 'qr') window.bqToast?.('Guardá el viaje para generar un enlace QR persistente.', 'info');
       const focus = event.target.closest('[data-focus-route]'); if (focus && map) { const point = travelSession.route[Number(focus.dataset.focusRoute)]; if (point?.latitude) { map.setView([point.latitude, point.longitude], 11); $('.ia-map-box')?.scrollIntoView({ behavior: 'smooth' }); } }
       const edit = event.target.closest('[data-edit-day]'); if (edit) { $('#iaChatInput').value = `Quiero modificar el Día ${edit.dataset.editDay}: `; $('#iaChatInput').focus(); }
     });
+  }
+
+  function exportRoutePdf() {
+    const route = travelSession.route || [];
+    if (!route.length) { window.bqToast?.(i18n('trip.pdfEmpty', 'Agregá al menos un destino para generar el PDF.'), 'warning'); return; }
+    const trip = {
+      name: i18n('baqui.pdf.title', 'Ruta BAQUI por Nicaragua'),
+      kind: 'route',
+      demo: false,
+      days: route.map((item, index) => ({
+        badge: i18n('baqui.pdf.stop', 'Parada {n}', { n: index + 1 }),
+        title: item.name,
+        location: [item.municipality, item.department].filter(Boolean).join(', ') || item.location || '',
+        desc: item.summary || item.description || '',
+        cost: '',
+        lat: Number.isFinite(item.latitude) ? item.latitude : null,
+        lng: Number.isFinite(item.longitude) ? item.longitude : null
+      }))
+    };
+    const run = () => window.BaqueanoPdf.trip(trip, null).catch(() => window.bqToast?.(i18n('pdf.error', 'No se pudo generar el PDF.'), 'warning'));
+    if (window.BaqueanoPdf) { run(); return; }
+    const script = document.createElement('script');
+    script.src = 'js/baqueano-pdf.js?v=20261006-2';
+    script.onload = run;
+    script.onerror = () => window.bqToast?.(i18n('pdf.error', 'No se pudo generar el PDF.'), 'warning');
+    document.head.appendChild(script);
   }
 
   function init() {

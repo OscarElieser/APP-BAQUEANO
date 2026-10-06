@@ -4867,3 +4867,10 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - aliados reales desde Supabase con ficha y métricas reales;
     - mapa con ?lat=&lng=; música con conteo real y anclas correctas; "Quiero unirme" → comunidad.
     - QA: 60 cargas y 0 fallos.
+  - Resultado de la Fase 4 (PDFs reales):
+    - jsPDF guardado en el repositorio tras revisarlo;
+    - PDFs legales profesionales (portada, índice, "Página X de Y", metadatos, A4) con el mismo contenido que la web, sin window.print;
+    - comprobante PDF de denuncia sin el token;
+    - Mi Viaje honesto: vacío por defecto, demo con aviso, costos "Por confirmar", clima real de Open-Meteo y PDF real;
+    - BAQUI exporta un PDF de la ruta.
+    - QA: 60 cargas y 0 fallos; i18n con 0 errores.

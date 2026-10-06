@@ -132,7 +132,7 @@
       var action=button.dataset.baquiAction;var route=baquiRouteData();var summary='Mi ruta BAQUI por Nicaragua: '+route.stops.join(' → ');var url=location.href;
       if(action==='save'){var trips=readJson('baqueano_saved_trips',[]);if(!Array.isArray(trips))trips=[];trips.push(route);writeJson('baqueano_saved_trips',trips);writeJson('baqueano_active_trip',route);button.innerHTML='<i class="fa-solid fa-check"></i> Guardada en Mi Viaje';if(typeof window.bqToast==='function')window.bqToast('Ruta guardada en Mi Viaje.','success');}
       if(action==='share'){window.open('https://wa.me/?text='+encodeURIComponent(summary+'\n'+url),'_blank','noopener');}
-      if(action==='pdf'){document.title='Ruta BAQUI - BAQUEANO';window.print();}
+      /* 2026-10-06: el PDF lo genera baqueano-travel-session.js con la plantilla oficial; ya no se imprime la pantalla. */
       if(action==='reserve'){window.open('https://wa.me/50584431289?text='+encodeURIComponent('Hola, quiero contactar a los servicios de esta ruta armada con BAQUI para consultar disponibilidad: '+summary),'_blank','noopener');}
       if(action==='qr')openQrDialog(url,summary);
     });});

@@ -200,6 +200,10 @@
       "interestAdventure": "adventure",
       "interestFood": "food",
       "interestPhoto": "photography"
+    },
+    "pdf": {
+      "title": "BAQUI route through Nicaragua",
+      "stop": "Stop {n}"
     }
   },
   "footer": {
@@ -755,7 +759,34 @@
     "morning": "Morning",
     "afternoon": "Afternoon",
     "evening": "Evening",
-    "notes": "Notes"
+    "notes": "Notes",
+    "demoTitle": "Sample itinerary.",
+    "demoBody": "It's not a booking or a confirmed route: schedules, transport and costs are confirmed with each provider.",
+    "costLabel": "Cost:",
+    "toConfirm": "To be confirmed",
+    "weatherTitle": "Weather on your route",
+    "weatherNoPlace": "Add destinations to your trip to see the forecast.",
+    "weatherLoading": "Checking the forecast…",
+    "weatherNote": "Forecast for the next 3 days (your trip doesn't have dates yet).",
+    "weatherSource": "Source: Open-Meteo",
+    "weatherUnavailable": "The forecast isn't available right now. We don't show made-up data.",
+    "pdfEmpty": "Add at least one destination to generate the PDF.",
+    "pdfPreparing": "Preparing PDF…",
+    "pdfDefaultName": "My trip through Nicaragua",
+    "pdfSummary": "{n} days · {places}",
+    "pdfItinerary": "Day-by-day itinerary",
+    "pdfMapLink": "View this point on the map",
+    "pdfNoWeather": "No forecast in this document: check it close to your travel date. BAQUEANO doesn't include made-up weather data.",
+    "budgetTitle": "Expense categories for your trip",
+    "budgetHonest": "BAQUEANO doesn't publish amounts without a verifiable source. Each cost is confirmed directly with the provider before traveling.",
+    "pdfContact": "Contact",
+    "pdfContactBody": "To coordinate with the providers on this route: BAQUEANO official line +505 8443-1289 (WhatsApp) or baqueanonicaragua@gmail.com. BAQUEANO connects you with businesses; it doesn't process bookings or payments.",
+    "pdfQrPending": "Shareable QR code: coming soon, once trips can be saved to your account with a private link.",
+    "noVerifiedReviews": "No verified reviews",
+    "priceToConfirm": "Price to be confirmed",
+    "mapItemUnverified": "Not verified on BAQUEANO · price and rating to be confirmed",
+    "mapItemVerified": "Partner with a verifiable source · price to be confirmed",
+    "pdfSummaryStops": "{n} stops · {places}"
   },
   "profile": {
     "title": "My Profile",
@@ -5807,5 +5838,25 @@
     "soonPill": "Coming soon",
     "soonTitle": "Online payments: coming soon",
     "soonBody": "We're preparing secure payment options. For now BAQUEANO connects you directly with businesses: we don't charge inside the platform and we don't request or store card details."
+  },
+  "pdf": {
+    "version": "Version",
+    "pageOf": "Page {n} of {total}",
+    "lastLegalUpdate": "Last legal update",
+    "generatedOn": "Date this PDF was generated",
+    "language": "Language",
+    "officialSource": "Official source",
+    "coverNote": "This PDF reproduces the text published on the official site on the generation date. In case of differences, the current version published on the site prevails.",
+    "toc": "Contents",
+    "relatedDocs": "Related documents",
+    "docTerms": "Terms and Conditions",
+    "docPrivacy": "Privacy Policy",
+    "docLegal": "Legal Notice",
+    "docCookies": "Cookie Policy",
+    "docGeneric": "Legal document",
+    "error": "The PDF couldn't be generated. Check your connection and try again.",
+    "ecoTitle": "Environmental report receipt",
+    "ecoSubtitle": "Received confidentially by BAQUEANO.",
+    "ecoPrivacy": "This receipt doesn't include photos, videos or contact details. To check the status you need the code and the private token you saw when submitting; the token isn't printed here for security."
   }
 }

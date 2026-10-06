@@ -282,7 +282,7 @@
     </aside>
 
     <!-- ÁREA PRINCIPAL -->
-    <main class="term-main">
+    <main class="term-main" data-legal-doc="terminos" data-legal-version="1.0" data-legal-updated="2026-09-26">
       <!-- BUSCADOR CON ILUSTRACIÓN DE GUARDABARRANCO -->
       <section class="term-search-card">
         <img src="assets/images/assistant/baqui-bird.png" alt="Baqüi" class="term-search-bird" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="300" height="300">
@@ -845,7 +845,7 @@
             </div>
           </div>
         </div>
-        <button type="button" class="term-btn-download" onclick="window.print()">
+        <button type="button" class="term-btn-download" data-legal-pdf>
           <i class="fa-solid fa-download"></i> <span data-i18n="common.descargarVersionPdf">Descargar versión PDF</span>
         </button>
       </section>
@@ -1046,6 +1046,7 @@
   </script>
 <script src="js/navigation.js?v=20261006-dialog-1"></script>
 <script src="js/global-injector.js"></script>
+  <script defer src="js/baqueano-pdf.js?v=20261006-2"></script>
 </body>
 </html>
 

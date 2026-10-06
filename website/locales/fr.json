@@ -200,6 +200,10 @@
       "interestAdventure": "aventure",
       "interestFood": "gastronomie",
       "interestPhoto": "photographie"
+    },
+    "pdf": {
+      "title": "Itinéraire BAQUI au Nicaragua",
+      "stop": "Étape {n}"
     }
   },
   "footer": {
@@ -755,7 +759,34 @@
     "morning": "Matin",
     "afternoon": "Après-midi",
     "evening": "Soir",
-    "notes": "Notes"
+    "notes": "Notes",
+    "demoTitle": "Itinéraire d'exemple.",
+    "demoBody": "Ce n'est ni une réservation ni un itinéraire confirmé : horaires, transport et coûts se confirment auprès de chaque prestataire.",
+    "costLabel": "Coût :",
+    "toConfirm": "À confirmer",
+    "weatherTitle": "Météo sur votre itinéraire",
+    "weatherNoPlace": "Ajoutez des destinations à votre voyage pour voir les prévisions.",
+    "weatherLoading": "Consultation des prévisions…",
+    "weatherNote": "Prévisions des 3 prochains jours (votre voyage n'a pas encore de dates).",
+    "weatherSource": "Source : Open-Meteo",
+    "weatherUnavailable": "Les prévisions ne sont pas disponibles pour le moment. Nous n'affichons pas de données inventées.",
+    "pdfEmpty": "Ajoutez au moins une destination pour générer le PDF.",
+    "pdfPreparing": "Préparation du PDF…",
+    "pdfDefaultName": "Mon voyage au Nicaragua",
+    "pdfSummary": "{n} jours · {places}",
+    "pdfItinerary": "Itinéraire jour par jour",
+    "pdfMapLink": "Voir ce point sur la carte",
+    "pdfNoWeather": "Pas de prévisions dans ce document : consultez-les près de la date du voyage. BAQUEANO n'inclut pas de données météo inventées.",
+    "budgetTitle": "Catégories de dépenses de votre voyage",
+    "budgetHonest": "BAQUEANO ne publie pas de montants sans source vérifiable. Chaque coût se confirme directement auprès du prestataire avant le voyage.",
+    "pdfContact": "Contact",
+    "pdfContactBody": "Pour vous coordonner avec les prestataires de cet itinéraire : ligne officielle BAQUEANO +505 8443-1289 (WhatsApp) ou baqueanonicaragua@gmail.com. BAQUEANO vous met en relation avec les entreprises ; il ne traite ni réservations ni paiements.",
+    "pdfQrPending": "QR code à partager : bientôt, lorsque le voyage pourra être enregistré dans votre compte avec un lien privé.",
+    "noVerifiedReviews": "Aucun avis vérifié",
+    "priceToConfirm": "Prix à confirmer",
+    "mapItemUnverified": "Non vérifié sur BAQUEANO · prix et note à confirmer",
+    "mapItemVerified": "Partenaire avec source vérifiable · prix à confirmer",
+    "pdfSummaryStops": "{n} étapes · {places}"
   },
   "profile": {
     "title": "Mon profil",
@@ -5807,5 +5838,25 @@
     "soonPill": "Bientôt",
     "soonTitle": "Paiements en ligne : bientôt",
     "soonBody": "Nous préparons des options de paiement sécurisées. Pour l'instant, BAQUEANO vous met directement en relation avec les entreprises : nous n'encaissons rien sur la plateforme et ne demandons ni ne conservons de données de carte."
+  },
+  "pdf": {
+    "version": "Version",
+    "pageOf": "Page {n} sur {total}",
+    "lastLegalUpdate": "Dernière mise à jour juridique",
+    "generatedOn": "Date de génération de ce PDF",
+    "language": "Langue",
+    "officialSource": "Source officielle",
+    "coverNote": "Ce PDF reproduit le texte publié sur le site officiel à la date de génération. En cas de différence, la version en vigueur publiée sur le site prévaut.",
+    "toc": "Sommaire",
+    "relatedDocs": "Documents associés",
+    "docTerms": "Conditions générales",
+    "docPrivacy": "Politique de confidentialité",
+    "docLegal": "Mentions légales",
+    "docCookies": "Politique relative aux cookies",
+    "docGeneric": "Document juridique",
+    "error": "Impossible de générer le PDF. Vérifiez votre connexion et réessayez.",
+    "ecoTitle": "Justificatif de signalement environnemental",
+    "ecoSubtitle": "Reçu de manière confidentielle par BAQUEANO.",
+    "ecoPrivacy": "Ce justificatif n'inclut ni photos, ni vidéos, ni coordonnées. Pour consulter l'état, il vous faut le code et le jeton privé affichés lors de l'envoi ; le jeton n'est pas imprimé ici par sécurité."
   }
 }

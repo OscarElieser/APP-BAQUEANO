@@ -914,7 +914,7 @@
     }
     if (!document.querySelector('script[data-platform-enhancements]')) {
       var enhancementScript = document.createElement('script');
-      enhancementScript.src = 'js/platform-enhancements.js?v=20261006-a11y-1';
+      enhancementScript.src = 'js/platform-enhancements.js?v=20261006-pdf-1';
       enhancementScript.dataset.platformEnhancements = 'true';
       enhancementScript.defer = true;
       document.body.appendChild(enhancementScript);

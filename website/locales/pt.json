@@ -200,6 +200,10 @@
       "interestAdventure": "aventura",
       "interestFood": "gastronomia",
       "interestPhoto": "fotografia"
+    },
+    "pdf": {
+      "title": "Rota BAQUI pela Nicarágua",
+      "stop": "Parada {n}"
     }
   },
   "footer": {
@@ -755,7 +759,34 @@
     "morning": "Manhã",
     "afternoon": "Tarde",
     "evening": "Noite",
-    "notes": "Notas"
+    "notes": "Notas",
+    "demoTitle": "Itinerário de exemplo.",
+    "demoBody": "Não é uma reserva nem uma rota confirmada: horários, transporte e custos são confirmados com cada prestador.",
+    "costLabel": "Custo:",
+    "toConfirm": "A confirmar",
+    "weatherTitle": "Clima na sua rota",
+    "weatherNoPlace": "Adicione destinos à sua viagem para ver a previsão.",
+    "weatherLoading": "Consultando a previsão…",
+    "weatherNote": "Previsão dos próximos 3 dias (sua viagem ainda não tem datas).",
+    "weatherSource": "Fonte: Open-Meteo",
+    "weatherUnavailable": "A previsão não está disponível agora. Não mostramos dados inventados.",
+    "pdfEmpty": "Adicione pelo menos um destino para gerar o PDF.",
+    "pdfPreparing": "Preparando PDF…",
+    "pdfDefaultName": "Minha viagem pela Nicarágua",
+    "pdfSummary": "{n} dias · {places}",
+    "pdfItinerary": "Itinerário dia a dia",
+    "pdfMapLink": "Ver este ponto no mapa",
+    "pdfNoWeather": "Sem previsão neste documento: consulte perto da data da viagem. O BAQUEANO não inclui dados de clima inventados.",
+    "budgetTitle": "Categorias de gasto da sua viagem",
+    "budgetHonest": "O BAQUEANO não publica valores sem uma fonte verificável. Cada custo é confirmado diretamente com o prestador antes de viajar.",
+    "pdfContact": "Contato",
+    "pdfContactBody": "Para coordenar com os prestadores desta rota: linha oficial do BAQUEANO +505 8443-1289 (WhatsApp) ou baqueanonicaragua@gmail.com. O BAQUEANO conecta você com os negócios; não processa reservas nem pagamentos.",
+    "pdfQrPending": "Código QR para compartilhar: em breve, quando a viagem puder ser salva na sua conta com um link privado.",
+    "noVerifiedReviews": "Sem avaliações verificadas",
+    "priceToConfirm": "Preço a confirmar",
+    "mapItemUnverified": "Não verificado no BAQUEANO · preço e avaliação a confirmar",
+    "mapItemVerified": "Parceiro com fonte verificável · preço a confirmar",
+    "pdfSummaryStops": "{n} paradas · {places}"
   },
   "profile": {
     "title": "Meu perfil",
@@ -5807,5 +5838,25 @@
     "soonPill": "Em breve",
     "soonTitle": "Pagamentos on-line: em breve",
     "soonBody": "Estamos preparando opções de pagamento seguras. Por enquanto, o BAQUEANO conecta você diretamente com os negócios: não cobramos dentro da plataforma e não pedimos nem guardamos dados de cartão."
+  },
+  "pdf": {
+    "version": "Versão",
+    "pageOf": "Página {n} de {total}",
+    "lastLegalUpdate": "Última atualização legal",
+    "generatedOn": "Data de geração deste PDF",
+    "language": "Idioma",
+    "officialSource": "Fonte oficial",
+    "coverNote": "Este PDF reproduz o texto publicado no site oficial na data de geração. Em caso de diferença, prevalece a versão vigente publicada no site.",
+    "toc": "Índice",
+    "relatedDocs": "Documentos relacionados",
+    "docTerms": "Termos e Condições",
+    "docPrivacy": "Política de Privacidade",
+    "docLegal": "Aviso Legal",
+    "docCookies": "Política de Cookies",
+    "docGeneric": "Documento legal",
+    "error": "Não foi possível gerar o PDF. Verifique sua conexão e tente de novo.",
+    "ecoTitle": "Comprovante de denúncia ambiental",
+    "ecoSubtitle": "Recebido de forma confidencial pelo BAQUEANO.",
+    "ecoPrivacy": "Este comprovante não inclui fotos, vídeos nem dados de contato. Para consultar o status você precisa do código e do token privado que viu ao enviar; por segurança o token não é impresso aqui."
   }
 }

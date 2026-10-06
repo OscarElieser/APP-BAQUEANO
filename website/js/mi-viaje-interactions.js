@@ -14,7 +14,7 @@
 // - Funciones puras con try/catch defensivo para evitar crashes ante datos corruptos.
 // - Toasts de retroalimentación visual accesibles con aria-live.
 // - Integración con mapa Leaflet embebido para "Ver en mapa".
-// - Generación de PDF vía window.print() con hoja de estilos temporal dedicada.
+// - Generación de PDF real con la plantilla BAQUEANO (js/baqueano-pdf.js), no la impresión de la pantalla.
 // - Generación de código QR vía API pública qrserver.com sin dependencias npm.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES):
@@ -30,39 +30,49 @@
   var STORAGE_KEY = 'baqueano_trip';
 
   function loadTrip() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultTrip(); }
-    catch (e) { return defaultTrip(); }
+    // 2026-10-06: sin viaje guardado se muestra el estado vacío, no un viaje de ejemplo como si fuera propio.
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || emptyTrip(); }
+    catch (e) { return emptyTrip(); }
   }
 
   function persistTrip(t) {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(t)); } catch (e) {}
   }
 
+  function emptyTrip() { return { name: 'Mi Aventura por Nicaragua', saved: false, days: [] }; }
+
+  // Itinerario de EJEMPLO (se marca como tal). Sin precios ni negocios inventados: los costos se
+  // confirman con cada prestador.
   function defaultTrip() {
     return {
       name: 'Mi Aventura por Nicaragua',
+      demo: true,
       saved: false,
       days: [
         { id: 1, badge: 'Día 1 · Llegada & Ciudad Colonial', location: 'Granada Colonial',
           title: 'Granada colonial y atardecer en las Isletas',
           desc: 'Recorrido a pie por la Plaza de la Independencia, ascenso a la torre de La Merced para fotografía panorámica y paseo en lancha con pescador local por las 365 Isletas del Cocibolca.',
-          extra: '🍽️ Comida: Vigorón en el kiosco de Doña Rosa · 🏨 Hospedaje: Hotel Colonial céntrico',
-          cost: 'C$ 1,800 (USD 49)', km: 45, hours: 6, lat: 11.9344, lng: -85.9560, saved: false },
+          extra: '🍽️ Comida: vigorón en un kiosco del parque central · 🏨 Hospedaje: a elegir entre los aliados verificados',
+          cost: 'Por confirmar con cada prestador', km: 45, hours: 6, lat: 11.9344, lng: -85.9560, saved: false },
         { id: 2, badge: 'Día 2 · Aventura Volcánica', location: 'Masaya & Sandboarding',
           title: 'Lago de lava en Volcán Masaya y artesanías de Monimbó',
           desc: 'Visita al Parque Nacional Volcán Masaya para contemplar los gases del Cráter Santiago. Almuerzo en el Mercado de Artesanías y compra de hamacas tejidas a mano.',
           extra: '☕ Merienda: Tiste frío con buñuelos en miel de Masaya',
-          cost: 'C$ 2,200 (USD 60)', km: 120, hours: 9, lat: 11.9843, lng: -86.1613, saved: false },
+          cost: 'Por confirmar con cada prestador', km: 120, hours: 9, lat: 11.9843, lng: -86.1613, saved: false },
         { id: 3, badge: 'Día 3 · Oasis de Fuego y Agua', location: 'Isla de Ometepe',
           title: 'Ferry a Ometepe, Ojo de Agua y senderismo en Finca Magdalena',
           desc: 'Cruce lacustre desde San Jorge hasta Moyogalpa. Baño en el manantial Ojo de Agua y caminata por los cafetales de la cooperativa comunitaria Finca Magdalena.',
           extra: '🌿 Impacto local: Apoyo directo a la cooperativa cafetalera campesina',
-          cost: 'C$ 2,500 (USD 68)', km: 110, hours: 8, lat: 11.4946, lng: -85.6156, saved: false }
+          cost: 'Por confirmar con cada prestador', km: 110, hours: 8, lat: 11.4946, lng: -85.6156, saved: false }
       ]
     };
   }
 
   var trip = loadTrip();
+
+  function tr(key, fallback) {
+    try { return window.BaqueanoLanguage && window.BaqueanoLanguage.t ? window.BaqueanoLanguage.t(key, { fallback: fallback }) : fallback; } catch (e) { return fallback; }
+  }
 
   // ─── Escape ────────────────────────────────────────────────────────────────
   function esc(val) {
@@ -128,25 +138,29 @@
 
     if (!trip.days || trip.days.length === 0) {
       c.innerHTML =
-        '<div style="background:rgba(255,255,255,0.03);border:1.5px dashed rgba(244,230,193,0.25);border-radius:18px;padding:48px 24px;text-align:center;margin-bottom:24px;">' +
+        '<div style="background:#0F2A33;border:1.5px dashed rgba(244,230,193,0.35);border-radius:18px;padding:48px 24px;text-align:center;margin-bottom:24px;">' +
           '<div style="font-size:3rem;margin-bottom:12px;">🎒</div>' +
           '<h3 style="font-family:Montserrat,sans-serif;color:#FFF;font-size:1.25rem;font-weight:800;margin:0 0 8px">Todavía no tenés un viaje guardado</h3>' +
-          '<p style="color:#94A3B8;max-width:540px;margin:0 auto 24px;font-size:.9rem;line-height:1.6">' +
+          '<p style="color:#CBD5E1;max-width:540px;margin:0 auto 24px;font-size:.9rem;line-height:1.6">' +
             'Descubrí los 17 territorios de Nicaragua, elegí tus atractivos favoritos o dejá que Baqueano Digital planifique una ruta a tu medida según tu presupuesto y días disponibles.' +
           '</p>' +
           '<div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">' +
             '<a href="destinos.html" style="background:#165D6F;color:#FFF;padding:11px 22px;border-radius:10px;font-weight:700;font-family:Montserrat,sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:8px">' +
               '<i class="fa-solid fa-mountain-sun"></i> Explorar destinos</a>' +
-            '<a href="baqueano-ia.html" style="background:#F65E01;color:#FFF;padding:11px 22px;border-radius:10px;font-weight:700;font-family:Montserrat,sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:8px">' +
+            '<a href="baqueano-ia.html" style="background:#C2410C;color:#FFF;padding:11px 22px;border-radius:10px;font-weight:700;font-family:Montserrat,sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:8px">' +
               '<i class="fa-solid fa-wand-magic-sparkles"></i> Planificar con Baqueano Digital</a>' +
-            '<button type="button" onclick="loadDemoTrip()" style="background:rgba(255,255,255,.08);color:#F4E6C1;border:1px solid rgba(255,255,255,.18);padding:11px 18px;border-radius:10px;font-weight:600;cursor:pointer">' +
+            '<button type="button" onclick="loadDemoTrip()" style="background:#24404A;color:#F4E6C1;border:1px solid rgba(244,230,193,.35);padding:11px 18px;border-radius:10px;font-weight:600;cursor:pointer">' +
               'Cargar viaje demostrativo</button>' +
           '</div>' +
         '</div>';
       return;
     }
 
-    c.innerHTML = trip.days.map(function(d) {
+    var demoBanner = trip.demo
+      ? '<div role="note" style="background:#FFF7ED;border:1px solid #FDBA74;color:#7C2D12;border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:.86rem;line-height:1.5">' +
+          '<strong>' + esc(tr('trip.demoTitle', 'Itinerario de ejemplo.')) + '</strong> ' + esc(tr('trip.demoBody', 'No es una reserva ni una ruta confirmada: los horarios, el transporte y los costos se confirman con cada prestador.')) + '</div>'
+      : '';
+    c.innerHTML = demoBanner + trip.days.map(function(d) {
       return '<div class="itinerary-day-card" id="dayCard-' + d.id + '">' +
         '<div class="itinerary-day-head">' +
           '<span class="itinerary-day-badge">' + esc(d.badge) + '</span>' +
@@ -158,7 +172,7 @@
         '<div class="day-stats-row">' +
           '<span class="day-stat"><i class="fa-solid fa-car"></i> ' + d.km + ' km</span>' +
           '<span class="day-stat"><i class="fa-regular fa-clock"></i> ' + d.hours + ' h</span>' +
-          '<span class="day-stat">Costo est.: <strong>' + esc(d.cost) + '</strong></span>' +
+          '<span class="day-stat">' + esc(tr('trip.costLabel', 'Costo:')) + ' <strong>' + esc(d.cost || tr('trip.toConfirm', 'Por confirmar')) + '</strong></span>' +
         '</div>' +
         '<div class="viaje-action-row">' +
           '<button type="button" class="btn-day-map" onclick="viewOnMap(' + d.id + ')">' +
@@ -173,20 +187,37 @@
   }
 
   // ─── Clima ─────────────────────────────────────────────────────────────────
+  // 2026-10-06: antes mostraba siempre "Granada 28°C, Parcialmente nublado". Ahora consulta Open-Meteo
+  // con las coordenadas del primer día del viaje y dice de dónde sale el dato. Sin datos, lo dice.
+  var weatherState = null;
   function renderWeather() {
     var el = document.getElementById('weatherWidget');
     if (!el) return;
-    el.innerHTML =
-      '<div class="weather-card">' +
-        '<div class="weather-header"><i class="fa-solid fa-cloud-sun" style="color:#F65E01"></i><strong>Clima en tu ruta</strong></div>' +
-        '<div class="weather-main"><span class="weather-icon">🌤️</span>' +
-          '<div><div class="weather-city">Granada 28°C</div><div class="weather-cond">Parcialmente nublado</div></div></div>' +
-        '<div class="weather-forecast">' +
-          '<div class="forecast-day"><span>Vie.</span><strong>29°</strong></div>' +
-          '<div class="forecast-day"><span>Sáb.</span><strong>30°</strong></div>' +
-          '<div class="forecast-day"><span>Dom.</span><strong>29°</strong></div>' +
-        '</div>' +
-      '</div>';
+    var day = trip.days && trip.days.filter(function (d) { return isFinite(Number(d.lat)) && isFinite(Number(d.lng)); })[0];
+    function paint(html) { el.innerHTML = '<div class="weather-card">' + html + '</div>'; }
+    var head = '<div class="weather-header"><i class="fa-solid fa-cloud-sun" style="color:#F65E01" aria-hidden="true"></i><strong>' + esc(tr('trip.weatherTitle', 'Clima en tu ruta')) + '</strong></div>';
+    if (!day) { weatherState = null; paint(head + '<p class="weather-cond">' + esc(tr('trip.weatherNoPlace', 'Agregá destinos a tu viaje para ver el pronóstico.')) + '</p>'); return; }
+    paint(head + '<p class="weather-cond">' + esc(tr('trip.weatherLoading', 'Consultando el pronóstico…')) + '</p>');
+    var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + Number(day.lat).toFixed(3) + '&longitude=' + Number(day.lng).toFixed(3) +
+      '&current=temperature_2m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=3&timezone=America%2FManagua';
+    fetch(url).then(function (r) { if (!r.ok) throw new Error('weather'); return r.json(); }).then(function (data) {
+      var lang = (window.BaqueanoLanguage && window.BaqueanoLanguage.get && window.BaqueanoLanguage.get()) || 'es';
+      var days = (data.daily && data.daily.time || []).map(function (t, i) {
+        var label = new Date(t + 'T12:00:00Z').toLocaleDateString(lang, { weekday: 'short', day: 'numeric', timeZone: 'America/Managua' });
+        return { label: label, max: Math.round(data.daily.temperature_2m_max[i]), min: Math.round(data.daily.temperature_2m_min[i]), rain: data.daily.precipitation_probability_max ? data.daily.precipitation_probability_max[i] : null };
+      });
+      weatherState = { place: day.location, current: data.current ? Math.round(data.current.temperature_2m) : null, days: days, at: new Date() };
+      paint(head +
+        '<div class="weather-main"><div><div class="weather-city">' + esc(day.location) + (weatherState.current != null ? ' ' + weatherState.current + '°C' : '') + '</div>' +
+        '<div class="weather-cond">' + esc(tr('trip.weatherNote', 'Pronóstico de los próximos 3 días (tu viaje todavía no tiene fechas).')) + '</div></div></div>' +
+        '<div class="weather-forecast">' + days.map(function (d) {
+          return '<div class="forecast-day"><span>' + esc(d.label) + '</span><strong>' + d.max + '° / ' + d.min + '°</strong>' + (d.rain != null ? '<small>' + d.rain + '% 🌧</small>' : '') + '</div>';
+        }).join('') + '</div>' +
+        '<p style="font-size:.7rem;color:#64748B;margin:8px 0 0">' + esc(tr('trip.weatherSource', 'Fuente: Open-Meteo')) + ' · ' + esc(weatherState.at.toLocaleTimeString(lang, { hour: '2-digit', minute: '2-digit' })) + '</p>');
+    }).catch(function () {
+      weatherState = null;
+      paint(head + '<p class="weather-cond">' + esc(tr('trip.weatherUnavailable', 'El pronóstico no está disponible en este momento. No mostramos datos inventados.')) + '</p>');
+    });
   }
 
   // ─── Acciones de los botones ───────────────────────────────────────────────
@@ -330,17 +361,12 @@
     } else { toast('Compartir no disponible en este navegador', 'warning'); }
   }
 
+  // 2026-10-06: PDF real con la plantilla BAQUEANO (texto seleccionable), no la impresión de la pantalla.
   window.downloadPDF = function() {
-    toast('Preparando PDF...', 'info');
-    var s = document.createElement('style');
-    s.id = 'bq-print';
-    s.media = 'print';
-    s.textContent = 'body *{visibility:hidden!important}#printableItinerary,#printableItinerary *{visibility:visible!important}#printableItinerary{position:fixed!important;top:0;left:0;width:100%;padding:20px}.viaje-action-row,.route-action-btns,.map-section-wrap,.recommendations-section,.weather-section{display:none!important}';
-    document.head.appendChild(s);
-    setTimeout(function() {
-      window.print();
-      setTimeout(function() { var el = document.getElementById('bq-print'); if (el) el.parentNode.removeChild(el); }, 1200);
-    }, 500);
+    if (!trip.days || !trip.days.length) { toast(tr('trip.pdfEmpty', 'Agregá al menos un destino para generar el PDF.'), 'warning'); return; }
+    if (!window.BaqueanoPdf || typeof window.BaqueanoPdf.trip !== 'function') { toast(tr('pdf.error', 'No se pudo generar el PDF. Revisá tu conexión e intentá de nuevo.'), 'warning'); return; }
+    toast(tr('trip.pdfPreparing', 'Preparando PDF…'), 'info');
+    window.BaqueanoPdf.trip(trip, weatherState).catch(function () { toast(tr('pdf.error', 'No se pudo generar el PDF. Revisá tu conexión e intentá de nuevo.'), 'warning'); });
   };
 
   window.generateQR = function() {

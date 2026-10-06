@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T21:39:20.061Z",
+  "generatedAt": "2026-10-06T22:00:54.300Z",
   "languages": [
     "es",
     "en",
@@ -9,23 +9,23 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4329,
-    "en": 4329,
-    "fr": 4329,
-    "it": 4329,
-    "pt": 4329,
-    "de": 4329
+    "es": 4376,
+    "en": 4376,
+    "fr": 4376,
+    "it": 4376,
+    "pt": 4376,
+    "de": 4376
   },
   "html": {
     "files": 33,
-    "total": 3791,
-    "translated": 3790,
+    "total": 3802,
+    "translated": 3801,
     "untranslated": 1
   },
   "js": {
-    "files": 100,
-    "translated": 147,
-    "untranslated": 725
+    "files": 101,
+    "translated": 152,
+    "untranslated": 722
   },
   "jsEditorial": {
     "files": 7,
@@ -79,6 +79,7 @@
     "js/baqueano-api.js",
     "js/baqueano-dialog.js",
     "js/baqueano-master-catalog.js",
+    "js/baqueano-pdf.js",
     "js/baqueano-traffic-tracker.js",
     "js/business-application.js",
     "js/community-api.js",
@@ -214,8 +215,8 @@
     {
       "file": "cookies.html",
       "type": "html",
-      "total": 122,
-      "translated": 122,
+      "total": 123,
+      "translated": 123,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -349,8 +350,8 @@
     {
       "file": "mi-viaje.html",
       "type": "html",
-      "total": 113,
-      "translated": 113,
+      "total": 122,
+      "translated": 122,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -412,8 +413,8 @@
     {
       "file": "privacidad.html",
       "type": "html",
-      "total": 88,
-      "translated": 88,
+      "total": 89,
+      "translated": 89,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -581,6 +582,15 @@
       "coverage": 100
     },
     {
+      "file": "js/baqueano-pdf.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/baqueano-reels.js",
       "type": "js",
       "total": 1,
@@ -610,11 +620,11 @@
     {
       "file": "js/baqueano-travel-session.js",
       "type": "js",
-      "total": 61,
-      "translated": 45,
+      "total": 66,
+      "translated": 50,
       "untranslated": 16,
       "editorialStrings": 0,
-      "coverage": 73.8
+      "coverage": 75.8
     },
     {
       "file": "js/baqui-evolved.js",
@@ -1033,9 +1043,9 @@
     {
       "file": "js/mi-viaje-interactions.js",
       "type": "js",
-      "total": 30,
+      "total": 28,
       "translated": 0,
-      "untranslated": 30,
+      "untranslated": 28,
       "editorialStrings": 0,
       "coverage": 0
     },
@@ -1150,9 +1160,9 @@
     {
       "file": "js/platform-enhancements.js",
       "type": "js",
-      "total": 12,
+      "total": 11,
       "translated": 0,
-      "untranslated": 12,
+      "untranslated": 11,
       "editorialStrings": 0,
       "coverage": 0
     },

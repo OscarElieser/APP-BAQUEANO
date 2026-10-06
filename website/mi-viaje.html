@@ -443,32 +443,32 @@
           <!-- ── PANEL 2: Calculadora ── -->
           <div class="viaje-tab-panel" id="tabPresupuesto">
             <div class="budget-calc-box">
-              <h3 data-i18n="pages.miViaje.tabPresupuesto.h31" style="font-family:'Montserrat',sans-serif;margin:0 0 8px">Estimación de Gastos (3 Días / 2 Personas)</h3>
-              <p data-i18n="pages.miViaje.tabPresupuesto.p1" style="font-size:0.82rem;color:#64748B;margin:0 0 16px">Cálculo transparente y validado según la realidad de costos en Nicaragua.</p>
+              <h3 data-i18n="trip.budgetTitle" style="font-family:'Montserrat',sans-serif;margin:0 0 8px">Categorías de gasto de tu viaje</h3>
+              <p data-i18n="trip.budgetHonest" style="font-size:0.82rem;color:#475569;margin:0 0 16px">BAQUEANO no publica montos sin una fuente verificable. Cada costo se confirma directamente con el prestador antes de viajar.</p>
               
               <div class="calc-row">
                 <span><i class="fa-solid fa-car"></i> <span data-i18n="pages.miViaje.tabPresupuesto.span1">Transporte (Gasolina vehículo propio / Bus)</span></span>
-                <strong data-i18n="pages.miViaje.tabPresupuesto.strong1">C$ 1,200 (~$33 USD)</strong>
+                <strong data-i18n="trip.toConfirm">Por confirmar</strong>
               </div>
               <div class="calc-row">
                 <span><i class="fa-solid fa-hotel"></i> <span data-i18n="pages.miViaje.tabPresupuesto.span2">Hospedaje (Hoteles estándar o boutique colonial, 2 noches)</span></span>
-                <strong data-i18n="pages.miViaje.tabPresupuesto.strong2">C$ 3,000 (~$82 USD)</strong>
+                <strong data-i18n="trip.toConfirm">Por confirmar</strong>
               </div>
               <div class="calc-row">
                 <span><i class="fa-solid fa-utensils"></i> <span data-i18n="pages.miViaje.tabPresupuesto.span3">Alimentación (Restaurantes típicos tradicionales, 3 tiempos)</span></span>
-                <strong data-i18n="pages.miViaje.tabPresupuesto.strong3">C$ 2,000 (~$55 USD)</strong>
+                <strong data-i18n="trip.toConfirm">Por confirmar</strong>
               </div>
               <div class="calc-row">
                 <span><i class="fa-solid fa-person-hiking"></i> <span data-i18n="pages.miViaje.tabPresupuesto.span4">Guías baqueanos comunitarios y entradas a reservas</span></span>
-                <strong data-i18n="pages.miViaje.tabPresupuesto.strong4">C$ 2,300 (~$63 USD)</strong>
+                <strong data-i18n="trip.toConfirm">Por confirmar</strong>
               </div>
               <div class="calc-row">
                 <span><i class="fa-solid fa-gift"></i> <span data-i18n="pages.miViaje.tabPresupuesto.span5">Otros gastos &amp; Utilerías (Artesanías, recuerdos, apoyo a niños locales)</span></span>
-                <strong data-i18n="pages.miViaje.tabPresupuesto.strong5">C$ 800 (~$22 USD)</strong>
+                <strong data-i18n="trip.toConfirm">Por confirmar</strong>
               </div>
               <div class="calc-total">
                 <span data-i18n="pages.miViaje.tabPresupuesto.span6">Total Estimado:</span>
-                <span data-i18n="pages.miViaje.tabPresupuesto.span7">C$ 9,300 (~$254 USD)</span>
+                <span data-i18n="trip.toConfirm">Por confirmar</span>
               </div>
               <div style="margin-top:14px;background:#F8FAFC;border-left:3px solid #F65E01;padding:10px 14px;border-radius:6px;font-size:0.75rem;color:#475569;line-height:1.45">
                 <strong data-i18n="pages.miViaje.tabPresupuesto.strong6">💡 Transparencia de Costos:</strong> <span data-i18n="pages.miViaje.tabPresupuesto.div1">Comer en comedores populares cuesta C$ 120-180 por plato, mientras que restaurantes turísticos rondan C$ 500-900. El bus interurbano es muy accesible (C$ 360), el auto propio ahorra en combustible y el alquiler de vehículo (C$ 3,800) brinda mayor comodidad.</span>
@@ -524,10 +524,10 @@
                   <div data-i18n="pages.miViaje.printableItinerary.div1" class="rec-card-name">Hotel Boutique Adela</div>
                   <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
                   <div class="rec-card-rating">
-                    <span class="rec-stars">★ 4.8</span> <span style="color:#64748B">(120)</span>
+                    <span class="rec-stars" data-i18n="trip.noVerifiedReviews">Sin reseñas verificadas</span>
                     <span data-i18n="pages.miViaje.printableItinerary.span1" class="rec-verified">· Verificado BAQUEANO</span>
                   </div>
-                  <div data-i18n="pages.miViaje.printableItinerary.div2" class="rec-price">C$ 1,800 / noche</div>
+                  <div data-i18n="trip.priceToConfirm" class="rec-price">Precio por confirmar</div>
                   <button data-i18n="pages.miViaje.printableItinerary.button5" type="button" class="btn-rec-action" onclick="viewDetail('Hotel Boutique Adela')">Ver detalle</button>
                 </div>
               </div>
@@ -542,10 +542,10 @@
                   <div data-i18n="pages.miViaje.printableItinerary.div3" class="rec-card-name">Restaurante El Zaguán</div>
                   <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
                   <div class="rec-card-rating">
-                    <span class="rec-stars">★ 4.7</span> <span style="color:#64748B">(210)</span>
+                    <span class="rec-stars" data-i18n="trip.noVerifiedReviews">Sin reseñas verificadas</span>
                     <span data-i18n="pages.miViaje.printableItinerary.span1" class="rec-verified">· Verificado BAQUEANO</span>
                   </div>
-                  <div data-i18n="pages.miViaje.printableItinerary.div4" class="rec-price">C$ 350 / persona</div>
+                  <div data-i18n="trip.priceToConfirm" class="rec-price">Precio por confirmar</div>
                   <button data-i18n="pages.miViaje.printableItinerary.button5" type="button" class="btn-rec-action" onclick="viewDetail('Restaurante El Zaguán')">Ver detalle</button>
                 </div>
               </div>
@@ -560,10 +560,10 @@
                   <div data-i18n="pages.miViaje.printableItinerary.div5" class="rec-card-name">Guía Local Don Carlos</div>
                   <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
                   <div class="rec-card-rating">
-                    <span class="rec-stars">★ 4.9</span> <span style="color:#64748B">(64)</span>
+                    <span class="rec-stars" data-i18n="trip.noVerifiedReviews">Sin reseñas verificadas</span>
                     <span data-i18n="pages.miViaje.printableItinerary.span1" class="rec-verified">· Verificado BAQUEANO</span>
                   </div>
-                  <div data-i18n="pages.miViaje.printableItinerary.div6" class="rec-price">C$ 800 / tour</div>
+                  <div data-i18n="trip.priceToConfirm" class="rec-price">Precio por confirmar</div>
                   <button data-i18n="actions.contact" type="button" class="btn-rec-action primary" onclick="contactRec('Guía Local Don Carlos')">Contactar</button>
                 </div>
               </div>
@@ -578,10 +578,10 @@
                   <div data-i18n="pages.miViaje.printableItinerary.div7" class="rec-card-name">Tour en Kayak Isletas</div>
                   <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
                   <div class="rec-card-rating">
-                    <span class="rec-stars">★ 4.8</span> <span style="color:#64748B">(93)</span>
+                    <span class="rec-stars" data-i18n="trip.noVerifiedReviews">Sin reseñas verificadas</span>
                     <span data-i18n="pages.miViaje.printableItinerary.span1" class="rec-verified">· Verificado BAQUEANO</span>
                   </div>
-                  <div data-i18n="pages.miViaje.printableItinerary.div8" class="rec-price">C$ 600 / persona</div>
+                  <div data-i18n="trip.priceToConfirm" class="rec-price">Precio por confirmar</div>
                   <button data-i18n="actions.book" type="button" class="btn-rec-action primary" onclick="reserveRec('Tour en Kayak Isletas')">Contactar</button>
                 </div>
               </div>
@@ -627,11 +627,11 @@
               <div class="map-day-cards">
                 <div class="map-day-row">
                   <div class="map-day-num" style="background:#165D6F"><i class="fa-solid fa-bed" style="font-size:.9rem"></i></div>
-                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelHospedajes.h51">Hotel Boutique Adela · Granada</h5><span data-i18n="pages.miViaje.mapPanelHospedajes.span1">C$ 1,800/noche · 4.8 ★ · Verificado</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelHospedajes.h51">Hotel Boutique Adela · Granada</h5><span data-i18n="trip.mapItemUnverified">Sin verificar en BAQUEANO · precio y valoración por confirmar</span></div>
                 </div>
                 <div class="map-day-row">
                   <div class="map-day-num" style="background:#165D6F"><i class="fa-solid fa-bed" style="font-size:.9rem"></i></div>
-                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelHospedajes.h52">Posada Rural San Ramón · Ometepe</h5><span data-i18n="pages.miViaje.mapPanelHospedajes.span2">C$ 1,200/noche · 4.6 ★ · Verificado</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelHospedajes.h52">Posada Rural San Ramón · Ometepe</h5><span data-i18n="trip.mapItemUnverified">Sin verificar en BAQUEANO · precio y valoración por confirmar</span></div>
                 </div>
               </div>
             </div>
@@ -641,11 +641,11 @@
               <div class="map-day-cards">
                 <div class="map-day-row">
                   <div class="map-day-num" style="background:#4A7A5A"><i class="fa-solid fa-utensils" style="font-size:.9rem"></i></div>
-                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelComida.h51">Restaurante El Zaguán · Granada</h5><span data-i18n="pages.miViaje.mapPanelComida.span1">C$ 350/persona · 4.7 ★ · Gastronomía típica</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelComida.h51">Restaurante El Zaguán · Granada</h5><span data-i18n="trip.mapItemVerified">Aliado con fuente verificable · precio por confirmar</span></div>
                 </div>
                 <div class="map-day-row">
                   <div class="map-day-num" style="background:#4A7A5A"><i class="fa-solid fa-utensils" style="font-size:.9rem"></i></div>
-                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelComida.h52">Kiosco Doña Rosa · Granada</h5><span data-i18n="pages.miViaje.mapPanelComida.span2">Vigorón artesanal · C$ 80/porción · Campesino</span></div>
+                  <div class="map-day-info"><h5 data-i18n="pages.miViaje.mapPanelComida.h52">Kiosco Doña Rosa · Granada</h5><span data-i18n="trip.mapItemUnverified">Sin verificar en BAQUEANO · precio y valoración por confirmar</span></div>
                 </div>
               </div>
             </div>
@@ -682,12 +682,12 @@
           <!-- Calculadora Mini -->
           <div class="sidebar-budget-mini">
             <h4 data-i18n="pages.miViaje.viajeSidebar.h41">Resumen de Presupuesto</h4>
-            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span1">Transporte (Gasolina / Bus)</span><strong>C$ 1,200</strong></div>
-            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span2">Hospedaje (Hotel estándar)</span><strong>C$ 3,000</strong></div>
-            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span3">Alimentación (Rest. típicos)</span><strong>C$ 2,000</strong></div>
-            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span4">Guías &amp; entradas</span><strong>C$ 2,300</strong></div>
-            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span5">Otros gastos &amp; utilerías</span><strong>C$ 800</strong></div>
-            <div class="budget-mini-total"><span data-i18n="pages.miViaje.viajeSidebar.span6">Total estimado</span><span>C$ 9,300 <small data-i18n="common.usd254" style="font-size:0.75rem;font-weight:600">(USD 254)</small></span></div>
+            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span1">Transporte (Gasolina / Bus)</span><strong data-i18n="trip.toConfirm">Por confirmar</strong></div>
+            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span2">Hospedaje (Hotel estándar)</span><strong data-i18n="trip.toConfirm">Por confirmar</strong></div>
+            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span3">Alimentación (Rest. típicos)</span><strong data-i18n="trip.toConfirm">Por confirmar</strong></div>
+            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span4">Guías &amp; entradas</span><strong data-i18n="trip.toConfirm">Por confirmar</strong></div>
+            <div class="budget-mini-row"><span data-i18n="pages.miViaje.viajeSidebar.span5">Otros gastos &amp; utilerías</span><strong data-i18n="trip.toConfirm">Por confirmar</strong></div>
+            <div class="budget-mini-total"><span data-i18n="pages.miViaje.viajeSidebar.span6">Total estimado</span><span data-i18n="trip.toConfirm">Por confirmar</span></div>
           </div>
 
           <!-- Acceso Rápido a Baqueano IA -->
@@ -836,7 +836,7 @@
   </div>
 
   <!-- Controlador Principal de Mi Viaje -->
-  <script defer src="js/mi-viaje-interactions.js?v=20261006-dialog-1"></script>
+  <script defer src="js/mi-viaje-interactions.js?v=20261006-pdf-2"></script>
 
   <!-- Banco Maestro de Turismo -->
   <script defer src="js/baqueano-master-catalog.js"></script>
@@ -876,5 +876,6 @@
     });
   </script>
 <script src="js/global-injector.js"></script>
+  <script defer src="js/baqueano-pdf.js?v=20261006-2"></script>
 </body>
 </html>

@@ -200,6 +200,10 @@
       "interestAdventure": "Abenteuer",
       "interestFood": "Gastronomie",
       "interestPhoto": "Fotografie"
+    },
+    "pdf": {
+      "title": "BAQUI-Route durch Nicaragua",
+      "stop": "Station {n}"
     }
   },
   "footer": {
@@ -755,7 +759,34 @@
     "morning": "Morgen",
     "afternoon": "Nachmittag",
     "evening": "Abend",
-    "notes": "Notizen"
+    "notes": "Notizen",
+    "demoTitle": "Beispiel-Reiseplan.",
+    "demoBody": "Keine Buchung und keine bestätigte Route: Zeiten, Transport und Kosten werden mit jedem Anbieter bestätigt.",
+    "costLabel": "Kosten:",
+    "toConfirm": "Noch zu bestätigen",
+    "weatherTitle": "Wetter auf deiner Route",
+    "weatherNoPlace": "Füge Reiseziele hinzu, um die Vorhersage zu sehen.",
+    "weatherLoading": "Vorhersage wird abgefragt…",
+    "weatherNote": "Vorhersage für die nächsten 3 Tage (deine Reise hat noch keine Daten).",
+    "weatherSource": "Quelle: Open-Meteo",
+    "weatherUnavailable": "Die Vorhersage ist gerade nicht verfügbar. Wir zeigen keine erfundenen Daten.",
+    "pdfEmpty": "Füge mindestens ein Reiseziel hinzu, um das PDF zu erstellen.",
+    "pdfPreparing": "PDF wird vorbereitet…",
+    "pdfDefaultName": "Meine Reise durch Nicaragua",
+    "pdfSummary": "{n} Tage · {places}",
+    "pdfItinerary": "Reiseplan Tag für Tag",
+    "pdfMapLink": "Diesen Punkt auf der Karte ansehen",
+    "pdfNoWeather": "Keine Vorhersage in diesem Dokument: Sieh kurz vor der Reise nach. BAQUEANO nimmt keine erfundenen Wetterdaten auf.",
+    "budgetTitle": "Ausgabenkategorien deiner Reise",
+    "budgetHonest": "BAQUEANO veröffentlicht keine Beträge ohne überprüfbare Quelle. Jede Ausgabe wird vor der Reise direkt mit dem Anbieter bestätigt.",
+    "pdfContact": "Kontakt",
+    "pdfContactBody": "Zur Abstimmung mit den Anbietern dieser Route: offizielle BAQUEANO-Linie +505 8443-1289 (WhatsApp) oder baqueanonicaragua@gmail.com. BAQUEANO verbindet dich mit den Betrieben; Buchungen und Zahlungen wickelt es nicht ab.",
+    "pdfQrPending": "Teilbarer QR-Code: demnächst, sobald Reisen mit privatem Link in deinem Konto gespeichert werden können.",
+    "noVerifiedReviews": "Keine verifizierten Bewertungen",
+    "priceToConfirm": "Preis noch zu bestätigen",
+    "mapItemUnverified": "Nicht auf BAQUEANO verifiziert · Preis und Bewertung noch offen",
+    "mapItemVerified": "Partner mit überprüfbarer Quelle · Preis noch offen",
+    "pdfSummaryStops": "{n} Stationen · {places}"
   },
   "profile": {
     "title": "Mein Profil",
@@ -5807,5 +5838,25 @@
     "soonPill": "Demnächst",
     "soonTitle": "Online-Zahlungen: demnächst",
     "soonBody": "Wir bereiten sichere Zahlungsoptionen vor. Bis dahin verbindet dich BAQUEANO direkt mit den Betrieben: Wir kassieren nichts auf der Plattform und fragen keine Kartendaten ab oder speichern sie."
+  },
+  "pdf": {
+    "version": "Version",
+    "pageOf": "Seite {n} von {total}",
+    "lastLegalUpdate": "Letzte rechtliche Aktualisierung",
+    "generatedOn": "Erstellungsdatum dieses PDF",
+    "language": "Sprache",
+    "officialSource": "Offizielle Quelle",
+    "coverNote": "Dieses PDF gibt den auf der offiziellen Website am Erstellungsdatum veröffentlichten Text wieder. Bei Abweichungen gilt die auf der Website veröffentlichte aktuelle Fassung.",
+    "toc": "Inhalt",
+    "relatedDocs": "Zugehörige Dokumente",
+    "docTerms": "Allgemeine Geschäftsbedingungen",
+    "docPrivacy": "Datenschutzerklärung",
+    "docLegal": "Impressum und rechtliche Hinweise",
+    "docCookies": "Cookie-Richtlinie",
+    "docGeneric": "Rechtliches Dokument",
+    "error": "Das PDF konnte nicht erstellt werden. Prüfe deine Verbindung und versuche es erneut.",
+    "ecoTitle": "Bestätigung der Umweltmeldung",
+    "ecoSubtitle": "Vertraulich von BAQUEANO erhalten.",
+    "ecoPrivacy": "Diese Bestätigung enthält keine Fotos, Videos oder Kontaktdaten. Für die Statusabfrage brauchst du den Code und das private Token, das beim Senden angezeigt wurde; aus Sicherheitsgründen wird das Token hier nicht gedruckt."
   }
 }

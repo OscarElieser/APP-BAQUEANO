@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-06T21:41:47.127Z",
+ "generatedAt": "2026-10-06T22:00:50.089Z",
  "base": "http://127.0.0.1:8790/",
  "widths": [
   390,
@@ -56,9 +56,7 @@
   }
  ],
  "fails": [],
- "slowLoads": [
-  "404.html@1366"
- ],
+ "slowLoads": [],
  "results": [
   {
    "page": "404.html",
@@ -93,7 +91,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": true,
+   "slowLoad": false,
    "axe": [],
    "missingAnchors": [],
    "whatsapp": [

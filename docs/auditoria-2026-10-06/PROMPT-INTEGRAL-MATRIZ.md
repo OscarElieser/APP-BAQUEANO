@@ -126,3 +126,33 @@ QUÉ: matriz de hallazgos de las 29 referencias críticas y el orden de las fase
 - **Pendiente:**
   - imágenes reales de los aliados (`cover_image` está vacío en los 30);
   - las tarjetas fijas antiguas de aliados siguen en el HTML como contenido sin JavaScript y se reemplazan al cargar los datos reales.
+
+## Avance — Fase 4 (PDFs reales, Mi Viaje honesto), 2026-10-06
+
+- **Motor PDF (`website/js/baqueano-pdf.js`):**
+  - usa jsPDF 4.2.1 guardado en el repositorio (`js/vendor/`, licencia MIT, integridad npm verificada) y solo se carga cuando se pide un PDF;
+  - genera texto seleccionable en A4, con logo, encabezado y pie "Página X de Y", metadatos y nombre `BAQUEANO_<Doc>_<IDIOMA>_v1.0.pdf`;
+  - se retiró `window.print()`.
+- **PDFs legales:**
+  - Términos, Aviso legal, Privacidad y Cookies tienen botón "Descargar PDF";
+  - cada PDF lleva portada (versión, última actualización legal, fecha de generación, idioma y fuente), índice con páginas y enlaces, y documentos relacionados;
+  - el contenido es idéntico al de la web, incluidas las cláusulas plegadas.
+  - Prueba: 8 PDFs (es/en) con 100 % de las palabras de la web (pdftotext) y pie en todas las páginas.
+- **Comprobante de denuncia en PDF:** incluye el código y el estado, pero no el token de consulta ni las evidencias.
+- **Mi Viaje:**
+  - sin viaje guardado, empieza vacío (antes mostraba un viaje inventado como si fuera tuyo);
+  - el viaje demostrativo lleva el aviso "Itinerario de ejemplo";
+  - el presupuesto dice "Por confirmar con cada prestador", sin montos inventados;
+  - se retiraron las estrellas y reseñas ficticias;
+  - el clima es real (Open-Meteo, con fuente y hora) y, si no responde, lo dice sin inventar datos;
+  - el PDF real incluye días, enlaces de mapa, clima o aviso, contacto oficial y "QR: próximamente".
+- **BAQUI:** "PDF" genera `BAQUEANO_Ruta_BAQUI_*.pdf` con las paradas reales y ya no imprime la pantalla.
+- **Contraste:** el estado vacío de Mi Viaje pasa axe (fondo sólido y naranja #C2410C).
+- **Pruebas:**
+  - Playwright: Mi Viaje vacío, demo, clima simulado con el formato real de Open-Meteo y descarga del PDF verificada con pdftotext;
+  - PDF de BAQUI con la ruta Granada → León;
+  - QA del sitio con 60 cargas y 0 fallos; i18n con 0 errores (29 claves nuevas).
+- **Pendiente:**
+  - QR con `share_token` (requiere guardar el viaje en la cuenta);
+  - probar Open-Meteo en producción, porque desde este entorno el proxy lo bloquea;
+  - validación legal humana de los textos (no del PDF).

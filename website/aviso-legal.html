@@ -258,7 +258,7 @@
   </section>
 
   <!-- ==================== CUERPO PRINCIPAL (2 COLUMNAS) ==================== -->
-  <main class="legal-main-layout">
+  <main class="legal-main-layout" data-legal-doc="aviso-legal" data-legal-version="1.0" data-legal-updated="2026-09-18">
     <!-- Sidebar Izquierdo -->
     <aside class="legal-sidebar">
       <div class="sidebar-index-card">
@@ -568,7 +568,7 @@
         <div class="transparency-version-pill">
           <span data-i18n="common.ultimaActualizacion1">Última actualización:</span> <strong data-i18n="pages.avisoLegal.legalHeroSection.strong1">18 de septiembre de 2026</strong>
         </div>
-        <button type="button" class="pdf-download-btn" onclick="window.print()">
+        <button type="button" class="pdf-download-btn" data-legal-pdf>
           <span>📥</span> <span data-i18n="common.descargarVersionPdf">Descargar versión PDF</span>
         </button>
       </div>
@@ -690,6 +690,7 @@
   </script>
 <script src="js/navigation.js?v=20261006-dialog-1"></script>
 <script src="js/global-injector.js"></script>
+  <script defer src="js/baqueano-pdf.js?v=20261006-2"></script>
 </body>
 </html>
 
