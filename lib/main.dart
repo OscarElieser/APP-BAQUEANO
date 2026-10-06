@@ -30,6 +30,7 @@ import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platf
 import 'config/app_router.dart';
 import 'config/firebase_options.dart';
 import 'core/theme/app_theme.dart';
+import 'services/presence_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -92,6 +93,8 @@ Future<void> main() async {
   }
 
   runApp(const ProviderScope(child: BaqueanoApp()));
+  // Presencia real para el Ops Center (mismo backend que la web): sin datos guardados en el teléfono.
+  PresenceService.instance.start();
 }
 
 class BaqueanoApp extends StatelessWidget {

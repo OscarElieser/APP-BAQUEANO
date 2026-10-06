@@ -119,6 +119,11 @@
             <span data-i18n="pages.admin.opsSidebarNav.span1" class="ops-nav-item-label">Dashboard Ejecutivo</span>
             <span data-i18n="pages.admin.opsSidebarNav.span2" class="ops-nav-badge live">● En Vivo</span>
           </a>
+          <a class="ops-nav-item" data-tab="39-en-vivo">
+            <i class="fa-solid fa-tower-broadcast ops-nav-item-icon"></i>
+            <span data-i18n="opsLive.title" class="ops-nav-item-label">Actividad en vivo</span>
+            <span data-i18n="pages.admin.opsSidebarNav.span2" class="ops-nav-badge live">● En Vivo</span>
+          </a>
           <a class="ops-nav-item" data-tab="02-contenido">
             <i class="fa-solid fa-file-lines ops-nav-item-icon"></i>
             <span data-i18n="pages.admin.opsSidebarNav.span3" class="ops-nav-item-label">CMS de Contenido</span>
@@ -401,6 +406,8 @@
               <button type="button" class="btn-ops-matte primary" id="btnOpsSyncAll" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.syncAll()"><i class="fa-solid fa-rotate"></i> <span data-i18n="pages.admin.btnOpsSyncAll.button1">Sincronizar</span></button>
             </div>
           </div>
+          <!-- Presencia real (baqueano-presence): personas en línea, web/Android, hoy y pico. -->
+          <div id="opsLiveStrip"></div>
 
           <!-- BANNER DE TRANSPARENCIA ARQUITECTÓNICA PARA JURADO -->
           <div style="background: rgba(22, 93, 111, 0.25); border: 1px solid rgba(45, 212, 191, 0.4); border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-size: 0.8rem; color: #E2E8F0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.65rem;">
@@ -919,6 +926,9 @@
         <section class="ops-view-panel" id="view-37-opiniones">
           <div class="ops-view-header"><h1><i class="fa-solid fa-star"></i> <span data-i18n="menu.platformReviews">Opiniones BAQUEANO</span></h1></div>
           <div class="ops-empty-state"><i class="fa-solid fa-star ops-empty-icon"></i><div data-i18n="menu.platformReviews" class="ops-empty-title">Opiniones BAQUEANO</div><div data-i18n="menu.platformReviewsDesc" class="ops-empty-desc">Calificá tu experiencia con la plataforma</div></div>
+        </section>
+        <section class="ops-view-panel" id="view-39-en-vivo" aria-live="off">
+          <div class="ops-view-header"><h1><i class="fa-solid fa-tower-broadcast"></i> <span data-i18n="opsLive.title">Actividad en vivo</span></h1></div>
         </section>
         <section class="ops-view-panel" id="view-38-buzon">
           <div class="ops-view-header"><h1><i class="fa-solid fa-inbox"></i> <span data-i18n="opsInbox.navLabel">Buzón (contacto, negocios, denuncias)</span></h1></div>
@@ -1590,7 +1600,7 @@
   <script src="js/video-registry.js?v=20260926-ops-fixed-uhd-1"></script>
   <!-- Matriz de roles compartida con el sitio público (autorización del Ops Center). -->
   <script src="js/shared/roles.js?v=20261005-rbac-1"></script>
-  <script src="js/ops-center/ops-engine.js?v=20261006-buzon-1"></script>
+  <script src="js/ops-center/ops-engine.js?v=20261006-live-1"></script>
   <script src="js/ops-center/ops-live-data.js?v=20261006-paginas-1"></script>
   <script src="js/ops-center/ops-ia-copilot.js?v=20261005-ops2-1"></script>
   <!-- Moderación de la comunidad: cliente de la Edge Function + vista 36. -->
@@ -1600,6 +1610,8 @@
   <script defer src="js/ops-center/ops-platform-reviews.js?v=20261006-1"></script>
   <!-- Buzón real: contacto, solicitudes de negocios y denuncias (Edge Function baqueano-intake, vista 38). -->
   <script defer src="js/ops-center/ops-intake-inbox.js?v=20261006-1"></script>
+  <script defer src="js/ops-center/ops-live-presence.js?v=20261006-1"></script>
+  <script defer src="js/baqueano-presence.js?v=20261006-1" data-bq-presence="true"></script>
 
   <script>
     // Puente de compatibilidad global sin errores de consola

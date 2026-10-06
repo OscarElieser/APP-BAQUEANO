@@ -4874,3 +4874,23 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Mi Viaje honesto: vacío por defecto, demo con aviso, costos "Por confirmar", clima real de Open-Meteo y PDF real;
     - BAQUI exporta un PDF de la ruta.
     - QA: 60 cargas y 0 fallos; i18n con 0 errores.
+- 2026-10-06 · Pedido del propietario: **PROMPT MAESTRO — EVOLUCIÓN INTEGRAL (Ops Center + tiempo real + App)**.
+  - Fases: 1 estabilidad; 2 presencia real (investigar por qué ~5 personas simultáneas no aparecieron en el Ops Center); 3 Ops Center (dashboard, actividad en vivo, historial, menú jerárquico, alertas); 4 opiniones (idioma reactivo sin F5, galería infinita con pausa, limpiar el formulario tras enviar, "Mis opiniones"); 5 notificaciones con campana en tiempo real; 6 mensajería web + Android en Supabase; 7 app (banner y QR hacia una URL estable /descargar, página de descarga con datos reales del build.gradle, versiones en el Ops Center, PWA); 8 automatización en infraestructura (Actions, cron, Edge, automation_runs); 9 informe PDF técnico con datos reales; 10 optimización.
+  - Reglas: no borrar; no inventar; nada de F5 como mecanismo; sin secretos en el frontend; un usuario común nunca entra al Ops Center.
+- 2026-10-06 · Pedido del propietario (amplía el anterior): **EQUIPO SENIOR — Firebase autentica, Supabase registra**.
+  - Flujo exigido: Firebase Auth → ID Token → backend verifica → UID verificado → Supabase → presencia → Ops Center. Nunca confiar en un UID enviado por el frontend ni guardar ID Tokens.
+  - Presencia con estados ONLINE / INACTIVO / OFFLINE y desglose Firebase (Google, correo) frente a invitados, y web frente a Android.
+  - Tabla de usuarios conectados (UID solo en la sección técnica) y filtros en "Actividad en vivo".
+  - Luego: opiniones e idiomas, notificaciones, mensajería, QR/APK/PWA, automation_runs, informe PDF, CI/CD, seguridad, rendimiento y accesibilidad.
+  - Skills externas: solo maduras y revisadas (reputación, permisos, seguridad); no se instala nada sin esa revisión.
+  - Resultado — presencia real (F2/F3/F4 del pedido):
+    - Causa comprobada: sin métrica de "ahora"; analítica condicionada al consentimiento (9 visitantes y 1 consentimiento el 06/10); user_id siempre vacío porque el login es Firebase y la ingesta usa auth.uid() de Supabase; Android sin señal; rastreador viejo bloqueado y sin reemplazo.
+    - Solución:
+      - Edge Function baqueano-presence (v2), que verifica el token de Firebase en el servidor;
+      - tablas presence_sessions y presence_events con RLS y solo service_role;
+      - cliente web sin almacenamiento local;
+      - servicio Android;
+      - vista 39 "Actividad en vivo" con KPIs, 🔥 Firebase Auth, estados 🟢🟡⚪, tabla de usuarios y feed con filtros.
+    - Pruebas: SQL revertido, HTTP real (200/403/401), Playwright + axe 390/1366 (0 fallas), QA 60/60, i18n 0 errores.
+    - Pendiente: compilar el APK con la presencia (aquí no hay Flutter) y que el propietario pruebe con su cuenta real.
+    - Informe: docs/auditoria-2026-10-06/PRESENCIA-OPS-CENTER.md.

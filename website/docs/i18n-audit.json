@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T22:00:54.300Z",
+  "generatedAt": "2026-10-06T22:29:31.581Z",
   "languages": [
     "es",
     "en",
@@ -9,21 +9,21 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4376,
-    "en": 4376,
-    "fr": 4376,
-    "it": 4376,
-    "pt": 4376,
-    "de": 4376
+    "es": 4448,
+    "en": 4448,
+    "fr": 4448,
+    "it": 4448,
+    "pt": 4448,
+    "de": 4448
   },
   "html": {
     "files": 33,
-    "total": 3802,
-    "translated": 3801,
+    "total": 3805,
+    "translated": 3804,
     "untranslated": 1
   },
   "js": {
-    "files": 101,
+    "files": 103,
     "translated": 152,
     "untranslated": 722
   },
@@ -80,6 +80,7 @@
     "js/baqueano-dialog.js",
     "js/baqueano-master-catalog.js",
     "js/baqueano-pdf.js",
+    "js/baqueano-presence.js",
     "js/baqueano-traffic-tracker.js",
     "js/business-application.js",
     "js/community-api.js",
@@ -103,6 +104,7 @@
     "js/intake-api.js",
     "js/ops-center/ops-community-moderation.js",
     "js/ops-center/ops-intake-inbox.js",
+    "js/ops-center/ops-live-presence.js",
     "js/ops-center/ops-platform-reviews.js",
     "js/platform-reviews.js",
     "js/safety-gallery.js",
@@ -152,8 +154,8 @@
     {
       "file": "admin.html",
       "type": "html",
-      "total": 485,
-      "translated": 485,
+      "total": 488,
+      "translated": 488,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -583,6 +585,15 @@
     },
     {
       "file": "js/baqueano-pdf.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/baqueano-presence.js",
       "type": "js",
       "total": 0,
       "translated": 0,
@@ -1120,6 +1131,15 @@
       "untranslated": 0,
       "editorialStrings": 23,
       "coverage": 0
+    },
+    {
+      "file": "js/ops-center/ops-live-presence.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/ops-center/ops-mock-data.js",

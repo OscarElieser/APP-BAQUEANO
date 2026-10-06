@@ -1777,6 +1777,13 @@
     },
     // 38: Buzón real (Edge Function baqueano-intake): contacto, solicitudes de negocios y denuncias.
     // Lo pinta js/ops-center/ops-intake-inbox.js; el servidor exige rol de equipo.
+    // 39: Actividad en vivo (Edge Function baqueano-presence). Lo pinta ops-live-presence.js.
+    '39-en-vivo': {
+      isSystem: true,
+      title: 'Actividad en vivo',
+      icon: 'fa-tower-broadcast',
+      roleRequired: 'admin'
+    },
     '38-buzon': {
       isSystem: true,
       title: 'Buzón BAQUEANO',
@@ -4144,6 +4151,10 @@
       if (tabId === '20-sos') return this.renderSosModule();
       if (tabId === '11-reservas') return this.renderReservationsModule();
       if (tabId === '35-backup') return this.renderBackupSyncModule();
+      if (tabId === '39-en-vivo') {
+        if (window.BaqueanoOpsLive) return window.BaqueanoOpsLive.render(panel);
+        return;
+      }
       if (tabId === '38-buzon') {
         if (window.BaqueanoOpsInbox) return window.BaqueanoOpsInbox.render(panel);
         return;

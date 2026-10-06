@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-06T22:00:54.300Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4376 · en 4376 · fr 4376 · it 4376 · pt 4376 · de 4376
+Generado: 2026-10-06T22:29:31.581Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4448 · en 4448 · fr 4448 · it 4448 · pt 4448 · de 4448
 
-HTML: 3801/3802 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3804/3805 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -139,7 +139,7 @@ HTML: 3801/3802 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/territory-carousel.js | js | 1 | 0 | 1 | 0 % |
 | js/territory-media-experience.js | js | 1 | 0 | 1 | 0 % |
 | 404.html | html | 25 | 25 | 0 | 100 % |
-| admin.html | html | 485 | 485 | 0 | 100 % |
+| admin.html | html | 488 | 488 | 0 | 100 % |
 | aliados.html | html | 189 | 189 | 0 | 100 % |
 | ambiental.html | html | 131 | 131 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -184,6 +184,7 @@ HTML: 3801/3802 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/baqueano-dialog.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-master-catalog.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-pdf.js | js | 0 | 0 | 0 | 100 % |
+| js/baqueano-presence.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-traffic-tracker.js | js | 0 | 0 | 0 | 100 % |
 | js/business-application.js | js | 0 | 0 | 0 | 100 % |
 | js/community-api.js | js | 0 | 0 | 0 | 100 % |
@@ -207,6 +208,7 @@ HTML: 3801/3802 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/intake-api.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-intake-inbox.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-live-presence.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |

@@ -912,6 +912,14 @@
       dialogScript.dataset.bqDialog = 'true';
       document.body.appendChild(dialogScript);
     }
+    // Presencia real para el Ops Center (2026-10-06): sin cookies ni almacenamiento.
+    if (!window.BaqueanoPresence && !document.querySelector('script[data-bq-presence]')) {
+      var presenceScript = document.createElement('script');
+      presenceScript.src = 'js/baqueano-presence.js?v=20261006-1';
+      presenceScript.dataset.bqPresence = 'true';
+      presenceScript.defer = true;
+      document.body.appendChild(presenceScript);
+    }
     if (!document.querySelector('script[data-platform-enhancements]')) {
       var enhancementScript = document.createElement('script');
       enhancementScript.src = 'js/platform-enhancements.js?v=20261006-pdf-1';

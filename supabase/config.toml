@@ -55,3 +55,10 @@ enabled = true
 verify_jwt = false
 import_map = "./functions/baqueano-intake/deno.json"
 entrypoint = "./functions/baqueano-intake/index.ts"
+
+[functions.baqueano-presence]
+# Presencia operativa: heartbeat público (origen web permitido o Android) y snapshot solo para el equipo.
+enabled = true
+verify_jwt = false
+import_map = "./functions/baqueano-presence/deno.json"
+entrypoint = "./functions/baqueano-presence/index.ts"
