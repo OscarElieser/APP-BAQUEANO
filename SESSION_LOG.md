@@ -20,6 +20,18 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 # ðŸ§­ BAQUEANO â€” BitÃ¡cora Persistente de Sesiones
 
+## 🧭 PUBLICACIÓN AUTORIZADA: DESTINOS EN VIVO + FIN DE ERRORES EN SUPABASE (05-10-2026 ~18:15)
+
+- **Consulta:** *"OK PUBLÍCALO"* + elección "Sí, todo junto" (los 3 pasos de errores/warnings + destinos).
+- **Aplicado en producción:**
+  1. Supabase: migración `security_posture` aplicada vía Management API en una transacción y registrada en `supabase_migrations.schema_migrations` (versión 20261006000827). Verificada como anon (staff_roles cerrada, destinations solo lectura, kpi_dashboard sin ejecución, user_registered solo servidor).
+  2. Edge Function `baqueano-identity` v2 desplegada (CLI `--use-api`): JWT falso → 401 sin llamar a Auth (sin warning nuevo en auth_logs).
+  3. GitHub: el propietario ya había subido "google10" (5dd779d7) con destinos + CI; se agregó 68ff851c (CI: tablas con RLS —user_roles, identity_links, business_members— se verifican con lectura vacía 200).
+- **Evidencia:** logs de Supabase desde 00:11 UTC: 0 errores Postgres y 0 respuestas 4xx/5xx pese a correr los controles de CI.
+- **HALLAZGO BLOQUEANTE:** baqueanonicaragua.com (Azure) sirve el commit 56bd236 desplegado 2026-10-05T00:27Z; el autodeploy de la VM no publica ningún commit desde entonces (por eso Kronox falla en cada push). El build `build-hostinger-static.mjs` funciona localmente (771 archivos): la falla es de la VM (revisar `journalctl -u baqueano-autodeploy`, espacio en disco, timer). app-baqueano.web.app (Firebase) también está desactualizado. Sin acceso desde esta PC (sin Azure CLI ni llave SSH).
+- **Kronox (corrido local):** 56/63; fallas: /health con commit viejo (crítico), puerto 8080 abierto (crítico), SSH 22 abierto a Internet, canonical apunta a app-baqueano.web.app, faltan hreflang/JSON-LD/manifest en la versión vieja servida.
+
+
 ## 🧭 "TODOS LOS DESTINOS (10)": SOLO SALEN 10 (05-10-2026)
 
 - **Consulta:** captura de la sección "Todos los destinos (10)" (Isletas de Granada, Miraflor, Laguna de Apoyo, Corn Island, Reserva Indio Maíz… con calificaciones y "Desde C$") — *"XQ ME SIGUEN SALIENDO SOLO LOS 10 REVISAR AHI"*.
