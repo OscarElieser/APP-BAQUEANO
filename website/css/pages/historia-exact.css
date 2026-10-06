@@ -1213,3 +1213,128 @@ dialog.hist-era-dialog .hist-era-dialog-title {
 @media (max-width: 600px) {
   dialog.hist-era-dialog[open] { inset: auto 0 0 0; margin: 0; }
 }
+
+/* ============================================================================
+ * AUDIOGUÍA → BIBLIOTECA SONORA (2026-10-05)
+ * 🎯 POR QUÉ: la tarjeta pasa de 7 relatos sueltos a períodos con capítulos,
+ *   cada uno con tipo (hecho histórico / patrimonio / tradición oral), ficha
+ *   y fuentes verificadas, sin cambiar la identidad visual de la tarjeta.
+ * ⚙️ CÓMO: columna derecha = chips de período + lista de capítulos del
+ *   período activo + "Siguiente capítulo"; columna izquierda suma la ficha
+ *   (.hist-audio-meta) y las fuentes (.hist-audio-sources) bajo el subtítulo.
+ * 📦 QUÉ: mismos chips y paleta; objetivos táctiles ≥ 36 px; 320–2560 px.
+ * ========================================================================== */
+.hist-audio-section { align-items: flex-start; }
+.hist-audio-left { align-items: flex-start; flex: 1 1 auto; min-width: 0; }
+.hist-audio-left > .hist-bird-avatar,
+.hist-audio-left > .hist-audio-play-btn { margin-top: 4px; }
+.hist-audio-right { display: flex; flex-direction: column; gap: 12px; flex: 0 1 450px; min-width: 0; }
+
+.hist-audio-chapters-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px dashed #E2E8F0;
+}
+.hist-audio-chapters-label {
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748B;
+}
+.hist-audio-chapters { display: flex; flex-direction: column; gap: 4px; }
+.hist-audio-chapter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  background: #FFFFFF;
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #0F172A;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+.hist-audio-chapter:hover { border-color: rgba(22, 93, 111, 0.35); background: #F8FAFC; }
+.hist-audio-chapter:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.hist-audio-chapter.is-active { border-color: #165D6F; background: #E6EEF0; }
+.hist-audio-chapter-n {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #F4E6C1;
+  color: #165D6F;
+  font-size: 0.66rem;
+  font-variant-numeric: tabular-nums;
+}
+.hist-audio-chapter.is-active .hist-audio-chapter-n { background: #165D6F; color: #FFFFFF; }
+
+.hist-audio-next {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid #165D6F;
+  border-radius: 999px;
+  background: transparent;
+  color: #165D6F;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+.hist-audio-next:hover { background: #165D6F; color: #FFFFFF; }
+.hist-audio-next:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.hist-audio-next:disabled { opacity: 0.45; cursor: default; background: transparent; color: #165D6F; }
+
+.hist-audio-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin-top: 10px;
+  font-size: 0.72rem;
+  color: #4F5E6B;
+}
+.hist-audio-meta:empty { display: none; }
+.hist-audio-meta-item i { color: #F65E01; }
+.hist-audio-type {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.hist-audio-type--historical_fact { background: #E6EEF0; color: #165D6F; }
+.hist-audio-type--heritage { background: #F4E6C1; color: #7A4A12; }
+.hist-audio-type--oral_tradition { background: #FDEBDD; color: #A43F00; }
+.hist-audio-map-link { font-weight: 800; color: #165D6F; text-decoration: none; }
+.hist-audio-map-link:hover, .hist-audio-map-link:focus-visible { color: #F65E01; text-decoration: underline; }
+
+.hist-audio-sources {
+  margin: 8px 0 0;
+  max-width: 64ch;
+  font-size: 0.68rem;
+  line-height: 1.5;
+  color: #64748B;
+}
+.hist-audio-sources a { color: #165D6F; text-decoration: underline; text-underline-offset: 2px; }
+.hist-audio-verified { white-space: nowrap; font-weight: 700; color: #3F7A55; }
+
+@media (max-width: 1100px) {
+  .hist-audio-right { flex-basis: auto; width: 100%; }
+}

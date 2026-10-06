@@ -20,8 +20,11 @@ if (path.dirname(output) !== path.resolve(root) || path.basename(output) !== 'di
 // (scripts/build-search-index.mjs); sin ellos el buscador cae al modo básico.
 const publicDirectories = ['assets', 'css', 'data', 'js', 'locales'];
 const publicRootFiles = new Set([
-  '.htaccess', 'app.js', 'favicon.ico', 'favicon.png', 'manifest.json', 'robots.txt',
-  'service-worker.js', 'sitemap.xml', 'styles.css'
+  '.htaccess', 'app.js', 'favicon.ico', 'favicon.png', 'manifest.json', 'site.webmanifest',
+  'favicon-16x16.png', 'favicon-32x32.png', 'favicon-48x48.png', 'favicon-64x64.png',
+  'apple-touch-icon.png', 'android-chrome-192x192.png', 'android-chrome-512x512.png',
+  'icon-192.png', 'icon-512.png', 'maskable-icon-192.png', 'maskable-icon-512.png',
+  'robots.txt', 'service-worker.js', 'sitemap.xml', 'styles.css'
 ]);
 const ignoredAssetNames = new Set([
   'BaqueanoNicaragua.apk',
@@ -57,8 +60,13 @@ for (const directory of publicDirectories) await copyTree(path.join(root, direct
 const publishedPages = (await fs.readdir(output)).filter((name) => name.endsWith('.html'));
 const injectorSheets = readInjectorSheets(await fs.readFile(path.join(root, 'js/global-injector.js'), 'utf8'));
 if (injectorSheets.length < 5) throw new Error('No se pudo leer la lista de hojas de global-injector.js');
+const isGoogleVerification = (name) => /^google[a-f0-9]+\.html$/i.test(name);
 const aliasPages = new Set();
 for (const page of publishedPages) {
+  if (isGoogleVerification(page)) {
+    aliasPages.add(page);
+    continue;
+  }
   const target = path.join(output, page);
   const html = await fs.readFile(target, 'utf8');
   if (redirectTarget(html)) aliasPages.add(page);

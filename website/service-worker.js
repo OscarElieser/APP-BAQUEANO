@@ -9,13 +9,20 @@
  * ============================================================================
  */
 'use strict';
-const CACHE_VERSION = 'baqueano-offline-v14';
+const CACHE_VERSION = 'baqueano-offline-v15';
 const OFFLINE_URL = '/offline.html';
 const PRECACHE_URLS = [
   OFFLINE_URL,
   '/index.html',
   '/destinos.html',
   '/manifest.json',
+  '/site.webmanifest',
+  '/favicon.ico',
+  '/favicon-32x32.png',
+  '/favicon-16x16.png',
+  '/apple-touch-icon.png',
+  '/android-chrome-192x192.png',
+  '/android-chrome-512x512.png',
   '/styles.css',
   '/css/mobile-first-core.css',
   '/css/demo-hackathon.css',
@@ -25,13 +32,15 @@ const PRECACHE_URLS = [
   '/assets/images/logo.png'
 ];
 const PRIVATE_PREFIXES = ['/admin', '/perfil', '/api/', '/health'];
-const STATIC_PREFIXES = ['/assets/images/', '/assets/audio/', '/css/', '/js/'];
+const STATIC_PREFIXES = ['/assets/images/', '/assets/audio/', '/css/', '/js/', '/assets/icons/'];
 function isPrivatePath(pathname) {
   return PRIVATE_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 }
 function isPublicStaticPath(pathname) {
   return STATIC_PREFIXES.some((prefix) => pathname.startsWith(prefix)) ||
-    pathname === '/styles.css' || pathname === '/app.js' || pathname === '/manifest.json';
+    pathname === '/styles.css' || pathname === '/app.js' || pathname === '/manifest.json' ||
+    pathname === '/site.webmanifest' || pathname === '/favicon.ico' || pathname.startsWith('/favicon-') ||
+    pathname.startsWith('/android-chrome-') || pathname.startsWith('/maskable-') || pathname === '/apple-touch-icon.png';
 }
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_VERSION).then((cache) => cache.addAll(PRECACHE_URLS)));

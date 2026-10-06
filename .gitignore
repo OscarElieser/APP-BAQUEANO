@@ -114,3 +114,6 @@ desktop.ini
 
 # Graphify: grafo de código regenerable (docs/architecture/GRAPHIFY.md)
 graphify-out/
+
+# Respaldos locales de migración (pueden contener datos de usuarios): nunca al repositorio
+backups/

@@ -1,0 +1,13 @@
+{
+ "note": "Solo puntos de acceso con fuente verificable (entrada, centro de visitantes, muelle, sendero). Vacío a propósito: al 2026-10-05 no hay ninguno verificado. Nunca usar el centroide de un área.",
+ "schema": {
+  "area_key": "slug del área (management-plans.json)",
+  "name": "texto",
+  "latitude": "número",
+  "longitude": "número",
+  "access_type": "entrance|visitor_center|dock|trailhead|ranger_station|parking|other",
+  "source_url": "https://…",
+  "verified_at": "AAAA-MM-DD"
+ },
+ "access_points": []
+}

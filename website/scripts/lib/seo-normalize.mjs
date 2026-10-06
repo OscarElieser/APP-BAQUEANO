@@ -138,7 +138,7 @@ export function normalizeHtml(html, page) {
       const graph = page === 'index.html'
         ? [website, {
           '@type': 'Organization', '@id': `${SITE}/#organization`, name: 'Baqueano Nicaragua', url: `${SITE}/`,
-          logo: `${SITE}/assets/icons/icon-512.png`, image: DEFAULT_OG_IMAGE, sameAs: SOCIAL_PROFILES,
+          logo: `${SITE}/android-chrome-512x512.png`, image: DEFAULT_OG_IMAGE, sameAs: SOCIAL_PROFILES,
           areaServed: { '@type': 'Country', name: 'Nicaragua' }
         }]
         : [website,
@@ -153,14 +153,16 @@ export function normalizeHtml(html, page) {
 
   // 5) Iconos: favicon y apple-touch-icon en todas las páginas (iOS y pestañas).
   if (!/<link\b[^>]*rel=["'](?:shortcut )?icon["']/i.test(head)) {
-    additions.push('<link rel="icon" type="image/png" sizes="48x48" href="/assets/icons/favicon-48.png">');
+    additions.push('<link rel="icon" href="/favicon.ico" sizes="any">');
+    additions.push('<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">');
+    additions.push('<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">');
   }
   if (!/<link\b[^>]*rel=["']apple-touch-icon["']/i.test(head)) {
-    additions.push('<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">');
+    additions.push('<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">');
   }
 
   // 6) Manifest PWA enlazado en todas las páginas.
-  if (!/<link\b[^>]*rel=["']manifest["']/i.test(head)) additions.push('<link rel="manifest" href="/manifest.json">');
+  if (!/<link\b[^>]*rel=["']manifest["']/i.test(head)) additions.push('<link rel="manifest" href="/site.webmanifest">');
 
   if (!additions.length) return before + head + after;
   return `${before}${head.replace(/\s*$/, '')}\n  ${additions.join('\n  ')}\n${after}`;

@@ -94,7 +94,8 @@ check('robots apunta al sitemap oficial', () => {
   assert.ok(out.includes(`Sitemap: ${SITE}/sitemap.xml`) && !out.includes('web.app'));
 });
 check('todas las páginas reales quedan con un único canonical oficial', () => {
-  for (const page of fs.readdirSync(ROOT).filter((n) => n.endsWith('.html'))) {
+  const isSiteVerification = (name) => /^google[0-9a-f]{8,}\.html$/i.test(name);
+  for (const page of fs.readdirSync(ROOT).filter((n) => n.endsWith('.html') && !isSiteVerification(n))) {
     const out = normalizeHtml(fs.readFileSync(path.join(ROOT, page), 'utf8'), page);
     assert.ok(count(out, /rel=["']canonical["']/g) <= 1, page);
     assert.equal(count(out, /rel=["']manifest["']/g), 1, page);

@@ -1,0 +1,191 @@
+{
+  "generated_from": "website/scripts/data/marena",
+  "statements": 116,
+  "areas": 42,
+  "linked_to_existing_place": [
+    {
+      "area": "reserva-natural-tisey-la-estanzuela",
+      "place_id": "pl-reserva-natural-tisey-la-estanzuela",
+      "place_name": "Reserva Natural Tisey-La Estanzuela",
+      "place_published": true
+    },
+    {
+      "area": "parque-nacional-saslaya",
+      "place_id": "pl-parque-nacional-saslaya",
+      "place_name": "Parque Nacional Saslaya",
+      "place_published": true
+    },
+    {
+      "area": "parque-nacional-volcan-masaya",
+      "place_id": "pl-parque-nacional-volcan-masaya",
+      "place_name": "Parque Nacional Volcán Masaya",
+      "place_published": true
+    },
+    {
+      "area": "refugio-vida-silvestre-rio-san-juan",
+      "place_id": "pl-refugio-de-vida-silvestre-rio-san-juan",
+      "place_name": "Refugio de Vida Silvestre Río San Juan",
+      "place_published": true
+    },
+    {
+      "area": "reserva-natural-cerro-datanli-el-diablo",
+      "place_id": "pl-reserva-natural-cerro-datanli-el-diablo",
+      "place_name": "Reserva Natural Cerro Datanlí–El Diablo",
+      "place_published": true
+    },
+    {
+      "area": "reserva-natural-cerro-mombachito-la-vieja",
+      "place_id": "pl-reserva-mombachito-cerro-la-vieja",
+      "place_name": "Reserva Mombachito–Cerro La Vieja",
+      "place_published": true
+    },
+    {
+      "area": "reserva-natural-cerro-musun",
+      "place_id": "pl-reserva-natural-cerro-musun",
+      "place_name": "Reserva Natural Cerro Musún",
+      "place_published": true
+    },
+    {
+      "area": "reserva-natural-estero-padre-ramos",
+      "place_id": "pl-estero-padre-ramos",
+      "place_name": "Estero Padre Ramos",
+      "place_published": true
+    },
+    {
+      "area": "reserva-natural-laguna-apoyo",
+      "place_id": "pl-reserva-natural-laguna-de-apoyo",
+      "place_name": "Reserva Natural Laguna de Apoyo",
+      "place_published": true
+    },
+    {
+      "area": "reserva-natural-macizo-penas-blancas",
+      "place_id": "pl-reserva-natural-macizo-de-penas-blancas",
+      "place_name": "Reserva Natural Macizo de Peñas Blancas",
+      "place_published": true
+    }
+  ],
+  "new_unpublished_places": 32,
+  "ambiguous": [],
+  "possible_same_entity_for_ops_review": [
+    {
+      "area": "complejo-volcanico-san-cristobal",
+      "candidates": [
+        {
+          "id": "pl-volcan-san-cristobal-1-745-msnm",
+          "name": "Volcán San Cristóbal (1,745 msnm)",
+          "published": true
+        }
+      ]
+    },
+    {
+      "area": "monumento-nacional-archipielago-solentiname",
+      "candidates": [
+        {
+          "id": "pl-archipielago-de-solentiname",
+          "name": "Archipiélago de Solentiname",
+          "published": true
+        }
+      ]
+    },
+    {
+      "area": "parque-nacional-volcan-maderas",
+      "candidates": [
+        {
+          "id": "pl-volcan-maderas",
+          "name": "Volcán Maderas",
+          "published": true
+        }
+      ]
+    },
+    {
+      "area": "refugio-vida-silvestre-rio-escalante",
+      "candidates": [
+        {
+          "id": "pl-refugio-rio-escalante-chacocente",
+          "name": "Refugio Río Escalante–Chacocente",
+          "published": true
+        }
+      ]
+    },
+    {
+      "area": "reserva-natural-cerro-kilambe",
+      "candidates": [
+        {
+          "id": "pl-cerro-kilambe-y-aguas-termales-de-el-cano",
+          "name": "Cerro Kilambé y aguas termales de El Caño",
+          "published": true
+        }
+      ]
+    },
+    {
+      "area": "reserva-natural-complejo-volcanico-telica",
+      "candidates": [
+        {
+          "id": "pl-volcan-telica",
+          "name": "Volcán Telica",
+          "published": true
+        }
+      ]
+    },
+    {
+      "area": "reserva-natural-isla-juan-venado",
+      "candidates": [
+        {
+          "id": "pl-isla-juan-venado",
+          "name": "Isla Juan Venado",
+          "published": true
+        }
+      ]
+    },
+    {
+      "area": "reserva-natural-laguna-asososca",
+      "candidates": [
+        {
+          "id": "pl-laguna-de-asososca",
+          "name": "Laguna de Asososca",
+          "published": true
+        }
+      ]
+    },
+    {
+      "area": "reserva-natural-laguna-tiscapa",
+      "candidates": [
+        {
+          "id": "pl-laguna-de-tiscapa",
+          "name": "Laguna de Tiscapa",
+          "published": true
+        }
+      ]
+    },
+    {
+      "area": "reserva-natural-serranias-tepesomoto",
+      "candidates": [
+        {
+          "id": "pl-reserva-natural-tepesomoto-la-pataste",
+          "name": "Reserva Natural Tepesomoto-La Pataste",
+          "published": true
+        }
+      ]
+    },
+    {
+      "area": "reserva-natural-volcan-concepcion",
+      "candidates": [
+        {
+          "id": "pl-volcan-concepcion",
+          "name": "Volcán Concepción",
+          "published": true
+        }
+      ]
+    },
+    {
+      "area": "reserva-natural-volcan-cosiguina",
+      "candidates": [
+        {
+          "id": "pl-volcan-cosiguina-y-laguna-crater",
+          "name": "Volcán Cosigüina y Laguna Cráter",
+          "published": true
+        }
+      ]
+    }
+  ]
+}

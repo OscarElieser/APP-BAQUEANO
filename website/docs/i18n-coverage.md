@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T18:57:15.167Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3824 · en 3824 · fr 3824 · it 3824 · pt 3824 · de 3824
+Generado: 2026-10-06T00:04:41.019Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3931 · en 3931 · fr 3931 · it 3931 · pt 3931 · de 3931
 
-HTML: 3644/3645 textos con clave (1 pendientes) · JS: 731 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3660/3661 textos con clave (1 pendientes) · JS: 729 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -123,7 +123,6 @@ HTML: 3644/3645 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | js/baqueano-3d-map.js | js | 2 | 0 | 2 | 0 % |
 | js/baqui-evolved.js | js | 2 | 0 | 2 | 0 % |
 | js/global-music-player.js | js | 2 | 0 | 2 | 0 % |
-| js/historia-audioguia.js | js | 2 | 0 | 2 | 0 % |
 | js/home-community.js | js | 2 | 0 | 2 | 0 % |
 | js/madriz-territory-map.js | js | 15 | 13 | 2 | 86.7 % |
 | js/ops-center/ops-ia-copilot.js | js | 2 | 0 | 2 | 0 % |
@@ -142,7 +141,7 @@ HTML: 3644/3645 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | 404.html | html | 25 | 25 | 0 | 100 % |
 | admin.html | html | 479 | 479 | 0 | 100 % |
 | aliados.html | html | 195 | 195 | 0 | 100 % |
-| ambiental.html | html | 121 | 121 | 0 | 100 % |
+| ambiental.html | html | 129 | 129 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
 | apps/admin/src/app/page.tsx | tsx | 0 | 0 | 0 | 100 % |
 | apps/admin/src/components/AdminCards.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -173,7 +172,7 @@ HTML: 3644/3645 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | experiencias.html | html | 157 | 157 | 0 | 100 % |
 | favoritos.html | html | 8 | 8 | 0 | 100 % |
 | gastronomia.html | html | 205 | 205 | 0 | 100 % |
-| historia.html | html | 176 | 176 | 0 | 100 % |
+| historia.html | html | 184 | 184 | 0 | 100 % |
 | index.html | html | 214 | 214 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
 | js/async-styles.js | js | 0 | 0 | 0 | 100 % |
@@ -185,20 +184,25 @@ HTML: 3644/3645 textos con clave (1 pendientes) · JS: 731 textos dinámicos pen
 | js/community-api.js | js | 0 | 0 | 0 | 100 % |
 | js/definitive-index-interactions.js | js | 0 | 0 | 0 | 100 % |
 | js/destination-community.js | js | 0 | 0 | 0 | 100 % |
+| js/destinos-catalog-live.js | js | 0 | 0 | 0 | 100 % |
 | js/destinos-provenance.js | js | 0 | 0 | 0 | 100 % |
+| js/destinos-supabase.js | js | 8 | 8 | 0 | 100 % |
 | js/destinos-verified.js | js | 15 | 15 | 0 | 100 % |
 | js/favoritos.js | js | 0 | 0 | 0 | 100 % |
 | js/firebase-config.js | js | 0 | 0 | 0 | 100 % |
 | js/firestore-mirror.js | js | 0 | 0 | 0 | 100 % |
 | js/firestore-realtime.js | js | 0 | 0 | 0 | 100 % |
 | js/hero-video-loader.js | js | 0 | 0 | 0 | 100 % |
+| js/historia-audioguia.js | js | 0 | 0 | 0 | 100 % |
 | js/impact-public.js | js | 6 | 6 | 0 | 100 % |
 | js/local-keys.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |
+| js/services/places-service.js | js | 4 | 4 | 0 | 100 % |
 | js/shared/roles.js | js | 0 | 0 | 0 | 100 % |
 | js/smart-search.js | js | 0 | 0 | 0 | 100 % |
 | js/supabase-config.js | js | 0 | 0 | 0 | 100 % |
+| js/territory-artists.js | js | 0 | 0 | 0 | 100 % |
 | js/territory-inspector.js | js | 0 | 0 | 0 | 100 % |
 | js/territory-media-catalog.js | js | 0 | 0 | 0 | 100 % |
 | js/territory-rich-sections.js | js | 0 | 0 | 0 | 100 % |

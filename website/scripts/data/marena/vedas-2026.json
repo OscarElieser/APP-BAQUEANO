@@ -1,0 +1,1574 @@
+{
+ "source": {
+  "institution": "MARENA",
+  "document_title": "Resolución Ministerial No. 016-2026 \"Actualización del Sistema de Vedas para el año 2026\"",
+  "publication": "La Gaceta, Diario Oficial No. 29",
+  "publication_date": "2026-02-16",
+  "issued_date": "2026-01-30",
+  "effective": "A partir de su publicación en La Gaceta (Art. 11)",
+  "source_url": "https://www.marena.gob.ni/wp-content/uploads/2026/03/GACETA29_2026.pdf",
+  "announcement_url": "https://www.marena.gob.ni/2026/03/03/actualizacion-del-sistema-de-vedas-para-el-ano-2026/",
+  "pages": "1643-1654",
+  "retrieved_at": "2026-10-05",
+  "repeals": "Resolución Ministerial No. 009-2025 (La Gaceta No. 35, 21-02-2025)",
+  "continuity": "Art. 10: de no publicarse el Sistema de Vedas 2027, sigue vigente esta resolución."
+ },
+ "year": 2026,
+ "transcription_note": "Transcrito de las páginas impresas (render del PDF oficial) el 2026-10-05; nombres y textos tal como aparecen, incluidas erratas del original.",
+ "articles": {
+  "art6": "Tortuga verde (Chelonia mydas) del Caribe: solo consumo con fines de subsistencia para las comunidades de la Costa Caribe (Ley 489 art. 96; Decreto 09-2005 art. 106).",
+  "art7": "Se autoriza durante septiembre la pesca deportiva de Sábalo Real en el Departamento de Río San Juan, con las autorizaciones correspondientes."
+ },
+ "restrictions": [
+  {
+   "group": "mamiferos",
+   "scientific_name": "Myrmecophaga tridactyla",
+   "common_name": "Oso hormiguero/ Oso Caballo/ Hormiguero Gigante",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Tamandua mexicana",
+   "common_name": "Hormiguero Colmenero/ Perico/ Tamandúa Norteña",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Cíclopes dorsalis",
+   "common_name": "Hormiguero Enano/ Oso hormiguero sedoso",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Choloepus hoffmanni",
+   "common_name": "Perezoso de Dos Garfios",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Bradypus variegatus",
+   "common_name": "Perezoso de Tres Garfios",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Cebus imitator",
+   "common_name": "Mono Cara Blanca, Capuchino",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Alouatta palliata",
+   "common_name": "Mono Congo, Mono Aullador",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Ateles geoffroyi",
+   "common_name": "Mono Araña, / Mono Bayo/ Mono Colorado",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Sciurus richmondi",
+   "common_name": "Ardilla del Rama",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Orthogeomys matagalpae",
+   "common_name": "Taltuza Segoviana",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Potos flavus",
+   "common_name": "Cuyuso/ Kinkayú",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Bassaricyon gabbii",
+   "common_name": "Cuyuso / Olingo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Bassariscus sumichrasti",
+   "common_name": "Cuyuso / Cacomistle",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Nasua narica",
+   "common_name": "Pizote, Pizote Solo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Neogale frenata",
+   "common_name": "Comadreja de Cola Larga",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Galictis vittata",
+   "common_name": "Tejon / Glotón Mayor",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Eira barbara",
+   "common_name": "Gato Culumuco",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Lontra longicaudis",
+   "common_name": "Perro de Agua/ Nutria / Nutria Colilarga",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Leopardus pardalis",
+   "common_name": "Tigrillo, Manigordo / Ocelote",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Leopardus wiedii",
+   "common_name": "Gato de Monte / Margay",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Herpailurus yaguarondi",
+   "common_name": "Leoncillo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Puma concolor",
+   "common_name": "León/ Puma",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Pantera onca",
+   "common_name": "Tigre/ Jaguar",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Trichechus manatus",
+   "common_name": "Manatí, Palpa",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Tapirus bairdii",
+   "common_name": "Danto, Danta, Tapir Centroamericano",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Sotalia fluviatilis",
+   "common_name": "Delfín/ Bufeo Negro/ Delfín Lagunero",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Tursiops truncatus",
+   "common_name": "Delfín Nariz de Botella, Delfín Hocicudo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Megaptera novaeangliae",
+   "common_name": "Ballena Jorobada",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Penelope purpurascens",
+   "common_name": "Pava Crestada",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Penelopina nigra",
+   "common_name": "Chachalaca Segoviana",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Crax rubra",
+   "common_name": "Pavón, Pajuil",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Ardea alba",
+   "common_name": "Garza Real",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Ardea Herodias",
+   "common_name": "Garzón Azul",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Platalea ajaja",
+   "common_name": "Espátula Rosada, Garza rosada",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Jabiru mycteria",
+   "common_name": "Pancho Galán, Galán Sin Ventura",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Mesembrinibis cayennensis",
+   "common_name": "Ibis Verde",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Sarcoramphus papa",
+   "common_name": "Rey de los Zopilotes",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Pandion haliaetus",
+   "common_name": "Águila Pescadora",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Leptodon cayanensis",
+   "common_name": "Gavilán Cabeza Gris",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Chondrohierax uncinatus",
+   "common_name": "Gavilán Pico Ganchudo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Elanoides forficatus",
+   "common_name": "Gavilancito Cola de Tijera",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Gampsonyx swainsonii",
+   "common_name": "Gavilancito Cara Amarilla",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Elanus leucurus",
+   "common_name": "Gavilán Cola Blanca",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Rosthramus sociabilis",
+   "common_name": "Gavilancito Caracolero",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Harpagus bidentatus",
+   "common_name": "Gavilancito Bidentado",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Ictinia mississippiensis",
+   "common_name": "Elanio Cola Negra",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Ictinia plumbea",
+   "common_name": "Elanio Gris",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Microspiza superciliosus",
+   "common_name": "Gavilancito Pequeño",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Accipiter striatus",
+   "common_name": "Gavilancito Pajarero",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Astur bicolor",
+   "common_name": "Gavilán Bicolor",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Busarellus nigricolis",
+   "common_name": "Gavilán Cuello Negro",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Circus hudsonius",
+   "common_name": "Aguilucho de Pantano",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Geranospiza caerulescens",
+   "common_name": "Gavilán Ranero Patas Rojas",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Pseudastur albicollis",
+   "common_name": "Aguilucho Blanco",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Buteogallus anthracinus",
+   "common_name": "Gavilán Cangrejero",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Buteogallus urubitinga",
+   "common_name": "Gavilán Negro",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Parabuteo unicinctus",
+   "common_name": "Gavilán Alicastaño",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Buteogallus solitarius",
+   "common_name": "Águila Solitaria",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Rupornis magnirostris",
+   "common_name": "Gavilán Chapulinero, Gavilán de las Rondas",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Buteo platypterus",
+   "common_name": "Gavilán Alas Anchas",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Buteo plagiatus",
+   "common_name": "Gavilán Gris",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Buteo brachyurus",
+   "common_name": "Gavilán Cola Corta",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Buteo swainsoni",
+   "common_name": "Gavilán Pechioscuro",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Geranoaetus albicaudatus",
+   "common_name": "Gavilán Cola Blanca",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Buteo albonotatus",
+   "common_name": "Gavilán Impostor",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Buteo jamaicensis",
+   "common_name": "Gavilán Cola Rojiza",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Leucopternis semiplumbeus",
+   "common_name": "Gavilán Lomo gris",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Morphnus guianensis",
+   "common_name": "Águila Crestada",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Harpia harpyja",
+   "common_name": "Águila Arpía",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Spizaetus melanoleucus",
+   "common_name": "Aguililla Blanca y Negra",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Spizaetus tyrannus",
+   "common_name": "Aguililla Negra",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Spizaetus ornatus",
+   "common_name": "Aguililla Penachuda",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Caracara plancus",
+   "common_name": "Querque",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Herpetotheres cachinnas",
+   "common_name": "Guas Guas, Guaco",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Falco sparverius",
+   "common_name": "Cernícalo Americano, Halconcito de patilla",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Falco columbarius",
+   "common_name": "Halcón Palomero, Esmerejón, Merlin",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Falco femoralis",
+   "common_name": "Halcón Plomizo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Falco rufigularis",
+   "common_name": "Halcón Murcielaguero",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Falco deiroleucus",
+   "common_name": "Halcón Pecho Canelo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Falco peregrinus",
+   "common_name": "Halcón Peregrino",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Micrastur ruficollis",
+   "common_name": "Halcón Selvático Cola Bandada",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Micrastur semitorquatus",
+   "common_name": "Halcón Collarejo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Porphyrio martinica",
+   "common_name": "Gallareta Morada",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Gallinula galeata",
+   "common_name": "Gallinita Pico Rojo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Fulica americana",
+   "common_name": "Gallinita de Cáitez",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Burhinus bistriatus",
+   "common_name": "Alcaraván",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Psittacara holochlorus",
+   "common_name": "Chocoyo Jalacatero, Chocoyo Coludo, Perico Verde",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Psittacara finschi",
+   "common_name": "Chocoyo Frente Carmesí",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Psittacara strenuus",
+   "common_name": "Chocoyo Coludo-Chocoyo Verde",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Eupsittula nana",
+   "common_name": "Chocoyo Chanero, Perico Frente Oliva",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Eupsittula canicularis",
+   "common_name": "Chocoyo Frente Anaranjada",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Ara ambiguus",
+   "common_name": "Lapa Verde",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Ara macao",
+   "common_name": "Lapa Roja",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Bolborhynchus lineola",
+   "common_name": "Chocoyito Listado",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Brotogeris jugularis",
+   "common_name": "Chocoyo Zapoyolito, Chocoyo Barbilla Anaranjada",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Pyrilia haematotis",
+   "common_name": "Perico Real, Perico Cabeza parda",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Pionus senilis",
+   "common_name": "Cotorra Costeña, Cotorra Corona Blanca",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Amazona albifrons",
+   "common_name": "Cotorra o Cancán Cotorra Frente Blanca",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Amazona autumnalis",
+   "common_name": "Lora Frente Roja",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Amazona farinosa",
+   "common_name": "Lora Ojona, Lora Corona Azul",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Amazona auropalliata",
+   "common_name": "Lora Nuca Amarilla",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Pharomachrus mocinno",
+   "common_name": "Quetzal",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Aulacorhynchus prasinus",
+   "common_name": "Tucancito Verde",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Selenidera spectabilis",
+   "common_name": "Tucancito Oído Amarillo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Pteroglossus torquatus",
+   "common_name": "Tucán de Collar",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Ramphastos sulfuratus",
+   "common_name": "Tucán Pico Arcoíris",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Ramphastos ambiguus",
+   "common_name": "Tucán Bicolor",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Procnias tricarunculatus",
+   "common_name": "Pájaro Campana, Rancho o Ranchero",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Quiscalus nicaraguensis",
+   "common_name": "Zanatillo, Zanate Nicaragüense",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Caretta caretta",
+   "common_name": "Tortuga Caguama, Tortuga Cabezona",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Chelonia mydas",
+   "common_name": "Tortuga Verde, Torita",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Dermochelys coriacea",
+   "common_name": "Tortuga Tora",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Eretmochelys imbricata",
+   "common_name": "Tortuga Carey",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Lepidochelys olivacea",
+   "common_name": "Tortuga Pásmala",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Crocodylus acutus",
+   "common_name": "Lagarto, Cocodrilo, Lagarto Amarillo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Ungaliophis panamensis",
+   "common_name": "Chatilla, Boa Enana de Panamá",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Ungaliophis continentalis",
+   "common_name": "Chatilla, Boa Enana",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Corallus annulatus",
+   "common_name": "Boa Arborícola",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Ctenosaura quinquecarinata",
+   "common_name": "Garrobo Cola Chata",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Carcharhinus leucas",
+   "common_name": "Tiburón Toro",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Rhincodon typus",
+   "common_name": "Tiburón Ballena",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Carcharhinus longimanus",
+   "common_name": "Tiburón Oceánico Punta Blanca",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Pristis pectinatus",
+   "common_name": "Pez Sierra del Lago de Nicaragua y Río San Juan",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Pristis perotteti",
+   "common_name": "Pez Sierra del Lago de Nicaragua y Río San Juan",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "moluscos",
+   "scientific_name": "Anadara grandis",
+   "common_name": "Casco de Burro",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "anfibios",
+   "scientific_name": "Lithobates miadis",
+   "common_name": "Rana Leopardo Isleña",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "anfibios",
+   "scientific_name": "Bolitoglossa insularis",
+   "common_name": "Salamandra del Volcán Maderas",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "anfibios",
+   "scientific_name": "Bolitoglossa mombachoensis",
+   "common_name": "Salamandra del Volcán Mombacho",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "anfibios",
+   "scientific_name": "Nototriton Saslaya",
+   "common_name": "Salamandra del Saslaya",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "flora",
+   "scientific_name": "Dipterix panamensis",
+   "common_name": "Almendro",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "flora",
+   "scientific_name": "Swietenia macrophylla King.",
+   "common_name": "Caoba del Atlántico",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "flora",
+   "scientific_name": "Swietenia humilis Zucc.",
+   "common_name": "Caoba del Pacifico",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "flora",
+   "scientific_name": "Conocarpus erectus",
+   "common_name": "Mangle Falso",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "flora",
+   "scientific_name": "Laguncularia racemosa",
+   "common_name": "Mangle Blanco",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "flora",
+   "scientific_name": "Avicennia germinans",
+   "common_name": "Mangle Negro",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "flora",
+   "scientific_name": "Rhizophora mangle",
+   "common_name": "Mangle Rojo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "flora",
+   "scientific_name": "Ceiba pentandra",
+   "common_name": "Ceibo",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "flora",
+   "scientific_name": "Guaiacum sanctum L.",
+   "common_name": "Guayacán",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida"
+  },
+  {
+   "group": "flora",
+   "scientific_name": "Pochota fendleri",
+   "common_name": "Pochote",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida Dentro de Área de Conservación Ambiental y Desarrollo Sostenible"
+  },
+  {
+   "group": "flora",
+   "scientific_name": "Cedrela odorata",
+   "common_name": "Cedro Real",
+   "restriction_type": "indefinite",
+   "period_text": "Indefinida Dentro de Área de Conservación Ambiental y Desarrollo Sostenible"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Cuniculus paca",
+   "common_name": "Guardatinaja, Güía",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 30 Junio",
+   "start_date": "2026-01-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Dasyprocta punctata",
+   "common_name": "Guatuza",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 30 Junio",
+   "start_date": "2026-01-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Dasypus novemcinctus",
+   "common_name": "Cusuco, Armado o Pitero",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 30 Junio",
+   "start_date": "2026-01-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Odocoileus virginianus",
+   "common_name": "Venado Cola Blanca, de Ramazón, Malacate",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 30 Junio",
+   "start_date": "2026-01-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Tayassu pecari",
+   "common_name": "Jabalí, Chancho de monte",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 30 Junio",
+   "start_date": "2026-01-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "mamiferos",
+   "scientific_name": "Dicotyles tajacu",
+   "common_name": "Sahino, Sajino, Chancho de monte",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 30 Junio",
+   "start_date": "2026-01-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Crypturellus soui",
+   "common_name": "Chinga, Perdiz pequeña solitaria",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Crypturellus cinnamomeus",
+   "common_name": "Perdiz canela, Chinga",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Crypturellus boucardi",
+   "common_name": "Perdiz, Chinga",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Tinamus major",
+   "common_name": "Gallinita de monte",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Dendrocygna autumnalis",
+   "common_name": "Piche Canelo",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 31 Mayo",
+   "start_date": "2026-01-01",
+   "end_date": "2026-05-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Dendrocygna bicolor",
+   "common_name": "Piche Bicolor",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 31 Abril",
+   "note": "El texto oficial dice \"31 Abril\" (fecha inexistente). No se convierte a fecha: se publica el texto tal cual y queda en revisión (conflicting)."
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Cairina moschata",
+   "common_name": "Pato Real",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 31 Mayo",
+   "start_date": "2026-01-01",
+   "end_date": "2026-05-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Ortalis vetula",
+   "common_name": "Chachalaca Vientre Claro",
+   "restriction_type": "partial",
+   "period_text": "1ro Marzo / 30 Junio",
+   "start_date": "2026-03-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Ortalis cinereiceps",
+   "common_name": "Chachalaca Cabeza Gris",
+   "restriction_type": "partial",
+   "period_text": "1ro Marzo / 30 Junio",
+   "start_date": "2026-03-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Rhynchortyx cinctus",
+   "common_name": "Codorniz Patas Largas",
+   "restriction_type": "partial",
+   "period_text": "1ro Marzo / 30 Junio",
+   "start_date": "2026-03-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Amaurolimnas concolor",
+   "common_name": "Gallinita Gris",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Aramides axillaris",
+   "common_name": "Gallinita Cuello Rojizo",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Aramides albiventris",
+   "common_name": "Gallinita Poponé",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Pardirallus maculatus",
+   "common_name": "Gallinita Moteada",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Porzana carolina",
+   "common_name": "Gallinita de Agua",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Laterallus flaviventer",
+   "common_name": "Gallinita Pecho Amarillo",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Laterallus ruber",
+   "common_name": "Gallinita Rojiza",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Laterallus exilis",
+   "common_name": "Gallinita Pecho Gris",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Laterallus albigularis",
+   "common_name": "Gallinita Garganta Blanca",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Julio",
+   "start_date": "2026-04-01",
+   "end_date": "2026-07-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Icterus pectoralis",
+   "common_name": "Chichiltote Pecho Manchado",
+   "restriction_type": "partial",
+   "period_text": "1ro Marzo / 30 Junio",
+   "start_date": "2026-03-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Icterus gularis",
+   "common_name": "Chichiltote Garganta Negra",
+   "restriction_type": "partial",
+   "period_text": "1ro Marzo / 30 Junio",
+   "start_date": "2026-03-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Icterus gálbula",
+   "common_name": "Chorchita Amarilla",
+   "restriction_type": "partial",
+   "period_text": "1ro Marzo / 30 Junio",
+   "start_date": "2026-03-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Turdus grayi",
+   "common_name": "Sensontle Pardo",
+   "restriction_type": "partial",
+   "period_text": "1ro Mayo / 31 Agosto",
+   "start_date": "2026-05-01",
+   "end_date": "2026-08-31"
+  },
+  {
+   "group": "aves",
+   "scientific_name": "Turdus plebejus",
+   "common_name": "Sinsontle Segoviano",
+   "restriction_type": "partial",
+   "period_text": "1ro Mayo / 31 Agosto",
+   "start_date": "2026-05-01",
+   "end_date": "2026-08-31"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Ctenosaura similis",
+   "common_name": "Garrobo Negro",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 30 Abril",
+   "start_date": "2026-01-01",
+   "end_date": "2026-04-30"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Iguana iguana",
+   "common_name": "Iguana Verde, Garrobo Lapa",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 30 Abril",
+   "start_date": "2026-01-01",
+   "end_date": "2026-04-30"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Basiliscus basiliscus",
+   "common_name": "Gallego Café",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Agosto",
+   "start_date": "2026-04-01",
+   "end_date": "2026-08-31"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Basiliscus plumifrons",
+   "common_name": "Gallego Verde",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Agosto",
+   "start_date": "2026-04-01",
+   "end_date": "2026-08-31"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Basiliscus vittatus",
+   "common_name": "Basilisco",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Agosto",
+   "start_date": "2026-04-01",
+   "end_date": "2026-08-31"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Boa imperator",
+   "common_name": "Boa Común",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Agosto",
+   "start_date": "2026-04-01",
+   "end_date": "2026-08-31"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Lampropeltis abnorma",
+   "common_name": "Falso Coral",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Agosto",
+   "start_date": "2026-04-01",
+   "end_date": "2026-08-31"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Rhinoclemmys annulatta",
+   "common_name": "Tortuga de Tierra",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Agosto",
+   "start_date": "2026-04-01",
+   "end_date": "2026-08-31"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Rhinoclemmys funerea",
+   "common_name": "Tortuga de Tierra",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Agosto",
+   "start_date": "2026-04-01",
+   "end_date": "2026-08-31"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Rhinoclemmys pulcherrima",
+   "common_name": "Tortuga Sabanera",
+   "restriction_type": "partial",
+   "period_text": "1ro Abril / 31 Agosto",
+   "start_date": "2026-04-01",
+   "end_date": "2026-08-31"
+  },
+  {
+   "group": "reptiles",
+   "scientific_name": "Caiman crocodilus",
+   "common_name": "Cuajipal, Maizola, Caimán",
+   "restriction_type": "partial",
+   "period_text": "1ro Marzo / 30 Junio",
+   "start_date": "2026-03-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "anfibios",
+   "scientific_name": "Agalychnis callidryas",
+   "common_name": "Rana Ojos Rojos",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 30 Abril",
+   "start_date": "2026-01-01",
+   "end_date": "2026-04-30"
+  },
+  {
+   "group": "anfibios",
+   "scientific_name": "Dendrobates auratus",
+   "common_name": "Ranita Camuflada",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 30 Abril",
+   "start_date": "2026-01-01",
+   "end_date": "2026-04-30"
+  },
+  {
+   "group": "anfibios",
+   "scientific_name": "Oophaga pumilio",
+   "common_name": "Ranita de Sangre",
+   "restriction_type": "partial",
+   "period_text": "1ro Enero / 30 Abril",
+   "start_date": "2026-01-01",
+   "end_date": "2026-04-30"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Lepisosteus tropicus",
+   "common_name": "Gaspar del Lago Cocibolca",
+   "restriction_type": "partial",
+   "period_text": "1ro Mayo / 31 Octubre",
+   "start_date": "2026-05-01",
+   "end_date": "2026-10-31"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Lepisosteus spatula",
+   "common_name": "Gaspar del Lago Cocibolca",
+   "restriction_type": "partial",
+   "period_text": "1ro Mayo / 31 Octubre",
+   "start_date": "2026-05-01",
+   "end_date": "2026-10-31"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Centropomus parallelus",
+   "common_name": "Róbalo del Lago Cocibolca y Río San Juan",
+   "restriction_type": "partial",
+   "period_text": "01 / 31 Diciembre",
+   "start_date": "2026-12-01",
+   "end_date": "2026-12-31"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Centropomus pectinatus",
+   "common_name": "Róbalo del Lago Cocibolca y Río San Juan",
+   "restriction_type": "partial",
+   "period_text": "01 / 31 Diciembre",
+   "start_date": "2026-12-01",
+   "end_date": "2026-12-31"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Megalops atlanticus",
+   "common_name": "Sábalo Real",
+   "restriction_type": "partial",
+   "period_text": "01 Abril / 30 Junio, y 01 Agosto / 31 Octubre",
+   "note": "Dos períodos (01-04 a 30-06 y 01-08 a 31-10). Art. 7: se autoriza en septiembre la pesca deportiva de Sábalo Real en Río San Juan con las autorizaciones correspondientes."
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Parachromis dovii",
+   "common_name": "Guapote Lagunero",
+   "restriction_type": "partial",
+   "period_text": "20 Mayo / 20 Julio",
+   "start_date": "2026-05-20",
+   "end_date": "2026-07-20"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Parachromis managuensis",
+   "common_name": "Guapote Tigre",
+   "restriction_type": "partial",
+   "period_text": "20 Mayo / 20 Julio",
+   "start_date": "2026-05-20",
+   "end_date": "2026-07-20"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Pomadasys crocro",
+   "common_name": "Roncador (San Carlos Río San Juan)",
+   "restriction_type": "partial",
+   "period_text": "15 Noviembre / 31 Diciembre",
+   "start_date": "2026-11-15",
+   "end_date": "2026-12-31"
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Thunus albacares",
+   "common_name": "Atunes del Océano Pacifico Oriental",
+   "restriction_type": "partial",
+   "period_text": "29 Julio / 8 Octubre y/o del 9 Noviembre / 19 Enero de 2024. (Se puede aplicar cualquiera de los dos períodos). Para la pesca de los atunes aleta amarilla, patudo y barrilete realizado por los buques cerqueros dentro del área de 96º y 110º O y entre 4º N y 3º S, conocida como el “corralito” tiene veda desde las 00:00 horas del 9 de octubre hasta las 24:00 horas del 8 de noviembre de cada año.",
+   "note": "El texto oficial 2026 cita \"19 Enero de 2024\": año inconsistente. No se convierte a fechas (conflicting)."
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Thunus obesus",
+   "common_name": "Atunes del Océano Pacifico Oriental",
+   "restriction_type": "partial",
+   "period_text": "29 Julio / 8 Octubre y/o del 9 Noviembre / 19 Enero de 2024. (Se puede aplicar cualquiera de los dos períodos). Para la pesca de los atunes aleta amarilla, patudo y barrilete realizado por los buques cerqueros dentro del área de 96º y 110º O y entre 4º N y 3º S, conocida como el “corralito” tiene veda desde las 00:00 horas del 9 de octubre hasta las 24:00 horas del 8 de noviembre de cada año.",
+   "note": "El texto oficial 2026 cita \"19 Enero de 2024\": año inconsistente. No se convierte a fechas (conflicting)."
+  },
+  {
+   "group": "peces",
+   "scientific_name": "Katsuwonus pelamis",
+   "common_name": "Atunes del Océano Pacifico Oriental",
+   "restriction_type": "partial",
+   "period_text": "29 Julio / 8 Octubre y/o del 9 Noviembre / 19 Enero de 2024. (Se puede aplicar cualquiera de los dos períodos). Para la pesca de los atunes aleta amarilla, patudo y barrilete realizado por los buques cerqueros dentro del área de 96º y 110º O y entre 4º N y 3º S, conocida como el “corralito” tiene veda desde las 00:00 horas del 9 de octubre hasta las 24:00 horas del 8 de noviembre de cada año.",
+   "note": "El texto oficial 2026 cita \"19 Enero de 2024\": año inconsistente. No se convierte a fechas (conflicting)."
+  },
+  {
+   "group": "moluscos",
+   "scientific_name": "Anadara similis",
+   "common_name": "Concha Negra",
+   "restriction_type": "partial",
+   "period_text": "21 Abril / 15 Julio",
+   "start_date": "2026-04-21",
+   "end_date": "2026-07-15"
+  },
+  {
+   "group": "moluscos",
+   "scientific_name": "Anadara tuberculosa",
+   "common_name": "Concha Negra",
+   "restriction_type": "partial",
+   "period_text": "21 Abril / 15 Julio",
+   "start_date": "2026-04-21",
+   "end_date": "2026-07-15"
+  },
+  {
+   "group": "moluscos",
+   "scientific_name": "Strombus gigas",
+   "common_name": "Caracol Rosado del Caribe",
+   "restriction_type": "partial",
+   "period_text": "Del 01 de junio al 30 de septiembre, se suspenden las actividades pesqueras como medida de protección a la reproducción.",
+   "start_date": "2026-06-01",
+   "end_date": "2026-09-30"
+  },
+  {
+   "group": "crustaceos",
+   "scientific_name": "Farfantepenaeus y Litopenaeus sp.",
+   "common_name": "Camarones Costeros del Caribe",
+   "restriction_type": "partial",
+   "period_text": "15 Abril / 15 Junio. las actividades pesqueras se suspenden, con el objetivo de proteger la reproducción y el reclutamiento a la pesquería.",
+   "start_date": "2026-04-15",
+   "end_date": "2026-06-15"
+  },
+  {
+   "group": "crustaceos",
+   "scientific_name": "Gen. Farfantepenaeus y Litopenaeus. Trachypenaeus sp. Tigre o rayado) y Xiphopenaeus riveti (titi)",
+   "common_name": "Camarones Costeros del pacifico, Chacalines Tigre y Titi del Pacifico.",
+   "restriction_type": "partial",
+   "period_text": "Del 01 de abril al 31 de mayo, se suspenden las actividades pesqueras para los camarones costeros en la zona marina (Pesca Industrial) con el objetivo de proteger la reproducción y del 01 de octubre al 30 de noviembre para proteger el reclutamiento a la pesquería.",
+   "note": "Dos períodos (01-04 a 31-05 y 01-10 a 30-11)."
+  },
+  {
+   "group": "crustaceos",
+   "scientific_name": "Gen. Farfantepenaeus y Litopenaeus sp.",
+   "common_name": "Larvas silvestres de camarones costeros en esteros y zona marina inmediata al litoral.",
+   "restriction_type": "partial",
+   "period_text": "Del 01 de junio al 31 de agosto, se suspenden las actividades para la captura de larvas silvestre de camarón costero del Pacífico.",
+   "start_date": "2026-06-01",
+   "end_date": "2026-08-31"
+  },
+  {
+   "group": "crustaceos",
+   "scientific_name": "Panulirus argus",
+   "common_name": "Langosta Espinosa del Caribe",
+   "restriction_type": "partial",
+   "period_text": "01 de marzo al 30 de junio",
+   "start_date": "2026-03-01",
+   "end_date": "2026-06-30"
+  },
+  {
+   "group": "equinodermos",
+   "scientific_name": "Familias Holothuridae, Stichopodidae",
+   "common_name": "Pepinos de Mar del Caribe y del Océano Pacifico",
+   "restriction_type": "partial",
+   "period_text": "01 de junio al 30 de noviembre se suspenden las actividades pesqueras para la captura de los pepinos de mar del Caribe y del O. Pacífico.",
+   "start_date": "2026-06-01",
+   "end_date": "2026-11-30"
+  },
+  {
+   "group": "equinodermos",
+   "scientific_name": "Familias Holothuridae, Stichopodidae",
+   "common_name": "Pepino Lápiz y Carajo del caribe",
+   "restriction_type": "partial",
+   "period_text": "01 de enero al 31 de diciembre",
+   "start_date": "2026-01-01",
+   "end_date": "2026-12-31"
+  }
+ ]
+}

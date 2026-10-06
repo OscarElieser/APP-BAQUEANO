@@ -2017,6 +2017,16 @@
         "h41": "Junte-se à comunidade",
         "p3": "Juntos por uma Nicarágua mais limpa e sustentável.",
         "a1": "Quero participar"
+      },
+      "verificacion": {
+        "kicker": "POLÍTICA DE DADOS BAQUEANO",
+        "title": "Compromisso de verificação ambiental",
+        "intro": "É assim que garantimos que cada dado de natureza que você vê no BAQUEANO seja confiável.",
+        "sourceTitle": "Sem evidência, sem selo",
+        "sourceRule": "Nenhum conteúdo ambiental poderá ser marcado como verificado ou publicado com o selo BAQUEANO se não houver evidência rastreável da fonte oficial ou validação documentada correspondente.",
+        "accessTitle": "“Como chegar” só com acesso validado",
+        "accessRule": "Uma área protegida pode ser publicada de forma informativa sem navegação; o botão “Como chegar” só é habilitado quando existe um ponto de acesso validado. O centro geográfico de uma reserva não será usado automaticamente como entrada turística.",
+        "accessWhy": "Assim evitamos enviar você a uma coordenada correta no mapa, mas incorreta como entrada."
       }
     },
     "avisoLegal": {
@@ -2889,6 +2899,11 @@
       },
       "destinosHeroSearch": {
         "inputPlaceholder1": "Buscar destinos, experiências, negócios..."
+      },
+      "live": {
+        "partial": "Verificação parcial",
+        "pending": "A verificar",
+        "territoryPhoto": "Foto do território"
       }
     },
     "experiencias": {
@@ -3295,17 +3310,18 @@
       "histAudioSection": {
         "h31": "Escute nossa história",
         "p1": "Relatos, música e personagens na voz do Baqueano Digital.",
-        "span1": "7 capítulos",
+        "span1": "13 capítulos",
         "p2": "Escolha um capítulo ou toque em ▶ para ouvir desde o início.",
         "button1": "🏛️ Época pré-hispânica",
         "button2": "⛪ Colônia",
         "button3": "📜 Independência",
         "button4": "⚔️ Guerra Nacional",
-        "button5": "🎖️ Século XX",
+        "button5": "🎖️ Personagens",
         "button6": "🇳🇮 Nicarágua atual",
         "button7": "🎶 Música e tradições",
         "buttonAriaLabel1": "Reproduzir audioguia",
-        "divAriaLabel1": "Capítulos do audioguia"
+        "divAriaLabel1": "Períodos do audioguia",
+        "button8": "🌊 Costa Caribe"
       },
       "museosPatrimonio": {
         "h21": "Monumentos históricos & Rede Nacional de Museus",
@@ -3374,6 +3390,155 @@
       },
       "territoryNext": {
         "buttonAriaLabel1": "Próximo território"
+      },
+      "artistas": {
+        "kicker": "ARTES VISUAIS, CÊNICAS E DOCUMENTAIS",
+        "title": "Artistas que desenharam o território",
+        "subtitle": "Pintura, escultura, dança, teatro, fotografia e cinema ligados a cada departamento e região da Nicarágua.",
+        "note": "Conteúdo editorial em revisão com fontes culturais oficiais.",
+        "deptLink": "Ver departamento",
+        "deptTitle": "Artistas do território",
+        "deptSubtitle": "Criadores cuja obra está ligada a este departamento ou região.",
+        "historiaLink": "Ver todos os artistas em História",
+        "groups": {
+          "managua": "Metropolitana · História cívica",
+          "masaya": "Berço do folclore e da dança tradicional",
+          "granada": "Patrimônio colonial e projeção internacional",
+          "leon": "Vanguarda teatral e literária",
+          "matagalpa": "Indigenismo, Praxis e texturas de montanha",
+          "carazo": "Planalto sul e expressionismo",
+          "raccs": "Cosmovisão afrodescendente e resistência cultural"
+        },
+        "disciplines": {
+          "painting": "Pintura",
+          "paintingPoetry": "Pintura / Poesia",
+          "paintingMixed": "Pintura / Técnica mista",
+          "paintingDrawing": "Pintura / Desenho",
+          "sculpture": "Escultura",
+          "sculpturePainting": "Escultura / Pintura",
+          "danceManagement": "Dança / Gestão cultural",
+          "danceFolklore": "Dança / Folclore",
+          "playwriting": "Dramaturgia / Letras",
+          "photography": "Fotografia",
+          "film": "Cinema / Documentário"
+        },
+        "items": {
+          "gron": {
+            "locality": "Radicada em Manágua · de origem dinamarquesa, naturalizada",
+            "milestone": "Forjou a memória monumental cívica do país: o monumento a Andrés Castro na Hacienda San Jacinto (Tipitapa), o relevo de Rubén Darío e a estátua do cacique Diriangén."
+          },
+          "penalba": {
+            "locality": "San Pedro de Lovago / San Juan de Oriente (vínculo com Masaya e León)",
+            "milestone": "Considerado o pai da pintura moderna na Nicarágua e diretor da Escola Nacional de Belas Artes; transformou a iconografia tradicional e sacra do Pacífico rumo à vanguarda expressionista."
+          },
+          "morales": {
+            "milestone": "Nascido na “Grande Sultana”. Seu imaginário projeta o lago Cocibolca, as naturezas-mortas coloniais e a exuberância da floresta tropical do Caribe nicaraguense, levados ao circuito internacional (Paris, Nova York)."
+          },
+          "marin": {
+            "milestone": "Herdeiro da tradição plástica da Meseta de los Pueblos; reconhecido pela arquitetura visual e pela densa textura a óleo com espátula, com cenas crioulas e urbanas centro-americanas."
+          },
+          "beer": {
+            "milestone": "Primeira pintora nacional afrodescendente da Costa Caribe. Sua obra é testemunho vivo da identidade crioula, da mulher negra caribenha e da memória comunitária de Bluefields."
+          },
+          "arostegui": {
+            "milestone": "Ligado ao norte montanhoso. Fundador do Grupo Praxis (1963); introduziu o informalismo matérico com terras, texturas vulcânicas e sucata metálica como metáfora da paisagem e da realidade sociopolítica nicaraguense."
+          },
+          "deleon": {
+            "milestone": "Criador da técnica de cera raspada e transparências a fresco. Fundou o Museo-Galería 904 na capital antes do terremoto de 1972, captando a luminosidade lacustre de Manágua."
+          },
+          "saenz": {
+            "milestone": "Maior expoente do indigenismo pictórico. Levou os petróglifos, a cerâmica pré-colombiana, as lendas do norte e o traço do altiplano central para murais e telas contemporâneos."
+          },
+          "saravia": {
+            "milestone": "Membro fundador da arte pública da capital e braço direito de Peñalba nas Belas Artes; esculpiu relevos e figuras que documentam a mestiçagem e a anatomia vernácula do Pacífico."
+          },
+          "bacon": {
+            "milestone": "Pioneira da dança contemporânea afro-caribenha e das danças de salão caribenhas; conectou o folclore do Palo de Mayo (Maypole) e os ritmos da Costa Caribe aos palcos do Pacífico."
+          },
+          "lopez": {
+            "milestone": "Referência nacional na pesquisa e sistematização dos sones de marimba, das danzas de negras, dos bailes de húngaras e da mestiçagem coreográfica de Monimbó e Masaya."
+          },
+          "espinoza": {
+            "milestone": "Herdeira da tradição intelectual universitária de León; suas peças exploram a memória colonial, a opressão patriarcal e a mitologia urbana da primeira capital do país."
+          },
+          "montealegre": {
+            "milestone": "Testemunha, pelo fotojornalismo, da insurreição, da Cruzada Nacional de Alfabetização e da reconstrução pós-guerra; captou o cotidiano dos bairros populares da capital."
+          },
+          "carrion": {
+            "milestone": "Cineasta que conecta a memória histórica coletiva dos anos 80 aos dilemas geracionais urbanos por meio do seu documentário Heredera del viento."
+          }
+        }
+      },
+      "audio": {
+        "counter": "Capítulo {n} de {total}",
+        "pause": "Pausar audioguia",
+        "end": "Fim do percurso. Escolha um capítulo para ouvi-lo novamente.",
+        "noVoice": "Seu navegador não consegue ler em voz alta: aqui está o relato completo.",
+        "next": "Próximo capítulo",
+        "map": "Ver no mapa",
+        "sources": "Fontes",
+        "verified": "Verificado em {date}",
+        "people": "Personagens",
+        "chaptersLabel": "Capítulos deste período",
+        "types": {
+          "historical_fact": "Fato histórico",
+          "heritage": "Patrimônio",
+          "oral_tradition": "Tradição oral"
+        },
+        "chapters": {
+          "pueblosOriginarios": {
+            "title": "Povos originários do Pacífico",
+            "text": "Quando os espanhóis chegaram, o Pacífico da Nicarágua já era habitado por vários povos: os maribios ou sutiavas, os mangues ou chorotegas e os nahuas ou nicaraguas. Viviam em povoados agrícolas, em planícies próximas aos lagos e vulcões, governados por conselhos de anciãos ou por caciques, e comerciavam por escambo com os povos vizinhos. Suas raízes estão ligadas a correntes migratórias vindas do norte, de territórios do atual México."
+          },
+          "conquista": {
+            "title": "Conquista e Colônia",
+            "text": "Em 1502, em sua quarta viagem, Cristóvão Colombo percorreu a costa caribenha da Nicarágua e dobrou um cabo que chamou de Gracias a Dios. Em 1522, Gil González Dávila e Andrés Niño chegaram por terra vindos do Panamá e entraram em contato com os caciques Nicoya e Nicaragua. Em 1524 os espanhóis fundaram León e Granada e, em 1544, o território foi incorporado à Capitania-Geral da Guatemala."
+          },
+          "leonViejo": {
+            "title": "León Viejo",
+            "text": "León, uma das cidades fundadas pelos espanhóis em 1524, foi transferida em 1610 para o local atual por causa de um terremoto. As ruínas da cidade original, conhecidas como León Viejo, foram inscritas em 2000 na Lista do Patrimônio Mundial da UNESCO."
+          },
+          "independencia": {
+            "title": "Independência",
+            "text": "Os primeiros levantes independentistas surgiram em 1811 em León, Granada e Rivas, com forte caráter popular. A Capitania-Geral da Guatemala, da qual a Nicarágua fazia parte, declarou independência da Espanha em 15 de setembro de 1821. Um ano depois foi anexada ao efêmero Império Mexicano de Agustín de Iturbide e, em 1823, a Nicarágua passou a integrar a Federação das Províncias Unidas da América Central."
+          },
+          "treintaAnos": {
+            "title": "Os Trinta Anos",
+            "text": "Depois da incursão flibusteira de William Walker, o Estado nicaraguense consolidou-se lentamente. Essa etapa é conhecida como os Trinta Anos: vai dos governos do general Tomás Martínez, entre 1858 e 1867, até 1893, ano da revolução liberal."
+          },
+          "guerraNacional": {
+            "title": "Guerra Nacional",
+            "text": "Entre 1855 e 1857, a Nicarágua enfrentou a incursão flibusteira de William Walker. No norte, os generais Tomás Martínez e Fernando Chamorro organizaram o Exército do Setentrião, cujos oficiais declararam em Matagalpa, em 20 de abril de 1856, que defenderiam a independência nacional até a última gota de sangue. Seis meses dessa resistência culminaram na batalha de San Jacinto."
+          },
+          "sanJacinto": {
+            "title": "A Batalha de San Jacinto",
+            "text": "No domingo, 14 de setembro de 1856, na fazenda San Jacinto, o coronel José Dolores Estrada e suas tropas resistiram ao ataque dos flibusteiros. Lutou-se corpo a corpo, e Andrés Castro, sem tempo para carregar o fuzil, derrubou um flibusteiro com uma pedra. Uma investida pelo flanco surpreendeu os atacantes, que fugiram. No mesmo dia, Estrada comunicou a vitória em seu relatório oficial."
+          },
+          "dario": {
+            "title": "Rubén Darío",
+            "text": "Félix Rubén García Sarmiento nasceu em Metapa em 18 de janeiro de 1867 e morreu em León em 6 de fevereiro de 1916. Sua família paterna era conhecida como os Daríos, e por isso adotou o sobrenome Darío. Poeta, jornalista e diplomata, é considerado o maior representante do modernismo literário em língua espanhola."
+          },
+          "sandino": {
+            "title": "Augusto C. Sandino",
+            "text": "Augusto Nicolás Calderón Sandino nasceu em Niquinohomo, Masaya, em 18 de maio de 1895. Em 1927 iniciou a luta armada contra a intervenção estadunidense à frente do Exército Defensor da Soberania Nacional. Foi assassinado em 21 de fevereiro de 1934 por oficiais da Guarda Nacional, sob ordens de Anastasio Somoza García."
+          },
+          "costaCaribe": {
+            "title": "A Costa Caribe e a Mosquitia",
+            "text": "A história do Caribe nicaraguense seguiu um caminho próprio. No século XVIII, os ingleses aliaram-se aos indígenas misquitos e consolidaram sua hegemonia na região; em 1748 apoderaram-se de San Juan de Nicaragua. A Mosquitia, ou costa dos Mosquitos, chegou a ser considerada colônia inglesa até 1860, quando o Tratado de Manágua reconheceu a soberania da Nicarágua e constituiu a Reserva da Mosquitia."
+          },
+          "autonomia": {
+            "title": "Autonomia da Costa Caribe",
+            "text": "Em 1987 foi aprovada a Lei nº 28, Estatuto de Autonomia das Regiões da Costa Caribe da Nicarágua. A lei simbolizou o reconhecimento dos direitos ancestrais dos povos indígenas e afrodescendentes como comunidades multiétnicas, multiculturais e multilíngues do país."
+          },
+          "patrimonioMundial": {
+            "title": "Patrimônio Mundial da Nicarágua",
+            "text": "A Nicarágua tem dois bens inscritos na Lista do Patrimônio Mundial da UNESCO: as Ruínas de León Viejo, desde 2000, e a Catedral de León, desde 2011."
+          },
+          "gueguense": {
+            "title": "El Güegüense",
+            "text": "El Güegüense é um drama satírico muito conhecido na Nicarágua que reúne teatro, dança e música, numa síntese das culturas espanhola e indígena. É encenado todos os anos na festa de San Sebastián. A UNESCO o proclamou em 2005 e o inscreveu em 2008 na Lista Representativa do Patrimônio Cultural Imaterial da Humanidade."
+          }
+        }
       }
     },
     "index": {
@@ -5050,7 +5215,18 @@
         "parque": "Parques e áreas protegidas",
         "restaurante": "Restaurantes",
         "comedor": "Comedores (restaurantes populares)",
-        "kiosco": "Quiosques"
+        "kiosco": "Quiosques",
+        "lago": "Lagos",
+        "cerro": "Morros",
+        "canon": "Cânions",
+        "museo": "Museus",
+        "sitio_historico": "Sítios históricos",
+        "centro_cultural": "Centros culturais",
+        "mercado": "Mercados",
+        "turismo_rural": "Turismo rural",
+        "turismo_comunitario": "Turismo comunitário",
+        "agroturismo": "Agroturismo",
+        "atractivo": "Atrativos"
       }
     }
   },
@@ -5068,7 +5244,10 @@
       "sources": "Fontes",
       "zone": "Município ou zona",
       "checkNotice": "Verificado com fonte oficial",
-      "seeSheet": "Ver ficha"
+      "seeSheet": "Ver ficha",
+      "partialNotice": "Informações parcialmente verificadas.",
+      "pendingNotice": "Localização pendente de verificação.",
+      "pendingConfirm": "Informações a confirmar."
     },
     "access": {
       "viewArea": "Ver a área no mapa",

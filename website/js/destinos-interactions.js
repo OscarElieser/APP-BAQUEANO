@@ -26,7 +26,10 @@
       return [...new Set(['baqueano-favorites','baqueano_favs','baqueano_favs_local'].flatMap((key) => safeStorage.read(key)).map((item) => typeof item === 'string' ? item : (item.id || item.destinationId || '')).filter(Boolean))];
     }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  // Espera el catálogo vivo de Supabase (js/destinos-catalog-live.js) para indexar
+  // las tarjetas reales; si no existe o no responde, usa las del HTML.
+  const whenCatalogReady = () => Promise.resolve(window.BaqueanoDestinosCatalogReady).catch(() => null);
+  document.addEventListener('DOMContentLoaded', () => whenCatalogReady().then(() => {
     const page = document.querySelector('.page-destinos-exact');
     if (!page) return;
 
@@ -58,13 +61,16 @@
       const tag = card.querySelector('.dest-catalog-tag')?.textContent.trim() || inferCategory(title);
       const rating = numberFrom(card.querySelector('.dest-highlight-rating')?.textContent);
       const price = numberFrom(card.querySelector('.dest-highlight-price')?.textContent);
-      card.dataset.destinationId = slug(title);
+      // Tarjetas vivas (Supabase) traen id, categoría y verificación reales; sin
+      // reseñas ni precio publicados, calificación y precio quedan en 0 = "sin dato".
+      card.dataset.destinationId = card.dataset.destinationId || slug(title);
       card.dataset.title = normalize(title);
       card.dataset.location = normalize(location);
-      card.dataset.category = normalize(tag);
+      card.dataset.category = card.dataset.category || normalize(tag);
       card.dataset.rating = String(rating);
       card.dataset.price = String(price);
-      card.dataset.verified = rating >= 4.7 ? 'true' : 'false';
+      // "Solo verificados" = verificación real de la fuente, nunca una calificación alta.
+      card.dataset.verified = card.dataset.verification === 'verified' ? 'true' : 'false';
     });
 
     function inferCategory(title) {
@@ -90,7 +96,8 @@
       };
       const categoryMatch = state.category === 'todos' || categoryAliases[state.category]?.test(category);
       const price = Number(card.dataset.price);
-      const priceMatch = !state.price || (state.price === 'low' && price <= 350) ||
+      // Sin precio publicado (0) no entra en ningún rango: no se presume barato.
+      const priceMatch = !state.price || (price > 0 && state.price === 'low' && price <= 350) ||
         (state.price === 'mid' && price > 350 && price <= 500) || (state.price === 'high' && price > 500);
       return searchable.includes(normalize(state.query)) && categoryMatch &&
         (!state.department || card.dataset.location.includes(normalize(state.department))) &&
@@ -159,7 +166,7 @@
       state.page = 1; applyFilters();
     });
 
-    setupFilter('department', ['Todos', 'Rivas', 'Granada', 'Masaya', 'León', 'Madriz', 'Estelí', 'Chinandega', 'Río San Juan', 'RACCS'], (value) => {
+    setupFilter('department', ['Todos', 'Boaco', 'Carazo', 'Chinandega', 'Chontales', 'Costa Caribe Norte', 'Costa Caribe Sur', 'Estelí', 'Granada', 'Jinotega', 'León', 'Madriz', 'Managua', 'Masaya', 'Matagalpa', 'Nueva Segovia', 'Río San Juan', 'Rivas'], (value) => {
       state.department = value === 'Todos' ? '' : value;
     });
     setupFilter('price', ['Todos', 'Hasta C$ 350', 'C$ 351–500', 'Más de C$ 500'], (_, index) => {
@@ -337,5 +344,5 @@
     if (searchInput) searchInput.value = state.query;
     categoryButtons.forEach((button) => button.classList.toggle('active', button.dataset.category === state.category));
     applyFilters();
-  });
+  }));
 })();

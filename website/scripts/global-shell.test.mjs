@@ -35,7 +35,8 @@ const WEBSITE_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 const ALL_WIDTHS = [320, 360, 375, 390, 412, 430, 768, 820, 1024, 1280, 1366, 1440, 1920];
 const WIDTHS = process.env.BQ_WIDTHS ? process.env.BQ_WIDTHS.split(',').map(Number).filter((w) => ALL_WIDTHS.includes(w)) : ALL_WIDTHS;
 const EXCLUDED = new Set(['admin.html', 'i18n-test.html']);
-const ALL_PAGES = readdirSync(WEBSITE_DIR).filter((f) => f.endsWith('.html') && !EXCLUDED.has(f)).sort();
+const isSiteVerification = (name) => /^google[0-9a-f]{8,}\.html$/.test(name);
+const ALL_PAGES = readdirSync(WEBSITE_DIR).filter((f) => f.endsWith('.html') && !EXCLUDED.has(f) && !isSiteVerification(f)).sort();
 const PAGES = process.env.BQ_PAGES ? process.env.BQ_PAGES.split(',') : process.env.BQ_QUICK ? ['index.html', 'destinos.html', 'historia.html', 'perfil.html'] : ALL_PAGES;
 const SESSION_KEY = 'baqueano_user_session_v1';
 const CONSENT = JSON.stringify({ essential: true, preferences: true, analytics: false, version: 1, updatedAt: '2026-10-03T00:00:00.000Z' });

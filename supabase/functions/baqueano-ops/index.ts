@@ -63,6 +63,15 @@ type Entity = {
   idPrefix?: string;
 };
 const ENTITIES: Record<string, Entity> = {
+  places: {
+    table: "places", order: "name", search: "name", softDelete: false, idPrefix: "place",
+    select: "id,name,slug,category,subcategory,type_label,department_id,municipality_id,short_description,description,latitude,longitude,location_precision,map_ready,is_published,verification_status,verified_at,source_name,source_url,address,attributes,created_at,updated_at",
+    write: {
+      name: "text", department_id: "id", municipality_id: "id", category: "text", subcategory: "text", short_description: "longtext", description: "longtext",
+      latitude: "lat", longitude: "lng", source_name: "text", source_url: "url", address: "longtext"
+    },
+    required: ["name", "department_id"],
+  },
   destinations: {
     table: "destinations", order: "name", search: "name", softDelete: true, statusColumn: "status", idPrefix: "dest",
     select: "id,name,department_id,municipality_id,category,short_desc,description,latitude,longitude,cover_image,status,verified,confidence_status,verification_status,verified_at,last_verified_at,verification_notes,source_name,source_url,source_type,valid_until,best_season,how_to_reach,vibe_tags,hidden_gem,metadata,created_at,updated_at,deleted_at",
@@ -103,6 +112,10 @@ const STATUS_VALUES = new Set(["draft", "published", "pending_review", "archived
 const COUNTS: Array<[string, string, ((q: any) => any)?]> = [
   ["departments", "departments"],
   ["municipalities", "municipalities"],
+  ["places", "places"],
+  ["places_published", "places", (q) => q.eq("is_published", true)],
+  ["places_map_ready", "places", (q) => q.eq("is_published", true).eq("map_ready", true).not("latitude", "is", null).not("longitude", "is", null)],
+  ["places_verified", "places", (q) => q.eq("verification_status", "verified")],
   ["destinations", "destinations", (q) => q.is("deleted_at", null)],
   ["destinations_published", "destinations", (q) => q.is("deleted_at", null).eq("status", "published")],
   ["destinations_with_coordinates", "destinations", (q) => q.is("deleted_at", null).not("latitude", "is", null).not("longitude", "is", null)],

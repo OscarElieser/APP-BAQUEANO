@@ -1,0 +1,104 @@
+{
+  "snapshot_at": "2026-10-05",
+  "note": "Entidades ya existentes en Supabase (solo campos públicos) para detectar duplicados al importar.",
+  "businesses": [
+    {
+      "id": "biz-red-ometepe",
+      "name": "Red Comunitaria Ometepe Viva",
+      "department_id": "rivas",
+      "latitude": null,
+      "longitude": null,
+      "source_url": null
+    },
+    {
+      "id": "biz-lancheros-isletas",
+      "name": "Asoc. Lancheros Tradicionales de Granada",
+      "department_id": "granada",
+      "latitude": null,
+      "longitude": null,
+      "source_url": null
+    },
+    {
+      "id": "biz-selva-negra-lodge",
+      "name": "Finca Comunitaria Nebliselva",
+      "department_id": "matagalpa",
+      "latitude": null,
+      "longitude": null,
+      "source_url": null
+    },
+    {
+      "id": "biz-cerro-negro-exp",
+      "name": "Baqueanos del Cerro Negro",
+      "department_id": "leon",
+      "latitude": null,
+      "longitude": null,
+      "source_url": null
+    },
+    {
+      "id": "biz-coop-somoto",
+      "name": "Coop. Guías Comunitarios del Cañón de Somoto",
+      "department_id": "madriz",
+      "latitude": null,
+      "longitude": null,
+      "source_url": null
+    }
+  ],
+  "destinations": [
+    {
+      "id": "dest_canon_somoto",
+      "name": "Monumento Nacional Cañón de Somoto",
+      "department_id": "madriz",
+      "latitude": 13.4833,
+      "longitude": -86.6667,
+      "source_url": null
+    },
+    {
+      "id": "dest_isla_ometepe",
+      "name": "Isla de Ometepe (Concepción & Maderas)",
+      "department_id": "rivas",
+      "latitude": 11.5375,
+      "longitude": -85.5905,
+      "source_url": null
+    },
+    {
+      "id": "dest_cerro_negro",
+      "name": "Volcán Cerro Negro",
+      "department_id": "leon",
+      "latitude": 12.5061,
+      "longitude": -86.7022,
+      "source_url": null
+    },
+    {
+      "id": "dest_selva_negra",
+      "name": "Reserva Ecológica Selva Negra",
+      "department_id": "matagalpa",
+      "latitude": 12.9983,
+      "longitude": -85.9089,
+      "source_url": null
+    },
+    {
+      "id": "dest_volcan_mombacho",
+      "name": "Reserva Natural Volcán Mombacho",
+      "department_id": "granada",
+      "latitude": 11.826,
+      "longitude": -85.968,
+      "source_url": null
+    },
+    {
+      "id": "dest_laguna_apoyo",
+      "name": "Reserva Natural Laguna de Apoyo",
+      "department_id": "masaya",
+      "latitude": 11.9286,
+      "longitude": -86.0306,
+      "source_url": null
+    },
+    {
+      "id": "dest_corn_island",
+      "name": "Islas del Maíz (Great & Little Corn Island)",
+      "department_id": "raccs",
+      "latitude": 12.1644,
+      "longitude": -83.0531,
+      "source_url": null
+    }
+  ]
+}

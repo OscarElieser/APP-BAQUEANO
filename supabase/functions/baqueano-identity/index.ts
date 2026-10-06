@@ -170,10 +170,25 @@ async function verifyFirebase(token: string) {
   }
 }
 
+// POR QUÉ: un token malformado (p. ej. "a.b.c" de las pruebas de CI) llegaba a
+// Supabase Auth y dejaba un warning "bad_jwt" en los logs. CÓMO: se valida la
+// forma (3 segmentos base64url y cabecera JSON con "alg") antes de llamar a Auth;
+// si no la tiene, se trata como sin sesión (401). La firma la sigue validando Auth.
+function looksLikeJwt(token: string): boolean {
+  const parts = token.split(".");
+  if (parts.length !== 3 || parts.some((p) => !/^[A-Za-z0-9_-]+$/.test(p))) return false;
+  try {
+    const header = JSON.parse(atob(parts[0].replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(parts[0].length / 4) * 4, "=")));
+    return typeof header?.alg === "string" && header.alg.length > 0;
+  } catch {
+    return false;
+  }
+}
+
 async function resolveActor(req: Request, service: SupabaseClient): Promise<Actor | null> {
   const bearer = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
   const anonKey = Deno.env.get("SUPABASE_ANON_KEY") || "";
-  if (bearer && bearer !== anonKey && bearer.split(".").length === 3) {
+  if (bearer && bearer !== anonKey && looksLikeJwt(bearer)) {
     const { data, error } = await service.auth.getUser(bearer);
     if (!error && data?.user) {
       const actor = await actorFromProfile(service, data.user.id, "supabase");
@@ -554,6 +569,7 @@ async function handle(req: Request, action: string, body: Record<string, unknown
       const bearer = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
       const firebaseToken = req.headers.get("x-firebase-token") || "";
       if (!bearer || !firebaseToken) throw new HttpError(400, "Se requieren ambas sesiones para vincular la cuenta.");
+      if (!looksLikeJwt(bearer)) throw new HttpError(401, "Confirmá tu correo en BAQUEANO antes de vincular.");
       const { data: sb } = await service.auth.getUser(bearer);
       if (!sb?.user?.email || !sb.user.email_confirmed_at) throw new HttpError(401, "Confirmá tu correo en BAQUEANO antes de vincular.");
       const claims = await verifyFirebase(firebaseToken);

@@ -948,3 +948,15 @@
 .dest-verified-btn.is-primary { background: #165D6F; color: #FFFFFF; }
 .dest-verified-source { margin: 0; color: #64748B; font-size: 0.72rem; line-height: 1.45; overflow-wrap: anywhere; }
 .dest-verified-source a { color: #165D6F; }
+
+/* ============================================================================
+   CATÁLOGO VIVO (js/destinos-catalog-live.js) — sello de verificación real
+   POR QUÉ: las tarjetas de Supabase muestran el estado real (no reseñas inventadas).
+   ============================================================================ */
+.dest-live-verification { display: inline-flex; align-items: center; gap: 5px; margin: 4px 0 2px; padding: 2px 9px; border-radius: 999px; font-size: 0.68rem; font-weight: 800; }
+.dest-live-verification.is-verified { background: #E3F1E8; color: #2F6B45; }
+.dest-live-verification.is-partial { background: #F4E6C1; color: #7A4A12; }
+.dest-live-verification.is-pending { background: #F1F5F9; color: #475569; }
+.dest-live-desc { margin: 4px 0 6px; font-size: 0.74rem; line-height: 1.4; color: #64748B; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.dest-catalog-card--live .dest-catalog-media { position: relative; }
+.dest-live-photo-note { position: absolute; right: 8px; bottom: 8px; padding: 2px 8px; border-radius: 999px; background: rgba(15, 23, 42, 0.72); color: #F4E6C1; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.02em; }

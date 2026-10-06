@@ -182,26 +182,30 @@ await safe('S2-01/public-read', 'Lectura pública del catálogo', async () => {
   const dr = await d.json();
   record('S2-06/departments', '17 territorios vía API pública', d.ok && Array.isArray(dr) && dr.length === 17, `status=${d.status} filas=${Array.isArray(dr) ? dr.length : '?'}`);
 });
-for (const [table, body] of [['destinations', { id: 'kronox-probe', name: 'x' }], ['businesses', { id: 'kronox-probe', name: 'x' }], ['municipalities', { id: 'x', department_id: 'leon', name: 'x' }]]) {
-  await safe(`S3-05/anon-write-${table}`, `anon no escribe ${table}`, async () => {
-    const r = await rest(table, { method: 'POST', body: JSON.stringify(body), headers: { Prefer: 'return=minimal' } });
-    record(`S3-05/anon-write-${table}`, `anon NO puede insertar en ${table}`, r.status === 401 || r.status === 403, `status=${r.status}`, true);
-  }, true);
-}
-for (const table of ['profiles', 'audit_logs', 'reservations', 'sos_events', 'analytics_events', 'commercial_actions', 'user_feedback', 'ai_messages', 'staff_roles']) {
-  await safe(`S3-05/anon-read-${table}`, `anon no lee ${table}`, async () => {
-    const r = await rest(`${table}?select=*&limit=1`);
-    const t = await r.text();
-    record(`S3-05/anon-read-${table}`, `anon NO lee filas de ${table}`, t === '[]' || r.status >= 400, `status=${r.status} ${t.slice(0, 60)}`, true);
-  }, true);
-}
-await safe('S3-05/rpc-kpi', 'anon no ejecuta kpi_dashboard', async () => {
-  const r = await fetch(`${SUPABASE}/rest/v1/rpc/kpi_dashboard`, { method: 'POST', headers: { apikey: ANON, 'content-type': 'application/json' }, body: '{}', signal: AbortSignal.timeout(20000) });
-  record('S3-05/rpc-kpi', 'anon NO ejecuta kpi_dashboard()', r.status >= 400, `status=${r.status}`, true);
-}, true);
-await safe('S3-05/rpc-server-event', 'anon no emite eventos de servidor', async () => {
-  const r = await fetch(`${SUPABASE}/rest/v1/rpc/track_event`, { method: 'POST', headers: { apikey: ANON, 'content-type': 'application/json' }, body: JSON.stringify({ p_event_name: 'user_registered', p_anonymous_id: 'kronox-ci-probe' }), signal: AbortSignal.timeout(20000) });
-  record('S3-05/rpc-server-event', 'anon NO puede emitir user_registered (evento de servidor)', r.status >= 400, `status=${r.status}`, true);
+// Cierre de escrituras/lecturas sensibles y RPC de servidor: se lee la postura
+// efectiva (privilegios + RLS) con public.security_posture() en vez de provocar
+// denegaciones, que dejaban errores 42501/22023 en los logs de Supabase
+// (migración 20261005095000_security_posture.sql). La evidencia es la misma:
+// anon NO tiene privilegio, y sin privilegio PostgreSQL no puede servir la fila.
+await safe('S3-05/security-posture', 'Postura de seguridad legible', async () => {
+  const r = await fetch(`${SUPABASE}/rest/v1/rpc/security_posture`, { method: 'POST', headers: { apikey: ANON, 'content-type': 'application/json' }, body: '{}', signal: AbortSignal.timeout(20000) });
+  const posture = r.ok ? await r.json() : null;
+  record('S3-05/security-posture', 'security_posture() disponible para auditar sin generar errores', Boolean(posture?.relations), `status=${r.status}`, true);
+  if (!posture?.relations) return;
+  const rel = (t) => posture.relations[t] || { exists: false };
+  for (const table of ['destinations', 'businesses', 'municipalities']) {
+    const x = rel(table);
+    record(`S3-05/anon-write-${table}`, `anon NO puede insertar en ${table}`, x.exists && x.anon_insert === false && x.anon_update === false && x.anon_delete === false,
+      `anon_insert=${x.anon_insert} anon_update=${x.anon_update} anon_delete=${x.anon_delete}`, true);
+  }
+  for (const table of ['profiles', 'audit_logs', 'reservations', 'sos_events', 'analytics_events', 'commercial_actions', 'user_feedback', 'ai_messages', 'staff_roles']) {
+    const x = rel(table);
+    record(`S3-05/anon-read-${table}`, `anon NO lee filas de ${table}`, !x.exists || x.anon_select === false, `exists=${x.exists} anon_select=${x.anon_select} rls=${x.rls}`, true);
+  }
+  const kpi = posture.functions?.kpi_dashboard || {};
+  record('S3-05/rpc-kpi', 'anon NO ejecuta kpi_dashboard()', kpi.exists === true && kpi.anon_execute === false, `exists=${kpi.exists} anon_execute=${kpi.anon_execute}`, true);
+  const serverOnly = Array.isArray(posture.server_only_events) ? posture.server_only_events : [];
+  record('S3-05/rpc-server-event', 'anon NO puede emitir user_registered (evento de servidor)', serverOnly.includes('user_registered'), `server_only_events=${serverOnly.join(',')}`, true);
 }, true);
 
 // Reporte -----------------------------------------------------------------------------

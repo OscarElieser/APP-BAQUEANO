@@ -2,17 +2,17 @@
 // 🧭 BAQUEANO ECOSYSTEM — SUPABASE EDGE FUNCTION: STATUS & TELEMETRY
 // ============================================================================
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proveer un punto de verificación perimetral (Edge) de ultra-baja latencia (<30ms)
-//   para supervisar la salud de los servicios de respaldo de Baqueano Nicaragua.
-// - Servir como monitor directo para el Centro de Operaciones (Ops Center) y la
-//   aplicación web (https://app-baqueano.web.app/).
+// - Proveer un punto de verificación perimetral sin generar intentos anónimos
+//   contra tablas privadas ni ruido de permisos en los registros de Postgres.
+// - Servir al Centro de Operaciones y al sitio oficial en Azure sin exponer
+//   credenciales administrativas ni convertir RLS en una falsa señal de falla.
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 // - Ejecutado en Deno / V8 Edge Runtime desplegado globalmente.
-// - Conexión directa a PostgreSQL mediante las variables de entorno inyectadas
-//   automáticamente por Supabase (SUPABASE_URL, SUPABASE_ANON_KEY).
-// - Headers CORS permisivos para orígenes oficiales de Baqueano y desarrollo local.
-// - Inspecciona la disponibilidad de tablas clave y extensiones PostGIS / pgvector.
+// - Usa `SUPABASE_SERVICE_ROLE_KEY` únicamente dentro del runtime servidor para
+//   leer conteos operativos protegidos. La llave nunca aparece en la respuesta.
+// - CORS se limita a orígenes oficiales y desarrollo local.
+// - Ejecuta las verificaciones en paralelo y devuelve 503 si alguna falla.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & CONTRATO):
 // - Endpoint HTTP GET /baqueano-status
@@ -22,61 +22,95 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
-const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, OPTIONS",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  "Content-Type": "application/json; charset=utf-8",
-};
+const ALLOWED_ORIGINS = new Set([
+  "https://baqueanonicaragua.com",
+  "https://www.baqueanonicaragua.com",
+]);
+
+function responseHeaders(origin: string | null): Record<string, string> {
+  const isLocal = origin != null && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+  const allowedOrigin = origin && (ALLOWED_ORIGINS.has(origin) || isLocal)
+    ? origin
+    : "https://baqueanonicaragua.com";
+  return {
+    "Access-Control-Allow-Origin": allowedOrigin,
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Content-Type": "application/json; charset=utf-8",
+    "Cache-Control": "no-store",
+    "Vary": "Origin",
+  };
+}
 
 Deno.serve(async (req: Request) => {
-  // Manejo de preflight CORS
+  const headers = responseHeaders(req.headers.get("origin"));
   if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: CORS_HEADERS });
+    return new Response("ok", { headers });
+  }
+  if (req.method !== "GET") {
+    return new Response(JSON.stringify({ ok: false, error: "Método no permitido." }), {
+      status: 405,
+      headers: { ...headers, "Allow": "GET, OPTIONS" },
+    });
   }
 
   const startTime = performance.now();
 
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
-    const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+    if (!supabaseUrl || !serviceRoleKey) {
+      throw new Error("Configuración interna incompleta");
+    }
 
-    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const supabase = createClient(supabaseUrl, serviceRoleKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
 
-    // Verificación fáctica de conectividad consultando conteo de destinos
-    const { count: destCount, error: destError } = await supabase
-      .from("destinations")
-      .select("*", { count: "exact", head: true });
-
-    // Verificación de cola de failover
-    const { count: opsCount, error: opsError } = await supabase
-      .from("backup_operations")
-      .select("*", { count: "exact", head: true });
+    const [destinationsResult, placesResult, businessesResult, operationsResult] = await Promise.all([
+      supabase.from("destinations").select("id", { count: "exact", head: true }),
+      supabase.from("places").select("id", { count: "exact", head: true }),
+      supabase.from("businesses").select("id", { count: "exact", head: true }),
+      supabase.from("backup_operations").select("id", { count: "exact", head: true }),
+    ]);
+    const errors = [
+      destinationsResult.error,
+      placesResult.error,
+      businessesResult.error,
+      operationsResult.error,
+    ].filter(Boolean);
+    const isOperational = errors.length === 0;
+    const destinations = destinationsResult.count ?? 0;
+    const places = placesResult.count ?? 0;
+    const businesses = businessesResult.count ?? 0;
 
     const latencyMs = Math.round(performance.now() - startTime);
 
     const payload = {
-      ok: true,
+      ok: isOperational,
       service: "Baqueano Supabase Edge Runtime",
       region: Deno.env.get("DENO_REGION") || "edge-global",
-      status: destError ? "degraded" : "operational",
+      status: isOperational ? "operational" : "degraded",
       latency_ms: latencyMs,
       features: {
         postgis: true,
         pgvector: true,
-        failover_queue: !opsError,
+        failover_queue: !operationsResult.error,
         storage_replica: true,
       },
       counts: {
-        destinations: destCount ?? 0,
-        pending_failovers: opsCount ?? 0,
+        destinations,
+        places,
+        businesses,
+        catalog_total: destinations + places + businesses,
+        pending_failovers: operationsResult.count ?? 0,
       },
       server_time: new Date().toISOString(),
     };
 
     return new Response(JSON.stringify(payload, null, 2), {
-      status: 200,
-      headers: CORS_HEADERS,
+      status: isOperational ? 200 : 503,
+      headers,
     });
   } catch (err: unknown) {
     const errorMessage = err instanceof Error ? err.message : String(err);
@@ -94,7 +128,7 @@ Deno.serve(async (req: Request) => {
       ),
       {
         status: 500,
-        headers: CORS_HEADERS,
+        headers,
       }
     );
   }

@@ -1,0 +1,9 @@
+{
+  "generated_from": "website/scripts/data/marena",
+  "statements": 42,
+  "plans": 42,
+  "with_confirmed_resolution": 17,
+  "conflicting": [
+    "parque-nacional-saslaya"
+  ]
+}

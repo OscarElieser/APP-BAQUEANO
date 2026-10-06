@@ -52,6 +52,11 @@
    - Toda clave nueva entra en los 6 idiomas a la vez (`npm run i18n:add lote.json`). Prohibido crear catálogos paralelos o claves tipo `texto1`.
    - Puerta CI `npm run i18n`: falla si falta una clave/traducción o si un archivo agrega texto de interfaz sin clave (trinquete contra `website/scripts/i18n-baseline.json`, que solo puede bajar). Cobertura: `website/docs/i18n-coverage.md`.
 
+10. **Verificación ambiental con evidencia trazable (Regla del propietario, 2026-10-05)**:
+   - "Ningún contenido ambiental podrá marcarse como verificado o publicarse con check BAQUEANO si no existe evidencia trazable de la fuente oficial o validación documentada correspondiente."
+   - Mapa: "Un área protegida puede estar publicada informativamente sin navegación; el botón 'Cómo llegar' solo se habilita cuando existe un punto de acceso validado. El centro geográfico de una reserva no se utilizará automáticamente como entrada turística."
+   - Publicada al visitante en `website/ambiental.html#verificacionAmbiental` (claves `pages.ambiental.verificacion.*`).
+
 ## BAQUEANO Agent Skills Orchestration
 
 ### 🎯 POR QUÉ (Why / Propósito)
@@ -64,7 +69,8 @@ Integrar los procedimientos especializados del plugin global `agent-skills` de A
 2. Los skills son procedimientos de trabajo. No autorizan despliegues, migraciones destructivas, cambios de plataforma ni acciones fuera del alcance solicitado.
 3. La precedencia obligatoria es: protección de datos y seguridad → este `AGENTS.md` → arquitectura comprobada de BAQUEANO → skill especializado → requisitos concretos de la tarea.
 4. Ante cualquier conflicto entre una guía genérica y una regla de BAQUEANO, prevalece BAQUEANO.
-5. Arquitectura oficial (directiva del propietario, 2026-10-05; sustituye la del 2026-10-03): **Firebase = Authentication + Hosting** (y servicios Firebase solo si se justifican e integran). **Supabase = base de datos principal del ecosistema** (PostgreSQL, PostGIS, pgvector, Realtime, contenido, catálogo turístico, negocios, reservas, auditoría, usuarios complementarios y BAQUI). Toda escritura administrativa nueva va a Supabase a través de Edge Functions con token de Firebase verificado y RBAC. Firestore queda como **origen heredado** de la app Android: se replica en Supabase con `baqueano-mirror` hasta completar la migración de Android (integración pendiente). La Web y Android deben consumir la misma información operacional desde Supabase. `website/` se publica en Azure (dominio) y Firebase Hosting (respaldo).
+5. Arquitectura oficial de transición (directiva del propietario, 2026-10-05; sustituye todas las variantes anteriores): **Supabase = fuente principal de verdad operacional** para PostgreSQL/PostGIS, contenido, catálogo, negocios, reservas, perfiles centrales, RBAC, Storage nuevo, Edge Functions, Realtime selectivo, impacto y BAQUI. **Firebase permanece integrado** para Firebase Auth actual, Google Sign-In, FCM, Analytics, App Check y compatibilidad con Firestore, Storage, Hosting, Functions, datos y archivos heredados. Nada de Firebase se borra o desactiva hasta demostrar respaldo, reemplazo, pruebas Web/Android/Ops/BAQUI y rollback, con autorización expresa.
+5b. **Identidad coexistente sin duplicados:** Firebase Auth y Supabase Auth convergen progresivamente en un único perfil BAQUEANO dentro de Supabase DB. `profiles` representa a la persona; `identity_links` relaciona identidades Firebase/Supabase/Google/email mediante identificadores únicos y correo verificado. Firebase Auth no se reemplaza abruptamente. Las nuevas escrituras operacionales migradas van a Supabase; Firestore y archivos estáticos permanecen como legado/compatibilidad hasta validar cada módulo. Detalle: `docs/architecture/DATA_ARCHITECTURE.md` y `docs/architecture/SUPABASE_SOURCE_OF_TRUTH.md`.
 6. El desarrollo Flutter se limita a Android, principalmente `lib/` y `android/`. No modificar `ios/` ni el directorio Flutter `web/` sin instrucción explícita.
 7. Las invocaciones manuales canónicas usan el namespace `/agent-skills:<skill>`. Los aliases heredados son secundarios y pueden no aparecer en Antigravity 1.x.
 8. Antes de instalar dependencias, modificar autenticación, reglas, RLS, migraciones, CSP o infraestructura, aplicar análisis de restricciones, seguridad, pruebas y revisión proporcional al riesgo.

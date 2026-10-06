@@ -842,3 +842,74 @@
   .amb-passport-levels-row { grid-template-columns: repeat(2, 1fr); }
   .amb-inspiring-row { grid-template-columns: 1fr 1fr; }
 }
+
+/* ============================================================================
+   6.1 COMPROMISO DE VERIFICACIÓN AMBIENTAL
+   POR QUÉ: hacer visibles las dos reglas de datos ambientales del propietario.
+   CÓMO: dos tarjetas con cita destacada; una columna en móvil.
+   QUÉ: .amb-verification-* (ambiental.html#verificacionAmbiental).
+   ============================================================================ */
+.amb-verification-section { padding: 40px 0; }
+
+.amb-verification-header { margin-bottom: 18px; }
+
+.amb-verification-kicker {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #F65E01;
+  margin-bottom: 4px;
+}
+
+.amb-verification-header h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #0F172A;
+  margin: 0 0 4px;
+}
+
+.amb-verification-header p { font-size: 0.86rem; color: #64748B; margin: 0; }
+
+.amb-verification-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.amb-verification-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-left: 4px solid #165D6F;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.amb-verification-icon { font-size: 1.4rem; color: #F65E01; margin-bottom: 8px; }
+
+.amb-verification-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 8px;
+}
+
+.amb-verification-card blockquote {
+  margin: 0;
+  padding: 12px 14px;
+  background: #F4E6C1;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  font-style: italic;
+  color: #0F172A;
+}
+
+.amb-verification-why { font-size: 0.8rem; color: #64748B; margin: 10px 0 0; }
+
+@media (max-width: 760px) {
+  .amb-verification-grid { grid-template-columns: 1fr; }
+}
