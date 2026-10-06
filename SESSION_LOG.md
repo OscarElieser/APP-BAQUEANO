@@ -4783,3 +4783,15 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - i18n: nuevo evento `baqueano:i18nReady`; los componentes dinámicos se repintan en el idioma del visitante.
     - Seguridad: reconocimiento con skill Cloudflare en curso (perfil quick; ejecución bloqueada por falta de sandbox verificado → solo fuente).
     - Informes en `docs/auditoria-2026-10-06/`.
+  - Avance (auditoría de botones en navegador real, `website/scripts/button-audit.mjs`: 4900 enlaces y 899 botones, 30 páginas × 2 anchos):
+    - Ops Center: 36 `<a>` sin href; corregido antes (teclado, URL, atrás/adelante).
+    - Crónicas:
+      - 6 filtros sin función → `<button aria-pressed>` + `js/cronicas-filter.js` (#tema=…).
+      - Contadores "12/18/15/9/14 relatos" sin fuente (la página tiene 3 crónicas) → "Explorar territorio".
+      - "Lo Más Leído" sin datos de lectura → "Lecturas recomendadas".
+      - Enlace `?id=caribe-sur` (inexistente, caía en Madriz) → `raccs`.
+      - Autores, guías y citas con nombre propio: quedan para que el propietario confirme.
+    - Historia: "Ver más pueblos/personajes/fuentes" sin destino → `js/historia-enlaces.js` (capítulo de la audioguía, personas citadas y 10 fuentes oficiales reales). Los 7 "Conocer más" ya funcionaban.
+    - `global-injector.js` pisaba el id del `<main>` para el salto de navegación. Rompía `#catalogoExperiencias` y la impresión de Mi Viaje (`#printableItinerary`, salía en blanco). Ahora respeta el id existente.
+    - Pendiente: botones "no clicables" del reproductor a 390 px (posible solapamiento con la barra inferior `bqThumbBar`) y "Probar conexión" en offline.html.
+    - Auditoría de seguridad: los 6 cazadores se cortaron por el límite de uso de la sesión. Reconocimiento completo y ledger válido en `~/security-audit-skill/APP-BAQUEANO/run-1` (fuera del repo). Se retoma al reanudar.

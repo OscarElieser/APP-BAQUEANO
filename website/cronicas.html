@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css?v=20261003-mag-1">
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
-  <link rel="stylesheet" href="css/components/magazine-layout.css?v=20261003-mag-1">
+  <link rel="stylesheet" href="css/components/magazine-layout.css?v=20261006-filter-1">
   
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
@@ -73,12 +73,12 @@
         </div>
 
         <nav data-i18n-aria-label="pages.cronicas.bqMagSectionNav.navAriaLabel1" class="bq-mag-section-nav" aria-label="Secciones del magazine">
-          <a data-i18n="pages.cronicas.bqMagSectionNav.a1" href="#" class="bq-mag-chip active">Todas las crónicas</a>
-          <a data-i18n="common.comunidadesVivas" href="#" class="bq-mag-chip">Comunidades Vivas</a>
-          <a data-i18n="pages.cronicas.bqMagSectionNav.a2" href="#" class="bq-mag-chip">Senderos y Volcanes</a>
-          <a data-i18n="pages.cronicas.bqMagSectionNav.a3" href="#" class="bq-mag-chip">Ruta del Café</a>
-          <a data-i18n="pages.cronicas.bqMagSectionNav.a4" href="#" class="bq-mag-chip">Memoria y Tradición</a>
-          <a data-i18n="pages.cronicas.bqMagSectionNav.a5" href="#" class="bq-mag-chip">Caribe y Pueblos</a>
+          <button type="button" data-i18n="pages.cronicas.bqMagSectionNav.a1" class="bq-mag-chip active" data-topic="todas" aria-pressed="true" aria-controls="bqMagFilterable">Todas las crónicas</button>
+          <button type="button" data-i18n="common.comunidadesVivas" class="bq-mag-chip" data-topic="comunidades" aria-pressed="false" aria-controls="bqMagFilterable">Comunidades Vivas</button>
+          <button type="button" data-i18n="pages.cronicas.bqMagSectionNav.a2" class="bq-mag-chip" data-topic="senderos" aria-pressed="false" aria-controls="bqMagFilterable">Senderos y Volcanes</button>
+          <button type="button" data-i18n="pages.cronicas.bqMagSectionNav.a3" class="bq-mag-chip" data-topic="cafe" aria-pressed="false" aria-controls="bqMagFilterable">Ruta del Café</button>
+          <button type="button" data-i18n="pages.cronicas.bqMagSectionNav.a4" class="bq-mag-chip" data-topic="memoria" aria-pressed="false" aria-controls="bqMagFilterable">Memoria y Tradición</button>
+          <button type="button" data-i18n="pages.cronicas.bqMagSectionNav.a5" class="bq-mag-chip" data-topic="caribe" aria-pressed="false" aria-controls="bqMagFilterable">Caribe y Pueblos</button>
         </nav>
       </header>
 
@@ -93,31 +93,31 @@
               <li>
                 <a href="departamento.html?id=madriz" class="bq-mag-topic-link">
                   <span>Cañón de Somoto</span>
-                  <span data-i18n="pages.cronicas.bqMagLeftRail.span1" class="bq-mag-topic-badge">12 relatos</span>
+                  <span data-i18n="pages.cronicas.exploreTerritory" class="bq-mag-topic-badge">Explorar territorio</span>
                 </a>
               </li>
               <li>
                 <a href="departamento.html?id=rivas" class="bq-mag-topic-link">
                   <span>Isla de Ometepe</span>
-                  <span data-i18n="pages.cronicas.bqMagLeftRail.span2" class="bq-mag-topic-badge">18 relatos</span>
+                  <span data-i18n="pages.cronicas.exploreTerritory" class="bq-mag-topic-badge">Explorar territorio</span>
                 </a>
               </li>
               <li>
                 <a href="departamento.html?id=matagalpa" class="bq-mag-topic-link">
                   <span data-i18n="pages.cronicas.bqMagLeftRail.span3">Selva Negra &amp; Norte</span>
-                  <span data-i18n="pages.cronicas.bqMagLeftRail.span4" class="bq-mag-topic-badge">15 relatos</span>
+                  <span data-i18n="pages.cronicas.exploreTerritory" class="bq-mag-topic-badge">Explorar territorio</span>
                 </a>
               </li>
               <li>
                 <a href="departamento.html?id=leon" class="bq-mag-topic-link">
                   <span data-i18n="pages.cronicas.bqMagLeftRail.span5">Cerro Negro &amp; Poneloya</span>
-                  <span data-i18n="pages.cronicas.bqMagLeftRail.span6" class="bq-mag-topic-badge">9 relatos</span>
+                  <span data-i18n="pages.cronicas.exploreTerritory" class="bq-mag-topic-badge">Explorar territorio</span>
                 </a>
               </li>
               <li>
-                <a href="departamento.html?id=caribe-sur" class="bq-mag-topic-link">
+                <a href="departamento.html?id=raccs" class="bq-mag-topic-link">
                   <span>Corn Island &amp; Bluefields</span>
-                  <span data-i18n="pages.cronicas.bqMagLeftRail.span7" class="bq-mag-topic-badge">14 relatos</span>
+                  <span data-i18n="pages.cronicas.exploreTerritory" class="bq-mag-topic-badge">Explorar territorio</span>
                 </a>
               </li>
             </ul>
@@ -135,10 +135,10 @@
         </aside>
 
         <!-- COLUMNA CENTRAL: Noticia Principal + Rejilla Popular -->
-        <div class="bq-mag-main-content">
+        <div class="bq-mag-main-content" id="bqMagFilterable">
           
           <!-- Noticia Líder (Featured Lead Story) -->
-          <article class="bq-mag-lead-article">
+          <article class="bq-mag-lead-article" data-topics="comunidades senderos memoria">
             <div class="bq-mag-lead-media">
               <img data-i18n-alt="pages.cronicas.bqMagLeadArticle.imgAlt1" src="assets/images/destinos/isla_de_ometepe.jpg" alt="Dos volcanes y comunidades en Ometepe" loading="eager" decoding="async" width="1600" height="900">
               <span data-i18n="pages.cronicas.bqMagLeadArticle.span1" class="bq-mag-lead-tag">Crónica Principal · Rivas</span>
@@ -159,8 +159,9 @@
           </article>
 
           <!-- Rejilla Secundaria Popular -->
-          <div class="bq-mag-secondary-grid">
-            <article class="bq-mag-card-sm">
+          <p class="bq-mag-filter-empty" id="bqMagFilterEmpty" role="status" hidden data-i18n="pages.cronicas.filterEmpty">Todavía no hay una crónica completa en esta sección. Mirá las lecturas recomendadas.</p>
+            <div class="bq-mag-secondary-grid">
+            <article class="bq-mag-card-sm" data-topics="comunidades senderos">
               <div class="bq-mag-card-sm-media">
                 <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto" loading="lazy" decoding="async" width="399" height="501">
               </div>
@@ -176,7 +177,7 @@
               </div>
             </article>
 
-            <article class="bq-mag-card-sm">
+            <article class="bq-mag-card-sm" data-topics="cafe">
               <div class="bq-mag-card-sm-media">
                 <img data-i18n-alt="pages.cronicas.bqMagCardSm.imgAlt1" src="assets/images/destinos/selva_negra.jpg" alt="Cafetales de Matagalpa" loading="lazy" decoding="async" width="399" height="501">
               </div>
@@ -199,9 +200,9 @@
         <aside data-i18n-aria-label="pages.cronicas.bqMagRightRail.asideAriaLabel1" class="bq-mag-right-rail" aria-label="Lecturas destacadas">
           
           <div class="bq-mag-rail-card">
-            <h3 data-i18n="pages.cronicas.bqMagRightRail.h31" class="bq-mag-rail-heading">Lo Más Leído</h3>
+            <h3 data-i18n="pages.cronicas.bqMagRightRail.h31" class="bq-mag-rail-heading">Lecturas recomendadas</h3>
             <div class="bq-mag-most-read-list">
-              <a href="historia.html" class="bq-mag-rank-item">
+              <a href="historia.html" class="bq-mag-rank-item" data-topics="memoria">
                 <span class="bq-mag-rank-number">01</span>
                 <div class="bq-mag-rank-content">
                   <h4 data-i18n="pages.cronicas.bqMagRightRail.h41" class="bq-mag-rank-title">Las 365 Isletas: El secreto de los pescadores coloniales</h4>
@@ -209,7 +210,7 @@
                 </div>
               </a>
 
-              <a href="gastronomia.html" class="bq-mag-rank-item">
+              <a href="gastronomia.html" class="bq-mag-rank-item" data-topics="caribe memoria">
                 <span class="bq-mag-rank-number">02</span>
                 <div class="bq-mag-rank-content">
                   <h4 data-i18n="pages.cronicas.bqMagRightRail.h42" class="bq-mag-rank-title">El rondón de Bluefields: Historia de leña y coco</h4>
@@ -217,7 +218,7 @@
                 </div>
               </a>
 
-              <a href="ambiental.html" class="bq-mag-rank-item">
+              <a href="ambiental.html" class="bq-mag-rank-item" data-topics="senderos">
                 <span class="bq-mag-rank-number">03</span>
                 <div class="bq-mag-rank-content">
                   <h4 data-i18n="pages.cronicas.bqMagRightRail.h43" class="bq-mag-rank-title">La guardia silenciosa del Guardabarranco</h4>
@@ -244,6 +245,7 @@
   <footer id="siteFooter"></footer>
 
   <script src="js/navigation.js?v=20261004-menu-2"></script>
+  <script src="js/cronicas-filter.js?v=20261006-1" defer></script>
   <script src="js/global-injector.js"></script>
 </body>
 </html>

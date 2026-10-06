@@ -2613,7 +2613,7 @@
         "imgAlt1": "Cafetales de Matagalpa"
       },
       "bqMagRightRail": {
-        "h31": "Lo Más Leído",
+        "h31": "Lecturas recomendadas",
         "h41": "Las 365 Isletas: El secreto de los pescadores coloniales",
         "span1": "Granada · 4 min de lectura",
         "h42": "El rondón de Bluefields: Historia de leña y coco",
@@ -2626,7 +2626,9 @@
       },
       "bqMagazineContainer": {
         "sectionAriaLabel1": "Magazine de Crónicas Territoriales"
-      }
+      },
+      "exploreTerritory": "Explorar territorio",
+      "filterEmpty": "Todavía no hay una crónica completa en esta sección. Mirá las lecturas recomendadas."
     },
     "denuncias": {
       "body": {
@@ -3539,6 +3541,13 @@
             "text": "El Güegüense es un drama satírico muy conocido en Nicaragua que reúne teatro, danza y música, y que es una síntesis de las culturas española e indígena. Se representa cada año en la fiesta de San Sebastián. La UNESCO lo proclamó en 2005 y lo inscribió en 2008 en la Lista Representativa del Patrimonio Cultural Inmaterial de la Humanidad."
           }
         }
+      },
+      "links": {
+        "close": "Cerrar",
+        "peopleTitle": "Personajes citados en la audioguía",
+        "peopleIntro": "Cada nombre aparece en uno o más capítulos verificados. Tocá un capítulo para escucharlo.",
+        "sourcesTitle": "Fuentes de esta página",
+        "sourcesIntro": "{count} fuentes oficiales y académicas citadas en la audioguía y la línea de tiempo."
       }
     },
     "index": {

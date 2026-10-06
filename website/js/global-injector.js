@@ -821,7 +821,15 @@
       main = document.querySelector(candidates[i] + ':not(#mainNavbar *):not(#siteFooter *)');
     }
     if (main) {
-      main.id = 'mainContent';
+      // Si el contenedor ya tiene id (p. ej. <main id="catalogoExperiencias">), se respeta:
+      // pisarlo rompía las anclas internas que lo usan (auditoría de botones 2026-10-06).
+      // El enlace "Saltar al contenido" apunta entonces a ese id.
+      if (main.id) {
+        var skip = document.getElementById('bqSkipNav');
+        if (skip) skip.href = '#' + main.id;
+      } else {
+        main.id = 'mainContent';
+      }
       if (!main.hasAttribute('tabindex')) {
         main.setAttribute('tabindex', '-1');
       }

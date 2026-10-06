@@ -2613,7 +2613,7 @@
         "imgAlt1": "Coffee plantations of Matagalpa"
       },
       "bqMagRightRail": {
-        "h31": "Most Read",
+        "h31": "Recommended reads",
         "h41": "The 365 Islets: the secret of the colonial fishermen",
         "span1": "Granada · 4 min read",
         "h42": "Bluefields rondón: a story of firewood and coconut",
@@ -2626,7 +2626,9 @@
       },
       "bqMagazineContainer": {
         "sectionAriaLabel1": "Territorial Chronicles Magazine"
-      }
+      },
+      "exploreTerritory": "Explore the territory",
+      "filterEmpty": "There is no full chronicle in this section yet. See the recommended reads."
     },
     "denuncias": {
       "body": {
@@ -3539,6 +3541,13 @@
             "text": "El Güegüense is a satirical drama, well known in Nicaragua, that brings together theatre, dance and music as a synthesis of Spanish and Indigenous cultures. It is performed every year at the feast of San Sebastián. UNESCO proclaimed it in 2005 and inscribed it in 2008 on the Representative List of the Intangible Cultural Heritage of Humanity."
           }
         }
+      },
+      "links": {
+        "close": "Close",
+        "peopleTitle": "People mentioned in the audio guide",
+        "peopleIntro": "Each name appears in one or more verified chapters. Tap a chapter to listen to it.",
+        "sourcesTitle": "Sources for this page",
+        "sourcesIntro": "{count} official and academic sources cited in the audio guide and timeline."
       }
     },
     "index": {

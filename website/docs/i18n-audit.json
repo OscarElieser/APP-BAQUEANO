@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T04:07:11.867Z",
+  "generatedAt": "2026-10-06T11:27:19.351Z",
   "languages": [
     "es",
     "en",
@@ -9,21 +9,21 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 3945,
-    "en": 3945,
-    "fr": 3945,
-    "it": 3945,
-    "pt": 3945,
-    "de": 3945
+    "es": 3952,
+    "en": 3952,
+    "fr": 3952,
+    "it": 3952,
+    "pt": 3952,
+    "de": 3952
   },
   "html": {
     "files": 31,
-    "total": 3661,
-    "translated": 3660,
+    "total": 3662,
+    "translated": 3661,
     "untranslated": 1
   },
   "js": {
-    "files": 88,
+    "files": 90,
     "translated": 148,
     "untranslated": 729
   },
@@ -76,6 +76,7 @@
     "js/baqueano-master-catalog.js",
     "js/baqueano-traffic-tracker.js",
     "js/community-api.js",
+    "js/cronicas-filter.js",
     "js/definitive-index-interactions.js",
     "js/destination-community.js",
     "js/destinos-catalog-live.js",
@@ -88,6 +89,7 @@
     "js/firestore-realtime.js",
     "js/hero-video-loader.js",
     "js/historia-audioguia.js",
+    "js/historia-enlaces.js",
     "js/impact-public.js",
     "js/ops-center/ops-community-moderation.js",
     "js/safety-gallery.js",
@@ -209,8 +211,8 @@
     {
       "file": "cronicas.html",
       "type": "html",
-      "total": 50,
-      "translated": 50,
+      "total": 51,
+      "translated": 51,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -612,6 +614,15 @@
       "coverage": 100
     },
     {
+      "file": "js/cronicas-filter.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/definitive-index-interactions.js",
       "type": "js",
       "total": 0,
@@ -838,6 +849,15 @@
     },
     {
       "file": "js/historia-audioguia.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/historia-enlaces.js",
       "type": "js",
       "total": 0,
       "translated": 0,

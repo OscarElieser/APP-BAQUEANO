@@ -2613,7 +2613,7 @@
         "imgAlt1": "Cafezais de Matagalpa"
       },
       "bqMagRightRail": {
-        "h31": "Mais lidos",
+        "h31": "Leituras recomendadas",
         "h41": "As 365 ilhotas: o segredo dos pescadores coloniais",
         "span1": "Granada · 4 min de leitura",
         "h42": "O rondón de Bluefields: história de lenha e coco",
@@ -2626,7 +2626,9 @@
       },
       "bqMagazineContainer": {
         "sectionAriaLabel1": "Revista de crônicas territoriais"
-      }
+      },
+      "exploreTerritory": "Explorar o território",
+      "filterEmpty": "Ainda não há uma crônica completa nesta seção. Veja as leituras recomendadas."
     },
     "denuncias": {
       "body": {
@@ -3539,6 +3541,13 @@
             "text": "El Güegüense é um drama satírico muito conhecido na Nicarágua que reúne teatro, dança e música, numa síntese das culturas espanhola e indígena. É encenado todos os anos na festa de San Sebastián. A UNESCO o proclamou em 2005 e o inscreveu em 2008 na Lista Representativa do Patrimônio Cultural Imaterial da Humanidade."
           }
         }
+      },
+      "links": {
+        "close": "Fechar",
+        "peopleTitle": "Personagens citados no audioguia",
+        "peopleIntro": "Cada nome aparece em um ou mais capítulos verificados. Toque em um capítulo para ouvi-lo.",
+        "sourcesTitle": "Fontes desta página",
+        "sourcesIntro": "{count} fontes oficiais e acadêmicas citadas no audioguia e na linha do tempo."
       }
     },
     "index": {

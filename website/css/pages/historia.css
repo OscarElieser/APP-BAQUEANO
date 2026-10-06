@@ -348,3 +348,14 @@ html body .historia-inline-039 {
   font-family: var(--font-tech) !important;
   font-weight: 700 !important;
 }
+
+/* Diálogos de "Ver más" (js/historia-enlaces.js, 2026-10-06) */
+.hist-links-dialog { max-width: min(640px, calc(100vw - 32px)); max-height: 80vh; overflow: auto; border: 0; border-radius: 16px; padding: 1.5rem; background: #FFFFFF; color: #0F172A; }
+.hist-links-dialog::backdrop { background: rgba(15, 23, 42, 0.6); }
+.hist-links-close { float: right; min-width: 44px; min-height: 44px; border: 0; border-radius: 50%; background: #F1F5F9; color: #0F172A; cursor: pointer; }
+.hist-links-title { margin: 0 0 0.75rem; font-size: 1.25rem; color: #165D6F; }
+.hist-links-intro { color: #334155; font-size: 0.92rem; }
+.hist-links-list { padding-left: 1.1rem; line-height: 1.6; }
+.hist-links-list a { color: #165D6F; text-decoration: underline; }
+.hist-links-chapter { min-height: 44px; border: 0; background: none; color: #B34400; text-decoration: underline; cursor: pointer; font: inherit; }
+.hist-links-used { color: #475569; font-size: 0.82rem; }

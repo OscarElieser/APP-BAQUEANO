@@ -283,6 +283,18 @@
       });
     });
 
+    // Acceso externo mínimo (2026-10-06): "Ver más sobre nuestros pueblos" y la lista de
+    // personajes abren un capítulo concreto sin reproducirlo (js/historia-enlaces.js).
+    window.BaqueanoHistoryAudio = Object.freeze({
+      showChapter: function (id) {
+        var index = chapters.findIndex(function (c) { return c.id === id; });
+        if (index < 0) return false;
+        show(index);
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return true;
+      }
+    });
+
     if (chaptersEl) {
       chaptersEl.addEventListener('click', function (event) {
         var button = event.target.closest('.hist-audio-chapter');

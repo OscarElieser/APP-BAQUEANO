@@ -513,3 +513,9 @@
     transform: none !important;
   }
 }
+
+/* Filtros temáticos como botones (2026-10-06, js/cronicas-filter.js): mismo aspecto que el chip. */
+button.bq-mag-chip { font-family: inherit; cursor: pointer; line-height: 1.2; }
+button.bq-mag-chip:focus-visible { outline: 3px solid var(--bq-mag-primary); outline-offset: 2px; }
+.bq-mag-filter-empty { margin: 0 0 1.25rem; padding: 0.9rem 1rem; border-left: 4px solid var(--bq-mag-primary); border-radius: 8px; background: var(--bq-mag-card); color: var(--bq-mag-slate); font-size: 0.92rem; }
+[data-topics][hidden] { display: none !important; }

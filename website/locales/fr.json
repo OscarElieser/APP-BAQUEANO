@@ -2613,7 +2613,7 @@
         "imgAlt1": "Caféières de Matagalpa"
       },
       "bqMagRightRail": {
-        "h31": "Les plus lus",
+        "h31": "Lectures recommandées",
         "h41": "Les 365 îlots : le secret des pêcheurs coloniaux",
         "span1": "Granada · 4 min de lecture",
         "h42": "Le rondón de Bluefields : histoire de bois et de coco",
@@ -2626,7 +2626,9 @@
       },
       "bqMagazineContainer": {
         "sectionAriaLabel1": "Magazine des chroniques territoriales"
-      }
+      },
+      "exploreTerritory": "Explorer le territoire",
+      "filterEmpty": "Il n'y a pas encore de chronique complète dans cette section. Consultez les lectures recommandées."
     },
     "denuncias": {
       "body": {
@@ -3539,6 +3541,13 @@
             "text": "El Güegüense est un drame satirique très connu au Nicaragua qui réunit théâtre, danse et musique, synthèse des cultures espagnole et autochtone. Il est représenté chaque année lors de la fête de San Sebastián. L’UNESCO l’a proclamé en 2005 et l’a inscrit en 2008 sur la Liste représentative du patrimoine culturel immatériel de l’humanité."
           }
         }
+      },
+      "links": {
+        "close": "Fermer",
+        "peopleTitle": "Personnages cités dans l'audioguide",
+        "peopleIntro": "Chaque nom apparaît dans un ou plusieurs chapitres vérifiés. Touchez un chapitre pour l'écouter.",
+        "sourcesTitle": "Sources de cette page",
+        "sourcesIntro": "{count} sources officielles et académiques citées dans l'audioguide et la chronologie."
       }
     },
     "index": {

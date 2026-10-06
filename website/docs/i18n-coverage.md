@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-06T04:07:11.867Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3945 · en 3945 · fr 3945 · it 3945 · pt 3945 · de 3945
+Generado: 2026-10-06T11:27:19.351Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3952 · en 3952 · fr 3952 · it 3952 · pt 3952 · de 3952
 
-HTML: 3660/3661 textos con clave (1 pendientes) · JS: 729 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3661/3662 textos con clave (1 pendientes) · JS: 729 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -164,7 +164,7 @@ HTML: 3660/3661 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | baqueano-ai.html | html | 3 | 3 | 0 | 100 % |
 | baqueano-ia.html | html | 194 | 194 | 0 | 100 % |
 | cookies.html | html | 122 | 122 | 0 | 100 % |
-| cronicas.html | html | 50 | 50 | 0 | 100 % |
+| cronicas.html | html | 51 | 51 | 0 | 100 % |
 | denuncias.html | html | 39 | 39 | 0 | 100 % |
 | departamento.html | html | 78 | 78 | 0 | 100 % |
 | destino.html | html | 18 | 18 | 0 | 100 % |
@@ -182,6 +182,7 @@ HTML: 3660/3661 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | js/baqueano-master-catalog.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-traffic-tracker.js | js | 0 | 0 | 0 | 100 % |
 | js/community-api.js | js | 0 | 0 | 0 | 100 % |
+| js/cronicas-filter.js | js | 0 | 0 | 0 | 100 % |
 | js/definitive-index-interactions.js | js | 0 | 0 | 0 | 100 % |
 | js/destination-community.js | js | 0 | 0 | 0 | 100 % |
 | js/destinos-catalog-live.js | js | 0 | 0 | 0 | 100 % |
@@ -194,6 +195,7 @@ HTML: 3660/3661 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | js/firestore-realtime.js | js | 0 | 0 | 0 | 100 % |
 | js/hero-video-loader.js | js | 0 | 0 | 0 | 100 % |
 | js/historia-audioguia.js | js | 0 | 0 | 0 | 100 % |
+| js/historia-enlaces.js | js | 0 | 0 | 0 | 100 % |
 | js/impact-public.js | js | 6 | 6 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |
