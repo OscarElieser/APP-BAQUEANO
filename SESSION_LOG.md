@@ -4795,3 +4795,12 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - `global-injector.js` pisaba el id del `<main>` para el salto de navegación. Rompía `#catalogoExperiencias` y la impresión de Mi Viaje (`#printableItinerary`, salía en blanco). Ahora respeta el id existente.
     - Pendiente: botones "no clicables" del reproductor a 390 px (posible solapamiento con la barra inferior `bqThumbBar`) y "Probar conexión" en offline.html.
     - Auditoría de seguridad: los 6 cazadores se cortaron por el límite de uso de la sesión. Reconocimiento completo y ledger válido en `~/security-audit-skill/APP-BAQUEANO/run-1` (fuera del repo). Se retoma al reanudar.
+  - Avance (auditoría de seguridad, cierre de run-1 con la skill Cloudflare, perfil quick, solo fuente):
+    - Corrida completa: 10 verificadores (todos `needs_validation`, sin sandbox) y crítico final (4 unidades diferidas).
+    - Ledger: 16 unidades. Hallazgos: 10. Ambos validados (PASS) y publicados en `docs/security-audit/2026-10-06/` con REPORT, FINDINGS-DETAIL y NEEDS-VALIDATION.
+    - Correcciones nuevas:
+      - Revocación del RBAC de Supabase aplicada también en baqueano-ops, -sos, -reservas y -community (`_shared/staff-revocation.ts`). Se verificó en la BD que ningún miembro del personal pierde acceso hoy.
+      - KPI `evidencias_sprint`: solo cuenta registros vigentes (migración 20261006060000, aplicada y verificada).
+      - BAQUI: presupuesto por IP (hash) de 20 cada 10 minutos y global de 400 por hora (migración 20261006070000, aplicada y probada; la función falta desplegar).
+      - El retriever de BAQUI incluye eventos `historical`, igual que RLS.
+    - Pendiente del propietario: despliegue de Edge Functions, sudo y protección de main, "Confirm email" en Auth, decisión sobre analítica anónima.

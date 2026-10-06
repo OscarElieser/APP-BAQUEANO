@@ -29,6 +29,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient, type SupabaseClient } from "jsr:@supabase/supabase-js@2";
 import { createRemoteJWKSet, jwtVerify } from "npm:jose@5.9.6";
+import { effectiveStaffRole } from "../_shared/staff-revocation.ts";
 
 const FIREBASE_PROJECT_ID = "app-baqueano";
 const JWKS_URL = "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com";
@@ -241,6 +242,8 @@ async function resolveActor(req: Request, service: SupabaseClient): Promise<Acto
     const { data } = await service.from("staff_roles").select("role").eq("email", email).eq("is_active", true).maybeSingle();
     if (data && STAFF_ROLES.has(data.role)) role = data.role;
   }
+  // Revocación y suspensión en el RBAC de Supabase también aplican aquí (auditoría 2026-10-06).
+  if (role) role = await effectiveStaffRole(service, { uid, email: email || null, emailVerified: emailVerified, role });
   if (!uid || !role) throw new HttpError(403, "Tu cuenta no tiene acceso al Ops Center.");
   return { uid, email, emailVerified, role, canWrite: role === "admin" || role === "super_admin" };
 }

@@ -205,6 +205,7 @@ function extractInteractionOutput(data: Record<string, unknown>) {
 }
 
 async function buildGroundedItinerary(input: Record<string, unknown>, territory: TerritoryCatalogItem) {
+  if (input.allowExternal === false) return {itinerary: null, status: "budget_local_only"};
   const apiKeys = [Deno.env.get("GEMINI_API_KEY"), Deno.env.get("BAQUEANONICARAGUA"), Deno.env.get("Gemini API Key")]
     .filter((value, index, values): value is string => Boolean(value) && values.indexOf(value) === index);
   if (!apiKeys.length) return {itinerary: null, status: "missing_secret"};
@@ -376,7 +377,8 @@ async function buildImpactAnswer(supabase: ReturnType<typeof createClient> | nul
   };
 }
 
-async function buildGroundedTourismAnswer(prompt: string, history: unknown, internalContext: unknown, language: string, countryCode: string) {
+async function buildGroundedTourismAnswer(prompt: string, history: unknown, internalContext: unknown, language: string, countryCode: string, allowExternal = true) {
+  if (!allowExternal) return {message: null, sources: [], status: "budget_local_only"};
   const apiKeys = [Deno.env.get("GEMINI_API_KEY"), Deno.env.get("BAQUEANONICARAGUA"), Deno.env.get("Gemini API Key")]
     .filter((value, index, values): value is string => Boolean(value) && values.indexOf(value) === index);
   if (!apiKeys.length) return {message: null, sources: [], status: "missing_secret"};
@@ -453,6 +455,29 @@ async function logExchange(
   }
 }
 
+// Auditoría de seguridad 2026-10-06 (anonymous-unmetered-gemini-and-persistent-writes): presupuesto en la
+// base (public.baqui_consume_budget, solo service_role). Por IP (hash SHA-256, nunca en claro): 20 consultas
+// cada 10 minutos; si se pasa, 429. Global: 400 por hora; si se pasa, BAQUI responde solo con el catálogo
+// propio y no consulta Gemini. Si el contador no responde, no se bloquea al visitante y se omite Gemini.
+type BudgetDecision = "ok" | "local_only" | "ip_limited";
+async function consumeBudget(supabase: ReturnType<typeof createClient> | null, req: Request): Promise<BudgetDecision> {
+  if (!supabase) return "local_only";
+  const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-real-ip") ||
+    (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "unknown";
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`baqui:${ip}`));
+  const ipHash = Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join("").slice(0, 40);
+  try {
+    const perIp = await supabase.rpc("baqui_consume_budget", {p_bucket: `ip:${ipHash}`, p_limit: 20, p_window_seconds: 600});
+    if (perIp.error) return "local_only";
+    if (perIp.data === false) return "ip_limited";
+    const global = await supabase.rpc("baqui_consume_budget", {p_bucket: "global", p_limit: 400, p_window_seconds: 3600});
+    if (global.error || global.data === false) return "local_only";
+    return "ok";
+  } catch (_) {
+    return "local_only";
+  }
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: CORS_HEADERS });
@@ -489,6 +514,14 @@ Deno.serve(async (req: Request) => {
     const rawSession = String(body.sessionId || body.session_id || "");
     const sessionKey = /^[A-Za-z0-9_-]{6,120}$/.test(rawSession) ? rawSession : `anon-${crypto.randomUUID()}`;
     const channel = ["web", "android", "ios"].includes(String(body.channel)) ? String(body.channel) : "web";
+    const budget = await consumeBudget(supabase, req);
+    if (budget === "ip_limited") {
+      return new Response(JSON.stringify({
+        success: false, ok: false, error: "rate_limited",
+        message: "Hiciste muchas consultas seguidas. Esperá unos minutos y volvé a intentarlo.",
+      }), {status: 429, headers: {...CORS_HEADERS, "Retry-After": "600"}});
+    }
+    const allowExternal = budget === "ok";
     const internalKnowledge = supabase ? await new BaqueanoKnowledgeService(supabase).search(prompt) : [];
     const internalSufficient = internalKnowledge.length > 0 && new BaqueanoKnowledgeService(supabase!).isSufficient(internalKnowledge);
 
@@ -522,7 +555,7 @@ Deno.serve(async (req: Request) => {
       };
       const localMessages = localizedMessages[currentLanguage] || localizedMessages.es;
       const internalAnswer = intent === "tourism" && internalSufficient ? internalKnowledgeAnswer(internalKnowledge, currentLanguage) : null;
-      const groundedAnswer = localMessages[intent] || internalAnswer ? null : await buildGroundedTourismAnswer(prompt, body.history, internalKnowledge, currentLanguage, countryCode);
+      const groundedAnswer = localMessages[intent] || internalAnswer ? null : await buildGroundedTourismAnswer(prompt, body.history, internalKnowledge, currentLanguage, countryCode, allowExternal);
       const message = localMessages[intent] || internalAnswer || groundedAnswer?.message || "Todavía no tengo ese dato verificado.";
       const conversationProvider = localMessages[intent] ? "baqueano-conversation" : "baqueano-supabase-grounded-web";
       await logExchange(supabase, {
@@ -547,7 +580,7 @@ Deno.serve(async (req: Request) => {
     const territory = resolveTerritory(prompt, requestedDept);
     const places = territory.places;
 
-    const groundingResult = await buildGroundedItinerary({prompt, department: requestedDept, days: daysRequested, groupSize, travelStyle, budgetNio, budgetUsd}, territory);
+    const groundingResult = await buildGroundedItinerary({prompt, department: requestedDept, days: daysRequested, groupSize, travelStyle, budgetNio, budgetUsd, allowExternal}, territory);
     const grounded = groundingResult.itinerary;
 
     const itineraryDays = [];

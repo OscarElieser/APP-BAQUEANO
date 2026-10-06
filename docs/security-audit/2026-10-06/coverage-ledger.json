@@ -1,0 +1,2313 @@
+[
+ {
+  "coverage_id": ".github%2Fworkflows%2F%2A.yml%20and%20azure%2Fautodeploy.sh%23push%20to%20main::repository%20write%20%2F%20PR%20author%20-%3E%20CI%20secrets%20and%20production%20VM::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Chained%20vulnerabilities%20and%20trust%20boundaries",
+  "canonical_refs": {
+   "surface": ".github/workflows/*.yml and azure/autodeploy.sh#push to main",
+   "boundary": "repository write / PR author -> CI secrets and production VM",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Chained vulnerabilities and trust boundaries"
+  },
+  "surface": ".github/workflows/*.yml and azure/autodeploy.sh#push to main",
+  "boundary": "repository write / PR author -> CI secrets and production VM",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Chained vulnerabilities and trust boundaries",
+  "starting_paths": [
+   ".github/workflows/flutter_ci.yml",
+   ".github/workflows/claude-review.yml",
+   ".github/workflows/geocode-territories.yml",
+   ".github/workflows/deploy-production.yml",
+   "azure/autodeploy.sh",
+   "azure/deploy.sh",
+   "azure/systemd"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Chained vulnerabilities and trust boundaries",
+  "selected_companion_blocks": [
+   "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+   "SUPPLY-CHAIN-AND-RELEASE.md#CI and automation attack classes",
+   "SUPPLY-CHAIN-AND-RELEASE.md#Release and update attack classes",
+   "SUPPLY-CHAIN-AND-RELEASE.md#Universal moves",
+   "SUPPLY-CHAIN-AND-RELEASE.md#Validation rules",
+   "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+   "CLOUD-AND-DEPLOYMENT.md#Ingress, network, and control-plane attack classes",
+   "CLOUD-AND-DEPLOYMENT.md#Configuration and secret lifecycle attack classes",
+   "CLOUD-AND-DEPLOYMENT.md#Universal moves",
+   "CLOUD-AND-DEPLOYMENT.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-deploy surfaces"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-deploy surfaces"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-deploy surfaces"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-deploy surfaces"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-deploy surfaces"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Dependency and build-input attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Workload identity and IAM attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Container and orchestration attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Managed storage, events, and edge attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native/binary code in scope"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no deep links, exported components beyond launcher, or WebView (recon 1c)"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "no custom protocol or broker; HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "candidate",
+  "agent_id": "hunter-deploy",
+  "reviewed_paths": [
+   "azure/autodeploy.sh",
+   "azure/deploy.sh",
+   "azure/systemd/baqueano-autodeploy.service",
+   ".github/workflows/deploy-production.yml",
+   ".github/workflows/flutter_ci.yml",
+   ".github/workflows/claude-review.yml",
+   ".github/workflows/geocode-territories.yml",
+   "website/scripts/geocode-territory-places.mjs",
+   "website/js/madriz-territory-map.js",
+   "website/assets/BaqueanoNicaragua.apk"
+  ],
+  "local_checks": [
+   {
+    "agent_id": "hunter-deploy",
+    "reviewed_paths": [
+     "azure/autodeploy.sh",
+     "azure/deploy.sh",
+     "azure/systemd/baqueano-autodeploy.service",
+     ".github/workflows/deploy-production.yml"
+    ],
+    "invariant": "Production VM deploy must be gated on passing CI checks, and repository content must not run with unrestricted root on the VM",
+    "method": "source",
+    "result": "autodeploy.sh (timer every 2 min) checks out origin/main and runs deploy.sh with no reference to any CI status. deploy.sh runs repository-controlled node build scripts and npm ci as user baqueano, which per the service comment has passwordless sudo. deploy-production.yml 'checks' runs only on push to main (no pull_request trigger), so it cannot be a required PR status check and runs in parallel with the VM pull. The sudoers scope and branch protection are not in the repo, so this is needs_validation.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-deploy",
+    "reviewed_paths": [
+     ".github/workflows/flutter_ci.yml",
+     ".github/workflows/claude-review.yml"
+    ],
+    "invariant": "Fork/untrusted PR code must not run with signing keys or write tokens",
+    "method": "source",
+    "result": "Both workflows use the pull_request trigger (not pull_request_target). Fork PRs get no secrets and a read-only token. claude-review is additionally restricted to head.repo == repository. Same-repo PR authors already have write access, which lets them add a workflow that reads repo secrets, so exposing the keystore on same-repo PRs adds no new principal. Recorded as hardening. The claude-review prompt interpolates only repository and PR number, not PR title/body; allowed tools are limited to gh pr comment/diff/view and inline comments.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-deploy",
+    "reviewed_paths": [
+     ".github/workflows/geocode-territories.yml",
+     "website/scripts/geocode-territory-places.mjs",
+     "website/js/madriz-territory-map.js"
+    ],
+    "invariant": "Bot push to main must not carry third-party controlled content into an executable or HTML sink",
+    "method": "source",
+    "result": "The workflow runs only on push to main / workflow_dispatch (main's own code), with contents: write. It commits website/data/territory-places.json containing Nominatim display_name labels. The consumer madriz-territory-map.js reads label into osmLabel and renders via textContent/el(); no innerHTML sink for label found. Not a finding. Its direct 'git push origin HEAD:main' implies that main accepts direct pushes from GITHUB_TOKEN (branch protection either absent or bypassed); this feeds the needs_validation blocker.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-deploy",
+    "reviewed_paths": [
+     "azure/deploy.sh",
+     "website/assets/BaqueanoNicaragua.apk",
+     ".github/workflows/flutter_ci.yml"
+    ],
+    "invariant": "Published APK should be the CI-built, signed artifact",
+    "method": "source",
+    "result": "deploy.sh publishes the git-committed binary website/assets/BaqueanoNicaragua.apk as /downloads/baqueano-android.apk. CI builds an AAB/APK but never promotes it, and the only check is 'test -s' (non-empty). There is no provenance binding, but the only actor who can replace it is a main pusher, the same principal as C1. Recorded as hardening.",
+    "artifact": null
+   }
+  ],
+  "result_fingerprints": [
+   "azure/autodeploy.sh:ungated-main-deploy-with-sudo"
+  ],
+  "unresolved": [
+   "Sudoers scope of the 'baqueano' user on vm-baqueano-prod (not in repo)",
+   "GitHub branch protection / rulesets on main (required reviews, required checks, bypass for github-actions[bot])"
+  ],
+  "hardening_notes": [
+   "flutter_ci.yml exposes the Android release keystore secrets to same-repo pull_request runs. Move signing to a protected GitHub Environment with required reviewers, used only on push to main or tags.",
+   "claude-review.yml grants id-token: write, pull-requests: write and issues: write to a job that feeds PR diff content to an LLM. Prompt injection in a PR diff can, at most, steer comments. Consider dropping id-token: write if the OIDC exchange is unused.",
+   "website/assets/BaqueanoNicaragua.apk is a committed binary published as /downloads/baqueano-android.apk without provenance. CI only checks that it is non-empty, and the CI-built AAB/APK is never what is released. Build and sign in CI, then publish by digest.",
+   "deploy.sh --rollback switches the static release, but nginx snippets are reinstalled from the current (newer) checkout and the API is not rolled back. A rollback does not restore a consistent prior state.",
+   "functions/lib/auth-middleware.js isAdminIdentity grants admin from a hard-coded verified email list that ignores staff_roles.is_active, and /admin/crud (functions/lib/http.js:662-718) writes arbitrary fields with the service role and no audit log. This matters only if the Firebase Functions 'api' is deployed.",
+   "functions/lib/http.js accepts client-supplied total_price/currency on reservations and verified_by_qr on passport stamps. These are integrity issues, relevant only if the Functions API is deployed.",
+   "website/apps/admin/src/app/api/auth/claims/route.ts does not validate newRole against an allowlist, so a super_admin can set arbitrary role strings.",
+   "functions/lib/http.js trusts the first X-Forwarded-For entry for its global rate limit and allows CORS for any *.web.app / *.firebaseapp.com origin (deployment uncertain).",
+   "azure/api/server.js /api/azure/health discloses hostname, kernel release and Node version publicly (informational)."
+  ],
+  "uncovered_notes": [
+   {
+    "surface": "functions/index.js exports.api (Firebase Functions HTTP API, if deployed)",
+    "boundary": "Firebase-claimed admin (including revoked Supabase staff) -> service-role catalog writes via /admin/crud",
+    "subsystem": "profile/quick/all-in-scope-subsystems",
+    "attack_class": "Access control",
+    "starting_paths": [
+     "functions/index.js",
+     "functions/lib/http.js",
+     "functions/lib/auth-middleware.js"
+    ],
+    "reason": "Whether this API is deployed is unknown. If it is, it is a second staff write path that bypasses Supabase staff_roles revocation and audit logging, and it needs owner confirmation and its own review against the baqueano-ops RBAC."
+   }
+  ]
+ },
+ {
+  "coverage_id": "firestore.rules%23businesses%20owner%20updates::business%20owner%20stored%20data%20-%3E%20public%20pages%20DOM%20%28public-cms-sync%20ally%20cards%2C%20other%20renderers%29::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Injection",
+  "canonical_refs": {
+   "surface": "firestore.rules#businesses owner updates",
+   "boundary": "business owner stored data -> public pages DOM (public-cms-sync ally cards, other renderers)",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Injection"
+  },
+  "surface": "firestore.rules#businesses owner updates",
+  "boundary": "business owner stored data -> public pages DOM (public-cms-sync ally cards, other renderers)",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Injection",
+  "starting_paths": [
+   "website/js/public-cms-sync.js",
+   "website/js/destinos-gastronomia.js",
+   "website/js/community-api.js",
+   "azure/nginx/baqueano-security-headers.conf"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Injection",
+  "selected_companion_blocks": [
+   "CLIENT-SIDE.md#Core discipline",
+   "CLIENT-SIDE.md#DOM and object-state attack classes",
+   "CLIENT-SIDE.md#UI-redress and navigation attack classes",
+   "CLIENT-SIDE.md#Universal moves",
+   "CLIENT-SIDE.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-xss surfaces"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Cross-origin messaging and network attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Service-worker and browser-storage attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Cross-site information leak classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-xss surfaces"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-xss surfaces"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-xss surfaces"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-xss surfaces"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-xss surfaces"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native/binary code in scope"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no deep links, exported components beyond launcher, or WebView (recon 1c)"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "no custom protocol or broker; HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "covered",
+  "agent_id": "hunter-xss",
+  "reviewed_paths": [
+   "website/js/public-cms-sync.js",
+   "website/denuncias.html",
+   "website/departamento.html",
+   "website/mi-negocio.html",
+   "website/js/baqueano-travel-session.js",
+   "website/js/destinos-gastronomia.js",
+   "website/js/community-api.js"
+  ],
+  "local_checks": [
+   {
+    "agent_id": "hunter-xss",
+    "reviewed_paths": [
+     "website/js/public-cms-sync.js",
+     "website/denuncias.html",
+     "website/departamento.html",
+     "website/mi-negocio.html"
+    ],
+    "invariant": "Business-owner imageUrl cannot reach public ally-card markup unencoded",
+    "method": "source",
+    "result": "syncAlliesPage (line 564) puts imageUrl raw into <img src>. The sink is unreachable today for three reasons. (1) public-cms-sync.js is loaded only by denuncias.html, departamento.html and mi-negocio.html, and none of them contains .allies-3d-grid or partnersTrackA, so syncAlliesPage and syncPartnerTracks return early. (2) Firestore rules force status 'pending_review' on create and freeze status on owner update, and the renderer filters to status=='published'. (3) The unfiltered businesses query fails under the rules for non-admin readers. The other string fields are encoded with an escape() that covers single quotes.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-xss",
+    "reviewed_paths": [
+     "website/js/baqueano-travel-session.js",
+     "website/js/destinos-gastronomia.js",
+     "website/js/community-api.js"
+    ],
+    "invariant": "Other public renderers of owner-controlled business fields (Supabase cover_image, name) encode output",
+    "method": "source",
+    "result": "baqueano-travel-session.js renders cover_image, name and location through escapeHtml (lines 56 and 571), which encodes & < > ' \". destinos-gastronomia.js and community-api.js do not interpolate business fields into innerHTML.",
+    "artifact": null
+   }
+  ],
+  "result_fingerprints": [],
+  "unresolved": [],
+  "hardening_notes": [
+   "website/js/ops-center/ops-engine.js renderTableRow (around lines 4237-4290) interpolates item.id raw into onclick='...' handlers and text, and status into a class attribute. Encode them and, preferably, use data-* attributes with addEventListener. Today ids come from Supabase or staff, but the Firestore path (environmental_reports allows client-chosen doc IDs and arbitrary fields for any signed-in user, and sos_logs.status is unconstrained) would become staff XSS if firebase-firestore-compat were ever added to admin.html.",
+   "OpsUI.escape (ops-engine.js line 6369) does not encode single quotes. Align it with public-cms-sync escape() and baqueano-ops escapeHtml.",
+   "previewEntity (ops-engine.js around line 6662) also renders item.status and item.department unencoded.",
+   "public-cms-sync.js syncAlliesPage (line 601), syncGastronomy (line 719) and the site_pages section renderer (lines 371-375: sec.imageUrl, ctaLink, cta2Link) interpolate URLs raw and do not check the scheme. These sinks are dead or admin-only today but should be encoded and validated (http/https only).",
+   "Add a DB CHECK constraint on businesses.cover_image (and other owner-writable URL columns) limiting it to https URLs on allowed storage hosts, so the owner PostgREST path gets the same validation as baqueano-ops.",
+   "Firestore rules for environmental_reports allow create with any keys and sizes for any signed-in user. Add a keys().hasOnly schema and size limits."
+  ],
+  "uncovered_notes": []
+ },
+ {
+  "coverage_id": "firestore.rules%23client-writable%20collections%20%28environmental_reports%2C%20businesses%2C%20traffic_sessions%2C%20users%29::signed-in%20user%20stored%20data%20-%3E%20staff%20Ops%20Center%20DOM%20%28renderTableRow%29::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Injection",
+  "canonical_refs": {
+   "surface": "firestore.rules#client-writable collections (environmental_reports, businesses, traffic_sessions, users)",
+   "boundary": "signed-in user stored data -> staff Ops Center DOM (renderTableRow)",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Injection"
+  },
+  "surface": "firestore.rules#client-writable collections (environmental_reports, businesses, traffic_sessions, users)",
+  "boundary": "signed-in user stored data -> staff Ops Center DOM (renderTableRow)",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Injection",
+  "starting_paths": [
+   "firestore.rules",
+   "storage.rules",
+   "website/js/ops-center/ops-engine.js",
+   "website/js/firestore-realtime.js"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Injection",
+  "selected_companion_blocks": [
+   "CLIENT-SIDE.md#Core discipline",
+   "CLIENT-SIDE.md#DOM and object-state attack classes",
+   "CLIENT-SIDE.md#UI-redress and navigation attack classes",
+   "CLIENT-SIDE.md#Universal moves",
+   "CLIENT-SIDE.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-xss surfaces"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Cross-origin messaging and network attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Service-worker and browser-storage attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Cross-site information leak classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-xss surfaces"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-xss surfaces"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-xss surfaces"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-xss surfaces"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-xss surfaces"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native/binary code in scope"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no deep links, exported components beyond launcher, or WebView (recon 1c)"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "no custom protocol or broker; HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "candidate",
+  "agent_id": "hunter-xss",
+  "reviewed_paths": [
+   "website/js/ops-center/ops-engine.js",
+   "website/admin.html",
+   "website/js/firebase-config.js",
+   "website/js/ops-center/ops-live-data.js",
+   "supabase/functions/baqueano-ops/index.ts",
+   "supabase/migrations/20261005040000_identity_rbac_foundation.sql",
+   "supabase/migrations/20261005080000_supabase_source_of_truth.sql",
+   "azure/nginx/baqueano-security-headers.conf",
+   "website/js/ops-center/ops-community-moderation.js"
+  ],
+  "local_checks": [
+   {
+    "agent_id": "hunter-xss",
+    "reviewed_paths": [
+     "website/js/ops-center/ops-engine.js"
+    ],
+    "invariant": "renderTableRow must HTML-encode every stored field placed in markup or inline handlers",
+    "method": "source",
+    "result": "title and territory go through OpsUI.escape, which encodes & < > \" but not '. Several values are interpolated raw: image in <img src=\"${image}\"> (line 4246), status in class=\"ops-badge-pill ${status}\", item.id in onclick='...' handlers and text, and priceNio/priceUsd. previewEntity (line 6662) also puts item.imageUrl, item.status and item.department in innerHTML without encoding.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-xss",
+    "reviewed_paths": [
+     "website/admin.html",
+     "website/js/firebase-config.js",
+     "website/js/ops-center/ops-engine.js"
+    ],
+    "invariant": "Firestore-sourced records (environmental_reports, businesses, users, sos_logs) reach renderTableRow in the deployed Ops Center",
+    "method": "source",
+    "result": "Not reachable today. admin.html loads only firebase-app-compat and firebase-auth-compat, never firebase-firestore-compat (lines 1565-1566). firebase-config.js routeToNamedDatabase(undefined) returns undefined, so OpsCMS.getDb() (line 2291) returns null and listenToCollection/initDataSync add no Firestore listeners. The Firestore-rule weaknesses are latent: environmental_reports create accepts any fields and a client-chosen doc ID for any signed-in user, and sos_logs.status has no constraint. They would become staff XSS through item.id/status/imageUrl if the Firestore SDK were added to admin.html.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-xss",
+    "reviewed_paths": [
+     "website/js/ops-center/ops-live-data.js",
+     "supabase/functions/baqueano-ops/index.ts",
+     "supabase/migrations/20261005040000_identity_rbac_foundation.sql",
+     "supabase/migrations/20261005080000_supabase_source_of_truth.sql"
+    ],
+    "invariant": "Lower-trust business managers cannot place markup into staff Ops Center DOM via Supabase businesses rows",
+    "method": "source",
+    "result": "Fails. authenticated has a column UPDATE grant on businesses.cover_image, and RLS gates it with is_business_manager (an active owner/manager membership plus businesses.manage_own). guard_business_verification does not restrict cover_image, and there is no CHECK constraint on it. The baqueano-ops 'url' validator applies only to staff writes made through the function. ops-live-data toEngine maps cover_image to imageUrl (line 323), ingestCollection stores the record for 08-negocios, and renderTableRow/previewEntity insert it raw into an src attribute.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-xss",
+    "reviewed_paths": [
+     "azure/nginx/baqueano-security-headers.conf"
+    ],
+    "invariant": "CSP blocks inline event-handler execution",
+    "method": "source",
+    "result": "script-src includes 'unsafe-inline', so injected inline handlers such as onerror run. An img blocked by img-src still fires onerror. Whether these headers are actually deployed cannot be seen from source.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-xss",
+    "reviewed_paths": [
+     "website/js/ops-center/ops-community-moderation.js",
+     "website/js/ops-center/ops-live-data.js"
+    ],
+    "invariant": "Other staff renderers of user-generated data (community moderation, SOS, reservations) encode output",
+    "method": "source",
+    "result": "ops-community-moderation.js renders user text with textContent. ops-live-data.js contains no innerHTML sinks. Neither has a finding.",
+    "artifact": null
+   }
+  ],
+  "result_fingerprints": [
+   "website/js/ops-center/ops-engine.js:renderTableRow:raw-imageUrl-from-businesses.cover_image"
+  ],
+  "unresolved": [],
+  "hardening_notes": [
+   "website/js/ops-center/ops-engine.js renderTableRow (around lines 4237-4290) interpolates item.id raw into onclick='...' handlers and text, and status into a class attribute. Encode them and, preferably, use data-* attributes with addEventListener. Today ids come from Supabase or staff, but the Firestore path (environmental_reports allows client-chosen doc IDs and arbitrary fields for any signed-in user, and sos_logs.status is unconstrained) would become staff XSS if firebase-firestore-compat were ever added to admin.html.",
+   "OpsUI.escape (ops-engine.js line 6369) does not encode single quotes. Align it with public-cms-sync escape() and baqueano-ops escapeHtml.",
+   "previewEntity (ops-engine.js around line 6662) also renders item.status and item.department unencoded.",
+   "public-cms-sync.js syncAlliesPage (line 601), syncGastronomy (line 719) and the site_pages section renderer (lines 371-375: sec.imageUrl, ctaLink, cta2Link) interpolate URLs raw and do not check the scheme. These sinks are dead or admin-only today but should be encoded and validated (http/https only).",
+   "Add a DB CHECK constraint on businesses.cover_image (and other owner-writable URL columns) limiting it to https URLs on allowed storage hosts, so the owner PostgREST path gets the same validation as baqueano-ops.",
+   "Firestore rules for environmental_reports allow create with any keys and sizes for any signed-in user. Add a keys().hasOnly schema and size limits."
+  ],
+  "uncovered_notes": []
+ },
+ {
+  "coverage_id": "functions%2Flib%2Fhttp.js%2C%20website%2Fapps%2Fadmin%2Fsrc%2Fapp%2Fapi%2F%2A%2A%2C%20azure%2Fapi%2Fserver.js%23HTTP%20routes::anonymous%20or%20signed-in%20caller%20-%3E%20secondary%20APIs%20%28admin%20crud%2C%20claims%2C%20evidence%29::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Access%20control",
+  "canonical_refs": {
+   "surface": "functions/lib/http.js, website/apps/admin/src/app/api/**, azure/api/server.js#HTTP routes",
+   "boundary": "anonymous or signed-in caller -> secondary APIs (admin crud, claims, evidence)",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Access control"
+  },
+  "surface": "functions/lib/http.js, website/apps/admin/src/app/api/**, azure/api/server.js#HTTP routes",
+  "boundary": "anonymous or signed-in caller -> secondary APIs (admin crud, claims, evidence)",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Access control",
+  "starting_paths": [
+   "functions/lib/http.js",
+   "functions/lib/auth-middleware.js",
+   "website/apps/admin/src/app/api/auth/claims/route.ts",
+   "website/apps/admin/src/app/api/ai/orchestrator/route.ts",
+   "azure/api/server.js",
+   "azure/nginx"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Access control",
+  "selected_companion_blocks": [
+   "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+   "SUPPLY-CHAIN-AND-RELEASE.md#CI and automation attack classes",
+   "SUPPLY-CHAIN-AND-RELEASE.md#Release and update attack classes",
+   "SUPPLY-CHAIN-AND-RELEASE.md#Universal moves",
+   "SUPPLY-CHAIN-AND-RELEASE.md#Validation rules",
+   "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+   "CLOUD-AND-DEPLOYMENT.md#Ingress, network, and control-plane attack classes",
+   "CLOUD-AND-DEPLOYMENT.md#Configuration and secret lifecycle attack classes",
+   "CLOUD-AND-DEPLOYMENT.md#Universal moves",
+   "CLOUD-AND-DEPLOYMENT.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-deploy surfaces"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-deploy surfaces"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-deploy surfaces"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-deploy surfaces"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-deploy surfaces"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Dependency and build-input attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Workload identity and IAM attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Container and orchestration attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Managed storage, events, and edge attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native/binary code in scope"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no deep links, exported components beyond launcher, or WebView (recon 1c)"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "no custom protocol or broker; HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "covered",
+  "agent_id": "hunter-deploy",
+  "reviewed_paths": [
+   "azure/api/server.js",
+   "azure/nginx/baqueano.conf",
+   "website/apps/admin/src/app/api/auth/claims/route.ts",
+   "website/apps/admin/src/app/api/ai/orchestrator/route.ts",
+   "functions/lib/http.js",
+   "functions/lib/auth-middleware.js",
+   "functions/index.js"
+  ],
+  "local_checks": [
+   {
+    "agent_id": "hunter-deploy",
+    "reviewed_paths": [
+     "azure/api/server.js",
+     "azure/nginx/baqueano.conf"
+    ],
+    "invariant": "Azure API exposes only intended routes; the evidence CRUD cannot touch arbitrary rows; the rate-limit key cannot be spoofed",
+    "method": "source",
+    "result": "The server binds 127.0.0.1. Routes are a fixed map. evidence/crud takes no request body, generates its own random id/proof token, and uses the publishable key against sprint_evidence_records only. The rate limit keys on X-Real-IP, which nginx overwrites with $remote_addr (proxy_set_header). /health discloses hostname, kernel and node version only (informational). No access-control failure.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-deploy",
+    "reviewed_paths": [
+     "website/apps/admin/src/app/api/auth/claims/route.ts",
+     "website/apps/admin/src/app/api/ai/orchestrator/route.ts"
+    ],
+    "invariant": "Only super_admin can set claims; only admin/super_admin can run the orchestrator",
+    "method": "source",
+    "result": "Both routes verify the Firebase ID token with the Admin SDK and gate on the server-set custom claim role (super_admin; admin|super_admin). No self-escalation path. newRole is unvalidated (super_admin may assign any string), and there is no deployment config for this Next app in the repo. Recorded as hardening.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-deploy",
+    "reviewed_paths": [
+     "functions/lib/http.js",
+     "functions/lib/auth-middleware.js",
+     "functions/index.js",
+     "azure/nginx/baqueano.conf"
+    ],
+    "invariant": "Firebase Functions API: user routes bind the owner to token uid; /admin/crud requires admin",
+    "method": "source",
+    "result": "The reservations, reviews, favorites, travel-plans, passport and profile routes bind user_uid to auth.user.uid. /admin/crud requires verifyAdmin (claim admin/role or a verified official email) and an allowlisted table, then writes arbitrary record fields with the service role. This is the same staff authority as baqueano-ops (which also accepts claims.admin), but without audit logging and with a hard-coded email fallback that ignores staff_roles.is_active. Reachability is doubtful: the nginx /api/ proxy is commented out and the comments state that no Cloud Functions are deployed (Spark plan). Client-controlled total_price (reservations) and verified_by_qr (passport stamps) are noted as hardening. No candidate survives the gate without deployment.",
+    "artifact": null
+   }
+  ],
+  "result_fingerprints": [],
+  "unresolved": [],
+  "hardening_notes": [
+   "flutter_ci.yml exposes the Android release keystore secrets to same-repo pull_request runs. Move signing to a protected GitHub Environment with required reviewers, used only on push to main or tags.",
+   "claude-review.yml grants id-token: write, pull-requests: write and issues: write to a job that feeds PR diff content to an LLM. Prompt injection in a PR diff can, at most, steer comments. Consider dropping id-token: write if the OIDC exchange is unused.",
+   "website/assets/BaqueanoNicaragua.apk is a committed binary published as /downloads/baqueano-android.apk without provenance. CI only checks that it is non-empty, and the CI-built AAB/APK is never what is released. Build and sign in CI, then publish by digest.",
+   "deploy.sh --rollback switches the static release, but nginx snippets are reinstalled from the current (newer) checkout and the API is not rolled back. A rollback does not restore a consistent prior state.",
+   "functions/lib/auth-middleware.js isAdminIdentity grants admin from a hard-coded verified email list that ignores staff_roles.is_active, and /admin/crud (functions/lib/http.js:662-718) writes arbitrary fields with the service role and no audit log. This matters only if the Firebase Functions 'api' is deployed.",
+   "functions/lib/http.js accepts client-supplied total_price/currency on reservations and verified_by_qr on passport stamps. These are integrity issues, relevant only if the Functions API is deployed.",
+   "website/apps/admin/src/app/api/auth/claims/route.ts does not validate newRole against an allowlist, so a super_admin can set arbitrary role strings.",
+   "functions/lib/http.js trusts the first X-Forwarded-For entry for its global rate limit and allows CORS for any *.web.app / *.firebaseapp.com origin (deployment uncertain).",
+   "azure/api/server.js /api/azure/health discloses hostname, kernel release and Node version publicly (informational)."
+  ],
+  "uncovered_notes": [
+   {
+    "surface": "functions/index.js exports.api (Firebase Functions HTTP API, if deployed)",
+    "boundary": "Firebase-claimed admin (including revoked Supabase staff) -> service-role catalog writes via /admin/crud",
+    "subsystem": "profile/quick/all-in-scope-subsystems",
+    "attack_class": "Access control",
+    "starting_paths": [
+     "functions/index.js",
+     "functions/lib/http.js",
+     "functions/lib/auth-middleware.js"
+    ],
+    "reason": "Whether this API is deployed is unknown. If it is, it is a second staff write path that bypasses Supabase staff_roles revocation and audit logging, and it needs owner confirmation and its own review against the baqueano-ops RBAC."
+   }
+  ]
+ },
+ {
+  "coverage_id": "storage.rules%20%28Firebase%20Storage%20paths%29%2C%20Supabase%20storage%20bucket%20policies%20%28009_storage_bucket_policies.sql%2C%2020261005050000_security_storage_lockdown.sql%2C%2020261004170000_community_testimonials.sql%29%20and%20firestore.rules%20read%2Fwrite%20rules%20for%20users%2C%20reservation_requests%2C%20conversations%2Fmessages%2C%20travelPlans::signed-in%20user%20-%3E%20other%20users%27%20stored%20objects%2Fdocuments%20and%20public-bucket%20content::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Access%20control",
+  "canonical_refs": {
+   "surface": "storage.rules (Firebase Storage paths), Supabase storage bucket policies (009_storage_bucket_policies.sql, 20261005050000_security_storage_lockdown.sql, 20261004170000_community_testimonials.sql) and firestore.rules read/write rules for users, reservation_requests, conversations/messages, travelPlans",
+   "boundary": "signed-in user -> other users' stored objects/documents and public-bucket content",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Access control"
+  },
+  "surface": "storage.rules (Firebase Storage paths), Supabase storage bucket policies (009_storage_bucket_policies.sql, 20261005050000_security_storage_lockdown.sql, 20261004170000_community_testimonials.sql) and firestore.rules read/write rules for users, reservation_requests, conversations/messages, travelPlans",
+  "boundary": "signed-in user -> other users' stored objects/documents and public-bucket content",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Access control",
+  "starting_paths": [
+   "storage.rules",
+   "firestore.rules",
+   "supabase/migrations/008_storage_buckets_setup.sql",
+   "supabase/migrations/009_storage_bucket_policies.sql",
+   "supabase/migrations/20261005050000_security_storage_lockdown.sql",
+   "supabase/migrations/20261004170000_community_testimonials.sql",
+   "supabase/migrations/20261003213000_lock_down_sensitive_surfaces.sql"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Access control",
+  "selected_companion_blocks": [
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Tenant and object-isolation attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Universal moves",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Validation rules",
+   "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+   "CLOUD-AND-DEPLOYMENT.md#Managed storage, events, and edge attack classes",
+   "CLOUD-AND-DEPLOYMENT.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "no LLM on this path"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "sink rendering is covered by the hunter-xss units"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+    "reason": "token verification is done by Firebase/Supabase platforms"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+    "reason": "size limits are noted only incidentally"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "android/releases path is admin-only; release provenance is covered by hunter-deploy"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native code"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "no IPC"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "deferred",
+  "agent_id": null,
+  "reviewed_paths": [],
+  "local_checks": [],
+  "result_fingerprints": [],
+  "unresolved": [
+   "quick_profile_final_critic: storage.rules is a starting path of the hunter-xss Firestore unit but is not in its reviewed_paths. No unit reviewed the Supabase storage bucket migrations. The firestore.rules review covered only writes that reach DOM sinks, not cross-user read/write isolation. Rules to check: conversations read at firestore.rules L329, messages L333-347, reservation_requests L267-283 and travelPlans L233-243. Also check storage participatesIn/ownsBusiness, which rely on firestore.get of client-creatable docs (businesses.ownerUid is client-set on create), and the community media bucket policies outside the edge-function signed-URL path."
+  ]
+ },
+ {
+  "coverage_id": "supabase%2Ffunctions%2F%7Bbaqueano-community%2Cbaqueano-identity%7D%2Findex.ts%23PostgREST%20.or%28%29%20filters::request%20fields%20-%3E%20PostgREST%20filter%20grammar::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Injection",
+  "canonical_refs": {
+   "surface": "supabase/functions/{baqueano-community,baqueano-identity}/index.ts#PostgREST .or() filters",
+   "boundary": "request fields -> PostgREST filter grammar",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Injection"
+  },
+  "surface": "supabase/functions/{baqueano-community,baqueano-identity}/index.ts#PostgREST .or() filters",
+  "boundary": "request fields -> PostgREST filter grammar",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Injection",
+  "starting_paths": [
+   "supabase/functions/baqueano-community/index.ts",
+   "supabase/functions/baqueano-identity/index.ts"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Injection",
+  "selected_companion_blocks": [
+   "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+   "WEB-PROTOCOL-AND-AUTH.md#Federated-identity attack classes",
+   "WEB-PROTOCOL-AND-AUTH.md#Universal moves",
+   "WEB-PROTOCOL-AND-AUTH.md#Validation rules",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Tenant and object-isolation attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Universal moves",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#HTTP framing and cache attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Browser-session attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#MFA, passkey, and account-transition attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#API-key and mTLS attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Derived-data and disclosure attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Export, backup, restore, and migration attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Deletion, revocation, and lifecycle attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native/binary code in scope"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no deep links, exported components beyond launcher, or WebView (recon 1c)"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "no custom protocol or broker; HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "covered",
+  "agent_id": "hunter-edge",
+  "reviewed_paths": [
+   "supabase/functions/baqueano-community/index.ts",
+   "supabase/functions/baqueano-identity/index.ts"
+  ],
+  "local_checks": [
+   {
+    "agent_id": "hunter-edge",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-community/index.ts"
+    ],
+    "invariant": "Values interpolated into .or() cannot add filter terms or change logic",
+    "method": "source",
+    "result": "Holds. destination is constrained by cleanId to ^[A-Za-z0-9_-]{1,120}$ (line 135) before interpolation at 329 and 393, so commas, parentheses, dots and quotes are impossible. The free-text q goes through textSearch (websearch), which is parameterized, not the .or() grammar.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-edge",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-identity/index.ts"
+    ],
+    "invariant": "safeSearch output cannot break out of the ilike value in the .or() string",
+    "method": "source",
+    "result": "Holds. safeSearch strips , ( ) % * \\ (line 280), which removes the term separator and grouping, and the value is prefixed with % so it is never a quoted value. Remaining '.', ':' and '\"' stay inside the ilike value. '_' acts as an ilike wildcard (only broader matching). The caller also needs the users.read permission (staff). Other ilike uses in baqueano-ops strip %/_ and use .ilike() parameters, not .or().",
+    "artifact": null
+   }
+  ],
+  "result_fingerprints": [],
+  "unresolved": [],
+  "hardening_notes": [
+   "baqueano-community react/report do not check that the target testimonial or comment is published, so reacting to a pending or hidden item by UUID returns its reactions_count. Gate on status='published', as the comment action does.",
+   "baqueano-community attach_media enforces photo/video count limits only in upload_url. Repeated attach_media calls with already-uploaded paths under the author's prefix can exceed photosPerTestimonial. Re-check the counts in attach_media.",
+   "baqueano-mirror accepts arbitrary document content without confirming that the Firestore write occurred. Consider re-reading the document server-side with the Admin SDK, or applying the firestore.rules field constraints (status, verified) to the mirrored data.",
+   "The staff role resolvers in community, reservas, sos and ops prefer the Firebase custom claim role/admin over staff_roles. Deactivating a staff_roles row does not revoke a still-present custom claim until the claim is cleared and the token refreshed. Confirm that the revocation flow also clears claims (owned by the RBAC unit).",
+   "baqueano-ops audit() records the client IP from the first X-Forwarded-For entry, which is client-influenced unless the Supabase edge overwrites it. This affects audit-log fidelity only.",
+   "reservas/sos resolveActor ignores the legacy claims.admin===true that community and ops accept. The role sources are inconsistent but fail closed."
+  ],
+  "uncovered_notes": []
+ },
+ {
+  "coverage_id": "supabase%2Ffunctions%2F%7Bbaqueano-community%2Cbaqueano-reservas%2Cbaqueano-sos%2Cbaqueano-ops%7D%2Findex.ts%23Deno.serve::Firebase%20user%20-%3E%20other%20users%20objects%20and%20staff%20actions::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Access%20control",
+  "canonical_refs": {
+   "surface": "supabase/functions/{baqueano-community,baqueano-reservas,baqueano-sos,baqueano-ops}/index.ts#Deno.serve",
+   "boundary": "Firebase user -> other users objects and staff actions",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Access control"
+  },
+  "surface": "supabase/functions/{baqueano-community,baqueano-reservas,baqueano-sos,baqueano-ops}/index.ts#Deno.serve",
+  "boundary": "Firebase user -> other users objects and staff actions",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Access control",
+  "starting_paths": [
+   "supabase/functions/baqueano-community/index.ts",
+   "supabase/functions/baqueano-reservas/index.ts",
+   "supabase/functions/baqueano-sos/index.ts",
+   "supabase/functions/baqueano-ops/index.ts"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Access control",
+  "selected_companion_blocks": [
+   "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+   "WEB-PROTOCOL-AND-AUTH.md#Federated-identity attack classes",
+   "WEB-PROTOCOL-AND-AUTH.md#Universal moves",
+   "WEB-PROTOCOL-AND-AUTH.md#Validation rules",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Tenant and object-isolation attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Universal moves",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#HTTP framing and cache attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Browser-session attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#MFA, passkey, and account-transition attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#API-key and mTLS attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Derived-data and disclosure attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Export, backup, restore, and migration attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Deletion, revocation, and lifecycle attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native/binary code in scope"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no deep links, exported components beyond launcher, or WebView (recon 1c)"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "no custom protocol or broker; HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "covered",
+  "agent_id": "hunter-edge",
+  "reviewed_paths": [
+   "supabase/functions/baqueano-community/index.ts",
+   "supabase/functions/baqueano-reservas/index.ts",
+   "supabase/functions/baqueano-sos/index.ts",
+   "supabase/functions/baqueano-ops/index.ts"
+  ],
+  "local_checks": [
+   {
+    "agent_id": "hunter-edge",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-community/index.ts"
+    ],
+    "invariant": "Testimonial update/delete/media operations are bound to the stored author_uid (or an admin)",
+    "method": "source",
+    "result": "Holds. loadOwned reads author_uid from the DB (lines 226-232). update, upload_url and attach_media additionally require author==uid (428, 450, 477). attach_media binds the storage path prefix to uid/testimonialId/ and rejects '..' (478-483), then verifies the real size and magic bytes. remove_media, edit_comment and delete_comment check the stored author_uid (520, 551, 561). Moderation actions call requireAdmin, and the auditor role is read-only.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-edge",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-community/index.ts"
+    ],
+    "invariant": "Public reads expose only published rows and public columns",
+    "method": "source",
+    "result": "list, get and destination_feed use the anon client (RLS) with PUBLIC_COLUMNS. In the get path, the service-role read of an unpublished row is returned only to the author or an admin, and author_uid is stripped (356-362). Holds.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-edge",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-reservas/index.ts"
+    ],
+    "invariant": "Reservation cancel/read is owner-bound; staff queue/update are role-gated",
+    "method": "source",
+    "result": "Holds. In cancel, user_uid is compared from the stored row (206-207). mine filters by token uid. queue requires admin or auditor, and update requires admin (218, 233). create forces user_uid=token uid, status pending and total_price null, and requires a verified business.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-edge",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-sos/index.ts"
+    ],
+    "invariant": "SOS events are readable only by reporter (limited columns) or staff; updates admin-only",
+    "method": "source",
+    "result": "Holds. report forces reporter_uid, email and name from the token. mine filters by uid with non-sensitive columns. queue requires admin or auditor, and update requires admin (165, 180).",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-edge",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-ops/index.ts"
+    ],
+    "invariant": "Every Ops action requires a staff role; writes require admin/super_admin and use whitelisted columns",
+    "method": "source",
+    "result": "Holds. resolveActor throws 403 when no staff role is found (243-244). save, set_status and verify call requireWriter. save coerces only the fields in entity.write. Entities are fixed by the ENTITIES whitelist. Role sources are the Firebase custom claim role/admin (set only by the Admin SDK) or a verified email in staff_roles. Revocation semantics belong to the peer RBAC unit.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-edge",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-community/index.ts"
+    ],
+    "invariant": "Reactions/reports only target visible (published) objects",
+    "method": "source",
+    "result": "Weak but not a boundary finding. react and report do not check the target's status, so a user who knows a UUID can react to or report a pending or hidden testimonial and get back its reactions_count. UUIDs are not enumerable and the leaked data is only a count, so this is recorded under hardening.",
+    "artifact": null
+   }
+  ],
+  "result_fingerprints": [],
+  "unresolved": [],
+  "hardening_notes": [
+   "baqueano-community react/report do not check that the target testimonial or comment is published, so reacting to a pending or hidden item by UUID returns its reactions_count. Gate on status='published', as the comment action does.",
+   "baqueano-community attach_media enforces photo/video count limits only in upload_url. Repeated attach_media calls with already-uploaded paths under the author's prefix can exceed photosPerTestimonial. Re-check the counts in attach_media.",
+   "baqueano-mirror accepts arbitrary document content without confirming that the Firestore write occurred. Consider re-reading the document server-side with the Admin SDK, or applying the firestore.rules field constraints (status, verified) to the mirrored data.",
+   "The staff role resolvers in community, reservas, sos and ops prefer the Firebase custom claim role/admin over staff_roles. Deactivating a staff_roles row does not revoke a still-present custom claim until the claim is cleared and the token refreshed. Confirm that the revocation flow also clears claims (owned by the RBAC unit).",
+   "baqueano-ops audit() records the client IP from the first X-Forwarded-For entry, which is client-influenced unless the Supabase edge overwrites it. This affects audit-log fidelity only.",
+   "reservas/sos resolveActor ignores the legacy claims.admin===true that community and ops accept. The role sources are inconsistent but fail closed."
+  ],
+  "uncovered_notes": []
+ },
+ {
+  "coverage_id": "supabase%2Ffunctions%2F%7Bbaqueano-ops%2Cbaqueano-sos%2Cbaqueano-reservas%2Cbaqueano-community%7D%2Findex.ts%23resolveActor%20staff%20role%20resolution%2C%20plus%20firestore.rules%2Fstorage.rules%20isAdmin%2C%20functions%2Flib%2Fauth-middleware.js%20and%20tools%2Fset-role-claim.mjs::revoked%20or%20suspended%20staff%20%28user_roles%20deleted%2C%20profiles.status%20suspended%2Fblocked%2C%20staff_roles.is_active%3Dfalse%29%20-%3E%20continued%20staff%20reads%2Fwrites%20via%20Firebase%20custom%20claim%20role%2Fadmin%2C%20staff_roles%20email%2C%20or%20hard-coded%20email%20lists::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Chained%20vulnerabilities%20and%20trust%20boundaries",
+  "canonical_refs": {
+   "surface": "supabase/functions/{baqueano-ops,baqueano-sos,baqueano-reservas,baqueano-community}/index.ts#resolveActor staff role resolution, plus firestore.rules/storage.rules isAdmin, functions/lib/auth-middleware.js and tools/set-role-claim.mjs",
+   "boundary": "revoked or suspended staff (user_roles deleted, profiles.status suspended/blocked, staff_roles.is_active=false) -> continued staff reads/writes via Firebase custom claim role/admin, staff_roles email, or hard-coded email lists",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Chained vulnerabilities and trust boundaries"
+  },
+  "surface": "supabase/functions/{baqueano-ops,baqueano-sos,baqueano-reservas,baqueano-community}/index.ts#resolveActor staff role resolution, plus firestore.rules/storage.rules isAdmin, functions/lib/auth-middleware.js and tools/set-role-claim.mjs",
+  "boundary": "revoked or suspended staff (user_roles deleted, profiles.status suspended/blocked, staff_roles.is_active=false) -> continued staff reads/writes via Firebase custom claim role/admin, staff_roles email, or hard-coded email lists",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Chained vulnerabilities and trust boundaries",
+  "starting_paths": [
+   "supabase/functions/baqueano-ops/index.ts",
+   "supabase/functions/baqueano-sos/index.ts",
+   "supabase/functions/baqueano-reservas/index.ts",
+   "supabase/functions/baqueano-community/index.ts",
+   "supabase/functions/baqueano-identity/index.ts",
+   "firestore.rules",
+   "storage.rules",
+   "functions/lib/auth-middleware.js",
+   "tools/set-role-claim.mjs",
+   "supabase/migrations/20261005040000_identity_rbac_foundation.sql",
+   "supabase/migrations/20261005000000_staff_roles_rbac.sql"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Chained vulnerabilities and trust boundaries",
+  "selected_companion_blocks": [
+   "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+   "WEB-PROTOCOL-AND-AUTH.md#Federated-identity attack classes",
+   "WEB-PROTOCOL-AND-AUTH.md#Universal moves",
+   "WEB-PROTOCOL-AND-AUTH.md#Validation rules",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Deletion, revocation, and lifecycle attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Universal moves",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "no LLM on this path"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "authority decision is server-side"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+    "reason": "not an availability boundary"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "not a release path"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "no infra control on this path"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native code"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no exported components beyond the launcher, no deep links and no WebView"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "deferred",
+  "agent_id": null,
+  "reviewed_paths": [],
+  "local_checks": [],
+  "result_fingerprints": [],
+  "unresolved": [
+   "quick_profile_final_critic: Two hunter-rbac units each left an uncovered_note naming this boundary, and no unit owns it. Hunter-edge closed the ops, sos, reservas and community access-control unit as 'covered' but explicitly deferred revocation semantics to 'the peer RBAC unit' (ops L241, sos L110, reservas L133, community L192). Hunter-rbac checked only the baqueano-identity fallback. The other four functions accept the Firebase claim role/admin or active staff_roles email, never user_roles or profiles.status. The Firebase-side sources (the isAdmin email lists in firestore.rules and storage.rules L26-38, and the auth-middleware L27-35 email list) are also outside Supabase revocation. Together these are a parallel-path variant of candidate baqueano-identity:resolveActor:staff_roles-firebase-fallback-ignores-rbac-revocation and should be checked as one lifecycle invariant across every door."
+  ]
+ },
+ {
+  "coverage_id": "supabase%2Ffunctions%2Fbaqueano-ai%2Findex.ts%23Deno.serve::anonymous%20caller%20-%3E%20service-role%20writes%20%28travel_plans%2C%20ai_sessions%20via%20baqui_log_exchange%29::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Access%20control",
+  "canonical_refs": {
+   "surface": "supabase/functions/baqueano-ai/index.ts#Deno.serve",
+   "boundary": "anonymous caller -> service-role writes (travel_plans, ai_sessions via baqui_log_exchange)",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Access control"
+  },
+  "surface": "supabase/functions/baqueano-ai/index.ts#Deno.serve",
+  "boundary": "anonymous caller -> service-role writes (travel_plans, ai_sessions via baqui_log_exchange)",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Access control",
+  "starting_paths": [
+   "supabase/functions/baqueano-ai/index.ts",
+   "supabase/migrations/20261005053000_baqui_traceability.sql",
+   "functions/lib/http.js"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Access control",
+  "selected_companion_blocks": [
+   "AI-AND-LLM.md#Core discipline",
+   "AI-AND-LLM.md#Context, retrieval, and memory attack classes",
+   "AI-AND-LLM.md#Tool and action attack classes",
+   "AI-AND-LLM.md#Output and disclosure attack classes",
+   "AI-AND-LLM.md#Universal moves",
+   "AI-AND-LLM.md#Validation rules",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Tenant and object-isolation attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Derived-data and disclosure attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Universal moves",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Validation rules",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Quota and scheduling attack classes",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Universal moves",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#MCP and sub-agent trust classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-ai surfaces"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-ai surfaces"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Export, backup, restore, and migration attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Deletion, revocation, and lifecycle attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Computational amplification attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Resource accumulation attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Failure and recovery attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-ai surfaces"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-ai surfaces"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native/binary code in scope"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no deep links, exported components beyond launcher, or WebView (recon 1c)"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "no custom protocol or broker; HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "candidate",
+  "agent_id": "hunter-ai",
+  "reviewed_paths": [
+   "supabase/functions/baqueano-ai/index.ts",
+   "functions/lib/http.js",
+   "supabase/migrations/001_initial_schema.sql",
+   "supabase/migrations/20260929005610_canonical_supabase_data_layer.sql",
+   "supabase/migrations/20261005053000_baqui_traceability.sql",
+   "supabase/migrations/20261005070000_impact_alignment.sql"
+  ],
+  "local_checks": [
+   {
+    "agent_id": "hunter-ai",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-ai/index.ts",
+     "functions/lib/http.js",
+     "supabase/migrations/001_initial_schema.sql",
+     "supabase/migrations/20260929005610_canonical_supabase_data_layer.sql"
+    ],
+    "invariant": "A travel_plans row may only be attributed (user_uid) to the principal whose identity was verified by the writer",
+    "method": "source",
+    "result": "Violated in source. baqueano-ai has no authentication and copies body.userUid (index.ts:479) into travel_plans.user_uid (index.ts:600) through a service-role client (index.ts:484-485, 592-596). The only per-user reader is GET /api/travel-plans in functions/lib/http.js:541-543, which returns rows where user_uid equals the verified Firebase uid. A forged row therefore shows up in the victim's plan list. The attacker controls content through the unbounded travelStyle (index.ts:476, 573, 577) and the prompt. Whether that reader is deployed and has a UI is not established: website/js/baqueano-api.js:89 defines travelPlans(), but no call site was found. Candidate baqueano-ai:travel_plans-unverified-userUid, needs_validation.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-ai",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-ai/index.ts",
+     "supabase/migrations/20261005053000_baqui_traceability.sql"
+    ],
+    "invariant": "An anonymous caller cannot write ai_sessions/ai_messages under another identity or escalate trust of rag_sources",
+    "method": "source",
+    "result": "Holds for identity and trust. logExchange always passes p_user_id=null and p_legacy_uid=null (index.ts:434-437). baqui_log_exchange is granted to service_role only (migration:193-196) and inserts rag_sources as trust_level 'unreviewed', verified=false (migration:176-181). Weakness: sessionKey is client-chosen (index.ts:486-487) and the upsert on session_key (migration:150-161) lets anyone who knows or guesses a key append messages to that session. Keys are client-generated and no non-staff reader of ai_messages was found, so this is recorded as hardening.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-ai",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-ai/index.ts",
+     "supabase/migrations/20261005070000_impact_alignment.sql"
+    ],
+    "invariant": "Anonymous callers cannot drive unbounded operator-paid model calls or persistent writes that skew public KPIs",
+    "method": "source",
+    "result": "No bound visible in source. There is no auth, no rate limit and CORS is * (index.ts:49-53, 456-490). Each planning request makes one Gemini url_context call (index.ts:223-231) and one service-role travel_plans insert (index.ts:597-609). Each request also triggers 13 service-role DB queries (baqueano-knowledge.ts:43-57) and 3 ai_* inserts. The public KPIs itinerarios_generados, consultas_baqui and sesiones_baqui in public_impact_summary count these rows (impact_alignment.sql:428-429, 352-354). Upstream gateway, provider quota and billing caps are not visible. Candidate baqueano-ai:anonymous-unmetered-gemini-and-persistent-writes, needs_validation.",
+    "artifact": null
+   }
+  ],
+  "result_fingerprints": [
+   "baqueano-ai:travel_plans-unverified-userUid",
+   "baqueano-ai:anonymous-unmetered-gemini-and-persistent-writes"
+  ],
+  "unresolved": [
+   "Whether functions/lib/http.js (/api/travel-plans) is deployed and reachable by end users, and whether any UI consumes it",
+   "Deployed edge gateway or rate limits and the Gemini key quota or billing cap"
+  ],
+  "hardening_notes": [
+   "baqui_log_exchange upserts on a client-chosen session_key (index.ts:486-487, traceability.sql:150-161): an anonymous caller who knows another visitor's session key can append messages to that session. Bind session keys to a server-issued value or HMAC.",
+   "Client-supplied history role labels are concatenated as untyped text into the prompt (index.ts:383). Use typed turns and drop client 'system'/'assistant' roles, even though this crosses no boundary today.",
+   "index.ts:592 falls back to SUPABASE_ANON_KEY for the travel_plans insert. That fails silently because of the grant revocation. Remove the fallback to avoid confusion.",
+   "Unbounded travelStyle and budget fields (index.ts:474-477) flow into persisted JSONB. Bound or enumerate them."
+  ],
+  "uncovered_notes": [
+   {
+    "surface": "functions/lib/http.js#GET /travel-plans and website/js/baqueano-api.js",
+    "boundary": "forged travel_plans rows -> victim user's plan list / staff Ops Center renderers",
+    "subsystem": "profile/quick/all-in-scope-subsystems",
+    "attack_class": "Injection",
+    "starting_paths": [
+     "functions/lib/http.js",
+     "website/js/baqueano-api.js",
+     "website/js/ops-center/ops-engine.js"
+    ],
+    "reason": "Consumers that render travel_plans payloads (attacker-controlled through baqueano-ai) need their own sink review for stored XSS and deployment confirmation; no unit currently owns travel_plans rendering."
+   }
+  ]
+ },
+ {
+  "coverage_id": "supabase%2Ffunctions%2Fbaqueano-ai%2Findex.ts%23Deno.serve::untrusted%20prompt%2Fhistory%20and%20stored%20DB%20rows%20-%3E%20Gemini%20with%20url_context%20-%3E%20client::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Feature%20abuse%20and%20data%20leakage",
+  "canonical_refs": {
+   "surface": "supabase/functions/baqueano-ai/index.ts#Deno.serve",
+   "boundary": "untrusted prompt/history and stored DB rows -> Gemini with url_context -> client",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Feature abuse and data leakage"
+  },
+  "surface": "supabase/functions/baqueano-ai/index.ts#Deno.serve",
+  "boundary": "untrusted prompt/history and stored DB rows -> Gemini with url_context -> client",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Feature abuse and data leakage",
+  "starting_paths": [
+   "supabase/functions/baqueano-ai/index.ts",
+   "supabase/functions/_shared/baqueano-knowledge.ts"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Feature abuse and data leakage",
+  "selected_companion_blocks": [
+   "AI-AND-LLM.md#Core discipline",
+   "AI-AND-LLM.md#Context, retrieval, and memory attack classes",
+   "AI-AND-LLM.md#Tool and action attack classes",
+   "AI-AND-LLM.md#Output and disclosure attack classes",
+   "AI-AND-LLM.md#Universal moves",
+   "AI-AND-LLM.md#Validation rules",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Tenant and object-isolation attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Derived-data and disclosure attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Universal moves",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Validation rules",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Quota and scheduling attack classes",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Universal moves",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#MCP and sub-agent trust classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-ai surfaces"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-ai surfaces"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Export, backup, restore, and migration attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Deletion, revocation, and lifecycle attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Computational amplification attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Resource accumulation attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Failure and recovery attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-ai surfaces"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-ai surfaces"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native/binary code in scope"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no deep links, exported components beyond launcher, or WebView (recon 1c)"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "no custom protocol or broker; HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "candidate",
+  "agent_id": "hunter-ai",
+  "reviewed_paths": [
+   "supabase/functions/_shared/baqueano-knowledge.ts",
+   "supabase/functions/baqueano-ai/index.ts",
+   "supabase/migrations/20261005080000_supabase_source_of_truth.sql",
+   "supabase/migrations/012_comprehensive_cultural_and_ops_schema.sql"
+  ],
+  "local_checks": [
+   {
+    "agent_id": "hunter-ai",
+    "reviewed_paths": [
+     "supabase/functions/_shared/baqueano-knowledge.ts",
+     "supabase/functions/baqueano-ai/index.ts",
+     "supabase/migrations/20261005080000_supabase_source_of_truth.sql",
+     "supabase/migrations/012_comprehensive_cultural_and_ops_schema.sql"
+    ],
+    "invariant": "Retrieval for an anonymous BAQUI caller returns only rows that the anon RLS policy exposes (status='published', deleted_at is null)",
+    "method": "source",
+    "result": "Violated in source. BaqueanoKnowledgeService.search runs select('*') with an ilike filter on the name/title column of 13 tables (baqueano-knowledge.ts:45-48), using the service-role client (index.ts:484-489) that bypasses RLS. It applies no status or deleted_at filter. The anon policies restrict reads to published rows: businesses (source_of_truth.sql:162), culture/heritage/museums/gastronomy/communities/routes/experiences/events (012:612-651) and places (source_of_truth.sql:109). The response leaks the id and name of every matched row, including draft, rejected and soft-deleted ones, in 'sources' (index.ts:537) and in the message text via internalKnowledgeAnswer (index.ts:311-313, 521-523). That makes name search an existence oracle. Full rows go into the Gemini prompt (index.ts:388): owner_uid, email, phone, whatsapp, commission_rate and metadata. The model output is returned to the caller. Candidate baqueano-ai:knowledge-service-role-bypasses-publication-rls.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-ai",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-ai/index.ts"
+    ],
+    "invariant": "Client history role labels and url_context cannot raise authority",
+    "method": "source",
+    "result": "history role and content are concatenated as untyped text (index.ts:383) into the caller's own prompt. The only model tool is url_context, which Google fetches. There is no operator-side side-effecting tool and no cross-principal consumer of this history, so it is not a finding by itself. Model output is returned as JSON. Rendering sinks belong to peer client-side units.",
+    "artifact": null
+   }
+  ],
+  "result_fingerprints": [
+   "baqueano-ai:knowledge-service-role-bypasses-publication-rls"
+  ],
+  "unresolved": [
+   "Whether production tables actually contain non-published or soft-deleted rows with private columns populated (DB state)",
+   "Whether the Gemini model reproduces private fields from the context when asked (model behavior)"
+  ],
+  "hardening_notes": [
+   "baqui_log_exchange upserts on a client-chosen session_key (index.ts:486-487, traceability.sql:150-161): an anonymous caller who knows another visitor's session key can append messages to that session. Bind session keys to a server-issued value or HMAC.",
+   "Client-supplied history role labels are concatenated as untyped text into the prompt (index.ts:383). Use typed turns and drop client 'system'/'assistant' roles, even though this crosses no boundary today.",
+   "index.ts:592 falls back to SUPABASE_ANON_KEY for the travel_plans insert. That fails silently because of the grant revocation. Remove the fallback to avoid confusion.",
+   "Unbounded travelStyle and budget fields (index.ts:474-477) flow into persisted JSONB. Bound or enumerate them."
+  ],
+  "uncovered_notes": [
+   {
+    "surface": "functions/lib/http.js#GET /travel-plans and website/js/baqueano-api.js",
+    "boundary": "forged travel_plans rows -> victim user's plan list / staff Ops Center renderers",
+    "subsystem": "profile/quick/all-in-scope-subsystems",
+    "attack_class": "Injection",
+    "starting_paths": [
+     "functions/lib/http.js",
+     "website/js/baqueano-api.js",
+     "website/js/ops-center/ops-engine.js"
+    ],
+    "reason": "Consumers that render travel_plans payloads (attacker-controlled through baqueano-ai) need their own sink review for stored XSS and deployment confirmation; no unit currently owns travel_plans rendering."
+   }
+  ]
+ },
+ {
+  "coverage_id": "supabase%2Ffunctions%2Fbaqueano-identity%2Findex.ts%23Deno.serve::non-staff%20or%20lower%20staff%20-%3E%20staff%20role%20%2F%20status%20changes::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Access%20control",
+  "canonical_refs": {
+   "surface": "supabase/functions/baqueano-identity/index.ts#Deno.serve",
+   "boundary": "non-staff or lower staff -> staff role / status changes",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Access control"
+  },
+  "surface": "supabase/functions/baqueano-identity/index.ts#Deno.serve",
+  "boundary": "non-staff or lower staff -> staff role / status changes",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Access control",
+  "starting_paths": [
+   "supabase/functions/baqueano-identity/index.ts",
+   "supabase/migrations/20261005040000_identity_rbac_foundation.sql",
+   "supabase/migrations/20261005042000_identity_restrictive_policies.sql"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Access control",
+  "selected_companion_blocks": [
+   "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+   "WEB-PROTOCOL-AND-AUTH.md#Federated-identity attack classes",
+   "WEB-PROTOCOL-AND-AUTH.md#MFA, passkey, and account-transition attack classes",
+   "WEB-PROTOCOL-AND-AUTH.md#Universal moves",
+   "WEB-PROTOCOL-AND-AUTH.md#Validation rules",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Deletion, revocation, and lifecycle attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Universal moves",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-rbac surfaces"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-rbac surfaces"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#HTTP framing and cache attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Browser-session attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#API-key and mTLS attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Tenant and object-isolation attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Derived-data and disclosure attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Export, backup, restore, and migration attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-rbac surfaces"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-rbac surfaces"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-rbac surfaces"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native/binary code in scope"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no deep links, exported components beyond launcher, or WebView (recon 1c)"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "no custom protocol or broker; HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "candidate",
+  "agent_id": "hunter-rbac",
+  "reviewed_paths": [
+   "supabase/functions/baqueano-identity/index.ts",
+   "supabase/migrations/20261005040000_identity_rbac_foundation.sql",
+   "supabase/migrations/20261005042000_identity_restrictive_policies.sql"
+  ],
+  "local_checks": [
+   {
+    "agent_id": "hunter-rbac",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-identity/index.ts"
+    ],
+    "invariant": "set_role/invite grants are gated by assertCanGrant (users.assign_role for public, roles.assign_staff for auditor/admin, roles.assign_superadmin for superadmin) and assertCanManageTarget (admin/superadmin targets need roles.assign_superadmin; no self-modification)",
+    "method": "source",
+    "result": "Holds for Supabase-session actors: permissions come only from user_roles+role_permissions of an active profile (actorFromProfile L150-159); role_id is whitelisted (ALL_ROLES L393/L450); admin lacks roles.assign_staff/assign_superadmin per the matrix (migration L151-155), so an admin cannot mint auditor/admin/superadmin or touch admin/superadmin targets. Auditor has no write permissions. No body field overrides the permission decision.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-rbac",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-identity/index.ts",
+     "supabase/migrations/20261005040000_identity_rbac_foundation.sql"
+    ],
+    "invariant": "Role revocation (set_role grant=false) and suspension/block (set_status) remove staff authority from every identity door into baqueano-identity",
+    "method": "source",
+    "result": "Violated in source: resolveActor's legacy Firebase fallback (L202-216) grants roles from staff_roles by verified email whenever the Firebase uid has no identity_links row, with profileId null and no profiles.status check. set_role revoke (L409) only deletes user_roles; set_status (L436-440) only updates profiles and bans Supabase Auth. Neither touches staff_roles nor identity_links, so a revoked or suspended staff member who never linked (or who uses an unlinked Firebase uid) keeps full staff permissions. Reported as candidate baqueano-identity:resolveActor:staff_roles-firebase-fallback-ignores-rbac-revocation.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-rbac",
+    "reviewed_paths": [
+     "supabase/migrations/20261005040000_identity_rbac_foundation.sql",
+     "supabase/migrations/20261005042000_identity_restrictive_policies.sql"
+    ],
+    "invariant": "Clients cannot write user_roles, identity_links, profiles.status/role or audit_logs directly",
+    "method": "source",
+    "result": "Holds in source: insert/update/delete are revoked on user_roles, identity_links, business_members and RBAC catalog tables (L396, L403, L423, L451). Profiles UPDATE is limited to non-privileged columns (L411-413). audit_logs WITH CHECK false plus immutability triggers. Restrictive-policy rewrite (042000) only relaxes SELECT to sessioned users; permissive policies still scope rows.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-rbac",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-identity/index.ts"
+    ],
+    "invariant": "link_firebase binds the legacy Firebase uid to the caller's Supabase profile only with proof of both identities",
+    "method": "source",
+    "result": "Holds: it requires a Supabase JWT validated via auth.getUser with email_confirmed_at, a jose-verified Firebase token (iss/aud app-baqueano) with email_verified, and equal emails (L569-579). identity_links PK (provider,legacy_uid) and unique(profile_id,provider) prevent relinking an already-linked uid; the upsert on conflict could overwrite profile_id only for the same verified email. No cross-account takeover found.",
+    "artifact": null
+   }
+  ],
+  "result_fingerprints": [
+   "baqueano-identity:resolveActor:staff_roles-firebase-fallback-ignores-rbac-revocation"
+  ],
+  "unresolved": [
+   "Whether production staff_roles rows are kept in sync manually when a staff member is revoked or suspended is operational state, not source; the candidate needs owner confirmation (needs_validation)."
+  ],
+  "hardening_notes": [
+   "baqueano-identity set_role: the last-superadmin guard (L401-404) counts user_roles rows regardless of profiles.status, and set_status can suspend or block a superadmin without the same guard. A superadmin can therefore suspend or revoke peers until no active superadmin remains. This is an availability/lockout risk, not privilege gain.",
+   "baqueano-identity set_status: the result of auth.admin.updateUserById (L440) is ignored. If the ban fails, the profile is marked suspended but the Supabase session stays valid. RLS has_permission does check status, which limits the impact.",
+   "baqueano-identity decide_verification and assertCanManageTarget rely on actor.profileId for self-action checks. Any Firebase-fallback actor (profileId null) bypasses them; bind the fallback actor to the email's Supabase profile id.",
+   "Hard-coded staff emails in firestore.rules (isAdmin/isSuperAdmin L31-51) and functions/lib/auth-middleware.js (L27-35), plus Firebase custom claims set by tools/set-role-claim.mjs, form further staff role sources that Supabase RBAC revocation cannot remove. Revoking access requires a redeploy or a manual claim change.",
+   "The staff role matrices disagree: vigoronmixt@gmail.com is 'admin' in staff_roles (20261005000000 L46) but super_admin in official_super_admins (20260928192057 L47), so sync_staff_roles grants both admin and superadmin."
+  ],
+  "uncovered_notes": [
+   {
+    "surface": "supabase/functions/{baqueano-ops,baqueano-sos,baqueano-reservas,baqueano-community}/index.ts#staff role resolution",
+    "boundary": "revoked or suspended staff (user_roles/profiles.status) -> continued staff actions via Firebase claim role or staff_roles email",
+    "subsystem": "profile/quick/all-in-scope-subsystems",
+    "attack_class": "Chained vulnerabilities and trust boundaries",
+    "starting_paths": [
+     "supabase/functions/baqueano-ops/index.ts",
+     "supabase/functions/baqueano-sos/index.ts",
+     "supabase/functions/baqueano-reservas/index.ts",
+     "supabase/functions/baqueano-community/index.ts"
+    ],
+    "reason": "These functions resolve staff from the Firebase claim role or active staff_roles (ops L241, sos L110, reservas L133, community L192), not from user_roles or profiles.status. They are likely variants of the revocation-bypass root cause. Their access-control unit belongs to hunter-edge, but the revocation/lifecycle boundary has no coverage unit."
+   },
+   {
+    "surface": "firestore.rules + functions/lib/auth-middleware.js#hard-coded staff emails and custom claims",
+    "boundary": "de-provisioned staff -> Firestore/Firebase Functions admin access",
+    "subsystem": "profile/quick/all-in-scope-subsystems",
+    "attack_class": "Chained vulnerabilities and trust boundaries",
+    "starting_paths": [
+     "firestore.rules",
+     "functions/lib/auth-middleware.js",
+     "tools/set-role-claim.mjs"
+    ],
+    "reason": "Firebase-side staff authority is unrevocable from the Supabase RBAC console, and no unit covers lifecycle consistency across role sources."
+   }
+  ]
+ },
+ {
+  "coverage_id": "supabase%2Ffunctions%2Fbaqueano-mirror%2Findex.ts%23Deno.serve::Firebase%20user%20-%3E%20other%20users%20mirror%20rows%20%28ownerOf%29::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Access%20control",
+  "canonical_refs": {
+   "surface": "supabase/functions/baqueano-mirror/index.ts#Deno.serve",
+   "boundary": "Firebase user -> other users mirror rows (ownerOf)",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Access control"
+  },
+  "surface": "supabase/functions/baqueano-mirror/index.ts#Deno.serve",
+  "boundary": "Firebase user -> other users mirror rows (ownerOf)",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Access control",
+  "starting_paths": [
+   "supabase/functions/baqueano-mirror/index.ts",
+   "firestore.rules",
+   "website/js/firestore-mirror.js"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Access control",
+  "selected_companion_blocks": [
+   "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+   "WEB-PROTOCOL-AND-AUTH.md#Federated-identity attack classes",
+   "WEB-PROTOCOL-AND-AUTH.md#Universal moves",
+   "WEB-PROTOCOL-AND-AUTH.md#Validation rules",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Tenant and object-isolation attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Universal moves",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#HTTP framing and cache attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Browser-session attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#MFA, passkey, and account-transition attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#API-key and mTLS attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Derived-data and disclosure attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Export, backup, restore, and migration attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Deletion, revocation, and lifecycle attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-edge surfaces"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native/binary code in scope"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no deep links, exported components beyond launcher, or WebView (recon 1c)"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "no custom protocol or broker; HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "candidate",
+  "agent_id": "hunter-edge",
+  "reviewed_paths": [
+   "supabase/functions/baqueano-mirror/index.ts",
+   "supabase/migrations/20261003200000_firestore_mirror.sql",
+   "firestore.rules"
+  ],
+  "local_checks": [
+   {
+    "agent_id": "hunter-edge",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-mirror/index.ts"
+    ],
+    "invariant": "Firebase ID token is verified with pinned issuer/audience and JWKS before any write",
+    "method": "source",
+    "result": "jwtVerify against Google securetoken JWKS with issuer https://securetoken.google.com/app-baqueano and audience app-baqueano (lines 109-112); uid from sub. Holds.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-edge",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-mirror/index.ts",
+     "supabase/migrations/20261003200000_firestore_mirror.sql"
+    ],
+    "invariant": "A non-admin caller can only create/overwrite/delete firestore_mirror rows that it owns (owner bound from the stored row, not the request)",
+    "method": "source",
+    "result": "Violated. ownerOf() (lines 88-98) derives the owner from the path (only for users/*) or from owner fields in the request body; for delete, data is null so owner is null. The existing row is read (line 160) only for version/data, never for owner_uid. A non-admin can upsert on any doc_path in OWNER_WRITABLE top-level collections (businesses, travelPlans, reservation_requests, sos_logs, environmental_reports, registro_negocios, messages, user_saved_places) by omitting owner fields or setting them to its own uid, overwriting another user's mirrored document or marking it deleted. Reported as candidate baqueano-mirror/ownerOf-request-derived-owner.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-edge",
+    "reviewed_paths": [
+     "supabase/functions/baqueano-mirror/index.ts",
+     "firestore.rules"
+    ],
+    "invariant": "Admin-only and server-only collections cannot be mirrored by non-admins",
+    "method": "source",
+    "result": "Holds: SERVER_ONLY rejected for everyone (line 146); non-admin rejected unless collection in OWNER_WRITABLE and not ADMIN_ONLY (line 150). The collection is taken from the last pair of segments, and for users/* subpaths the owner is segments[1].",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-edge",
+    "reviewed_paths": [
+     "supabase/migrations/20261003200000_firestore_mirror.sql"
+    ],
+    "invariant": "firestore_mirror is not directly readable or writable by anon or authenticated users",
+    "method": "source",
+    "result": "RLS is enabled and all privileges are revoked from anon and authenticated (lines 39-40). The only writer is the Edge Function. The only reader in source is a staff count in baqueano-ops (line 141). Cross-user disclosure is not possible; the impact is limited to integrity of the mirror.",
+    "artifact": null
+   }
+  ],
+  "result_fingerprints": [
+   "baqueano-mirror/ownerOf-request-derived-owner"
+  ],
+  "unresolved": [
+   "Whether firestore_mirror is used (or planned) as a migration/restore source of truth: this decides the real impact of the integrity loss. No consumer other than a count is visible in source."
+  ],
+  "hardening_notes": [
+   "baqueano-community react/report do not check that the target testimonial or comment is published, so reacting to a pending or hidden item by UUID returns its reactions_count. Gate on status='published', as the comment action does.",
+   "baqueano-community attach_media enforces photo/video count limits only in upload_url. Repeated attach_media calls with already-uploaded paths under the author's prefix can exceed photosPerTestimonial. Re-check the counts in attach_media.",
+   "baqueano-mirror accepts arbitrary document content without confirming that the Firestore write occurred. Consider re-reading the document server-side with the Admin SDK, or applying the firestore.rules field constraints (status, verified) to the mirrored data.",
+   "The staff role resolvers in community, reservas, sos and ops prefer the Firebase custom claim role/admin over staff_roles. Deactivating a staff_roles row does not revoke a still-present custom claim until the claim is cleared and the token refreshed. Confirm that the revocation flow also clears claims (owned by the RBAC unit).",
+   "baqueano-ops audit() records the client IP from the first X-Forwarded-For entry, which is client-influenced unless the Supabase edge overwrites it. This affects audit-log fidelity only.",
+   "reservas/sos resolveActor ignores the legacy claims.admin===true that community and ops accept. The role sources are inconsistent but fail closed."
+  ],
+  "uncovered_notes": []
+ },
+ {
+  "coverage_id": "supabase%2Ffunctions%2Fbaqueano-status%2Findex.ts%23Deno.serve%20%28verify_jwt%3Dfalse%2C%20service-role%20client%29::anonymous%20caller%20-%3E%20service-role%20counts%20and%20backend%20health%20disclosure::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Feature%20abuse%20and%20data%20leakage",
+  "canonical_refs": {
+   "surface": "supabase/functions/baqueano-status/index.ts#Deno.serve (verify_jwt=false, service-role client)",
+   "boundary": "anonymous caller -> service-role counts and backend health disclosure",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Feature abuse and data leakage"
+  },
+  "surface": "supabase/functions/baqueano-status/index.ts#Deno.serve (verify_jwt=false, service-role client)",
+  "boundary": "anonymous caller -> service-role counts and backend health disclosure",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Feature abuse and data leakage",
+  "starting_paths": [
+   "supabase/functions/baqueano-status/index.ts",
+   "supabase/config.toml"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Feature abuse and data leakage",
+  "selected_companion_blocks": [
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Derived-data and disclosure attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Validation rules",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Quota and scheduling attack classes"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "no LLM"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "JSON response only"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+    "reason": "intentionally unauthenticated; the CORS allowlist is not an auth control"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "not a release path"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "no infra mutation"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native code"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "no IPC"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "deferred",
+  "agent_id": null,
+  "reviewed_paths": [],
+  "local_checks": [],
+  "result_fingerprints": [],
+  "unresolved": [
+   "quick_profile_final_critic: This is an unmapped entry point. The architecture counts 8 Edge Functions, but at a25cb23 there are 9: supabase/functions/baqueano-status exists and is enabled with verify_jwt=false in supabase/config.toml L2-6. It runs head-count queries with the service role, with no status filter, over destinations, places, businesses and backup_operations. That counts unpublished rows and backup_operations, which anon RLS hides. No ledger unit lists this path. The impact is likely low (aggregate counts only), but it needs a recorded check."
+  ]
+ },
+ {
+  "coverage_id": "supabase%2Fmigrations%2F%2A.sql%23anon-executable%20RPCs%20and%20anon%20table%20grants::anonymous%20PostgREST%20caller%20-%3E%20DB%20writes%2C%20KPIs%20and%20disclosure::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Business%20logic",
+  "canonical_refs": {
+   "surface": "supabase/migrations/*.sql#anon-executable RPCs and anon table grants",
+   "boundary": "anonymous PostgREST caller -> DB writes, KPIs and disclosure",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Business logic"
+  },
+  "surface": "supabase/migrations/*.sql#anon-executable RPCs and anon table grants",
+  "boundary": "anonymous PostgREST caller -> DB writes, KPIs and disclosure",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Business logic",
+  "starting_paths": [
+   "supabase/migrations/20261005054100_analytics_ingestion_kpis.sql",
+   "supabase/migrations/20261005095000_security_posture.sql",
+   "supabase/migrations/20261003223000_sprint_evidence_crud.sql",
+   "supabase/migrations/003_postgis.sql",
+   "supabase/migrations/004_pgvector.sql",
+   "supabase/migrations/20261004235000_rls_hardening.sql"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Business logic",
+  "selected_companion_blocks": [
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Derived-data and disclosure attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Universal moves",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Validation rules",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Resource accumulation attack classes",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Quota and scheduling attack classes",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Universal moves",
+   "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-dbrpc surfaces"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-dbrpc surfaces"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-dbrpc surfaces"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Tenant and object-isolation attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Export, backup, restore, and migration attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Deletion, revocation, and lifecycle attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Computational amplification attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Failure and recovery attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-dbrpc surfaces"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-dbrpc surfaces"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native/binary code in scope"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no deep links, exported components beyond launcher, or WebView (recon 1c)"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "no custom protocol or broker; HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "candidate",
+  "agent_id": "hunter-dbrpc",
+  "reviewed_paths": [
+   "supabase/migrations/20261005054100_analytics_ingestion_kpis.sql",
+   "supabase/migrations/20261005054000_analytics_smart.sql",
+   "supabase/migrations/20261003223000_sprint_evidence_crud.sql",
+   "supabase/migrations/20261005070000_impact_alignment.sql",
+   "supabase/migrations/003_postgis.sql",
+   "supabase/migrations/004_pgvector.sql",
+   "supabase/migrations/20261005095000_security_posture.sql",
+   "supabase/migrations/20261005080000_supabase_source_of_truth.sql",
+   "supabase/migrations/20261004235000_rls_hardening.sql"
+  ],
+  "local_checks": [
+   {
+    "agent_id": "hunter-dbrpc",
+    "reviewed_paths": [
+     "supabase/migrations/20261005054100_analytics_ingestion_kpis.sql",
+     "supabase/migrations/20261005054000_analytics_smart.sql"
+    ],
+    "invariant": "Anonymous ingestion RPCs (track_event, track_commercial_action, submit_feedback) bound each actor's writes so KPIs and storage cannot be driven by one anonymous caller",
+    "method": "source",
+    "result": "Every rate limit counts rows WHERE anonymous_id = p_anonymous_id (lines 67-71, 134-137, 184-187); p_anonymous_id is any 8-120 char string the caller picks. Rotating it resets every limit. There is no per-IP, per-session or global cap at the DB layer. Each new id also yields a new 'activated actor' (lines 83-90), and track_commercial_action hardcodes is_qualified=true (line 151). Candidate raised.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-dbrpc",
+    "reviewed_paths": [
+     "supabase/migrations/20261005054100_analytics_ingestion_kpis.sql"
+    ],
+    "invariant": "kpi_dashboard is restricted to service_role or analytics.read and is not executable by anon",
+    "method": "source",
+    "result": "EXECUTE is revoked from public and anon (line 350). The function checks the request.jwt.claims role, current_user and has_permission('analytics.read') (lines 237-240). A user JWT cannot carry role=service_role without the service key. Holds.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-dbrpc",
+    "reviewed_paths": [
+     "supabase/migrations/20261005054100_analytics_ingestion_kpis.sql",
+     "supabase/migrations/20261005054000_analytics_smart.sql"
+    ],
+    "invariant": "Client-supplied identity and enumerations cannot be forged into analytics rows",
+    "method": "source",
+    "result": "user_id always comes from auth.uid() joined to active profiles. Server-only events (user_registered, user_activated, experience_published) are rejected because client_allowed=false. Feedback rating, feature and platform are bounded by table CHECK constraints (analytics_smart.sql 148-153). Metadata is capped at 4096 bytes and path at 300 chars. Holds, except for the volume and actor-forgery issue above.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-dbrpc",
+    "reviewed_paths": [
+     "supabase/migrations/20261003223000_sprint_evidence_crud.sql",
+     "supabase/migrations/20261005070000_impact_alignment.sql"
+    ],
+    "invariant": "Anon-writable sprint_evidence_records stays ephemeral and isolated per X-Proof-Token",
+    "method": "source",
+    "result": "RLS binds SELECT, UPDATE and DELETE to sha256(x-proof-token), so read and modify isolation holds. However, INSERT is unlimited for anon, the client chooses created_at and expires_at, and the repository has no job that deletes expired rows (no cron.schedule or delete anywhere). Expired rows therefore persist indefinitely. strategic_impact_report counts all rows, expired ones included, as the 'evidencias_sprint' education KPI (impact_alignment.sql 349). Candidate raised.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-dbrpc",
+    "reviewed_paths": [
+     "supabase/migrations/003_postgis.sql",
+     "supabase/migrations/004_pgvector.sql"
+    ],
+    "invariant": "Default-PUBLIC-execute RPCs get_nearby_* and match_knowledge_documents do not bypass RLS or disclose non-public rows",
+    "method": "source",
+    "result": "All three are SECURITY INVOKER (no security definer), so table RLS applies. get_nearby_* filter on published or verified rows with LIMIT 50. match_knowledge_documents reads knowledge_documents, which already has a public SELECT policy. The knowledge_documents write policy FOR ALL USING(auth.role()='service_role') also serves as WITH CHECK, so anon cannot write. match_count is unbounded, but it returns only data that is already public. Not a finding.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-dbrpc",
+    "reviewed_paths": [
+     "supabase/migrations/20261005095000_security_posture.sql",
+     "supabase/migrations/20261005080000_supabase_source_of_truth.sql"
+    ],
+    "invariant": "Anon-executable security_posture and public_impact_summary disclose only aggregates and no confidential predicate",
+    "method": "source",
+    "result": "security_posture returns privilege and RLS booleans for a fixed list of relations, plus the server-only event names. This is reconnaissance metadata, not protected data. public_impact_summary returns global counts of published content, travel_plans and ai_messages, with no per-user or per-tenant predicate. Hardening only.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-dbrpc",
+    "reviewed_paths": [
+     "supabase/migrations/20261004235000_rls_hardening.sql"
+    ],
+    "invariant": "Server-only tables carry restrictive deny policies for anon and authenticated",
+    "method": "source",
+    "result": "A restrictive FOR ALL USING(false) WITH CHECK(false) policy is added to audit_logs, profiles, reservations, travel_plans, ai_* and others. Formerly open policies are re-targeted to service_role. traffic_sessions loses select, update and delete for anon (insert stays). Holds in source. The deployed policy state was not observed.",
+    "artifact": null
+   }
+  ],
+  "result_fingerprints": [
+   "supabase/migrations/analytics_ingestion_kpis:anon-rate-limit-keyed-on-client-anonymous_id",
+   "supabase/migrations/sprint_evidence_crud:anon-insert-no-expiry-cleanup-counted-in-kpi"
+  ],
+  "unresolved": [
+   "Whether Supabase API gateway, PostgREST or nginx apply any per-IP rate limit to /rest/v1/rpc/track_* (not source-visible)",
+   "Whether a pg_cron or external job deletes expired sprint_evidence_records in the deployed project"
+  ],
+  "hardening_notes": [
+   "security_posture() is anon-executable and reports which sensitive tables anon/authenticated can SELECT/INSERT, plus the server-only event names. The data is not protected, but it gives reconnaissance to anonymous callers; consider restricting it to the CI service identity.",
+   "match_knowledge_documents has default PUBLIC execute and an unbounded match_count. It is SECURITY INVOKER over a publicly readable table, so nothing is disclosed, but a cap (e.g. least(match_count, 20)) would bound per-call work on the HNSW index.",
+   "get_nearby_destinations/get_nearby_businesses keep default PUBLIC execute with a client-supplied radius_meters. LIMIT 50 bounds the output, but the ST_DWithin scan over a huge radius is not capped; consider clamping radius_meters.",
+   "campaign_attribution upserts ON CONFLICT (session_id) DO NOTHING with a client-chosen session_id. The first writer wins attribution for a session id; this has low impact because session ids are random client values."
+  ],
+  "uncovered_notes": []
+ },
+ {
+  "coverage_id": "supabase%2Fmigrations%2F20261005040000_identity_rbac_foundation.sql%23sync_staff_roles::new%20Supabase%20Auth%20signup%20-%3E%20inherited%20staff%20role%20by%20email::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Chained%20vulnerabilities%20and%20trust%20boundaries",
+  "canonical_refs": {
+   "surface": "supabase/migrations/20261005040000_identity_rbac_foundation.sql#sync_staff_roles",
+   "boundary": "new Supabase Auth signup -> inherited staff role by email",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Chained vulnerabilities and trust boundaries"
+  },
+  "surface": "supabase/migrations/20261005040000_identity_rbac_foundation.sql#sync_staff_roles",
+  "boundary": "new Supabase Auth signup -> inherited staff role by email",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Chained vulnerabilities and trust boundaries",
+  "starting_paths": [
+   "supabase/migrations/20261005040000_identity_rbac_foundation.sql",
+   "supabase/migrations/20260928192057_register_official_super_admins.sql",
+   "supabase/config.toml",
+   "tools/set-role-claim.mjs",
+   "firestore.rules",
+   "functions/lib/auth-middleware.js"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Chained vulnerabilities and trust boundaries",
+  "selected_companion_blocks": [
+   "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+   "WEB-PROTOCOL-AND-AUTH.md#Federated-identity attack classes",
+   "WEB-PROTOCOL-AND-AUTH.md#MFA, passkey, and account-transition attack classes",
+   "WEB-PROTOCOL-AND-AUTH.md#Universal moves",
+   "WEB-PROTOCOL-AND-AUTH.md#Validation rules",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Deletion, revocation, and lifecycle attack classes",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Universal moves",
+   "DATA-ISOLATION-AND-LIFECYCLE.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-rbac surfaces"
+   },
+   {
+    "block": "CLIENT-SIDE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-rbac surfaces"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#HTTP framing and cache attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Browser-session attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#API-key and mTLS attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Tenant and object-isolation attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Derived-data and disclosure attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Export, backup, restore, and migration attack classes",
+    "reason": "section not reachable from this assignment surface; covered elsewhere or not applicable"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-rbac surfaces"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-rbac surfaces"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "domain owned by another assignment in this run or not reachable from hunter-rbac surfaces"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native/binary code in scope"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "Android app has no deep links, exported components beyond launcher, or WebView (recon 1c)"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "no custom protocol or broker; HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "candidate",
+  "agent_id": "hunter-rbac",
+  "reviewed_paths": [
+   "supabase/migrations/20261005040000_identity_rbac_foundation.sql",
+   "supabase/config.toml",
+   "supabase/migrations/20261005043000_identity_function_privileges.sql",
+   "supabase/migrations/20261005000000_staff_roles_rbac.sql",
+   "supabase/migrations/20260928192057_register_official_super_admins.sql",
+   "firestore.rules",
+   "functions/lib/auth-middleware.js",
+   "tools/set-role-claim.mjs"
+  ],
+  "local_checks": [
+   {
+    "agent_id": "hunter-rbac",
+    "reviewed_paths": [
+     "supabase/migrations/20261005040000_identity_rbac_foundation.sql",
+     "supabase/config.toml"
+    ],
+    "invariant": "sync_staff_roles grants auditor/admin/superadmin only to the person who actually controls the staff email address",
+    "method": "source",
+    "result": "The only gate is auth.users.email_confirmed_at IS NOT NULL (L301-305). It runs at INSERT (handle_new_auth_user L356) and on the first confirmation (L379-383). Whether email_confirmed_at proves control depends on deployed Supabase Auth settings: email autoconfirm, enabled OAuth providers and their verified-email handling, and identity-linking behavior on pre-registered unconfirmed accounts. supabase/config.toml has no [auth] section, so none of this is source-visible. Reported as needs_validation candidate supabase:sync_staff_roles:email_confirmed_at-trusted-as-staff-email-ownership.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-rbac",
+    "reviewed_paths": [
+     "supabase/migrations/20261005040000_identity_rbac_foundation.sql",
+     "supabase/migrations/20261005043000_identity_function_privileges.sql"
+    ],
+    "invariant": "sync_staff_roles and the trigger functions cannot be invoked by clients via RPC; roles are never read from user_metadata",
+    "method": "source",
+    "result": "Holds: execute is revoked from public/anon/authenticated on sync_staff_roles (L322), handle_new_auth_user and handle_auth_user_confirmed (043000 L15-16). handle_new_auth_user copies only name/avatar/provider/language from metadata; role is hard-coded 'traveler'/'turista'.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-rbac",
+    "reviewed_paths": [
+     "supabase/migrations/20261005040000_identity_rbac_foundation.sql",
+     "supabase/migrations/20261005000000_staff_roles_rbac.sql",
+     "supabase/migrations/20260928192057_register_official_super_admins.sql"
+    ],
+    "invariant": "Deactivating a staff_roles/official_super_admins row removes the inherited user_roles staff grant",
+    "method": "source",
+    "result": "Not enforced: sync is one-way and additive (insert ... on conflict do nothing). No trigger on staff_roles or official_super_admins deletes user_roles when is_active becomes false, so the Supabase-side staff grant survives de-provisioning in the legacy table. This is the inverse of the identity-unit candidate and shares its root cause (no single source of truth for staff roles); it is folded into that fingerprint's remediation.",
+    "artifact": null
+   },
+   {
+    "agent_id": "hunter-rbac",
+    "reviewed_paths": [
+     "firestore.rules",
+     "functions/lib/auth-middleware.js",
+     "tools/set-role-claim.mjs"
+    ],
+    "invariant": "Firebase-side email-based role inheritance requires verified email",
+    "method": "source",
+    "result": "Holds for ownership: firestore.rules isAdmin/isSuperAdmin (L31-51) and auth-middleware verifiedEmail (L44-50) require email_verified==true. set-role-claim.mjs refuses unverified emails. However, these hard-coded email lists and custom claims cannot be revoked by Supabase RBAC actions (noted as hardening/uncovered).",
+    "artifact": null
+   }
+  ],
+  "result_fingerprints": [
+   "supabase:sync_staff_roles:email_confirmed_at-trusted-as-staff-email-ownership"
+  ],
+  "unresolved": [
+   "Deployed Supabase Auth config (mailer autoconfirm / enable_confirmations, enabled external providers, automatic identity linking) is not in supabase/config.toml and decides whether this candidate is exploitable."
+  ],
+  "hardening_notes": [
+   "baqueano-identity set_role: the last-superadmin guard (L401-404) counts user_roles rows regardless of profiles.status, and set_status can suspend or block a superadmin without the same guard. A superadmin can therefore suspend or revoke peers until no active superadmin remains. This is an availability/lockout risk, not privilege gain.",
+   "baqueano-identity set_status: the result of auth.admin.updateUserById (L440) is ignored. If the ban fails, the profile is marked suspended but the Supabase session stays valid. RLS has_permission does check status, which limits the impact.",
+   "baqueano-identity decide_verification and assertCanManageTarget rely on actor.profileId for self-action checks. Any Firebase-fallback actor (profileId null) bypasses them; bind the fallback actor to the email's Supabase profile id.",
+   "Hard-coded staff emails in firestore.rules (isAdmin/isSuperAdmin L31-51) and functions/lib/auth-middleware.js (L27-35), plus Firebase custom claims set by tools/set-role-claim.mjs, form further staff role sources that Supabase RBAC revocation cannot remove. Revoking access requires a redeploy or a manual claim change.",
+   "The staff role matrices disagree: vigoronmixt@gmail.com is 'admin' in staff_roles (20261005000000 L46) but super_admin in official_super_admins (20260928192057 L47), so sync_staff_roles grants both admin and superadmin."
+  ],
+  "uncovered_notes": [
+   {
+    "surface": "supabase/functions/{baqueano-ops,baqueano-sos,baqueano-reservas,baqueano-community}/index.ts#staff role resolution",
+    "boundary": "revoked or suspended staff (user_roles/profiles.status) -> continued staff actions via Firebase claim role or staff_roles email",
+    "subsystem": "profile/quick/all-in-scope-subsystems",
+    "attack_class": "Chained vulnerabilities and trust boundaries",
+    "starting_paths": [
+     "supabase/functions/baqueano-ops/index.ts",
+     "supabase/functions/baqueano-sos/index.ts",
+     "supabase/functions/baqueano-reservas/index.ts",
+     "supabase/functions/baqueano-community/index.ts"
+    ],
+    "reason": "These functions resolve staff from the Firebase claim role or active staff_roles (ops L241, sos L110, reservas L133, community L192), not from user_roles or profiles.status. They are likely variants of the revocation-bypass root cause. Their access-control unit belongs to hunter-edge, but the revocation/lifecycle boundary has no coverage unit."
+   },
+   {
+    "surface": "firestore.rules + functions/lib/auth-middleware.js#hard-coded staff emails and custom claims",
+    "boundary": "de-provisioned staff -> Firestore/Firebase Functions admin access",
+    "subsystem": "profile/quick/all-in-scope-subsystems",
+    "attack_class": "Chained vulnerabilities and trust boundaries",
+    "starting_paths": [
+     "firestore.rules",
+     "functions/lib/auth-middleware.js",
+     "tools/set-role-claim.mjs"
+    ],
+    "reason": "Firebase-side staff authority is unrevocable from the Supabase RBAC console, and no unit covers lifecycle consistency across role sources."
+   }
+  ]
+ },
+ {
+  "coverage_id": "travel_plans%20payload%20and%20BAQUI%2Fplanner%20model%20output%20renderers%3A%20website%2Fjs%2Froute-builder.js%20%28result.innerHTML%20~L1057-1120%29%2C%20website%2Fjs%2Fbaqueano-ai.js%20renderPlan%2C%20website%2Fjs%2Fai-assistant.js%20renderGroundedAnswer%2C%20website%2Fjs%2Fbaqui-evolved.js%20appendEvolvedMessage%2C%20website%2Fjs%2Fops-center%2Fops-engine.js%20%28travel_plans%20views%29%2C%20functions%2Flib%2Fhttp.js%20GET%20%2Ftravel-plans::attacker-influenced%20LLM%20output%20%28prompt%2C%20url_context-fetched%20pages%2C%20owner-controlled%20business%20names%20in%20retrieval%29%20and%20forged%20travel_plans%20rows%20%28unauthenticated%20baqueano-ai%20userUid%29%20-%3E%20victim%2Fstaff%20DOM::profile%2Fquick%2Fall-in-scope-subsystems::ATTACK-CLASSES.md%23Injection",
+  "canonical_refs": {
+   "surface": "travel_plans payload and BAQUI/planner model output renderers: website/js/route-builder.js (result.innerHTML ~L1057-1120), website/js/baqueano-ai.js renderPlan, website/js/ai-assistant.js renderGroundedAnswer, website/js/baqui-evolved.js appendEvolvedMessage, website/js/ops-center/ops-engine.js (travel_plans views), functions/lib/http.js GET /travel-plans",
+   "boundary": "attacker-influenced LLM output (prompt, url_context-fetched pages, owner-controlled business names in retrieval) and forged travel_plans rows (unauthenticated baqueano-ai userUid) -> victim/staff DOM",
+   "subsystem": "profile/quick/all-in-scope-subsystems",
+   "attack_class": "ATTACK-CLASSES.md#Injection"
+  },
+  "surface": "travel_plans payload and BAQUI/planner model output renderers: website/js/route-builder.js (result.innerHTML ~L1057-1120), website/js/baqueano-ai.js renderPlan, website/js/ai-assistant.js renderGroundedAnswer, website/js/baqui-evolved.js appendEvolvedMessage, website/js/ops-center/ops-engine.js (travel_plans views), functions/lib/http.js GET /travel-plans",
+  "boundary": "attacker-influenced LLM output (prompt, url_context-fetched pages, owner-controlled business names in retrieval) and forged travel_plans rows (unauthenticated baqueano-ai userUid) -> victim/staff DOM",
+  "subsystem": "profile/quick/all-in-scope-subsystems",
+  "attack_class": "Injection",
+  "starting_paths": [
+   "website/js/route-builder.js",
+   "website/js/baqueano-ai.js",
+   "website/js/ai-assistant.js",
+   "website/js/baqui-evolved.js",
+   "website/js/baqueano-assistant.js",
+   "website/js/baqueano-api.js",
+   "website/js/ops-center/ops-engine.js",
+   "functions/lib/http.js",
+   "website/scripts/build-hostinger-static.mjs",
+   "supabase/functions/baqueano-ai/index.ts"
+  ],
+  "ordinary_attack_class_block": "ATTACK-CLASSES.md#Injection",
+  "selected_companion_blocks": [
+   "CLIENT-SIDE.md#Core discipline",
+   "CLIENT-SIDE.md#DOM and object-state attack classes",
+   "CLIENT-SIDE.md#Universal moves",
+   "CLIENT-SIDE.md#Validation rules",
+   "AI-AND-LLM.md#Core discipline",
+   "AI-AND-LLM.md#Output and disclosure attack classes",
+   "AI-AND-LLM.md#Validation rules"
+  ],
+  "excluded_blocks": [
+   {
+    "block": "AI-AND-LLM.md#MCP and sub-agent trust classes",
+    "reason": "no MCP or sub-agents"
+   },
+   {
+    "block": "WEB-PROTOCOL-AND-AUTH.md#Core discipline",
+    "reason": "identity forging is already covered by the hunter-ai access-control unit"
+   },
+   {
+    "block": "DATA-ISOLATION-AND-LIFECYCLE.md#Core discipline",
+    "reason": "row ownership is already covered by the hunter-ai unit"
+   },
+   {
+    "block": "RESOURCE-EXHAUSTION-AND-AVAILABILITY.md#Core discipline",
+    "reason": "not an availability boundary"
+   },
+   {
+    "block": "SUPPLY-CHAIN-AND-RELEASE.md#Core discipline",
+    "reason": "not a release path"
+   },
+   {
+    "block": "CLOUD-AND-DEPLOYMENT.md#Core discipline",
+    "reason": "CSP 'unsafe-inline' is already recorded by hunter-xss"
+   },
+   {
+    "block": "MEMORY-SAFETY-AND-BINARY.md#Core discipline",
+    "reason": "no native code"
+   },
+   {
+    "block": "DESKTOP-MOBILE-AND-LOCAL-IPC.md#Core discipline",
+    "reason": "no WebView"
+   },
+   {
+    "block": "PROTOCOLS-RPC-AND-MESSAGING.md#Core discipline",
+    "reason": "HTTP/JSON only"
+   }
+  ],
+  "prior_status": "none",
+  "attempts": [],
+  "wave": 1,
+  "status": "deferred",
+  "agent_id": null,
+  "reviewed_paths": [],
+  "local_checks": [],
+  "result_fingerprints": [],
+  "unresolved": [
+   "quick_profile_final_critic: Hunter-ai left an uncovered_note ('no unit currently owns travel_plans rendering') and deferred model-output sinks to 'peer client-side units'. The hunter-xss units only checked Firestore/business fields into renderTableRow and the ally cards. At a25cb23, route-builder.js interpolates model fields raw into innerHTML (plan_title, resumen, destino_principal, day.titulo, and targetBiz.name at L1236). baqui-evolved.js L649 assigns innerHTML from text with only newline and bold substitution. baqueano-ai.js and route-builder.js escape source.url, but neither checks the scheme. Loading of these scripts was not found in website/*.html, so reachability (build bundle, dynamic load) must be established. baqueano-assistant.js, the one confirmed loaded, uses textContent. The unit must also decide whether Ops Center or the /travel-plans consumers render the forged payloads."
+  ]
+ }
+]
