@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T18:55:33.902Z",
+  "generatedAt": "2026-10-06T04:08:06.923Z",
   "source": "OpenStreetMap Nominatim — © OpenStreetMap contributors (ODbL). Contornos: geoBoundaries ADM1 (CC BY 4.0).",
   "rule": "Cada punto se acepta solo si cae dentro del contorno oficial de su territorio.",
   "territories": {
@@ -231,6 +231,13 @@
         "lng": -86.8819,
         "source": "catalog",
         "label": "Hotel El Convento"
+      },
+      {
+        "name": "Comedor La Cucaracha",
+        "lat": 12.4342008,
+        "lng": -86.873702,
+        "source": "catalog",
+        "label": "Comedor La Cucaracha"
       }
     ],
     "rivas": [
@@ -339,6 +346,14 @@
         "lng": -85.92049,
         "source": "catalog",
         "label": "Morgan's Rock Reserve & Ecolodge"
+      },
+      {
+        "name": "Hostal Puesta del Sol (Ometepe)",
+        "lat": 11.49839,
+        "lng": -85.62554,
+        "osm": "relation/6409432",
+        "label": "Isla de Ometepe, Rivas, Nicaragua",
+        "approx": true
       },
       {
         "name": "Finca Magdalena (Ometepe)",
@@ -675,6 +690,20 @@
         "lng": -85.95451,
         "source": "catalog",
         "label": "Hotel Plaza Colón"
+      },
+      {
+        "name": "Restaurante El Zaguán",
+        "lat": 11.92958,
+        "lng": -85.95256,
+        "source": "catalog",
+        "label": "Restaurante El Zaguán"
+      },
+      {
+        "name": "Comedor Doña Tulita",
+        "lat": 11.9322657,
+        "lng": -85.9573215,
+        "source": "catalog",
+        "label": "Comedor Doña Tulita"
       }
     ],
     "matagalpa": [
@@ -1150,6 +1179,34 @@
         "lng": -86.24828,
         "source": "catalog",
         "label": "Hyatt Place Managua"
+      },
+      {
+        "name": "Cocina de Doña Haydée",
+        "lat": 12.11872,
+        "lng": -86.26163,
+        "source": "catalog",
+        "label": "Cocina de Doña Haydée"
+      },
+      {
+        "name": "Restaurante Don Cándido",
+        "lat": 12.12577,
+        "lng": -86.26316,
+        "source": "catalog",
+        "label": "Restaurante Don Cándido"
+      },
+      {
+        "name": "Restaurante El Eskimo",
+        "lat": 12.14409,
+        "lng": -86.29012,
+        "source": "catalog",
+        "label": "Restaurante El Eskimo"
+      },
+      {
+        "name": "Restaurante Los Ranchos",
+        "lat": 12.14443,
+        "lng": -86.29049,
+        "source": "catalog",
+        "label": "Restaurante Los Ranchos"
       }
     ],
     "carazo": [
@@ -1325,6 +1382,14 @@
         "lng": -85.56974,
         "osm": "relation/19173758",
         "label": "Reserva Natural Cerro Mombachito – La Vieja, Boaco, 51000",
+        "approx": true
+      },
+      {
+        "name": "Cerros y cascadas de Santa Lucía",
+        "lat": 12.50197,
+        "lng": -85.93835,
+        "osm": "node/12180566182",
+        "label": "Cerros Coyoltepe, Teustepe, Boaco",
         "approx": true
       },
       {
@@ -1600,6 +1665,13 @@
         "approx": true
       },
       {
+        "name": "Bluff Beach",
+        "lat": 12.00391,
+        "lng": -83.68462,
+        "osm": "node/3146085659",
+        "label": "El Bluff, Kukra Hill, Costa Caribe Sur"
+      },
+      {
         "name": "Little Corn Island y Otto Beach",
         "lat": 12.2884,
         "lng": -82.9812,
@@ -1649,8 +1721,7 @@
       "Centro de Arte Fundación Ortiz Gurdián"
     ],
     "rivas": [
-      "Corredor de playas de Tola",
-      "Hostal Puesta del Sol (Ometepe)"
+      "Corredor de playas de Tola"
     ],
     "jinotega": [
       "Salto La Mocuana"
@@ -1664,7 +1735,11 @@
       "Convento e Iglesia San Francisco",
       "Casa de los Leones",
       "Antigua Estación del Ferrocarril",
-      "Lago Cocibolca"
+      "Lago Cocibolca",
+      "Boca Baco",
+      "Comedor La Parada",
+      "Comedor Martha",
+      "Kiosco La Gata"
     ],
     "matagalpa": [
       "Villa Chagüitillo",
@@ -1679,7 +1754,9 @@
       "Basílica Menor de Nuestra Señora del Trono",
       "Playa Jiquilillo"
     ],
-    "managua": [],
+    "managua": [
+      "Kiosko Vilma"
+    ],
     "carazo": [
       "Reserva Silvestre Privada Tonantzin",
       "Reserva Silvestre Privada FRANIN"
@@ -1687,15 +1764,14 @@
     "chontales": [
       "Pirámides de Garro Grande",
       "Archipiélago El Nancital",
-      "Aguas Calientes e Isla Arena",
-      "Cascadas de Chontales"
+      "Cascadas de Chontales",
+      "Aguas Calientes e Isla Arena"
     ],
     "boaco": [
       "Centro Histórico & Calles Escalonadas de Boaco",
       "Mirador El Faro",
       "Reserva Natural Filas de Masigüe",
-      "Comunidad Las Lagunas",
-      "Cerros y cascadas de Santa Lucía"
+      "Comunidad Las Lagunas"
     ],
     "nueva-segovia": [
       "Ocotal Colonial & Casa de la Cultura",
@@ -1715,57 +1791,7 @@
       "Isla Rama Cay",
       "Playas de Corn Island",
       "Saltos Walpapigny y Busay",
-      "Yemaya Reefs",
-      "Bluff Beach"
+      "Yemaya Reefs"
     ]
-  },
-  "rejected": [
-    {
-      "name": "Hostal Puesta del Sol (Ometepe)",
-      "lat": 11.25252,
-      "lng": -85.87066,
-      "osm": "way/417334395",
-      "label": "Posada Puesta del Sol, Avenida Real, San Juan del Sur",
-      "territory": "rivas",
-      "reason": "El hostal está en la Isla de Ometepe; el resultado es una posada homónima en San Juan del Sur."
-    },
-    {
-      "name": "Bluff Beach",
-      "lat": 12.09054,
-      "lng": -83.68877,
-      "osm": "relation/16528013",
-      "label": "Playa Falso Bluff, Kukra Hill, Costa Caribe Sur",
-      "territory": "raccs",
-      "reason": "Playa Falso Bluff (Kukra Hill) es otro lugar; El Bluff pertenece a Bluefields."
-    },
-    {
-      "name": "Cascadas de Chontales",
-      "lat": 11.57387,
-      "lng": -85.31262,
-      "osm": "relation/2194833",
-      "label": "Lago Cocibolca, Chontales, Nicaragua",
-      "approx": true,
-      "territory": "chontales",
-      "reason": "El resultado es el Lago Cocibolca (el punto cae en el agua); no es la ubicación de las cascadas."
-    },
-    {
-      "name": "Refugio de Vida Silvestre Río San Juan",
-      "lat": 11.03826,
-      "lng": -85.04148,
-      "osm": "relation/16339033",
-      "label": "Refugio de Vida Silvestre Los Guatuzos, Río San Juan, Nicaragua",
-      "territory": "rio-san-juan",
-      "reason": "Los Guatuzos es otro refugio; el Refugio de Vida Silvestre Río San Juan está en la desembocadura del río (San Juan de Nicaragua)."
-    },
-    {
-      "name": "Cerros y cascadas de Santa Lucía",
-      "lat": 12.30739,
-      "lng": -85.85801,
-      "osm": "node/2816076559",
-      "label": "Cerros Colama, Teustepe, Boaco",
-      "approx": true,
-      "territory": "boaco",
-      "reason": "Cerros Colama está en Teustepe; el lugar corresponde al municipio de Santa Lucía."
-    }
-  ]
+  }
 }
