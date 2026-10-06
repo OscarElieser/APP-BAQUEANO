@@ -207,7 +207,19 @@ async function resolveActor(req: Request, service: SupabaseClient): Promise<Acto
   const { data: link } = await service.from("identity_links").select("profile_id").eq("provider", "firebase").eq("legacy_uid", uid).maybeSingle();
   if (link?.profile_id) return actorFromProfile(service, link.profile_id, "firebase", { firebaseUid: uid });
 
-  // Compatibilidad: personal heredado identificado por correo verificado.
+  // Auditoría de seguridad 2026-10-06 (resolveActor:staff_roles-firebase-fallback-ignores-rbac-revocation):
+  // si ese correo verificado ya tiene perfil en Supabase, manda el perfil (estado activo + user_roles),
+  // así una revocación o suspensión hecha en RBAC también aplica a quien entra con Firebase sin vincular.
+  if (email && claims.email_verified === true) {
+    const exact = email.replace(/[\\%_]/g, (c) => "\\" + c); // ilike sin comodines: coincidencia exacta sin mayúsculas
+    const { data: profilesByEmail, error: profileError } = await service.from("profiles").select("id").ilike("email", exact).limit(2);
+    if (profileError || (profilesByEmail || []).length > 1) {
+      throw new HttpError(403, "No pudimos confirmar tu cuenta. Vinculá tu acceso desde tu perfil.");
+    }
+    if (profilesByEmail && profilesByEmail[0]?.id) return actorFromProfile(service, profilesByEmail[0].id, "firebase", { firebaseUid: uid });
+  }
+
+  // Compatibilidad: personal heredado (sin perfil en Supabase) identificado por correo verificado.
   const roles: string[] = [];
   if (email && claims.email_verified === true) {
     const { data: staff } = await service.from("staff_roles").select("role").eq("email", email).eq("is_active", true).maybeSingle();

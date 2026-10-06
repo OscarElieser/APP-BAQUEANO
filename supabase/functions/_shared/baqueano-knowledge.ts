@@ -21,15 +21,36 @@ export interface KnowledgeRecord {
   confidence: number;
 }
 
-const SEARCH_DOMAINS = [
-  {table: "departments", title: "name"}, {table: "municipalities", title: "name"},
-  {table: "destinations", title: "name"}, {table: "places", title: "name"},
-  {table: "businesses", title: "name"}, {table: "culture", title: "title"},
-  {table: "heritage", title: "name"}, {table: "museums", title: "name"},
-  {table: "gastronomy", title: "dish_name"}, {table: "communities", title: "name"},
-  {table: "experiences", title: "title"}, {table: "routes", title: "title"},
-  {table: "events", title: "title"}
-] as const;
+// Auditoría de seguridad 2026-10-06 (knowledge-service-role-bypasses-publication-rls): el cliente de
+// BAQUI usa service_role, que salta RLS. Cada dominio reaplica aquí el MISMO predicado de publicación
+// que RLS aplica al público (columnas verificadas en la base), y los campos privados nunca llegan al
+// modelo ni a la respuesta.
+type Publication = "none" | "status" | "status_not_deleted" | "is_published" | "business";
+const SEARCH_DOMAINS: ReadonlyArray<{table: string; title: string; publication: Publication}> = [
+  {table: "departments", title: "name", publication: "none"}, {table: "municipalities", title: "name", publication: "none"},
+  {table: "destinations", title: "name", publication: "status_not_deleted"}, {table: "places", title: "name", publication: "is_published"},
+  {table: "businesses", title: "name", publication: "business"}, {table: "culture", title: "title", publication: "status"},
+  {table: "heritage", title: "name", publication: "status"}, {table: "museums", title: "name", publication: "status"},
+  {table: "gastronomy", title: "dish_name", publication: "status"}, {table: "communities", title: "name", publication: "status"},
+  {table: "experiences", title: "title", publication: "status"}, {table: "routes", title: "title", publication: "status"},
+  {table: "events", title: "title", publication: "status"}
+];
+const PRIVATE_FIELDS = new Set(["owner_uid", "owner_id", "commission_rate", "metadata", "created_by", "updated_by",
+  "legacy_key", "legacy_source", "written_by_uid", "written_by_email", "user_uid", "user_id", "attributes", "internal_notes"]);
+
+// deno-lint-ignore no-explicit-any
+function published(request: any, publication: Publication) {
+  if (publication === "status") return request.eq("status", "published");
+  if (publication === "status_not_deleted") return request.eq("status", "published").is("deleted_at", null);
+  if (publication === "is_published") return request.eq("is_published", true);
+  if (publication === "business") return request.eq("status", "published").is("deleted_at", null);
+  return request;
+}
+function publicPayload(row: Record<string, unknown>): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(row)) if (!PRIVATE_FIELDS.has(key)) out[key] = value;
+  return out;
+}
 
 export class BaqueanoKnowledgeService {
   constructor(private readonly supabase: SupabaseClient) {}
@@ -42,14 +63,14 @@ export class BaqueanoKnowledgeService {
     const retrievedAt = new Date().toISOString();
     const results = await Promise.all(SEARCH_DOMAINS.map(async (domain) => {
       try {
-        const request = this.supabase.from(domain.table).select("*");
+        const request = published(this.supabase.from(domain.table).select("*"), domain.publication);
         const {data, error} = terms.length
           ? await request.or(terms.map((term) => `${domain.title}.ilike.%${term}%`).join(",")).limit(limitPerDomain)
           : await request.ilike(domain.title, `%${safeQuery}%`).limit(limitPerDomain);
         if (error || !Array.isArray(data)) return [];
         return data.map((row: Record<string, unknown>) => ({
           entityType: domain.table, entityId: row.id == null ? null : String(row.id),
-          title: String(row[domain.title] || ""), payload: row,
+          title: String(row[domain.title] || ""), payload: publicPayload(row),
           sourceType: "baqueano" as const, sourceUrl: null, retrievedAt,
           confidence: row.verified === true ? 1 : 0.82
         }));

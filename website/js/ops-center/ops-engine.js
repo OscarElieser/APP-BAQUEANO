@@ -4227,11 +4227,20 @@
       `;
     },
 
-    renderTableRow(tabId, item) {
-      const isSelected = OpsState.selectedIds.has(item.id);
+    renderTableRow(tabId, rawItem) {
+      // Auditoría de seguridad 2026-10-06 (renderTableRow:raw-imageUrl-from-businesses.cover_image):
+      // los datos vienen de Supabase/Firestore y algunos campos los escribe un dueño de negocio.
+      // Todo lo que entra a este HTML se codifica: id (contexto JS dentro de atributo), estado
+      // (lista permitida), imagen (solo http(s)/relativa/data:image) y precios (números).
+      const isSelected = OpsState.selectedIds.has(rawItem.id);
+      const item = Object.assign({}, rawItem, {
+        id: this.jsAttr(rawItem.id),
+        priceNio: Number.isFinite(Number(rawItem.priceNio)) ? Number(rawItem.priceNio) : '',
+        priceUsd: Number.isFinite(Number(rawItem.priceUsd)) ? Number(rawItem.priceUsd) : ''
+      });
       const title = item.title || item.name || 'Sin Título';
-      const status = item.status || 'published';
-      const image = item.imageUrl || item.image || item.photo || '';
+      const status = ['published', 'draft', 'archived', 'trashed', 'pending', 'pending_review'].includes(item.status) ? item.status : (item.status ? 'draft' : 'published');
+      const image = this.safeUrl(item.imageUrl || item.image || item.photo || '');
       const territory = item.department || item.region || item.category || 'Nacional';
       const updated = item.updatedAt ? new Date(item.updatedAt).toLocaleDateString('es-NI', { day: '2-digit', month: 'short' }) : 'Hoy';
       const isVerified = item.verified === true || item.verificationStatus === 'verified';
@@ -6372,7 +6381,22 @@
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    },
+
+    // Valor dentro de una cadena JS '...' que a su vez va en un atributo HTML (onclick="...").
+    jsAttr(value) {
+      if (value === undefined || value === null) return '';
+      return this.escape(String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/[\r\n\u2028\u2029]/g, ' '));
+    },
+
+    // URL de imagen segura para src: http(s), relativa o data:image; cualquier otra cosa se descarta.
+    safeUrl(value) {
+      const url = String(value || '').trim();
+      if (!url) return '';
+      if (!/^(https?:\/\/|\/(?!\/)|\.\.?\/|data:image\/(png|jpe?g|webp|gif);base64,)/i.test(url) && /^[a-z][a-z0-9+.-]*:/i.test(url)) return '';
+      return this.escape(url);
     }
   };
 
@@ -6659,15 +6683,15 @@
       titleEl.textContent = item.title || item.name || 'Vista Previa';
       bodyEl.innerHTML = `
         <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
-          ${item.imageUrl ? `<img src="${item.imageUrl}" style="width:100%;max-height:260px;object-fit:cover;border-radius:var(--ops-radius-md);border:1px solid var(--ops-border-subtle);" alt="">` : ''}
+          ${OpsUI.safeUrl(item.imageUrl) ? `<img src="${OpsUI.safeUrl(item.imageUrl)}" style="width:100%;max-height:260px;object-fit:cover;border-radius:var(--ops-radius-md);border:1px solid var(--ops-border-subtle);" alt="">` : ''}
           <div style="flex:1;">
             <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
-              <span class="ops-badge-pill ${item.status || 'published'}">${item.status || 'published'}</span>
-              <span style="font-size:0.8rem;color:var(--ops-text-secondary);">${item.department || 'Nacional'}</span>
+              <span class="ops-badge-pill ${OpsUI.escape(item.status || 'published')}">${OpsUI.escape(item.status || 'published')}</span>
+              <span style="font-size:0.8rem;color:var(--ops-text-secondary);">${OpsUI.escape(item.department || 'Nacional')}</span>
             </div>
             <h2 style="font-size:1.3rem;color:#fff;margin:0 0 0.75rem 0;">${OpsUI.escape(item.title || item.name)}</h2>
             <p style="font-size:0.88rem;color:var(--ops-text-secondary);line-height:1.6;">${OpsUI.escape(item.description || 'Sin descripción detallada.')}</p>
-            ${item.priceUsd ? `<div style="font-size:1.1rem;font-weight:700;color:var(--bq-accent);margin-top:1rem;">$${item.priceUsd} USD ${item.priceNio ? `<span style="font-size:0.8rem;color:var(--ops-text-muted);">(C$ ${item.priceNio})</span>` : '<span style="font-size:0.8rem;color:var(--ops-text-muted);">Sin conversión registrada</span>'}</div>` : ''}
+            ${item.priceUsd ? `<div style="font-size:1.1rem;font-weight:700;color:var(--bq-accent);margin-top:1rem;">$${OpsUI.escape(item.priceUsd)} USD ${item.priceNio ? `<span style="font-size:0.8rem;color:var(--ops-text-muted);">(C$ ${OpsUI.escape(item.priceNio)})</span>` : '<span style="font-size:0.8rem;color:var(--ops-text-muted);">Sin conversión registrada</span>'}</div>` : ''}
           </div>
         </div>
       `;

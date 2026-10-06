@@ -157,13 +157,19 @@ Deno.serve(async (req: Request) => {
 
   // 4. Guardar (versión incremental; un borrado conserva la última copia)
   const docPath = segments.join("/");
-  const { data: existing } = await supabase.from("firestore_mirror").select("version, data").eq("doc_path", docPath).maybeSingle();
+  const { data: existing } = await supabase.from("firestore_mirror").select("version, data, owner_uid").eq("doc_path", docPath).maybeSingle();
+  // Auditoría de seguridad 2026-10-06 (baqueano-mirror/ownerOf-request-derived-owner): el dueño
+  // que decide es el de la fila GUARDADA, como en firestore.rules (resource.data.ownerUid), no el
+  // que trae el cuerpo. Sin esto, cualquier usuario podía sobrescribir o borrar la copia de otro.
+  if (!isAdmin && existing?.owner_uid && existing.owner_uid !== uid) {
+    return reply(403, { ok: false, error: "No podés copiar documentos de otra persona." }, origin);
+  }
   const row = {
     doc_path: docPath,
     collection,
     doc_id: docId,
     data: op === "delete" ? (existing?.data ?? {}) : data,
-    owner_uid: owner ?? (isAdmin ? null : uid),
+    owner_uid: existing?.owner_uid ?? owner ?? (isAdmin ? null : uid),
     written_by_uid: uid,
     written_by_email: email,
     op,
@@ -173,7 +179,7 @@ Deno.serve(async (req: Request) => {
     mirrored_at: new Date().toISOString(),
   };
   const { error } = await supabase.from("firestore_mirror").upsert(row, { onConflict: "doc_path" });
-  if (error) return reply(500, { ok: false, error: "No se pudo guardar la copia.", detail: error.message }, origin);
+  if (error) return reply(500, { ok: false, error: "No se pudo guardar la copia." }, origin);
 
   return reply(200, { ok: true, path: docPath, version: row.version, deleted: row.deleted }, origin);
 });

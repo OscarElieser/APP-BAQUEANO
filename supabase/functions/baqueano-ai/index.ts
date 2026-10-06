@@ -473,10 +473,13 @@ Deno.serve(async (req: Request) => {
     const requestedDept = String(body.department || "Nicaragua");
     const daysRequested = Math.max(1, Math.min(Number(body.days) || 3, 14));
     const groupSize = Math.max(1, Math.min(Number(body.groupSize) || 2, 20));
-    const travelStyle = String(body.travelStyle || "aventura");
+    const travelStyle = String(body.travelStyle || "aventura").slice(0, 60);
     const budgetNio = Number(body.budgetNio) || (daysRequested * groupSize * 2000);
     const budgetUsd = Number(body.budgetUsd) || Number((budgetNio / BCN_RATE).toFixed(2));
-    const userUid = body.userUid ? String(body.userUid) : null;
+    // Auditoría de seguridad 2026-10-06 (travel_plans-unverified-userUid): esta función no autentica,
+    // así que un userUid del cuerpo no prueba nada. Los planes se guardan sin dueño (null) hasta que
+    // BAQUI verifique un token de sesión; nunca a nombre de otra persona.
+    const userUid: string | null = null;
     const countryCode = String(body.countryCode || "NI").toUpperCase().slice(0, 2);
     const requestedLanguage = String(body.currentLanguage || body.preferredLanguage || "es").toLowerCase().split("-")[0];
     const currentLanguage = ["es", "en", "fr", "it", "pt", "de"].includes(requestedLanguage) ? requestedLanguage : "es";
