@@ -4746,3 +4746,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - La autorización se limita a completar esta funcionalidad sin borrar datos ni retirar Firebase; cualquier cambio debe preservar compatibilidad y rollback.
 
 - 2026-10-06 01:51 Propietario: muchos correos 'Run failed: BAQUEANO Producción (Azure)' (QA en navegador falló 10 min; Verificar despliegue en Azure falló 14 min) y 'Run failed: CodeQL'. Investigando.
+- Diagnóstico de los correos "Run failed" (2026-10-06):
+  1. "Verificar despliegue en Azure": falla el paso "/health sirva este commit" → la VM sigue sin autodeploy (acción del propietario: `sudo journalctl -u baqueano-autodeploy -n 100`, `df -h`). Arrastra "Evidencia Sprint 1–3". Las pruebas de seguridad en vivo pasan.
+  2. "QA en navegador": CI instalaba `axe-core@4` (flotante) y tomó 4.14, que agrega la regla label-content-name-mismatch (56 casos) + 2 contrastes nuevos (ambiental .amb-verification-kicker, perfil .bq-auth-submit del login con Google). Corrección: axe fijado a 4.13.0 en el workflow; contrastes con tokens accesibles. Local: 56 cargas, 0 fallos.
+  3. Muchos correos porque cada push a main (google2…google11) dispara el workflow.
+  - Pendiente: nombres accesibles (Label in Name) generados desde ids ("bq Menu Trigger account", "tm Clear"…), selector de idioma, logo y BAQUI → luego subir axe a 4.14.

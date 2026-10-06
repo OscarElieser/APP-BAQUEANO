@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T00:04:41.019Z",
+  "generatedAt": "2026-10-06T01:57:33.121Z",
   "languages": [
     "es",
     "en",
@@ -23,7 +23,7 @@
     "untranslated": 1
   },
   "js": {
-    "files": 88,
+    "files": 87,
     "translated": 134,
     "untranslated": 729
   },
@@ -89,7 +89,6 @@
     "js/hero-video-loader.js",
     "js/historia-audioguia.js",
     "js/impact-public.js",
-    "js/local-keys.js",
     "js/ops-center/ops-community-moderation.js",
     "js/safety-gallery.js",
     "js/services/places-service.js",
@@ -114,11 +113,11 @@
     "apps/web/src/app/mi-viaje/[tripId]/page.tsx",
     "apps/web/src/app/page.tsx",
     "apps/web/src/app/territorios/[slug]/page.tsx",
-    "apps/web/src/components/cards/DestinationCard.tsx",
     "apps/web/src/components/DynamicBlockRenderer.tsx",
+    "apps/web/src/components/OfflineRegistration.tsx",
+    "apps/web/src/components/cards/DestinationCard.tsx",
     "apps/web/src/components/navigation/PublicNavigation.tsx",
     "apps/web/src/components/navigation/ScrollProgress.tsx",
-    "apps/web/src/components/OfflineRegistration.tsx",
     "apps/web/src/components/sections/DataSourceBanner.tsx",
     "packages/i18n/src/index.tsx",
     "packages/ui/src/index.tsx"
@@ -900,15 +899,6 @@
       "coverage": 0
     },
     {
-      "file": "js/local-keys.js",
-      "type": "js",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "editorialStrings": 0,
-      "coverage": 100
-    },
-    {
       "file": "js/madriz-experience.js",
       "type": "js",
       "total": 9,
@@ -1332,6 +1322,14 @@
       "coverage": 0
     },
     {
+      "file": "apps/admin/src/app/destinos/[id]/page.tsx",
+      "type": "tsx",
+      "total": 8,
+      "translated": 0,
+      "untranslated": 8,
+      "coverage": 0
+    },
+    {
       "file": "apps/admin/src/app/destinos/nuevo/page.tsx",
       "type": "tsx",
       "total": 18,
@@ -1345,14 +1343,6 @@
       "total": 9,
       "translated": 0,
       "untranslated": 9,
-      "coverage": 0
-    },
-    {
-      "file": "apps/admin/src/app/destinos/[id]/page.tsx",
-      "type": "tsx",
-      "total": 8,
-      "translated": 0,
-      "untranslated": 8,
       "coverage": 0
     },
     {
@@ -1428,19 +1418,19 @@
       "coverage": 0
     },
     {
-      "file": "apps/admin/src/app/negocios/page.tsx",
-      "type": "tsx",
-      "total": 9,
-      "translated": 0,
-      "untranslated": 9,
-      "coverage": 0
-    },
-    {
       "file": "apps/admin/src/app/negocios/[id]/page.tsx",
       "type": "tsx",
       "total": 5,
       "translated": 0,
       "untranslated": 5,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/app/negocios/page.tsx",
+      "type": "tsx",
+      "total": 9,
+      "translated": 0,
+      "untranslated": 9,
       "coverage": 0
     },
     {
@@ -1612,19 +1602,19 @@
       "coverage": 0
     },
     {
-      "file": "apps/admin/src/components/ai/AdminCopilot.tsx",
-      "type": "tsx",
-      "total": 11,
-      "translated": 0,
-      "untranslated": 11,
-      "coverage": 0
-    },
-    {
       "file": "apps/admin/src/components/ModulePlaceholder.tsx",
       "type": "tsx",
       "total": 2,
       "translated": 0,
       "untranslated": 2,
+      "coverage": 0
+    },
+    {
+      "file": "apps/admin/src/components/ai/AdminCopilot.tsx",
+      "type": "tsx",
+      "total": 11,
+      "translated": 0,
+      "untranslated": 11,
       "coverage": 0
     },
     {
@@ -1692,19 +1682,19 @@
       "coverage": 0
     },
     {
-      "file": "apps/web/src/app/destinos/page.tsx",
-      "type": "tsx",
-      "total": 3,
-      "translated": 0,
-      "untranslated": 3,
-      "coverage": 0
-    },
-    {
       "file": "apps/web/src/app/destinos/[slug]/page.tsx",
       "type": "tsx",
       "total": 8,
       "translated": 0,
       "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/destinos/page.tsx",
+      "type": "tsx",
+      "total": 3,
+      "translated": 0,
+      "untranslated": 3,
       "coverage": 0
     },
     {
@@ -1780,20 +1770,20 @@
       "coverage": 0
     },
     {
-      "file": "apps/web/src/app/mi-viaje/page.tsx",
-      "type": "tsx",
-      "total": 4,
-      "translated": 0,
-      "untranslated": 4,
-      "coverage": 0
-    },
-    {
       "file": "apps/web/src/app/mi-viaje/[tripId]/page.tsx",
       "type": "tsx",
       "total": 0,
       "translated": 0,
       "untranslated": 0,
       "coverage": 100
+    },
+    {
+      "file": "apps/web/src/app/mi-viaje/page.tsx",
+      "type": "tsx",
+      "total": 4,
+      "translated": 0,
+      "untranslated": 4,
+      "coverage": 0
     },
     {
       "file": "apps/web/src/app/not-found.tsx",
@@ -1860,19 +1850,19 @@
       "coverage": 0
     },
     {
-      "file": "apps/web/src/app/rutas/page.tsx",
-      "type": "tsx",
-      "total": 6,
-      "translated": 0,
-      "untranslated": 6,
-      "coverage": 0
-    },
-    {
       "file": "apps/web/src/app/rutas/[slug]/page.tsx",
       "type": "tsx",
       "total": 8,
       "translated": 0,
       "untranslated": 8,
+      "coverage": 0
+    },
+    {
+      "file": "apps/web/src/app/rutas/page.tsx",
+      "type": "tsx",
+      "total": 6,
+      "translated": 0,
+      "untranslated": 6,
       "coverage": 0
     },
     {
@@ -1892,14 +1882,6 @@
       "coverage": 0
     },
     {
-      "file": "apps/web/src/app/territorios/page.tsx",
-      "type": "tsx",
-      "total": 2,
-      "translated": 0,
-      "untranslated": 2,
-      "coverage": 0
-    },
-    {
       "file": "apps/web/src/app/territorios/[slug]/page.tsx",
       "type": "tsx",
       "total": 0,
@@ -1908,12 +1890,36 @@
       "coverage": 100
     },
     {
+      "file": "apps/web/src/app/territorios/page.tsx",
+      "type": "tsx",
+      "total": 2,
+      "translated": 0,
+      "untranslated": 2,
+      "coverage": 0
+    },
+    {
       "file": "apps/web/src/app/viaje/[tripId]/page.tsx",
       "type": "tsx",
       "total": 23,
       "translated": 0,
       "untranslated": 23,
       "coverage": 0
+    },
+    {
+      "file": "apps/web/src/components/DynamicBlockRenderer.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
+    },
+    {
+      "file": "apps/web/src/components/OfflineRegistration.tsx",
+      "type": "tsx",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "coverage": 100
     },
     {
       "file": "apps/web/src/components/cards/DestinationCard.tsx",
@@ -1938,14 +1944,6 @@
       "translated": 0,
       "untranslated": 1,
       "coverage": 0
-    },
-    {
-      "file": "apps/web/src/components/DynamicBlockRenderer.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
     },
     {
       "file": "apps/web/src/components/map/InteractiveMap.tsx",
@@ -1978,14 +1976,6 @@
       "translated": 0,
       "untranslated": 4,
       "coverage": 0
-    },
-    {
-      "file": "apps/web/src/components/OfflineRegistration.tsx",
-      "type": "tsx",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "coverage": 100
     },
     {
       "file": "apps/web/src/components/sections/DataSourceBanner.tsx",

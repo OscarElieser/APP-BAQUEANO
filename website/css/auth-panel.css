@@ -239,7 +239,8 @@ RELACIÓN:
   min-height: 3rem;
   border: 0;
   border-radius: 0.75rem;
-  background: var(--bq-auth-orange);
+  /* Relleno con texto blanco: naranja accesible del sistema (4.79:1, WCAG AA). */
+  background: var(--baqueano-primary-fill, #C54B01);
   color: #FFFFFF;
   font: 700 1rem/1.2 inherit;
   cursor: pointer;

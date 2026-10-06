@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-06T00:04:41.019Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3931 · en 3931 · fr 3931 · it 3931 · pt 3931 · de 3931
+Generado: 2026-10-06T01:57:33.121Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3931 · en 3931 · fr 3931 · it 3931 · pt 3931 · de 3931
 
 HTML: 3660/3661 textos con clave (1 pendientes) · JS: 729 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -195,7 +195,6 @@ HTML: 3660/3661 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | js/hero-video-loader.js | js | 0 | 0 | 0 | 100 % |
 | js/historia-audioguia.js | js | 0 | 0 | 0 | 100 % |
 | js/impact-public.js | js | 6 | 6 | 0 | 100 % |
-| js/local-keys.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |
 | js/services/places-service.js | js | 4 | 4 | 0 | 100 % |

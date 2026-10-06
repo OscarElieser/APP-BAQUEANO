@@ -98,7 +98,7 @@ jobs:
       - name: Herramientas de prueba aisladas (Playwright + axe-core, sin tocar dependencias del sitio)
         run: |
           mkdir -p "$RUNNER_TEMP/qa"
-          npm --prefix "$RUNNER_TEMP/qa" install --no-audit --no-fund @playwright/test@1.63.0 axe-core@4
+          npm --prefix "$RUNNER_TEMP/qa" install --no-audit --no-fund @playwright/test@1.63.0 axe-core@4.13.0
           ln -s "$RUNNER_TEMP/qa/node_modules" website/node_modules
           "$RUNNER_TEMP/qa/node_modules/.bin/playwright" install --with-deps chromium
       - name: Build estático del Website

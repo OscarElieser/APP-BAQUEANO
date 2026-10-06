@@ -858,7 +858,8 @@
   font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  color: #F65E01;
+  /* Texto naranja pequeño sobre claro: tono accesible del sistema (5.6:1, WCAG AA). */
+  color: var(--baqueano-primary-text, #B34400);
   margin-bottom: 4px;
 }
 
