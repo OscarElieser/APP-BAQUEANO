@@ -19,7 +19,8 @@
 //   del departamento como posición de un lugar).
 //
 // 📦 QUÉ (Entregables):
-// - `DepartmentLiveSection(departmentId, departmentName)`.
+// - `DepartmentLiveSection(departmentId, departmentName)`, con la lista de
+//   municipios del territorio desde Supabase (paridad con departamento.html).
 // ============================================================================
 
 import 'dart:async';
@@ -53,6 +54,10 @@ class DepartmentLiveSection extends ConsumerWidget {
     final destinations = (catalogAsync.valueOrNull?.places ?? const <PlaceModel>[])
         .where((place) => place.departmentId == id)
         .toList(growable: false);
+    final municipalities =
+        (catalogAsync.valueOrNull?.municipalities ?? const <CatalogMunicipality>[])
+            .where((m) => m.departmentId == id)
+            .toList(growable: false);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,6 +91,16 @@ class DepartmentLiveSection extends ConsumerWidget {
           _note('Aún no hay destinos verificados de $departmentName publicados con coordenadas. Cuando el equipo los verifique en el Ops Center aparecerán aquí, en el mapa y en la web.')
         else
           ...destinations.map((place) => _DestinationTile(place: place)),
+        if (municipalities.isNotEmpty) ...[
+          const SizedBox(height: 14),
+          _heading('🏘️ Municipios de $departmentName (${municipalities.length})'),
+          const SizedBox(height: 8),
+          ...municipalities.map((m) => _MunicipalityTile(municipality: m)),
+          Text(
+            'Contornos: geoBoundaries · © OpenStreetMap (ODbL). El área se calcula del contorno y puede incluir agua. Población, historia y fiestas patronales: por verificar con fuente oficial.',
+            style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.textMuted, height: 1.4),
+          ),
+        ],
         if (territory != null && territory.bestSeason.isNotEmpty) ...[
           const SizedBox(height: 14),
           _heading('🌤️ Mejor época'),
@@ -157,6 +172,49 @@ class _DestinationTile extends StatelessWidget {
             icon: const Icon(Icons.map_rounded, size: 16, color: AppColors.gold),
             label: Text('Ver en mapa', style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.gold)),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MunicipalityTile extends StatelessWidget {
+  final CatalogMunicipality municipality;
+
+  const _MunicipalityTile({required this.municipality});
+
+  @override
+  Widget build(BuildContext context) {
+    final area = municipality.areaKm2;
+    final areaText = area == null
+        ? null
+        : '≈ ${area < 10 ? area.toStringAsFixed(1) : area.round()} km² (área del contorno)';
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppColors.bgDark,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppColors.borderGold.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            municipality.name,
+            style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white),
+          ),
+          if (municipality.identity.isNotEmpty) ...[
+            const SizedBox(height: 2),
+            Text(
+              municipality.identity,
+              style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70, height: 1.4),
+            ),
+          ],
+          if (areaText != null) ...[
+            const SizedBox(height: 2),
+            Text(areaText, style: GoogleFonts.inter(fontSize: 11, color: AppColors.goldLight)),
+          ],
         ],
       ),
     );

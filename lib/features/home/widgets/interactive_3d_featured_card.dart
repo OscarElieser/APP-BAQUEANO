@@ -446,19 +446,21 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
             runSpacing: 6,
             children: [
               _buildMetricPill(
-                icon: Icons.star_rounded,
+                // Auditoría 2026-10-06: sin reseñas, duración ni precios con fuente no se
+                // muestran cifras (antes había valores por defecto inventados: 4.9, 128, 25 USD).
+                icon: Icons.rate_review_outlined,
                 iconColor: Colors.amber,
-                label: '${destination.rating ?? 4.9} (${destination.reviewsCount ?? 128})',
+                label: 'Sin reseñas verificadas',
               ),
               _buildMetricPill(
                 icon: Icons.schedule_rounded,
                 iconColor: AppColors.goldLight,
-                label: destination.duration?.toString().isNotEmpty == true ? destination.duration.toString() : '1 Día',
+                label: destination.duration?.toString().isNotEmpty == true ? destination.duration.toString() : 'Duración por confirmar',
               ),
               _buildMetricPill(
                 icon: Icons.hiking_rounded,
                 iconColor: AppColors.jungleGreen,
-                label: destination.distance?.toString().isNotEmpty == true ? destination.distance.toString() : '18 km',
+                label: destination.distance?.toString().isNotEmpty == true ? destination.distance.toString() : 'Distancia por confirmar',
               ),
             ],
           ),
@@ -496,7 +498,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
                         textBaseline: TextBaseline.alphabetic,
                         children: [
                           Text(
-                            '\$${destination.priceUsd?.toInt() ?? 25}',
+                            'Por confirmar',
                             style: GoogleFonts.montserrat(
                               fontSize: 21,
                               fontWeight: FontWeight.w900,
@@ -504,7 +506,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
                             ),
                           ),
                           Text(
-                            ' USD',
+                            '',
                             style: GoogleFonts.spaceGrotesk(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
@@ -513,7 +515,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            '· C\$${destination.priceNio?.toInt() ?? ((destination.priceUsd ?? 25) * 36.62).toInt()} NIO',
+                            '· con el anfitrión',
                             style: GoogleFonts.inter(
                               fontSize: 11,
                               fontWeight: FontWeight.w500,

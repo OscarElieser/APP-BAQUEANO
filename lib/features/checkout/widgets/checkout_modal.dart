@@ -19,6 +19,8 @@
 // - ⚠️ 2026-10-05: `show` delega en `ReservationRequestSheet` (solicitud real en
 //   Supabase + WhatsApp/llamada con el negocio verificado, sin pago en línea).
 //   Este modal mostraba anfitriones y precios ficticios; queda como `legacyShow`.
+//   Auditoría 2026-10-06: aun así, `HostEnterpriseProfile` ya no llama ni escribe
+//   a teléfonos sin verificar (usa la línea oficial y marca "por verificar").
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
 // - `CheckoutModal`: Formulario de reserva con datos de expedición, régimen fiscal,
@@ -58,6 +60,24 @@ class HostEnterpriseProfile {
   final String taxStatus;
   final String settlementPolicy;
 
+  /// Auditoría 2026-10-06: ninguno de estos perfiles tiene fuente verificable
+  /// (los teléfonos no figuran en Supabase ni en la web; uno era la línea
+  /// oficial de BAQUEANO atribuida a un guía). Mientras `verified` sea false,
+  /// la App no llama ni escribe a esos números: el contacto va por la línea
+  /// oficial y el nombre del anfitrión se muestra "por verificar". Los datos
+  /// originales se conservan para que el equipo los confirme en Ops Center.
+  final bool verified;
+
+  /// Línea oficial de la Mesa Técnica BAQUEANO (la misma de la web y Ops Center).
+  static const String officialPhone = '+505 8443-1289';
+  static const String officialEmail = 'contacto@baqueano.ni';
+  static const String officialTeam = 'Mesa Técnica BAQUEANO';
+
+  String get contactPhone => verified ? phone : officialPhone;
+  String get contactEmail => verified ? email : officialEmail;
+  String get contactName => verified ? legalOwner : officialTeam;
+  String get ownerLabel => verified ? legalOwner : '$legalOwner (por verificar)';
+
   const HostEnterpriseProfile({
     required this.businessName,
     required this.legalOwner,
@@ -69,6 +89,7 @@ class HostEnterpriseProfile {
     required this.taxStatus,
     this.settlementPolicy =
         'Pago directo al anfitrión comunitario sin intermediarios ni comisiones abusivas.',
+    this.verified = false,
   });
 
   /// Resuelve la información del anfitrión según el destino seleccionado
@@ -615,7 +636,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          'Propietario / Responsable: ${_hostEnterprise.legalOwner}',
+                          'Propietario / Responsable: ${_hostEnterprise.ownerLabel}',
                           style: GoogleFonts.inter(
                             fontSize: 12,
                             color: AppColors.goldLight,
@@ -644,10 +665,10 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 _hostEnterprise.address,
               ),
               _buildEnterpriseInfoRow(
-                'Teléfono Directo:',
-                _hostEnterprise.phone,
+                _hostEnterprise.verified ? 'Teléfono Directo:' : 'Contacto BAQUEANO:',
+                _hostEnterprise.contactPhone,
               ),
-              _buildEnterpriseInfoRow('Correo Oficial:', _hostEnterprise.email),
+              _buildEnterpriseInfoRow('Correo Oficial:', _hostEnterprise.contactEmail),
               _buildEnterpriseInfoRow(
                 'Régimen Legal:',
                 _hostEnterprise.taxStatus,
@@ -710,7 +731,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               const SizedBox(height: 14),
 
               Text(
-                'Anfitrión Responsable: ${_hostEnterprise.legalOwner}',
+                'Anfitrión Responsable: ${_hostEnterprise.ownerLabel}',
                 style: GoogleFonts.spaceGrotesk(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
@@ -732,8 +753,8 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: () => _launchWhatsAppDirect(
-                        _hostEnterprise.phone,
-                        _hostEnterprise.legalOwner,
+                        _hostEnterprise.contactPhone,
+                        _hostEnterprise.contactName,
                       ),
                       icon: const Icon(Icons.chat, color: Color(0xFF25D366), size: 18),
                       label: Text(
@@ -756,7 +777,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () => _makePhoneCallDirect(_hostEnterprise.phone),
+                      onPressed: () => _makePhoneCallDirect(_hostEnterprise.contactPhone),
                       icon: const Icon(Icons.phone, color: AppColors.gold, size: 18),
                       label: Text(
                         'Llamar',
@@ -1230,9 +1251,9 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   destinationTitle: widget.destination.title,
                   destinationId: widget.destination.id,
                   department: widget.destination.department,
-                  hostName: _hostEnterprise.legalOwner,
+                  hostName: _hostEnterprise.contactName,
                   hostBusiness: _hostEnterprise.businessName,
-                  hostPhone: _hostEnterprise.phone,
+                  hostPhone: _hostEnterprise.contactPhone,
                   date: DateFormat('dd MMM yyyy').format(_selectedDate),
                   participants: _participants,
                   totalUsd: _totalUsd,
@@ -1640,11 +1661,11 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               ),
               const SizedBox(height: 6),
               _buildDetailRow('Local Anfitrión:', _hostEnterprise.businessName),
-              _buildDetailRow('Propietario:', _hostEnterprise.legalOwner),
+              _buildDetailRow('Propietario:', _hostEnterprise.ownerLabel),
               _buildDetailRow('RUC Oficial:', _hostEnterprise.rucNumber),
               _buildDetailRow('Licencia INTUR:', _hostEnterprise.inturLicense),
               _buildDetailRow('Dirección:', _hostEnterprise.address),
-              _buildDetailRow('Teléfono Contacto:', _hostEnterprise.phone),
+              _buildDetailRow('Teléfono Contacto:', _hostEnterprise.contactPhone),
               _buildDetailRow(
                 'Liquidación:',
                 _hostEnterprise.settlementPolicy,
@@ -1682,7 +1703,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'Comunícate con ${_hostEnterprise.legalOwner} para coordinar disponibilidad y llegada. Al confirmar tu expedición, el pago se realiza directo al anfitrión sin intermediarios.',
+                        'Comunícate con ${_hostEnterprise.contactName} para coordinar disponibilidad y llegada. Al confirmar tu expedición, el pago se realiza directo al anfitrión sin intermediarios.',
                         style: GoogleFonts.inter(
                           fontSize: 12,
                           color: AppColors.textLight,
@@ -1720,8 +1741,8 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   ),
                 ),
                 onPressed: () => _launchWhatsAppDirect(
-                  _hostEnterprise.phone,
-                  _hostEnterprise.legalOwner,
+                  _hostEnterprise.contactPhone,
+                  _hostEnterprise.contactName,
                 ),
               ),
             ),
@@ -1744,7 +1765,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                     fontSize: 13,
                   ),
                 ),
-                onPressed: () => _makePhoneCallDirect(_hostEnterprise.phone),
+                onPressed: () => _makePhoneCallDirect(_hostEnterprise.contactPhone),
               ),
             ),
           ],

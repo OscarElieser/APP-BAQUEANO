@@ -326,7 +326,18 @@
       case 'departments':
         return Object.assign(base, { title: row.name, name: row.name, description: row.short_desc || '', capital: row.capital || '', imageUrl: row.banner_image || '', status: 'published' });
       case 'municipalities':
-        return Object.assign(base, { title: row.name, name: row.name, department: DEPARTMENTS[row.department_id] || row.department_id, status: 'published' });
+        return Object.assign(base, {
+          title: row.name, name: row.name, department: DEPARTMENTS[row.department_id] || row.department_id, status: 'published',
+          description: [row.identity, Number.isFinite(Number(row.area_km2)) && row.area_km2 !== null ? `≈ ${Math.round(Number(row.area_km2))} km² (contorno)` : ''].filter(Boolean).join(' · ')
+        });
+      case 'places':
+        return Object.assign(base, {
+          title: row.name, name: row.name, department: DEPARTMENTS[row.department_id] || row.department_id || '',
+          category: [row.type_label || row.category || 'Lugar', ({ approximate: 'ubicación aproximada', reference: 'ubicación de referencia', centroid: 'centro del municipio', missing: 'sin ubicación' })[row.location_precision] || ''].filter(Boolean).join(' · '),
+          description: row.short_description || '', latitude: row.latitude, longitude: row.longitude,
+          status: row.is_published === false ? 'draft' : 'published', verified: row.verification_status === 'verified',
+          sourceName: row.source_name || '', sourceUrl: row.source_url || ''
+        });
       case 'gastronomy':
         return Object.assign(base, { title: row.dish_name, name: row.dish_name, category: row.category || '', department: DEPARTMENTS[row.department_id] || row.department_id });
       case 'tourism_services':
@@ -338,16 +349,36 @@
     }
   }
 
+  // Auditoría 2026-10-06: el servidor entrega como máximo 100 filas por página y aquí se pedía
+  // solo la primera. Municipios (153) y lugares (237) quedaban cortados sin aviso. Se recorren las
+  // páginas hasta completar `total`, con un tope de 20 páginas (2000 filas) para no colgar el panel.
+  async function listAll(entity, extra) {
+    const first = await call('list', Object.assign({ entity, limit: 100, page: 0 }, extra || {}));
+    let rows = first.items || [];
+    const total = Number(first.total) || rows.length;
+    for (let page = 1; rows.length < total && page < 20; page += 1) {
+      const next = await call('list', Object.assign({ entity, limit: 100, page }, extra || {}));
+      if (!next.items || !next.items.length) break;
+      rows = rows.concat(next.items);
+    }
+    return { items: rows, total, state: first.state };
+  }
+
   async function loadTab(tabId) {
     const cfg = TABS[tabId];
     if (!cfg || !currentUser()) return null;
-    const res = await call('list', { entity: cfg.entity, limit: 100 });
+    const res = await listAll(cfg.entity);
     let items = res.items.map((row) => toEngine(cfg.entity, row));
     if (cfg.write && (cfg.entity === 'destinations' || cfg.entity === 'businesses')) {
-      const archived = await call('list', { entity: cfg.entity, limit: 100, archived: true }).catch(() => ({ items: [] }));
+      const archived = await listAll(cfg.entity, { archived: true }).catch(() => ({ items: [] }));
       items = items.concat(archived.items.map((row) => toEngine(cfg.entity, row)));
     }
-    if (tabId === '07-mapa') items = items.filter((i) => Number.isFinite(i.latitude) && Number.isFinite(i.longitude));
+    if (tabId === '07-mapa') {
+      // El mapa del equipo muestra también los lugares del catálogo (tabla places), no solo los destinos.
+      const places = await listAll('places').catch(() => ({ items: [] }));
+      items = items.concat(places.items.map((row) => toEngine('places', row)));
+      items = items.filter((i) => Number.isFinite(i.latitude) && Number.isFinite(i.longitude));
+    }
     if (window.BaqueanoOpsEngine && typeof window.BaqueanoOpsEngine.ingestCollection === 'function') {
       window.BaqueanoOpsEngine.ingestCollection(tabId, items, { source: 'Supabase', state: res.state, total: res.total });
     }

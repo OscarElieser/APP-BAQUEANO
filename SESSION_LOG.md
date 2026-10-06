@@ -4804,3 +4804,12 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
       - BAQUI: presupuesto por IP (hash) de 20 cada 10 minutos y global de 400 por hora (migración 20261006070000, aplicada y probada; la función falta desplegar).
       - El retriever de BAQUI incluye eventos `historical`, igual que RLS.
     - Pendiente del propietario: despliegue de Edge Functions, sudo y protección de main, "Confirm email" en Auth, decisión sobre analítica anónima.
+  - Avance (Android, Ops Center y privacidad de negocios):
+    - Android:
+      - La app ahora lee los 153 municipios de Supabase y los muestra en la ficha del departamento.
+      - Inicio y búsqueda ya no muestran calificaciones ni precios sin fuente; antes había valores por defecto inventados como 4.9/128/$25.
+      - El checkout anterior ya no llama a teléfonos sin verificar.
+      - `flutter analyze` sin problemas y `flutter test` 71/71, con el SDK oficial 3.47.6 verificado por SHA-256.
+    - Ops Center: paginación real (municipios 153/153, antes 100) y lugares (`places`) en el mapa del equipo.
+    - BD: anon ya no lee `commission_rate`, `owner_uid`, `created_by`, `updated_by` ni `verified_by` de `businesses` (migración 20261006080000, aplicada y verificada; la app y la web siguen leyendo los 30 negocios).
+    - Informes: `docs/auditoria-2026-10-06/ANDROID-AUDIT.md` y `OPS-CENTER-AUDIT.md`.

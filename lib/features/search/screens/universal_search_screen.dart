@@ -371,7 +371,7 @@ class _UniversalSearchScreenState extends State<UniversalSearchScreen> {
                                               size: 16),
                                           const SizedBox(width: 2),
                                           Text(
-                                            item.rating.toString(),
+                                            'Sin reseñas',
                                             style: const TextStyle(
                                               color: Color(0xFFD4AF37),
                                               fontSize: 12,
@@ -413,7 +413,7 @@ class _UniversalSearchScreenState extends State<UniversalSearchScreen> {
                                         ),
                                       ),
                                       Text(
-                                        '\$${item.priceUsd.toInt()} USD / C\$${item.priceNio.toInt()}',
+                                        'Precio por confirmar',
                                         style: const TextStyle(
                                           color: Color(0xFFD4AF37),
                                           fontSize: 12,

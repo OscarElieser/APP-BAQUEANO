@@ -18,7 +18,8 @@
 // 4. Descarta filas con coordenadas nulas, no finitas o fuera de Nicaragua.
 //
 // 📦 QUÉ (Entregables):
-// - `CatalogSnapshot`: departamentos, lugares (destinos) y negocios + origen.
+// - `CatalogSnapshot`: departamentos, lugares (destinos), negocios y los 153
+//   municipios (área del contorno e identidad; lo demás, pendiente) + origen.
 // - `CatalogRepository.load()` (Supabase → caché local → vacío con error).
 // - `catalogRepositoryProvider` / `catalogSnapshotProvider` (Riverpod).
 // ============================================================================
@@ -89,10 +90,32 @@ class CatalogBusiness {
   bool get hasCoordinates => latitude != null && longitude != null;
 }
 
+/// Municipio oficial (153 en Supabase). Solo datos calculados o citados:
+/// área del contorno geoBoundaries/OSM e identidad curada. Población, historia
+/// y fiestas quedan pendientes de fuente oficial (`profile_status`).
+class CatalogMunicipality {
+  final String id;
+  final String departmentId;
+  final String name;
+  final double? areaKm2;
+  final String identity;
+  final bool pendingVerification;
+
+  const CatalogMunicipality({
+    required this.id,
+    required this.departmentId,
+    required this.name,
+    this.areaKm2,
+    this.identity = '',
+    this.pendingVerification = true,
+  });
+}
+
 class CatalogSnapshot {
   final List<CatalogDepartment> departments;
   final List<PlaceModel> places;
   final List<CatalogBusiness> businesses;
+  final List<CatalogMunicipality> municipalities;
   final CatalogSource source;
   final DateTime? fetchedAt;
   final String? error;
@@ -101,6 +124,7 @@ class CatalogSnapshot {
     this.departments = const [],
     this.places = const [],
     this.businesses = const [],
+    this.municipalities = const [],
     this.source = CatalogSource.none,
     this.fetchedAt,
     this.error,
@@ -132,33 +156,51 @@ class CatalogRepository {
   final SupabaseRestClient _client;
 
   CatalogRepository({SupabaseRestClient client = const SupabaseRestClient()})
-      : _client = client;
+    : _client = client;
 
   /// Carga Supabase-first; si falla, devuelve la última copia guardada.
   Future<CatalogSnapshot> load() async {
     try {
       final results = await Future.wait([
-        _client.select('departments', query: {
-          'select': 'id,name,capital,short_desc,banner_image',
-          'order': 'name.asc',
-        }),
-        _client.select('destinations', query: {
-          'select':
-              'id,department_id,name,category,short_desc,description,latitude,longitude,cover_image,rating,reviews_count,verified,status,source_name,source_url,last_verified_at,how_to_reach,created_at,updated_at',
-          'order': 'updated_at.desc',
-          'limit': '500',
-        }),
-        _client.select('businesses', query: {
-          'select':
-              'id,name,category,department,municipality,phone,whatsapp,address,latitude,longitude,cover_image,verified,host_name,host_story,metadata',
-          'order': 'name.asc',
-          'limit': '500',
-        }),
+        _client.select(
+          'departments',
+          query: {
+            'select': 'id,name,capital,short_desc,banner_image',
+            'order': 'name.asc',
+          },
+        ),
+        _client.select(
+          'destinations',
+          query: {
+            'select':
+                'id,department_id,name,category,short_desc,description,latitude,longitude,cover_image,rating,reviews_count,verified,status,source_name,source_url,last_verified_at,how_to_reach,created_at,updated_at',
+            'order': 'updated_at.desc',
+            'limit': '500',
+          },
+        ),
+        _client.select(
+          'businesses',
+          query: {
+            'select':
+                'id,name,category,department,municipality,phone,whatsapp,address,latitude,longitude,cover_image,verified,host_name,host_story,metadata',
+            'order': 'name.asc',
+            'limit': '500',
+          },
+        ),
+        _client.select(
+          'municipalities',
+          query: {
+            'select': 'id,department_id,name,area_km2,identity,profile_status',
+            'order': 'name.asc',
+            'limit': '300',
+          },
+        ),
       ]);
       final raw = <String, dynamic>{
         'departments': results[0],
         'destinations': results[1],
         'businesses': results[2],
+        'municipalities': results[3],
         'fetchedAt': DateTime.now().toUtc().toIso8601String(),
       };
       await _saveCache(raw);
@@ -167,8 +209,11 @@ class CatalogRepository {
       debugPrint('⚠️ [CatalogRepository] Supabase no disponible: $error');
       final cached = await _readCache();
       if (cached != null) {
-        return snapshotFromRaw(cached, CatalogSource.cache,
-            error: error.toString());
+        return snapshotFromRaw(
+          cached,
+          CatalogSource.cache,
+          error: error.toString(),
+        );
       }
       return CatalogSnapshot(error: error.toString());
     }
@@ -213,14 +258,18 @@ class CatalogRepository {
         .map((row) => placeFromDestinationRow(row, departmentNames: names))
         .whereType<PlaceModel>()
         .toList(growable: false);
-    final businesses = _rows(raw['businesses'])
-        .map(businessFromRow)
-        .whereType<CatalogBusiness>()
+    final businesses = _rows(
+      raw['businesses'],
+    ).map(businessFromRow).whereType<CatalogBusiness>().toList(growable: false);
+    final municipalities = _rows(raw['municipalities'])
+        .map(municipalityFromRow)
+        .whereType<CatalogMunicipality>()
         .toList(growable: false);
     return CatalogSnapshot(
       departments: departments,
       places: places,
       businesses: businesses,
+      municipalities: municipalities,
       source: source,
       fetchedAt: DateTime.tryParse(raw['fetchedAt']?.toString() ?? ''),
       error: error,
@@ -257,9 +306,10 @@ class CatalogRepository {
 
     final departmentId = _str(row['department_id']);
     final category = _str(row['category']).toLowerCase();
-    final description = _str(row['description']).isNotEmpty
-        ? _str(row['description'])
-        : _str(row['short_desc']);
+    final description =
+        _str(row['description']).isNotEmpty
+            ? _str(row['description'])
+            : _str(row['short_desc']);
     final cover = _httpsOrEmpty(row['cover_image']);
     final created =
         DateTime.tryParse(_str(row['created_at'])) ?? DateTime.now();
@@ -272,7 +322,8 @@ class CatalogRepository {
       categoryName: _categoryLabels[category] ?? _capitalize(category),
       description: description,
       departmentId: departmentId,
-      departmentName: departmentNames[departmentId] ?? _capitalize(departmentId),
+      departmentName:
+          departmentNames[departmentId] ?? _capitalize(departmentId),
       municipalityId: '',
       municipalityName: '',
       address: _str(row['how_to_reach']),
@@ -291,6 +342,24 @@ class CatalogRepository {
       status: 'published',
       createdAt: created,
       updatedAt: updated,
+    );
+  }
+
+  /// Devuelve `null` sin id, nombre o departamento. Un área no positiva se
+  /// descarta: no se muestra un número que no salga del contorno.
+  static CatalogMunicipality? municipalityFromRow(Map<String, dynamic> row) {
+    final id = _str(row['id']);
+    final name = _str(row['name']);
+    final departmentId = _str(row['department_id']);
+    if (id.isEmpty || name.isEmpty || departmentId.isEmpty) return null;
+    final area = _finite(row['area_km2']);
+    return CatalogMunicipality(
+      id: id,
+      departmentId: departmentId,
+      name: name,
+      areaKm2: area != null && area > 0 ? area : null,
+      identity: _str(row['identity']),
+      pendingVerification: _str(row['profile_status']) != 'verified',
     );
   }
 
@@ -316,9 +385,10 @@ class CatalogRepository {
       longitude: validCoords ? lng : null,
       coverImage: _httpsOrEmpty(row['cover_image']),
       verified: row['verified'] == true,
-      hostName: _str(row['host_name']).isNotEmpty
-          ? _str(row['host_name'])
-          : _str(metadata['host']),
+      hostName:
+          _str(row['host_name']).isNotEmpty
+              ? _str(row['host_name'])
+              : _str(metadata['host']),
       hostStory: _str(row['host_story']),
       specialty: _str(metadata['specialty']),
     );

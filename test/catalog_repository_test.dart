@@ -118,7 +118,10 @@ void main() {
         'id': 'biz-red-ometepe',
         'name': 'Red Comunitaria Ometepe Viva',
         'host_name': null,
-        'metadata': {'host': 'Doña María Luisa', 'specialty': 'Posadas rurales'},
+        'metadata': {
+          'host': 'Doña María Luisa',
+          'specialty': 'Posadas rurales',
+        },
         'verified': true,
       });
       expect(business!.hostName, 'Doña María Luisa');
@@ -138,23 +141,20 @@ void main() {
 
   group('CatalogRepository.snapshotFromRaw', () {
     test('arma el catálogo completo y conserva el origen', () {
-      final snapshot = CatalogRepository.snapshotFromRaw(
-        {
-          'departments': [
-            {'id': 'madriz', 'name': 'Madriz', 'capital': 'Somoto'},
-            {'id': '', 'name': 'Sin id'},
-          ],
-          'destinations': [
-            _destination(),
-            _destination({'id': 'sin_coords', 'longitude': null}),
-          ],
-          'businesses': [
-            {'id': 'biz-1', 'name': 'Negocio verificado', 'verified': true},
-          ],
-          'fetchedAt': '2026-10-05T00:00:00Z',
-        },
-        CatalogSource.cache,
-      );
+      final snapshot = CatalogRepository.snapshotFromRaw({
+        'departments': [
+          {'id': 'madriz', 'name': 'Madriz', 'capital': 'Somoto'},
+          {'id': '', 'name': 'Sin id'},
+        ],
+        'destinations': [
+          _destination(),
+          _destination({'id': 'sin_coords', 'longitude': null}),
+        ],
+        'businesses': [
+          {'id': 'biz-1', 'name': 'Negocio verificado', 'verified': true},
+        ],
+        'fetchedAt': '2026-10-05T00:00:00Z',
+      }, CatalogSource.cache);
 
       expect(snapshot.source, CatalogSource.cache);
       expect(snapshot.departments, hasLength(1));
@@ -165,11 +165,59 @@ void main() {
     });
 
     test('tolera datos corruptos sin lanzar excepciones', () {
-      final snapshot = CatalogRepository.snapshotFromRaw(
-        {'departments': 'x', 'destinations': null, 'businesses': [1, 2]},
-        CatalogSource.cache,
-      );
+      final snapshot = CatalogRepository.snapshotFromRaw({
+        'departments': 'x',
+        'destinations': null,
+        'businesses': [1, 2],
+      }, CatalogSource.cache);
       expect(snapshot.isEmpty, isTrue);
+    });
+  });
+
+  group('CatalogRepository.municipalityFromRow', () {
+    test('mapea un municipio real de Supabase (área numérica como texto)', () {
+      final m = CatalogRepository.municipalityFromRow({
+        'id': 'boaco__camoapa',
+        'department_id': 'boaco',
+        'name': 'Camoapa',
+        'area_km2': '1493.6',
+        'identity': 'Ganadería, artesanía, sombreros de pita y reservas',
+        'profile_status': 'pending_verification',
+      });
+      expect(m, isNotNull);
+      expect(m!.departmentId, 'boaco');
+      expect(m.areaKm2, closeTo(1493.6, 0.001));
+      expect(m.pendingVerification, isTrue);
+    });
+
+    test('descarta filas incompletas y no inventa un área', () {
+      expect(
+        CatalogRepository.municipalityFromRow({'id': 'x', 'name': 'Sin depto'}),
+        isNull,
+      );
+      final m = CatalogRepository.municipalityFromRow({
+        'id': 'boaco__boaco',
+        'department_id': 'boaco',
+        'name': 'Boaco',
+        'area_km2': 0,
+      });
+      expect(m!.areaKm2, isNull);
+      expect(m.identity, isEmpty);
+    });
+
+    test('snapshotFromRaw incluye los municipios', () {
+      final snapshot = CatalogRepository.snapshotFromRaw({
+        'municipalities': [
+          {
+            'id': 'madriz__somoto',
+            'department_id': 'madriz',
+            'name': 'Somoto',
+            'area_km2': 466.6,
+          },
+          {'id': '', 'department_id': 'madriz', 'name': 'Inválido'},
+        ],
+      }, CatalogSource.supabase);
+      expect(snapshot.municipalities.map((m) => m.name), ['Somoto']);
     });
   });
 

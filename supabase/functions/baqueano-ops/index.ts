@@ -95,7 +95,7 @@ const ENTITIES: Record<string, Entity> = {
     required: ["name"],
   },
   departments: { table: "departments", order: "name", search: "name", select: "id,name,capital,short_desc,banner_image,created_at" },
-  municipalities: { table: "municipalities", order: "name", search: "name", select: "id,department_id,name,latitude,longitude,location_precision,source_name,created_at,updated_at" },
+  municipalities: { table: "municipalities", order: "name", search: "name", select: "id,department_id,name,latitude,longitude,location_precision,source_name,area_km2,identity,profile_status,created_at,updated_at" },
   experiences: { table: "experiences", order: "title", search: "title", statusColumn: "status", select: "id,title,category,department_id,destination_id,business_id,price_nio,price_usd,verified,status,latitude,longitude,updated_at" },
   day_passes: { table: "day_passes", order: "title", search: "title", statusColumn: "status", select: "id,business_id,title,price_adult_nio,price_child_nio,price_usd,schedule_hours,requires_reservation,status,updated_at" },
   tourism_services: { table: "tourism_services", order: "title", search: "title", statusColumn: "status", select: "id,title,service_type,destination_id,business_id,price_min,price_max,currency,price_unit,source_name,verified_at,valid_until,status,updated_at" },

@@ -276,10 +276,12 @@ class _DestinationCardState extends State<DestinationCard> {
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.star_rounded, size: 18, color: AppColors.gold),
+                          // Auditoría 2026-10-06: el catálogo estático no tiene reseñas reales
+                          // ni precios con fuente; no se muestran cifras sin respaldo.
+                          const Icon(Icons.rate_review_outlined, size: 16, color: AppColors.gold),
                           const SizedBox(width: 4),
                           Text(
-                            destination.rating.clamp(0.0, 5.0).toStringAsFixed(1),
+                            'Sin reseñas',
                             style: GoogleFonts.spaceGrotesk(
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
@@ -288,7 +290,7 @@ class _DestinationCardState extends State<DestinationCard> {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '(${destination.reviewsCount >= 0 ? destination.reviewsCount : 0})',
+                            'verificadas',
                             style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
                           ),
                         ],
@@ -403,7 +405,7 @@ class _DestinationCardState extends State<DestinationCard> {
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
                                 Text(
-                                  '\$${destination.priceUsd.isFinite ? destination.priceUsd.toInt() : 0} USD',
+                                  'Por confirmar',
                                   style: GoogleFonts.montserrat(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w900,
@@ -412,7 +414,7 @@ class _DestinationCardState extends State<DestinationCard> {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  '/ C\$${destination.priceNio.isFinite ? destination.priceNio.toInt() : 0}',
+                                  'con el anfitrión',
                                   style: GoogleFonts.spaceGrotesk(
                                     fontSize: 11,
                                     color: AppColors.textMuted,
