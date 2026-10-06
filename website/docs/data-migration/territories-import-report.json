@@ -11,13 +11,15 @@
     "total_pendientes": 141,
     "total_parciales": 6,
     "total_verificados": 115,
-    "total_sin_coordenadas": 183,
+    "total_sin_coordenadas": 45,
     "total_coordenadas_descartadas": 0,
     "total_sin_fuente": 141,
     "total_map_ready": 37,
-    "total_sin_municipio": 193,
+    "total_sin_municipio": 108,
     "total_categoria_inferida": 177,
-    "total_notas_precio": 38
+    "total_notas_precio": 38,
+    "total_coordenadas_geocodificadas": 138,
+    "total_municipio_por_geocodigo": 85
   },
   "duplicates": [
     {
@@ -56,7 +58,7 @@
       "similar_to": "dest_selva_negra",
       "existing_name": "Reserva Ecológica Selva Negra",
       "similarity": 0.5,
-      "near_150m": false
+      "near_150m": true
     },
     {
       "territory": "matagalpa",
@@ -106,11 +108,6 @@
       "territory": "esteli",
       "name": "Reserva Natural Tisey-La Estanzuela",
       "zone": "Estelí / San Nicolás / El Sauce"
-    },
-    {
-      "territory": "nueva-segovia",
-      "name": "Cerro Mogotón (2,107 msnm)",
-      "zone": "Frontera Nicaragua-Honduras"
     },
     {
       "territory": "rio-san-juan",

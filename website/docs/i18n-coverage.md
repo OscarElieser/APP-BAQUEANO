@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-06T02:12:23.121Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3931 · en 3931 · fr 3931 · it 3931 · pt 3931 · de 3931
+Generado: 2026-10-06T04:07:11.867Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3945 · en 3945 · fr 3945 · it 3945 · pt 3945 · de 3945
 
 HTML: 3660/3661 textos con clave (1 pendientes) · JS: 729 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -204,6 +204,7 @@ HTML: 3660/3661 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | js/territory-artists.js | js | 0 | 0 | 0 | 100 % |
 | js/territory-inspector.js | js | 0 | 0 | 0 | 100 % |
 | js/territory-media-catalog.js | js | 0 | 0 | 0 | 100 % |
+| js/territory-municipalities.js | js | 14 | 14 | 0 | 100 % |
 | js/territory-rich-sections.js | js | 0 | 0 | 0 | 100 % |
 | js/video-registry.js | js | 0 | 0 | 0 | 100 % |
 | js/website-business-catalog.js | js | 0 | 0 | 0 | 100 % |

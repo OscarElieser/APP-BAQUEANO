@@ -1,0 +1,4260 @@
+{
+ "_doc": "Generado por tools/data/build-municipalities.mjs. NO editar a mano. area_km2 y center se CALCULAN del contorno OSM, que en municipios lacustres o costeros puede incluir agua; center NO es la cabecera municipal ni un pin. identity es texto curado ya publicado en la web. Lo que figura en pending_verification aún no tiene fuente verificada.",
+ "source": {
+  "name": "geoBoundaries gbOpen NIC ADM2 (fuente: OpenStreetMap, Wambacher)",
+  "license": "Open Data Commons Open Database License 1.0 (ODbL)",
+  "attribution": "© OpenStreetMap contributors · geoBoundaries (William & Mary geoLab)",
+  "url": "https://github.com/wmgeolab/geoBoundaries/tree/main/releaseData/gbOpen/NIC/ADM2",
+  "boundaryID": "NIC-ADM2-1004716",
+  "buildDate": "2023-12-12",
+  "sha256": "2a77bdfd3fc8917d0fb38128ea64413cb920f3a6b8cf09f9366182336120058d"
+ },
+ "total": 153,
+ "municipalities": [
+  {
+   "id": "boaco__boaco",
+   "department_id": "boaco",
+   "name": "Boaco",
+   "identity": "Ciudad de laderas, cultura, miradores y café",
+   "area_km2": 1090.3,
+   "center": {
+    "lat": 12.57604,
+    "lng": -85.49001,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.69401,
+    12.37103,
+    -85.22883,
+    12.74305
+   ],
+   "boundary_name_osm": "Municipio Boaco",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "boaco__camoapa",
+   "department_id": "boaco",
+   "name": "Camoapa",
+   "identity": "Ganadería, artesanía, sombreros de pita y reservas",
+   "area_km2": 1493.6,
+   "center": {
+    "lat": 12.51795,
+    "lng": -85.23833,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.59583,
+    12.31066,
+    -84.9522,
+    12.8011
+   ],
+   "boundary_name_osm": "Municipio Camoapa",
+   "places": [
+    "Pueblo Ganadero de Camoapa"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "boaco__san_jose_de_los_remates",
+   "department_id": "boaco",
+   "name": "San José de los Remates",
+   "identity": "Cascadas, café, naturaleza y aves",
+   "area_km2": 283.8,
+   "center": {
+    "lat": 12.59888,
+    "lng": -85.78806,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.94351,
+    12.52957,
+    -85.6413,
+    12.66039
+   ],
+   "boundary_name_osm": "Municipio San José de Los Remates",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "boaco__san_lorenzo",
+   "department_id": "boaco",
+   "name": "San Lorenzo",
+   "identity": "Campo, producción, tradiciones y naturaleza",
+   "area_km2": 792.6,
+   "center": {
+    "lat": 12.16025,
+    "lng": -85.71018,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.82633,
+    11.7096,
+    -85.5951,
+    12.42936
+   ],
+   "boundary_name_osm": "San Lorenzo (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "boaco__santa_lucia",
+   "department_id": "boaco",
+   "name": "Santa Lucía",
+   "identity": "Cerros, café, cascadas y aventura",
+   "area_km2": 123.8,
+   "center": {
+    "lat": 12.51339,
+    "lng": -85.71284,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.76743,
+    12.44191,
+    -85.6586,
+    12.58638
+   ],
+   "boundary_name_osm": "Municipio Santa Lucía",
+   "places": [
+    "Cueva La Cocinera y Finca El Tamarindo"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "boaco__teustepe",
+   "department_id": "boaco",
+   "name": "Teustepe",
+   "identity": "Lago, agricultura, ganadería y paisaje rural",
+   "area_km2": 641.8,
+   "center": {
+    "lat": 12.42751,
+    "lng": -85.83679,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.9871,
+    12.27616,
+    -85.66264,
+    12.55873
+   ],
+   "boundary_name_osm": "Municipio Teustepe",
+   "places": [
+    "Finca Poza Redonda Azul",
+    "Salto La Chorrera"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "carazo__diriamba",
+   "department_id": "carazo",
+   "name": "Diriamba",
+   "identity": "Güegüense, San Sebastián, folclore, café y costa",
+   "area_km2": 353.7,
+   "center": {
+    "lat": 11.76964,
+    "lng": -86.32844,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.44942,
+    11.63352,
+    -86.21512,
+    11.89755
+   ],
+   "boundary_name_osm": "Diriamba (Municipio)",
+   "places": [
+    "Casares",
+    "Centro Ecoturístico La Máquina",
+    "Diriamba y Basílica de San Sebastián",
+    "La Boquita",
+    "Reserva Silvestre Privada La Mákina"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "carazo__dolores",
+   "department_id": "carazo",
+   "name": "Dolores",
+   "identity": "Agroturismo, ciclismo y cultura comunitaria",
+   "area_km2": 2.9,
+   "center": {
+    "lat": 11.85516,
+    "lng": -86.21865,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.22744,
+    11.84709,
+    -86.20855,
+    11.8641
+   ],
+   "boundary_name_osm": "Dolores (Municipio)",
+   "places": [
+    "Dolores y fincas cafetaleras"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "carazo__el_rosario",
+   "department_id": "carazo",
+   "name": "El Rosario",
+   "identity": "Vida comunitaria y patrimonio local",
+   "area_km2": 13.6,
+   "center": {
+    "lat": 11.83563,
+    "lng": -86.15149,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.17761,
+    11.81765,
+    -86.11765,
+    11.85695
+   ],
+   "boundary_name_osm": "El Rosario (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "carazo__jinotepe",
+   "department_id": "carazo",
+   "name": "Jinotepe",
+   "identity": "Cultura urbana, gastronomía, historia y servicios",
+   "area_km2": 288.6,
+   "center": {
+    "lat": 11.71097,
+    "lng": -86.24311,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.35532,
+    11.55632,
+    -86.15389,
+    11.89552
+   ],
+   "boundary_name_osm": "Jinotepe (Municipio)",
+   "places": [
+    "Huehuete y El Tamarindo",
+    "Jinotepe y Parroquia Santiago"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "carazo__la_conquista",
+   "department_id": "carazo",
+   "name": "La Conquista",
+   "identity": "Turismo rural y paisajes",
+   "area_km2": 89.8,
+   "center": {
+    "lat": 11.70299,
+    "lng": -86.18832,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.22418,
+    11.6216,
+    -86.1505,
+    11.80733
+   ],
+   "boundary_name_osm": "La Conquista (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "carazo__la_paz_de_carazo",
+   "department_id": "carazo",
+   "name": "La Paz de Carazo",
+   "identity": "Artesanía y tradición",
+   "area_km2": 16,
+   "center": {
+    "lat": 11.82125,
+    "lng": -86.10993,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.1443,
+    11.79941,
+    -86.08417,
+    11.83995
+   ],
+   "boundary_name_osm": "La Paz de Carazo (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "carazo__san_marcos",
+   "department_id": "carazo",
+   "name": "San Marcos",
+   "identity": "Clima fresco, café, naturaleza y tradición",
+   "area_km2": 120.5,
+   "center": {
+    "lat": 11.89728,
+    "lng": -86.27744,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.37943,
+    11.81187,
+    -86.17069,
+    11.95443
+   ],
+   "boundary_name_osm": "San Marcos (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "carazo__santa_teresa",
+   "department_id": "carazo",
+   "name": "Santa Teresa",
+   "identity": "Campo, naturaleza y comunidades",
+   "area_km2": 216.3,
+   "center": {
+    "lat": 11.67677,
+    "lng": -86.15036,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.21858,
+    11.51854,
+    -86.08535,
+    11.82814
+   ],
+   "boundary_name_osm": "Santa Teresa (Municipio)",
+   "places": [
+    "Centro Ecoturístico Loma de Viento",
+    "Refugio Río Escalante–Chacocente"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__chichigalpa",
+   "department_id": "chinandega",
+   "name": "Chichigalpa",
+   "identity": "Memoria maribia, arqueología, cultura y paisaje agroindustrial",
+   "area_km2": 221.3,
+   "center": {
+    "lat": 12.55625,
+    "lng": -87.03688,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -87.13748,
+    12.46484,
+    -86.94386,
+    12.69499
+   ],
+   "boundary_name_osm": "Chichigalpa (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__chinandega",
+   "department_id": "chinandega",
+   "name": "Chinandega",
+   "identity": "Ciudad, patrimonio, vida comercial y puerta al volcán San Cristóbal",
+   "area_km2": 665.5,
+   "center": {
+    "lat": 12.71869,
+    "lng": -87.01806,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -87.18482,
+    12.52946,
+    -86.80848,
+    12.86505
+   ],
+   "boundary_name_osm": "Chinandega (Municipio)",
+   "places": [
+    "Volcán San Cristóbal (1,745 msnm)"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__cinco_pinos",
+   "department_id": "chinandega",
+   "name": "Cinco Pinos",
+   "identity": "Cerro San Rafael, río El Gallo y naturaleza de montaña",
+   "area_km2": 61,
+   "center": {
+    "lat": 13.21359,
+    "lng": -86.85509,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.90986,
+    13.16443,
+    -86.81523,
+    13.25103
+   ],
+   "boundary_name_osm": "San Juan de Cinco Pinos (Municipio)",
+   "places": [
+    "Cabañas El Manantial"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__corinto",
+   "department_id": "chinandega",
+   "name": "Corinto",
+   "identity": "Puerto, mar, pesca, gastronomía y cultura costera",
+   "area_km2": 60.8,
+   "center": {
+    "lat": 12.47312,
+    "lng": -87.14323,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -87.24583,
+    12.4018,
+    -87.07179,
+    12.55568
+   ],
+   "boundary_name_osm": "Corinto (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__el_realejo",
+   "department_id": "chinandega",
+   "name": "El Realejo",
+   "identity": "Antiguo puerto colonial, ruinas, manglares e historia",
+   "area_km2": 105.3,
+   "center": {
+    "lat": 12.55841,
+    "lng": -87.18389,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -87.24742,
+    12.49826,
+    -87.12157,
+    12.61392
+   ],
+   "boundary_name_osm": "El Realejo (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__el_viejo",
+   "department_id": "chinandega",
+   "name": "El Viejo",
+   "identity": "Basílica, Lavada de la Plata, Cosigüina, Padre Ramos y playas",
+   "area_km2": 1308.4,
+   "center": {
+    "lat": 12.80914,
+    "lng": -87.40836,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -87.69194,
+    12.55433,
+    -87.11935,
+    13.09089
+   ],
+   "boundary_name_osm": "El Viejo (Municipio)",
+   "places": [
+    "Estero Padre Ramos",
+    "Playa Jiquilillo",
+    "Playas de Aserradores & Jiquilillo",
+    "Volcán Cosigüina y Laguna Cráter"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__posoltega",
+   "department_id": "chinandega",
+   "name": "Posoltega",
+   "identity": "Volcán Casita, agricultura, memoria y resiliencia comunitaria",
+   "area_km2": 149.9,
+   "center": {
+    "lat": 12.60116,
+    "lng": -86.94667,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -87.00328,
+    12.50374,
+    -86.87055,
+    12.67915
+   ],
+   "boundary_name_osm": "Posoltega (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__puerto_morazan",
+   "department_id": "chinandega",
+   "name": "Puerto Morazán",
+   "identity": "Estero Real, camarones, memoria ferroviaria y Tonalá",
+   "area_km2": 513,
+   "center": {
+    "lat": 12.87581,
+    "lng": -87.22316,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -87.3838,
+    12.71239,
+    -87.11577,
+    12.9966
+   ],
+   "boundary_name_osm": "Puerto Morazán (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__san_francisco_del_norte",
+   "department_id": "chinandega",
+   "name": "San Francisco del Norte",
+   "identity": "Sabanas, Cerro del Mono, ríos y vida rural",
+   "area_km2": 119.9,
+   "center": {
+    "lat": 13.21171,
+    "lng": -86.77299,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.82784,
+    13.14992,
+    -86.7083,
+    13.28508
+   ],
+   "boundary_name_osm": "San Francisco del Norte (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__san_pedro_del_norte",
+   "department_id": "chinandega",
+   "name": "San Pedro del Norte",
+   "identity": "Cordillera de La Botija, ríos y vida agropecuaria",
+   "area_km2": 71.3,
+   "center": {
+    "lat": 13.27373,
+    "lng": -86.84407,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.91553,
+    13.22756,
+    -86.77847,
+    13.31328
+   ],
+   "boundary_name_osm": "San Pedro del Norte (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__santo_tomas_del_norte",
+   "department_id": "chinandega",
+   "name": "Santo Tomás del Norte",
+   "identity": "Río Guasaule, agricultura y tradición comunitaria",
+   "area_km2": 41.1,
+   "center": {
+    "lat": 13.18168,
+    "lng": -86.8995,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.93297,
+    13.14321,
+    -86.86529,
+    13.22526
+   ],
+   "boundary_name_osm": "Santo Tomás del Norte (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__somotillo",
+   "department_id": "chinandega",
+   "name": "Somotillo",
+   "identity": "Frontera, intercambio, cerros y paisaje rural del norte",
+   "area_km2": 728.3,
+   "center": {
+    "lat": 12.9844,
+    "lng": -86.9648,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -87.1622,
+    12.80777,
+    -86.75054,
+    13.17621
+   ],
+   "boundary_name_osm": "Somotillo (Municipio)",
+   "places": [
+    "Campamento Ecológico Campuzano",
+    "Rancho Maribel"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chinandega__villanueva",
+   "department_id": "chinandega",
+   "name": "Villanueva",
+   "identity": "Ríos, planicies agrícolas y conexión con Apacunca",
+   "area_km2": 802.2,
+   "center": {
+    "lat": 12.90462,
+    "lng": -86.79392,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.94191,
+    12.742,
+    -86.66075,
+    13.15215
+   ],
+   "boundary_name_osm": "Villanueva (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chontales__acoyapa",
+   "department_id": "chontales",
+   "name": "Acoyapa",
+   "identity": "El Nancital, lago, pesca, navegación y cuevas",
+   "area_km2": 3132.3,
+   "center": {
+    "lat": 11.74502,
+    "lng": -85.24225,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.67037,
+    11.36714,
+    -84.80739,
+    12.03057
+   ],
+   "boundary_name_osm": "Acoyapa",
+   "places": [
+    "Salto y Cueva La Oropéndola"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chontales__comalapa",
+   "department_id": "chontales",
+   "name": "Comalapa",
+   "identity": "Ganadería, agricultura y vida rural",
+   "area_km2": 928.5,
+   "center": {
+    "lat": 12.11739,
+    "lng": -85.57462,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.67435,
+    11.7096,
+    -85.32928,
+    12.35894
+   ],
+   "boundary_name_osm": "Comalapa (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chontales__el_coral",
+   "department_id": "chontales",
+   "name": "El Coral",
+   "identity": "Naturaleza, producción y vida comunitaria",
+   "area_km2": 305.5,
+   "center": {
+    "lat": 11.91561,
+    "lng": -84.68056,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.81459,
+    11.83543,
+    -84.52491,
+    12.00188
+   ],
+   "boundary_name_osm": "Municipio El Coral",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chontales__juigalpa",
+   "department_id": "chontales",
+   "name": "Juigalpa",
+   "identity": "Museos, miradores, arqueología, ganadería y servicios",
+   "area_km2": 1043.4,
+   "center": {
+    "lat": 11.99952,
+    "lng": -85.44239,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.67037,
+    11.7096,
+    -85.25186,
+    12.21844
+   ],
+   "boundary_name_osm": "Juigalpa (Municipio)",
+   "places": [
+    "Cerro y Cuevas Las Ventanas",
+    "Cordillera de Amerrisque",
+    "Finca Los Ángeles",
+    "Museo Arqueológico Gregorio Aguilar Barea",
+    "Puerto Díaz & Lago Cocibolca",
+    "Zoológico Thomas Belt de Juigalpa"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chontales__la_libertad",
+   "department_id": "chontales",
+   "name": "La Libertad",
+   "identity": "Minería histórica, cascadas y cultura local",
+   "area_km2": 778.1,
+   "center": {
+    "lat": 12.35923,
+    "lng": -85.12638,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.29456,
+    12.13223,
+    -84.87322,
+    12.62497
+   ],
+   "boundary_name_osm": "Municipio La Libertad",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chontales__san_francisco_de_cuapa",
+   "department_id": "chontales",
+   "name": "San Francisco de Cuapa",
+   "identity": "Santuario, cascadas y religiosidad",
+   "area_km2": 276.9,
+   "center": {
+    "lat": 12.26265,
+    "lng": -85.35889,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.48805,
+    12.16254,
+    -85.25475,
+    12.36455
+   ],
+   "boundary_name_osm": "Municipio San Francisco de Cuapa",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chontales__san_pedro_de_lovago",
+   "department_id": "chontales",
+   "name": "San Pedro de Lóvago",
+   "identity": "Kilona, fincas y cultura campesina",
+   "area_km2": 463.6,
+   "center": {
+    "lat": 12.14237,
+    "lng": -85.10235,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.26971,
+    12.00098,
+    -84.8757,
+    12.27022
+   ],
+   "boundary_name_osm": "Municipio San Pedro de Lóvago",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chontales__santo_domingo",
+   "department_id": "chontales",
+   "name": "Santo Domingo",
+   "identity": "Minería, montaña y comunidades",
+   "area_km2": 680.3,
+   "center": {
+    "lat": 12.35433,
+    "lng": -84.95287,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.11655,
+    12.20999,
+    -84.7757,
+    12.53279
+   ],
+   "boundary_name_osm": "Municipio Santo Domingo",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chontales__santo_tomas",
+   "department_id": "chontales",
+   "name": "Santo Tomás",
+   "identity": "Quesillos, cascadas, mitos y tradiciones",
+   "area_km2": 496.8,
+   "center": {
+    "lat": 12.11703,
+    "lng": -84.97874,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.16271,
+    11.95182,
+    -84.77272,
+    12.2918
+   ],
+   "boundary_name_osm": "Municipio Santo Tomás",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "chontales__villa_sandino",
+   "department_id": "chontales",
+   "name": "Villa Sandino",
+   "identity": "Piedras Pintadas, Garro Grande y arqueología",
+   "area_km2": 689.5,
+   "center": {
+    "lat": 12.03716,
+    "lng": -84.8647,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.03918,
+    11.9014,
+    -84.72467,
+    12.19525
+   ],
+   "boundary_name_osm": "Municipio Villa Sandino",
+   "places": [
+    "Piedras Pintadas de Villa Sandino"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "esteli__condega",
+   "department_id": "esteli",
+   "name": "Condega",
+   "identity": "Arqueología, cerámica, agricultura y cultura",
+   "area_km2": 400,
+   "center": {
+    "lat": 13.34035,
+    "lng": -86.34831,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.48408,
+    13.24852,
+    -86.20815,
+    13.43436
+   ],
+   "boundary_name_osm": "Municipio Condega",
+   "places": [
+    "Condega y su Taller Comunal de Cerámica"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "esteli__esteli",
+   "department_id": "esteli",
+   "name": "Estelí",
+   "identity": "Cultura urbana, naturaleza, arte y producción",
+   "area_km2": 804.8,
+   "center": {
+    "lat": 13.12963,
+    "lng": -86.34783,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.49213,
+    12.97308,
+    -86.16472,
+    13.29986
+   ],
+   "boundary_name_osm": "Municipio Estelí",
+   "places": [
+    "Reserva Natural Miraflor",
+    "Reserva Natural Tisey-La Estanzuela",
+    "Salto de La Estanzuela"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "esteli__la_trinidad",
+   "department_id": "esteli",
+   "name": "La Trinidad",
+   "identity": "Gastronomía, panadería y cultura local",
+   "area_km2": 277.9,
+   "center": {
+    "lat": 13.01321,
+    "lng": -86.2106,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.31812,
+    12.91258,
+    -86.09875,
+    13.1091
+   ],
+   "boundary_name_osm": "Municipio La Trinidad",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "esteli__pueblo_nuevo",
+   "department_id": "esteli",
+   "name": "Pueblo Nuevo",
+   "identity": "Paleontología, naturaleza y memoria",
+   "area_km2": 206,
+   "center": {
+    "lat": 13.35285,
+    "lng": -86.52198,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.6205,
+    13.27224,
+    -86.43126,
+    13.43424
+   ],
+   "boundary_name_osm": "Municipio Pueblo Nuevo",
+   "places": [
+    "Pueblo Nuevo"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "esteli__san_juan_de_limay",
+   "department_id": "esteli",
+   "name": "San Juan de Limay",
+   "identity": "Escultura, marmolina y paisaje",
+   "area_km2": 439.1,
+   "center": {
+    "lat": 13.19252,
+    "lng": -86.58882,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.74735,
+    13.09738,
+    -86.451,
+    13.30281
+   ],
+   "boundary_name_osm": "Municipio San Juan de Limay",
+   "places": [
+    "Mirador San Luis",
+    "San Juan de Limay"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "esteli__san_nicolas",
+   "department_id": "esteli",
+   "name": "San Nicolás",
+   "identity": "Montañas, campo y turismo rural",
+   "area_km2": 161.3,
+   "center": {
+    "lat": 12.92325,
+    "lng": -86.3583,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.4384,
+    12.85957,
+    -86.2749,
+    12.98497
+   ],
+   "boundary_name_osm": "Municipio San Nicolas",
+   "places": [
+    "ASOPASN · Programa Agrícola San Nicolás",
+    "Cueva del Duende (Tisey)",
+    "Cuevas y Mirador de Apaguají",
+    "La Garnacha",
+    "Mirador El Ranchito (Tisey)"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "granada__diria",
+   "department_id": "granada",
+   "name": "Diriá",
+   "identity": "Laguna de Apoyo, paisaje, cultura y atol de ánimas",
+   "area_km2": 30.4,
+   "center": {
+    "lat": 11.86928,
+    "lng": -86.07299,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.09354,
+    11.81255,
+    -86.00345,
+    11.92344
+   ],
+   "boundary_name_osm": "Diriá (Municipio)",
+   "places": [
+    "Reserva Natural Laguna de Apoyo"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "granada__diriomo",
+   "department_id": "granada",
+   "name": "Diriomo",
+   "identity": "Cajetas, artesanía, tradición y vida comunitaria",
+   "area_km2": 53.4,
+   "center": {
+    "lat": 11.85226,
+    "lng": -86.03598,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.0714,
+    11.79161,
+    -85.99537,
+    11.90133
+   ],
+   "boundary_name_osm": "Diriomo (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "granada__granada",
+   "department_id": "granada",
+   "name": "Granada",
+   "identity": "Centro histórico, arquitectura, lago, museos y gastronomía",
+   "area_km2": 1471.5,
+   "center": {
+    "lat": 11.934,
+    "lng": -85.86153,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.03534,
+    11.70049,
+    -85.67037,
+    12.21458
+   ],
+   "boundary_name_osm": "Granada (Municipio)",
+   "places": [
+    "Boca Baco",
+    "Comedor Doña Tulita",
+    "Comedor La Parada",
+    "Comedor Martha",
+    "Finca El Rayo",
+    "Finca María Auxiliadora",
+    "Hotel Darío",
+    "Hotel Plaza Colón",
+    "Isla Zapatera",
+    "Isletas de Granada",
+    "Kiosco La Gata",
+    "Lago Cocibolca",
+    "Restaurante El Zaguán",
+    "Treehouse Nicaragua"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "granada__nandaime",
+   "department_id": "granada",
+   "name": "Nandaime",
+   "identity": "Turismo rural, naturaleza, gastronomía y festividades municipales",
+   "area_km2": 388.2,
+   "center": {
+    "lat": 11.70924,
+    "lng": -86.02201,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.13322,
+    11.6022,
+    -85.89109,
+    11.82317
+   ],
+   "boundary_name_osm": "Nandaime (Municipio)",
+   "places": [
+    "Aguas Agrias–La Nanda",
+    "Eco Finca El Buen Pastor"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "jinotega__el_cua",
+   "department_id": "jinotega",
+   "name": "El Cuá",
+   "identity": "Peñas Blancas, cascadas y agroecoturismo",
+   "area_km2": 779.1,
+   "center": {
+    "lat": 13.40225,
+    "lng": -85.65425,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.82558,
+    13.24643,
+    -85.43729,
+    13.58532
+   ],
+   "boundary_name_osm": "Municipio El Cuá",
+   "places": [
+    "Cascada La Luna & El Cuá",
+    "Cascadas Arco Iris, La Pavona y La Sonora",
+    "Reserva Natural Macizo de Peñas Blancas"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "jinotega__jinotega",
+   "department_id": "jinotega",
+   "name": "Jinotega",
+   "identity": "Café, Apanás, miradores y bosque nuboso",
+   "area_km2": 884.1,
+   "center": {
+    "lat": 13.16968,
+    "lng": -85.92778,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.11693,
+    12.99469,
+    -85.72014,
+    13.34152
+   ],
+   "boundary_name_osm": "Municipio de Jinotega",
+   "places": [
+    "Cascada La Bujona",
+    "Lago de Apanás",
+    "Peña de La Cruz",
+    "Reserva Natural Cerro Datanlí–El Diablo"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "jinotega__la_concordia",
+   "department_id": "jinotega",
+   "name": "La Concordia",
+   "identity": "Historia y paisaje rural",
+   "area_km2": 149,
+   "center": {
+    "lat": 13.1962,
+    "lng": -86.18251,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.2615,
+    13.1091,
+    -86.12227,
+    13.26655
+   ],
+   "boundary_name_osm": "Municipio La Concordia",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "jinotega__san_jose_de_bocay",
+   "department_id": "jinotega",
+   "name": "San José de Bocay",
+   "identity": "Bosawás, ríos, cacao y aventura",
+   "area_km2": 3801.6,
+   "center": {
+    "lat": 13.98816,
+    "lng": -85.17159,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.66742,
+    13.46653,
+    -84.82766,
+    14.61351
+   ],
+   "boundary_name_osm": "Municipio San José de Bocay",
+   "places": [
+    "Salto de Kayaska"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "jinotega__san_rafael_del_norte",
+   "department_id": "jinotega",
+   "name": "San Rafael del Norte",
+   "identity": "Historia, religión, montaña, Ruta Sandino y café",
+   "area_km2": 242.5,
+   "center": {
+    "lat": 13.23224,
+    "lng": -86.08518,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.16472,
+    13.09754,
+    -86.00859,
+    13.36797
+   ],
+   "boundary_name_osm": "Municipio San Rafael del Norte",
+   "places": [
+    "Fincas Agroecológicas de San Rafael del Norte"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "jinotega__san_sebastian_de_yali",
+   "department_id": "jinotega",
+   "name": "San Sebastián de Yalí",
+   "identity": "Café, panadería tradicional y ruralidad",
+   "area_km2": 401.9,
+   "center": {
+    "lat": 13.36906,
+    "lng": -86.13327,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.25753,
+    13.24361,
+    -86.0091,
+    13.50486
+   ],
+   "boundary_name_osm": "Muncipio San Sebastián de Yalí",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "jinotega__santa_maria_de_pantasma",
+   "department_id": "jinotega",
+   "name": "Santa María de Pantasma",
+   "identity": "Valle, producción y comunidades",
+   "area_km2": 553.5,
+   "center": {
+    "lat": 13.40555,
+    "lng": -85.91344,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.04677,
+    13.27197,
+    -85.76293,
+    13.52558
+   ],
+   "boundary_name_osm": "Municipio Santa María de Pantasma",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "jinotega__wiwili_de_jinotega",
+   "department_id": "jinotega",
+   "name": "Wiwilí de Jinotega",
+   "identity": "Ríos, naturaleza y comunidades",
+   "area_km2": 2532.5,
+   "center": {
+    "lat": 13.93337,
+    "lng": -85.51408,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.83105,
+    13.45409,
+    -85.05982,
+    14.58595
+   ],
+   "boundary_name_osm": "Municipio Wiwilí de Jinotega",
+   "places": [
+    "Cerro Kilambé y aguas termales de El Caño"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "leon__achuapa",
+   "department_id": "leon",
+   "name": "Achuapa",
+   "identity": "Montañas y turismo rural",
+   "area_km2": 392.9,
+   "center": {
+    "lat": 13.05227,
+    "lng": -86.60309,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.74667,
+    12.96245,
+    -86.4684,
+    13.12807
+   ],
+   "boundary_name_osm": "Municipio Achuapa",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "leon__el_jicaral",
+   "department_id": "leon",
+   "name": "El Jicaral",
+   "identity": "Arqueología y paisaje rural",
+   "area_km2": 473.5,
+   "center": {
+    "lat": 12.62172,
+    "lng": -86.38406,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.47734,
+    12.35946,
+    -86.27315,
+    12.79359
+   ],
+   "boundary_name_osm": "El Jicaral (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "leon__el_sauce",
+   "department_id": "leon",
+   "name": "El Sauce",
+   "identity": "Santuario del Señor de Esquipulas y turismo rural",
+   "area_km2": 701.8,
+   "center": {
+    "lat": 12.87372,
+    "lng": -86.54402,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.68612,
+    12.71792,
+    -86.41814,
+    13.05126
+   ],
+   "boundary_name_osm": "Municipio El Sauce",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "leon__la_paz_centro",
+   "department_id": "leon",
+   "name": "La Paz Centro",
+   "identity": "León Viejo, artesanía de barro, quesillo y Momotombo",
+   "area_km2": 967.6,
+   "center": {
+    "lat": 12.40427,
+    "lng": -86.57407,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.78602,
+    12.20906,
+    -86.31771,
+    12.56156
+   ],
+   "boundary_name_osm": "La Paz Centro (Municipio)",
+   "places": [
+    "Ruinas de León Viejo",
+    "Volcán El Hoyo",
+    "Volcán Momotombo"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "leon__larreynaga",
+   "department_id": "leon",
+   "name": "Larreynaga",
+   "identity": "Artesanía y comunidades rurales",
+   "area_km2": 748,
+   "center": {
+    "lat": 12.65159,
+    "lng": -86.61438,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.77944,
+    12.49601,
+    -86.43938,
+    12.79512
+   ],
+   "boundary_name_osm": "Municipio Larreynaga",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "leon__leon",
+   "department_id": "leon",
+   "name": "León",
+   "identity": "Patrimonio, cultura, universidades, museos y arquitectura",
+   "area_km2": 819.2,
+   "center": {
+    "lat": 12.39421,
+    "lng": -86.87606,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -87.11882,
+    12.1936,
+    -86.67567,
+    12.52085
+   ],
+   "boundary_name_osm": "Municipio León",
+   "places": [
+    "Comedor La Cucaracha",
+    "Hotel El Convento",
+    "Iglesia San Juan Bautista de Sutiaba",
+    "Insigne Basílica Catedral de León",
+    "Isla Juan Venado",
+    "Las Peñitas y Poneloya",
+    "Museo Archivo Rubén Darío",
+    "Museo de la Revolución",
+    "Playa Las Peñitas",
+    "Playa Poneloya",
+    "Poco a Poco Hostel",
+    "Teatro Municipal José de la Cruz Mena"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "leon__nagarote",
+   "department_id": "leon",
+   "name": "Nagarote",
+   "identity": "Gastronomía, quesillo, costa y cultura local",
+   "area_km2": 714.1,
+   "center": {
+    "lat": 12.20066,
+    "lng": -86.6055,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.76993,
+    11.9904,
+    -86.31771,
+    12.35946
+   ],
+   "boundary_name_osm": "Nagarote (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "leon__quezalguaque",
+   "department_id": "leon",
+   "name": "Quezalguaque",
+   "identity": "Cultura comunitaria y patrimonio local",
+   "area_km2": 86.1,
+   "center": {
+    "lat": 12.53699,
+    "lng": -86.91934,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -87.00514,
+    12.46392,
+    -86.87525,
+    12.63487
+   ],
+   "boundary_name_osm": "Quezalguaque (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "leon__santa_rosa_del_penon",
+   "department_id": "leon",
+   "name": "Santa Rosa del Peñón",
+   "identity": "Paisajes, minería histórica y naturaleza",
+   "area_km2": 228.8,
+   "center": {
+    "lat": 12.81739,
+    "lng": -86.36509,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.45537,
+    12.73337,
+    -86.28469,
+    12.89796
+   ],
+   "boundary_name_osm": "Municipio Santa Rosa del Peñón",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "leon__telica",
+   "department_id": "leon",
+   "name": "Telica",
+   "identity": "Volcán Telica y Hervideros de San Jacinto",
+   "area_km2": 395.2,
+   "center": {
+    "lat": 12.60436,
+    "lng": -86.80648,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.88958,
+    12.47406,
+    -86.71362,
+    12.75132
+   ],
+   "boundary_name_osm": "Municipio Telica",
+   "places": [
+    "Hervideros de San Jacinto",
+    "Volcán Telica"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "madriz__las_sabanas",
+   "department_id": "madriz",
+   "name": "Las Sabanas",
+   "identity": "Laguna La Bruja, Café y Alturas Segovianas",
+   "area_km2": 69.1,
+   "center": {
+    "lat": 13.33933,
+    "lng": -86.64738,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.71054,
+    13.30281,
+    -86.58211,
+    13.37512
+   ],
+   "boundary_name_osm": "Municipio Las Sabanas",
+   "places": [
+    "Laguna La Bruja (Las Sabanas)"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "madriz__palacaguina",
+   "department_id": "madriz",
+   "name": "Palacagüina",
+   "identity": "Memoria Histórica, Cerro de la Iguana y Tradición",
+   "area_km2": 167,
+   "center": {
+    "lat": 13.45058,
+    "lng": -86.39511,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.47936,
+    13.39269,
+    -86.29594,
+    13.52297
+   ],
+   "boundary_name_osm": "Palacagüina (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "madriz__san_jose_de_cusmapa",
+   "department_id": "madriz",
+   "name": "San José de Cusmapa",
+   "identity": "Miradores Hacia el Pacífico y Cestería en Pino",
+   "area_km2": 131.2,
+   "center": {
+    "lat": 13.26086,
+    "lng": -86.68082,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.75434,
+    13.19153,
+    -86.61928,
+    13.32376
+   ],
+   "boundary_name_osm": "Municipio San José de Cusmapa",
+   "places": [
+    "Finca Entre Pinos",
+    "Mirador El Balcón (San José de Cusmapa)"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "madriz__san_juan_del_rio_coco",
+   "department_id": "madriz",
+   "name": "San Juan del Río Coco",
+   "identity": "Aroma de Café, Cascadas y Nebliselva",
+   "area_km2": 186.4,
+   "center": {
+    "lat": 13.52154,
+    "lng": -86.14019,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.21269,
+    13.438,
+    -86.06769,
+    13.61778
+   ],
+   "boundary_name_osm": "Municipio San Juan de Río Coco",
+   "places": [
+    "Parque Natural El Majaste (San Juan del Río Coco)"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "madriz__san_lucas",
+   "department_id": "madriz",
+   "name": "San Lucas",
+   "identity": "Cerámica Ancestral y Memoria Viva",
+   "area_km2": 154.7,
+   "center": {
+    "lat": 13.40279,
+    "lng": -86.65136,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.74438,
+    13.3458,
+    -86.55582,
+    13.44844
+   ],
+   "boundary_name_osm": "Municipio San Lucas",
+   "places": [
+    "Talleres de Cerámica de Loma Panda (San Lucas)"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "madriz__somoto",
+   "department_id": "madriz",
+   "name": "Somoto",
+   "identity": "Cañón, Rosquillas y Música Campesina",
+   "area_km2": 469,
+   "center": {
+    "lat": 13.53359,
+    "lng": -86.64864,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.7699,
+    13.42487,
+    -86.50687,
+    13.66297
+   ],
+   "boundary_name_osm": "Somoto (Municipio)",
+   "places": [
+    "Casa de Huésped La Ceibita",
+    "Parque Arqueológico Piedras Pintadas",
+    "Rosquillas Delicias del Norte"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "madriz__telpaneca",
+   "department_id": "madriz",
+   "name": "Telpaneca",
+   "identity": "Río Sagrado, Memoria y Gastronomía Rural",
+   "area_km2": 357.7,
+   "center": {
+    "lat": 13.51714,
+    "lng": -86.26565,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.37953,
+    13.39307,
+    -86.17569,
+    13.62205
+   ],
+   "boundary_name_osm": "Municipio Telpaneca",
+   "places": [
+    "Río Estelí"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "madriz__totogalpa",
+   "department_id": "madriz",
+   "name": "Totogalpa",
+   "identity": "Patrimonio Ancestral y Turismo Rural",
+   "area_km2": 149.9,
+   "center": {
+    "lat": 13.55024,
+    "lng": -86.46135,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.56768,
+    13.48758,
+    -86.34919,
+    13.59595
+   ],
+   "boundary_name_osm": "Totogalpa (Municipio)",
+   "places": [
+    "Comunidad Indígena San José de Palmira (Totogalpa)"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "madriz__yalaguina",
+   "department_id": "madriz",
+   "name": "Yalagüina",
+   "identity": "Rosquillas Tradicionales y Bosque Seco",
+   "area_km2": 71.5,
+   "center": {
+    "lat": 13.48093,
+    "lng": -86.49174,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.53802,
+    13.42085,
+    -86.43184,
+    13.53265
+   ],
+   "boundary_name_osm": "Municipio Yalagüina",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "managua__ciudad_sandino",
+   "department_id": "managua",
+   "name": "Ciudad Sandino",
+   "identity": "Vida comunitaria, paisaje urbano y cultura local",
+   "area_km2": 72.4,
+   "center": {
+    "lat": 12.15537,
+    "lng": -86.3392,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.40888,
+    12.10064,
+    -86.19676,
+    12.22427
+   ],
+   "boundary_name_osm": "Ciudad Sandino (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "managua__el_crucero",
+   "department_id": "managua",
+   "name": "El Crucero",
+   "identity": "Clima fresco, café, miradores y turismo rural",
+   "area_km2": 224.9,
+   "center": {
+    "lat": 11.99314,
+    "lng": -86.35331,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.44637,
+    11.91288,
+    -86.25174,
+    12.07564
+   ],
+   "boundary_name_osm": "El Crucero (Municipio)",
+   "places": [
+    "Hotel Bosque Las Nubes"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "managua__managua",
+   "department_id": "managua",
+   "name": "Managua",
+   "identity": "Historia, cultura, lago, gastronomía, servicios y entretenimiento",
+   "area_km2": 336.9,
+   "center": {
+    "lat": 12.12264,
+    "lng": -86.24738,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.39149,
+    12.02118,
+    -86.12571,
+    12.22427
+   ],
+   "boundary_name_osm": "Managua (Municipio)",
+   "places": [
+    "Centro Histórico de Managua",
+    "Cocina de Doña Haydée",
+    "Huellas de Acahualinca",
+    "Hyatt Place Managua",
+    "InterContinental Managua at Metrocentro Mall",
+    "Kiosko Vilma",
+    "Lago Xolotlán (Lago de Managua)",
+    "Laguna de Asososca",
+    "Laguna de Tiscapa",
+    "Mercado Roberto Huembes",
+    "Parque Luis Alfonso Velásquez Flores",
+    "Restaurante Don Cándido",
+    "Restaurante El Eskimo",
+    "Restaurante Los Ranchos",
+    "Teatro Nacional Rubén Darío"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "managua__mateare",
+   "department_id": "managua",
+   "name": "Mateare",
+   "identity": "Xiloá, Chiltepe, paisaje volcánico y naturaleza",
+   "area_km2": 487.6,
+   "center": {
+    "lat": 12.23502,
+    "lng": -86.37533,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.53044,
+    12.1056,
+    -86.19676,
+    12.35946
+   ],
+   "boundary_name_osm": "Mateare (Municipio)",
+   "places": [
+    "Laguna de Apoyeque",
+    "Laguna de Xiloá y Apoyeque",
+    "Reserva Natural Península de Chiltepe"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "managua__san_francisco_libre",
+   "department_id": "managua",
+   "name": "San Francisco Libre",
+   "identity": "Lago, ruralidad, naturaleza y comunidades",
+   "area_km2": 911.9,
+   "center": {
+    "lat": 12.4594,
+    "lng": -86.23176,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.37909,
+    12.22427,
+    -86.09973,
+    12.64152
+   ],
+   "boundary_name_osm": "San Francisco Libre (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "managua__san_rafael_del_sur",
+   "department_id": "managua",
+   "name": "San Rafael del Sur",
+   "identity": "Pochomil, Masachapa, pesca y costa del Pacífico",
+   "area_km2": 365.5,
+   "center": {
+    "lat": 11.85354,
+    "lng": -86.45397,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.58234,
+    11.72014,
+    -86.32593,
+    11.95267
+   ],
+   "boundary_name_osm": "San Rafael del Sur (Municipio)",
+   "places": [
+    "Playa Masachapa",
+    "Playa Pochomil",
+    "Pochomil y Masachapa"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "managua__ticuantepe",
+   "department_id": "managua",
+   "name": "Ticuantepe",
+   "identity": "Agricultura, Chocoyero, senderismo y aviturismo",
+   "area_km2": 65.1,
+   "center": {
+    "lat": 12.01165,
+    "lng": -86.22136,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.28452,
+    11.97263,
+    -86.17431,
+    12.06433
+   ],
+   "boundary_name_osm": "Ticuantepe (Municipio)",
+   "places": [
+    "Finca Las Delicias",
+    "Reserva Natural Chocoyero–El Brujo",
+    "Reserva Silvestre Privada Montibelli"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "managua__tipitapa",
+   "department_id": "managua",
+   "name": "Tipitapa",
+   "identity": "Termalismo, historia local, gastronomía y campo",
+   "area_km2": 1091.5,
+   "center": {
+    "lat": 12.32548,
+    "lng": -86.02298,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.19676,
+    12.13679,
+    -85.79434,
+    12.58956
+   ],
+   "boundary_name_osm": "Tipitapa (Municipio)",
+   "places": [
+    "Tipitapa y Centro Turístico El Trapiche"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "managua__villa_el_carmen",
+   "department_id": "managua",
+   "name": "Villa El Carmen",
+   "identity": "Playas, fincas, naturaleza y turismo comunitario",
+   "area_km2": 571.4,
+   "center": {
+    "lat": 12.02193,
+    "lng": -86.52541,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.67493,
+    11.87604,
+    -86.3559,
+    12.15696
+   ],
+   "boundary_name_osm": "Villa El Carmen (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "masaya__catarina",
+   "department_id": "masaya",
+   "name": "Catarina",
+   "identity": "Miradores, viveros, música, gastronomía y Laguna de Apoyo",
+   "area_km2": 18.3,
+   "center": {
+    "lat": 11.92648,
+    "lng": -86.05988,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.09278,
+    11.90637,
+    -86.03088,
+    11.95051
+   ],
+   "boundary_name_osm": "Catarina (Municipio)",
+   "places": [
+    "Mirador de Catarina"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "masaya__la_concepcion",
+   "department_id": "masaya",
+   "name": "La Concepción",
+   "identity": "Producción agrícola, viveros y paisaje rural",
+   "area_km2": 67.9,
+   "center": {
+    "lat": 11.95432,
+    "lng": -86.22149,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.29311,
+    11.92257,
+    -86.15434,
+    11.99216
+   ],
+   "boundary_name_osm": "La Concepción (Municipio)",
+   "places": [
+    "Taller Escuela Valentín López y Palo Solo"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "masaya__masatepe",
+   "department_id": "masaya",
+   "name": "Masatepe",
+   "identity": "Gastronomía, muebles, tradición y vida comunitaria",
+   "area_km2": 62.4,
+   "center": {
+    "lat": 11.90352,
+    "lng": -86.14436,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.17819,
+    11.83818,
+    -86.11483,
+    11.97194
+   ],
+   "boundary_name_osm": "Masatepe (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "masaya__masaya",
+   "department_id": "masaya",
+   "name": "Masaya",
+   "identity": "Folclore, Monimbó, mercados, artesanía y fiestas tradicionales",
+   "area_km2": 150.5,
+   "center": {
+    "lat": 12.01074,
+    "lng": -86.06785,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.11633,
+    11.91615,
+    -85.98682,
+    12.14138
+   ],
+   "boundary_name_osm": "Masaya (Municipio)",
+   "places": [
+    "Mercado de Artesanías de Masaya",
+    "Monimbó"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "masaya__nandasmo",
+   "department_id": "masaya",
+   "name": "Nandasmo",
+   "identity": "Artesanía, agricultura y cultura local",
+   "area_km2": 17.7,
+   "center": {
+    "lat": 11.92375,
+    "lng": -86.12014,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.13404,
+    11.88589,
+    -86.10529,
+    11.97194
+   ],
+   "boundary_name_osm": "Nandasmo (Muncipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "masaya__nindiri",
+   "department_id": "masaya",
+   "name": "Nindirí",
+   "identity": "Patrimonio, volcán, paisaje, agricultura e historia local",
+   "area_km2": 151.1,
+   "center": {
+    "lat": 12.04801,
+    "lng": -86.14132,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.2108,
+    11.9638,
+    -86.09253,
+    12.14243
+   ],
+   "boundary_name_osm": "Nindirí (Municipio)",
+   "places": [
+    "Laguna de Masaya",
+    "Volcán Masaya (caldera Santiago)"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "masaya__niquinohomo",
+   "department_id": "masaya",
+   "name": "Niquinohomo",
+   "identity": "Memoria del General Sandino, patrimonio e historia",
+   "area_km2": 31.5,
+   "center": {
+    "lat": 11.87731,
+    "lng": -86.09932,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.1201,
+    11.83307,
+    -86.07613,
+    11.92564
+   ],
+   "boundary_name_osm": "Niquinohomo (Municipio)",
+   "places": [
+    "Niquinohomo y Casa Museo de Sandino"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "masaya__san_juan_de_oriente",
+   "department_id": "masaya",
+   "name": "San Juan de Oriente",
+   "identity": "Cerámica artesanal y talleres con maestros creadores",
+   "area_km2": 11.1,
+   "center": {
+    "lat": 11.90021,
+    "lng": -86.0637,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.08304,
+    11.87664,
+    -86.03088,
+    11.92344
+   ],
+   "boundary_name_osm": "San Juan de Oriente (Municipio)",
+   "places": [
+    "San Juan de Oriente"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "masaya__tisma",
+   "department_id": "masaya",
+   "name": "Tisma",
+   "identity": "Naturaleza, humedales, agricultura y turismo comunitario",
+   "area_km2": 127.1,
+   "center": {
+    "lat": 12.08627,
+    "lng": -86.02292,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.06952,
+    12.01313,
+    -85.9604,
+    12.15444
+   ],
+   "boundary_name_osm": "Tisma (Municipio)",
+   "places": [
+    "Reserva Natural Laguna de Tisma"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__ciudad_dario",
+   "department_id": "matagalpa",
+   "name": "Ciudad Darío",
+   "identity": "Casa natal de Rubén Darío, poesía y patrimonio",
+   "area_km2": 736.4,
+   "center": {
+    "lat": 12.68018,
+    "lng": -86.10408,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.28708,
+    12.53442,
+    -85.88588,
+    12.82352
+   ],
+   "boundary_name_osm": "Municipio Ciudad Darco",
+   "places": [
+    "Museo Casa Natal Rubén Darío"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__el_tuma_la_dalia",
+   "department_id": "matagalpa",
+   "name": "El Tuma–La Dalia",
+   "identity": "Montañas de café, agua, cascadas y comunidades",
+   "area_km2": 650.6,
+   "center": {
+    "lat": 13.11043,
+    "lng": -85.68765,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.83613,
+    12.96278,
+    -85.52236,
+    13.26927
+   ],
+   "boundary_name_osm": "Municipio El Tuma - La Dalia",
+   "places": [
+    "Cascada La Luna (El Tuma-La Dalia)",
+    "Río Tuma"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__esquipulas",
+   "department_id": "matagalpa",
+   "name": "Esquipulas",
+   "identity": "Religiosidad, ruralidad y paisajes productivos",
+   "area_km2": 222.1,
+   "center": {
+    "lat": 12.69267,
+    "lng": -85.75822,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.88598,
+    12.63661,
+    -85.61568,
+    12.77565
+   ],
+   "boundary_name_osm": "Municipio Esquipulas",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__matagalpa",
+   "department_id": "matagalpa",
+   "name": "Matagalpa",
+   "identity": "Ciudad de montaña, café, museos, miradores y cultura",
+   "area_km2": 647.1,
+   "center": {
+    "lat": 12.91342,
+    "lng": -85.90039,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.06474,
+    12.7593,
+    -85.67718,
+    13.10027
+   ],
+   "boundary_name_osm": "Municipio Matagalpa",
+   "places": [
+    "Catedral San Pedro",
+    "Cerro Apante (Reserva Natural)",
+    "Hotel San José Matagalpa",
+    "Museo Nacional del Café",
+    "Reserva Silvestre Selva Negra",
+    "Selva Negra Ecolodge"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__matiguas",
+   "department_id": "matagalpa",
+   "name": "Matiguás",
+   "identity": "Ganadería, naturaleza y cultura rural",
+   "area_km2": 1540,
+   "center": {
+    "lat": 12.87692,
+    "lng": -85.39147,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.63521,
+    12.61928,
+    -85.12116,
+    13.1026
+   ],
+   "boundary_name_osm": "Municipio Matiguás",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__muy_muy",
+   "department_id": "matagalpa",
+   "name": "Muy Muy",
+   "identity": "Lácteos, producción y paisajes",
+   "area_km2": 378.2,
+   "center": {
+    "lat": 12.75656,
+    "lng": -85.58965,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.71836,
+    12.66539,
+    -85.4206,
+    12.84643
+   ],
+   "boundary_name_osm": "Municipio Muy Muy",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__rancho_grande",
+   "department_id": "matagalpa",
+   "name": "Rancho Grande",
+   "identity": "Cacao, café, montaña y Peñas Blancas",
+   "area_km2": 602.4,
+   "center": {
+    "lat": 13.21023,
+    "lng": -85.49333,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.65534,
+    13.08083,
+    -85.29064,
+    13.34594
+   ],
+   "boundary_name_osm": "Municipio Rancho Grande",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__rio_blanco",
+   "department_id": "matagalpa",
+   "name": "Río Blanco",
+   "identity": "Música, artesanía en madera, montaña y ganadería",
+   "area_km2": 674.7,
+   "center": {
+    "lat": 13.04198,
+    "lng": -85.23078,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.39726,
+    12.80796,
+    -85.0716,
+    13.18394
+   ],
+   "boundary_name_osm": "Municipio Río Blanco",
+   "places": [
+    "Reserva Natural Cerro Musún"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__san_dionisio",
+   "department_id": "matagalpa",
+   "name": "San Dionisio",
+   "identity": "Agricultura, cultura comunitaria y paisaje rural",
+   "area_km2": 170.2,
+   "center": {
+    "lat": 12.7646,
+    "lng": -85.85592,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.93146,
+    12.69695,
+    -85.76698,
+    12.8523
+   ],
+   "boundary_name_osm": "Municipio San Dionisio",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__san_isidro",
+   "department_id": "matagalpa",
+   "name": "San Isidro",
+   "identity": "Producción, gastronomía y vida comunitaria",
+   "area_km2": 291.7,
+   "center": {
+    "lat": 12.87333,
+    "lng": -86.20926,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.30121,
+    12.7384,
+    -86.10496,
+    12.99693
+   ],
+   "boundary_name_osm": "Municipio San Isidro",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__san_ramon",
+   "department_id": "matagalpa",
+   "name": "San Ramón",
+   "identity": "Café, cacao, fincas y turismo rural comunitario",
+   "area_km2": 428.3,
+   "center": {
+    "lat": 12.91808,
+    "lng": -85.73004,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.87391,
+    12.81246,
+    -85.59598,
+    13.0154
+   ],
+   "boundary_name_osm": "Municipio San Ramon",
+   "places": [
+    "Albergue Tierra Alta Ecolodge",
+    "Cascada Blanca (Río Yasica)",
+    "San Ramón"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__sebaco",
+   "department_id": "matagalpa",
+   "name": "Sébaco",
+   "identity": "Producción agrícola, corredor gastronómico e historia",
+   "area_km2": 292.6,
+   "center": {
+    "lat": 12.90545,
+    "lng": -86.08519,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.1881,
+    12.79535,
+    -85.96728,
+    13.04591
+   ],
+   "boundary_name_osm": "Municipio Sebaco",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "matagalpa__terrabona",
+   "department_id": "matagalpa",
+   "name": "Terrabona",
+   "identity": "Paisajes rurales, agricultura y tradición",
+   "area_km2": 246.3,
+   "center": {
+    "lat": 12.70915,
+    "lng": -85.95894,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.05277,
+    12.62178,
+    -85.85706,
+    12.82814
+   ],
+   "boundary_name_osm": "Municipio Terrabona",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "nueva_segovia__ciudad_antigua",
+   "department_id": "nueva_segovia",
+   "name": "Ciudad Antigua",
+   "identity": "Ruta colonial, iglesias y memoria local",
+   "area_km2": 124.2,
+   "center": {
+    "lat": 13.64272,
+    "lng": -86.28342,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.36872,
+    13.58706,
+    -86.20319,
+    13.70779
+   ],
+   "boundary_name_osm": "Municipio Ciudad Antigua",
+   "places": [
+    "Ciudad Antigua"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "nueva_segovia__dipilto",
+   "department_id": "nueva_segovia",
+   "name": "Dipilto",
+   "identity": "Café, pinares, Virgen de la Piedra y montaña",
+   "area_km2": 105.4,
+   "center": {
+    "lat": 13.7378,
+    "lng": -86.52509,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.5755,
+    13.67239,
+    -86.46631,
+    13.80501
+   ],
+   "boundary_name_osm": "Municipio Dipilito",
+   "places": [
+    "Santuario de la Virgen de la Piedra (Dipilto)"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "nueva_segovia__el_jicaro",
+   "department_id": "nueva_segovia",
+   "name": "El Jícaro",
+   "identity": "Historia, campo y cultura segoviana",
+   "area_km2": 429.8,
+   "center": {
+    "lat": 13.71657,
+    "lng": -86.12808,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.24861,
+    13.58705,
+    -86.01148,
+    13.86231
+   ],
+   "boundary_name_osm": "Municipio El Jacaro",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "nueva_segovia__jalapa",
+   "department_id": "nueva_segovia",
+   "name": "Jalapa",
+   "identity": "Café, tabaco, maíz, música y montaña",
+   "area_km2": 662.2,
+   "center": {
+    "lat": 13.92045,
+    "lng": -86.10272,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.29051,
+    13.78239,
+    -85.9127,
+    14.08025
+   ],
+   "boundary_name_osm": "Municipio Jalapa",
+   "places": [
+    "Valle Fértil de Jalapa"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "nueva_segovia__macuelizo",
+   "department_id": "nueva_segovia",
+   "name": "Macuelizo",
+   "identity": "Feria del Jocote, producción y gastronomía",
+   "area_km2": 260.1,
+   "center": {
+    "lat": 13.67795,
+    "lng": -86.59982,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.6973,
+    13.57212,
+    -86.50627,
+    13.79114
+   ],
+   "boundary_name_osm": "Municipio Macuelizo",
+   "places": [
+    "Aguas Termales de Macuelizo & Delia"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "nueva_segovia__mozonte",
+   "department_id": "nueva_segovia",
+   "name": "Mozonte",
+   "identity": "Barro artesanal, comunidad indígena y tradición",
+   "area_km2": 221,
+   "center": {
+    "lat": 13.67289,
+    "lng": -86.41675,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.49018,
+    13.56316,
+    -86.34919,
+    13.78985
+   ],
+   "boundary_name_osm": "Municipio Monzonte",
+   "places": [
+    "Artesanías de Mozonte",
+    "Cerro Mogotón (2,107 msnm)"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "nueva_segovia__murra",
+   "department_id": "nueva_segovia",
+   "name": "Murra",
+   "identity": "Cascadas, café, bosque y senderismo",
+   "area_km2": 429.8,
+   "center": {
+    "lat": 13.79181,
+    "lng": -85.94859,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.06168,
+    13.65231,
+    -85.82097,
+    13.92957
+   ],
+   "boundary_name_osm": "Municipio Murra",
+   "places": [
+    "Salto El Rosario"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "nueva_segovia__ocotal",
+   "department_id": "nueva_segovia",
+   "name": "Ocotal",
+   "identity": "Ciudad de los Pinos, cultura, comercio e historia",
+   "area_km2": 87.1,
+   "center": {
+    "lat": 13.64431,
+    "lng": -86.49133,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.5515,
+    13.58366,
+    -86.44934,
+    13.70125
+   ],
+   "boundary_name_osm": "Ocotal (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "nueva_segovia__quilali",
+   "department_id": "nueva_segovia",
+   "name": "Quilalí",
+   "identity": "Montaña, historia y comunidades rurales",
+   "area_km2": 352,
+   "center": {
+    "lat": 13.57829,
+    "lng": -86.00158,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.13631,
+    13.46421,
+    -85.88264,
+    13.678
+   ],
+   "boundary_name_osm": "Municipio Quilalí",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "nueva_segovia__san_fernando",
+   "department_id": "nueva_segovia",
+   "name": "San Fernando",
+   "identity": "Café, montañas, naturaleza y aguas termales",
+   "area_km2": 235.4,
+   "center": {
+    "lat": 13.74366,
+    "lng": -86.29883,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.39861,
+    13.63518,
+    -86.19565,
+    13.85333
+   ],
+   "boundary_name_osm": "Municipio San Fernando",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "nueva_segovia__santa_maria",
+   "department_id": "nueva_segovia",
+   "name": "Santa María",
+   "identity": "Paisaje seco, comunidades y producción",
+   "area_km2": 161.6,
+   "center": {
+    "lat": 13.72224,
+    "lng": -86.71487,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.78606,
+    13.65119,
+    -86.64714,
+    13.7872
+   ],
+   "boundary_name_osm": "Municipio Santa María",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "nueva_segovia__wiwili_de_nueva_segovia",
+   "department_id": "nueva_segovia",
+   "name": "Wiwilí de Nueva Segovia",
+   "identity": "Ríos, naturaleza, producción y frontera",
+   "area_km2": 408,
+   "center": {
+    "lat": 13.68241,
+    "lng": -85.85317,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.93473,
+    13.50606,
+    -85.75218,
+    13.85296
+   ],
+   "boundary_name_osm": "Municipio Wiwilí de Nueva Segovia",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccn__bonanza",
+   "department_id": "raccn",
+   "name": "Bonanza",
+   "identity": "Montaña, cultura mayangna, ríos y memoria minera",
+   "area_km2": 1930.6,
+   "center": {
+    "lat": 14.05929,
+    "lng": -84.62814,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.94308,
+    13.828,
+    -84.33382,
+    14.25488
+   ],
+   "boundary_name_osm": "Municipio Bonanza",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccn__mulukuku",
+   "department_id": "raccn",
+   "name": "Mulukukú",
+   "identity": "Ríos, producción, conexión terrestre y comunidades",
+   "area_km2": 1690.7,
+   "center": {
+    "lat": 13.29545,
+    "lng": -84.95009,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.21338,
+    13.0878,
+    -84.66276,
+    13.47276
+   ],
+   "boundary_name_osm": "Municipio Mulukukú",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccn__prinzapolka",
+   "department_id": "raccn",
+   "name": "Prinzapolka",
+   "identity": "Ríos, Caribe, pesca, humedales y comunidades",
+   "area_km2": 6938.9,
+   "center": {
+    "lat": 13.49746,
+    "lng": -84.03305,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.76194,
+    13.0209,
+    -83.50545,
+    14.03551
+   ],
+   "boundary_name_osm": "Municipio Prinzapolka",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccn__puerto_cabezas_bilwi",
+   "department_id": "raccn",
+   "name": "Puerto Cabezas / Bilwi",
+   "identity": "Puerta urbana, cultura miskita, costa y mercados",
+   "area_km2": 6243.7,
+   "center": {
+    "lat": 14.20509,
+    "lng": -83.5978,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.11235,
+    13.64836,
+    -82.73432,
+    14.68256
+   ],
+   "boundary_name_osm": "Municipio Puerto Cabezas",
+   "places": [
+    "Cayos Miskitos"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccn__rosita",
+   "department_id": "raccn",
+   "name": "Rosita",
+   "identity": "Naturaleza, memoria productiva y Triángulo Minero",
+   "area_km2": 2210.4,
+   "center": {
+    "lat": 13.94377,
+    "lng": -84.28155,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.52753,
+    13.63883,
+    -84.03591,
+    14.24439
+   ],
+   "boundary_name_osm": "Municipio Rosita",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccn__siuna",
+   "department_id": "raccn",
+   "name": "Siuna",
+   "identity": "Bosawás, bosque, biodiversidad y agricultura",
+   "area_km2": 3561.6,
+   "center": {
+    "lat": 13.6559,
+    "lng": -84.87625,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.43433,
+    13.39379,
+    -84.44139,
+    13.9058
+   ],
+   "boundary_name_osm": "Municipio Siuna",
+   "places": [
+    "Finca Agroturística El Cortés",
+    "Parque Nacional Saslaya"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccn__waslala",
+   "department_id": "raccn",
+   "name": "Waslala",
+   "identity": "Montaña, agricultura, naturaleza y vida comunitaria",
+   "area_km2": 1342.4,
+   "center": {
+    "lat": 13.38114,
+    "lng": -85.30296,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.51019,
+    13.14148,
+    -85.14142,
+    13.61023
+   ],
+   "boundary_name_osm": "Municipio Waslala",
+   "places": [
+    "Reserva de Biosfera Bosawás"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccn__waspam",
+   "department_id": "raccn",
+   "name": "Waspam",
+   "identity": "Portal del Wangki, navegación y cultura miskita",
+   "area_km2": 8953,
+   "center": {
+    "lat": 14.5488,
+    "lng": -84.20137,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.05072,
+    14.12347,
+    -83.13014,
+    15.0297
+   ],
+   "boundary_name_osm": "Municipio Waspán",
+   "places": [
+    "Río Coco / Wangki"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccs__bluefields",
+   "department_id": "raccs",
+   "name": "Bluefields",
+   "identity": "Capital regional, bahía, música y multiculturalidad",
+   "area_km2": 4536.5,
+   "center": {
+    "lat": 11.56287,
+    "lng": -83.97033,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.43677,
+    10.94229,
+    -83.64219,
+    12.15736
+   ],
+   "boundary_name_osm": "Municipio Bluefields",
+   "places": [
+    "Bahía de Bluefields & Malecón"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccs__bocana_de_paiwas",
+   "department_id": "raccs",
+   "name": "Bocana de Paiwas",
+   "identity": "Ríos, campo, naturaleza y comunidades",
+   "area_km2": 2217.6,
+   "center": {
+    "lat": 12.90412,
+    "lng": -84.91139,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.19859,
+    12.65079,
+    -84.62165,
+    13.15498
+   ],
+   "boundary_name_osm": "Municipio Paiwas",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccs__corn_island",
+   "department_id": "raccs",
+   "name": "Corn Island",
+   "identity": "Islas, playas, buceo, pesca y gastronomía",
+   "area_km2": 12.6,
+   "center": {
+    "lat": 12.16969,
+    "lng": -83.05336,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -83.07107,
+    12.14646,
+    -82.97126,
+    12.3019
+   ],
+   "boundary_name_osm": "Corn Island",
+   "places": [
+    "Little Corn Island y Otto Beach",
+    "Yemaya Reefs"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccs__desembocadura_de_rio_grande",
+   "department_id": "raccs",
+   "name": "Desembocadura de Río Grande",
+   "identity": "Río, mar, cayos, pesca y navegación",
+   "area_km2": 1796.9,
+   "center": {
+    "lat": 13.02232,
+    "lng": -83.78743,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.06526,
+    12.78815,
+    -83.50485,
+    13.27345
+   ],
+   "boundary_name_osm": "Municipio Desembocadura de Cruz Río Grande",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccs__el_ayote",
+   "department_id": "raccs",
+   "name": "El Ayote",
+   "identity": "Ruralidad, producción y vida comunitaria",
+   "area_km2": 831.3,
+   "center": {
+    "lat": 12.57202,
+    "lng": -84.80153,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.99729,
+    12.33861,
+    -84.64671,
+    12.73128
+   ],
+   "boundary_name_osm": "Municipio El Ayote",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccs__el_rama",
+   "department_id": "raccs",
+   "name": "El Rama",
+   "identity": "Nodo fluvial, conectividad y vida urbana caribeña",
+   "area_km2": 3756.2,
+   "center": {
+    "lat": 12.24005,
+    "lng": -84.31296,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.80222,
+    11.72017,
+    -84.00423,
+    12.6387
+   ],
+   "boundary_name_osm": "Municipio El Rama",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccs__el_tortuguero",
+   "department_id": "raccs",
+   "name": "El Tortuguero",
+   "identity": "Cascadas, senderos, aves y comunidades",
+   "area_km2": 3100.8,
+   "center": {
+    "lat": 12.72205,
+    "lng": -84.25228,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.6674,
+    12.4439,
+    -83.82633,
+    12.96723
+   ],
+   "boundary_name_osm": "Municipio El Tortugero",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccs__kukra_hill",
+   "department_id": "raccs",
+   "name": "Kukra Hill",
+   "identity": "Agricultura, cultura caribeña y naturaleza",
+   "area_km2": 1331.3,
+   "center": {
+    "lat": 12.29314,
+    "lng": -83.91337,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.1692,
+    11.98819,
+    -83.66879,
+    12.55336
+   ],
+   "boundary_name_osm": "Municipio Kukra Hill",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccs__la_cruz_de_rio_grande",
+   "department_id": "raccs",
+   "name": "La Cruz de Río Grande",
+   "identity": "Río, cultura, producción y territorio",
+   "area_km2": 3351.7,
+   "center": {
+    "lat": 13.0717,
+    "lng": -84.39438,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.80225,
+    12.74659,
+    -83.95735,
+    13.31129
+   ],
+   "boundary_name_osm": "Municipio La Cruz de Río Grande",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccs__laguna_de_perlas",
+   "department_id": "raccs",
+   "name": "Laguna de Perlas",
+   "identity": "Laguna, Cayos Perlas, comunidades y cultura",
+   "area_km2": 2052.3,
+   "center": {
+    "lat": 12.6019,
+    "lng": -83.81438,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.02769,
+    12.25444,
+    -83.48601,
+    12.85146
+   ],
+   "boundary_name_osm": "Municipio Laguna de Perlas",
+   "places": [
+    "Awas y Orinoco",
+    "Garífuna Secrets of the Jungle",
+    "Laguna de Perlas & Aspinwall"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccs__muelle_de_los_bueyes",
+   "department_id": "raccs",
+   "name": "Muelle de los Bueyes",
+   "identity": "Producción, naturaleza y conexión terrestre",
+   "area_km2": 1403.1,
+   "center": {
+    "lat": 12.13282,
+    "lng": -84.58533,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.80084,
+    11.92234,
+    -84.35207,
+    12.36731
+   ],
+   "boundary_name_osm": "Municipio Muelle de los Bueyes",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "raccs__nueva_guinea",
+   "department_id": "raccs",
+   "name": "Nueva Guinea",
+   "identity": "Agricultura, ganadería, cacao y comunidades",
+   "area_km2": 2689.2,
+   "center": {
+    "lat": 11.69588,
+    "lng": -84.34424,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.60612,
+    11.39645,
+    -84.01426,
+    11.9998
+   ],
+   "boundary_name_osm": "Municipio Nueva Guinea",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rio_san_juan__el_almendro",
+   "department_id": "rio_san_juan",
+   "name": "El Almendro",
+   "identity": "Ríos, ganadería, agricultura y cultura campesina",
+   "area_km2": 1019.5,
+   "center": {
+    "lat": 11.71547,
+    "lng": -84.69902,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.8821,
+    11.54481,
+    -84.52334,
+    11.88196
+   ],
+   "boundary_name_osm": "Municipio El Almendro",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rio_san_juan__el_castillo",
+   "department_id": "rio_san_juan",
+   "name": "El Castillo",
+   "identity": "Fortaleza, río, cacao, Bartola e Indio Maíz",
+   "area_km2": 1668.6,
+   "center": {
+    "lat": 11.08877,
+    "lng": -84.30912,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.53254,
+    10.78175,
+    -84.08177,
+    11.40048
+   ],
+   "boundary_name_osm": "El Castillo (Municipio)",
+   "places": [
+    "Bartola",
+    "Fortaleza de la Inmaculada Concepción (El Castillo)"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rio_san_juan__morrito",
+   "department_id": "rio_san_juan",
+   "name": "Morrito",
+   "identity": "Lago, pesca, campo y vida comunitaria",
+   "area_km2": 949.4,
+   "center": {
+    "lat": 11.60093,
+    "lng": -84.97977,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.14969,
+    11.36714,
+    -84.8026,
+    11.8033
+   ],
+   "boundary_name_osm": "Morrito (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rio_san_juan__san_carlos",
+   "department_id": "rio_san_juan",
+   "name": "San Carlos",
+   "identity": "Lago, malecón, cultura, Solentiname y puerta del río",
+   "area_km2": 2727.9,
+   "center": {
+    "lat": 11.17775,
+    "lng": -84.84758,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.1907,
+    10.94344,
+    -84.43677,
+    11.41238
+   ],
+   "boundary_name_osm": "San Carlos (Municipio)",
+   "places": [
+    "Archipiélago de Solentiname",
+    "Hostal Buen Amigo",
+    "Humedales de San Carlos & Malecón",
+    "Refugio Los Guatuzos",
+    "San Carlos y su circuito urbano"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rio_san_juan__san_juan_de_nicaragua",
+   "department_id": "rio_san_juan",
+   "name": "San Juan de Nicaragua",
+   "identity": "Caribe, Greytown, lagunas, caños y selva",
+   "area_km2": 1645.2,
+   "center": {
+    "lat": 10.9071,
+    "lng": -83.92725,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -84.15818,
+    10.70766,
+    -83.66066,
+    11.13351
+   ],
+   "boundary_name_osm": "Municipio San Juan de Nicaragua",
+   "places": [
+    "San Juan de Nicaragua (Greytown)"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rio_san_juan__san_miguelito",
+   "department_id": "rio_san_juan",
+   "name": "San Miguelito",
+   "identity": "Humedales, pesca, lago, comunidades y atardeceres",
+   "area_km2": 1355.1,
+   "center": {
+    "lat": 11.43392,
+    "lng": -84.75941,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.14969,
+    11.2819,
+    -84.4503,
+    11.58312
+   ],
+   "boundary_name_osm": "San Miguelito (Municipio)",
+   "places": [
+    "Muelle de San Miguelito y Chocoyolandia"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rivas__altagracia",
+   "department_id": "rivas",
+   "name": "Altagracia",
+   "identity": "Ometepe oriental, volcanes, cultura y arqueología",
+   "area_km2": 1089.6,
+   "center": {
+    "lat": 11.47097,
+    "lng": -85.48426,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.67037,
+    11.33981,
+    -85.14969,
+    11.7096
+   ],
+   "boundary_name_osm": "Altagracia (Municipio)",
+   "places": [
+    "Cascada de San Ramón",
+    "Reserva Natural Charco Verde",
+    "TOTOCO Eco Resort",
+    "Volcán Concepción",
+    "Volcán Maderas"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rivas__belen",
+   "department_id": "rivas",
+   "name": "Belén",
+   "identity": "Cultura rural y producción",
+   "area_km2": 251.2,
+   "center": {
+    "lat": 11.56313,
+    "lng": -85.97577,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.14335,
+    11.45787,
+    -85.86542,
+    11.65726
+   ],
+   "boundary_name_osm": "Belén (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rivas__buenos_aires",
+   "department_id": "rivas",
+   "name": "Buenos Aires",
+   "identity": "Agricultura y cultura local",
+   "area_km2": 419.1,
+   "center": {
+    "lat": 11.60984,
+    "lng": -85.78683,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.90581,
+    11.46144,
+    -85.67037,
+    11.71264
+   ],
+   "boundary_name_osm": "Buenos Aires (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rivas__cardenas",
+   "department_id": "rivas",
+   "name": "Cárdenas",
+   "identity": "Lago, frontera natural y ruralidad",
+   "area_km2": 1290.9,
+   "center": {
+    "lat": 11.23905,
+    "lng": -85.37942,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.70218,
+    11.04421,
+    -85.14969,
+    11.36714
+   ],
+   "boundary_name_osm": "Cárdenas",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rivas__moyogalpa",
+   "department_id": "rivas",
+   "name": "Moyogalpa",
+   "identity": "Ometepe occidental, puerto y servicios",
+   "area_km2": 251.1,
+   "center": {
+    "lat": 11.51015,
+    "lng": -85.68624,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.75499,
+    11.33981,
+    -85.64238,
+    11.7096
+   ],
+   "boundary_name_osm": "Moyagalpa (Muncipio)",
+   "places": [
+    "Punta Jesús María"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rivas__potosi",
+   "department_id": "rivas",
+   "name": "Potosí",
+   "identity": "Campo, producción y paisaje rural",
+   "area_km2": 147.9,
+   "center": {
+    "lat": 11.58167,
+    "lng": -85.88839,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.97123,
+    11.46384,
+    -85.82468,
+    11.68521
+   ],
+   "boundary_name_osm": "Potosí (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rivas__rivas",
+   "department_id": "rivas",
+   "name": "Rivas",
+   "identity": "Historia, gastronomía, cultura y servicios",
+   "area_km2": 350.1,
+   "center": {
+    "lat": 11.3451,
+    "lng": -85.76711,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.91487,
+    11.20741,
+    -85.63927,
+    11.47866
+   ],
+   "boundary_name_osm": "Rivas (Municipio)",
+   "places": [],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rivas__san_jorge",
+   "department_id": "rivas",
+   "name": "San Jorge",
+   "identity": "Lago, puerto y acceso a Ometepe",
+   "area_km2": 111.5,
+   "center": {
+    "lat": 11.4131,
+    "lng": -85.74591,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.81484,
+    11.33981,
+    -85.64238,
+    11.47423
+   ],
+   "boundary_name_osm": "San Jorge (Municipio)",
+   "places": [
+    "Puerto de San Jorge"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rivas__san_juan_del_sur",
+   "department_id": "rivas",
+   "name": "San Juan del Sur",
+   "identity": "Playa, surf, navegación y entretenimiento",
+   "area_km2": 419.4,
+   "center": {
+    "lat": 11.22085,
+    "lng": -85.78071,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -85.92227,
+    11.07931,
+    -85.63391,
+    11.35083
+   ],
+   "boundary_name_osm": "San Juan del Sur (Municipio)",
+   "places": [
+    "Hotel Victoriano",
+    "Maderas, Marsella, Remanso, Hermosa y El Coco",
+    "Morgan's Rock Reserve & Ecolodge",
+    "Playa El Coco",
+    "Playa Maderas",
+    "Playa Remanso",
+    "Playa San Juan del Sur",
+    "Refugio de Vida Silvestre La Flor",
+    "San Juan del Sur y Cristo de la Misericordia"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  },
+  {
+   "id": "rivas__tola",
+   "department_id": "rivas",
+   "name": "Tola",
+   "identity": "Surf, naturaleza, playas y comunidades costeras",
+   "area_km2": 478.2,
+   "center": {
+    "lat": 11.45819,
+    "lng": -86.01882,
+    "precision": "centroid"
+   },
+   "bbox": [
+    -86.17275,
+    11.30316,
+    -85.87891,
+    11.58149
+   ],
+   "boundary_name_osm": "Tola (Municipio)",
+   "places": [
+    "Ojo de Agua y Playa Santo Domingo",
+    "Playa Gigante",
+    "Popoyo y Guasacate"
+   ],
+   "pending_verification": [
+    "population",
+    "history",
+    "festivities",
+    "cabecera_coordinates"
+   ]
+  }
+ ]
+}

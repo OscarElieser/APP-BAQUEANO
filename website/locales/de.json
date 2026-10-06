@@ -5373,5 +5373,23 @@
       "cobertura": "Territoriale Abdeckung",
       "contenido_costa_caribe": "Inhalte an der Karibikküste (RACCN und RACCS)"
     }
+  },
+  "territory": {
+    "municipality": {
+      "area": "≈ {area} km² (Fläche der Gemeindegrenze)",
+      "areaHint": "Aus der offiziellen OpenStreetMap/geoBoundaries-Grenze berechnet; kann Wasserflächen von Seen und Lagunen enthalten.",
+      "places": "{count} Orte auf BAQUEANO",
+      "morePlaces": "und {count} weitere",
+      "noPlaces": "Noch keine verifizierten Orte auf BAQUEANO",
+      "map": "Auf der Karte ansehen",
+      "mapLabel": "Auf der Karte ansehen: {name} (OpenStreetMap, öffnet einen neuen Tab)",
+      "plan": "Mit BAQUI planen",
+      "planLabel": "Mit BAQUI planen: {name}",
+      "baquiQuery": "Ich möchte {name}, {department} kennenlernen",
+      "pending": "Einwohnerzahl, Geschichte und Patronatsfeste: Prüfung mit amtlicher Quelle ausstehend.",
+      "source": "Grenzen: geoBoundaries · © OpenStreetMap (ODbL). Flächen werden aus der Grenze berechnet.",
+      "count": "{count} Gemeinden",
+      "placesOne": "1 Ort auf BAQUEANO"
+    }
   }
 }

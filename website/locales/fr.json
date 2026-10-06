@@ -5373,5 +5373,23 @@
       "cobertura": "Couverture territoriale",
       "contenido_costa_caribe": "Contenu sur la côte caraïbe (RACCN et RACCS)"
     }
+  },
+  "territory": {
+    "municipality": {
+      "area": "≈ {area} km² (superficie du contour)",
+      "areaHint": "Calculée à partir du contour officiel OpenStreetMap/geoBoundaries ; elle peut inclure l'eau des lacs et lagunes.",
+      "places": "{count} lieux sur BAQUEANO",
+      "morePlaces": "et {count} de plus",
+      "noPlaces": "Pas encore de lieux vérifiés sur BAQUEANO",
+      "map": "Voir sur la carte",
+      "mapLabel": "Voir sur la carte : {name} (OpenStreetMap, ouvre un nouvel onglet)",
+      "plan": "Planifier avec BAQUI",
+      "planLabel": "Planifier avec BAQUI : {name}",
+      "baquiQuery": "Je veux découvrir {name}, {department}",
+      "pending": "Population, histoire et fêtes patronales : à vérifier auprès d'une source officielle.",
+      "source": "Contours : geoBoundaries · © OpenStreetMap (ODbL). Les superficies sont calculées à partir du contour.",
+      "count": "{count} municipalités",
+      "placesOne": "1 lieu sur BAQUEANO"
+    }
   }
 }

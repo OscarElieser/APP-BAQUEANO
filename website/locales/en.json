@@ -5373,5 +5373,23 @@
       "cobertura": "Territorial coverage",
       "contenido_costa_caribe": "Content on the Caribbean Coast (RACCN and RACCS)"
     }
+  },
+  "territory": {
+    "municipality": {
+      "area": "≈ {area} km² (boundary area)",
+      "areaHint": "Calculated from the official OpenStreetMap/geoBoundaries boundary; it may include lake and lagoon water.",
+      "places": "{count} places on BAQUEANO",
+      "morePlaces": "and {count} more",
+      "noPlaces": "No verified places on BAQUEANO yet",
+      "map": "View on the map",
+      "mapLabel": "View on the map: {name} (OpenStreetMap, opens a new tab)",
+      "plan": "Plan with BAQUI",
+      "planLabel": "Plan with BAQUI: {name}",
+      "baquiQuery": "I want to visit {name}, {department}",
+      "pending": "Population, history and patron saint festivities: pending verification with an official source.",
+      "source": "Boundaries: geoBoundaries · © OpenStreetMap (ODbL). Areas are calculated from the boundary.",
+      "count": "{count} municipalities",
+      "placesOne": "1 place on BAQUEANO"
+    }
   }
 }

@@ -337,10 +337,18 @@
     });
   }
 
+  // Aviso de catálogo listo (2026-10-06): la carga inicial es silenciosa para no re-pintar
+  // toda la página, pero los componentes que pintan antes de que llegue el catálogo del
+  // visitante necesitan saberlo para volver a pintarse en su idioma.
+  var resolveReady;
+  var readyPromise = new Promise(function (resolve) { resolveReady = resolve; });
+
   async function init() {
     installStyle();
     bindButtons(document);
     await changeLanguage(currentLanguage, { silent: true });
+    resolveReady(currentLanguage);
+    window.dispatchEvent(new CustomEvent('baqueano:i18nReady', { detail: languageChangedDetail() }));
     var observer = new MutationObserver(function observe(records) {
       if (applying) return;
       records.forEach(function collectMutations(record) {
@@ -364,6 +372,7 @@
 
   window.BaqueanoLanguage = Object.freeze({
     get: function getLanguage() { return currentLanguage; },
+    ready: function ready() { return readyPromise; },
     getLocale: function getLocale() { return LOCALES[currentLanguage]; },
     getSupported: function getSupported() { return SUPPORTED.slice(); },
     set: changeLanguage,

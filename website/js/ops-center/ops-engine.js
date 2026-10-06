@@ -4021,14 +4021,28 @@
     },
 
     bindTabs() {
+      // POR QUÉ (auditoría 2026-10-06): los <a class="ops-nav-item"> no tenían href, así que
+      // no se podían alcanzar con teclado (WCAG 2.1.1) ni compartir/volver a un módulo.
+      // CÓMO: href="#<tab>" + historial (pushState) y hashchange para atrás/adelante y enlace
+      // directo. QUÉ: misma navegación por clic de siempre, ahora también por teclado y URL.
       const navItems = document.querySelectorAll('.ops-nav-item');
       navItems.forEach((item) => {
+        const tabId = item.getAttribute('data-tab');
+        if (tabId && !item.getAttribute('href')) item.setAttribute('href', `#${tabId}`);
         item.addEventListener('click', (e) => {
           e.preventDefault();
-          const tabId = item.getAttribute('data-tab');
-          if (tabId) this.switchTab(tabId);
+          if (!tabId) return;
+          this.switchTab(tabId);
+          if (window.location.hash !== `#${tabId}`) window.history.pushState({ opsTab: tabId }, '', `#${tabId}`);
         });
       });
+      const fromHash = () => {
+        const tabId = decodeURIComponent(window.location.hash.slice(1));
+        if (tabId && ENTITY_REGISTRY[tabId] && OpsState.activeTab !== tabId) this.switchTab(tabId);
+      };
+      window.addEventListener('hashchange', fromHash);
+      window.addEventListener('popstate', fromHash);
+      fromHash();
     },
 
     switchTab(tabId) {
@@ -4040,7 +4054,9 @@
 
       // Botones activos en el sidebar
       document.querySelectorAll('.ops-nav-item').forEach((item) => {
-        item.classList.toggle('is-active', item.getAttribute('data-tab') === tabId);
+        const active = item.getAttribute('data-tab') === tabId;
+        item.classList.toggle('is-active', active);
+        if (active) item.setAttribute('aria-current', 'page'); else item.removeAttribute('aria-current');
       });
 
       // Mostrar panel activo

@@ -151,5 +151,8 @@
     }, { rootMargin: '600px 0px' });
     observer.observe(section);
   } else start();
-  window.addEventListener('baqueano:languageChanged', function () { if (start.done && items.length) { kindRow.replaceChildren(); while (deptSelect.options.length > 1) deptSelect.remove(1); collect(); renderFilters(); renderGrid(); } });
+  function rerender() { if (start.done && items.length) { kindRow.replaceChildren(); while (deptSelect.options.length > 1) deptSelect.remove(1); collect(); renderFilters(); renderGrid(); } }
+  window.addEventListener('baqueano:languageChanged', rerender);
+  // Si la sección se pintó antes de que cargara el catálogo del visitante (carga inicial silenciosa).
+  window.addEventListener('baqueano:i18nReady', rerender);
 })(window, document);

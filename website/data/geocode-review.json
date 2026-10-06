@@ -1,0 +1,41 @@
+{
+  "_doc": "🎯 POR QUÉ: Nominatim a veces devuelve un lugar homónimo dentro del mismo territorio. ⚙️ CÓMO: cada rechazo fue revisado a mano; scripts/geocode-territory-places.mjs y scripts/migrate-territories-to-supabase.mjs descartan ese resultado OSM para ese lugar y buscan otro (o lo dejan sin pin). 📦 QUÉ: lista de coincidencias rechazadas con su motivo. Nunca se inventa una coordenada de reemplazo.",
+  "reviewedAt": "2026-10-06",
+  "rejected": [
+    {
+      "territory": "rivas",
+      "name": "Hostal Puesta del Sol (Ometepe)",
+      "osm": "way/417334395",
+      "label": "Posada Puesta del Sol, Avenida Real, San Juan del Sur",
+      "reason": "El hostal está en la Isla de Ometepe; el resultado es una posada homónima en San Juan del Sur."
+    },
+    {
+      "territory": "raccs",
+      "name": "Bluff Beach",
+      "osm": "relation/16528013",
+      "label": "Playa Falso Bluff, Kukra Hill, Costa Caribe Sur",
+      "reason": "Playa Falso Bluff (Kukra Hill) es otro lugar; El Bluff pertenece a Bluefields."
+    },
+    {
+      "territory": "chontales",
+      "name": "Cascadas de Chontales",
+      "osm": "relation/2194833",
+      "label": "Lago Cocibolca, Chontales, Nicaragua",
+      "reason": "El resultado es el Lago Cocibolca (el punto cae en el agua); no es la ubicación de las cascadas."
+    },
+    {
+      "territory": "rio-san-juan",
+      "name": "Refugio de Vida Silvestre Río San Juan",
+      "osm": "relation/16339033",
+      "label": "Refugio de Vida Silvestre Los Guatuzos, Río San Juan, Nicaragua",
+      "reason": "Los Guatuzos es otro refugio; el Refugio de Vida Silvestre Río San Juan está en la desembocadura del río (San Juan de Nicaragua)."
+    },
+    {
+      "territory": "boaco",
+      "name": "Cerros y cascadas de Santa Lucía",
+      "osm": "node/2816076559",
+      "label": "Cerros Colama, Teustepe, Boaco",
+      "reason": "Cerros Colama está en Teustepe; el lugar corresponde al municipio de Santa Lucía."
+    }
+  ]
+}

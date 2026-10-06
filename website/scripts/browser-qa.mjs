@@ -42,7 +42,11 @@ async function inspect(pageName, width) {
   const page = await context.newPage();
   const row = { page: pageName, width, overflowPx: 0, offscreen: [], imgNoAlt: [], error: null };
   try {
-    await page.goto(BASE + pageName, { waitUntil: 'load', timeout: 45000 });
+    // El DOM propio debe llegar siempre (si no, es error). El evento `load` depende también de
+    // terceros (fuentes, CDN, video); si tarda más de 20 s se registra como aviso `slowLoad`
+    // en el JSON en vez de descartar la medición del diseño.
+    await page.goto(BASE + pageName, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    row.slowLoad = await page.waitForLoadState('load', { timeout: 20000 }).then(() => false, () => true);
     await page.waitForTimeout(1800);
     Object.assign(row, await page.evaluate(() => {
       const vw = document.documentElement.clientWidth;
@@ -133,7 +137,9 @@ for (const r of results) {
 for (const l of notFoundLinks) if (!l.present) fails.push(`404.html sin enlace a ${l.href}`);
 
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
-fs.writeFileSync(OUT, JSON.stringify({ generatedAt: new Date().toISOString(), base: BASE, widths: WIDTHS, pages: PAGES, notFoundLinks, fails, results }, null, 1));
-console.log(`Browser QA: ${PAGES.length} páginas × ${WIDTHS.length} anchos = ${results.length} cargas · fallos ${fails.length}`);
+fs.writeFileSync(OUT, JSON.stringify({ generatedAt: new Date().toISOString(), base: BASE, widths: WIDTHS, pages: PAGES, notFoundLinks, fails, slowLoads: results.filter((r) => r.slowLoad).map((r) => `${r.page}@${r.width}`), results }, null, 1));
+const slow = results.filter((r) => r.slowLoad).map((r) => `${r.page}@${r.width}`);
+console.log(`Browser QA: ${PAGES.length} páginas × ${WIDTHS.length} anchos = ${results.length} cargas · fallos ${fails.length} · avisos de carga lenta (>20 s hasta 'load') ${slow.length}`);
 for (const f of fails.slice(0, 60)) console.log(' ✗', f);
+for (const w of slow.slice(0, 30)) console.log(' ⚠ carga lenta', w);
 process.exit(fails.length ? 1 : 0);

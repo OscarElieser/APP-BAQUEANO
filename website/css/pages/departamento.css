@@ -2814,3 +2814,30 @@ html body main#mainContent .bq-rich-feature li strong { color: #F4E6C1 !importan
 .map-place-info .map-place-verified-sources a { color: #F4E6C1 !important; text-decoration: underline; }
 /* Nota de acceso (catálogo de naturaleza 2026-10): el punto mostrado es el área general. */
 .map-place-info .map-place-info-access { margin: 0.5rem 0 0; padding: 0.45rem 0.6rem; border-left: 3px solid #F65E01; border-radius: 6px; background: rgba(246, 94, 1, 0.12); color: #F4E6C1 !important; font-size: 0.78rem; line-height: 1.45; }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Ficha verificable de municipios (2026-10-06, js/territory-municipalities.js)
+ * 🎯 POR QUÉ: información de cada municipio sin inventar: área del contorno, lugares
+ *   BAQUEANO, mapa, BAQUI y pendientes.
+ * ⚙️ CÓMO: misma tarjeta clara (.dept-place-item) con textos #334155/#475569 (≥ 7:1 sobre
+ *   #F8FAFC) y botones de 44 px de alto (WCAG 2.5.8).
+ * 📦 QUÉ: .dept-mun-*.
+ * ──────────────────────────────────────────────────────────────────────────── */
+.dept-mun-card { display: flex; flex-direction: column; gap: 0.45rem; }
+.dept-mun-card .dept-item-title { margin: 0; font-size: 1rem; }
+.dept-mun-card .dept-item-desc { margin: 0; }
+.dept-mun-facts,
+.dept-mun-places { margin: 0; color: #334155 !important; font-size: 0.84rem; line-height: 1.45; overflow-wrap: anywhere; }
+.dept-mun-facts i,
+.dept-mun-places i { color: #165D6F; margin-right: 0.2rem; }
+.dept-mun-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.25rem; }
+.dept-mun-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; padding: 0.45rem 0.85rem;
+  border-radius: 999px; background: #165D6F; color: #FFFFFF !important; font-size: 0.82rem; font-weight: 700;
+  text-decoration: none; line-height: 1.2;
+}
+.dept-mun-btn:hover { background: #0F4A59; }
+.dept-mun-btn:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.dept-mun-pending { margin: 0.2rem 0 0; color: #475569 !important; font-size: 0.76rem; font-style: italic; line-height: 1.4; }
+.dept-mun-source { margin: 0.9rem 0 0; color: #475569; font-size: 0.78rem; line-height: 1.5; }
+@media (max-width: 380px) { .dept-mun-btn { flex: 1 1 100%; justify-content: center; } }

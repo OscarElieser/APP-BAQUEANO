@@ -87,6 +87,8 @@ function nameVariants(raw) {
 // Volcán Maderas; "Catedral de Granada" no es un hotel que la menciona.
 const FOREIGN_KINDS = [
   { re: /^volc[aá]n\b/i, unless: /volc[aá]n/i },
+  // Un lago no es el punto de una cascada o un cerro: su centroide cae en el agua.
+  { re: /^lago\b/i, unless: /\blago\b|cocibolca|xolotl[aá]n/i },
   { re: /\b(hotel|hostal|hostel|posada|restaurante?|bar|tienda|farmacia)\b/i, unless: /\b(hotel|hostal|hostel|posada|restaurante?|bar|tienda|farmacia)\b/i }
 ];
 const HOSPITALITY_TYPES = new Set(['hotel', 'guest_house', 'hostel', 'motel', 'restaurant', 'bar', 'cafe', 'fast_food', 'shop', 'supermarket', 'pharmacy']);
@@ -94,6 +96,11 @@ function plausible(placeName, label, type) {
   if (HOSPITALITY_TYPES.has(String(type || '')) && !FOREIGN_KINDS[1].unless.test(placeName)) return false;
   return !FOREIGN_KINDS.some((rule) => rule.re.test(String(label || '').split(',')[0].trim()) && !rule.unless.test(placeName));
 }
+
+// Revisión manual (data/geocode-review.json): resultados OSM rechazados para un lugar concreto.
+const REVIEW_FILE = new URL('../data/geocode-review.json', import.meta.url);
+const REVIEW = (() => { try { return JSON.parse(fs.readFileSync(REVIEW_FILE, 'utf8')).rejected || []; } catch (e) { return []; } })();
+const rejectedByReview = (territoryId, placeName, osm) => REVIEW.some((r) => r.territory === territoryId && r.name === placeName && r.osm === osm);
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -144,7 +151,7 @@ for (const territory of territories) {
       continue;
     }
     const known = (previous.territories?.[territory.id] || []).find((p) => p.name === place.name
-      && insideFeature(feature, p.lat, p.lng) && plausible(place.name, p.label));
+      && insideFeature(feature, p.lat, p.lng) && plausible(place.name, p.label) && !rejectedByReview(territory.id, place.name, p.osm));
     if (known) { result.territories[territory.id].push(known); continue; }
     let match = null;
     let approx = false;
@@ -156,7 +163,7 @@ for (const territory of territories) {
         const candidates = await query(q, bbox);
         await sleep(DELAY_MS);
         match = (Array.isArray(candidates) ? candidates : []).find((c) => insideFeature(feature, Number(c.lat), Number(c.lon))
-          && plausible(place.name, c.display_name, c.type));
+          && plausible(place.name, c.display_name, c.type) && !rejectedByReview(territory.id, place.name, `${c.osm_type}/${c.osm_id}`));
         if (match) break;
       }
       if (match) { approx = variant.approx; break; }

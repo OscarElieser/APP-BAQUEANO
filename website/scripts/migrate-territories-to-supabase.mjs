@@ -139,12 +139,13 @@ export function matchMunicipality(text, departmentId, municipalities) {
 }
 
 // ── Transformación ───────────────────────────────────────────────────────────
-export function buildImport({ territories, municipalities, existing }) {
+export function buildImport({ territories, municipalities, existing, geocoded = {} }) {
   const report = {
     run_key: RUN_KEY, generated_at: null, source: `website/js/${LEGACY_SOURCE}`,
     totals: { total_fuente_original: 0, places: 0, businesses: 0, total_insertados: 0, total_actualizados: 0, total_duplicados: 0,
       total_pendientes: 0, total_parciales: 0, total_verificados: 0, total_sin_coordenadas: 0, total_coordenadas_descartadas: 0,
-      total_sin_fuente: 0, total_map_ready: 0, total_sin_municipio: 0, total_categoria_inferida: 0, total_notas_precio: 0 },
+      total_sin_fuente: 0, total_map_ready: 0, total_sin_municipio: 0, total_categoria_inferida: 0, total_notas_precio: 0,
+      total_coordenadas_geocodificadas: 0, total_municipio_por_geocodigo: 0 },
     duplicates: [], review: [], discarded_coordinates: [], unmatched_municipalities: [], existing_without_source: []
   };
   const places = []; const businesses = []; const sources = [];
@@ -192,7 +193,15 @@ export function buildImport({ territories, municipalities, existing }) {
         report.discarded_coordinates.push({ territory: territory.id, name: place.name, lat, lng });
         lat = null; lng = null;
       }
-      const precisionRaw = place.precision || (v && v.precision) || (lat !== null ? 'approximate' : 'missing');
+      // Sin coordenadas propias: punto geocodificado (OSM Nominatim, dentro del contorno oficial
+      // del territorio; website/data/territory-places.json). Nunca es "exact": no habilita "Cómo llegar".
+      const geo = (geocoded[territory.id] || {})[nameNorm] || null;
+      let geoPrecision = null;
+      if (lat === null && geo && inNicaragua(geo.lat, geo.lng)) {
+        lat = geo.lat; lng = geo.lng; geoPrecision = geo.approx ? 'approximate' : 'reference';
+        report.totals.total_coordenadas_geocodificadas += 1;
+      }
+      const precisionRaw = place.precision || (v && v.precision) || geoPrecision || (lat !== null ? 'approximate' : 'missing');
       const precision = ['exact', 'reference', 'approximate', 'centroid', 'address', 'pending', 'missing'].includes(precisionRaw) ? precisionRaw : 'approximate';
       const mapReady = lat !== null && precision === 'exact' && !(v && v.mapReady === false);
       if (lat === null) report.totals.total_sin_coordenadas += 1;
@@ -210,7 +219,26 @@ export function buildImport({ territories, municipalities, existing }) {
       const primary = srcList.find((s) => s.url) || srcList[0] || null;
 
       const zone = (v && (v.zone || v.municipality)) || null;
-      const municipalityId = matchMunicipality(zone, departmentId, municipalities);
+      let municipalityId = matchMunicipality(zone, departmentId, municipalities);
+      // Sin zona en la fuente: la etiqueta administrativa de OSM ("Las Sabanas, Madriz, 35500")
+      // enlaza el municipio solo si exactamente un segmento coincide EXACTO con un municipio del territorio.
+      if (!municipalityId && geo && geo.label) {
+        // Un segmento igual al nombre del departamento ("…, Rivas, Nicaragua") es ambiguo:
+        // puede ser el departamento y no el municipio homónimo. Nunca enlaza.
+        const deptNames = new Set([normalize(territory.name), normalize(departmentId.replace(/_/g, ' '))]);
+        const hits = new Set();
+        for (const seg of String(geo.label).split(',')) {
+          if (deptNames.has(normalize(seg))) continue;
+          const exact = municipalities.filter((mu) => mu.department_id === departmentId && normalize(mu.name) === normalize(seg));
+          if (exact.length === 1) hits.add(exact[0].id);
+        }
+        // "Comunidades Mayangnas de Bonanza y Rosita": si el nombre menciona otro municipio
+        // del territorio distinto del encontrado, el lugar abarca más de uno → no se enlaza.
+        const nameNormFull = ` ${nameNorm} `;
+        const others = municipalities.filter((mu) => mu.department_id === departmentId && !hits.has(mu.id)
+          && !deptNames.has(normalize(mu.name)) && nameNormFull.includes(` ${normalize(mu.name)} `));
+        if (hits.size === 1 && !others.length) { municipalityId = [...hits][0]; report.totals.total_municipio_por_geocodigo += 1; }
+      }
       if (!municipalityId) {
         report.totals.total_sin_municipio += 1;
         if (zone) report.unmatched_municipalities.push({ territory: territory.id, name: place.name, zone });
@@ -235,6 +263,7 @@ export function buildImport({ territories, municipalities, existing }) {
           report.totals.total_notas_precio += 1;
         }
       }
+      if (geoPrecision) attributes.geo_source = { provider: 'OpenStreetMap Nominatim (ODbL)', label: geo.label || null, osm: geo.osm || null, precision: geoPrecision };
       const desc = String(place.desc || '').trim();
       const short = desc.split(/(?<=[.!?])\s/)[0].slice(0, 200);
       const slug = uniqueSlug(slugify(place.name), departmentId);
@@ -315,11 +344,28 @@ on conflict (run_key) do update set finished_at = now(), totals = excluded.total
 }
 
 // ── Ejecución ─────────────────────────────────────────────────────────────────
-function loadTerritories(file = DATA_FILE) {
+export function loadTerritories(file = DATA_FILE) {
   const sandbox = { window: {} };
   vm.runInNewContext(fs.readFileSync(file, 'utf8'), sandbox, { timeout: 5000 });
   const t = sandbox.window.BAQUEANO_TERRITORIES;
   return Array.isArray(t) ? t : Object.values(t || {});
+}
+
+const GEOCODED = path.join(ROOT, 'website/data/territory-places.json');
+export function loadGeocoded(file = GEOCODED) {
+  if (!fs.existsSync(file)) return {};
+  const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const reviewFile = path.join(path.dirname(file), 'geocode-review.json');
+  const rejected = fs.existsSync(reviewFile) ? (JSON.parse(fs.readFileSync(reviewFile, 'utf8')).rejected || []) : [];
+  const out = {};
+  for (const [territoryId, list] of Object.entries(data.territories || {})) {
+    out[territoryId] = {};
+    for (const p of Array.isArray(list) ? list : []) {
+      if (!p || !p.name || rejected.some((r) => r.territory === territoryId && r.name === p.name && r.osm === p.osm)) continue;
+      out[territoryId][normalize(p.name)] = p;
+    }
+  }
+  return out;
 }
 
 function main() {
@@ -328,7 +374,7 @@ function main() {
   const existing = fs.existsSync(EXISTING) ? JSON.parse(fs.readFileSync(EXISTING, 'utf8')) : { businesses: [], destinations: [] };
   if (territories.length !== 17) throw new Error(`Se esperaban 17 territorios y hay ${territories.length}.`);
   if (municipalities.length !== 153) throw new Error(`Se esperaban 153 municipios en el seed y hay ${municipalities.length}.`);
-  const result = buildImport({ territories, municipalities, existing });
+  const result = buildImport({ territories, municipalities, existing, geocoded: loadGeocoded() });
   const t = result.report.totals;
   // Debe cuadrar: cada registro de la fuente termina insertado o descartado como duplicado.
   if (t.total_insertados + t.total_duplicados !== t.total_fuente_original) throw new Error('Los totales no cuadran.');

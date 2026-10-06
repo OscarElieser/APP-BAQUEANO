@@ -4756,3 +4756,30 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - CI tras fijar axe: QA bajó de 56 a 3 fallos, todos target-size de pines de mapa (Madriz MapLibre, Mi Viaje Leaflet) que solo se miden en CI (localmente el proxy bloquea las librerías de mapa). Corrección: pines con la misma coordenada se abren en abanico (ángulo áureo, offset en px; Mi Viaje desplaza días en el mismo lugar) y browser-qa.mjs aplica la excepción "Esencial" de WCAG 2.5.8 solo a target-size de pines de mapa. QA local 0 fallos; prueba con MapLibre local: 0 pines idénticos superpuestos.
 - 02:22 Propietario: enlaces para instalar: desktop-commander remote (npx), oso95/scroll-world, nidhinjs/prompt-master, agent-browser (npm -g), vercel-labs/skills@find-skills, openalternative.co, freshtechbro/claudedesignskills web3d-integration-patterns. Regla: revisar contenido antes de agregar.
   - Instaladas en .claude/skills (MIT, revisadas): prompt-master, web3d-integration-patterns, find-skills, scroll-world (servicios pagos Higgsfield/Monid; palabra prohibida reemplazada). agent-browser 0.27.0 instalado en el contenedor (efímero). No instalados: Desktop Commander (control remoto del PC del propietario; se ejecuta en su equipo) y OpenAlternative (sitio web). Doc: docs/architecture/SKILLS_DE_TERCEROS.md.
+
+## 2026-10-06 — Auditoría total "PROMPT MAESTRO DEFINITIVO" (propietario)
+
+- 02:40 Propietario: auditoría completa de https://baqueanonicaragua.com/:
+  - Botones funcionando; si un botón no tiene página, crearla.
+  - Revisar la base de Supabase (heiudfpthqwtjrtluqlm), colores, tipografía, idiomas, navegación, trazabilidad, diseño, sostenibilidad, cultura, música, arte y literatura.
+  - Seguridad con cloudflare/security-audit-skill.
+  - Responsive: de teléfonos pequeños a Smart TV.
+  - App Android conectada a Ops Center con información real.
+  - Información de cada municipio de cada departamento y región.
+  - Reglas: NO borrar nada y NO inventar.
+  - Recursos: Azure vm-baqueano-prod / rg-baqueano-prod y repo OscarElieser/APP-BAQUEANO.
+  - Reconocimiento inicial: el proxy de este contenedor bloquea baqueanonicaragua.com (403 CONNECT). La web en producción se audita desde el build local (`dist-hostinger`, mismo código de main) y desde CI (`verify-azure` sí llega a producción).
+  - Azure no es accesible desde aquí: es acción del propietario.
+  - cloudflare/security-audit-skill (commit c1c8a8c, MIT) revisada: sus 2 scripts `.cjs` solo leen y validan JSON localmente, sin red ni procesos. Se instala en `.claude/skills/security-audit`.
+  - Avance (04:15):
+    - CI QA: 0 violaciones a11y. Los 7 fallos restantes eran timeouts de `load` por recursos de terceros. Arreglo: `browser-qa.mjs` espera el DOM y registra la carga lenta como aviso `slowLoad`.
+    - Supabase:
+      - Advisors: `search_path` fijado en 3 funciones (migración 20261006030000); el aviso desapareció.
+      - Sincronización web → Supabase con delta verificado = 0: lugares con coordenadas de 60 a 197 (`approximate`/`reference`, nunca `exact`); lugares con municipio de 44 a 129.
+      - Revisión manual de 5 geocodificaciones erróneas (`website/data/geocode-review.json`).
+    - Municipios: 153/153 con área del contorno, caja e identidad curada (migración 20261006040000 + import). Sección web enriquecida (`js/territory-municipalities.js`) en 6 idiomas; lo que falta queda "por verificar".
+    - Fuentes oficiales (INIDE/INIFOM/Wikidata) bloqueadas por la red del entorno.
+    - Ops Center: navegación lateral accesible por teclado con enlace directo y atrás/adelante (antes `<a>` sin href).
+    - i18n: nuevo evento `baqueano:i18nReady`; los componentes dinámicos se repintan en el idioma del visitante.
+    - Seguridad: reconocimiento con skill Cloudflare en curso (perfil quick; ejecución bloqueada por falta de sandbox verificado → solo fuente).
+    - Informes en `docs/auditoria-2026-10-06/`.

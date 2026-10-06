@@ -918,7 +918,7 @@
     }
     if (!window.__BAQUEANO_I18N_LOADED__ && !document.querySelector('script[data-global-language]')) {
       var languageScript = document.createElement('script');
-      languageScript.src = 'js/global-language.js?v=20261004-comunidad-1';
+      languageScript.src = 'js/global-language.js?v=20261006-i18nready-1';
       languageScript.defer = true;
       languageScript.dataset.globalLanguage = 'true';
       document.body.appendChild(languageScript);

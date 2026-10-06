@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T02:12:23.121Z",
+  "generatedAt": "2026-10-06T04:07:11.867Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 3931,
-    "en": 3931,
-    "fr": 3931,
-    "it": 3931,
-    "pt": 3931,
-    "de": 3931
+    "es": 3945,
+    "en": 3945,
+    "fr": 3945,
+    "it": 3945,
+    "pt": 3945,
+    "de": 3945
   },
   "html": {
     "files": 31,
@@ -23,8 +23,8 @@
     "untranslated": 1
   },
   "js": {
-    "files": 87,
-    "translated": 134,
+    "files": 88,
+    "translated": 148,
     "untranslated": 729
   },
   "jsEditorial": {
@@ -98,6 +98,7 @@
     "js/territory-artists.js",
     "js/territory-inspector.js",
     "js/territory-media-catalog.js",
+    "js/territory-municipalities.js",
     "js/territory-rich-sections.js",
     "js/video-registry.js",
     "js/website-business-catalog.js",
@@ -1167,6 +1168,15 @@
       "untranslated": 1,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/territory-municipalities.js",
+      "type": "js",
+      "total": 14,
+      "translated": 14,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/territory-rich-sections.js",
