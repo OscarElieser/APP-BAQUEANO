@@ -366,7 +366,7 @@
 
   window.reserveAll = function() {
     var summary = trip.days.map(function(d) { return d.badge + ': ' + d.title; }).join('\n');
-    window.open('https://wa.me/50584431289?text=' + encodeURIComponent('Hola, deseo coordinar las reservas de mi ruta BAQUEANO:\n' + summary), '_blank', 'noopener,noreferrer');
+    window.open('https://wa.me/50584431289?text=' + encodeURIComponent('Hola, quiero contactar a los servicios de mi ruta BAQUEANO para consultar disponibilidad:\n' + summary), '_blank', 'noopener,noreferrer');
     toast('Abriendo atención por WhatsApp', 'info');
     return;
     toast('Redirigiendo a Red de Aliados BAQUEANO...', 'info');
@@ -389,7 +389,7 @@
 
   window.reserveRec = function(name) {
     var ally = name || 'aliado';
-    window.open('https://wa.me/50584431289?text=' + encodeURIComponent('Hola, deseo reservar ' + ally + ' desde BAQUEANO.'), '_blank', 'noopener,noreferrer');
+    window.open('https://wa.me/50584431289?text=' + encodeURIComponent('Hola, quiero consultar disponibilidad de ' + ally + ' desde BAQUEANO.'), '_blank', 'noopener,noreferrer');
     toast('Abriendo reserva con ' + ally, 'info');
     return;
     toast('Iniciando reserva con ' + (name || 'aliado') + ' ✅');

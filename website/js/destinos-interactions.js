@@ -302,16 +302,16 @@
       const image = card.querySelector('img')?.getAttribute('src') || '';
       const location = card.querySelector('.location, .destinos-preview-info span')?.textContent.trim() || 'Nicaragua';
       const detailByDestination = {
-        'Isla de Ometepe': { access:'Ferri desde San Jorge, Rivas', duration:'1–3 días', price:'Accesos y actividades según operador', best:'Temporada seca o salida confirmada', contact:'50588880005' },
-        'Granada': { access:'Carretera desde Managua · buses y transporte privado', duration:'1–2 días', price:'Recorridos desde C$ 350', best:'Todo el año; evitar horas de mayor calor', contact:'50588880010' },
-        'San Juan del Sur': { access:'Carretera Panamericana hacia Rivas', duration:'1–3 días', price:'Actividades desde C$ 920', best:'Según oleaje y condiciones marítimas', contact:'50588880007' },
-        'Cerro Negro': { access:'Desde León con operador y vehículo adecuado', duration:'Medio día', price:'Desde C$ 1,100', best:'Confirmar clima, acceso y equipo', contact:'50588880004' },
-        'Cañón de Somoto': { access:'Desde Somoto hacia comunidad de acceso autorizada', duration:'Medio día o día completo', price:'Desde C$ 550', best:'Confirmar nivel del río y guía', contact:'50588880001' },
-        'Masaya': { access:'Carretera Managua–Masaya', duration:'Medio día', price:'Consultar tarifa oficial vigente', best:'Confirmar estado y horario del parque', contact:'50588880009' },
-        'Las Isletas de Granada': { access:'Muelle de Granada con operador autorizado', duration:'2–4 horas', price:'Desde C$ 660', best:'Confirmar viento y estado del lago', contact:'50588880010' },
-        'Miraflor': { access:'Desde Estelí por vía rural', duration:'1–2 días', price:'Desde C$ 440', best:'Coordinar previamente con finca o guía', contact:'50588880002' },
-        'Laguna de Apoyo': { access:'Desvío entre Masaya y Granada', duration:'Medio día o día completo', price:'Depende del acceso o establecimiento', best:'Confirmar acceso, clima y normas locales', contact:'50588880009' },
-        'Corn Island': { access:'Vuelo nacional o conexión marítima confirmada', duration:'3–5 días', price:'Variable según transporte y temporada', best:'Revisar condiciones marítimas', contact:'50588880014' }
+        'Isla de Ometepe': { access:'Ferri desde San Jorge, Rivas', duration:'1–3 días', price:'Accesos y actividades según operador', best:'Temporada seca o salida confirmada', contact:'50584431289' },
+        'Granada': { access:'Carretera desde Managua · buses y transporte privado', duration:'1–2 días', price:'Recorridos desde C$ 350', best:'Todo el año; evitar horas de mayor calor', contact:'50584431289' },
+        'San Juan del Sur': { access:'Carretera Panamericana hacia Rivas', duration:'1–3 días', price:'Actividades desde C$ 920', best:'Según oleaje y condiciones marítimas', contact:'50584431289' },
+        'Cerro Negro': { access:'Desde León con operador y vehículo adecuado', duration:'Medio día', price:'Desde C$ 1,100', best:'Confirmar clima, acceso y equipo', contact:'50584431289' },
+        'Cañón de Somoto': { access:'Desde Somoto hacia comunidad de acceso autorizada', duration:'Medio día o día completo', price:'Desde C$ 550', best:'Confirmar nivel del río y guía', contact:'50584431289' },
+        'Masaya': { access:'Carretera Managua–Masaya', duration:'Medio día', price:'Consultar tarifa oficial vigente', best:'Confirmar estado y horario del parque', contact:'50584431289' },
+        'Las Isletas de Granada': { access:'Muelle de Granada con operador autorizado', duration:'2–4 horas', price:'Desde C$ 660', best:'Confirmar viento y estado del lago', contact:'50584431289' },
+        'Miraflor': { access:'Desde Estelí por vía rural', duration:'1–2 días', price:'Desde C$ 440', best:'Coordinar previamente con finca o guía', contact:'50584431289' },
+        'Laguna de Apoyo': { access:'Desvío entre Masaya y Granada', duration:'Medio día o día completo', price:'Depende del acceso o establecimiento', best:'Confirmar acceso, clima y normas locales', contact:'50584431289' },
+        'Corn Island': { access:'Vuelo nacional o conexión marítima confirmada', duration:'3–5 días', price:'Variable según transporte y temporada', best:'Revisar condiciones marítimas', contact:'50584431289' }
       };
       const info = detailByDestination[title] || { access:'Consultá el mapa para una ruta desde tu ubicación', duration:'Según punto de partida', price:'Confirmar con el prestador', best:'Verificar clima, acceso y disponibilidad', contact:'50584431289' };
       const dialog = document.createElement('dialog'); dialog.className = 'dest-detail-dialog';

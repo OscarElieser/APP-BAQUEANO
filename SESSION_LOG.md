@@ -4860,3 +4860,10 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - se retiraron 3 éxitos falsos más (boletín, reportes de destino solo locales, audio inexistente);
     - los respaldos de BAQUI llevan a baqueano-ia.html?q=.
     - QA: 60 cargas y 0 fallos; i18n con 0 errores.
+  - Resultado de la Fase 3:
+    - CTAs "Reservar" → "Contactar" en 6 idiomas;
+    - 34 teléfonos falsos reemplazados por la línea oficial;
+    - pagos "Próximamente";
+    - aliados reales desde Supabase con ficha y métricas reales;
+    - mapa con ?lat=&lng=; música con conteo real y anclas correctas; "Quiero unirme" → comunidad.
+    - QA: 60 cargas y 0 fallos.

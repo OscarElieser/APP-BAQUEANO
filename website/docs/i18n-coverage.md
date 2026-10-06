@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-06T21:32:25.423Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4285 · en 4285 · fr 4285 · it 4285 · pt 4285 · de 4285
+Generado: 2026-10-06T21:39:20.061Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4329 · en 4329 · fr 4329 · it 4329 · pt 4329 · de 4329
 
-HTML: 3797/3798 textos con clave (1 pendientes) · JS: 725 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3790/3791 textos con clave (1 pendientes) · JS: 725 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -140,7 +140,7 @@ HTML: 3797/3798 textos con clave (1 pendientes) · JS: 725 textos dinámicos pen
 | js/territory-media-experience.js | js | 1 | 0 | 1 | 0 % |
 | 404.html | html | 25 | 25 | 0 | 100 % |
 | admin.html | html | 485 | 485 | 0 | 100 % |
-| aliados.html | html | 195 | 195 | 0 | 100 % |
+| aliados.html | html | 189 | 189 | 0 | 100 % |
 | ambiental.html | html | 131 | 131 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
 | apps/admin/src/app/page.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -175,6 +175,7 @@ HTML: 3797/3798 textos con clave (1 pendientes) · JS: 725 textos dinámicos pen
 | historia.html | html | 184 | 184 | 0 | 100 % |
 | index.html | html | 214 | 214 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
+| js/allies-directory.js | js | 0 | 0 | 0 | 100 % |
 | js/ambiental-report-handoff.js | js | 0 | 0 | 0 | 100 % |
 | js/async-styles.js | js | 0 | 0 | 0 | 100 % |
 | js/ayuda.js | js | 0 | 0 | 0 | 100 % |
@@ -231,7 +232,7 @@ HTML: 3797/3798 textos con clave (1 pendientes) · JS: 725 textos dinámicos pen
 | opiniones.html | html | 76 | 76 | 0 | 100 % |
 | packages/i18n/src/index.tsx | tsx | 2 | 2 | 0 | 100 % |
 | packages/ui/src/index.tsx | tsx | 0 | 0 | 0 | 100 % |
-| perfil.html | html | 162 | 162 | 0 | 100 % |
+| perfil.html | html | 161 | 161 | 0 | 100 % |
 | privacidad.html | html | 88 | 88 | 0 | 100 % |
 | terminos.html | html | 193 | 193 | 0 | 100 % |
 | testimonios.html | html | 79 | 79 | 0 | 100 % |

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-06T21:33:54.994Z",
+ "generatedAt": "2026-10-06T21:41:47.127Z",
  "base": "http://127.0.0.1:8790/",
  "widths": [
   390,
@@ -56,7 +56,9 @@
   }
  ],
  "fails": [],
- "slowLoads": [],
+ "slowLoads": [
+  "404.html@1366"
+ ],
  "results": [
   {
    "page": "404.html",
@@ -91,7 +93,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": false,
+   "slowLoad": true,
    "axe": [],
    "missingAnchors": [],
    "whatsapp": [
@@ -113,56 +115,6 @@
    "axe": [],
    "missingAnchors": [],
    "whatsapp": [
-    {
-     "href": "https://wa.me/50588880001?text=Hola%20Coop%20Cañón%20de%20So",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880002?text=Hola%20Posada%20La%20Abuela,%",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880003?text=Hola%20Arenas%20Beach,%20los%",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880004?text=Hola%20Baqueanos%20Cerro%20Ne",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880005?text=Hola%20Finca%20Magdalena,%20l",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880006?text=Hola%20San%20Simián,%20los%20",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880007?text=Hola%20Morgan%20Rock,%20los%2",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880008?text=Hola%20Hola%20Ola,%20los%20en",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880009?text=Hola%20Feel%20at%20Home,%20lo",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880010?text=Hola%20Sohla%20Rooftop,%20los",
-     "safe": true,
-     "name": "WhatsApp"
-    },
     {
      "href": "https://wa.me/50584431289",
      "safe": true,
@@ -189,56 +141,6 @@
    "axe": [],
    "missingAnchors": [],
    "whatsapp": [
-    {
-     "href": "https://wa.me/50588880001?text=Hola%20Coop%20Cañón%20de%20So",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880002?text=Hola%20Posada%20La%20Abuela,%",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880003?text=Hola%20Arenas%20Beach,%20los%",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880004?text=Hola%20Baqueanos%20Cerro%20Ne",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880005?text=Hola%20Finca%20Magdalena,%20l",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880006?text=Hola%20San%20Simián,%20los%20",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880007?text=Hola%20Morgan%20Rock,%20los%2",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880008?text=Hola%20Hola%20Ola,%20los%20en",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880009?text=Hola%20Feel%20at%20Home,%20lo",
-     "safe": true,
-     "name": "WhatsApp"
-    },
-    {
-     "href": "https://wa.me/50588880010?text=Hola%20Sohla%20Rooftop,%20los",
-     "safe": true,
-     "name": "WhatsApp"
-    },
     {
      "href": "https://wa.me/50584431289",
      "safe": true,
@@ -745,74 +647,74 @@
    "missingAnchors": [],
    "whatsapp": [
     {
-     "href": "https://wa.me/50588880004",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880001",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880005",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880002",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880010",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880007",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880010",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880014",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
-    },
-    {
-     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
-     "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
      "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
      "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
      "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
      "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
      "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Contact"
     },
     {
      "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20in",
@@ -846,74 +748,74 @@
    "missingAnchors": [],
    "whatsapp": [
     {
-     "href": "https://wa.me/50588880004",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880001",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880005",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880002",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880010",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880007",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880010",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880014",
+     "href": "https://wa.me/50584431289",
      "safe": true,
-     "name": "Book"
-    },
-    {
-     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
-     "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
      "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
      "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
      "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
      "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
     },
     {
      "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
      "safe": true,
-     "name": "Book"
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20re",
+     "safe": true,
+     "name": "Contact"
     },
     {
      "href": "https://wa.me/50584431289?text=Hola%20Baqueano,%20deseo%20in",
@@ -983,22 +885,22 @@
    "missingAnchors": [],
    "whatsapp": [
     {
-     "href": "https://wa.me/50588880011",
+     "href": "https://wa.me/50584431289",
      "safe": true,
      "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880012",
+     "href": "https://wa.me/50584431289",
      "safe": true,
      "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880013",
+     "href": "https://wa.me/50584431289",
      "safe": true,
      "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880014",
+     "href": "https://wa.me/50584431289",
      "safe": true,
      "name": "Contact"
     },
@@ -1029,22 +931,22 @@
    "missingAnchors": [],
    "whatsapp": [
     {
-     "href": "https://wa.me/50588880011",
+     "href": "https://wa.me/50584431289",
      "safe": true,
      "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880012",
+     "href": "https://wa.me/50584431289",
      "safe": true,
      "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880013",
+     "href": "https://wa.me/50584431289",
      "safe": true,
      "name": "Contact"
     },
     {
-     "href": "https://wa.me/50588880014",
+     "href": "https://wa.me/50584431289",
      "safe": true,
      "name": "Contact"
     },
@@ -1241,7 +1143,7 @@
    "missingAnchors": [],
    "whatsapp": [
     {
-     "href": "https://wa.me/50588880000",
+     "href": "https://wa.me/50584431289",
      "safe": true,
      "name": "Contact"
     },
@@ -1272,7 +1174,7 @@
    "missingAnchors": [],
    "whatsapp": [
     {
-     "href": "https://wa.me/50588880000",
+     "href": "https://wa.me/50584431289",
      "safe": true,
      "name": "Contact"
     },

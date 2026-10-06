@@ -215,7 +215,7 @@
   <!-- ============================================================================
        3. SECCIÓN: EXPLORÁ POR GÉNEROS (7 TARJETAS - IMAGEN 1)
        ============================================================================ -->
-  <section class="musica-section-common">
+  <section class="musica-section-common" id="generosMusicales">
     <div class="exact-container">
       <div class="musica-head-row">
         <div class="musica-head-title">
@@ -223,7 +223,7 @@
           <p data-i18n="pages.musica.musicaSectionCommon.p1">Ritmos que cuentan la historia de nuestra tierra.</p>
         </div>
         <div class="musica-head-actions">
-          <a data-i18n="pages.musica.musicaSectionCommon.a1" href="#archivoSonoro" class="musica-view-link">Ver todos los géneros &rarr;</a>
+          <a data-i18n="pages.musica.musicaSectionCommon.a1" href="#generosMusicales" class="musica-view-link">Ver todos los géneros &rarr;</a>
           <div class="musica-carousel-arrows">
             <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
             <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
@@ -308,7 +308,7 @@
   <!-- ============================================================================
        4. SECCIÓN: ARTISTAS Y COMPOSITORES (8 AVATARES - IMAGEN 1)
        ============================================================================ -->
-  <section class="musica-section-common">
+  <section class="musica-section-common" id="artistasMusica">
     <div class="exact-container">
       <div class="musica-head-row">
         <div class="musica-head-title">
@@ -316,7 +316,7 @@
           <p data-i18n="pages.musica.musicaSectionCommon.p9">Voces que han puesto a Nicaragua en el corazón del mundo.</p>
         </div>
         <div class="musica-head-actions">
-          <a data-i18n="pages.musica.musicaSectionCommon.a2" href="#archivoSonoro" class="musica-view-link">Ver todos los artistas &rarr;</a>
+          <a data-i18n="pages.musica.musicaSectionCommon.a2" href="#artistasMusica" class="musica-view-link">Ver todos los artistas &rarr;</a>
           <div class="musica-carousel-arrows">
             <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
             <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
@@ -537,7 +537,7 @@
   <!-- ============================================================================
        7. SECCIÓN: INSTRUMENTOS TRADICIONALES (6 TARJETAS - IMAGEN 1)
        ============================================================================ -->
-  <section class="musica-section-common">
+  <section class="musica-section-common" id="instrumentosMusica">
     <div class="exact-container">
       <div class="musica-head-row">
         <div class="musica-head-title">
@@ -545,7 +545,7 @@
           <p data-i18n="pages.musica.musicaSectionCommon.p23">Sonidos que nacen de nuestra tierra.</p>
         </div>
         <div class="musica-head-actions">
-          <a data-i18n="pages.musica.musicaSectionCommon.a4" href="#archivoSonoro" class="musica-view-link">Ver todos los instrumentos &rarr;</a>
+          <a data-i18n="pages.musica.musicaSectionCommon.a4" href="#instrumentosMusica" class="musica-view-link">Ver todos los instrumentos &rarr;</a>
           <div class="musica-carousel-arrows">
             <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
             <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
@@ -622,7 +622,7 @@
           <p data-i18n="pages.musica.archivoSonoro.p1">Grabaciones, canciones y recopilaciones para escuchar y aprender.</p>
         </div>
         <div class="musica-head-actions">
-          <span class="musica-archive-count"><strong>93</strong> <span data-i18n="pages.musica.archivoSonoro.span1">Grabaciones preservadas</span></span>
+          <span class="musica-archive-count"><strong id="musicArchiveCount">—</strong> <span data-i18n="music.archiveCountLabel">piezas en el archivo</span></span>
           <a data-i18n="pages.musica.archivoSonoro.a1" href="#archivoSonoro" class="musica-view-link">Ver archivo completo &rarr;</a>
           <div class="musica-carousel-arrows">
             <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
@@ -1084,6 +1084,13 @@
 <script src="js/musica-player.js?v=20261006-a11y-1"></script>
 <script src="js/navigation.js?v=20261006-dialog-1"></script>
 <script src="js/global-injector.js"></script>
+  <script>
+    // 2026-10-06: el contador decía "93" con 6 piezas cargadas. Ahora cuenta las piezas reales del archivo.
+    (function () {
+      var grid = document.getElementById('tracksGrid'), out = document.getElementById('musicArchiveCount');
+      if (grid && out) out.textContent = String(grid.querySelectorAll('.track-card-exact').length);
+    })();
+  </script>
 </body>
 
 </html>

@@ -404,7 +404,7 @@
       <p class="drawer-desc" id="drawerDesc"><span data-i18n="pages.mapa.drawerDesc.p1">Oasis de fuego y agua en el Gran Lago Cocibolca con volcanes Concepción y Maderas.</span></p>
       <div class="drawer-actions">
         <a href="destinos.html" class="btn-drawer-primary" id="drawerLinkDest"><span data-i18n="pages.mapa.drawerLinkDest.a1">Ver ficha completa</span></a>
-        <a href="https://wa.me/50588880000" target="_blank" rel="noopener" class="btn-drawer-secondary" id="drawerLinkWa"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.contact">Contactar</span></a>
+        <a href="https://wa.me/50584431289" target="_blank" rel="noopener" class="btn-drawer-secondary" id="drawerLinkWa"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="actions.contact">Contactar</span></a>
       </div>
     </div>
   </main>
@@ -490,6 +490,17 @@
       }).addTo(mapInstance);
 
       renderMarkers('all');
+
+      // 2026-10-06: "Ver en el mapa" desde la ficha de un aliado o un destino llega con ?lat=&lng=.
+      // Solo se centra si el punto está dentro de Nicaragua; nunca se inventa una ubicación.
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var qLat = parseFloat(params.get('lat')), qLng = parseFloat(params.get('lng'));
+        if (isFinite(qLat) && isFinite(qLng) && qLat >= 10.5 && qLat <= 15.2 && qLng >= -88 && qLng <= -82.5) {
+          mapInstance.setView([qLat, qLng], 15);
+          L.circleMarker([qLat, qLng], { radius: 10, color: '#F65E01', weight: 3, fillColor: '#F65E01', fillOpacity: 0.35 }).addTo(mapInstance);
+        }
+      } catch (e) { /* sin parámetros válidos */ }
       const initialQuery = new URLSearchParams(window.location.search).get('q');
       if (initialQuery) {
         const search = document.getElementById('mapSearchInput');

@@ -1205,3 +1205,41 @@ body.page-aliados-exact {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   Directorio real de aliados (2026-10-06): tarjetas desde Supabase, sello
+   honesto, ficha en <dialog> y estados de carga o error. Contraste AA.
+   ========================================================================== */
+.bq-ally-count { grid-column: 1 / -1; margin: 0 0 4px; font-size: .88rem; color: #334155; }
+.bq-ally-noimg { display: flex; align-items: center; justify-content: center; min-height: 180px; background: linear-gradient(135deg, #165D6F 0%, #0D1B2A 100%); color: #F4E6C1; font-size: 2.4rem; }
+.bq-ally-seal { position: absolute; left: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: .74rem; font-weight: 800; background: #FFFFFF; color: #0D1B2A; box-shadow: 0 4px 12px rgba(13, 27, 42, .2); }
+.bq-ally-seal.is-verified { color: #14532D; }
+.bq-ally-seal.is-legacy { color: #7C2D12; }
+.bq-ally-seal.is-partial { color: #075985; }
+.bq-ally-body .bq-ally-seal, .bq-ally-kicker .bq-ally-seal { position: static; box-shadow: none; border: 1px solid #E2E8F0; }
+.aliado-card-actions .btn-aliado-profile { cursor: pointer; font: inherit; }
+.aliado-card-actions { flex-wrap: wrap; gap: 8px; }
+.aliado-card-actions > * { flex: 1 1 140px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; text-align: center; }
+.bq-ally-more { grid-column: 1 / -1; display: flex; justify-content: center; margin-top: 8px; }
+.bq-ally-error { grid-column: 1 / -1; padding: 24px; border-radius: 16px; background: #FEF2F2; border: 1px solid #FCA5A5; color: #7F1D1D; text-align: center; }
+.bq-ally-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 12px; border: 1.5px solid #165D6F; background: #FFFFFF; color: #165D6F; font-weight: 700; text-decoration: none; cursor: pointer; }
+.bq-ally-btn.is-primary { background: #165D6F; color: #FFFFFF; }
+.bq-ally-btn:focus-visible, .bq-ally-close:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.bq-ally-dialog { width: min(92vw, 640px); max-height: 88vh; border: none; border-radius: 20px; padding: 0; background: #FFFFFF; color: #0D1B2A; box-shadow: 0 30px 80px rgba(13, 27, 42, .35); }
+.bq-ally-dialog::backdrop { background: rgba(13, 27, 42, .6); }
+.bq-ally-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 18px 22px; border-bottom: 1px solid #E2E8F0; background: #F8FAFC; position: sticky; top: 0; }
+.bq-ally-head h2 { margin: 0; font: 800 1.2rem/1.3 Montserrat, system-ui, sans-serif; overflow-wrap: anywhere; }
+.bq-ally-close { width: 44px; height: 44px; flex: 0 0 auto; border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; color: #0D1B2A; cursor: pointer; }
+.bq-ally-body { padding: 16px 22px 22px; }
+.bq-ally-kicker { margin: 0 0 10px; font-size: .84rem; color: #334155; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.bq-ally-desc { color: #334155; line-height: 1.6; margin: 0 0 12px; }
+.bq-ally-data { margin: 0 0 12px; display: grid; gap: 6px; }
+.bq-ally-row { display: grid; grid-template-columns: minmax(110px, 32%) 1fr; gap: 10px; padding-bottom: 6px; border-bottom: 1px solid #F1F5F9; }
+.bq-ally-row dt { font-size: .8rem; font-weight: 700; color: #475569; }
+.bq-ally-row dd { margin: 0; font-size: .88rem; overflow-wrap: anywhere; }
+.bq-ally-row a { color: #165D6F; font-weight: 600; }
+.bq-ally-note { font-size: .82rem; color: #7C2D12; background: #FFF7ED; border: 1px solid #FDBA74; border-radius: 10px; padding: 10px 12px; }
+.bq-ally-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+.bq-ally-secondary { font-size: .86rem; color: #334155; margin: 8px 0 0; }
+.bq-ally-secondary a { color: #165D6F; font-weight: 700; }
+@media (max-width: 560px) { .bq-ally-row { grid-template-columns: 1fr; gap: 2px; } .bq-ally-dialog { width: 100vw; max-width: 100vw; max-height: 100dvh; height: 100dvh; border-radius: 0; } .bq-ally-actions > * { flex: 1 1 auto; } }

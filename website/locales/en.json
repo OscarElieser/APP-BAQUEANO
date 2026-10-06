@@ -85,7 +85,7 @@
     "explore": "Explore",
     "discover": "Discover",
     "plan": "Plan",
-    "book": "Book",
+    "book": "Contact",
     "contact": "Contact",
     "login": "Sign in",
     "logout": "Sign out",
@@ -700,7 +700,7 @@
     "included": "Included",
     "notIncluded": "Not included",
     "requirements": "Requirements",
-    "book": "Book experience",
+    "book": "Contact host",
     "contact": "Check availability"
   },
   "history": {
@@ -728,7 +728,8 @@
     "region": "Region",
     "listen": "Listen",
     "artists": "Artists",
-    "festivals": "Festivals"
+    "festivals": "Festivals",
+    "archiveCountLabel": "pieces in the archive"
   },
   "environmental": {
     "title": "Environmental Stewardship",
@@ -865,7 +866,48 @@
   },
   "allies": {
     "title": "Partner Network",
-    "subtitle": "Communities and businesses that make responsible tourism in Nicaragua possible"
+    "subtitle": "Communities and businesses that make responsible tourism in Nicaragua possible",
+    "sealVerified": "Verified with source",
+    "sealLegacy": "Pending revalidation",
+    "sealPartial": "Partial verification",
+    "waHello": "Hello {name}, I found you on BAQUEANO.",
+    "waOfficial": "Hello BAQUEANO, I'd like contact information for {name}.",
+    "verifiedOn": "Verified: {date}",
+    "officialLine": "BAQUEANO line",
+    "viewProfile": "View profile",
+    "where": "Location",
+    "host": "Host",
+    "hours": "Hours",
+    "phone": "Phone",
+    "email": "Email",
+    "web": "Website",
+    "source": "Source",
+    "updated": "Last verified",
+    "noOwnWa": "This partner doesn't have a verified WhatsApp yet. The button connects you with BAQUEANO's official line, which coordinates the contact.",
+    "contactWa": "Contact via WhatsApp",
+    "contactOfficial": "Contact via BAQUEANO",
+    "onMap": "View on map",
+    "knowTerritory": "Want to explore {territory}?",
+    "exploreTerritory": "Explore the territory",
+    "showMore": "Show more partners ({n} left)",
+    "countReal": "{n} partners published on BAQUEANO, with their source and verification status.",
+    "mVerified": "{n} verified with source",
+    "mLegacy": "{n} pending revalidation",
+    "mPartial": "{n} partially verified",
+    "cat": {
+      "lodging": "Lodging",
+      "food": "Food",
+      "guides": "Guides",
+      "transport": "Transport",
+      "other": "Other"
+    },
+    "loadError": "We couldn't load the partners right now.",
+    "retry": "Retry",
+    "metricsLoading": "Loading real network data…",
+    "statPublished": "Published partners",
+    "statTerritories": "Territories with partners",
+    "statCommission": "Commission: BAQUEANO doesn't charge inside the platform",
+    "statSourced": "With a verifiable source"
   },
   "business": {
     "register": {
@@ -5053,7 +5095,7 @@
     "irAInicioBaqueano": "Go to BAQUEANO Home",
     "buscarEnLaPlataforma": "Search the platform",
     "patrimonioAncestralNicaraguense": "Nicaraguan ancestral heritage",
-    "misReservas": "My reservations",
+    "misReservas": "My requests",
     "naturaleza": "🌿 Nature",
     "cultura": "🏛️ Culture",
     "itinerario": "Itinerary",
@@ -5068,7 +5110,7 @@
     "usd254": "(USD 254)",
     "tuRutaEstaLista": "Your route is ready 🌿",
     "compartirRuta": "Share route",
-    "reservarTodo": "Book everything",
+    "reservarTodo": "Contact route services",
     "recomendacionesVerificadasParaTuRuta": "Verified recommendations for your route",
     "hospedajesRestaurantesGuiasYExperiencias": "Lodging, restaurants, guides and local experiences selected for this itinerary.",
     "verMasRecomendaciones": "See more recommendations →",
@@ -5758,6 +5800,12 @@
     "newsletterBody": "The BAQUEANO newsletter isn't available yet: we did not store your email. Meanwhile, follow us on Instagram and TikTok or write to us from Contact.",
     "handoffTitle": "Send to the BAQUEANO team",
     "handoffBody": "So the team receives it and can reply, we'll take you to Contact with your message already written. Just add your name and email.",
-    "handoffGo": "Go to Contact"
+    "handoffGo": "Go to Contact",
+    "close": "Close"
+  },
+  "payments": {
+    "soonPill": "Coming soon",
+    "soonTitle": "Online payments: coming soon",
+    "soonBody": "We're preparing secure payment options. For now BAQUEANO connects you directly with businesses: we don't charge inside the platform and we don't request or store card details."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T21:32:25.423Z",
+  "generatedAt": "2026-10-06T21:39:20.061Z",
   "languages": [
     "es",
     "en",
@@ -9,21 +9,21 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4285,
-    "en": 4285,
-    "fr": 4285,
-    "it": 4285,
-    "pt": 4285,
-    "de": 4285
+    "es": 4329,
+    "en": 4329,
+    "fr": 4329,
+    "it": 4329,
+    "pt": 4329,
+    "de": 4329
   },
   "html": {
     "files": 33,
-    "total": 3798,
-    "translated": 3797,
+    "total": 3791,
+    "translated": 3790,
     "untranslated": 1
   },
   "js": {
-    "files": 99,
+    "files": 100,
     "translated": 147,
     "untranslated": 725
   },
@@ -71,6 +71,7 @@
     "terminos.html",
     "testimonios.html",
     "js/ai-assistant.js",
+    "js/allies-directory.js",
     "js/ambiental-report-handoff.js",
     "js/async-styles.js",
     "js/ayuda.js",
@@ -159,8 +160,8 @@
     {
       "file": "aliados.html",
       "type": "html",
-      "total": 195,
-      "translated": 195,
+      "total": 189,
+      "translated": 189,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -402,8 +403,8 @@
     {
       "file": "perfil.html",
       "type": "html",
-      "total": 162,
-      "translated": 162,
+      "total": 161,
+      "translated": 161,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -446,6 +447,15 @@
     },
     {
       "file": "js/ai-assistant.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/allies-directory.js",
       "type": "js",
       "total": 0,
       "translated": 0,

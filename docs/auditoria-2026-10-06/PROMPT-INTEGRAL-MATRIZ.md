@@ -103,3 +103,26 @@ QUÉ: matriz de hallazgos de las 29 referencias críticas y el orden de las fase
 - **BAQUI:** los respaldos "Baqüi te sugiere…" de música, gastronomía y destinos abren `baqueano-ia.html?q=` con la consulta real.
 - **Código muerto detectado:** `environmental.js`, `environmental-evidence.js`, `calculator.js`, `admin-ops.js` e `index-features.js` no los carga ninguna página. Contienen éxitos falsos y una orden de pago ficticia. Se conservan (regla "no eliminar") y no se ejecutan.
 - **Pruebas:** diálogo en 390 y 1366 px sin ventanas nativas y con axe sin fallas; QA del sitio con 60 cargas y 0 fallos; i18n con 0 errores.
+
+## Avance — Fase 3 (botones y datos honestos), 2026-10-06
+
+- **"Reservar" → "Contactar"** en la causa, es decir en las claves de 6 idiomas:
+  - `actions.book`, `experiences.book`, `common.reservarTodo` ("Contactar servicios de la ruta") y `common.misReservas` ("Mis gestiones");
+  - los mensajes de WhatsApp ya no dicen "deseo reservar".
+- **Teléfonos falsos:** 34 números ficticios `5058888000X` en 6 archivos pasan a la línea oficial (+505 8443-1289).
+- **Pagos (perfil):** el bloque pasa a "Pagos en línea: próximamente". No cobramos en la plataforma ni pedimos ni guardamos tarjetas, y no hay "checkout" ni historial ficticio.
+- **Aliados (`js/allies-directory.js`):**
+  - directorio real desde `businesses` (30 publicados), con sello honesto: verificado con fuente, pendiente de revalidar o parcial;
+  - "Ver perfil" abre la ficha real: contacto solo si existe, fuente, fecha, mapa y "¿Querés conocer…?";
+  - filtros con los 17 territorios y métricas calculadas;
+  - se retiraron "14 verificados", "50+", "12" y "100%";
+  - si Supabase falla, se muestra un error con "Reintentar".
+- **Mapa:** soporta `?lat=&lng=` para enfocar el punto exacto.
+- **Música:**
+  - el "93" fijo pasa al conteo real de piezas;
+  - los enlaces "Ver todos los géneros / artistas / instrumentos" llevan a su propia sección y no al archivo.
+- **Ambiental:** "Quiero unirme" lleva a la comunidad real (testimonios) y no al perfil.
+- **Pruebas:** aliados con Playwright + axe en 390 y 1366 px; QA del sitio con 60 cargas y 0 fallos; i18n con 0 errores (41 claves nuevas).
+- **Pendiente:**
+  - imágenes reales de los aliados (`cover_image` está vacío en los 30);
+  - las tarjetas fijas antiguas de aliados siguen en el HTML como contenido sin JavaScript y se reemplazan al cargar los datos reales.

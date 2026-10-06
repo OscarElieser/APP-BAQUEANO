@@ -85,7 +85,7 @@
     "explore": "Esplora",
     "discover": "Scopri",
     "plan": "Pianifica",
-    "book": "Prenota",
+    "book": "Contatta",
     "contact": "Contatta",
     "login": "Accedi",
     "logout": "Esci",
@@ -700,7 +700,7 @@
     "included": "Incluso",
     "notIncluded": "Non incluso",
     "requirements": "Requisiti",
-    "book": "Prenota l'esperienza",
+    "book": "Contatta l'host",
     "contact": "Verifica disponibilità"
   },
   "history": {
@@ -728,7 +728,8 @@
     "region": "Regione",
     "listen": "Ascolta",
     "artists": "Artisti",
-    "festivals": "Festival"
+    "festivals": "Festival",
+    "archiveCountLabel": "brani nell'archivio"
   },
   "environmental": {
     "title": "Tutela ambientale",
@@ -865,7 +866,48 @@
   },
   "allies": {
     "title": "Rete di partner",
-    "subtitle": "Comunità e imprese che rendono possibile il turismo responsabile in Nicaragua"
+    "subtitle": "Comunità e imprese che rendono possibile il turismo responsabile in Nicaragua",
+    "sealVerified": "Verificato con fonte",
+    "sealLegacy": "In attesa di riconvalida",
+    "sealPartial": "Verifica parziale",
+    "waHello": "Ciao {name}, vi ho trovati su BAQUEANO.",
+    "waOfficial": "Ciao BAQUEANO, vorrei i contatti di {name}.",
+    "verifiedOn": "Verificato: {date}",
+    "officialLine": "Linea BAQUEANO",
+    "viewProfile": "Vedi profilo",
+    "where": "Posizione",
+    "host": "Host",
+    "hours": "Orari",
+    "phone": "Telefono",
+    "email": "Email",
+    "web": "Sito web",
+    "source": "Fonte",
+    "updated": "Ultima verifica",
+    "noOwnWa": "Questo partner non ha ancora un WhatsApp verificato. Il pulsante ti mette in contatto con la linea ufficiale di BAQUEANO, che coordina il contatto.",
+    "contactWa": "Contatta su WhatsApp",
+    "contactOfficial": "Contatta tramite BAQUEANO",
+    "onMap": "Vedi sulla mappa",
+    "knowTerritory": "Vuoi conoscere {territory}?",
+    "exploreTerritory": "Esplora il territorio",
+    "showMore": "Mostra altri partner ({n} rimanenti)",
+    "countReal": "{n} partner pubblicati su BAQUEANO, con fonte e stato di verifica.",
+    "mVerified": "{n} verificati con fonte",
+    "mLegacy": "{n} in attesa di riconvalida",
+    "mPartial": "{n} con verifica parziale",
+    "cat": {
+      "lodging": "Alloggio",
+      "food": "Gastronomia",
+      "guides": "Guide",
+      "transport": "Trasporto",
+      "other": "Altro"
+    },
+    "loadError": "Non siamo riusciti a caricare i partner in questo momento.",
+    "retry": "Riprova",
+    "metricsLoading": "Caricamento dei dati reali della rete…",
+    "statPublished": "Partner pubblicati",
+    "statTerritories": "Territori con partner",
+    "statCommission": "Commissione: BAQUEANO non incassa nulla sulla piattaforma",
+    "statSourced": "Con fonte verificabile"
   },
   "business": {
     "register": {
@@ -5053,7 +5095,7 @@
     "irAInicioBaqueano": "Vai alla home di BAQUEANO",
     "buscarEnLaPlataforma": "Cerca nella piattaforma",
     "patrimonioAncestralNicaraguense": "Patrimonio ancestrale nicaraguense",
-    "misReservas": "Le mie prenotazioni",
+    "misReservas": "Le mie richieste",
     "naturaleza": "🌿 Natura",
     "cultura": "🏛️ Cultura",
     "itinerario": "Itinerario",
@@ -5068,7 +5110,7 @@
     "usd254": "(USD 254)",
     "tuRutaEstaLista": "Il tuo itinerario è pronto 🌿",
     "compartirRuta": "Condividi itinerario",
-    "reservarTodo": "Prenota tutto",
+    "reservarTodo": "Contatta i servizi del percorso",
     "recomendacionesVerificadasParaTuRuta": "Consigli verificati per il tuo itinerario",
     "hospedajesRestaurantesGuiasYExperiencias": "Alloggi, ristoranti, guide ed esperienze locali selezionati per questo itinerario.",
     "verMasRecomendaciones": "Vedi altri consigli →",
@@ -5758,6 +5800,12 @@
     "newsletterBody": "La newsletter di BAQUEANO non è ancora disponibile: non abbiamo salvato la tua email. Nel frattempo seguici su Instagram e TikTok o scrivici dalla pagina Contatti.",
     "handoffTitle": "Invia al team di BAQUEANO",
     "handoffBody": "Perché il team lo riceva e possa risponderti, ti portiamo a Contatti con il messaggio già scritto. Aggiungi solo nome ed email.",
-    "handoffGo": "Vai a Contatti"
+    "handoffGo": "Vai a Contatti",
+    "close": "Chiudi"
+  },
+  "payments": {
+    "soonPill": "Prossimamente",
+    "soonTitle": "Pagamenti online: prossimamente",
+    "soonBody": "Stiamo preparando opzioni di pagamento sicure. Per ora BAQUEANO ti mette in contatto diretto con le attività: non incassiamo nulla sulla piattaforma e non chiediamo né conserviamo dati di carte."
   }
 }
