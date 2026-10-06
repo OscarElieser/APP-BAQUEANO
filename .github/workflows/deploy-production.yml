@@ -206,7 +206,11 @@ jobs:
           for t in staff_roles audit_logs ops_backup_entities profiles reservations sos_events user_roles admin_user_directory identity_links business_members; do
             if echo "$posture" | jq -e --arg t "$t" '.relations[$t] | (.exists | not) or (.anon_select == false and .anon_insert == false)' >/dev/null; then
               echo "✅ anon sin privilegios sobre $t"
-            else echo "::error::anon tiene privilegios sobre $t"; exit 1; fi
+            elif echo "$posture" | jq -e --arg t "$t" '.relations[$t] | .rls == true and .anon_insert == false' >/dev/null; then
+              # Protegida por RLS (no por privilegio): la lectura responde 200 sin filas y no deja error en los logs.
+              body="$(curl -s --max-time 20 "$REST/$t?select=*&limit=1" -H "apikey: $ANON")"
+              if [[ "$body" == "[]" ]]; then echo "✅ RLS: anon no ve filas de $t"; else echo "::error::anon ve filas de $t"; exit 1; fi
+            else echo "::error::anon tiene privilegios sobre $t sin RLS"; exit 1; fi
           done
       - name: Cabeceras de seguridad y redirecciones
         # Corre aunque /health no coincida: la evidencia de seguridad no debe
