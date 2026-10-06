@@ -4381,3 +4381,4 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - i18n-audit.mjs: se excluyen archivos de verificación de Google Search Console (google<hex>.html, apareció google5c73d71f3e5f8337.html a las 12:53, no creado por esta sesión) — no son interfaz y deben conservar su contenido exacto.
 - Coordinación: la sesión de hospedajes (Antigravity) tenía cambios sin commit en territories-data.js/destinos-verified.js/mapa.html; se editó encima sin revertir nada (CATEGORY_KIND conserva 'hospedaje'). Nada commiteado por esta sesión.
 - **Estado:** ✅ BAQUEANO IMPACTO (repo) y catálogo gastronómico completados. Pendiente autorización: aplicar migración 20261005070000 y desplegar baqueano-ops / baqueano-ai.
+- 2026-10-06 01:51 Propietario: muchos correos 'Run failed: BAQUEANO Producción (Azure)' (QA en navegador falló 10 min; Verificar despliegue en Azure falló 14 min) y 'Run failed: CodeQL'. Investigando.
