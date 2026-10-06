@@ -30,7 +30,7 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
   <link rel="stylesheet" href="styles.css?v=20260930-quality-restore-1">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
-  <link rel="stylesheet" href="css/pages/destinos-exact.css?v=20261005-base-1">
+  <link rel="stylesheet" href="css/pages/destinos-exact.css?v=20261005-live-1">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
@@ -296,7 +296,10 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
       </div>
 
       <!-- ============================================================================
-           5. TODOS LOS DESTINOS (128) (IMAGEN 3)
+           5. TODOS LOS DESTINOS (IMAGEN 3)
+           POR QUÉ: deben salir TODOS los lugares publicados, no 10 fijos.
+           CÓMO: js/destinos-catalog-live.js reemplaza en la página estas tarjetas por
+             los places publicados de Supabase; estas quedan como respaldo sin conexión.
            ============================================================================ -->
       <div class="section-header-exact">
         <div class="title-group">
@@ -650,7 +653,12 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
   </footer>
 
   <!-- Scripts Modulares -->
-  <script defer src="js/destinos-interactions.js?v=20261004-pag-1"></script>
+  <!-- Catálogo vivo: Supabase (places publicados) → "Todos los destinos"; las tarjetas
+       estáticas de arriba quedan solo como respaldo sin conexión. Orden: servicio → catálogo → interacciones. -->
+  <script defer src="js/services/places-service.js?v=20261005-1"></script>
+  <script defer src="js/territory-media-catalog.js?v=20260926-1"></script>
+  <script defer src="js/destinos-catalog-live.js?v=20261005-2"></script>
+  <script defer src="js/destinos-interactions.js?v=20261005-live-1"></script>
   <script defer src="js/destinos-verified.js?v=20261005-nat-1"></script>
 
   <script>

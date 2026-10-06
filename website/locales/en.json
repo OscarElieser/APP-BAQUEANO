@@ -2899,6 +2899,11 @@
       },
       "destinosHeroSearch": {
         "inputPlaceholder1": "Search destinations, experiences, businesses..."
+      },
+      "live": {
+        "partial": "Partly verified",
+        "pending": "Pending verification",
+        "territoryPhoto": "Photo of the area"
       }
     },
     "experiencias": {
@@ -5210,7 +5215,18 @@
         "parque": "Parks and protected areas",
         "restaurante": "Restaurants",
         "comedor": "Local eateries (comedores)",
-        "kiosco": "Food kiosks"
+        "kiosco": "Food kiosks",
+        "lago": "Lakes",
+        "cerro": "Hills",
+        "canon": "Canyons",
+        "museo": "Museums",
+        "sitio_historico": "Historic sites",
+        "centro_cultural": "Cultural centres",
+        "mercado": "Markets",
+        "turismo_rural": "Rural tourism",
+        "turismo_comunitario": "Community tourism",
+        "agroturismo": "Agritourism",
+        "atractivo": "Attractions"
       }
     }
   },

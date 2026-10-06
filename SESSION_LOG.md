@@ -20,6 +20,26 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 # ðŸ§­ BAQUEANO â€” BitÃ¡cora Persistente de Sesiones
 
+## 🧭 "TODOS LOS DESTINOS (10)": SOLO SALEN 10 (05-10-2026)
+
+- **Consulta:** captura de la sección "Todos los destinos (10)" (Isletas de Granada, Miraflor, Laguna de Apoyo, Corn Island, Reserva Indio Maíz… con calificaciones y "Desde C$") — *"XQ ME SIGUEN SALIENDO SOLO LOS 10 REVISAR AHI"*.
+- **Causa:** la sección era HTML fijo: 10 tarjetas escritas a mano en destinos.html, con calificaciones ("4.8 (310)") y precios ("Desde C$ 400") sin fuente; además "Solo verificados" usaba calificación ≥ 4.7 como si fuera verificación. No consultaba Supabase (237 lugares publicados).
+- **Corrección (local, sin deploy):** `website/js/destinos-catalog-live.js` (nuevo) carga los places publicados con `BaqueanoPlacesService` y pinta tarjetas con sello real (Verificado / Verificación parcial / Por verificar), sin calificación ni precio inventados; foto propia si existe o foto REAL del territorio (`territory-media-catalog.js`) con etiqueta "Foto del territorio" (antes: ruta inventada → 404 → logo). `destinos-interactions.js`: espera el catálogo vivo, "Solo verificados" = verification_status real, sin precio no entra en rangos de precio, filtro con los 17 territorios. destinos.html carga servicio → catálogo → interacciones; las 10 tarjetas estáticas quedan en el archivo como respaldo sin conexión. CSS de sellos en destinos-exact.css. 14 claves i18n × 6 idiomas.
+- **Evidencia (Playwright local, Supabase real):** contador (237), 24 páginas de 10, Playas = 18, Solo verificados = 96, 0 errores JS, 0 respuestas 4xx de Supabase o assets, 0 logos de reemplazo, sin desborde a 1366 y 390 px. `npm run i18n` 0 errores. Sin commit/push/deploy.
+- **Pendiente:** autorización para publicar; y los 3 pasos de "errores y warnings".
+
+
+## 🧭 DIAGNÓSTICO "NO QUIERO VER ERRORES NI WARNINGS" EN SUPABASE (05-10-2026 ~18:00)
+
+- **Consulta:** capturas del panel (Auth 1 warning · Postgres 21 errores · API Gateway 20 warnings, 16:19–17:17). Llave de Management API guardada por el propietario en `SUPABASE_ACCESS_TOKEN` (usuario Windows) mediante diálogo enmascarado; nunca se mostró.
+- **Lectura de logs (solo lectura, endpoint nuevo `/analytics/endpoints/logs`, tabla `logs`):**
+  1. **Postgres 21 ERROR (42501/22023):** 5 ráfagas idénticas (15:39, 15:41, 15:56, 17:01, 17:15) = controles de seguridad de CI que "atacan" a propósito: `deploy-production.yml` (curl: lee staff_roles, audit_logs, ops_backup_entities, profiles, reservations, sos_events, admin_user_directory…) y `tools/kronox-prod-evidence.mjs` (node: inserta en destinations/businesses/municipalities, lee 9 tablas, kpi_dashboard, track_event user_registered). Postgres los rechazó correctamente: no hubo fuga.
+  2. **Auth 1 warning (bad_jwt):** prueba "identity invite con JWT falso" (Bearer a.b.c) → baqueano-identity llamaba auth.getUser con un token malformado.
+  3. **API Gateway 4xx:** los mismos controles (401) + `HEAD backup_operations` 401 ×781 desde baqueano-status entre 09:45 y 15:31 (ya corregido por otra sesión: 200 desde 15:32, función v103 15:37) + 1 consulta mía a `protected_area_details` (404, 16:47) + `places` 400 (16:32) y `regions` 404 (16:12) aislados, sin repetición.
+- **Corrección preparada (repo, NO aplicada):** migración `20261005095000_security_posture.sql` (función `security_posture()` de solo lectura: privilegios efectivos + RLS + eventos de servidor) · CI y Kronox leen la postura en vez de provocar denegaciones · `baqueano-identity` valida la forma del JWT antes de llamar a Auth. Pruebas: postura 10/10 en PGlite (y la lectura directa sigue denegada); validador JWT 5/5; YAML válido; `node --check` OK.
+- **Pendiente de autorización:** (1) aplicar la migración en producción, (2) desplegar baqueano-identity, (3) commit + push de CI (en ese orden; si se sube CI antes de la migración, el control falla).
+
+
 ## 🧭 MÓDULO AMBIENTAL MARENA — REANUDACIÓN (05-10-2026)
 
 - **Consulta / Mandato del Usuario:** *"ok te autorizo"* (respuesta a "¿Retomo MARENA o sigo con la biblioteca?"). Se retoma MARENA (opción 1, AGENTS.md §6). Sin commit/push/db push/deploy.

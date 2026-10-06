@@ -2899,6 +2899,11 @@
       },
       "destinosHeroSearch": {
         "inputPlaceholder1": "Buscar destinos, experiências, negócios..."
+      },
+      "live": {
+        "partial": "Verificação parcial",
+        "pending": "A verificar",
+        "territoryPhoto": "Foto do território"
       }
     },
     "experiencias": {
@@ -5210,7 +5215,18 @@
         "parque": "Parques e áreas protegidas",
         "restaurante": "Restaurantes",
         "comedor": "Comedores (restaurantes populares)",
-        "kiosco": "Quiosques"
+        "kiosco": "Quiosques",
+        "lago": "Lagos",
+        "cerro": "Morros",
+        "canon": "Cânions",
+        "museo": "Museus",
+        "sitio_historico": "Sítios históricos",
+        "centro_cultural": "Centros culturais",
+        "mercado": "Mercados",
+        "turismo_rural": "Turismo rural",
+        "turismo_comunitario": "Turismo comunitário",
+        "agroturismo": "Agroturismo",
+        "atractivo": "Atrativos"
       }
     }
   },

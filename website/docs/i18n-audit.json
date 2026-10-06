@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T23:27:44.603Z",
+  "generatedAt": "2026-10-06T00:04:41.019Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 3917,
-    "en": 3917,
-    "fr": 3917,
-    "it": 3917,
-    "pt": 3917,
-    "de": 3917
+    "es": 3931,
+    "en": 3931,
+    "fr": 3931,
+    "it": 3931,
+    "pt": 3931,
+    "de": 3931
   },
   "html": {
     "files": 31,
@@ -23,7 +23,7 @@
     "untranslated": 1
   },
   "js": {
-    "files": 87,
+    "files": 88,
     "translated": 134,
     "untranslated": 729
   },
@@ -78,6 +78,7 @@
     "js/community-api.js",
     "js/definitive-index-interactions.js",
     "js/destination-community.js",
+    "js/destinos-catalog-live.js",
     "js/destinos-provenance.js",
     "js/destinos-supabase.js",
     "js/destinos-verified.js",
@@ -645,6 +646,15 @@
       "untranslated": 6,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/destinos-catalog-live.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/destinos-gastronomia.js",

@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-05T23:27:44.603Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3917 · en 3917 · fr 3917 · it 3917 · pt 3917 · de 3917
+Generado: 2026-10-06T00:04:41.019Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 3931 · en 3931 · fr 3931 · it 3931 · pt 3931 · de 3931
 
 HTML: 3660/3661 textos con clave (1 pendientes) · JS: 729 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -184,6 +184,7 @@ HTML: 3660/3661 textos con clave (1 pendientes) · JS: 729 textos dinámicos pen
 | js/community-api.js | js | 0 | 0 | 0 | 100 % |
 | js/definitive-index-interactions.js | js | 0 | 0 | 0 | 100 % |
 | js/destination-community.js | js | 0 | 0 | 0 | 100 % |
+| js/destinos-catalog-live.js | js | 0 | 0 | 0 | 100 % |
 | js/destinos-provenance.js | js | 0 | 0 | 0 | 100 % |
 | js/destinos-supabase.js | js | 8 | 8 | 0 | 100 % |
 | js/destinos-verified.js | js | 15 | 15 | 0 | 100 % |
