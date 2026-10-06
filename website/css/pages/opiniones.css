@@ -1,0 +1,163 @@
+/* ============================================================================
+   🧭 BAQUEANO — OPINIONES SOBRE BAQUEANO (opiniones.css)
+   🎯 POR QUÉ: que dejar una opinión se sienta como comentar en una comunidad, no como una
+      encuesta, y que la calificación se lea como evidencia: promedio, total y distribución.
+   ⚙️ CÓMO: paleta oficial (#165D6F, #F65E01, #F4E6C1, #0F172A), mobile-first con una columna que
+      pasa a dos desde 900 px. Estrellas grandes (48 px de área táctil) y foco visible. Contraste AA
+      sobre fondo claro.
+   📦 QUÉ: héroe, resumen y barras, formulario, acceso, "Mi opinión", lista con foto, distintivo,
+      respuesta de BAQUEANO y diálogo de reporte.
+   ============================================================================ */
+.pr-page { background: #F7F4EC; color: #0F172A; }
+.pr-page [hidden] { display: none !important; }
+.pr-wrap { width: min(1180px, 100% - 32px); margin-inline: auto; }
+.pr-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Héroe */
+.pr-hero { background: radial-gradient(circle at 15% 0%, rgba(246, 94, 1, 0.22), transparent 42%), linear-gradient(135deg, #0B2335 0%, #165D6F 100%); color: #FFFFFF; padding: clamp(104px, 13vw, 140px) 0 clamp(36px, 5vw, 60px); }
+.pr-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(244, 230, 193, 0.14); color: #F4E6C1; font: 800 0.72rem/1.2 Montserrat, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; }
+.pr-hero h1 { margin: 14px 0 10px; font: 900 clamp(1.9rem, 5vw, 3.2rem)/1.08 Montserrat, sans-serif; color: #FFFFFF; }
+.pr-lead { margin: 0; max-width: 62ch; font-size: clamp(1rem, 1.6vw, 1.12rem); line-height: 1.6; color: rgba(255, 255, 255, 0.9); }
+
+/* Rejilla: una columna en celular, dos en escritorio */
+.pr-grid { display: grid; gap: 18px; padding: 22px 0 56px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) {
+  .pr-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); align-items: start; }
+  .pr-summary { grid-column: 1; grid-row: 1; }
+  .pr-trust { grid-column: 1; grid-row: 2; }
+  .pr-compose { grid-column: 2; grid-row: 1 / span 2; }
+  .pr-list-section { grid-column: 1 / -1; }
+}
+.pr-card { background: #FFFFFF; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 20px; padding: clamp(16px, 3vw, 24px); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06); min-width: 0; }
+.pr-card h2 { margin: 0 0 12px; font: 800 1.15rem/1.3 Montserrat, sans-serif; color: #0F172A; }
+.pr-muted, .pr-help { color: #475569; font-size: 0.9rem; line-height: 1.5; }
+.pr-help { margin: 4px 0 12px; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+
+/* Resumen */
+.pr-average { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 4px 14px; }
+.pr-average-number { grid-row: span 2; font: 900 3.2rem/1 Montserrat, sans-serif; color: #165D6F; }
+.pr-based-on { margin: 0; color: #334155; font-size: 0.92rem; }
+.pr-stars { display: inline-flex; gap: 2px; color: #D97706; font-size: 0.95rem; }
+.pr-stars-lg { font-size: 1.3rem; }
+.pr-distribution { display: grid; gap: 8px; margin: 16px 0 12px; }
+.pr-dist-row { display: grid; grid-template-columns: 44px minmax(0, 1fr) 40px; align-items: center; gap: 10px; font-weight: 700; font-size: 0.88rem; color: #334155; }
+.pr-dist-label i { color: #D97706; font-size: 0.8rem; }
+.pr-dist-bar { height: 10px; border-radius: 999px; background: #E2E8F0; overflow: hidden; }
+.pr-dist-fill { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #165D6F, #1F8A9E); }
+.pr-dist-count { text-align: right; font-variant-numeric: tabular-nums; }
+.pr-source { margin: 12px 0 0; padding-top: 12px; border-top: 1px dashed rgba(15, 23, 42, 0.14); color: #475569; font-size: 0.82rem; line-height: 1.5; }
+.pr-source i { color: #165D6F; }
+
+/* Formulario */
+.pr-form { display: block; }
+.pr-label { display: block; margin: 0 0 6px; font: 800 0.95rem/1.35 Montserrat, sans-serif; color: #0F172A; }
+.pr-form textarea, .pr-form input[type="email"], .pr-form input[type="password"], .pr-form input[type="text"], .pr-dialog textarea, .pr-dialog select {
+  display: block; width: 100%; max-width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1.5px solid #CBD5E1; border-radius: 14px;
+  font: 500 1rem/1.5 "Plus Jakarta Sans", system-ui, sans-serif; color: #0F172A; background: #FFFFFF; resize: vertical;
+}
+.pr-form textarea:focus, .pr-form input:focus, .pr-dialog textarea:focus, .pr-dialog select:focus { outline: 3px solid rgba(22, 93, 111, 0.35); outline-offset: 1px; border-color: #165D6F; }
+.pr-form [aria-invalid="true"] { border-color: #B91C1C; }
+.pr-counter { font-variant-numeric: tabular-nums; }
+.pr-error { margin: 4px 0 10px; color: #B91C1C; font-weight: 700; font-size: 0.88rem; }
+.pr-form-error { padding: 10px 12px; border-radius: 12px; background: #FEF2F2; }
+
+/* Estrellas: radios reales (teclado con flechas), área táctil de 48 px */
+.pr-rating { border: 0; margin: 14px 0 6px; padding: 0; min-width: 0; }
+.pr-stars-input { display: flex; gap: 4px; flex-wrap: wrap; }
+.pr-stars-input input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.pr-stars-input label { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; cursor: pointer; color: #CBD5E1; font-size: 1.7rem; transition: color 0.15s ease, transform 0.15s ease; }
+.pr-stars-input label.is-on { color: #D97706; }
+.pr-stars-input label:hover { transform: scale(1.08); }
+.pr-stars-input input:focus-visible + label { outline: 3px solid #165D6F; outline-offset: 2px; }
+.pr-rating-text { min-height: 1.4em; margin: 4px 0 0; font-weight: 700; color: #334155; }
+@media (prefers-reduced-motion: reduce) { .pr-stars-input label { transition: none; } .pr-stars-input label:hover { transform: none; } }
+
+.pr-check { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; font-size: 0.92rem; line-height: 1.5; color: #1E293B; cursor: pointer; }
+.pr-check input { flex: 0 0 auto; width: 22px; height: 22px; margin-top: 1px; accent-color: #165D6F; }
+.pr-consent { margin-top: 6px; padding: 12px 14px; border-radius: 14px; background: #F1F5F9; }
+.pr-consent .pr-check { margin: 0; }
+.pr-legal-links { margin: 8px 0 0 32px; font-size: 0.86rem; }
+.pr-legal-links a, .pr-trust a { color: #0E5566; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+
+/* Botones */
+.pr-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 12px 20px; border-radius: 999px; border: 2px solid transparent; font: 800 0.92rem/1.2 Montserrat, sans-serif; letter-spacing: 0.02em; cursor: pointer; text-decoration: none; }
+.pr-btn:focus-visible { outline: 3px solid #165D6F; outline-offset: 3px; }
+.pr-btn[disabled] { opacity: 0.6; cursor: progress; }
+.pr-btn-primary { width: 100%; margin-top: 14px; background: #F65E01; color: #FFFFFF; box-shadow: 0 10px 22px rgba(246, 94, 1, 0.28); }
+.pr-btn-primary:hover { background: #D94F00; }
+.pr-btn-secondary { margin-top: 10px; background: #165D6F; color: #FFFFFF; }
+.pr-btn-ghost { background: transparent; color: #0E5566; border-color: rgba(22, 93, 111, 0.35); }
+.pr-btn-danger { background: transparent; color: #B91C1C; border-color: rgba(185, 28, 28, 0.35); }
+.pr-btn-google { width: 100%; background: #FFFFFF; color: #0F172A; border-color: #CBD5E1; }
+.pr-link { background: none; border: 0; padding: 4px 0; color: #0E5566; font-weight: 700; text-decoration: underline; cursor: pointer; font-size: 0.86rem; }
+
+/* Sesión */
+.pr-signed { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 14px; padding: 8px 12px; border-radius: 999px; background: #ECFEFF; color: #0E5566; font-weight: 700; font-size: 0.9rem; }
+.pr-signed-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+.pr-login { margin-top: 14px; padding: 16px; border-radius: 16px; border: 1.5px solid rgba(246, 94, 1, 0.4); background: #FFF7ED; }
+.pr-login-msg { margin: 0 0 6px; font-weight: 800; color: #7C2D12; line-height: 1.5; }
+.pr-email-login { margin-top: 10px; }
+.pr-email-login summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-weight: 800; color: #0E5566; }
+.pr-email-fields { display: grid; gap: 4px; padding-top: 4px; }
+
+/* Mi opinión y confirmación */
+.pr-mine { margin: 0 0 16px; padding: 14px; border-radius: 16px; background: #F0FDFA; border: 1px solid rgba(22, 93, 111, 0.2); }
+.pr-mine h3 { margin: 0 0 6px; font: 800 1rem/1.3 Montserrat, sans-serif; }
+.pr-mine-status { margin: 0; font-weight: 800; color: #0E5566; }
+.pr-mine-status[data-status="rejected"], .pr-mine-status[data-status="hidden"] { color: #B91C1C; }
+.pr-mine-reason { margin: 6px 0 0; color: #334155; font-size: 0.9rem; }
+.pr-mine-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.pr-mine-actions .pr-btn { min-height: 44px; padding: 8px 14px; font-size: 0.82rem; }
+.pr-thanks { margin-top: 16px; padding: 18px; border-radius: 16px; background: #ECFDF5; border: 1px solid #A7F3D0; text-align: center; }
+.pr-thanks i { font-size: 2rem; color: #047857; }
+.pr-thanks h3 { margin: 8px 0 6px; font: 800 1.1rem/1.3 Montserrat, sans-serif; color: #064E3B; }
+.pr-thanks p { margin: 0; color: #065F46; line-height: 1.55; }
+.pr-status-msg { margin-top: 12px; padding: 10px 12px; border-radius: 12px; background: #F1F5F9; font-weight: 700; }
+
+/* Confianza */
+.pr-trust ul { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 12px; }
+.pr-trust li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; font-size: 0.92rem; color: #1E293B; }
+.pr-trust li i { color: #165D6F; margin-top: 4px; }
+
+/* Lista pública */
+.pr-list-section h2 { margin: 8px 0 14px; font: 800 1.3rem/1.3 Montserrat, sans-serif; }
+.pr-list { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 760px) { .pr-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1500px) { .pr-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.pr-review { background: #FFFFFF; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 18px; padding: 16px; display: grid; gap: 10px; min-width: 0; }
+.pr-review-head { display: flex; gap: 12px; align-items: center; min-width: 0; }
+.pr-avatar { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; background: #165D6F; }
+.pr-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.pr-avatar-initials { color: #FFFFFF; font: 800 1rem/1 Montserrat, sans-serif; }
+.pr-review-who { display: grid; gap: 2px; min-width: 0; }
+.pr-review-name { font: 800 1rem/1.3 Montserrat, sans-serif; overflow-wrap: anywhere; }
+.pr-badge { display: inline-flex; align-items: center; gap: 6px; width: fit-content; padding: 3px 10px; border-radius: 999px; background: #ECFEFF; color: #0E5566; font-size: 0.76rem; font-weight: 800; cursor: help; }
+.pr-review-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; color: #475569; font-size: 0.84rem; }
+.pr-review-edited { padding: 2px 8px; border-radius: 999px; background: #F1F5F9; font-weight: 700; }
+.pr-review-text { margin: 0; line-height: 1.6; color: #1E293B; overflow-wrap: anywhere; white-space: pre-line; }
+.pr-response { margin-top: 2px; padding: 12px 14px; border-left: 4px solid #F65E01; border-radius: 0 12px 12px 0; background: #FFF7ED; }
+.pr-response-head { margin: 0 0 4px; font: 800 0.82rem/1.3 Montserrat, sans-serif; color: #9A3412; text-transform: uppercase; letter-spacing: 0.06em; }
+.pr-response-text { margin: 0; line-height: 1.55; color: #431407; overflow-wrap: anywhere; }
+.pr-report { justify-self: start; color: #475569; }
+
+/* Diálogo de reporte */
+.pr-dialog { width: min(520px, 100% - 32px); border: 0; border-radius: 20px; padding: 22px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.3); }
+.pr-dialog::backdrop { background: rgba(15, 23, 42, 0.55); }
+.pr-dialog h2 { margin: 0 0 12px; font: 800 1.15rem/1.3 Montserrat, sans-serif; }
+.pr-dialog select, .pr-dialog textarea { margin-bottom: 12px; }
+.pr-dialog-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+.pr-dialog-actions .pr-btn-primary { width: auto; margin-top: 0; }
+
+@media (max-width: 380px) {
+  .pr-stars-input label { width: 44px; height: 44px; font-size: 1.5rem; }
+  .pr-average-number { font-size: 2.6rem; }
+}
+
+/* Normas de la Comunidad (normas-comunidad.html) */
+.nc-article { max-width: 860px; padding: 24px 0 56px; }
+.nc-notice { display: flex; gap: 10px; align-items: flex-start; padding: 14px 16px; border-radius: 14px; background: #FFF7ED; border: 1px solid rgba(246, 94, 1, 0.35); color: #7C2D12; line-height: 1.55; font-weight: 600; }
+.nc-notice i { margin-top: 4px; color: #C2410C; }
+.nc-section { margin-top: 22px; padding: 18px 20px; border-radius: 18px; background: #FFFFFF; border: 1px solid rgba(15, 23, 42, 0.08); }
+.nc-section h2 { margin: 0 0 8px; font: 800 1.15rem/1.3 Montserrat, sans-serif; color: #0F172A; }
+.nc-section p, .nc-section li { margin: 0 0 8px; line-height: 1.65; color: #1E293B; }
+.nc-section ul { margin: 0; padding-left: 20px; }

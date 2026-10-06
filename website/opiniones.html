@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html data-i18n-description="platformReviews.metaDescription" data-i18n-title="platformReviews.metaTitle" lang="es" data-bq-page="opiniones" data-bq-group="comunidad">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!--
+    🎯 POR QUÉ: el propietario pidió (2026-10-06) opiniones auténticas sobre el USO de BAQUEANO para
+       demostrar credibilidad con evidencia:
+       - solo usuarios autenticados;
+       - una opinión activa por cuenta;
+       - moderación con motivo;
+       - promedio y distribución calculados en Supabase.
+       Es distinta de testimonios.html, que reúne experiencias en destinos.
+    ⚙️ CÓMO: js/platform-reviews.js → Edge Function baqueano-reviews (Supabase) con la sesión de
+       Firebase (Google o cuenta BAQUEANO). El inicio de sesión ocurre en esta misma página, así el
+       usuario vuelve solo a su formulario y el borrador se conserva. Todo texto se pinta con
+       textContent; i18n en 6 idiomas (claves platformReviews.*).
+    📦 QUÉ: resumen real (promedio, total, distribución), formulario natural (comentario → estrellas
+       → mejora opcional → consentimiento), "Mi opinión" (estado, editar, retirar, eliminar), lista
+       pública con foto, distintivo "Usuario BAQUEANO autenticado" y respuesta de BAQUEANO, y reporte.
+  -->
+  <title>Opiniones sobre BAQUEANO | Usuarios autenticados</title>
+  <meta name="description" content="Opiniones reales de usuarios autenticados sobre BAQUEANO: calificación promedio y distribución calculadas solo con opiniones aprobadas.">
+  <link rel="canonical" href="https://baqueanonicaragua.com/opiniones.html">
+  <meta name="theme-color" content="#165D6F">
+  <meta property="og:title" content="Opiniones sobre BAQUEANO">
+  <meta property="og:description" content="Opiniones reales de usuarios autenticados. Promedio calculado solo con opiniones aprobadas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css?v=20260929-help-1">
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
+  <link rel="stylesheet" href="css/pages/opiniones.css?v=20261006-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+<body class="pr-page">
+  <nav class="main-navbar-exact main-navbar" id="mainNavbar" aria-label="Navegación principal">
+    <div class="exact-container nav-inner">
+      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu"></div>
+      <div class="exact-nav-actions global-nav-actions"></div>
+    </div>
+  </nav>
+
+  <main id="mainContent" tabindex="-1">
+    <section class="pr-hero">
+      <div class="pr-wrap">
+        <span class="pr-eyebrow"><i class="fa-solid fa-comments" aria-hidden="true"></i> <span data-i18n="platformReviews.eyebrow">Comunidad BAQUEANO</span></span>
+        <h1 data-i18n="platformReviews.title">¿Qué te pareció BAQUEANO?</h1>
+        <p class="pr-lead" data-i18n="platformReviews.lead">Queremos conocer tu experiencia. Contanos qué te gustó, qué descubriste usando BAQUEANO o qué podríamos hacer mejor. Tu opinión nos ayuda a seguir creciendo.</p>
+      </div>
+    </section>
+
+    <div class="pr-wrap pr-grid">
+      <!-- Resumen real: sale de platform_review_summary() (solo opiniones aprobadas) -->
+      <section class="pr-card pr-summary" aria-labelledby="prSummaryTitle">
+        <h2 id="prSummaryTitle" data-i18n="platformReviews.summaryTitle">Calificación de la comunidad</h2>
+        <div class="pr-summary-main" id="prSummaryMain" aria-live="polite">
+          <p class="pr-muted" id="prSummaryEmpty" hidden data-i18n="platformReviews.summaryEmpty">Todavía no hay opiniones publicadas. La calificación aparecerá cuando la comunidad publique las primeras.</p>
+          <p class="pr-muted" id="prSummaryError" hidden data-i18n="platformReviews.summaryUnavailable">No pudimos cargar la calificación en este momento.</p>
+          <div class="pr-average" id="prAverageBlock" hidden>
+            <span class="pr-average-number" id="prAverage"></span>
+            <span class="pr-stars" id="prAverageStars" role="img"></span>
+            <p class="pr-based-on" id="prBasedOn"></p>
+          </div>
+        </div>
+        <div class="pr-distribution" id="prDistribution" role="list" hidden></div>
+        <p class="pr-source"><i class="fa-solid fa-database" aria-hidden="true"></i> <span data-i18n="platformReviews.summarySource">Calculado automáticamente con opiniones aprobadas de usuarios autenticados. Nadie puede fijar este número a mano.</span></p>
+      </section>
+
+      <!-- Formulario: comentario → estrellas → mejora opcional → consentimiento -->
+      <section class="pr-card pr-compose" id="prCompose" aria-labelledby="prComposeTitle">
+        <h2 id="prComposeTitle" data-i18n="platformReviews.commentLabel">Contanos tu experiencia</h2>
+
+        <div class="pr-mine" id="prMine" hidden>
+          <h3 data-i18n="platformReviews.mineTitle">Mi opinión</h3>
+          <p class="pr-mine-status" id="prMineStatus"></p>
+          <p class="pr-mine-reason" id="prMineReason" hidden></p>
+          <div class="pr-mine-actions">
+            <button type="button" class="pr-btn pr-btn-ghost" id="prWithdraw"><i class="fa-solid fa-eye-slash" aria-hidden="true"></i> <span data-i18n="platformReviews.withdraw">Retirar mi opinión</span></button>
+            <button type="button" class="pr-btn pr-btn-danger" id="prDelete"><i class="fa-solid fa-trash-can" aria-hidden="true"></i> <span data-i18n="platformReviews.deleteMine">Eliminar mi opinión y mis datos</span></button>
+            <a class="pr-btn pr-btn-ghost" href="ayuda.html"><i class="fa-solid fa-life-ring" aria-hidden="true"></i> <span data-i18n="platformReviews.reportProblem">Reportar un problema</span></a>
+          </div>
+        </div>
+
+        <form class="pr-form" id="prForm" novalidate>
+          <p class="pr-signed" id="prSigned" hidden>
+            <img class="pr-signed-avatar" id="prSignedAvatar" alt="" width="32" height="32" hidden>
+            <span id="prSignedName"></span>
+            <button type="button" class="pr-link" id="prSignOut" data-i18n="platformReviews.signOut">Cerrar sesión</button>
+          </p>
+
+          <label class="pr-label" for="prComment" data-i18n="platformReviews.commentLabel">Contanos tu experiencia</label>
+          <textarea id="prComment" name="comment" rows="5" minlength="10" maxlength="1000" required aria-describedby="prCommentHelp prCommentError" data-i18n-placeholder="platformReviews.commentPlaceholder" placeholder="Ejemplo: Me gustó porque encontré lugares que no conocía y pude contactar directamente con negocios locales."></textarea>
+          <p class="pr-help" id="prCommentHelp"><span data-i18n="platformReviews.commentHelp">Entre 10 y 1000 caracteres. Sin enlaces, correos ni teléfonos.</span> <span class="pr-counter" id="prCounter" aria-live="polite">0/1000</span></p>
+          <p class="pr-error" id="prCommentError" hidden></p>
+
+          <fieldset class="pr-rating" aria-describedby="prRatingError">
+            <legend class="pr-label" data-i18n="platformReviews.ratingLegend">¿Cómo calificás BAQUEANO?</legend>
+            <div class="pr-stars-input">
+              <input type="radio" id="prStar1" name="rating" value="1"><label for="prStar1" title="1 estrella — Muy mala" data-i18n-title="platformReviews.rating1"><span class="pr-sr" data-i18n="platformReviews.rating1">1 estrella — Muy mala</span><i class="fa-solid fa-star" aria-hidden="true"></i></label>
+              <input type="radio" id="prStar2" name="rating" value="2"><label for="prStar2" title="2 estrellas — Mala" data-i18n-title="platformReviews.rating2"><span class="pr-sr" data-i18n="platformReviews.rating2">2 estrellas — Mala</span><i class="fa-solid fa-star" aria-hidden="true"></i></label>
+              <input type="radio" id="prStar3" name="rating" value="3"><label for="prStar3" title="3 estrellas — Buena" data-i18n-title="platformReviews.rating3"><span class="pr-sr" data-i18n="platformReviews.rating3">3 estrellas — Buena</span><i class="fa-solid fa-star" aria-hidden="true"></i></label>
+              <input type="radio" id="prStar4" name="rating" value="4"><label for="prStar4" title="4 estrellas — Muy buena" data-i18n-title="platformReviews.rating4"><span class="pr-sr" data-i18n="platformReviews.rating4">4 estrellas — Muy buena</span><i class="fa-solid fa-star" aria-hidden="true"></i></label>
+              <input type="radio" id="prStar5" name="rating" value="5"><label for="prStar5" title="5 estrellas — Excelente" data-i18n-title="platformReviews.rating5"><span class="pr-sr" data-i18n="platformReviews.rating5">5 estrellas — Excelente</span><i class="fa-solid fa-star" aria-hidden="true"></i></label>
+            </div>
+            <p class="pr-rating-text" id="prRatingText" aria-live="polite"></p>
+            <p class="pr-error" id="prRatingError" hidden></p>
+          </fieldset>
+
+          <label class="pr-label" for="prImprovement" data-i18n="platformReviews.improvementLabel">¿Qué podríamos mejorar?</label>
+          <textarea id="prImprovement" name="improvement" rows="3" maxlength="600" aria-describedby="prImprovementHelp"></textarea>
+          <p class="pr-help" id="prImprovementHelp" data-i18n="platformReviews.improvementHelp">Opcional. Solo lo lee el equipo de BAQUEANO; no se publica.</p>
+
+          <label class="pr-check">
+            <input type="checkbox" id="prShowAvatar" checked>
+            <span data-i18n="platformReviews.showAvatar">Mostrar mi foto de perfil junto a mi opinión</span>
+          </label>
+
+          <div class="pr-consent">
+            <label class="pr-check">
+              <input type="checkbox" id="prConsent" aria-describedby="prConsentError">
+              <span data-i18n="platformReviews.consentText">Acepto que mi nombre público, mi foto (si elijo mostrarla), mi calificación y mi comentario sean mostrados públicamente en BAQUEANO de acuerdo con la Política de Privacidad y las Normas de la Comunidad.</span>
+            </label>
+            <p class="pr-legal-links">
+              <a href="privacidad.html" data-i18n="platformReviews.linkPrivacy">Política de Privacidad</a> ·
+              <a href="terminos.html" data-i18n="platformReviews.linkTerms">Términos y Condiciones</a> ·
+              <a href="normas-comunidad.html" data-i18n="platformReviews.linkRules">Normas de la Comunidad</a>
+            </p>
+            <p class="pr-error" id="prConsentError" hidden></p>
+          </div>
+
+          <!-- Sin sesión: el mismo lugar ofrece Google, cuenta BAQUEANO o cuenta nueva -->
+          <div class="pr-login" id="prLogin" hidden>
+            <p class="pr-login-msg" data-i18n="platformReviews.loginRequired">Para publicar tu opinión necesitás iniciar sesión. Esto nos ayuda a mantener opiniones auténticas y una comunidad más confiable.</p>
+            <p class="pr-help" data-i18n="platformReviews.draftKept">Guardamos lo que escribiste: después de iniciar sesión vuelve a aparecer aquí.</p>
+            <button type="button" class="pr-btn pr-btn-google" id="prGoogle"><i class="fa-brands fa-google" aria-hidden="true"></i> <span data-i18n="platformReviews.loginGoogle">Continuar con Google</span></button>
+            <details class="pr-email-login">
+              <summary data-i18n="platformReviews.loginEmail">Entrar con mi cuenta BAQUEANO</summary>
+              <div class="pr-email-fields">
+                <label class="pr-label" for="prEmail" data-i18n="platformReviews.emailLabel">Correo electrónico</label>
+                <input type="email" id="prEmail" autocomplete="email">
+                <label class="pr-label" for="prPassword" data-i18n="platformReviews.passwordLabel">Contraseña</label>
+                <input type="password" id="prPassword" autocomplete="current-password" minlength="8">
+                <button type="button" class="pr-btn pr-btn-secondary" id="prEmailLogin" data-i18n="platformReviews.loginSubmit">Entrar</button>
+              </div>
+            </details>
+            <details class="pr-email-login">
+              <summary data-i18n="platformReviews.createAccount">Crear una cuenta BAQUEANO</summary>
+              <div class="pr-email-fields">
+                <label class="pr-label" for="prRegName" data-i18n="platformReviews.nameLabel">Nombre público</label>
+                <input type="text" id="prRegName" autocomplete="name" maxlength="80">
+                <label class="pr-label" for="prRegEmail" data-i18n="platformReviews.emailLabel">Correo electrónico</label>
+                <input type="email" id="prRegEmail" autocomplete="email">
+                <label class="pr-label" for="prRegPassword" data-i18n="platformReviews.passwordLabel">Contraseña</label>
+                <input type="password" id="prRegPassword" autocomplete="new-password" minlength="8">
+                <button type="button" class="pr-btn pr-btn-secondary" id="prRegister" data-i18n="platformReviews.registerSubmit">Crear cuenta y continuar</button>
+              </div>
+            </details>
+            <p class="pr-error" id="prLoginError" role="alert" hidden></p>
+          </div>
+
+          <p class="pr-error pr-form-error" id="prFormError" role="alert" hidden></p>
+          <button type="submit" class="pr-btn pr-btn-primary" id="prSubmit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> <span id="prSubmitLabel" data-i18n="platformReviews.submit">PUBLICAR MI OPINIÓN</span></button>
+        </form>
+
+        <div class="pr-thanks" id="prThanks" role="status" hidden tabindex="-1">
+          <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+          <h3 data-i18n="platformReviews.thanksTitle">¡Gracias por compartir tu experiencia!</h3>
+          <p data-i18n="platformReviews.thanksText">Tu opinión fue recibida y será revisada según nuestras Normas de la Comunidad antes de publicarse.</p>
+        </div>
+        <p class="pr-status-msg" id="prStatusMsg" role="status" hidden></p>
+      </section>
+
+      <aside class="pr-card pr-trust" aria-labelledby="prTrustTitle">
+        <h2 id="prTrustTitle" data-i18n="platformReviews.trustTitle">Cómo cuidamos estas opiniones</h2>
+        <ul>
+          <li><i class="fa-solid fa-user-check" aria-hidden="true"></i> <span data-i18n="platformReviews.trust1">Solo publican personas con sesión iniciada: una opinión activa por cuenta, que se puede editar.</span></li>
+          <li><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> <span data-i18n="platformReviews.trust2">Las críticas respetuosas también se publican. Moderamos insultos, spam, datos personales o contenido ilegal, nunca una calificación baja.</span></li>
+          <li><i class="fa-solid fa-calculator" aria-hidden="true"></i> <span data-i18n="platformReviews.trust3">El promedio y la distribución salen solo de opiniones aprobadas. Nadie puede cambiarlos a mano.</span></li>
+          <li><i class="fa-solid fa-user-shield" aria-hidden="true"></i> <span data-i18n="platformReviews.trust4">Nunca mostramos tu correo, teléfono ni identificadores. Podés retirar o eliminar tu opinión cuando quieras.</span></li>
+        </ul>
+        <p class="pr-help"><span data-i18n="platformReviews.separateNote">¿Querés contar un viaje a un destino? Eso va en Experiencias de viajeros: aquí opinamos sobre el uso de la plataforma.</span> <a href="testimonios.html" data-i18n="platformReviews.linkTestimonials">Experiencias de viajeros</a></p>
+      </aside>
+
+      <section class="pr-list-section" aria-labelledby="prListTitle">
+        <h2 id="prListTitle" data-i18n="platformReviews.listTitle">Opiniones de la comunidad</h2>
+        <p class="pr-muted" id="prListEmpty" hidden data-i18n="platformReviews.listEmpty">Todavía no hay opiniones publicadas. ¡La tuya puede ser la primera!</p>
+        <ul class="pr-list" id="prList"></ul>
+        <button type="button" class="pr-btn pr-btn-ghost" id="prMore" hidden data-i18n="platformReviews.loadMore">Ver más opiniones</button>
+      </section>
+    </div>
+
+    <dialog class="pr-dialog" id="prReportDialog" aria-labelledby="prReportTitle">
+      <form method="dialog" id="prReportForm">
+        <h2 id="prReportTitle" data-i18n="platformReviews.reportTitle">Reportar esta opinión</h2>
+        <label class="pr-label" for="prReportReason" data-i18n="platformReviews.reportReason">Motivo</label>
+        <select id="prReportReason" required>
+          <option value="insulto" data-i18n="platformReviews.reasons.insulto">Insultos</option>
+          <option value="amenaza" data-i18n="platformReviews.reasons.amenaza">Amenazas</option>
+          <option value="spam" data-i18n="platformReviews.reasons.spam">Spam o publicidad</option>
+          <option value="ilegal" data-i18n="platformReviews.reasons.ilegal">Contenido ilegal</option>
+          <option value="datos_personales" data-i18n="platformReviews.reasons.datos_personales">Datos personales</option>
+          <option value="suplantacion" data-i18n="platformReviews.reasons.suplantacion">Suplantación de identidad</option>
+          <option value="automatizado" data-i18n="platformReviews.reasons.automatizado">Contenido automatizado</option>
+          <option value="repetido" data-i18n="platformReviews.reasons.repetido">Publicación repetida</option>
+          <option value="enlace_peligroso" data-i18n="platformReviews.reasons.enlace_peligroso">Enlace peligroso</option>
+          <option value="discriminacion" data-i18n="platformReviews.reasons.discriminacion">Lenguaje discriminatorio</option>
+          <option value="otro" data-i18n="platformReviews.reasons.otro">Otro</option>
+        </select>
+        <label class="pr-label" for="prReportDetails" data-i18n="platformReviews.reportDetails">Detalle (opcional)</label>
+        <textarea id="prReportDetails" rows="3" maxlength="500"></textarea>
+        <p class="pr-error" id="prReportError" role="alert" hidden></p>
+        <div class="pr-dialog-actions">
+          <button type="button" class="pr-btn pr-btn-ghost" id="prReportCancel" data-i18n="platformReviews.cancel">Cancelar</button>
+          <button type="button" class="pr-btn pr-btn-primary" id="prReportSend" data-i18n="platformReviews.reportSend">Enviar reporte</button>
+        </div>
+      </form>
+    </dialog>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="js/firebase-config.js?v=20261004-1"></script>
+  <script src="js/platform-reviews.js?v=20261006-1" defer></script>
+  <script src="js/navigation.js?v=20261006-reviews-1"></script>
+  <script src="js/global-injector.js"></script>
+</body>
+</html>

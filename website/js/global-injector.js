@@ -18,7 +18,7 @@
 //   `baqueano:shell-ready`, y navigation.js monta UNA vez el contenido y los
 //   controles del menú; user-session.js pinta el estado de sesión y el rol.
 // - Página pública nueva: basta con incluir, al final del <body>,
-//     <script src="js/navigation.js?v=20261006-a11y-2"></script>
+//     <script src="js/navigation.js?v=20261006-reviews-1"></script>
 //     <script src="js/global-injector.js"></script>
 //   No hay que copiar menú, pie, idioma ni sesión.
 //
@@ -327,8 +327,8 @@
         '</div>' +
         bqFooterLinks('EXPLORÁ', [['index.html', 'Inicio'], ['destinos.html', 'Destinos'], ['mapa.html', 'Mapa Interactivo'], ['experiencias.html', 'Experiencias'], ['departamento.html', 'Departamentos']]) +
         bqFooterLinks('CULTURA', [['historia.html', 'Historia &amp; Memoria'], ['gastronomia.html', 'Gastronomía Ancestral'], ['musica.html', 'Son Sonoro Folk'], ['ambiental.html', 'Custodia Ambiental'], ['aliados.html', 'Red de Aliados']]) +
-        bqFooterLinks('COMUNIDAD', [['nosotros.html', 'Quiénes Somos'], ['testimonios.html', 'Experiencias de viajeros'], ['mi-negocio.html', 'Registrá tu Negocio'], ['denuncias.html', 'Canal de Denuncias'], ['perfil.html', 'Mi Perfil'], ['mi-viaje.html', 'Mi Viaje']]) +
-        bqFooterLinks('LEGAL', [['terminos.html', 'Términos y Condiciones'], ['privacidad.html', 'Política de Privacidad'], ['cookies.html', 'Política de Cookies'], ['aviso-legal.html', 'Aviso Legal']]).replace('</ul>', '<li><a href="cookies.html#preferencias" data-cookie-open data-i18n="consent.footerLink">Configurar cookies</a></li></ul>') +
+        bqFooterLinks('COMUNIDAD', [['nosotros.html', 'Quiénes Somos'], ['testimonios.html', 'Experiencias de viajeros'], ['opiniones.html', 'Opiniones sobre BAQUEANO'], ['mi-negocio.html', 'Registrá tu Negocio'], ['denuncias.html', 'Canal de Denuncias'], ['perfil.html', 'Mi Perfil'], ['mi-viaje.html', 'Mi Viaje']]) +
+        bqFooterLinks('LEGAL', [['terminos.html', 'Términos y Condiciones'], ['privacidad.html', 'Política de Privacidad'], ['cookies.html', 'Política de Cookies'], ['normas-comunidad.html', 'Normas de la Comunidad'], ['aviso-legal.html', 'Aviso Legal']]).replace('</ul>', '<li><a href="cookies.html#preferencias" data-cookie-open data-i18n="consent.footerLink">Configurar cookies</a></li></ul>') +
       '</div></div>' +
       '<div class="footer-bottom-bar"><div class="exact-container">' +
         '<span>&copy; 2026 BAQUEANO. Todos los derechos reservados.</span>' +

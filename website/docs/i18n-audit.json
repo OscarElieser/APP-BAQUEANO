@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T16:41:48.179Z",
+  "generatedAt": "2026-10-06T17:35:18.076Z",
   "languages": [
     "es",
     "en",
@@ -9,21 +9,21 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 3952,
-    "en": 3952,
-    "fr": 3952,
-    "it": 3952,
-    "pt": 3952,
-    "de": 3952
+    "es": 4084,
+    "en": 4084,
+    "fr": 4084,
+    "it": 4084,
+    "pt": 4084,
+    "de": 4084
   },
   "html": {
-    "files": 31,
-    "total": 3662,
-    "translated": 3661,
+    "files": 33,
+    "total": 3766,
+    "translated": 3765,
     "untranslated": 1
   },
   "js": {
-    "files": 90,
+    "files": 91,
     "translated": 147,
     "untranslated": 729
   },
@@ -62,8 +62,10 @@
     "mi-negocio.html",
     "mi-viaje.html",
     "musica.html",
+    "normas-comunidad.html",
     "nosotros.html",
     "offline.html",
+    "opiniones.html",
     "perfil.html",
     "privacidad.html",
     "terminos.html",
@@ -92,6 +94,7 @@
     "js/historia-enlaces.js",
     "js/impact-public.js",
     "js/ops-center/ops-community-moderation.js",
+    "js/platform-reviews.js",
     "js/safety-gallery.js",
     "js/services/places-service.js",
     "js/shared/roles.js",
@@ -353,6 +356,15 @@
       "coverage": 100
     },
     {
+      "file": "normas-comunidad.html",
+      "type": "html",
+      "total": 28,
+      "translated": 28,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
       "file": "nosotros.html",
       "type": "html",
       "total": 168,
@@ -366,6 +378,15 @@
       "type": "html",
       "total": 24,
       "translated": 24,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "opiniones.html",
+      "type": "html",
+      "total": 76,
+      "translated": 76,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -1044,6 +1065,15 @@
       "untranslated": 12,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/platform-reviews.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/public-cms-sync.js",

@@ -80,6 +80,7 @@ const BQ_MENU_GROUPS = [
         ['aliados.html', 'fa-regular fa-handshake', 'allies', 'Aliados', 'Organizaciones que impulsan el turismo'],
         ['mi-negocio.html', 'fa-solid fa-shop', 'business', 'Mi Negocio', 'Registrá tu emprendimiento turístico'],
         ['testimonios.html', 'fa-regular fa-comments', 'testimonials', 'Testimonios', 'Experiencias reales de viajeros'],
+        ['opiniones.html', 'fa-regular fa-star', 'platformReviews', 'Opiniones sobre BAQUEANO', 'Calificá tu experiencia con la plataforma'],
         ['denuncias.html', 'fa-solid fa-shield-halved', 'complaints', 'Denuncia', 'Reporte confidencial ambiental']
       ] }
     ]
