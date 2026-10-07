@@ -5317,3 +5317,4 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - sin DS (DNSSEC apagado, no hay que desactivar nada en Hostinger) ✔;
   - NS actuales byte/pixel.dns-parking.com (Hostinger).
 - **Falta:** CNAME `ues3nrtrlyrd` → `gv-kphjfbvtlhk32n.dv.googlehosted.com` (verificación de Google Search Console). Agregar como DNS only antes de "Continue to activation".
+- Propietario agregó el CNAME `ues3nrtrlyrd` → googlehosted (DNS only), según la captura. Los 4 registros quedan correctos; siguiente paso: "Continue to activation", nameservers en Hostinger y SSL Full (strict).
