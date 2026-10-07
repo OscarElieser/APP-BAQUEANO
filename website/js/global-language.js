@@ -7,6 +7,10 @@
 //    atributos semánticos, compatibilidad con textos heredados y un único evento.
 // 📦 QUÉ: API `BaqueanoLanguage`, selector accesible, Intl, SEO y traducción de
 //    nodos añadidos después del primer render sin insertar HTML del catálogo.
+// ⚡ RENDIMIENTO (2026-10-07, 20/20 C): el motor solo escribe en el DOM si el valor cambia y
+//    descarta sus propias mutaciones (takeRecords). Antes reescribía la etiqueta "ES" del
+//    selector en cada pasada: el MutationObserver la veía como texto nuevo y volvía a traducir
+//    en bucle (~20 veces por segundo, recálculo de estilo de toda la página en cada vuelta).
 // ============================================================================
 (function initializeBaqueanoI18n(window, document) {
   'use strict';
@@ -26,6 +30,7 @@
   var applying = false;
   var scheduled = false;
   var mutationRoots = new Set();
+  var languageObserver = null;
 
   var legacyKeys = Object.freeze({
     'Inicio': 'nav.home', 'Explorar': 'nav.explore', 'Destinos': 'nav.destinations', 'Mapa': 'nav.map',
@@ -186,11 +191,11 @@
   }
 
   function updateMetadata() {
-    document.documentElement.lang = LOCALES[currentLanguage];
-    document.documentElement.dir = 'ltr';
+    if (document.documentElement.lang !== LOCALES[currentLanguage]) document.documentElement.lang = LOCALES[currentLanguage];
+    if (document.documentElement.dir !== 'ltr') document.documentElement.dir = 'ltr';
     var titleKey = document.documentElement.dataset.i18nTitle || document.body?.dataset.i18nTitle;
     var descriptionKey = document.documentElement.dataset.i18nDescription || document.body?.dataset.i18nDescription;
-    if (titleKey) document.title = translate(titleKey, { fallback: document.title });
+    if (titleKey) { var nextTitle = translate(titleKey, { fallback: document.title }); if (document.title !== nextTitle) document.title = nextTitle; }
     var description = document.querySelector('meta[name="description"]');
     if (description && descriptionKey) description.content = translate(descriptionKey, { fallback: description.content });
     var ogTitle = document.querySelector('meta[property="og:title"]');
@@ -199,13 +204,18 @@
     if (ogDescription && descriptionKey) ogDescription.content = translate(descriptionKey, { fallback: ogDescription.content });
   }
 
+  function setAttributeIfChanged(element, name, value) {
+    if (element.getAttribute(name) !== value) element.setAttribute(name, value);
+  }
+
   function updateButtons() {
     document.querySelectorAll('.global-language,.navbar-lang-pill').forEach(function updateButton(button) {
       var label = button.querySelector('span');
-      if (label) label.textContent = currentLanguage.toUpperCase();
+      var code = currentLanguage.toUpperCase();
+      if (label && label.textContent !== code) label.textContent = code;
       // WCAG 2.5.3: el nombre accesible incluye el código visible ("ES — Cambiar idioma").
-      button.setAttribute('aria-label', currentLanguage.toUpperCase() + ' — ' + translate('language.change', { fallback: 'Cambiar idioma' }));
-      button.setAttribute('aria-expanded', String(Boolean(document.querySelector('.bq-language-menu'))));
+      setAttributeIfChanged(button, 'aria-label', code + ' — ' + translate('language.change', { fallback: 'Cambiar idioma' }));
+      setAttributeIfChanged(button, 'aria-expanded', String(Boolean(document.querySelector('.bq-language-menu'))));
     });
   }
 
@@ -221,6 +231,8 @@
     }
     updateMetadata();
     updateButtons();
+    // Las mutaciones que acaba de hacer el propio motor no son contenido nuevo.
+    if (languageObserver) languageObserver.takeRecords();
     applying = false;
   }
 
@@ -367,7 +379,7 @@
     await changeLanguage(currentLanguage, { silent: true });
     resolveReady(currentLanguage);
     window.dispatchEvent(new CustomEvent('baqueano:i18nReady', { detail: languageChangedDetail() }));
-    var observer = new MutationObserver(function observe(records) {
+    var observer = languageObserver = new MutationObserver(function observe(records) {
       if (applying) return;
       records.forEach(function collectMutations(record) {
         if (record.type === 'characterData') {

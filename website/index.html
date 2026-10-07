@@ -57,7 +57,8 @@
   <link rel="stylesheet" href="css/components/app-banner.css?v=20261007-1">
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
   <!-- Póster del hero = elemento LCP: se pide primero; el video se carga después (js/hero-video-loader.js). -->
-  <link rel="preload" as="image" href="assets/images/heroes/hero-ometepe-1280.webp" imagesrcset="assets/images/heroes/hero-ometepe-768.webp 768w, assets/images/heroes/hero-ometepe-1280.webp 1280w" imagesizes="100vw" fetchpriority="high" type="image/webp">
+  <!-- 20/20 C (2026-10-07): el preload pide exactamente el póster del video (el LCP); antes el móvil precargaba la de 768 px y además descargaba tarde la de 1280. -->
+  <link rel="preload" as="image" href="assets/images/heroes/hero-ometepe-1280.webp" fetchpriority="high" type="image/webp">
   <script src="js/hero-video-loader.js?v=20261005-1" defer></script>
   <!-- Favicon e Iconografía Oficial BAQUEANO -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -1287,7 +1288,7 @@
     <div class="modal-card-dialog" style="max-width: 860px; padding: 16px; background: #000000; border-radius: 18px; border: 1px solid rgba(255,255,255,0.2);">
       <button data-i18n-aria-label="pages.index.videoModal.buttonAriaLabel1" type="button" class="modal-close-x" onclick="closeHeroVideoModal()" aria-label="Cerrar video"><i class="fa-solid fa-xmark"></i></button>
       <div style="position: relative; width: 100%; border-radius: 12px; overflow: hidden; background: #000;">
-        <video id="heroModalVideoPlayer" controls playsinline preload="none" style="width: 100%; height: auto; max-height: 75vh; display: block;" poster="assets/images/destinos/isla_de_ometepe.jpg">
+        <video id="heroModalVideoPlayer" controls playsinline preload="none" style="width: 100%; height: auto; max-height: 75vh; display: block;" data-poster="assets/images/destinos/isla_de_ometepe.jpg">
           <source src="assets/videos/video%20nicaragua.mp4" type="video/mp4">
           <span data-i18n="pages.index.heroModalVideoPlayer.video1">Tu navegador no soporta reproducción de video.</span>
         </video>
@@ -1419,6 +1420,8 @@
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
         if (player) {
+          // El póster (161 KB) se pide al abrir el modal, no al cargar la portada (20/20 C).
+          if (!player.getAttribute('poster') && player.dataset.poster) player.setAttribute('poster', player.dataset.poster);
           player.currentTime = 0;
           player.play().catch(() => {});
         }

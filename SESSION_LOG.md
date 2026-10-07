@@ -5244,3 +5244,27 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - **Evidencia:**
   - Consultas reales: android_24h=0, runs_cron=2, web_ok=2.
   - En vivo, sin token: HTTP 401 «Iniciá sesión con tu cuenta autorizada.».
+
+## 2026-10-07 — #24 Rendimiento (20/20 C): bucle de traducción y LCP de la portada
+- **Pedido:** seguir con el plan, #24 rendimiento.
+- **Medición inicial** (Lighthouse local, sin gzip): móvil 15, TBT 7,5 s, CLS 0,201. Había retrocedido desde 28–30.
+- **Causa encontrada** (traza de Chrome):
+  - `global-language.js` reescribía la etiqueta "ES" del selector de idioma en cada pasada.
+  - Su MutationObserver lo tomaba como texto nuevo y volvía a traducir: un bucle de unas 20 veces por segundo.
+  - En cada vuelta se recalculaba el estilo de 1086 elementos (~55 ms). Arrastraba a los observadores de user-session, platform-enhancements y global-asset-curator.
+  - Afectaba a todas las páginas: gasto de CPU y batería continuo.
+- **Corrección:**
+  - El motor solo escribe si el valor cambia (etiqueta, aria-label, aria-expanded, lang, dir, title).
+  - Descarta sus propias mutaciones con `takeRecords()`.
+  - Versión del script: `?v=20261007-perf-1`.
+- **Portada:**
+  - El preload pide exactamente el póster del video (el LCP); antes el móvil bajaba la imagen de 768 px y además la de 1280.
+  - El póster del video del modal (161 KB) se pide recién al abrir el modal.
+- **Evidencia:**
+  - Recálculos completos después de 2 s: 127 (4,7 s) → **0**.
+  - Lighthouse sin gzip: móvil 15 → 31–33 (TBT 1,1–1,5 s, CLS 0); escritorio 64 → 83.
+  - Lighthouse con gzip (como nginx en producción): **móvil 43–45** (FCP 3,8 s, LCP 8,6 s, TBT 0,7–0,8 s, CLS 0) y **escritorio 95** (LCP 1,3 s, TBT 40 ms).
+  - JSON en `docs/production-audit/lighthouse/local-index-v6-*`.
+  - i18n: `?lang=en` → EN; cambio a FR; nodos nuevos traducidos; 0 errores JS.
+  - `npm run i18n`: 0 errores. Auditoría estática: 0 críticos. browser-qa de la portada: 16 anchos, 0 fallos.
+- **Brecha honesta:** el móvil no llega a 90. El LCP depende de 27 hojas CSS bloqueantes (95 KB sin usar, gzip). Hace falta consolidar el CSS crítico, un refactor con riesgo visual que sigue pendiente.

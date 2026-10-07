@@ -5,7 +5,7 @@
 -->
 # Auditoría estática de la salida publicada
 
-Generado: 2026-10-07T04:25:57.637Z · Páginas: 34 · URLs en sitemap: 26 · **Críticos: 0** · Advertencias: 62
+Generado: 2026-10-07T11:15:48.281Z · Páginas: 34 · URLs en sitemap: 25 · **Críticos: 0** · Advertencias: 62
 
 ## SEO por página
 
@@ -24,7 +24,7 @@ Generado: 2026-10-07T04:25:57.637Z · Páginas: 34 · URLs en sitemap: 26 · **C
 | denuncias.html | Canal Ético Ambiental & Denuncias \| Baqueano Nicaragua | 134 car. | /denuncias.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | departamento.html | Guía Turística Departamental \| Baqueano Nicaragua | 107 car. | /departamento.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | descargar.html | Descargar BAQUEANO para Android \| App oficial | 141 car. | /descargar.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| destino.html | Ficha de Destino \| Baqueano Nicaragua | 112 car. | /destino.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
+| destino.html | Ficha de Destino \| Baqueano Nicaragua | 112 car. | /destino.html | ✅ | ✅ | 1 | 7 | ✅ | ❌ |
 | destinos.html | Destinos de Nicaragua \| Baqueano Nicaragua | 84 car. | /destinos.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | experiencias.html | Experiencias de Aventura & Cultura \| Baqueano Nicaragua | 141 car. | /experiencias.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | favoritos.html | Mis Favoritos \| BAQUEANO Nicaragua | 77 car. | /favoritos.html | ✅ | ✅ | 1 | 7 | ✅ | ❌ |
