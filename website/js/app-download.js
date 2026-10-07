@@ -12,7 +12,8 @@
 //   y vuelve a pintar al cambiar de idioma.
 // - Si el JSON no carga, el botón de descarga sigue funcionando y se avisa sin inventar datos.
 //
-// 📦 QUÉ: rellena #dlMeta, #dlSpecs, #dlPerms, #dlSha y #dlSigner en descargar.html.
+// 📦 QUÉ: rellena #dlMeta, #dlSpecs, #dlPerms, #dlSha y #dlSigner en descargar.html y cuenta los
+//    clics en el botón oficial (record_app_download).
 // ============================================================================
 (function (window, document) {
   'use strict';
@@ -76,6 +77,27 @@
       .catch(function () { $('dlSpecsError').hidden = false; });
   }
 
+  // Contador de descargas (Supabase record_app_download): solo el clic en el botón oficial.
+  // keepalive para que el aviso salga aunque el navegador ya esté descargando; nunca frena la
+  // descarga ni muestra errores. El servidor no guarda IP (hash diario con sal aleatoria).
+  var RPC = 'https://heiudfpthqwtjrtluqlm.supabase.co/rest/v1/rpc/record_app_download';
+  var PUBLIC_KEY = 'sb_publishable_q7ZhqRIRjlerZK7WOu_Qxw_X_AqXV1d';
+  function countDownload() {
+    var c = release && release.current;
+    try {
+      fetch(RPC, {
+        method: 'POST', keepalive: true,
+        headers: { apikey: PUBLIC_KEY, Authorization: 'Bearer ' + PUBLIC_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_version_name: c ? c.versionName : 'desconocida', p_version_code: c ? c.versionCode : null })
+      }).catch(function () {});
+    } catch (_) { /* sin red: la descarga sigue igual */ }
+  }
+  function wireButton() {
+    var button = $('dlButton');
+    if (button && !button.dataset.bqCounted) { button.dataset.bqCounted = '1'; button.addEventListener('click', countDownload); }
+  }
+
   window.addEventListener('baqueano:languageChanged', render);
-  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', load, { once: true }) : load();
+  function boot() { wireButton(); load(); }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', boot, { once: true }) : boot();
 })(window, document);

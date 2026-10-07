@@ -6152,5 +6152,27 @@
         "nearBeach": "Close to the beach and downtown San Juan del Sur"
       }
     }
+  },
+  "opsApp": {
+    "title": "Android app",
+    "loading": "Loading…",
+    "releaseError": "Could not read data/app-release.json.",
+    "releaseTitle": "Published version",
+    "signer": "Signature",
+    "history": "Previous versions",
+    "noHistory": "None yet",
+    "openPage": "Open /descargar",
+    "apkLink": "Direct APK link",
+    "downloadsTitle": "Downloads from /descargar",
+    "statsError": "Could not read downloads (Supabase).",
+    "total": "Total",
+    "last7": "Last 7 days",
+    "last30": "Last 30 days",
+    "lastAt": "Latest download",
+    "chartLabel": "Downloads per day, last 14 days",
+    "byVersion": "By version",
+    "countNote": "Counts clicks on “Download for Android” on /descargar (at most 3 per device per day; no IP stored). A direct download of the file is not counted.",
+    "updated": "Updated",
+    "refresh": "Refresh"
   }
 }

@@ -1778,6 +1778,13 @@
     // 38: Buzón real (Edge Function baqueano-intake): contacto, solicitudes de negocios y denuncias.
     // Lo pinta js/ops-center/ops-intake-inbox.js; el servidor exige rol de equipo.
     // 39: Actividad en vivo (Edge Function baqueano-presence). Lo pinta ops-live-presence.js.
+    // 40: Aplicación Android (data/app-release.json + Supabase public_app_download_stats). Lo pinta ops-android-app.js.
+    '40-app-android': {
+      isSystem: true,
+      title: 'Aplicación Android',
+      icon: 'fa-mobile-screen',
+      roleRequired: 'admin'
+    },
     '39-en-vivo': {
       isSystem: true,
       title: 'Actividad en vivo',
@@ -4151,6 +4158,10 @@
       if (tabId === '20-sos') return this.renderSosModule();
       if (tabId === '11-reservas') return this.renderReservationsModule();
       if (tabId === '35-backup') return this.renderBackupSyncModule();
+      if (tabId === '40-app-android') {
+        if (window.BaqueanoOpsAndroid) return window.BaqueanoOpsAndroid.render(panel);
+        return;
+      }
       if (tabId === '39-en-vivo') {
         if (window.BaqueanoOpsLive) return window.BaqueanoOpsLive.render(panel);
         return;

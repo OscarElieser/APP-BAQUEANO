@@ -5104,3 +5104,12 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
       - sin menú; el escenario playa sigue OK;
       - auditoría de producción con 0 críticos; SEO, i18n y Kronox OK.
     - Nota: la API REST de Supabase volvió a responder (fin del incidente 522).
+- 2026-10-07 · Verificación programada del despliegue y "Continuá" del propietario:
+  - Las ejecuciones 151 y 152 de producción ya pasan la auditoría 20/20, pero fallan en "QA en navegador": destino.html @1366/@1440 con axe aria-required-children (#navLinksMenu), contraste, target-size y desborde de 168 px.
+  - En la ejecución 146 esa QA pasó. Se reproduce localmente.
+  - Causa raíz (registro del job 151): destino.html sin ?id= redirige a destinos.html. Con cargas lentas en CI (>20 s), la redirección ocurría en plena medición ("Execution context was destroyed") y se medía destinos.html a medio cargar. Localmente pasaba.
+  - Arreglo:
+    - browser-qa.mjs mide la ficha real destino.html?id=ometepe y acepta --pages= para probar páginas sueltas.
+    - Esa ficha nunca se había medido. Tenía 2 fallos axe reales que se corrigieron: contraste del botón «Volver» y del sello «Verificación en 8 puntos» sobre fondo blanco, y la etiqueta de «Sí, útil» distinta del texto visible. En la tarjeta oscura de "no encontrado" se mantiene el crema.
+  - Validado localmente: 16 anchos, 0 fallos. Pasos de CI en verde: i18n, exports, producción 0 críticos, kronox, SEO y baqui-brain 10/10.
+  - Además se sube el paso 2 (F7): contador de descargas de la APK (Supabase record_app_download / public_app_download_stats, sin guardar IP) y la vista "App Android" en Ops Center.

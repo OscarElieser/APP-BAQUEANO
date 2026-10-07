@@ -74,21 +74,28 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: #F4E6C1;
+      /* La barra va sobre fondo claro (#FFF): el crema #F4E6C1 daba 1.24:1 (axe, 2026-10-07). */
+      color: #165D6F;
       text-decoration: none;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 0.88rem;
       padding: 8px 16px;
       border-radius: 10px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(22,93,111,0.06);
+      border: 1px solid rgba(22,93,111,0.25);
       transition: all 0.2s ease;
     }
     .destino-back-btn:hover {
       background: #165D6F;
       color: #FFFFFF;
       transform: translateX(-3px);
+    }
+    /* Dentro de la tarjeta oscura (ficha no encontrada) se mantiene el crema original. */
+    #destinoContentCard .destino-back-btn {
+      color: #F4E6C1;
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.1);
     }
     #destinoContentCard {
       background: linear-gradient(175deg, #0D263B 0%, #081927 100%);
@@ -302,7 +309,7 @@
       <a href="destinos.html" class="destino-back-btn">
         <i class="fa-solid fa-arrow-left"></i> <span data-i18n="pages.destino.mainContent.a1">Volver al Catálogo de Destinos</span>
       </a>
-      <span style="font-size:0.82rem;color:#94A3B8;">
+      <span style="font-size:0.82rem;color:#475569;">
         <i class="fa-solid fa-shield-halved" style="color:#4A7A5A;margin-right:4px;"></i> <span data-i18n="pages.destino.mainContent.span1">Verificación Territorial en 8 Puntos</span>
       </span>
     </div>
@@ -489,7 +496,7 @@
                 <i class="fa-solid fa-comment-dots" style="color:#F65E01;"></i> ¿Te resultó útil esta información territorial?
               </div>
               <div class="bq-dossier-feedback-actions">
-                <button type="button" class="bq-feedback-chip" id="feedbackVoteUp" aria-label="Sí, muy útil">
+                <button type="button" class="bq-feedback-chip" id="feedbackVoteUp" aria-label="Sí, útil">
                   <i class="fa-solid fa-thumbs-up" style="color:#4A7A5A;"></i> <span>Sí, útil</span>
                 </button>
                 <button type="button" class="bq-feedback-chip" id="feedbackVoteDown" aria-label="Podría mejorar">

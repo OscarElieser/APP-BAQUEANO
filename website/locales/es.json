@@ -6152,5 +6152,27 @@
         "nearBeach": "Cerca de la playa y del centro de San Juan del Sur"
       }
     }
+  },
+  "opsApp": {
+    "title": "Aplicación Android",
+    "loading": "Cargando…",
+    "releaseError": "No se pudo leer data/app-release.json.",
+    "releaseTitle": "Versión publicada",
+    "signer": "Firma",
+    "history": "Versiones anteriores",
+    "noHistory": "Ninguna todavía",
+    "openPage": "Abrir /descargar",
+    "apkLink": "Enlace directo de la APK",
+    "downloadsTitle": "Descargas desde /descargar",
+    "statsError": "No se pudieron leer las descargas (Supabase).",
+    "total": "Total",
+    "last7": "Últimos 7 días",
+    "last30": "Últimos 30 días",
+    "lastAt": "Última descarga",
+    "chartLabel": "Descargas por día, últimos 14 días",
+    "byVersion": "Por versión",
+    "countNote": "Cuenta los clics en «Descargar para Android» de /descargar (máximo 3 por dispositivo y día; sin guardar IP). Una descarga directa del archivo no se cuenta.",
+    "updated": "Actualizado",
+    "refresh": "Actualizar"
   }
 }

@@ -8,7 +8,7 @@
  *   Por página y ancho: desborde horizontal (scrollWidth > innerWidth), elementos
  *   interactivos visibles fuera del viewport e imágenes sin alt. A 390 y 1366 px: axe
  *   (wcag2a/aa, wcag21aa, wcag22aa), anclas #id inexistentes, WhatsApp y cajón móvil.
- * 📦 QUÉ: `BASE_URL=http://127.0.0.1:8790/ AXE_PATH=… node scripts/browser-qa.mjs [--widths=320,390]`
+ * 📦 QUÉ: `BASE_URL=http://127.0.0.1:8790/ AXE_PATH=… node scripts/browser-qa.mjs [--widths=320,390] [--pages=destino.html?id=ometepe]`
  *   → docs/production-audit/browser-qa.json; código 1 si hay desborde horizontal,
  *   violaciones axe críticas o graves, imágenes sin alt o enlaces de WhatsApp inseguros.
  */
@@ -25,10 +25,14 @@ const AXE_PATH = process.env.AXE_PATH || require.resolve('axe-core/axe.min.js');
 const argWidths = (process.argv.find((a) => a.startsWith('--widths=')) || '').split('=')[1];
 const WIDTHS = argWidths ? argWidths.split(',').map(Number) : [320, 360, 375, 390, 412, 430, 480, 600, 768, 820, 1024, 1280, 1366, 1440, 1920, 2560];
 const AXE_WIDTHS = new Set([390, 1366]);
-const PAGES = ['index.html', 'destinos.html', 'destino.html', 'departamento.html?depto=madriz', 'mapa.html', 'experiencias.html',
+// destino.html sin ?id= redirige a destinos.html (ya medida): si la carga es lenta, la redirección
+// ocurría en plena medición (CI, ejecuciones 151/152). Se mide la ficha real con un id del dossier.
+const ALL_PAGES = ['index.html', 'destinos.html', 'destino.html?id=ometepe', 'departamento.html?depto=madriz', 'mapa.html', 'experiencias.html',
   'historia.html', 'gastronomia.html', 'musica.html', 'cronicas.html', 'baqueano-ia.html', 'mi-viaje.html', 'perfil.html',
   'favoritos.html', 'mi-negocio.html', 'testimonios.html', 'opiniones.html', 'descargar.html', 'normas-comunidad.html', 'nosotros.html', 'aliados.html', 'ambiental.html', 'denuncias.html',
   'ayuda.html', 'cookies.html', 'privacidad.html', 'terminos.html', 'aviso-legal.html', 'legal.html', '404.html', 'offline.html'];
+const argPages = (process.argv.find((a) => a.startsWith('--pages=')) || '').split('=').slice(1).join('=');
+const PAGES = argPages ? argPages.split(',') : ALL_PAGES;
 const OUT = path.resolve(ROOT, '../docs/production-audit/browser-qa.json');
 
 const browser = await chromium.launch();

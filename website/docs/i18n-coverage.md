@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T04:25:18.773Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4628 · en 4628 · fr 4628 · it 4628 · pt 4628 · de 4628
+Generado: 2026-10-07T08:18:22.263Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4648 · en 4648 · fr 4648 · it 4648 · pt 4648 · de 4648
 
-HTML: 3855/3856 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3857/3858 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -139,7 +139,7 @@ HTML: 3855/3856 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/territory-carousel.js | js | 1 | 0 | 1 | 0 % |
 | js/territory-media-experience.js | js | 1 | 0 | 1 | 0 % |
 | 404.html | html | 25 | 25 | 0 | 100 % |
-| admin.html | html | 488 | 488 | 0 | 100 % |
+| admin.html | html | 490 | 490 | 0 | 100 % |
 | aliados.html | html | 189 | 189 | 0 | 100 % |
 | ambiental.html | html | 131 | 131 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -211,6 +211,7 @@ HTML: 3855/3856 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/impact-public.js | js | 6 | 6 | 0 | 100 % |
 | js/intake-api.js | js | 0 | 0 | 0 | 100 % |
 | js/lodging-showcase.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-android-app.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-intake-inbox.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-live-presence.js | js | 0 | 0 | 0 | 100 % |
