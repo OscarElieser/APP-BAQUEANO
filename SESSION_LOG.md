@@ -4986,3 +4986,11 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
       - el logo original del hotel (el propietario lo envía);
       - coordenadas exactas para el mapa;
       - que BAQÜI use estas tarifas en el presupuesto de San Juan del Sur (hoy busca precios por destino, no por negocio).
+- 2026-10-07 · Pedido del propietario: agregar a Hotel Encanto del Sur su ubicación real: https://maps.app.goo.gl/zg64Cd6hWcq5psGF7
+  - Resultado — ubicación de Hotel Encanto del Sur:
+    - El enlace corto se resolvió desde la base con `extensions.http` (el proxy de la sesión bloquea `maps.app.goo.gl`). Lleva a la ficha de Google "Hotel Encanto del Sur, Av. Gaspar Garcia Laviana, San Juan del Sur 48600" (lugar `0x8f75b44204ea7461:0xef9f405edf63dfac`).
+    - Ni la URL ni la página (sin navegador) traen coordenadas, y OpenStreetMap no tiene el hotel. No se inventan.
+    - Supabase (migración `20261007130000_hotel_encanto_del_sur_ubicacion.sql`, UPDATE de 1 fila): `address`, `location_precision='address'` y `attributes.location` (`maps_url`, `google_place`, fuente, fecha, coordenadas pendientes). `map_ready` sigue en false.
+    - Ficha: "Ver ubicación" abre el enlace exacto del propietario; se muestra la dirección.
+    - Pruebas: Playwright + axe en ES/EN/DE/FR, sin violaciones; el enlace del botón es `https://maps.app.goo.gl/zg64Cd6hWcq5psGF7`.
+    - Pendiente: lat/lng para el pin del mapa de BAQUEANO (en Google Maps: mantener presionado el pin y copiar los dos números).

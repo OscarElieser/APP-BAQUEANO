@@ -33,7 +33,10 @@
       logo: null,
       whatsapp: '50577532549',
       whatsappLabel: '+505 7753 2549',
-      // Sin coordenadas confirmadas: "Ver ubicación" abre una búsqueda por nombre, no un pin inventado.
+      // Ubicación entregada por el propietario (2026-10-07): enlace exacto de Google Maps y dirección que
+      // ese enlace confirma. Las coordenadas numéricas siguen pendientes (no se inventan).
+      mapsUrl: 'https://maps.app.goo.gl/zg64Cd6hWcq5psGF7',
+      address: 'Av. Gaspar García Laviana, San Juan del Sur 48600',
       mapsQuery: 'Hotel Encanto del Sur, San Juan del Sur, Nicaragua',
       amenities: ['standard', 'family', 'groups', 'equipped', 'airConditioning', 'wifi', 'cableTv', 'dailyCleaning', 'personalService', 'familyAtmosphere', 'nearBeach'],
       prices: [

@@ -71,7 +71,9 @@
 .bq-lodging-btn.is-map, .bq-lodging-btn.is-share { flex: 1 1 140px; background: #FFFFFF; color: var(--lodging-navy); border-color: var(--lodging-navy); }
 .bq-lodging-btn.is-map:hover, .bq-lodging-btn.is-share:hover { background: #EEF2F7; }
 .bq-lodging-btn:focus-visible { outline: 3px solid var(--lodging-yellow); outline-offset: 2px; }
-.bq-lodging-phone { margin: 10px 0 0; font-weight: 700; color: var(--lodging-navy); }
+.bq-lodging-address { margin: 12px 0 0; color: #1E293B; line-height: 1.45; }
+.bq-lodging-address i { color: var(--lodging-green); }
+.bq-lodging-phone { margin: 6px 0 0; font-weight: 700; color: var(--lodging-navy); }
 
 .bq-lodging-seal { display: flex; align-items: center; gap: 10px; padding: 10px clamp(18px, 3.5vw, 30px); border-top: 1px solid #E7DCC3; background: #FFFFFF; }
 .bq-lodging-seal-logo { width: 28px; height: 28px; flex: none; }

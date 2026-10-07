@@ -116,7 +116,9 @@
     wa.appendChild(icon('fa-brands fa-whatsapp'));
     wa.appendChild(document.createTextNode(' '));
     wa.appendChild(keyed('span', '', 'lodgingShowcase.whatsapp'));
-    var map = el('a', 'bq-lodging-btn is-map', { href: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(item.mapsQuery), target: '_blank', rel: 'noopener noreferrer' });
+    // Enlace exacto del negocio si existe; si no, búsqueda por nombre (nunca un pin inventado).
+    var mapHref = item.mapsUrl || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(item.mapsQuery));
+    var map = el('a', 'bq-lodging-btn is-map', { href: mapHref, target: '_blank', rel: 'noopener noreferrer' });
     map.appendChild(icon('fa-solid fa-map-location-dot'));
     map.appendChild(document.createTextNode(' '));
     map.appendChild(keyed('span', '', 'lodgingShowcase.location'));
@@ -126,11 +128,20 @@
     shareBtn.appendChild(keyed('span', '', 'lodgingShowcase.share'));
     shareBtn.addEventListener('click', function () { share(item, shareBtn); });
     row.appendChild(wa); row.appendChild(map); row.appendChild(shareBtn);
+    var nodes = [row];
+    if (item.address) {
+      var address = el('p', 'bq-lodging-address');
+      address.appendChild(icon('fa-solid fa-location-dot'));
+      address.appendChild(document.createTextNode(' '));
+      address.appendChild(proper('span', '', item.address));
+      nodes.push(address);
+    }
     var phone = el('p', 'bq-lodging-phone');
     phone.appendChild(icon('fa-brands fa-whatsapp'));
     phone.appendChild(document.createTextNode(' '));
     phone.appendChild(proper('span', '', item.whatsappLabel));
-    return [row, phone];
+    nodes.push(phone);
+    return nodes;
   }
 
   function card(item) {
