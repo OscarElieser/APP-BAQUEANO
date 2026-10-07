@@ -5,7 +5,7 @@
 -->
 # Auditoría estática de la salida publicada
 
-Generado: 2026-10-06T01:57:33.416Z · Páginas: 31 · URLs en sitemap: 23 · **Críticos: 0** · Advertencias: 64
+Generado: 2026-10-07T04:21:27.130Z · Páginas: 34 · URLs en sitemap: 26 · **Críticos: 0** · Advertencias: 62
 
 ## SEO por página
 
@@ -23,6 +23,7 @@ Generado: 2026-10-06T01:57:33.416Z · Páginas: 31 · URLs en sitemap: 23 · **C
 | cronicas.html | Crónicas & Relatos Territoriales \| Baqueano Nicaragua | 124 car. | /cronicas.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | denuncias.html | Canal Ético Ambiental & Denuncias \| Baqueano Nicaragua | 134 car. | /denuncias.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | departamento.html | Guía Turística Departamental \| Baqueano Nicaragua | 107 car. | /departamento.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
+| descargar.html | Descargar BAQUEANO para Android \| App oficial | 141 car. | /descargar.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | destino.html | Ficha de Destino \| Baqueano Nicaragua | 112 car. | /destino.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | destinos.html | Destinos de Nicaragua \| Baqueano Nicaragua | 84 car. | /destinos.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | experiencias.html | Experiencias de Aventura & Cultura \| Baqueano Nicaragua | 141 car. | /experiencias.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
@@ -36,8 +37,10 @@ Generado: 2026-10-06T01:57:33.416Z · Páginas: 31 · URLs en sitemap: 23 · **C
 | mi-negocio.html | Portal de Anfitriones & Negocios \| Baqueano Nicaragua | 158 car. | /mi-negocio.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | mi-viaje.html | Mi Viaje & Planificador \| Baqueano Nicaragua | 122 car. | /mi-viaje.html | ✅ | ✅ | 1 | 7 | ✅ | ❌ |
 | musica.html | Música & Patrimonio Sonoro \| Baqueano Nicaragua | 121 car. | /musica.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
+| normas-comunidad.html | Normas de la Comunidad y Política de Opiniones \| BAQUEANO | 150 car. | /normas-comunidad.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | nosotros.html | Nosotros \| BAQUEANO Nicaragua Auténtica | 135 car. | /nosotros.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | offline.html | Modo Offline Territorial \| Baqueano Nicaragua | — | — | ❌ | ❌ | 0 | 0 | ❌ | ❌ |
+| opiniones.html | Opiniones sobre BAQUEANO \| Usuarios autenticados | 135 car. | /opiniones.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | perfil.html | Mi Perfil \| BAQUEANO Nicaragua Auténtica | 113 car. | /perfil.html | ✅ | ✅ | 1 | 7 | ✅ | ❌ |
 | privacidad.html | Privacidad & Seguridad de tus Datos \| BAQUEANO Nicaragua | 135 car. | /privacidad.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | terminos.html | Términos & Condiciones de Uso \| BAQUEANO Nicaragua | 150 car. | /terminos.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
@@ -102,8 +105,6 @@ Generado: 2026-10-06T01:57:33.416Z · Páginas: 31 · URLs en sitemap: 23 · **C
 | ⚠️ advertencia | perfil.html | anchor-missing | mi-viaje.html#favoritos: ancla #favoritos no encontrada en mi-viaje.html (estático) |
 | ⚠️ advertencia | perfil.html | anchor-missing | mi-viaje.html#reservas: ancla #reservas no encontrada en mi-viaje.html (estático) |
 | ⚠️ advertencia | perfil.html | anchor-missing | mi-viaje.html#favoritos: ancla #favoritos no encontrada en mi-viaje.html (estático) |
-| ⚠️ advertencia | perfil.html | anchor-missing | mi-viaje.html#reservas: ancla #reservas no encontrada en mi-viaje.html (estático) |
-| ⚠️ advertencia | perfil.html | anchor-missing | mi-viaje.html#reservas: ancla #reservas no encontrada en mi-viaje.html (estático) |
 | ⚠️ advertencia | perfil.html | anchor-missing | aliados.html#postular: ancla #postular no encontrada en aliados.html (estático) |
 | ⚠️ advertencia | privacidad.html | anchor-missing | index.html#sos: ancla #sos no encontrada en index.html (estático) |
 | ⚠️ advertencia | privacidad.html | anchor-missing | mi-viaje.html#favoritos: ancla #favoritos no encontrada en mi-viaje.html (estático) |

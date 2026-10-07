@@ -5074,3 +5074,14 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Rectificación pedida por el propietario: las 8 fotos colocadas antes son byte a byte idénticas (SHA-256) a sus archivos con nombre. Grön no está entre los subidos; se identificó por su texto impreso.
     - Pruebas: `test:artistas` en verde; Playwright + axe en historia (ES 390, EN 1366) y departamento (Managua, RACCS): 14 fotos cargan, 0 pendientes, 0 violaciones.
     - Nota: los originales subidos (incluido el PNG del logo de 1,2 MB) quedan en `website/assets/` sin uso directo. La web usa las versiones .webp optimizadas.
+- 2026-10-07 · Propietario: "Gloria Carrión Fonseca, Irene López, Gloria Elena Espinoza de Tercero, Leoncio Sáenz y June Beer están sin foto".
+  - Diagnóstico: el código y los archivos están en GitHub, pero el workflow "BAQUEANO Producción (Azure)" falla en "Auditoría 20/20 de la salida publicada" desde el commit 2f7988c (ejecuciones 146 y 147). El despliegue se omite, por eso las fotos no aparecen en el sitio. Se reproduce y corrige localmente.
+  - Causa: el único crítico era el botón de /descargar → `/downloads/baqueano-android.apk`. Ese archivo no está en el build estático porque lo instala `azure/deploy.sh` en el servidor, y `production-audit.mjs` lo marcaba como enlace roto. El despliegue se cortaba desde que se agregó /descargar.
+  - Corrección: `production-audit.mjs` reconoce los entregables que instala el despliegue (DEPLOY_PROVIDED). Solo valen si el archivo de origen (`website/assets/BaqueanoNicaragua.apk`) existe y no está vacío; si falta, sigue siendo crítico.
+  - Validación local de todos los pasos del job:
+    - auditoría: 0 críticos;
+    - SEO 12/12;
+    - i18n y paridad de traducciones;
+    - Kronox --check;
+    - bash -n, API Azure (pruebas, node --check), APK presente;
+    - franja de lugares, paridad de territorios.

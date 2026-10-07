@@ -1,11 +1,11 @@
 {
  "summary": {
-  "generatedAt": "2026-10-06T01:57:33.416Z",
+  "generatedAt": "2026-10-07T04:21:27.130Z",
   "dir": "dist-hostinger",
-  "pages": 31,
+  "pages": 34,
   "critical": 0,
-  "warnings": 64,
-  "sitemapUrls": 23
+  "warnings": 62,
+  "sitemapUrls": 26
  },
  "seo": [
   {
@@ -156,6 +156,19 @@
    "title": "Guía Turística Departamental | Baqueano Nicaragua",
    "description": "Descubre la historia, gastronomía, lugares turísticos y rutas auténticas de los departamentos de Nicaragua.",
    "canonical": "https://baqueanonicaragua.com/departamento.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "descargar.html",
+   "title": "Descargar BAQUEANO para Android | App oficial",
+   "description": "Descargá la app oficial de BAQUEANO Nicaragua para Android: versión, requisitos, tamaño, permisos y huella SHA-256 para verificar el archivo.",
+   "canonical": "https://baqueanonicaragua.com/descargar.html",
    "og": true,
    "twitter": true,
    "jsonLd": 1,
@@ -334,6 +347,19 @@
    "sitemap": true
   },
   {
+   "page": "normas-comunidad.html",
+   "title": "Normas de la Comunidad y Política de Opiniones | BAQUEANO",
+   "description": "Cómo publicamos, moderamos y protegemos las opiniones sobre BAQUEANO: autenticidad, críticas respetuosas, datos personales y derechos de cada usuario.",
+   "canonical": "https://baqueanonicaragua.com/normas-comunidad.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
    "page": "nosotros.html",
    "title": "Nosotros | BAQUEANO Nicaragua Auténtica",
    "description": "Conocé el propósito, misión y equipo de BAQUEANO Nicaragua. El puente tecnológico para el turismo comunitario, soberano y regenerativo.",
@@ -358,6 +384,19 @@
    "indexable": false,
    "lang": "es",
    "sitemap": false
+  },
+  {
+   "page": "opiniones.html",
+   "title": "Opiniones sobre BAQUEANO | Usuarios autenticados",
+   "description": "Opiniones reales de usuarios autenticados sobre BAQUEANO: calificación promedio y distribución calculadas solo con opiniones aprobadas.",
+   "canonical": "https://baqueanonicaragua.com/opiniones.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
   },
   {
    "page": "perfil.html",
@@ -747,18 +786,6 @@
    "severity": "warning",
    "page": "perfil.html",
    "rule": "anchor-missing",
-   "detail": "mi-viaje.html#reservas: ancla #reservas no encontrada en mi-viaje.html (estático)"
-  },
-  {
-   "severity": "warning",
-   "page": "perfil.html",
-   "rule": "anchor-missing",
-   "detail": "mi-viaje.html#reservas: ancla #reservas no encontrada en mi-viaje.html (estático)"
-  },
-  {
-   "severity": "warning",
-   "page": "perfil.html",
-   "rule": "anchor-missing",
    "detail": "aliados.html#postular: ancla #postular no encontrada en aliados.html (estático)"
   },
   {
@@ -1126,18 +1153,6 @@
   {
    "from": "perfil.html",
    "link": "mi-viaje.html#favoritos",
-   "status": "ancla no encontrada (estático)",
-   "severity": "warning"
-  },
-  {
-   "from": "perfil.html",
-   "link": "mi-viaje.html#reservas",
-   "status": "ancla no encontrada (estático)",
-   "severity": "warning"
-  },
-  {
-   "from": "perfil.html",
-   "link": "mi-viaje.html#reservas",
    "status": "ancla no encontrada (estático)",
    "severity": "warning"
   },

@@ -28,6 +28,11 @@ if (!fs.existsSync(DIR)) {
   process.exit(2);
 }
 
+// Entregables que no forman parte del build estático: azure/deploy.sh los instala en el servidor
+// (ver azure/nginx/baqueano-delivery.conf). Solo cuentan como existentes si su archivo de origen
+// está en el repo; si falta el origen, siguen siendo un enlace roto crítico (2026-10-07).
+const DEPLOY_PROVIDED = { 'downloads/baqueano-android.apk': path.join(ROOT, 'assets/BaqueanoNicaragua.apk') };
+const deployProvided = (rel) => DEPLOY_PROVIDED[rel] && fs.existsSync(DEPLOY_PROVIDED[rel]) && fs.statSync(DEPLOY_PROVIDED[rel]).size > 0;
 const findings = [];
 const add = (severity, page, rule, detail) => findings.push({ severity, page, rule, detail });
 
@@ -169,7 +174,7 @@ for (const page of pages) {
     const t = localTarget(page, ref);
     if (!t) continue;
     if (t.legacy) { add('critical', page, 'legacy-link', `${kind} apunta al dominio de respaldo: ${ref}`); linkReport.push({ from: page, link: ref, status: 'dominio de respaldo', severity: 'critical' }); continue; }
-    if (!exists(t.rel)) {
+    if (!exists(t.rel) && !deployProvided(t.rel)) {
       add('critical', page, `${kind}-missing`, `${ref} → ${t.rel} no existe`);
       linkReport.push({ from: page, link: ref, status: '404 (archivo inexistente en la salida publicada)', severity: 'critical' });
     } else if (kind === 'a' && t.hash && t.rel.endsWith('.html') && htmlCache.has(t.rel) && !idsOf(t.rel).has(decodeURIComponent(t.hash))) {
