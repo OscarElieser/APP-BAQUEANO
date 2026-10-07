@@ -5273,3 +5273,22 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - **Hallazgo:** en el run 164 fallaron la validación, el QA y el despliegue de 134d3ec. "Confirmar /health" encontró producción en **a52df84**, el commit siguiente, publicado a las 11:15:21 por el autodeploy propio de la VM (trae origin/main) antes de que su CI desplegara. No es un fallo de código: producción servía una versión que ya contenía el commit validado.
 - **Corrección** (`deploy-production.yml`, pasos "Esperar publicación" y "Confirmar /health"): se acepta el commit validado o uno posterior que lo contenga (API compare de GitHub, `status == ahead`, con GITHUB_TOKEN de solo lectura). Un commit anterior, divergente o vacío sigue fallando.
 - **Prueba local** (gh simulado): igual → OK; posterior → OK; anterior, divergente o vacío → FALLA. YAML válido.
+
+## 2026-10-07 — Pedido del propietario: prueba de carga (200 000 usuarios) y seguridad máxima
+- Pedido textual: "Quiero que haga la prueba con miles de cientos de usuarios para ver que no se cae por ejemplo 200000. Mi meta es que millones de personas puedan navegar sin ningún problema. [...] la seguridad y la confianza quiero que le metas bastante seguridad [...] contra ataque maliciosa o le quieran meter virus o hacker, y hacker con IA".
+- Plan:
+  1. Medir la capacidad real con la misma configuración de Nginx que producción (prueba de carga local reproducible).
+  2. Endurecer Nginx: límites por IP, protección contra conexiones lentas, caché de estáticos.
+  3. Revisar las subidas de archivos (virus) y BAQÜI (ataques con IA).
+  4. Plan honesto para llegar a millones (CDN).
+- No se lanza tráfico masivo contra producción sin autorización: equivale a un ataque de denegación de servicio contra la propia VM.
+- **Resultado (2026-10-07), Nginx 1.24 local con la configuración real de producción y 2 workers (como la VM de 2 vCPU):**
+  - Antes, gzip en cada petición: ~1 070 páginas/s, p99 1,2 s, timeouts. La CPU era el cuello de botella.
+  - Con precompresión (`gzip_static`) + `open_file_cache`: **4 655 páginas/s**, p99 324 ms, 0 errores.
+  - Inundación desde una IP (500 conexiones): 501 977 rechazos 429 a ~50 000/s con p99 26 ms; solo 898 servidas. El servidor sigue sano.
+  - Visita normal con navegador (3 páginas, 162 peticiones): todas 200, 0 bloqueos.
+- **Cambios** (instalados por `deploy.sh`):
+  - `azure/nginx/baqueano-limits.conf` en conf.d: 50 peticiones/s por IP, con ráfaga de 400 por las redes móviles con IP compartida (CGNAT).
+  - `azure/nginx/baqueano-hardening.conf`: gzip_static, caché de archivos, tiempos anti-slowloris, 300 conexiones por IP, rutas de escáneres (php, wp-admin, .env, …) → 404 inmediato.
+  - Precompresión `.gz` de cada release.
+- **Honestidad sobre 200 000 usuarios:** una sola VM no sirve a 200 000 personas simultáneas. El límite real es la red: la primera visita pesa ~1,5 MB. Para millones hace falta una CDN delante (por ejemplo Cloudflare, plan gratuito, con protección DDoS y WAF), que el propietario configura en su DNS. Supabase y las Edge Functions escalan aparte. No se lanzó tráfico masivo contra producción: sería un ataque de denegación de servicio contra la propia VM.

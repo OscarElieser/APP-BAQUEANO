@@ -79,6 +79,10 @@ reload_nginx() {
   sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-security-headers.conf" "/etc/nginx/snippets/baqueano-security-headers.conf"
   sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-auth-proxy.conf" "/etc/nginx/snippets/baqueano-auth-proxy.conf"
   sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-delivery.conf" "/etc/nginx/snippets/baqueano-delivery.conf"
+  # Capacidad y defensa (2026-10-07): zonas de límite por IP en conf.d (contexto http) y snippet
+  # del sitio con gzip_static, caché de archivos, tiempos anti-slowloris y filtro de escáneres.
+  sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-limits.conf" "/etc/nginx/conf.d/baqueano-limits.conf"
+  sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-hardening.conf" "/etc/nginx/snippets/baqueano-hardening.conf"
   sudo install -m 0644 "${REPO_DIR}/azure/nginx/baqueano-ip.conf" "/etc/nginx/sites-available/baqueano-ip.conf"
   sudo ln -sfn "/etc/nginx/sites-available/baqueano-ip.conf" "/etc/nginx/sites-enabled/baqueano-ip.conf"
   sudo rm -f "/etc/nginx/sites-enabled/default"
@@ -87,6 +91,7 @@ reload_nginx() {
 
   ensure_include "baqueano-auth-proxy.conf" "el proxy OAuth" || return 1
   ensure_include "baqueano-delivery.conf" "la ruta de entrega Android (/downloads, /app)" || return 1
+  ensure_include "baqueano-hardening.conf" "la capacidad y defensa (gzip_static, límites por IP)" || return 1
   # El bloque IP posee el único default_server. Esta normalización preserva las
   # líneas TLS que Certbot haya añadido al virtual host canónico.
   sudo sed -i -E 's/listen 80 default_server;/listen 80;/' "${site_config}"
@@ -127,6 +132,9 @@ echo "==> 3/6 Creando release"
 RELEASE="${RELEASES}/$(date -u +%Y%m%d%H%M%S)-${SHA}"
 mkdir -p "${RELEASE}"
 rsync -a --delete "${REPO_DIR}/website/dist-hostinger/" "${RELEASE}/"
+# Precompresión (2026-10-07): Nginx sirve los .gz con gzip_static sin gastar CPU por petición.
+# Prueba de carga con 2 workers: 1 066 → 4 655 páginas/s. Los originales se conservan (-k).
+find "${RELEASE}" -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.json' -o -name '*.svg' -o -name '*.xml' -o -name '*.txt' -o -name '*.webmanifest' \) -size +1k -exec gzip -k -6 -f {} +
 
 echo "==> 4/6 Incorporando videos (fuera de Git)"
 # Los videos están en .gitignore (exceden límites de GitHub). Se suben una vez
