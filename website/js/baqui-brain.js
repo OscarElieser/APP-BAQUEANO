@@ -255,7 +255,9 @@
   function money(nio, usd, currency) {
     const fNio = 'C$ ' + Math.round(nio).toLocaleString('es-NI');
     const fUsd = 'US$ ' + (Math.round(usd * 100) / 100).toLocaleString('en-US', { maximumFractionDigits: 2 });
-    return currency === 'USD' ? fUsd + ' (≈ ' + fNio + ')' : fNio + ' (≈ ' + fUsd + ')';
+    // Regla del propietario (2026-10-07): siempre córdobas primero y luego dólares, aunque la persona
+    // haya hablado en dólares (currency se conserva para saber de qué moneda partió el cálculo).
+    return fNio + ' (≈ ' + fUsd + ')';
   }
 
   // Texto en español nicaragüense (voseo natural). t(key, fallback, vars) traduce si hay clave.

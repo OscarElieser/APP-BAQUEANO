@@ -83,3 +83,7 @@
 .bq-lodging-email { margin: 6px 0 0; font-weight: 600; overflow-wrap: anywhere; }
 .bq-lodging-email a { color: var(--lodging-navy); }
 .bq-lodging-email i { color: var(--lodging-green); }
+.bq-lodging-price-amounts { flex: none; display: grid; justify-items: end; gap: 4px; }
+.bq-lodging-price-usd { font-weight: 700; font-size: 0.9rem; color: #F4E6C1; }
+.bq-lodging-phone.is-call a { color: var(--lodging-navy); }
+.bq-lodging-phone.is-call i { color: var(--lodging-green); }

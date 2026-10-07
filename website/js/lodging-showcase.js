@@ -41,6 +41,11 @@
     return node;
   }
   function icon(name) { return el('i', name, { 'aria-hidden': 'true' }); }
+  function number(value, decimals) {
+    var L = window.BaqueanoLanguage;
+    var options = { maximumFractionDigits: decimals };
+    return L && L.formatNumber ? L.formatNumber(value, options) : Number(value).toFixed(decimals);
+  }
 
   // Fecha de hoy en Nicaragua (AAAA-MM-DD), para comparar con la vigencia de las tarifas.
   function todayManagua() {
@@ -81,11 +86,24 @@
     item.prices.forEach(function (price) {
       var li = el('li');
       li.appendChild(keyed('span', 'bq-lodging-price-label', 'lodging.' + item.i18nKey + '.price.' + price.key));
-      li.appendChild(proper('strong', 'bq-lodging-price-amount', (price.currency === 'USD' ? 'US$' : 'C$') + price.amount));
+      // Córdobas primero y luego dólares (regla del propietario, 2026-10-07).
+      var rate = item.exchangeRate && item.exchangeRate.USD_NIO;
+      var nio = price.currency === 'USD' ? (rate ? price.amount * rate : null) : price.amount;
+      var usd = price.currency === 'USD' ? price.amount : (rate ? price.amount / rate : null);
+      var amounts = el('span', 'bq-lodging-price-amounts');
+      if (nio != null) amounts.appendChild(proper('strong', 'bq-lodging-price-amount', 'C$ ' + number(nio, 0)));
+      if (usd != null) amounts.appendChild(proper('span', 'bq-lodging-price-usd', 'US$ ' + number(usd, 2)));
+      li.appendChild(amounts);
       list.appendChild(li);
     });
     box.appendChild(list);
     box.appendChild(keyed('p', 'bq-lodging-price-note', 'lodgingShowcase.pricesNote'));
+    if (item.exchangeRate) {
+      // Texto con valores: se arma aquí y se vuelve a pintar en i18nReady y al cambiar de idioma.
+      var rateNote = el('p', 'bq-lodging-price-note bq-lodging-price-rate');
+      rateNote.textContent = t('lodgingShowcase.pricesRate', { rate: number(item.exchangeRate.USD_NIO, 4), date: item.exchangeRate.verifiedAt });
+      box.appendChild(rateNote);
+    }
     return box;
   }
 
@@ -149,6 +167,15 @@
     phone.appendChild(document.createTextNode(' '));
     phone.appendChild(proper('span', '', item.whatsappLabel));
     nodes.push(phone);
+    if (item.phone) {
+      var call = el('p', 'bq-lodging-phone is-call');
+      call.appendChild(icon('fa-solid fa-phone'));
+      call.appendChild(document.createTextNode(' '));
+      var tel = el('a', '', { href: 'tel:' + item.phone, translate: 'no' });
+      tel.textContent = item.phoneLabel;
+      call.appendChild(tel);
+      nodes.push(call);
+    }
     if (item.email) {
       var mail = el('p', 'bq-lodging-email');
       mail.appendChild(icon('fa-regular fa-envelope'));
@@ -221,6 +248,8 @@
   window.BaqueanoLodgingShowcase = { render: render };
   // El mensaje prellenado de WhatsApp sale en el idioma activo: se vuelve a pintar al cambiarlo.
   window.addEventListener('baqueano:languageChanged', render);
+  // Primera carga: el catálogo puede llegar después del primer pintado (textos con valores y WhatsApp).
+  window.addEventListener('baqueano:i18nReady', render);
 
   function boot() {
     var L = window.BaqueanoLanguage;

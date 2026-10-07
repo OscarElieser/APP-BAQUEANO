@@ -22,7 +22,7 @@
   if (EXCLUDED.test(location.pathname.replace(/\/$/, ''))) return;
   // 2026-10-07 — Motor de conversación, memoria y presupuesto de BAQÜI (js/baqui-brain.js).
   if (!window.BaquiBrain && !document.querySelector('script[data-baqui-brain]')) {
-    const brainScript = document.createElement('script'); brainScript.src = 'js/baqui-brain.js?v=20261007-3'; brainScript.dataset.baquiBrain = 'true'; document.head.appendChild(brainScript);
+    const brainScript = document.createElement('script'); brainScript.src = 'js/baqui-brain.js?v=20261007-4'; brainScript.dataset.baquiBrain = 'true'; document.head.appendChild(brainScript);
   }
   // Tipo de cambio de referencia: el mismo valor configurado en baqueano-travel-session.js.
   const RATE = Object.freeze(window.BAQUEANO_RATE || { USD_NIO: 36.6243, verifiedAt: '2026-10-01', source: 'Configuración BAQUEANO' });

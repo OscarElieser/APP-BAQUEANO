@@ -33,6 +33,9 @@
       logo: null,
       whatsapp: '50577532549',
       whatsappLabel: '+505 7753 2549',
+      // Teléfono para llamadas entregado por el propietario (2026-10-07).
+      phone: '+50525682222',
+      phoneLabel: '+505 2568 2222',
       // Correo de la publicidad del hotel enviada por el propietario (2026-10-07).
       email: 'encantodelsursjs@gmail.com',
       // Ubicación entregada por el propietario (2026-10-07): enlace exacto de Google Maps y dirección que
@@ -51,6 +54,9 @@
         { key: 'coupleNoAc', amount: 30, currency: 'USD' },
         { key: 'coupleAc', amount: 40, currency: 'USD' }
       ],
+      // El hotel publica su tarifa en dólares. Se muestra primero en córdobas (regla BAQUEANO) con el
+      // cambio de referencia del proyecto (mismo valor que BAQÜI y el planificador).
+      exchangeRate: { USD_NIO: 36.6243, verifiedAt: '2026-10-01' },
       pricesValidFrom: '2026-10-01',
       pricesValidUntil: '2026-10-31',
       source: 'business_owner',

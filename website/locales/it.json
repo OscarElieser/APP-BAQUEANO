@@ -6118,7 +6118,8 @@
     "copied": "Link copiato",
     "sealTitle": "Disponibile su BAQUEANO",
     "sealTagline": "Scopri ciò che non è sulla mappa.",
-    "baqueanoMap": "Vedi sulla mappa di BAQUEANO"
+    "baqueanoMap": "Vedi sulla mappa di BAQUEANO",
+    "pricesRate": "L'hotel pubblica la tariffa in dollari statunitensi. Córdobas al cambio di riferimento di C$ {rate} per 1 US$ ({date})."
   },
   "lodging": {
     "encantoDelSur": {

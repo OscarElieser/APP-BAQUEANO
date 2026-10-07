@@ -1177,6 +1177,7 @@
   "lodgingShowcase.location": "See location",
   "lodgingShowcase.pricesExpired": "The published rates are no longer valid. Ask the hotel directly for the current rate.",
   "lodgingShowcase.pricesNote": "Rates provided by the hotel. Confirm availability directly with the establishment.",
+  "lodgingShowcase.pricesRate": "The hotel publishes its rate in US dollars. Córdobas at the reference exchange rate of C$ {rate} per US$ 1 ({date}).",
   "lodgingShowcase.sealTagline": "Discover what's not on the map.",
   "lodgingShowcase.sealTitle": "Available on BAQUEANO",
   "lodgingShowcase.share": "Share",

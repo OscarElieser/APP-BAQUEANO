@@ -6118,7 +6118,8 @@
     "copied": "Link copied",
     "sealTitle": "Available on BAQUEANO",
     "sealTagline": "Discover what's not on the map.",
-    "baqueanoMap": "See on the BAQUEANO map"
+    "baqueanoMap": "See on the BAQUEANO map",
+    "pricesRate": "The hotel publishes its rate in US dollars. Córdobas at the reference exchange rate of C$ {rate} per US$ 1 ({date})."
   },
   "lodging": {
     "encantoDelSur": {

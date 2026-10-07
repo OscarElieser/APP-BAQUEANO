@@ -1177,6 +1177,7 @@
   "lodgingShowcase.location": "Vedi posizione",
   "lodgingShowcase.pricesExpired": "Le tariffe pubblicate non sono più valide. Chiedi la tariffa attuale direttamente all'hotel.",
   "lodgingShowcase.pricesNote": "Tariffe comunicate dall'hotel. Conferma la disponibilità direttamente con la struttura.",
+  "lodgingShowcase.pricesRate": "L'hotel pubblica la tariffa in dollari statunitensi. Córdobas al cambio di riferimento di C$ {rate} per 1 US$ ({date}).",
   "lodgingShowcase.sealTagline": "Scopri ciò che non è sulla mappa.",
   "lodgingShowcase.sealTitle": "Disponibile su BAQUEANO",
   "lodgingShowcase.share": "Condividi",

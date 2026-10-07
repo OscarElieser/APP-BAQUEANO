@@ -5021,3 +5021,15 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Pruebas:
       - Playwright + axe en ES/EN/DE/FR: sin violaciones ni errores; el botón apunta a lat 11.251437 / lng -85.870063.
       - El centrado de mapa.html no se pudo comprobar en el navegador: el sandbox bloquea el CDN de Leaflet. Se revisó en el código (mapa.html:496-501).
+- 2026-10-07 · Pedido del propietario: "Recordá que los precios van en córdobas y luego en dólares". Aplicarlo a la ficha de Hotel Encanto del Sur y revisar dónde se muestra primero el dólar.
+  - Resultado — córdobas primero:
+    - Ficha del hotel: C$ 1,099 / US$ 30 y C$ 1,465 / US$ 40, con la nota "El hotel publica su tarifa en dólares. Córdobas al cambio de referencia de C$ 36.6243 por US$ 1 (2026-10-01)", en 6 idiomas (`lodgingShowcase.pricesRate`).
+    - BAQÜI (`baqui-brain.js` money): siempre C$ (≈ US$), aunque la persona hable en dólares.
+    - Regla 11 agregada en AGENTS.md.
+    - La ficha se vuelve a pintar en `baqueano:i18nReady` (textos con valores y WhatsApp).
+    - Pruebas: Playwright + axe ES/EN/DE/FR sin violaciones; BAQÜI E2E sin menú; node:test 9/9.
+- 2026-10-07 · Pedido del propietario: agregar a Hotel Encanto del Sur el teléfono 2568 2222.
+  - Resultado:
+    - Supabase (migración `20261007170000_hotel_encanto_del_sur_telefono.sql`, UPDATE de 1 fila): `phone='+505 2568 2222'`; el WhatsApp sigue en `whatsapp`; anotado en `attributes.phones`.
+    - Ficha: teléfono con enlace `tel:+50525682222` bajo el WhatsApp.
+    - Pruebas: Playwright + axe ES/EN/DE/FR, sin violaciones.

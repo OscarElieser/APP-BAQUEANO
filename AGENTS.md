@@ -57,6 +57,11 @@
    - Mapa: "Un área protegida puede estar publicada informativamente sin navegación; el botón 'Cómo llegar' solo se habilita cuando existe un punto de acceso validado. El centro geográfico de una reserva no se utilizará automáticamente como entrada turística."
    - Publicada al visitante en `website/ambiental.html#verificacionAmbiental` (claves `pages.ambiental.verificacion.*`).
 
+11. **Precios: córdobas primero, luego dólares (Regla del propietario, 2026-10-07)**:
+   * Todo precio visible (fichas de negocios, BAQÜI, planificador, PDFs, Ops) se muestra primero en córdobas (C$) y después en dólares (US$).
+   * Si el negocio publica en dólares, la conversión usa el cambio de referencia del proyecto (C$ 36.6243 por US$ 1, verificado el 2026-10-01) y se dice en la ficha que el original está en dólares.
+   * Nunca se inventa un precio: solo se convierte el que entregó el negocio o el que figura en `public.prices`.
+
 ## BAQUEANO Agent Skills Orchestration
 
 ### 🎯 POR QUÉ (Why / Propósito)
