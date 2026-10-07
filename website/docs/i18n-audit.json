@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T18:44:33.252Z",
+  "generatedAt": "2026-10-07T18:54:41.242Z",
   "languages": [
     "es",
     "en",
@@ -9,21 +9,21 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4853,
-    "en": 4853,
-    "fr": 4853,
-    "it": 4853,
-    "pt": 4853,
-    "de": 4853
+    "es": 4887,
+    "en": 4887,
+    "fr": 4887,
+    "it": 4887,
+    "pt": 4887,
+    "de": 4887
   },
   "html": {
     "files": 34,
-    "total": 3870,
-    "translated": 3869,
+    "total": 3872,
+    "translated": 3871,
     "untranslated": 1
   },
   "js": {
-    "files": 117,
+    "files": 118,
     "translated": 152,
     "untranslated": 722
   },
@@ -110,6 +110,7 @@
     "js/impact-public.js",
     "js/intake-api.js",
     "js/lodging-showcase.js",
+    "js/musica-archivo.js",
     "js/ops-center/ops-alerts.js",
     "js/ops-center/ops-android-app.js",
     "js/ops-center/ops-automation.js",
@@ -385,8 +386,8 @@
     {
       "file": "musica.html",
       "type": "html",
-      "total": 197,
-      "translated": 197,
+      "total": 199,
+      "translated": 199,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -1155,6 +1156,15 @@
       "untranslated": 28,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/musica-archivo.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/musica-player.js",

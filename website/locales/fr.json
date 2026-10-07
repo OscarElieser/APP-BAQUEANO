@@ -4349,7 +4349,7 @@
         "p30": "Je vous recommande des chansons, artistes, routes culturelles et expériences selon le territoire que vous explorez.",
         "button1": "🎵 Je veux du son nica",
         "button2": "🌊 Musique des Caraïbes",
-        "button3": "🪵 Marimba",
+        "button3": "🎶 Marimba",
         "button4": "📜 Chansons historiques",
         "button5": "⭐ Artistes à la une",
         "button6": "🗺️ Routes musicales",
@@ -6411,5 +6411,71 @@
   "marquee": {
     "pause": "Pause",
     "play": "Reprendre"
+  },
+  "musicArchive": {
+    "pendingCredits": "Crédits à documenter",
+    "pending": "En cours de vérification",
+    "play": "Écouter {title}"
+  },
+  "musicInfo": {
+    "close": "Fermer",
+    "listen": "Écouter",
+    "stop": "Arrêter la lecture",
+    "source": "Source",
+    "listenHeading": "À écouter dans les archives ({n})",
+    "artistsHeading": "Artistes dans les archives",
+    "seeMap": "Voir la carte sonore",
+    "pendingNote": "La fiche propre à cet instrument est en préparation : nous ne publions que des données sourcées.",
+    "general": {
+      "text": "La musique du Nicaragua mêle des influences autochtones, africaines et européennes, surtout espagnoles."
+    },
+    "sonNica": {
+      "title": "Le son nica",
+      "text": "Le son nica est un genre musical propre au Nicaragua et l'un des plus représentatifs de sa culture : il compte parmi les symboles nationaux non officiels du pays. Le compositeur et auteur-compositeur Camilo Zapata en est l'un des auteurs les plus importants."
+    },
+    "moraLimpia": {
+      "title": "La Mora Limpia",
+      "text": "La Mora Limpia est une pièce instrumentale du compositeur et auteur-compositeur nicaraguayen Justo Santos. Son enregistrement fait partie des archives sonores de BAQUEANO et s'écoute ici même."
+    },
+    "marimba": {
+      "title": "La marimba de arco",
+      "text": "La marimba de arco nicaraguayenne est une variante simple de la marimba, instrument d'origine africaine. Sa structure a peu changé avec le temps : seuls certains matériaux de fabrication ont été renouvelés. Les archives contiennent des enregistrements de la Marimba de Arco de Monimbó, à Masaya."
+    },
+    "gueguense": {
+      "title": "El Güegüense",
+      "text": "El Güegüense est un drame satirique et la première œuvre théâtrale de la littérature nicaraguayenne. Il réunit théâtre, danse et musique, et fait la synthèse des cultures espagnole et autochtone. L'UNESCO l'a inscrit sur la Liste représentative du patrimoine culturel immatériel de l'humanité (proclamé en 2005)."
+    },
+    "caribe": {
+      "title": "Musique caraïbe et Palo de Mayo",
+      "text": "Le Palo de Mayo est une danse afro-caribéenne qui fait partie de la culture de plusieurs communautés des Régions autonomes de la côte caraïbe Nord et Sud du Nicaragua. Dans les archives, elle est surtout représentée par Dimensión Costeña, de Bluefields."
+    },
+    "historicas": {
+      "title": "Chansons historiques",
+      "text": "Carlos Mejía Godoy est l'un des principaux représentants de la chanson testimoniale ou nueva canción du Nicaragua. Les archives réunissent ses chansons et celles de son frère Luis Enrique Mejía Godoy."
+    },
+    "artistas": {
+      "title": "Artistes des archives",
+      "text": "Les archives sonores de BAQUEANO réunissent {verified} enregistrements à fiche vérifiée de {artists} artistes et groupes nicaraguayens. Touche un nom pour écouter l'un de leurs morceaux."
+    },
+    "rutas": {
+      "title": "Routes musicales",
+      "text": "La carte sonore de cette page signale cinq territoires : Masaya, berceau de la marimba de arco ; Grenade, avec ses sérénades et ses compositeurs ; León, avec la trova et le son nica ; la Caraïbe Sud, avec le Palo de Mayo ; et Matagalpa et Jinotega, avec polkas et mazurkas paysannes."
+    },
+    "quijongo": {
+      "title": "Le quijongo",
+      "text": "Le quijongo est un instrument à corde frappée, typique des peuples autochtones du Nicaragua et du Costa Rica. Bien qu'on l'associe aux Chorotegas de Nicoya, son origine est africaine : il ressemble beaucoup au berimbau afro-brésilien."
+    },
+    "guitarra": {
+      "title": "La guitare nicaraguayenne"
+    },
+    "pito": {
+      "title": "Le pito (flûte)"
+    },
+    "tambor": {
+      "title": "Le tambour"
+    },
+    "percusion": {
+      "title": "Les percussions"
+    }
   }
 }

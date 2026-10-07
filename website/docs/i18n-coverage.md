@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T18:44:33.252Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4853 · en 4853 · fr 4853 · it 4853 · pt 4853 · de 4853
+Generado: 2026-10-07T18:54:41.242Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4887 · en 4887 · fr 4887 · it 4887 · pt 4887 · de 4887
 
-HTML: 3869/3870 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3871/3872 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -214,6 +214,7 @@ HTML: 3869/3870 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/impact-public.js | js | 6 | 6 | 0 | 100 % |
 | js/intake-api.js | js | 0 | 0 | 0 | 100 % |
 | js/lodging-showcase.js | js | 0 | 0 | 0 | 100 % |
+| js/musica-archivo.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-alerts.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-android-app.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-automation.js | js | 0 | 0 | 0 | 100 % |
@@ -243,7 +244,7 @@ HTML: 3869/3870 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | mapa.html | html | 43 | 43 | 0 | 100 % |
 | mi-negocio.html | html | 188 | 188 | 0 | 100 % |
 | mi-viaje.html | html | 122 | 122 | 0 | 100 % |
-| musica.html | html | 197 | 197 | 0 | 100 % |
+| musica.html | html | 199 | 199 | 0 | 100 % |
 | normas-comunidad.html | html | 28 | 28 | 0 | 100 % |
 | nosotros.html | html | 169 | 169 | 0 | 100 % |
 | offline.html | html | 24 | 24 | 0 | 100 % |

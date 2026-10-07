@@ -4349,7 +4349,7 @@
         "p30": "Ti consiglio canzoni, artisti, itinerari culturali ed esperienze in base al territorio che stai esplorando.",
         "button1": "🎵 Voglio son nica",
         "button2": "🌊 Musica dei Caraibi",
-        "button3": "🪵 Marimba",
+        "button3": "🎶 Marimba",
         "button4": "📜 Canzoni storiche",
         "button5": "⭐ Artisti in evidenza",
         "button6": "🗺️ Itinerari musicali",
@@ -6411,5 +6411,71 @@
   "marquee": {
     "pause": "Pausa",
     "play": "Riprendi"
+  },
+  "musicArchive": {
+    "pendingCredits": "Crediti da documentare",
+    "pending": "In revisione",
+    "play": "Riproduci {title}"
+  },
+  "musicInfo": {
+    "close": "Chiudi",
+    "listen": "Ascolta",
+    "stop": "Interrompi lettura",
+    "source": "Fonte",
+    "listenHeading": "Ascoltalo nell'archivio ({n})",
+    "artistsHeading": "Artisti nell'archivio",
+    "seeMap": "Vedi la mappa sonora",
+    "pendingNote": "La scheda di questo strumento è in preparazione: pubblichiamo solo dati con fonte.",
+    "general": {
+      "text": "La musica del Nicaragua è una miscela di influenze indigene, africane ed europee, soprattutto spagnole."
+    },
+    "sonNica": {
+      "title": "Il son nica",
+      "text": "Il son nica è un genere musicale proprio del Nicaragua e uno dei più rappresentativi della sua cultura: è considerato tra i simboli nazionali non ufficiali del paese. Il compositore e cantautore Camilo Zapata è uno dei suoi autori più importanti."
+    },
+    "moraLimpia": {
+      "title": "La Mora Limpia",
+      "text": "La Mora Limpia è un brano strumentale del compositore e cantautore nicaraguense Justo Santos. La sua registrazione fa parte dell'archivio sonoro di BAQUEANO e si può ascoltare proprio qui."
+    },
+    "marimba": {
+      "title": "La marimba de arco",
+      "text": "La marimba de arco nicaraguense è una variante semplice della marimba, strumento di origine africana. La sua struttura è cambiata poco nel tempo: sono stati rinnovati solo alcuni materiali con cui si costruisce. Nell'archivio ci sono registrazioni della Marimba de Arco de Monimbó, a Masaya."
+    },
+    "gueguense": {
+      "title": "El Güegüense",
+      "text": "El Güegüense è un dramma satirico e la prima opera teatrale della letteratura nicaraguense. Unisce teatro, danza e musica ed è una sintesi delle culture spagnola e indigena. L'UNESCO lo ha iscritto nella Lista rappresentativa del patrimonio culturale immateriale dell'umanità (proclamato nel 2005)."
+    },
+    "caribe": {
+      "title": "Musica dei Caraibi e Palo de Mayo",
+      "text": "Il Palo de Mayo è una danza afrocaraibica che fa parte della cultura di varie comunità delle Regioni Autonome della Costa Caraibica Nord e Sud del Nicaragua. Nell'archivio la rappresenta soprattutto Dimensión Costeña, di Bluefields."
+    },
+    "historicas": {
+      "title": "Canzoni storiche",
+      "text": "Carlos Mejía Godoy è uno dei principali rappresentanti della canzone testimoniale o nueva canción del Nicaragua. Nell'archivio ci sono le sue canzoni e quelle di suo fratello Luis Enrique Mejía Godoy."
+    },
+    "artistas": {
+      "title": "Artisti dell'archivio",
+      "text": "L'archivio sonoro di BAQUEANO riunisce {verified} registrazioni con scheda verificata di {artists} artisti e gruppi nicaraguensi. Tocca un nome per ascoltare uno dei loro brani."
+    },
+    "rutas": {
+      "title": "Percorsi musicali",
+      "text": "La mappa sonora di questa pagina segna cinque territori: Masaya, culla della marimba de arco; Granada, con le sue serenate e i suoi compositori; León, con la trova e il son nica; i Caraibi Sud, con il Palo de Mayo; e Matagalpa e Jinotega, con polke e mazurke contadine."
+    },
+    "quijongo": {
+      "title": "Il quijongo",
+      "text": "Il quijongo è uno strumento a corda percossa, tipico dei popoli indigeni del Nicaragua e della Costa Rica. Anche se è associato ai chorotega di Nicoya, la sua origine è africana: è molto simile al berimbau afrobrasiliano."
+    },
+    "guitarra": {
+      "title": "La chitarra nicaraguense"
+    },
+    "pito": {
+      "title": "Il pito (flauto)"
+    },
+    "tambor": {
+      "title": "Il tamburo"
+    },
+    "percusion": {
+      "title": "Le percussioni"
+    }
   }
 }

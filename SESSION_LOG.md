@@ -5420,3 +5420,40 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - copias = originales, todas inert + aria-hidden; sin desborde; axe 0;
   - con reducir movimiento: sin animación, sin copias y sin botón.
 - Hallazgo de contenido: las categorías "Bebidas" y "Dulces" de Gastronomía no tienen platos cargados (0 tarjetas). Se resuelve en la página de todos los platos (tarea 53), sin inventar.
+15. Música, "Historia viva del sonido pinolero" e "Instrumentos tradicionales": galería rotativa con todos los elementos; las flechas no funcionan; la flechita de cada tarjeta debe dar más información sin salirse del contexto.
+16. Música, "Archivo sonoro": "si en sistema tenemos 93 músicas tienen que mostrarse todas, que ocupe el ancho de la pantalla y se vean en fila y columna" (hoy muestra 6).
+17. Música, "Baqueano Digital: ¿Qué música querés disfrutar hoy?": al tocar un tema (Son Nica, Caribe, Marimba…) debe salir información de ese tema sin salir de musica.html, "a como hace historia que te la puede leer por vos" (lectura en voz alta). El chip "Marimba" muestra un ícono roto.
+18. Reproductor flotante inferior: "hacerlo más chico, no tan ancho".
+19. Destinos: el botón "Ver todos" de "Todos los destinos (237)" no funciona; debe abrir una página nueva con todos los destinos. Se suma a la tarea 54.
+- Hallazgo: `js/epic-music-player.js` ya tiene el inventario de los 93 MP3 de `assets/audio` con reglas de catalogación verificada (título, artista, crédito, territorio), pero ninguna página lo carga. Se reutiliza como fuente del Archivo sonoro; las piezas sin ficha muestran "Créditos por documentar" (no se inventan).
+20. Mapas: captura de un mapa con pines y etiquetas con nombre ("Cañón de Somoto", "Hotel Darío", "Yemaya Reefs"…): "así tienen que salir pero con toda la información que tenemos". Se suma a la tarea 52 (todos los pines, con su nombre y su información).
+
+### Música: Archivo sonoro completo, fichas en contexto y barra compacta — hecho y probado
+- Archivo sonoro (#tracksGrid): muestra las 93 grabaciones de `assets/audio`, en filas y columnas a casi todo el ancho de la pantalla (5 columnas a 1366 px, 1 columna en celular).
+  - Fuente: el inventario de `js/epic-music-player.js`, que ya existía pero no estaba cargado. Tiene 90 piezas con ficha verificada; las 3 restantes dicen "Créditos por documentar / En revisión".
+  - El contador pasa a "93". El buscador filtra las 93.
+  - Cada tarjeta suena en el reproductor de la página. `musica-player.js` suma a su cola las pistas del archivo (`window.playArchiveFile`) y marca la tarjeta exacta por archivo.
+- Fichas sin salir de la página (`js/musica-archivo.js` + `css/components/musica-archivo.css`), con `<dialog>` nativo:
+  - se abren desde:
+    - los 6 chips de "Baqueano Digital";
+    - las 4 tarjetas de "Historia viva";
+    - las 6 de "Instrumentos" (ahora con ícono de información; se abren también con el teclado);
+  - cada ficha trae un texto breve con fuente citada (Wikipedia: Son nica, Marimba de arco, Palo de Mayo, Quijongo, Justo Santos, Carlos Mejía Godoy, Música de Nicaragua; UNESCO: El Güegüense);
+  - botón "Escuchar" que lee la ficha en voz alta con la voz del idioma activo, como la audioguía de Historia;
+  - lista de las grabaciones del archivo relacionadas, que se reproducen ahí mismo.
+- Guitarra, Pito, Tambor y Percusión no tienen fuente propia todavía. Su ficha muestra el contexto general con fuente y el aviso "La ficha propia de este instrumento está en preparación"; no se inventan datos.
+- Chip "Marimba": el ícono 🪵 no se veía en algunos sistemas; ahora es 🎶 (6 idiomas).
+- Flechas de Géneros, Historia viva, Instrumentos y Archivo: no movían nada (grillas, no carriles). Quedan ocultas en el DOM.
+- "Historia viva" e "Instrumentos" usan la galería en movimiento con Pausar. Si todas las tarjetas caben en pantalla, se muestran todas quietas.
+- Barra flotante (`global-music-player.js`): ahora centrada y de 600 px como máximo (antes ocupaba todo el ancho). Guarda el archivo exacto, así que una pieza del archivo sigue sonando al cambiar de página.
+- 34 claves `musicArchive.*` / `musicInfo.*` en 6 idiomas; `npm run i18n` da 0 errores.
+- Pruebas:
+  - Playwright 27/27 ✅ a 1366 y 390 px: 93 tarjetas, buscador, reproducir la tarjeta 50, chip, tarjeta de Historia viva sin cambiar la URL, instrumento con Enter, Escape devuelve el foco, ficha en inglés, sin desborde, barra de 600 px centrada con la pista correcta;
+  - "Escuchar" con voz simulada: lee "título. texto" en es-NI, y el botón pasa a "Detener" y vuelve solo al terminar;
+  - axe de la ficha: 0 (el botón Escuchar pasó a #C2410C por contraste);
+  - browser-qa (música y destinos): 32 cargas, 0 fallos;
+  - auditoría estática: 0 críticos.
+- Imágenes que no corresponden (pendiente de fotos reales con licencia; no se reemplazan por otras inventadas):
+  - Historia viva: "El Son Nica" usa la Calzada de Granada, "La Mora Limpia" Ometepe, "Marimba de Arco" el volcán Masaya y "El Güegüense" un plato de gallo pinto.
+  - Instrumentos: Marimba y Tambor usan el volcán Masaya, Guitarra el Cerro Negro, Pito una posada, Quijongo el Cañón de Somoto y Percusión Corn Island.
+- Dato del sitio a revisar: la tarjeta "Marimba de Arco" dice "Patrimonio de la Humanidad". La declaratoria UNESCO verificada es la de El Güegüense; no se cambió el texto sin una fuente.

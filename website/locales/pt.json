@@ -4349,7 +4349,7 @@
         "p30": "Recomendo canções, artistas, rotas culturais e experiências conforme o território que você está explorando.",
         "button1": "🎵 Quero son nica",
         "button2": "🌊 Música do Caribe",
-        "button3": "🪵 Marimba",
+        "button3": "🎶 Marimba",
         "button4": "📜 Canções históricas",
         "button5": "⭐ Artistas em destaque",
         "button6": "🗺️ Rotas musicais",
@@ -6411,5 +6411,71 @@
   "marquee": {
     "pause": "Pausar",
     "play": "Continuar"
+  },
+  "musicArchive": {
+    "pendingCredits": "Créditos a documentar",
+    "pending": "Em revisão",
+    "play": "Tocar {title}"
+  },
+  "musicInfo": {
+    "close": "Fechar",
+    "listen": "Ouvir",
+    "stop": "Parar leitura",
+    "source": "Fonte",
+    "listenHeading": "Ouça no arquivo ({n})",
+    "artistsHeading": "Artistas no arquivo",
+    "seeMap": "Ver o mapa sonoro",
+    "pendingNote": "A ficha própria deste instrumento está em preparação: só publicamos dados com fonte.",
+    "general": {
+      "text": "A música da Nicarágua é uma mistura de influências indígenas, africanas e europeias, sobretudo espanholas."
+    },
+    "sonNica": {
+      "title": "O son nica",
+      "text": "O son nica é um gênero musical próprio da Nicarágua e um dos mais representativos de sua cultura: está entre os símbolos nacionais não oficiais do país. O compositor e cantautor Camilo Zapata é um de seus autores mais importantes."
+    },
+    "moraLimpia": {
+      "title": "La Mora Limpia",
+      "text": "La Mora Limpia é uma peça instrumental do compositor e cantautor nicaraguense Justo Santos. Sua gravação faz parte do arquivo sonoro do BAQUEANO e pode ser ouvida aqui mesmo."
+    },
+    "marimba": {
+      "title": "A marimba de arco",
+      "text": "A marimba de arco nicaraguense é uma variante simples da marimba, instrumento de origem africana. Sua estrutura quase não mudou com o tempo: só alguns dos materiais com que é feita foram renovados. No arquivo há gravações da Marimba de Arco de Monimbó, em Masaya."
+    },
+    "gueguense": {
+      "title": "El Güegüense",
+      "text": "El Güegüense é um drama satírico e a primeira obra teatral da literatura nicaraguense. Une teatro, dança e música e é uma síntese das culturas espanhola e indígena. A UNESCO o inscreveu na Lista Representativa do Patrimônio Cultural Imaterial da Humanidade (proclamado em 2005)."
+    },
+    "caribe": {
+      "title": "Música do Caribe e Palo de Mayo",
+      "text": "O Palo de Mayo é uma dança afro-caribenha que faz parte da cultura de várias comunidades das Regiões Autônomas da Costa Caribe Norte e Sul da Nicarágua. No arquivo, é representada sobretudo por Dimensión Costeña, de Bluefields."
+    },
+    "historicas": {
+      "title": "Canções históricas",
+      "text": "Carlos Mejía Godoy é um dos principais representantes da canção testemunhal ou nueva canción da Nicarágua. No arquivo estão suas canções e as de seu irmão Luis Enrique Mejía Godoy."
+    },
+    "artistas": {
+      "title": "Artistas do arquivo",
+      "text": "O arquivo sonoro do BAQUEANO reúne {verified} gravações com ficha verificada de {artists} artistas e grupos nicaraguenses. Toque em um nome para ouvir uma de suas peças."
+    },
+    "rutas": {
+      "title": "Rotas musicais",
+      "text": "O mapa sonoro desta página marca cinco territórios: Masaya, berço da marimba de arco; Granada, com suas serenatas e compositores; León, com a trova e o son nica; o Caribe Sul, com o Palo de Mayo; e Matagalpa e Jinotega, com polcas e mazurcas camponesas."
+    },
+    "quijongo": {
+      "title": "O quijongo",
+      "text": "O quijongo é um instrumento de corda percutida, típico de povos indígenas da Nicarágua e da Costa Rica. Embora seja associado aos chorotegas de Nicoya, sua origem é africana: é muito parecido com o berimbau afro-brasileiro."
+    },
+    "guitarra": {
+      "title": "O violão nicaraguense"
+    },
+    "pito": {
+      "title": "O pito (flauta)"
+    },
+    "tambor": {
+      "title": "O tambor"
+    },
+    "percusion": {
+      "title": "A percussão"
+    }
   }
 }

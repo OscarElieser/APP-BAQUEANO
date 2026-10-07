@@ -953,7 +953,7 @@
     }
     if (!document.querySelector('script[data-global-music-player]')) {
       var musicPlayerScript = document.createElement('script');
-      musicPlayerScript.src = 'js/global-music-player.js?v=20260929-1';
+      musicPlayerScript.src = 'js/global-music-player.js?v=20261007-1';
       musicPlayerScript.defer = true;
       musicPlayerScript.dataset.globalMusicPlayer = 'true';
       document.body.appendChild(musicPlayerScript);

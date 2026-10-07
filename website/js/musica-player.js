@@ -26,6 +26,9 @@
     { title:'Palo de Mayo', artist:'Tradición caribeña', file:'Sabroso Palo de Mayo.mp3', image:'assets/artistas/Dimensión Costeña.jpg', genre:'Palo de Mayo', region:'Costa Caribe', period:'Tradición viva', summary:'Ritmo comunitario afrocaribeño asociado a las celebraciones de mayo, la danza y la herencia creole.' },
     { title:'Danza del Güegüense', artist:'Folclor Nacional', file:'🔊Sones del Güegüense.mp3', image:'assets/artistas/Música de El Güegüense.jpg', genre:'Son tradicional', region:'Diriamba, Carazo', period:'Época colonial', summary:'Música de la obra danzaria El Güegüense, expresión de sátira, teatro, danza y patrimonio cultural nicaragüense.' }
   ].map(track => ({...track, src:`assets/audio/${encodeURIComponent(track.file)}`}));
+  // 2026-10-07: el Archivo sonoro muestra las 93 grabaciones de js/epic-music-player.js; se suman a la
+  // cola las que no estaban (mismo archivo = misma pista) para que cualquier tarjeta pueda sonar aquí.
+  (window.BaqueanoArchive?.tracks||[]).forEach(item=>{if(!TRACKS.some(track=>track.file===item.file))TRACKS.push({title:item.title,artist:item.artist,file:item.file,image:item.image||'assets/images/destinos/volcan_masaya.jpg',genre:item.credit,region:item.territory,period:'',summary:'',src:item.src});});
 
   const ARTISTS = {
     'Camilo Zapata': { years:'1917–2009', place:'Managua', role:'Compositor y guitarrista', bio:'Considerado creador y principal impulsor del son nica. Su obra convirtió paisajes, costumbres y personajes populares en una expresión musical propia de Nicaragua.', works:'Caballito chontaleño · El solar de Monimbó · Flor de mi colina' },
@@ -52,7 +55,7 @@
   const $$ = selector => Array.from(document.querySelectorAll(selector));
   const formatTime = value => Number.isFinite(value) ? `${Math.floor(value/60)}:${String(Math.floor(value%60)).padStart(2,'0')}` : '0:00';
   function savePersistentState(playing) {
-    try { sessionStorage.setItem(persistentKey, JSON.stringify({started:true,dismissed:false,index:currentIndex,time:audio.currentTime||0,playing:!!playing,updatedAt:Date.now()})); }
+    try { sessionStorage.setItem(persistentKey, JSON.stringify({started:true,dismissed:false,index:currentIndex,file:TRACKS[currentIndex]?.file,title:TRACKS[currentIndex]?.title,artist:TRACKS[currentIndex]?.artist,image:TRACKS[currentIndex]?.image,time:audio.currentTime||0,playing:!!playing,updatedAt:Date.now()})); }
     catch (error) { /* El reproductor continúa aunque la sesión no pueda guardarse. */ }
   }
 
@@ -64,19 +67,20 @@
     const query=String(title||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
     return TRACKS.findIndex(track=>track.title.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes(query)||query.includes(track.title.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()));
   }
+  function isCurrentCard(card) { return card.dataset.file ? card.dataset.file===TRACKS[currentIndex]?.file : findTrack(card.dataset.title)===currentIndex; }
   function setTrack(index, autoplay) {
     currentIndex=(index+TRACKS.length)%TRACKS.length;
     const track=TRACKS[currentIndex]; audio.src=track.src; audio.load();
     const featured=$('#featuredTrackTitle'), featuredArtist=$('#featuredTrackArtist'), featuredCover=$('.featured-player-cover'), stickyTitle=$('#stickyTrackTitle'), stickyArtist=$('#stickyTrackArtist'), stickyCover=$('#stickyTrackThumb');
     if(featured) featured.textContent=track.title; if(featuredArtist) featuredArtist.textContent=track.artist; if(featuredCover){featuredCover.src=track.image;featuredCover.alt=track.artist;} if(stickyTitle) stickyTitle.textContent=track.title; if(stickyArtist) stickyArtist.textContent=track.artist; if(stickyCover){stickyCover.src=track.image;stickyCover.alt=track.artist;}
-    $$('.track-card-exact').forEach(card=>card.classList.toggle('is-playing',findTrack(card.dataset.title)===currentIndex));
+    $$('.track-card-exact').forEach(card=>card.classList.toggle('is-playing',isCurrentCard(card)));
     if(autoplay) audio.play().catch(()=>notify('El navegador bloqueó el inicio automático. Pulsá reproducir nuevamente.'));
   }
   function updatePlayState() {
     const playing=!audio.paused;
     ['#mainPlayIcon','#stickyPlayIcon'].forEach(selector=>{const icon=$(selector);if(icon)icon.className=`fa-solid fa-${playing?'pause':'play'}`;});
     const wave=$('#waveformVisualizer'); if(wave) wave.classList.toggle('is-playing',playing);
-    $$('.track-card-exact').forEach(card=>{const button=card.querySelector('.track-play-btn i');if(button&&findTrack(card.dataset.title)===currentIndex)button.className=`fa-solid fa-${playing?'pause':'play'}`;});
+    $$('.track-card-exact').forEach(card=>{const button=card.querySelector('.track-play-btn i');if(button)button.className='fa-solid fa-play';if(button&&isCurrentCard(card))button.className=`fa-solid fa-${playing?'pause':'play'}`;});
   }
   function toggle() { if(!audio.src)setTrack(currentIndex,false); audio.paused?audio.play().catch(()=>notify('No fue posible iniciar esta grabación.')):audio.pause(); }
   function step(direction) { const next=shuffle?Math.floor(Math.random()*TRACKS.length):currentIndex+direction; setTrack(next,true); }
@@ -93,6 +97,7 @@
   function closeProfile(){const modal=$('#musicProfileModal');if(modal){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');}}
 
   window.toggleMainTrack=toggle;
+  window.playArchiveFile=function(file){const index=TRACKS.findIndex(track=>track.file===file);if(index<0)return false;if(index===currentIndex&&audio.src){toggle();return true;}setTrack(index,true);return true;};
   window.playSong=function(title){const index=findTrack(title);if(index>=0)setTrack(index,true);else notify('Esta ficha todavía no tiene una grabación vinculada.');};
 
   function wireControls() {
@@ -108,7 +113,7 @@
     const progress=$('.sticky-progress-bar'); if(progress){progress.setAttribute('role','slider');progress.setAttribute('tabindex','0');progress.title='Cambiar posición';progress.addEventListener('click',event=>{if(Number.isFinite(audio.duration)){const box=progress.getBoundingClientRect();audio.currentTime=Math.max(0,Math.min(1,(event.clientX-box.left)/box.width))*audio.duration;}});progress.addEventListener('keydown',event=>{if(!Number.isFinite(audio.duration))return;const step={ArrowRight:5,ArrowUp:5,ArrowLeft:-5,ArrowDown:-5}[event.key];if(event.key==='Home'||event.key==='End'||step){event.preventDefault();audio.currentTime=event.key==='Home'?0:event.key==='End'?Math.max(0,audio.duration-1):Math.max(0,Math.min(audio.duration,audio.currentTime+step));}});}
   }
   function wireCarousels() {
-    $$('.musica-carousel-arrows').forEach(arrows=>{const section=arrows.closest('.musica-section-common');const rail=section?.querySelector('.genres-grid-exact,.artists-grid-exact,.history-grid-exact,.instruments-grid-exact,.tracks-grid-exact');if(!rail)return;const buttons=arrows.querySelectorAll('.musica-arrow-btn');buttons[0]?.addEventListener('click',()=>rail.scrollBy({left:-Math.max(280,rail.clientWidth*.75),behavior:'smooth'}));buttons[1]?.addEventListener('click',()=>rail.scrollBy({left:Math.max(280,rail.clientWidth*.75),behavior:'smooth'}));});
+    $$('.musica-carousel-arrows').forEach(arrows=>{const section=arrows.closest('.musica-section-common');const rail=section?.querySelector('.genres-grid-exact,.artists-grid-exact,.history-grid-exact,.instruments-grid-exact,.tracks-grid-exact');if(!rail||arrows.hidden)return;const buttons=arrows.querySelectorAll('.musica-arrow-btn');buttons[0]?.addEventListener('click',()=>rail.scrollBy({left:-Math.max(280,rail.clientWidth*.75),behavior:'smooth'}));buttons[1]?.addEventListener('click',()=>rail.scrollBy({left:Math.max(280,rail.clientWidth*.75),behavior:'smooth'}));});
   }
   function wireMapSearch() {
     const button=$('#btnSoundMapSearch'); if(!button)return;

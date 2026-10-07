@@ -4349,7 +4349,7 @@
         "p30": "Te recomiendo canciones, artistas, rutas culturales y experiencias según el territorio que estés explorando.",
         "button1": "🎵 Quiero Son Nica",
         "button2": "🌊 Música del Caribe",
-        "button3": "🪵 Marimba",
+        "button3": "🎶 Marimba",
         "button4": "📜 Canciones históricas",
         "button5": "⭐ Artistas destacados",
         "button6": "🗺️ Rutas musicales",
@@ -6411,5 +6411,71 @@
   "marquee": {
     "pause": "Pausar",
     "play": "Continuar"
+  },
+  "musicArchive": {
+    "pendingCredits": "Créditos por documentar",
+    "pending": "En revisión",
+    "play": "Reproducir {title}"
+  },
+  "musicInfo": {
+    "close": "Cerrar",
+    "listen": "Escuchar",
+    "stop": "Detener lectura",
+    "source": "Fuente",
+    "listenHeading": "Escuchalo en el archivo ({n})",
+    "artistsHeading": "Artistas en el archivo",
+    "seeMap": "Ver el mapa sonoro",
+    "pendingNote": "La ficha propia de este instrumento está en preparación: solo publicamos datos con fuente.",
+    "general": {
+      "text": "La música de Nicaragua es una mezcla de influencias indígenas, africanas y europeas, especialmente españolas."
+    },
+    "sonNica": {
+      "title": "El son nica",
+      "text": "El son nica es un género musical propio de Nicaragua y uno de los más representativos de su cultura: se lo cuenta entre los símbolos nacionales no oficiales del país. Camilo Zapata, compositor y cantautor, es uno de sus autores más importantes."
+    },
+    "moraLimpia": {
+      "title": "La Mora Limpia",
+      "text": "La Mora Limpia es una pieza instrumental del compositor y cantautor nicaragüense Justo Santos. Su grabación forma parte del archivo sonoro de BAQUEANO y se puede escuchar aquí mismo."
+    },
+    "marimba": {
+      "title": "La marimba de arco",
+      "text": "La marimba de arco nicaragüense es una variante sencilla de la marimba, instrumento de origen africano. Su estructura casi no ha cambiado con el tiempo: solo se renovaron algunos de los materiales con que se fabrica. En el archivo suenan grabaciones de la Marimba de Arco de Monimbó, en Masaya."
+    },
+    "gueguense": {
+      "title": "El Güegüense",
+      "text": "El Güegüense es un drama satírico y la primera obra teatral de la literatura nicaragüense. Une teatro, danza y música, y es una síntesis de las culturas española e indígena. La UNESCO lo inscribió en la Lista Representativa del Patrimonio Cultural Inmaterial de la Humanidad (proclamado en 2005)."
+    },
+    "caribe": {
+      "title": "Música del Caribe y Palo de Mayo",
+      "text": "El Palo de Mayo es una danza afrocaribeña que forma parte de la cultura de varias comunidades de las Regiones Autónomas de la Costa Caribe Norte y Sur de Nicaragua. En el archivo la representa sobre todo Dimensión Costeña, de Bluefields."
+    },
+    "historicas": {
+      "title": "Canciones históricas",
+      "text": "Carlos Mejía Godoy es uno de los principales representantes de la canción testimonial o nueva canción de Nicaragua. En el archivo están sus canciones y las de su hermano Luis Enrique Mejía Godoy."
+    },
+    "artistas": {
+      "title": "Artistas del archivo",
+      "text": "El archivo sonoro de BAQUEANO reúne {verified} grabaciones con ficha verificada de {artists} artistas y agrupaciones nicaragüenses. Tocá un nombre para escuchar una de sus piezas."
+    },
+    "rutas": {
+      "title": "Rutas musicales",
+      "text": "El mapa sonoro de esta página marca cinco territorios: Masaya, cuna de la marimba de arco; Granada, con sus serenatas y compositores; León, con la trova y el son nica; el Caribe Sur, con el Palo de Mayo; y Matagalpa y Jinotega, con polkas y mazurcas campesinas."
+    },
+    "quijongo": {
+      "title": "El quijongo",
+      "text": "El quijongo es un instrumento de cuerda percutida, típico de pueblos indígenas de Nicaragua y Costa Rica. Aunque se lo asocia a los chorotegas de Nicoya, su origen es africano: es muy parecido al birimbao afrobrasileño."
+    },
+    "guitarra": {
+      "title": "La guitarra nicaragüense"
+    },
+    "pito": {
+      "title": "El pito"
+    },
+    "tambor": {
+      "title": "El tambor"
+    },
+    "percusion": {
+      "title": "La percusión"
+    }
   }
 }

@@ -63,6 +63,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="css/components/bq-marquee.css?v=20261007-1">
+  <link rel="stylesheet" href="css/components/musica-archivo.css?v=20261007-1">
 </head>
 
 <body class="page-musica-exact">
@@ -225,7 +226,7 @@
         </div>
         <div class="musica-head-actions">
           <a data-i18n="pages.musica.musicaSectionCommon.a1" href="#generosMusicales" class="musica-view-link">Ver todos los géneros &rarr;</a>
-          <div class="musica-carousel-arrows">
+          <div class="musica-carousel-arrows" hidden>
             <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
             <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
@@ -474,16 +475,16 @@
         </div>
         <div class="musica-head-actions">
           <a data-i18n="pages.musica.musicaSectionCommon.a3" href="historia.html" class="musica-view-link">Ver toda la historia &rarr;</a>
-          <div class="musica-carousel-arrows">
+          <div class="musica-carousel-arrows" hidden>
             <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
             <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
         </div>
       </div>
 
-      <div class="musica-history-grid">
+      <div class="musica-history-grid" data-bq-marquee data-bq-gallery-ready="true" data-bq-speed="35" style="--bq-marquee-item:280px" data-i18n-aria-label="pages.musica.musicaSectionCommon.h23" aria-label="Historia viva del sonido pinolero">
         <!-- 1. El Son Nica -->
-        <a href="#archivoSonoro" class="history-card-exact">
+        <a href="#archivoSonoro" class="history-card-exact" data-music-topic="sonNica" aria-haspopup="dialog">
           <img data-i18n-alt="pages.musica.musicaSectionCommon.h36" loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="El Son Nica" class="history-card-bg" width="401" height="498">
           <div class="history-card-overlay"></div>
           <div class="history-card-content">
@@ -496,7 +497,7 @@
         </a>
 
         <!-- 2. La Mora Limpia -->
-        <a href="#archivoSonoro" class="history-card-exact">
+        <a href="#archivoSonoro" class="history-card-exact" data-music-topic="moraLimpia" aria-haspopup="dialog">
           <img data-i18n-alt="pages.musica.featuredTrackTitle.h41" loading="lazy" decoding="async" src="assets/images/destinos/isla_de_ometepe.jpg" alt="La Mora Limpia" class="history-card-bg" width="1600" height="900">
           <div class="history-card-overlay"></div>
           <div class="history-card-content">
@@ -509,7 +510,7 @@
         </a>
 
         <!-- 3. Marimba de Arco -->
-        <a href="#archivoSonoro" class="history-card-exact">
+        <a href="#archivoSonoro" class="history-card-exact" data-music-topic="marimba" aria-haspopup="dialog">
           <img data-i18n-alt="pages.musica.musicaSectionCommon.h37" loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Marimba de Arco" class="history-card-bg" width="1600" height="1131">
           <div class="history-card-overlay"></div>
           <div class="history-card-content">
@@ -522,7 +523,7 @@
         </a>
 
         <!-- 4. El Güegüense -->
-        <a href="#archivoSonoro" class="history-card-exact">
+        <a href="#archivoSonoro" class="history-card-exact" data-music-topic="gueguense" aria-haspopup="dialog">
           <img loading="lazy" decoding="async" src="assets/images/comida/gallo_pinto.jpg" alt="El Güegüense" class="history-card-bg" width="387" height="516">
           <div class="history-card-overlay"></div>
           <div class="history-card-content">
@@ -549,66 +550,72 @@
         </div>
         <div class="musica-head-actions">
           <a data-i18n="pages.musica.musicaSectionCommon.a4" href="#instrumentosMusica" class="musica-view-link">Ver todos los instrumentos &rarr;</a>
-          <div class="musica-carousel-arrows">
+          <div class="musica-carousel-arrows" hidden>
             <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
             <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
         </div>
       </div>
 
-      <div class="musica-instruments-grid">
+      <div class="musica-instruments-grid" data-bq-marquee data-bq-gallery-ready="true" data-bq-speed="35" style="--bq-marquee-item:220px" data-i18n-aria-label="pages.musica.musicaSectionCommon.h24" aria-label="Instrumentos tradicionales">
         <!-- 1. Marimba de Arco -->
-        <div class="instrument-card-exact">
+        <div class="instrument-card-exact" data-music-topic="marimba" role="button" tabindex="0" aria-haspopup="dialog">
           <img data-i18n-alt="pages.musica.musicaSectionCommon.h37" loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Marimba de Arco" class="instrument-img" width="1600" height="1131">
           <div class="instrument-body">
             <h4 data-i18n="pages.musica.musicaSectionCommon.h37">Marimba de Arco</h4>
             <p data-i18n="pages.musica.musicaSectionCommon.p24">Patrimonio de la Humanidad</p>
           </div>
+          <span class="instrument-card-more" aria-hidden="true"><i class="fa-solid fa-circle-info"></i></span>
         </div>
 
         <!-- 2. Guitarra Nicaragüense -->
-        <div class="instrument-card-exact">
+        <div class="instrument-card-exact" data-music-topic="guitarra" role="button" tabindex="0" aria-haspopup="dialog">
           <img data-i18n-alt="pages.musica.musicaSectionCommon.h48" loading="lazy" decoding="async" src="assets/images/destinos/cerro_negro.jpg" alt="Guitarra Nicaragüense" class="instrument-img" width="700" height="438">
           <div class="instrument-body">
             <h4 data-i18n="pages.musica.musicaSectionCommon.h48">Guitarra Nicaragüense</h4>
             <p data-i18n="pages.musica.musicaSectionCommon.p25">Acompaña nuestra identidad</p>
           </div>
+          <span class="instrument-card-more" aria-hidden="true"><i class="fa-solid fa-circle-info"></i></span>
         </div>
 
         <!-- 3. Pito -->
-        <div class="instrument-card-exact">
+        <div class="instrument-card-exact" data-music-topic="pito" role="button" tabindex="0" aria-haspopup="dialog">
           <img data-i18n-alt="pages.musica.musicaSectionCommon.h49" loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Pito" class="instrument-img">
           <div class="instrument-body">
             <h4 data-i18n="pages.musica.musicaSectionCommon.h49">Pito</h4>
             <p data-i18n="pages.musica.musicaSectionCommon.p26">Sonidos del pueblo</p>
           </div>
+          <span class="instrument-card-more" aria-hidden="true"><i class="fa-solid fa-circle-info"></i></span>
         </div>
 
         <!-- 4. Tambor -->
-        <div class="instrument-card-exact">
+        <div class="instrument-card-exact" data-music-topic="tambor" role="button" tabindex="0" aria-haspopup="dialog">
           <img data-i18n-alt="pages.musica.musicaSectionCommon.h410" loading="lazy" decoding="async" src="assets/images/destinos/volcan_masaya.jpg" alt="Tambor" class="instrument-img" width="1600" height="1131">
           <div class="instrument-body">
             <h4 data-i18n="pages.musica.musicaSectionCommon.h410">Tambor</h4>
             <p data-i18n="pages.musica.musicaSectionCommon.p27">Ritmo que une</p>
           </div>
+          <span class="instrument-card-more" aria-hidden="true"><i class="fa-solid fa-circle-info"></i></span>
         </div>
 
         <!-- 5. Quijongo -->
-        <div class="instrument-card-exact">
+        <div class="instrument-card-exact" data-music-topic="quijongo" role="button" tabindex="0" aria-haspopup="dialog">
           <img data-i18n-alt="pages.musica.musicaSectionCommon.h411" loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Quijongo" class="instrument-img" width="399" height="501">
           <div class="instrument-body">
             <h4 data-i18n="pages.musica.musicaSectionCommon.h411">Quijongo</h4>
             <p data-i18n="pages.musica.musicaSectionCommon.p28">Herencia afroindígena</p>
           </div>
+          <span class="instrument-card-more" aria-hidden="true"><i class="fa-solid fa-circle-info"></i></span>
         </div>
 
         <!-- 6. Percusión -->
-        <div class="instrument-card-exact">
+        <div class="instrument-card-exact" data-music-topic="percusion" role="button" tabindex="0" aria-haspopup="dialog">
           <img data-i18n-alt="pages.musica.musicaSectionCommon.h412" loading="lazy" decoding="async" src="assets/images/destinos/corn_island.jpg" alt="Percusión" class="instrument-img" width="800" height="550">
           <div class="instrument-body">
             <h4 data-i18n="pages.musica.musicaSectionCommon.h412">Percusión</h4>
             <p data-i18n="pages.musica.musicaSectionCommon.p29">Energía del Caribe</p>
           </div>
+          <span class="instrument-card-more" aria-hidden="true"><i class="fa-solid fa-circle-info"></i></span>
         </div>
       </div>
     </div>
@@ -627,7 +634,7 @@
         <div class="musica-head-actions">
           <span class="musica-archive-count"><strong id="musicArchiveCount">—</strong> <span data-i18n="music.archiveCountLabel">piezas en el archivo</span></span>
           <a data-i18n="pages.musica.archivoSonoro.a1" href="#archivoSonoro" class="musica-view-link">Ver archivo completo &rarr;</a>
-          <div class="musica-carousel-arrows">
+          <div class="musica-carousel-arrows" hidden>
             <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
             <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
@@ -722,12 +729,12 @@
         </div>
 
         <div class="musica-digital-chips">
-          <button data-i18n="pages.musica.musicaSectionCommon.button1" type="button" class="musica-chip-btn" onclick="askBaquiMusic('Quiero escuchar el mejor Son Nica tradicional')">🎵 Quiero Son Nica</button>
-          <button data-i18n="pages.musica.musicaSectionCommon.button2" type="button" class="musica-chip-btn" onclick="askBaquiMusic('Recomiéndame música del Caribe y Palo de Mayo')">🌊 Música del Caribe</button>
-          <button data-i18n="pages.musica.musicaSectionCommon.button3" type="button" class="musica-chip-btn" onclick="askBaquiMusic('Música de marimba de Masaya')">🪵 Marimba</button>
-          <button data-i18n="pages.musica.musicaSectionCommon.button4" type="button" class="musica-chip-btn" onclick="askBaquiMusic('Canciones históricas y de la patria')">📜 Canciones históricas</button>
-          <button data-i18n="pages.musica.musicaSectionCommon.button5" type="button" class="musica-chip-btn" onclick="askBaquiMusic('Artistas destacados y compositores')">⭐ Artistas destacados</button>
-          <button data-i18n="pages.musica.musicaSectionCommon.button6" type="button" class="musica-chip-btn" onclick="askBaquiMusic('Rutas musicales de Nicaragua')">🗺️ Rutas musicales</button>
+          <button data-i18n="pages.musica.musicaSectionCommon.button1" type="button" class="musica-chip-btn" data-music-topic="sonNica" aria-haspopup="dialog" data-baqui-query="Quiero escuchar el mejor Son Nica tradicional">🎵 Quiero Son Nica</button>
+          <button data-i18n="pages.musica.musicaSectionCommon.button2" type="button" class="musica-chip-btn" data-music-topic="caribe" aria-haspopup="dialog" data-baqui-query="Recomiéndame música del Caribe y Palo de Mayo">🌊 Música del Caribe</button>
+          <button data-i18n="pages.musica.musicaSectionCommon.button3" type="button" class="musica-chip-btn" data-music-topic="marimba" aria-haspopup="dialog" data-baqui-query="Música de marimba de Masaya">🎶 Marimba</button>
+          <button data-i18n="pages.musica.musicaSectionCommon.button4" type="button" class="musica-chip-btn" data-music-topic="historicas" aria-haspopup="dialog" data-baqui-query="Canciones históricas y de la patria">📜 Canciones históricas</button>
+          <button data-i18n="pages.musica.musicaSectionCommon.button5" type="button" class="musica-chip-btn" data-music-topic="artistas" aria-haspopup="dialog" data-baqui-query="Artistas destacados y compositores">⭐ Artistas destacados</button>
+          <button data-i18n="pages.musica.musicaSectionCommon.button6" type="button" class="musica-chip-btn" data-music-topic="rutas" aria-haspopup="dialog" data-baqui-query="Rutas musicales de Nicaragua">🗺️ Rutas musicales</button>
         </div>
       </div>
     </div>
@@ -1084,7 +1091,9 @@
       });
     }
   </script>
-<script src="js/musica-player.js?v=20261006-a11y-1"></script>
+<script src="js/epic-music-player.js?v=20261007-1"></script>
+<script src="js/musica-player.js?v=20261007-archivo-1"></script>
+<script src="js/musica-archivo.js?v=20261007-1"></script>
 <script src="js/navigation.js?v=20261007-app-2"></script>
 <script src="js/global-injector.js"></script>
   <script>

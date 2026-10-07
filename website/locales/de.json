@@ -4349,7 +4349,7 @@
         "p30": "Ich empfehle dir Lieder, Künstler, Kulturrouten und Erlebnisse passend zur Region, die du erkundest.",
         "button1": "🎵 Ich will Son Nica",
         "button2": "🌊 Karibische Musik",
-        "button3": "🪵 Marimba",
+        "button3": "🎶 Marimba",
         "button4": "📜 Historische Lieder",
         "button5": "⭐ Ausgewählte Künstler",
         "button6": "🗺️ Musikrouten",
@@ -6411,5 +6411,71 @@
   "marquee": {
     "pause": "Pausieren",
     "play": "Fortsetzen"
+  },
+  "musicArchive": {
+    "pendingCredits": "Angaben werden noch dokumentiert",
+    "pending": "In Prüfung",
+    "play": "{title} abspielen"
+  },
+  "musicInfo": {
+    "close": "Schließen",
+    "listen": "Vorlesen",
+    "stop": "Vorlesen stoppen",
+    "source": "Quelle",
+    "listenHeading": "Im Archiv anhören ({n})",
+    "artistsHeading": "Künstler im Archiv",
+    "seeMap": "Klangkarte ansehen",
+    "pendingNote": "Das eigene Profil dieses Instruments ist in Vorbereitung: Wir veröffentlichen nur belegte Angaben.",
+    "general": {
+      "text": "Die Musik Nicaraguas verbindet indigene, afrikanische und europäische, vor allem spanische Einflüsse."
+    },
+    "sonNica": {
+      "title": "Der Son nica",
+      "text": "Der Son nica ist eine eigene Musikrichtung Nicaraguas und eine der repräsentativsten seiner Kultur: Er zählt zu den inoffiziellen Nationalsymbolen des Landes. Der Komponist und Liedermacher Camilo Zapata ist einer seiner wichtigsten Autoren."
+    },
+    "moraLimpia": {
+      "title": "La Mora Limpia",
+      "text": "La Mora Limpia ist ein Instrumentalstück des nicaraguanischen Komponisten und Liedermachers Justo Santos. Die Aufnahme gehört zum Klangarchiv von BAQUEANO und kann direkt hier gehört werden."
+    },
+    "marimba": {
+      "title": "Die Marimba de arco",
+      "text": "Die nicaraguanische Marimba de arco ist eine einfache Variante der Marimba, eines Instruments afrikanischen Ursprungs. Ihr Aufbau hat sich kaum verändert: Nur einige Baumaterialien wurden erneuert. Im Archiv erklingen Aufnahmen der Marimba de Arco de Monimbó aus Masaya."
+    },
+    "gueguense": {
+      "title": "El Güegüense",
+      "text": "El Güegüense ist ein satirisches Drama und das erste Theaterwerk der nicaraguanischen Literatur. Es verbindet Theater, Tanz und Musik und vereint spanische und indigene Kultur. Die UNESCO nahm es in die Repräsentative Liste des immateriellen Kulturerbes der Menschheit auf (2005 proklamiert)."
+    },
+    "caribe": {
+      "title": "Karibische Musik und Palo de Mayo",
+      "text": "Der Palo de Mayo ist ein afrokaribischer Tanz und Teil der Kultur mehrerer Gemeinschaften in den Autonomen Regionen der Nord- und Südkaribikküste Nicaraguas. Im Archiv vertritt ihn vor allem Dimensión Costeña aus Bluefields."
+    },
+    "historicas": {
+      "title": "Historische Lieder",
+      "text": "Carlos Mejía Godoy ist einer der wichtigsten Vertreter des Zeugnisliedes oder der Nueva Canción Nicaraguas. Im Archiv finden sich seine Lieder und die seines Bruders Luis Enrique Mejía Godoy."
+    },
+    "artistas": {
+      "title": "Künstler des Archivs",
+      "text": "Das Klangarchiv von BAQUEANO vereint {verified} Aufnahmen mit geprüften Angaben von {artists} nicaraguanischen Künstlern und Gruppen. Tippe auf einen Namen, um eines ihrer Stücke zu hören."
+    },
+    "rutas": {
+      "title": "Musikrouten",
+      "text": "Die Klangkarte dieser Seite zeigt fünf Gebiete: Masaya, Wiege der Marimba de arco; Granada mit seinen Serenaden und Komponisten; León mit Trova und Son nica; die Südkaribik mit dem Palo de Mayo; und Matagalpa und Jinotega mit ländlichen Polkas und Mazurkas."
+    },
+    "quijongo": {
+      "title": "Der Quijongo",
+      "text": "Der Quijongo ist ein Instrument mit angeschlagener Saite, typisch für indigene Völker Nicaraguas und Costa Ricas. Obwohl man ihn mit den Chorotega von Nicoya verbindet, stammt er aus Afrika: Er ähnelt stark dem afrobrasilianischen Berimbau."
+    },
+    "guitarra": {
+      "title": "Die nicaraguanische Gitarre"
+    },
+    "pito": {
+      "title": "Die Pito (Flöte)"
+    },
+    "tambor": {
+      "title": "Die Trommel"
+    },
+    "percusion": {
+      "title": "Das Schlagwerk"
+    }
   }
 }
