@@ -203,20 +203,46 @@
     renderToggle();
     scheduleGallery();
   }
+  // Varias tarjetas a la vez (pedido del propietario 2026-10-07): 3 en escritorio, 2 en tablet,
+  // 1 en móvil, según el ancho real de la galería. Avanza de a una y da la vuelta al llegar al
+  // final, así la rotación es infinita; el orden visual lo fija `order` en la grilla.
+  function perView() {
+    var vp = $('prGalleryViewport');
+    var w = vp ? vp.clientWidth : 0;
+    var per = w >= 960 ? 3 : (w >= 620 ? 2 : 1);
+    return Math.max(1, Math.min(per, state.reviews.length));
+  }
   function paintGallery(focus) {
-    var slides = $('prGalleryTrack').children;
-    for (var i = 0; i < slides.length; i += 1) {
-      var on = i === state.g.index;
+    var track = $('prGalleryTrack');
+    var slides = track.children;
+    var n = slides.length;
+    var per = Math.min(perView(), n || 1);
+    track.style.setProperty('--pr-per-view', String(per));
+    var visible = {};
+    for (var k = 0; k < per; k += 1) visible[(state.g.index + k) % n] = k;
+    for (var i = 0; i < n; i += 1) {
+      var on = Object.prototype.hasOwnProperty.call(visible, i);
       slides[i].hidden = !on;
       slides[i].setAttribute('aria-hidden', on ? 'false' : 'true');
+      slides[i].style.order = on ? String(visible[i]) : '';
     }
     var total = state.reviews.length + (state.hasMore ? '+' : '');
-    $('prGalleryPos').textContent = t('galleryPos', '{n} de {total}', { n: state.g.index + 1, total: total });
+    var from = state.g.index + 1;
+    var to = ((state.g.index + per - 1) % n) + 1;
+    $('prGalleryPos').textContent = per > 1
+      ? t('galleryRange', '{from}–{to} de {total}', { from: from, to: to, total: total })
+      : t('galleryPos', '{n} de {total}', { n: from, total: total });
     if (focus && slides[state.g.index]) slides[state.g.index].focus({ preventScroll: true });
   }
   function moveGallery(step) {
     var n = state.reviews.length; if (!n) return;
     var next = state.g.index + step;
+    // Pide la página siguiente un poco antes de agotar las tarjetas visibles.
+    if (step > 0 && next + perView() > n && state.hasMore && !state.g.loading) {
+      state.g.loading = true;
+      loadPage(state.page + 1).then(function () { state.g.loading = false; state.g.index = Math.min(next, state.reviews.length - 1); paintGallery(false); });
+      return;
+    }
     if (next >= n) {
       if (state.hasMore && !state.g.loading) {
         state.g.loading = true;
@@ -268,6 +294,12 @@
       if (Math.abs(dx) > 45) { moveGallery(dx < 0 ? 1 : -1); scheduleGallery(); }
     });
     document.addEventListener('visibilitychange', scheduleGallery);
+    // Al girar el teléfono o cambiar el tamaño de la ventana se recalcula cuántas tarjetas caben.
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(function () { if (state.reviews.length) paintGallery(false); }, 150);
+    });
   }
   function loadPage(page) {
     return call('list', { page: page }).then(function (d) {

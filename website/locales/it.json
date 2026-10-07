@@ -5609,7 +5609,8 @@
     "histErased": "Eliminata su tua richiesta",
     "histResponded": "BAQUEANO ha risposto",
     "histErasedText": "Hai eliminato questa opinione e i suoi dati.",
-    "histTimeline": "Vedi cronologia ({n})"
+    "histTimeline": "Vedi cronologia ({n})",
+    "galleryRange": "{from}–{to} di {total}"
   },
   "communityRules": {
     "metaTitle": "Regole della comunità e politica delle opinioni | BAQUEANO",

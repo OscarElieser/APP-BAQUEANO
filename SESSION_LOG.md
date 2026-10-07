@@ -5351,3 +5351,18 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - La app Android no usa el dominio (lib/ sin referencias). Los visitantes con navegador superan el desafío sin notarlo.
 - En el plan Free, Bot Fight Mode no admite excepciones (no se puede saltar con reglas WAF).
 - Recomendación: apagar Bot Fight Mode y reemplazarlo por una regla de Rate limiting (incluida en el plan Free). Se mantienen el managed ruleset, la protección HTTP DDoS, el script monitoring y los límites de Nginx por IP real.
+
+## 2026-10-07 — Propietario: "revisa en https://baqueanonicaragua.com/perfil.html el usuario no puede editar su perfil en ningun lugar"
+- Investigando: qué datos muestra perfil.html, dónde se guardan (Firebase/Supabase profiles) y si existe un flujo de edición.
+
+## 2026-10-07 — Propietario: opiniones "que se muestren varios como en la segunda imagen… siempre en galería rotativa infinita con opción de pausa"
+- Hecho (`website/js/platform-reviews.js`, `css/pages/opiniones.css`, versión 20261007-galeria-2):
+  - la galería muestra varias tarjetas según el ancho real: 3 (≥960 px), 2 (≥620 px), 1 en móvil;
+  - avanza de a una con autoplay de 7 s, da la vuelta al final (infinita) y pide la página siguiente antes de agotar las visibles;
+  - se mantienen Pausar/Continuar, flechas, teclado, deslizamiento, pausa al pasar el puntero o al tener foco, y reducir movimiento;
+  - recalcula al girar el teléfono o cambiar el tamaño de la ventana.
+  - Nueva clave i18n `platformReviews.galleryRange` ("1–3 de 4") en 6 idiomas; export:app-locales.
+- Pruebas (Playwright con 4 opiniones simuladas, sin red a Supabase):
+  - 1366 px → 3 visibles, "1–3 de 4" → siguiente "2–4" → vuelta a "1–3"; 800 px → 2 visibles; 390 px → 1;
+  - Pausar → aria-pressed=true; 0 errores JS; sin desborde horizontal.
+  - browser-qa opiniones.html: 16 anchos, 0 fallos. npm run i18n: 0 errores.

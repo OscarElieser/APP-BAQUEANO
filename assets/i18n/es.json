@@ -4399,6 +4399,7 @@
   "platformReviews.galleryPlay": "Continuar",
   "platformReviews.galleryPos": "{n} de {total}",
   "platformReviews.galleryPrev": "Opinión anterior",
+  "platformReviews.galleryRange": "{from}–{to} de {total}",
   "platformReviews.gallerySlide": "opinión",
   "platformReviews.histApproved": "Aprobada y publicada",
   "platformReviews.histCreated": "Enviada",

@@ -5609,7 +5609,8 @@
     "histErased": "Supprimé à votre demande",
     "histResponded": "BAQUEANO a répondu",
     "histErasedText": "Vous avez supprimé cet avis et ses données.",
-    "histTimeline": "Voir l'historique ({n})"
+    "histTimeline": "Voir l'historique ({n})",
+    "galleryRange": "{from}–{to} sur {total}"
   },
   "communityRules": {
     "metaTitle": "Règles de la communauté et politique des avis | BAQUEANO",

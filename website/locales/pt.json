@@ -5609,7 +5609,8 @@
     "histErased": "Excluída a seu pedido",
     "histResponded": "O BAQUEANO respondeu",
     "histErasedText": "Você excluiu esta avaliação e seus dados.",
-    "histTimeline": "Ver histórico ({n})"
+    "histTimeline": "Ver histórico ({n})",
+    "galleryRange": "{from}–{to} de {total}"
   },
   "communityRules": {
     "metaTitle": "Normas da Comunidade e Política de Opiniões | BAQUEANO",

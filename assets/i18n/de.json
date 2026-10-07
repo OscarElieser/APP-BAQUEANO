@@ -4399,6 +4399,7 @@
   "platformReviews.galleryPlay": "Fortsetzen",
   "platformReviews.galleryPos": "{n} von {total}",
   "platformReviews.galleryPrev": "Vorherige Bewertung",
+  "platformReviews.galleryRange": "{from}–{to} von {total}",
   "platformReviews.gallerySlide": "Bewertung",
   "platformReviews.histApproved": "Freigegeben und veröffentlicht",
   "platformReviews.histCreated": "Gesendet",

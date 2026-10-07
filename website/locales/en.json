@@ -5609,7 +5609,8 @@
     "histErased": "Deleted at your request",
     "histResponded": "BAQUEANO replied",
     "histErasedText": "You deleted this review and its data.",
-    "histTimeline": "View history ({n})"
+    "histTimeline": "View history ({n})",
+    "galleryRange": "{from}–{to} of {total}"
   },
   "communityRules": {
     "metaTitle": "Community Guidelines and Review Policy | BAQUEANO",

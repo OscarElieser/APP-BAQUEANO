@@ -5609,7 +5609,8 @@
     "histErased": "Auf deinen Wunsch gelöscht",
     "histResponded": "BAQUEANO hat geantwortet",
     "histErasedText": "Du hast diese Bewertung und ihre Daten gelöscht.",
-    "histTimeline": "Verlauf anzeigen ({n})"
+    "histTimeline": "Verlauf anzeigen ({n})",
+    "galleryRange": "{from}–{to} von {total}"
   },
   "communityRules": {
     "metaTitle": "Community-Richtlinien und Bewertungsrichtlinie | BAQUEANO",
