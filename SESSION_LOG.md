@@ -5487,3 +5487,48 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - Estado: "Publicada y firmada", solo si el certificado está verificado.
 - 7 claves en 6 idiomas; `npm run i18n` da 0 errores.
 - Prueba ✅ sin retraso y con 2,5 s de retraso, en español e inglés: los 10 campos con valor, fecha "30 de septiembre de 2026", "Android 6.0 o superior (API 23)", "95.4 MB" y "Primera versión publicada de la app.".
+23. PROMPT MAESTRO — BAQUEANO OPS CENTER 2026 (secciones 1–131 más una rectificación arquitectónica).
+  - Ops Center como centro único de operaciones, CMS y control del ecosistema.
+  - Arquitectura: Supabase es el núcleo de datos; Supabase Auth + Firebase Auth son la identidad; Azure, Hostinger y Cloudflare figuran solo según su configuración real comprobada.
+  - Cero datos inventados. No borrar nada.
+  - Entregable inicial obligatorio: A) auditoría real, B) mapa de dependencias, C) matriz P0–P3, D) plan exacto, E) riesgos.
+  - Después, implementar por fases según prioridad y evidencia.
+  - P0 indicados por el propietario: desfase GitHub ↔ producción de admin.html, "Firebase First / Supabase Fallback", indicadores demo en producción, estado real de baqueano-ops y del despliegue de Edge Functions, RBAC y revocación, y `places` sin CRUD.
+  - Filosofía "administración sin tocar código": pages/sections/navigation/footer/settings/feature flags gestionados desde Ops Center.
+
+### Ops Center 2026 — auditoría real + primera intervención P0 (2026-10-07)
+- Informe: `docs/ops-center/OPS_CENTER_AUDIT_2026-10-07.md`:
+  - A. auditoría con evidencia (21 hallazgos);
+  - B. mapa de dependencias; C. matriz P0–P3; D. plan; E. riesgos;
+  - F. estado tras la intervención.
+- Verificado:
+  - **producción = HEAD**: JS con el mismo md5; `admin.html` igual salvo el script que inyecta Cloudflare;
+  - el catálogo simulado no se carga.
+- Hechos en la base (consultas reales):
+  - places: 237 (108 sin municipio, 141 sin fuente, 40 sin coordenadas, 96 verificados);
+  - destinations: 7, sin municipio ni fuente;
+  - experiences / gastronomy / culture / tourism_services: 0;
+  - backup_operations y storage_backups: 0;
+  - user_roles: 0; profiles: 0;
+  - audit_logs: inmutable por trigger, aunque service_role conserva TRUNCATE.
+- `baqueano-ops` v5 desplegada (idéntica al repo):
+  - filtros de calidad y territorio para places;
+  - publicar/archivar con is_published/archived_at;
+  - verificación de lugares con traza;
+  - backup_operations y storage_backups de solo lectura.
+  - Sin token → 401; token falso → 401; el filtro "sin fuente" en PostgREST devuelve 141, igual que el SQL.
+- Ops Center:
+  - nuevo módulo **Lugares** (vista 43, `js/ops-center/ops-places.js` + `css/components/ops-places.css`);
+  - Backup sin datos inventados;
+  - arquitectura "Supabase núcleo / Firebase identidad" en 6 idiomas;
+  - avatar sin innerHTML;
+  - un error de módulo ya no niega el acceso a un admin válido;
+  - nombre accesible del login y contraste;
+  - versión mínima 1.2.4 inventada eliminada.
+- Pruebas:
+  - Playwright Lugares 35/35 (admin 1366/390, auditor);
+  - pruebas previas del Ops Center en verde;
+  - browser-qa admin.html: 16 anchos, 0 fallos;
+  - i18n: 0 errores;
+  - auditoría estática: 0 críticos.
+- Escrituras reales con token del propietario: PENDIENTES DE VALIDACIÓN (no tengo su sesión).

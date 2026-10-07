@@ -1780,6 +1780,13 @@
     // 39: Actividad en vivo (Edge Function baqueano-presence). Lo pinta ops-live-presence.js.
     // 40: Aplicación Android (data/app-release.json + Supabase public_app_download_stats). Lo pinta ops-android-app.js.
     // 42: Mensajes de viajeros (F6): Edge Function baqueano-messages. Lo pinta ops-messages.js.
+    // 43: Lugares (auditoría 2026-10-07, A08): places vía baqueano-ops. Lo pinta ops-places.js.
+    '43-lugares': {
+      isSystem: true,
+      title: 'Lugares',
+      icon: 'fa-location-dot',
+      roleRequired: 'auditor'
+    },
     '42-mensajes': {
       isSystem: true,
       title: 'Mensajes de viajeros',
@@ -1960,7 +1967,10 @@
   };
 
   // --------------------------------------------------------------------------
-  // 5. GESTOR HÍBRIDO DE ALMACENAMIENTO (FIREBASE PRINCIPAL + SUPABASE RESPALDO)
+  // 5. GESTOR HÍBRIDO DE ALMACENAMIENTO (heredado)
+  //    2026-10-07: el título decía "FIREBASE PRINCIPAL + SUPABASE RESPALDO", que ya no es la
+  //    arquitectura vigente (Supabase = núcleo de datos; Firebase = identidad). Se conserva la
+  //    lógica de subida tal cual hasta migrar Multimedia a Supabase Storage (auditoría A17).
   // --------------------------------------------------------------------------
   const OpsStorage = {
     getFirebaseStorage() {
@@ -2203,11 +2213,21 @@
       const fallbackRole = user.emailVerified === true &&
         this.authorizedAdmins.some((adminEmail) => adminEmail.toLowerCase() === email) ? 'admin' : 'explorer';
       const decision = rolesApi ? rolesApi.resolveFirebaseUser(user) : Promise.resolve(fallbackRole);
+      // 2026-10-07 (auditoría §71): antes un error de CUALQUIER módulo al preparar el panel
+      // (p. ej. el listener heredado de Firestore) caía en este catch y se mostraba "No tienes
+      // autorización" a un administrador válido. Ahora solo un fallo al resolver el rol niega el
+      // acceso; un módulo que falla después se registra y el resto del panel sigue funcionando.
       decision
-        .then((role) => this.applyAuthorization(user, role))
         .catch((error) => {
           console.error('[OpsAuth] No se pudo verificar el rol:', error);
-          this.applyAuthorization(user, 'explorer');
+          return 'explorer';
+        })
+        .then((role) => {
+          try {
+            this.applyAuthorization(user, role);
+          } catch (error) {
+            console.error('[OpsAuth] Un módulo del panel no terminó de cargar:', error);
+          }
         });
     },
 
@@ -4172,6 +4192,10 @@
       if (tabId === '20-sos') return this.renderSosModule();
       if (tabId === '11-reservas') return this.renderReservationsModule();
       if (tabId === '35-backup') return this.renderBackupSyncModule();
+      if (tabId === '43-lugares') {
+        if (window.BaqueanoOpsPlaces) return window.BaqueanoOpsPlaces.render(panel);
+        return;
+      }
       if (tabId === '42-mensajes') {
         if (window.BaqueanoOpsMessages) return window.BaqueanoOpsMessages.render(panel);
         return;
@@ -6117,11 +6141,12 @@
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
               <label class="ops-form-label">Versión Mínima Requerida de la App Android</label>
-              <input type="text" class="ops-form-input" id="cfgMinAndroidVersion" value="1.2.4 (Build 18)">
+              <!-- 2026-10-07: decía "1.2.4 (Build 18)", una versión que no existe (la APK publicada es 1.0.0, código 1). -->
+              <input type="text" class="ops-form-input" id="cfgMinAndroidVersion" value="" placeholder="—">
             </div>
             <div class="ops-form-group">
-              <label class="ops-form-label">Sincronización Cloud Dual</label>
-              <input type="text" class="ops-form-input" value="Firebase (Primario) + Supabase (Respaldo) ACTIVA" readonly style="background:var(--ops-surface-2); font-weight:700; color:var(--bq-secondary);">
+              <label class="ops-form-label">Arquitectura de datos</label>
+              <input type="text" class="ops-form-input" value="Supabase = núcleo de datos · Firebase = identidad (Auth)" readonly style="background:var(--ops-surface-2); font-weight:700; color:var(--bq-secondary);">
             </div>
           </div>
         </div>
@@ -6239,7 +6264,7 @@
       setBadge('statusBadgeFirebase', isFirestoreOnline ? '🟡 FIRESTORE (heredado de Android)' : '⚪ NO SE USA EN EL OPS CENTER', false);
       setEl('stateTextFirebase', isFirestoreOnline ? 'Origen heredado; se replica en Supabase' : 'El panel trabaja sobre Supabase', 'var(--bq-accent)');
 
-      const liveDb = window.BaqueanoOpsData && window.BaqueanoOpsData.state.health && window.BaqueanoOpsData.state.health.checks.find((c) => c.id === 'supabase_db');
+      const liveDb = window.BaqueanoOpsData && window.BaqueanoOpsData.state.health && (window.BaqueanoOpsData.state.health.checks || []).find((c) => c.id === 'supabase_db');
       setBadge('statusBadgeSupabase', liveDb ? (liveDb.state === 'OPERATIVO' ? '🟢 OPERATIVO' : `🔴 ${liveDb.state}`) : (isSupabaseOnline ? '🟡 CLIENTE CONFIGURADO (sin comprobar)' : '⚪ NO CONFIGURADO'), Boolean(liveDb && liveDb.state === 'OPERATIVO'));
       setEl('stateTextSupabase', liveDb ? `${liveDb.detail} (base principal)` : 'Base de datos principal', liveDb && liveDb.state === 'OPERATIVO' ? 'var(--bq-jungle)' : 'var(--bq-accent)');
 
@@ -6248,26 +6273,43 @@
       setBadge('statusBadgeFirebaseStorage', hasFbStorage ? '🟡 SDK CARGADO (sin comprobar)' : '⚪ NO CONFIGURADO', false);
       setEl('stateTextFirebaseStorage', hasFbStorage ? 'SDK presente' : 'No se usa en el Ops Center', 'var(--bq-accent)');
 
-      const liveSt = window.BaqueanoOpsData && window.BaqueanoOpsData.state.health && window.BaqueanoOpsData.state.health.checks.find((c) => c.id === 'supabase_storage');
+      const liveSt = window.BaqueanoOpsData && window.BaqueanoOpsData.state.health && (window.BaqueanoOpsData.state.health.checks || []).find((c) => c.id === 'supabase_storage');
       setBadge('statusBadgeSupabaseStorage', liveSt ? (liveSt.state === 'OPERATIVO' ? '🟢 OPERATIVO' : `🔴 ${liveSt.state}`) : '⚪ SIN COMPROBAR', Boolean(liveSt && liveSt.state === 'OPERATIVO'));
       setEl('stateTextSupabaseStorage', liveSt ? liveSt.detail : 'Se comprueba al iniciar sesión', 'var(--bq-accent)');
 
-      const totalSync = (OpsState.collectionsData['03-destinos']?.length || 0) +
-                        (OpsState.collectionsData['08-negocios']?.length || 0) +
-                        (OpsState.collectionsData['04-territorios']?.length || 0) +
-                        (OpsState.collectionsData['05-municipios']?.length || 0) +
-                        (OpsState.collectionsData['15-gastronomia']?.length || 0) +
-                        (OpsState.collectionsData['16-historia']?.length || 0);
-
-      setEl('kpiSyncPending', '0', 'var(--bq-accent)');
-      setEl('kpiSyncCompleted', totalSync > 0 ? String(totalSync) : '243', 'var(--bq-jungle)');
-      setEl('kpiSyncFailed', '0', 'var(--bq-crimson)');
-      setEl('kpiSyncConflicts', '0', '#F59E0B');
-
-      const nowStr = new Date().toLocaleString('es-NI', { dateStyle: 'medium', timeStyle: 'short' });
-      setEl('txtLastBackupTimestamp', nowStr);
-      setEl('txtLastSyncTimestamp', nowStr);
-      setBadge('badgeCircuitBreaker', 'CLOSED (Normal · Cero Fallos)', true);
+      // 2026-10-07 (auditoría A03): aquí se mostraba "243" sincronizados sin datos, 0 fallos fijos,
+      // la hora actual como "último backup" y un circuito "Cero Fallos" inventado. Ahora solo se
+      // muestra lo que devuelve Supabase (backup_operations y storage_backups vía baqueano-ops).
+      ['kpiSyncPending', 'kpiSyncCompleted', 'kpiSyncFailed', 'kpiSyncConflicts'].forEach((id) => setEl(id, '—', 'var(--ops-text-muted)'));
+      setEl('txtLastBackupTimestamp', 'Comprobando…');
+      setEl('txtLastSyncTimestamp', 'Comprobando…');
+      setBadge('badgeCircuitBreaker', '⚪ SIN DATOS', false);
+      const ops = window.BaqueanoOpsData;
+      if (!ops || typeof ops.call !== 'function') return;
+      const fmt = (iso) => (iso ? new Date(iso).toLocaleString('es-NI', { dateStyle: 'medium', timeStyle: 'short' }) : null);
+      Promise.all([
+        ops.call('list', { entity: 'backup_operations', limit: 100, page: 0 }),
+        ops.call('list', { entity: 'storage_backups', limit: 1, page: 0 })
+      ]).then(([queue, files]) => {
+        const rows = queue.items || [];
+        if (!queue.total) {
+          ['kpiSyncPending', 'kpiSyncCompleted', 'kpiSyncFailed', 'kpiSyncConflicts'].forEach((id) => setEl(id, '0', 'var(--ops-text-muted)'));
+          setEl('txtLastSyncTimestamp', 'Sin registros en backup_operations (Supabase)', 'var(--bq-accent)');
+        } else {
+          const by = (st) => rows.filter((r) => String(r.firebase_status || '').toLowerCase() === st).length;
+          setEl('kpiSyncPending', String(by('pending')), 'var(--bq-accent)');
+          setEl('kpiSyncCompleted', String(by('synced') + by('completed') + by('ok')), 'var(--bq-jungle)');
+          setEl('kpiSyncFailed', String(by('failed') + by('error')), 'var(--bq-crimson)');
+          setEl('kpiSyncConflicts', String(by('conflict')), '#F59E0B');
+          setEl('txtLastSyncTimestamp', `${fmt(rows[0].synced_at || rows[0].created_at)} · ${queue.total} registros`, 'var(--bq-jungle)');
+        }
+        const last = (files.items || [])[0];
+        setEl('txtLastBackupTimestamp', last ? `${fmt(last.backed_up_at || last.created_at)} · ${last.backup_status || 'sin estado'}` : 'Sin copias registradas en storage_backups', last ? '#fff' : 'var(--bq-accent)');
+        setBadge('badgeCircuitBreaker', rows.length ? '🟢 REAL · Supabase' : '⚪ SIN DATOS', Boolean(rows.length));
+      }).catch((err) => {
+        setEl('txtLastSyncTimestamp', `🔴 ERROR: ${err && err.message ? err.message : 'sin respuesta'}`, 'var(--bq-crimson)');
+        setEl('txtLastBackupTimestamp', '🔴 ERROR', 'var(--bq-crimson)');
+      });
     },
 
     // 8.4 Command Palette (Ctrl+K) con Búsqueda Omnicanal
@@ -6407,7 +6449,15 @@
         const initials = displayName.substring(0, 2).toUpperCase();
 
         if (photo) {
-          avatarEl.innerHTML = `<img src="${photo}" alt="${displayName}" class="ops-user-avatar-img" referrerpolicy="no-referrer" loading="eager" onerror="this.remove(); this.parentElement.textContent='${initials}';">`;
+          // 2026-10-07 (auditoría A18): antes se armaba con innerHTML usando el nombre y la URL de la
+          // foto (que puede venir de localStorage). Ahora se crea con el DOM: sin inyección posible.
+          const img = document.createElement('img');
+          img.className = 'ops-user-avatar-img';
+          img.alt = displayName;
+          img.referrerPolicy = 'no-referrer';
+          img.loading = 'eager';
+          img.addEventListener('error', () => { avatarEl.textContent = initials; });
+          if (/^https:\/\//i.test(String(photo))) { img.src = photo; avatarEl.replaceChildren(img); } else { avatarEl.textContent = initials; }
           avatarEl.title = displayName;
         } else {
           avatarEl.textContent = initials;
@@ -7541,6 +7591,9 @@
       if (control.getAttribute('aria-label') || control.getAttribute('aria-labelledby')) return;
       if (control.closest('label')) return;
       if (control.id && document.querySelector(`label[for="${CSS.escape(control.id)}"]`)) return;
+      // Un botón o enlace con texto visible ya tiene nombre accesible: ponerle uno derivado del id
+      // ("btn Google Login") no coincide con lo que se lee en pantalla (WCAG 2.5.3, auditoría 2026-10-07).
+      if (!/^(INPUT|SELECT|TEXTAREA)$/.test(control.tagName) && (control.textContent || '').trim()) return;
 
       const rawName = control.getAttribute('title')
         || control.getAttribute('placeholder')

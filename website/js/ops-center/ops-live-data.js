@@ -802,6 +802,8 @@
       const who = await call('whoami');
       state.role = who.role;
       state.canWrite = who.can_write === true;
+      // Los módulos que dependen del permiso (p. ej. Lugares) se repintan al conocerlo.
+      window.dispatchEvent(new CustomEvent('baqueano:ops-data', { detail: { state } }));
     } catch (error) {
       state.status = 'DESCONECTADO';
       state.error = error.message;

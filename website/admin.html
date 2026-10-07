@@ -51,6 +51,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/ops-matte-theme.css?v=20261005-impact-1">
+  <link rel="stylesheet" href="css/components/ops-places.css?v=20261007-1">
   <link rel="stylesheet" href="css/components/ops-alerts.css?v=20261007-1">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <meta name="theme-color" content="#165D6F">
@@ -86,7 +87,7 @@
         <span data-i18n="pages.admin.btnGoogleLogin.span1">Ingresar con Cuenta Google</span>
       </button>
 
-      <div style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--ops-border-subtle); display: flex; justify-content: space-between; font-size: 0.76rem; color: var(--ops-text-muted);">
+      <div style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--ops-border-subtle); display: flex; justify-content: space-between; font-size: 0.76rem; color: #94A3B8;">
         <span><i class="fa-solid fa-shield-halved"></i> <span data-i18n="pages.admin.adminLoginGate.span1">Acceso con Google · rol verificado en el servidor</span></span>
         <a href="index.html" style="color: var(--bq-secondary); text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="pages.admin.adminLoginGate.a1">Volver al Portal</span></a>
       </div>
@@ -129,6 +130,10 @@
             <i class="fa-solid fa-mountain ops-nav-item-icon"></i>
             <span data-i18n="nav.destinations" class="ops-nav-item-label">Destinos</span>
             <span data-i18n-title="pages.admin.badgeDestinosCount.spanTitle1" class="ops-nav-badge is-pending" id="badgeDestinosCount" data-ops-count="destinations" title="Cargando dato real desde Supabase…">—</span>
+          </a>
+          <a class="ops-nav-item" data-tab="43-lugares">
+            <i class="fa-solid fa-location-dot ops-nav-item-icon"></i>
+            <span data-i18n="opsPlaces.title" class="ops-nav-item-label">Lugares</span>
           </a>
           <a class="ops-nav-item" data-tab="04-territorios">
             <i class="fa-solid fa-map ops-nav-item-icon"></i>
@@ -940,6 +945,9 @@
           <div class="ops-view-header"><h1><i class="fa-solid fa-star"></i> <span data-i18n="menu.platformReviews">Opiniones BAQUEANO</span></h1></div>
           <div class="ops-empty-state"><i class="fa-solid fa-star ops-empty-icon"></i><div data-i18n="menu.platformReviews" class="ops-empty-title">Opiniones BAQUEANO</div><div data-i18n="menu.platformReviewsDesc" class="ops-empty-desc">Calificá tu experiencia con la plataforma</div></div>
         </section>
+        <section class="ops-view-panel" id="view-43-lugares">
+          <div class="ops-view-header"><h1><i class="fa-solid fa-location-dot"></i> <span data-i18n="opsPlaces.title">Lugares</span></h1></div>
+        </section>
         <section class="ops-view-panel" id="view-42-mensajes">
           <div class="ops-view-header"><h1><i class="fa-solid fa-comments"></i> <span data-i18n="opsMsg.title">Mensajes de viajeros</span></h1></div>
         </section>
@@ -967,7 +975,7 @@
           <div class="ops-view-header">
             <div class="ops-view-title-group">
               <h1><i class="fa-solid fa-cloud-arrow-up" style="color: var(--bq-secondary);"></i> <span data-i18n="pages.admin.view35Backup.h11">Sistema → Backup y Sincronización</span></h1>
-              <p data-i18n="pages.admin.view35Backup.p1" class="ops-view-subtitle">ARQUITECTURA FIREBASE FIRST, SUPABASE FALLBACK · AUDITORÍA DE FAILOVER Y RESGUARDO TRANSACCIONAL</p>
+              <p data-i18n="pages.admin.view35Backup.p1" class="ops-view-subtitle">SUPABASE = NÚCLEO DE DATOS · FIREBASE = IDENTIDAD · ESTADO REAL DE COPIAS Y SINCRONIZACIÓN</p>
             </div>
             <div class="ops-view-actions">
               <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsEngine && window.BaqueanoOpsEngine.scrollToSyncErrors()">
@@ -988,16 +996,16 @@
             <div class="ops-table-container-matte" style="padding: 1.25rem; border-top: 3px solid #FFA000;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
                 <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
-                  <i class="fa-solid fa-fire" style="color:#FFA000;"></i> <span data-i18n="pages.admin.view35Backup.strong1">Firebase (Principal)</span>
+                  <i class="fa-solid fa-fire" style="color:#FFA000;"></i> <span data-i18n="pages.admin.view35Backup.strong1">Firebase (Identidad · heredado)</span>
                 </strong>
-                <span class="ops-badge-status published" id="statusBadgeFirebase"><span data-i18n="pages.admin.statusBadgeFirebase.span1">🟢 OPERATIVO</span></span>
+                <span class="ops-badge-status draft" id="statusBadgeFirebase"><span data-i18n="pages.admin.statusUnchecked">⚪ SIN COMPROBAR</span></span>
               </div>
               <div data-i18n="pages.admin.view35Backup.div1" style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
-                Auth, Firestore, Hosting, App Check y Secret Manager.
+                Auth (Google y correo) y servicios heredados de la app Android que todavía no migraron.
               </div>
               <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--ops-text-muted); border-top:1px solid var(--ops-border-subtle); padding-top:0.6rem;">
                 <span data-i18n="pages.admin.view35Backup.span1">Estado de Red:</span>
-                <strong id="stateTextFirebase" style="color:var(--bq-jungle);"><span data-i18n="pages.admin.stateTextFirebase.strong1">ONLINE</span></strong>
+                <strong id="stateTextFirebase" style="color:var(--ops-text-muted);"><span data-i18n="pages.admin.txtLastBackupTimestamp.strong1">Comprobando...</span></strong>
               </div>
             </div>
 
@@ -1005,16 +1013,16 @@
             <div class="ops-table-container-matte" style="padding: 1.25rem; border-top: 3px solid #3ECF8E;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
                 <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
-                  <i class="fa-solid fa-bolt" style="color:#3ECF8E;"></i> <span data-i18n="pages.admin.view35Backup.strong2">Supabase (Respaldo)</span>
+                  <i class="fa-solid fa-bolt" style="color:#3ECF8E;"></i> <span data-i18n="pages.admin.view35Backup.strong2">Supabase (Núcleo de datos)</span>
                 </strong>
-                <span class="ops-badge-status published" id="statusBadgeSupabase"><span data-i18n="pages.admin.statusBadgeFirebase.span1">🟢 OPERATIVO</span></span>
+                <span class="ops-badge-status draft" id="statusBadgeSupabase"><span data-i18n="pages.admin.statusUnchecked">⚪ SIN COMPROBAR</span></span>
               </div>
               <div data-i18n="pages.admin.view35Backup.div2" style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
-                PostgreSQL, PostGIS, pgvector, Realtime y Contingencia.
+                PostgreSQL, PostGIS, pgvector, Realtime y Storage: fuente principal de los datos.
               </div>
               <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--ops-text-muted); border-top:1px solid var(--ops-border-subtle); padding-top:0.6rem;">
                 <span data-i18n="pages.admin.view35Backup.span1">Estado de Red:</span>
-                <strong id="stateTextSupabase" style="color:var(--bq-jungle);"><span data-i18n="pages.admin.stateTextFirebase.strong1">ONLINE</span></strong>
+                <strong id="stateTextSupabase" style="color:var(--ops-text-muted);"><span data-i18n="pages.admin.txtLastBackupTimestamp.strong1">Comprobando...</span></strong>
               </div>
             </div>
 
@@ -1024,14 +1032,14 @@
                 <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
                   <i class="fa-solid fa-box-archive" style="color:#4285F4;"></i> <span data-i18n="pages.admin.view35Backup.strong3">Firebase Storage</span>
                 </strong>
-                <span class="ops-badge-status published" id="statusBadgeFirebaseStorage"><span data-i18n="pages.admin.statusBadgeFirebase.span1">🟢 OPERATIVO</span></span>
+                <span class="ops-badge-status draft" id="statusBadgeFirebaseStorage"><span data-i18n="pages.admin.statusUnchecked">⚪ SIN COMPROBAR</span></span>
               </div>
               <div data-i18n="pages.admin.view35Backup.div3" style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
-                Almacenamiento primario CDN de imágenes y archivos.
+                Solo se informa si el SDK está cargado y comprobado; el Ops Center no lo usa.
               </div>
               <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--ops-text-muted); border-top:1px solid var(--ops-border-subtle); padding-top:0.6rem;">
                 <span data-i18n="pages.admin.view35Backup.span2">Estado Bucket:</span>
-                <strong id="stateTextFirebaseStorage" style="color:var(--bq-jungle);"><span data-i18n="pages.admin.stateTextFirebase.strong1">ONLINE</span></strong>
+                <strong id="stateTextFirebaseStorage" style="color:var(--ops-text-muted);"><span data-i18n="pages.admin.txtLastBackupTimestamp.strong1">Comprobando...</span></strong>
               </div>
             </div>
 
@@ -1041,14 +1049,14 @@
                 <strong style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:0.5rem;">
                   <i class="fa-solid fa-cloud-arrow-down" style="color:#00B4D8;"></i> <span data-i18n="pages.admin.view35Backup.strong4">Supabase Storage</span>
                 </strong>
-                <span class="ops-badge-status published" id="statusBadgeSupabaseStorage"><span data-i18n="pages.admin.statusBadgeFirebase.span1">🟢 OPERATIVO</span></span>
+                <span class="ops-badge-status draft" id="statusBadgeSupabaseStorage"><span data-i18n="pages.admin.statusUnchecked">⚪ SIN COMPROBAR</span></span>
               </div>
               <div data-i18n="pages.admin.view35Backup.div4" style="font-size:0.8rem; color:var(--ops-text-secondary); margin-bottom:0.75rem;">
-                Copia secundaria y espejo con integridad SHA-256.
+                Buckets de Supabase comprobados en vivo por baqueano-ops.
               </div>
               <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--ops-text-muted); border-top:1px solid var(--ops-border-subtle); padding-top:0.6rem;">
                 <span data-i18n="pages.admin.view35Backup.span2">Estado Bucket:</span>
-                <strong id="stateTextSupabaseStorage" style="color:var(--bq-jungle);"><span data-i18n="pages.admin.stateTextFirebase.strong1">ONLINE</span></strong>
+                <strong id="stateTextSupabaseStorage" style="color:var(--ops-text-muted);"><span data-i18n="pages.admin.txtLastBackupTimestamp.strong1">Comprobando...</span></strong>
               </div>
             </div>
           </div>
@@ -1057,25 +1065,25 @@
           <div class="ops-kpi-grid-matte" style="margin-bottom: 1.5rem;">
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header"><span data-i18n="pages.admin.view35Backup.span3" class="ops-kpi-title">Operaciones Pendientes</span><div class="ops-kpi-icon-wrap" style="color:var(--bq-accent);"><i class="fa-solid fa-hourglass-half"></i></div></div>
-              <div class="ops-kpi-value-num" id="kpiSyncPending" style="color:var(--bq-accent);">0</div>
+              <div class="ops-kpi-value-num" id="kpiSyncPending" style="color:var(--bq-accent);">—</div>
               <div data-i18n="pages.admin.view35Backup.div5" class="ops-kpi-subtext">En espera de sincronización</div>
             </div>
 
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header"><span data-i18n="pages.admin.view35Backup.span4" class="ops-kpi-title">Operaciones Sincronizadas</span><div class="ops-kpi-icon-wrap" style="color:var(--bq-jungle);"><i class="fa-solid fa-circle-check"></i></div></div>
-              <div class="ops-kpi-value-num" id="kpiSyncCompleted" style="color:var(--bq-jungle);">0</div>
+              <div class="ops-kpi-value-num" id="kpiSyncCompleted" style="color:var(--bq-jungle);">—</div>
               <div data-i18n="pages.admin.view35Backup.div6" class="ops-kpi-subtext">Confirmadas en base principal</div>
             </div>
 
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header"><span data-i18n="pages.admin.view35Backup.span5" class="ops-kpi-title">Operaciones Fallidas</span><div class="ops-kpi-icon-wrap" style="color:var(--bq-crimson);"><i class="fa-solid fa-triangle-exclamation"></i></div></div>
-              <div class="ops-kpi-value-num" id="kpiSyncFailed" style="color:var(--bq-crimson);">0</div>
+              <div class="ops-kpi-value-num" id="kpiSyncFailed" style="color:var(--bq-crimson);">—</div>
               <div data-i18n="pages.admin.view35Backup.div7" class="ops-kpi-subtext">Requieren reintento manual</div>
             </div>
 
             <div class="ops-kpi-card-matte">
               <div class="ops-kpi-header"><span data-i18n="pages.admin.view35Backup.span6" class="ops-kpi-title">Conflictos Detectados</span><div class="ops-kpi-icon-wrap" style="color:#F59E0B;"><i class="fa-solid fa-code-compare"></i></div></div>
-              <div class="ops-kpi-value-num" id="kpiSyncConflicts" style="color:#F59E0B;">0</div>
+              <div class="ops-kpi-value-num" id="kpiSyncConflicts" style="color:#F59E0B;">—</div>
               <div data-i18n="pages.admin.view35Backup.div8" class="ops-kpi-subtext">Resueltos por marca de tiempo</div>
             </div>
           </div>
@@ -1109,7 +1117,7 @@
                 </div>
                 <div style="display:flex; justify-content:space-between;">
                   <span data-i18n="pages.admin.view35Backup.span9" style="color:var(--ops-text-muted);">Circuit Breaker Firestore:</span>
-                  <span class="ops-badge-status published" id="badgeCircuitBreaker"><span data-i18n="pages.admin.badgeCircuitBreaker.span1">CLOSED (Normal)</span></span>
+                  <span class="ops-badge-status draft" id="badgeCircuitBreaker"><span data-i18n="pages.admin.statusUnchecked">⚪ SIN COMPROBAR</span></span>
                 </div>
               </div>
             </div>
@@ -1622,8 +1630,8 @@
   <script src="js/video-registry.js?v=20260926-ops-fixed-uhd-1"></script>
   <!-- Matriz de roles compartida con el sitio público (autorización del Ops Center). -->
   <script src="js/shared/roles.js?v=20261005-rbac-1"></script>
-  <script src="js/ops-center/ops-engine.js?v=20261007-msg-1"></script>
-  <script src="js/ops-center/ops-live-data.js?v=20261006-paginas-1"></script>
+  <script src="js/ops-center/ops-engine.js?v=20261007-lugares-1"></script>
+  <script src="js/ops-center/ops-live-data.js?v=20261007-lugares-1"></script>
   <script src="js/ops-center/ops-ia-copilot.js?v=20261005-ops2-1"></script>
   <!-- Moderación de la comunidad: cliente de la Edge Function + vista 36. -->
   <script defer src="js/community-api.js?v=20261004-1"></script>
@@ -1638,6 +1646,7 @@
   <script defer src="js/ops-center/ops-tech-report.js?v=20261007-1"></script>
   <script defer src="js/ops-center/ops-automation.js?v=20261007-2"></script>
   <script defer src="js/ops-center/ops-messages.js?v=20261007-1"></script>
+  <script defer src="js/ops-center/ops-places.js?v=20261007-1"></script>
   <script defer src="js/ops-center/ops-nav-groups.js?v=20261007-1"></script>
   <script defer src="js/ops-center/ops-alerts.js?v=20261007-1"></script>
   <script defer src="js/baqueano-presence.js?v=20261006-1" data-bq-presence="true"></script>

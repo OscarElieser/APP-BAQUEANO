@@ -1,12 +1,12 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T19:16:52.816Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4908 · en 4908 · fr 4908 · it 4908 · pt 4908 · de 4908
+Generado: 2026-10-07T20:10:39.676Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4994 · en 4994 · fr 4994 · it 4994 · pt 4994 · de 4994
 
-HTML: 3889/3890 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3891/3892 textos con clave (1 pendientes) · JS: 721 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
-| js/ops-center/ops-engine.js | js | 324 | 2 | 322 | 0.6 % |
+| js/ops-center/ops-engine.js | js | 323 | 2 | 321 | 0.6 % |
 | apps/web/src/app/baqueano-ai/page.tsx | tsx | 72 | 0 | 72 | 0 % |
 | apps/admin/src/app/spatial/page.tsx | tsx | 58 | 0 | 58 | 0 % |
 | apps/admin/src/app/strategic/page.tsx | tsx | 52 | 0 | 52 | 0 % |
@@ -139,7 +139,7 @@ HTML: 3889/3890 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/territory-carousel.js | js | 1 | 0 | 1 | 0 % |
 | js/territory-media-experience.js | js | 1 | 0 | 1 | 0 % |
 | 404.html | html | 25 | 25 | 0 | 100 % |
-| admin.html | html | 494 | 494 | 0 | 100 % |
+| admin.html | html | 496 | 496 | 0 | 100 % |
 | aliados.html | html | 189 | 189 | 0 | 100 % |
 | ambiental.html | html | 131 | 131 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -223,6 +223,7 @@ HTML: 3889/3890 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/ops-center/ops-live-presence.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-messages.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-nav-groups.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-places.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-tech-report.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |

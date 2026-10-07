@@ -26,6 +26,9 @@
 //   (APK y sesiones reales) y la disponibilidad medida en 24 h.
 // - Escritura (admin): save, set_status (publish|unpublish|archive|restore),
 //   verify (sello "Verificado por BAQUEANO" con trazabilidad), log,
+//   (2026-10-07) Lugares: list con filtros de calidad (quality) y territorio (department_id),
+//   publicar/archivar sobre is_published/archived_at y verificación con traza en attributes.
+//   Solo lectura nueva: backup_operations y storage_backups (estado real de copias).
 //   automation_run_now (ejecuta run_automation_checks; como máximo 1 cada 2 min).
 // ============================================================================
 
@@ -65,11 +68,15 @@ type Entity = {
   write?: Record<string, FieldType>;
   required?: string[];
   idPrefix?: string;
+  // 2026-10-07 (módulo Lugares): publicación booleana y archivo con columna propia.
+  publishColumn?: string;
+  archiveColumn?: string;
 };
 const ENTITIES: Record<string, Entity> = {
   places: {
-    table: "places", order: "name", search: "name", softDelete: false, idPrefix: "place",
-    select: "id,name,slug,category,subcategory,type_label,department_id,municipality_id,short_description,description,latitude,longitude,location_precision,map_ready,is_published,verification_status,verified_at,source_name,source_url,address,attributes,created_at,updated_at",
+    table: "places", order: "name", search: "name", softDelete: true, idPrefix: "place",
+    publishColumn: "is_published", archiveColumn: "archived_at",
+    select: "id,name,slug,category,subcategory,type_label,department_id,municipality_id,short_description,description,latitude,longitude,location_precision,map_ready,is_published,verification_status,verified_at,last_verified_at,valid_until,source_name,source_url,source_type,address,attributes,archived_at,created_at,updated_at",
     write: {
       name: "text", department_id: "id", municipality_id: "id", category: "text", subcategory: "text", short_description: "longtext", description: "longtext",
       latitude: "lat", longitude: "lng", source_name: "text", source_url: "url", address: "longtext"
@@ -108,6 +115,9 @@ const ENTITIES: Record<string, Entity> = {
   heritage: { table: "heritage", order: "name", search: "name", statusColumn: "status", select: "id,department_id,name,heritage_type,unesco_status,status,latitude,longitude,updated_at" },
   events: { table: "events", order: "start_date", search: "title", statusColumn: "status", select: "id,department_id,title,category,start_date,end_date,location_name,status,updated_at" },
   routes: { table: "routes", order: "title", search: "title", statusColumn: "status", select: "id,title,slug,category,duration_days,difficulty,verified,status,updated_at" },
+  // Solo lectura: cola de sincronización heredada y copias de archivos (A03/A16 de la auditoría 2026-10-07).
+  backup_operations: { table: "backup_operations", order: "created_at", search: "entity_type", select: "id,operation_type,entity_type,entity_id,firebase_status,retry_count,last_error,created_at,synced_at" },
+  storage_backups: { table: "storage_backups", order: "created_at", search: "supabase_path", select: "id,supabase_bucket,supabase_path,checksum,file_size,mime_type,backup_status,last_error,created_at,backed_up_at" },
   verification_requests: { table: "verification_requests", order: "created_at", search: "applicant_name", statusColumn: "status", select: "id,entity_type,entity_id,applicant_name,status,admin_notes,reviewed_by,reviewed_at,created_at" },
 };
 const STATUS_VALUES = new Set(["draft", "published", "pending_review", "archived"]);
@@ -427,7 +437,20 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       const limit = Math.min(Math.max(Number(body.limit) || 25, 1), 100);
       const page = Math.min(Math.max(Number(body.page) || 0, 0), 500);
       let q = service.from(entity.table).select(entity.select, { count: "exact" });
-      if (entity.softDelete) q = body.archived === true ? q.not("deleted_at", "is", null) : q.is("deleted_at", null);
+      const archiveCol = entity.archiveColumn || "deleted_at";
+      if (entity.softDelete) q = body.archived === true ? q.not(archiveCol, "is", null) : q.is(archiveCol, null);
+      // Filtros del módulo Lugares: territorio y calidad de datos (nunca se completan datos aquí).
+      const dept = cleanText(body.department_id, 80, "departamento");
+      if (dept && /(^|,)department_id(,|$)/.test(entity.select)) q = q.eq("department_id", dept);
+      if (body.entity === "places") {
+        const quality = String(body.quality || "");
+        if (quality === "no_municipality") q = q.is("municipality_id", null);
+        else if (quality === "no_source") q = q.or("and(or(source_name.is.null,source_name.eq.),or(source_url.is.null,source_url.eq.))");
+        else if (quality === "no_coords") q = q.or("latitude.is.null,longitude.is.null");
+        else if (quality === "verified") q = q.eq("verification_status", "verified");
+        else if (quality === "unverified") q = q.neq("verification_status", "verified");
+        else if (quality === "unpublished") q = q.eq("is_published", false);
+      }
       const search = cleanText(body.q, 80, "búsqueda");
       if (search && entity.search) q = q.ilike(entity.search, `%${search.replace(/[%_]/g, "")}%`);
       if (body.status && entity.statusColumn && STATUS_VALUES.has(String(body.status))) q = q.eq(entity.statusColumn, String(body.status));
@@ -495,6 +518,11 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
         if (department && data.department_id !== department) throw new HttpError(400, "El municipio no pertenece al departamento indicado.");
         if (!department) patch.department_id = data.department_id;
       }
+      if (body.entity === "places") {
+        if (typeof patch.latitude === "number" && typeof patch.longitude === "number") { patch.map_ready = true; patch.location_precision = "manual"; }
+        patch.updated_by = actor.email || actor.uid;
+        if (!id) patch.created_by = actor.email || actor.uid;
+      }
       patch.updated_at = new Date().toISOString();
       let saved;
       if (before) {
@@ -524,14 +552,16 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       if (!id) throw new HttpError(400, "Falta el id.");
       if (!["publish", "unpublish", "archive", "restore"].includes(op)) throw new HttpError(400, "Operación inválida.");
       if ((op === "archive" || op === "restore") && !entity.softDelete) throw new HttpError(400, "Esta entidad no admite archivo.");
-      if ((op === "publish" || op === "unpublish") && !entity.statusColumn) throw new HttpError(400, "Esta entidad no tiene estado de publicación.");
+      if ((op === "publish" || op === "unpublish") && !entity.statusColumn && !entity.publishColumn) throw new HttpError(400, "Esta entidad no tiene estado de publicación.");
       const { data: before } = await service.from(entity.table).select(entity.select).eq("id", id).maybeSingle();
       if (!before) throw new HttpError(404, "El registro no existe.");
       const patch: Record<string, unknown> = { updated_at: new Date().toISOString() };
-      if (op === "publish") patch[entity.statusColumn!] = "published";
-      if (op === "unpublish") patch[entity.statusColumn!] = "draft";
-      if (op === "archive") patch.deleted_at = new Date().toISOString();
-      if (op === "restore") patch.deleted_at = null;
+      const archiveCol = entity.archiveColumn || "deleted_at";
+      if (op === "publish" && (before as Record<string, unknown>)[archiveCol]) throw new HttpError(400, "Restaurá el registro antes de publicarlo.");
+      if (op === "publish") { if (entity.publishColumn) patch[entity.publishColumn] = true; else patch[entity.statusColumn!] = "published"; }
+      if (op === "unpublish") { if (entity.publishColumn) patch[entity.publishColumn] = false; else patch[entity.statusColumn!] = "draft"; }
+      if (op === "archive") { patch[archiveCol] = new Date().toISOString(); if (entity.publishColumn) patch[entity.publishColumn] = false; }
+      if (op === "restore") patch[archiveCol] = null;
       const { data: after, error } = await service.from(entity.table).update(patch).eq("id", id).select(entity.select).single();
       if (error) throw new HttpError(500, "No se pudo cambiar el estado.");
       await audit(service, req, actor, { action: op, module: String(body.entity), entity: entity.table, id, description: `${op} ${entity.table}: ${(after as Record<string, unknown>).name || id}`, before, after });
@@ -541,7 +571,7 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
     case "verify": {
       requireWriter(actor);
       const entity = entityOf(body.entity);
-      if (!["destinations", "businesses"].includes(String(body.entity))) throw new HttpError(400, "El sello aplica a destinos y negocios.");
+      if (!["destinations", "businesses", "places"].includes(String(body.entity))) throw new HttpError(400, "El sello aplica a lugares, destinos y negocios.");
       const id = cleanText(body.id, 120, "id");
       if (!id) throw new HttpError(400, "Falta el id.");
       const verified = body.verified === true;
@@ -555,8 +585,11 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       if (!before) throw new HttpError(404, "El registro no existe.");
       const now = new Date().toISOString();
       const trace = { verified, verified_by: actor.email, verified_uid: actor.uid, verified_at: now, source, evidence, notes, next_review: nextReview ? nextReview.toISOString().slice(0, 10) : null };
-      const metadata = { ...((before as Record<string, unknown>).metadata as Record<string, unknown> || {}), verification: trace };
-      const patch: Record<string, unknown> = { verified, metadata, updated_at: now };
+      const isPlace = body.entity === "places";
+      // places no tiene `verified` ni `metadata`: la traza va en `attributes.verification`.
+      const traceColumn = isPlace ? "attributes" : "metadata";
+      const traceValue = { ...((before as Record<string, unknown>)[traceColumn] as Record<string, unknown> || {}), verification: trace };
+      const patch: Record<string, unknown> = isPlace ? { attributes: traceValue, updated_at: now, last_verified_at: verified ? now : null } : { verified, metadata: traceValue, updated_at: now };
       if (body.entity === "destinations") {
         patch.last_verified_at = verified ? now : null;
         patch.verification_notes = notes;

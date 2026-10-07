@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T19:16:52.816Z",
+  "generatedAt": "2026-10-07T20:10:39.676Z",
   "languages": [
     "es",
     "en",
@@ -9,23 +9,23 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4908,
-    "en": 4908,
-    "fr": 4908,
-    "it": 4908,
-    "pt": 4908,
-    "de": 4908
+    "es": 4994,
+    "en": 4994,
+    "fr": 4994,
+    "it": 4994,
+    "pt": 4994,
+    "de": 4994
   },
   "html": {
     "files": 34,
-    "total": 3890,
-    "translated": 3889,
+    "total": 3892,
+    "translated": 3891,
     "untranslated": 1
   },
   "js": {
-    "files": 118,
+    "files": 119,
     "translated": 152,
-    "untranslated": 722
+    "untranslated": 721
   },
   "jsEditorial": {
     "files": 8,
@@ -119,6 +119,7 @@
     "js/ops-center/ops-live-presence.js",
     "js/ops-center/ops-messages.js",
     "js/ops-center/ops-nav-groups.js",
+    "js/ops-center/ops-places.js",
     "js/ops-center/ops-platform-reviews.js",
     "js/ops-center/ops-tech-report.js",
     "js/platform-reviews.js",
@@ -170,8 +171,8 @@
     {
       "file": "admin.html",
       "type": "html",
-      "total": 494,
-      "translated": 494,
+      "total": 496,
+      "translated": 496,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -1232,9 +1233,9 @@
     {
       "file": "js/ops-center/ops-engine.js",
       "type": "js",
-      "total": 324,
+      "total": 323,
       "translated": 2,
-      "untranslated": 322,
+      "untranslated": 321,
       "editorialStrings": 0,
       "coverage": 0.6
     },
@@ -1294,6 +1295,15 @@
     },
     {
       "file": "js/ops-center/ops-nav-groups.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/ops-center/ops-places.js",
       "type": "js",
       "total": 0,
       "translated": 0,

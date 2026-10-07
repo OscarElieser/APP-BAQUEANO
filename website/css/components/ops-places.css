@@ -1,0 +1,41 @@
+/* ============================================================================
+   🧭 BAQUEANO — OPS CENTER: LUGARES (js/ops-center/ops-places.js)
+   🎯 POR QUÉ: gestionar los 237 lugares de `places` con su calidad de datos (auditoría 2026-10-07).
+   ⚙️ CÓMO: reutiliza las clases del tema mate (ops-view-*, ops-btn, ops-table-matte) y suma solo
+      filtros, banderas de calidad, paginación y el editor en <dialog>. Contrastes AA sobre fondo oscuro.
+   📦 QUÉ: .ops-places-*.
+   ============================================================================ */
+.ops-places-source { margin: 4px 0 0; font-size: 0.78rem; color: #AFC0CC; }
+.ops-places-notice { margin: 12px 0 0; padding: 10px 14px; border-radius: 10px; background: rgba(74, 122, 90, 0.18); color: #E2F2E7; font-size: 0.86rem; }
+.ops-places-error { margin: 16px 0; padding: 12px 14px; border-radius: 10px; background: rgba(220, 38, 38, 0.16); color: #FECACA; }
+.ops-places-empty { margin: 16px 0; color: #CBD5E1; }
+.ops-places-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 12px; }
+.ops-places-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(244, 230, 193, 0.22);
+  background: rgba(255, 255, 255, 0.04); color: #E2E8F0; font: 700 0.82rem/1 'Plus Jakarta Sans', system-ui, sans-serif; cursor: pointer; }
+.ops-places-chip:hover { border-color: #F65E01; }
+.ops-places-chip.is-active { background: #F65E01; border-color: #F65E01; color: #FFFFFF; }
+.ops-places-chip-n { padding: 2px 8px; border-radius: 999px; background: rgba(0, 0, 0, 0.25); font-variant-numeric: tabular-nums; }
+.ops-places-filters { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
+.ops-places-field { display: flex; flex-direction: column; gap: 6px; min-width: min(100%, 240px); flex: 1 1 240px; font-size: 0.8rem; font-weight: 700; color: #CBD5E1; }
+.ops-places-table { overflow-x: auto; }
+.ops-places-name { padding: 0; border: 0; background: none; color: #FFFFFF; font: 800 0.9rem/1.3 'Plus Jakarta Sans', system-ui, sans-serif; text-align: left; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.ops-places-flag { display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; font-weight: 700; white-space: nowrap; }
+.ops-places-flag.is-ok { color: #86EFAC; }
+.ops-places-flag.is-missing { color: #FCD34D; }
+.ops-places-pager { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; color: #CBD5E1; font-size: 0.85rem; }
+.ops-places-dialog { width: min(760px, calc(100vw - 24px)); max-height: 90vh; padding: 0; border: 1px solid rgba(244, 230, 193, 0.2); border-radius: 18px; background: #0D1B2A; color: #E2E8F0; overflow: auto; }
+.ops-places-dialog::backdrop { background: rgba(2, 8, 23, 0.7); }
+.ops-places-dialog-head { position: sticky; top: 0; z-index: 1; padding: 18px 20px 10px; background: #0D1B2A; border-bottom: 1px solid rgba(244, 230, 193, 0.12); }
+.ops-places-dialog-head h2 { margin: 0; font: 900 1.2rem/1.25 Montserrat, sans-serif; color: #FFFFFF; }
+.ops-places-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; padding: 16px 20px; }
+.ops-places-form .ops-places-field:has(textarea), .ops-places-form .ops-places-dialog-actions { grid-column: 1 / -1; }
+.ops-places-form-status { margin: 0 20px 10px; min-height: 1.2em; color: #FCD34D; font-size: 0.85rem; }
+.ops-places-dialog-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+.ops-places-lifecycle { margin: 0 20px 20px; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(244, 230, 193, 0.14); display: grid; gap: 10px; }
+.ops-places-lifecycle h3 { margin: 0; font: 800 0.95rem/1.3 Montserrat, sans-serif; color: #F4E6C1; }
+.ops-places-lifecycle .ops-places-dialog-actions { justify-content: flex-start; }
+.ops-places-chip:focus-visible, .ops-places-name:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+@media (max-width: 640px) {
+  .ops-places-form { grid-template-columns: 1fr; }
+  .ops-places-pager { flex-wrap: wrap; justify-content: center; }
+}
