@@ -5202,3 +5202,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - E2E @1366 y @390: grupos y ubicación de las vistas, plegar y abrir, insignia 3, 4 alertas con enlaces y "sin datos", Escape; axe 0.
     - Se repitieron las suites anteriores (automatización, informe PDF, mensajes del Ops, perfil y app): todo en verde.
     - QA completa: 31 páginas × 16 anchos = 496 cargas, 0 fallos. Auditoría con 0 críticos.
+- 2026-10-07 · El propietario recuerda la regla 1: responder siempre en español (el resumen anterior salió en inglés; corregido). Comparte el correo de bienvenida de Search Console (WNC-376106) para https://baqueanonicaragua.com/. Estado de sus 4 pasos:
+  1. Cobertura: ya existe la propiedad de dominio baqueanonicaragua.com, que es la recomendada.
+  2. Compartir acceso: opcional; lo decide el propietario.
+  3. Sitemap: ya enviado, "Correcto" con 25 páginas.
+  4. Guía de uso: lectura opcional.
