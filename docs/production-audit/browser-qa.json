@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-07T03:19:46.926Z",
+ "generatedAt": "2026-10-07T03:30:39.724Z",
  "base": "http://127.0.0.1:8790/",
  "widths": [
   390,
@@ -57,9 +57,7 @@
   }
  ],
  "fails": [],
- "slowLoads": [
-  "favoritos.html@390"
- ],
+ "slowLoads": [],
  "results": [
   {
    "page": "404.html",
@@ -604,6 +602,11 @@
    "missingAnchors": [],
    "whatsapp": [
     {
+     "href": "https://wa.me/50577532549?text=Hotel%20Encanto%20del%20Sur",
+     "safe": true,
+     "name": "Contact on WhatsApp"
+    },
+    {
      "href": "https://wa.me/50584431289",
      "safe": true,
      "name": "WhatsApp"
@@ -630,6 +633,11 @@
    "missingAnchors": [],
    "whatsapp": [
     {
+     "href": "https://wa.me/50577532549?text=Hotel%20Encanto%20del%20Sur",
+     "safe": true,
+     "name": "Contact on WhatsApp"
+    },
+    {
      "href": "https://wa.me/50584431289",
      "safe": true,
      "name": "WhatsApp"
@@ -647,6 +655,11 @@
    "axe": [],
    "missingAnchors": [],
    "whatsapp": [
+    {
+     "href": "https://wa.me/50577532549?text=Hotel%20Encanto%20del%20Sur",
+     "safe": true,
+     "name": "Contact on WhatsApp"
+    },
     {
      "href": "https://wa.me/50584431289",
      "safe": true,
@@ -673,6 +686,11 @@
    "axe": [],
    "missingAnchors": [],
    "whatsapp": [
+    {
+     "href": "https://wa.me/50577532549?text=Hotel%20Encanto%20del%20Sur",
+     "safe": true,
+     "name": "Contact on WhatsApp"
+    },
     {
      "href": "https://wa.me/50584431289",
      "safe": true,
@@ -881,7 +899,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": true,
+   "slowLoad": false,
    "axe": [],
    "missingAnchors": [],
    "whatsapp": [

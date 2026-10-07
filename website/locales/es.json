@@ -6103,5 +6103,45 @@
     "text": "Descargá la app oficial para Android: mapas, BAQÜI y tu viaje guardado, también sin señal.",
     "cta": "Ver la app",
     "qrHint": "O escaneá con tu teléfono"
+  },
+  "lodgingShowcase": {
+    "kicker": "Hospedajes en BAQUEANO",
+    "title": "Descubrí dónde quedarte. Viví Nicaragua como se vive aquí.",
+    "lead": "En BAQUEANO te acercamos a hospedajes locales para que conozcás sus servicios y contactés directamente con el establecimiento.",
+    "amenitiesTitle": "Servicios y comodidades",
+    "pricesNote": "Tarifas informadas por el hotel. Confirmá disponibilidad directamente con el establecimiento.",
+    "pricesExpired": "Las tarifas publicadas ya no están vigentes. Consultá la tarifa actual directamente con el hotel.",
+    "whatsapp": "Contactar por WhatsApp",
+    "whatsappMessage": "Hola, vi {name} en BAQUEANO y quiero consultar disponibilidad.",
+    "location": "Ver ubicación",
+    "share": "Compartir",
+    "copied": "Enlace copiado",
+    "sealTitle": "Disponible en BAQUEANO",
+    "sealTagline": "Descubre lo que no sale en el mapa."
+  },
+  "lodging": {
+    "encantoDelSur": {
+      "tagline": "Descanso, comodidad y cercanía al mar.",
+      "description": "Disfrutá de una estadía cómoda en Hotel Encanto del Sur, una opción de hospedaje en San Juan del Sur ideal para parejas, familias y grupos que buscan tranquilidad, buena ubicación y fácil acceso a la playa y al centro de la ciudad.",
+      "promise": "Tu descanso a pocos minutos del mar.",
+      "pricesTitle": "Tarifas – Octubre 2026",
+      "price": {
+        "coupleNoAc": "Pareja por noche, sin aire acondicionado",
+        "coupleAc": "Pareja por noche, con aire acondicionado"
+      },
+      "amenity": {
+        "standard": "Habitaciones estándar",
+        "family": "Habitaciones familiares",
+        "groups": "Habitaciones para grupos",
+        "equipped": "Habitaciones cómodas y equipadas",
+        "airConditioning": "Aire acondicionado disponible",
+        "wifi": "Wi-Fi",
+        "cableTv": "Televisión por cable",
+        "dailyCleaning": "Limpieza diaria",
+        "personalService": "Atención personalizada",
+        "familyAtmosphere": "Ambiente familiar",
+        "nearBeach": "Cerca de la playa y del centro de San Juan del Sur"
+      }
+    }
   }
 }

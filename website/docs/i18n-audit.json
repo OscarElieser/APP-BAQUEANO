@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T03:16:08.051Z",
+  "generatedAt": "2026-10-07T03:24:47.616Z",
   "languages": [
     "es",
     "en",
@@ -9,26 +9,26 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4589,
-    "en": 4589,
-    "fr": 4589,
-    "it": 4589,
-    "pt": 4589,
-    "de": 4589
+    "es": 4619,
+    "en": 4619,
+    "fr": 4619,
+    "it": 4619,
+    "pt": 4619,
+    "de": 4619
   },
   "html": {
     "files": 34,
-    "total": 3853,
-    "translated": 3852,
+    "total": 3856,
+    "translated": 3855,
     "untranslated": 1
   },
   "js": {
-    "files": 106,
+    "files": 107,
     "translated": 152,
     "untranslated": 722
   },
   "jsEditorial": {
-    "files": 7,
+    "files": 8,
     "strings": 23
   },
   "tsx": {
@@ -106,6 +106,7 @@
     "js/historia-enlaces.js",
     "js/impact-public.js",
     "js/intake-api.js",
+    "js/lodging-showcase.js",
     "js/ops-center/ops-community-moderation.js",
     "js/ops-center/ops-intake-inbox.js",
     "js/ops-center/ops-live-presence.js",
@@ -275,8 +276,8 @@
     {
       "file": "destinos.html",
       "type": "html",
-      "total": 130,
-      "translated": 130,
+      "total": 133,
+      "translated": 133,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -1072,6 +1073,24 @@
       "untranslated": 1,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/lodging-showcase-data.js",
+      "type": "js-editorial",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/lodging-showcase.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/madriz-experience.js",

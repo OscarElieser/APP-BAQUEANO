@@ -6103,5 +6103,45 @@
     "text": "Get the official Android app: maps, BAQÜI and your saved trip, even offline.",
     "cta": "See the app",
     "qrHint": "Or scan with your phone"
+  },
+  "lodgingShowcase": {
+    "kicker": "Places to stay on BAQUEANO",
+    "title": "Find where to stay. Live Nicaragua the way locals do.",
+    "lead": "BAQUEANO brings you closer to local places to stay so you can see their services and contact the establishment directly.",
+    "amenitiesTitle": "Services and amenities",
+    "pricesNote": "Rates provided by the hotel. Confirm availability directly with the establishment.",
+    "pricesExpired": "The published rates are no longer valid. Ask the hotel directly for the current rate.",
+    "whatsapp": "Contact on WhatsApp",
+    "whatsappMessage": "Hi, I saw {name} on BAQUEANO and would like to check availability.",
+    "location": "See location",
+    "share": "Share",
+    "copied": "Link copied",
+    "sealTitle": "Available on BAQUEANO",
+    "sealTagline": "Discover what's not on the map."
+  },
+  "lodging": {
+    "encantoDelSur": {
+      "tagline": "Rest, comfort and the sea close by.",
+      "description": "Enjoy a comfortable stay at Hotel Encanto del Sur, a place to stay in San Juan del Sur ideal for couples, families and groups looking for peace, a good location and easy access to the beach and downtown.",
+      "promise": "Your rest just minutes from the sea.",
+      "pricesTitle": "Rates – October 2026",
+      "price": {
+        "coupleNoAc": "Couple per night, without air conditioning",
+        "coupleAc": "Couple per night, with air conditioning"
+      },
+      "amenity": {
+        "standard": "Standard rooms",
+        "family": "Family rooms",
+        "groups": "Group rooms",
+        "equipped": "Comfortable, fully equipped rooms",
+        "airConditioning": "Air conditioning available",
+        "wifi": "Wi-Fi",
+        "cableTv": "Cable TV",
+        "dailyCleaning": "Daily cleaning",
+        "personalService": "Personalized service",
+        "familyAtmosphere": "Family-friendly atmosphere",
+        "nearBeach": "Close to the beach and downtown San Juan del Sur"
+      }
+    }
   }
 }

@@ -6103,5 +6103,45 @@
     "text": "Holen Sie sich die offizielle Android-App: Karten, BAQÜI und Ihre gespeicherte Reise, auch offline.",
     "cta": "Zur App",
     "qrHint": "Oder mit dem Handy scannen"
+  },
+  "lodgingShowcase": {
+    "kicker": "Unterkünfte auf BAQUEANO",
+    "title": "Finden Sie Ihre Unterkunft. Erleben Sie Nicaragua wie die Menschen hier.",
+    "lead": "BAQUEANO bringt Sie zu lokalen Unterkünften: Sie sehen ihre Leistungen und kontaktieren den Betrieb direkt.",
+    "amenitiesTitle": "Leistungen und Ausstattung",
+    "pricesNote": "Vom Hotel angegebene Preise. Bitte Verfügbarkeit direkt beim Betrieb bestätigen.",
+    "pricesExpired": "Die veröffentlichten Preise gelten nicht mehr. Fragen Sie den aktuellen Preis direkt beim Hotel an.",
+    "whatsapp": "Per WhatsApp kontaktieren",
+    "whatsappMessage": "Hallo, ich habe {name} auf BAQUEANO gesehen und möchte die Verfügbarkeit anfragen.",
+    "location": "Standort ansehen",
+    "share": "Teilen",
+    "copied": "Link kopiert",
+    "sealTitle": "Verfügbar auf BAQUEANO",
+    "sealTagline": "Entdecken Sie, was nicht auf der Karte steht."
+  },
+  "lodging": {
+    "encantoDelSur": {
+      "tagline": "Erholung, Komfort und das Meer ganz nah.",
+      "description": "Genießen Sie einen angenehmen Aufenthalt im Hotel Encanto del Sur, einer Unterkunft in San Juan del Sur – ideal für Paare, Familien und Gruppen, die Ruhe, eine gute Lage und kurze Wege zum Strand und ins Zentrum suchen.",
+      "promise": "Ihre Erholung nur wenige Minuten vom Meer entfernt.",
+      "pricesTitle": "Preise – Oktober 2026",
+      "price": {
+        "coupleNoAc": "Paar pro Nacht, ohne Klimaanlage",
+        "coupleAc": "Paar pro Nacht, mit Klimaanlage"
+      },
+      "amenity": {
+        "standard": "Standardzimmer",
+        "family": "Familienzimmer",
+        "groups": "Gruppenzimmer",
+        "equipped": "Komfortable, ausgestattete Zimmer",
+        "airConditioning": "Klimaanlage verfügbar",
+        "wifi": "WLAN",
+        "cableTv": "Kabelfernsehen",
+        "dailyCleaning": "Tägliche Reinigung",
+        "personalService": "Persönlicher Service",
+        "familyAtmosphere": "Familiäre Atmosphäre",
+        "nearBeach": "Nahe am Strand und am Zentrum von San Juan del Sur"
+      }
+    }
   }
 }

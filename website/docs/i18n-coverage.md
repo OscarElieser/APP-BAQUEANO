@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T03:16:08.051Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4589 · en 4589 · fr 4589 · it 4589 · pt 4589 · de 4589
+Generado: 2026-10-07T03:24:47.616Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4619 · en 4619 · fr 4619 · it 4619 · pt 4619 · de 4619
 
-HTML: 3852/3853 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3855/3856 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -169,7 +169,7 @@ HTML: 3852/3853 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | departamento.html | html | 82 | 82 | 0 | 100 % |
 | descargar.html | html | 29 | 29 | 0 | 100 % |
 | destino.html | html | 18 | 18 | 0 | 100 % |
-| destinos.html | html | 130 | 130 | 0 | 100 % |
+| destinos.html | html | 133 | 133 | 0 | 100 % |
 | experiencias.html | html | 157 | 157 | 0 | 100 % |
 | favoritos.html | html | 8 | 8 | 0 | 100 % |
 | gastronomia.html | html | 205 | 205 | 0 | 100 % |
@@ -210,6 +210,7 @@ HTML: 3852/3853 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/historia-enlaces.js | js | 0 | 0 | 0 | 100 % |
 | js/impact-public.js | js | 6 | 6 | 0 | 100 % |
 | js/intake-api.js | js | 0 | 0 | 0 | 100 % |
+| js/lodging-showcase.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-intake-inbox.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-live-presence.js | js | 0 | 0 | 0 | 100 % |

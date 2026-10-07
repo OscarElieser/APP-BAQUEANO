@@ -6103,5 +6103,45 @@
     "text": "Téléchargez l'application officielle Android : cartes, BAQÜI et votre voyage enregistré, même hors ligne.",
     "cta": "Voir l'application",
     "qrHint": "Ou scannez avec votre téléphone"
+  },
+  "lodgingShowcase": {
+    "kicker": "Hébergements sur BAQUEANO",
+    "title": "Trouvez où dormir. Vivez le Nicaragua comme on le vit ici.",
+    "lead": "BAQUEANO vous rapproche des hébergements locaux pour découvrir leurs services et contacter directement l'établissement.",
+    "amenitiesTitle": "Services et équipements",
+    "pricesNote": "Tarifs communiqués par l'hôtel. Confirmez la disponibilité directement auprès de l'établissement.",
+    "pricesExpired": "Les tarifs publiés ne sont plus valables. Demandez le tarif actuel directement à l'hôtel.",
+    "whatsapp": "Contacter sur WhatsApp",
+    "whatsappMessage": "Bonjour, j'ai vu {name} sur BAQUEANO et je voudrais connaître vos disponibilités.",
+    "location": "Voir l'emplacement",
+    "share": "Partager",
+    "copied": "Lien copié",
+    "sealTitle": "Disponible sur BAQUEANO",
+    "sealTagline": "Découvrez ce qui n'est pas sur la carte."
+  },
+  "lodging": {
+    "encantoDelSur": {
+      "tagline": "Repos, confort et la mer à deux pas.",
+      "description": "Profitez d'un séjour confortable à l'Hotel Encanto del Sur, un hébergement à San Juan del Sur idéal pour les couples, les familles et les groupes en quête de calme, d'un bon emplacement et d'un accès facile à la plage et au centre-ville.",
+      "promise": "Votre repos à quelques minutes de la mer.",
+      "pricesTitle": "Tarifs – octobre 2026",
+      "price": {
+        "coupleNoAc": "Couple par nuit, sans climatisation",
+        "coupleAc": "Couple par nuit, avec climatisation"
+      },
+      "amenity": {
+        "standard": "Chambres standard",
+        "family": "Chambres familiales",
+        "groups": "Chambres pour groupes",
+        "equipped": "Chambres confortables et équipées",
+        "airConditioning": "Climatisation disponible",
+        "wifi": "Wi-Fi",
+        "cableTv": "Télévision par câble",
+        "dailyCleaning": "Ménage quotidien",
+        "personalService": "Service personnalisé",
+        "familyAtmosphere": "Ambiance familiale",
+        "nearBeach": "Près de la plage et du centre de San Juan del Sur"
+      }
+    }
   }
 }

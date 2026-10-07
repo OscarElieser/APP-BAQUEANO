@@ -34,6 +34,7 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" href="css/components/lodging-showcase.css?v=20261007-1">
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
   <!-- Favicon e Iconografía Oficial BAQUEANO -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -545,6 +546,25 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
       </div>
 
       <!-- ============================================================================
+           8a. HOSPEDAJES EN BAQUEANO (fichas de negocios locales)
+           🎯 POR QUÉ: el propietario pidió (2026-10-07) publicar la ficha de Hotel Encanto del Sur
+              (San Juan del Sur). La identidad del negocio es la protagonista; BAQUEANO lo presenta
+              y conecta al viajero con el hotel, con un sello pequeño "Disponible en BAQUEANO".
+           ⚙️ CÓMO: js/lodging-showcase.js pinta js/lodging-showcase-data.js (espejo de
+              public.businesses y public.prices); textos i18n lodging.* y lodgingShowcase.*.
+           📦 QUÉ: logo o nombre del negocio, servicios, tarifas vigentes, WhatsApp directo,
+              ubicación, compartir y sello BAQUEANO.
+           ============================================================================ -->
+      <section class="bq-lodging-section" id="hospedajesBaqueano" aria-labelledby="lodgingShowcaseTitle">
+        <div class="bq-lodging-intro">
+          <span class="bq-lodging-kicker" data-i18n="lodgingShowcase.kicker">Hospedajes en BAQUEANO</span>
+          <h2 id="lodgingShowcaseTitle" data-i18n="lodgingShowcase.title">Descubrí dónde quedarte. Viví Nicaragua como se vive aquí.</h2>
+          <p data-i18n="lodgingShowcase.lead">En BAQUEANO te acercamos a hospedajes locales para que conozcás sus servicios y contactés directamente con el establecimiento.</p>
+        </div>
+        <div class="bq-lodging-grid" id="lodgingShowcaseGrid"></div>
+      </section>
+
+      <!-- ============================================================================
            8b. LUGARES VERIFICADOS POR DEPARTAMENTO
            🎯 POR QUÉ: base verificada (2026-10-05) y catálogo INTUR de turismo rural y
               comunitario 2026, pedidos por el propietario también en destinos.html.
@@ -774,6 +794,8 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
     }
   </script>
 <script src="js/baqueano-master-catalog.js"></script>
+<script src="js/lodging-showcase-data.js?v=20261007-1" defer></script>
+<script src="js/lodging-showcase.js?v=20261007-3" defer></script>
 <script src="js/navigation.js?v=20261007-app-2"></script>
 <script src="js/global-injector.js"></script>
 </body>

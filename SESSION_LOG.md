@@ -4959,3 +4959,30 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Hallazgo: `initDownloadModal()` (navigation.js) borra todo enlace `.apk`. Se conserva la función y solo se exceptúa el botón oficial (`data-bq-official-download`).
     - Pruebas: Playwright + axe en descargar (ES 390, EN 1366, DE 320) e inicio (ES 390, FR 1366): sin violaciones, sin desborde, sin errores JS. QA 62/62. i18n 0 errores (59 claves nuevas).
     - Pendiente: contador de descargas (necesita endpoint propio en Azure o Supabase); vista "Aplicación Android" en Ops Center; sitemap (sigue apuntando al dominio antiguo app-baqueano.web.app, revisar aparte).
+- 2026-10-07 · Pedido del propietario:
+  - Confirma que las fotos de artistas van en historia.html, sección "Artistas que dibujaron el territorio".
+  - Agregar en destinos.html la ficha publicitaria de **Hotel Encanto del Sur** (San Juan del Sur, Rivas), con los datos entregados por el propietario:
+    - servicios;
+    - tarifas de octubre 2026: pareja por noche US$30 sin aire y US$40 con aire;
+    - WhatsApp +505 7753 2549;
+    - textos BAQUEANO.
+  - El logo original del hotel queda como protagonista y BAQUEANO solo aparece como sello pequeño "Disponible en BAQUEANO".
+  - El propietario mandó 3 imágenes de referencia (publicidad del hotel) y pidió no agregarlas. Además llevan marca de agua de TikTok. No se publican; solo se tomó de ellas la paleta (azul marino, verde y amarillo) y la jerarquía.
+  - Resultado — Hotel Encanto del Sur:
+    - Supabase (migración `20261007120000_hotel_encanto_del_sur.sql`, aplicada):
+      - `businesses.biz-hotel-encanto-del-sur` publicado, `verification_status=partial`, `source_type=business_owner`, sin coordenadas (`location_precision=pending`, no se inventan);
+      - `prices`: US$30 y US$40 pareja/noche (`per_night`), vigentes del 01 al 31/10/2026.
+      - Comprobado con SQL.
+    - destinos.html, sección `#hospedajesBaqueano` (antes de "Lugares verificados"): `js/lodging-showcase-data.js` (espejo de Supabase) + `js/lodging-showcase.js` + `css/components/lodging-showcase.css`. La ficha muestra:
+      - nombre del hotel como protagonista (el espacio del logo original queda listo con `logo: null`; nunca se reemplaza por el de BAQUEANO);
+      - tagline, descripción y 11 servicios;
+      - tarifas solo mientras estén vigentes (hora de Nicaragua);
+      - WhatsApp directo con mensaje prellenado en el idioma activo, "Ver ubicación" (búsqueda por nombre en Google Maps, sin pin inventado) y Compartir (`#hotel-encanto-del-sur`);
+      - sello pequeño "Disponible en BAQUEANO · baqueanonicaragua.com · Descubre lo que no sale en el mapa."
+    - Error corregido en la prueba: el mensaje de WhatsApp salía vacío porque se armaba antes de cargar el catálogo de idioma. Ahora se arma al tocar o enfocar el botón.
+    - i18n: 30 claves (`lodging.encantoDelSur.*`, `lodgingShowcase.*`) en 6 idiomas; gate 0 errores.
+    - Pruebas: Playwright + axe ES 390, EN 1366, DE 320, FR 768: 0 violaciones, sin desborde, sin errores JS, 11 servicios, 2 tarifas. QA 62/62.
+    - Pendiente:
+      - el logo original del hotel (el propietario lo envía);
+      - coordenadas exactas para el mapa;
+      - que BAQÜI use estas tarifas en el presupuesto de San Juan del Sur (hoy busca precios por destino, no por negocio).
