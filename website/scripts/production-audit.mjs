@@ -15,7 +15,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { NOINDEX_PAGES, PERSONAL_PAGES, SITE, LEGACY_HOSTS, redirectTarget } from './lib/seo-normalize.mjs';
+import { NOINDEX_PAGES, PERSONAL_PAGES, QUERY_TEMPLATE_PAGES, SITE, LEGACY_HOSTS, redirectTarget } from './lib/seo-normalize.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const arg = (name, fallback) => (process.argv.find((a) => a.startsWith(`--${name}=`)) || '').split('=')[1] || fallback;
@@ -201,7 +201,7 @@ const sitemapPages = new Set(locs.map((u) => u.replace(SITE + '/', '') || 'index
 for (const p of sitemapPages) if (!htmlCache.has(p)) add('critical', 'sitemap.xml', 'sitemap-missing-page', `${p} no existe`);
 for (const row of seo) {
   row.sitemap = sitemapPages.has(row.page);
-  const shouldBeIn = row.indexable && !PERSONAL_PAGES.has(row.page);
+  const shouldBeIn = row.indexable && !PERSONAL_PAGES.has(row.page) && !QUERY_TEMPLATE_PAGES.has(row.page);
   if (shouldBeIn && !row.sitemap) add('critical', 'sitemap.xml', 'sitemap-incomplete', `falta ${row.page}`);
   if (!row.indexable && row.sitemap) add('critical', 'sitemap.xml', 'sitemap-noindex', `${row.page} no indexable está en el sitemap`);
 }

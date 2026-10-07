@@ -5113,3 +5113,13 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Esa ficha nunca se había medido. Tenía 2 fallos axe reales que se corrigieron: contraste del botón «Volver» y del sello «Verificación en 8 puntos» sobre fondo blanco, y la etiqueta de «Sí, útil» distinta del texto visible. En la tarjeta oscura de "no encontrado" se mantiene el crema.
   - Validado localmente: 16 anchos, 0 fallos. Pasos de CI en verde: i18n, exports, producción 0 críticos, kronox, SEO y baqui-brain 10/10.
   - Además se sube el paso 2 (F7): contador de descargas de la APK (Supabase record_app_download / public_app_download_stats, sin guardar IP) y la vista "App Android" en Ops Center.
+- 2026-10-07 · El propietario comparte un aviso de Search Console: «Página con redirección», 2 páginas, en la propiedad https://www.baqueanonicaragua.com/ (0 indexadas). Pide resolverlo. Se revisan las redirecciones reales, los canonical y el sitemap.
+  - Producción, ejecución 153: los 4 jobs en verde. En vivo (HTTP 200) están las fotos de artistas y el logo del hotel, y destinos.html tiene #hospedajesBaqueano.
+  - Search Console, causa:
+    - Las 2 páginas "con redirección" están en la propiedad www. Medido desde Supabase (http): http://www → https://www → https://baqueanonicaragua.com (301) y https://www → apex (301), redirecciones correctas e intencionales.
+    - Las 26 URL del sitemap responden 200.
+    - Única incoherencia propia: el sitemap incluía destino.html, que sin ?id= redirige por JS a destinos.html.
+  - Arreglo:
+    - QUERY_TEMPLATE_PAGES excluye destino.html del sitemap (queda en 25 URL) y production-audit lo respeta.
+    - Prueba nueva en seo-normalize.test (13 casos OK). Auditoría con 0 críticos.
+  - Acción del propietario: agregar en Search Console la propiedad del dominio oficial https://baqueanonicaragua.com/ (o "Dominio" por DNS), enviar ahí sitemap.xml y validar la corrección en la propiedad www.

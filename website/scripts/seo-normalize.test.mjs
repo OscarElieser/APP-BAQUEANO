@@ -77,6 +77,11 @@ check('alias con meta refresh: canónico al destino, sin hreflang ni sitemap', (
   assert.equal(count(out, /hreflang|ld\+json/g), 0);
   assert.equal(count(buildSitemap(['baqueano-ai.html', 'baqueano-ia.html'], 'x', new Set(['baqueano-ai.html'])), /<loc>/g), 1);
 });
+check('Plantillas que redirigen sin ?id= (destino.html) quedan fuera del sitemap', () => {
+  const xml = buildSitemap(['destino.html', 'destinos.html'], 'x');
+  assert.ok(!xml.includes(`<loc>${SITE}/destino.html</loc>`));
+  assert.ok(xml.includes(`<loc>${SITE}/destinos.html</loc>`));
+});
 check('Open Graph, Twitter Card e iconos se completan sin pisar los existentes', () => {
   const src = '<html><head><title>Mapa | Baqueano</title><meta name="description" content="Mapa interactivo de Nicaragua."><meta property="og:title" content="Propio"></head></html>';
   const out = normalizeHtml(src, 'mapa.html');

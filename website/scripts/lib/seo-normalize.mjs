@@ -27,6 +27,9 @@ export const SOCIAL_PROFILES = [
 export const NOINDEX_PAGES = new Set(['admin.html', 'offline.html', '404.html', 'i18n-test.html']);
 // Páginas personales: se pueden visitar, pero no aportan al sitemap.
 export const PERSONAL_PAGES = new Set(['perfil.html', 'favoritos.html', 'mi-viaje.html']);
+// Plantillas que solo tienen contenido con ?id=: sin parámetro redirigen (destino.html → destinos.html),
+// así que la URL desnuda no va al sitemap (Search Console la marcaba "Página con redirección", 2026-10-07).
+export const QUERY_TEMPLATE_PAGES = new Set(['destino.html']);
 
 // Alias con <meta http-equiv="refresh" content="0; url=destino.html">: su
 // canónico es el destino y no entra al sitemap (evita contenido duplicado).
@@ -171,7 +174,7 @@ export function normalizeHtml(html, page) {
 /** Sitemap del dominio oficial con alternativas por idioma. */
 export function buildSitemap(pages, lastmod, excluded = new Set()) {
   const entries = pages
-    .filter((page) => !NOINDEX_PAGES.has(page) && !PERSONAL_PAGES.has(page) && !excluded.has(page))
+    .filter((page) => !NOINDEX_PAGES.has(page) && !PERSONAL_PAGES.has(page) && !QUERY_TEMPLATE_PAGES.has(page) && !excluded.has(page))
     .sort((a, b) => (a === 'index.html' ? -1 : b === 'index.html' ? 1 : a.localeCompare(b)))
     .map((page) => {
       const loc = canonicalFor(page);
