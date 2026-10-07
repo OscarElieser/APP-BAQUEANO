@@ -5066,3 +5066,11 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Playwright + axe en historia (ES 390, EN 1366) y en departamento (Managua ES, RACCS FR): 0 violaciones, sin desborde ni errores; 9 fotos cargan y 5 quedan pendientes.
     - Ficha del hotel en ES/EN/DE/FR: el logo carga (600 px), axe 0.
     - `test:artistas` en verde; i18n 0 errores.
+- 2026-10-07 · Propietario: "acabo de subir las fotos a GitHub para que las revisés por ahí" (las 5 fotos de artistas que faltan).
+  - Resultado:
+    - Commit del propietario ba08dec ("Add files via upload"): 14 archivos con nombre en `website/assets/`. Se integró con merge (no se borró nada).
+    - Las 5 fotos que faltaban se colocaron desde esos archivos: Gloria Carrión Fonseca, Gloria Elena Espinoza de Tercero, Irene López, June Beer y Leoncio Sáenz (`assets/images/artistas/{carrion,espinoza,lopez,beer,saenz}.webp`, 4:3).
+    - Ahora tienen foto los 14 de 14 artistas.
+    - Rectificación pedida por el propietario: las 8 fotos colocadas antes son byte a byte idénticas (SHA-256) a sus archivos con nombre. Grön no está entre los subidos; se identificó por su texto impreso.
+    - Pruebas: `test:artistas` en verde; Playwright + axe en historia (ES 390, EN 1366) y departamento (Managua, RACCS): 14 fotos cargan, 0 pendientes, 0 violaciones.
+    - Nota: los originales subidos (incluido el PNG del logo de 1,2 MB) quedan en `website/assets/` sin uso directo. La web usa las versiones .webp optimizadas.

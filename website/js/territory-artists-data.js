@@ -49,15 +49,15 @@
     { id: 'gron', name: 'Edith Grön', discipline: 'sculpture', group: 'managua', depts: ['managua'], localityKey: 'pages.historia.artistas.items.gron.locality', photo: { src: 'assets/images/artistas/gron.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'saravia', name: 'Fernando Saravia', discipline: 'sculpturePainting', group: 'managua', depts: ['managua'], locality: 'Managua', photo: { src: 'assets/images/artistas/saravia.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'montealegre', name: 'Margarita Montealegre', discipline: 'photography', group: 'managua', depts: ['managua'], locality: 'Managua', photo: { src: 'assets/images/artistas/montealegre.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
-    { id: 'carrion', name: 'Gloria Carrión Fonseca', discipline: 'film', group: 'managua', depts: ['managua'], locality: 'Managua' },
-    { id: 'lopez', name: 'Irene López', discipline: 'danceFolklore', group: 'masaya', depts: ['masaya'], locality: 'Masaya' },
+    { id: 'carrion', name: 'Gloria Carrión Fonseca', discipline: 'film', group: 'managua', depts: ['managua'], locality: 'Managua', photo: { src: 'assets/images/artistas/carrion.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
+    { id: 'lopez', name: 'Irene López', discipline: 'danceFolklore', group: 'masaya', depts: ['masaya'], locality: 'Masaya', photo: { src: 'assets/images/artistas/lopez.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'penalba', name: 'Rodrigo Peñalba', discipline: 'painting', group: 'masaya', depts: ['masaya', 'leon'], localityKey: 'pages.historia.artistas.items.penalba.locality', photo: { src: 'assets/images/artistas/penalba.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'morales', name: 'Armando Morales', discipline: 'painting', group: 'granada', depts: ['granada'], locality: 'Granada', photo: { src: 'assets/images/artistas/morales.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
-    { id: 'espinoza', name: 'Gloria Elena Espinoza de Tercero', discipline: 'playwriting', group: 'leon', depts: ['leon'], locality: 'León' },
+    { id: 'espinoza', name: 'Gloria Elena Espinoza de Tercero', discipline: 'playwriting', group: 'leon', depts: ['leon'], locality: 'León', photo: { src: 'assets/images/artistas/espinoza.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'arostegui', name: 'Alejandro Aróstegui', discipline: 'paintingMixed', group: 'matagalpa', depts: ['matagalpa'], locality: 'San Ramón', photo: { src: 'assets/images/artistas/arostegui.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
-    { id: 'saenz', name: 'Leoncio Sáenz', discipline: 'paintingDrawing', group: 'matagalpa', depts: ['matagalpa'], locality: 'Paxila, Matagalpa' },
+    { id: 'saenz', name: 'Leoncio Sáenz', discipline: 'paintingDrawing', group: 'matagalpa', depts: ['matagalpa'], locality: 'Paxila, Matagalpa', photo: { src: 'assets/images/artistas/saenz.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'marin', name: 'Raúl Marín', discipline: 'painting', group: 'carazo', depts: ['carazo'], locality: 'Jinotepe', photo: { src: 'assets/images/artistas/marin.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
-    { id: 'beer', name: 'June Beer', discipline: 'paintingPoetry', group: 'raccs', depts: ['raccs'], locality: 'Bluefields' },
+    { id: 'beer', name: 'June Beer', discipline: 'paintingPoetry', group: 'raccs', depts: ['raccs'], locality: 'Bluefields', photo: { src: 'assets/images/artistas/beer.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'bacon', name: 'Gloria Bacon', discipline: 'danceManagement', group: 'raccs', depts: ['raccs'], locality: 'Bluefields', photo: { src: 'assets/images/artistas/bacon.webp', providedBy: 'owner', providedAt: '2026-10-07', credit: 'Gabriel García' } }
   ];
 
