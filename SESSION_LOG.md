@@ -5343,3 +5343,11 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - AI Labyrinth es opcional.
 - Riesgo a vigilar: Bot Fight Mode puede desafiar a clientes sin navegador (curl del CI verify-azure, pg_cron web_health desde Supabase). En esta prueba, los resolvers de Supabase todavía llegan directo (Server=nginx, sin cf-ray), así que no se pudo comprobar. /health ya sirve el commit 0e91be9 (server_tokens off desplegado). Se revisa en la verificación de las 16:44 UTC y en el próximo run de CI.
 - Propietario: "listo ya lo hice". Activó Continuous script monitoring en Cloudflare.
+
+## 2026-10-07 16:45 UTC — Verificación programada: Cloudflare activo
+- NS en dns.google: kim/konnor.ns.cloudflare.com ✔. El tráfico pasa por Cloudflare (server=cloudflare, cf-ray).
+- **Problema:** Bot Fight Mode responde 403 con cf-mitigated=challenge ("Just a moment…") a clientes sin navegador (curl desde Supabase/AWS) en /health, la portada, el APK y /app.
+  - Consecuencias: el paso verify-azure del CI fallará; pg_cron web_health ya en `warn` (14:17, 15:17, 16:17); el Health Center de baqueano-ops marcará web y APK como ERROR.
+  - La app Android no usa el dominio (lib/ sin referencias). Los visitantes con navegador superan el desafío sin notarlo.
+- En el plan Free, Bot Fight Mode no admite excepciones (no se puede saltar con reglas WAF).
+- Recomendación: apagar Bot Fight Mode y reemplazarlo por una regla de Rate limiting (incluida en el plan Free). Se mantienen el managed ruleset, la protección HTTP DDoS, el script monitoring y los límites de Nginx por IP real.
