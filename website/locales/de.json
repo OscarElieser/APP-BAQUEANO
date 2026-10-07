@@ -2942,7 +2942,7 @@
         "option4": "Preis: absteigend",
         "button3": "Liste",
         "button4": "Beides",
-        "span2": "Granada · Kultur · ★ 4.8 (950)",
+        "span2": "Granada · Kultur",
         "h21": "Ausgewählte Reiseziele",
         "h22": "Alle Reiseziele",
         "h23": "Weitere Reiseziele, die du lieben wirst",
@@ -2983,7 +2983,10 @@
         "partial": "Teilweise geprüft",
         "pending": "Prüfung ausstehend",
         "territoryPhoto": "Foto der Region"
-      }
+      },
+      "featuredRowTitle": "Ausgewählte Orte",
+      "featuredLabel": "Ausgewählte Reiseziele in Bewegung",
+      "viewAllN": "Alle {n} Reiseziele ansehen"
     },
     "experiencias": {
       "body": {
@@ -5117,6 +5120,11 @@
       "termSearchInput": {
         "inputPlaceholder1": "Suche ein Thema in den Nutzungsbedingungen..."
       }
+    },
+    "todosDestinos": {
+      "title": "Alle Reiseziele | BAQUEANO Nicaragua",
+      "h1": "Alle Reiseziele in Nicaragua",
+      "metaDescription": "Vollständiger Katalog der auf BAQUEANO veröffentlichten Reiseziele in Nicaragua: Strände, Vulkane, Flüsse, Kultur und Gemeindetourismus, mit Filtern nach Kategorie und Departamento."
     }
   },
   "common": {

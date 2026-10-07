@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T20:10:39.676Z",
+  "generatedAt": "2026-10-07T20:17:53.023Z",
   "languages": [
     "es",
     "en",
@@ -9,21 +9,21 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4994,
-    "en": 4994,
-    "fr": 4994,
-    "it": 4994,
-    "pt": 4994,
-    "de": 4994
+    "es": 5000,
+    "en": 5000,
+    "fr": 5000,
+    "it": 5000,
+    "pt": 5000,
+    "de": 5000
   },
   "html": {
-    "files": 34,
-    "total": 3892,
-    "translated": 3891,
+    "files": 35,
+    "total": 3981,
+    "translated": 3980,
     "untranslated": 1
   },
   "js": {
-    "files": 119,
+    "files": 120,
     "translated": 152,
     "untranslated": 721
   },
@@ -71,6 +71,7 @@
     "privacidad.html",
     "terminos.html",
     "testimonios.html",
+    "todos-los-destinos.html",
     "js/ai-assistant.js",
     "js/allies-directory.js",
     "js/ambiental-report-handoff.js",
@@ -96,6 +97,7 @@
     "js/definitive-index-interactions.js",
     "js/destination-community.js",
     "js/destinos-catalog-live.js",
+    "js/destinos-featured.js",
     "js/destinos-provenance.js",
     "js/destinos-supabase.js",
     "js/destinos-verified.js",
@@ -461,6 +463,15 @@
       "type": "html",
       "total": 79,
       "translated": 79,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "todos-los-destinos.html",
+      "type": "html",
+      "total": 89,
+      "translated": 89,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -836,6 +847,15 @@
     },
     {
       "file": "js/destinos-catalog-live.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/destinos-featured.js",
       "type": "js",
       "total": 0,
       "translated": 0,

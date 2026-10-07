@@ -2942,7 +2942,7 @@
         "option4": "Precio: mayor a menor",
         "button3": "Lista",
         "button4": "Ambos",
-        "span2": "Granada · Cultura · ★ 4.8 (950)",
+        "span2": "Granada · Cultura",
         "h21": "Destinos destacados",
         "h22": "Todos los destinos",
         "h23": "Más destinos que te encantarán",
@@ -2983,7 +2983,10 @@
         "partial": "Verificación parcial",
         "pending": "Por verificar",
         "territoryPhoto": "Foto del territorio"
-      }
+      },
+      "featuredRowTitle": "Lugares destacados",
+      "featuredLabel": "Destinos destacados en movimiento",
+      "viewAllN": "Ver los {n} destinos"
     },
     "experiencias": {
       "body": {
@@ -5117,6 +5120,11 @@
       "termSearchInput": {
         "inputPlaceholder1": "Buscá un tema dentro de los términos y condiciones..."
       }
+    },
+    "todosDestinos": {
+      "title": "Todos los destinos | BAQUEANO Nicaragua",
+      "h1": "Todos los destinos de Nicaragua",
+      "metaDescription": "Catálogo completo de destinos de Nicaragua publicados en BAQUEANO: playas, volcanes, ríos, cultura y turismo comunitario, con filtros por categoría y departamento."
     }
   },
   "common": {

@@ -5532,3 +5532,23 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - i18n: 0 errores;
   - auditoría estática: 0 críticos.
 - Escrituras reales con token del propietario: PENDIENTES DE VALIDACIÓN (no tengo su sesión).
+24. "Continúa hasta terminar": seguir con los pendientes en orden de prioridad (Destinos 'Ver todos' + página de todos los destinos, mapas, gastronomía, historia, crónicas, Ops Center P1).
+
+### Destinos: 10 destacados en movimiento + página "Todos los destinos" — hecho y probado
+- `todos-los-destinos.html` (nueva):
+  - catálogo completo de `places` publicados en Supabase, con búsqueda, categorías, filtros, orden y paginación (237 → 24 páginas de 10);
+  - generada a partir de destinos.html, sin el mapa ni los bloques laterales;
+  - título y descripción propios (6 idiomas); entra sola en el sitemap y en el buscador interno.
+- `destinos.html` (`data-destinos-mode="featured"`):
+  - "Todos los destinos" pasa a "Lugares destacados": solo 10, primero los verificados (`js/destinos-catalog-live.js`);
+  - la fila es una galería en movimiento con Pausar (`js/destinos-featured.js` + bq-marquee);
+  - los 3 "Ver todos" (que volvían a destinos.html) abren todos-los-destinos.html con el total real ("Ver los 237 destinos");
+  - buscar y tocar una categoría llevan al catálogo completo con `?q=` / `?categoria=`;
+  - "Más destinos", la paginación y la barra de filtros se ocultan aquí (siguen en el DOM).
+- Datos inventados ocultos: las tarjetas estáticas de respaldo mostraban "★ 4.9 (1,210)", "Desde C$ 400" y "★ 4.8 (950)" sin fuente. No se muestran (CSS) y se quitó la calificación del texto i18n en 6 idiomas.
+- Pruebas:
+  - Playwright 21/21 a 1366 y 390 px: 10 originales + 10 copias inertes, se mueve y pausa, búsqueda → 1 resultado exacto, categoría → URL correcta, 237 tarjetas y 24 páginas, página 2 empieza en el 11.º, reducir movimiento → estática;
+  - axe 0;
+  - browser-qa (2 páginas × 16 anchos): 0 fallos;
+  - auditoría estática: 0 críticos (se corrigió una descripción duplicada);
+  - i18n: 0 errores.

@@ -5,7 +5,7 @@
 -->
 # Auditoría estática de la salida publicada
 
-Generado: 2026-10-07T20:10:39.968Z · Páginas: 34 · URLs en sitemap: 25 · **Críticos: 0** · Advertencias: 62
+Generado: 2026-10-07T20:21:47.343Z · Páginas: 35 · URLs en sitemap: 26 · **Críticos: 0** · Advertencias: 64
 
 ## SEO por página
 
@@ -45,6 +45,7 @@ Generado: 2026-10-07T20:10:39.968Z · Páginas: 34 · URLs en sitemap: 25 · **C
 | privacidad.html | Privacidad & Seguridad de tus Datos \| BAQUEANO Nicaragua | 135 car. | /privacidad.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | terminos.html | Términos & Condiciones de Uso \| BAQUEANO Nicaragua | 150 car. | /terminos.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | testimonios.html | Experiencias de viajeros \| Testimonios BAQUEANO | 134 car. | /testimonios.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
+| todos-los-destinos.html | Todos los destinos \| BAQUEANO Nicaragua | 163 car. | /todos-los-destinos.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 
 ## Hallazgos
 
@@ -112,3 +113,5 @@ Generado: 2026-10-07T20:10:39.968Z · Páginas: 34 · URLs en sitemap: 25 · **C
 | ⚠️ advertencia | terminos.html | anchor-missing | index.html#sos: ancla #sos no encontrada en index.html (estático) |
 | ⚠️ advertencia | terminos.html | anchor-missing | mi-viaje.html#favoritos: ancla #favoritos no encontrada en mi-viaje.html (estático) |
 | ⚠️ advertencia | terminos.html | anchor-missing | aliados.html#postular: ancla #postular no encontrada en aliados.html (estático) |
+| ⚠️ advertencia | todos-los-destinos.html | anchor-missing | ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución) |
+| ⚠️ advertencia | todos-los-destinos.html | anchor-missing | ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución) |

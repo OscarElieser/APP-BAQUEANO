@@ -960,3 +960,10 @@
 .dest-live-desc { margin: 4px 0 6px; font-size: 0.74rem; line-height: 1.4; color: #64748B; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .dest-catalog-card--live .dest-catalog-media { position: relative; }
 .dest-live-photo-note { position: absolute; right: 8px; bottom: 8px; padding: 2px 8px; border-radius: 999px; background: rgba(15, 23, 42, 0.72); color: #F4E6C1; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.02em; }
+
+/* 2026-10-07: las tarjetas estáticas de respaldo traían calificaciones y precios escritos a mano
+   ("★ 4.9 (1,210)", "Desde C$ 400") sin ninguna fuente. No se muestran (siguen en el HTML hasta
+   que el catálogo de Supabase tenga reseñas y tarifas verificadas). */
+.page-destinos-exact .dest-highlight-rating,
+.page-destinos-exact .dest-highlight-price { display: none !important; }
+.page-destinos-exact .destinos-featured-row-head h2 [aria-live]:empty { display: none; }

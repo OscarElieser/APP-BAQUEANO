@@ -177,6 +177,7 @@ for (const a of sonora.BAQUEANO_SONORA_ARTISTS || []) {
 const PAGES = [
   ['Inicio', 'index.html', 'Portada de BAQUEANO Nicaragua.', 'inicio portada home', 'fa-solid fa-house'],
   ['Destinos de Nicaragua', 'destinos.html', 'Volcanes, playas, montañas, reservas y ciudades.', 'destinos viajar turismo', 'fa-solid fa-compass'],
+  ['Todos los destinos', 'todos-los-destinos.html', 'Catálogo completo de lugares publicados, con filtros por categoría y departamento.', 'todos destinos catalogo lugares lista completa', 'fa-solid fa-list'],
   ['Departamentos y territorios', 'departamento.html', 'Los 17 territorios de Nicaragua.', 'departamentos territorios', 'fa-solid fa-map'],
   ['Mapa interactivo', 'mapa.html', 'Ubicá destinos, servicios y puntos de interés.', 'mapa ubicacion gps coordenadas', 'fa-solid fa-map-location-dot'],
   ['Experiencias y rutas', 'experiencias.html', 'Actividades, senderos, rutas y paquetes.', 'experiencias tours rutas paquetes guias', 'fa-solid fa-person-hiking'],

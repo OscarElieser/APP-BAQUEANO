@@ -1,11 +1,11 @@
 {
  "summary": {
-  "generatedAt": "2026-10-07T20:10:39.968Z",
+  "generatedAt": "2026-10-07T20:21:47.343Z",
   "dir": "dist-hostinger",
-  "pages": 34,
+  "pages": 35,
   "critical": 0,
-  "warnings": 62,
-  "sitemapUrls": 25
+  "warnings": 64,
+  "sitemapUrls": 26
  },
  "seo": [
   {
@@ -449,6 +449,19 @@
    "indexable": true,
    "lang": "es",
    "sitemap": true
+  },
+  {
+   "page": "todos-los-destinos.html",
+   "title": "Todos los destinos | BAQUEANO Nicaragua",
+   "description": "Catálogo completo de destinos de Nicaragua publicados en BAQUEANO: playas, volcanes, ríos, cultura y turismo comunitario, con filtros por categoría y departamento.",
+   "canonical": "https://baqueanonicaragua.com/todos-los-destinos.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
   }
  ],
  "findings": [
@@ -823,6 +836,18 @@
    "page": "terminos.html",
    "rule": "anchor-missing",
    "detail": "aliados.html#postular: ancla #postular no encontrada en aliados.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "todos-los-destinos.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "todos-los-destinos.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución)"
   }
  ],
  "links": [
@@ -1195,6 +1220,18 @@
   {
    "from": "terminos.html",
    "link": "aliados.html#postular",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "todos-los-destinos.html",
+   "link": "#sosModal",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "todos-los-destinos.html",
+   "link": "#sosModal",
    "status": "ancla no encontrada (estático)",
    "severity": "warning"
   }

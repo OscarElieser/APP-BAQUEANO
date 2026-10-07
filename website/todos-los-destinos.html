@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <!--
 ============================================================================
-🧭 BAQUEANO ECOSYSTEM — CATÁLOGO DE DESTINOS (destinos.html)
+🧭 BAQUEANO ECOSYSTEM — TODOS LOS DESTINOS (todos-los-destinos.html)
 ============================================================================
-🎯 POR QUÉ: Presentar el catálogo territorial de Nicaragua con identidad visual,
-exploración cartográfica, filtros y contenido accesible en cualquier pantalla.
-⚙️ CÓMO: El head carga primero identidad y metadatos, luego fuentes y proveedores,
-y finalmente el sistema global, la navegación y los estilos específicos de destinos.
-📦 QUÉ: Portada editorial, buscador, categorías, mapa Leaflet, 10 destacados en movimiento
-(2026-10-07; el catálogo completo está en todos-los-destinos.html), catálogos,
-paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucional.
+🎯 POR QUÉ: pedido del propietario (2026-10-07): el botón «Ver todos» de destinos.html no llevaba
+a ningún lado; debe abrir una página aparte con TODOS los destinos. En destinos.html quedan solo
+10 destacados en movimiento.
+⚙️ CÓMO: misma estructura y scripts que destinos.html (catálogo vivo de Supabase: places
+publicados, con búsqueda, categorías, filtros, orden y paginación en js/destinos-interactions.js,
+que lee ?q= y ?categoria= de la URL). Sin el mapa ni los bloques laterales de la portada.
+📦 QUÉ: buscador, categorías, filtros, catálogo completo paginado y CTA comunitario.
 ============================================================================
 -->
-<html data-destinos-mode="featured" data-i18n-description="pages.destinos.body.metaDescription1" data-i18n-title="pages.destinos.body.title1" lang="es" data-bq-page="destinos" data-bq-group="territorio">
+<html data-destinos-mode="all" data-i18n-description="pages.todosDestinos.metaDescription" data-i18n-title="pages.todosDestinos.title" lang="es" data-bq-page="destinos" data-bq-subpage="todos-los-destinos" data-bq-group="territorio">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Destinos de Nicaragua | Baqueano Nicaragua</title>
+  <title>Todos los destinos | BAQUEANO Nicaragua</title>
   <meta name="description"
-    content="Explora los destinos naturales, playas, volcanes y patrimonio cultural de Nicaragua.">
+    content="Catálogo completo de destinos de Nicaragua publicados en BAQUEANO: playas, volcanes, ríos, cultura y turismo comunitario, con filtros por categoría y departamento.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#165D6F">
 
@@ -36,7 +36,6 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
   <link rel="stylesheet" href="css/components/lodging-showcase.css?v=20261007-7">
-  <link rel="stylesheet" href="css/components/bq-marquee.css?v=20261007-1">
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
   <!-- Favicon e Iconografía Oficial BAQUEANO -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -112,7 +111,7 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
       <div class="bq-hero-overlay" aria-hidden="true"></div>
       <div class="exact-container">
         <div class="destinos-hero-left">
-          <h1 data-i18n="pages.destinos.destinosHeroExact.h11" class="destinos-hero-title">Destinos de Nicaragua</h1>
+          <h1 data-i18n="pages.todosDestinos.h1" class="destinos-hero-title">Todos los destinos de Nicaragua</h1>
           <p data-i18n="pages.destinos.destinosHeroExact.p1" class="destinos-hero-subtitle">Playas, volcanes, montañas, cultura, gastronomía y mucho más.</p>
           <form class="destinos-hero-search" action="todos-los-destinos.html" method="get" role="search">
             <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
@@ -150,7 +149,7 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
       <!-- ============================================================================
            3. BARRA DE FILTROS Y ORDENAMIENTO (IMAGEN 3)
            ============================================================================ -->
-      <div class="destinos-filter-bar" data-destinos-more>
+      <div class="destinos-filter-bar">
         <div class="destinos-filters-left">
           <button type="button" class="dest-dropdown-btn" data-filter="department" aria-expanded="false"><span data-i18n="testimonials.departmentLabel">Departamento</span> <i class="fa-solid fa-chevron-down"></i></button>
           <button type="button" class="dest-dropdown-btn" data-filter="price" aria-expanded="false"><span data-i18n="experiences.price">Precio</span> <i class="fa-solid fa-chevron-down"></i></button>
@@ -172,146 +171,19 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
       </div>
 
       <!-- ============================================================================
-           4. SPLIT PRINCIPAL: MAPA + DESTINOS DESTACADOS (IMAGEN 3)
-           ============================================================================ -->
-      <div class="destinos-split-grid">
-        <!-- Izquierda: Mapa de Nicaragua -->
-        <div class="destinos-map-panel">
-          <div class="destinos-map-top-bar">
-            <button data-i18n="nav.map" type="button" class="destinos-view-tab active" data-view="map" aria-pressed="true">Mapa</button>
-            <button data-i18n="pages.destinos.mainContent.button3" type="button" class="destinos-view-tab" data-view="list" aria-pressed="false">Lista</button>
-            <button data-i18n="pages.destinos.mainContent.button4" type="button" class="destinos-view-tab" data-view="both" aria-pressed="false">Ambos</button>
-          </div>
-          <div class="destinos-map-viewport" id="destinosInteractiveMap"></div>
-
-          <!-- Mini Tarjeta de Vista Previa dentro del Mapa (Granada) -->
-          <div class="destinos-map-preview-card">
-            <img src="assets/images/departamentos/granada.jpg" alt="Granada" class="destinos-preview-img" decoding="async" loading="lazy" width="192" height="144">
-            <div class="destinos-preview-info">
-              <h4>Granada</h4>
-              <span><i class="fa-solid fa-location-dot" style="color: #F65E01;"></i> <span data-i18n="pages.destinos.mainContent.span2">Granada · Cultura</span></span>
-            </div>
-            <a data-i18n="actions.details" href="destinos.html?id=granada" class="destinos-preview-btn">Ver detalles</a>
-          </div>
-        </div>
-
-        <!-- Derecha: Destinos Destacados (Grilla 3x2) -->
-        <div class="destinos-destacados-panel">
-          <div class="section-header-exact">
-            <div class="title-group">
-              <h2 data-i18n="pages.destinos.mainContent.h21">Destinos destacados</h2>
-            </div>
-            <a href="todos-los-destinos.html" class="section-header-link" data-destinos-all-link><span data-i18n="actions.viewAll">Ver todos</span> <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-
-          <div class="destinos-destacados-grid">
-            <!-- 1. Isla de Ometepe -->
-            <article class="dest-highlight-card">
-              <div class="dest-highlight-media">
-                <img src="assets/images/destinos/isla_de_ometepe.jpg" alt="Isla de Ometepe" loading="lazy" decoding="async" width="1600" height="900">
-                <button data-i18n-aria-label="common.favorito" type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <div class="dest-highlight-body">
-                <h4>Isla de Ometepe</h4>
-                <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Rivas</span>
-                <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.9 (1,210)</div>
-                <div data-i18n="pages.destinos.destHighlightCard.div1" class="dest-highlight-price">Desde C$ 600</div>
-                <a data-i18n="testimonials.viewDestination" href="destinos.html?id=ometepe" class="dest-btn-green">Ver destino</a>
-              </div>
-            </article>
-
-            <!-- 2. Granada -->
-            <article class="dest-highlight-card">
-              <div class="dest-highlight-media">
-                <img src="assets/images/departamentos/granada.jpg" alt="Granada" loading="lazy" decoding="async" width="192" height="144">
-                <button data-i18n-aria-label="common.favorito" type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <div class="dest-highlight-body">
-                <h4>Granada</h4>
-                <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Granada</span>
-                <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.8 (950)</div>
-                <div data-i18n="pages.destinos.destHighlightCard.div2" class="dest-highlight-price">Desde C$ 400</div>
-                <a data-i18n="testimonials.viewDestination" href="destinos.html?id=granada" class="dest-btn-green">Ver destino</a>
-              </div>
-            </article>
-
-            <!-- 3. San Juan del Sur -->
-            <article class="dest-highlight-card">
-              <div class="dest-highlight-media">
-                <img src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="San Juan del Sur" loading="lazy" decoding="async" width="447" height="447">
-                <button data-i18n-aria-label="common.favorito" type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <div class="dest-highlight-body">
-                <h4>San Juan del Sur</h4>
-                <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Rivas</span>
-                <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.7 (820)</div>
-                <div data-i18n="pages.destinos.destHighlightCard.div3" class="dest-highlight-price">Desde C$ 500</div>
-                <a data-i18n="testimonials.viewDestination" href="destinos.html?id=sjds" class="dest-btn-green">Ver destino</a>
-              </div>
-            </article>
-
-            <!-- 4. Cerro Negro -->
-            <article class="dest-highlight-card">
-              <div class="dest-highlight-media">
-                <img src="assets/images/destinos/cerro_negro.jpg" alt="Cerro Negro" loading="lazy" decoding="async" width="700" height="438">
-                <button data-i18n-aria-label="common.favorito" type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <div class="dest-highlight-body">
-                <h4>Cerro Negro</h4>
-                <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> León</span>
-                <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.9 (410)</div>
-                <div data-i18n="pages.destinos.destHighlightCard.div4" class="dest-highlight-price">Desde C$ 700</div>
-                <a data-i18n="testimonials.viewDestination" href="destinos.html?id=cerro_negro" class="dest-btn-green">Ver destino</a>
-              </div>
-            </article>
-
-            <!-- 5. Cañón de Somoto -->
-            <article class="dest-highlight-card">
-              <div class="dest-highlight-media">
-                <img src="assets/images/destinos/canon_de_somoto.jpg" alt="Cañón de Somoto" loading="lazy" decoding="async" width="399" height="501">
-                <button data-i18n-aria-label="common.favorito" type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <div class="dest-highlight-body">
-                <h4>Cañón de Somoto</h4>
-                <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Madriz</span>
-                <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.8 (320)</div>
-                <div data-i18n="pages.destinos.destHighlightCard.div5" class="dest-highlight-price">Desde C$ 350</div>
-                <a data-i18n="testimonials.viewDestination" href="destinos.html?id=somoto" class="dest-btn-green">Ver destino</a>
-              </div>
-            </article>
-
-            <!-- 6. Masaya -->
-            <article class="dest-highlight-card">
-              <div class="dest-highlight-media">
-                <img src="assets/images/destinos/volcan_masaya.jpg" alt="Volcán Masaya" loading="lazy" decoding="async" width="1600" height="1131">
-                <button data-i18n-aria-label="common.favorito" type="button" class="dest-highlight-heart" aria-label="Favorito"><i class="fa-regular fa-heart"></i></button>
-              </div>
-              <div class="dest-highlight-body">
-                <h4>Masaya</h4>
-                <span class="location"><i class="fa-solid fa-location-dot" style="color: #0284C7;"></i> Masaya</span>
-                <div class="dest-highlight-rating"><i class="fa-solid fa-star"></i> 4.6 (310)</div>
-                <div data-i18n="pages.destinos.destHighlightCard.div6" class="dest-highlight-price">Desde C$ 300</div>
-                <a data-i18n="testimonials.viewDestination" href="destinos.html?id=masaya" class="dest-btn-green">Ver destino</a>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============================================================================
            5. TODOS LOS DESTINOS (IMAGEN 3)
            POR QUÉ: deben salir TODOS los lugares publicados, no 10 fijos.
            CÓMO: js/destinos-catalog-live.js reemplaza en la página estas tarjetas por
              los places publicados de Supabase; estas quedan como respaldo sin conexión.
            ============================================================================ -->
-      <div class="section-header-exact destinos-featured-row-head">
+      <div class="section-header-exact">
         <div class="title-group">
-          <h2><span data-i18n="pages.destinos.featuredRowTitle">Lugares destacados</span> <span style="color: #F65E01; font-weight: 800;" aria-live="polite"></span></h2>
+          <h2><span data-i18n="pages.destinos.mainContent.h22">Todos los destinos</span> <span style="color: #F65E01; font-weight: 800;" aria-live="polite"></span></h2>
         </div>
-        <a href="todos-los-destinos.html" class="section-header-link" data-destinos-all-link><span data-i18n="actions.viewAll">Ver todos</span> <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="destinos.html" class="section-header-link" hidden><span data-i18n="actions.viewAll">Ver todos</span> <i class="fa-solid fa-arrow-right"></i></a>
       </div>
 
-      <div class="destinos-catalog-row destinos-featured-row">
+      <div class="destinos-catalog-row">
         <!-- 1. Las Isletas de Granada -->
         <article class="dest-catalog-card">
           <div class="dest-catalog-media">
@@ -406,14 +278,14 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
       <!-- ============================================================================
            6. MÁS DESTINOS QUE TE ENCANTARÁN (IMAGEN 3)
            ============================================================================ -->
-      <div class="section-header-exact" data-destinos-more>
+      <div class="section-header-exact">
         <div class="title-group">
           <h2 data-i18n="pages.destinos.mainContent.h23">Más destinos que te encantarán</h2>
         </div>
-        <a href="todos-los-destinos.html" class="section-header-link" data-destinos-all-link><span data-i18n="actions.viewAll">Ver todos</span> <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="destinos.html" class="section-header-link" hidden><span data-i18n="actions.viewAll">Ver todos</span> <i class="fa-solid fa-arrow-right"></i></a>
       </div>
 
-      <div class="destinos-catalog-row" data-destinos-more>
+      <div class="destinos-catalog-row">
         <!-- 1. León -->
         <article class="dest-catalog-card">
           <div class="dest-catalog-media">
@@ -508,7 +380,7 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
       <!-- ============================================================================
            7. PAGINACIÓN NUMÉRICA (IMAGEN 3)
            ============================================================================ -->
-      <div data-i18n-aria-label="pages.destinos.mainContent.divAriaLabel2" class="destinos-pagination-wrap" data-destinos-more role="navigation" aria-label="Paginación de destinos">
+      <div data-i18n-aria-label="pages.destinos.mainContent.divAriaLabel2" class="destinos-pagination-wrap" role="navigation" aria-label="Paginación de destinos">
         <button data-i18n-aria-label="actions.prevPage" type="button" class="pagination-btn" aria-label="Página anterior"><i class="fa-solid fa-chevron-left"></i></button>
         <button type="button" class="pagination-btn active">1</button>
         <button type="button" class="pagination-btn">2</button>
@@ -519,76 +391,6 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <button type="button" class="pagination-btn">13</button>
         <button data-i18n-aria-label="actions.nextPage" type="button" class="pagination-btn" aria-label="Página siguiente"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
-
-      <!-- ============================================================================
-           8. ¿NO SABÉS DÓNDE IR? (BAQUEANO DIGITAL - IMAGEN 3)
-           ============================================================================ -->
-      <div class="destinos-ai-box">
-        <div class="destinos-ai-top-row">
-          <div class="destinos-ai-left">
-            <img data-i18n-alt="common.baquiGuardabarranco" loading="lazy" decoding="async" src="assets/images/assistant/baqui.png" alt="Baqüi Guardabarranco" class="destinos-ai-avatar" width="300" height="300">
-            <div class="destinos-ai-text">
-              <h3 data-i18n="pages.destinos.mainContent.h31">¿No sabés dónde ir?</h3>
-              <p data-i18n="pages.destinos.mainContent.p1">Contame qué buscás y Baqueano Digital encuentra los mejores destinos para vos.</p>
-            </div>
-          </div>
-          <a class="destinos-ai-btn-purple" href="baqueano-ai.html?prompt=recomendacion-destinos">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="common.planificarConBaqueanoDigital">Planificar con Baqueano Digital</span> <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <div class="destinos-ai-chips-strip">
-          <a data-i18n="common.tengoC1500" class="dest-ai-chip" href="baqueano-ai.html?prompt=presupuesto-1500">💵 Tengo C$1,500</a>
-          <a data-i18n="pages.destinos.mainContent.a1" class="dest-ai-chip" href="baqueano-ai.html?prompt=naturaleza">🍃 Quiero naturaleza</a>
-          <a data-i18n="common.viajoConNinos" class="dest-ai-chip" href="baqueano-ai.html?prompt=viaje-con-ninos">👨‍👩‍👧 Viajo con niños</a>
-          <a data-i18n="common.quieroAventura" class="dest-ai-chip" href="baqueano-ai.html?prompt=aventura">🧗 Quiero aventura</a>
-          <a data-i18n="common.algoCerca" class="dest-ai-chip" href="baqueano-ai.html?prompt=cerca-de-mi">📍 Algo cerca</a>
-          <a data-i18n="pages.destinos.mainContent.a2" class="dest-ai-chip" href="baqueano-ai.html?prompt=un-dia">⏱️ Tengo solo un día</a>
-        </div>
-      </div>
-
-      <!-- ============================================================================
-           8a. HOSPEDAJES EN BAQUEANO (fichas de negocios locales)
-           🎯 POR QUÉ: el propietario pidió (2026-10-07) publicar la ficha de Hotel Encanto del Sur
-              (San Juan del Sur). La identidad del negocio es la protagonista; BAQUEANO lo presenta
-              y conecta al viajero con el hotel, con un sello pequeño "Disponible en BAQUEANO".
-           ⚙️ CÓMO: js/lodging-showcase.js pinta js/lodging-showcase-data.js (espejo de
-              public.businesses y public.prices); textos i18n lodging.* y lodgingShowcase.*.
-           📦 QUÉ: logo o nombre del negocio, servicios, tarifas vigentes, WhatsApp directo,
-              ubicación, compartir y sello BAQUEANO.
-           ============================================================================ -->
-      <section class="bq-lodging-section" id="hospedajesBaqueano" aria-labelledby="lodgingShowcaseTitle">
-        <div class="bq-lodging-intro">
-          <span class="bq-lodging-kicker" data-i18n="lodgingShowcase.kicker">Hospedajes en BAQUEANO</span>
-          <h2 id="lodgingShowcaseTitle" data-i18n="lodgingShowcase.title">Descubrí dónde quedarte. Viví Nicaragua como se vive aquí.</h2>
-          <p data-i18n="lodgingShowcase.lead">En BAQUEANO te acercamos a hospedajes locales para que conozcás sus servicios y contactés directamente con el establecimiento.</p>
-        </div>
-        <div class="bq-lodging-grid" id="lodgingShowcaseGrid"></div>
-      </section>
-
-      <!-- ============================================================================
-           8b. LUGARES VERIFICADOS POR DEPARTAMENTO
-           🎯 POR QUÉ: base verificada (2026-10-05) y catálogo INTUR de turismo rural y
-              comunitario 2026, pedidos por el propietario también en destinos.html.
-           ⚙️ CÓMO: js/destinos-verified.js lee js/territories-data.js (misma fuente que
-              las fichas de cada departamento) y filtra por departamento y tipo.
-           📦 QUÉ: tarjetas con sello, fuente, horario/precio con fecha y enlaces.
-           ============================================================================ -->
-      <section class="dest-verified-section" id="destinosVerificados" aria-labelledby="destVerifiedTitle">
-        <div class="dest-verified-intro">
-          <span class="dest-verified-kicker" data-i18n="destinos.verified.kicker">Información comprobada</span>
-          <h2 id="destVerifiedTitle" data-i18n="destinos.verified.title">Lugares verificados por departamento</h2>
-          <p data-i18n="destinos.verified.lead">Fichas con fuente oficial (INTUR, MARENA, Visit Nicaragua y sitios oficiales): turismo rural, comunitario, agroturismo, naturaleza y servicios verificados.</p>
-        </div>
-        <div class="dest-verified-filters">
-          <label class="dest-verified-label" for="destVerifiedDept"><span data-i18n="destinos.verified.filterDept">Departamento o región</span>
-            <select id="destVerifiedDept"><option value="" data-i18n="destinos.verified.allDepts">Todos los territorios</option></select>
-          </label>
-          <div class="dest-verified-kinds" id="destVerifiedKind" role="group" data-i18n-aria-label="destinos.verified.filterKind" aria-label="Tipo de experiencia"></div>
-        </div>
-        <p class="dest-verified-count" id="destVerifiedCount" aria-live="polite"></p>
-        <div class="dest-verified-grid" id="destVerifiedGrid" aria-busy="true"></div>
-      </section>
 
       <!-- ============================================================================
            9. BANNER CTA COMUNITARIO AL ATARDECER (IMAGEN 3)
@@ -681,8 +483,6 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
   <script defer src="js/territory-media-catalog.js?v=20260926-1"></script>
   <script defer src="js/destinos-catalog-live.js?v=20261007-featured-1"></script>
   <script defer src="js/destinos-interactions.js?v=20261005-live-1"></script>
-  <script defer src="js/destinos-verified.js?v=20261005-nat-1"></script>
-  <script defer src="js/destinos-featured.js?v=20261007-1"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -797,11 +597,8 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
     }
   </script>
 <script src="js/baqueano-master-catalog.js"></script>
-<script src="js/lodging-showcase-data.js?v=20261007-8" defer></script>
-<script src="js/lodging-showcase.js?v=20261007-9" defer></script>
 <script src="js/navigation.js?v=20261007-app-2"></script>
 <script src="js/global-injector.js"></script>
-<script src="js/bq-marquee.js?v=20261007-1" defer></script>
 </body>
 
 </html>

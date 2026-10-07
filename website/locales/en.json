@@ -2942,7 +2942,7 @@
         "option4": "Price: high to low",
         "button3": "List",
         "button4": "Both",
-        "span2": "Granada · Culture · ★ 4.8 (950)",
+        "span2": "Granada · Culture",
         "h21": "Featured destinations",
         "h22": "All destinations",
         "h23": "More destinations you'll love",
@@ -2983,7 +2983,10 @@
         "partial": "Partly verified",
         "pending": "Pending verification",
         "territoryPhoto": "Photo of the area"
-      }
+      },
+      "featuredRowTitle": "Featured places",
+      "featuredLabel": "Featured destinations in motion",
+      "viewAllN": "See all {n} destinations"
     },
     "experiencias": {
       "body": {
@@ -5117,6 +5120,11 @@
       "termSearchInput": {
         "inputPlaceholder1": "Search for a topic within the terms and conditions..."
       }
+    },
+    "todosDestinos": {
+      "title": "All destinations | BAQUEANO Nicaragua",
+      "h1": "All destinations in Nicaragua",
+      "metaDescription": "Full catalog of Nicaraguan destinations published on BAQUEANO: beaches, volcanoes, rivers, culture and community tourism, with filters by category and department."
     }
   },
   "common": {

@@ -15,6 +15,7 @@
  *   - Sello real de verificación (verificado / parcial / por verificar). Sin
  *     calificación ni precio: no hay dato → no se muestra (NO DATA = NO INVENTION).
  *   - Si Supabase no responde (o en 8 s), quedan las tarjetas estáticas del HTML.
+ *   - Modo destacados (destinos.html): solo 10; window.BaqueanoDestinosTotal guarda el total real.
  * 📦 QUÉ: window.BaqueanoDestinosCatalogReady (Promise<{ source, count }>).
  */
 (function (window, document) {
@@ -136,9 +137,21 @@
     return article;
   }
 
+  // 2026-10-07: en destinos.html (data-destinos-mode="featured") solo se destacan 10 lugares
+  // (primero los verificados, en el orden del servicio); el catálogo completo vive en
+  // todos-los-destinos.html. Devuelve también el total real para el enlace «Ver los N destinos».
+  var FEATURED_LIMIT = 10;
+  function pickFeatured(places) {
+    var verified = places.filter(function (p) { return p.verification_status === 'verified'; });
+    var rest = places.filter(function (p) { return p.verification_status !== 'verified'; });
+    return verified.concat(rest).slice(0, FEATURED_LIMIT);
+  }
+
   function render(places) {
     var rows = Array.prototype.slice.call(document.querySelectorAll('.destinos-catalog-row'));
     if (!rows.length) return 0;
+    window.BaqueanoDestinosTotal = places.length;
+    if (document.documentElement.getAttribute('data-destinos-mode') === 'featured') places = pickFeatured(places);
     var names = departmentNames();
     var cards = places.map(function (place) { return card(place, names); });
     // Las tarjetas estáticas del HTML se quitan solo de la página en vivo (el archivo

@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T20:10:39.676Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4994 · en 4994 · fr 4994 · it 4994 · pt 4994 · de 4994
+Generado: 2026-10-07T20:17:53.023Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 5000 · en 5000 · fr 5000 · it 5000 · pt 5000 · de 5000
 
-HTML: 3891/3892 textos con clave (1 pendientes) · JS: 721 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3980/3981 textos con clave (1 pendientes) · JS: 721 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -200,6 +200,7 @@ HTML: 3891/3892 textos con clave (1 pendientes) · JS: 721 textos dinámicos pen
 | js/definitive-index-interactions.js | js | 0 | 0 | 0 | 100 % |
 | js/destination-community.js | js | 0 | 0 | 0 | 100 % |
 | js/destinos-catalog-live.js | js | 0 | 0 | 0 | 100 % |
+| js/destinos-featured.js | js | 0 | 0 | 0 | 100 % |
 | js/destinos-provenance.js | js | 0 | 0 | 0 | 100 % |
 | js/destinos-supabase.js | js | 8 | 8 | 0 | 100 % |
 | js/destinos-verified.js | js | 15 | 15 | 0 | 100 % |
@@ -256,3 +257,4 @@ HTML: 3891/3892 textos con clave (1 pendientes) · JS: 721 textos dinámicos pen
 | privacidad.html | html | 89 | 89 | 0 | 100 % |
 | terminos.html | html | 193 | 193 | 0 | 100 % |
 | testimonios.html | html | 79 | 79 | 0 | 100 % |
+| todos-los-destinos.html | html | 89 | 89 | 0 | 100 % |
