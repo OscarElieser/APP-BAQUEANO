@@ -1685,7 +1685,7 @@ function loadBaqueanoDigital(openWhenReady) {
 
   if (!document.querySelector('script[data-baqueano-assistant]')) {
     const script = document.createElement('script');
-    script.src = 'js/baqueano-assistant.js?v=20261007-baqui-5';
+    script.src = 'js/baqueano-assistant.js?v=20261007-baqui-6';
     script.defer = true;
     script.dataset.baqueanoAssistant = 'true';
     if (openWhenReady) {

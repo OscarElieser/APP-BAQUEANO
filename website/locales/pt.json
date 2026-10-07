@@ -6021,7 +6021,13 @@
     "fbPrefs": "Você me disse que se interessa por {prefs}. Se me contar de onde sai e quantos dias tem, proponho duas ou três opções concretas.",
     "fbOpen": "Conte um pouco mais: o que você quer viver na Nicarágua (praia, vulcões, cidades históricas, montanha, comida) e quantos dias tem?",
     "actionBusinesses": "Ver negócios de {where}",
-    "actionPlanner": "Abrir o planejador"
+    "actionPlanner": "Abrir o planejador",
+    "lodgingTitle": "Hospedagens com tarifa publicada no BAQUEANO para {where}:",
+    "lodgingFrom": "Para {nights} noite(s), a partir de {total} por quarto.",
+    "lodgingRooms": "Com o que você reservou para hospedagem ({slot}) dá para {rooms} quarto(s) nessa tarifa.",
+    "lodgingNote": "São tarifas informadas por cada negócio. Confirme a disponibilidade e quantas pessoas cabem por quarto diretamente com o estabelecimento.",
+    "lodgingNoteUntil": "São tarifas informadas por cada negócio, válidas até {until}. Confirme a disponibilidade e quantas pessoas cabem por quarto diretamente com o estabelecimento.",
+    "noPricesLodging": "Ainda não tenho preços verificados de transporte nem de comida para {where}; de hospedagem há tarifas publicadas pelos negócios (abaixo). Não vou inventar tarifas: divido seu orçamento para você saber quanto reservar para cada item."
   },
   "appDownload": {
     "metaTitle": "Baixar o BAQUEANO para Android | App oficial",

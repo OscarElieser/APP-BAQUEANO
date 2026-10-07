@@ -203,7 +203,9 @@
   // ---- Presupuesto -----------------------------------------------------------
   function round(n) { return Math.round(n * 100) / 100; }
   // prices: filas vigentes de public.prices para el destino (ya filtradas por el cliente).
-  function budget(state, prices, rate) {
+  // lodging: filas de public_destination_lodging_prices (tarifas de negocios). Son OPCIONES de
+  // habitación, no se suman al total: dos tarifas del mismo hotel son alternativas, no gastos.
+  function budget(state, prices, rate, lodging) {
     const r = rate && rate.USD_NIO ? rate : { USD_NIO: 36.6243, verifiedAt: '2026-10-01', source: 'Configuración BAQUEANO' };
     const assumptions = [];
     const travelers = state.viajeros || 1;
@@ -248,8 +250,27 @@
         usedPct: totalNio ? Math.round((usedNio / totalNio) * 100) : 0, overBudget: usedNio > totalNio
       };
     }
+    const byBusiness = new Map();
+    (lodging || []).filter((o) => o && o.amount != null && o.price_type === 'per_night').forEach((o) => {
+      const unitNio = round(toNio(Number(o.amount), o.currency || 'NIO'));
+      const entry = byBusiness.get(o.business_id) || { id: o.business_id, name: o.business_name, whatsapp: o.whatsapp || null,
+        status: o.verification_status || null, validUntil: o.valid_until || null, source: o.source_name || null, options: [] };
+      entry.options.push({ product: o.product_name, unitNio, unitUsd: round(unitNio / r.USD_NIO) });
+      byBusiness.set(o.business_id, entry);
+    });
+    const lodgingOptions = [...byBusiness.values()].map((b) => {
+      b.options.sort((a, c) => a.unitNio - c.unitNio);
+      const nightsQty = Math.max(1, nights);
+      b.fromNio = round(b.options[0].unitNio * nightsQty);
+      b.nights = nightsQty;
+      // Habitaciones que alcanzan con la parte de hospedaje del reparto, a la tarifa más baja.
+      const slot = split && split.find((row) => row.key === 'lodging');
+      b.roomsAffordable = slot && b.fromNio > 0 ? Math.floor(slot.nio / b.fromNio) : null;
+      b.lodgingSlotNio = slot ? slot.nio : null;
+      return b;
+    });
     return { destination, origin, travelers, adults: state.adultos, kids: state.ninos, days, nights, currency, rate: r, assumptions,
-      verifiedLines: lines, verifiedTotalNio, verifiedTotalUsd: round(verifiedTotalNio / r.USD_NIO), split, focus: state.enfoque || null };
+      verifiedLines: lines, verifiedTotalNio, verifiedTotalUsd: round(verifiedTotalNio / r.USD_NIO), split, focus: state.enfoque || null, lodgingOptions };
   }
 
   function money(nio, usd, currency) {
@@ -283,7 +304,9 @@
       b.verifiedLines.forEach((l) => out.push('• ' + l.name + ': ' + money(l.unitNio, l.unitNio / b.rate.USD_NIO, b.currency) + ' × ' + l.qty + ' = ' + money(l.totalNio, l.totalNio / b.rate.USD_NIO, b.currency) + (l.source ? ' · ' + t('baquiBrain.source', 'fuente') + ': ' + l.source : '')));
       out.push(t('baquiBrain.verifiedTotal', 'Total con precios verificados: {total}.', { total: money(b.verifiedTotalNio, b.verifiedTotalUsd, b.currency) }));
     } else {
-      out.push('', t('baquiBrain.noPrices', 'Todavía no tengo precios verificados de transporte, hospedaje ni comida para {where}. No te voy a dar tarifas inventadas: te reparto tu presupuesto para que sepás con cuánto contar en cada cosa, y los montos exactos se confirman con cada negocio.', { where }));
+      out.push('', (b.lodgingOptions && b.lodgingOptions.length)
+        ? t('baquiBrain.noPricesLodging', 'Todavía no tengo precios verificados de transporte ni comida para {where}; de hospedaje sí hay tarifas publicadas por negocios (te las muestro abajo). No te voy a dar tarifas inventadas: te reparto tu presupuesto para que sepás con cuánto contar en cada cosa.', { where })
+        : t('baquiBrain.noPrices', 'Todavía no tengo precios verificados de transporte, hospedaje ni comida para {where}. No te voy a dar tarifas inventadas: te reparto tu presupuesto para que sepás con cuánto contar en cada cosa, y los montos exactos se confirman con cada negocio.', { where }));
     }
 
     if (b.split) {
@@ -299,6 +322,18 @@
       out.push(t('baquiBrain.splitNote', 'Es una distribución sugerida de tu dinero, no una lista de precios. Cambio de referencia: {rate} córdobas por dólar ({date}).', { rate: b.rate.USD_NIO, date: b.rate.verifiedAt }));
     } else {
       out.push('', t('baquiBrain.askBudget', 'Si me decís cuánto querés gastar en total (por ejemplo, "tengo 300 dólares"), te lo reparto entre pasaje, hospedaje, comida y actividades, por persona y para todo el grupo.'));
+    }
+    if (b.lodgingOptions && b.lodgingOptions.length) {
+      out.push('', t('baquiBrain.lodgingTitle', 'Hospedajes con tarifa publicada en BAQUEANO para {where}:', { where: b.destination || '' }));
+      b.lodgingOptions.forEach((h) => {
+        out.push('• ' + h.name + ': ' + h.options.map((o) => o.product + ' ' + money(o.unitNio, o.unitUsd, b.currency)).join('; ') + '.');
+        out.push('  ' + t('baquiBrain.lodgingFrom', 'Para {nights} noche(s), desde {total} por habitación.', { nights: h.nights, total: money(h.fromNio, h.fromNio / b.rate.USD_NIO, b.currency) }));
+        if (h.roomsAffordable != null) out.push('  ' + t('baquiBrain.lodgingRooms', 'Con lo que reservaste para hospedaje ({slot}) te alcanza para {rooms} habitación(es) a esa tarifa.', { slot: money(h.lodgingSlotNio, h.lodgingSlotNio / b.rate.USD_NIO, b.currency), rooms: h.roomsAffordable }));
+      });
+      const until = b.lodgingOptions[0].validUntil;
+      out.push(until
+        ? t('baquiBrain.lodgingNoteUntil', 'Son tarifas informadas por cada negocio, vigentes hasta {until}. Confirmá disponibilidad y cuántas personas caben por habitación directamente con el establecimiento.', { until })
+        : t('baquiBrain.lodgingNote', 'Son tarifas informadas por cada negocio. Confirmá disponibilidad y cuántas personas caben por habitación directamente con el establecimiento.'));
     }
     if (!b.destination) out.push(t('baquiBrain.askDestination', '¿Para qué destino lo armamos? Con eso busco los negocios verificados de la zona.'));
     else out.push(t('baquiBrain.contact', 'Puedo ponerte en contacto con negocios de {where} registrados en BAQUEANO para confirmar precios y disponibilidad.', { where: b.destination }));

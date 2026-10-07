@@ -22,7 +22,7 @@
   if (EXCLUDED.test(location.pathname.replace(/\/$/, ''))) return;
   // 2026-10-07 — Motor de conversación, memoria y presupuesto de BAQÜI (js/baqui-brain.js).
   if (!window.BaquiBrain && !document.querySelector('script[data-baqui-brain]')) {
-    const brainScript = document.createElement('script'); brainScript.src = 'js/baqui-brain.js?v=20261007-4'; brainScript.dataset.baquiBrain = 'true'; document.head.appendChild(brainScript);
+    const brainScript = document.createElement('script'); brainScript.src = 'js/baqui-brain.js?v=20261007-6'; brainScript.dataset.baquiBrain = 'true'; document.head.appendChild(brainScript);
   }
   // Tipo de cambio de referencia: el mismo valor configurado en baqueano-travel-session.js.
   const RATE = Object.freeze(window.BAQUEANO_RATE || { USD_NIO: 36.6243, verifiedAt: '2026-10-01', source: 'Configuración BAQUEANO' });
@@ -52,6 +52,27 @@
       priceCache.set(entry[1], Array.isArray(rows) ? rows : []);
     } catch (_) { return []; } finally { clearTimeout(timer); }
     return priceCache.get(entry[1]);
+  }
+
+  // Tarifas vigentes que publican los hospedajes del destino (RPC public_destination_lodging_prices).
+  // Son opciones de habitación: BAQÜI las muestra sin sumarlas al total. Máximo 4 s, sin caché de fallos.
+  const lodgingCache = new Map();
+  async function loadLodgingOptions(destination) {
+    if (!destination) return [];
+    if (lodgingCache.has(destination)) return lodgingCache.get(destination);
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 4000);
+    try {
+      const res = await fetch(PRICES_REST.replace(/\/prices$/, '/rpc/public_destination_lodging_prices'), {
+        method: 'POST', signal: controller.signal,
+        headers: { apikey: PUBLIC_KEY, Authorization: `Bearer ${PUBLIC_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_place: destination })
+      });
+      if (!res.ok) return [];
+      const rows = await res.json();
+      lodgingCache.set(destination, Array.isArray(rows) ? rows : []);
+    } catch (_) { return []; } finally { clearTimeout(timer); }
+    return lodgingCache.get(destination);
   }
 
   const safeJson = (value, fallback) => { try { return JSON.parse(value) ?? fallback; } catch (_) { return fallback; } };
@@ -828,8 +849,9 @@ Seguinos para descubrir contenido en video, historias de artesanos locales y el 
       // "no me mostraste el cálculo". El modelo no hace cuentas: el motor suma solo precios
       // verificados y reparte el presupuesto de la persona, con supuestos explícitos.
       if (understood && (understood.intent === 'budget' || understood.intent === 'correction')) {
-        const prices = await loadVerifiedPrices(session.brain.destino_actual || session.brain.ultimo_recomendado);
-        const breakdown = Brain.budget(session.brain, prices, RATE);
+        const where = session.brain.destino_actual || session.brain.ultimo_recomendado;
+        const [prices, lodging] = await Promise.all([loadVerifiedPrices(where), loadLodgingOptions(where)]);
+        const breakdown = Brain.budget(session.brain, prices, RATE, lodging);
         const text = Brain.composeBudget(breakdown, { t: brainT, correction: understood.intent === 'correction' });
         thinking?.closest('article')?.remove();
         session.brain = Brain.remember(session.brain, text); saveSession();

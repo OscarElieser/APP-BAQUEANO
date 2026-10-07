@@ -5085,3 +5085,22 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Kronox --check;
     - bash -n, API Azure (pruebas, node --check), APK presente;
     - franja de lugares, paridad de territorios.
+- 2026-10-07 · Pedido del propietario: "Continuá con lo del plan que todavía falta".
+  Pendientes, en orden:
+  1. BAQÜI usa las tarifas de negocios (Hotel Encanto del Sur) en el presupuesto de San Juan del Sur.
+  2. F7: contador de descargas de la APK y vista "Aplicación Android" en Ops Center.
+  3. F8: automatización (automation_runs + chequeos programados).
+  4. F9: informe técnico PDF con datos reales.
+  5. F6: mensajería.
+  6. Menú y alertas de Ops.
+  - Resultado 1 — BAQÜI usa las tarifas de los negocios:
+    - Supabase: función `public_destination_lodging_prices(p_place)` (migración `20261007200000_*`). Es de solo lectura, con `security definer` y `search_path` fijo, y tiene EXECUTE para anon. Devuelve las tarifas por noche de hospedajes publicados, con precio activo y vigente hoy en hora de Nicaragua. Comprobada por REST con la clave pública: 2 tarifas de Hotel Encanto del Sur.
+    - `baqui-brain.js`: las tarifas de negocios son OPCIONES y no se suman al total. Muestra córdobas primero, "desde" por las noches del viaje, cuántas habitaciones alcanzan con la parte de hospedaje del reparto y la vigencia. El texto de "sin precios" ya no contradice cuando sí hay hospedaje.
+    - `baqueano-assistant.js`: `loadLodgingOptions()` (RPC, 4 s, sin caché de fallos) en paralelo con los precios por destino.
+    - i18n: 6 claves nuevas (`baquiBrain.lodging*`, `noPricesLodging`) en 6 idiomas.
+    - Pruebas:
+      - node:test 10/10 (nueva prueba de opciones de hospedaje);
+      - Playwright "Quiero ir a San Juan del Sur" → "¿Cuánto gasto? Voy con mi esposa, 3 días, tengo 300 dólares": muestra Hotel Encanto del Sur C$ 1,099 / C$ 1,465 por noche, desde C$ 2,197 por 2 noches, y 1 habitación alcanza con C$ 3,296;
+      - sin menú; el escenario playa sigue OK;
+      - auditoría de producción con 0 críticos; SEO, i18n y Kronox OK.
+    - Nota: la API REST de Supabase volvió a responder (fin del incidente 522).

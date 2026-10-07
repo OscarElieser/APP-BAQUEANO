@@ -6021,7 +6021,13 @@
     "fbPrefs": "Vous m'avez dit que {prefs} vous intéresse. Si vous me dites d'où vous partez et combien de jours vous avez, je vous propose deux ou trois options concrètes.",
     "fbOpen": "Dites-m'en un peu plus : que voulez-vous vivre au Nicaragua (plage, volcans, villages historiques, montagne, cuisine) et combien de jours avez-vous ?",
     "actionBusinesses": "Voir les commerces de {where}",
-    "actionPlanner": "Ouvrir le planificateur"
+    "actionPlanner": "Ouvrir le planificateur",
+    "lodgingTitle": "Hébergements avec tarifs publiés sur BAQUEANO pour {where} :",
+    "lodgingFrom": "Pour {nights} nuit(s), à partir de {total} par chambre.",
+    "lodgingRooms": "Avec ce que vous avez prévu pour l'hébergement ({slot}), vous pouvez payer {rooms} chambre(s) à ce tarif.",
+    "lodgingNote": "Ces tarifs sont communiqués par chaque commerce. Confirmez la disponibilité et le nombre de personnes par chambre directement auprès de l'établissement.",
+    "lodgingNoteUntil": "Ces tarifs sont communiqués par chaque commerce et valables jusqu'au {until}. Confirmez la disponibilité et le nombre de personnes par chambre directement auprès de l'établissement.",
+    "noPricesLodging": "Je n'ai pas encore de prix vérifiés de transport ni de repas pour {where} ; pour l'hébergement, des commerces ont publié leurs tarifs (ci-dessous). Je ne vais pas inventer de tarifs : je répartis votre budget pour que vous sachiez combien prévoir pour chaque poste."
   },
   "appDownload": {
     "metaTitle": "Télécharger BAQUEANO pour Android | Application officielle",

@@ -6021,7 +6021,13 @@
     "fbPrefs": "You told me you're interested in {prefs}. If you tell me where you're leaving from and how many days you have, I'll suggest two or three concrete options.",
     "fbOpen": "Tell me a bit more: what would you like to experience in Nicaragua (beach, volcanoes, historic towns, mountains, food) and how many days do you have?",
     "actionBusinesses": "See businesses in {where}",
-    "actionPlanner": "Open the planner"
+    "actionPlanner": "Open the planner",
+    "lodgingTitle": "Places to stay with published rates on BAQUEANO for {where}:",
+    "lodgingFrom": "For {nights} night(s), from {total} per room.",
+    "lodgingRooms": "With what you set aside for lodging ({slot}) you can cover {rooms} room(s) at that rate.",
+    "lodgingNote": "These rates are provided by each business. Confirm availability and how many people fit per room directly with the establishment.",
+    "lodgingNoteUntil": "These rates are provided by each business and valid until {until}. Confirm availability and how many people fit per room directly with the establishment.",
+    "noPricesLodging": "I don't have verified transport or food prices for {where} yet; for lodging there are rates published by businesses (shown below). I won't make up rates: I'll split your budget so you know how much to set aside for each item."
   },
   "appDownload": {
     "metaTitle": "Download BAQUEANO for Android | Official app",

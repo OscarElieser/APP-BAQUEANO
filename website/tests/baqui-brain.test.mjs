@@ -98,3 +98,21 @@ test('el punto de salida del desglose no se vuelve el destino recordado', () => 
   const again = B.budget(B.understand(s, "no me mostraste el cálculo").state, []);
   assert.notEqual(again.destination, 'Managua');
 });
+
+test('tarifas de hospedaje de negocios: opciones sin sumar, córdobas primero y habitaciones que alcanzan', () => {
+  let s = B.createState();
+  s = B.understand(s, '¿Cuánto gasto en San Juan del Sur? Voy con mi esposa, tengo 300 dólares, 3 días').state;
+  const lodging = [
+    { business_id: 'biz-x', business_name: 'Hotel X', whatsapp: '+505', verification_status: 'partial', product_name: 'Pareja sin aire', amount: 30, currency: 'USD', price_type: 'per_night', valid_until: '2026-10-31' },
+    { business_id: 'biz-x', business_name: 'Hotel X', whatsapp: '+505', verification_status: 'partial', product_name: 'Pareja con aire', amount: 40, currency: 'USD', price_type: 'per_night', valid_until: '2026-10-31' }
+  ];
+  const b = B.budget(s, [], undefined, lodging);
+  assert.equal(b.verifiedTotalNio, 0, 'las opciones de hospedaje no se suman al total verificado');
+  assert.equal(b.lodgingOptions.length, 1);
+  assert.equal(b.lodgingOptions[0].nights, 2);
+  const text = B.composeBudget(b, {});
+  assert.match(text, /Hotel X: Pareja sin aire C\$ 1,099 \(≈ US\$ 30\); Pareja con aire C\$ 1,465 \(≈ US\$ 40\)/);
+  assert.match(text, /Para 2 noche\(s\), desde C\$ 2,197/);
+  assert.match(text, /te alcanza para \d+ habitación/);
+  assert.match(text, /vigentes hasta 2026-10-31/);
+});
