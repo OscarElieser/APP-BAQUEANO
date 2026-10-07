@@ -5144,3 +5144,4 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - Arreglo:
     - `ensure_include` usa marcas alternativas con comparación literal (awk) y comprueba que el include quedó escrito y que nginx -t lo acepta. Si no, restaura la configuración y FALLA.
     - El job de verificación comprueba en vivo la APK (200 + MIME de Android), /app (301 → /descargar) y /descargar (200).
+- 2026-10-07 · Captura del propietario: Search Console ya tiene la propiedad de dominio `baqueanonicaragua.com` (verificada), además de la de www. Indicación: usar esa propiedad, enviar sitemap.xml en "Sitemaps" e ignorar el aviso de la propiedad www (redirección 301 intencional).
