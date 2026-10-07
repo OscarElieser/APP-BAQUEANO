@@ -1,0 +1,35 @@
+/* ============================================================================
+   🧭 BAQUEANO — BANNER DE LA APP EN EL INICIO (css/components/app-banner.css)
+   ============================================================================
+   🎯 POR QUÉ: invitar a instalar la app Android sin tapar contenido ni romper el ritmo del inicio.
+   ⚙️ CÓMO: franja con la paleta oficial; en celular solo texto + botón (ya está en el teléfono),
+      en pantallas anchas suma el QR para pasar la descarga de la computadora al teléfono.
+   📦 QUÉ: .bq-app-banner (copy, botón y QR).
+   ============================================================================ */
+.bq-app-banner { padding: clamp(28px, 5vw, 56px) 16px; background: #F6F8FA; }
+.bq-app-banner-inner {
+  width: min(1120px, 100%);
+  margin-inline: auto;
+  display: grid;
+  gap: 24px;
+  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
+  padding: clamp(22px, 4vw, 40px);
+  border-radius: 24px;
+  background: radial-gradient(circle at 90% 0%, rgba(246, 94, 1, 0.25), transparent 45%), linear-gradient(135deg, #0B2335 0%, #165D6F 100%);
+  color: #FFFFFF;
+  box-shadow: 0 18px 40px rgba(11, 35, 53, 0.25);
+}
+.bq-app-banner-label { display: inline-flex; align-items: center; gap: 8px; color: #F4E6C1; font: 800 0.75rem/1.2 Montserrat, sans-serif; letter-spacing: 0.12em; text-transform: uppercase; }
+.bq-app-banner h2 { margin: 10px 0 8px; font: 900 clamp(1.5rem, 3.6vw, 2.4rem)/1.1 Montserrat, sans-serif; color: #FFFFFF; }
+.bq-app-banner p { margin: 0 0 18px; max-width: 54ch; line-height: 1.6; color: rgba(255, 255, 255, 0.92); }
+.bq-app-banner-cta { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 12px 24px; border-radius: 14px; background: #C2410C; color: #FFFFFF; font: 800 1rem/1.2 Montserrat, sans-serif; text-decoration: none; }
+.bq-app-banner-cta:hover, .bq-app-banner-cta:focus-visible { background: #9A3412; color: #FFFFFF; }
+.bq-app-banner-cta:focus-visible { outline: 3px solid #F4E6C1; outline-offset: 3px; }
+.bq-app-banner-qr { display: none; margin: 0; text-align: center; background: #FFFFFF; border-radius: 18px; padding: 14px; }
+.bq-app-banner-qr img { display: block; width: 168px; height: 168px; }
+.bq-app-banner-qr figcaption { margin-top: 6px; color: #0F2A33; font-size: 0.85rem; font-weight: 600; }
+@media (min-width: 900px) {
+  .bq-app-banner-inner { grid-template-columns: minmax(0, 1fr) auto; }
+  .bq-app-banner-qr { display: block; }
+}

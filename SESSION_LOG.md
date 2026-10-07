@@ -4949,3 +4949,13 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Error encontrado y corregido: `departamento.html` nunca tuvo el bloque de artistas. Los enlaces "Ver departamento" de Historia llevaban a un ancla inexistente y la prueba `test:artistas` ya estaba en rojo. Ahora el bloque se pinta en cada cambio de territorio.
     - Pruebas: `test:artistas` en verde. Playwright + axe en Historia (390/1366, ES/EN) y Departamento (Managua, RACCS en DE, Granada, Carazo, León): retratos visibles, sin desborde, sin errores JS, axe 0. Madriz y Chinandega, de diseño especial y sin artistas, no muestran el bloque.
     - Pendiente: el propietario enviará las fotos.
+  - Resultado — Fase 7 (app Android):
+    - `descargar.html` (URL estable `/descargar`). Muestra la ficha real de la APK desde `data/app-release.json` (versión 1.0.0 (1), Android 6.0+ / API 23, 95,4 MB, 30/09/2026 en hora de Nicaragua, paquete, SHA-256 y firma del certificado).
+    - Permisos explicados solo con usos comprobados en `lib/` (SOS, reportes ambientales, comunidad, mensajes con anfitriones). Los que agregan las librerías de Google quedan dichos como tales, y se aclara que la versión no envía notificaciones push.
+    - Pasos de instalación, cómo verificar el SHA-256 y aviso para iPhone.
+    - QR estático `assets/images/qr-descargar.svg` (`scripts/make-download-qr.mjs`, codificador MIT incluido en npm), decodificado con jsQR (solo en el scratchpad): `https://baqueanonicaragua.com/descargar`.
+    - Banner en el inicio (`#appBanner`), con QR solo en pantallas anchas; "App Android" en el menú; enlace en el pie.
+    - Rutas: Nginx `/app` → 301 `/descargar` (`/descargar` ya resuelve por `try_files $uri.html`); `.htaccess` con las mismas reglas.
+    - Hallazgo: `initDownloadModal()` (navigation.js) borra todo enlace `.apk`. Se conserva la función y solo se exceptúa el botón oficial (`data-bq-official-download`).
+    - Pruebas: Playwright + axe en descargar (ES 390, EN 1366, DE 320) e inicio (ES 390, FR 1366): sin violaciones, sin desborde, sin errores JS. QA 62/62. i18n 0 errores (59 claves nuevas).
+    - Pendiente: contador de descargas (necesita endpoint propio en Azure o Supabase); vista "Aplicación Android" en Ops Center; sitemap (sigue apuntando al dominio antiguo app-baqueano.web.app, revisar aparte).

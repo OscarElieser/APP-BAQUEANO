@@ -297,7 +297,8 @@
     "search": "Search BAQUEANO",
     "searchPlaceholder": "Search beaches, volcanoes, León…",
     "platformReviews": "Reviews of BAQUEANO",
-    "platformReviewsDesc": "Rate your experience with the platform"
+    "platformReviewsDesc": "Rate your experience with the platform",
+    "androidApp": "Android app"
   },
   "testimonials": {
     "metaTitle": "Traveler experiences | BAQUEANO testimonials",
@@ -6020,5 +6021,87 @@
     "fbOpen": "Tell me a bit more: what would you like to experience in Nicaragua (beach, volcanoes, historic towns, mountains, food) and how many days do you have?",
     "actionBusinesses": "See businesses in {where}",
     "actionPlanner": "Open the planner"
+  },
+  "appDownload": {
+    "metaTitle": "Download BAQUEANO for Android | Official app",
+    "metaDescription": "Download the official BAQUEANO Nicaragua app for Android: version, requirements, size, permissions and SHA-256 fingerprint to verify the file.",
+    "eyebrow": "Official Android app",
+    "title": "Take BAQUEANO on your phone",
+    "lead": "Destinations, maps, BAQÜI and your saved trip, even when the signal drops along the way.",
+    "button": "Download for Android",
+    "meta": "Version {version} · {size} MB · Android {android} or later",
+    "ios": "Have an iPhone? For now the app is Android only; on iPhone use the website in your browser.",
+    "iosLink": "Go to home page",
+    "qrAlt": "QR code that opens baqueanonicaragua.com/descargar",
+    "qrCaption": "On a computer? Scan the code with your phone's camera.",
+    "stepsTitle": "How to install it",
+    "step1": "Tap “Download for Android” and wait for the download to finish.",
+    "step2": "Open baqueano-android.apk from your notifications or the Downloads folder.",
+    "step3": "If Android asks, allow installing apps from your browser. You only need to do this once.",
+    "step4": "Tap “Install” and open BAQUEANO.",
+    "stepsNote": "Only download it from baqueanonicaragua.com. If someone sends it to you another way, compare the SHA-256 fingerprint below before installing.",
+    "specsTitle": "Release details",
+    "specsError": "We couldn't load the release details. The download still works.",
+    "version": "Version",
+    "published": "Published",
+    "requires": "Requires",
+    "requiresValue": "Android {android} or later (API {sdk})",
+    "size": "Size",
+    "sizeValue": "{size} MB",
+    "package": "Package",
+    "notes": "What's new",
+    "notes100": "First published version of the app.",
+    "permsTitle": "Permissions and what they're for",
+    "permsLead": "Android asks you to confirm sensitive permissions when the app needs them; you can deny them and keep using everything else.",
+    "perm": {
+      "internet": {
+        "name": "Internet",
+        "why": "Load destinations, maps and chat with BAQÜI."
+      },
+      "network": {
+        "name": "Network status",
+        "why": "Added by the app's Google services (Firebase) to check for a connection before syncing."
+      },
+      "location": {
+        "name": "Location",
+        "why": "Share where you are in emergency SOS and environmental reports. Only if you allow it."
+      },
+      "call": {
+        "name": "Phone calls",
+        "why": "Call emergency services from SOS, or a lodging or restaurant, with one tap."
+      },
+      "camera": {
+        "name": "Camera",
+        "why": "Take photos for the community, environmental reports or messages with hosts, only when you choose to."
+      },
+      "photos": {
+        "name": "Photos",
+        "why": "Pick an image from your gallery to upload it."
+      },
+      "wakelock": {
+        "name": "Keep awake",
+        "why": "Added by the app's Google services (Firebase) to finish background tasks."
+      },
+      "push": {
+        "name": "Google services",
+        "why": "Declared by Google's libraries (Firebase). This version does not send push notifications."
+      },
+      "adid": {
+        "name": "Advertising ID",
+        "why": "Declared by the Google services the app uses (Firebase). You can delete or disable it in Android settings."
+      }
+    },
+    "verifyTitle": "Check that the file is the official one",
+    "verifyLead": "The SHA-256 fingerprint of the published file is:",
+    "verifyHow": "On a computer: “sha256sum baqueano-android.apk” (Linux), “shasum -a 256 baqueano-android.apk” (macOS) or “certutil -hashfile baqueano-android.apk SHA256” (Windows). The result must be identical.",
+    "signerLead": "Developer signature (SHA-256 certificate):",
+    "signerPending": "Signature pending verification."
+  },
+  "appBanner": {
+    "label": "BAQUEANO app for Android",
+    "title": "Carry Nicaragua in your pocket",
+    "text": "Get the official Android app: maps, BAQÜI and your saved trip, even offline.",
+    "cta": "See the app",
+    "qrHint": "Or scan with your phone"
   }
 }

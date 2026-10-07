@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T03:06:51.146Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4530 · en 4530 · fr 4530 · it 4530 · pt 4530 · de 4530
+Generado: 2026-10-07T03:16:08.051Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4589 · en 4589 · fr 4589 · it 4589 · pt 4589 · de 4589
 
-HTML: 3817/3818 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3852/3853 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -167,16 +167,18 @@ HTML: 3817/3818 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | cronicas.html | html | 51 | 51 | 0 | 100 % |
 | denuncias.html | html | 61 | 61 | 0 | 100 % |
 | departamento.html | html | 82 | 82 | 0 | 100 % |
+| descargar.html | html | 29 | 29 | 0 | 100 % |
 | destino.html | html | 18 | 18 | 0 | 100 % |
 | destinos.html | html | 130 | 130 | 0 | 100 % |
 | experiencias.html | html | 157 | 157 | 0 | 100 % |
 | favoritos.html | html | 8 | 8 | 0 | 100 % |
 | gastronomia.html | html | 205 | 205 | 0 | 100 % |
 | historia.html | html | 184 | 184 | 0 | 100 % |
-| index.html | html | 214 | 214 | 0 | 100 % |
+| index.html | html | 220 | 220 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
 | js/allies-directory.js | js | 0 | 0 | 0 | 100 % |
 | js/ambiental-report-handoff.js | js | 0 | 0 | 0 | 100 % |
+| js/app-download.js | js | 0 | 0 | 0 | 100 % |
 | js/async-styles.js | js | 0 | 0 | 0 | 100 % |
 | js/ayuda.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-analytics.js | js | 0 | 0 | 0 | 100 % |

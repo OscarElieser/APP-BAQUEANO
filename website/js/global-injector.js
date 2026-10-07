@@ -327,7 +327,7 @@
         '</div>' +
         bqFooterLinks('EXPLORÁ', [['index.html', 'Inicio'], ['destinos.html', 'Destinos'], ['mapa.html', 'Mapa Interactivo'], ['experiencias.html', 'Experiencias'], ['departamento.html', 'Departamentos']]) +
         bqFooterLinks('CULTURA', [['historia.html', 'Historia &amp; Memoria'], ['gastronomia.html', 'Gastronomía Ancestral'], ['musica.html', 'Son Sonoro Folk'], ['ambiental.html', 'Custodia Ambiental'], ['aliados.html', 'Red de Aliados']]) +
-        bqFooterLinks('COMUNIDAD', [['nosotros.html', 'Quiénes Somos'], ['testimonios.html', 'Experiencias de viajeros'], ['opiniones.html', 'Opiniones sobre BAQUEANO'], ['mi-negocio.html', 'Registrá tu Negocio'], ['denuncias.html', 'Canal de Denuncias'], ['perfil.html', 'Mi Perfil'], ['mi-viaje.html', 'Mi Viaje']]) +
+        bqFooterLinks('COMUNIDAD', [['nosotros.html', 'Quiénes Somos'], ['testimonios.html', 'Experiencias de viajeros'], ['opiniones.html', 'Opiniones sobre BAQUEANO'], ['descargar.html', 'App para Android'], ['mi-negocio.html', 'Registrá tu Negocio'], ['denuncias.html', 'Canal de Denuncias'], ['perfil.html', 'Mi Perfil'], ['mi-viaje.html', 'Mi Viaje']]) +
         bqFooterLinks('LEGAL', [['terminos.html', 'Términos y Condiciones'], ['privacidad.html', 'Política de Privacidad'], ['cookies.html', 'Política de Cookies'], ['normas-comunidad.html', 'Normas de la Comunidad'], ['aviso-legal.html', 'Aviso Legal']]).replace('</ul>', '<li><a href="cookies.html#preferencias" data-cookie-open data-i18n="consent.footerLink">Configurar cookies</a></li></ul>') +
       '</div></div>' +
       '<div class="footer-bottom-bar"><div class="exact-container">' +

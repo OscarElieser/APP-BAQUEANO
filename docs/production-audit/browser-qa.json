@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-07T02:58:34.986Z",
+ "generatedAt": "2026-10-07T03:19:46.926Z",
  "base": "http://127.0.0.1:8790/",
  "widths": [
   390,
@@ -23,6 +23,7 @@
   "mi-negocio.html",
   "testimonios.html",
   "opiniones.html",
+  "descargar.html",
   "normas-comunidad.html",
   "nosotros.html",
   "aliados.html",
@@ -57,8 +58,7 @@
  ],
  "fails": [],
  "slowLoads": [
-  "favoritos.html@390",
-  "mi-viaje.html@1366"
+  "favoritos.html@390"
  ],
  "results": [
   {
@@ -549,6 +549,50 @@
    ]
   },
   {
+   "page": "descargar.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "descargar.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
    "page": "destino.html",
    "width": 390,
    "overflowPx": 0,
@@ -1263,7 +1307,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": true,
+   "slowLoad": false,
    "axe": [],
    "missingAnchors": [],
    "whatsapp": [

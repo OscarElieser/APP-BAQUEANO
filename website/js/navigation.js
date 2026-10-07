@@ -95,6 +95,7 @@ const BQ_MENU_GROUPS = [
         ['favoritos.html', 'fa-regular fa-heart', 'favorites', 'Favoritos']
       ] },
       { key: 'platform', label: 'Plataforma', items: [
+        ['descargar.html', 'fa-brands fa-android', 'androidApp', 'App Android'],
         ['ayuda.html', 'fa-regular fa-circle-question', 'help', 'Ayuda'],
         ['nosotros.html', 'fa-solid fa-people-group', 'about', 'Nosotros'],
         ['terminos.html', 'fa-regular fa-file-lines', 'terms', 'Términos'],
@@ -927,6 +928,9 @@ function initSosModal() {
 function initDownloadModal() {
   const modal = document.getElementById('downloadModal');
   document.querySelectorAll('a[href$=".apk"], [download$=".apk"], .open-download-modal-btn').forEach((control) => {
+    // 2026-10-07: se conserva solo el botón oficial de /descargar (descargar.html), respaldado por
+    // data/app-release.json generado desde la APK real. Los enlaces sueltos de siempre se siguen quitando.
+    if (control.hasAttribute('data-bq-official-download')) return;
     control.remove();
   });
   if (modal) modal.remove();

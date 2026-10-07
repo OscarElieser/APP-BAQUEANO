@@ -54,6 +54,7 @@
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" href="css/components/app-banner.css?v=20261007-1">
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
   <!-- Póster del hero = elemento LCP: se pide primero; el video se carga después (js/hero-video-loader.js). -->
   <link rel="preload" as="image" href="assets/images/heroes/hero-ometepe-1280.webp" imagesrcset="assets/images/heroes/hero-ometepe-768.webp 768w, assets/images/heroes/hero-ometepe-1280.webp 1280w" imagesizes="100vw" fetchpriority="high" type="image/webp">
@@ -1007,6 +1008,28 @@
     <!-- ============================================================================
          SECCIÓN 9: SÚMATE A LA COMUNIDAD BAQUEANO (ANFITRIÓN CAMPESINO - IMAGEN 4)
          ============================================================================ -->
+    <!--
+      🎯 POR QUÉ: el propietario pidió (2026-10-06) invitar a instalar la app Android desde el inicio,
+         con un QR estable para quien navega en la computadora.
+      ⚙️ CÓMO: enlace a descargar.html (en producción también /descargar); el QR es un SVG estático
+         verificado que abre https://baqueanonicaragua.com/descargar; textos con claves appBanner.*.
+      📦 QUÉ: banner con texto, botón y QR (el QR solo se ve en pantallas anchas).
+    -->
+    <section class="bq-app-banner" id="appBanner" aria-labelledby="appBannerTitle">
+      <div class="bq-app-banner-inner">
+        <div class="bq-app-banner-copy">
+          <span class="bq-app-banner-label"><i class="fa-brands fa-android" aria-hidden="true"></i> <span data-i18n="appBanner.label">App de BAQUEANO para Android</span></span>
+          <h2 id="appBannerTitle" data-i18n="appBanner.title">Llevá Nicaragua en el bolsillo</h2>
+          <p data-i18n="appBanner.text">Descargá la app oficial para Android: mapas, BAQÜI y tu viaje guardado, también sin señal.</p>
+          <a class="bq-app-banner-cta" href="descargar.html"><span data-i18n="appBanner.cta">Ver la app</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+        <figure class="bq-app-banner-qr">
+          <img src="assets/images/qr-descargar.svg?v=20261007-1" width="296" height="296" loading="lazy" decoding="async" alt="Código QR que abre baqueanonicaragua.com/descargar" data-i18n-alt="appDownload.qrAlt">
+          <figcaption data-i18n="appBanner.qrHint">O escaneá con tu teléfono</figcaption>
+        </figure>
+      </div>
+    </section>
+
     <section class="community-section-exact" id="comunidadSeccion">
       <div class="exact-container">
         <div class="community-card-exact">
@@ -1479,7 +1502,7 @@
 <script src="js/baqueano-master-catalog.js"></script>
 <script src="js/index-destinos-editorial.js?v=20260930-1"></script>
 <script src="js/tres-pilares.js?v=20261006-a11y-1"></script>
-<script src="js/navigation.js?v=20261006-dialog-1"></script>
+<script src="js/navigation.js?v=20261007-app-2"></script>
 <script src="js/global-injector.js"></script>
 <!-- Testimonios de la portada = comunidad real (misma fuente que testimonios.html). -->
 <script defer src="js/community-api.js?v=20261004-1"></script>

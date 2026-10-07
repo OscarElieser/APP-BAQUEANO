@@ -297,7 +297,8 @@
     "search": "Buscar no BAQUEANO",
     "searchPlaceholder": "Praias, vulcões, León…",
     "platformReviews": "Opiniões sobre o BAQUEANO",
-    "platformReviewsDesc": "Avalie sua experiência com a plataforma"
+    "platformReviewsDesc": "Avalie sua experiência com a plataforma",
+    "androidApp": "App Android"
   },
   "testimonials": {
     "metaTitle": "Experiências de viajantes | Depoimentos BAQUEANO",
@@ -6020,5 +6021,87 @@
     "fbOpen": "Conte um pouco mais: o que você quer viver na Nicarágua (praia, vulcões, cidades históricas, montanha, comida) e quantos dias tem?",
     "actionBusinesses": "Ver negócios de {where}",
     "actionPlanner": "Abrir o planejador"
+  },
+  "appDownload": {
+    "metaTitle": "Baixar o BAQUEANO para Android | App oficial",
+    "metaDescription": "Baixe o app oficial do BAQUEANO Nicarágua para Android: versão, requisitos, tamanho, permissões e impressão digital SHA-256 para verificar o arquivo.",
+    "eyebrow": "App oficial para Android",
+    "title": "Leve o BAQUEANO no seu celular",
+    "lead": "Destinos, mapas, BAQÜI e sua viagem salva, mesmo quando o sinal some no caminho.",
+    "button": "Baixar para Android",
+    "meta": "Versão {version} · {size} MB · Android {android} ou superior",
+    "ios": "Tem iPhone? Por enquanto o app é só para Android; no iPhone use o site no navegador.",
+    "iosLink": "Ir para o início",
+    "qrAlt": "Código QR que abre baqueanonicaragua.com/descargar",
+    "qrCaption": "Está no computador? Escaneie o código com a câmera do celular.",
+    "stepsTitle": "Como instalar",
+    "step1": "Toque em “Baixar para Android” e espere o download terminar.",
+    "step2": "Abra o arquivo baqueano-android.apk pelas notificações ou pela pasta Downloads.",
+    "step3": "Se o Android pedir, permita instalar apps pelo navegador. Só é preciso na primeira vez.",
+    "step4": "Toque em “Instalar” e abra o BAQUEANO.",
+    "stepsNote": "Baixe somente em baqueanonicaragua.com. Se alguém enviar por outro meio, compare a impressão SHA-256 abaixo antes de instalar.",
+    "specsTitle": "Ficha da versão",
+    "specsError": "Não conseguimos carregar a ficha da versão. O download funciona normalmente.",
+    "version": "Versão",
+    "published": "Publicada",
+    "requires": "Requer",
+    "requiresValue": "Android {android} ou superior (API {sdk})",
+    "size": "Tamanho",
+    "sizeValue": "{size} MB",
+    "package": "Pacote",
+    "notes": "Novidades",
+    "notes100": "Primeira versão publicada do app.",
+    "permsTitle": "Permissões e para que servem",
+    "permsLead": "O Android pede para confirmar as permissões sensíveis quando o app precisa delas; você pode negá-las e continuar usando o resto.",
+    "perm": {
+      "internet": {
+        "name": "Internet",
+        "why": "Carregar destinos, mapas e conversar com o BAQÜI."
+      },
+      "network": {
+        "name": "Estado da rede",
+        "why": "Adicionada pelos serviços do Google do app (Firebase) para verificar a conexão antes de sincronizar."
+      },
+      "location": {
+        "name": "Localização",
+        "why": "Compartilhar onde você está no SOS de emergência e nas denúncias ambientais. Só se você permitir."
+      },
+      "call": {
+        "name": "Chamadas",
+        "why": "Ligar com um toque para emergências pelo SOS, ou para uma hospedagem ou restaurante."
+      },
+      "camera": {
+        "name": "Câmera",
+        "why": "Tirar fotos para a comunidade, as denúncias ambientais ou as mensagens com anfitriões, só quando você quiser."
+      },
+      "photos": {
+        "name": "Fotos",
+        "why": "Escolher uma imagem da galeria para enviar."
+      },
+      "wakelock": {
+        "name": "Manter ativo",
+        "why": "Adicionada pelos serviços do Google do app (Firebase) para concluir tarefas em segundo plano."
+      },
+      "push": {
+        "name": "Serviços do Google",
+        "why": "Declarada pelas bibliotecas do Google (Firebase). Esta versão não envia notificações push."
+      },
+      "adid": {
+        "name": "ID de publicidade",
+        "why": "Declarado pelos serviços do Google usados pelo app (Firebase). Você pode excluí-lo ou desativá-lo nos ajustes do Android."
+      }
+    },
+    "verifyTitle": "Confira se o arquivo é o oficial",
+    "verifyLead": "A impressão digital SHA-256 do arquivo publicado é:",
+    "verifyHow": "No computador: “sha256sum baqueano-android.apk” (Linux), “shasum -a 256 baqueano-android.apk” (macOS) ou “certutil -hashfile baqueano-android.apk SHA256” (Windows). O resultado tem de ser idêntico.",
+    "signerLead": "Assinatura do desenvolvedor (certificado SHA-256):",
+    "signerPending": "Assinatura pendente de verificação."
+  },
+  "appBanner": {
+    "label": "App do BAQUEANO para Android",
+    "title": "A Nicarágua no seu bolso",
+    "text": "Baixe o app oficial para Android: mapas, BAQÜI e sua viagem salva, mesmo sem sinal.",
+    "cta": "Ver o app",
+    "qrHint": "Ou escaneie com o celular"
   }
 }

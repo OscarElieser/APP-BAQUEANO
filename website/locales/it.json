@@ -297,7 +297,8 @@
     "search": "Cerca su BAQUEANO",
     "searchPlaceholder": "Spiagge, vulcani, León…",
     "platformReviews": "Opinioni su BAQUEANO",
-    "platformReviewsDesc": "Valuta la tua esperienza con la piattaforma"
+    "platformReviewsDesc": "Valuta la tua esperienza con la piattaforma",
+    "androidApp": "App Android"
   },
   "testimonials": {
     "metaTitle": "Esperienze di viaggiatori | Testimonianze BAQUEANO",
@@ -6020,5 +6021,87 @@
     "fbOpen": "Raccontami un po' di più: cosa vuoi vivere in Nicaragua (spiaggia, vulcani, paesi storici, montagna, cucina) e quanti giorni hai?",
     "actionBusinesses": "Vedi le attività di {where}",
     "actionPlanner": "Apri il pianificatore"
+  },
+  "appDownload": {
+    "metaTitle": "Scarica BAQUEANO per Android | App ufficiale",
+    "metaDescription": "Scarica l'app ufficiale di BAQUEANO Nicaragua per Android: versione, requisiti, dimensione, permessi e impronta SHA-256 per verificare il file.",
+    "eyebrow": "App ufficiale per Android",
+    "title": "Porta BAQUEANO sul tuo telefono",
+    "lead": "Destinazioni, mappe, BAQÜI e il tuo viaggio salvato, anche quando il segnale si perde lungo la strada.",
+    "button": "Scarica per Android",
+    "meta": "Versione {version} · {size} MB · Android {android} o successivo",
+    "ios": "Hai un iPhone? Per ora l'app è solo per Android; su iPhone usa il sito nel browser.",
+    "iosLink": "Vai alla home",
+    "qrAlt": "Codice QR che apre baqueanonicaragua.com/descargar",
+    "qrCaption": "Sei al computer? Inquadra il codice con la fotocamera del telefono.",
+    "stepsTitle": "Come installarla",
+    "step1": "Tocca «Scarica per Android» e attendi la fine del download.",
+    "step2": "Apri baqueano-android.apk dalle notifiche o dalla cartella Download.",
+    "step3": "Se Android lo chiede, consenti l'installazione di app dal browser. Serve solo la prima volta.",
+    "step4": "Tocca «Installa» e apri BAQUEANO.",
+    "stepsNote": "Scaricala solo da baqueanonicaragua.com. Se qualcuno te la invia in altro modo, confronta l'impronta SHA-256 qui sotto prima di installarla.",
+    "specsTitle": "Scheda della versione",
+    "specsError": "Non siamo riusciti a caricare la scheda della versione. Il download funziona comunque.",
+    "version": "Versione",
+    "published": "Pubblicata",
+    "requires": "Requisiti",
+    "requiresValue": "Android {android} o successivo (API {sdk})",
+    "size": "Dimensione",
+    "sizeValue": "{size} MB",
+    "package": "Pacchetto",
+    "notes": "Novità",
+    "notes100": "Prima versione pubblicata dell'app.",
+    "permsTitle": "Permessi e a cosa servono",
+    "permsLead": "Android ti chiede di confermare i permessi sensibili quando l'app ne ha bisogno; puoi negarli e continuare a usare il resto.",
+    "perm": {
+      "internet": {
+        "name": "Internet",
+        "why": "Caricare destinazioni, mappe e parlare con BAQÜI."
+      },
+      "network": {
+        "name": "Stato della rete",
+        "why": "Aggiunto dai servizi Google dell'app (Firebase) per verificare la connessione prima di sincronizzare."
+      },
+      "location": {
+        "name": "Posizione",
+        "why": "Condividere dove ti trovi nell'SOS di emergenza e nelle segnalazioni ambientali. Solo se lo consenti."
+      },
+      "call": {
+        "name": "Chiamate",
+        "why": "Chiamare con un tocco i soccorsi dall'SOS, o un alloggio o un ristorante."
+      },
+      "camera": {
+        "name": "Fotocamera",
+        "why": "Scattare foto per la comunità, le segnalazioni ambientali o i messaggi con gli host, solo quando lo decidi tu."
+      },
+      "photos": {
+        "name": "Foto",
+        "why": "Scegliere un'immagine dalla galleria per caricarla."
+      },
+      "wakelock": {
+        "name": "Mantieni attivo",
+        "why": "Aggiunto dai servizi Google dell'app (Firebase) per completare le attività in background."
+      },
+      "push": {
+        "name": "Servizi Google",
+        "why": "Dichiarato dalle librerie Google (Firebase). Questa versione non invia notifiche push."
+      },
+      "adid": {
+        "name": "ID pubblicità",
+        "why": "Lo dichiarano i servizi Google usati dall'app (Firebase). Puoi eliminarlo o disattivarlo nelle impostazioni di Android."
+      }
+    },
+    "verifyTitle": "Verifica che il file sia quello ufficiale",
+    "verifyLead": "L'impronta SHA-256 del file pubblicato è:",
+    "verifyHow": "Al computer: «sha256sum baqueano-android.apk» (Linux), «shasum -a 256 baqueano-android.apk» (macOS) o «certutil -hashfile baqueano-android.apk SHA256» (Windows). Il risultato deve essere identico.",
+    "signerLead": "Firma dello sviluppatore (certificato SHA-256):",
+    "signerPending": "Firma in attesa di verifica."
+  },
+  "appBanner": {
+    "label": "App BAQUEANO per Android",
+    "title": "Il Nicaragua in tasca",
+    "text": "Scarica l'app ufficiale per Android: mappe, BAQÜI e il tuo viaggio salvato, anche senza rete.",
+    "cta": "Vedi l'app",
+    "qrHint": "Oppure inquadra con il telefono"
   }
 }

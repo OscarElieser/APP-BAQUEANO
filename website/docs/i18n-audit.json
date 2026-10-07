@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T03:06:51.146Z",
+  "generatedAt": "2026-10-07T03:16:08.051Z",
   "languages": [
     "es",
     "en",
@@ -9,21 +9,21 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4530,
-    "en": 4530,
-    "fr": 4530,
-    "it": 4530,
-    "pt": 4530,
-    "de": 4530
+    "es": 4589,
+    "en": 4589,
+    "fr": 4589,
+    "it": 4589,
+    "pt": 4589,
+    "de": 4589
   },
   "html": {
-    "files": 33,
-    "total": 3818,
-    "translated": 3817,
+    "files": 34,
+    "total": 3853,
+    "translated": 3852,
     "untranslated": 1
   },
   "js": {
-    "files": 105,
+    "files": 106,
     "translated": 152,
     "untranslated": 722
   },
@@ -50,6 +50,7 @@
     "cronicas.html",
     "denuncias.html",
     "departamento.html",
+    "descargar.html",
     "destino.html",
     "destinos.html",
     "experiencias.html",
@@ -73,6 +74,7 @@
     "js/ai-assistant.js",
     "js/allies-directory.js",
     "js/ambiental-report-handoff.js",
+    "js/app-download.js",
     "js/async-styles.js",
     "js/ayuda.js",
     "js/baqueano-analytics.js",
@@ -253,6 +255,15 @@
       "coverage": 100
     },
     {
+      "file": "descargar.html",
+      "type": "html",
+      "total": 29,
+      "translated": 29,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
       "file": "destino.html",
       "type": "html",
       "total": 18,
@@ -318,8 +329,8 @@
     {
       "file": "index.html",
       "type": "html",
-      "total": 214,
-      "translated": 214,
+      "total": 220,
+      "translated": 220,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -470,6 +481,15 @@
     },
     {
       "file": "js/ambiental-report-handoff.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/app-download.js",
       "type": "js",
       "total": 0,
       "translated": 0,

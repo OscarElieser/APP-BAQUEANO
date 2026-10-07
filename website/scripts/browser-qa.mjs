@@ -27,7 +27,7 @@ const WIDTHS = argWidths ? argWidths.split(',').map(Number) : [320, 360, 375, 39
 const AXE_WIDTHS = new Set([390, 1366]);
 const PAGES = ['index.html', 'destinos.html', 'destino.html', 'departamento.html?depto=madriz', 'mapa.html', 'experiencias.html',
   'historia.html', 'gastronomia.html', 'musica.html', 'cronicas.html', 'baqueano-ia.html', 'mi-viaje.html', 'perfil.html',
-  'favoritos.html', 'mi-negocio.html', 'testimonios.html', 'opiniones.html', 'normas-comunidad.html', 'nosotros.html', 'aliados.html', 'ambiental.html', 'denuncias.html',
+  'favoritos.html', 'mi-negocio.html', 'testimonios.html', 'opiniones.html', 'descargar.html', 'normas-comunidad.html', 'nosotros.html', 'aliados.html', 'ambiental.html', 'denuncias.html',
   'ayuda.html', 'cookies.html', 'privacidad.html', 'terminos.html', 'aviso-legal.html', 'legal.html', '404.html', 'offline.html'];
 const OUT = path.resolve(ROOT, '../docs/production-audit/browser-qa.json');
 

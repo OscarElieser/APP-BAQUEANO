@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html data-i18n-description="appDownload.metaDescription" data-i18n-title="appDownload.metaTitle" lang="es" data-bq-page="descargar" data-bq-group="app">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!--
+    🎯 POR QUÉ: el propietario pidió (2026-10-06/07) una URL estable para instalar la app Android,
+       con QR y banner desde el inicio y sin datos inventados. El QR apunta aquí, no al archivo:
+       cuando salga una versión nueva, los QR ya compartidos siguen sirviendo.
+    ⚙️ CÓMO:
+       - js/app-download.js lee data/app-release.json, que scripts/app-release-manifest.mjs genera
+         leyendo la APK real (versión, Android mínimo, tamaño, SHA-256, permisos y firma).
+       - El botón descarga /downloads/baqueano-android.apk (Nginx, azure/nginx/baqueano-delivery.conf).
+       - QR estático versionado (scripts/make-download-qr.mjs), verificado con un lector QR.
+       - Textos con claves appDownload.* en 6 idiomas.
+    📦 QUÉ: descarga, QR, ficha técnica verificable, permisos explicados, pasos de instalación,
+       cómo verificar el archivo y aviso para iPhone (por ahora se usa la web).
+  -->
+  <title>Descargar BAQUEANO para Android | App oficial</title>
+  <meta name="description" content="Descargá la app oficial de BAQUEANO Nicaragua para Android: versión, requisitos, tamaño, permisos y huella SHA-256 para verificar el archivo.">
+  <link rel="canonical" href="https://baqueanonicaragua.com/descargar">
+  <meta name="theme-color" content="#165D6F">
+  <meta property="og:title" content="BAQUEANO para Android">
+  <meta property="og:description" content="Descarga oficial de la app de BAQUEANO Nicaragua para Android.">
+  <meta property="og:url" content="https://baqueanonicaragua.com/descargar">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css?v=20260929-help-1">
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
+  <link rel="stylesheet" href="css/pages/descargar.css?v=20261007-1">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+<body class="dl-page">
+  <nav class="main-navbar-exact main-navbar" id="mainNavbar" aria-label="Navegación principal">
+    <div class="exact-container nav-inner">
+      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu"></div>
+      <div class="exact-nav-actions global-nav-actions"></div>
+    </div>
+  </nav>
+
+  <main id="mainContent" tabindex="-1">
+    <section class="dl-hero">
+      <div class="dl-wrap dl-hero-grid">
+        <div>
+          <span class="dl-eyebrow"><i class="fa-brands fa-android" aria-hidden="true"></i> <span data-i18n="appDownload.eyebrow">App oficial para Android</span></span>
+          <h1 data-i18n="appDownload.title">Llevá BAQUEANO en tu teléfono</h1>
+          <p class="dl-lead" data-i18n="appDownload.lead">Destinos, mapas, BAQÜI y tu viaje guardado, también cuando la señal se pierde en el camino.</p>
+          <div class="dl-actions">
+            <a class="dl-button" id="dlButton" href="/downloads/baqueano-android.apk" download data-bq-official-download>
+              <i class="fa-solid fa-download" aria-hidden="true"></i> <span data-i18n="appDownload.button">Descargar para Android</span>
+            </a>
+            <p class="dl-meta" id="dlMeta" aria-live="polite"></p>
+          </div>
+          <p class="dl-ios"><i class="fa-brands fa-apple" aria-hidden="true"></i> <span data-i18n="appDownload.ios">¿Tenés iPhone? Por ahora la app es solo para Android; en iPhone usá la web, que funciona en el navegador.</span> <a href="index.html" data-i18n="appDownload.iosLink">Ir al inicio</a></p>
+        </div>
+        <figure class="dl-qr">
+          <img src="assets/images/qr-descargar.svg?v=20261007-1" width="296" height="296" alt="Código QR que abre baqueanonicaragua.com/descargar" data-i18n-alt="appDownload.qrAlt">
+          <figcaption data-i18n="appDownload.qrCaption">¿Estás en la computadora? Escaneá el código con la cámara de tu teléfono.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="dl-wrap dl-grid">
+      <section class="dl-card" aria-labelledby="dlStepsTitle">
+        <h2 id="dlStepsTitle" data-i18n="appDownload.stepsTitle">Cómo instalarla</h2>
+        <ol class="dl-steps">
+          <li data-i18n="appDownload.step1">Tocá «Descargar para Android» y esperá a que termine la descarga.</li>
+          <li data-i18n="appDownload.step2">Abrí el archivo baqueano-android.apk desde las notificaciones o desde la carpeta Descargas.</li>
+          <li data-i18n="appDownload.step3">Si Android lo pide, permití instalar apps desde tu navegador. Solo hace falta la primera vez.</li>
+          <li data-i18n="appDownload.step4">Tocá «Instalar» y abrí BAQUEANO.</li>
+        </ol>
+        <p class="dl-note" data-i18n="appDownload.stepsNote">Descargala solo desde baqueanonicaragua.com. Si alguien te la envía por otro medio, compará la huella SHA-256 de abajo antes de instalarla.</p>
+      </section>
+
+      <section class="dl-card" aria-labelledby="dlSpecsTitle">
+        <h2 id="dlSpecsTitle" data-i18n="appDownload.specsTitle">Ficha de la versión</h2>
+        <p class="dl-muted" id="dlSpecsError" hidden data-i18n="appDownload.specsError">No pudimos cargar la ficha de la versión. La descarga funciona igual.</p>
+        <dl class="dl-specs" id="dlSpecs" hidden>
+          <div><dt data-i18n="appDownload.version">Versión</dt><dd id="dlVersion" translate="no"></dd></div>
+          <div><dt data-i18n="appDownload.published">Publicada</dt><dd id="dlPublished"></dd></div>
+          <div><dt data-i18n="appDownload.requires">Requiere</dt><dd id="dlRequires"></dd></div>
+          <div><dt data-i18n="appDownload.size">Tamaño</dt><dd id="dlSize"></dd></div>
+          <div><dt data-i18n="appDownload.package">Paquete</dt><dd id="dlPackage" translate="no"></dd></div>
+          <div><dt data-i18n="appDownload.notes">Novedades</dt><dd id="dlNotes"></dd></div>
+        </dl>
+      </section>
+
+      <section class="dl-card" aria-labelledby="dlPermsTitle">
+        <h2 id="dlPermsTitle" data-i18n="appDownload.permsTitle">Permisos y para qué se usan</h2>
+        <p class="dl-muted" data-i18n="appDownload.permsLead">Android te pide confirmar los permisos sensibles cuando la app los necesita; podés negarlos y seguir usando el resto.</p>
+        <ul class="dl-perms" id="dlPerms"></ul>
+      </section>
+
+      <section class="dl-card" aria-labelledby="dlVerifyTitle">
+        <h2 id="dlVerifyTitle" data-i18n="appDownload.verifyTitle">Verificá que el archivo es el oficial</h2>
+        <p data-i18n="appDownload.verifyLead">La huella SHA-256 del archivo publicado es:</p>
+        <code class="dl-hash" id="dlSha" translate="no"></code>
+        <p data-i18n="appDownload.verifyHow">En la computadora: «sha256sum baqueano-android.apk» (Linux), «shasum -a 256 baqueano-android.apk» (macOS) o «certutil -hashfile baqueano-android.apk SHA256» (Windows). El resultado tiene que ser idéntico.</p>
+        <p data-i18n="appDownload.signerLead">Firma del desarrollador (certificado SHA-256):</p>
+        <code class="dl-hash" id="dlSigner" translate="no"></code>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/app-download.js?v=20261007-2" defer></script>
+  <script src="js/navigation.js?v=20261007-app-2"></script>
+  <script src="js/global-injector.js"></script>
+</body>
+</html>
