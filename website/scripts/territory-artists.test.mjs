@@ -62,16 +62,19 @@ for (const artist of artists) {
     const photo = artist.photo;
     if (!/^assets\/images\/artistas\/[a-z0-9-]+\.(webp|jpg|jpeg|png)$/.test(String(photo.src || ''))) fail(`${where}: photo.src debe estar en assets/images/artistas/.`);
     else if (!fs.existsSync(path.join(ROOT, photo.src))) fail(`${where}: no existe ${photo.src}.`);
-    if (!String(photo.credit || '').trim()) fail(`${where}: foto sin crédito.`);
-    if (!String(photo.license || '').trim()) fail(`${where}: foto sin licencia o permiso.`);
-    if (!/^https:\/\//.test(String(photo.sourceUrl || ''))) fail(`${where}: foto sin fuente https.`);
+    const ownerProvided = photo.providedBy === 'owner' && /^\d{4}-\d{2}-\d{2}$/.test(String(photo.providedAt || ''));
+    if (!ownerProvided) {
+      if (!String(photo.credit || '').trim()) fail(`${where}: foto sin crédito.`);
+      if (!String(photo.license || '').trim()) fail(`${where}: foto sin licencia o permiso.`);
+      if (!/^https:\/\//.test(String(photo.sourceUrl || ''))) fail(`${where}: foto sin fuente https (o providedBy 'owner' con fecha).`);
+    }
   }
   if (artist.localityKey) requireKey(artist.localityKey, where);
   requireKey(`${BASE}disciplines.${artist.discipline}`, where);
   requireKey(`${BASE}items.${artist.id}.milestone`, where);
 }
 
-for (const key of ['kicker', 'title', 'subtitle', 'note', 'deptLink', 'deptTitle', 'deptSubtitle', 'historiaLink', 'photoPending', 'photoCredit']) requireKey(BASE + key, 'sección');
+for (const key of ['kicker', 'title', 'subtitle', 'note', 'deptLink', 'deptTitle', 'deptSubtitle', 'historiaLink', 'photoPending', 'photoCredit', 'photoOwner']) requireKey(BASE + key, 'sección');
 
 const historia = read('historia.html');
 const departamento = read('departamento.html');

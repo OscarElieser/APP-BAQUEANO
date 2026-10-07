@@ -5040,3 +5040,29 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - Fotos de artistas: llegan 10 imágenes en dos mensajes. Las 5 primeras están en el disco de la sesión (images/15–19); las otras 5 solo como vista.
     - No se asigna ninguna foto a un artista por su cara. Solo la de Edith Grön se identifica por su texto.
     - Se pide al propietario la lista "foto N → artista" y, por cada foto, de dónde sale (enlace o crédito) y si hay permiso o licencia, como exige `test:artistas`.
+- 2026-10-07 · Propietario:
+  - Envía el logo original de Hotel Encanto del Sur (images/20.webp).
+  - Envía 4 fotos más de artistas. La 24 lleva impreso "RODRIGO PEÑALBA 1908-1979"; las 21, 22 y 23 no traen nombre.
+  - Se colocan solo las fotos identificadas por su propio texto (Edith Grön, Rodrigo Peñalba). Las demás esperan la lista del propietario.
+  - El propietario asigna las fotos:
+    - Alejandro Aróstegui → 15.jpg
+    - Armando Morales → 16.jpg
+    - Edith Grön → 17.webp
+    - Fernando Saravia → 18.jpg
+    - Gloria Bacon → 19.jpg (crédito impreso: "Foto por Gabriel García")
+    - Gloria Elena Espinoza de Tercero → imagen sin archivo en la sesión
+    - Gloria Carrión Fonseca → imagen sin archivo en la sesión
+  - Siguen sin nombre las fotos 21, 22 y 23.
+  - Asignación final del propietario: Margarita Montealegre → 21.jpg, Omar de León → 22.jpg, Raúl Marín → 23.jpg, Rodrigo Peñalba → 24.jpg (confirmado). Irene López, June Beer y Leoncio Sáenz llegaron en el mensaje cuyos archivos no quedaron en la sesión.
+  - Resultado — retratos de artistas:
+    - 9 de 14 fotos publicadas (`website/assets/images/artistas/*.webp`, encuadre 4:3 sin ampliar ni cortar rostros, texto impreso recortado): Omar de León, Edith Grön, Fernando Saravia, Margarita Montealegre, Rodrigo Peñalba, Armando Morales, Alejandro Aróstegui, Raúl Marín y Gloria Bacon.
+    - Pendientes, porque el archivo no está en la sesión: Gloria Carrión Fonseca, Irene López, Gloria Elena Espinoza de Tercero, Leoncio Sáenz y June Beer. Se siguen viendo con el logo y "Foto pendiente".
+    - Pie de foto honesto, en 6 idiomas (`pages.historia.artistas.photoOwner`): "Imagen aportada a BAQUEANO · fuente original por confirmar". Gloria Bacon suma su crédito impreso: "Foto: Gabriel García".
+    - `test:artistas` acepta una foto sin enlace solo con `providedBy: 'owner'` y fecha; con enlace sigue exigiendo crédito, licencia y https.
+  - Resultado — logo de Hotel Encanto del Sur:
+    - `assets/images/negocios/hotel-encanto-del-sur/logo.webp` (600×400) como protagonista de la ficha en destinos.html.
+    - Supabase: `attributes.logo` (migración `20261007190000_hotel_encanto_del_sur_logo.sql`, UPDATE de 1 fila).
+  - Pruebas:
+    - Playwright + axe en historia (ES 390, EN 1366) y en departamento (Managua ES, RACCS FR): 0 violaciones, sin desborde ni errores; 9 fotos cargan y 5 quedan pendientes.
+    - Ficha del hotel en ES/EN/DE/FR: el logo carga (600 px), axe 0.
+    - `test:artistas` en verde; i18n 0 errores.

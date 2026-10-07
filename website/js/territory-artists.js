@@ -71,11 +71,23 @@
     var img = el('img', 'bq-artist-portrait-img', { src: photo.src, alt: artist.name, loading: 'lazy', decoding: 'async' });
     img.addEventListener('error', function () { placeholder(figure); }, { once: true });
     var caption = el('figcaption', 'bq-artist-portrait-credit');
-    caption.appendChild(keyed('span', '', BASE + 'photoCredit'));
-    caption.appendChild(document.createTextNode(': '));
-    var source = el('a', '', { href: photo.sourceUrl, target: '_blank', rel: 'noopener noreferrer', translate: 'no' });
-    source.textContent = photo.credit + ' · ' + photo.license;
-    caption.appendChild(source);
+    if (photo.sourceUrl) {
+      caption.appendChild(keyed('span', '', BASE + 'photoCredit'));
+      caption.appendChild(document.createTextNode(': '));
+      var source = el('a', '', { href: photo.sourceUrl, target: '_blank', rel: 'noopener noreferrer', translate: 'no' });
+      source.textContent = photo.credit + ' · ' + photo.license;
+      caption.appendChild(source);
+    } else {
+      // Aportada por el propietario sin enlace de origen: se dice tal cual, sin inventar crédito.
+      // Si la foto trae el crédito impreso (p. ej. "Foto por Gabriel García"), se muestra.
+      if (photo.credit) {
+        caption.appendChild(keyed('span', '', BASE + 'photoCredit'));
+        caption.appendChild(document.createTextNode(': '));
+        caption.appendChild(proper('span', '', photo.credit));
+        caption.appendChild(document.createTextNode(' · '));
+      }
+      caption.appendChild(keyed('span', '', BASE + 'photoOwner'));
+    }
     figure.appendChild(img);
     figure.appendChild(caption);
     return figure;

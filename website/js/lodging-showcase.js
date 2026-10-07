@@ -56,7 +56,7 @@
   function brand(item) {
     var box = el('div', 'bq-lodging-brand');
     if (item.logo) {
-      var img = el('img', 'bq-lodging-logo', { src: item.logo, alt: item.name, loading: 'lazy', decoding: 'async' });
+      var img = el('img', 'bq-lodging-logo', { src: item.logo, alt: item.name, width: '600', height: '400', loading: 'lazy', decoding: 'async' });
       box.appendChild(img);
     } else {
       // Logo original pendiente: el nombre del hotel en texto, nunca el logo de BAQUEANO.

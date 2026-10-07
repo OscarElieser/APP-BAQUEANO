@@ -37,25 +37,28 @@
   //   photo: { src: 'assets/images/artistas/<id>.webp', credit: 'Autor o archivo',
   //            license: 'CC BY-SA 4.0 | Permiso escrito | Dominio público', sourceUrl: 'https://…' }
   // Solo fotos reales con permiso o licencia, nunca imágenes generadas que simulen a la persona.
-  // scripts/territory-artists.test.mjs exige crédito, licencia, fuente https y que el archivo exista.
+  // Si la foto la aportó el propietario sin enlace de origen: photo: { src, providedBy: 'owner',
+  //   providedAt: 'AAAA-MM-DD' } y la ficha dice "Imagen aportada a BAQUEANO · fuente original por confirmar".
+  // scripts/territory-artists.test.mjs exige el archivo y, o bien crédito + licencia + fuente https,
+  // o bien providedBy 'owner' con fecha.
   // discipline → pages.historia.artistas.disciplines.<discipline>
   // milestone  → pages.historia.artistas.items.<id>.milestone
   // localityKey (opcional) → localidad con texto traducible en vez de nombre propio.
   var artists = [
-    { id: 'deleon', name: 'Omar de León', discipline: 'painting', group: 'managua', depts: ['managua'], locality: 'Managua' },
-    { id: 'gron', name: 'Edith Grön', discipline: 'sculpture', group: 'managua', depts: ['managua'], localityKey: 'pages.historia.artistas.items.gron.locality' },
-    { id: 'saravia', name: 'Fernando Saravia', discipline: 'sculpturePainting', group: 'managua', depts: ['managua'], locality: 'Managua' },
-    { id: 'montealegre', name: 'Margarita Montealegre', discipline: 'photography', group: 'managua', depts: ['managua'], locality: 'Managua' },
+    { id: 'deleon', name: 'Omar de León', discipline: 'painting', group: 'managua', depts: ['managua'], locality: 'Managua', photo: { src: 'assets/images/artistas/deleon.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
+    { id: 'gron', name: 'Edith Grön', discipline: 'sculpture', group: 'managua', depts: ['managua'], localityKey: 'pages.historia.artistas.items.gron.locality', photo: { src: 'assets/images/artistas/gron.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
+    { id: 'saravia', name: 'Fernando Saravia', discipline: 'sculpturePainting', group: 'managua', depts: ['managua'], locality: 'Managua', photo: { src: 'assets/images/artistas/saravia.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
+    { id: 'montealegre', name: 'Margarita Montealegre', discipline: 'photography', group: 'managua', depts: ['managua'], locality: 'Managua', photo: { src: 'assets/images/artistas/montealegre.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'carrion', name: 'Gloria Carrión Fonseca', discipline: 'film', group: 'managua', depts: ['managua'], locality: 'Managua' },
     { id: 'lopez', name: 'Irene López', discipline: 'danceFolklore', group: 'masaya', depts: ['masaya'], locality: 'Masaya' },
-    { id: 'penalba', name: 'Rodrigo Peñalba', discipline: 'painting', group: 'masaya', depts: ['masaya', 'leon'], localityKey: 'pages.historia.artistas.items.penalba.locality' },
-    { id: 'morales', name: 'Armando Morales', discipline: 'painting', group: 'granada', depts: ['granada'], locality: 'Granada' },
+    { id: 'penalba', name: 'Rodrigo Peñalba', discipline: 'painting', group: 'masaya', depts: ['masaya', 'leon'], localityKey: 'pages.historia.artistas.items.penalba.locality', photo: { src: 'assets/images/artistas/penalba.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
+    { id: 'morales', name: 'Armando Morales', discipline: 'painting', group: 'granada', depts: ['granada'], locality: 'Granada', photo: { src: 'assets/images/artistas/morales.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'espinoza', name: 'Gloria Elena Espinoza de Tercero', discipline: 'playwriting', group: 'leon', depts: ['leon'], locality: 'León' },
-    { id: 'arostegui', name: 'Alejandro Aróstegui', discipline: 'paintingMixed', group: 'matagalpa', depts: ['matagalpa'], locality: 'San Ramón' },
+    { id: 'arostegui', name: 'Alejandro Aróstegui', discipline: 'paintingMixed', group: 'matagalpa', depts: ['matagalpa'], locality: 'San Ramón', photo: { src: 'assets/images/artistas/arostegui.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'saenz', name: 'Leoncio Sáenz', discipline: 'paintingDrawing', group: 'matagalpa', depts: ['matagalpa'], locality: 'Paxila, Matagalpa' },
-    { id: 'marin', name: 'Raúl Marín', discipline: 'painting', group: 'carazo', depts: ['carazo'], locality: 'Jinotepe' },
+    { id: 'marin', name: 'Raúl Marín', discipline: 'painting', group: 'carazo', depts: ['carazo'], locality: 'Jinotepe', photo: { src: 'assets/images/artistas/marin.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'beer', name: 'June Beer', discipline: 'paintingPoetry', group: 'raccs', depts: ['raccs'], locality: 'Bluefields' },
-    { id: 'bacon', name: 'Gloria Bacon', discipline: 'danceManagement', group: 'raccs', depts: ['raccs'], locality: 'Bluefields' }
+    { id: 'bacon', name: 'Gloria Bacon', discipline: 'danceManagement', group: 'raccs', depts: ['raccs'], locality: 'Bluefields', photo: { src: 'assets/images/artistas/bacon.webp', providedBy: 'owner', providedAt: '2026-10-07', credit: 'Gabriel García' } }
   ];
 
   window.BAQUEANO_TERRITORY_ARTISTS = Object.freeze({ groups: groups, artists: artists });

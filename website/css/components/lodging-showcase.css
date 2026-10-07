@@ -39,7 +39,7 @@
   text-align: center;
 }
 .bq-lodging-brand { display: grid; justify-items: center; gap: 6px; }
-.bq-lodging-logo { max-width: 220px; max-height: 120px; width: auto; height: auto; background: #FFFFFF; border-radius: 12px; padding: 8px; }
+.bq-lodging-logo { width: min(320px, 80%); height: auto; background: #FBFBF7; border-radius: 16px; padding: 8px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); }
 .bq-lodging-wordmark { margin: 0; display: grid; line-height: 1; }
 .bq-lodging-wordmark-top { font: 800 clamp(0.95rem, 2vw, 1.15rem)/1.1 Montserrat, sans-serif; letter-spacing: 0.3em; color: var(--lodging-yellow); }
 .bq-lodging-wordmark-main { font: 900 clamp(1.8rem, 6vw, 3rem)/1.05 Montserrat, sans-serif; color: #FFFFFF; letter-spacing: 0.02em; }

@@ -29,8 +29,8 @@
       name: 'Hotel Encanto del Sur',
       place: 'San Juan del Sur, Rivas, Nicaragua',
       territory: 'rivas',
-      // Logo original pendiente de entrega por el negocio (ej.: 'assets/images/negocios/hotel-encanto-del-sur/logo.webp').
-      logo: null,
+      // Logo original del hotel, entregado por el propietario (2026-10-07). Va como protagonista.
+      logo: 'assets/images/negocios/hotel-encanto-del-sur/logo.webp',
       whatsapp: '50577532549',
       whatsappLabel: '+505 7753 2549',
       // Teléfono para llamadas entregado por el propietario (2026-10-07).

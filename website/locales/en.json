@@ -3547,7 +3547,8 @@
           }
         },
         "photoPending": "Photo coming soon",
-        "photoCredit": "Photo"
+        "photoCredit": "Photo",
+        "photoOwner": "Image provided to BAQUEANO · original source to be confirmed"
       },
       "audio": {
         "counter": "Chapter {n} of {total}",
