@@ -33,6 +33,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "@supabase/supabase-js";
 import { BaqueanoKnowledgeService } from "../_shared/baqueano-knowledge.ts";
+import { BAQUI_SYSTEM_PROMPT } from "../_shared/baqui-persona.ts";
 
 const BCN_RATE = 36.6243;
 const GROUNDED_MODEL = "gemini-3.5-flash-lite";
@@ -377,22 +378,25 @@ async function buildImpactAnswer(supabase: ReturnType<typeof createClient> | nul
   };
 }
 
-async function buildGroundedTourismAnswer(prompt: string, history: unknown, internalContext: unknown, language: string, countryCode: string, allowExternal = true) {
+async function buildGroundedTourismAnswer(prompt: string, history: unknown, internalContext: unknown, language: string, countryCode: string, allowExternal = true, conversationState: Record<string, unknown> | null = null) {
   if (!allowExternal) return {message: null, sources: [], status: "budget_local_only"};
   const apiKeys = [Deno.env.get("GEMINI_API_KEY"), Deno.env.get("BAQUEANONICARAGUA"), Deno.env.get("Gemini API Key")]
     .filter((value, index, values): value is string => Boolean(value) && values.indexOf(value) === index);
   if (!apiKeys.length) return {message: null, sources: [], status: "missing_secret"};
   const recentHistory = Array.isArray(history) ? history.slice(-8).map((item: Record<string, unknown>) => `${String(item.role || "user")}: ${String(item.content || "").slice(0, 500)}`).join("\n") : "";
   const languageNames: Record<string, string> = {es: "español nicaragüense", en: "inglés turístico claro", fr: "francés natural", it: "italiano cercano", pt: "portugués natural", de: "alemán claro"};
-  const instruction = `Sos Baqüi, agente autónomo y responsable especializado en turismo integral del país ${countryCode}.
-Respondé en ${languageNames[language] || languageNames.es}. Conservá nombres culturales originales y el contexto.
-Personalidad: sos alguien de aquí que conoce el territorio y acompaña al viajero; cercano, curioso, práctico y respetuoso. En español usá voseo nicaragüense natural (querés, podés, tenés, decime, armemos) y alguna expresión local con moderación ("¡Dele pues!"); nunca caricaturices ni uses groserías o jerga ofensiva. En otros idiomas no traduzcas modismos: transmití la misma calidez y hospitalidad con naturalidad. Respuestas breves y útiles: primero lo que la persona necesita, luego una pregunta corta para seguir (qué le gusta, cuántos van, cuántos días, cuánto quiere gastar). Si piden lugares poco conocidos, priorizá experiencias comunitarias y rurales verificadas. Ayudá con destinos, cultura, gastronomía, naturaleza, transporte, clima, seguridad, accesibilidad, presupuesto y turismo comunitario.
-Información interna BAQUEANO recuperada primero: ${JSON.stringify(internalContext).slice(0, 8000)}.
-La información interna válida prevalece. Usa fuentes externas solamente para completar vacíos o datos operativos/actuales y cita su procedencia.
-Consulta y prioriza mediante URL Context: ${TRUSTED_SOURCE_URLS.join(" ")}.
-No inventes precios, teléfonos, horarios, disponibilidad ni hechos. Si hablás de políticas públicas o planes nacionales, distinguí siempre HECHO OFICIAL (con su fuente) de CONTRIBUCIÓN DE BAQUEANO; nunca digas que el Gobierno, INTUR, MARENA, MINED, INATEC o CNU reconocen oficialmente a BAQUEANO ni que BAQUEANO forma parte de un plan institucional. Si el usuario pregunta algo ajeno al turismo de Nicaragua, explicá amablemente tu especialidad y ofrecé una alternativa turística relacionada.
-No construyas un itinerario salvo que el usuario lo solicite. Para emergencias recomendá confirmar con autoridades oficiales.
-Historial reciente:\n${recentHistory || "Sin historial previo."}\nPregunta actual: ${prompt}`;
+  // 2026-10-07: prompt maestro de BAQÜI (_shared/baqui-persona.ts) + estado estructurado de la
+  // conversación (baqui-brain.js). La instrucción anterior se conserva en el historial de git.
+  const instruction = `${BAQUI_SYSTEM_PROMPT}
+
+IDIOMA DE SALIDA: ${languageNames[language] || languageNames.es}. País: ${countryCode}.
+ESTADO DE CONVERSACIÓN (memoria; no vuelvas a pedir estos datos): ${conversationState ? JSON.stringify(conversationState).slice(0, 3000) : "conversación nueva"}.
+INFORMACIÓN INTERNA BAQUEANO (prevalece sobre todo lo demás): ${JSON.stringify(internalContext).slice(0, 8000)}.
+FUENTES OFICIALES AUTORIZADAS (URL Context, solo si falta información interna; citá la procedencia): ${TRUSTED_SOURCE_URLS.join(" ")}.
+POLÍTICAS PÚBLICAS: distinguí siempre HECHO OFICIAL (con fuente) de CONTRIBUCIÓN DE BAQUEANO; nunca digas que una institución reconoce oficialmente a BAQUEANO.
+No construyas un itinerario día por día salvo que lo pidan.
+HISTORIAL RECIENTE:\n${recentHistory || "Sin historial previo."}
+MENSAJE ACTUAL: ${prompt}`;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 12000);
   try {
@@ -433,7 +437,7 @@ async function logExchange(
 ) {
   if (!supabase) return;
   try {
-    const {error} = await supabase.rpc("baqui_log_exchange", {
+    const {error} = await withTimeout<RpcResult>(supabase.rpc("baqui_log_exchange", {
       p_session_key: entry.sessionKey,
       p_user_id: null,
       p_legacy_uid: null,
@@ -448,8 +452,8 @@ async function logExchange(
       p_latency_ms: Math.max(0, Math.round(entry.latencyMs)),
       p_tool_calls: entry.toolCalls || [],
       p_sources: entry.sources.slice(0, 20),
-    });
-    if (error) console.warn("[baqueano-ai] baqui_log_exchange:", error.message);
+    }) as PromiseLike<RpcResult>, 3000, {data: null, error: {message: "timeout"}});
+    if (error) console.warn("[baqueano-ai] baqui_log_exchange:", String(error.message).slice(0, 120));
   } catch (logErr) {
     console.warn("[baqueano-ai] No se pudo registrar el intercambio:", logErr);
   }
@@ -459,6 +463,14 @@ async function logExchange(
 // base (public.baqui_consume_budget, solo service_role). Por IP (hash SHA-256, nunca en claro): 20 consultas
 // cada 10 minutos; si se pasa, 429. Global: 400 por hora; si se pasa, BAQUI responde solo con el catálogo
 // propio y no consulta Gemini. Si el contador no responde, no se bloquea al visitante y se omite Gemini.
+// 2026-10-07: si la API de Supabase responde lento (se observó un 522 de Cloudflare en todas las
+// llamadas internas), BAQUI no puede quedarse colgado. Cada llamada interna tiene un tope de tiempo y
+// un valor seguro de respaldo: sin presupuesto confirmado no se consulta Gemini (local_only).
+function withTimeout<T>(promise: PromiseLike<T>, ms: number, fallback: T): Promise<T> {
+  return Promise.race([Promise.resolve(promise), new Promise<T>((resolve) => setTimeout(() => resolve(fallback), ms))]);
+}
+
+type RpcResult = {data: unknown; error: {message?: string} | null};
 type BudgetDecision = "ok" | "local_only" | "ip_limited";
 async function consumeBudget(supabase: ReturnType<typeof createClient> | null, req: Request): Promise<BudgetDecision> {
   if (!supabase) return "local_only";
@@ -467,10 +479,11 @@ async function consumeBudget(supabase: ReturnType<typeof createClient> | null, r
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`baqui:${ip}`));
   const ipHash = Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join("").slice(0, 40);
   try {
-    const perIp = await supabase.rpc("baqui_consume_budget", {p_bucket: `ip:${ipHash}`, p_limit: 20, p_window_seconds: 600});
+    const timedOut: RpcResult = {data: null, error: {message: "timeout"}};
+    const perIp = await withTimeout<RpcResult>(supabase.rpc("baqui_consume_budget", {p_bucket: `ip:${ipHash}`, p_limit: 20, p_window_seconds: 600}) as PromiseLike<RpcResult>, 4000, timedOut);
     if (perIp.error) return "local_only";
     if (perIp.data === false) return "ip_limited";
-    const global = await supabase.rpc("baqui_consume_budget", {p_bucket: "global", p_limit: 400, p_window_seconds: 3600});
+    const global = await withTimeout<RpcResult>(supabase.rpc("baqui_consume_budget", {p_bucket: "global", p_limit: 400, p_window_seconds: 3600}) as PromiseLike<RpcResult>, 4000, timedOut);
     if (global.error || global.data === false) return "local_only";
     return "ok";
   } catch (_) {
@@ -522,10 +535,22 @@ Deno.serve(async (req: Request) => {
       }), {status: 429, headers: {...CORS_HEADERS, "Retry-After": "600"}});
     }
     const allowExternal = budget === "ok";
-    const internalKnowledge = supabase ? await new BaqueanoKnowledgeService(supabase).search(prompt) : [];
+    const internalKnowledge = supabase ? await withTimeout(new BaqueanoKnowledgeService(supabase).search(prompt), 5000, []) : [];
     const internalSufficient = internalKnowledge.length > 0 && new BaqueanoKnowledgeService(supabase!).isSufficient(internalKnowledge);
 
-    const intent = conversationIntent(prompt);
+    // 2026-10-07 — memoria estructurada enviada por baqui-brain.js (solo datos simples, acotados).
+    let conversationState: Record<string, unknown> | null = null;
+    if (body.conversationState && typeof body.conversationState === "object" && !Array.isArray(body.conversationState)) {
+      const raw = JSON.stringify(body.conversationState);
+      if (raw.length <= 4000) conversationState = JSON.parse(raw) as Record<string, unknown>;
+    }
+    const conversationActive = Boolean(conversationState && Number(conversationState.turnos || 0) > 1);
+    const detectedIntent = conversationIntent(prompt);
+    // Con conversación activa, "¿cuánto…?", "días" o "presupuesto" no disparan un itinerario
+    // nuevo: se responde en la conversación salvo que pidan explícitamente la ruta.
+    const wantsItinerary = /\b(itinerario|planifica\w*|arma\w*\s+(?:una\s+|la\s+)?ruta|ruta de \d+|plan de viaje)\b/.test(normalizeIntentText(prompt));
+    const intent = detectedIntent === "planning" && conversationActive && !wantsItinerary ? "tourism"
+      : (detectedIntent === "help" && conversationActive ? "tourism" : detectedIntent);
     if (intent === "impact") {
       const impact = await buildImpactAnswer(supabase, currentLanguage);
       await logExchange(supabase, {
@@ -554,9 +579,11 @@ Deno.serve(async (req: Request) => {
         de: {greeting: "Hallo! Ich bin Baqüi, Ihr Reiseagent für Nicaragua. Was möchten Sie entdecken?", farewell: "Bis bald! Ich behalte den freigegebenen Reisekontext.", thanks: "Gern! Ich helfe weiter mit nachvollziehbaren Reiseinformationen.", help: "Ich kann BAQUEANO durchsuchen, Routen planen und externe Quellen nur bei fehlenden Informationen nutzen."}
       };
       const localMessages = localizedMessages[currentLanguage] || localizedMessages.es;
-      const internalAnswer = intent === "tourism" && internalSufficient ? internalKnowledgeAnswer(internalKnowledge, currentLanguage) : null;
-      const groundedAnswer = localMessages[intent] || internalAnswer ? null : await buildGroundedTourismAnswer(prompt, body.history, internalKnowledge, currentLanguage, countryCode, allowExternal);
-      const message = localMessages[intent] || internalAnswer || groundedAnswer?.message || "Todavía no tengo ese dato verificado.";
+      // La lista genérica "Según la información interna encontré…" solo sirve como primera respuesta;
+      // con conversación activa el modelo responde con el estado y los datos internos como contexto.
+      const internalAnswer = intent === "tourism" && internalSufficient && !conversationActive ? internalKnowledgeAnswer(internalKnowledge, currentLanguage) : null;
+      const groundedAnswer = localMessages[intent] || internalAnswer ? null : await buildGroundedTourismAnswer(prompt, body.history, internalKnowledge, currentLanguage, countryCode, allowExternal, conversationState);
+      const message = localMessages[intent] || internalAnswer || groundedAnswer?.message || (internalSufficient ? internalKnowledgeAnswer(internalKnowledge, currentLanguage) : "No tengo ese dato confirmado todavía. Si me decís qué querés vivir o a qué zona vas, te busco lo que sí está verificado.");
       const conversationProvider = localMessages[intent] ? "baqueano-conversation" : "baqueano-supabase-grounded-web";
       await logExchange(supabase, {
         sessionKey, language: currentLanguage, channel, provider: conversationProvider,

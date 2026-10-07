@@ -4912,3 +4912,32 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
       - `baqueano-reviews` v2 avisa al aprobar, rechazar o responder;
       - campana 🔔 con contador sincronizado entre pestañas y panel accesible.
     - Pruebas: HTTP real (200/401/403); Playwright con galería, envío, doble clic, idioma EN/ES y campana, más axe 390/1366 sin fallas; QA 60/60; i18n 0 errores.
+- 2026-10-07 · Pedido del propietario: **BAQÜI — Sistema maestro de inteligencia** (identidad nica con voseo natural, memoria conversacional estructurada, autodeterminación de supuestos, presupuesto con desglose por persona y grupo, saldo del presupuesto, datos verificados frente a estimados, sin inventar, anti-bucle, fallback inteligente, multiidioma y motores Conversación / Territorio / Cultura / Naturaleza / Planner / Budget / Places / Sources / Live / Memory).
+  - Pide tocar el código, no solo el prompt: el menú de 5 capacidades no debe salir como respuesta de reserva en una conversación activa (desactivarlo, no borrarlo).
+  - Además: "en la foto que te compartí quiero ponerle foto de las personas artistas" (la imagen no llegó a esta sesión).
+  - Pedido "Intentar nuevamente": continuar el trabajo.
+  - Resultado — BAQÜI (código, no solo prompt):
+    - Motor determinista `website/js/baqui-brain.js`:
+      - memoria estructurada: destino, viajeros, adultos y niños, días, noches, presupuesto, moneda, preferencias, último recomendado y supuestos;
+      - intención: saludo, ayuda, corrección, presupuesto (comida, hospedaje, transporte, actividades), comparar, recomendar, ajustar;
+      - presupuesto: suma solo precios verificados de `public.prices`. Sin precios, reparte el dinero de la persona (20/30/25/10/5/10 %) por persona, por día y para el grupo, con supuestos explícitos, sin tarifas inventadas;
+      - anti-bucle y plan B con contexto.
+    - El menú de 5 capacidades sigue en el código, pero ya no sale durante una conversación activa; solo al inicio o si la persona pide ayuda.
+    - Edge Function `baqueano-ai`:
+      - v115: prompt maestro operativo (`_shared/baqui-persona.ts`) y `conversationState`;
+      - v116: límites de tiempo en las RPC internas (4 s), la búsqueda interna (5 s) y el registro (3 s).
+    - Cliente:
+      - límite de 20 s al servidor, con respuesta local de respaldo;
+      - consulta de precios con límite de 4 s;
+      - animación de escritura de 60 pasos como máximo (antes 20 s en un desglose largo).
+    - Error real corregido: `global-injector.js` trataba `#bqForm` como un formulario sin lógica. Si BAQÜI tardaba más de 2,2 s, aparecía "Este formulario todavía no envía datos" y la página saltaba a `nosotros.html#contacto` en plena conversación.
+    - Error corregido: el "saliendo de Managua" del desglose quedaba como destino recordado.
+    - Claves i18n `baquiBrain.*` (36) en 6 idiomas; gate 0 errores; locales de la app exportados.
+    - Texto completo del propietario en `docs/baqui/BAQUI-PROMPT-MAESTRO.md`.
+    - Pruebas:
+      - `node --test tests/baqui-brain.test.mjs` 9/9; la prueba nueva falla sin la corrección;
+      - Playwright E2E (playa → ¿cuánto gasto? → "no me mostraste el cálculo" → seguimiento) con servidor OK y con servidor colgado: ningún turno muestra el menú;
+      - QA de navegador: 60 cargas, 0 fallas;
+      - HTTP real a v116: 200, sin menú.
+    - Incidente de plataforma Supabase (07/10): las llamadas internas a la API REST devuelven 522 de Cloudflare (desde Edge Functions y desde `extensions.http`), mientras SQL directo funciona y `get_project` informa ACTIVE_HEALTHY. No lo causa el código. BAQÜI responde igual por la ruta local.
+    - Pendiente: la foto de artistas (la imagen no llegó; solo se usarán fotos reales o con licencia, nunca generadas como si fueran las personas). La Fase 7 (/descargar, QR, banner) sigue: ya está el manifiesto real de la APK (`website/data/app-release.json`).

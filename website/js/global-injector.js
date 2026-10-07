@@ -468,11 +468,14 @@
   //    que su página ya procesa en JS se listan en OWN_SUBMIT.
   // 📦 QUÉ: confirmación visual solo donde no existe otro manejador.
   var OWN_SUBMIT = ['bqReportForm', 'businessRegForm', 'registerBusinessForm', 'helpSearchForm', 'bizRegisterForm', 'ecoReportForm',
-    'baqueanoContactForm', 'ambientalReportForm', 'ecoLookupForm', 'bzaForm', 'prForm'];
+    'baqueanoContactForm', 'ambientalReportForm', 'ecoLookupForm', 'bzaForm', 'prForm', 'bqForm'];
   function upgradeContactForms() {
     document.querySelectorAll('form:not([data-bq-wired])').forEach(function(form) {
       if (form.hasAttribute('action') || form.hasAttribute('onsubmit') || form.getAttribute('role') === 'search' ||
-          form.classList.contains('bq-auth-form') || form.closest('#mainNavbar') || OWN_SUBMIT.indexOf(form.id) !== -1) return;
+          form.classList.contains('bq-auth-form') || form.closest('#mainNavbar') || OWN_SUBMIT.indexOf(form.id) !== -1 ||
+          // 2026-10-07: el chat de BAQÜI tiene su propio envío. Si el servidor tardaba, este aviso se
+          // disparaba igual y a los 2,2 s mandaba a la persona a nosotros.html en plena conversación.
+          form.closest('#baqueanoAssistantBox')) return;
       form.setAttribute('data-bq-wired', '1');
       // 2026-10-06: ya no se simula "¡Mensaje enviado!". Un formulario sin lógica propia no envía
       // nada a ningún lado, así que se dice la verdad y se ofrece el canal real (nosotros.html → Supabase).

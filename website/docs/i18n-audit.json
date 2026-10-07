@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T22:52:16.995Z",
+  "generatedAt": "2026-10-07T02:42:34.747Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4492,
-    "en": 4492,
-    "fr": 4492,
-    "it": 4492,
-    "pt": 4492,
-    "de": 4492
+    "es": 4528,
+    "en": 4528,
+    "fr": 4528,
+    "it": 4528,
+    "pt": 4528,
+    "de": 4528
   },
   "html": {
     "files": 33,
@@ -23,7 +23,7 @@
     "untranslated": 1
   },
   "js": {
-    "files": 104,
+    "files": 105,
     "translated": 152,
     "untranslated": 722
   },
@@ -83,6 +83,7 @@
     "js/baqueano-pdf.js",
     "js/baqueano-presence.js",
     "js/baqueano-traffic-tracker.js",
+    "js/baqui-brain.js",
     "js/business-application.js",
     "js/community-api.js",
     "js/contact-form.js",
@@ -646,6 +647,15 @@
       "untranslated": 16,
       "editorialStrings": 0,
       "coverage": 75.8
+    },
+    {
+      "file": "js/baqui-brain.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/baqui-evolved.js",

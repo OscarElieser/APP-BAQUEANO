@@ -20,6 +20,39 @@
   const ACTIONS = new Set(['open_destination','open_department','open_map','show_place','search_places','search_destination','search_business','search_experience','build_itinerary','calculate_budget','calculate_distance','save_favorite','show_nearby','show_emergency','open_booking','request_booking','check_availability','check_weather','search_events','create_route','share_itinerary','open_route','play_audio','pause_audio','show_food','show_history']);
   const CHARACTER_STATES = new Set(['idle','greeting','listening','thinking','speaking','dancing','explaining','celebrating','exploring','sleeping','hidden','minimized','emergency']);
   if (EXCLUDED.test(location.pathname.replace(/\/$/, ''))) return;
+  // 2026-10-07 — Motor de conversación, memoria y presupuesto de BAQÜI (js/baqui-brain.js).
+  if (!window.BaquiBrain && !document.querySelector('script[data-baqui-brain]')) {
+    const brainScript = document.createElement('script'); brainScript.src = 'js/baqui-brain.js?v=20261007-3'; brainScript.dataset.baquiBrain = 'true'; document.head.appendChild(brainScript);
+  }
+  // Tipo de cambio de referencia: el mismo valor configurado en baqueano-travel-session.js.
+  const RATE = Object.freeze(window.BAQUEANO_RATE || { USD_NIO: 36.6243, verifiedAt: '2026-10-01', source: 'Configuración BAQUEANO' });
+  const PRICES_REST = 'https://heiudfpthqwtjrtluqlm.supabase.co/rest/v1/prices';
+  const PUBLIC_KEY = 'sb_publishable_q7ZhqRIRjlerZK7WOu_Qxw_X_AqXV1d';
+  const priceCache = new Map();
+  function brainT(key, fallback, vars) {
+    let text = fallback;
+    try { if (window.BaqueanoLanguage?.t) text = window.BaqueanoLanguage.t(key, Object.assign({ fallback }, vars || {})) || fallback; } catch (_) { text = fallback; }
+    return String(text).replace(/\{(\w+)\}/g, (m, k) => (vars && vars[k] != null ? vars[k] : m));
+  }
+  // Precios vigentes de public.prices (lectura pública solo de precios activos y no vencidos).
+  async function loadVerifiedPrices(destination) {
+    if (!destination || !window.BaquiBrain) return [];
+    const entry = window.BaquiBrain.DESTINATIONS.find(([name]) => name === destination);
+    if (!entry) return [];
+    if (priceCache.has(entry[1])) return priceCache.get(entry[1]);
+    // Máximo 4 s: si la API no responde, el desglose sale igual con el reparto del presupuesto
+    // (sin precios) y la próxima consulta vuelve a intentar, porque el fallo no se guarda en caché.
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 4000);
+    try {
+      const url = `${PRICES_REST}?select=product_name,amount,amount_max,currency,price_type,source_name,source_url,checked_at,is_active&is_active=eq.true&entity_id=eq.${encodeURIComponent(entry[1])}&limit=20`;
+      const res = await fetch(url, { headers: { apikey: PUBLIC_KEY, Authorization: `Bearer ${PUBLIC_KEY}` }, signal: controller.signal });
+      if (!res.ok) return [];
+      const rows = await res.json();
+      priceCache.set(entry[1], Array.isArray(rows) ? rows : []);
+    } catch (_) { return []; } finally { clearTimeout(timer); }
+    return priceCache.get(entry[1]);
+  }
 
   const safeJson = (value, fallback) => { try { return JSON.parse(value) ?? fallback; } catch (_) { return fallback; } };
   const initialLanguage = window.BaqueanoLanguage?.get?.() || localStorage.getItem('baqueano_language_v2') || localStorage.getItem('baqueano_language_v1') || localStorage.getItem('baqueano_language') || 'es';
@@ -236,8 +269,9 @@
   async function streamText(text) {
     setCharacter('speaking');
     const p = appendMessage('', 'assistant', false); if (!p) return;
-    const chunks = String(text).split(/(\s+)/); let rendered = '';
-    for (const chunk of chunks) { if (!state.busy) break; rendered += chunk; p.textContent = rendered; await new Promise(resolve => setTimeout(resolve, reduceMotion ? 0 : 14)); }
+    // Como máximo 60 pasos (~1-3 s según el navegador): un desglose largo no puede tardar 20 s en aparecer.
+    const chunks = String(text).split(/(\s+)/); const step = Math.max(1, Math.ceil(chunks.length / 60)); let rendered = '';
+    for (let i = 0; i < chunks.length; i += step) { if (!state.busy) { rendered = String(text); p.textContent = rendered; break; } rendered += chunks.slice(i, i + step).join(''); p.textContent = rendered; await new Promise(resolve => setTimeout(resolve, reduceMotion ? 0 : 14)); }
     appendFeedbackActions(p.closest('article'), text);
     session.messages.push({ role: 'assistant', content: String(text).slice(0, 1000) }); session.messages = session.messages.slice(-16); saveSession();
     if (preferences.voice && text) speak(text); else setCharacter('idle');
@@ -748,7 +782,15 @@ Seguinos para descubrir contenido en video, historias de artesanos locales y el 
       };
     }
 
-    // 5. RESPUESTA GENERAL ASISTENCIAL (Nivel ChatGPT/Gemini con identidad Baqueano)
+    // 5. RESPUESTA GENERAL. 2026-10-07: el menú de capacidades se conserva, pero SOLO se muestra
+    // al empezar una conversación o si la persona pide ayuda explícitamente. En una conversación
+    // activa BAQÜI retoma el contexto (BaquiBrain.composeFallback) en lugar de repetir el menú.
+    const brainState = session.brain;
+    const conversationActive = Boolean(brainState && (brainState.turnos > 1 || brainState.destinos.length || brainState.preferencias.length || brainState.presupuesto));
+    const explicitHelp = /^(ayuda|help|que (puedes|podes) hacer|que haces|en que me ayudas)\??$/.test(text);
+    if (conversationActive && !explicitHelp && window.BaquiBrain) {
+      return { message: window.BaquiBrain.composeFallback(brainState, { t: brainT }), animation: 'explaining', actions: [] };
+    }
     const message = `¡Dele pues! Soy Baqüi y conozco Nicaragua de punta a punta. Te puedo ayudar con:
 
 1. 🏖️ Destinos y playas, con precios en córdobas y dólares cuando los tenemos verificados.
@@ -772,11 +814,34 @@ Seguinos para descubrir contenido en video, historias de artesanos locales y el 
 
   async function ask(raw) {
     const message = String(raw || '').trim(); if (!message || state.busy) return;
-    session.tripProfile = Object.assign({}, session.tripProfile, extractTripProfile(message)); saveSession();
+    session.tripProfile = Object.assign({}, session.tripProfile, extractTripProfile(message));
+    const Brain = window.BaquiBrain;
+    const understood = Brain ? Brain.understand(session.brain || Brain.createState(), message) : null;
+    if (understood) session.brain = understood.state;
+    saveSession();
     appendMessage(message, 'user'); state.busy = true; state.controller = new AbortController();
     $('#bqMessages').setAttribute('aria-busy', 'true'); $('[data-command="stop"]').hidden = false; setCharacter('thinking');
     const thinking = appendMessage('Buscando por los caminos…', 'status', false); const started = performance.now();
+    let serverTimer = null;
     try {
+      // PRESUPUESTO DETERMINISTA (2026-10-07): "¿cuánto gasto?", "¿y para cuatro?", "¿y comida?",
+      // "no me mostraste el cálculo". El modelo no hace cuentas: el motor suma solo precios
+      // verificados y reparte el presupuesto de la persona, con supuestos explícitos.
+      if (understood && (understood.intent === 'budget' || understood.intent === 'correction')) {
+        const prices = await loadVerifiedPrices(session.brain.destino_actual || session.brain.ultimo_recomendado);
+        const breakdown = Brain.budget(session.brain, prices, RATE);
+        const text = Brain.composeBudget(breakdown, { t: brainT, correction: understood.intent === 'correction' });
+        thinking?.closest('article')?.remove();
+        session.brain = Brain.remember(session.brain, text); saveSession();
+        setCharacter('explaining');
+        await streamText(text);
+        renderActions([
+          breakdown.destination ? { type: 'search_business', label: brainT('baquiBrain.actionBusinesses', 'Ver negocios de {where}', { where: breakdown.destination }), url: `aliados.html?q=${encodeURIComponent(breakdown.destination)}` } : null,
+          { type: 'build_itinerary', label: brainT('baquiBrain.actionPlanner', 'Abrir el planificador'), url: 'baqueano-ia.html#planner' }
+        ].filter(Boolean));
+        track('assistant_response_budget_engine', { verified_prices: breakdown.verifiedLines.length, latency_ms: Math.round(performance.now() - started) });
+        return;
+      }
       // INTERCEPTOR DE PRECISIÓN LOCAL: Si la consulta solicita catálogo de la web, comparativa o ruta ajustada con rechazo a volcanes,
       // delegamos inmediatamente al motor cognitivo territorial de Baqueano para garantizar datos reales de destinos.html
       const msgLower = message.toLowerCase();
@@ -789,11 +854,15 @@ Seguinos para descubrir contenido en video, historias de artesanos locales y el 
       }
 
       let response;
+      // Si el servidor tarda más de 20 s, responde el motor local con contexto (nunca el menú).
+      serverTimer = setTimeout(() => { state.serverTimedOut = true; state.controller?.abort(); }, 20000);
+      state.serverTimedOut = false;
       for (let attempt = 1; attempt <= CONFIG.requestAttempts; attempt += 1) {
-        response = await fetch(CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: state.controller.signal, body: JSON.stringify({ message, conversationId: session.id, history: session.messages.slice(-12, -1), countryCode: 'NI', currentLanguage: session.currentLanguage, preferredLanguage: session.preferredLanguage, context: context() }) });
+        response = await fetch(CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: state.controller.signal, body: JSON.stringify({ message, conversationId: session.id, history: session.messages.slice(-12, -1), countryCode: 'NI', currentLanguage: session.currentLanguage, preferredLanguage: session.preferredLanguage, context: context(), conversationState: session.brain ? Object.assign({}, session.brain, { recientes: undefined }) : null, intent: understood ? understood.intent : null }) });
         if (response.ok || response.status < 500) break;
         if (attempt < CONFIG.requestAttempts) await new Promise(resolve => setTimeout(resolve, 500 * (2 ** (attempt - 1))));
       }
+      clearTimeout(serverTimer);
       if (!response.ok) throw new Error('gateway');
       const data = await response.json();
       if (!data.ok || !data.message) throw new Error('contract');
@@ -807,22 +876,31 @@ Seguinos para descubrir contenido en video, historias de artesanos locales y el 
       thinking?.closest('article')?.remove();
       session.tripProfile = Object.assign({}, session.tripProfile, data.tripProfilePatch || {});
       if (CHARACTER_STATES.has(data.animation)) setCharacter(data.animation);
-      await streamText(data.message || itineraryReply(data.itinerary));
+      let serverText = data.message || itineraryReply(data.itinerary);
+      // Anti-bucle: si la respuesta repite una anterior, se retoma el contexto en su lugar.
+      if (Brain && session.brain && Brain.isDuplicate(session.brain, serverText)) serverText = Brain.composeFallback(session.brain, { t: brainT });
+      if (Brain && session.brain) { session.brain = Brain.remember(session.brain, serverText); saveSession(); }
+      await streamText(serverText);
       renderActions(data.actions || [{ type: 'open_destination', label: 'Ver destinos', url: 'destinos.html' }]);
       track('assistant_response', { mode: data.mode || data.provider, grounding: data.groundingStatus, latency_ms: Math.round(performance.now() - started) });
     } catch (error) {
       thinking?.closest('article')?.remove();
-      if (error.name !== 'AbortError') {
+      if (error.name !== 'AbortError' || state.serverTimedOut) {
+        state.serverTimedOut = false;
         // En lugar de fallar o alucinar, el motor de inteligencia territorial Baqueano entra en acción con datos reales
         updateServiceStatus('online');
         const localAnswer = generateLocalBaqueanoAnswer(message, session.tripProfile, context());
         session.tripProfile = Object.assign({}, session.tripProfile, localAnswer.tripProfilePatch || {});
         if (CHARACTER_STATES.has(localAnswer.animation)) setCharacter(localAnswer.animation);
-        await streamText(localAnswer.message);
+        let localText = localAnswer.message;
+        if (Brain && session.brain && Brain.isDuplicate(session.brain, localText)) localText = Brain.composeFallback(session.brain, { t: brainT });
+        if (Brain && session.brain) { session.brain = Brain.remember(session.brain, localText); saveSession(); }
+        await streamText(localText);
         renderActions(localAnswer.actions || [{ type: 'open_destination', label: 'Ver destinos', url: 'destinos.html' }]);
         track('assistant_response_local_brain', { latency_ms: Math.round(performance.now() - started) });
       }
     } finally {
+      clearTimeout(serverTimer);
       state.busy = false; state.controller = null;
       $('#bqMessages').setAttribute('aria-busy', 'false');
       $('[data-command="stop"]').hidden = true;

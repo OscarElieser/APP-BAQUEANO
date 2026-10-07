@@ -1,0 +1,56 @@
+{
+  "generatedAt": "2026-10-06T22:56:10.840Z",
+  "stableUrl": "https://baqueanonicaragua.com/descargar",
+  "apkUrl": "/downloads/baqueano-android.apk",
+  "signer": {
+    "subjectCN": "Baqueano Production",
+    "organization": "Baqueano Nicaragua",
+    "certSha256": "E6:95:4D:A3:0E:A5:9D:28:EB:CD:B2:1B:87:11:12:1B:D5:20:63:F6:87:66:49:0F:2E:A7:C5:3F:4A:CE:70:0A",
+    "verifiedWith": "openssl pkcs7 + x509 (META-INF/CERT.RSA)"
+  },
+  "current": {
+    "versionName": "1.0.0",
+    "versionCode": 1,
+    "package": "ni.baqueano.app",
+    "minSdk": 23,
+    "minAndroid": "6.0",
+    "targetSdk": 35,
+    "targetAndroid": "15",
+    "sizeBytes": 95441231,
+    "sha256": "b3e9c26e2f92001f9ff83dbbc183e5c80919e173e4bd680cfb69740c58bb684a",
+    "publishedAt": "2026-09-30T22:24:49-06:00",
+    "permissions": [
+      "internet",
+      "location",
+      "call",
+      "camera",
+      "photos",
+      "network",
+      "wakelock",
+      "adid",
+      "push"
+    ],
+    "rawPermissions": [
+      "android.permission.INTERNET",
+      "android.permission.ACCESS_FINE_LOCATION",
+      "android.permission.ACCESS_COARSE_LOCATION",
+      "android.permission.CALL_PHONE",
+      "android.permission.CAMERA",
+      "android.permission.READ_EXTERNAL_STORAGE",
+      "android.permission.READ_MEDIA_IMAGES",
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.WAKE_LOCK",
+      "com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE",
+      "com.google.android.gms.permission.AD_ID",
+      "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+      "android.permission.ACCESS_ADSERVICES_AD_ID",
+      "com.google.android.providers.gsf.permission.READ_GSERVICES",
+      "com.google.android.c2dm.permission.RECEIVE",
+      "ni.baqueano.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+    ],
+    "source": "website/assets/BaqueanoNicaragua.apk",
+    "status": "published",
+    "notesKey": "appDownload.notes100"
+  },
+  "history": []
+}
