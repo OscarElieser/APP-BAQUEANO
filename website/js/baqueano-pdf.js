@@ -19,7 +19,9 @@
 // - Logo oficial horizontal (PNG), con su proporción original.
 //
 // 📦 QUÉ:
-// - window.BaqueanoPdf = { legalFromPage(button), ecoReceipt(data), document(spec) }.
+// - window.BaqueanoPdf = { legalFromPage(button), ecoReceipt(data), document(spec), techReport(report) }.
+// - techReport (F9, 2026-10-07): informe técnico del Ops Center con datos reales ya medidos; cada
+//   sección declara su fuente y hora, y una sección sin datos dice por qué en vez de inventar.
 // - Los botones con [data-legal-pdf] generan el PDF de la página legal actual.
 // ============================================================================
 (function (window, document) {
@@ -398,6 +400,63 @@
     });
   }
 
+  // ------------------------------------------------------------------ informe técnico (F9)
+  // report = { generatedBy, sections: [{ title, source, at, note, rows: [[etiqueta, valor, estado?]], error }] }
+  // estado opcional: 'ok' | 'warn' | 'fail' (se escribe como texto, no solo color).
+  function techReport(report) {
+    return Promise.all([loadJsPdf(), loadLogo()]).then(function (res) {
+      var JsPDF = res[0], logo = res[1];
+      var doc = new JsPDF({ unit: 'mm', format: 'a4', compress: true });
+      var title = t('techReport.title', 'Informe técnico de BAQUEANO');
+      var now = new Date();
+      if (logo) doc.addImage(logo, 'PNG', A4.margin, 18, 70, 70 / LOGO_RATIO);
+      var w = new Writer(doc, { contentTop: 26 });
+      w.y = 42;
+      w.text(title, { size: 22, bold: true, color: COLORS.ink, lh: 1.25, after: 3 });
+      var stamp = new Intl.DateTimeFormat(lang(), { dateStyle: 'long', timeStyle: 'short', timeZone: 'America/Managua' }).format(now);
+      w.text(t('pdf.generatedOn', 'Fecha de generación de este PDF') + ': ' + stamp + ' (' + t('techReport.tz', 'hora de Nicaragua') + ')', { size: 9.5, color: COLORS.muted, after: 1 });
+      if (report.generatedBy) w.text(t('techReport.by', 'Generado por') + ': ' + report.generatedBy, { size: 9.5, color: COLORS.muted, after: 4 });
+      w.text(t('techReport.method', 'Todas las cifras de este informe se midieron en el momento de generarlo, desde la base de datos de Supabase y desde el sitio publicado. Si una fuente no respondió, la sección lo indica; no se completan datos a mano ni se estiman.'), { size: 10, italic: true, after: 6 });
+      var STATE = { ok: t('techReport.stateOk', 'Correcto'), warn: t('techReport.stateWarn', 'Aviso'), fail: t('techReport.stateFail', 'Falla') };
+      var STATE_COLOR = { ok: [74, 122, 90], warn: [180, 83, 9], fail: [185, 28, 28] };
+      (report.sections || []).forEach(function (sec, i) {
+        w.ensure(28);
+        w.text((i + 1) + '. ' + sec.title, { size: 14, bold: true, color: COLORS.teal, after: 1.5, keepWithNext: 10 });
+        var meta = [sec.source ? t('techReport.source', 'Fuente') + ': ' + sec.source : '', sec.at ? t('techReport.measuredAt', 'Medido') + ': ' + sec.at : ''].filter(Boolean).join(' · ');
+        if (meta) w.text(meta, { size: 8.5, color: COLORS.muted, after: 2 });
+        if (sec.error) { w.text(t('techReport.unavailable', 'Sin datos en este informe') + ': ' + sec.error, { size: 10, color: STATE_COLOR.fail, after: 4 }); return; }
+        if (sec.note) w.text(sec.note, { size: 9.5, italic: true, after: 2 });
+        (sec.rows || []).forEach(function (row) {
+          var label = clean(row[0]), value = clean(row[1] == null ? '—' : String(row[1])), st = row[2];
+          doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
+          var labelW = 62, valueX = A4.margin + labelW + 2, valueW = w.width - labelW - 2 - (st ? 20 : 0);
+          var labelLines = doc.splitTextToSize(label, labelW);
+          doc.setFont('helvetica', 'normal');
+          var valueLines = doc.splitTextToSize(value, valueW);
+          var lh = w.lineHeight(9.5, 1.35), h = Math.max(labelLines.length, valueLines.length) * lh + 1.6;
+          w.ensure(h);
+          doc.setFont('helvetica', 'bold'); doc.setTextColor.apply(doc, COLORS.ink); doc.text(labelLines, A4.margin, w.y);
+          doc.setFont('helvetica', 'normal'); doc.setTextColor.apply(doc, COLORS.body); doc.text(valueLines, valueX, w.y);
+          if (st && STATE[st]) {
+            doc.setFont('helvetica', 'bold'); doc.setTextColor.apply(doc, STATE_COLOR[st]);
+            doc.text(clean(STATE[st]), A4.w - A4.margin, w.y, { align: 'right' });
+          }
+          doc.setDrawColor.apply(doc, COLORS.line); doc.setLineWidth(0.2);
+          doc.line(A4.margin, w.y + h - lh - 0.2, A4.w - A4.margin, w.y + h - lh - 0.2);
+          w.y += h;
+        });
+        w.y += 4;
+      });
+      drawHeaderFooter(doc, { title: title, shortTitle: title }, logo);
+      doc.setProperties({ title: title, subject: t('techReport.subject', 'Estado técnico de la plataforma'), author: 'BAQUEANO — Ops Center', creator: 'BAQUEANO (' + SITE + ')', keywords: 'BAQUEANO, informe técnico, Supabase, Azure' });
+      var local = new Intl.DateTimeFormat('sv-SE', { dateStyle: 'short', timeStyle: 'short', timeZone: 'America/Managua' }).format(now).replace(/[-: ]/g, '');
+      var filename = 'BAQUEANO_Informe_tecnico_' + local + '.pdf'; // hora de Nicaragua (AAAAMMDDHHMM)
+      doc.save(filename);
+      document.dispatchEvent(new CustomEvent('baqueano:pdfGenerated', { detail: { kind: 'techReport', filename: filename, sections: (report.sections || []).length } }));
+      return { filename: filename, pages: doc.getNumberOfPages() };
+    });
+  }
+
   // Botones de descarga de los documentos legales (sin onclick en línea).
   document.addEventListener('click', function (e) {
     var button = e.target.closest && e.target.closest('[data-legal-pdf]');
@@ -406,5 +465,5 @@
     legalFromPage(button).catch(function () { /* el diálogo ya informó */ });
   });
 
-  window.BaqueanoPdf = { legalFromPage: legalFromPage, ecoReceipt: ecoReceipt, trip: tripPlan, _extract: extract, _clean: clean };
+  window.BaqueanoPdf = { legalFromPage: legalFromPage, ecoReceipt: ecoReceipt, trip: tripPlan, techReport: techReport, _extract: extract, _clean: clean };
 })(window, document);

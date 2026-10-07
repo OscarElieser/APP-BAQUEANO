@@ -16,13 +16,15 @@
 //   por el servidor (códigos HTTP, conteos, commit) y se muestra tal cual.
 // - Todo se pinta con textContent.
 //
-// 📦 QUÉ: window.BaqueanoOpsAutomation = { render(panel), refresh(), latest() }.
+// - Botón "Informe técnico PDF" (F9): BaqueanoOpsTechReport.download() con los datos del momento.
+//
+// 📦 QUÉ: window.BaqueanoOpsAutomation = { render(panel), refresh(), latest(), checkName(check) }.
 // ============================================================================
 (function (window, document) {
   'use strict';
   if (window.BaqueanoOpsAutomation) return;
 
-  var state = { panel: null, items: null, schedule: '', error: '', busy: false, notice: '' };
+  var state = { panel: null, items: null, schedule: '', error: '', busy: false, pdfBusy: false, notice: '' };
   var COLORS = { ok: '#4A7A5A', warn: '#B45309', fail: '#B91C1C', running: '#475569' };
   // Nombres en español si el Ops Center no tiene el motor de idioma cargado (admin.html no lo carga).
   var CHECK_ES = {
@@ -36,7 +38,7 @@
   function tr(key, fallback, vars) {
     var out = fallback;
     try { if (window.BaqueanoLanguage && window.BaqueanoLanguage.t) out = window.BaqueanoLanguage.t(key, Object.assign({ fallback: fallback }, vars || {})); } catch (_) { /* sin motor i18n */ }
-    return out;
+    return String(out).replace(/\{(\w+)\}/g, function (m, k) { return vars && vars[k] != null ? vars[k] : m; });
   }
   function el(tag, attrs, children) {
     var node = document.createElement(tag);
@@ -58,6 +60,7 @@
       return window.BaqueanoLanguage && window.BaqueanoLanguage.formatDate ? window.BaqueanoLanguage.formatDate(iso, o) : new Intl.DateTimeFormat('es-NI', o).format(new Date(iso));
     } catch (_) { return String(iso).slice(0, 16); }
   }
+  function checkName(c) { return tr('opsAuto.check.' + c.id, CHECK_ES[c.id] || c.label || c.id); }
   function statusLabel(s) {
     return tr('opsAuto.status.' + s, { ok: 'Todo en orden', warn: 'Con avisos', fail: 'Con fallas', running: 'En curso' }[s] || s);
   }
@@ -75,7 +78,7 @@
     var rows = (run.checks || []).map(function (c) {
       return el('tr', {}, [
         el('td', { style: 'padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.06);white-space:nowrap' }, [badge(c.state)]),
-        el('th', { scope: 'row', style: 'padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left;font-weight:700', text: tr('opsAuto.check.' + c.id, CHECK_ES[c.id] || c.label || c.id) }),
+        el('th', { scope: 'row', style: 'padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left;font-weight:700', text: checkName(c) }),
         el('td', { style: 'padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.06);color:#CBD5E1;overflow-wrap:anywhere', text: c.detail || '' })
       ]);
     });
@@ -120,6 +123,13 @@
     var reload = el('button', { type: 'button', className: 'ops-btn' }, [icon('fa-rotate'), document.createTextNode(' ' + tr('opsAuto.refresh', 'Actualizar'))]);
     reload.addEventListener('click', function () { refresh(); });
     actions.push(reload);
+    // F9: informe técnico en PDF con los datos reales del momento (lectura: todo el personal).
+    if (window.BaqueanoOpsTechReport) {
+      var pdf = el('button', { type: 'button', className: 'ops-btn', disabled: state.pdfBusy ? 'disabled' : null, 'aria-busy': state.pdfBusy ? 'true' : null },
+        [icon(state.pdfBusy ? 'fa-spinner fa-spin' : 'fa-file-pdf'), document.createTextNode(' ' + tr('techReport.button', 'Informe técnico PDF'))]);
+      pdf.addEventListener('click', downloadReport);
+      actions.push(pdf);
+    }
     if (canWrite) {
       var run = el('button', { type: 'button', className: 'ops-btn ops-btn-primary', disabled: state.busy ? 'disabled' : null, 'aria-busy': state.busy ? 'true' : null },
         [icon(state.busy ? 'fa-spinner fa-spin' : 'fa-play'), document.createTextNode(' ' + tr('opsAuto.runNow', 'Ejecutar ahora'))]);
@@ -159,8 +169,18 @@
     }).then(function () { state.busy = false; return refresh(); });
   }
 
+  function downloadReport() {
+    if (state.pdfBusy) return;
+    state.pdfBusy = true; state.notice = tr('techReport.building', 'Reuniendo los datos y armando el PDF…'); renderInto(state.panel);
+    window.BaqueanoOpsTechReport.download().then(function (r) {
+      state.notice = tr('techReport.ready', 'Informe descargado: {file} ({pages} páginas).', { file: r.filename, pages: r.pages });
+    }, function (e) {
+      state.notice = tr('techReport.failed', 'No se pudo generar el informe') + ': ' + ((e && e.message) || e);
+    }).then(function () { state.pdfBusy = false; renderInto(state.panel); });
+  }
+
   function render(panel) { state.panel = panel; renderInto(panel); refresh(); }
   window.addEventListener('baqueano:languageChanged', function () { renderInto(state.panel); });
 
-  window.BaqueanoOpsAutomation = { render: render, refresh: refresh, latest: function () { return state.items && state.items[0] || null; } };
+  window.BaqueanoOpsAutomation = { render: render, refresh: refresh, checkName: checkName, latest: function () { return state.items && state.items[0] || null; } };
 })(window, document);

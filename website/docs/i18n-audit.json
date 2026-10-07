@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T09:08:15.565Z",
+  "generatedAt": "2026-10-07T09:14:38.481Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4679,
-    "en": 4679,
-    "fr": 4679,
-    "it": 4679,
-    "pt": 4679,
-    "de": 4679
+    "es": 4733,
+    "en": 4733,
+    "fr": 4733,
+    "it": 4733,
+    "pt": 4733,
+    "de": 4733
   },
   "html": {
     "files": 34,
@@ -23,7 +23,7 @@
     "untranslated": 1
   },
   "js": {
-    "files": 109,
+    "files": 110,
     "translated": 152,
     "untranslated": 722
   },
@@ -113,6 +113,7 @@
     "js/ops-center/ops-intake-inbox.js",
     "js/ops-center/ops-live-presence.js",
     "js/ops-center/ops-platform-reviews.js",
+    "js/ops-center/ops-tech-report.js",
     "js/platform-reviews.js",
     "js/safety-gallery.js",
     "js/services/places-service.js",
@@ -1231,6 +1232,15 @@
     },
     {
       "file": "js/ops-center/ops-platform-reviews.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/ops-center/ops-tech-report.js",
       "type": "js",
       "total": 0,
       "translated": 0,

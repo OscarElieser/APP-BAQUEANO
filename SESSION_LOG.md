@@ -5154,3 +5154,17 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - 31 claves `opsAuto.*` en 6 idiomas; gate con 0 errores.
     - E2E (es@1366, en@390, de@1366): 8 controles, historial de 2, botón funcionando, axe 0 y sin errores de consola.
   - Search Console (capturas del propietario): propiedad https://baqueanonicaragua.com/ verificada; sitemap.xml "Correcto" con 25 páginas descubiertas.
+  - F9, informe técnico en PDF con datos reales:
+    - `BaqueanoPdf.techReport()` en js/baqueano-pdf.js: jsPDF local, texto real, logo, "Página X de Y" y metadatos. Cada fila lleva el estado en texto (Correcto / Aviso / Falla), no solo con color.
+    - `ops-tech-report.js` junta en paralelo los datos del momento. Cada sección lleva su fuente y su hora, y si una fuente falla la sección dice "Sin datos" con el motivo. Secciones:
+      - servicios (health);
+      - automatización (automation_runs);
+      - base y seguridad (db_health_report);
+      - catálogo (overview);
+      - app (app-release.json y estadísticas de descarga).
+    - Botón "Informe técnico PDF" en la vista Automatización. El archivo lleva la hora de Nicaragua en el nombre.
+    - 54 claves `techReport.*` en 6 idiomas.
+    - E2E con datos reales de db_health_report y de la corrida #1:
+      - 2 páginas; pdftotext encuentra los 13 valores esperados (92/92 RLS, 153 municipios, APK HTTP 404 como Falla, versión 1.0.0, "No se pudo leer" donde la fuente falló);
+      - revisión visual de la página 1;
+      - sin errores de consola.

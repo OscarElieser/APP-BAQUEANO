@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T09:08:15.565Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4679 · en 4679 · fr 4679 · it 4679 · pt 4679 · de 4679
+Generado: 2026-10-07T09:14:38.481Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4733 · en 4733 · fr 4733 · it 4733 · pt 4733 · de 4733
 
 HTML: 3859/3860 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -217,6 +217,7 @@ HTML: 3859/3860 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/ops-center/ops-intake-inbox.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-live-presence.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-tech-report.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |
 | js/services/places-service.js | js | 4 | 4 | 0 | 100 % |
