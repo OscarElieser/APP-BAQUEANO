@@ -4559,6 +4559,34 @@
         "p1": "Vos informations sont protégées et ne seront jamais partagées avec des tiers.",
         "inputPlaceholder1": "José Martínez",
         "textareaPlaceholder1": "Partagez votre idée, expérience ou proposition pour l'écotourisme communautaire au Nicaragua..."
+      },
+      "valores": {
+        "title": "Nos valeurs",
+        "subtitle": "Ce qui guide chaque décision de BAQUEANO, avec les communautés et avec chaque voyageur.",
+        "v1": {
+          "title": "Protagonisme local",
+          "text": "La communauté et le baqueano sont au cœur de chaque expérience : leurs savoirs, leurs histoires et leurs décisions passent en premier."
+        },
+        "v2": {
+          "title": "Commerce équitable et transparence",
+          "text": "Nous affichons clairement les coûts pour que la valeur de chaque visite revienne directement aux familles d'accueil."
+        },
+        "v3": {
+          "title": "Prendre soin du territoire",
+          "text": "Nous mettons en avant des destinations moins saturées, le respect de la faune et de l'eau, et un tourisme qui préserve ce qu'il visite."
+        },
+        "v4": {
+          "title": "Mémoire et identité",
+          "text": "La culture, la gastronomie et l'histoire sont la porte d'entrée pour comprendre le Nicaragua avant de le parcourir."
+        },
+        "v5": {
+          "title": "Information fiable",
+          "text": "Nous n'inventons pas de données : nous publions uniquement des informations vérifiées, avec leur source, et indiquons clairement ce qui reste à confirmer."
+        },
+        "v6": {
+          "title": "Technologie responsable",
+          "text": "Nous utilisons la technologie et l'intelligence artificielle pour rapprocher, non pour remplacer, et nous protégeons les données de chacun."
+        }
       }
     },
     "offline": {

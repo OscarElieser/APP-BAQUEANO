@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T18:54:41.242Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4887 · en 4887 · fr 4887 · it 4887 · pt 4887 · de 4887
+Generado: 2026-10-07T19:12:44.294Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4901 · en 4901 · fr 4901 · it 4901 · pt 4901 · de 4901
 
-HTML: 3871/3872 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3885/3886 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -246,7 +246,7 @@ HTML: 3871/3872 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | mi-viaje.html | html | 122 | 122 | 0 | 100 % |
 | musica.html | html | 199 | 199 | 0 | 100 % |
 | normas-comunidad.html | html | 28 | 28 | 0 | 100 % |
-| nosotros.html | html | 169 | 169 | 0 | 100 % |
+| nosotros.html | html | 183 | 183 | 0 | 100 % |
 | offline.html | html | 24 | 24 | 0 | 100 % |
 | opiniones.html | html | 85 | 85 | 0 | 100 % |
 | packages/i18n/src/index.tsx | tsx | 2 | 2 | 0 | 100 % |

@@ -5457,3 +5457,17 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - Historia viva: "El Son Nica" usa la Calzada de Granada, "La Mora Limpia" Ometepe, "Marimba de Arco" el volcán Masaya y "El Güegüense" un plato de gallo pinto.
   - Instrumentos: Marimba y Tambor usan el volcán Masaya, Guitarra el Cerro Negro, Pito una posada, Quijongo el Cañón de Somoto y Percusión Corn Island.
 - Dato del sitio a revisar: la tarjeta "Marimba de Arco" dice "Patrimonio de la Humanidad". La declaratoria UNESCO verificada es la de El Güegüense; no se cambió el texto sin una fuente.
+21. Nosotros (nosotros.html): debajo de "Nuestra Misión" y "Nuestra Visión" agregar los valores de BAQUEANO.
+
+### Nosotros: "Nuestros valores" — hecho y probado
+- Nueva sección `#valores` justo debajo de Misión y Visión, con 6 tarjetas:
+  - Protagonismo local;
+  - Comercio justo y transparencia;
+  - Cuidado del territorio;
+  - Memoria e identidad;
+  - Información veraz;
+  - Tecnología responsable.
+- Los textos salen de principios ya documentados: README ("Cadena de impacto": protagonismo del baqueano, comercio justo, desconcentración y educación ambiental, memoria colectiva, "no inventar información"), los pilares de la misma página y las reglas de AGENTS.md. No se agregaron cifras.
+- La sección "¿Qué significa ser BAQUEANO?" (Conocer, Conectar…) queda igual.
+- 14 claves en 6 idiomas; `npm run i18n` da 0 errores.
+- Playwright ✅: 1366 px en español (3 columnas), 820 px en inglés (2) y 390 px en alemán (1). Queda inmediatamente después de Misión y Visión, sin desborde, y axe da 0.

@@ -4559,6 +4559,34 @@
         "p1": "Tu información está protegida y nunca será compartida con terceros.",
         "inputPlaceholder1": "José Martínez",
         "textareaPlaceholder1": "Contanos tu idea, experiencia o propuesta para el ecoturismo comunitario de Nicaragua..."
+      },
+      "valores": {
+        "title": "Nuestros valores",
+        "subtitle": "Lo que guía cada decisión de BAQUEANO, con las comunidades y con cada viajero.",
+        "v1": {
+          "title": "Protagonismo local",
+          "text": "La comunidad y el baqueano son el corazón de cada experiencia: sus saberes, sus historias y sus decisiones van primero."
+        },
+        "v2": {
+          "title": "Comercio justo y transparencia",
+          "text": "Mostramos los costos con claridad para que el valor de cada visita llegue directamente a las familias anfitrionas."
+        },
+        "v3": {
+          "title": "Cuidado del territorio",
+          "text": "Promovemos destinos menos saturados, el respeto a la fauna y al agua, y un turismo que conserva lo que visita."
+        },
+        "v4": {
+          "title": "Memoria e identidad",
+          "text": "La cultura, la gastronomía y la historia son la puerta de entrada para comprender Nicaragua antes de recorrerla."
+        },
+        "v5": {
+          "title": "Información veraz",
+          "text": "No inventamos datos: publicamos solo información verificada, con su fuente, y decimos con claridad lo que falta confirmar."
+        },
+        "v6": {
+          "title": "Tecnología responsable",
+          "text": "Usamos la tecnología y la inteligencia artificial para acercar, no para reemplazar, y protegemos los datos de cada persona."
+        }
       }
     },
     "offline": {

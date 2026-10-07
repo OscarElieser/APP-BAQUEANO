@@ -4559,6 +4559,34 @@
         "p1": "Suas informações estão protegidas e nunca serão compartilhadas com terceiros.",
         "inputPlaceholder1": "José Martínez",
         "textareaPlaceholder1": "Conte sua ideia, experiência ou proposta para o ecoturismo comunitário da Nicarágua..."
+      },
+      "valores": {
+        "title": "Nossos valores",
+        "subtitle": "O que orienta cada decisão do BAQUEANO, com as comunidades e com cada viajante.",
+        "v1": {
+          "title": "Protagonismo local",
+          "text": "A comunidade e o baqueano são o coração de cada experiência: seus saberes, suas histórias e suas decisões vêm em primeiro lugar."
+        },
+        "v2": {
+          "title": "Comércio justo e transparência",
+          "text": "Mostramos os custos com clareza para que o valor de cada visita chegue diretamente às famílias anfitriãs."
+        },
+        "v3": {
+          "title": "Cuidado com o território",
+          "text": "Promovemos destinos menos saturados, o respeito à fauna e à água e um turismo que conserva o que visita."
+        },
+        "v4": {
+          "title": "Memória e identidade",
+          "text": "A cultura, a gastronomia e a história são a porta de entrada para compreender a Nicarágua antes de percorrê-la."
+        },
+        "v5": {
+          "title": "Informação verdadeira",
+          "text": "Não inventamos dados: publicamos apenas informações verificadas, com sua fonte, e dizemos claramente o que ainda falta confirmar."
+        },
+        "v6": {
+          "title": "Tecnologia responsável",
+          "text": "Usamos a tecnologia e a inteligência artificial para aproximar, não para substituir, e protegemos os dados de cada pessoa."
+        }
       }
     },
     "offline": {
