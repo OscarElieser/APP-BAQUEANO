@@ -5300,3 +5300,6 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 
 ## 2026-10-07 — Propietario: "pero no esta conectado con hostinger nuestro sitio"
 - Aclaración con evidencia: el sitio se sirve desde la VM de Azure (registro A 20.80.81.65), pero el dominio y su DNS están en Hostinger. Lo muestran los nameservers byte.dns-parking.com (SESSION_LOG, verificación de Search Console) y el paso 5 de docs/deployment/AZURE_DEPLOYMENT.md ("DNS en Hostinger", hPanel). Los nameservers se cambian en hPanel; el hosting de Hostinger no se usa.
+
+## 2026-10-07 — Propietario: captura de Cloudflare "Connect your domain" (políticas de IA)
+- Recomendación: dominio `baqueanonicaragua.com` correcto. "I monetize pages that serve ads" sin marcar (el sitio no tiene anuncios). Search y Agent en Allow: los buscadores y los asistentes de IA muestran BAQUEANO a los turistas. Training queda a criterio del propietario: no afecta a Google ni a la seguridad. La defensa contra atacantes (también con IA) es otra cosa: WAF y Bot Fight Mode, después de activar el dominio.
