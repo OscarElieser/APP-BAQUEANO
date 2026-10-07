@@ -5321,3 +5321,4 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 
 ## 2026-10-07 — Propietario: "pero no quiero borrar hostinger"
 - Aclaración: cambiar los nameservers no borra nada de Hostinger. El dominio sigue registrado y renovándose allí, y la zona DNS de Hostinger queda guardada. Es reversible: se vuelve a `byte/pixel.dns-parking.com` cuando se quiera. Solo cambia quién responde las consultas DNS.
+- Cloudflare asignó los nameservers `kim.ns.cloudflare.com` y `konnor.ns.cloudflare.com`. Reemplazan a byte/pixel.dns-parking.com en Hostinger (hPanel).
