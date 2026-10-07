@@ -6271,5 +6271,78 @@
       "traffic_sessions_24h": "Sesiones de tráfico (24 h)",
       "audit_logs": "Registros de auditoría"
     }
+  },
+  "messages": {
+    "tab": "Mensajes",
+    "title": "Mensajes con el equipo BAQUEANO",
+    "lead": "Escribinos tus dudas sobre destinos, negocios o tu cuenta. Te respondemos aquí y te avisamos en la campana.",
+    "loginRequired": "Iniciá sesión para ver tus mensajes.",
+    "errGeneric": "No se pudo completar la acción. Intentá de nuevo.",
+    "err": {
+      "login_required": "Iniciá sesión para usar los mensajes.",
+      "session_expired": "Tu sesión venció. Volvé a iniciar sesión.",
+      "not_found": "No existe esa conversación.",
+      "closed": "La conversación está cerrada.",
+      "rate_limited": "Enviaste muchos mensajes seguidos. Esperá unos minutos.",
+      "too_many_open": "Tenés 5 conversaciones abiertas. Esperá respuesta antes de abrir otra.",
+      "subject_invalid": "El asunto debe tener entre 3 y 120 caracteres.",
+      "body_invalid": "El mensaje debe tener entre 1 y 2000 caracteres.",
+      "origin_forbidden": "Este sitio no puede enviar mensajes a BAQUEANO."
+    },
+    "status": {
+      "open": "Esperando respuesta",
+      "answered": "Respondida",
+      "closed": "Cerrada"
+    },
+    "counter": "{n} de {max} caracteres",
+    "newTitle": "Nueva consulta",
+    "subject": "Asunto",
+    "body": "Mensaje",
+    "send": "Enviar",
+    "sent": "Mensaje enviado. Te avisamos en la campana cuando el equipo responda.",
+    "sentReply": "Respuesta enviada.",
+    "unread": "{n} sin leer",
+    "empty": "Todavía no tenés conversaciones. Escribinos y te respondemos aquí.",
+    "loading": "Cargando…",
+    "listTitle": "Tus conversaciones",
+    "back": "Volver a tus conversaciones",
+    "threadLabel": "Mensajes de la conversación",
+    "you": "Vos",
+    "team": "Equipo BAQUEANO",
+    "closedNote": "El equipo cerró esta conversación. Si necesitás algo más, abrí una nueva consulta.",
+    "reply": "Tu respuesta",
+    "notifReplyTitle": "El equipo BAQUEANO te respondió",
+    "notifReplyBody": "Respuesta a «{subject}». Leela en tu perfil, sección Mensajes."
+  },
+  "opsMsg": {
+    "title": "Mensajes de viajeros",
+    "subtitle": "Consultas escritas desde el perfil. Cada respuesta le llega a la persona en su campana.",
+    "noSession": "Sin sesión administrativa.",
+    "filterLabel": "Filtrar conversaciones",
+    "loading": "Cargando…",
+    "empty": "No hay conversaciones en esta bandeja.",
+    "unread": "{n} nuevos",
+    "noEmail": "Correo no verificado",
+    "inboxTitle": "Bandeja",
+    "counts": "{open} esperando respuesta · {unread} mensajes nuevos",
+    "threadLabel": "Mensajes de la conversación",
+    "teamAuthor": "Equipo",
+    "traveler": "Viajero",
+    "since": "desde",
+    "closedBy": "Cerrada {at} por {who}.",
+    "reply": "Responder",
+    "close": "Cerrar conversación",
+    "replyLabel": "Respuesta para la persona (la ve como «Equipo BAQUEANO»)",
+    "emptyReply": "Escribí la respuesta antes de enviarla.",
+    "replied": "Respuesta enviada. La persona recibió un aviso en su campana.",
+    "closed": "Conversación cerrada.",
+    "readOnly": "Tu rol es de solo lectura: responder requiere un administrador.",
+    "refresh": "Actualizar",
+    "status": {
+      "open": "Esperando respuesta",
+      "answered": "Respondida",
+      "closed": "Cerrada",
+      "all": "Todas"
+    }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T09:14:38.481Z",
+  "generatedAt": "2026-10-07T09:30:30.979Z",
   "languages": [
     "es",
     "en",
@@ -9,21 +9,21 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4733,
-    "en": 4733,
-    "fr": 4733,
-    "it": 4733,
-    "pt": 4733,
-    "de": 4733
+    "es": 4796,
+    "en": 4796,
+    "fr": 4796,
+    "it": 4796,
+    "pt": 4796,
+    "de": 4796
   },
   "html": {
     "files": 34,
-    "total": 3860,
-    "translated": 3859,
+    "total": 3865,
+    "translated": 3864,
     "untranslated": 1
   },
   "js": {
-    "files": 110,
+    "files": 112,
     "translated": 152,
     "untranslated": 722
   },
@@ -81,6 +81,7 @@
     "js/baqueano-api.js",
     "js/baqueano-dialog.js",
     "js/baqueano-master-catalog.js",
+    "js/baqueano-messages.js",
     "js/baqueano-notifications.js",
     "js/baqueano-pdf.js",
     "js/baqueano-presence.js",
@@ -112,6 +113,7 @@
     "js/ops-center/ops-community-moderation.js",
     "js/ops-center/ops-intake-inbox.js",
     "js/ops-center/ops-live-presence.js",
+    "js/ops-center/ops-messages.js",
     "js/ops-center/ops-platform-reviews.js",
     "js/ops-center/ops-tech-report.js",
     "js/platform-reviews.js",
@@ -162,8 +164,8 @@
     {
       "file": "admin.html",
       "type": "html",
-      "total": 492,
-      "translated": 492,
+      "total": 494,
+      "translated": 494,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -423,8 +425,8 @@
     {
       "file": "perfil.html",
       "type": "html",
-      "total": 161,
-      "translated": 161,
+      "total": 164,
+      "translated": 164,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -602,6 +604,15 @@
     },
     {
       "file": "js/baqueano-master-catalog.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/baqueano-messages.js",
       "type": "js",
       "total": 0,
       "translated": 0,
@@ -1214,6 +1225,15 @@
     },
     {
       "file": "js/ops-center/ops-live-presence.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/ops-center/ops-messages.js",
       "type": "js",
       "total": 0,
       "translated": 0,

@@ -1,0 +1,39 @@
+/* ============================================================================
+   🧭 BAQUEANO — MENSAJES CON EL EQUIPO (css/components/messages.css)
+   🎯 POR QUÉ: sección "Mensajes" del perfil (F6), legible y accesible en móvil y escritorio.
+   ⚙️ CÓMO: tarjeta clara con colores de la marca y contraste AA (texto #0D1B2A / #334155 sobre
+      blanco; botón #165D6F con texto blanco 7.2:1). Objetivos táctiles de 44 px como mínimo.
+   📦 QUÉ: .bq-msg-* para js/baqueano-messages.js.
+   ============================================================================ */
+.bq-msg-card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 20px; color: #0D1B2A; max-width: 1100px; margin: 0 auto; }
+.bq-msg-card > h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font: 800 1.05rem/1.3 Montserrat, sans-serif; }
+.bq-msg-lead { margin: 0 0 14px; color: #334155; font-size: .92rem; }
+.bq-msg-h3 { margin: 16px 0 8px; font: 800 1rem/1.3 Montserrat, sans-serif; color: #0D1B2A; }
+.bq-msg-h3:focus { outline: 3px solid #F65E01; outline-offset: 3px; }
+.bq-msg-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.bq-msg-item { width: 100%; min-height: 44px; display: grid; gap: 2px; text-align: left; padding: 10px 12px; border: 1px solid #CBD5E1; border-radius: 12px; background: #F8FAFC; color: #0D1B2A; cursor: pointer; font: inherit; position: relative; }
+.bq-msg-item:hover, .bq-msg-item:focus-visible { border-color: #165D6F; background: #F0F7F9; }
+.bq-msg-item:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.bq-msg-meta { color: #475569; font-size: .82rem; }
+.bq-msg-badge { justify-self: start; margin-top: 4px; padding: 2px 8px; border-radius: 999px; background: #A74001; color: #FFFFFF; font-size: .75rem; font-weight: 800; }
+.bq-msg-empty { color: #475569; margin: 6px 0; }
+.bq-msg-form { display: grid; gap: 6px; margin-top: 12px; }
+.bq-msg-form label { font-weight: 700; color: #0D1B2A; font-size: .9rem; }
+.bq-msg-form input, .bq-msg-form textarea { font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid #94A3B8; border-radius: 10px; color: #0D1B2A; background: #FFFFFF; width: 100%; box-sizing: border-box; }
+.bq-msg-form input:focus-visible, .bq-msg-form textarea:focus-visible { outline: 3px solid #F65E01; outline-offset: 1px; border-color: #165D6F; }
+.bq-msg-counter { color: #475569; font-size: .78rem; justify-self: end; }
+.bq-msg-btn { justify-self: start; min-height: 44px; padding: 10px 20px; border: 0; border-radius: 10px; background: #165D6F; color: #FFFFFF; font-weight: 800; cursor: pointer; }
+.bq-msg-btn:hover { background: #0F4757; }
+.bq-msg-btn:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.bq-msg-btn[disabled] { opacity: .65; cursor: progress; }
+.bq-msg-link { min-height: 44px; padding: 8px 0; border: 0; background: none; color: #165D6F; font-weight: 800; cursor: pointer; text-decoration: underline; }
+.bq-msg-link:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.bq-msg-thread { list-style: none; margin: 10px 0; padding: 0; display: grid; gap: 10px; }
+.bq-msg-bubble { max-width: min(560px, 92%); padding: 10px 12px; border-radius: 14px; display: grid; gap: 4px; }
+.bq-msg-bubble p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; color: #0D1B2A; }
+.bq-msg-bubble.is-mine { justify-self: end; background: #E6F1F4; border: 1px solid #B6D4DC; }
+.bq-msg-bubble.is-team { justify-self: start; background: #FFF4EC; border: 1px solid #F5C9A8; }
+.bq-msg-author { font-weight: 800; font-size: .8rem; color: #0D1B2A; }
+.bq-msg-bubble time { font-size: .75rem; color: #475569; }
+.bq-msg-notice { margin: 8px 0; padding: 8px 12px; border-radius: 10px; background: #EAF5EE; color: #1F4D2E; }
+.bq-msg-error { margin: 8px 0; padding: 8px 12px; border-radius: 10px; background: #FDECEC; color: #8A1C1C; }

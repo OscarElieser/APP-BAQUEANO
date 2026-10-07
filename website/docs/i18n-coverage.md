@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T09:14:38.481Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4733 · en 4733 · fr 4733 · it 4733 · pt 4733 · de 4733
+Generado: 2026-10-07T09:30:30.979Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4796 · en 4796 · fr 4796 · it 4796 · pt 4796 · de 4796
 
-HTML: 3859/3860 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3864/3865 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -139,7 +139,7 @@ HTML: 3859/3860 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/territory-carousel.js | js | 1 | 0 | 1 | 0 % |
 | js/territory-media-experience.js | js | 1 | 0 | 1 | 0 % |
 | 404.html | html | 25 | 25 | 0 | 100 % |
-| admin.html | html | 492 | 492 | 0 | 100 % |
+| admin.html | html | 494 | 494 | 0 | 100 % |
 | aliados.html | html | 189 | 189 | 0 | 100 % |
 | ambiental.html | html | 131 | 131 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -185,6 +185,7 @@ HTML: 3859/3860 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/baqueano-api.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-dialog.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-master-catalog.js | js | 0 | 0 | 0 | 100 % |
+| js/baqueano-messages.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-notifications.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-pdf.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-presence.js | js | 0 | 0 | 0 | 100 % |
@@ -216,6 +217,7 @@ HTML: 3859/3860 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-intake-inbox.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-live-presence.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-messages.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-tech-report.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |
@@ -243,7 +245,7 @@ HTML: 3859/3860 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | opiniones.html | html | 85 | 85 | 0 | 100 % |
 | packages/i18n/src/index.tsx | tsx | 2 | 2 | 0 | 100 % |
 | packages/ui/src/index.tsx | tsx | 0 | 0 | 0 | 100 % |
-| perfil.html | html | 161 | 161 | 0 | 100 % |
+| perfil.html | html | 164 | 164 | 0 | 100 % |
 | privacidad.html | html | 89 | 89 | 0 | 100 % |
 | terminos.html | html | 193 | 193 | 0 | 100 % |
 | testimonios.html | html | 79 | 79 | 0 | 100 % |

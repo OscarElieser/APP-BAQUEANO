@@ -1779,6 +1779,13 @@
     // Lo pinta js/ops-center/ops-intake-inbox.js; el servidor exige rol de equipo.
     // 39: Actividad en vivo (Edge Function baqueano-presence). Lo pinta ops-live-presence.js.
     // 40: Aplicación Android (data/app-release.json + Supabase public_app_download_stats). Lo pinta ops-android-app.js.
+    // 42: Mensajes de viajeros (F6): Edge Function baqueano-messages. Lo pinta ops-messages.js.
+    '42-mensajes': {
+      isSystem: true,
+      title: 'Mensajes de viajeros',
+      icon: 'fa-comments',
+      roleRequired: 'admin'
+    },
     // 41: Automatización (F8): automation_runs vía baqueano-ops. Lo pinta ops-automation.js.
     '41-automatizacion': {
       isSystem: true,
@@ -4165,6 +4172,10 @@
       if (tabId === '20-sos') return this.renderSosModule();
       if (tabId === '11-reservas') return this.renderReservationsModule();
       if (tabId === '35-backup') return this.renderBackupSyncModule();
+      if (tabId === '42-mensajes') {
+        if (window.BaqueanoOpsMessages) return window.BaqueanoOpsMessages.render(panel);
+        return;
+      }
       if (tabId === '41-automatizacion') {
         if (window.BaqueanoOpsAutomation) return window.BaqueanoOpsAutomation.render(panel);
         return;

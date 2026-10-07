@@ -5168,3 +5168,20 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
       - 2 páginas; pdftotext encuentra los 13 valores esperados (92/92 RLS, 153 municipios, APK HTTP 404 como Falla, versión 1.0.0, "No se pudo leer" donde la fuente falló);
       - revisión visual de la página 1;
       - sin errores de consola.
+  - F8 verificado: pg_cron ejecutó solo la corrida #2 a las 09:17 UTC, con estado "warn". La APK ya da ok; queda un aviso real: 7 contenidos publicados sin fuente declarada.
+  - F6, mensajería viajero ↔ equipo (web + Android, Supabase):
+    - Migración `20261007230000_messaging.sql`, aplicada.
+      - Tablas `conversations` y `messages` con RLS y sin políticas; un trigger impide DELETE.
+      - Funciones `msg_*` y `msg_staff_*`, solo para service_role.
+      - Límites: 5 conversaciones abiertas, 10 mensajes cada 10 minutos, asunto 3–120 y mensaje 1–2000.
+    - Probado con una transacción revertida: ajeno → not_found; la respuesta del equipo avisa a la persona correcta sin mostrarle el correo del equipo; límites; cerrada → closed; DELETE bloqueado; sexta abierta → too_many_open. Después quedan 0 filas.
+    - Edge Function `baqueano-messages` v1, desplegada. Verificado en vivo: 401 sin token o con token falso, 403 desde origen ajeno, la RPC con la clave pública da "permission denied" y REST devuelve [].
+      - La respuesta del equipo crea un aviso en la campana (notify, tipo reply) y queda en audit_logs sin el texto.
+    - Web:
+      - sección "Mensajes" en perfil.html (`js/baqueano-messages.js`, `css/components/messages.css`) con pestaña propia;
+      - vista "Mensajes de viajeros" en el Ops Center (`ops-messages.js`): filtros, hilo, responder y cerrar; auditor solo lee.
+      - 63 claves `messages.*` y `opsMsg.*` en 6 idiomas.
+    - E2E:
+      - perfil es@390 y en@1366: validación, creación, foco en el título, HTML del usuario mostrado como texto, respuesta y lista; axe 0.
+      - Ops @1366 y @390: bandeja, hilo, respuesta, cierre; axe 0.
+    - Android: `lib/data/repositories/messages_repository.dart` (misma función) con su prueba `test/messages_repository_test.dart`. Pendiente honesto: la pantalla de la App va en la próxima versión del APK (aquí no hay Flutter; flutter analyze y test corren en CI).

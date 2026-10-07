@@ -124,6 +124,10 @@
             <span data-i18n="opsLive.title" class="ops-nav-item-label">Actividad en vivo</span>
             <span data-i18n="pages.admin.opsSidebarNav.span2" class="ops-nav-badge live">● En Vivo</span>
           </a>
+          <a class="ops-nav-item" data-tab="42-mensajes">
+            <i class="fa-solid fa-comments ops-nav-item-icon"></i>
+            <span data-i18n="opsMsg.title" class="ops-nav-item-label">Mensajes de viajeros</span>
+          </a>
           <a class="ops-nav-item" data-tab="41-automatizacion">
             <i class="fa-solid fa-robot ops-nav-item-icon"></i>
             <span data-i18n="opsAuto.title" class="ops-nav-item-label">Automatización</span>
@@ -935,6 +939,9 @@
           <div class="ops-view-header"><h1><i class="fa-solid fa-star"></i> <span data-i18n="menu.platformReviews">Opiniones BAQUEANO</span></h1></div>
           <div class="ops-empty-state"><i class="fa-solid fa-star ops-empty-icon"></i><div data-i18n="menu.platformReviews" class="ops-empty-title">Opiniones BAQUEANO</div><div data-i18n="menu.platformReviewsDesc" class="ops-empty-desc">Calificá tu experiencia con la plataforma</div></div>
         </section>
+        <section class="ops-view-panel" id="view-42-mensajes">
+          <div class="ops-view-header"><h1><i class="fa-solid fa-comments"></i> <span data-i18n="opsMsg.title">Mensajes de viajeros</span></h1></div>
+        </section>
         <section class="ops-view-panel" id="view-41-automatizacion">
           <div class="ops-view-header"><h1><i class="fa-solid fa-robot"></i> <span data-i18n="opsAuto.title">Automatización</span></h1></div>
         </section>
@@ -1614,7 +1621,7 @@
   <script src="js/video-registry.js?v=20260926-ops-fixed-uhd-1"></script>
   <!-- Matriz de roles compartida con el sitio público (autorización del Ops Center). -->
   <script src="js/shared/roles.js?v=20261005-rbac-1"></script>
-  <script src="js/ops-center/ops-engine.js?v=20261007-auto-1"></script>
+  <script src="js/ops-center/ops-engine.js?v=20261007-msg-1"></script>
   <script src="js/ops-center/ops-live-data.js?v=20261006-paginas-1"></script>
   <script src="js/ops-center/ops-ia-copilot.js?v=20261005-ops2-1"></script>
   <!-- Moderación de la comunidad: cliente de la Edge Function + vista 36. -->
@@ -1629,6 +1636,7 @@
   <script defer src="js/baqueano-pdf.js?v=20261007-1"></script>
   <script defer src="js/ops-center/ops-tech-report.js?v=20261007-1"></script>
   <script defer src="js/ops-center/ops-automation.js?v=20261007-2"></script>
+  <script defer src="js/ops-center/ops-messages.js?v=20261007-1"></script>
   <script defer src="js/baqueano-presence.js?v=20261006-1" data-bq-presence="true"></script>
 
   <script>

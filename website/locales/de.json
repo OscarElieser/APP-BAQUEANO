@@ -6271,5 +6271,78 @@
       "traffic_sessions_24h": "Traffic-Sitzungen (24 Std.)",
       "audit_logs": "Prüfprotokolleinträge"
     }
+  },
+  "messages": {
+    "tab": "Nachrichten",
+    "title": "Nachrichten mit dem BAQUEANO-Team",
+    "lead": "Schreib uns deine Fragen zu Reisezielen, Betrieben oder deinem Konto. Wir antworten hier und melden uns über die Glocke.",
+    "loginRequired": "Melde dich an, um deine Nachrichten zu sehen.",
+    "errGeneric": "Die Aktion konnte nicht abgeschlossen werden. Bitte versuch es erneut.",
+    "err": {
+      "login_required": "Melde dich an, um Nachrichten zu nutzen.",
+      "session_expired": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.",
+      "not_found": "Diese Unterhaltung gibt es nicht.",
+      "closed": "Die Unterhaltung ist geschlossen.",
+      "rate_limited": "Du hast viele Nachrichten hintereinander gesendet. Bitte warte ein paar Minuten.",
+      "too_many_open": "Du hast 5 offene Unterhaltungen. Warte auf eine Antwort, bevor du eine neue öffnest.",
+      "subject_invalid": "Der Betreff muss 3 bis 120 Zeichen lang sein.",
+      "body_invalid": "Die Nachricht muss 1 bis 2000 Zeichen lang sein.",
+      "origin_forbidden": "Diese Website kann keine Nachrichten an BAQUEANO senden."
+    },
+    "status": {
+      "open": "Wartet auf Antwort",
+      "answered": "Beantwortet",
+      "closed": "Geschlossen"
+    },
+    "counter": "{n} von {max} Zeichen",
+    "newTitle": "Neue Anfrage",
+    "subject": "Betreff",
+    "body": "Nachricht",
+    "send": "Senden",
+    "sent": "Nachricht gesendet. Wir melden uns über die Glocke, sobald das Team antwortet.",
+    "sentReply": "Antwort gesendet.",
+    "unread": "{n} ungelesen",
+    "empty": "Du hast noch keine Unterhaltungen. Schreib uns, wir antworten hier.",
+    "loading": "Wird geladen…",
+    "listTitle": "Deine Unterhaltungen",
+    "back": "Zurück zu deinen Unterhaltungen",
+    "threadLabel": "Nachrichten der Unterhaltung",
+    "you": "Du",
+    "team": "BAQUEANO-Team",
+    "closedNote": "Das Team hat diese Unterhaltung geschlossen. Wenn du noch etwas brauchst, stell eine neue Anfrage.",
+    "reply": "Deine Antwort",
+    "notifReplyTitle": "Das BAQUEANO-Team hat geantwortet",
+    "notifReplyBody": "Antwort auf „{subject}“. Lies sie in deinem Profil unter Nachrichten."
+  },
+  "opsMsg": {
+    "title": "Nachrichten von Reisenden",
+    "subtitle": "Anfragen aus dem Profil. Jede Antwort erreicht die Person über ihre Glocke.",
+    "noSession": "Keine Admin-Sitzung.",
+    "filterLabel": "Unterhaltungen filtern",
+    "loading": "Wird geladen…",
+    "empty": "Keine Unterhaltungen in diesem Posteingang.",
+    "unread": "{n} neu",
+    "noEmail": "Nicht bestätigte E-Mail",
+    "inboxTitle": "Posteingang",
+    "counts": "{open} warten auf Antwort · {unread} neue Nachrichten",
+    "threadLabel": "Nachrichten der Unterhaltung",
+    "teamAuthor": "Team",
+    "traveler": "Reisende Person",
+    "since": "seit",
+    "closedBy": "Geschlossen am {at} von {who}.",
+    "reply": "Antworten",
+    "close": "Unterhaltung schließen",
+    "replyLabel": "Antwort an die Person (sie sieht sie als „BAQUEANO-Team“)",
+    "emptyReply": "Schreib die Antwort, bevor du sie sendest.",
+    "replied": "Antwort gesendet. Die Person hat eine Benachrichtigung an ihrer Glocke erhalten.",
+    "closed": "Unterhaltung geschlossen.",
+    "readOnly": "Deine Rolle ist schreibgeschützt: Antworten erfordert eine Administratorin oder einen Administrator.",
+    "refresh": "Aktualisieren",
+    "status": {
+      "open": "Wartet auf Antwort",
+      "answered": "Beantwortet",
+      "closed": "Geschlossen",
+      "all": "Alle"
+    }
   }
 }

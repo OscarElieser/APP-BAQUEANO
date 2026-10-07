@@ -52,6 +52,7 @@
   <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" href="css/components/messages.css?v=20261007-1">
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
   <meta name="theme-color" content="#165D6F">
   <!-- Favicon e Iconografía Oficial BAQUEANO -->
@@ -211,6 +212,7 @@
       <a href="#preferencias" class="prof-tab-btn"><i class="fa-solid fa-sliders"></i> <span data-i18n="common.preferencias">Preferencias</span></a>
       <a href="#seguridad" class="prof-tab-btn"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="common.seguridad">Seguridad</span></a>
       <a href="#pagos" class="prof-tab-btn"><i class="fa-regular fa-credit-card"></i> <span data-i18n="common.pagos">Pagos</span></a>
+      <a href="#mensajes" class="prof-tab-btn"><i class="fa-regular fa-comments"></i> <span data-i18n="messages.tab">Mensajes</span></a>
       <a href="opiniones.html" class="prof-tab-btn"><i class="fa-regular fa-star"></i> <span data-i18n="platformReviews.mineTitle">Mi opinión</span></a>
       <a href="privacidad.html" class="prof-tab-btn"><i class="fa-solid fa-lock"></i> <span data-i18n="menu.privacy">Privacidad</span></a>
     </div>
@@ -401,6 +403,15 @@
           </a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- MENSAJES CON EL EQUIPO (F6): js/baqueano-messages.js + Edge Function baqueano-messages. -->
+  <section class="prof-messages-section" id="mensajes" data-private-section hidden style="padding:0 16px;margin:24px auto">
+    <div class="bq-msg-card">
+      <h4><i class="fa-regular fa-comments" aria-hidden="true" style="color:#165D6F"></i> <span data-i18n="messages.title">Mensajes con el equipo BAQUEANO</span></h4>
+      <p class="bq-msg-lead" data-i18n="messages.lead">Escribinos tus dudas sobre destinos, negocios o tu cuenta. Te respondemos aquí y te avisamos en la campana.</p>
+      <div data-messages-body aria-live="polite"></div>
     </div>
   </section>
 
@@ -793,6 +804,7 @@
 <script src="js/global-injector.js"></script>
 <script src="js/user-session.js?v=20261003-3"></script>
 <script src="js/auth-panel.js?v=20261004-1" defer></script>
+<script src="js/baqueano-messages.js?v=20261007-1" defer></script>
 </body>
 </html>
 

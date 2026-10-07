@@ -6271,5 +6271,78 @@
       "traffic_sessions_24h": "Traffic sessions (24 h)",
       "audit_logs": "Audit records"
     }
+  },
+  "messages": {
+    "tab": "Messages",
+    "title": "Messages with the BAQUEANO team",
+    "lead": "Send us your questions about destinations, businesses or your account. We reply here and let you know through the bell.",
+    "loginRequired": "Sign in to see your messages.",
+    "errGeneric": "The action could not be completed. Please try again.",
+    "err": {
+      "login_required": "Sign in to use messages.",
+      "session_expired": "Your session expired. Please sign in again.",
+      "not_found": "That conversation does not exist.",
+      "closed": "The conversation is closed.",
+      "rate_limited": "You sent many messages in a row. Please wait a few minutes.",
+      "too_many_open": "You have 5 open conversations. Wait for a reply before opening another.",
+      "subject_invalid": "The subject must be 3 to 120 characters long.",
+      "body_invalid": "The message must be 1 to 2000 characters long.",
+      "origin_forbidden": "This site cannot send messages to BAQUEANO."
+    },
+    "status": {
+      "open": "Awaiting reply",
+      "answered": "Answered",
+      "closed": "Closed"
+    },
+    "counter": "{n} of {max} characters",
+    "newTitle": "New question",
+    "subject": "Subject",
+    "body": "Message",
+    "send": "Send",
+    "sent": "Message sent. We’ll let you know through the bell when the team replies.",
+    "sentReply": "Reply sent.",
+    "unread": "{n} unread",
+    "empty": "You have no conversations yet. Write to us and we’ll reply here.",
+    "loading": "Loading…",
+    "listTitle": "Your conversations",
+    "back": "Back to your conversations",
+    "threadLabel": "Messages in this conversation",
+    "you": "You",
+    "team": "BAQUEANO team",
+    "closedNote": "The team closed this conversation. If you need anything else, open a new question.",
+    "reply": "Your reply",
+    "notifReplyTitle": "The BAQUEANO team replied",
+    "notifReplyBody": "Reply to “{subject}”. Read it in your profile, Messages section."
+  },
+  "opsMsg": {
+    "title": "Traveler messages",
+    "subtitle": "Questions written from the profile. Each reply reaches the person through their bell.",
+    "noSession": "No admin session.",
+    "filterLabel": "Filter conversations",
+    "loading": "Loading…",
+    "empty": "No conversations in this inbox.",
+    "unread": "{n} new",
+    "noEmail": "Unverified email",
+    "inboxTitle": "Inbox",
+    "counts": "{open} awaiting reply · {unread} new messages",
+    "threadLabel": "Messages in this conversation",
+    "teamAuthor": "Team",
+    "traveler": "Traveler",
+    "since": "since",
+    "closedBy": "Closed {at} by {who}.",
+    "reply": "Reply",
+    "close": "Close conversation",
+    "replyLabel": "Reply to the person (they see it as “BAQUEANO team”)",
+    "emptyReply": "Write the reply before sending it.",
+    "replied": "Reply sent. The person got a notification on their bell.",
+    "closed": "Conversation closed.",
+    "readOnly": "Your role is read-only: replying requires an administrator.",
+    "refresh": "Refresh",
+    "status": {
+      "open": "Awaiting reply",
+      "answered": "Answered",
+      "closed": "Closed",
+      "all": "All"
+    }
   }
 }
