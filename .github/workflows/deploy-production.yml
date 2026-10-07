@@ -198,14 +198,25 @@ jobs:
       - name: Esperar publicación del commit
         env:
           SITE: https://baqueanonicaragua.com
+          GH_TOKEN: ${{ github.token }}
         run: |
           short="${GITHUB_SHA::7}"
+          # 2026-10-07: la VM también tiene su propio autodeploy (trae origin/main). Si un commit más
+          # nuevo llegó antes de verificar, producción sirve una versión que YA CONTIENE el validado:
+          # se acepta igual o posterior (API compare de GitHub); distinto o anterior sigue fallando.
+          contains_validated() {
+            local d="$1"; [[ -n "$d" ]] || return 1
+            [[ "$short" == "$d"* ]] && return 0
+            local st; st="$(gh api "repos/$GITHUB_REPOSITORY/compare/${GITHUB_SHA}...${d}" --jq .status 2>/dev/null || true)"
+            [[ "$st" == "ahead" ]] && { echo "ℹ️ Producción sirve ${d}, posterior a ${short} y que lo contiene."; return 0; }
+            return 1
+          }
 
           for i in $(seq 1 18); do
             deployed="$(curl -fsS --max-time 10 "$SITE/health" | sed -nE 's/.*"commit":"([0-9a-f]+)".*/\1/p' || true)"
             echo "Intento $i: producción=${deployed:-?} · esperado=${short}"
 
-            if [[ -n "$deployed" && "$short" == "$deployed"* ]]; then
+            if contains_validated "$deployed"; then
               echo "✅ Producción sirve el commit ${short}"
               exit 0
             fi
@@ -231,12 +242,24 @@ jobs:
         with:
           node-version: '22'
       - name: Confirmar /health contra el commit actual
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           short="${GITHUB_SHA::7}"
+          # 2026-10-07: la VM también tiene su propio autodeploy (trae origin/main). Si un commit más
+          # nuevo llegó antes de verificar, producción sirve una versión que YA CONTIENE el validado:
+          # se acepta igual o posterior (API compare de GitHub); distinto o anterior sigue fallando.
+          contains_validated() {
+            local d="$1"; [[ -n "$d" ]] || return 1
+            [[ "$short" == "$d"* ]] && return 0
+            local st; st="$(gh api "repos/$GITHUB_REPOSITORY/compare/${GITHUB_SHA}...${d}" --jq .status 2>/dev/null || true)"
+            [[ "$st" == "ahead" ]] && { echo "ℹ️ Producción sirve ${d}, posterior a ${short} y que lo contiene."; return 0; }
+            return 1
+          }
           body="$(curl -fsS --max-time 15 "$SITE/health")"
           echo "$body"
           deployed="$(echo "$body" | sed -nE 's/.*"commit":"([0-9a-f]+)".*/\1/p')"
-          [[ -n "$deployed" && "$short" == "$deployed"* ]] || {
+          contains_validated "$deployed" || {
             echo "::error::Producción=${deployed:-?}, esperado=${short}"
             exit 1
           }

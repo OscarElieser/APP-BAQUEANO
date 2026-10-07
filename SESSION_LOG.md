@@ -5268,3 +5268,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - i18n: `?lang=en` → EN; cambio a FR; nodos nuevos traducidos; 0 errores JS.
   - `npm run i18n`: 0 errores. Auditoría estática: 0 críticos. browser-qa de la portada: 16 anchos, 0 fallos.
 - **Brecha honesta:** el móvil no llega a 90. El LCP depende de 27 hojas CSS bloqueantes (95 KB sin usar, gzip). Hace falta consolidar el CSS crítico, un refactor con riesgo visual que sigue pendiente.
+
+## 2026-10-07 — CI run 164 en rojo: carrera con el autodeploy de la VM
+- **Hallazgo:** en el run 164 fallaron la validación, el QA y el despliegue de 134d3ec. "Confirmar /health" encontró producción en **a52df84**, el commit siguiente, publicado a las 11:15:21 por el autodeploy propio de la VM (trae origin/main) antes de que su CI desplegara. No es un fallo de código: producción servía una versión que ya contenía el commit validado.
+- **Corrección** (`deploy-production.yml`, pasos "Esperar publicación" y "Confirmar /health"): se acepta el commit validado o uno posterior que lo contenga (API compare de GitHub, `status == ahead`, con GITHUB_TOKEN de solo lectura). Un commit anterior, divergente o vacío sigue fallando.
+- **Prueba local** (gh simulado): igual → OK; posterior → OK; anterior, divergente o vacío → FALLA. YAML válido.
