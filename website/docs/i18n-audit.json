@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T20:17:53.023Z",
+  "generatedAt": "2026-10-07T20:25:05.067Z",
   "languages": [
     "es",
     "en",
@@ -9,21 +9,21 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 5000,
-    "en": 5000,
-    "fr": 5000,
-    "it": 5000,
-    "pt": 5000,
-    "de": 5000
+    "es": 5016,
+    "en": 5016,
+    "fr": 5016,
+    "it": 5016,
+    "pt": 5016,
+    "de": 5016
   },
   "html": {
-    "files": 35,
-    "total": 3981,
-    "translated": 3980,
+    "files": 36,
+    "total": 3999,
+    "translated": 3998,
     "untranslated": 1
   },
   "js": {
-    "files": 120,
+    "files": 121,
     "translated": 152,
     "untranslated": 721
   },
@@ -72,6 +72,7 @@
     "terminos.html",
     "testimonios.html",
     "todos-los-destinos.html",
+    "todos-los-platos.html",
     "js/ai-assistant.js",
     "js/allies-directory.js",
     "js/ambiental-report-handoff.js",
@@ -136,6 +137,7 @@
     "js/territory-media-catalog.js",
     "js/territory-municipalities.js",
     "js/territory-rich-sections.js",
+    "js/todos-los-platos.js",
     "js/video-registry.js",
     "js/website-business-catalog.js",
     "js/website-operations-catalog.js",
@@ -472,6 +474,15 @@
       "type": "html",
       "total": 89,
       "translated": 89,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "todos-los-platos.html",
+      "type": "html",
+      "total": 18,
+      "translated": 18,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -1573,6 +1584,15 @@
       "untranslated": 37,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/todos-los-platos.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/tourism-catalog-expansion.js",

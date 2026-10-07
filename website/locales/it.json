@@ -6612,5 +6612,23 @@
     "verifySource": "Come è stato verificato (obbligatorio)",
     "verifyEvidence": "Prova (link, facoltativo)",
     "verifyNext": "Prossima revisione (il sigillo scade quel giorno)"
+  },
+  "allDishes": {
+    "back": "Torna alla Gastronomia",
+    "title": "Tutti i piatti del Nicaragua",
+    "docTitle": "Tutti i piatti del Nicaragua | BAQUEANO",
+    "metaDescription": "Tutti i piatti tradizionali del Nicaragua per dipartimento e regione: nacatamal, rosquillas, rondón, caffè d'altura e altro, dalle schede territoriali di BAQUEANO.",
+    "lead": "I sapori di ogni dipartimento e regione, così come compaiono nelle loro schede territoriali.",
+    "search": "Cerca un piatto",
+    "searchPh": "Nacatamal, rosquillas, caffè…",
+    "territory": "Dipartimento o regione",
+    "allTerritories": "Tutti i territori",
+    "source": "Fonte: schede territoriali di BAQUEANO. Le immagini sono foto del territorio, non del piatto.",
+    "groupCount": "{n} piatti",
+    "viewTerritory": "Vedi la scheda di {name}",
+    "territoryPhoto": "Foto del territorio",
+    "empty": "Nessun piatto per questa ricerca.",
+    "count": "{n} piatti da {t} territori",
+    "countOne": "{n} piatti da 1 territorio"
   }
 }

@@ -1,11 +1,11 @@
 {
  "summary": {
-  "generatedAt": "2026-10-07T20:21:47.343Z",
+  "generatedAt": "2026-10-07T20:25:03.994Z",
   "dir": "dist-hostinger",
-  "pages": 35,
+  "pages": 36,
   "critical": 0,
-  "warnings": 64,
-  "sitemapUrls": 26
+  "warnings": 71,
+  "sitemapUrls": 27
  },
  "seo": [
   {
@@ -462,6 +462,19 @@
    "indexable": true,
    "lang": "es",
    "sitemap": true
+  },
+  {
+   "page": "todos-los-platos.html",
+   "title": "Todos los platos de Nicaragua | BAQUEANO",
+   "description": "Todos los platos tradicionales de Nicaragua por departamento y región: nacatamal, rosquillas, rondón, café de altura y más, según las fichas territoriales de BAQUEANO.",
+   "canonical": "https://baqueanonicaragua.com/todos-los-platos.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 7,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
   }
  ],
  "findings": [
@@ -848,6 +861,48 @@
    "page": "todos-los-destinos.html",
    "rule": "anchor-missing",
    "detail": "ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "todos-los-platos.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #saboresNuestraHistoria no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "todos-los-platos.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #saboresNuestraHistoria no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "todos-los-platos.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #saboresNuestraHistoria no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "todos-los-platos.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #dondeVivirSabores no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "todos-los-platos.html",
+   "rule": "anchor-missing",
+   "detail": "ancla #dondeVivirSabores no existe en la página (puede crearse en tiempo de ejecución)"
+  },
+  {
+   "severity": "warning",
+   "page": "todos-los-platos.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#blog: ancla #blog no encontrada en nosotros.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "todos-los-platos.html",
+   "rule": "anchor-missing",
+   "detail": "nosotros.html#faqs: ancla #faqs no encontrada en nosotros.html (estático)"
   }
  ],
  "links": [
@@ -1232,6 +1287,48 @@
   {
    "from": "todos-los-destinos.html",
    "link": "#sosModal",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "todos-los-platos.html",
+   "link": "#saboresNuestraHistoria",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "todos-los-platos.html",
+   "link": "#saboresNuestraHistoria",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "todos-los-platos.html",
+   "link": "#saboresNuestraHistoria",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "todos-los-platos.html",
+   "link": "#dondeVivirSabores",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "todos-los-platos.html",
+   "link": "#dondeVivirSabores",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "todos-los-platos.html",
+   "link": "nosotros.html#blog",
+   "status": "ancla no encontrada (estático)",
+   "severity": "warning"
+  },
+  {
+   "from": "todos-los-platos.html",
+   "link": "nosotros.html#faqs",
    "status": "ancla no encontrada (estático)",
    "severity": "warning"
   }

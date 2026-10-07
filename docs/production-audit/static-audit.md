@@ -5,7 +5,7 @@
 -->
 # Auditoría estática de la salida publicada
 
-Generado: 2026-10-07T20:21:47.343Z · Páginas: 35 · URLs en sitemap: 26 · **Críticos: 0** · Advertencias: 64
+Generado: 2026-10-07T20:25:03.994Z · Páginas: 36 · URLs en sitemap: 27 · **Críticos: 0** · Advertencias: 71
 
 ## SEO por página
 
@@ -46,6 +46,7 @@ Generado: 2026-10-07T20:21:47.343Z · Páginas: 35 · URLs en sitemap: 26 · **C
 | terminos.html | Términos & Condiciones de Uso \| BAQUEANO Nicaragua | 150 car. | /terminos.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | testimonios.html | Experiencias de viajeros \| Testimonios BAQUEANO | 134 car. | /testimonios.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 | todos-los-destinos.html | Todos los destinos \| BAQUEANO Nicaragua | 163 car. | /todos-los-destinos.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
+| todos-los-platos.html | Todos los platos de Nicaragua \| BAQUEANO | 167 car. | /todos-los-platos.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
 
 ## Hallazgos
 
@@ -115,3 +116,10 @@ Generado: 2026-10-07T20:21:47.343Z · Páginas: 35 · URLs en sitemap: 26 · **C
 | ⚠️ advertencia | terminos.html | anchor-missing | aliados.html#postular: ancla #postular no encontrada en aliados.html (estático) |
 | ⚠️ advertencia | todos-los-destinos.html | anchor-missing | ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución) |
 | ⚠️ advertencia | todos-los-destinos.html | anchor-missing | ancla #sosModal no existe en la página (puede crearse en tiempo de ejecución) |
+| ⚠️ advertencia | todos-los-platos.html | anchor-missing | ancla #saboresNuestraHistoria no existe en la página (puede crearse en tiempo de ejecución) |
+| ⚠️ advertencia | todos-los-platos.html | anchor-missing | ancla #saboresNuestraHistoria no existe en la página (puede crearse en tiempo de ejecución) |
+| ⚠️ advertencia | todos-los-platos.html | anchor-missing | ancla #saboresNuestraHistoria no existe en la página (puede crearse en tiempo de ejecución) |
+| ⚠️ advertencia | todos-los-platos.html | anchor-missing | ancla #dondeVivirSabores no existe en la página (puede crearse en tiempo de ejecución) |
+| ⚠️ advertencia | todos-los-platos.html | anchor-missing | ancla #dondeVivirSabores no existe en la página (puede crearse en tiempo de ejecución) |
+| ⚠️ advertencia | todos-los-platos.html | anchor-missing | nosotros.html#blog: ancla #blog no encontrada en nosotros.html (estático) |
+| ⚠️ advertencia | todos-los-platos.html | anchor-missing | nosotros.html#faqs: ancla #faqs no encontrada en nosotros.html (estático) |

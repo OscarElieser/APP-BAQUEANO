@@ -5552,3 +5552,16 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - browser-qa (2 páginas × 16 anchos): 0 fallos;
   - auditoría estática: 0 críticos (se corrigió una descripción duplicada);
   - i18n: 0 errores.
+
+### Gastronomía: "Ver todos los platos" → página aparte — hecho y probado
+- `todos-los-platos.html` (nueva) + `js/todos-los-platos.js` + `css/pages/todos-los-platos.css`:
+  - los 100 platos de los 17 territorios de `js/territories-data.js` (la misma fuente que las fichas de cada departamento), agrupados por territorio;
+  - búsqueda (`?q=`), filtro por territorio (`?territorio=`) y enlace a cada ficha;
+  - sin precios, calificaciones ni fotos de platos inexistentes: la imagen es la foto del territorio y dice "Foto del territorio".
+- gastronomia.html: "Ver todos los platos" (antes un ancla a la misma sección) abre la página nueva. Los Sabores destacados siguen en movimiento con pausa.
+- 16 claves `allDishes.*` en 6 idiomas; entrada en el buscador interno; sitemap automático.
+- Pruebas:
+  - Playwright 10/10 a 1366 y 390 px: 100 platos / 17 grupos / 100 rótulos de foto, búsqueda "rosquilla" → 8, Madriz → 6 con enlace a su ficha, axe 0;
+  - browser-qa (2 páginas × 16 anchos): 0 fallos;
+  - auditoría estática: 0 críticos; i18n: 0 errores.
+- Sigue sin resolver: las categorías "Bebidas" y "Dulces" de gastronomia.html no tienen platos asignados. No se clasificó por adivinanza; requiere que el equipo marque cada plato.

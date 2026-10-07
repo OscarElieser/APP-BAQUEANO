@@ -6612,5 +6612,23 @@
     "verifySource": "Como foi conferido (obrigatório)",
     "verifyEvidence": "Evidência (link, opcional)",
     "verifyNext": "Próxima revisão (o selo vence nesse dia)"
+  },
+  "allDishes": {
+    "back": "Voltar à Gastronomia",
+    "title": "Todos os pratos da Nicarágua",
+    "docTitle": "Todos os pratos da Nicarágua | BAQUEANO",
+    "metaDescription": "Todos os pratos tradicionais da Nicarágua por departamento e região: nacatamal, rosquillas, rondón, café de altitude e mais, segundo as fichas territoriais do BAQUEANO.",
+    "lead": "Os sabores de cada departamento e região, tal como aparecem em suas fichas territoriais.",
+    "search": "Buscar um prato",
+    "searchPh": "Nacatamal, rosquillas, café…",
+    "territory": "Departamento ou região",
+    "allTerritories": "Todos os territórios",
+    "source": "Fonte: fichas territoriais do BAQUEANO. As imagens são fotos do território, não do prato.",
+    "groupCount": "{n} pratos",
+    "viewTerritory": "Ver a ficha de {name}",
+    "territoryPhoto": "Foto do território",
+    "empty": "Não encontramos pratos com essa busca.",
+    "count": "{n} pratos de {t} territórios",
+    "countOne": "{n} pratos de 1 território"
   }
 }

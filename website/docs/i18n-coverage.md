@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T20:17:53.023Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 5000 · en 5000 · fr 5000 · it 5000 · pt 5000 · de 5000
+Generado: 2026-10-07T20:25:05.067Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 5016 · en 5016 · fr 5016 · it 5016 · pt 5016 · de 5016
 
-HTML: 3980/3981 textos con clave (1 pendientes) · JS: 721 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3998/3999 textos con clave (1 pendientes) · JS: 721 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -239,6 +239,7 @@ HTML: 3980/3981 textos con clave (1 pendientes) · JS: 721 textos dinámicos pen
 | js/territory-media-catalog.js | js | 0 | 0 | 0 | 100 % |
 | js/territory-municipalities.js | js | 14 | 14 | 0 | 100 % |
 | js/territory-rich-sections.js | js | 0 | 0 | 0 | 100 % |
+| js/todos-los-platos.js | js | 0 | 0 | 0 | 100 % |
 | js/video-registry.js | js | 0 | 0 | 0 | 100 % |
 | js/website-business-catalog.js | js | 0 | 0 | 0 | 100 % |
 | js/website-operations-catalog.js | js | 0 | 0 | 0 | 100 % |
@@ -258,3 +259,4 @@ HTML: 3980/3981 textos con clave (1 pendientes) · JS: 721 textos dinámicos pen
 | terminos.html | html | 193 | 193 | 0 | 100 % |
 | testimonios.html | html | 79 | 79 | 0 | 100 % |
 | todos-los-destinos.html | html | 89 | 89 | 0 | 100 % |
+| todos-los-platos.html | html | 18 | 18 | 0 | 100 % |

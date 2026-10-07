@@ -6612,5 +6612,23 @@
     "verifySource": "Wie es geprüft wurde (Pflichtfeld)",
     "verifyEvidence": "Nachweis (Link, optional)",
     "verifyNext": "Nächste Prüfung (das Siegel läuft an diesem Tag ab)"
+  },
+  "allDishes": {
+    "back": "Zurück zur Gastronomie",
+    "title": "Alle Gerichte Nicaraguas",
+    "docTitle": "Alle Gerichte Nicaraguas | BAQUEANO",
+    "metaDescription": "Alle traditionellen Gerichte Nicaraguas nach Departamento und Region: Nacatamal, Rosquillas, Rondón, Hochlandkaffee und mehr, aus den Gebietsprofilen von BAQUEANO.",
+    "lead": "Die Aromen jedes Departamentos und jeder Region, wie sie in ihren Gebietsprofilen stehen.",
+    "search": "Gericht suchen",
+    "searchPh": "Nacatamal, Rosquillas, Kaffee…",
+    "territory": "Departamento oder Region",
+    "allTerritories": "Alle Gebiete",
+    "source": "Quelle: Gebietsprofile von BAQUEANO. Die Bilder zeigen das Gebiet, nicht das Gericht.",
+    "groupCount": "{n} Gerichte",
+    "viewTerritory": "Profil von {name} ansehen",
+    "territoryPhoto": "Foto des Gebiets",
+    "empty": "Keine Gerichte für diese Suche gefunden.",
+    "count": "{n} Gerichte aus {t} Gebieten",
+    "countOne": "{n} Gerichte aus 1 Gebiet"
   }
 }

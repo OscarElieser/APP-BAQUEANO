@@ -6612,5 +6612,23 @@
     "verifySource": "Cómo se comprobó (obligatorio)",
     "verifyEvidence": "Evidencia (enlace, opcional)",
     "verifyNext": "Próxima revisión (el sello vence ese día)"
+  },
+  "allDishes": {
+    "back": "Volver a Gastronomía",
+    "title": "Todos los platos de Nicaragua",
+    "docTitle": "Todos los platos de Nicaragua | BAQUEANO",
+    "metaDescription": "Todos los platos tradicionales de Nicaragua por departamento y región: nacatamal, rosquillas, rondón, café de altura y más, según las fichas territoriales de BAQUEANO.",
+    "lead": "Los sabores de cada departamento y región, tal como aparecen en sus fichas territoriales.",
+    "search": "Buscar un plato",
+    "searchPh": "Nacatamal, rosquillas, café…",
+    "territory": "Departamento o región",
+    "allTerritories": "Todos los territorios",
+    "source": "Fuente: fichas territoriales de BAQUEANO. Las imágenes son fotos del territorio, no del plato.",
+    "groupCount": "{n} platos",
+    "viewTerritory": "Ver la ficha de {name}",
+    "territoryPhoto": "Foto del territorio",
+    "empty": "No encontramos platos con esa búsqueda.",
+    "count": "{n} platos de {t} territorios",
+    "countOne": "{n} platos de 1 territorio"
   }
 }

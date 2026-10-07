@@ -6612,5 +6612,23 @@
     "verifySource": "How it was checked (required)",
     "verifyEvidence": "Evidence (link, optional)",
     "verifyNext": "Next review (the seal expires that day)"
+  },
+  "allDishes": {
+    "back": "Back to Food",
+    "title": "All the dishes of Nicaragua",
+    "docTitle": "All the dishes of Nicaragua | BAQUEANO",
+    "metaDescription": "All the traditional dishes of Nicaragua by department and region: nacatamal, rosquillas, rondón, highland coffee and more, from BAQUEANO's territory profiles.",
+    "lead": "The flavors of each department and region, just as they appear in their territory profiles.",
+    "search": "Search for a dish",
+    "searchPh": "Nacatamal, rosquillas, coffee…",
+    "territory": "Department or region",
+    "allTerritories": "All territories",
+    "source": "Source: BAQUEANO territory profiles. Images are photos of the territory, not of the dish.",
+    "groupCount": "{n} dishes",
+    "viewTerritory": "See the {name} profile",
+    "territoryPhoto": "Photo of the territory",
+    "empty": "We found no dishes for that search.",
+    "count": "{n} dishes from {t} territories",
+    "countOne": "{n} dishes from 1 territory"
   }
 }
