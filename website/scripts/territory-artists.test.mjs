@@ -57,12 +57,21 @@ for (const artist of artists) {
     for (const id of artist.depts) if (!territoryIds.has(id)) fail(`${where}: territorio "${id}" inexistente.`);
   }
   if (!artist.locality && !artist.localityKey) fail(`${where}: sin localidad.`);
+  // Foto opcional, pero si está debe ser real y trazable: crédito, licencia, fuente y archivo.
+  if (artist.photo) {
+    const photo = artist.photo;
+    if (!/^assets\/images\/artistas\/[a-z0-9-]+\.(webp|jpg|jpeg|png)$/.test(String(photo.src || ''))) fail(`${where}: photo.src debe estar en assets/images/artistas/.`);
+    else if (!fs.existsSync(path.join(ROOT, photo.src))) fail(`${where}: no existe ${photo.src}.`);
+    if (!String(photo.credit || '').trim()) fail(`${where}: foto sin crédito.`);
+    if (!String(photo.license || '').trim()) fail(`${where}: foto sin licencia o permiso.`);
+    if (!/^https:\/\//.test(String(photo.sourceUrl || ''))) fail(`${where}: foto sin fuente https.`);
+  }
   if (artist.localityKey) requireKey(artist.localityKey, where);
   requireKey(`${BASE}disciplines.${artist.discipline}`, where);
   requireKey(`${BASE}items.${artist.id}.milestone`, where);
 }
 
-for (const key of ['kicker', 'title', 'subtitle', 'note', 'deptLink', 'deptTitle', 'deptSubtitle', 'historiaLink']) requireKey(BASE + key, 'sección');
+for (const key of ['kicker', 'title', 'subtitle', 'note', 'deptLink', 'deptTitle', 'deptSubtitle', 'historiaLink', 'photoPending', 'photoCredit']) requireKey(BASE + key, 'sección');
 
 const historia = read('historia.html');
 const departamento = read('departamento.html');

@@ -32,6 +32,12 @@
     { id: 'raccs', name: 'Costa Caribe Sur (RACCS)', icon: 'fa-water' }
   ];
 
+  // FOTOS (2026-10-07): cada ficha tiene un espacio de retrato. Mientras no haya foto, muestra el
+  // logo de BAQUEANO y el aviso "Foto pendiente". Para publicar una foto real, agregá al artista:
+  //   photo: { src: 'assets/images/artistas/<id>.webp', credit: 'Autor o archivo',
+  //            license: 'CC BY-SA 4.0 | Permiso escrito | Dominio público', sourceUrl: 'https://…' }
+  // Solo fotos reales con permiso o licencia, nunca imágenes generadas que simulen a la persona.
+  // scripts/territory-artists.test.mjs exige crédito, licencia, fuente https y que el archivo exista.
   // discipline → pages.historia.artistas.disciplines.<discipline>
   // milestone  → pages.historia.artistas.items.<id>.milestone
   // localityKey (opcional) → localidad con texto traducible en vez de nombre propio.

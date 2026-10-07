@@ -4941,3 +4941,11 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
       - HTTP real a v116: 200, sin menú.
     - Incidente de plataforma Supabase (07/10): las llamadas internas a la API REST devuelven 522 de Cloudflare (desde Edge Functions y desde `extensions.http`), mientras SQL directo funciona y `get_project` informa ACTIVE_HEALTHY. No lo causa el código. BAQÜI responde igual por la ruta local.
     - Pendiente: la foto de artistas (la imagen no llegó; solo se usarán fotos reales o con licencia, nunca generadas como si fueran las personas). La Fase 7 (/descargar, QR, banner) sigue: ya está el manifiesto real de la APK (`website/data/app-release.json`).
+- 2026-10-07 · Pedido del propietario: "Ok, implementá lo de la foto; por ejemplo, dejá el logo por ahora; después yo busco las fotos y te las doy, y continuá".
+  - Interpretación: en las fichas de artistas por territorio (historia.html y departamento.html), un espacio de retrato por artista que hoy muestra el logo de BAQUEANO y que, cuando llegue la foto real con su crédito y licencia, la muestra sin tocar código. Después, continuar con la Fase 7 (/descargar, QR, banner).
+  - Resultado — retratos de artistas:
+    - Cada ficha tiene un retrato. Hoy muestra el logo de BAQUEANO con "Foto pendiente" (6 idiomas). Con `photo` en los datos muestra la foto real con crédito y licencia enlazados, y si no carga vuelve al logo.
+    - La prueba `territory-artists` exige crédito, licencia, fuente https y que el archivo exista. Instrucciones en `website/assets/images/artistas/README.md`.
+    - Error encontrado y corregido: `departamento.html` nunca tuvo el bloque de artistas. Los enlaces "Ver departamento" de Historia llevaban a un ancla inexistente y la prueba `test:artistas` ya estaba en rojo. Ahora el bloque se pinta en cada cambio de territorio.
+    - Pruebas: `test:artistas` en verde. Playwright + axe en Historia (390/1366, ES/EN) y Departamento (Managua, RACCS en DE, Granada, Carazo, León): retratos visibles, sin desborde, sin errores JS, axe 0. Madriz y Chinandega, de diseño especial y sin artistas, no muestran el bloque.
+    - Pendiente: el propietario enviará las fotos.

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T02:42:34.747Z",
+  "generatedAt": "2026-10-07T03:06:51.146Z",
   "languages": [
     "es",
     "en",
@@ -9,17 +9,17 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4528,
-    "en": 4528,
-    "fr": 4528,
-    "it": 4528,
-    "pt": 4528,
-    "de": 4528
+    "es": 4530,
+    "en": 4530,
+    "fr": 4530,
+    "it": 4530,
+    "pt": 4530,
+    "de": 4530
   },
   "html": {
     "files": 33,
-    "total": 3814,
-    "translated": 3813,
+    "total": 3818,
+    "translated": 3817,
     "untranslated": 1
   },
   "js": {
@@ -246,8 +246,8 @@
     {
       "file": "departamento.html",
       "type": "html",
-      "total": 78,
-      "translated": 78,
+      "total": 82,
+      "translated": 82,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100

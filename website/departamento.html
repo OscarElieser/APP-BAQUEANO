@@ -56,6 +56,7 @@
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/pages/departamento.css?v=20261006-muni-1">
   <link rel="stylesheet" href="css/pages/chinandega.css">
+  <link rel="stylesheet" href="css/components/territory-artists.css?v=20261007-fotos-1">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
@@ -461,6 +462,23 @@
           CÓMO: nombres y datos se completan desde el catálogo territorial al navegar.
           QUÉ: planificación y acciones contextualizadas para los 17 territorios.
         -->
+        <!--
+          🎯 POR QUÉ: Historia enlaza a cada artista con "Ver departamento" (#territoryArtistsSection),
+             pero este bloque nunca se había agregado y el enlace llegaba a la nada (2026-10-07).
+          ⚙️ CÓMO: js/territory-artists.js pinta las fichas del territorio activo en cada cambio
+             (renderDepartment → BaqueanoTerritoryArtists.render) y oculta el bloque si no hay artistas.
+          📦 QUÉ: fichas con retrato (foto real con crédito, o logo + "Foto pendiente") y enlace a Historia.
+        -->
+        <section class="dept-section-card bq-artists" id="territoryArtistsSection" aria-labelledby="territoryArtistsTitle" hidden>
+          <header>
+            <span><i class="fa-solid fa-palette" aria-hidden="true"></i> <span data-i18n="pages.historia.artistas.kicker">ARTES VISUALES, ESCÉNICAS Y DOCUMENTALES</span></span>
+            <h2 id="territoryArtistsTitle"><span data-i18n="pages.historia.artistas.deptTitle">Artistas del territorio</span></h2>
+            <p data-i18n="pages.historia.artistas.deptSubtitle">Creadores cuya obra está ligada a este departamento o región.</p>
+          </header>
+          <div class="bq-artists-grid" id="territoryArtistsGrid"></div>
+          <p class="bq-artists-note"><a href="historia.html#artistasTerritorio" class="bq-artists-group-link"><span data-i18n="pages.historia.artistas.historiaLink">Ver todos los artistas en Historia</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+        </section>
+
         <section class="dept-section-card chinandega-logistics-card" aria-labelledby="deptPlanningTitle">
           <header>
             <span><i class="fa-solid fa-compass"></i> <span data-i18n="pages.departamento.header.span1">PLANIFICACIÓN HONESTA</span></span>
@@ -1140,6 +1158,7 @@
          * plantilla territorial compartida únicamente para los otros territorios.
          * QUÉ: dos experiencias especiales intactas y una base común coherente.
          */
+        if (window.BaqueanoTerritoryArtists) window.BaqueanoTerritoryArtists.render(dept);
         if (dept.id === 'madriz' && window.BaqueanoMadriz) {
           if (window.BaqueanoTerritoryMedia) window.BaqueanoTerritoryMedia.unmount();
           if (mainContainer) {
@@ -1385,6 +1404,8 @@
     });
   </script>
   <script src="js/persistent-audio-player.js?v=20260922-3"></script>
+<script src="js/territory-artists-data.js?v=20261007-fotos-1"></script>
+<script src="js/territory-artists.js?v=20261007-fotos-1"></script>
 <script src="js/global-injector.js"></script>
 </body>
 </html>

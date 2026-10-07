@@ -54,8 +54,36 @@
     return { groups: source.groups || [], artists: source.artists || [] };
   }
 
+  var LOGO = 'assets/images/logo.png';
+
+  // Retrato: foto real con crédito y licencia si existe; si no (o si no carga), el logo de
+  // BAQUEANO con el aviso "Foto pendiente". Nunca se muestra una cara que no sea la persona.
+  function placeholder(figure) {
+    figure.className = 'bq-artist-portrait is-pending';
+    var logo = el('img', 'bq-artist-portrait-logo', { src: LOGO, alt: '', width: '600', height: '608', loading: 'lazy', decoding: 'async' });
+    figure.replaceChildren(logo, keyed('span', 'bq-artist-portrait-chip', BASE + 'photoPending'));
+  }
+
+  function portrait(artist) {
+    var figure = el('figure', 'bq-artist-portrait');
+    var photo = artist.photo;
+    if (!photo || !photo.src) { placeholder(figure); return figure; }
+    var img = el('img', 'bq-artist-portrait-img', { src: photo.src, alt: artist.name, loading: 'lazy', decoding: 'async' });
+    img.addEventListener('error', function () { placeholder(figure); }, { once: true });
+    var caption = el('figcaption', 'bq-artist-portrait-credit');
+    caption.appendChild(keyed('span', '', BASE + 'photoCredit'));
+    caption.appendChild(document.createTextNode(': '));
+    var source = el('a', '', { href: photo.sourceUrl, target: '_blank', rel: 'noopener noreferrer', translate: 'no' });
+    source.textContent = photo.credit + ' · ' + photo.license;
+    caption.appendChild(source);
+    figure.appendChild(img);
+    figure.appendChild(caption);
+    return figure;
+  }
+
   function artistCard(artist) {
     var card = el('article', 'bq-artist-card', { id: 'artista-' + artist.id });
+    card.appendChild(portrait(artist));
     var head = el('div', 'bq-artist-head');
     head.appendChild(keyed('span', 'bq-artist-discipline', BASE + 'disciplines.' + artist.discipline));
     card.appendChild(head);

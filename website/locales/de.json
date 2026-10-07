@@ -3544,7 +3544,9 @@
           "carrion": {
             "milestone": "Filmemacherin, die mit ihrem Dokumentarfilm Heredera del viento das kollektive historische Gedächtnis der 1980er-Jahre mit urbanen Generationskonflikten verbindet."
           }
-        }
+        },
+        "photoPending": "Foto folgt",
+        "photoCredit": "Foto"
       },
       "audio": {
         "counter": "Kapitel {n} von {total}",

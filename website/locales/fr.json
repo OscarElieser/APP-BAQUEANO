@@ -3544,7 +3544,9 @@
           "carrion": {
             "milestone": "Cinéaste qui relie la mémoire historique collective des années 1980 aux dilemmes générationnels urbains à travers son documentaire Heredera del viento."
           }
-        }
+        },
+        "photoPending": "Photo à venir",
+        "photoCredit": "Photo"
       },
       "audio": {
         "counter": "Chapitre {n} sur {total}",
