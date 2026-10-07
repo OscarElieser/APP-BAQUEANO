@@ -53,6 +53,7 @@
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
   <link rel="stylesheet" href="css/components/messages.css?v=20261007-1">
+  <link rel="stylesheet" href="css/components/profile-editor.css?v=20261007-1">
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
   <meta name="theme-color" content="#165D6F">
   <!-- Favicon e Iconografía Oficial BAQUEANO -->
@@ -165,16 +166,16 @@
       <div class="prof-user-left">
         <div class="prof-avatar-box">
           <img src="assets/images/logo.png" alt="" class="prof-avatar-img" onerror="this.onerror=null;this.src='assets/images/logo.png'" decoding="async" loading="lazy" width="600" height="608">
-          <a data-i18n-aria-label="pages.perfil.profUserSection.aAriaLabel1" href="perfil.html?editar=foto#perfil-personal" class="prof-avatar-edit-btn" aria-label="Cambiar foto"><i class="fa-solid fa-camera"></i></a>
+          <a data-i18n-aria-label="pages.perfil.profUserSection.aAriaLabel1" href="perfil.html?editar=foto#perfil-personal" data-pe-edit="foto" class="prof-avatar-edit-btn" aria-label="Cambiar foto"><i class="fa-solid fa-camera"></i></a>
         </div>
         <div class="prof-user-info">
           <h3><span data-i18n="pages.perfil.profUserSection.span1" data-profile-field="name">Explorador</span> <span data-i18n="pages.perfil.profUserSection.span2" class="prof-user-badge">Explorador BAQUEANO</span></h3>
           <p class="prof-user-tagline" data-profile-field="email"></p>
           <div class="prof-user-meta">
             <span><i class="fa-regular fa-calendar"></i> <span data-i18n="pages.perfil.profUserSection.span3">Miembro desde</span> <strong data-profile-field="since">—</strong></span>
-            <span><i class="fa-solid fa-location-dot"></i> <strong data-i18n="pages.perfil.profUserSection.strong1">Ubicación sin completar</strong></span>
-            <span><i class="fa-solid fa-language"></i> <strong data-i18n="language.es">Español</strong></span>
-            <span><i class="fa-solid fa-coins"></i> <span data-i18n="pages.perfil.profUserSection.span4">Moneda preferida:</span> <strong data-i18n="pages.perfil.profUserSection.strong2">C$ Córdoba (NIO)</strong></span>
+            <span><i class="fa-solid fa-location-dot"></i> <strong data-i18n="pages.perfil.profUserSection.strong1" data-pe="location">Ubicación sin completar</strong></span>
+            <span><i class="fa-solid fa-language"></i> <strong data-i18n="language.es" data-pe="language-label">Español</strong></span>
+            <span><i class="fa-solid fa-coins"></i> <span data-i18n="pages.perfil.profUserSection.span4">Moneda preferida:</span> <strong data-i18n="pages.perfil.profUserSection.strong2" data-pe="currency-label">C$ Córdoba (NIO)</strong></span>
           </div>
         </div>
       </div>
@@ -196,7 +197,7 @@
           <i class="fa-solid fa-star prof-stat-icon yellow"></i>
           <div><div class="prof-stat-val">0</div><span data-i18n="pages.perfil.profUserSection.span8" class="prof-stat-lbl">Reseñas realizadas</span></div>
         </div>
-        <a href="#perfil-personal" class="prof-btn-edit"><i class="fa-regular fa-pen-to-square"></i> <span data-i18n="profile.editProfile">Editar perfil</span></a>
+        <a href="#perfil-personal" data-pe-edit="datos" class="prof-btn-edit"><i class="fa-regular fa-pen-to-square"></i> <span data-i18n="profile.editProfile">Editar perfil</span></a>
       </div>
     </div>
   </section>
@@ -423,16 +424,16 @@
       </div>
       <p data-i18n="pages.perfil.preferencias.p1" style="font-size:0.8rem;color:var(--prof-muted);margin:0">Selecciona tus intereses para recibir recomendaciones personalizadas.</p>
       <div class="prof-prefs-cloud">
-        <span class="prof-pref-tag"><i class="fa-solid fa-umbrella-beach"></i> <span data-i18n="home.destinations.filters.beaches">Playas</span></span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-volcano"></i> <span data-i18n="home.destinations.filters.volcanoes">Volcanes</span></span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-person-hiking"></i> <span data-i18n="pages.perfil.preferencias.span1">Senderismo</span></span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-utensils"></i> <span data-i18n="nav.gastronomy">Gastronomía</span></span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-mug-hot"></i> <span data-i18n="pages.perfil.preferencias.span2">Café</span></span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-water"></i> <span data-i18n="pages.perfil.preferencias.span3">Cascadas</span></span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-masks-theater"></i> <span data-i18n="nav.culture">Cultura</span></span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-people-roof"></i> <span data-i18n="pages.perfil.preferencias.span4">Turismo familiar</span></span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-camera"></i> <span data-i18n="common.fotografia">Fotografía</span></span>
-        <span class="prof-pref-tag"><i class="fa-solid fa-mountain"></i> <span data-i18n="testimonials.types.aventura">Aventura</span></span>
+        <span class="prof-pref-tag" data-interest="playas"><i class="fa-solid fa-umbrella-beach"></i> <span data-i18n="home.destinations.filters.beaches">Playas</span></span>
+        <span class="prof-pref-tag" data-interest="volcanes"><i class="fa-solid fa-volcano"></i> <span data-i18n="home.destinations.filters.volcanoes">Volcanes</span></span>
+        <span class="prof-pref-tag" data-interest="senderismo"><i class="fa-solid fa-person-hiking"></i> <span data-i18n="pages.perfil.preferencias.span1">Senderismo</span></span>
+        <span class="prof-pref-tag" data-interest="gastronomia"><i class="fa-solid fa-utensils"></i> <span data-i18n="nav.gastronomy">Gastronomía</span></span>
+        <span class="prof-pref-tag" data-interest="cafe"><i class="fa-solid fa-mug-hot"></i> <span data-i18n="pages.perfil.preferencias.span2">Café</span></span>
+        <span class="prof-pref-tag" data-interest="cascadas"><i class="fa-solid fa-water"></i> <span data-i18n="pages.perfil.preferencias.span3">Cascadas</span></span>
+        <span class="prof-pref-tag" data-interest="cultura"><i class="fa-solid fa-masks-theater"></i> <span data-i18n="nav.culture">Cultura</span></span>
+        <span class="prof-pref-tag" data-interest="familiar"><i class="fa-solid fa-people-roof"></i> <span data-i18n="pages.perfil.preferencias.span4">Turismo familiar</span></span>
+        <span class="prof-pref-tag" data-interest="fotografia"><i class="fa-solid fa-camera"></i> <span data-i18n="common.fotografia">Fotografía</span></span>
+        <span class="prof-pref-tag" data-interest="aventura"><i class="fa-solid fa-mountain"></i> <span data-i18n="testimonials.types.aventura">Aventura</span></span>
       </div>
     </div>
 
@@ -450,14 +451,14 @@
     <div class="prof-card">
       <div class="prof-card-header">
         <h4><i class="fa-regular fa-user" style="color:var(--prof-primary)"></i> <span data-i18n="pages.perfil.perfilPersonal.h41">Información personal</span></h4>
-        <a data-i18n="actions.edit" href="perfil.html?editar=datos#perfil-personal" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
+        <a data-i18n="actions.edit" href="perfil.html?editar=datos#perfil-personal" data-pe-edit="datos" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
       </div>
       <div class="prof-field-list">
         <div class="prof-field-item"><i class="fa-solid fa-id-badge"></i><div><small data-i18n="forms.fullName">Nombre completo</small><strong data-i18n="pages.perfil.perfilPersonal.strong1" data-profile-field="name">Sin completar</strong></div></div>
         <div class="prof-field-item"><i class="fa-regular fa-envelope"></i><div><small data-i18n="profile.email">Correo electrónico</small><strong data-i18n="pages.perfil.perfilPersonal.strong1" data-profile-field="email">Sin completar</strong></div></div>
-        <div class="prof-field-item"><i class="fa-solid fa-phone"></i><div><small data-i18n="profile.phone">Teléfono</small><strong data-i18n="pages.perfil.perfilPersonal.strong1">Sin completar</strong></div></div>
-        <div class="prof-field-item"><i class="fa-solid fa-location-dot"></i><div><small data-i18n="pages.perfil.perfilPersonal.small1">Ubicación</small><strong data-i18n="pages.perfil.perfilPersonal.strong1">Sin completar</strong></div></div>
-        <div class="prof-field-item"><i class="fa-solid fa-phone-volume"></i><div><small data-i18n="pages.perfil.perfilPersonal.small2">Contacto de emergencia</small><strong data-i18n="pages.perfil.perfilPersonal.strong1">Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-phone"></i><div><small data-i18n="profile.phone">Teléfono</small><strong data-i18n="pages.perfil.perfilPersonal.strong1" data-pe="phone">Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-location-dot"></i><div><small data-i18n="pages.perfil.perfilPersonal.small1">Ubicación</small><strong data-i18n="pages.perfil.perfilPersonal.strong1" data-pe="location">Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-phone-volume"></i><div><small data-i18n="pages.perfil.perfilPersonal.small2">Contacto de emergencia</small><strong data-i18n="pages.perfil.perfilPersonal.strong1" data-pe="emergency">Sin completar</strong></div></div>
       </div>
     </div>
 
@@ -465,21 +466,21 @@
     <div class="prof-card">
       <div class="prof-card-header">
         <h4><i class="fa-solid fa-globe" style="color:var(--prof-green)"></i> <span data-i18n="pages.perfil.perfilPersonal.h42">Idioma y moneda</span></h4>
-        <a data-i18n="actions.edit" href="perfil.html?editar=idioma#perfil-personal" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
+        <a data-i18n="actions.edit" href="perfil.html?editar=idioma#perfil-personal" data-pe-edit="idioma" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:14px">
         <div>
           <label style="font-size:0.78rem;font-weight:700;color:var(--prof-dark)"><span data-i18n="pages.perfil.perfilPersonal.label1">Idioma de la plataforma</span></label>
-          <select class="prof-select">
-            <option data-i18n="pages.perfil.perfilPersonal.option1" selected>🇳🇮 Español</option>
-            <option data-i18n="pages.perfil.perfilPersonal.option2">🇺🇸 English</option>
+          <select class="prof-select" id="peLanguage" data-i18n-aria-label="pages.perfil.perfilPersonal.label1" aria-label="Idioma de la plataforma">
+            <option value="es" data-i18n="pages.perfil.perfilPersonal.option1" selected>🇳🇮 Español</option>
+            <option value="en" data-i18n="pages.perfil.perfilPersonal.option2">🇺🇸 English</option>
           </select>
         </div>
         <div>
           <label style="font-size:0.78rem;font-weight:700;color:var(--prof-dark)"><span data-i18n="pages.perfil.perfilPersonal.label2">Moneda preferida</span></label>
-          <select class="prof-select">
-            <option data-i18n="pages.perfil.profUserSection.strong2" selected>C$ Córdoba (NIO)</option>
-            <option data-i18n="pages.perfil.perfilPersonal.option3">$ Dólar (USD)</option>
+          <select class="prof-select" id="peCurrency" data-i18n-aria-label="pages.perfil.perfilPersonal.label2" aria-label="Moneda preferida">
+            <option value="NIO" data-i18n="pages.perfil.profUserSection.strong2" selected>C$ Córdoba (NIO)</option>
+            <option value="USD" data-i18n="pages.perfil.perfilPersonal.option3">$ Dólar (USD)</option>
           </select>
         </div>
         <div style="background:#F8FAFC;border:1px solid #EDF2F7;padding:10px;border-radius:8px;font-size:0.74rem;color:var(--prof-muted)">
@@ -492,12 +493,12 @@
     <div class="prof-card">
       <div class="prof-card-header">
         <h4><i class="fa-solid fa-heart-pulse" style="color:#EF4444"></i> <span data-i18n="pages.perfil.perfilPersonal.h43">Salud, accesibilidad y bienestar</span></h4>
-        <a data-i18n="actions.edit" href="perfil.html?editar=accesibilidad#perfil-personal" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
+        <a data-i18n="actions.edit" href="perfil.html?editar=accesibilidad#perfil-personal" data-pe-edit="accesibilidad" class="prof-btn-edit" style="padding:4px 10px;font-size:0.75rem">Editar</a>
       </div>
       <div class="prof-field-list">
-        <div class="prof-field-item"><i class="fa-solid fa-wheat-awn-circle-exclamation"></i><div><small data-i18n="pages.perfil.perfilPersonal.small3">Alergias o restricciones</small><strong data-i18n="pages.perfil.perfilPersonal.strong1">Sin completar</strong></div></div>
-        <div class="prof-field-item"><i class="fa-solid fa-wheelchair"></i><div><small data-i18n="pages.perfil.perfilPersonal.small4">Accesibilidad</small><strong data-i18n="pages.perfil.perfilPersonal.strong1">Sin completar</strong></div></div>
-        <div class="prof-field-item"><i class="fa-solid fa-user-shield"></i><div><small data-i18n="pages.perfil.perfilPersonal.small2">Contacto de emergencia</small><strong data-i18n="pages.perfil.perfilPersonal.strong1">Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-wheat-awn-circle-exclamation"></i><div><small data-i18n="pages.perfil.perfilPersonal.small3">Alergias o restricciones</small><strong data-i18n="pages.perfil.perfilPersonal.strong1" data-pe="dietary">Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-wheelchair"></i><div><small data-i18n="pages.perfil.perfilPersonal.small4">Accesibilidad</small><strong data-i18n="pages.perfil.perfilPersonal.strong1" data-pe="accessibility">Sin completar</strong></div></div>
+        <div class="prof-field-item"><i class="fa-solid fa-user-shield"></i><div><small data-i18n="pages.perfil.perfilPersonal.small2">Contacto de emergencia</small><strong data-i18n="pages.perfil.perfilPersonal.strong1" data-pe="emergency">Sin completar</strong></div></div>
         <div data-i18n="pages.perfil.perfilPersonal.div2" style="background:#ECFDF5;border:1px solid #A7F3D0;padding:8px;border-radius:8px;font-size:0.72rem;color:#2F5A3C;margin-top:6px">
           Esta información solo se comparte cuando es necesaria y con tu autorización (por ejemplo, en reservas o emergencias).
         </div>
@@ -551,15 +552,20 @@
       <div>
         <div class="prof-toggle-row">
           <div><strong data-i18n="pages.perfil.profBottomCards.strong1">Permisos de ubicación</strong><small data-i18n="pages.perfil.profBottomCards.small1">Usamos tu ubicación solo cuando la activás para mapas y clima.</small></div>
-          <input type="checkbox" style="accent-color:var(--prof-green)">
+          <input type="checkbox" data-consent="location" style="accent-color:var(--prof-green)">
         </div>
         <div class="prof-toggle-row">
           <div><strong data-i18n="pages.perfil.profBottomCards.strong2">Personalización de contenido</strong><small data-i18n="pages.perfil.profBottomCards.small2">Recomendaciones basadas en tus intereses de viaje.</small></div>
-          <input type="checkbox" style="accent-color:var(--prof-green)">
+          <input type="checkbox" data-consent="personalization" style="accent-color:var(--prof-green)">
         </div>
         <div class="prof-toggle-row">
           <div><strong data-i18n="pages.perfil.profBottomCards.strong3">Analítica (opcional)</strong><small data-i18n="pages.perfil.profBottomCards.small3">Nos ayuda a mejorar la plataforma.</small></div>
-          <input type="checkbox" style="accent-color:var(--prof-green)">
+          <input type="checkbox" data-consent="analytics" style="accent-color:var(--prof-green)">
+        </div>
+        <!-- 2026-10-07: foto en la comunidad (experiencias.html), solo con permiso explícito. -->
+        <div class="prof-toggle-row">
+          <div><strong data-i18n="profileEditor.communityTitle">Mostrar mi foto en la comunidad</strong><small data-i18n="profileEditor.communityHelp">Tu foto y tu primer nombre aparecen en "Únete a la comunidad" de Experiencias, junto a otros viajeros. Podés desactivarlo cuando quieras y desaparecen en pocos minutos.</small></div>
+          <input type="checkbox" data-consent="community" data-i18n-aria-label="profileEditor.communityTitle" aria-label="Mostrar mi foto en la comunidad" style="accent-color:var(--prof-green)">
         </div>
         <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:0.78rem">
           <a href="privacidad.html" style="color:var(--prof-dark);text-decoration:none"><i class="fa-solid fa-download"></i> <span data-i18n="pages.perfil.profBottomCards.a2">Descargar mis datos →</span></a>
@@ -805,6 +811,8 @@
 <script src="js/user-session.js?v=20261003-3"></script>
 <script src="js/auth-panel.js?v=20261004-1" defer></script>
 <script src="js/baqueano-messages.js?v=20261007-1" defer></script>
+<!-- 🎯 Perfil editable (2026-10-07): datos, idioma y moneda, accesibilidad, intereses, permisos y foto en Supabase (baqueano-profile). -->
+<script src="js/profile-editor.js?v=20261007-1" defer></script>
 </body>
 </html>
 

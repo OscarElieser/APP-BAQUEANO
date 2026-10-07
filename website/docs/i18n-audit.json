@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T18:24:33.132Z",
+  "generatedAt": "2026-10-07T18:35:00.742Z",
   "languages": [
     "es",
     "en",
@@ -9,21 +9,21 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4813,
-    "en": 4813,
-    "fr": 4813,
-    "it": 4813,
-    "pt": 4813,
-    "de": 4813
+    "es": 4845,
+    "en": 4845,
+    "fr": 4845,
+    "it": 4845,
+    "pt": 4845,
+    "de": 4845
   },
   "html": {
     "files": 34,
-    "total": 3865,
-    "translated": 3864,
+    "total": 3870,
+    "translated": 3869,
     "untranslated": 1
   },
   "js": {
-    "files": 114,
+    "files": 115,
     "translated": 152,
     "untranslated": 722
   },
@@ -119,6 +119,7 @@
     "js/ops-center/ops-platform-reviews.js",
     "js/ops-center/ops-tech-report.js",
     "js/platform-reviews.js",
+    "js/profile-editor.js",
     "js/safety-gallery.js",
     "js/services/places-service.js",
     "js/shared/roles.js",
@@ -427,8 +428,8 @@
     {
       "file": "perfil.html",
       "type": "html",
-      "total": 164,
-      "translated": 164,
+      "total": 169,
+      "translated": 169,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -1317,6 +1318,15 @@
     },
     {
       "file": "js/platform-reviews.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/profile-editor.js",
       "type": "js",
       "total": 0,
       "translated": 0,

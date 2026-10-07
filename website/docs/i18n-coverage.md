@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T18:24:33.132Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4813 · en 4813 · fr 4813 · it 4813 · pt 4813 · de 4813
+Generado: 2026-10-07T18:35:00.742Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4845 · en 4845 · fr 4845 · it 4845 · pt 4845 · de 4845
 
-HTML: 3864/3865 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3869/3870 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -223,6 +223,7 @@ HTML: 3864/3865 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-tech-report.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |
+| js/profile-editor.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |
 | js/services/places-service.js | js | 4 | 4 | 0 | 100 % |
 | js/shared/roles.js | js | 0 | 0 | 0 | 100 % |
@@ -247,7 +248,7 @@ HTML: 3864/3865 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | opiniones.html | html | 85 | 85 | 0 | 100 % |
 | packages/i18n/src/index.tsx | tsx | 2 | 2 | 0 | 100 % |
 | packages/ui/src/index.tsx | tsx | 0 | 0 | 0 | 100 % |
-| perfil.html | html | 164 | 164 | 0 | 100 % |
+| perfil.html | html | 169 | 169 | 0 | 100 % |
 | privacidad.html | html | 89 | 89 | 0 | 100 % |
 | terminos.html | html | 193 | 193 | 0 | 100 % |
 | testimonios.html | html | 79 | 79 | 0 | 100 % |

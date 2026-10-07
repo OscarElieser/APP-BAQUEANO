@@ -5366,3 +5366,29 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - 1366 px → 3 visibles, "1–3 de 4" → siguiente "2–4" → vuelta a "1–3"; 800 px → 2 visibles; 390 px → 1;
   - Pausar → aria-pressed=true; 0 errores JS; sin desborde horizontal.
   - browser-qa opiniones.html: 16 anchos, 0 fallos. npm run i18n: 0 errores.
+
+## 2026-10-07 — Propietario: captura de Cloudflare ("asi era")
+- La regla "Limite por IP" quedó como WAF **Custom rule** (Block, 0 eventos), no como **Rate limiting rule** (0/1). Una regla personalizada no cuenta peticiones: o no aplica a nada o, mal escrita, bloquearía todo el sitio.
+- En vivo (HTTP real desde Supabase): portada, /health y opiniones.html → 200 por Cloudflare (server=cloudflare, sin cf-mitigated). Bot Fight Mode ya apagado. /health = commit fafdc24 (galería de opiniones publicada).
+- Indicado: borrar o desactivar la Custom rule y crear la Rate limiting rule (URI Path starts with "/", por IP, 150 peticiones / 10 s → Block 10 s).
+
+## 2026-10-07 — Nuevos pedidos del propietario (en cola, en este orden)
+1. Perfil editable (en curso): tabla `traveler_profiles` + bucket `avatars` (migración 20261007250000 aplicada), Edge Function `baqueano-profile` v2 (get/save/avatar/avatar_remove/community_faces). En vivo: sin token 401, token falso 401, origen ajeno 403; la tabla no tiene grants para anon/authenticated.
+2. Experiencias: "que salga como foto como hace Facebook… con las fotos de los usuarios registrados… y un mensaje de dónde va a salir su foto y qué puede hacer". Diseño: solo con permiso explícito `community` en el perfil; `community_faces` público devuelve nombre de pila y foto de quienes aceptaron (máx. 12) y el total.
+3. Crónicas (cronicas.html): el usuario escribe su crónica, se publica en la plataforma y se muestra en la misma página; la tarjeta lateral blanca no muestra nada.
+4. Pueblos originarios (Chorotegas, Nicaraos, Matagalpas, Miskitos, Mayangnas): "agregarle más información relevante sobre los temas de cada uno". Solo con fuente verificable.
+5. Historia: "Ver más personajes" abre una lista cruda ("está horrible") con claves internas (sanJacinto, guerraNacional); debe mostrarse con tarjetas como la sección.
+6. Historia, "Monumentos Históricos & Red Nacional de Museos": "hacerlo en galerías en movimiento infinito automático con opción de pausa por el usuario".
+
+### Perfil editable — hecho y probado
+- `website/js/profile-editor.js` + `css/components/profile-editor.css`. En `perfil.html`, atributos `data-pe`, `data-pe-edit`, `data-interest` y `data-consent` agregados sin borrar contenido, y nueva casilla "Mostrar mi foto en la comunidad".
+- Diálogos nativos para información personal, salud y accesibilidad, y foto (reducida a 320×320 WebP en el navegador). Idioma (6), moneda, intereses y permisos se guardan al cambiar. `?editar=` abre la sección.
+- 32 claves `profileEditor.*` en 6 idiomas; npm run i18n: 0 errores.
+- Prueba E2E (Firebase y servidor simulados), 2/2 ✅:
+  - nombre, teléfono, ubicación (tarjeta y cabecera), contacto de emergencia, salud y accesibilidad se guardan y se muestran;
+  - un teléfono inválido muestra el error del servidor y el diálogo sigue abierto;
+  - el HTML del nombre no se interpreta;
+  - el nombre también se actualiza en Firebase Auth;
+  - intereses ["playas","cafe"] con aria-pressed; moneda USD;
+  - permiso community + foto de Google como respaldo;
+  - axe del diálogo y de la sección: 0 violaciones.
