@@ -5342,3 +5342,4 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - dejar Hotlink Protection apagado, para no romper las vistas previas de imágenes al compartir en redes;
   - AI Labyrinth es opcional.
 - Riesgo a vigilar: Bot Fight Mode puede desafiar a clientes sin navegador (curl del CI verify-azure, pg_cron web_health desde Supabase). En esta prueba, los resolvers de Supabase todavía llegan directo (Server=nginx, sin cf-ray), así que no se pudo comprobar. /health ya sirve el commit 0e91be9 (server_tokens off desplegado). Se revisa en la verificación de las 16:44 UTC y en el próximo run de CI.
+- Propietario: "listo ya lo hice". Activó Continuous script monitoring en Cloudflare.
