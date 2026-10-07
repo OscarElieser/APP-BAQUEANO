@@ -162,15 +162,19 @@ jobs:
             -o BatchMode=yes \
             -o ConnectTimeout=20 \
             -i ~/.ssh/baqueano_key \
-            "$SSH_USER@$SSH_HOST" << 'EOF'
+            "$SSH_USER@$SSH_HOST" "DEPLOY_SHA=$GITHUB_SHA bash -s" << 'EOF'
               set -euo pipefail
 
               cd /home/baqueano/APP-BAQUEANO
 
-              echo "==> Sincronizando repositorio con GitHub main"
+              # 2026-10-07: antes se publicaba origin/main, que pudo avanzar mientras este run
+              # pasaba QA. Así se publicaba un commit todavía sin validar y la espera de /health
+              # fallaba (ejecuciones 159 y 161). Ahora se publica exactamente el commit validado.
+              echo "==> Sincronizando repositorio con GitHub (commit validado ${DEPLOY_SHA:0:7})"
               git fetch --prune origin
-              git switch -C main origin/main
-              git reset --hard origin/main
+              git cat-file -e "${DEPLOY_SHA}^{commit}"
+              git switch -C main "$DEPLOY_SHA"
+              git reset --hard "$DEPLOY_SHA"
 
               echo "==> Commit a desplegar"
               git rev-parse --short HEAD
@@ -179,7 +183,7 @@ jobs:
               bash -n azure/deploy.sh
 
               echo "==> Ejecutando despliegue"
-              bash azure/deploy.sh
+              bash azure/deploy.sh "$DEPLOY_SHA"
 
               echo "==> Validando Nginx"
               sudo -n nginx -t

@@ -5211,3 +5211,11 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - La ejecución 159 marcó "falla" solo porque, mientras corría, se desplegó el commit más nuevo d951d55, que ya la incluye. Su control de "commit exacto" no coincidió.
   - Producción sirve d951d55. Responden 200: ops-alerts, ops-nav-groups, ops-messages, ops-tech-report, ops-automation, baqueano-messages y la APK; perfil.html tiene #mensajes.
   - La ejecución 161 (mismo commit) pasó la validación; su QA seguía en curso.
+- 2026-10-07 · Revisión programada de las ejecuciones 161 y 162:
+  - La 162 quedó en verde completa: validación, QA, despliegue y verificación.
+  - La 161 falló igual que la 159: producción servía 47f5afc y esperaba d951d55.
+  - Causa raíz: el job de despliegue publicaba `origin/main`, que avanzó mientras el run pasaba la QA. Con eso, un run podía publicar un commit todavía sin validar, y su espera de /health no coincidía.
+  - Arreglo en deploy-production.yml:
+    - Se pasa `DEPLOY_SHA=$GITHUB_SHA` al servidor, que publica exactamente ese commit (`git cat-file -e`, `switch`/`reset` al SHA y `deploy.sh "$DEPLOY_SHA"`).
+    - El orden lo garantiza `concurrency: production-deploy`.
+  - Validado localmente: YAML, `bash -n` y simulación del comando remoto.
