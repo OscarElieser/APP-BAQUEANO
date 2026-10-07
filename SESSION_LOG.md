@@ -5325,4 +5325,4 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - Captura de Hostinger: el propietario agregó los de Cloudflare como 3.º y 4.º nameserver y dejó byte/pixel en 1 y 2. Corrección indicada: solo kim y konnor. Mezclar los nameservers de Hostinger y de Cloudflare da respuestas inconsistentes y Cloudflare no activa el dominio.
 - Hostinger confirmó el cambio a kim/konnor.ns.cloudflare.com (captura). A las ~15:15 UTC, dns.google todavía devuelve byte/pixel (caché, TTL 6 h); A 20.80.81.65; /health 200 (nginx directo). Propagación en curso.
 - Captura de SSL/TLS: Cloudflare está en "Automatic SSL/TLS" con "Full" corriendo. Recomendación: Full (Strict). El origen tiene un certificado válido (Let's Encrypt): las consultas HTTPS a baqueanonicaragua.com desde Supabase validan TLS y responden 200.
-- El propietario seleccionó Full (Strict) en SSL/TLS (captura, falta pulsar Save).
+- El propietario seleccionó y guardó Full (Strict) en SSL/TLS (captura: "Current encryption mode: Full (strict)").
