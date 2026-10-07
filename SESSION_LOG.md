@@ -5033,3 +5033,10 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Supabase (migración `20261007170000_hotel_encanto_del_sur_telefono.sql`, UPDATE de 1 fila): `phone='+505 2568 2222'`; el WhatsApp sigue en `whatsapp`; anotado en `attributes.phones`.
     - Ficha: teléfono con enlace `tel:+50525682222` bajo el WhatsApp.
     - Pruebas: Playwright + axe ES/EN/DE/FR, sin violaciones.
+- 2026-10-07 · Propietario:
+  - Confirma el correo de Hotel Encanto del Sur (encantodelsursjs@gmail.com).
+  - Comparte 5 fotos para la sección de artistas de historia.html, sin decir quién es cada una. Solo la 3 se identifica sola por su texto ("EDITH GRÓN (1917-1990)"). La 5 lleva el crédito "Foto por Gabriel García".
+  - Correo: estado actualizado a "confirmado por el propietario" (migración `20261007180000_hotel_encanto_del_sur_correo_confirmado.sql`, UPDATE de 1 fila).
+  - Fotos de artistas: llegan 10 imágenes en dos mensajes. Las 5 primeras están en el disco de la sesión (images/15–19); las otras 5 solo como vista.
+    - No se asigna ninguna foto a un artista por su cara. Solo la de Edith Grön se identifica por su texto.
+    - Se pide al propietario la lista "foto N → artista" y, por cada foto, de dónde sale (enlace o crédito) y si hay permiso o licencia, como exige `test:artistas`.
