@@ -5010,3 +5010,14 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
       - `location_precision='approximate'` por la palabra del propietario, así que `map_ready` sigue en false (la regla del mapa exige 'exact').
       - Si confirma que el punto cae sobre el hotel, se cambia a 'exact' y se activa el pin.
     - `js/lodging-showcase-data.js` actualizado (espejo).
+- 2026-10-07 · Pedido del propietario: Plus Code de Hotel Encanto del Sur: "742H+HX San Juan del Sur".
+  - Resultado — Plus Code:
+    - `742H+HX` decodificado con Open Location Code (prefijo recuperado con la referencia de San Juan del Sur): `763P742H+HX` → 11.2514375, -85.8700625, celda de ~14 m. Al volver a codificarlo da el mismo código.
+    - Las coordenadas "aproximadas" previas quedaban 143 m al sur. El propietario compartió una captura de Google Maps con el pin en la Av. Del Rastro, una cuadra al sur del Parque Central, que coincide con el Plus Code.
+    - Supabase (migración `20261007160000_hotel_encanto_del_sur_plus_code.sql`, UPDATE de 1 fila):
+      - lat/lng del Plus Code, `location_precision='exact'`, `map_ready=true`, `geom` generado;
+      - las coordenadas previas se conservan en `attributes.location.previous_coordinates`.
+    - Ficha en destinos.html: nuevo botón "Ver en el mapa de BAQUEANO" (`mapa.html?lat=&lng=`), que solo aparece con ubicación exacta. Además el hotel aparece en el directorio de aliados.html, que lee Supabase.
+    - Pruebas:
+      - Playwright + axe en ES/EN/DE/FR: sin violaciones ni errores; el botón apunta a lat 11.251437 / lng -85.870063.
+      - El centrado de mapa.html no se pudo comprobar en el navegador: el sandbox bloquea el CDN de Leaflet. Se revisó en el código (mapa.html:496-501).

@@ -68,8 +68,8 @@
 .bq-lodging-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 10px 16px; border-radius: 12px; font: 800 0.95rem/1.2 Montserrat, sans-serif; text-decoration: none; cursor: pointer; border: 2px solid transparent; }
 .bq-lodging-btn.is-whatsapp { flex: 1 1 100%; background: var(--lodging-green); color: #FFFFFF; }
 .bq-lodging-btn.is-whatsapp:hover, .bq-lodging-btn.is-whatsapp:focus-visible { background: #14532D; color: #FFFFFF; }
-.bq-lodging-btn.is-map, .bq-lodging-btn.is-share { flex: 1 1 140px; background: #FFFFFF; color: var(--lodging-navy); border-color: var(--lodging-navy); }
-.bq-lodging-btn.is-map:hover, .bq-lodging-btn.is-share:hover { background: #EEF2F7; }
+.bq-lodging-btn.is-map, .bq-lodging-btn.is-share, .bq-lodging-btn.is-baqueano-map { flex: 1 1 140px; background: #FFFFFF; color: var(--lodging-navy); border-color: var(--lodging-navy); }
+.bq-lodging-btn.is-map:hover, .bq-lodging-btn.is-share:hover, .bq-lodging-btn.is-baqueano-map:hover { background: #EEF2F7; }
 .bq-lodging-btn:focus-visible { outline: 3px solid var(--lodging-yellow); outline-offset: 2px; }
 .bq-lodging-address { margin: 12px 0 0; color: #1E293B; line-height: 1.45; }
 .bq-lodging-address i { color: var(--lodging-green); }

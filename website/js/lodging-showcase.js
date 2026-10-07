@@ -128,6 +128,14 @@
     shareBtn.appendChild(keyed('span', '', 'lodgingShowcase.share'));
     shareBtn.addEventListener('click', function () { share(item, shareBtn); });
     row.appendChild(wa); row.appendChild(map); row.appendChild(shareBtn);
+    // Pin en el mapa de BAQUEANO solo con ubicación exacta (mapa.html centra ?lat=&lng= dentro de Nicaragua).
+    if (item.locationPrecision === 'exact' && isFinite(item.latitude) && isFinite(item.longitude)) {
+      var own = el('a', 'bq-lodging-btn is-baqueano-map', { href: 'mapa.html?lat=' + item.latitude.toFixed(6) + '&lng=' + item.longitude.toFixed(6) });
+      own.appendChild(icon('fa-solid fa-map-pin'));
+      own.appendChild(document.createTextNode(' '));
+      own.appendChild(keyed('span', '', 'lodgingShowcase.baqueanoMap'));
+      row.appendChild(own);
+    }
     var nodes = [row];
     if (item.address) {
       var address = el('p', 'bq-lodging-address');

@@ -6117,7 +6117,8 @@
     "share": "Partager",
     "copied": "Lien copié",
     "sealTitle": "Disponible sur BAQUEANO",
-    "sealTagline": "Découvrez ce qui n'est pas sur la carte."
+    "sealTagline": "Découvrez ce qui n'est pas sur la carte.",
+    "baqueanoMap": "Voir sur la carte BAQUEANO"
   },
   "lodging": {
     "encantoDelSur": {
