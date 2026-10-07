@@ -5333,3 +5333,12 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - El dominio principal todavía llega directo en algunos resolvers: dns.google tiene en caché NS dns-parking, TTL ~5,7 h restantes.
   - Funcionan: /health 200, portada 200, APK 200 (application/vnd.android.package-archive), /app → /descargar, /__/auth/handler 200, http→https, wp-login.php 404.
 - **Hallazgo:** la redirección http→https (bloque de Certbot) devolvía `Server: nginx/1.18.0 (Ubuntu)`. Corrección: `server_tokens off` en contexto http (conf.d/baqueano-limits.conf). nginx -t OK; en el nginx.conf de Ubuntu esa directiva viene comentada, así que no se duplica.
+
+## 2026-10-07 — Propietario: capturas de Cloudflare Security
+- Activo: Bot Fight Mode; Cloudflare managed ruleset y HTTP DDoS protection (siempre activos); Email Address Obfuscation; Replace insecure JavaScript libraries.
+- Apagado: AI Labyrinth, Continuous script monitoring, Hotlink Protection.
+- Recomendación:
+  - activar Continuous script monitoring (avisa si se inyecta un script malicioso);
+  - dejar Hotlink Protection apagado, para no romper las vistas previas de imágenes al compartir en redes;
+  - AI Labyrinth es opcional.
+- Riesgo a vigilar: Bot Fight Mode puede desafiar a clientes sin navegador (curl del CI verify-azure, pg_cron web_health desde Supabase). En esta prueba, los resolvers de Supabase todavía llegan directo (Server=nginx, sin cf-ray), así que no se pudo comprobar. /health ya sirve el commit 0e91be9 (server_tokens off desplegado). Se revisa en la verificación de las 16:44 UTC y en el próximo run de CI.
