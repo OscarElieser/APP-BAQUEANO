@@ -5303,3 +5303,7 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 
 ## 2026-10-07 — Propietario: captura de Cloudflare "Connect your domain" (políticas de IA)
 - Recomendación: dominio `baqueanonicaragua.com` correcto. "I monetize pages that serve ads" sin marcar (el sitio no tiene anuncios). Search y Agent en Allow: los buscadores y los asistentes de IA muestran BAQUEANO a los turistas. Training queda a criterio del propietario: no afecta a Google ni a la seguridad. La defensa contra atacantes (también con IA) es otra cosa: WAF y Bot Fight Mode, después de activar el dominio.
+
+## 2026-10-07 15:00 — Revisión programada del CI (runs 168/169)
+- Runs 168 (Nginx: gzip_static, límites, anti-slowloris, escáneres) y 169 (IP real detrás de Cloudflare): **success**. `nginx -t` pasó en la VM.
+- En vivo (HTTP real desde Supabase): /index.html 200 gzip + Vary; /wp-login.php y /.env → 404 inmediato; /health 200.
