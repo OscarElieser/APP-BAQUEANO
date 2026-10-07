@@ -5326,3 +5326,10 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - Hostinger confirmó el cambio a kim/konnor.ns.cloudflare.com (captura). A las ~15:15 UTC, dns.google todavía devuelve byte/pixel (caché, TTL 6 h); A 20.80.81.65; /health 200 (nginx directo). Propagación en curso.
 - Captura de SSL/TLS: Cloudflare está en "Automatic SSL/TLS" con "Full" corriendo. Recomendación: Full (Strict). El origen tiene un certificado válido (Let's Encrypt): las consultas HTTPS a baqueanonicaragua.com desde Supabase validan TLS y responden 200.
 - El propietario seleccionó y guardó Full (Strict) en SSL/TLS (captura: "Current encryption mode: Full (strict)").
+
+## 2026-10-07 — Propietario: correo de Cloudflare "Our network is now boosting baqueanonicaragua.com"
+- Verificación en vivo (HTTP real desde Supabase):
+  - www pasa por Cloudflare (server=cloudflare, cf-ray, CF-Cache DYNAMIC) → 301 al dominio principal → 200.
+  - El dominio principal todavía llega directo en algunos resolvers: dns.google tiene en caché NS dns-parking, TTL ~5,7 h restantes.
+  - Funcionan: /health 200, portada 200, APK 200 (application/vnd.android.package-archive), /app → /descargar, /__/auth/handler 200, http→https, wp-login.php 404.
+- **Hallazgo:** la redirección http→https (bloque de Certbot) devolvía `Server: nginx/1.18.0 (Ubuntu)`. Corrección: `server_tokens off` en contexto http (conf.d/baqueano-limits.conf). nginx -t OK; en el nginx.conf de Ubuntu esa directiva viene comentada, así que no se duplica.
