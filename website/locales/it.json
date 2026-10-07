@@ -6174,5 +6174,44 @@
     "countNote": "Conta i clic su «Scarica per Android» in /descargar (massimo 3 per dispositivo al giorno; senza salvare l'IP). Un download diretto del file non viene contato.",
     "updated": "Aggiornato",
     "refresh": "Aggiorna"
+  },
+  "opsAuto": {
+    "title": "Automazione",
+    "subtitle": "Controlli automatici ogni ora: sito web, sitemap, download dell’app, sicurezza del database e qualità dei dati.",
+    "loading": "Caricamento…",
+    "empty": "Nessuna esecuzione registrata finora.",
+    "error": "Impossibile leggere la cronologia.",
+    "noApi": "L’Ops Center non ha ancora effettuato l’accesso.",
+    "refresh": "Aggiorna",
+    "runNow": "Esegui ora",
+    "running": "Esecuzione dei controlli…",
+    "done": "Controlli eseguiti.",
+    "throttled": "C’è stata un’esecuzione meno di 2 minuti fa; viene mostrata quella.",
+    "latestTitle": "Ultima esecuzione",
+    "historyTitle": "Cronologia",
+    "colState": "Stato",
+    "colCheck": "Controllo",
+    "colDetail": "Risultato misurato",
+    "status": {
+      "ok": "Tutto in ordine",
+      "warn": "Con avvisi",
+      "fail": "Con errori",
+      "running": "In corso"
+    },
+    "trigger": {
+      "cron": "Programmata",
+      "manual": "Manuale"
+    },
+    "check": {
+      "web_health": "Sito pubblicato (/health)",
+      "sitemap": "Mappa del sito (sitemap.xml)",
+      "app_download": "Download dell’app (/descargar e APK)",
+      "rls": "RLS su tutte le tabelle pubbliche",
+      "definer_search_path": "Funzioni sicure con search_path fisso",
+      "data_quality": "Qualità dei dati pubblicati",
+      "operations": "Operazioni in sospeso",
+      "baqui_activity": "BAQÜI (attività 7 giorni)",
+      "db_health": "Rapporto sullo stato del database"
+    }
   }
 }

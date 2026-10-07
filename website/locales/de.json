@@ -6174,5 +6174,44 @@
     "countNote": "Zählt Klicks auf „Für Android herunterladen“ unter /descargar (höchstens 3 pro Gerät und Tag; ohne IP-Speicherung). Ein direkter Datei-Download wird nicht gezählt.",
     "updated": "Aktualisiert",
     "refresh": "Aktualisieren"
+  },
+  "opsAuto": {
+    "title": "Automatisierung",
+    "subtitle": "Automatische Prüfungen jede Stunde: Website, Sitemap, App-Download, Datenbanksicherheit und Datenqualität.",
+    "loading": "Wird geladen…",
+    "empty": "Noch keine Durchläufe erfasst.",
+    "error": "Der Verlauf konnte nicht gelesen werden.",
+    "noApi": "Das Ops Center ist noch nicht angemeldet.",
+    "refresh": "Aktualisieren",
+    "runNow": "Jetzt ausführen",
+    "running": "Prüfungen laufen…",
+    "done": "Prüfungen abgeschlossen.",
+    "throttled": "Vor weniger als 2 Minuten gab es einen Durchlauf; dieser wird angezeigt.",
+    "latestTitle": "Letzter Durchlauf",
+    "historyTitle": "Verlauf",
+    "colState": "Status",
+    "colCheck": "Prüfung",
+    "colDetail": "Gemessenes Ergebnis",
+    "status": {
+      "ok": "Alles in Ordnung",
+      "warn": "Mit Hinweisen",
+      "fail": "Mit Fehlern",
+      "running": "Läuft"
+    },
+    "trigger": {
+      "cron": "Geplant",
+      "manual": "Manuell"
+    },
+    "check": {
+      "web_health": "Veröffentlichte Website (/health)",
+      "sitemap": "Sitemap (sitemap.xml)",
+      "app_download": "App-Download (/descargar und APK)",
+      "rls": "RLS auf allen öffentlichen Tabellen",
+      "definer_search_path": "Sichere Funktionen mit festem search_path",
+      "data_quality": "Qualität der veröffentlichten Daten",
+      "operations": "Offene Vorgänge",
+      "baqui_activity": "BAQÜI (Aktivität 7 Tage)",
+      "db_health": "Datenbank-Zustandsbericht"
+    }
   }
 }

@@ -21,9 +21,11 @@
 // 📦 QUÉ (POST { action, ... }):
 // - Lectura (staff): whoami, overview, health, list, get, audit_list,
 //   kpis (kpi_dashboard SMART), impact (strategic_impact_report + matriz de
-//   alineación nacional y fuentes), db_health (db_health_report), duplicates.
+//   alineación nacional y fuentes), db_health (db_health_report), duplicates,
+//   automation_runs (historial de controles programados, F8).
 // - Escritura (admin): save, set_status (publish|unpublish|archive|restore),
-//   verify (sello "Verificado por BAQUEANO" con trazabilidad), log.
+//   verify (sello "Verificado por BAQUEANO" con trazabilidad), log,
+//   automation_run_now (ejecuta run_automation_checks; como máximo 1 cada 2 min).
 // ============================================================================
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
@@ -590,6 +592,28 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       if (biz.error || dest.error || phones.error) throw new HttpError(500, "No se pudieron consultar los posibles duplicados.");
       // Solo sugerencias: nunca se fusiona automáticamente.
       return { businesses: biz.data, destinations: dest.data, shared_phones: phones.data };
+    }
+
+    case "automation_runs": {
+      // F8: historial de public.automation_runs (pg_cron cada hora + ejecuciones manuales).
+      const limit = Math.min(Math.max(Number(body.limit) || 24, 1), 72);
+      const { data, error } = await service.from("automation_runs")
+        .select("id,job,trigger,started_at,finished_at,status,checks,summary")
+        .order("started_at", { ascending: false }).limit(limit);
+      if (error) throw new HttpError(500, "No se pudo leer el historial de automatización.");
+      return { items: data || [], schedule: "cada hora, minuto 17 (pg_cron: baqueano-automation-hourly)" };
+    }
+
+    case "automation_run_now": {
+      requireWriter(actor);
+      // Límite: una ejecución manual o programada cada 2 minutos (cada corrida consulta el sitio).
+      const { data: last } = await service.from("automation_runs").select("id,started_at,status,checks,summary")
+        .order("started_at", { ascending: false }).limit(1).maybeSingle();
+      if (last && Date.now() - new Date(last.started_at).getTime() < 120000) return { run: last, throttled: true };
+      const { data, error } = await service.rpc("run_automation_checks", { p_trigger: "manual" });
+      if (error) throw new HttpError(500, "No se pudieron ejecutar los controles.");
+      await audit(service, req, actor, { action: "automation_run", module: "automation", entity: "automation_runs", id: String((data as Record<string, unknown>)?.id ?? ""), description: `Ejecutó los controles automáticos: ${(data as Record<string, unknown>)?.status}` });
+      return { run: data, throttled: false };
     }
 
     case "log": {

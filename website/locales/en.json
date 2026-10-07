@@ -6174,5 +6174,44 @@
     "countNote": "Counts clicks on “Download for Android” on /descargar (at most 3 per device per day; no IP stored). A direct download of the file is not counted.",
     "updated": "Updated",
     "refresh": "Refresh"
+  },
+  "opsAuto": {
+    "title": "Automation",
+    "subtitle": "Automatic checks every hour: website, sitemap, app download, database security and data quality.",
+    "loading": "Loading…",
+    "empty": "No runs recorded yet.",
+    "error": "The history could not be read.",
+    "noApi": "The Ops Center has not signed in yet.",
+    "refresh": "Refresh",
+    "runNow": "Run now",
+    "running": "Running the checks…",
+    "done": "Checks completed.",
+    "throttled": "A run happened less than 2 minutes ago; showing that one.",
+    "latestTitle": "Latest run",
+    "historyTitle": "History",
+    "colState": "Status",
+    "colCheck": "Check",
+    "colDetail": "Measured result",
+    "status": {
+      "ok": "All good",
+      "warn": "With warnings",
+      "fail": "With failures",
+      "running": "Running"
+    },
+    "trigger": {
+      "cron": "Scheduled",
+      "manual": "Manual"
+    },
+    "check": {
+      "web_health": "Published website (/health)",
+      "sitemap": "Sitemap (sitemap.xml)",
+      "app_download": "App download (/descargar and APK)",
+      "rls": "RLS on every public table",
+      "definer_search_path": "Secure functions with fixed search_path",
+      "data_quality": "Published data quality",
+      "operations": "Pending operations",
+      "baqui_activity": "BAQÜI (7-day activity)",
+      "db_health": "Database health report"
+    }
   }
 }

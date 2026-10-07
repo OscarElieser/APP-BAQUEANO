@@ -6174,5 +6174,44 @@
     "countNote": "Conta os cliques em “Baixar para Android” em /descargar (máximo 3 por dispositivo por dia; sem guardar IP). Um download direto do arquivo não é contado.",
     "updated": "Atualizado",
     "refresh": "Atualizar"
+  },
+  "opsAuto": {
+    "title": "Automação",
+    "subtitle": "Verificações automáticas a cada hora: site, sitemap, download do app, segurança do banco e qualidade dos dados.",
+    "loading": "Carregando…",
+    "empty": "Ainda não há execuções registradas.",
+    "error": "Não foi possível ler o histórico.",
+    "noApi": "O Ops Center ainda não iniciou sessão.",
+    "refresh": "Atualizar",
+    "runNow": "Executar agora",
+    "running": "Executando as verificações…",
+    "done": "Verificações concluídas.",
+    "throttled": "Houve uma execução há menos de 2 minutos; ela é mostrada.",
+    "latestTitle": "Última execução",
+    "historyTitle": "Histórico",
+    "colState": "Estado",
+    "colCheck": "Verificação",
+    "colDetail": "Resultado medido",
+    "status": {
+      "ok": "Tudo em ordem",
+      "warn": "Com avisos",
+      "fail": "Com falhas",
+      "running": "Em andamento"
+    },
+    "trigger": {
+      "cron": "Agendada",
+      "manual": "Manual"
+    },
+    "check": {
+      "web_health": "Site publicado (/health)",
+      "sitemap": "Sitemap (sitemap.xml)",
+      "app_download": "Download do app (/descargar e APK)",
+      "rls": "RLS em todas as tabelas públicas",
+      "definer_search_path": "Funções seguras com search_path fixo",
+      "data_quality": "Qualidade dos dados publicados",
+      "operations": "Pendências operacionais",
+      "baqui_activity": "BAQÜI (atividade em 7 dias)",
+      "db_health": "Relatório de saúde do banco"
+    }
   }
 }

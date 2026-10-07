@@ -5145,3 +5145,12 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - `ensure_include` usa marcas alternativas con comparación literal (awk) y comprueba que el include quedó escrito y que nginx -t lo acepta. Si no, restaura la configuración y FALLA.
     - El job de verificación comprueba en vivo la APK (200 + MIME de Android), /app (301 → /descargar) y /descargar (200).
 - 2026-10-07 · Captura del propietario: Search Console ya tiene la propiedad de dominio `baqueanonicaragua.com` (verificada), además de la de www. Indicación: usar esa propiedad, enviar sitemap.xml en "Sitemaps" e ignorar el aviso de la propiedad www (redirección 301 intencional).
+  - F8, automatización (paso 2):
+    - Producción confirmada en vivo: la APK responde 200 con `application/vnd.android.package-archive` y /app hace 301 a /descargar.
+    - Edge Function `baqueano-ops` v3 desplegada. Incluye la revocación del RBAC (`_shared/staff-revocation.ts`), que estaba en el repo pero no en producción (v2), y las acciones `automation_runs` (personal) y `automation_run_now` (admin, máximo 1 cada 2 min, con auditoría).
+      - Verificado antes del despliegue: los 4 miembros activos del personal no tienen perfil vinculado, así que no pierden acceso.
+      - Verificado después: 401 sin token y con token falso.
+    - Vista "Automatización" en el Ops Center (`ops-automation.js`): última corrida con sus controles, historial y botón "Ejecutar ahora".
+    - 31 claves `opsAuto.*` en 6 idiomas; gate con 0 errores.
+    - E2E (es@1366, en@390, de@1366): 8 controles, historial de 2, botón funcionando, axe 0 y sin errores de consola.
+  - Search Console (capturas del propietario): propiedad https://baqueanonicaragua.com/ verificada; sitemap.xml "Correcto" con 25 páginas descubiertas.
