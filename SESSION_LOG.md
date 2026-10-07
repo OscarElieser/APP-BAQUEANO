@@ -5318,3 +5318,6 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - NS actuales byte/pixel.dns-parking.com (Hostinger).
 - **Falta:** CNAME `ues3nrtrlyrd` → `gv-kphjfbvtlhk32n.dv.googlehosted.com` (verificación de Google Search Console). Agregar como DNS only antes de "Continue to activation".
 - Propietario agregó el CNAME `ues3nrtrlyrd` → googlehosted (DNS only), según la captura. Los 4 registros quedan correctos; siguiente paso: "Continue to activation", nameservers en Hostinger y SSL Full (strict).
+
+## 2026-10-07 — Propietario: "pero no quiero borrar hostinger"
+- Aclaración: cambiar los nameservers no borra nada de Hostinger. El dominio sigue registrado y renovándose allí, y la zona DNS de Hostinger queda guardada. Es reversible: se vuelve a `byte/pixel.dns-parking.com` cuando se quiera. Solo cambia quién responde las consultas DNS.
