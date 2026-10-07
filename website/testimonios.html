@@ -34,6 +34,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="css/components/community-faces.css?v=20261007-1">
 </head>
 <body class="tm-page">
   <nav class="main-navbar-exact main-navbar" id="mainNavbar" aria-label="Navegación principal">
@@ -54,6 +55,8 @@
             <button type="button" class="tm-btn tm-btn-primary" data-compose="1"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> <span data-i18n="testimonials.ctaShare">Compartí tu experiencia</span></button>
             <a class="tm-btn tm-btn-ghost" href="#tmFeedSection"><i class="fa-regular fa-compass" aria-hidden="true"></i> <span data-i18n="testimonials.ctaExplore">Explorar experiencias</span></a>
           </div>
+          <!-- 2026-10-07: fotos de la comunidad (solo con permiso del perfil); js/community-faces.js -->
+          <div class="bq-faces" data-community-faces aria-live="polite"></div>
         </div>
         <aside class="tm-hero-card">
           <h2 data-i18n="testimonials.heroCardTitle">¿Ya viviste Nicaragua?</h2>
@@ -237,5 +240,6 @@
   <script src="js/testimonios.js?v=20261006-dialog-1" defer></script>
   <script src="js/navigation.js?v=20261007-app-2"></script>
   <script src="js/global-injector.js"></script>
+<script src="js/community-faces.js?v=20261007-1" defer></script>
 </body>
 </html>

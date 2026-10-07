@@ -6399,5 +6399,13 @@
     "titleHealth": "Santé, accessibilité et bien-être",
     "titlePersonal": "Modifier les informations personnelles",
     "titlePhoto": "Changer la photo de profil"
+  },
+  "communityFaces": {
+    "label": "Voyageurs de la communauté BAQUEANO",
+    "empty": "Sois parmi les premières personnes à apparaître ici.",
+    "one": "1 voyageur nous a déjà rejoints",
+    "many": "{n} voyageurs nous ont déjà rejoints",
+    "note": "Tu veux apparaître ici ? Active « Afficher ma photo dans la communauté » dans ton profil : ta photo et ton prénom seront visibles dans cette section. Tu peux le retirer quand tu veux.",
+    "cta": "Afficher ma photo ici"
   }
 }

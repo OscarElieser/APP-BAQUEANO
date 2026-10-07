@@ -1,0 +1,22 @@
+/* ============================================================================
+   🧭 BAQUEANO — FOTOS DE LA COMUNIDAD (js/community-faces.js)
+   🎯 POR QUÉ: mostrar quiénes se sumaron, como "personas que siguen esta página" (2026-10-07).
+   ⚙️ CÓMO: fotos de 36 px superpuestas con borde blanco, total y aviso de privacidad.
+   📦 QUÉ: .bq-faces*.
+   ============================================================================ */
+.bq-faces { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; min-width: 0; }
+.bq-faces-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.bq-faces-stack { display: flex; list-style: none; margin: 0; padding: 0 0 0 10px; }
+.bq-faces-item, .bq-faces-more { width: 36px; height: 36px; margin-left: -10px; border-radius: 50%; border: 2px solid #FFFFFF; background: #E2E8F0;
+  overflow: hidden; box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15); flex: 0 0 auto; }
+.bq-faces-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bq-faces-more { display: inline-flex; align-items: center; justify-content: center; font: 800 0.72rem/1 Montserrat, sans-serif; color: #FFFFFF; background: #165D6F; }
+.bq-faces-count { margin: 0; font: 800 0.85rem/1.3 Montserrat, sans-serif; color: #0F172A; }
+.bq-faces-note { margin: 0; font-size: 0.78rem; line-height: 1.45; color: #475569; }
+.bq-faces-note i { color: #165D6F; }
+.bq-faces-link { align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; font: 800 0.82rem/1.2 Montserrat, sans-serif; color: #0E5566; text-decoration: underline; text-underline-offset: 3px; }
+.bq-faces-link:focus-visible { outline: 3px solid #165D6F; outline-offset: 2px; border-radius: 6px; }
+/* En la tarjeta de Custodia ambiental el bloque ocupa toda la fila, debajo del texto y el botón. */
+.amb-triple-box .bq-faces { flex-basis: 100%; }
+.tm-hero .bq-faces { margin-top: 18px; padding: 12px 14px; border-radius: 16px; background: rgba(255, 255, 255, 0.92); max-width: 560px; }
+.amb-triple-box--faces { flex-wrap: wrap; }

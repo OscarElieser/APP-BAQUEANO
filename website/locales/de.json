@@ -6399,5 +6399,13 @@
     "titleHealth": "Gesundheit, Barrierefreiheit und Wohlbefinden",
     "titlePersonal": "Persönliche Daten bearbeiten",
     "titlePhoto": "Profilfoto ändern"
+  },
+  "communityFaces": {
+    "label": "Reisende der BAQUEANO-Community",
+    "empty": "Gehöre zu den Ersten, die hier erscheinen.",
+    "one": "1 Reisender ist schon dabei",
+    "many": "{n} Reisende sind schon dabei",
+    "note": "Möchtest du hier erscheinen? Aktiviere „Mein Foto in der Community zeigen“ in deinem Profil: Dein Foto und dein Vorname werden in diesem Bereich angezeigt. Du kannst es jederzeit entfernen.",
+    "cta": "Mein Foto hier zeigen"
   }
 }

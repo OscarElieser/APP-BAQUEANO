@@ -5392,3 +5392,14 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - intereses ["playas","cafe"] con aria-pressed; moneda USD;
   - permiso community + foto de Google como respaldo;
   - axe del diálogo y de la sección: 0 violaciones.
+7. Historia, barra de fuentes: "hacerlo más pro, ponerle los logos oficiales de cada uno… como scroll en movimiento infinito y así quitamos el botón de ver todas las fuentes" (el modal "Fuentes de esta página" se ve sin estilo y con claves internas).
+- Comunidad: la tarjeta "Únete a la comunidad" está en ambiental.html y su botón lleva a testimonios.html ("Experiencias de viajeros"). Las fotos se muestran en ambas con un componente reutilizable.
+8. Historia, "Patrimonio vivo": "darle más información a cada tarjeta"; el botón "Ver más patrimonios" solo baja en la página.
+9. Historia, "Antes y ahora": "ponerle dos fotos en una sola en cada una… y con más información de cada uno". Fotos históricas solo reales, de dominio público o con licencia, citando la fuente.
+10. Mapas: "recuerda que en todos los mapas que tengamos tienen que salir todos los pines" (captura de un mapa con solo 7 pines).
+
+### Fotos de la comunidad — hecho y probado
+- `website/js/community-faces.js` + `css/components/community-faces.css` en ambiental.html (tarjeta "Únete a la comunidad") y en testimonios.html ("Experiencias de viajeros", destino de "Quiero unirme"). Seis claves `communityFaces.*` en 6 idiomas.
+- Solo aparecen quienes activaron el permiso en su perfil (`perfil.html#privacidad-datos`). Texto fijo: dónde sale la foto, qué se ve (foto + primer nombre) y que se puede quitar cuando se quiera.
+- Pruebas: 15 personas con 2 fotos válidas → 2 fotos + "+13" (corregido: antes decía "+7"). Una URL `javascript:` se descarta y "Luis<b>" queda como texto. Con 0 personas: "Sé de las primeras personas…", sin cifras inventadas. axe 0; sin desborde.
+- browser-qa (perfil, ambiental, testimonios): 48 cargas, 0 fallos. Auditoría estática: 0 críticos. En vivo, community_faces → 200 {total:0, faces:[]}.

@@ -6399,5 +6399,13 @@
     "titleHealth": "Health, accessibility and wellbeing",
     "titlePersonal": "Edit personal information",
     "titlePhoto": "Change profile photo"
+  },
+  "communityFaces": {
+    "label": "BAQUEANO community travelers",
+    "empty": "Be among the first people to appear here.",
+    "one": "1 traveler has already joined",
+    "many": "{n} travelers have already joined",
+    "note": "Want to appear here? Turn on “Show my photo in the community” in your profile: your photo and first name will be shown in this section. You can remove it anytime.",
+    "cta": "Show my photo here"
   }
 }

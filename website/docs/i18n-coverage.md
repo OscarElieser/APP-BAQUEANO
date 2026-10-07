@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T18:35:00.742Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4845 · en 4845 · fr 4845 · it 4845 · pt 4845 · de 4845
+Generado: 2026-10-07T18:38:23.821Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4851 · en 4851 · fr 4851 · it 4851 · pt 4851 · de 4851
 
 HTML: 3869/3870 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -193,6 +193,7 @@ HTML: 3869/3870 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/baqui-brain.js | js | 0 | 0 | 0 | 100 % |
 | js/business-application.js | js | 0 | 0 | 0 | 100 % |
 | js/community-api.js | js | 0 | 0 | 0 | 100 % |
+| js/community-faces.js | js | 0 | 0 | 0 | 100 % |
 | js/contact-form.js | js | 0 | 0 | 0 | 100 % |
 | js/cronicas-filter.js | js | 0 | 0 | 0 | 100 % |
 | js/definitive-index-interactions.js | js | 0 | 0 | 0 | 100 % |

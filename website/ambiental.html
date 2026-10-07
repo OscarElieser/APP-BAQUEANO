@@ -60,6 +60,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="css/components/community-faces.css?v=20261007-1">
 </head>
 
 <body class="page-ambiental-exact">
@@ -592,7 +593,7 @@
           </div>
 
           <!-- Caja 3: Únete a la Comunidad -->
-          <div class="amb-triple-box">
+          <div class="amb-triple-box amb-triple-box--faces">
             <div class="amb-box-left">
               <i class="fa-solid fa-users amb-box-icon"></i>
               <div class="amb-box-text">
@@ -601,6 +602,8 @@
               </div>
             </div>
             <a data-i18n="pages.ambiental.ambTripleSection.a1" href="testimonios.html" class="amb-btn-box outline">Quiero unirme</a>
+            <!-- 2026-10-07: fotos de la comunidad (solo con permiso del perfil); js/community-faces.js -->
+            <div class="bq-faces" data-community-faces aria-live="polite"></div>
           </div>
         </div>
       </div>
@@ -747,6 +750,7 @@
 <script src="js/navigation.js?v=20261007-app-2"></script>
 <script src="js/global-injector.js"></script>
   <script defer src="js/ambiental-report-handoff.js?v=20261006-1"></script>
+<script src="js/community-faces.js?v=20261007-1" defer></script>
 </body>
 
 </html>

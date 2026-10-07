@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T18:35:00.742Z",
+  "generatedAt": "2026-10-07T18:38:23.821Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4845,
-    "en": 4845,
-    "fr": 4845,
-    "it": 4845,
-    "pt": 4845,
-    "de": 4845
+    "es": 4851,
+    "en": 4851,
+    "fr": 4851,
+    "it": 4851,
+    "pt": 4851,
+    "de": 4851
   },
   "html": {
     "files": 34,
@@ -23,7 +23,7 @@
     "untranslated": 1
   },
   "js": {
-    "files": 115,
+    "files": 116,
     "translated": 152,
     "untranslated": 722
   },
@@ -89,6 +89,7 @@
     "js/baqui-brain.js",
     "js/business-application.js",
     "js/community-api.js",
+    "js/community-faces.js",
     "js/contact-form.js",
     "js/cronicas-filter.js",
     "js/definitive-index-interactions.js",
@@ -751,6 +752,15 @@
     },
     {
       "file": "js/community-api.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/community-faces.js",
       "type": "js",
       "total": 0,
       "translated": 0,
