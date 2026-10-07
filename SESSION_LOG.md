@@ -5207,3 +5207,7 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   2. Compartir acceso: opcional; lo decide el propietario.
   3. Sitemap: ya enviado, "Correcto" con 25 páginas.
   4. Guía de uso: lectura opcional.
+- 2026-10-07 · Verificación de producción:
+  - La ejecución 159 marcó "falla" solo porque, mientras corría, se desplegó el commit más nuevo d951d55, que ya la incluye. Su control de "commit exacto" no coincidió.
+  - Producción sirve d951d55. Responden 200: ops-alerts, ops-nav-groups, ops-messages, ops-tech-report, ops-automation, baqueano-messages y la APK; perfil.html tiene #mensajes.
+  - La ejecución 161 (mismo commit) pasó la validación; su QA seguía en curso.
