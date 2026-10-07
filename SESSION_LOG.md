@@ -5219,3 +5219,18 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Se pasa `DEPLOY_SHA=$GITHUB_SHA` al servidor, que publica exactamente ese commit (`git cat-file -e`, `switch`/`reset` al SHA y `deploy.sh "$DEPLOY_SHA"`).
     - El orden lo garantiza `concurrency: production-deploy`.
   - Validado localmente: YAML, `bash -n` y simulación del comando remoto.
+- 2026-10-07 · Propietario: "No estoy cancelando, estoy preguntando para que siga con el plan". Se continúa con las tareas abiertas de etapas anteriores, en este orden:
+  1. #26 antispam en el servidor;
+  2. #13 Health Center;
+  3. #24 rendimiento;
+  4. #19 i18n del JS dinámico y del Ops;
+  5. #17 login y gestión de usuarios.
+  - #26, antispam y seguridad del servidor (20/20 E), cerrado:
+    - Inventario: las 11 Edge Functions que escriben ya tenían token u origen y límites (por cuenta, por IP en hash y por tamaño); intake tiene honeypot.
+    - Hallazgo real: `track_event`, `track_commercial_action` y `submit_feedback` (RPC públicas) limitaban solo por anonymous_id, que elige el navegador.
+    - Corrección: migración `20261007240000_rpc_ip_rate_limits.sql`, aplicada. `client_ip_allowed()` limita por hash de IP con la sal diaria; no aplica a service_role ni a llamadas sin cabeceras. Cada función queda idéntica salvo la línea del límite.
+    - Prueba (transacción revertida): 25 envíos con 25 anonymous_id desde una IP → 20 aceptados y 5 bloqueados; otra IP pasa; service_role y SQL interno no se limitan; 0 IP en claro.
+    - Pruebas en vivo contra las 10 funciones: 401/403 sin sesión, con token falso y desde origen ajeno; 413 con 140 KB.
+    - intake: origen ajeno o sin Origin → 403; honeypot → "aceptado" con 0 filas guardadas.
+    - Avisos del asesor de Supabase aceptados con su motivo (RLS sin políticas a propósito, RPC públicas por diseño, `vector` en public como mejora planificada).
+    - Matriz final: `docs/production-audit/antispam-security-report.md`.
