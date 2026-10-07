@@ -5234,3 +5234,13 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - intake: origen ajeno o sin Origin → 403; honeypot → "aceptado" con 0 filas guardadas.
     - Avisos del asesor de Supabase aceptados con su motivo (RLS sin políticas a propósito, RPC públicas por diseño, `vector` en public como mejora planificada).
     - Matriz final: `docs/production-audit/antispam-security-report.md`.
+
+## 2026-10-07 — #13 Health Center real (baqueano-ops v4)
+- **Pedido:** seguir con el plan ("estoy prefur ando para que siga con el plan"): #13 Health Center.
+- **Hecho:**
+  - `health()` de baqueano-ops: el aviso fijo "Android SIN_CONFIGURAR" se reemplazó por una comprobación real: HEAD de la APK oficial y sesiones `presence_sessions` con plataforma android en 24 h, más la última versión vista.
+  - Nuevo control "Disponibilidad medida de la web (24 h)": proporción de corridas de pg_cron (`automation_runs`) en que `web_health` no falló. 100 % = OPERATIVO, ≥90 % = DEGRADADO, menos = ERROR; sin corridas = SIN_CONFIGURAR.
+  - Desplegada la versión 4 de la Edge Function. La interfaz (`healthCard`) ya pinta los controles de forma genérica: sin cambios en el front.
+- **Evidencia:**
+  - Consultas reales: android_24h=0, runs_cron=2, web_ok=2.
+  - En vivo, sin token: HTTP 401 «Iniciá sesión con tu cuenta autorizada.».

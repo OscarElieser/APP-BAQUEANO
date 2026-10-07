@@ -22,7 +22,8 @@
 // - Lectura (staff): whoami, overview, health, list, get, audit_list,
 //   kpis (kpi_dashboard SMART), impact (strategic_impact_report + matriz de
 //   alineación nacional y fuentes), db_health (db_health_report), duplicates,
-//   automation_runs (historial de controles programados, F8).
+//   automation_runs (historial de controles programados, F8). health incluye la app Android
+//   (APK y sesiones reales) y la disponibilidad medida en 24 h.
 // - Escritura (admin): save, set_status (publish|unpublish|archive|restore),
 //   verify (sello "Verificado por BAQUEANO" con trazabilidad), log,
 //   automation_run_now (ejecuta run_automation_checks; como máximo 1 cada 2 min).
@@ -350,8 +351,35 @@ async function health(service: SupabaseClient): Promise<Check[]> {
     state: aiErr ? "ERROR" : (lastAi ? "OPERATIVO" : "SIN_CONFIGURAR"),
     detail: aiErr ? "No se pudo leer ai_messages." : (lastAi ? `Última respuesta: ${lastAi.created_at} (${lastAi.provider_used || "proveedor no informado"}).` : "BAQUI aún no registra interacciones en ai_messages: sin datos de uso, tokens ni latencia.") });
 
-  checks.push({ id: "android", label: "App Android (telemetría)", source: "Android", state: "SIN_CONFIGURAR",
-    detail: "La app todavía no transmite versión, dispositivos ni sesiones a Supabase. Integración pendiente." });
+  // App Android (2026-10-07): antes era un aviso fijo "SIN_CONFIGURAR". Ahora se mide la descarga
+  // oficial de la APK y las sesiones reales que la app envía a baqueano-presence.
+  const [android, apkMs, apkErr] = await timed(async () => {
+    const res = await fetch("https://baqueanonicaragua.com/downloads/baqueano-android.apk", { method: "HEAD" });
+    const since = new Date(Date.now() - 86400000).toISOString();
+    const { data, count, error } = await service.from("presence_sessions").select("app_version, last_seen", { count: "exact" })
+      .eq("platform", "android").gte("last_seen", since).order("last_seen", { ascending: false }).limit(1);
+    if (error) throw error;
+    return { apk: res.status, sessions: count || 0, version: (data && data[0]?.app_version) || null };
+  });
+  checks.push({ id: "android", label: "App Android (descarga y sesiones)", source: "Azure /downloads + Supabase presence_sessions", latency_ms: apkMs,
+    state: apkErr ? "ERROR" : (android!.apk === 200 ? "OPERATIVO" : "ERROR"),
+    detail: apkErr ? "No se pudo comprobar la APK ni las sesiones." :
+      `APK HTTP ${android!.apk} · ${android!.sessions} sesiones de la app en 24 h${android!.version ? ` · última versión vista ${android!.version}` : ""}.` });
+
+  // Disponibilidad medida: proporción de controles horarios (pg_cron, F8) en que la web respondió.
+  const [avail, , availErr] = await timed(async () => {
+    const since = new Date(Date.now() - 86400000).toISOString();
+    const { data, error } = await service.from("automation_runs").select("checks").eq("trigger", "cron").gte("started_at", since);
+    if (error) throw error;
+    const runs = (data || []) as Array<{ checks: Array<{ id: string; state: string }> }>;
+    const up = runs.filter((r) => (r.checks || []).some((c) => c.id === "web_health" && c.state !== "fail")).length;
+    return { total: runs.length, up };
+  });
+  const pct = avail && avail.total ? Math.round((avail.up / avail.total) * 1000) / 10 : null;
+  checks.push({ id: "availability", label: "Disponibilidad medida de la web (24 h)", source: "Supabase automation_runs (pg_cron cada hora)",
+    state: availErr ? "ERROR" : (pct === null ? "SIN_CONFIGURAR" : (pct === 100 ? "OPERATIVO" : (pct >= 90 ? "DEGRADADO" : "ERROR"))),
+    detail: availErr ? "No se pudo leer el historial de controles." :
+      (pct === null ? "Todavía no hay controles programados en las últimas 24 h." : `${pct} % · la web respondió en ${avail!.up} de ${avail!.total} controles horarios.`) });
   return checks;
 }
 
