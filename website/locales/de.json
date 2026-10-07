@@ -6344,5 +6344,25 @@
       "closed": "Geschlossen",
       "all": "Alle"
     }
+  },
+  "opsNav": {
+    "toggleGroup": "Diese Gruppe ein- oder ausblenden"
+  },
+  "opsAlerts": {
+    "title": "Warnungen",
+    "buttonLabel": "Warnungen: {n} brauchen Aufmerksamkeit",
+    "loading": "Wird geprüft…",
+    "none": "Keine Warnungen: Im Moment braucht nichts Aufmerksamkeit.",
+    "updated": "Geprüft: {time}",
+    "noData": "{source}: keine Daten ({error})",
+    "autoFail": "Automatische Prüfung fehlgeschlagen",
+    "autoWarn": "Automatische Prüfung mit Hinweis",
+    "messages": "{n} Unterhaltungen von Reisenden warten auf Antwort",
+    "sos": "{n} offene SOS",
+    "reports": "{n} offene Inhaltsmeldungen",
+    "testimonials": "{n} Erlebnisse warten auf Moderation",
+    "verifications": "{n} offene Prüfungen",
+    "reservations": "{n} offene Buchungen",
+    "overview": "Betriebsübersicht"
   }
 }

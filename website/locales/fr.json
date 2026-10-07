@@ -6344,5 +6344,25 @@
       "closed": "Fermée",
       "all": "Toutes"
     }
+  },
+  "opsNav": {
+    "toggleGroup": "Afficher ou masquer ce groupe"
+  },
+  "opsAlerts": {
+    "title": "Alertes",
+    "buttonLabel": "Alertes : {n} demandent votre attention",
+    "loading": "Vérification…",
+    "none": "Aucune alerte : rien ne demande d’attention pour l’instant.",
+    "updated": "Vérifié : {time}",
+    "noData": "{source} : aucune donnée ({error})",
+    "autoFail": "Contrôle automatique en échec",
+    "autoWarn": "Contrôle automatique avec avertissement",
+    "messages": "{n} conversations de voyageurs en attente de réponse",
+    "sos": "{n} SOS ouverts",
+    "reports": "{n} signalements de contenu ouverts",
+    "testimonials": "{n} récits en attente de modération",
+    "verifications": "{n} vérifications en attente",
+    "reservations": "{n} réservations en attente",
+    "overview": "Vue d’ensemble opérationnelle"
   }
 }

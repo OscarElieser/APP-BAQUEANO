@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T09:30:30.979Z",
+  "generatedAt": "2026-10-07T09:33:13.659Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4796,
-    "en": 4796,
-    "fr": 4796,
-    "it": 4796,
-    "pt": 4796,
-    "de": 4796
+    "es": 4812,
+    "en": 4812,
+    "fr": 4812,
+    "it": 4812,
+    "pt": 4812,
+    "de": 4812
   },
   "html": {
     "files": 34,
@@ -23,7 +23,7 @@
     "untranslated": 1
   },
   "js": {
-    "files": 112,
+    "files": 114,
     "translated": 152,
     "untranslated": 722
   },
@@ -108,12 +108,14 @@
     "js/impact-public.js",
     "js/intake-api.js",
     "js/lodging-showcase.js",
+    "js/ops-center/ops-alerts.js",
     "js/ops-center/ops-android-app.js",
     "js/ops-center/ops-automation.js",
     "js/ops-center/ops-community-moderation.js",
     "js/ops-center/ops-intake-inbox.js",
     "js/ops-center/ops-live-presence.js",
     "js/ops-center/ops-messages.js",
+    "js/ops-center/ops-nav-groups.js",
     "js/ops-center/ops-platform-reviews.js",
     "js/ops-center/ops-tech-report.js",
     "js/platform-reviews.js",
@@ -1161,6 +1163,15 @@
       "coverage": 0
     },
     {
+      "file": "js/ops-center/ops-alerts.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/ops-center/ops-android-app.js",
       "type": "js",
       "total": 0,
@@ -1244,6 +1255,15 @@
     {
       "file": "js/ops-center/ops-mock-data.js",
       "type": "js-editorial",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/ops-center/ops-nav-groups.js",
+      "type": "js",
       "total": 0,
       "translated": 0,
       "untranslated": 0,

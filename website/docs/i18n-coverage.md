@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T09:30:30.979Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4796 · en 4796 · fr 4796 · it 4796 · pt 4796 · de 4796
+Generado: 2026-10-07T09:33:13.659Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4812 · en 4812 · fr 4812 · it 4812 · pt 4812 · de 4812
 
 HTML: 3864/3865 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -212,12 +212,14 @@ HTML: 3864/3865 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/impact-public.js | js | 6 | 6 | 0 | 100 % |
 | js/intake-api.js | js | 0 | 0 | 0 | 100 % |
 | js/lodging-showcase.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-alerts.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-android-app.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-automation.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-intake-inbox.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-live-presence.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-messages.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-nav-groups.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-tech-report.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |

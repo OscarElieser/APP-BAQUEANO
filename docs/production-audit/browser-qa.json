@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-07T08:26:55.728Z",
+ "generatedAt": "2026-10-07T09:45:21.783Z",
  "base": "http://127.0.0.1:8790/",
  "widths": [
   320,
@@ -72,8 +72,11 @@
  ],
  "fails": [],
  "slowLoads": [
-  "mi-viaje.html@820",
-  "mi-viaje.html@1366"
+  "favoritos.html@480",
+  "favoritos.html@600",
+  "favoritos.html@820",
+  "legal.html@1280",
+  "legal.html@1440"
  ],
  "results": [
   {
@@ -2762,7 +2765,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": false
+   "slowLoad": true
   },
   {
    "page": "favoritos.html",
@@ -2771,7 +2774,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": false
+   "slowLoad": true
   },
   {
    "page": "favoritos.html",
@@ -2784,1288 +2787,6 @@
   },
   {
    "page": "favoritos.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "favoritos.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "favoritos.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "favoritos.html",
-   "width": 1366,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ]
-  },
-  {
-   "page": "favoritos.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "favoritos.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "favoritos.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 390,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "Contact"
-    },
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "Contact"
-    },
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "Contact"
-    },
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "Contact"
-    },
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ],
-   "drawer": {
-    "present": true,
-    "open": true,
-    "overflowY": "auto",
-    "scrollable": true,
-    "lastReachable": true,
-    "closes": true
-   }
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 1366,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "Contact"
-    },
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "Contact"
-    },
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "Contact"
-    },
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "Contact"
-    },
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ]
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "gastronomia.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 390,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [
-    "epocaPrehispanica",
-    "resistenciaIndigena",
-    "periodoColonial",
-    "independencia",
-    "guerraNacional",
-    "sigloXX",
-    "nicaraguaActual",
-    "pueblosOriginarios",
-    "personajes",
-    "fuentes"
-   ],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ],
-   "drawer": {
-    "present": true,
-    "open": true,
-    "overflowY": "auto",
-    "scrollable": true,
-    "lastReachable": true,
-    "closes": true
-   }
-  },
-  {
-   "page": "historia.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 1366,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [
-    "epocaPrehispanica",
-    "resistenciaIndigena",
-    "periodoColonial",
-    "independencia",
-    "guerraNacional",
-    "sigloXX",
-    "nicaraguaActual",
-    "pueblosOriginarios",
-    "personajes",
-    "fuentes"
-   ],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ]
-  },
-  {
-   "page": "historia.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "historia.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 390,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289?text=EMERGENCIA%20BAQUEANO",
-     "safe": true,
-     "name": "Baqueano DeskWhatsApp 24/7"
-    },
-    {
-     "href": "https://wa.me/50584431289?text=ALERTA%20SOS%20DESDE%20BAQUEA",
-     "safe": true,
-     "name": "Send alert with GPS coordinates"
-    },
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ],
-   "drawer": {
-    "present": true,
-    "open": true,
-    "overflowY": "auto",
-    "scrollable": true,
-    "lastReachable": true,
-    "closes": true
-   }
-  },
-  {
-   "page": "index.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 1366,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289?text=EMERGENCIA%20BAQUEANO",
-     "safe": true,
-     "name": "Baqueano DeskWhatsApp 24/7"
-    },
-    {
-     "href": "https://wa.me/50584431289?text=ALERTA%20SOS%20DESDE%20BAQUEA",
-     "safe": true,
-     "name": "Send alert with GPS coordinates"
-    },
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ]
-  },
-  {
-   "page": "index.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "index.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 390,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ],
-   "drawer": {
-    "present": true,
-    "open": true,
-    "overflowY": "auto",
-    "scrollable": true,
-    "lastReachable": true,
-    "closes": true
-   }
-  },
-  {
-   "page": "legal.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 1366,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ]
-  },
-  {
-   "page": "legal.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "legal.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 390,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "Contact"
-    },
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ],
-   "drawer": {
-    "present": true,
-    "open": true,
-    "overflowY": "auto",
-    "scrollable": true,
-    "lastReachable": true,
-    "closes": true
-   }
-  },
-  {
-   "page": "mapa.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 1366,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "Contact"
-    },
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ]
-  },
-  {
-   "page": "mapa.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mapa.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 390,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ],
-   "drawer": {
-    "present": true,
-    "open": true,
-    "overflowY": "auto",
-    "scrollable": true,
-    "lastReachable": true,
-    "closes": true
-   }
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 820,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 1024,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 1280,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 1366,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ]
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 1440,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 1920,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-negocio.html",
-   "width": 2560,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 320,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 360,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 375,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 390,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false,
-   "axe": [],
-   "missingAnchors": [],
-   "whatsapp": [
-    {
-     "href": "https://wa.me/50584431289",
-     "safe": true,
-     "name": "WhatsApp"
-    }
-   ],
-   "drawer": {
-    "present": true,
-    "open": true,
-    "overflowY": "auto",
-    "scrollable": true,
-    "lastReachable": true,
-    "closes": true
-   }
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 412,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 430,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 480,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 600,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-viaje.html",
-   "width": 768,
-   "overflowPx": 0,
-   "offscreen": [],
-   "imgNoAlt": [],
-   "error": null,
-   "slowLoad": false
-  },
-  {
-   "page": "mi-viaje.html",
    "width": 820,
    "overflowPx": 0,
    "offscreen": [],
@@ -4074,6 +2795,1288 @@
    "slowLoad": true
   },
   {
+   "page": "favoritos.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "favoritos.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "favoritos.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "favoritos.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "favoritos.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "favoritos.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "gastronomia.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [
+    "epocaPrehispanica",
+    "resistenciaIndigena",
+    "periodoColonial",
+    "independencia",
+    "guerraNacional",
+    "sigloXX",
+    "nicaraguaActual",
+    "pueblosOriginarios",
+    "personajes",
+    "fuentes"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "historia.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [
+    "epocaPrehispanica",
+    "resistenciaIndigena",
+    "periodoColonial",
+    "independencia",
+    "guerraNacional",
+    "sigloXX",
+    "nicaraguaActual",
+    "pueblosOriginarios",
+    "personajes",
+    "fuentes"
+   ],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "historia.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "historia.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289?text=EMERGENCIA%20BAQUEANO",
+     "safe": true,
+     "name": "Baqueano DeskWhatsApp 24/7"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=ALERTA%20SOS%20DESDE%20BAQUEA",
+     "safe": true,
+     "name": "Send alert with GPS coordinates"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "index.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289?text=EMERGENCIA%20BAQUEANO",
+     "safe": true,
+     "name": "Baqueano DeskWhatsApp 24/7"
+    },
+    {
+     "href": "https://wa.me/50584431289?text=ALERTA%20SOS%20DESDE%20BAQUEA",
+     "safe": true,
+     "name": "Send alert with GPS coordinates"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "index.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "index.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "legal.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "legal.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "legal.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "legal.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "legal.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "legal.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "legal.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "legal.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "legal.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "legal.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "legal.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "legal.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": true
+  },
+  {
+   "page": "legal.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "legal.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": true
+  },
+  {
+   "page": "legal.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "legal.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "mapa.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "Contact"
+    },
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "mapa.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mapa.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 1024,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 1280,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 1366,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ]
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 1440,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 1920,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-negocio.html",
+   "width": 2560,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 320,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 360,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 375,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 390,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false,
+   "axe": [],
+   "missingAnchors": [],
+   "whatsapp": [
+    {
+     "href": "https://wa.me/50584431289",
+     "safe": true,
+     "name": "WhatsApp"
+    }
+   ],
+   "drawer": {
+    "present": true,
+    "open": true,
+    "overflowY": "auto",
+    "scrollable": true,
+    "lastReachable": true,
+    "closes": true
+   }
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 412,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 430,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 480,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 600,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 768,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
+   "page": "mi-viaje.html",
+   "width": 820,
+   "overflowPx": 0,
+   "offscreen": [],
+   "imgNoAlt": [],
+   "error": null,
+   "slowLoad": false
+  },
+  {
    "page": "mi-viaje.html",
    "width": 1024,
    "overflowPx": 0,
@@ -4098,7 +4101,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": true,
+   "slowLoad": false,
    "axe": [],
    "missingAnchors": [],
    "whatsapp": [

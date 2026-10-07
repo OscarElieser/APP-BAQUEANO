@@ -5185,3 +5185,20 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
       - perfil es@390 y en@1366: validación, creación, foco en el título, HTML del usuario mostrado como texto, respuesta y lista; axe 0.
       - Ops @1366 y @390: bandeja, hilo, respuesta, cierre; axe 0.
     - Android: `lib/data/repositories/messages_repository.dart` (misma función) con su prueba `test/messages_repository_test.dart`. Pendiente honesto: la pantalla de la App va en la próxima versión del APK (aquí no hay Flutter; flutter analyze y test corren en CI).
+  - Menú y alertas del Ops Center (último punto del plan):
+    - Menú: las 4 vistas nuevas estaban en "01 — Exploración & Catálogo". Se movieron sin borrar nada:
+      - Mensajes, a 02 Operaciones, junto al buzón;
+      - Actividad en vivo, a 05 Inteligencia;
+      - App Android, a 04, junto a Android;
+      - Automatización, a 06, junto a Estado.
+    - `ops-nav-groups.js`: los 6 grupos son plegables (botón con aria-expanded/aria-controls). El grupo activo siempre queda abierto (también con #hash). Lo plegado se recuerda en el navegador; con la barra contraída se ven todos los íconos.
+    - `ops-alerts.js`: campana "Alertas" en la barra superior, solo con señales reales:
+      - automatización con falla o aviso;
+      - conversaciones de viajeros sin respuesta;
+      - SOS abiertos;
+      - denuncias, moderación, verificaciones y reservas pendientes.
+      Un conteo ilegible aparece como "sin datos", no como 0. Cada alerta enlaza a su vista; se actualiza cada 2 min con la pestaña visible; Escape cierra y devuelve el foco.
+    - 16 claves `opsAlerts.*` y `opsNav.*` en 6 idiomas.
+    - E2E @1366 y @390: grupos y ubicación de las vistas, plegar y abrir, insignia 3, 4 alertas con enlaces y "sin datos", Escape; axe 0.
+    - Se repitieron las suites anteriores (automatización, informe PDF, mensajes del Ops, perfil y app): todo en verde.
+    - QA completa: 31 páginas × 16 anchos = 496 cargas, 0 fallos. Auditoría con 0 críticos.
