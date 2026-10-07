@@ -36,9 +36,14 @@
       // Correo de la publicidad del hotel enviada por el propietario (2026-10-07).
       email: 'encantodelsursjs@gmail.com',
       // Ubicación entregada por el propietario (2026-10-07): enlace exacto de Google Maps y dirección que
-      // ese enlace confirma. Las coordenadas numéricas siguen pendientes (no se inventan).
+      // ese enlace confirma.
       mapsUrl: 'https://maps.app.goo.gl/zg64Cd6hWcq5psGF7',
       address: 'Av. Gaspar García Laviana, San Juan del Sur 48600',
+      // Coordenadas entregadas por el propietario como "aproximadas" (2026-10-07); en Supabase,
+      // location_precision 'approximate' (el pin del mapa exige 'exact').
+      latitude: 11.25015,
+      longitude: -85.87015,
+      locationPrecision: 'approximate',
       mapsQuery: 'Hotel Encanto del Sur, San Juan del Sur, Nicaragua',
       amenities: ['standard', 'family', 'groups', 'equipped', 'airConditioning', 'wifi', 'cableTv', 'dailyCleaning', 'personalService', 'familyAtmosphere', 'nearBeach'],
       prices: [

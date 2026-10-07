@@ -4999,3 +4999,14 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Supabase: `email` actualizado (migración `20261007140000_hotel_encanto_del_sur_correo.sql`, UPDATE de 1 fila) con `attributes.email_source`, marcado "confirmar con el propietario".
     - Ficha: correo con enlace `mailto:` bajo el WhatsApp.
     - Pruebas: Playwright + axe en ES/EN/DE/FR, sin violaciones ni errores.
+- 2026-10-07 · Pedido del propietario: coordenadas de Hotel Encanto del Sur. Latitud 11.25015 (11° 15' 00.5" N), longitud -85.87015 (85° 52' 12.5" W), descritas por él como "aproximadas".
+  - Resultado:
+    - Verificado antes de guardar:
+      - los grados/min/seg coinciden con los decimales (diferencia de unos 20 cm);
+      - el punto cae dentro del límite de San Juan del Sur;
+      - está a 286 m del Hotel Victoriano (casco urbano).
+    - Supabase (migración `20261007150000_hotel_encanto_del_sur_coordenadas.sql`, UPDATE de 1 fila):
+      - lat/lng guardadas y `geom` generado por el trigger;
+      - `location_precision='approximate'` por la palabra del propietario, así que `map_ready` sigue en false (la regla del mapa exige 'exact').
+      - Si confirma que el punto cae sobre el hotel, se cambia a 'exact' y se activa el pin.
+    - `js/lodging-showcase-data.js` actualizado (espejo).
