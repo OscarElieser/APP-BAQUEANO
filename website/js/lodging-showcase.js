@@ -141,6 +141,15 @@
     phone.appendChild(document.createTextNode(' '));
     phone.appendChild(proper('span', '', item.whatsappLabel));
     nodes.push(phone);
+    if (item.email) {
+      var mail = el('p', 'bq-lodging-email');
+      mail.appendChild(icon('fa-regular fa-envelope'));
+      mail.appendChild(document.createTextNode(' '));
+      var link = el('a', '', { href: 'mailto:' + item.email, translate: 'no' });
+      link.textContent = item.email;
+      mail.appendChild(link);
+      nodes.push(mail);
+    }
     return nodes;
   }
 

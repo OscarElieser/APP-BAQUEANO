@@ -4994,3 +4994,8 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - Ficha: "Ver ubicación" abre el enlace exacto del propietario; se muestra la dirección.
     - Pruebas: Playwright + axe en ES/EN/DE/FR, sin violaciones; el enlace del botón es `https://maps.app.goo.gl/zg64Cd6hWcq5psGF7`.
     - Pendiente: lat/lng para el pin del mapa de BAQUEANO (en Google Maps: mantener presionado el pin y copiar los dos números).
+- 2026-10-07 · Pedido del propietario: "Poné el correo también que tiene" (Hotel Encanto del Sur). El correo sale de la publicidad de referencia que envió el propietario: encantodelsursjs@gmail.com (la marca de agua de TikTok tapa parte del texto; se pide confirmación).
+  - Resultado:
+    - Supabase: `email` actualizado (migración `20261007140000_hotel_encanto_del_sur_correo.sql`, UPDATE de 1 fila) con `attributes.email_source`, marcado "confirmar con el propietario".
+    - Ficha: correo con enlace `mailto:` bajo el WhatsApp.
+    - Pruebas: Playwright + axe en ES/EN/DE/FR, sin violaciones ni errores.

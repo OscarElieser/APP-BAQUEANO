@@ -79,3 +79,7 @@
 .bq-lodging-seal-logo { width: 28px; height: 28px; flex: none; }
 .bq-lodging-seal p { margin: 0; font-size: 0.8rem; color: #475569; line-height: 1.4; }
 .bq-lodging-seal strong { color: #165D6F; }
+
+.bq-lodging-email { margin: 6px 0 0; font-weight: 600; overflow-wrap: anywhere; }
+.bq-lodging-email a { color: var(--lodging-navy); }
+.bq-lodging-email i { color: var(--lodging-green); }

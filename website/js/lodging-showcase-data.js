@@ -33,6 +33,8 @@
       logo: null,
       whatsapp: '50577532549',
       whatsappLabel: '+505 7753 2549',
+      // Correo de la publicidad del hotel enviada por el propietario (2026-10-07).
+      email: 'encantodelsursjs@gmail.com',
       // Ubicación entregada por el propietario (2026-10-07): enlace exacto de Google Maps y dirección que
       // ese enlace confirma. Las coordenadas numéricas siguen pendientes (no se inventan).
       mapsUrl: 'https://maps.app.goo.gl/zg64Cd6hWcq5psGF7',
