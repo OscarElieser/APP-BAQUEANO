@@ -5307,3 +5307,13 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 ## 2026-10-07 15:00 — Revisión programada del CI (runs 168/169)
 - Runs 168 (Nginx: gzip_static, límites, anti-slowloris, escáneres) y 169 (IP real detrás de Cloudflare): **success**. `nginx -t` pasó en la VM.
 - En vivo (HTTP real desde Supabase): /index.html 200 gzip + Vary; /wp-login.php y /.env → 404 inmediato; /health 200.
+
+## 2026-10-07 — Propietario: captura de los registros DNS importados en Cloudflare
+- Comparación con el DNS público actual (dns.google, consultado desde Supabase):
+  - A @ 20.80.81.65 ✔ (Proxied);
+  - www CNAME → apex ✔ (Proxied);
+  - TXT 6317a1dae2f8e12255c20385d684203d ✔ (DNS only);
+  - sin MX (no hay correo) ✔;
+  - sin DS (DNSSEC apagado, no hay que desactivar nada en Hostinger) ✔;
+  - NS actuales byte/pixel.dns-parking.com (Hostinger).
+- **Falta:** CNAME `ues3nrtrlyrd` → `gv-kphjfbvtlhk32n.dv.googlehosted.com` (verificación de Google Search Console). Agregar como DNS only antes de "Continue to activation".
