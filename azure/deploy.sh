@@ -39,6 +39,39 @@ RELEASES="${WEB_ROOT}/releases"
 MEDIA_VIDEOS="${WEB_ROOT}/media/videos"
 KEEP=3
 
+# POR QUÉ (2026-10-07): la inserción anterior buscaba la marca "# API proxy", que la configuración
+#   viva ya no tiene; sed no hacía nada, nginx -t pasaba y /downloads/baqueano-android.apk y /app
+#   respondían 404 en producción sin que el despliegue lo notara (lo detectó run_automation_checks).
+# CÓMO: el include se agrega antes de la primera marca conocida que exista (comparación literal con
+#   awk), se comprueba que quedó escrito y que nginx -t lo acepta; si no, se restaura la copia y el
+#   despliegue FALLA con un mensaje claro en vez de seguir en silencio.
+# QUÉ: ensure_include <snippet> <descripción>.
+ensure_include() {
+  local snippet="$1" label="$2"
+  local site_config="/etc/nginx/sites-available/baqueano.conf"
+  local site_backup="${site_config}.baqueano-backup"
+  local marker inserted=""
+  sudo grep -q "snippets/${snippet}" "${site_config}" && return 0
+  sudo cp "${site_config}" "${site_backup}"
+  for marker in "# API proxy" "location /api/azure/" "location = /health" "location / {"; do
+    if sudo grep -qF "${marker}" "${site_config}"; then
+      sudo awk -v m="${marker}" -v inc="    include /etc/nginx/snippets/${snippet};" \
+        '!done && index($0, m) { print inc; print ""; done = 1 } { print }' "${site_config}" \
+        | sudo tee "${site_config}.baqueano-new" >/dev/null
+      sudo mv "${site_config}.baqueano-new" "${site_config}"
+      inserted="${marker}"
+      break
+    fi
+  done
+  if [[ -z "${inserted}" ]] || ! sudo grep -q "snippets/${snippet}" "${site_config}" || ! sudo nginx -t; then
+    sudo cp "${site_backup}" "${site_config}"
+    sudo nginx -t
+    echo "ERROR: no se pudo instalar ${label} (${snippet}); se restauró la configuración anterior." >&2
+    return 1
+  fi
+  echo "Nginx: incluido ${snippet} antes de «${inserted}»."
+}
+
 reload_nginx() {
   # POR QUÉ: las cabeceras versionadas deben llegar a producción junto con cada release.
   # CÓMO: instalamos el snippet antes de validar; nginx -t impide activar una configuración inválida.
@@ -52,27 +85,8 @@ reload_nginx() {
   local site_config="/etc/nginx/sites-available/baqueano.conf"
   local site_backup="${site_config}.baqueano-backup"
 
-  if ! sudo grep -q "baqueano-auth-proxy.conf" "${site_config}"; then
-    sudo cp "${site_config}" "${site_backup}"
-    sudo sed -i "/# API proxy/i\\    include /etc/nginx/snippets/baqueano-auth-proxy.conf;\n" "${site_config}"
-
-    if ! sudo nginx -t; then
-      sudo cp "${site_backup}" "${site_config}"
-      sudo nginx -t
-      echo "No se pudo instalar el proxy OAuth; se restauró la configuración anterior." >&2
-      return 1
-    fi
-  fi
-  if ! sudo grep -q "baqueano-delivery.conf" "${site_config}"; then
-    sudo cp "${site_config}" "${site_backup}"
-    sudo sed -i "/# API proxy/i\\    include /etc/nginx/snippets/baqueano-delivery.conf;\n" "${site_config}"
-    if ! sudo nginx -t; then
-      sudo cp "${site_backup}" "${site_config}"
-      sudo nginx -t
-      echo "No se pudo instalar la ruta de entrega Android; se restauró la configuración anterior." >&2
-      return 1
-    fi
-  fi
+  ensure_include "baqueano-auth-proxy.conf" "el proxy OAuth" || return 1
+  ensure_include "baqueano-delivery.conf" "la ruta de entrega Android (/downloads, /app)" || return 1
   # El bloque IP posee el único default_server. Esta normalización preserva las
   # líneas TLS que Certbot haya añadido al virtual host canónico.
   sudo sed -i -E 's/listen 80 default_server;/listen 80;/' "${site_config}"

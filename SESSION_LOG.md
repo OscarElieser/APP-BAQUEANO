@@ -5123,3 +5123,24 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
     - QUERY_TEMPLATE_PAGES excluye destino.html del sitemap (queda en 25 URL) y production-audit lo respeta.
     - Prueba nueva en seo-normalize.test (13 casos OK). Auditoría con 0 críticos.
   - Acción del propietario: agregar en Search Console la propiedad del dominio oficial https://baqueanonicaragua.com/ (o "Dominio" por DNS), enviar ahí sitemap.xml y validar la corrección en la propiedad www.
+- 2026-10-07 · Propietario: "Termina con el plan". Pendiente del plan de evolución: F5 notificaciones, F6 mensajería, F8 automatización y F9 informe PDF; además reestructurar el menú y las alertas de Ops. Se trabaja en ese orden de dependencia y con datos reales.
+  - F8, automatización (paso 1):
+    - Migración `20261007220000_automation_runs.sql`, aplicada.
+      - pg_cron con la tarea `baqueano-automation-hourly` (minuto 17).
+      - Tabla `automation_runs` con RLS y sin políticas.
+      - `run_automation_checks()` sin EXECUTE para anon ni authenticated. Controla:
+        - web /health;
+        - sitemap;
+        - /descargar y la APK;
+        - RLS;
+        - search_path;
+        - calidad de datos;
+        - operación;
+        - actividad de BAQÜI.
+    - Primera corrida real: FAIL. **La APK respondía 404 en producción**, y /app también.
+  - Causa:
+    - azure/deploy.sh insertaba el include de baqueano-delivery.conf antes de la marca "# API proxy", que la configuración viva de Nginx no tiene.
+    - sed no hacía nada y nginx -t pasaba, así que el despliegue seguía "verde" sin la ruta de descarga.
+  - Arreglo:
+    - `ensure_include` usa marcas alternativas con comparación literal (awk) y comprueba que el include quedó escrito y que nginx -t lo acepta. Si no, restaura la configuración y FALLA.
+    - El job de verificación comprueba en vivo la APK (200 + MIME de Android), /app (301 → /descargar) y /descargar (200).

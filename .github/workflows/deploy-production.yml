@@ -237,6 +237,18 @@ jobs:
             exit 1
           }
           echo "✅ /health confirma el commit ${short}"
+      - name: Descarga oficial de la app (/descargar, APK y /app)
+        # 2026-10-07: la APK respondía 404 en producción porque el include de Nginx no se instalaba
+        # y ningún control lo miraba. Ahora un 404 aquí frena la verificación.
+        run: |
+          code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 -I "$SITE/downloads/baqueano-android.apk")"
+          ctype="$(curl -sI --max-time 20 "$SITE/downloads/baqueano-android.apk" | tr -d '\r' | sed -nE 's/^[Cc]ontent-[Tt]ype: *//p')"
+          app="$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' --max-time 20 "$SITE/app")"
+          page="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$SITE/descargar")"
+          echo "APK → $code ($ctype) · /app → $app · /descargar → $page"
+          [[ "$code" == 200 && "$ctype" == application/vnd.android.package-archive* ]] || { echo "::error::La APK no se sirve (HTTP $code, $ctype)"; exit 1; }
+          [[ "$app" == "301 $SITE/descargar" ]] || { echo "::error::/app no redirige a /descargar ($app)"; exit 1; }
+          [[ "$page" == 200 ]] || { echo "::error::/descargar respondió $page"; exit 1; }
       - name: API Azure y conexión con Supabase
         run: |
           curl -fsS --max-time 15 "$SITE/api/azure/health"; echo
