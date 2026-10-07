@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T19:12:44.294Z",
+  "generatedAt": "2026-10-07T19:16:52.816Z",
   "languages": [
     "es",
     "en",
@@ -9,17 +9,17 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4901,
-    "en": 4901,
-    "fr": 4901,
-    "it": 4901,
-    "pt": 4901,
-    "de": 4901
+    "es": 4908,
+    "en": 4908,
+    "fr": 4908,
+    "it": 4908,
+    "pt": 4908,
+    "de": 4908
   },
   "html": {
     "files": 34,
-    "total": 3886,
-    "translated": 3885,
+    "total": 3890,
+    "translated": 3889,
     "untranslated": 1
   },
   "js": {
@@ -269,8 +269,8 @@
     {
       "file": "descargar.html",
       "type": "html",
-      "total": 29,
-      "translated": 29,
+      "total": 33,
+      "translated": 33,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100

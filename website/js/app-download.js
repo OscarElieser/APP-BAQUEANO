@@ -10,6 +10,7 @@
 //   revalidación, para que una versión nueva se vea sin esperar la caché.
 // - Pinta todo con textContent y claves appDownload.* (fecha y números con el formato del idioma),
 //   y vuelve a pintar al cambiar de idioma.
+// - Vuelve a pintar con baqueano:i18nReady (el motor de idiomas puede cargar después).
 // - Si el JSON no carga, el botón de descarga sigue funcionando y se avisa sin inventar datos.
 //
 // 📦 QUÉ: rellena #dlMeta, #dlSpecs, #dlPerms, #dlSha y #dlSigner en descargar.html y cuenta los
@@ -49,6 +50,10 @@
     $('dlRequires').textContent = t('appDownload.requiresValue', { android: c.minAndroid || ('API ' + c.minSdk), sdk: c.minSdk });
     $('dlSize').textContent = t('appDownload.sizeValue', { size: size });
     $('dlPackage').textContent = c.package || '—';
+    $('dlTarget').textContent = c.targetSdk ? t('appDownload.targetValue', { android: c.targetAndroid || ('API ' + c.targetSdk), sdk: c.targetSdk }) : '—';
+    $('dlDeveloper').textContent = (release.signer && (release.signer.organization || release.signer.subjectCN)) || '—';
+    $('dlPermsCount').textContent = t('appDownload.permsCountValue', { n: (c.permissions || []).length });
+    $('dlStatus').textContent = c.status === 'published' && release.signer && release.signer.certSha256 ? t('appDownload.statusPublished') : (c.status || '—');
     $('dlNotes').textContent = c.notesKey ? t(c.notesKey) : '—';
     $('dlSha').textContent = c.sha256;
     $('dlSigner').textContent = release.signer && release.signer.certSha256
@@ -98,6 +103,10 @@
   }
 
   window.addEventListener('baqueano:languageChanged', render);
+  // 2026-10-07: este script (defer) puede terminar antes de que global-injector cargue el motor de
+  // idiomas; entonces t() devolvía '' y "Requiere", "Tamaño" y "Novedades" quedaban vacíos en
+  // producción. Se vuelve a pintar cuando el motor avisa que está listo.
+  window.addEventListener('baqueano:i18nReady', render);
   function boot() { wireButton(); load(); }
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', boot, { once: true }) : boot();
 })(window, document);

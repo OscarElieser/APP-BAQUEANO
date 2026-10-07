@@ -6131,7 +6131,14 @@
     "verifyLead": "L'empreinte SHA-256 du fichier publié est :",
     "verifyHow": "Sur ordinateur : « sha256sum baqueano-android.apk » (Linux), « shasum -a 256 baqueano-android.apk » (macOS) ou « certutil -hashfile baqueano-android.apk SHA256 » (Windows). Le résultat doit être identique.",
     "signerLead": "Signature du développeur (certificat SHA-256) :",
-    "signerPending": "Signature en attente de vérification."
+    "signerPending": "Signature en attente de vérification.",
+    "target": "Optimisée pour",
+    "targetValue": "Android {android} (API {sdk})",
+    "developer": "Développeur",
+    "permsCount": "Autorisations",
+    "permsCountValue": "{n} (détails ci-dessous)",
+    "status": "État",
+    "statusPublished": "Publiée et signée"
   },
   "appBanner": {
     "label": "Application BAQUEANO pour Android",

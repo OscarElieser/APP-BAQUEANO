@@ -6131,7 +6131,14 @@
     "verifyLead": "Der SHA-256-Fingerabdruck der veröffentlichten Datei lautet:",
     "verifyHow": "Am Computer: „sha256sum baqueano-android.apk“ (Linux), „shasum -a 256 baqueano-android.apk“ (macOS) oder „certutil -hashfile baqueano-android.apk SHA256“ (Windows). Das Ergebnis muss identisch sein.",
     "signerLead": "Entwicklersignatur (SHA-256-Zertifikat):",
-    "signerPending": "Signatur noch nicht geprüft."
+    "signerPending": "Signatur noch nicht geprüft.",
+    "target": "Optimiert für",
+    "targetValue": "Android {android} (API {sdk})",
+    "developer": "Entwickler",
+    "permsCount": "Berechtigungen",
+    "permsCountValue": "{n} (Details weiter unten)",
+    "status": "Status",
+    "statusPublished": "Veröffentlicht und signiert"
   },
   "appBanner": {
     "label": "BAQUEANO-App für Android",

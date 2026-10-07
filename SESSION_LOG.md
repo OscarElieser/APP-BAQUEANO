@@ -5471,3 +5471,19 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - La sección "¿Qué significa ser BAQUEANO?" (Conocer, Conectar…) queda igual.
 - 14 claves en 6 idiomas; `npm run i18n` da 0 errores.
 - Playwright ✅: 1366 px en español (3 columnas), 820 px en inglés (2) y 390 px en alemán (1). Queda inmediatamente después de Misión y Visión, sin desborde, y axe da 0.
+22. Descargar (ficha de la versión): "Requiere", "Tamaño" y "Novedades" salen vacíos; "mostrar toda la información posible".
+
+### Descargar: ficha de la versión completa — hecho y probado
+- Causa de los campos vacíos en producción:
+  - `js/app-download.js` (defer) pintaba la ficha antes de que global-injector cargara el motor de idiomas;
+  - `t()` devolvía '' y "Requiere", "Tamaño", "Novedades" y la lista de permisos quedaban vacíos;
+  - la fecha salía en formato numérico ("30/9/2026").
+  - Reproducido con Playwright retrasando `global-language.js` 2,5 s: queda igual que en la captura del propietario.
+- Corrección: se vuelve a pintar con el evento `baqueano:i18nReady`.
+- Datos nuevos, todos tomados de `data/app-release.json` (generado desde la APK):
+  - Optimizada para: Android 15 (API 35);
+  - Desarrollador: Baqueano Nicaragua (del certificado de firma);
+  - Permisos: 9;
+  - Estado: "Publicada y firmada", solo si el certificado está verificado.
+- 7 claves en 6 idiomas; `npm run i18n` da 0 errores.
+- Prueba ✅ sin retraso y con 2,5 s de retraso, en español e inglés: los 10 campos con valor, fecha "30 de septiembre de 2026", "Android 6.0 o superior (API 23)", "95.4 MB" y "Primera versión publicada de la app.".

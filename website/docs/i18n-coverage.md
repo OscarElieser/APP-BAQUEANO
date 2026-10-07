@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T19:12:44.294Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4901 · en 4901 · fr 4901 · it 4901 · pt 4901 · de 4901
+Generado: 2026-10-07T19:16:52.816Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4908 · en 4908 · fr 4908 · it 4908 · pt 4908 · de 4908
 
-HTML: 3885/3886 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 3889/3890 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -167,7 +167,7 @@ HTML: 3885/3886 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | cronicas.html | html | 51 | 51 | 0 | 100 % |
 | denuncias.html | html | 61 | 61 | 0 | 100 % |
 | departamento.html | html | 82 | 82 | 0 | 100 % |
-| descargar.html | html | 29 | 29 | 0 | 100 % |
+| descargar.html | html | 33 | 33 | 0 | 100 % |
 | destino.html | html | 18 | 18 | 0 | 100 % |
 | destinos.html | html | 133 | 133 | 0 | 100 % |
 | experiencias.html | html | 157 | 157 | 0 | 100 % |
