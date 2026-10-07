@@ -6407,5 +6407,9 @@
     "many": "{n} viajantes já se juntaram",
     "note": "Quer aparecer aqui? Ative «Mostrar minha foto na comunidade» no seu perfil: sua foto e seu primeiro nome aparecerão nesta seção. Você pode remover quando quiser.",
     "cta": "Mostrar minha foto aqui"
+  },
+  "marquee": {
+    "pause": "Pausar",
+    "play": "Continuar"
   }
 }

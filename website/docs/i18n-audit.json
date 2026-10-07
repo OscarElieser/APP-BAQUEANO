@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T18:38:23.821Z",
+  "generatedAt": "2026-10-07T18:44:33.252Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 4851,
-    "en": 4851,
-    "fr": 4851,
-    "it": 4851,
-    "pt": 4851,
-    "de": 4851
+    "es": 4853,
+    "en": 4853,
+    "fr": 4853,
+    "it": 4853,
+    "pt": 4853,
+    "de": 4853
   },
   "html": {
     "files": 34,
@@ -23,7 +23,7 @@
     "untranslated": 1
   },
   "js": {
-    "files": 116,
+    "files": 117,
     "translated": 152,
     "untranslated": 722
   },
@@ -87,6 +87,7 @@
     "js/baqueano-presence.js",
     "js/baqueano-traffic-tracker.js",
     "js/baqui-brain.js",
+    "js/bq-marquee.js",
     "js/business-application.js",
     "js/community-api.js",
     "js/community-faces.js",
@@ -704,6 +705,15 @@
       "untranslated": 2,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/bq-marquee.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/business-application.js",

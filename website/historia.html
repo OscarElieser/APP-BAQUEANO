@@ -59,6 +59,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="css/components/bq-marquee.css?v=20261007-1">
 </head>
 
 <body class="page-historia-exact">
@@ -619,7 +620,8 @@
         <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800; color: #0B253A; margin: 24px 0 14px;">
           <i class="fa-solid fa-landmark-dome" style="color: #4A7A5A;"></i> <span data-i18n="pages.historia.museosPatrimonio.h31">Monumentos y Sitios de Memoria Viva</span>
         </h3>
-        <div class="hist-monuments-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 16px; margin-bottom: 30px;">
+        <!-- 2026-10-07: galería en movimiento infinito con pausa (js/bq-marquee.js) -->
+        <div class="hist-monuments-grid" data-bq-marquee data-bq-gallery-ready="true" data-bq-speed="35" data-i18n-aria-label="pages.historia.museosPatrimonio.h31" data-bq-label="Monumentos y Sitios de Memoria Viva" style="--bq-marquee-item: 300px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 16px; margin-bottom: 30px;">
           <article class="hist-site-card" style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 16px; box-shadow: 0 4px 12px rgba(15,23,42,0.04); display: flex; flex-direction: column;">
             <div style="font-size: 0.72rem; font-weight: 800; color: #F65E01; text-transform: uppercase; margin-bottom: 4px;"><i class="fa-solid fa-chess-rook"></i> El Castillo · Río San Juan</div>
             <h4 data-i18n="pages.historia.histSiteCard.h41" style="font-family: 'Montserrat', sans-serif; font-size: 1.02rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">Fortaleza de la Inmaculada Concepción</h4>
@@ -929,6 +931,7 @@
 <script src="js/territory-artists-data.js?v=20261007-fotos-4" defer></script>
 <script src="js/territory-artists.js?v=20261007-fotos-3" defer></script>
 <script src="js/global-injector.js"></script>
+<script src="js/bq-marquee.js?v=20261007-1" defer></script>
 </body>
 
 </html>

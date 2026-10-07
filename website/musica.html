@@ -62,6 +62,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="css/components/bq-marquee.css?v=20261007-1">
 </head>
 
 <body class="page-musica-exact">
@@ -317,14 +318,16 @@
         </div>
         <div class="musica-head-actions">
           <a data-i18n="pages.musica.musicaSectionCommon.a2" href="#artistasMusica" class="musica-view-link">Ver todos los artistas &rarr;</a>
-          <div class="musica-carousel-arrows">
+          <!-- 2026-10-07: las flechas no movían esta grilla (musica-player.js busca .artists-grid-exact); la galería en movimiento con Pausar las reemplaza. Se conservan ocultas. -->
+          <div class="musica-carousel-arrows" hidden>
             <button data-i18n-aria-label="common.anterior" type="button" class="musica-arrow-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
             <button data-i18n-aria-label="common.siguiente" type="button" class="musica-arrow-btn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
         </div>
       </div>
 
-      <div class="musica-artists-grid">
+      <!-- 2026-10-07: todos los artistas en movimiento infinito con pausa (js/bq-marquee.js). -->
+      <div class="musica-artists-grid" data-bq-marquee data-bq-gallery-ready="true" data-bq-speed="30" data-bq-label="Artistas y compositores" data-i18n-aria-label="pages.musica.musicaSectionCommon.h22" style="--bq-marquee-item: 170px;">
         <!-- 1. Camilo Zapata -->
         <div class="artist-card-exact">
           <div class="artist-avatar-wrap">
@@ -1091,6 +1094,7 @@
       if (grid && out) out.textContent = String(grid.querySelectorAll('.track-card-exact').length);
     })();
   </script>
+<script src="js/bq-marquee.js?v=20261007-1" defer></script>
 </body>
 
 </html>

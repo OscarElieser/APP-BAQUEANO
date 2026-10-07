@@ -6407,5 +6407,9 @@
     "many": "{n} voyageurs nous ont déjà rejoints",
     "note": "Tu veux apparaître ici ? Active « Afficher ma photo dans la communauté » dans ton profil : ta photo et ton prénom seront visibles dans cette section. Tu peux le retirer quand tu veux.",
     "cta": "Afficher ma photo ici"
+  },
+  "marquee": {
+    "pause": "Pause",
+    "play": "Reprendre"
   }
 }

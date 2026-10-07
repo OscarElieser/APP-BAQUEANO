@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T18:38:23.821Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4851 · en 4851 · fr 4851 · it 4851 · pt 4851 · de 4851
+Generado: 2026-10-07T18:44:33.252Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 4853 · en 4853 · fr 4853 · it 4853 · pt 4853 · de 4853
 
 HTML: 3869/3870 textos con clave (1 pendientes) · JS: 722 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
@@ -191,6 +191,7 @@ HTML: 3869/3870 textos con clave (1 pendientes) · JS: 722 textos dinámicos pen
 | js/baqueano-presence.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-traffic-tracker.js | js | 0 | 0 | 0 | 100 % |
 | js/baqui-brain.js | js | 0 | 0 | 0 | 100 % |
+| js/bq-marquee.js | js | 0 | 0 | 0 | 100 % |
 | js/business-application.js | js | 0 | 0 | 0 | 100 % |
 | js/community-api.js | js | 0 | 0 | 0 | 100 % |
 | js/community-faces.js | js | 0 | 0 | 0 | 100 % |

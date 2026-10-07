@@ -5403,3 +5403,20 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
 - Solo aparecen quienes activaron el permiso en su perfil (`perfil.html#privacidad-datos`). Texto fijo: dónde sale la foto, qué se ve (foto + primer nombre) y que se puede quitar cuando se quiera.
 - Pruebas: 15 personas con 2 fotos válidas → 2 fotos + "+13" (corregido: antes decía "+7"). Una URL `javascript:` se descarta y "Luis<b>" queda como texto. Con 0 personas: "Sé de las primeras personas…", sin cifras inventadas. axe 0; sin desborde.
 - browser-qa (perfil, ambiental, testimonios): 48 cargas, 0 fallos. Auditoría estática: 0 críticos. En vivo, community_faces → 200 {total:0, faces:[]}.
+11. Gastronomía, "Sabores que cuentan nuestra historia": galería en movimiento infinito con pausa; "Ver todos los platos" debe mostrar aparte todos los platos (los de la portada serán los destacados).
+12. Destinos: "otra hoja" que muestre los 244 destinos; en destinos.html solo los primeros 10 destacados, moviéndose automáticamente.
+- Decisión técnica: un solo componente reutilizable de galería infinita (`js/bq-marquee.js`) para Monumentos, Fuentes, Sabores y Destinos destacados: pausa, pausa al pasar el puntero o al tener foco, copias inertes para el bucle y reducir movimiento → desplazamiento manual.
+- Logos oficiales: Wikimedia Commons (vía Supabase) tiene UNESCO 2021 (SVG), INTUR (PNG) y Banco Central de Nicaragua (PNG). Sin archivo oficial en Commons: MINED, MARENA, INC, ENEL, UNAN-Managua, AGHN e Instituto Cervantes. Los sitios .gob.ni rechazan la verificación SSL desde Supabase.
+13. Música, "Artistas y compositores": "hacerlo en movimiento para que salgan todos los artistas y con opción de pausa por el usuario".
+14. Mapas: sacar los cuadros superpuestos (p. ej. "Mapa sonoro de Nicaragua" y "Filtrar mapa sonoro" en musica.html) fuera del mapa para que se vean todos los pines. Se suma a la tarea 52.
+
+### Galería en movimiento infinito (componente reutilizable) — hecho y probado
+- `website/js/bq-marquee.js` + `css/components/bq-marquee.css`; claves `marquee.pause` y `marquee.play` en 6 idiomas.
+- Aplicado a: Historia → Monumentos y Sitios de Memoria Viva; Gastronomía → Sabores (platos destacados; el filtro por categoría vuelve a medir la galería); Música → Artistas y compositores (las flechas, que nunca movían esa grilla, quedan ocultas).
+- El sistema anterior (platform-enhancements.js) omite estas grillas (`data-bq-gallery-ready`).
+- Falla encontrada y corregida en la prueba: no se había insertado el `<script>` (la comprobación encontraba el nombre del archivo en el comentario).
+- Prueba Playwright, 4/4 ✅ (historia 1366, gastronomía 390, música 1366, música con reducir movimiento):
+  - se mueve; Pausar → aria-pressed=true y la pista se detiene; la etiqueta pasa a "Continuar";
+  - copias = originales, todas inert + aria-hidden; sin desborde; axe 0;
+  - con reducir movimiento: sin animación, sin copias y sin botón.
+- Hallazgo de contenido: las categorías "Bebidas" y "Dulces" de Gastronomía no tienen platos cargados (0 tarjetas). Se resuelve en la página de todos los platos (tarea 53), sin inventar.

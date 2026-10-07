@@ -6407,5 +6407,9 @@
     "many": "{n} travelers have already joined",
     "note": "Want to appear here? Turn on “Show my photo in the community” in your profile: your photo and first name will be shown in this section. You can remove it anytime.",
     "cta": "Show my photo here"
+  },
+  "marquee": {
+    "pause": "Pause",
+    "play": "Play"
   }
 }

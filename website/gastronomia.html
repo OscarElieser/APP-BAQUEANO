@@ -61,6 +61,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="css/components/bq-marquee.css?v=20261007-1">
 </head>
 
 <body class="page-gastro-exact">
@@ -200,7 +201,8 @@
         <a data-i18n="pages.gastronomia.saboresNuestraHistoria.a1" href="#saboresNuestraHistoria" class="gastro-view-link">Ver todos los platos &rarr;</a>
       </div>
 
-      <div class="gastro-dishes-grid" id="dishesGrid">
+      <!-- 2026-10-07: platos destacados en galería infinita con pausa (js/bq-marquee.js); el sistema anterior la omite (data-bq-gallery-ready). -->
+      <div class="gastro-dishes-grid" id="dishesGrid" data-bq-marquee data-bq-gallery-ready="true" data-bq-speed="35" data-bq-label="Sabores que cuentan nuestra historia" data-i18n-aria-label="pages.gastronomia.saboresNuestraHistoria.h21" style="--bq-marquee-item: 230px;">
         <!-- 1. Gallo Pinto -->
         <article class="dish-card-exact" data-cat="todos pacifico norte centro">
           <div class="dish-img-wrap">
@@ -818,6 +820,8 @@
           card.style.display = 'none';
         }
       });
+      // La galería en movimiento se vuelve a medir con las tarjetas visibles del filtro.
+      if (window.BaqueanoMarquee) window.BaqueanoMarquee.refresh();
     }
 
     function showDishInfo(title, desc) {
@@ -1010,6 +1014,7 @@
   </script>
 <script src="js/navigation.js?v=20261007-app-2"></script>
 <script src="js/global-injector.js"></script>
+<script src="js/bq-marquee.js?v=20261007-1" defer></script>
 </body>
 
 </html>

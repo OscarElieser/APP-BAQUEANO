@@ -6407,5 +6407,9 @@
     "many": "{n} Reisende sind schon dabei",
     "note": "Möchtest du hier erscheinen? Aktiviere „Mein Foto in der Community zeigen“ in deinem Profil: Dein Foto und dein Vorname werden in diesem Bereich angezeigt. Du kannst es jederzeit entfernen.",
     "cta": "Mein Foto hier zeigen"
+  },
+  "marquee": {
+    "pause": "Pausieren",
+    "play": "Fortsetzen"
   }
 }
