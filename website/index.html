@@ -54,11 +54,9 @@
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
-  <link rel="stylesheet" href="css/components/app-banner.css?v=20261007-1">
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
   <!-- Póster del hero = elemento LCP: se pide primero; el video se carga después (js/hero-video-loader.js). -->
-  <!-- 20/20 C (2026-10-07): el preload pide exactamente el póster del video (el LCP); antes el móvil precargaba la de 768 px y además descargaba tarde la de 1280. -->
-  <link rel="preload" as="image" href="assets/images/heroes/hero-ometepe-1280.webp" fetchpriority="high" type="image/webp">
+  <link rel="preload" as="image" href="assets/images/heroes/hero-ometepe-1280.webp" imagesrcset="assets/images/heroes/hero-ometepe-768.webp 768w, assets/images/heroes/hero-ometepe-1280.webp 1280w" imagesizes="100vw" fetchpriority="high" type="image/webp">
   <script src="js/hero-video-loader.js?v=20261005-1" defer></script>
   <!-- Favicon e Iconografía Oficial BAQUEANO -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -213,61 +211,151 @@
     <section class="category-strip-section" id="categoriaStrip">
       <div class="exact-container">
         <div data-i18n-aria-label="pages.index.categoriaStrip.divAriaLabel1" class="category-strip-card" role="navigation" aria-label="Categorías principales de viaje">
-          <!-- 1. Naturaleza -->
-          <a href="destinos.html?cat=naturaleza" class="category-item active">
-            <div class="category-icon-circle all"><i class="fa-solid fa-table-cells-large"></i></div>
-            <span data-i18n="home.destinations.filters.all" class="category-label">Todos</span>
-          </a>
-          <!-- 2. Playas -->
-          <a href="destinos.html?cat=playas" class="category-item">
-            <div class="category-icon-circle beach"><i class="fa-solid fa-water"></i></div>
-            <span data-i18n="home.destinations.filters.beaches" class="category-label">Playas</span>
-          </a>
-          <!-- 3. Volcanes -->
-          <a href="destinos.html?cat=volcanes" class="category-item">
-            <div class="category-icon-circle volcano"><i class="fa-solid fa-volcano"></i></div>
-            <span data-i18n="home.destinations.filters.volcanoes" class="category-label">Volcanes</span>
-          </a>
-          <!-- 4. Ríos y lagunas -->
-          <a href="destinos.html?cat=rios" class="category-item">
-            <div class="category-icon-circle water"><i class="fa-solid fa-water-ladder"></i></div>
-            <span data-i18n="common.riosYLagunas" class="category-label">Ríos y lagunas</span>
-          </a>
-          <!-- 5. Naturaleza -->
-          <a href="destinos.html?cat=naturaleza" class="category-item">
-            <div class="category-icon-circle nature"><i class="fa-solid fa-leaf"></i></div>
-            <span data-i18n="home.destinations.filters.nature" class="category-label">Naturaleza</span>
-          </a>
-          <!-- 6. Cultura -->
-          <a href="destinos.html?cat=cultura" class="category-item">
-            <div class="category-icon-circle culture"><i class="fa-solid fa-landmark"></i></div>
-            <span data-i18n="nav.culture" class="category-label">Cultura</span>
-          </a>
-          <!-- 7. Gastronomía -->
-          <a href="gastronomia.html" class="category-item">
-            <div class="category-icon-circle food"><i class="fa-solid fa-utensils"></i></div>
-            <span data-i18n="nav.gastronomy" class="category-label">Gastronomía</span>
-          </a>
-          <!-- 8. Turismo comunitario -->
-          <a href="destinos.html?cat=comunitario" class="category-item">
-            <div class="category-icon-circle lodge"><i class="fa-solid fa-users"></i></div>
-            <span data-i18n="pages.index.categoriaStrip.span1" class="category-label">Turismo comunitario</span>
-          </a>
-          <!-- 9. Aventura -->
-          <a href="destinos.html?cat=aventura" class="category-item">
-            <div class="category-icon-circle adventure"><i class="fa-solid fa-person-hiking"></i></div>
-            <span data-i18n="testimonials.types.aventura" class="category-label">Aventura</span>
-          </a>
-          <!-- 10. Hospedaje -->
-          <a href="destinos.html?cat=hospedaje" class="category-item">
-            <div class="category-icon-circle leaf"><i class="fa-solid fa-bed"></i></div>
-            <span data-i18n="testimonials.types.hospedaje" class="category-label">Hospedaje</span>
-          </a>
-          <!-- 11. Vida nocturna -->
-          <a href="destinos.html?cat=nocturna" class="category-item">
-            <div class="category-icon-circle night"><i class="fa-solid fa-moon"></i></div>
-            <span data-i18n="app.nav.nightlife" class="category-label">Vida nocturna</span>
-          </a>
+          <div class="category-strip-track">
+            <!-- Grupo 1: Categorías principales interactivas -->
+            <div class="category-strip-group">
+              <a href="destinos.html" class="category-item active">
+                <div class="category-icon-circle all"><i class="fa-solid fa-table-cells-large"></i></div>
+                <span data-i18n="home.destinations.filters.all" class="category-label">Todos</span>
+              </a>
+              <a href="destinos.html?cat=playas" class="category-item">
+                <div class="category-icon-circle beach"><i class="fa-solid fa-water"></i></div>
+                <span data-i18n="home.destinations.filters.beaches" class="category-label">Playas</span>
+              </a>
+              <a href="destinos.html?cat=volcanes" class="category-item">
+                <div class="category-icon-circle volcano"><i class="fa-solid fa-volcano"></i></div>
+                <span data-i18n="home.destinations.filters.volcanoes" class="category-label">Volcanes</span>
+              </a>
+              <a href="destinos.html?cat=rios" class="category-item">
+                <div class="category-icon-circle water"><i class="fa-solid fa-water-ladder"></i></div>
+                <span data-i18n="common.riosYLagunas" class="category-label">Ríos y lagunas</span>
+              </a>
+              <a href="destinos.html?cat=naturaleza" class="category-item">
+                <div class="category-icon-circle nature"><i class="fa-solid fa-leaf"></i></div>
+                <span data-i18n="home.destinations.filters.nature" class="category-label">Naturaleza</span>
+              </a>
+              <a href="destinos.html?cat=cultura" class="category-item">
+                <div class="category-icon-circle culture"><i class="fa-solid fa-landmark"></i></div>
+                <span data-i18n="nav.culture" class="category-label">Cultura</span>
+              </a>
+              <a href="gastronomia.html" class="category-item">
+                <div class="category-icon-circle food"><i class="fa-solid fa-utensils"></i></div>
+                <span data-i18n="nav.gastronomy" class="category-label">Gastronomía</span>
+              </a>
+              <a href="destinos.html?cat=comunitario" class="category-item">
+                <div class="category-icon-circle lodge"><i class="fa-solid fa-users"></i></div>
+                <span data-i18n="pages.index.categoriaStrip.span1" class="category-label">Turismo comunitario</span>
+              </a>
+              <a href="destinos.html?cat=aventura" class="category-item">
+                <div class="category-icon-circle adventure"><i class="fa-solid fa-person-hiking"></i></div>
+                <span data-i18n="testimonials.types.aventura" class="category-label">Aventura</span>
+              </a>
+              <a href="destinos.html?cat=hospedaje" class="category-item">
+                <div class="category-icon-circle leaf"><i class="fa-solid fa-bed"></i></div>
+                <span data-i18n="testimonials.types.hospedaje" class="category-label">Hospedaje</span>
+              </a>
+              <a href="destinos.html?cat=nocturna" class="category-item">
+                <div class="category-icon-circle night"><i class="fa-solid fa-moon"></i></div>
+                <span data-i18n="app.nav.nightlife" class="category-label">Vida nocturna</span>
+              </a>
+            </div>
+
+            <!-- Grupo 2: Bucle continuo para carrusel infinito (acelerado por GPU) -->
+            <div class="category-strip-group" aria-hidden="true">
+              <a href="destinos.html" class="category-item" tabindex="-1">
+                <div class="category-icon-circle all"><i class="fa-solid fa-table-cells-large"></i></div>
+                <span data-i18n="home.destinations.filters.all" class="category-label">Todos</span>
+              </a>
+              <a href="destinos.html?cat=playas" class="category-item" tabindex="-1">
+                <div class="category-icon-circle beach"><i class="fa-solid fa-water"></i></div>
+                <span data-i18n="home.destinations.filters.beaches" class="category-label">Playas</span>
+              </a>
+              <a href="destinos.html?cat=volcanes" class="category-item" tabindex="-1">
+                <div class="category-icon-circle volcano"><i class="fa-solid fa-volcano"></i></div>
+                <span data-i18n="home.destinations.filters.volcanoes" class="category-label">Volcanes</span>
+              </a>
+              <a href="destinos.html?cat=rios" class="category-item" tabindex="-1">
+                <div class="category-icon-circle water"><i class="fa-solid fa-water-ladder"></i></div>
+                <span data-i18n="common.riosYLagunas" class="category-label">Ríos y lagunas</span>
+              </a>
+              <a href="destinos.html?cat=naturaleza" class="category-item" tabindex="-1">
+                <div class="category-icon-circle nature"><i class="fa-solid fa-leaf"></i></div>
+                <span data-i18n="home.destinations.filters.nature" class="category-label">Naturaleza</span>
+              </a>
+              <a href="destinos.html?cat=cultura" class="category-item" tabindex="-1">
+                <div class="category-icon-circle culture"><i class="fa-solid fa-landmark"></i></div>
+                <span data-i18n="nav.culture" class="category-label">Cultura</span>
+              </a>
+              <a href="gastronomia.html" class="category-item" tabindex="-1">
+                <div class="category-icon-circle food"><i class="fa-solid fa-utensils"></i></div>
+                <span data-i18n="nav.gastronomy" class="category-label">Gastronomía</span>
+              </a>
+              <a href="destinos.html?cat=comunitario" class="category-item" tabindex="-1">
+                <div class="category-icon-circle lodge"><i class="fa-solid fa-users"></i></div>
+                <span data-i18n="pages.index.categoriaStrip.span1" class="category-label">Turismo comunitario</span>
+              </a>
+              <a href="destinos.html?cat=aventura" class="category-item" tabindex="-1">
+                <div class="category-icon-circle adventure"><i class="fa-solid fa-person-hiking"></i></div>
+                <span data-i18n="testimonials.types.aventura" class="category-label">Aventura</span>
+              </a>
+              <a href="destinos.html?cat=hospedaje" class="category-item" tabindex="-1">
+                <div class="category-icon-circle leaf"><i class="fa-solid fa-bed"></i></div>
+                <span data-i18n="testimonials.types.hospedaje" class="category-label">Hospedaje</span>
+              </a>
+              <a href="destinos.html?cat=nocturna" class="category-item" tabindex="-1">
+                <div class="category-icon-circle night"><i class="fa-solid fa-moon"></i></div>
+                <span data-i18n="app.nav.nightlife" class="category-label">Vida nocturna</span>
+              </a>
+            </div>
+
+            <!-- Grupo 3: Continuidad sin fin para monitores de alta resolución -->
+            <div class="category-strip-group" aria-hidden="true">
+              <a href="destinos.html" class="category-item" tabindex="-1">
+                <div class="category-icon-circle all"><i class="fa-solid fa-table-cells-large"></i></div>
+                <span data-i18n="home.destinations.filters.all" class="category-label">Todos</span>
+              </a>
+              <a href="destinos.html?cat=playas" class="category-item" tabindex="-1">
+                <div class="category-icon-circle beach"><i class="fa-solid fa-water"></i></div>
+                <span data-i18n="home.destinations.filters.beaches" class="category-label">Playas</span>
+              </a>
+              <a href="destinos.html?cat=volcanes" class="category-item" tabindex="-1">
+                <div class="category-icon-circle volcano"><i class="fa-solid fa-volcano"></i></div>
+                <span data-i18n="home.destinations.filters.volcanoes" class="category-label">Volcanes</span>
+              </a>
+              <a href="destinos.html?cat=rios" class="category-item" tabindex="-1">
+                <div class="category-icon-circle water"><i class="fa-solid fa-water-ladder"></i></div>
+                <span data-i18n="common.riosYLagunas" class="category-label">Ríos y lagunas</span>
+              </a>
+              <a href="destinos.html?cat=naturaleza" class="category-item" tabindex="-1">
+                <div class="category-icon-circle nature"><i class="fa-solid fa-leaf"></i></div>
+                <span data-i18n="home.destinations.filters.nature" class="category-label">Naturaleza</span>
+              </a>
+              <a href="destinos.html?cat=cultura" class="category-item" tabindex="-1">
+                <div class="category-icon-circle culture"><i class="fa-solid fa-landmark"></i></div>
+                <span data-i18n="nav.culture" class="category-label">Cultura</span>
+              </a>
+              <a href="gastronomia.html" class="category-item" tabindex="-1">
+                <div class="category-icon-circle food"><i class="fa-solid fa-utensils"></i></div>
+                <span data-i18n="nav.gastronomy" class="category-label">Gastronomía</span>
+              </a>
+              <a href="destinos.html?cat=comunitario" class="category-item" tabindex="-1">
+                <div class="category-icon-circle lodge"><i class="fa-solid fa-users"></i></div>
+                <span data-i18n="pages.index.categoriaStrip.span1" class="category-label">Turismo comunitario</span>
+              </a>
+              <a href="destinos.html?cat=aventura" class="category-item" tabindex="-1">
+                <div class="category-icon-circle adventure"><i class="fa-solid fa-person-hiking"></i></div>
+                <span data-i18n="testimonials.types.aventura" class="category-label">Aventura</span>
+              </a>
+              <a href="destinos.html?cat=hospedaje" class="category-item" tabindex="-1">
+                <div class="category-icon-circle leaf"><i class="fa-solid fa-bed"></i></div>
+                <span data-i18n="testimonials.types.hospedaje" class="category-label">Hospedaje</span>
+              </a>
+              <a href="destinos.html?cat=nocturna" class="category-item" tabindex="-1">
+                <div class="category-icon-circle night"><i class="fa-solid fa-moon"></i></div>
+                <span data-i18n="app.nav.nightlife" class="category-label">Vida nocturna</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1009,28 +1097,6 @@
     <!-- ============================================================================
          SECCIÓN 9: SÚMATE A LA COMUNIDAD BAQUEANO (ANFITRIÓN CAMPESINO - IMAGEN 4)
          ============================================================================ -->
-    <!--
-      🎯 POR QUÉ: el propietario pidió (2026-10-06) invitar a instalar la app Android desde el inicio,
-         con un QR estable para quien navega en la computadora.
-      ⚙️ CÓMO: enlace a descargar.html (en producción también /descargar); el QR es un SVG estático
-         verificado que abre https://baqueanonicaragua.com/descargar; textos con claves appBanner.*.
-      📦 QUÉ: banner con texto, botón y QR (el QR solo se ve en pantallas anchas).
-    -->
-    <section class="bq-app-banner" id="appBanner" aria-labelledby="appBannerTitle">
-      <div class="bq-app-banner-inner">
-        <div class="bq-app-banner-copy">
-          <span class="bq-app-banner-label"><i class="fa-brands fa-android" aria-hidden="true"></i> <span data-i18n="appBanner.label">App de BAQUEANO para Android</span></span>
-          <h2 id="appBannerTitle" data-i18n="appBanner.title">Llevá Nicaragua en el bolsillo</h2>
-          <p data-i18n="appBanner.text">Descargá la app oficial para Android: mapas, BAQÜI y tu viaje guardado, también sin señal.</p>
-          <a class="bq-app-banner-cta" href="descargar.html"><span data-i18n="appBanner.cta">Ver la app</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-        </div>
-        <figure class="bq-app-banner-qr">
-          <img src="assets/images/qr-descargar.svg?v=20261007-1" width="296" height="296" loading="lazy" decoding="async" alt="Código QR que abre baqueanonicaragua.com/descargar" data-i18n-alt="appDownload.qrAlt">
-          <figcaption data-i18n="appBanner.qrHint">O escaneá con tu teléfono</figcaption>
-        </figure>
-      </div>
-    </section>
-
     <section class="community-section-exact" id="comunidadSeccion">
       <div class="exact-container">
         <div class="community-card-exact">
@@ -1288,7 +1354,7 @@
     <div class="modal-card-dialog" style="max-width: 860px; padding: 16px; background: #000000; border-radius: 18px; border: 1px solid rgba(255,255,255,0.2);">
       <button data-i18n-aria-label="pages.index.videoModal.buttonAriaLabel1" type="button" class="modal-close-x" onclick="closeHeroVideoModal()" aria-label="Cerrar video"><i class="fa-solid fa-xmark"></i></button>
       <div style="position: relative; width: 100%; border-radius: 12px; overflow: hidden; background: #000;">
-        <video id="heroModalVideoPlayer" controls playsinline preload="none" style="width: 100%; height: auto; max-height: 75vh; display: block;" data-poster="assets/images/destinos/isla_de_ometepe.jpg">
+        <video id="heroModalVideoPlayer" controls playsinline preload="none" style="width: 100%; height: auto; max-height: 75vh; display: block;" poster="assets/images/destinos/isla_de_ometepe.jpg">
           <source src="assets/videos/video%20nicaragua.mp4" type="video/mp4">
           <span data-i18n="pages.index.heroModalVideoPlayer.video1">Tu navegador no soporta reproducción de video.</span>
         </video>
@@ -1420,8 +1486,6 @@
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
         if (player) {
-          // El póster (161 KB) se pide al abrir el modal, no al cargar la portada (20/20 C).
-          if (!player.getAttribute('poster') && player.dataset.poster) player.setAttribute('poster', player.dataset.poster);
           player.currentTime = 0;
           player.play().catch(() => {});
         }
@@ -1505,11 +1569,12 @@
 <script src="js/baqueano-master-catalog.js"></script>
 <script src="js/index-destinos-editorial.js?v=20260930-1"></script>
 <script src="js/tres-pilares.js?v=20261006-a11y-1"></script>
-<script src="js/navigation.js?v=20261007-app-2"></script>
+<script src="js/navigation.js?v=20261006-dialog-1"></script>
 <script src="js/global-injector.js"></script>
 <!-- Testimonios de la portada = comunidad real (misma fuente que testimonios.html). -->
 <script defer src="js/community-api.js?v=20261004-1"></script>
 <script defer src="js/home-community.js?v=20261004-galeria-1"></script>
+<script defer src="js/category-strip-marquee.js?v=20261007-1"></script>
 </body>
 
 </html>

@@ -7,6 +7,7 @@
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { buildSitemap, normalizeHtml, normalizeRobots, redirectTarget } from './lib/seo-normalize.mjs';
 import { optimizeHtml, readInjectorSheets } from './lib/perf-normalize.mjs';
 
@@ -33,6 +34,38 @@ const ignoredAssetNames = new Set([
   'video 2 (1).mp4', 'video nicaragua (1).mp4', 'destinos (1).mp4', 'gastronomia (1).mp4',
   'historia (1).mp4', 'video (1).mp4', '[preview]destinos.mp4'
 ]);
+
+function gitValue(args, fallback = '') {
+  try {
+    return execFileSync('git', args, {
+      cwd: path.resolve(root, '..'),
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore']
+    }).trim();
+  } catch {
+    return fallback;
+  }
+}
+
+function buildVersionManifest() {
+  const commit = (process.env.GITHUB_SHA || gitValue(['rev-parse', 'HEAD'], 'unknown')).trim();
+  const shortCommit = commit === 'unknown' ? 'unknown' : commit.slice(0, 7);
+  const dirtyStatus = gitValue(['status', '--short'], '');
+  const builtAt = new Date().toISOString();
+  const buildId = process.env.BAQUEANO_BUILD_ID || `${builtAt.replace(/[-:.TZ]/g, '').slice(0, 14)}-${shortCommit}`;
+  return {
+    status: 'ok',
+    service: 'baqueano-website',
+    artifact: 'hostinger-static',
+    environment: process.env.BAQUEANO_ENV || 'local',
+    commit,
+    shortCommit,
+    buildId,
+    builtAt,
+    dirty: dirtyStatus.length > 0,
+    source: process.env.GITHUB_ACTIONS === 'true' ? 'github-actions' : 'local-build'
+  };
+}
 
 async function copyTree(source, target) {
   await fs.mkdir(target, { recursive: true });
@@ -76,7 +109,20 @@ await fs.writeFile(path.join(output, 'sitemap.xml'), buildSitemap(publishedPages
 const robotsPath = path.join(output, 'robots.txt');
 await fs.writeFile(robotsPath, normalizeRobots(await fs.readFile(robotsPath, 'utf8')));
 
-const required = ['index.html', '404.html', 'testimonios.html', 'styles.css', 'js/global-injector.js', 'js/global-language.js', 'js/global-search.js', 'locales/es.json', 'data/search-index.json', 'data/travel-knowledge.json', '.htaccess'];
+const versionManifest = buildVersionManifest();
+await fs.writeFile(path.join(output, 'version.json'), `${JSON.stringify(versionManifest, null, 2)}\n`);
+await fs.writeFile(path.join(output, 'health.json'), `${JSON.stringify({
+  status: versionManifest.status,
+  service: versionManifest.service,
+  host: versionManifest.environment,
+  commit: versionManifest.shortCommit,
+  fullCommit: versionManifest.commit,
+  buildId: versionManifest.buildId,
+  builtAt: versionManifest.builtAt,
+  dirty: versionManifest.dirty
+}, null, 2)}\n`);
+
+const required = ['index.html', '404.html', 'testimonios.html', 'styles.css', 'js/global-injector.js', 'js/global-language.js', 'js/global-search.js', 'locales/es.json', 'data/search-index.json', 'data/travel-knowledge.json', 'version.json', 'health.json', '.htaccess'];
 for (const relative of required) {
   try { await fs.access(path.join(output, relative)); }
   catch { throw new Error(`Salida incompleta: falta ${relative}`); }

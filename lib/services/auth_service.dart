@@ -65,12 +65,7 @@ class AuthService extends ChangeNotifier {
   }) : _firebaseAuth = firebaseAuth ?? _resolveFirebaseAuth(),
        _firestore = firestore ?? _resolveFirestore(),
        _googleSignIn =
-           googleSignIn ??
-               GoogleSignIn(
-                 serverClientId:
-                     '578585227888-07hbecjlkb7kn08ku2dgm6039gjiqbvj.apps.googleusercontent.com',
-                 scopes: const ['email', 'profile'],
-               ) {
+           googleSignIn ?? GoogleSignIn(scopes: const ['email', 'profile']) {
     _listenToFirebaseSession();
   }
 
@@ -375,7 +370,22 @@ class AuthService extends ChangeNotifier {
   }
 
   void _logAuthDiagnostic(String type, String code, String? message) {
-    debugPrint('Auth diagnostic [$type]: code=$code, message=$message');
+    final sanitizedMessage =
+        (message ?? 'Sin mensaje')
+            .replaceAll(RegExp(r'idToken=[^,\s]+'), 'idToken=[redacted]')
+            .replaceAll(
+              RegExp(r'accessToken=[^,\s]+'),
+              'accessToken=[redacted]',
+            )
+            .replaceAll(
+              RegExp(r'authorizationCode=[^,\s]+'),
+              'authorizationCode=[redacted]',
+            )
+            .split('\n')
+            .first;
+    debugPrint(
+      'Auth diagnostic [$type]: code=$code, message=$sanitizedMessage',
+    );
   }
 
   Future<void> _rollbackIncompleteGoogleSession(
@@ -487,7 +497,6 @@ class AuthService extends ChangeNotifier {
       _notifySafely();
     }
   }
-
 
   Future<void> _persistAndroidUserSession(
     firebase_auth.User firebaseUser,

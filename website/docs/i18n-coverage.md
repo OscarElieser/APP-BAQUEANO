@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-07T20:25:05.067Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 5016 · en 5016 · fr 5016 · it 5016 · pt 5016 · de 5016
+Generado: 2026-10-07T23:41:46.514Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 5016 · en 5016 · fr 5016 · it 5016 · pt 5016 · de 5016
 
-HTML: 3998/3999 textos con clave (1 pendientes) · JS: 721 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
+HTML: 4014/4015 textos con clave (1 pendientes) · JS: 721 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 23 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -174,7 +174,7 @@ HTML: 3998/3999 textos con clave (1 pendientes) · JS: 721 textos dinámicos pen
 | favoritos.html | html | 8 | 8 | 0 | 100 % |
 | gastronomia.html | html | 205 | 205 | 0 | 100 % |
 | historia.html | html | 184 | 184 | 0 | 100 % |
-| index.html | html | 220 | 220 | 0 | 100 % |
+| index.html | html | 236 | 236 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
 | js/allies-directory.js | js | 0 | 0 | 0 | 100 % |
 | js/ambiental-report-handoff.js | js | 0 | 0 | 0 | 100 % |
@@ -193,6 +193,7 @@ HTML: 3998/3999 textos con clave (1 pendientes) · JS: 721 textos dinámicos pen
 | js/baqui-brain.js | js | 0 | 0 | 0 | 100 % |
 | js/bq-marquee.js | js | 0 | 0 | 0 | 100 % |
 | js/business-application.js | js | 0 | 0 | 0 | 100 % |
+| js/category-strip-marquee.js | js | 0 | 0 | 0 | 100 % |
 | js/community-api.js | js | 0 | 0 | 0 | 100 % |
 | js/community-faces.js | js | 0 | 0 | 0 | 100 % |
 | js/contact-form.js | js | 0 | 0 | 0 | 100 % |
@@ -214,6 +215,7 @@ HTML: 3998/3999 textos con clave (1 pendientes) · JS: 721 textos dinámicos pen
 | js/historia-enlaces.js | js | 0 | 0 | 0 | 100 % |
 | js/impact-public.js | js | 6 | 6 | 0 | 100 % |
 | js/intake-api.js | js | 0 | 0 | 0 | 100 % |
+| js/local-keys.js | js | 0 | 0 | 0 | 100 % |
 | js/lodging-showcase.js | js | 0 | 0 | 0 | 100 % |
 | js/musica-archivo.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-alerts.js | js | 0 | 0 | 0 | 100 % |

@@ -37,7 +37,8 @@ class AdvertiseBusinessSection extends StatefulWidget {
   const AdvertiseBusinessSection({super.key});
 
   @override
-  State<AdvertiseBusinessSection> createState() => _AdvertiseBusinessSectionState();
+  State<AdvertiseBusinessSection> createState() =>
+      _AdvertiseBusinessSectionState();
 }
 
 class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
@@ -85,13 +86,21 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
               final link = linkCtrl.text.trim();
               final desc = descriptionCtrl.text.trim();
 
-              final subject = Uri.encodeComponent('[REGISTRO DE NEGOCIO] - $bizName ($selectedDepartment)');
+              final subject = Uri.encodeComponent(
+                '[REGISTRO DE NEGOCIO] - $bizName ($selectedDepartment)',
+              );
               final bodyBuffer = StringBuffer();
-              bodyBuffer.writeln('SOLICITUD DE AFILIACIÓN COMERCIAL — APP BAQUEANO');
-              bodyBuffer.writeln('====================================================');
+              bodyBuffer.writeln(
+                'SOLICITUD DE AFILIACIÓN COMERCIAL — APP BAQUEANO',
+              );
+              bodyBuffer.writeln(
+                '====================================================',
+              );
               bodyBuffer.writeln('Nombre Comercial: $bizName');
               bodyBuffer.writeln('Rubro o Categoría: $selectedCategory');
-              bodyBuffer.writeln('Departamento / Ubicación: $selectedDepartment');
+              bodyBuffer.writeln(
+                'Departamento / Ubicación: $selectedDepartment',
+              );
               bodyBuffer.writeln('Persona de Contacto: $contact');
               bodyBuffer.writeln('Teléfono / WhatsApp: $phone');
               bodyBuffer.writeln('Correo Electrónico: $email');
@@ -100,33 +109,54 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
               }
               bodyBuffer.writeln('');
               bodyBuffer.writeln('DESCRIPCIÓN DE LA PROPUESTA / SERVICIOS:');
-              bodyBuffer.writeln(desc.isNotEmpty ? desc : 'Deseo que me contacten para afiliar mi negocio.');
-              bodyBuffer.writeln('====================================================');
+              bodyBuffer.writeln(
+                desc.isNotEmpty
+                    ? desc
+                    : 'Deseo que me contacten para afiliar mi negocio.',
+              );
+              bodyBuffer.writeln(
+                '====================================================',
+              );
               bodyBuffer.writeln('Enviado desde la app Baqueano Nicaragua.');
 
-              final emailUri = Uri.parse('mailto:negocios@baqueano.com?subject=$subject&body=${Uri.encodeComponent(bodyBuffer.toString())}');
+              final emailUri = Uri.parse(
+                'mailto:negocios@baqueano.com?subject=$subject&body=${Uri.encodeComponent(bodyBuffer.toString())}',
+              );
 
               Navigator.of(modalCtx).pop();
               try {
                 await launchUrl(emailUri, mode: LaunchMode.externalApplication);
                 if (context.mounted) {
-                  CustomToast.success(context, '¡Solicitud preparada! Revisa tu cliente de correo para enviarla.');
+                  CustomToast.success(
+                    context,
+                    '¡Solicitud preparada! Revisa tu cliente de correo para enviarla.',
+                  );
                 }
               } catch (_) {
                 if (context.mounted) {
-                  CustomToast.show(context, message: 'Escríbenos directamente a negocios@baqueano.com');
+                  CustomToast.show(
+                    context,
+                    message: 'Escríbenos directamente a negocios@baqueano.com',
+                  );
                 }
               }
             }
 
             Future<void> submitByWhatsApp() async {
-              if (businessNameCtrl.text.trim().isEmpty || phoneCtrl.text.trim().isEmpty) {
-                CustomToast.error(modalCtx, 'Ingresa al menos el nombre del negocio y tu teléfono');
+              if (businessNameCtrl.text.trim().isEmpty ||
+                  phoneCtrl.text.trim().isEmpty) {
+                CustomToast.error(
+                  modalCtx,
+                  'Ingresa al menos el nombre del negocio y tu teléfono',
+                );
                 return;
               }
 
               final bizName = businessNameCtrl.text.trim();
-              final contact = contactNameCtrl.text.trim().isNotEmpty ? contactNameCtrl.text.trim() : 'Propietario(a)';
+              final contact =
+                  contactNameCtrl.text.trim().isNotEmpty
+                      ? contactNameCtrl.text.trim()
+                      : 'Propietario(a)';
               final phone = phoneCtrl.text.trim();
 
               final msg = StringBuffer();
@@ -138,16 +168,23 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
               if (descriptionCtrl.text.trim().isNotEmpty) {
                 msg.writeln('• *Detalles:* ${descriptionCtrl.text.trim()}');
               }
-              msg.writeln('Deseo que mi negocio figure en la app Baqueano. ¡Quedo atento a su respuesta!');
+              msg.writeln(
+                'Deseo que mi negocio figure en la app Baqueano. ¡Quedo atento a su respuesta!',
+              );
 
-              final waUri = Uri.parse('https://wa.me/50588883333?text=${Uri.encodeComponent(msg.toString())}');
+              final waUri = Uri.parse(
+                'https://wa.me/50588883333?text=${Uri.encodeComponent(msg.toString())}',
+              );
 
               Navigator.of(modalCtx).pop();
               try {
                 await launchUrl(waUri, mode: LaunchMode.externalApplication);
               } catch (_) {
                 if (context.mounted) {
-                  CustomToast.show(context, message: 'WhatsApp comercial no disponible');
+                  CustomToast.show(
+                    context,
+                    message: 'WhatsApp comercial no disponible',
+                  );
                 }
               }
             }
@@ -170,230 +207,368 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                 ),
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Container(
-                          width: 44,
-                          height: 4,
-                          decoration: BoxDecoration(
-                            color: Colors.white24,
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Container(
+                            width: 44,
+                            height: 4,
                             decoration: BoxDecoration(
-                              color: AppColors.gold.withValues(alpha: 0.2),
-                              shape: BoxShape.circle,
-                              border: Border.all(color: AppColors.goldLight),
-                            ),
-                            child: const Icon(Icons.storefront_rounded, color: AppColors.goldLight, size: 22),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'ALIANZAS & AFILIACIÓN COMERCIAL',
-                                  style: GoogleFonts.spaceGrotesk(
-                                    fontSize: 10.5,
-                                    fontWeight: FontWeight.w800,
-                                    color: AppColors.goldLight,
-                                    letterSpacing: 0.8,
-                                  ),
-                                ),
-                                Text(
-                                  'Registra tu Negocio en Baqueano',
-                                  style: GoogleFonts.montserrat(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w900,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
+                              color: Colors.white24,
+                              borderRadius: BorderRadius.circular(2),
                             ),
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.close_rounded, color: Colors.white70),
-                            onPressed: () => Navigator.of(modalCtx).pop(),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-
-                      Text(
-                        'Completa tus datos comerciales y nuestro equipo te contactará en menos de 24 horas para verificar y activar tu ficha destacada.',
-                        style: GoogleFonts.inter(fontSize: 12, color: Colors.white70, height: 1.4),
-                      ),
-                      const SizedBox(height: 16),
-
-                      // Nombre Comercial
-                      Text('Nombre Comercial del Negocio:', style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
-                      const SizedBox(height: 6),
-                      TextFormField(
-                        controller: businessNameCtrl,
-                        style: GoogleFonts.inter(fontSize: 13.5, color: Colors.white),
-                        decoration: _buildInputDecoration('Ej: Eco-Lodge Mirador Volcánico', Icons.business_rounded),
-                        validator: (v) => (v == null || v.trim().isEmpty) ? 'Ingresa el nombre del negocio' : null,
-                      ),
-                      const SizedBox(height: 14),
-
-                      // Rubro o Categoría
-                      Text('Categoría o Rubro:', style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
-                      const SizedBox(height: 6),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryDark,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: AppColors.borderLight),
                         ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: selectedCategory,
-                            isExpanded: true,
-                            dropdownColor: const Color(0xFF082B35),
-                            icon: const Icon(Icons.arrow_drop_down, color: AppColors.gold),
-                            items: categories.map((cat) {
-                              return DropdownMenuItem<String>(
-                                value: cat,
-                                child: Text(cat, style: GoogleFonts.inter(fontSize: 13, color: Colors.white)),
-                              );
-                            }).toList(),
-                            onChanged: (val) {
-                              if (val != null) {
-                                setModalState(() => selectedCategory = val);
-                              }
-                            },
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 14),
+                        const SizedBox(height: 16),
 
-                      // Departamento
-                      Text('Departamento donde opera:', style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
-                      const SizedBox(height: 6),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryDark,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: AppColors.borderLight),
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: AppColors.gold.withValues(alpha: 0.2),
+                                shape: BoxShape.circle,
+                                border: Border.all(color: AppColors.goldLight),
+                              ),
+                              child: const Icon(
+                                Icons.storefront_rounded,
+                                color: AppColors.goldLight,
+                                size: 22,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'ALIANZAS & AFILIACIÓN COMERCIAL',
+                                    style: GoogleFonts.spaceGrotesk(
+                                      fontSize: 10.5,
+                                      fontWeight: FontWeight.w800,
+                                      color: AppColors.goldLight,
+                                      letterSpacing: 0.8,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Registra tu Negocio en Baqueano',
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.close_rounded,
+                                color: Colors.white70,
+                              ),
+                              onPressed: () => Navigator.of(modalCtx).pop(),
+                            ),
+                          ],
                         ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: selectedDepartment,
-                            isExpanded: true,
-                            dropdownColor: const Color(0xFF082B35),
-                            icon: const Icon(Icons.arrow_drop_down, color: AppColors.gold),
-                            items: CatalogData.departments.where((d) => d != 'Todos').map((dept) {
-                              return DropdownMenuItem<String>(
-                                value: dept,
-                                child: Text(dept, style: GoogleFonts.inter(fontSize: 13, color: Colors.white)),
-                              );
-                            }).toList(),
-                            onChanged: (val) {
-                              if (val != null) {
-                                setModalState(() => selectedDepartment = val);
-                              }
-                            },
+                        const SizedBox(height: 8),
+
+                        Text(
+                          'Completa tus datos comerciales y nuestro equipo te contactará en menos de 24 horas para verificar y activar tu ficha destacada.',
+                          style: GoogleFonts.inter(
+                            fontSize: 12,
+                            color: Colors.white70,
+                            height: 1.4,
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 14),
+                        const SizedBox(height: 16),
 
-                      // Persona de Contacto
-                      Text('Persona de Contacto:', style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
-                      const SizedBox(height: 6),
-                      TextFormField(
-                        controller: contactNameCtrl,
-                        style: GoogleFonts.inter(fontSize: 13.5, color: Colors.white),
-                        decoration: _buildInputDecoration('Nombre y Apellido', Icons.person_outline_rounded),
-                        validator: (v) => (v == null || v.trim().isEmpty) ? 'Ingresa tu nombre' : null,
-                      ),
-                      const SizedBox(height: 14),
+                        // Nombre Comercial
+                        Text(
+                          'Nombre Comercial del Negocio:',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        TextFormField(
+                          controller: businessNameCtrl,
+                          style: GoogleFonts.inter(
+                            fontSize: 13.5,
+                            color: Colors.white,
+                          ),
+                          decoration: _buildInputDecoration(
+                            'Ej: Eco-Lodge Mirador Volcánico',
+                            Icons.business_rounded,
+                          ),
+                          validator:
+                              (v) =>
+                                  (v == null || v.trim().isEmpty)
+                                      ? 'Ingresa el nombre del negocio'
+                                      : null,
+                        ),
+                        const SizedBox(height: 14),
 
-                      // Teléfono / WhatsApp
-                      Text('Teléfono o WhatsApp:', style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
-                      const SizedBox(height: 6),
-                      TextFormField(
-                        controller: phoneCtrl,
-                        keyboardType: TextInputType.phone,
-                        style: GoogleFonts.inter(fontSize: 13.5, color: Colors.white),
-                        decoration: _buildInputDecoration('+505 8888-0000', Icons.phone_android_rounded),
-                        validator: (v) => (v == null || v.trim().isEmpty) ? 'Ingresa tu número de contacto' : null,
-                      ),
-                      const SizedBox(height: 14),
+                        // Rubro o Categoría
+                        Text(
+                          'Categoría o Rubro:',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryDark,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: AppColors.borderLight),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              value: selectedCategory,
+                              isExpanded: true,
+                              dropdownColor: const Color(0xFF082B35),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: AppColors.gold,
+                              ),
+                              items:
+                                  categories.map((cat) {
+                                    return DropdownMenuItem<String>(
+                                      value: cat,
+                                      child: Text(
+                                        cat,
+                                        style: GoogleFonts.inter(
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                              onChanged: (val) {
+                                if (val != null) {
+                                  setModalState(() => selectedCategory = val);
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 14),
 
-                      // Correo
-                      Text('Correo Electrónico:', style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
-                      const SizedBox(height: 6),
-                      TextFormField(
-                        controller: emailCtrl,
-                        keyboardType: TextInputType.emailAddress,
-                        style: GoogleFonts.inter(fontSize: 13.5, color: Colors.white),
-                        decoration: _buildInputDecoration('contacto@tunegocio.com', Icons.alternate_email_rounded),
-                      ),
-                      const SizedBox(height: 14),
+                        // Departamento
+                        Text(
+                          'Departamento donde opera:',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryDark,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: AppColors.borderLight),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              value: selectedDepartment,
+                              isExpanded: true,
+                              dropdownColor: const Color(0xFF082B35),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: AppColors.gold,
+                              ),
+                              items:
+                                  CatalogData.departments
+                                      .where((d) => d != 'Todos')
+                                      .map((dept) {
+                                        return DropdownMenuItem<String>(
+                                          value: dept,
+                                          child: Text(
+                                            dept,
+                                            style: GoogleFonts.inter(
+                                              fontSize: 13,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        );
+                                      })
+                                      .toList(),
+                              onChanged: (val) {
+                                if (val != null) {
+                                  setModalState(() => selectedDepartment = val);
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 14),
 
-                      // Red Social o Web
-                      Text('Instagram, Facebook o Web (Opcional):', style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70)),
-                      const SizedBox(height: 6),
-                      TextFormField(
-                        controller: linkCtrl,
-                        style: GoogleFonts.inter(fontSize: 13.5, color: Colors.white),
-                        decoration: _buildInputDecoration('@tu_negocio_nicaragua', Icons.link_rounded),
-                      ),
-                      const SizedBox(height: 14),
+                        // Persona de Contacto
+                        Text(
+                          'Persona de Contacto:',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        TextFormField(
+                          controller: contactNameCtrl,
+                          style: GoogleFonts.inter(
+                            fontSize: 13.5,
+                            color: Colors.white,
+                          ),
+                          decoration: _buildInputDecoration(
+                            'Nombre y Apellido',
+                            Icons.person_outline_rounded,
+                          ),
+                          validator:
+                              (v) =>
+                                  (v == null || v.trim().isEmpty)
+                                      ? 'Ingresa tu nombre'
+                                      : null,
+                        ),
+                        const SizedBox(height: 14),
 
-                      // Breve descripción
-                      Text('Breve descripción de tus servicios:', style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70)),
-                      const SizedBox(height: 6),
-                      TextFormField(
-                        controller: descriptionCtrl,
-                        maxLines: 2,
-                        style: GoogleFonts.inter(fontSize: 13.5, color: Colors.white),
-                        decoration: _buildInputDecoration('Capacidad de alojamiento, especialidades gastronómicas o rutas guiadas...', Icons.notes_rounded),
-                      ),
-                      const SizedBox(height: 20),
+                        // Teléfono / WhatsApp
+                        Text(
+                          'Teléfono o WhatsApp:',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        TextFormField(
+                          controller: phoneCtrl,
+                          keyboardType: TextInputType.phone,
+                          style: GoogleFonts.inter(
+                            fontSize: 13.5,
+                            color: Colors.white,
+                          ),
+                          decoration: _buildInputDecoration(
+                            '+505 8888-0000',
+                            Icons.phone_android_rounded,
+                          ),
+                          validator:
+                              (v) =>
+                                  (v == null || v.trim().isEmpty)
+                                      ? 'Ingresa tu número de contacto'
+                                      : null,
+                        ),
+                        const SizedBox(height: 14),
 
-                      // Botones de acción
-                      BaqueanoButton(
-                        text: 'ENVIAR SOLICITUD DE REGISTRO',
-                        icon: const Icon(Icons.send_rounded, size: 18),
-                        variant: BaqueanoButtonVariant.primary,
-                        height: 48,
-                        width: double.infinity,
-                        onPressed: submitByEmail,
-                      ),
-                      const SizedBox(height: 10),
-                      BaqueanoButton(
-                        text: 'Hablar con Asesor Comercial en WhatsApp',
-                        icon: const Icon(Icons.chat_rounded, size: 18),
-                        variant: BaqueanoButtonVariant.gold,
-                        height: 42,
-                        width: double.infinity,
-                        onPressed: submitByWhatsApp,
-                      ),
-                      const SizedBox(height: 36),
-                    ],
+                        // Correo
+                        Text(
+                          'Correo Electrónico:',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        TextFormField(
+                          controller: emailCtrl,
+                          keyboardType: TextInputType.emailAddress,
+                          style: GoogleFonts.inter(
+                            fontSize: 13.5,
+                            color: Colors.white,
+                          ),
+                          decoration: _buildInputDecoration(
+                            'contacto@tunegocio.com',
+                            Icons.alternate_email_rounded,
+                          ),
+                        ),
+                        const SizedBox(height: 14),
+
+                        // Red Social o Web
+                        Text(
+                          'Instagram, Facebook o Web (Opcional):',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white70,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        TextFormField(
+                          controller: linkCtrl,
+                          style: GoogleFonts.inter(
+                            fontSize: 13.5,
+                            color: Colors.white,
+                          ),
+                          decoration: _buildInputDecoration(
+                            '@tu_negocio_nicaragua',
+                            Icons.link_rounded,
+                          ),
+                        ),
+                        const SizedBox(height: 14),
+
+                        // Breve descripción
+                        Text(
+                          'Breve descripción de tus servicios:',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white70,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        TextFormField(
+                          controller: descriptionCtrl,
+                          maxLines: 2,
+                          style: GoogleFonts.inter(
+                            fontSize: 13.5,
+                            color: Colors.white,
+                          ),
+                          decoration: _buildInputDecoration(
+                            'Capacidad de alojamiento, especialidades gastronómicas o rutas guiadas...',
+                            Icons.notes_rounded,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+
+                        // Botones de acción
+                        BaqueanoButton(
+                          text: 'ENVIAR SOLICITUD DE REGISTRO',
+                          icon: const Icon(Icons.send_rounded, size: 18),
+                          variant: BaqueanoButtonVariant.primary,
+                          height: 48,
+                          width: double.infinity,
+                          onPressed: submitByEmail,
+                        ),
+                        const SizedBox(height: 10),
+                        BaqueanoButton(
+                          text: 'Hablar con Asesor Comercial en WhatsApp',
+                          icon: const Icon(Icons.chat_rounded, size: 18),
+                          variant: BaqueanoButtonVariant.gold,
+                          height: 42,
+                          width: double.infinity,
+                          onPressed: submitByWhatsApp,
+                        ),
+                        const SizedBox(height: 36),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
         );
       },
     );
@@ -407,9 +582,18 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
       filled: true,
       fillColor: AppColors.primaryDark,
       contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.borderLight)),
-      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.borderLight)),
-      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: AppColors.gold, width: 1.4)),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: AppColors.borderLight),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: AppColors.borderLight),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: AppColors.gold, width: 1.4),
+      ),
     );
   }
 
@@ -437,7 +621,10 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(26),
-          border: Border.all(color: AppColors.gold.withValues(alpha: 0.65), width: 1.5),
+          border: Border.all(
+            color: AppColors.gold.withValues(alpha: 0.65),
+            width: 1.5,
+          ),
           boxShadow: [
             BoxShadow(
               color: AppColors.gold.withValues(alpha: 0.16),
@@ -465,7 +652,11 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.workspace_premium_rounded, color: AppColors.goldLight, size: 16),
+                  const Icon(
+                    Icons.verified_rounded,
+                    color: AppColors.goldLight,
+                    size: 16,
+                  ),
                   const SizedBox(width: 6),
                   Text(
                     'IMPULSA TU NEGOCIO CON BAQUEANO',
@@ -509,20 +700,52 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
               builder: (context, constraints) {
                 final isNarrow = constraints.maxWidth < 650;
                 final cards = [
-                  _buildBenefitItem('🚀', 'Tráfico Directo 100%', 'Clientes directos a tu WhatsApp o teléfono, cero comisiones por reserva.'),
-                  _buildBenefitItem('🌍', 'Alcance Global', 'Visibilidad verificada ante viajeros locales e internacionales.'),
-                  _buildBenefitItem('🧭', 'Sello Oficial', 'Ficha destacada en catálogo cultural, mapas GPS y asistente inteligente.'),
+                  _buildBenefitItem(
+                    '🚀',
+                    'Tráfico Directo 100%',
+                    'Clientes directos a tu WhatsApp o teléfono, cero comisiones por reserva.',
+                  ),
+                  _buildBenefitItem(
+                    '🌍',
+                    'Alcance Global',
+                    'Visibilidad verificada ante viajeros locales e internacionales.',
+                  ),
+                  _buildBenefitItem(
+                    '🧭',
+                    'Sello Oficial',
+                    'Ficha destacada en catálogo cultural, mapas GPS y asistente inteligente.',
+                  ),
                 ];
 
                 if (isNarrow) {
                   return Column(
-                    children: cards.map((c) => Padding(padding: const EdgeInsets.only(bottom: 10), child: c)).toList(),
+                    children:
+                        cards
+                            .map(
+                              (c) => Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: c,
+                              ),
+                            )
+                            .toList(),
                   );
                 }
 
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: cards.map((c) => Expanded(child: Padding(padding: const EdgeInsets.symmetric(horizontal: 6), child: c))).toList(),
+                  children:
+                      cards
+                          .map(
+                            (c) => Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                ),
+                                child: c,
+                              ),
+                            ),
+                          )
+                          .toList(),
                 );
               },
             ),

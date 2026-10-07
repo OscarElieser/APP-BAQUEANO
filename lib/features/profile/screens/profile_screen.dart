@@ -867,7 +867,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             ),
             content: const Text(
               'Esta acción es irreversible y eliminará definitivamente tu perfil, tus datos de autenticación y tus preferencias almacenadas en el servidor, de conformidad con las políticas de privacidad y derechos ARCO.\n\n¿Deseas proceder con la eliminación definitiva?',
-              style: TextStyle(color: Colors.white70, fontSize: 13, height: 1.4),
+              style: TextStyle(
+                color: Colors.white70,
+                fontSize: 13,
+                height: 1.4,
+              ),
             ),
             actions: [
               TextButton(
@@ -1971,10 +1975,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     vertical: 10,
                   ),
                 ),
-                icon: const Icon(
-                  Icons.delete_forever_rounded,
-                  size: 16,
-                ),
+                icon: const Icon(Icons.delete_forever_rounded, size: 16),
                 label: Text(
                   'Eliminar Cuenta',
                   style: GoogleFonts.spaceGrotesk(
@@ -2049,7 +2050,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 child: Icon(
                   passport.isActive
                       ? Icons.verified_rounded
-                      : Icons.workspace_premium_rounded,
+                      : Icons.verified_user_rounded,
                   color:
                       passport.isActive
                           ? AppColors.jungleGreenLight
@@ -2257,7 +2258,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   Row(
                     children: [
                       const Icon(
-                        Icons.workspace_premium_rounded,
+                        Icons.verified_user_rounded,
                         color: AppColors.goldLight,
                         size: 26,
                       ),

@@ -5565,3 +5565,31 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - browser-qa (2 páginas × 16 anchos): 0 fallos;
   - auditoría estática: 0 críticos; i18n: 0 errores.
 - Sigue sin resolver: las categorías "Bebidas" y "Dulces" de gastronomia.html no tienen platos asignados. No se clasificó por adivinanza; requiere que el equipo marque cada plato.
+
+## 2026-10-07 — Reanudación Operativa y Carrusel Infinito de Categorías a 60fps
+
+### Solicitudes del usuario
+1. "continua donde te quedaste antes que se apagara"
+2. "dime en que trabajaste tu ?"
+3. "se puede hacer animado . con movimiento no se haz tu magia y que se mueva como carrrusel infinito"
+4. "ydeay lo hiciste pero en local y en produccion no lo hiciste"
+5. "si subi"
+
+### Golden Circle
+- 🎯 **POR QUÉ:** (1) Restablecer la continuidad operativa tras corte de energía; (2) Transformar la franja estática de categorías de index.html en una franja viva con movimiento continuo e infinito a 60fps acelerado por GPU, con interacción táctil, pausa automática en hover y drag/swipe; (3) Desplegar de inmediato a producción (aqueanonicaragua.com) integrando todos los avances remotos y locales.
+- ⚙️ **CÓMO:**
+  1. Conexión de track continuo en website/index.html con 3 grupos continuos de 11 categorías, bucle seamless a 60fps vía @keyframes categoryInfiniteMarquee (	ranslate3d(0,0,0) a 	ranslate3d(-33.333333%,0,0)).
+  2. Estilos refinados en website/css/pages/index-exact.css con máscaras de degradado lateral (mask-image), pausa en :hover, :focus-within y .is-paused, microinteracciones de elevación de ítem (	ranslateY(-3px) scale(1.03)).
+  3. Módulo táctil website/js/category-strip-marquee.js para arrastre libre en móviles y reanudación automática tras 1.6s.
+  4. Mejoras en Flutter: corrección de Google Sign-In retirando serverClientId estático en AuthService, sustitución de términos e íconos no permitidos por el estándar (erified_rounded / erified_user_rounded).
+  5. Sincronización limpia sobre origin/main y compilación de dist-hostinger/ (800 archivos).
+- 📦 **QUÉ:**
+  - website/css/pages/index-exact.css
+  - website/index.html
+  - website/js/category-strip-marquee.js
+  - website/scripts/serve-demo.mjs
+  - website/scripts/build-hostinger-static.mjs
+  - website/scripts/verify-production-parity.mjs
+  - lib/services/auth_service.dart, lib/features/auth/screens/login_screen.dart, etc.
+  - Puertas de calidad: 
+pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
