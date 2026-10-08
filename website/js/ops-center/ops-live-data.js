@@ -665,6 +665,12 @@
   // --------------------------------------------------------------------------
   const RES_LABEL = { pending: 'Solicitud enviada', confirmed: 'Confirmada', rejected: 'No disponible', cancelled: 'Cancelada', completed: 'Completada' };
   const RES_ACTIONS = [['confirmed', 'Confirmar'], ['completed', 'Completada'], ['rejected', 'No disponible'], ['cancelled', 'Cancelar']];
+  const RES_CHANNEL = {
+    android: ['opsReservations.android', 'App Android'],
+    web: ['opsReservations.web', 'Portal web'],
+    phone: ['opsReservations.phone', 'Teléfono'],
+    whatsapp: ['opsReservations.whatsapp', 'WhatsApp']
+  };
   let resLoading = null;
 
   function resVisible() {
@@ -688,7 +694,8 @@
     chip.dataset.state = item.status === 'pending' ? 'acknowledged' : (item.status === 'confirmed' || item.status === 'completed' ? 'resolved' : 'closed');
     codeCell.appendChild(chip);
     codeCell.appendChild(el('div', 'ops-sos-who', item.reservation_code));
-    codeCell.appendChild(el('div', 'ops-sos-meta', item.channel === 'web' ? 'Portal web' : 'App Android'));
+    const channelLabel = RES_CHANNEL[item.channel];
+    codeCell.appendChild(el('div', 'ops-sos-meta', channelLabel ? t(channelLabel[0], channelLabel[1]) : (item.channel || '—')));
     tr.appendChild(codeCell);
 
     const bizCell = el('td');
@@ -737,6 +744,88 @@
     return tr;
   }
 
+  function reservationFormElements() {
+    return {
+      intake: document.getElementById('opsReservationIntake'),
+      open: document.getElementById('opsReservationNew'),
+      close: document.getElementById('opsReservationClose'),
+      cancel: document.getElementById('opsReservationCancel'),
+      form: document.getElementById('opsReservationForm'),
+      status: document.getElementById('opsReservationFormStatus'),
+      submit: document.getElementById('opsReservationSubmit'),
+      business: document.getElementById('opsReservationBusiness'),
+      channel: document.getElementById('opsReservationChannel'),
+      name: document.getElementById('opsReservationName'),
+      phone: document.getElementById('opsReservationPhone'),
+      date: document.getElementById('opsReservationDate'),
+      people: document.getElementById('opsReservationPeople'),
+      service: document.getElementById('opsReservationService'),
+      notes: document.getElementById('opsReservationNotes'),
+      filter: document.getElementById('opsReservationStatus'),
+      refresh: document.getElementById('opsReservationRefresh'),
+      sync: document.getElementById('opsReservationSync')
+    };
+  }
+
+  function configureReservationUi(data) {
+    const ui = reservationFormElements();
+    if (!ui.form) return;
+    const businesses = Array.isArray(data.businesses) ? data.businesses : [];
+    const selected = ui.business.value;
+    const first = ui.business.options[0] || new Option(t('opsReservations.businessPlaceholder', 'Seleccioná un negocio verificado'), '');
+    ui.business.replaceChildren(first, ...businesses.map((business) => new Option(`${business.name}${business.department ? ` · ${business.department}` : ''}`, business.id)));
+    if (businesses.some((business) => business.id === selected)) ui.business.value = selected;
+    const readOnly = data.read_only === true;
+    if (ui.open) ui.open.hidden = readOnly;
+    if (readOnly) ui.intake.hidden = true;
+    const today = new Date();
+    const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+    ui.date.min = localToday;
+
+    if (ui.form.dataset.bound === 'true') return;
+    ui.form.dataset.bound = 'true';
+    const closeForm = () => { ui.intake.hidden = true; ui.open.focus(); };
+    ui.open.addEventListener('click', () => {
+      ui.intake.hidden = false;
+      ui.status.textContent = '';
+      ui.channel.focus();
+    });
+    ui.close.addEventListener('click', closeForm);
+    ui.cancel.addEventListener('click', closeForm);
+    ui.refresh.addEventListener('click', () => renderReservations({ force: true }));
+    ui.filter.addEventListener('change', () => renderReservations({ force: true }));
+    ui.form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!ui.form.reportValidity()) return;
+      ui.submit.disabled = true;
+      ui.status.className = 'ops-reservation-form-status';
+      ui.status.textContent = t('opsReservations.saving', 'Guardando solicitud…');
+      try {
+        const result = await callReservations('create_manual', {
+          channel: ui.channel.value,
+          business_id: ui.business.value,
+          contact_name: ui.name.value,
+          contact_phone: ui.phone.value,
+          travel_date: ui.date.value,
+          people_count: Number(ui.people.value),
+          service_title: ui.service.value,
+          notes: ui.notes.value
+        });
+        const code = result.reservation && result.reservation.reservation_code;
+        ui.status.classList.add('is-success');
+        ui.status.textContent = t('opsReservations.saved', 'Solicitud {code} registrada.', { code: code || '' });
+        ui.form.reset();
+        ui.people.value = '1';
+        await renderReservations({ force: true });
+      } catch (error) {
+        ui.status.classList.add('is-error');
+        ui.status.textContent = t('opsReservations.saveError', 'No se pudo guardar: {error}', { error: error.message });
+      } finally {
+        ui.submit.disabled = false;
+      }
+    });
+  }
+
   async function renderReservations(options) {
     const opts = options || {};
     if (!currentUser()) return;
@@ -745,18 +834,25 @@
       const body = document.getElementById('opsLiveReservations');
       const empty = document.getElementById('opsLiveReservationsEmpty');
       try {
-        const data = await callReservations('queue');
+        const ui = reservationFormElements();
+        const status = ui.filter ? ui.filter.value : '';
+        const data = await callReservations('queue', status ? { status } : {});
         const items = Array.isArray(data.items) ? data.items : [];
         if (body) body.replaceChildren(...items.map((item) => reservationRow(item, data.read_only === true)));
+        configureReservationUi(data);
         const pending = Number((data.counts && data.counts.pending) || 0);
         state.reservations = { pending, counts: data.counts || {}, lastSync: Date.now() };
         if (empty) {
           empty.hidden = items.length > 0;
-          empty.textContent = 'Sin solicitudes de reserva. Aparecen cuando un viajero con sesión registra una solicitud desde la App o la web.';
+          const message = status
+            ? t('opsReservations.emptyFilter', 'No hay solicitudes con este estado.')
+            : t('opsReservations.empty', 'Aún no hay solicitudes. Registrá aquí las recibidas por teléfono o WhatsApp; las de la App y la web aparecen automáticamente.');
+          empty.replaceChildren(el('i', 'fa-solid fa-calendar-day'), el('span', '', message));
         }
+        if (ui.sync) ui.sync.textContent = t('opsReservations.synced', 'Actualizado {time}', { time: new Date().toLocaleTimeString((window.BaqueanoLanguage && window.BaqueanoLanguage.getLocale()) || 'es-NI', { hour: '2-digit', minute: '2-digit' }) });
       } catch (error) {
         if (body) body.replaceChildren();
-        if (empty) { empty.hidden = false; empty.textContent = `No se pudieron leer las reservas: ${error.message}`; }
+        if (empty) { empty.hidden = false; empty.replaceChildren(el('i', 'fa-solid fa-triangle-exclamation'), el('span', '', t('opsReservations.loadError', 'No se pudieron leer las reservas: {error}', { error: error.message }))); }
       }
     })().finally(() => { resLoading = null; });
     return resLoading;
@@ -831,10 +927,11 @@
     window.setInterval(() => { if (currentUser() && sosVisible()) renderSos(); }, SOS_POLL_MS);
     window.setInterval(() => { if (currentUser() && resVisible()) renderReservations(); }, RES_POLL_MS);
     document.addEventListener('click', (event) => {
-      const target = event.target.closest && event.target.closest('#btnOpsSyncAll, [data-tab="27-auditoria"], [data-tab="20-sos"], [data-tab="26-analitica"]');
+      const target = event.target.closest && event.target.closest('#btnOpsSyncAll, [data-tab="27-auditoria"], [data-tab="20-sos"], [data-tab="11-reservas"], [data-tab="26-analitica"]');
       if (!target || !currentUser()) return;
       if (target.id === 'btnOpsSyncAll') { refresh({ force: true, health: true }); renderSos({ force: true }); renderReservations({ force: true }); }
       else if (target.dataset.tab === '20-sos') window.setTimeout(() => renderSos({ force: true }), 0);
+      else if (target.dataset.tab === '11-reservas') window.setTimeout(() => renderReservations({ force: true }), 0);
       else if (target.dataset.tab === '26-analitica') window.setTimeout(renderImpact, 0);
       else window.setTimeout(renderAudit, 0); // después de que el motor dibuje la vista
     });

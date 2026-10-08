@@ -25,6 +25,7 @@
     "audit:visual": "node scripts/visual-audit.mjs",
     "test:territorios": "node scripts/territory-places-rule.test.mjs",
     "test:places": "node scripts/places-consistency.test.mjs",
+    "test:reservations": "node scripts/reservations-ops.test.mjs",
     "test:artistas": "node scripts/territory-artists.test.mjs",
     "test:audioguia": "node scripts/historia-audioguia.test.mjs",
     "export:app-territories": "node scripts/export-territories-for-app.mjs",

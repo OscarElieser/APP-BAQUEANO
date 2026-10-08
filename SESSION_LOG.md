@@ -18,6 +18,21 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 CORRECCIÓN DE PANEL OPS CENTER: GESTIÓN DE NEGOCIOS & ALIADOS (#08-negocios) (08-10-2026 ~16:29 CST)
+- **Consulta / Solicitud del Usuario:** *"https://baqueanonicaragua.com/admin.html#08-negocios revisar ahi tiene que ir acorde para poder agregar,editar,eliminar o suspender"*
+- **Diagnóstico Inicial:**
+  En `admin.html#08-negocios` ("Negocios & Aliados"), el drawer lateral "Nuevo Negocio" utiliza actualmente el formulario de destinos turísticos con campos y placeholders no correspondientes (como "Cañón de Somoto, Volcán Mombacho", categorías de playas/volcanes, etc.) y carece de opciones operativas claras para suspender, eliminar, editar y agregar negocios con sus datos comerciales pertinentes (responsable, categoría comercial, contacto, tarifas Córdobas/USD, estado de verificación y estado operativo).
+  El usuario requiere:
+  1. Agregar negocios con campos acordes (Nombre comercial, categoría de negocio, propietario/contacto, teléfono, WhatsApp, territorio, tarifas, estado).
+  2. Editar negocios existentes.
+  3. Suspender / reactivar negocios con control directo de estado.
+  4. Eliminar negocios con confirmación defensiva de seguridad.
+- **Plan de Acción:**
+  1. Analizar el modelo de datos de `businesses` en Supabase (`businesses` table / `baqueano-ops`), Firestore y `ops-engine.js`.
+  2. Implementar módulo o controles especializados para negocios con drawer y acciones dedicadas (Agregar, Editar, Suspender, Eliminar).
+  3. Integrar en `admin.html` y conectar con persistencia en Supabase / Firestore respetando la regla de precios (Córdobas primero, luego Dólares) y verificación ambiental/territorial.
+  4. Probar y documentar.
+
 ## 🧭 CORRECCIÓN DE PANEL OPS CENTER: GESTIÓN DE USUARIOS (#13-usuarios) (08-10-2026 ~14:28 CST)
 - **Consulta / Solicitud del Usuario:** *"si ve la imagen estoy en :https://baqueanonicaragua.com/admin.html#13-usuarios y me muestra un menu que no corresponde necesito agregar usuarios , que pueda eliminar,agregar modificar ,con su contraseña ."*
 - **Diagnóstico Inicial:**
@@ -5704,3 +5719,23 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - `git diff --cached --check` terminó limpio y no se detectaron asignaciones evidentes de credenciales en el parche preparado.
 - Commit creado con el mensaje solicitado: `hackathon 20268`.
 - Siguiente acción: incorporar esta actualización de bitácora al mismo commit y publicar `main` en `origin`.
+
+## 2026-10-08 — Activación de Reservas por WhatsApp y teléfono en Ops Center
+
+- Solicitud: activar `https://baqueanonicaragua.com/admin.html#11-reservas` para visualizar cada reserva recibida por teléfono o WhatsApp.
+- Evidencia aportada: la sección existe, pero muestra el estado vacío «Sin solicitudes de reserva» y declara como fuente `Supabase reservations`.
+- Objetivo: auditar y completar el flujo de datos real desde web/app hacia Supabase y su visualización/gestión en Ops Center, respetando privacidad, RBAC, RLS, i18n y precios C$ primero/US$ después.
+- Estado inicial: solicitud registrada antes de inspeccionar código, datos o configuración.
+### Implementación y activación
+
+- Diagnóstico de producción: `public.reservations` tenía 0 filas; la vista no fallaba, pero solo admitía canales `android` y `web`.
+- Migración aditiva creada y aplicada en Supabase: `reservations.channel` admite `android`, `web`, `phone` y `whatsapp`.
+- Edge Function `baqueano-reservas` desplegada como versión 2 con `create_manual` exclusivo para admin/superadmin, validación del negocio verificado, datos de contacto, fecha, personas e historial.
+- La cola devuelve negocios verificados para el formulario; auditores conservan modo de solo lectura.
+- Ops Center incorpora alta manual, filtros por estado, actualización, hora de sincronización, contacto por WhatsApp, estados de carga/vacío/error y diseño responsivo.
+- Textos nuevos añadidos a los seis catálogos (`es`, `en`, `fr`, `it`, `pt`, `de`) y cache-busting actualizado en `admin.html`.
+- Prueba de regresión añadida: `website/scripts/reservations-ops.test.mjs` (`npm run test:reservations`).
+- Verificaciones completadas: JSON de los seis catálogos válido, claves obligatorias presentes, `git diff --check` limpio, restricción de canal confirmada en producción y endpoint sin sesión rechazado correctamente con HTTP 401.
+- Advisors de Supabase: el cambio no introdujo alertas específicas de `reservations`; permanecen avisos globales preexistentes fuera de este alcance.
+- Limitación local: Node/npm y Supabase CLI no están disponibles en el PATH, por lo que las pruebas Node quedan para CI. La migración se creó con el formato cronológico del repositorio y se aplicó con la integración oficial de Supabase.
+- Cambio ajeno preservado y excluido del alcance: `supabase/functions/baqueano-ops/index.ts`.

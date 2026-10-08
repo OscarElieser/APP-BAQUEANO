@@ -6228,21 +6228,49 @@
       panel.innerHTML = `
         <div class="ops-view-header">
           <div class="ops-view-title-group">
-            <h1><i class="fa-solid fa-calendar-check" style="color: var(--bq-accent);"></i> Reservas por WhatsApp y teléfono</h1>
-            <p class="ops-view-subtitle">SOLICITUDES REALES · SIN PAGO EN LÍNEA · PRECIO Y PAGO SE ACUERDAN CON EL NEGOCIO · FUENTE: SUPABASE reservations</p>
+            <h1><i class="fa-solid fa-calendar-check" style="color: var(--bq-accent);"></i> <span data-i18n="opsReservations.title">Reservas por WhatsApp y teléfono</span></h1>
+            <p class="ops-view-subtitle" data-i18n="opsReservations.subtitle">SOLICITUDES REALES · SIN PAGO EN LÍNEA · PRECIO Y PAGO SE ACUERDAN CON EL NEGOCIO · FUENTE: SUPABASE reservations</p>
           </div>
+          <button type="button" class="btn-ops-matte primary" id="opsReservationNew" data-i18n="opsReservations.new">Registrar solicitud</button>
+        </div>
+        <section class="ops-reservation-intake" id="opsReservationIntake" hidden aria-labelledby="opsReservationFormTitle">
+          <div class="ops-reservation-intake-head">
+            <div>
+              <h2 id="opsReservationFormTitle" data-i18n="opsReservations.formTitle">Nueva solicitud recibida</h2>
+              <p data-i18n="opsReservations.formHelp">Registrá únicamente una solicitud real recibida por llamada o WhatsApp.</p>
+            </div>
+            <button type="button" class="ops-reservation-close" id="opsReservationClose" data-i18n-aria-label="opsReservations.close" aria-label="Cerrar formulario"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+          </div>
+          <form id="opsReservationForm" class="ops-reservation-form">
+            <label><span data-i18n="opsReservations.channel">Canal</span><select id="opsReservationChannel" required><option value="whatsapp" data-i18n="opsReservations.whatsapp">WhatsApp</option><option value="phone" data-i18n="opsReservations.phone">Teléfono</option></select></label>
+            <label><span data-i18n="opsReservations.business">Negocio</span><select id="opsReservationBusiness" required><option value="" data-i18n="opsReservations.businessPlaceholder">Seleccioná un negocio verificado</option></select></label>
+            <label><span data-i18n="opsReservations.traveler">Nombre del viajero</span><input id="opsReservationName" type="text" maxlength="80" autocomplete="name" required></label>
+            <label><span data-i18n="opsReservations.contactPhone">Teléfono de contacto</span><input id="opsReservationPhone" type="tel" maxlength="20" inputmode="tel" autocomplete="tel" pattern="[0-9+ ()-]{7,20}" required></label>
+            <label><span data-i18n="opsReservations.travelDate">Fecha del viaje</span><input id="opsReservationDate" type="date" required></label>
+            <label><span data-i18n="opsReservations.people">Personas</span><input id="opsReservationPeople" type="number" min="1" max="50" value="1" required></label>
+            <label class="ops-reservation-wide"><span data-i18n="opsReservations.service">Servicio o experiencia</span><input id="opsReservationService" type="text" maxlength="120"></label>
+            <label class="ops-reservation-wide"><span data-i18n="opsReservations.notes">Nota operativa</span><textarea id="opsReservationNotes" maxlength="500" rows="3"></textarea></label>
+            <div class="ops-reservation-form-status" id="opsReservationFormStatus" role="status" aria-live="polite"></div>
+            <div class="ops-reservation-form-actions"><button type="button" class="btn-ops-matte" id="opsReservationCancel" data-i18n="opsReservations.cancel">Cancelar</button><button type="submit" class="btn-ops-matte primary" id="opsReservationSubmit" data-i18n="opsReservations.save">Guardar solicitud</button></div>
+          </form>
+        </section>
+        <div class="ops-reservation-toolbar" aria-label="Filtros de reservas" data-i18n-aria-label="opsReservations.filters">
+          <label><span class="ops-sr-only" data-i18n="opsReservations.statusFilter">Filtrar por estado</span><select id="opsReservationStatus"><option value="" data-i18n="opsReservations.allStatuses">Todos los estados</option><option value="pending" data-i18n="opsReservations.pending">Pendientes</option><option value="confirmed" data-i18n="opsReservations.confirmed">Confirmadas</option><option value="completed" data-i18n="opsReservations.completed">Completadas</option><option value="rejected" data-i18n="opsReservations.rejected">No disponibles</option><option value="cancelled" data-i18n="opsReservations.cancelled">Canceladas</option></select></label>
+          <button type="button" class="btn-ops-matte" id="opsReservationRefresh"><i class="fa-solid fa-rotate" aria-hidden="true"></i> <span data-i18n="opsReservations.refresh">Actualizar</span></button>
+          <span class="ops-reservation-sync" id="opsReservationSync" aria-live="polite"></span>
         </div>
         <div class="ops-table-container-matte">
           <table class="ops-table-matte">
-            <caption class="ops-sr-only">Solicitudes de reserva registradas por viajeros</caption>
+            <caption class="ops-sr-only" data-i18n="opsReservations.caption">Solicitudes de reserva registradas</caption>
             <thead>
-              <tr><th scope="col">Solicitud</th><th scope="col">Negocio</th><th scope="col">Viajero</th><th scope="col">Fecha y personas</th><th scope="col">Registrada</th><th scope="col">Gestión</th></tr>
+              <tr><th scope="col" data-i18n="opsReservations.request">Solicitud</th><th scope="col" data-i18n="opsReservations.business">Negocio</th><th scope="col" data-i18n="opsReservations.traveler">Viajero</th><th scope="col" data-i18n="opsReservations.datePeople">Fecha y personas</th><th scope="col" data-i18n="opsReservations.registered">Registrada</th><th scope="col" data-i18n="opsReservations.management">Gestión</th></tr>
             </thead>
             <tbody id="opsLiveReservations"></tbody>
           </table>
-          <p class="ops-health-detail" id="opsLiveReservationsEmpty">Cargando solicitudes de reserva…</p>
+          <div class="ops-reservation-state" id="opsLiveReservationsEmpty"><i class="fa-solid fa-calendar-day" aria-hidden="true"></i><span data-i18n="opsReservations.loading">Cargando solicitudes de reserva…</span></div>
         </div>
       `;
+      if (window.BaqueanoLanguage && typeof window.BaqueanoLanguage.translateElement === 'function') window.BaqueanoLanguage.translateElement(panel);
       if (window.BaqueanoOpsData && typeof window.BaqueanoOpsData.renderReservations === 'function') window.BaqueanoOpsData.renderReservations({ force: true });
     },
 

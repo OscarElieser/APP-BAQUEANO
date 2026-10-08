@@ -20,7 +20,7 @@
 //
 // 📦 QUÉ (POST { action, ... }):
 // - Con sesión: create, mine, cancel (propia y pendiente).
-// - Ops Center: queue (admin y auditor), update (solo admin/superadmin).
+// - Ops Center: queue (admin y auditor), create_manual/update (solo admin/superadmin).
 // ============================================================================
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
@@ -196,6 +196,52 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
         business: { id: business.id, name: business.name, phone: business.phone, whatsapp: business.whatsapp, department: business.department },
       };
     }
+    case "create_manual": {
+      const a = requireActor(actor);
+      if (!a.isAdmin) throw new HttpError(403, "Solo administradores pueden registrar reservas recibidas por teléfono o WhatsApp.");
+      const channel = String(body.channel || "");
+      if (channel !== "phone" && channel !== "whatsapp") throw new HttpError(400, "Seleccioná teléfono o WhatsApp como canal.");
+
+      const businessId = cleanText(body.business_id, 120, "el negocio", true)!;
+      const { data: business } = await service.from("businesses")
+        .select("id, name, phone, whatsapp, department, verified, deleted_at").eq("id", businessId).maybeSingle();
+      if (!business || business.verified !== true || business.deleted_at) {
+        throw new HttpError(400, "Ese negocio no está verificado para recibir reservas.");
+      }
+      const people = Number(body.people_count);
+      if (!Number.isInteger(people) || people < 1 || people > 50) throw new HttpError(400, "Indicá entre 1 y 50 personas.");
+      const phone = cleanText(body.contact_phone, 20, "el teléfono del viajero", true)!;
+      if (!/^[0-9+ ()-]{7,20}$/.test(phone)) throw new HttpError(400, "El teléfono de contacto no es válido.");
+      const contactName = cleanText(body.contact_name, 80, "el nombre del viajero", true)!;
+      const now = new Date().toISOString();
+      const row = {
+        reservation_code: reservationCode(),
+        user_uid: `manual:${a.uid}`,
+        business_id: business.id,
+        service_title: cleanText(body.service_title, 120, "el servicio") || `Reserva con ${business.name}`,
+        destination_name: cleanText(body.destination_name, 120, "el destino"),
+        travel_date: parseTravelDate(body.travel_date),
+        people_count: people,
+        total_price: null,
+        status: "pending",
+        notes: cleanText(body.notes, 500, "la nota"),
+        contact_name: contactName,
+        contact_phone: phone,
+        channel,
+        handled_by: a.email || a.uid,
+        handled_at: now,
+        history: [{ at: now, by: a.email || a.uid, to: "pending", note: `Solicitud recibida por ${channel === "whatsapp" ? "WhatsApp" : "teléfono"}` }],
+      };
+      let inserted: Record<string, unknown> | null = null;
+      for (let attempt = 0; attempt < 3 && !inserted; attempt++) {
+        const { data, error } = await service.from("reservations").insert(row).select(STAFF_COLUMNS).single();
+        if (!error) inserted = data;
+        else if (error.code === "23505") row.reservation_code = reservationCode();
+        else throw new HttpError(500, "No se pudo registrar la solicitud recibida.");
+      }
+      if (!inserted) throw new HttpError(500, "No se pudo generar el código de reserva. Intentá de nuevo.");
+      return { reservation: inserted };
+    }
     case "mine": {
       const a = requireActor(actor);
       const { data, error } = await service.from("reservations").select(USER_COLUMNS)
@@ -229,7 +275,11 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
         const { count } = await service.from("reservations").select("id", { count: "exact", head: true }).eq("status", s).is("deleted_at", null);
         counts[s] = count || 0;
       }
-      return { items: data || [], counts, read_only: !a.isAdmin };
+      const { data: businesses, error: businessesError } = await service.from("businesses")
+        .select("id, name, phone, whatsapp, department")
+        .eq("verified", true).is("deleted_at", null).order("name", { ascending: true }).limit(500);
+      if (businessesError) throw new HttpError(500, "No se pudieron cargar los negocios disponibles.");
+      return { items: data || [], counts, businesses: businesses || [], read_only: !a.isAdmin };
     }
     case "update": {
       const a = requireActor(actor);
