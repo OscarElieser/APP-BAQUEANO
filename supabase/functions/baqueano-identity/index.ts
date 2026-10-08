@@ -477,6 +477,89 @@ async function handle(req: Request, action: string, body: Record<string, unknown
       return { id: data.user.id, email, role };
     }
 
+    case "create_user": {
+      const a = requirePermission(actor, "users.invite");
+      const email = cleanEmail(body.email);
+      const password = cleanText(body.password, 120, "la contraseña", true)!;
+      if (password.length < 8) throw new HttpError(400, "La contraseña debe tener al menos 8 caracteres.");
+      const role = String(body.role || "turista");
+      if (!ALL_ROLES.has(role)) throw new HttpError(400, "Rol inválido.");
+      assertCanGrant(a, role);
+      const name = cleanText(body.name || body.display_name, 120, "el nombre", true)!;
+      const phone = cleanText(body.phone, 20, "el teléfono");
+      const department = cleanText(body.department, 80, "el departamento");
+
+      const { data: existing } = await service.from("profiles").select("id").ilike("email", email).maybeSingle();
+      if (existing) throw new HttpError(409, "Ya existe una cuenta con ese correo.");
+
+      const { data: authUser, error: authError } = await service.auth.admin.createUser({
+        email,
+        password,
+        email_confirm: true,
+        user_metadata: { full_name: name, display_name: name, phone: phone || undefined },
+      });
+      if (authError || !authUser?.user) throw new HttpError(400, authError?.message || "No se pudo crear el usuario en Auth.");
+
+      const userId = authUser.user.id;
+      const now = new Date().toISOString();
+
+      await service.from("profiles").upsert({
+        id: userId,
+        email,
+        display_name: name,
+        phone: phone || null,
+        city: department || null,
+        status: String(body.status || "active"),
+        created_at: now,
+        updated_at: now,
+      }, { onConflict: "id" });
+
+      if (role !== "turista") {
+        await service.from("user_roles").upsert({
+          user_id: userId,
+          role_id: role,
+          granted_by: a.profileId,
+          reason: "Creación administrativa con contraseña"
+        }, { onConflict: "user_id,role_id" });
+      }
+
+      await audit(service, req, a, "user.create", "profile", userId, null, { email, role, name }, "Alta de usuario con contraseña", `Creó al usuario ${email} como ${role}`);
+      return { id: userId, email, role, name };
+    }
+
+    case "update_password": {
+      const a = requirePermission(actor, "users.update");
+      const id = cleanUuid(body.id);
+      const password = cleanText(body.password, 120, "la nueva contraseña", true)!;
+      if (password.length < 8) throw new HttpError(400, "La contraseña debe tener al menos 8 caracteres.");
+      const targetRoles = await rolesOf(service, id);
+      assertCanManageTarget(a, id, targetRoles);
+
+      const { error: authError } = await service.auth.admin.updateUserById(id, { password });
+      if (authError) throw new HttpError(400, authError.message || "No se pudo actualizar la contraseña.");
+
+      await audit(service, req, a, "user.password_change", "profile", id, null, { updated: true }, cleanText(body.reason, 300, "el motivo"), "Cambio administrativo de contraseña");
+      return { id, password_updated: true };
+    }
+
+    case "delete_user": {
+      const a = requirePermission(actor, "users.suspend");
+      const id = cleanUuid(body.id);
+      const targetRoles = await rolesOf(service, id);
+      assertCanManageTarget(a, id, targetRoles);
+      if (targetRoles.includes("superadmin")) {
+        const { count } = await service.from("user_roles").select("user_id", { count: "exact", head: true }).eq("role_id", "superadmin");
+        if ((count || 0) <= 1) throw new HttpError(400, "No se puede eliminar al último superadministrador.");
+      }
+
+      await service.auth.admin.deleteUser(id);
+      await service.from("user_roles").delete().eq("user_id", id);
+      await service.from("profiles").update({ status: "deleted_soft", updated_at: new Date().toISOString() }).eq("id", id);
+
+      await audit(service, req, a, "user.delete", "profile", id, null, { deleted: true }, cleanText(body.reason, 300, "el motivo"), "Eliminación administrativa de cuenta");
+      return { id, deleted: true };
+    }
+
     case "request_verification": {
       if (!actor?.profileId) throw new HttpError(401, "Iniciá sesión con tu cuenta BAQUEANO para solicitar verificación.");
       requirePermission(actor, "verifications.request");

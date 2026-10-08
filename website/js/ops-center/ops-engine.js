@@ -4180,6 +4180,13 @@
       if (tabId === '02-contenido') return this.renderWebsiteBuilderModule('02-contenido');
       if (tabId === '09-verificaciones') return this.renderVerificationsModule();
       if (tabId === '10-suscripciones') return this.renderSubscriptionsModule();
+      if (tabId === '13-usuarios') {
+        if (window.BaqueanoOpsUsers) return window.BaqueanoOpsUsers.render(panel);
+        setTimeout(() => {
+          if (window.BaqueanoOpsUsers) window.BaqueanoOpsUsers.render(panel);
+        }, 80);
+        return;
+      }
       if (tabId === '23-ai') return this.renderAiAdminModule();
       if (tabId === '24-builder') return this.renderWebsiteBuilderModule('24-builder');
       if (tabId === '25-android') return this.renderAndroidReleaseModule();
@@ -4567,6 +4574,9 @@
     },
 
     openDrawer(tabId, item = null) {
+      if (tabId === '13-usuarios') {
+        if (window.BaqueanoOpsUsers) return window.BaqueanoOpsUsers.openModal(item ? item.id : null);
+      }
       const drawer = document.getElementById('opsEntityDrawer');
       const titleEl = document.getElementById('opsDrawerTitle');
       const subEl = document.getElementById('opsDrawerSubtitle');
@@ -6780,10 +6790,16 @@
 
     // Operaciones de Formulario / Drawer
     openCreateDrawer(tabId) {
+      if (tabId === '13-usuarios' && window.BaqueanoOpsUsers) {
+        return window.BaqueanoOpsUsers.openModal();
+      }
       OpsUI.openDrawer(tabId, null);
     },
 
     openEditDrawer(tabId, entityId) {
+      if (tabId === '13-usuarios' && window.BaqueanoOpsUsers) {
+        return window.BaqueanoOpsUsers.openModal(entityId);
+      }
       const item = (OpsState.collectionsData[tabId] || []).find((x) => x.id === entityId);
       if (item) OpsUI.openDrawer(tabId, item);
     },

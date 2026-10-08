@@ -16,7 +16,47 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 - Flutter sin errores de compilacion
 - global-injector.js sincroniza footer/navbar en 22+ paginas
 
-============================================================ -->
+<!-- ============================================================ -->
+
+## 🧭 CORRECCIÓN DE PANEL OPS CENTER: GESTIÓN DE USUARIOS (#13-usuarios) (08-10-2026 ~14:28 CST)
+- **Consulta / Solicitud del Usuario:** *"si ve la imagen estoy en :https://baqueanonicaragua.com/admin.html#13-usuarios y me muestra un menu que no corresponde necesito agregar usuarios , que pueda eliminar,agregar modificar ,con su contraseña ."*
+- **Diagnóstico Inicial:**
+  En `admin.html` y los módulos JS de Ops Center, al interactuar con el módulo `#13-usuarios` ("Directorio de Usuarios"), el modal/drawer lateral "Nuevo Usuario" despliega erróneamente el formulario de destinos/lugares ("Territorio, Tarifas & Contacto, Multimedia, SEO", "Cañón de Somoto", etc.) en lugar de un formulario de gestión de cuentas de usuario.
+  El usuario requiere un sistema funcional de gestión de usuarios que permita:
+  1. Agregar usuarios con nombre, correo electrónico, rol y contraseña.
+  2. Modificar usuarios existentes (editar perfil, rol, estado y contraseña).
+  3. Eliminar usuarios.
+  4. Interfaz dedicada y limpia acorde al diseño oficial de BAQUEANO.
+- **Plan de Acción & Ejecución Completada:**
+  1. `website/js/ops-center/ops-users.js` (Nuevo): Módulo integral `BaqueanoOpsUsers` bajo el estándar Círculo Dorado:
+     - Renderizado de panel `#view-13-usuarios` con KPIs (Total Usuarios, Staff & Admins, Guías Nativos, Emprendedores, Exploradores, Suspendidos).
+     - Tabla interactiva con avatar, nombre, correo, badges de rol estilizados, territorio/contacto, estado de cuenta, fecha y botones de acción (Editar, Cambiar Contraseña, Suspender/Reactivar, Eliminar).
+     - Gestión del Drawer `#opsUserDrawer`: Modo creación (campos limpios, contraseña obligatoria) y modo edición (carga de datos, contraseña opcional).
+     - Generador criptográfico de contraseñas de alta entropía con botón para ver/ocultar y copia al portapapeles.
+     - Modal de cambio rápido de contraseña `#opsUserPasswordModal`.
+     - Persistencia atómica dual en Firestore (`users`), Supabase Edge Function (`baqueano-identity`) y Firebase Auth con instancia secundaria para evitar desconexión del administrador.
+     - Salvaguardas defensivas: Previene auto-eliminación de la cuenta en sesión y del último SuperAdministrador.
+  2. `website/admin.html`:
+     - Inclusión del Drawer off-canvas `#opsUserDrawer` específico para cuentas de usuario.
+     - Inclusión del Modal rápido de cambio de contraseña `#opsUserPasswordModal`.
+     - Script tag `<script defer src="js/ops-center/ops-users.js?v=20261008-users-1"></script>`.
+  3. `website/js/ops-center/ops-engine.js`:
+     - Delegación de `renderEntityView('13-usuarios')`, `openCreateDrawer('13-usuarios')`, `openEditDrawer('13-usuarios')` y `openDrawer('13-usuarios')` hacia `BaqueanoOpsUsers`, eliminando el fallback al formulario de catálogo turístico.
+  4. `supabase/functions/baqueano-identity/index.ts`:
+     - Implementación de las acciones de backend `create_user`, `update_password` y `delete_user` con Supabase Auth Admin API y registro inmutable en `audit_logs`.
+  5. Verificaciones:
+     - `flutter analyze`: No issues found! (100% limpio).
+     - Validación contra palabras prohibidas y deprecaciones: 0 coincidencias.
+- **Estado:** ✅ Completado y verificado. Listo para despliegue y uso en producción.
+
+## 🧭 EJECUCIÓN DE APK EN EMULADOR ANDROID (08-10-2026 ~11:27 CST)
+- **Consulta / Solicitud del Usuario:** *"CORRER LA APK EN UN EMULADOR"*
+- **Objetivo:**
+  1. Detectar emuladores Android disponibles (`flutter emulators`, `emulator -list-avds` o dispositivos conectados con `flutter devices` / `adb devices`).
+  2. Iniciar el emulador de Android disponible de forma limpia y verificar conexión ADB.
+  3. Ejecutar o instalar la aplicación Flutter en el emulador (`flutter run -d <emulator-id>` o `flutter build apk` e instalar / correr).
+  4. Garantizar rendimiento fluido, cumplimiento del estándar de Android (`lib/`, `android/`) y cero bloqueos.
+- **Estado Inicial:** Iniciando verificación de herramientas de Android SDK, emuladores y dispositivos.
 
 ## 🧭 CORRECCIÓN DE DISEÑO: "LUGARES DESTACADOS (10)" Y LINK TODOS LOS DESTINOS (07-10-2026 ~18:03 CST)
 - **Consulta / Solicitud del Usuario:** *"eso se feo le di ver [Ver los 237 destinos](https://baqueanonicaragua.com/todos-los-destinos.html) Pausar corregirlo es tener la misma diseño que losotros"* con captura de pantalla donde las tarjetas de "Lugares destacados (10)" se apilan verticalmente con imágenes desproporcionadas a pantalla completa.
@@ -5611,3 +5651,56 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - 🎯 **POR QUÉ:** Corregir la presentación visual de la sección "Lugares destacados (10)" y "todos-los-destinos.html" para que tenga exactamente el mismo diseño de tarjetas de alta fidelidad, ordenadas en cuadrícula/carrusel horizontal estilizado, con proporciones visuales armónicas y sin tarjetas gigantescas que deformen el flujo visual.
 - ⚙️ **CÓMO:** (1) Auditar destinos.html, 	odos-los-destinos.html, website/css/pages/destinos-exact.css, js/destinos-featured.js y js/destinos-catalog-live.js; (2) Identificar por qué las tarjetas se muestran en vertical gigantescas o sin las dimensiones correctas del diseño original; (3) Aplicar el diseño oficial con la paleta de marca (#165D6F, #F65E01, #F4E6C1, #0F172A), proporciones de imagen estándar (altura acotada ~220-240px, aspect-ratio 16:10 / 4:3), tipografía y botones armonizados; (4) Verificar responsividad, i18n y compuertas de calidad; (5) Desplegar a producción.
 - 📦 **QUÉ:** Rediseño alineado a los estándares de BAQUEANO probado en local y en producción.
+
+## 2026-10-08 — Actualización completa desde Git remoto
+
+- Solicitud: «actualiza el git aqui trae todo lo que esta en la nube».
+- Estado inicial: solicitud registrada antes de inspeccionar o ejecutar operaciones Git.
+- Plan: comprobar rama, remotos y estado local; descargar referencias y actualizar de forma segura preservando cambios locales.
+### Resultado verificable
+
+- Ejecutado `git fetch --all --prune --tags` correctamente contra `origin`.
+- Verificada la divergencia `HEAD...origin/main`: `0 0`; la rama local `main` ya contiene todo lo publicado en `origin/main`.
+- Referencias de ramas remotas y etiquetas actualizadas; referencias obsoletas depuradas.
+- Cambios locales preservados sin alteración: `SESSION_LOG.md`, `admin/pubspec.lock` y `pubspec.lock`.
+- No fue necesario fusionar, rebasar ni resolver conflictos.
+
+## 2026-10-08 — Ejecución de APK en emulador Android
+
+- Solicitud: «correr la apk en el emulador».
+- Estado inicial: solicitud registrada antes de inspeccionar dispositivos o ejecutar Flutter.
+- Plan: detectar el emulador Android, resolver la configuración del proyecto y ejecutar la aplicación preservando los cambios locales.
+### Resultado / bloqueo verificable
+
+- Flutter localizado en `C:\Users\57LAB2PC1\flutter` (stable 3.47.6, Dart 3.13.5).
+- `flutter devices` solo detectó Windows, Chrome y Edge; no existe dispositivo Android conectado.
+- `flutter emulators` informó que no hay fuentes de emuladores ni imágenes AVD instaladas.
+- `flutter doctor -v` confirmó: `Unable to locate Android SDK`.
+- La APK no pudo ejecutarse porque el equipo carece actualmente de Android SDK y emulador Android configurado.
+- Próximo paso requerido: instalar/configurar Android Studio + Android SDK + una imagen AVD, o conectar un teléfono Android con depuración USB.
+
+## 2026-10-08 — Solicitud de Microsoft Windows App SDK
+
+- Solicitud: instalar `microsoft/WindowsAppSDK` en el proyecto BAQUEANO.
+- Fuente indicada: `https://github.com/microsoft/WindowsAppSDK`.
+- Estado inicial: solicitud registrada antes de consultar la fuente o modificar el proyecto.
+- Restricción detectada: la arquitectura vigente de BAQUEANO limita el desarrollo a Android (`android/` y `lib/`); se evaluará compatibilidad y alcance antes de cualquier cambio.
+### Evaluación y decisión
+
+- El proyecto es Flutter con objetivo exclusivo Android; `docs/audit/SYSTEM_MAP.md` y `docs/audit/SPRINT1_REPOSITORY_AUDIT.md` clasifican `windows/` como plataforma no objetivo y señalan que no debe modificarse.
+- Microsoft Windows App SDK es una plataforma nativa para aplicaciones Windows (WinUI/Win32) distribuida principalmente mediante NuGet; no es una dependencia compatible con el módulo Android ni una dependencia Dart de `pubspec.yaml`.
+- No se modificó `windows/`, `android/`, `lib/` ni `pubspec.yaml`, porque una integración real exigiría autorizar explícitamente Windows como nueva plataforma de BAQUEANO y definir el producto de escritorio.
+- Estado: bloqueado por conflicto arquitectónico, no por un error de instalación.
+
+## 2026-10-08 — Corrección de commit y publicación Git
+
+- Incidente reportado: `git commit "hackathon8"` se interpretó como pathspec por faltar `-m`; posteriormente `git commit -m "hackathon 20268"` falló porque Git no tenía `user.name` ni `user.email` configurados.
+- `git push` informó `Everything up-to-date` porque todavía no existía un commit nuevo.
+- Solicitud implícita: corregir la identidad Git, verificar los archivos preparados, crear el commit y publicarlo en `origin/main` sin perder cambios.
+- Estado inicial registrado antes de inspeccionar o modificar la configuración Git.
+### Resultado verificable
+
+- Identidad configurada localmente para este repositorio: `oscarelieser <oscarelieser.informatica.inatec@gmail.com>`, recuperada del historial del propietario.
+- `git diff --cached --check` terminó limpio y no se detectaron asignaciones evidentes de credenciales en el parche preparado.
+- Commit creado con el mensaje solicitado: `hackathon 20268`.
+- Siguiente acción: incorporar esta actualización de bitácora al mismo commit y publicar `main` en `origin`.

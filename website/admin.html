@@ -1573,6 +1573,239 @@
     </div>
   </div>
 
+  <!-- OFFCANVAS DRAWER EXCLUSIVO PARA GESTIÓN DE USUARIOS, CREDENCIALES & ROLES -->
+  <div class="ops-drawer-backdrop" id="opsUserDrawer">
+    <div class="ops-drawer-panel" style="width: 720px; max-width: 95vw;">
+      <div class="ops-drawer-header">
+        <div class="ops-drawer-title-wrap">
+          <h2 class="ops-drawer-title" id="opsUserDrawerTitle" style="display:flex; align-items:center; gap:0.6rem;">
+            <i class="fa-solid fa-user-shield" style="color: var(--bq-accent);"></i>
+            <span>Nuevo Usuario</span>
+          </h2>
+          <p class="ops-drawer-subtitle" id="opsUserDrawerSubtitle">Módulo: Directorio de Usuarios &amp; Control de Acceso RBAC</p>
+        </div>
+        <button type="button" class="ops-drawer-close-btn" id="opsUserDrawerCloseBtn" onclick="window.BaqueanoOpsUsers.closeModal()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="ops-drawer-body" style="padding: 1.5rem 1.75rem; overflow-y: auto;">
+        <input type="hidden" id="opsUserFormId" value="">
+
+        <!-- SECCIÓN 1: DATOS DE IDENTIDAD & ACCESO -->
+        <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+          <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
+            <i class="fa-solid fa-id-card" style="color: var(--bq-secondary);"></i>
+            <span>Identidad &amp; Cuenta</span>
+          </h3>
+
+          <div class="ops-form-group">
+            <label class="ops-form-label">Nombre Completo Oficial *</label>
+            <input type="text" class="ops-form-input" id="opsUserFormName" placeholder="Ej. Carlos Silva Mendieta">
+          </div>
+
+          <div class="ops-form-group">
+            <label class="ops-form-label">Correo Electrónico (Email de Acceso) *</label>
+            <input type="email" class="ops-form-input" id="opsUserFormEmail" placeholder="usuario@baqueanonicaragua.com">
+          </div>
+        </div>
+
+        <!-- SECCIÓN 2: GESTIÓN DE CONTRASEÑA -->
+        <div style="background: rgba(22, 93, 111, 0.12); border: 1px solid rgba(22, 93, 111, 0.35); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem;">
+            <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0; display:flex; align-items:center; gap:0.5rem;">
+              <i class="fa-solid fa-key" style="color: #F59E0B;"></i>
+              <span>Contraseña de Acceso</span>
+            </h3>
+            <button type="button" class="btn-ops-matte accent" style="padding: 0.35rem 0.75rem; font-size: 0.76rem;" onclick="window.BaqueanoOpsUsers.generateSecurePassword('opsUserFormPassword')">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Generar Contraseña Segura
+            </button>
+          </div>
+
+          <p id="opsUserFormPasswordHint" style="font-size: 0.77rem; color: var(--ops-text-secondary); margin: 0 0 1rem 0; line-height: 1.45;">
+            Obligatorio al crear: debe contener al menos 8 caracteres seguros para iniciar sesión.
+          </p>
+
+          <div class="ops-form-grid-2">
+            <div class="ops-form-group">
+              <label class="ops-form-label">Contraseña</label>
+              <div style="position: relative; display: flex; align-items: center;">
+                <input type="password" class="ops-form-input" id="opsUserFormPassword" placeholder="••••••••••••" style="padding-right: 2.75rem;">
+                <button type="button" class="btn-ops-icon" style="position: absolute; right: 0.4rem; background: none; border: none; cursor: pointer;" onclick="window.BaqueanoOpsUsers.togglePasswordVisibility('opsUserFormPassword', this)">
+                  <i class="fa-solid fa-eye" style="color: var(--ops-text-muted);"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="ops-form-group">
+              <label class="ops-form-label">Confirmar Contraseña</label>
+              <div style="position: relative; display: flex; align-items: center;">
+                <input type="password" class="ops-form-input" id="opsUserFormPasswordConfirm" placeholder="••••••••••••" style="padding-right: 2.75rem;">
+                <button type="button" class="btn-ops-icon" style="position: absolute; right: 0.4rem; background: none; border: none; cursor: pointer;" onclick="window.BaqueanoOpsUsers.togglePasswordVisibility('opsUserFormPasswordConfirm', this)">
+                  <i class="fa-solid fa-eye" style="color: var(--ops-text-muted);"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 3: ROL Y POLÍTICAS RBAC -->
+        <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+          <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
+            <i class="fa-solid fa-user-shield" style="color: var(--bq-accent);"></i>
+            <span>Rol en el Ecosistema &amp; Estado</span>
+          </h3>
+
+          <div class="ops-form-grid-2">
+            <div class="ops-form-group">
+              <label class="ops-form-label">Rol Asignado *</label>
+              <select class="ops-form-select" id="opsUserFormRole">
+                <option value="turista">Explorador / Turista (Usuario general web y app)</option>
+                <option value="guia">Guía &amp; Baqueano Nativo (Acreditado en territorio)</option>
+                <option value="emprendedor">Emprendedor Aliado (Anfitrión campesino / Negocio)</option>
+                <option value="auditor">Auditor Territorial (Supervisión solo lectura)</option>
+                <option value="admin">Administrador General (Gestión editorial y catálogo)</option>
+                <option value="superadmin">Super Administrador (Control total del sistema)</option>
+              </select>
+            </div>
+
+            <div class="ops-form-group">
+              <label class="ops-form-label">Estado de la Cuenta *</label>
+              <select class="ops-form-select" id="opsUserFormStatus">
+                <option value="active">Activo (Acceso habilitado)</option>
+                <option value="suspended">Suspendido (Pausa administrativa)</option>
+                <option value="blocked">Bloqueado (Acceso revocado por seguridad)</option>
+                <option value="pending">Pendiente de Verificación</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="ops-form-grid-2" style="margin-top: 0.75rem;">
+            <div class="ops-form-group">
+              <label class="ops-form-label">Teléfono / WhatsApp</label>
+              <input type="tel" class="ops-form-input" id="opsUserFormPhone" placeholder="+505 8888-0000">
+            </div>
+
+            <div class="ops-form-group">
+              <label class="ops-form-label">Departamento / Territorio</label>
+              <select class="ops-form-select" id="opsUserFormDepartment">
+                <option value="Nacional">Nacional / Multiterritorial</option>
+                <option value="Boaco">Boaco</option>
+                <option value="Carazo">Carazo</option>
+                <option value="Chinandega">Chinandega</option>
+                <option value="Chontales">Chontales</option>
+                <option value="Estelí">Estelí</option>
+                <option value="Granada">Granada</option>
+                <option value="Jinotega">Jinotega</option>
+                <option value="León">León</option>
+                <option value="Madriz">Madriz</option>
+                <option value="Managua">Managua</option>
+                <option value="Masaya">Masaya</option>
+                <option value="Matagalpa">Matagalpa</option>
+                <option value="Nueva Segovia">Nueva Segovia</option>
+                <option value="Rivas">Rivas</option>
+                <option value="Río San Juan">Río San Juan</option>
+                <option value="RACCN">RACCN (Caribe Norte)</option>
+                <option value="RACCS">RACCS (Caribe Sur)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="ops-form-grid-2" style="margin-top: 0.75rem;">
+            <div class="ops-form-group">
+              <label class="ops-form-label">Nivel de Explorador / Título</label>
+              <input type="text" class="ops-form-input" id="opsUserFormLevel" placeholder="Ej. Guardián Supremo, Guía Territorial...">
+            </div>
+
+            <div class="ops-form-group" style="display:flex; flex-direction:column; justify-content:center;">
+              <label class="ops-form-label">Distintivo de Verificación</label>
+              <label style="cursor:pointer; display:flex; align-items:center; gap:0.5rem; background:var(--ops-surface-2); padding:0.6rem 0.9rem; border-radius:var(--ops-radius-md); border:1px solid rgba(0,186,242,0.35);">
+                <input type="checkbox" id="opsUserFormVerified" style="accent-color:#00BAF2; width:18px; height:18px; cursor:pointer;">
+                <span style="font-size:0.82rem; font-weight:700; color:#fff; display:flex; align-items:center; gap:0.35rem;">
+                  <i class="fa-solid fa-circle-check" style="color:#00BAF2;"></i> Perfil Verificado (Check Azul)
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="ops-form-group" style="margin-top: 0.75rem;">
+            <label class="ops-form-label">Observaciones / Notas Internas</label>
+            <textarea class="ops-form-textarea" id="opsUserFormNotes" rows="2" placeholder="Motivo de suspensión, notas de asignación o contacto de referencia..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="ops-drawer-footer" style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <button type="button" class="btn-ops-matte danger" id="btnOpsUserDrawerDelete" style="display:none;" onclick="window.BaqueanoOpsUsers.deleteUser()">
+            <i class="fa-solid fa-trash-can"></i> Eliminar Usuario
+          </button>
+        </div>
+        <div style="display:flex; gap:0.75rem;">
+          <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsUsers.closeModal()">
+            Cancelar
+          </button>
+          <button type="button" class="btn-ops-matte primary" id="btnOpsUserDrawerSave" onclick="window.BaqueanoOpsUsers.saveUser()">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span id="opsUserSaveBtnText">Guardar Usuario</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL RÁPIDO DE CAMBIO DE CONTRASEÑA -->
+  <div class="ops-modal-backdrop" id="opsUserPasswordModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="ops-modal-card" style="width: 100%; max-width: 480px; background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-lg); padding: 1.75rem; box-shadow: var(--ops-shadow-lg); animation: opsFadeIn 0.25s ease;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+        <h2 style="font-size: 1.15rem; color: #fff; margin:0; display:flex; align-items:center; gap:0.5rem;">
+          <i class="fa-solid fa-key" style="color: #F59E0B;"></i> Cambiar Contraseña
+        </h2>
+        <button type="button" class="ops-drawer-close-btn" onclick="window.BaqueanoOpsUsers.closePasswordModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <input type="hidden" id="opsQuickPassUserId" value="">
+
+      <div style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.85rem 1rem; margin-bottom: 1.25rem;">
+        <span style="font-size: 0.75rem; color: var(--ops-text-muted); display: block;">Usuario Seleccionado:</span>
+        <strong id="opsQuickPassUserName" style="font-size: 0.92rem; color: #fff; display: block; margin-top: 0.15rem;">—</strong>
+        <span id="opsQuickPassUserEmail" style="font-size: 0.8rem; color: #38BDF8; font-family: monospace;">—</span>
+      </div>
+
+      <div class="ops-form-group" style="margin-bottom: 1rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
+          <label class="ops-form-label" style="margin:0;">Nueva Contraseña *</label>
+          <button type="button" style="background:none; border:none; color:var(--bq-accent); font-size:0.75rem; cursor:pointer; font-weight:700;" onclick="window.BaqueanoOpsUsers.generateSecurePassword('opsQuickPassNewPass')">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Generar segura
+          </button>
+        </div>
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="password" class="ops-form-input" id="opsQuickPassNewPass" placeholder="Mínimo 8 caracteres" style="padding-right: 2.75rem;">
+          <button type="button" class="btn-ops-icon" style="position: absolute; right: 0.4rem; background: none; border: none; cursor: pointer;" onclick="window.BaqueanoOpsUsers.togglePasswordVisibility('opsQuickPassNewPass', this)">
+            <i class="fa-solid fa-eye" style="color: var(--ops-text-muted);"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="ops-form-group" style="margin-bottom: 1.5rem;">
+        <label class="ops-form-label">Confirmar Nueva Contraseña *</label>
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="password" class="ops-form-input" id="opsQuickPassConfirmPass" placeholder="Repetir contraseña" style="padding-right: 2.75rem;">
+          <button type="button" class="btn-ops-icon" style="position: absolute; right: 0.4rem; background: none; border: none; cursor: pointer;" onclick="window.BaqueanoOpsUsers.togglePasswordVisibility('opsQuickPassConfirmPass', this)">
+            <i class="fa-solid fa-eye" style="color: var(--ops-text-muted);"></i>
+          </button>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsUsers.closePasswordModal()">Cancelar</button>
+        <button type="button" class="btn-ops-matte primary" onclick="window.BaqueanoOpsUsers.saveNewPassword()">
+          <i class="fa-solid fa-check"></i> Actualizar Contraseña
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL DE COPIA DE SEGURIDAD & RESTAURACIÓN CON FECHA Y HORA -->
   <div class="ops-modal-backdrop" id="opsBackupModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; padding: 1.5rem;">
     <div class="ops-modal-card" style="width: 100%; max-width: 560px; background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-lg); padding: 2rem; box-shadow: var(--ops-shadow-lg); animation: opsFadeIn 0.25s ease;">
@@ -1647,6 +1880,7 @@
   <script defer src="js/ops-center/ops-automation.js?v=20261007-2"></script>
   <script defer src="js/ops-center/ops-messages.js?v=20261007-1"></script>
   <script defer src="js/ops-center/ops-places.js?v=20261007-1"></script>
+  <script defer src="js/ops-center/ops-users.js?v=20261008-users-1"></script>
   <script defer src="js/ops-center/ops-nav-groups.js?v=20261007-1"></script>
   <script defer src="js/ops-center/ops-alerts.js?v=20261007-1"></script>
   <script defer src="js/baqueano-presence.js?v=20261006-1" data-bq-presence="true"></script>
