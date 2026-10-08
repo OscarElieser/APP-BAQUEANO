@@ -5739,3 +5739,11 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - Advisors de Supabase: el cambio no introdujo alertas específicas de `reservations`; permanecen avisos globales preexistentes fuera de este alcance.
 - Limitación local: Node/npm y Supabase CLI no están disponibles en el PATH, por lo que las pruebas Node quedan para CI. La migración se creó con el formato cronológico del repositorio y se aplicó con la integración oficial de Supabase.
 - Cambio ajeno preservado y excluido del alcance: `supabase/functions/baqueano-ops/index.ts`.
+### Producción verificada
+
+- Commit publicado: `4d0519e` (`feat(reservas): activar solicitudes por telefono y WhatsApp`).
+- `origin/main` y `HEAD` quedaron sincronizados.
+- Azure informó `status: ok`, commit `4d0519e`, desplegado el `2026-10-08T22:36:48Z`.
+- `admin.html` en producción sirve el cache-busting `20261008-reservas-1`.
+- Los archivos productivos contienen `opsReservationForm`, la llamada segura `create_manual` y el catálogo español `opsReservations`.
+- La tabla permanece sin filas inventadas; las solicitudes aparecerán al registrarse desde App/web o cuando un administrador capture una llamada/WhatsApp real.
