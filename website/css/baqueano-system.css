@@ -1212,8 +1212,9 @@ html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card):nth-
   transform: rotate(0.8deg) translateY(-5px);
 }
 html[data-bq-page="destinos"] :is(.dest-highlight-media, .dest-catalog-media) {
-  height: auto !important;
-  aspect-ratio: 4 / 3;
+  height: 190px !important;
+  max-height: 190px !important;
+  aspect-ratio: auto !important;
   overflow: hidden;
 }
 html[data-bq-page="destinos"] :is(.dest-highlight-media, .dest-catalog-media) img {

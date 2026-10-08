@@ -136,6 +136,7 @@
     }
 
     function updateResultCount(count) {
+      if (document.documentElement.getAttribute('data-destinos-mode') === 'featured') return;
       const countEl = document.querySelector('.section-header-exact h2 [aria-live]');
       if (countEl) countEl.textContent = `(${count})`;
     }

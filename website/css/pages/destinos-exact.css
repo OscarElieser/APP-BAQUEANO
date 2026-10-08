@@ -529,90 +529,206 @@
    ============================================================================ */
 .destinos-catalog-row {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
   margin-bottom: 30px;
+}
+
+/* Catálogo completo (todos-los-destinos.html) */
+html[data-destinos-mode="all"] .destinos-catalog-row,
+.page-destinos-exact:not([data-destinos-mode="featured"]) .destinos-catalog-row {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 18px !important;
+  margin-bottom: 32px;
 }
 
 .dest-catalog-card {
   background: #FFFFFF;
-  border-radius: 14px;
-  border: 1px solid var(--bq-border-light);
+  border-radius: 16px;
+  border: 1px solid var(--bq-border-light, rgba(22, 93, 111, 0.12));
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(11, 37, 58, 0.05);
+  box-shadow: 0 4px 16px rgba(11, 37, 58, 0.06);
   display: flex;
   flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dest-catalog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(11, 37, 58, 0.12);
 }
 
 .dest-catalog-media {
   position: relative;
-  height: 110px;
+  width: 100%;
+  height: 190px !important;
+  max-height: 190px !important;
+  aspect-ratio: auto !important;
+  overflow: hidden;
+  background: #0B253A;
 }
 
 .dest-catalog-media img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 100% !important;
+  max-height: 190px !important;
+  object-fit: cover !important;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.dest-catalog-card:hover .dest-catalog-media img {
+  transform: scale(1.05);
 }
 
 .dest-catalog-tag {
   position: absolute;
-  top: 6px;
-  left: 6px;
-  font-size: 0.64rem;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 10px;
+  top: 10px;
+  left: 10px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  z-index: 2;
 }
 
-.dest-catalog-tag.orange { background: var(--bq-orange); color: #FFFFFF; }
+.dest-catalog-tag.orange { background: #F65E01; color: #FFFFFF; }
 .dest-catalog-tag.blue { background: #0284C7; color: #FFFFFF; }
-.dest-catalog-tag.green { background: #4A7A5A; color: #FFFFFF; }
+.dest-catalog-tag.green { background: #165D6F; color: #FFFFFF; }
 .dest-catalog-tag.purple { background: #8B5CF6; color: #FFFFFF; }
 
 .dest-catalog-body {
-  padding: 10px;
+  padding: 14px 14px 16px;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .dest-catalog-body h4 {
-  font-size: 0.88rem;
+  font-family: var(--bq-font-heading, 'Montserrat', sans-serif);
+  font-size: 0.95rem;
   font-weight: 800;
-  color: var(--bq-navy);
-  margin: 0 0 2px 0;
+  color: #0F172A;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
 }
 
 .dest-catalog-body span.location {
-  font-size: 0.7rem;
-  color: var(--bq-text-muted);
+  font-size: 0.76rem;
+  color: #475569;
   margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .dest-catalog-dual-btns {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  margin-top: 8px;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
 }
 
-.dest-btn-subtle {
-  height: 30px;
-  border: 1px solid var(--bq-border-light);
-  border-radius: 6px;
-  background: #FFFFFF;
-  font-size: 0.68rem;
+.dest-btn-green {
+  width: 100%;
+  min-height: 38px;
+  background: #F65E01 !important;
+  color: #FFFFFF !important;
+  border-radius: 10px;
+  font-family: var(--bq-font-body, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--bq-navy);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 2px 8px rgba(246, 94, 1, 0.25);
+}
+
+.dest-btn-green:hover {
+  background: #D95301 !important;
+  transform: translateY(-1px);
+}
+
+.dest-btn-subtle {
+  min-height: 38px;
+  padding: 0 12px;
+  background: #F8FAFC;
+  color: #165D6F;
+  border: 1px solid rgba(22, 93, 111, 0.2);
+  border-radius: 10px;
+  font-family: var(--bq-font-body, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
 
 .dest-btn-subtle:hover {
-  background: #F1F5F9;
+  background: #E8F1F3;
+  border-color: #165D6F;
+}
+
+/* Fila de destacados en movimiento infinito */
+.destinos-featured-row.bq-marquee {
+  display: block !important;
+  position: relative;
+  min-width: 0;
+  margin-bottom: 36px;
+}
+
+.destinos-featured-row .bq-marquee-viewport {
+  padding: 10px 4px 18px;
+}
+
+.destinos-featured-row .bq-marquee-track > .dest-catalog-card {
+  flex: 0 0 clamp(260px, 28vw, 300px) !important;
+  width: clamp(260px, 28vw, 300px) !important;
+  max-width: 85vw;
+}
+
+.destinos-featured-row .bq-marquee-controls {
+  display: flex !important;
+  justify-content: flex-end;
+  margin: 0 0 10px;
+}
+
+.destinos-featured-row .bq-marquee-toggle {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1px solid rgba(22, 93, 111, 0.22);
+  color: #165D6F;
+  font-family: var(--bq-font-body, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(11, 37, 58, 0.06);
+  transition: all 0.2s ease;
+}
+
+.destinos-featured-row .bq-marquee-toggle:hover {
+  background: #F4E6C1;
+  color: #0F172A;
+  border-color: #F65E01;
+}
+
+.destinos-featured-row .bq-marquee-toggle[aria-pressed="true"] {
+  background: #165D6F;
+  border-color: #165D6F;
+  color: #FFFFFF;
 }
 
 /* ============================================================================
@@ -848,7 +964,7 @@
    ============================================================================ */
 @media (max-width: 1024px) {
   .destinos-split-grid { grid-template-columns: 1fr; }
-  .destinos-catalog-row { grid-template-columns: repeat(3, 1fr); }
+  .destinos-catalog-row:not(.bq-marquee) { grid-template-columns: repeat(3, 1fr); }
   .destinos-destacados-grid { grid-template-columns: repeat(2, 1fr); }
   .destinos-ai-top-row { flex-direction: column; align-items: flex-start; }
 }
@@ -857,7 +973,7 @@
   .destinos-hero-exact .exact-container { flex-direction: column; align-items: flex-start; gap: 14px; }
   .destinos-hero-right { align-items: flex-start; }
   .destinos-destacados-grid { grid-template-columns: 1fr; }
-  .destinos-catalog-row { grid-template-columns: 1fr; }
+  .destinos-catalog-row:not(.bq-marquee) { grid-template-columns: 1fr; }
   .destinos-cta-banner { flex-direction: column; align-items: flex-start; }
 }
 

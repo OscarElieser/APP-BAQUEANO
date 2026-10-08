@@ -18,6 +18,14 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 ============================================================ -->
 
+## 🧭 CORRECCIÓN DE DISEÑO: "LUGARES DESTACADOS (10)" Y LINK TODOS LOS DESTINOS (07-10-2026 ~18:03 CST)
+- **Consulta / Solicitud del Usuario:** *"eso se feo le di ver [Ver los 237 destinos](https://baqueanonicaragua.com/todos-los-destinos.html) Pausar corregirlo es tener la misma diseño que losotros"* con captura de pantalla donde las tarjetas de "Lugares destacados (10)" se apilan verticalmente con imágenes desproporcionadas a pantalla completa.
+- **Objetivo:**
+  1. Corregir el layout y dimensiones de las tarjetas en `website/destinos.html` ("Lugares destacados (10)") y `website/todos-los-destinos.html` para que sigan el diseño estándar de BAQUEANO (formato tarjeta proporcionada, imagen contenida con aspect-ratio / altura adecuada como 220px-240px, tipografía uniforme, carrusel/fila horizontal fluida con botón de pausa).
+  2. Ajustar `destinos-exact.css` o los estilos correspondientes para que las imágenes no se desborden verticalmente ni colapsen en pantallas grandes/móviles.
+  3. Validar localmente (build, servidor local, pruebas visuales) y desplegar a producción.
+
+
 # ðŸ§­ BAQUEANO â€” BitÃ¡cora Persistente de Sesiones
 
 ## 🧭 PUBLICACIÓN AUTORIZADA: DESTINOS EN VIVO + FIN DE ERRORES EN SUPABASE (05-10-2026 ~18:15)
@@ -5593,3 +5601,13 @@ Estado: diagnóstico iniciado; aún sin cambios de autenticación.
   - lib/services/auth_service.dart, lib/features/auth/screens/login_screen.dart, etc.
   - Puertas de calidad: 
 pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
+
+## 2026-10-07 — Corrección de Diseño Visual en Destinos / Lugares Destacados y Todos los Destinos
+
+### Solicitud del usuario
+- "eso se feo le di ver [Ver los 237 destinos](https://baqueanonicaragua.com/todos-los-destinos.html) Pausar corregirlo es tener la misma diseño que losotros" [con captura de pantalla adjunta]
+
+### Golden Circle
+- 🎯 **POR QUÉ:** Corregir la presentación visual de la sección "Lugares destacados (10)" y "todos-los-destinos.html" para que tenga exactamente el mismo diseño de tarjetas de alta fidelidad, ordenadas en cuadrícula/carrusel horizontal estilizado, con proporciones visuales armónicas y sin tarjetas gigantescas que deformen el flujo visual.
+- ⚙️ **CÓMO:** (1) Auditar destinos.html, 	odos-los-destinos.html, website/css/pages/destinos-exact.css, js/destinos-featured.js y js/destinos-catalog-live.js; (2) Identificar por qué las tarjetas se muestran en vertical gigantescas o sin las dimensiones correctas del diseño original; (3) Aplicar el diseño oficial con la paleta de marca (#165D6F, #F65E01, #F4E6C1, #0F172A), proporciones de imagen estándar (altura acotada ~220-240px, aspect-ratio 16:10 / 4:3), tipografía y botones armonizados; (4) Verificar responsividad, i18n y compuertas de calidad; (5) Desplegar a producción.
+- 📦 **QUÉ:** Rediseño alineado a los estándares de BAQUEANO probado en local y en producción.

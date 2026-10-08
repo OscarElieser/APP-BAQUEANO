@@ -36,8 +36,34 @@
     span.textContent = paused ? t('marquee.play', 'Continuar') : t('marquee.pause', 'Pausar');
   }
 
+  function destroy(box) {
+    if (!box) return;
+    var state = box.__bqMarquee;
+    if (!state) return;
+    clearClones(state);
+    var items = Array.prototype.slice.call(state.track.children);
+    items.forEach(function (it) {
+      it.classList.remove('bq-marquee-item');
+      box.appendChild(it);
+    });
+    if (state.controls && state.controls.parentNode) state.controls.remove();
+    if (state.viewport && state.viewport.parentNode) state.viewport.remove();
+    box.classList.remove('bq-marquee', 'is-static', 'is-paused', 'is-reduced');
+    delete box.__bqMarquee;
+  }
+
   function build(box) {
-    if (box.__bqMarquee) return box.__bqMarquee;
+    if (box.__bqMarquee) {
+      // Si se añadieron elementos directamente a la caja fuera del viewport/controls, o el track quedó vacío:
+      var stray = Array.prototype.filter.call(box.children, function (ch) {
+        return ch !== box.__bqMarquee.controls && ch !== box.__bqMarquee.viewport;
+      });
+      if (stray.length || !box.__bqMarquee.track.children.length) {
+        destroy(box);
+      } else {
+        return box.__bqMarquee;
+      }
+    }
     var items = Array.prototype.slice.call(box.children);
     if (!items.length) return null;
     var label = box.getAttribute('data-bq-label') || '';
@@ -61,6 +87,7 @@
     box.appendChild(controls);
     box.appendChild(viewport);
     var state = { box: box, track: track, viewport: viewport, btn: btn, controls: controls, paused: false, hold: false, clones: [] };
+    setLabel(btn, false);
     btn.addEventListener('click', function () { state.paused = !state.paused; apply(state); });
     ['mouseenter', 'focusin'].forEach(function (ev) { viewport.addEventListener(ev, function () { state.hold = true; apply(state); }); });
     ['mouseleave', 'focusout'].forEach(function (ev) { viewport.addEventListener(ev, function (e) {
@@ -127,7 +154,7 @@
     document.querySelectorAll('[data-bq-marquee]').forEach(function (box) { if (box.__bqMarquee) setLabel(box.__bqMarquee.btn, box.__bqMarquee.paused); });
   });
 
-  window.BaqueanoMarquee = { refresh: refresh };
+  window.BaqueanoMarquee = { refresh: refresh, destroy: destroy, build: build };
   function start() { refresh(); window.addEventListener('load', function () { refresh(); }, { once: true }); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
   else start();

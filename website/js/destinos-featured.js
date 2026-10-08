@@ -60,23 +60,23 @@
       // Después de que destinos-interactions.js indexó las tarjetas (misma promesa, registrada antes).
       window.setTimeout(function () {
         var row = document.querySelector('.destinos-featured-row');
-        // destinos-interactions.js reparte 5 + 5 entre las dos filas: aquí se juntan en la primera
-        // (máximo 10) y se ocultan «Más destinos» y la paginación (siguen en el DOM).
         if (row) {
           document.querySelectorAll('.destinos-catalog-row').forEach(function (other) {
             if (other === row) return;
             Array.prototype.slice.call(other.querySelectorAll('.dest-catalog-card')).forEach(function (card) { row.appendChild(card); });
+            other.style.display = 'none';
           });
           Array.prototype.slice.call(row.querySelectorAll('.dest-catalog-card')).forEach(function (card, i) { card.hidden = i >= 10; });
           document.querySelectorAll('[data-destinos-more]').forEach(function (n) { n.hidden = true; });
-        }
-        if (row && !row.hasAttribute('data-bq-marquee')) {
+
           row.setAttribute('data-bq-marquee', '');
           row.setAttribute('data-bq-gallery-ready', 'true');
-          row.setAttribute('data-bq-speed', '45');
-          row.style.setProperty('--bq-marquee-item', '260px');
+          row.setAttribute('data-bq-speed', '40');
+          row.style.setProperty('--bq-marquee-item', '280px');
           row.setAttribute('data-bq-label', t('pages.destinos.featuredLabel', 'Destinos destacados en movimiento'));
-          if (window.BaqueanoMarquee) window.BaqueanoMarquee.refresh();
+          if (window.BaqueanoMarquee && typeof window.BaqueanoMarquee.refresh === 'function') {
+            window.BaqueanoMarquee.refresh(row);
+          }
         }
         paintTotal();
       }, 0);

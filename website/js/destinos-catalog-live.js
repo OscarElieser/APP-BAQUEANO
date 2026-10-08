@@ -151,14 +151,34 @@
     var rows = Array.prototype.slice.call(document.querySelectorAll('.destinos-catalog-row'));
     if (!rows.length) return 0;
     window.BaqueanoDestinosTotal = places.length;
-    if (document.documentElement.getAttribute('data-destinos-mode') === 'featured') places = pickFeatured(places);
+    var isFeatured = document.documentElement.getAttribute('data-destinos-mode') === 'featured';
+    if (isFeatured) places = pickFeatured(places);
     var names = departmentNames();
     var cards = places.map(function (place) { return card(place, names); });
-    // Las tarjetas estáticas del HTML se quitan solo de la página en vivo (el archivo
-    // las conserva como respaldo sin conexión); destinos-interactions.js reparte las nuevas.
-    rows.forEach(function (row) { row.querySelectorAll('.dest-catalog-card').forEach(function (old) { old.remove(); }); });
-    cards.forEach(function (node) { rows[0].appendChild(node); });
+    var targetRow = rows[0];
+
+    // Si la fila ya tenía un marquee montado, desmontar limpiamente para reconstruir
+    if (window.BaqueanoMarquee && typeof window.BaqueanoMarquee.destroy === 'function') {
+      window.BaqueanoMarquee.destroy(targetRow);
+    }
+
+    // Las tarjetas estáticas del HTML se quitan de la página en vivo
+    rows.forEach(function (row) {
+      row.querySelectorAll('.dest-catalog-card').forEach(function (old) { old.remove(); });
+      if (isFeatured && row !== targetRow) row.style.display = 'none';
+    });
+    cards.forEach(function (node) { targetRow.appendChild(node); });
     document.documentElement.setAttribute('data-destinos-source', 'supabase');
+
+    if (isFeatured) {
+      targetRow.setAttribute('data-bq-marquee', '');
+      targetRow.setAttribute('data-bq-gallery-ready', 'true');
+      targetRow.setAttribute('data-bq-speed', '40');
+      targetRow.style.setProperty('--bq-marquee-item', '280px');
+      if (window.BaqueanoMarquee && typeof window.BaqueanoMarquee.refresh === 'function') {
+        window.BaqueanoMarquee.refresh(targetRow);
+      }
+    }
     return cards.length;
   }
 
