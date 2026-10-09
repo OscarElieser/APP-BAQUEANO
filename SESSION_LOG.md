@@ -18,6 +18,34 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 SUBIDA TOTAL DE CORRECCIONES DE LAYOUT Y RESPONSIVIDAD AL REPOSITORIO REMOTO GITHUB (09-10-2026 ~00:50 CST)
+- **Consulta / Solicitud del Usuario:** *"sube los cambios al repositorio remoto"*
+- **Archivos a Sincronizar y Commitear:**
+  - `lib/features/home/widgets/hero_section.dart`: Tag pill banner responsive con `Flexible` + `FittedBox`.
+  - `lib/features/emergency/screens/emergency_sos_screen.dart`: AppBar `title` y cabecera de coordenadas GPS con `Expanded`/`Flexible`.
+  - `lib/features/profile/screens/profile_screen.dart`: Modales y filas de detalle con `Expanded`/`Flexible`.
+  - `lib/features/environmental/screens/environmental_campaign_screen.dart`: Cabecera de evidencia fotográfica con `Flexible`.
+  - `SESSION_LOG.md`: Bitácora detallada de la auditoría y validaciones.
+- **Validaciones Previas:**
+  - `flutter analyze`: **No issues found!** (0 errores, 0 lints).
+  - `flutter test`: **77/77 tests pasaron exitosamente**.
+- **Destino Remoto:** Rama `origin/wip/tipografias-ops-2026-10-08`.
+- **Estado:** 🔄 En ejecución.
+
+## 🧭 AUDITORÍA RESPONSIVA Y RESOLUCIÓN DE OVERFLOWS EN UI FLUTTER (09-10-2026 ~00:40 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: UI_Overflow_Resolution_and_Responsive_Audit"`
+  - **Objetivo:** Auditar la UI en `lib/` para erradicar errores de layout overflow ("RIGHT OVERFLOWED", "BOTTOM OVERFLOWED"), especialmente en banners ("EXPEDICIONES PRIVADAS") y filas con textos dinámicos sin `Expanded`/`Flexible`/`Wrap`/`FittedBox`.
+  - **Restricción Estricta:** `website/` 100% intocado. Enfoque exclusivo en `lib/`.
+- **Componentes Corregidos y Optimizados:**
+  1. `lib/features/home/widgets/hero_section.dart`: Tag Pill banner *"EXPEDICIONES PRIVADAS · TURISMO LOCAL"* asegurado con `Flexible` y `FittedBox(fit: BoxFit.scaleDown)` + `overflow: TextOverflow.ellipsis` para eliminar el overflow horizontal en pantallas de 320px-360px con escalado de fuentes.
+  2. `lib/features/emergency/screens/emergency_sos_screen.dart`: AppBar `title` y tarjeta de coordenadas GPS adaptados con `Expanded` y `Flexible` para evitar desbordamiento lateral ante iconos y botones.
+  3. `lib/features/profile/screens/profile_screen.dart`: Títulos de diálogos modales (Avatar, Editar Perfil, Cambiar Contraseña, Cerrar Sesión, Eliminar Cuenta) y filas de detalle (`_buildDialogDetailRow`) asegurados con `Expanded` y `Flexible(maxLines: 1, overflow: TextOverflow.ellipsis)`.
+  4. `lib/features/environmental/screens/environmental_campaign_screen.dart`: Fila de cabecera de evidencia fotográfica envuelta en `Flexible` para evitar colisión con botones de acción de cámara y galería.
+- **Control de Calidad y Pruebas:**
+  - `flutter analyze`: **No issues found!** (0 errores, 0 lints).
+  - `flutter test`: **77/77 tests pasaron exitosamente** (exit code 0).
+- **Estado:** ✅ COMPLETADO Y VALIDADO AL 100%.
+
 ## 🧭 SUBIDA TOTAL AL REPOSITORIO REMOTO GITHUB (09-10-2026 ~00:12 CST)
 - **Consulta / Solicitud del Usuario:** *"sube todo a repositorio remoto"*
 - **Archivos a Sincronizar y Commitear:**

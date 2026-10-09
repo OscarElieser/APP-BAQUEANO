@@ -510,11 +510,21 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Evidencia Fotográfica (${attachedPhotos.length}):',
-                          style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
+                        Flexible(
+                          child: Text(
+                            'Evidencia Fotográfica (${attachedPhotos.length}):',
+                            style: BaqueanoFonts.text(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white70,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
+                        const SizedBox(width: 8),
                         Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
                               icon: const Icon(Icons.camera_alt_rounded, color: AppColors.gold, size: 20),

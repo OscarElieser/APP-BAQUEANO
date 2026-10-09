@@ -229,13 +229,17 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
           children: [
             Icon(Icons.shield_rounded, color: Color(0xFFE11D48), size: 24),
             SizedBox(width: 8),
-            Text(
-              'Centro de Asistencia SOS',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w800,
-                fontSize: 18,
-                letterSpacing: 0.5,
+            Expanded(
+              child: Text(
+                'Centro de Asistencia SOS',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 18,
+                  letterSpacing: 0.5,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
@@ -328,24 +332,31 @@ class _EmergencySosScreenState extends State<EmergencySosScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Row(
-                        children: [
-                          Icon(
-                            Icons.my_location_rounded,
-                            color: Color(0xFFD4AF37),
-                            size: 20,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            'Tus Coordenadas de Rescate',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700,
+                      const Expanded(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.my_location_rounded,
+                              color: Color(0xFFD4AF37),
+                              size: 20,
                             ),
-                          ),
-                        ],
+                            SizedBox(width: 8),
+                            Flexible(
+                              child: Text(
+                                'Tus Coordenadas de Rescate',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
+                      const SizedBox(width: 8),
                       if (_isLoadingGps)
                         const SizedBox(
                           width: 18,

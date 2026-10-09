@@ -208,12 +208,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       size: 22,
                     ),
                     const SizedBox(width: 10),
-                    Text(
-                      'Foto de Perfil & Avatar Baqueano',
-                      style: BaqueanoFonts.text(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
+                    Expanded(
+                      child: Text(
+                        'Foto de Perfil & Avatar Baqueano',
+                        style: BaqueanoFonts.text(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
@@ -356,12 +360,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   size: 24,
                 ),
                 const SizedBox(width: 10),
-                Text(
-                  'Editar Datos del Perfil',
-                  style: BaqueanoFonts.text(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16,
+                Expanded(
+                  child: Text(
+                    'Editar Datos del Perfil',
+                    style: BaqueanoFonts.text(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
@@ -471,12 +479,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   size: 24,
                 ),
                 const SizedBox(width: 10),
-                Text(
-                  'Cambiar Contraseña',
-                  style: BaqueanoFonts.text(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16,
+                Expanded(
+                  child: Text(
+                    'Cambiar Contraseña',
+                    style: BaqueanoFonts.text(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
@@ -726,16 +738,26 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: BaqueanoFonts.text(fontSize: 11, color: Colors.white54),
+          Flexible(
+            child: Text(
+              label,
+              style: BaqueanoFonts.text(fontSize: 11, color: Colors.white54),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-          Text(
-            value,
-            style: BaqueanoFonts.text(
-              fontSize: 11,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
+          const SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              value,
+              textAlign: TextAlign.end,
+              style: BaqueanoFonts.text(
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
@@ -791,11 +813,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               children: [
                 Icon(Icons.logout_rounded, color: Color(0xFFE11D48)),
                 SizedBox(width: 10),
-                Text(
-                  'Cerrar Sesión',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    'Cerrar Sesión',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
@@ -856,11 +882,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               children: [
                 Icon(Icons.warning_amber_rounded, color: Color(0xFFE11D48)),
                 SizedBox(width: 10),
-                Text(
-                  'Eliminar Cuenta',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    'Eliminar Cuenta',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],

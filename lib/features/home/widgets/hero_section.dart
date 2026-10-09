@@ -197,13 +197,20 @@ class _HeroSectionState extends State<HeroSection> {
                 size: 14,
               ),
               const SizedBox(width: 8),
-              Text(
-                'EXPEDICIONES PRIVADAS · TURISMO LOCAL',
-                style: BaqueanoFonts.text(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w800,
-                  color: AppColors.goldLight,
-                  letterSpacing: 1.2,
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    'EXPEDICIONES PRIVADAS · TURISMO LOCAL',
+                    style: BaqueanoFonts.text(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.goldLight,
+                      letterSpacing: 1.2,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
             ],
