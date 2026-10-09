@@ -18,6 +18,30 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 ELIMINACIÓN DEFINITIVA DE RASTREO GIT PARA ARCHIVOS GENERADOS (08-10-2026 ~23:22 CST)
+- **Consulta / Solicitud del Usuario:** *"estoy viendo que aun tengo esto, se habia quitado cuando te lo pedí hace rato pero otra vez lo veo"* (reaparición de `windows/flutter/generated_*` y `pubspec.lock` tras ejecutar `flutter test`).
+- **Diagnóstico Técnico de Raíz:**
+  1. Los archivos `windows/flutter/generated_*` estaban previamente rastreados en el índice de Git en commits antiguos. En Git, agregar un archivo a `.gitignore` **no tiene efecto si el archivo ya está en el índice**. Cada vez que Flutter ejecuta `analyze` o `test` en Windows, regenera esos archivos y Git los vuelve a detectar como modificados.
+  2. Solución definitiva aplicada:
+     - Se ejecutó `git rm --cached windows/flutter/generated_*` para des-rastrearlos permanentemente del repositorio sin borrarlos del disco.
+     - Se preservó la regla `windows/flutter/generated_*` en `.gitignore` para que Git nunca más los vuelva a rastrear.
+     - Se preparó el commit semántico unificando la sincronización de temas (`app_colors.dart`, `app_theme.dart`), actualización de resolución de dependencias (`pubspec.lock`) y bitácora.
+- **Estado:** ✅ DES-RASTREO PERMANENTE Y COMMIT COMPLETADOS.
+
+## 🧭 SINCRONIZACIÓN DE IDENTIDAD VISUAL WEB A FLUTTER APP (08-10-2026 ~23:06 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: UI_Synchronization_Web_to_App"`
+- **Ejecución y Entregables:**
+  1. **Extracción de Tokens Web (Fuente de Verdad `website/`):**
+     - Colores: Terracota Naranja Volcán (`#F65E01`), Petróleo Teal Laguna (`#165D6F`), Arena Pinolera (`#F4E6C1`), Noche Profunda (`#0F172A`), Selva Naturaleza (`#4A7A5A` / `#3E7B52`), Text Light Papel de Mapa (`#F7F3EA`), Text Dark (`#15232F`).
+     - Tipografías: League Spartan (Display/Headlines) y Aristotelica Pro con respaldo Plus Jakarta Sans (Texto/Body).
+  2. **Implementación Quirúrgica en Flutter (`lib/core/theme/`):**
+     - `lib/core/theme/app_colors.dart`: Paleta completa sincronizada con el design system web, compatible al 100% con `.withValues(alpha: X)` y encabezados Golden Circle.
+     - `lib/core/theme/app_theme.dart`: `ColorScheme.dark` completo para Material 3, `TextTheme` armonizado con League Spartan y Aristotelica Pro / Plus Jakarta Sans, y temas de componentes (`AppBarTheme`, `CardThemeData`, `ChipThemeData`, `DividerThemeData`, `ElevatedButtonThemeData`).
+  3. **Validación Exhaustiva:**
+     - `flutter analyze`: **No issues found!** (0 lints, 0 errores).
+     - `flutter test`: **77/77 tests pasaron exitosamente** (exit code 0).
+- **Estado:** ✅ COMPLETADO Y VALIDADO AL 100%.
+
 ## 🧭 VERIFICACIÓN Y SUBIDA TOTAL AL SERVIDOR REMOTO GITHUB (08-10-2026 ~22:55 CST)
 - **Consulta / Solicitud del Usuario:** *"ok podrias subir todo al servidor remoto"*
 - **Objetivo & Ejecución:**

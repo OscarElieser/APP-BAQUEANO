@@ -1,51 +1,67 @@
 // ============================================================================
-// 🎭 SISTEMA DE TEMA GLOBAL & TIPOGRAFÍA EDITORIAL (APP_THEME.DART)
+// 🎭 SISTEMA DE TEMA GLOBAL & JERARQUÍA EDITORIAL (APP_THEME.DART)
 // ============================================================================
 //
 // 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Centralizar la apariencia visual de la aplicación bajo un estándar consistente,
-//   elegante y oscuro (Dark Luxury Theme), optimizado para reducir fatiga visual
-//   y ahorrar batería en pantallas OLED/AMOLED de teléfonos modernos.
-// - Aplicar las dos tipografías oficiales de BAQUEANO (directiva 2026-10-08),
-//   centralizadas en `baqueano_fonts.dart`:
-//   * League Spartan (títulos de gran impacto y presencia imponente).
-//   * Aristotelica Pro (subtítulos, métricas, etiquetas y lectura continua;
-//     respaldo Plus Jakarta Sans hasta registrar sus archivos con licencia).
+// - Unificar la identidad visual de la aplicación móvil de Baqueano con el sitio
+//   web oficial (website/css/baqueano-system.css y typography.css).
+// - Proporcionar un tema oscuro de alto rendimiento (Dark Luxury Theme) adaptado
+//   a pantallas OLED/AMOLED con un contraste visual óptimo (WCAG 2.1 AA/AAA).
+// - Aplicar las dos tipografías oficiales de la plataforma:
+//   * League Spartan (títulos de display y elementos de impacto visual).
+//   * Aristotelica Pro (texto corrido, etiquetas, métricas; respaldo Plus Jakarta Sans).
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - Configura `ThemeData` conforme a la especificación Material Design 3 (`useMaterial3: true`).
-// - Define un `ColorScheme` oscuro integral con colores onPrimary, onSecondary y onSurface.
-// - Sobrescribe temas de componentes base (CardTheme, AppBarTheme, ChipTheme, DividerTheme).
+// - Especificación Material Design 3 (`useMaterial3: true`).
+// - Define un `ColorScheme.dark` completo y armonioso con primary (Terracota #F65E01),
+//   secondary (Petróleo Teal #165D6F), tertiary (Arena Pinolera #F4E6C1) y surface (Noche #0F172A).
+// - Estricto uso de `.withValues(alpha: X)` para transparencia, erradicando `.withOpacity()`.
+// - Temas especializados para AppBarTheme, CardThemeData, ChipThemeData, DividerThemeData
+//   e InputDecorationTheme.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & TEMA EXPUESTO):
-// - `AppTheme.darkTheme`: Objeto `ThemeData` listo para inyectarse en `MaterialApp.router`.
+// - `AppTheme.darkTheme`: `ThemeData` central inyectable en MaterialApp.router.
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'baqueano_fonts.dart';
 import 'app_colors.dart';
+import 'baqueano_fonts.dart';
 
 class AppTheme {
-  /// Retorna el tema oscuro oficial de Baqueano con tipografías oficiales de BaqueanoFonts.
+  AppTheme._();
+
+  /// Retorna el tema oscuro oficial de Baqueano sincronizado con el diseño web.
   static ThemeData get darkTheme {
     return ThemeData(
       // Activación del estándar moderno Material 3
       useMaterial3: true,
       brightness: Brightness.dark,
 
-      // Fondo base de la aplicación (Medianoche Volcánica)
+      // Fondo base de la aplicación (Noche Profunda #0F172A)
       scaffoldBackgroundColor: AppColors.bgDark,
       primaryColor: AppColors.primary,
 
-      // Esquema de color semántico oficial
+      // Esquema de color semántico oficial sincronizado con website/
       colorScheme: const ColorScheme.dark(
         primary: AppColors.terracotta,
-        secondary: AppColors.gold,
-        surface: AppColors.bgSurface,
-        error: AppColors.error,
         onPrimary: AppColors.textLight,
-        onSecondary: AppColors.textDark,
+        primaryContainer: AppColors.terracottaDark,
+        onPrimaryContainer: AppColors.textLight,
+        secondary: AppColors.primary,
+        onSecondary: AppColors.textLight,
+        secondaryContainer: AppColors.primaryLight,
+        onSecondaryContainer: AppColors.textLight,
+        tertiary: AppColors.sand,
+        onTertiary: AppColors.textDark,
+        tertiaryContainer: AppColors.goldDark,
+        onTertiaryContainer: AppColors.textLight,
+        surface: AppColors.bgDark,
         onSurface: AppColors.textLight,
+        surfaceContainerHighest: AppColors.bgCard,
+        error: AppColors.error,
+        onError: AppColors.textLight,
+        outline: AppColors.borderLight,
+        outlineVariant: AppColors.borderOnDark,
       ),
 
       // ----------------------------------------------------------------------
@@ -75,16 +91,16 @@ class AppTheme {
           color: AppColors.textLight,
           height: 1.2,
         ),
-        // Títulos técnicos con estilo monoespaciado moderno
-        headlineLarge: BaqueanoFonts.text(
+        // Títulos de nivel 1 en vistas de detalle
+        headlineLarge: BaqueanoFonts.display(
           fontSize: 24,
           fontWeight: FontWeight.w700,
           color: AppColors.textLight,
           letterSpacing: -0.3,
         ),
-        headlineMedium: BaqueanoFonts.text(
+        headlineMedium: BaqueanoFonts.display(
           fontSize: 20,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w700,
           color: AppColors.textLight,
         ),
         headlineSmall: BaqueanoFonts.text(
@@ -92,7 +108,7 @@ class AppTheme {
           fontWeight: FontWeight.w600,
           color: AppColors.textLight,
         ),
-        // Títulos de tarjetas en cuadrícula
+        // Títulos de tarjetas y modales
         titleLarge: BaqueanoFonts.display(
           fontSize: 18,
           fontWeight: FontWeight.w700,
@@ -128,10 +144,22 @@ class AppTheme {
           color: AppColors.textMuted,
           height: 1.4,
         ),
-        // Texto para botones interactivos y chips
+        // Botones interactivos y etiquetas destacadas
         labelLarge: BaqueanoFonts.text(
           fontSize: 14,
           fontWeight: FontWeight.w700,
+          color: AppColors.textLight,
+          letterSpacing: 0.5,
+        ),
+        labelMedium: BaqueanoFonts.text(
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+          color: AppColors.textMuted,
+        ),
+        labelSmall: BaqueanoFonts.text(
+          fontSize: 10,
+          fontWeight: FontWeight.w600,
+          color: AppColors.textMuted,
           letterSpacing: 0.5,
         ),
       ),
@@ -147,19 +175,19 @@ class AppTheme {
         iconTheme: IconThemeData(color: AppColors.textLight),
       ),
 
-      // Tarjetas base con borde translúcido
+      // Tarjetas base con elevación cero y borde translúcido
       cardTheme: CardThemeData(
         color: AppColors.bgCard,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(14),
           side: const BorderSide(color: AppColors.borderLight),
         ),
       ),
 
       // Chips de filtros de departamento y categoría
       chipTheme: ChipThemeData(
-        backgroundColor: AppColors.primaryLight.withValues(alpha: 0.5),
+        backgroundColor: AppColors.primary.withValues(alpha: 0.35),
         labelStyle: BaqueanoFonts.text(
           fontSize: 12,
           fontWeight: FontWeight.w600,
@@ -173,6 +201,22 @@ class AppTheme {
       dividerTheme: const DividerThemeData(
         color: AppColors.borderLight,
         thickness: 1,
+      ),
+
+      // Botones elevados de acción primaria (Terracota)
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.terracotta,
+          foregroundColor: AppColors.textLight,
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          textStyle: BaqueanoFonts.text(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.3,
+          ),
+        ),
       ),
     );
   }
