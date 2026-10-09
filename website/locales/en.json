@@ -787,7 +787,9 @@
     "priceToConfirm": "Price to be confirmed",
     "mapItemUnverified": "Not verified on BAQUEANO · price and rating to be confirmed",
     "mapItemVerified": "Partner with a verifiable source · price to be confirmed",
-    "pdfSummaryStops": "{n} stops · {places}"
+    "pdfSummaryStops": "{n} stops · {places}",
+    "stopBadge": "Saved destination",
+    "viewPlace": "View destination page"
   },
   "profile": {
     "title": "My Profile",
@@ -2995,7 +2997,32 @@
       "noResults": "We couldn't find destinations with those filters. Try another category or department.",
       "allCtaTitle": "Explore the full catalog",
       "allCtaText": "Every published place across the 17 territories, with its verification status and filters by department and category.",
-      "cardNumber": "Destination {n} of {total}"
+      "cardNumber": "Destination {n} of {total}",
+      "detail": {
+        "kicker": "BAQUEANO destination",
+        "lead": "Practical information to plan a responsible visit and connect directly with local providers.",
+        "access": "Getting there",
+        "duration": "Recommended time",
+        "price": "Price guide",
+        "before": "Before you go",
+        "defaultAccess": "Check the map for a route from your location",
+        "defaultDuration": "Depends on your starting point",
+        "defaultPrice": "Confirm with the provider",
+        "defaultBefore": "Check weather, access and availability",
+        "noteStrong": "Responsible tip:",
+        "note": "schedules, rates, access and conditions may change. Confirm them before you travel.",
+        "route": "Route and location",
+        "contact": "Contact on WhatsApp",
+        "trip": "Add to My Trip",
+        "added": "In My Trip",
+        "addedToast": "{name} added to My Trip.",
+        "territory": "View the territory page",
+        "close": "Close",
+        "waMessage": "Hi, I'd like up-to-date information about {name} from BAQUEANO"
+      },
+      "tripIn": "✓ In My Trip",
+      "tripRemoved": "{name} was removed from My Trip.",
+      "tripStorageError": "Couldn't save in this browser."
     },
     "experiencias": {
       "body": {

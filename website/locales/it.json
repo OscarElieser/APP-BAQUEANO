@@ -787,7 +787,9 @@
     "priceToConfirm": "Prezzo da confermare",
     "mapItemUnverified": "Non verificato su BAQUEANO · prezzo e valutazione da confermare",
     "mapItemVerified": "Partner con fonte verificabile · prezzo da confermare",
-    "pdfSummaryStops": "{n} tappe · {places}"
+    "pdfSummaryStops": "{n} tappe · {places}",
+    "stopBadge": "Destinazione salvata",
+    "viewPlace": "Vedi la scheda della destinazione"
   },
   "profile": {
     "title": "Il mio profilo",
@@ -2995,7 +2997,32 @@
       "noResults": "Nessuna destinazione con questi filtri. Prova un'altra categoria o un altro dipartimento.",
       "allCtaTitle": "Esplora il catalogo completo",
       "allCtaText": "Tutti i luoghi pubblicati dei 17 territori, con il loro stato di verifica e filtri per dipartimento e categoria.",
-      "cardNumber": "Destinazione {n} di {total}"
+      "cardNumber": "Destinazione {n} di {total}",
+      "detail": {
+        "kicker": "Destinazione BAQUEANO",
+        "lead": "Informazioni pratiche per pianificare una visita responsabile e contattare direttamente i fornitori locali.",
+        "access": "Come arrivare",
+        "duration": "Tempo consigliato",
+        "price": "Prezzo indicativo",
+        "before": "Prima di partire",
+        "defaultAccess": "Consulta la mappa per un percorso dalla tua posizione",
+        "defaultDuration": "In base al punto di partenza",
+        "defaultPrice": "Da confermare con il fornitore",
+        "defaultBefore": "Verifica meteo, accesso e disponibilità",
+        "noteStrong": "Consiglio responsabile:",
+        "note": "orari, tariffe, accessi e condizioni possono cambiare. Confermali prima di partire.",
+        "route": "Percorso e posizione",
+        "contact": "Contatta su WhatsApp",
+        "trip": "Aggiungi al Mio viaggio",
+        "added": "Nel Mio viaggio",
+        "addedToast": "{name} aggiunto al Mio viaggio.",
+        "territory": "Vedi la scheda del territorio",
+        "close": "Chiudi",
+        "waMessage": "Ciao, vorrei informazioni aggiornate su {name} da BAQUEANO"
+      },
+      "tripIn": "✓ Nel Mio viaggio",
+      "tripRemoved": "{name} è stato rimosso dal Mio viaggio.",
+      "tripStorageError": "Impossibile salvare in questo browser."
     },
     "experiencias": {
       "body": {

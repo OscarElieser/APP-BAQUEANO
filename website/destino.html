@@ -361,6 +361,7 @@
   <script src="js/destination-dossier.js?v=20261006-dialog-1"></script>
   <script src="js/navigation.js?v=20261007-app-2"></script>
   <script src="js/baqueano-api.js"></script>
+  <script src="js/baqueano-trip-store.js?v=20261009-1"></script>
   <script src="js/global-injector.js"></script>
   <!-- Experiencias aprobadas de la comunidad para este destino (Edge Function baqueano-community). -->
   <script defer src="js/community-api.js?v=20261004-1"></script>
@@ -564,10 +565,19 @@
               source: 'destination_dossier',
               payload: { destinationId: dest.id, title: dest.title, department: dest.department }
             });
-          } else {
+          } else if (!window.BaqueanoTrip) {
             const trips = JSON.parse(localStorage.getItem('baqueano_trip_plan') || '[]');
             trips.push({ destinationId: dest.id, title: dest.title, department: dest.department, addedAt: new Date().toISOString() });
             localStorage.setItem('baqueano_trip_plan', JSON.stringify(trips));
+          }
+          // 2026-10-09: además queda en el viaje que muestra mi-viaje.html (js/baqueano-trip-store.js);
+          // antes solo iba a `baqueano_trip_plan`, que Mi viaje no leía.
+          if (window.BaqueanoTrip) {
+            window.BaqueanoTrip.add({
+              destId: dest.id, name: dest.title, location: dest.department || '', desc: dest.shortDesc || dest.description || '',
+              lat: dest.latitude != null ? dest.latitude : dest.lat, lng: dest.longitude != null ? dest.longitude : dest.lng,
+              link: window.location.pathname.split('/').pop() + window.location.search
+            });
           }
           this.innerHTML = '<i class="fa-solid fa-route" style="color:#F65E01"></i> <span>En Mi Viaje</span>';
           if (window.bqToast) window.bqToast(`${dest.title} se añadió a Mi Viaje.`, 'success');

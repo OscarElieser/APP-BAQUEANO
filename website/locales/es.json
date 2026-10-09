@@ -420,7 +420,9 @@
     "priceToConfirm": "Precio por confirmar",
     "mapItemUnverified": "Sin verificar en BAQUEANO · precio y valoración por confirmar",
     "mapItemVerified": "Aliado con fuente verificable · precio por confirmar",
-    "pdfSummaryStops": "{n} paradas · {places}"
+    "pdfSummaryStops": "{n} paradas · {places}",
+    "stopBadge": "Destino guardado",
+    "viewPlace": "Ver ficha del destino"
   },
   "profile": {
     "title": "Mi Perfil",
@@ -2995,7 +2997,32 @@
       "noResults": "No encontramos destinos con esos filtros. Probá con otra categoría o departamento.",
       "allCtaTitle": "Explorá el catálogo completo",
       "allCtaText": "Todos los lugares publicados de los 17 territorios, con su estado de verificación, filtros por departamento y categoría.",
-      "cardNumber": "Destino {n} de {total}"
+      "cardNumber": "Destino {n} de {total}",
+      "detail": {
+        "kicker": "Destino BAQUEANO",
+        "lead": "Información práctica para planificar una visita responsable y conectar directamente con prestadores locales.",
+        "access": "Cómo llegar",
+        "duration": "Tiempo recomendado",
+        "price": "Precio orientativo",
+        "before": "Antes de salir",
+        "defaultAccess": "Consultá el mapa para una ruta desde tu ubicación",
+        "defaultDuration": "Según punto de partida",
+        "defaultPrice": "Confirmar con el prestador",
+        "defaultBefore": "Verificar clima, acceso y disponibilidad",
+        "noteStrong": "Dato responsable:",
+        "note": "horarios, tarifas, accesos y condiciones pueden cambiar. Confirmalos antes de viajar.",
+        "route": "Ver ruta y ubicación",
+        "contact": "Contactar por WhatsApp",
+        "trip": "Agregar a Mi Viaje",
+        "added": "En Mi Viaje",
+        "addedToast": "{name} agregado a Mi Viaje.",
+        "territory": "Ver ficha del territorio",
+        "close": "Cerrar",
+        "waMessage": "Hola, deseo información actualizada sobre {name} desde BAQUEANO"
+      },
+      "tripIn": "✓ En Mi viaje",
+      "tripRemoved": "{name} se quitó de Mi viaje.",
+      "tripStorageError": "No fue posible guardar en este navegador."
     },
     "experiencias": {
       "body": {

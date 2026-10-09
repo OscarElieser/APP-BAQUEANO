@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-09T09:41:20.150Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 5098 · en 5098 · fr 5098 · it 5098 · pt 5098 · de 5098
+Generado: 2026-10-09T09:53:26.559Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 5123 · en 5123 · fr 5123 · it 5123 · pt 5123 · de 5123
 
-HTML: 4007/4241 textos con clave (234 pendientes) · JS: 874 textos dinámicos pendientes · TSX: 1093 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
+HTML: 4007/4241 textos con clave (234 pendientes) · JS: 873 textos dinámicos pendientes · TSX: 1093 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -62,7 +62,6 @@ HTML: 4007/4241 textos con clave (234 pendientes) · JS: 874 textos dinámicos p
 | apps/admin/src/app/website-builder/page.tsx | tsx | 10 | 0 | 10 | 0 % |
 | apps/web/src/app/open-data/page.tsx | tsx | 10 | 0 | 10 | 0 % |
 | apps/web/src/components/sections/DestinationExplorer.tsx | tsx | 10 | 0 | 10 | 0 % |
-| js/destinos-interactions.js | js | 16 | 6 | 10 | 37.5 % |
 | js/global-injector.js | js | 30 | 20 | 10 | 66.7 % |
 | apps/admin/src/app/categorias/page.tsx | tsx | 9 | 0 | 9 | 0 % |
 | apps/admin/src/app/configuracion/page.tsx | tsx | 9 | 0 | 9 | 0 % |
@@ -78,6 +77,7 @@ HTML: 4007/4241 textos con clave (234 pendientes) · JS: 874 textos dinámicos p
 | apps/admin/src/app/usuarios/page.tsx | tsx | 9 | 0 | 9 | 0 % |
 | js/auth-panel.js | js | 9 | 0 | 9 | 0 % |
 | js/baqueano-assistant.js | js | 9 | 0 | 9 | 0 % |
+| js/destinos-interactions.js | js | 39 | 30 | 9 | 76.9 % |
 | js/persistent-audio-player.js | js | 9 | 0 | 9 | 0 % |
 | js/public-cms-sync.js | js | 9 | 0 | 9 | 0 % |
 | apps/admin/src/app/destinos/[id]/page.tsx | tsx | 8 | 0 | 8 | 0 % |
@@ -195,6 +195,7 @@ HTML: 4007/4241 textos con clave (234 pendientes) · JS: 874 textos dinámicos p
 | js/baqueano-pdf.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-presence.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-traffic-tracker.js | js | 0 | 0 | 0 | 100 % |
+| js/baqueano-trip-store.js | js | 0 | 0 | 0 | 100 % |
 | js/baqui-brain.js | js | 0 | 0 | 0 | 100 % |
 | js/bq-marquee.js | js | 0 | 0 | 0 | 100 % |
 | js/business-application.js | js | 0 | 0 | 0 | 100 % |

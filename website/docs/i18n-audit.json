@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T09:41:20.150Z",
+  "generatedAt": "2026-10-09T09:53:26.559Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 5098,
-    "en": 5098,
-    "fr": 5098,
-    "it": 5098,
-    "pt": 5098,
-    "de": 5098
+    "es": 5123,
+    "en": 5123,
+    "fr": 5123,
+    "it": 5123,
+    "pt": 5123,
+    "de": 5123
   },
   "html": {
     "files": 36,
@@ -23,9 +23,9 @@
     "untranslated": 234
   },
   "js": {
-    "files": 127,
-    "translated": 201,
-    "untranslated": 874
+    "files": 128,
+    "translated": 225,
+    "untranslated": 873
   },
   "jsEditorial": {
     "files": 8,
@@ -87,6 +87,7 @@
     "js/baqueano-pdf.js",
     "js/baqueano-presence.js",
     "js/baqueano-traffic-tracker.js",
+    "js/baqueano-trip-store.js",
     "js/baqui-brain.js",
     "js/bq-marquee.js",
     "js/business-application.js",
@@ -721,6 +722,15 @@
       "coverage": 75.8
     },
     {
+      "file": "js/baqueano-trip-store.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/baqui-brain.js",
       "type": "js",
       "total": 0,
@@ -903,11 +913,11 @@
     {
       "file": "js/destinos-interactions.js",
       "type": "js",
-      "total": 16,
-      "translated": 6,
-      "untranslated": 10,
+      "total": 39,
+      "translated": 30,
+      "untranslated": 9,
       "editorialStrings": 0,
-      "coverage": 37.5
+      "coverage": 76.9
     },
     {
       "file": "js/destinos-provenance.js",

@@ -787,7 +787,9 @@
     "priceToConfirm": "Preis noch zu bestätigen",
     "mapItemUnverified": "Nicht auf BAQUEANO verifiziert · Preis und Bewertung noch offen",
     "mapItemVerified": "Partner mit überprüfbarer Quelle · Preis noch offen",
-    "pdfSummaryStops": "{n} Stationen · {places}"
+    "pdfSummaryStops": "{n} Stationen · {places}",
+    "stopBadge": "Gespeichertes Reiseziel",
+    "viewPlace": "Reisezielseite ansehen"
   },
   "profile": {
     "title": "Mein Profil",
@@ -2995,7 +2997,32 @@
       "noResults": "Keine Reiseziele mit diesen Filtern gefunden. Versuche eine andere Kategorie oder ein anderes Departamento.",
       "allCtaTitle": "Entdecke den vollständigen Katalog",
       "allCtaText": "Alle veröffentlichten Orte der 17 Territorien, mit Verifizierungsstatus und Filtern nach Departamento und Kategorie.",
-      "cardNumber": "Reiseziel {n} von {total}"
+      "cardNumber": "Reiseziel {n} von {total}",
+      "detail": {
+        "kicker": "BAQUEANO-Reiseziel",
+        "lead": "Praktische Informationen, um einen verantwortungsvollen Besuch zu planen und direkt mit lokalen Anbietern in Kontakt zu treten.",
+        "access": "Anreise",
+        "duration": "Empfohlene Dauer",
+        "price": "Richtpreis",
+        "before": "Vor der Abreise",
+        "defaultAccess": "Sieh auf der Karte nach einer Route von deinem Standort",
+        "defaultDuration": "Je nach Ausgangspunkt",
+        "defaultPrice": "Beim Anbieter bestätigen",
+        "defaultBefore": "Wetter, Zugang und Verfügbarkeit prüfen",
+        "noteStrong": "Verantwortungsvoller Hinweis:",
+        "note": "Öffnungszeiten, Preise, Zugänge und Bedingungen können sich ändern. Bestätige sie vor der Reise.",
+        "route": "Route und Standort",
+        "contact": "Per WhatsApp kontaktieren",
+        "trip": "Zu Meine Reise hinzufügen",
+        "added": "In Meine Reise",
+        "addedToast": "{name} zu Meine Reise hinzugefügt.",
+        "territory": "Seite des Territoriums ansehen",
+        "close": "Schließen",
+        "waMessage": "Hallo, ich hätte gern aktuelle Informationen zu {name} über BAQUEANO"
+      },
+      "tripIn": "✓ In Meine Reise",
+      "tripRemoved": "{name} wurde aus Meine Reise entfernt.",
+      "tripStorageError": "Speichern in diesem Browser nicht möglich."
     },
     "experiencias": {
       "body": {

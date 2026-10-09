@@ -91,6 +91,12 @@
       'data-verification': place.verification_status || 'pending_review',
       'data-live': 'true'
     });
+    // Coordenadas reales (si existen) para «Mi viaje» y su mapa; nunca se completan si faltan.
+    if (place.latitude != null && place.longitude != null && place.location_precision !== 'missing' &&
+        Number(place.latitude) >= 10.5 && Number(place.latitude) <= 15.2 && Number(place.longitude) >= -88 && Number(place.longitude) <= -82.5) {
+      article.setAttribute('data-lat', String(place.latitude));
+      article.setAttribute('data-lng', String(place.longitude));
+    }
 
     var media = el('div', 'dest-catalog-media');
     var tagKey = K + place.category;

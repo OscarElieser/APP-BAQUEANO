@@ -1239,3 +1239,77 @@ html[data-destinos-mode="all"] .dest-catalog-media { position: relative; }
 }
 .dest-card-number b { font-size: 1rem; font-weight: 900; }
 .dest-card-number small { font-size: 0.66rem; font-weight: 700; opacity: 0.85; }
+
+/* ============================================================================
+   2026-10-09 — DETALLE DE DESTINO COMPLETO Y SIN CORTES (.dest-detail-dialog.is-v2)
+   POR QUÉ: la foto ocupaba media ventana y los botones quedaban cortados abajo.
+   CÓMO: ventana en columna dentro de la altura visible (100dvh): encabezado con foto
+     baja y título encima, cuerpo con desplazamiento propio y acciones fijas al pie.
+     Contraste AA: #F8FAFC sobre degradado noche ≥ 7:1; botones 48 px.
+   ============================================================================ */
+.dest-detail-dialog.is-v2 {
+  display: flex; flex-direction: column; width: min(720px, calc(100vw - 24px));
+  max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow: hidden;
+  border-radius: 24px; background: #FBF7EE; padding: 0;
+}
+.dest-detail-dialog.is-v2[open] { display: flex; }
+.dest-detail-dialog.is-v2 .dest-dialog-close {
+  position: absolute; float: none; margin: 0; top: 12px; right: 12px; z-index: 3;
+  width: 42px; height: 42px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.85);
+  background: rgba(15, 23, 42, 0.72); color: #FFFFFF; font-size: 1.5rem; line-height: 1; backdrop-filter: blur(6px);
+}
+.dest-detail-hero { position: relative; flex: none; height: clamp(170px, 30vh, 240px); background: #0F172A; border-bottom: 5px solid #165D6F; }
+.dest-detail-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dest-detail-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 30%, rgba(15, 23, 42, 0.88) 100%); }
+.dest-detail-hero-text { position: absolute; z-index: 1; left: 22px; right: 70px; bottom: 16px; color: #F8FAFC; }
+.dest-detail-hero-text .dest-dialog-kicker { display: inline-block; padding: 3px 10px; border-radius: 999px; background: #F65E01; color: #FFFFFF; font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.dest-detail-dialog.is-v2 .dest-detail-hero-text h2 { margin: 8px 0 4px; color: #FFFFFF !important; font: 900 clamp(1.45rem, 4vw, 2rem)/1.08 'League Spartan', 'Plus Jakarta Sans', sans-serif; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45); }
+.dest-detail-where { margin: 0; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: #F4E6C1; }
+.dest-detail-where i { color: #F65E01; }
+.dest-detail-photo-note { position: absolute; right: -52px; bottom: 0; padding: 2px 8px; border-radius: 999px; background: rgba(15, 23, 42, 0.75); color: #F4E6C1; font-size: 0.62rem; font-weight: 700; white-space: nowrap; }
+.dest-detail-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 18px 22px 16px; display: grid; gap: 14px; }
+.dest-detail-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.dest-detail-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font: 800 0.72rem/1.2 'League Spartan', 'Plus Jakarta Sans', sans-serif; }
+.dest-detail-chip.is-kind { background: #0F172A; color: #F4E6C1; text-transform: uppercase; letter-spacing: 0.05em; }
+.dest-detail-chip.is-verified { background: #165D6F; color: #FFFFFF; }
+.dest-detail-chip.is-pending { background: #FFFFFF; color: #475569; border: 1px solid #E7DCC3; }
+.dest-detail-lead { margin: 0; color: #1E293B; font-size: 0.98rem; line-height: 1.55; }
+.dest-detail-dialog.is-v2 .bq-destination-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0; }
+.dest-detail-dialog.is-v2 .bq-destination-fact { padding: 12px 14px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E7DCC3; display: grid; gap: 4px; }
+.dest-detail-dialog.is-v2 .bq-destination-fact small { display: inline-flex; align-items: center; gap: 6px; color: #165D6F; font: 800 0.68rem/1.2 'League Spartan', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
+.dest-detail-dialog.is-v2 .bq-destination-fact small i { color: #F65E01; }
+.dest-detail-dialog.is-v2 .bq-destination-fact strong { color: #0F172A; font-size: 0.9rem; line-height: 1.35; }
+.dest-detail-dialog.is-v2 .bq-destination-note { margin: 0; padding: 10px 14px; border-radius: 12px; border-left: 4px solid #F65E01; background: #FFF4EA; color: #7A3A0C; font-size: 0.84rem; line-height: 1.45; }
+.dest-detail-more { justify-self: start; display: inline-flex; align-items: center; gap: 8px; color: #165D6F; font-weight: 800; text-decoration: none; border-bottom: 2px solid rgba(22, 93, 111, 0.3); }
+.dest-detail-more:hover { border-color: #165D6F; }
+.dest-detail-actions {
+  flex: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;
+  padding: 14px 22px calc(14px + env(safe-area-inset-bottom, 0px)); background: #FFFFFF; border-top: 1px solid #E7DCC3;
+  box-shadow: 0 -10px 24px -18px rgba(15, 23, 42, 0.5);
+}
+.dest-detail-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 8px 12px; border-radius: 14px;
+  border: 2px solid transparent; font: 800 0.88rem/1.15 'League Spartan', 'Plus Jakarta Sans', sans-serif; text-align: center; text-decoration: none; cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.dest-detail-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.dest-detail-btn:focus-visible, .dest-detail-dialog.is-v2 .dest-dialog-close:focus-visible, .dest-detail-more:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.dest-detail-btn.is-route { background: #FFFFFF; border-color: #165D6F; color: #165D6F; }
+.dest-detail-btn.is-route:hover { background: #E8F1F3; }
+.dest-detail-btn.is-whatsapp { background: #F65E01; color: #FFFFFF; box-shadow: 0 10px 22px -10px rgba(246, 94, 1, 0.8); }
+.dest-detail-btn.is-whatsapp:hover { background: #C2410C; color: #FFFFFF; }
+.dest-detail-btn.is-trip { background: #0F172A; color: #F4E6C1; }
+.dest-detail-btn.is-trip:hover:not(:disabled) { background: #1E293B; }
+.dest-detail-btn.is-trip:disabled { background: #165D6F; color: #FFFFFF; cursor: default; }
+@media (max-width: 560px) {
+  .dest-detail-dialog.is-v2 { width: calc(100vw - 16px); max-height: calc(100dvh - 16px); border-radius: 20px; }
+  .dest-detail-dialog.is-v2 .bq-destination-facts { grid-template-columns: 1fr; }
+  .dest-detail-actions { grid-template-columns: 1fr 1fr; padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); }
+  .dest-detail-btn.is-whatsapp { grid-column: 1 / -1; order: -1; }
+  .dest-detail-body { padding: 14px 16px; }
+  .dest-detail-photo-note { display: none; }
+}
+/* Ajustes del detalle: styles.css pone margin:0 a todo (*), lo que anula el centrado nativo
+   de <dialog>; y una regla de títulos fija -webkit-text-fill-color oscuro sobre la foto. */
+.dest-detail-dialog.is-v2 { margin: auto; inset: 0; }
+html body .dest-detail-dialog.is-v2 .dest-detail-hero-text h2 { color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important; }
