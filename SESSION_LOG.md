@@ -6168,4 +6168,20 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - Entradas añadidas en `.gitignore`.
 - Archivos locales generados e ignorados por Git: `baqueano_iconography.md` y `Baqueano_Iconography.pdf`.
 
+## 2026-10-09 — Exportación Visual de Iconografía (HTML a PDF con Glifos Renderizados)
+
+### 🎯 1. POR QUÉ (Why / Propósito)
+- Generar un reporte visual interactivo y de alta gama en formato PDF (`Baqueano_Visual_Report.pdf`) donde los glifos gráficos de cada icono se rendericen nítidamente con FontAwesome 6.5.1 y tipografía `League Spartan`, permitiendo al mentor de diseño evaluar visualmente cada activo.
+- Mantener la regla innegociable de exclusión de Git para no versionar archivos de reporte.
+
+### ⚙️ 2. CÓMO (How / Arquitectura e Implementación)
+1. **Aislamiento Git:** Añadir `baqueano_iconography.html` y `Baqueano_Visual_Report.pdf` a `.gitignore`.
+2. **Documento Visual HTML:** Generación de `baqueano_iconography.html` con `<meta charset="UTF-8">`, inyección de CDN FontAwesome 6.5.1, Google Fonts (`League Spartan`, `Plus Jakarta Sans`, `Cinzel`), tarjetas visuales con iconos en 24px/28px y badges de colores de marca.
+3. **Impresión Headless con Carga de Activos:** Script automatizado que asegura `document.fonts.ready` y renderiza el PDF vectorizado en alta definición.
+
+### 📦 3. QUÉ (What / Entregables)
+- `baqueano_iconography.html` (ignorado por Git).
+- `Baqueano_Visual_Report.pdf` (ignorado por Git).
+
+
 
