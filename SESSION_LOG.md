@@ -6120,3 +6120,10 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - Regla de repositorio GitHub identificada vía API: Ruleset ID `24771709` (`pull_request` requerida en `main`). Se proporcionan enlaces directos al usuario para completar el merge en GitHub con un clic.
 
 
+
+## 2026-10-09 — Contraste de descripciones en «Lugares Turísticos» de departamentos
+
+- Solicitud: el texto dorado/arena de las tarjetas de lugares turísticos casi no se ve; Madriz está bien, corregir el resto de departamentos y regiones.
+- Causa: en `website/css/pages/departamento.css`, `.departamento-inline-031` usaba `--arena-pinolera` (#F4E6C1) y `.departamento-inline-030` `--oro-noble` (#D4AF37) sobre tarjeta clara #F8FAFC (contraste < 3:1).
+- Cambio: descripción a teal de marca #165D6F (~7:1) e ícono a ámbar oscuro #A16207 (~5:1). Solo CSS; no se eliminó nada.
+- Verificación pendiente: revisión visual en navegador por el usuario.
