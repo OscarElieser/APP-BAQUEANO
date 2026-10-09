@@ -18,6 +18,12 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 MERGE GLOBAL DE WORKSPACE A RAMA PRINCIPAL (MAIN) Y DESPLIEGUE A ORIGIN (09-10-2026 ~01:31 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: Full_Workspace_Git_Merge_To_Main"`
+  - **Objetivo:** Fusionar (merge) todos los avances de `wip/tipografias-ops-2026-10-08` en `main`, sincronizar con `origin/main`, resolver cualquier conflicto con Sequential Thinking y subir `main` al repositorio remoto.
+  - **Alcance Autorizado:** Global (incluye `website/`, `lib/`, `android/`, scripts y documentación).
+- **Estado:** 🔄 En ejecución con Sequential Thinking.
+
 ## 🧭 SUBIDA TOTAL DE REFACTORIZACIÓN DE BOTONES A COLORES SÓLIDOS AL REPOSITORIO REMOTO GITHUB (09-10-2026 ~01:05 CST)
 - **Consulta / Solicitud del Usuario:** *"sube todo al repositorio remoto"*
 - **Archivos a Sincronizar y Commitear:**
