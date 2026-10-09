@@ -31,7 +31,7 @@ que lee ?q= y ?categoria= de la URL). Sin el mapa ni los bloques laterales de la
   <link rel="stylesheet" href="styles.css?v=20260930-quality-restore-1">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
-  <link rel="stylesheet" href="css/pages/destinos-exact.css?v=20261007-featured-1">
+  <link rel="stylesheet" href="css/pages/destinos-exact.css?v=20261009-ficha-3">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
@@ -152,8 +152,8 @@ que lee ?q= y ?categoria= de la URL). Sin el mapa ni los bloques laterales de la
       <div class="destinos-filter-bar">
         <div class="destinos-filters-left">
           <button type="button" class="dest-dropdown-btn" data-filter="department" aria-expanded="false"><span data-i18n="testimonials.departmentLabel">Departamento</span> <i class="fa-solid fa-chevron-down"></i></button>
-          <button type="button" class="dest-dropdown-btn" data-filter="price" aria-expanded="false"><span data-i18n="experiences.price">Precio</span> <i class="fa-solid fa-chevron-down"></i></button>
-          <button type="button" class="dest-dropdown-btn" data-filter="rating" aria-expanded="false"><span data-i18n="pages.destinos.mainContent.button2">Valoración</span> <i class="fa-solid fa-chevron-down"></i></button>
+          <!-- 2026-10-09: sin filtros de Precio/Valoración: los lugares publicados no traen
+               tarifas ni reseñas verificadas (NO DATA = NO INVENTION); dejaban 0 resultados. -->
           <button type="button" class="dest-toggle-btn" aria-pressed="false">
             <span class="toggle-switch-ui"></span> <span data-i18n="common.verificados">Verificados</span>
           </button>
@@ -162,10 +162,9 @@ que lee ?q= y ?categoria= de la URL). Sin el mapa ni los bloques laterales de la
         <div class="dest-order-right">
           <span data-i18n="pages.destinos.mainContent.span1">Ordenar por:</span>
           <select data-i18n-aria-label="pages.destinos.mainContent.selectAriaLabel1" class="dest-order-select" aria-label="Ordenar destinos">
-            <option data-i18n="pages.destinos.mainContent.option1">Más populares</option>
-            <option data-i18n="pages.destinos.mainContent.option2">Mejor valorados</option>
-            <option data-i18n="pages.destinos.mainContent.option3">Precio: menor a mayor</option>
-            <option data-i18n="pages.destinos.mainContent.option4">Precio: mayor a menor</option>
+            <option value="verified" data-i18n="pages.destinos.sortVerified">Verificados primero</option>
+            <option value="az" data-i18n="pages.destinos.sortAZ">Nombre (A–Z)</option>
+            <option value="department" data-i18n="pages.destinos.sortDepartment">Por departamento</option>
           </select>
         </div>
       </div>
@@ -176,9 +175,10 @@ que lee ?q= y ?categoria= de la URL). Sin el mapa ni los bloques laterales de la
            CÓMO: js/destinos-catalog-live.js reemplaza en la página estas tarjetas por
              los places publicados de Supabase; estas quedan como respaldo sin conexión.
            ============================================================================ -->
-      <div class="section-header-exact">
+      <div class="section-header-exact" id="todosDestinosGrid">
         <div class="title-group">
           <h2><span data-i18n="pages.destinos.mainContent.h22">Todos los destinos</span> <span style="color: #F65E01; font-weight: 800;" aria-live="polite"></span></h2>
+          <p class="destinos-page-info" aria-live="polite"></p>
         </div>
         <a href="destinos.html" class="section-header-link" hidden><span data-i18n="actions.viewAll">Ver todos</span> <i class="fa-solid fa-arrow-right"></i></a>
       </div>
@@ -380,17 +380,9 @@ que lee ?q= y ?categoria= de la URL). Sin el mapa ni los bloques laterales de la
       <!-- ============================================================================
            7. PAGINACIÓN NUMÉRICA (IMAGEN 3)
            ============================================================================ -->
-      <div data-i18n-aria-label="pages.destinos.mainContent.divAriaLabel2" class="destinos-pagination-wrap" role="navigation" aria-label="Paginación de destinos">
-        <button data-i18n-aria-label="actions.prevPage" type="button" class="pagination-btn" aria-label="Página anterior"><i class="fa-solid fa-chevron-left"></i></button>
-        <button type="button" class="pagination-btn active">1</button>
-        <button type="button" class="pagination-btn">2</button>
-        <button type="button" class="pagination-btn">3</button>
-        <button type="button" class="pagination-btn">4</button>
-        <button type="button" class="pagination-btn">5</button>
-        <span style="color: #94A3B8; font-size: 0.8rem;">...</span>
-        <button type="button" class="pagination-btn">13</button>
-        <button data-i18n-aria-label="actions.nextPage" type="button" class="pagination-btn" aria-label="Página siguiente"><i class="fa-solid fa-chevron-right"></i></button>
-      </div>
+      <!-- Paginación real: js/destinos-interactions.js la arma según los destinos publicados
+           (12 por página, ‹ 1 … 4 5 6 … 20 ›). Antes eran botones fijos 1–13 sin función. -->
+      <nav data-i18n-aria-label="pages.destinos.mainContent.divAriaLabel2" class="destinos-pagination-wrap" aria-label="Paginación de destinos" hidden></nav>
 
       <!-- ============================================================================
            9. BANNER CTA COMUNITARIO AL ATARDECER (IMAGEN 3)
@@ -481,8 +473,8 @@ que lee ?q= y ?categoria= de la URL). Sin el mapa ni los bloques laterales de la
        estáticas de arriba quedan solo como respaldo sin conexión. Orden: servicio → catálogo → interacciones. -->
   <script defer src="js/services/places-service.js?v=20261005-1"></script>
   <script defer src="js/territory-media-catalog.js?v=20260926-1"></script>
-  <script defer src="js/destinos-catalog-live.js?v=20261007-featured-1"></script>
-  <script defer src="js/destinos-interactions.js?v=20261005-live-1"></script>
+  <script defer src="js/destinos-catalog-live.js?v=20261009-ficha-2"></script>
+  <script defer src="js/destinos-interactions.js?v=20261009-paginado-2"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {

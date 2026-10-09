@@ -6163,3 +6163,22 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
   - `validate-i18n`: es/en/fr/it/pt/de con 5058/5058 claves, 0 faltantes, 0 vacías. PASS.
   - `i18n-audit`: FAIL con 7 errores preexistentes del Ops Center (textos sin clave en `admin.html`, `ops-businesses.js`, `ops-engine.js` 330 vs base 322, `ops-guides.js`, `ops-messages.js`, `ops-payments.js`, `ops-users.js`). No provienen de los cambios de Baqui/logo; quedan pendientes.
   - `export-locales-for-app --check`: FAIL por 43 claves `opsReservations.*` nunca exportadas a la app. Regenerado con `npm run export:app-locales` (solo agrega esas 43 claves; las ediciones de Baqui coinciden con la salida del script). Re-check: «App y Web comparten 6 idiomas · 5059 claves». PASS.
+
+## 2026-10-09 — Catálogo paginado propio de destinos y botón «Ver los 237 destinos» aparte
+
+- Solicitud: «crear una página aparte como paginación donde el botón de Ver los 237 destinos esté aparte y se muestre como venimos trabajando; nada de Booking u otra plataforma, auténtica; aplicarlo en destinos.html sin romper lo que llevamos; si hay errores corregir y mejorar». Luego: «auténtico de BAQUEANO, que el estilo sea único» (referencia: ficha del Hotel Encanto del Sur).
+- Errores encontrados y corregidos:
+  1. `destinos-interactions.js` cancelaba el clic en todo `.section-header-link`: el enlace «Ver los N destinos» de destinos.html NO abría la página. Ahora excluye `[data-destinos-all-link]`.
+  2. El orden reordenaba el DOM pero la paginación usaba el orden original, y ordenaba por calificación/precio inexistentes, así que no hacía nada. Ahora ordena el arreglo real: Verificados primero / Nombre A–Z / Por departamento (`?orden=`).
+  3. Filtros Precio/Valoración sin datos reales dejaban 0 resultados: retirados del HTML (destinos.html y todos-los-destinos.html).
+  4. Paginación fija 1–13 en el HTML; la generada mostraba 24 botones seguidos. Ahora es compacta con «…» (en celular ‹ 1 … 7 … 20 ›), botones de 44 px.
+  5. En celular/tablet el catálogo completo quedaba en 4 columnas (el selector `.page-destinos-exact:not([data-destinos-mode="featured"])` pesaba más que los @media). Ahora 4/3/2/1 columnas reales.
+- Catálogo completo (`todos-los-destinos.html`): una grilla, 12 por página, cinta «Mostrando X–Y de N destinos», `?pagina=` persistente; categoría/departamento/verificados recalculan la paginación.
+- `destinos.html`: los 10 destacados en movimiento se mantienen; el botón pasó a un bloque propio `.destinos-all-cta` debajo de la galería con el total real de Supabase.
+- Identidad «Ficha de destino BAQUEANO» (`css/pages/destinos-exact.css`): estructura de las fichas de hospedaje con la paleta oficial (noche #0F172A, laguna #165D6F, volcán #F65E01, arena #F4E6C1): cuerpo crema, línea laguna bajo la foto, etiquetas noche/arena, botón secundario con borde laguna y sello «Disponible en BAQUEANO» al pie (claves existentes `lodgingShowcase.seal*`).
+- i18n: 8 claves nuevas en 6 idiomas (`pages.destinos.sortVerified/sortAZ/sortDepartment/pageInfo/pageN/noResults/allCtaTitle/allCtaText`) vía `i18n-add-keys.mjs`; exportadas a la app.
+- Verificación real:
+  - QA en Microsoft Edge (playwright-core en scratchpad, servidor local, datos vivos de Supabase: 237 lugares): 22/22 PASS. 12 tarjetas por página, página 2, orden A–Z, filtro Playas (18), 4/2/1 columnas a 1280/768/390 px, sin scroll horizontal, el botón aparte navega, destacados siguen en movimiento, sin errores JS (solo aviso del navegador por `@view-transition` al navegar, preexistente).
+  - `validate-i18n` PASS (5066 claves ×6), `export-locales-for-app --check` PASS, `build-hostinger-static` + `verify-hostinger-static` PASS (10 rutas).
+  - `i18n-audit`: mismos 7 errores preexistentes del Ops Center.
+  - `global-shell.test.mjs` NO ejecutado: falta `@playwright/test` (dependencias del workspace no instaladas).

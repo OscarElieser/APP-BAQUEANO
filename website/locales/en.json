@@ -2986,7 +2986,15 @@
       },
       "featuredRowTitle": "Featured places",
       "featuredLabel": "Featured destinations in motion",
-      "viewAllN": "See all {n} destinations"
+      "viewAllN": "See all {n} destinations",
+      "sortVerified": "Verified first",
+      "sortAZ": "Name (A–Z)",
+      "sortDepartment": "By department",
+      "pageInfo": "Showing {from}–{to} of {total} destinations",
+      "pageN": "Page {n}",
+      "noResults": "We couldn't find destinations with those filters. Try another category or department.",
+      "allCtaTitle": "Explore the full catalog",
+      "allCtaText": "Every published place across the 17 territories, with its verification status and filters by department and category."
     },
     "experiencias": {
       "body": {

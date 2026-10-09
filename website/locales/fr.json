@@ -2986,7 +2986,15 @@
       },
       "featuredRowTitle": "Lieux à la une",
       "featuredLabel": "Destinations à la une en mouvement",
-      "viewAllN": "Voir les {n} destinations"
+      "viewAllN": "Voir les {n} destinations",
+      "sortVerified": "Vérifiés d'abord",
+      "sortAZ": "Nom (A–Z)",
+      "sortDepartment": "Par département",
+      "pageInfo": "Affichage de {from}–{to} sur {total} destinations",
+      "pageN": "Page {n}",
+      "noResults": "Aucune destination ne correspond à ces filtres. Essayez une autre catégorie ou un autre département.",
+      "allCtaTitle": "Explorez le catalogue complet",
+      "allCtaText": "Tous les lieux publiés des 17 territoires, avec leur statut de vérification et des filtres par département et catégorie."
     },
     "experiencias": {
       "body": {

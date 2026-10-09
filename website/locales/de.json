@@ -2986,7 +2986,15 @@
       },
       "featuredRowTitle": "Ausgewählte Orte",
       "featuredLabel": "Ausgewählte Reiseziele in Bewegung",
-      "viewAllN": "Alle {n} Reiseziele ansehen"
+      "viewAllN": "Alle {n} Reiseziele ansehen",
+      "sortVerified": "Verifizierte zuerst",
+      "sortAZ": "Name (A–Z)",
+      "sortDepartment": "Nach Departamento",
+      "pageInfo": "{from}–{to} von {total} Reisezielen",
+      "pageN": "Seite {n}",
+      "noResults": "Keine Reiseziele mit diesen Filtern gefunden. Versuche eine andere Kategorie oder ein anderes Departamento.",
+      "allCtaTitle": "Entdecke den vollständigen Katalog",
+      "allCtaText": "Alle veröffentlichten Orte der 17 Territorien, mit Verifizierungsstatus und Filtern nach Departamento und Kategorie."
     },
     "experiencias": {
       "body": {

@@ -2986,7 +2986,15 @@
       },
       "featuredRowTitle": "Luoghi in evidenza",
       "featuredLabel": "Destinazioni in evidenza in movimento",
-      "viewAllN": "Vedi le {n} destinazioni"
+      "viewAllN": "Vedi le {n} destinazioni",
+      "sortVerified": "Prima i verificati",
+      "sortAZ": "Nome (A–Z)",
+      "sortDepartment": "Per dipartimento",
+      "pageInfo": "Visualizzati {from}–{to} di {total} destinazioni",
+      "pageN": "Pagina {n}",
+      "noResults": "Nessuna destinazione con questi filtri. Prova un'altra categoria o un altro dipartimento.",
+      "allCtaTitle": "Esplora il catalogo completo",
+      "allCtaText": "Tutti i luoghi pubblicati dei 17 territori, con il loro stato di verifica e filtri per dipartimento e categoria."
     },
     "experiencias": {
       "body": {

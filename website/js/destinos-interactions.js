@@ -52,8 +52,26 @@
     // 📦 QUÉ: ninguna sección queda vacía ni con huecos.
     const catalogRows = [...document.querySelectorAll('.destinos-catalog-row')];
     const rowCapacity = 5;
-    const pageSize = Math.max(rowCapacity, catalogRows.length * rowCapacity);
+    // 2026-10-09 (pedido del propietario): todos-los-destinos.html es un catálogo
+    // paginado propio — UNA sola grilla de 12 tarjetas por página con el diseño de
+    // tarjeta de BAQUEANO, sin precios ni calificaciones sin fuente.
+    const isAllMode = document.documentElement.getAttribute('data-destinos-mode') === 'all';
+    const pageSize = isAllMode ? 12 : Math.max(rowCapacity, catalogRows.length * rowCapacity);
     const state = { query: '', category: 'todos', department: '', price: '', rating: 0, verified: false, favoritesOnly: false, page: 1 };
+    const i18n = (key, fallback, vars) => {
+      let out = fallback;
+      try { out = (window.BaqueanoLanguage && window.BaqueanoLanguage.t(key, { fallback })) || fallback; } catch (_) { out = fallback; }
+      return String(out).replace(/\{(\w+)\}/g, (match, name) => (vars && vars[name] != null ? vars[name] : match));
+    };
+
+    if (isAllMode && catalogRows.length > 1) {
+      cards.forEach((card) => catalogRows[0].appendChild(card));
+      catalogRows.slice(1).forEach((row) => {
+        row.hidden = true;
+        const header = row.previousElementSibling;
+        if (header && header.classList.contains('section-header-exact')) header.hidden = true;
+      });
+    }
 
     allCards.forEach((card, index) => {
       const title = card.querySelector('h4')?.textContent.trim() || `Destino ${index + 1}`;
@@ -71,6 +89,7 @@
       card.dataset.price = String(price);
       // "Solo verificados" = verificación real de la fuente, nunca una calificación alta.
       card.dataset.verified = card.dataset.verification === 'verified' ? 'true' : 'false';
+      card.dataset.order = String(index);
     });
 
     function inferCategory(title) {
@@ -113,16 +132,16 @@
       state.page = Math.min(state.page, maxPage);
       cards.forEach((card) => { card.hidden = true; });
       const pageCards = filtered.slice((state.page - 1) * pageSize, state.page * pageSize);
+      // appendChild en orden reconstruye el orden vigente (filtro u orden elegido).
+      if (isAllMode) cards.forEach((card) => catalogRows[0]?.appendChild(card));
       pageCards.forEach((card, index) => {
         card.hidden = false;
-        const row = catalogRows[Math.min(catalogRows.length - 1, Math.floor(index / rowCapacity))];
-        // appendChild en orden reconstruye el orden original aunque un filtro
-        // anterior haya movido la tarjeta de fila.
+        const row = isAllMode ? catalogRows[0] : catalogRows[Math.min(catalogRows.length - 1, Math.floor(index / rowCapacity))];
         if (row) row.appendChild(card);
       });
       // Una fila sin tarjetas visibles se oculta junto con su título.
       catalogRows.forEach((row, index) => {
-        if (index === 0) return;
+        if (index === 0 || isAllMode) return;
         const empty = ![...row.children].some((child) => !child.hidden);
         row.hidden = empty;
         const header = row.previousElementSibling;
@@ -146,6 +165,7 @@
       state.query ? url.searchParams.set('q', state.query) : url.searchParams.delete('q');
       state.category !== 'todos' ? url.searchParams.set('categoria', state.category) : url.searchParams.delete('categoria');
       state.page > 1 ? url.searchParams.set('pagina', state.page) : url.searchParams.delete('pagina');
+      state.sort && state.sort !== 'verified' ? url.searchParams.set('orden', state.sort) : url.searchParams.delete('orden');
       history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
     }
 
@@ -216,16 +236,25 @@
       );
     });
 
-    document.querySelector('.dest-order-select')?.addEventListener('change', (event) => {
-      const mode = event.target.selectedIndex;
-      document.querySelectorAll('.destinos-catalog-row').forEach((row) => {
-        [...row.querySelectorAll('.dest-catalog-card')].sort((a, b) => {
-          if (mode === 1) return Number(b.dataset.rating) - Number(a.dataset.rating);
-          if (mode === 2) return Number(a.dataset.price) - Number(b.dataset.price);
-          if (mode === 3) return Number(b.dataset.price) - Number(a.dataset.price);
-          return Number(b.dataset.rating) - Number(a.dataset.rating);
-        }).forEach((card) => row.appendChild(card));
+    // Orden con datos reales: verificación de la fuente, nombre o departamento.
+    // (Antes reordenaba el DOM pero la paginación seguía el orden original, y
+    // ordenaba por calificación/precio que no existen → no hacía nada.)
+    const VERIFICATION_RANK = { verified: 0, partial: 1 };
+    const SORT_MODES = ['verified', 'az', 'department'];
+    function sortCards(mode) {
+      state.sort = SORT_MODES.includes(mode) ? mode : 'verified';
+      const byOrder = (a, b) => Number(a.dataset.order) - Number(b.dataset.order);
+      const byName = (a, b) => a.dataset.title.localeCompare(b.dataset.title, 'es');
+      cards.sort((a, b) => {
+        if (state.sort === 'az') return byName(a, b);
+        if (state.sort === 'department') return a.dataset.location.localeCompare(b.dataset.location, 'es') || byName(a, b);
+        const rank = (card) => VERIFICATION_RANK[card.dataset.verification] ?? 2;
+        return rank(a) - rank(b) || byOrder(a, b);
       });
+    }
+    document.querySelector('.dest-order-select')?.addEventListener('change', (event) => {
+      sortCards(event.target.value);
+      state.page = 1;
       applyFilters();
     });
 
@@ -240,7 +269,37 @@
       if (view !== 'list') setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
     }));
 
+    // Páginas visibles: primera, última y vecinas de la actual; el resto con «…»
+    // (con 237 destinos eran 24 botones seguidos).
+    function visiblePages(pages, current) {
+      // En celular solo primera, actual y última (‹ 1 … 7 … 20 ›) para que entre en un renglón.
+      const narrow = window.matchMedia('(max-width: 520px)').matches;
+      if (pages <= (narrow ? 5 : 7)) return Array.from({ length: pages }, (_, i) => i + 1);
+      const keep = new Set(narrow ? [1, pages, current] : [1, pages, current - 1, current, current + 1]);
+      if (!narrow && current <= 4) [2, 3, 4, 5].forEach((p) => keep.add(p));
+      if (!narrow && current >= pages - 3) [pages - 1, pages - 2, pages - 3, pages - 4].forEach((p) => keep.add(p));
+      if (narrow && current <= 2) keep.add(2);
+      if (narrow && current >= pages - 1) keep.add(pages - 1);
+      const list = [...keep].filter((p) => p >= 1 && p <= pages).sort((a, b) => a - b);
+      return list.flatMap((p, i) => (i && p - list[i - 1] > 1 ? ['…', p] : [p]));
+    }
+
+    function renderPageInfo(total) {
+      const info = document.querySelector('.destinos-page-info');
+      if (!info) return;
+      if (!total) { info.textContent = i18n('pages.destinos.noResults', 'No encontramos destinos con esos filtros. Probá con otra categoría o departamento.'); return; }
+      const from = (state.page - 1) * pageSize + 1;
+      info.textContent = i18n('pages.destinos.pageInfo', 'Mostrando {from}–{to} de {total} destinos', { from, to: Math.min(total, state.page * pageSize), total });
+    }
+
+    function goToPage(page) {
+      state.page = page; applyFilters();
+      const anchor = isAllMode ? document.getElementById('todosDestinosGrid') : document.querySelector('.destinos-pagination-wrap');
+      anchor?.scrollIntoView({ behavior: 'smooth', block: isAllMode ? 'start' : 'center' });
+    }
+
     function renderPagination(total) {
+      renderPageInfo(total);
       const wrap = document.querySelector('.destinos-pagination-wrap');
       if (!wrap) return;
       const pages = Math.max(1, Math.ceil(total / pageSize));
@@ -248,17 +307,24 @@
       // Con una sola página no hay nada que paginar.
       wrap.hidden = pages <= 1;
       if (pages <= 1) return;
-      const addButton = (label, page, ariaLabel, disabled) => {
-        const button = document.createElement('button'); button.type = 'button'; button.className = 'pagination-btn';
-        button.textContent = label; button.disabled = disabled; if (ariaLabel) button.setAttribute('aria-label', ariaLabel);
-        if (page === state.page && !ariaLabel) { button.classList.add('active'); button.setAttribute('aria-current', 'page'); }
-        button.addEventListener('click', () => { state.page = page; applyFilters(); wrap.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+      const addButton = (label, page, ariaLabel, disabled, extraClass) => {
+        const button = document.createElement('button'); button.type = 'button'; button.className = `pagination-btn${extraClass ? ` ${extraClass}` : ''}`;
+        button.textContent = label; button.disabled = disabled; button.setAttribute('aria-label', ariaLabel);
+        if (page === state.page && !extraClass) { button.classList.add('active'); button.setAttribute('aria-current', 'page'); }
+        button.addEventListener('click', () => goToPage(page));
         wrap.appendChild(button);
       };
-      addButton('‹', Math.max(1, state.page - 1), 'Página anterior', state.page === 1);
-      for (let page = 1; page <= pages; page += 1) addButton(String(page), page, '', false);
-      addButton('›', Math.min(pages, state.page + 1), 'Página siguiente', state.page === pages);
+      addButton('‹', Math.max(1, state.page - 1), i18n('actions.prevPage', 'Página anterior'), state.page === 1, 'pagination-step');
+      visiblePages(pages, state.page).forEach((page) => {
+        if (page === '…') {
+          const gap = document.createElement('span'); gap.className = 'pagination-gap'; gap.setAttribute('aria-hidden', 'true');
+          gap.append('…'); wrap.appendChild(gap); return;
+        }
+        addButton(String(page), page, i18n('pages.destinos.pageN', 'Página {n}', { n: page }), false, '');
+      });
+      addButton('›', Math.min(pages, state.page + 1), i18n('actions.nextPage', 'Página siguiente'), state.page === pages, 'pagination-step');
     }
+    if (isAllMode) window.addEventListener('baqueano:languageChanged', () => renderPagination(cards.filter(matches).length));
 
     function toggleSaved(button, key, addedText) {
       const card = button.closest('article'); const id = card?.dataset.destinationId; if (!id) return;
@@ -293,7 +359,9 @@
       const card = link.closest('article, .destinos-map-preview-card'); if (!card) return;
       event.preventDefault(); openDetails(card);
     }));
-    document.querySelectorAll('.section-header-link').forEach((link) => link.addEventListener('click', (event) => {
+    // El enlace al catálogo completo (data-destinos-all-link) navega de verdad;
+    // antes este manejador lo cancelaba y «Ver los N destinos» no abría la página.
+    document.querySelectorAll('.section-header-link:not([data-destinos-all-link])').forEach((link) => link.addEventListener('click', (event) => {
       event.preventDefault(); state.query = ''; state.category = 'todos'; state.department = ''; state.price = ''; state.rating = 0; state.page = 1;
       if (searchInput) searchInput.value = ''; categoryButtons.forEach((item, index) => item.classList.toggle('active', index === 0)); applyFilters();
     }));
@@ -344,6 +412,11 @@
     state.query = params.get('q') || ''; state.category = params.get('categoria') || 'todos'; state.favoritesOnly = params.get('favs') === '1'; state.page = Math.max(1, Number(params.get('pagina')) || 1);
     if (searchInput) searchInput.value = state.query;
     categoryButtons.forEach((button) => button.classList.toggle('active', button.dataset.category === state.category));
+    if (isAllMode) {
+      sortCards(params.get('orden') || 'verified');
+      const orderSelect = document.querySelector('.dest-order-select');
+      if (orderSelect) orderSelect.value = state.sort;
+    }
     applyFilters();
   }));
 })();

@@ -2986,7 +2986,15 @@
       },
       "featuredRowTitle": "Lugares em destaque",
       "featuredLabel": "Destinos em destaque em movimento",
-      "viewAllN": "Ver os {n} destinos"
+      "viewAllN": "Ver os {n} destinos",
+      "sortVerified": "Verificados primeiro",
+      "sortAZ": "Nome (A–Z)",
+      "sortDepartment": "Por departamento",
+      "pageInfo": "Mostrando {from}–{to} de {total} destinos",
+      "pageN": "Página {n}",
+      "noResults": "Não encontramos destinos com esses filtros. Tente outra categoria ou departamento.",
+      "allCtaTitle": "Explore o catálogo completo",
+      "allCtaText": "Todos os lugares publicados dos 17 territórios, com seu status de verificação e filtros por departamento e categoria."
     },
     "experiencias": {
       "body": {

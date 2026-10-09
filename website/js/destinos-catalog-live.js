@@ -134,6 +134,17 @@
     actions.appendChild(keyed('button', 'dest-btn-subtle', 'pages.destinos.destCatalogCard.button1')).setAttribute('type', 'button');
     body.appendChild(actions);
     article.appendChild(body);
+    // Firma propia de BAQUEANO al pie (misma identidad que las fichas de hospedaje).
+    var footSeal = el('footer', 'dest-card-seal');
+    footSeal.appendChild(el('img', 'dest-card-seal-logo', { src: 'assets/images/LOGOS/baqueano_icono_oficial.png', alt: '', width: '480', height: '480', loading: 'lazy', decoding: 'async' }));
+    var sealText = el('p');
+    sealText.appendChild(keyed('strong', '', 'lodgingShowcase.sealTitle'));
+    var tagline = el('span', 'dest-card-seal-tagline');
+    tagline.appendChild(document.createTextNode(' · '));
+    tagline.appendChild(keyed('span', '', 'lodgingShowcase.sealTagline'));
+    sealText.appendChild(tagline);
+    footSeal.appendChild(sealText);
+    article.appendChild(footSeal);
     return article;
   }
 
