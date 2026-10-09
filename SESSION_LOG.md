@@ -18,6 +18,14 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 AUDITORÍA Y LIMPIEZA DE ARCHIVOS GENERADOS / GITIGNORE (08-10-2026 ~22:51 CST)
+- **Consulta / Solicitud del Usuario:** *"yo creo que esos archivos no deberian subirse a git, que podemos hacer, o que opinas tu?"* (referencia a `pubspec.lock`, `windows/flutter/generated_*`, y archivo espurio `website/Darwing`).
+- **Diagnóstico & Acciones Ejecutadas:**
+  1. `windows/flutter/generated_*`: Revertidos con `git restore` y agregados a [.gitignore](file:///c:/Users/Lenovo/Desktop/APP-BAQUEANO/.gitignore) (`windows/flutter/generated_*`). Puesto que el proyecto tiene enfoque exclusivo en Android (`lib/` y `android/`), estos artefactos generados de Windows quedan permanentemente fuera de git.
+  2. `pubspec.lock`: Revertido con `git restore` para no generar divergencias de dependencias sin cambios reales en `pubspec.yaml`.
+  3. `website/Darwing`: Archivo vacío de 2 bytes (creado previamente en commit `31c2926`) eliminado de forma limpia del repositorio.
+- **Estado:** ✅ Limpieza completada y regla de `.gitignore` establecida.
+
 ## 🧭 SUBIDA EXITOSA A GITHUB COMO COLABORADOR (08-10-2026 ~21:40 CST)
 - **Consulta / Solicitud del Usuario:** *"intenta hacerlo de nuevo, lo que pasa que oscsr es el propietario pero yo alex soy colaborador asi que puedo subir"*
 - **Objetivo & Ejecución:**
