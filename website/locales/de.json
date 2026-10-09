@@ -113,7 +113,7 @@
     "processing": "Wird verarbeitet…"
   },
   "baqui": {
-    "welcome": "Hallo! Ich bin Baqüi, Ihr Guardabarranco-Reiseführer. Was möchten Sie heute entdecken?",
+    "welcome": "Hallo! Ich bin Baqüi, der Vogel-Reiseführer von BAQUEANO. Was möchten Sie heute entdecken?",
     "placeholder": "Fragen Sie nach Reisezielen, Routen oder Erlebnissen…",
     "inputLabel": "Geben Sie Ihre Frage ein",
     "open": "Baqüi, den digitalen Reiseführer, öffnen",
@@ -1095,7 +1095,7 @@
         "div1": "NEUE REISEZIELE",
         "div2": "GROSSE GESCHICHTEN",
         "div3": "WEITER ENTDECKEN",
-        "imgAlt1": "BAQUI, der Entdecker-Sägeracke, mit seiner Karte"
+        "imgAlt1": "BAQUI, der Entdeckervogel von BAQUEANO, mit Hut und Kamera"
       },
       "center404MessageBlock": {
         "h11": "Dieser Weg",
@@ -5034,7 +5034,7 @@
       "sec17": {
         "h41": "17. Geistiges Eigentum",
         "p1": "Rechte an der Marke BAQUEANO, Code, Design und Bildsprache.",
-        "div1": "Alle Logos, Designs, Quellcodes, Illustrationen des Guardabarranco Baqüi und redaktionellen Texte sind ausschließliches Eigentum von BAQUEANO oder rechtmäßig lizenziert."
+        "div1": "Alle Logos, Designs, Quellcodes, Illustrationen des Maskottchens Baqüi und redaktionellen Texte sind ausschließliches Eigentum von BAQUEANO oder rechtmäßig lizenziert."
       },
       "sec18": {
         "h41": "18. Nutzung von Bildern und Medien",
@@ -5145,7 +5145,7 @@
     "bomberosUnificados115": "Vereinigte Feuerwehr (115)",
     "anterior": "Zurück",
     "siguiente": "Weiter",
-    "baquiGuardabarranco": "Baqüi, der Sägeracke",
+    "baquiGuardabarranco": "Baqüi, der Entdeckervogel",
     "verMasHistorias": "Weitere Geschichten ansehen",
     "registrarMiNegocio": "Mein Unternehmen registrieren",
     "nicaraguaAutentica": "AUTHENTISCHES NICARAGUA",

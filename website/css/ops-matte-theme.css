@@ -1,4 +1,4 @@
-/* ============================================================================
+﻿/* ============================================================================
 🧭 BAQUEANO ECOSYSTEM — OPS CENTER MATTE THEME (ops-matte-theme.css)
 ============================================================================
 
@@ -130,9 +130,9 @@
   width: 34px;
   height: 34px;
   border-radius: 8px;
-  object-fit: cover;
+  object-fit: contain;
   flex-shrink: 0;
-  filter: brightness(0) invert(1);
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
   transition: transform 0.25s ease, filter 0.25s ease;
 }
 
@@ -590,6 +590,131 @@
 
 .btn-ops-matte.danger:hover {
   background-color: rgba(239, 68, 68, 0.3);
+}
+
+/* ============================================================================
+   REJILLA UNIVERSAL DE KPIS EJECUTIVOS & PULSO EN TIEMPO REAL
+   POR QUE: Presentar telemetria y presencia en vivo con estetica ejecutiva.
+   COMO: CSS Grid responsivo con minmax fluido, glassmorphism y League Spartan.
+   QUE: .ops-kpi-grid, .ops-kpi-card, .ops-live-strip-header, @keyframes pulseGlow.
+   ============================================================================ */
+@keyframes pulseGlow {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+.ops-pulse-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #22C55E;
+  box-shadow: 0 0 10px #22C55E;
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+#opsLiveStrip {
+  margin-bottom: 1.5rem;
+}
+
+.ops-live-strip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.85rem;
+  background: rgba(14, 22, 38, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ops-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 1400px) {
+  #opsLiveStrip .ops-kpi-grid {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+.ops-kpi-card {
+  background: rgba(14, 22, 38, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1rem 0.95rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.45rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+}
+
+.ops-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--kpi-accent, #F65E01);
+  box-shadow: 0 0 10px var(--kpi-accent, #F65E01);
+}
+
+.ops-kpi-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 12px rgba(246, 94, 1, 0.15);
+}
+
+.ops-kpi-card .ops-kpi-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ops-kpi-card .ops-kpi-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: var(--kpi-accent, #F4E6C1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.05);
+}
+
+.ops-kpi-card .ops-kpi-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.1;
+  font-family: 'League Spartan', var(--baqueano-font-display, sans-serif);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.5px;
+}
+
+.ops-kpi-card .ops-kpi-label {
+  font-size: 0.72rem;
+  color: var(--ops-text-muted, #94A3B8);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  line-height: 1.25;
 }
 
 /* REJILLA DE KPIS MATE */

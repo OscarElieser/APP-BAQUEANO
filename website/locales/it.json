@@ -113,7 +113,7 @@
     "processing": "Elaborazione…"
   },
   "baqui": {
-    "welcome": "Ciao! Sono Baqüi, la tua guida guardabarranco. Cosa vuoi scoprire oggi?",
+    "welcome": "Ciao! Sono Baqüi, l'uccello guida di BAQUEANO. Cosa vuoi scoprire oggi?",
     "placeholder": "Chiedi informazioni su destinazioni, itinerari o esperienze…",
     "inputLabel": "Scrivi la tua domanda",
     "open": "Apri Baqüi, la tua guida digitale",
@@ -1095,7 +1095,7 @@
         "div1": "NUOVE DESTINAZIONI",
         "div2": "GRANDI STORIE",
         "div3": "CONTINUA A ESPLORARE",
-        "imgAlt1": "BAQUI, il motmot esploratore, con la sua mappa"
+        "imgAlt1": "BAQUI, l'uccello esploratore di BAQUEANO, con cappello e macchina fotografica"
       },
       "center404MessageBlock": {
         "h11": "Questa strada",
@@ -5034,7 +5034,7 @@
       "sec17": {
         "h41": "17. Proprietà intellettuale",
         "p1": "Diritti sul marchio BAQUEANO, codice, design e iconografia.",
-        "div1": "Tutti i loghi, design, codice sorgente, illustrazioni del Guardabarranco Baqüi e testi editoriali sono di proprietà esclusiva di BAQUEANO o dispongono di licenze d'uso legittime."
+        "div1": "Tutti i loghi, design, codice sorgente, illustrazioni della mascotte Baqüi e testi editoriali sono di proprietà esclusiva di BAQUEANO o dispongono di licenze d'uso legittime."
       },
       "sec18": {
         "h41": "18. Uso di immagini e media",
@@ -5145,7 +5145,7 @@
     "bomberosUnificados115": "Vigili del fuoco unificati (115)",
     "anterior": "Precedente",
     "siguiente": "Successivo",
-    "baquiGuardabarranco": "Baqüi il motmot",
+    "baquiGuardabarranco": "Baqüi, l'uccello esploratore",
     "verMasHistorias": "Vedi altre storie",
     "registrarMiNegocio": "Registra la mia attività",
     "nicaraguaAutentica": "NICARAGUA AUTENTICO",

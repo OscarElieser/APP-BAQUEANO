@@ -113,7 +113,7 @@
     "processing": "Processando…"
   },
   "baqui": {
-    "welcome": "Olá! Sou Baqüi, seu guia guardabarranco. O que você quer descobrir hoje?",
+    "welcome": "Olá! Sou Baqüi, o pássaro guia do BAQUEANO. O que você quer descobrir hoje?",
     "placeholder": "Pergunte sobre destinos, rotas ou experiências…",
     "inputLabel": "Digite sua pergunta",
     "open": "Abrir Baqüi, seu guia digital",
@@ -1095,7 +1095,7 @@
         "div1": "NOVOS DESTINOS",
         "div2": "GRANDES HISTÓRIAS",
         "div3": "CONTINUE EXPLORANDO",
-        "imgAlt1": "BAQUI, o udu explorador, com seu mapa"
+        "imgAlt1": "BAQUI, o pássaro explorador do BAQUEANO, com chapéu e câmera"
       },
       "center404MessageBlock": {
         "h11": "Este caminho",
@@ -5034,7 +5034,7 @@
       "sec17": {
         "h41": "17. Propriedade intelectual",
         "p1": "Direitos sobre a marca BAQUEANO, código, design e iconografia.",
-        "div1": "Todos os logotipos, designs, código-fonte, ilustrações do Guardabarranco Baqüi e textos editoriais são propriedade exclusiva do BAQUEANO ou contam com licenças legítimas de uso."
+        "div1": "Todos os logotipos, designs, código-fonte, ilustrações do mascote Baqüi e textos editoriais são propriedade exclusiva do BAQUEANO ou contam com licenças legítimas de uso."
       },
       "sec18": {
         "h41": "18. Uso de imagens e mídia",
@@ -5145,7 +5145,7 @@
     "bomberosUnificados115": "Bombeiros Unificados (115)",
     "anterior": "Anterior",
     "siguiente": "Próximo",
-    "baquiGuardabarranco": "Baqüi, o Udu",
+    "baquiGuardabarranco": "Baqüi, o pássaro explorador",
     "verMasHistorias": "Ver mais histórias",
     "registrarMiNegocio": "Cadastrar meu negócio",
     "nicaraguaAutentica": "NICARÁGUA AUTÊNTICA",

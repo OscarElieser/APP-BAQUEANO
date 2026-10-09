@@ -113,7 +113,7 @@
     "processing": "Traitement…"
   },
   "baqui": {
-    "welcome": "Bonjour ! Je suis Baqüi, votre guide guardabarranco. Que souhaitez-vous découvrir aujourd'hui ?",
+    "welcome": "Bonjour ! Je suis Baqüi, l'oiseau guide de BAQUEANO. Que souhaitez-vous découvrir aujourd'hui ?",
     "placeholder": "Posez une question sur les destinations, itinéraires ou expériences…",
     "inputLabel": "Écrivez votre question",
     "open": "Ouvrir Baqüi, votre guide numérique",
@@ -1095,7 +1095,7 @@
         "div1": "NOUVELLES DESTINATIONS",
         "div2": "GRANDES HISTOIRES",
         "div3": "CONTINUEZ D'EXPLORER",
-        "imgAlt1": "BAQUI, le motmot explorateur, avec sa carte"
+        "imgAlt1": "BAQUI, l'oiseau explorateur de BAQUEANO, avec chapeau et appareil photo"
       },
       "center404MessageBlock": {
         "h11": "Ce chemin",
@@ -5034,7 +5034,7 @@
       "sec17": {
         "h41": "17. Propriété intellectuelle",
         "p1": "Droits sur la marque BAQUEANO, le code, le design et l'iconographie.",
-        "div1": "Tous les logos, designs, code source, illustrations du guardabarranco Baqüi et textes éditoriaux sont la propriété exclusive de BAQUEANO ou font l'objet de licences légitimes."
+        "div1": "Tous les logos, designs, code source, illustrations de la mascotte Baqüi et textes éditoriaux sont la propriété exclusive de BAQUEANO ou font l'objet de licences légitimes."
       },
       "sec18": {
         "h41": "18. Utilisation des images et médias",
@@ -5145,7 +5145,7 @@
     "bomberosUnificados115": "Pompiers unifiés (115)",
     "anterior": "Précédent",
     "siguiente": "Suivant",
-    "baquiGuardabarranco": "Baqüi le motmot",
+    "baquiGuardabarranco": "Baqüi, l'oiseau explorateur",
     "verMasHistorias": "Voir plus d'histoires",
     "registrarMiNegocio": "Inscrire mon entreprise",
     "nicaraguaAutentica": "NICARAGUA AUTHENTIQUE",

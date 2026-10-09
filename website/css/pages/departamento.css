@@ -429,12 +429,14 @@ html body .departamento-inline-029 {
   justify-content: center !important;
 }
 
+/* Ícono y descripción de lugares sobre tarjeta clara (#F8FAFC): el dorado #D4AF37 y la
+   arena #F4E6C1 no llegaban a 3:1. Ámbar oscuro (~5:1) y teal de marca (~7:1). */
 html body .departamento-inline-030 {
-  color: var(--oro-noble) !important;
+  color: #A16207 !important;
 }
 
 html body .departamento-inline-031 {
-  color: var(--arena-pinolera) !important;
+  color: #165D6F !important;
   font-family: var(--font-tech) !important;
   font-weight:700 !important;
 }

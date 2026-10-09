@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
 ============================================================================
 🧭 BAQUEANO ECOSYSTEM — CENTRO DE OPERACIONES & COMANDO TOTAL (admin.html)
@@ -68,7 +68,7 @@
   <div class="admin-login-wrapper" id="adminLoginGate" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--ops-bg-deep); padding: 1.5rem;">
     <div class="admin-login-card" style="width: 100%; max-width: 440px; background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-lg); padding: 2.5rem 2rem; box-shadow: var(--ops-shadow-lg); text-align: center;">
       <div style="margin-bottom: 1.5rem;">
-        <img src="assets/images/logo.png" alt="Baqueano Nicaragua" style="width: 58px; height: 58px; border-radius: 12px; margin-bottom: 1rem; filter: brightness(0) invert(1);" decoding="async" loading="lazy" width="600" height="608">
+        <img src="assets/images/LOGOS/baqueano_icono_500x386-blanco.png" alt="Baqueano Nicaragua" style="width: 58px; height: 58px; border-radius: 12px; margin-bottom: 1rem; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));" decoding="async" loading="lazy" width="500" height="386">
         <h1 data-i18n="pages.admin.adminLoginGate.h11" style="font-family: 'League Spartan', sans-serif; font-size: 1.35rem; font-weight: 800; color: #FFFFFF; letter-spacing: 1px; margin: 0 0 0.4rem 0;">BAQUEANO OPS CENTER</h1>
         <p data-i18n="pages.admin.adminLoginGate.p1" style="font-size: 0.84rem; color: var(--ops-text-secondary); line-height: 1.5; margin: 0;">
           Centro de Operaciones y Mando Digital. Acceso exclusivo para la dirección y auditores autorizados.
@@ -101,7 +101,7 @@
     <aside class="ops-sidebar-matte" id="opsSidebarMatte">
       <div class="ops-sidebar-matte-header">
         <a href="index.html" class="ops-brand-lockup">
-          <img src="assets/images/logo.png" alt="Baqueano" class="ops-brand-logo-img" decoding="async" loading="lazy" width="600" height="608">
+          <img src="assets/images/LOGOS/baqueano_icono_500x386-blanco.png" alt="Baqueano" class="ops-brand-logo-img" decoding="async" loading="lazy" width="500" height="386" style="object-fit: contain;">
           <div class="ops-brand-text-group">
             <span class="ops-brand-title">BAQUEANO</span>
             <span data-i18n="pages.admin.opsSidebarMatte.span1" class="ops-brand-subtitle">Ops Command</span>
@@ -2481,6 +2481,225 @@
     </div>
   </div>
 
+    <!-- =======================================================================
+       DRAWER DEDICADO: GUÃAS NATIVOS & BAQUEANOS CERTIFICADOS (#14-guias)
+       ======================================================================= -->
+  <div class="ops-drawer-backdrop" id="opsGuideDrawer">
+    <div class="ops-drawer-panel">
+      <div class="ops-drawer-header">
+        <div>
+          <h2 class="ops-drawer-title" id="opsGuideDrawerTitle">Nuevo GuÃ­a Nativo Acreditado</h2>
+          <p class="ops-drawer-subtitle" id="opsGuideDrawerSubtitle">Registro bajo Ley 1211 e INTUR</p>
+        </div>
+        <button type="button" class="ops-drawer-close-btn" onclick="window.BaqueanoOpsGuides.closeDrawer()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="ops-drawer-body">
+        <form id="opsGuideForm" onsubmit="window.BaqueanoOpsGuides.saveGuide(event)">
+          <input type="hidden" id="opsGuideFormId" value="">
+
+          <!-- SECCIÃ“N 1: DATOS PERSONALES & VERIFICACIÃ“N -->
+          <div style="background: rgba(0, 186, 242, 0.08); border: 1px solid rgba(0, 186, 242, 0.3); border-radius: var(--ops-radius-md); padding: 0.85rem 1rem; margin-bottom: 1.25rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <strong style="color:#00BAF2; font-size:0.92rem; display:flex; align-items:center; gap:0.4rem;">
+                  <i class="fa-solid fa-circle-check"></i> <span>Sello de GuÃ­a Verificado (INTUR / Baqueano)</span>
+                </strong>
+                <span style="font-size:0.75rem; color:var(--ops-text-muted); display:block; margin-top:0.2rem;">
+                  Acredita al guÃ­a como anfitriÃ³n oficial verificado en la app y el catÃ¡logo pÃºblico sin intermediarios.
+                </span>
+              </div>
+              <label style="cursor:pointer; display:flex; align-items:center; gap:0.5rem; background:var(--ops-surface-2); padding:0.4rem 0.8rem; border-radius:var(--ops-radius-md); border:1px solid rgba(0,186,242,0.4);">
+                <input type="checkbox" id="opsGuideVerified" style="accent-color:#00BAF2; width:18px; height:18px; cursor:pointer;" checked>
+                <span style="font-size:0.82rem; font-weight:700; color:#fff;">Verificado</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="ops-form-group">
+            <label class="ops-form-label">Nombre Completo del GuÃ­a / Baqueano Campesino *</label>
+            <input type="text" class="ops-form-input" id="opsGuideName" placeholder="Ej. Carlos 'El Baqueano' Silva" required>
+          </div>
+
+          <div class="ops-form-grid-2">
+            <div class="ops-form-group">
+              <label class="ops-form-label">Carnet INTUR / AcreditaciÃ³n Oficial</label>
+              <input type="text" class="ops-form-input" id="opsGuideCarnet" placeholder="Ej. INTUR-MAD-0012">
+            </div>
+            <div class="ops-form-group">
+              <label class="ops-form-label">Estado Operativo</label>
+              <select class="ops-form-select" id="opsGuideStatus">
+                <option value="published">Activo en Servicio</option>
+                <option value="pending">En VerificaciÃ³n</option>
+                <option value="suspended">Suspendido Temporalmente</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- SECCIÃ“N 2: TERRITORIO & SABERES -->
+          <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+            <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
+              <i class="fa-solid fa-map-location-dot" style="color: var(--bq-accent);"></i>
+              <span>Territorio &amp; Especialidad Nativa</span>
+            </h3>
+
+            <div class="ops-form-grid-2">
+              <div class="ops-form-group">
+                <label class="ops-form-label">Departamento / Territorio *</label>
+                <select class="ops-form-select" id="opsGuideDepartment">
+                  <option value="Boaco">Boaco</option>
+                  <option value="Carazo">Carazo</option>
+                  <option value="Chinandega">Chinandega</option>
+                  <option value="Chontales">Chontales</option>
+                  <option value="EstelÃ­">EstelÃ­</option>
+                  <option value="Granada">Granada</option>
+                  <option value="Jinotega">Jinotega</option>
+                  <option value="LeÃ³n">LeÃ³n</option>
+                  <option value="Madriz" selected>Madriz</option>
+                  <option value="Managua">Managua</option>
+                  <option value="Masaya">Masaya</option>
+                  <option value="Matagalpa">Matagalpa</option>
+                  <option value="Nueva Segovia">Nueva Segovia</option>
+                  <option value="Rivas">Rivas</option>
+                  <option value="RÃ­o San Juan">RÃ­o San Juan</option>
+                  <option value="RACCN">RACCN (Caribe Norte)</option>
+                  <option value="RACCS">RACCS (Caribe Sur)</option>
+                </select>
+              </div>
+              <div class="ops-form-group">
+                <label class="ops-form-label">Municipio / Localidad</label>
+                <input type="text" class="ops-form-input" id="opsGuideMunicipality" placeholder="Ej. Somoto, Altagracia, Diriamba...">
+              </div>
+            </div>
+
+            <div class="ops-form-group">
+              <label class="ops-form-label">Especialidad TurÃ­stica &amp; Campo de Guianza *</label>
+              <input type="text" class="ops-form-input" id="opsGuideSpecialty" placeholder="Ej. CaÃ±Ã³n de Somoto, EspeleologÃ­a, Volcanes, Avistamiento de Aves, Flora..." required>
+            </div>
+
+            <div class="ops-form-group">
+              <label class="ops-form-label">Cooperativa Campesina o Comunidad</label>
+              <input type="text" class="ops-form-input" id="opsGuideCommunity" placeholder="Ej. Cooperativa Guardaparques Somoto, Red de Baqueanos...">
+            </div>
+          </div>
+
+          <!-- SECCIÃ“N 3: COMPETENCIAS & CONTACTO -->
+          <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+            <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
+              <i class="fa-solid fa-address-book" style="color: var(--bq-secondary);"></i>
+              <span>Contacto Directo &amp; Competencias</span>
+            </h3>
+
+            <div class="ops-form-grid-2">
+              <div class="ops-form-group">
+                <label class="ops-form-label">TelÃ©fono / WhatsApp Directo *</label>
+                <input type="tel" class="ops-form-input" id="opsGuidePhone" placeholder="+505 8891 0021" required>
+              </div>
+              <div class="ops-form-group">
+                <label class="ops-form-label">Correo ElectrÃ³nico (Asignado)</label>
+                <input type="email" class="ops-form-input" id="opsGuideEmail" placeholder="guia@baqueano.ni">
+              </div>
+            </div>
+
+            <div class="ops-form-grid-2">
+              <div class="ops-form-group">
+                <label class="ops-form-label">Idiomas que Domina</label>
+                <input type="text" class="ops-form-input" id="opsGuideLanguages" placeholder="Ej. EspaÃ±ol nativo, InglÃ©s fluido, Miskito">
+              </div>
+              <div class="ops-form-group">
+                <label class="ops-form-label">AÃ±os de Experiencia en Territorio</label>
+                <input type="number" min="0" max="60" class="ops-form-input" id="opsGuideExperience" placeholder="Ej. 12">
+              </div>
+            </div>
+          </div>
+
+          <!-- SECCIÃ“N 4: TARIFAS REGLA 11 (CÃ“RDOBAS PRIMERO) -->
+          <div style="background: rgba(22, 93, 111, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.75rem;">
+              <h3 style="font-size: 0.95rem; font-weight: 700; color: #F4E6C1; margin: 0; display:flex; align-items:center; gap:0.5rem;">
+                <i class="fa-solid fa-coins" style="color: #F4E6C1;"></i>
+                <span>Tarifa por Jornada (Regla 11: CÃ³rdobas Primero)</span>
+              </h3>
+              <span style="font-size: 0.74rem; color: #38BDF8; font-weight: 700; background: rgba(22, 93, 111, 0.35); padding: 0.2rem 0.5rem; border-radius: 4px;">
+                Tasa BCN: C$ 36.6243 = $1 USD
+              </span>
+            </div>
+
+            <div class="ops-form-grid-2">
+              <div class="ops-form-group">
+                <label class="ops-form-label" style="color: #F4E6C1; font-weight: 700;">Tarifa Diaria en CÃ³rdobas (C$ NIO) *</label>
+                <div style="position: relative; display: flex; align-items: center;">
+                  <span style="position: absolute; left: 0.75rem; color: #F4E6C1; font-weight: 800; font-size: 0.95rem;">C$</span>
+                  <input type="number" step="10" class="ops-form-input" id="opsGuidePriceNio" placeholder="800" style="padding-left: 2.5rem; font-weight: 800; font-size: 1.05rem; color: #F4E6C1;" oninput="window.BaqueanoOpsGuides.calculateUsdFromNio()" required>
+                </div>
+              </div>
+
+              <div class="ops-form-group">
+                <label class="ops-form-label" style="color: #38BDF8; font-weight: 700;">Equivalente en DÃ³lares ($ USD)</label>
+                <div style="position: relative; display: flex; align-items: center;">
+                  <span style="position: absolute; left: 0.75rem; color: #38BDF8; font-weight: 800; font-size: 0.95rem;">$</span>
+                  <input type="number" step="0.01" class="ops-form-input" id="opsGuidePriceUsd" placeholder="21.84" style="padding-left: 2.2rem; font-weight: 700; font-size: 1.05rem; color: #38BDF8;" oninput="window.BaqueanoOpsGuides.calculateNioFromUsd()">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECCIÃ“N 5: RESEÃ‘A & SABERES ANCESTRALES -->
+          <div class="ops-form-group">
+            <label class="ops-form-label">Saberes Campesinos, Rutas &amp; ReseÃ±a BiogrÃ¡fica</label>
+            <textarea class="ops-form-textarea" id="opsGuideBio" rows="3" placeholder="Describe los conocimientos tradicionales del baqueano, senderos que domina, botÃ¡nica, leyendas y recomendaciones para los viajeros..."></textarea>
+          </div>
+
+          <div class="ops-form-group">
+            <label class="ops-form-label">URL de FotografÃ­a de Perfil / AcreditaciÃ³n</label>
+            <input type="url" class="ops-form-input" id="opsGuidePhotoUrl" placeholder="https://... o assets/images/guias/...">
+          </div>
+
+          <div class="ops-drawer-footer" style="display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--ops-border-subtle);">
+            <div>
+              <button type="button" class="btn-ops-matte danger" id="opsGuideDrawerSuspendBtn" style="display:none;">
+                <i class="fa-solid fa-pause"></i> Suspender
+              </button>
+            </div>
+            <div style="display:flex; gap:0.65rem;">
+              <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsGuides.closeDrawer()">
+                Cancelar
+              </button>
+              <button type="submit" class="btn-ops-matte primary">
+                <i class="fa-solid fa-floppy-disk"></i> Guardar Ficha de GuÃ­a
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CONFIRMACIÃ“N DE ELIMINACIÃ“N DE GUÃA -->
+  <div class="ops-modal-backdrop" id="opsGuideDeleteModal">
+    <div class="ops-modal-card" style="max-width: 440px;">
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 0.85rem;">
+          <i class="fa-solid fa-triangle-exclamation" style="color: #EF4444; font-size: 1.6rem;"></i>
+        </div>
+        <h3 style="color: #fff; margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700;">Â¿Eliminar GuÃ­a del CatÃ¡logo?</h3>
+        <p style="color: var(--ops-text-secondary); font-size: 0.85rem; margin: 0; line-height: 1.45;">
+          EstÃ¡s a punto de retirar del catÃ¡logo a <strong id="opsGuideDeleteName" style="color: #F4E6C1;"></strong>. Esta acciÃ³n no se puede deshacer.
+        </p>
+      </div>
+      <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+        <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsGuides.closeDeleteModal()">
+          Cancelar
+        </button>
+        <button type="button" class="btn-ops-matte danger" onclick="window.BaqueanoOpsGuides.confirmDelete()">
+          <i class="fa-solid fa-trash-can"></i> Confirmar EliminaciÃ³n
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- SCRIPTS CENTRALES DE FIREBASE, SUPABASE & MOTOR DE OPERACIONES -->
   <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
@@ -2493,6 +2712,8 @@
   <script src="js/video-registry.js?v=20260926-ops-fixed-uhd-1"></script>
   <!-- Matriz de roles compartida con el sitio público (autorización del Ops Center). -->
   <script src="js/shared/roles.js?v=20261005-rbac-1"></script>
+    <!-- CatÃ¡logo operativo y mock data real de respaldo para cero listas vacÃ­as -->
+  <script src="js/ops-center/ops-mock-data.js?v=20261008-1"></script>
   <script src="js/ops-center/ops-engine.js?v=20261008-reservas-1"></script>
   <script src="js/ops-center/ops-live-data.js?v=20261008-reservas-1"></script>
   <script src="js/ops-center/ops-ia-copilot.js?v=20261005-ops2-1"></script>
@@ -2512,7 +2733,8 @@
   <script defer src="js/ops-center/ops-places.js?v=20261007-1"></script>
   <script defer src="js/ops-center/ops-users.js?v=20261008-users-1"></script>
   <script defer src="js/ops-center/ops-businesses.js?v=20261008-biz-1"></script>
-  <script defer src="js/ops-center/ops-payments.js?v=20261008-pagos-1"></script>
+    <script defer src="js/ops-center/ops-payments.js?v=20261008-pagos-1"></script>
+  <script defer src="js/ops-center/ops-guides.js?v=20261008-guias-1"></script>
   <script defer src="js/ops-center/ops-nav-groups.js?v=20261007-1"></script>
   <script defer src="js/ops-center/ops-alerts.js?v=20261007-1"></script>
   <script defer src="js/baqueano-presence.js?v=20261006-1" data-bq-presence="true"></script>
