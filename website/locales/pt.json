@@ -1778,7 +1778,355 @@
       "entityKeywords": {
         "inputPlaceholder1": "nicarágua, turismo rural, vulcões, baqueano"
       },
-      "statusUnchecked": "⚪ NÃO VERIFICADO"
+      "statusUnchecked": "⚪ NÃO VERIFICADO",
+      "opsBizDrawerTitle": {
+        "span1": "Novo negócio & parceiro comunitário"
+      },
+      "opsBizDrawerSubtitle": {
+        "p1": "Módulo: negócios comunitários, anfitriões e empreendedores"
+      },
+      "opsBusinessDrawer": {
+        "button1": "Geral & ramo",
+        "button2": "Saberes & fotos"
+      },
+      "opsBizPaneGeneral": {
+        "span1": "Identidade comercial & responsável",
+        "label1": "Nome comercial do negócio / empreendimento *",
+        "label2": "Anfitrião / proprietário responsável",
+        "label3": "Ramo / categoria comercial *",
+        "label4": "Status operacional na plataforma *",
+        "span2": "Serviços & selos oficiais",
+        "span3": "Selo oficial de verificação (check azul)",
+        "span4": "Comprova visita de campo e cumprimento da Lei 1210 / Lei 1211.",
+        "span5": "Serviço de day use comunitário (Day Pass disponível)",
+        "span6": "O viajante pode visitar o local durante o dia sem precisar pernoitar.",
+        "span7": "Joia escondida autêntica (recomendação local)",
+        "span8": "Experiência rural fora das rotas comerciais de massa."
+      },
+      "opsBizFormCategory": {
+        "option1": "Hospedagem rural / ecolodge / cabana",
+        "option2": "Restaurante típico / restaurante / gastronomia",
+        "option3": "Guia nativo / operador turístico local / excursões",
+        "option4": "Transporte rural / lacustre / comunitário",
+        "option5": "Artesanato / oficinas vivas / cultura",
+        "option6": "Agroturismo / fazenda familiar / café & cacau",
+        "option7": "Cooperativa de ecoturismo comunitário",
+        "option8": "Outro empreendimento comunitário"
+      },
+      "opsBizFormStatus": {
+        "option1": "Publicado (visível no site e no app Android)",
+        "option2": "Suspenso / rascunho (oculto temporariamente para revisão)",
+        "option3": "Em revisão (aguardando aprovação da equipe)",
+        "option4": "Arquivado (histórico / fora de serviço)"
+      },
+      "opsBizPaneTerritorio": {
+        "span1": "Território & georreferenciamento",
+        "label1": "Departamento *",
+        "label2": "Endereço / ponto de referência local",
+        "label3": "Latitude GPS (Nicaragua: 10,6 a 15,1)",
+        "label4": "Longitude GPS (Nicaragua: -87,8 a -82,5)"
+      },
+      "opsBizPaneContacto": {
+        "span1": "Tarifas de referência (Córdobas primeiro · regra 11)",
+        "span2": "Taxa BCN: C$ 36,6243 / US$ 1",
+        "label1": "Tarifa base em córdobas (C$) *",
+        "label2": "Tarifa equivalente em dólares (US$)",
+        "span3": "Contato direto com o anfitrião (0% de comissão)",
+        "label3": "Telefone fixo / celular",
+        "label4": "WhatsApp direto (para reservas)",
+        "label5": "E-mail oficial"
+      },
+      "opsBizPaneHistoria": {
+        "span1": "Relato do anfitrião & saberes camponeses",
+        "label1": "História camponesa / relato do anfitrião",
+        "label2": "Descrição geral do negócio & serviços",
+        "span2": "Foto de capa / logotipo",
+        "label3": "URL da imagem (ou envie um arquivo abaixo)"
+      },
+      "opsBizDropzoneText": {
+        "div1": "Clique ou arraste para enviar uma foto ou logotipo"
+      },
+      "opsBizDropzone": {
+        "small1": "Aceita JPG, PNG e WebP de até 15 MB"
+      },
+      "btnOpsBizDrawerSave": {
+        "button1": "Salvar negócio"
+      },
+      "opsUserDrawerTitle": {
+        "span1": "Novo usuário"
+      },
+      "opsUserDrawerSubtitle": {
+        "p1": "Módulo: diretório de usuários & controle de acesso RBAC"
+      },
+      "opsUserDrawer": {
+        "span1": "Identidade & conta",
+        "label1": "Nome completo oficial *",
+        "label2": "E-mail (e-mail de acesso) *",
+        "span2": "Senha de acesso",
+        "button1": "Gerar senha segura",
+        "label3": "Confirmar senha",
+        "span3": "Função no ecossistema & status",
+        "label4": "Função atribuída *",
+        "label5": "Status da conta *",
+        "label6": "Departamento / território",
+        "label7": "Nível de explorador / título",
+        "label8": "Selo de verificação",
+        "span4": "Perfil verificado (check azul)",
+        "label9": "Observações / notas internas"
+      },
+      "opsUserFormPasswordHint": {
+        "p1": "Obrigatória ao criar: deve ter pelo menos 8 caracteres seguros para entrar."
+      },
+      "opsUserFormRole": {
+        "option1": "Explorador / turista (usuário geral da web e do app)",
+        "option2": "Guia & baqueano nativo (credenciado no território)",
+        "option3": "Empreendedor parceiro (anfitrião rural / negócio)",
+        "option4": "Auditor territorial (supervisão somente leitura)",
+        "option5": "Administrador geral (gestão editorial e do catálogo)",
+        "option6": "Superadministrador (controle total do sistema)"
+      },
+      "opsUserFormStatus": {
+        "option1": "Ativo (acesso habilitado)",
+        "option2": "Suspenso (pausa administrativa)",
+        "option3": "Bloqueado (acesso revogado por segurança)",
+        "option4": "Aguardando verificação"
+      },
+      "btnOpsUserDrawerDelete": {
+        "button1": "Excluir usuário"
+      },
+      "opsUserSaveBtnText": {
+        "span1": "Salvar usuário"
+      },
+      "opsUserPasswordModal": {
+        "h21": "Alterar senha",
+        "span1": "Usuário selecionado:",
+        "label1": "Nova senha *",
+        "button1": "Gerar segura",
+        "label2": "Confirmar nova senha *",
+        "button2": "Atualizar senha"
+      },
+      "opsPaymentDrawerTitle": {
+        "span1": "Novo comprovante de pagamento"
+      },
+      "opsPaymentDrawerSubtitle": {
+        "p1": "Módulo: pagamentos & comprovantes bancários"
+      },
+      "opsPaymentDrawer": {
+        "span1": "Identificação fiscal & referência bancária",
+        "span2": "Código do comprovante *",
+        "button1": "Gerar",
+        "label1": "Nº de referência / comprovante de depósito *",
+        "label2": "Banco / meio de pagamento *",
+        "label3": "Status de conciliação *",
+        "label4": "Data da transação *",
+        "span3": "Titular / explorador que fez o pagamento",
+        "label5": "Nome completo do cliente *",
+        "label6": "Telefone / WhatsApp (para enviar o comprovante)",
+        "label7": "E-mail (para enviar o recibo digital)",
+        "span4": "Descrição do serviço & reserva vinculada",
+        "label8": "Conceito ou descrição do pagamento *",
+        "label9": "Código da reserva associada (opcional)",
+        "span5": "Valor & conversão oficial (regra 11: córdobas primeiro)",
+        "span6": "Taxa BCN: C$ 36,6243 = US$ 1",
+        "p1": "Informe o valor em córdobas e o sistema calculará automaticamente o equivalente em dólares, ou vice-versa.",
+        "label10": "Valor em córdobas (C$ NIO) *",
+        "label11": "Equivalente em dólares (US$)",
+        "span7": "Comprovante de depósito ou digital (prova visual)",
+        "label12": "URL do comprovante (ou envie imagem/PDF abaixo)",
+        "span8": "Notas de conciliação & auditoria contábil",
+        "label13": "Conta creditada / observações de auditoria"
+      },
+      "opsPaymentFormBank": {
+        "option1": "BAC Credomatic Nicaragua",
+        "option2": "Banco de la Producción (Banpro)",
+        "option3": "Banco LAFISE Bancentro",
+        "option4": "Banco de Finanzas (BDF)",
+        "option5": "Banco Avanz Nicaragua",
+        "option6": "Carteira móvel (Kash / Banpro)",
+        "option7": "Cartão de débito / crédito (Visa / Mastercard)",
+        "option8": "Dinheiro no território (0% de comissão do guia)",
+        "option9": "Gateway internacional Stripe",
+        "option10": "Transferência ACH / SWIFT"
+      },
+      "opsPaymentFormStatus": {
+        "option1": "Conciliado & verificado (creditado)",
+        "option2": "Rejeitado / não creditado",
+        "option3": "Reembolsado / anulado"
+      },
+      "opsPaymentDropzoneText": {
+        "div1": "Clique ou arraste para enviar a foto do comprovante bancário"
+      },
+      "opsPaymentDropzone": {
+        "small1": "Aceita imagens (JPG, PNG, WebP) ou arquivos PDF"
+      },
+      "btnOpsPaymentDrawerShare": {
+        "button1": "Enviar ao cliente"
+      },
+      "btnOpsPaymentDrawerSave": {
+        "button1": "Salvar comprovante"
+      },
+      "opsPaymentShareModal": {
+        "span1": "Enviar comprovante ao cliente",
+        "span2": "CLIENTE",
+        "span3": "TOTAL PAGO",
+        "span4": "BANCO / REFERÊNCIA",
+        "label1": "WhatsApp do cliente",
+        "label2": "E-mail do cliente",
+        "span5": "Enviar por WhatsApp",
+        "span6": "Enviar por e-mail",
+        "span7": "Imprimir / recibo PDF",
+        "span8": "Copiar para a área de transferência"
+      },
+      "opsShareModalCode": {
+        "span1": "COMP-2026-XXXX"
+      },
+      "opsBaucherModalTitle": {
+        "span1": "Comprovante / depósito bancário"
+      },
+      "opsGuideDrawerTitle": {
+        "h21": "Novo guia nativo credenciado"
+      },
+      "opsGuideDrawerSubtitle": {
+        "p1": "Registro conforme a Lei 1211 e o INTUR"
+      },
+      "opsGuideForm": {
+        "span1": "Selo de guia verificado (INTUR / Baqueano)",
+        "span2": "Credencia o guia como anfitrião oficial verificado no app e no catálogo público, sem intermediários.",
+        "label1": "Nome completo do guia / baqueano camponês *",
+        "label2": "Carteira INTUR / credenciamento oficial",
+        "label3": "Status operacional",
+        "span3": "Território & especialidade nativa",
+        "label4": "Departamento / território *",
+        "label5": "Município / localidade",
+        "label6": "Especialidade turística & área de guia *",
+        "label7": "Cooperativa camponesa ou comunidade",
+        "span4": "Contato direto & competências",
+        "label8": "Telefone / WhatsApp direto *",
+        "label9": "E-mail (atribuído)",
+        "label10": "Idiomas que domina",
+        "label11": "Anos de experiência no território",
+        "span5": "Diária (regra 11: córdobas primeiro)",
+        "label12": "Diária em córdobas (C$ NIO) *",
+        "label13": "Equivalente em dólares (US$)",
+        "label14": "Saberes camponeses, rotas & biografia",
+        "label15": "URL da foto de perfil / credenciamento",
+        "button1": "Salvar ficha do guia"
+      },
+      "opsGuideStatus": {
+        "option1": "Ativo em serviço",
+        "option2": "Em verificação",
+        "option3": "Suspenso temporariamente"
+      },
+      "opsGuideDepartment": {
+        "option1": "Estelí",
+        "option2": "León",
+        "option3": "Río San Juan"
+      },
+      "opsGuideDeleteModal": {
+        "h31": "Remover o guia do catálogo?",
+        "p1": "Você está prestes a remover do catálogo",
+        "p2": ". Esta ação não pode ser desfeita.",
+        "button1": "Confirmar remoção"
+      },
+      "opsBizFormName": {
+        "inputPlaceholder1": "Ex.: Comedor Tradicional Doña Haydée, Hospedaje Campesino Somoto..."
+      },
+      "opsBizFormHost": {
+        "inputPlaceholder1": "Ex.: Doña Haydée Palacios, cooperativa de guarda-parques..."
+      },
+      "opsBizFormMunicipality": {
+        "inputPlaceholder1": "Ex.: Somoto, Ometepe, San Ramón, Matagalpa..."
+      },
+      "opsBizFormAddress": {
+        "textareaPlaceholder1": "Ex.: 2 quadras ao norte do Parque Central, em frente ao rio..."
+      },
+      "opsBizFormLatitude": {
+        "inputPlaceholder1": "Ex.: 13.4862"
+      },
+      "opsBizFormLongitude": {
+        "inputPlaceholder1": "Ex.: -86.5824"
+      },
+      "opsBizFormPriceNio": {
+        "inputPlaceholder1": "Ex.: 350.00"
+      },
+      "opsBizFormPriceUsd": {
+        "inputPlaceholder1": "Ex.: 9.56"
+      },
+      "opsBizFormPhone": {
+        "inputPlaceholder1": "Ex.: +505 2713-2200 ou 8888-1234"
+      },
+      "opsBizFormWhatsapp": {
+        "inputPlaceholder1": "Ex.: 88881234 ou +50588881234"
+      },
+      "opsBizFormStory": {
+        "textareaPlaceholder1": "Quem são os anfitriões, a história familiar camponesa e como nasceu o empreendimento..."
+      },
+      "opsBizFormDescription": {
+        "textareaPlaceholder1": "Detalhes de pratos, quartos, trilhas, horários e dicas para viajantes..."
+      },
+      "opsUserFormName": {
+        "inputPlaceholder1": "Ex.: Carlos Silva Mendieta"
+      },
+      "opsUserFormLevel": {
+        "inputPlaceholder1": "Ex.: Guardião supremo, guia territorial..."
+      },
+      "opsUserFormNotes": {
+        "textareaPlaceholder1": "Motivo da suspensão, notas de atribuição ou contato de referência..."
+      },
+      "opsQuickPassNewPass": {
+        "inputPlaceholder1": "Mínimo de 8 caracteres"
+      },
+      "opsQuickPassConfirmPass": {
+        "inputPlaceholder1": "Repetir senha"
+      },
+      "opsPaymentFormCode": {
+        "inputPlaceholder1": "Ex.: COMP-2026-0042"
+      },
+      "opsPaymentFormReference": {
+        "inputPlaceholder1": "Ex.: BAC-TRX-441098, REF-88912"
+      },
+      "opsPaymentFormCustomerName": {
+        "inputPlaceholder1": "Ex.: Mateo Silva Rostrán"
+      },
+      "opsPaymentFormConcept": {
+        "inputPlaceholder1": "Ex.: Expedição ao Cânion de Somoto + guia comunitário, cabana ecolodge..."
+      },
+      "opsPaymentFormOrderCode": {
+        "inputPlaceholder1": "Ex.: RES-BQ-104"
+      },
+      "opsPaymentBaucherPreviewImg": {
+        "imgAlt1": "Comprovante"
+      },
+      "opsPaymentFormNotes": {
+        "textareaPlaceholder1": "Ex.: Creditado na conta corrente BAC em córdobas nº 4410. Verificado com o extrato..."
+      },
+      "opsGuideName": {
+        "inputPlaceholder1": "Ex.: Carlos 'El Baqueano' Silva"
+      },
+      "opsGuideCarnet": {
+        "inputPlaceholder1": "Ex.: INTUR-MAD-0012"
+      },
+      "opsGuideMunicipality": {
+        "inputPlaceholder1": "Ex.: Somoto, Altagracia, Diriamba..."
+      },
+      "opsGuideSpecialty": {
+        "inputPlaceholder1": "Ex.: Cânion de Somoto, espeleologia, vulcões, observação de aves, flora..."
+      },
+      "opsGuideCommunity": {
+        "inputPlaceholder1": "Ex.: Cooperativa de guarda-parques de Somoto, rede de baqueanos..."
+      },
+      "opsGuideLanguages": {
+        "inputPlaceholder1": "Ex.: espanhol nativo, inglês fluente, miskito"
+      },
+      "opsGuideExperience": {
+        "inputPlaceholder1": "Ex.: 12"
+      },
+      "opsGuideBio": {
+        "textareaPlaceholder1": "Descreva os saberes tradicionais do baqueano, as trilhas que domina, botânica, lendas e dicas para os viajantes..."
+      },
+      "opsGuidePhotoUrl": {
+        "inputPlaceholder1": "https://... ou assets/images/guias/..."
+      }
     },
     "aliados": {
       "body": {
@@ -5344,6 +5692,235 @@
       "colTerritory": "Território",
       "coverageTable": "Cobertura por departamento e região",
       "matrix": "Matriz de alinhamento nacional"
+    },
+    "guides": {
+      "buscarPorNombreTerritorio": "Buscar por nome, território, especialidade ou carteira...",
+      "guiaVerificadoConAcreditacion": "Guia verificado com credenciamento oficial",
+      "abrirWhatsapp": "Abrir WhatsApp",
+      "editarFichaDelGuia": "Editar ficha do guia",
+      "eliminarGuiaDelCatalogo": "Remover guia do catálogo",
+      "porFavorIngresaEl": "Informe o nome completo do guia.",
+      "porFavorEspecificaLa": "Especifique a especialidade turística do guia.",
+      "guiaGuardadoExitosamente": "Guia \"{p0}\" salvo com sucesso.",
+      "guiaEliminadoDelCatalogo": "Guia \"{p0}\" removido do catálogo.",
+      "reactivateGuide": "Reativar guia",
+      "suspendGuide": "Suspender guia",
+      "reactivate": "Reativar",
+      "suspend": "Suspender"
+    },
+    "messages": {
+      "buscarPorAsuntoO": "Buscar por assunto ou e-mail...",
+      "cerrarVistaDeConversacion": "Fechar visualização da conversa",
+      "escribeAquiTuRespuesta": "Escreva aqui sua resposta oficial. O viajante receberá uma notificação no sino do perfil web e do app Android...",
+      "porFavorEscribeEl": "Escreva a resposta antes de enviar.",
+      "escribeLaRespuestaAntes": "Escreva a resposta antes de enviar.",
+      "respuestaEnviadaElViajero": "Resposta enviada. O viajante foi notificado.",
+      "errorAlResponder": "Erro ao responder: {p0}",
+      "conversacionCerrada": "Conversa encerrada.",
+      "errorAlCerrar": "Erro ao encerrar: {p0}",
+      "conversacionReabierta": "Conversa reaberta.",
+      "sending": "Enviando...",
+      "sendReply": "Enviar resposta ao viajante"
+    },
+    "businesses": {
+      "buscarPorNegocioAnfitrion": "Buscar por negócio, anfitrião, município ou telefone...",
+      "verificadoOficialmenteSelloAutentico": "Verificado oficialmente (selo autêntico BAQUEANO)",
+      "abrirWhatsappDirectoCon": "Abrir WhatsApp direto com {p0}",
+      "editarDatosComercialesContacto": "Editar dados comerciais, contato e território",
+      "restaurarDeLaPapelera": "Restaurar da lixeira",
+      "eliminarArchivarNegocio": "Excluir / arquivar negócio",
+      "idActualizado": "ID: {p0} · Atualizado: {p1}",
+      "moduloNegociosComunitariosAnfitriones": "Módulo: negócios comunitários, anfitriões e empreendedores",
+      "subiendoImagenAStorage": "Enviando imagem para o Storage...",
+      "hazClicOArrastra": "Clique ou arraste para enviar uma foto ou logotipo",
+      "elNombreComercialDel": "O nome comercial do negócio é obrigatório.",
+      "negocioGuardadoExitosamente": "Negócio \"{p0}\" salvo com sucesso.",
+      "errorAlGuardar": "Erro ao salvar: {p0}",
+      "error": "Erro: {p0}",
+      "negocio": "Negócio \"{p0}\" {p1}.",
+      "errorAlSuspenderReactivar": "Erro ao suspender/reativar: {p0}",
+      "negocioArchivadoConExito": "Negócio \"{p0}\" arquivado com sucesso.",
+      "errorAlArchivar": "Erro ao arquivar: {p0}",
+      "negocioRestauradoABorradores": "Negócio \"{p0}\" restaurado para rascunhos.",
+      "errorAlRestaurar": "Erro ao restaurar: {p0}",
+      "selloDeVerificacionRevocado": "Selo de verificação revogado.",
+      "errorAlVerificar": "Erro ao verificar: {p0}",
+      "elArchivoDebeSer": "O arquivo deve ser uma imagem válida (JPG, PNG ou WebP).",
+      "laImagenSuperaEl": "A imagem excede o limite permitido de 15 MB.",
+      "fotografiaSubidaExitosamente": "Foto enviada com sucesso.",
+      "errorEnSubida": "Erro no envio: {p0}",
+      "sealActiveManage": "Selo verificado ativo (clique para gerenciar)",
+      "sealGrant": "Conceder selo oficial BAQUEANO",
+      "reactivatePublish": "Reativar / publicar negócio",
+      "suspendHide": "Suspender negócio (ocultar temporariamente)",
+      "editTitle": "Editar negócio: {p0}",
+      "newTitle": "Novo negócio & parceiro comunitário",
+      "saveBusiness": "Salvar negócio"
+    },
+    "payments": {
+      "buscarPorClienteComprobante": "Buscar por cliente, comprovante, referência ou banco...",
+      "verBaucherComprobanteBancario": "Ver comprovante de depósito / bancário",
+      "sinComprobanteAdjunto": "Sem comprovante anexado",
+      "enviarComprobanteAlCliente": "Enviar comprovante ao cliente (WhatsApp, e-mail, PDF)",
+      "aprobarYConciliarPago": "Aprovar e conciliar pagamento (valor creditado)",
+      "cambiarAPendienteDe": "Mudar para aguardando revisão",
+      "editarDatosDelComprobante": "Editar dados do comprovante",
+      "eliminarComprobante": "Excluir comprovante",
+      "idCliente": "ID: {p0} · Cliente: {p1}",
+      "moduloPagosComprobantesBancarios": "Módulo: pagamentos & comprovantes bancários",
+      "ref": "{p0} (Ref.: {p1})",
+      "baucherDepositoBancario": "Comprovante / depósito bancário — {p0}",
+      "subiendoComprobanteAStorage": "Enviando comprovante para o Storage...",
+      "hazClicOArrastra": "Clique ou arraste para enviar a foto do comprovante bancário",
+      "elNombreDelCliente": "O nome do cliente ou explorador é obrigatório.",
+      "elNombreDelCliente2": "O nome do cliente é obrigatório.",
+      "debesIngresarUnMonto": "Informe um valor válido em córdobas (C$) maior que 0.",
+      "montoEnCordobasObligatorio": "Valor em córdobas obrigatório.",
+      "comprobanteGuardadoConExito": "Comprovante \"{p0}\" salvo com sucesso.",
+      "comprobanteGuardadoConExito2": "Comprovante {p0} salvo com sucesso.",
+      "errorAlGuardarComprobante": "Erro ao salvar comprovante: {p0}",
+      "comprobanteMarcadoComo": "Comprovante marcado como: {p0}",
+      "error": "Erro: {p0}",
+      "comprobanteEliminadoConExito": "Comprovante \"{p0}\" excluído com sucesso.",
+      "errorAlEliminar": "Erro ao excluir: {p0}",
+      "porFavorIngresaEl": "Informe o número de WhatsApp do cliente.",
+      "numeroDeWhatsappRequerido": "Número de WhatsApp obrigatório",
+      "abriendoWhatsappConComprobante": "Abrindo WhatsApp com o comprovante oficial...",
+      "porFavorIngresaEl2": "Informe o e-mail do cliente.",
+      "correoElectronicoRequerido": "E-mail obrigatório",
+      "abriendoClienteDeCorreo": "Abrindo o cliente de e-mail...",
+      "textoDelComprobanteCopiado": "Texto do comprovante copiado para a área de transferência.",
+      "comprobanteCopiadoAlPortapapeles": "Comprovante copiado para a área de transferência",
+      "noSePudoCopiar": "Não foi possível copiar automaticamente.",
+      "porFavorPermiteVentanas": "Permita janelas pop-up para imprimir.",
+      "elArchivoDebeSer": "O arquivo deve ser uma imagem (JPG, PNG, WebP) ou um arquivo PDF.",
+      "elArchivoSuperaEl": "O arquivo excede o limite de 15 MB.",
+      "comprobanteSubidoExitosamente": "Comprovante enviado com sucesso.",
+      "errorAlSubirComprobante": "Erro ao enviar comprovante: {p0}",
+      "editTitle": "Editar comprovante: {p0}",
+      "newTitle": "Registrar novo comprovante",
+      "saveReceipt": "Salvar comprovante"
+    },
+    "users": {
+      "buscarPorNombreCorreo": "Buscar por nome, e-mail, função ou ID...",
+      "perfilVerificado": "Perfil verificado",
+      "escribirCorreoA": "Enviar e-mail para {p0}",
+      "editarUsuarioPerfilRol": "Editar usuário (perfil, função, senha)",
+      "cambiarContrasenaDeAcceso": "Troca rápida de senha",
+      "eliminarUsuarioDefinitivamente": "Excluir usuário definitivamente",
+      "editarUsuario": "Editar usuário: {p0}",
+      "idModificacionDePerfil": "ID: {p0} · Alteração de perfil & permissões",
+      "opcionalEnEdicionDeja": "Opcional na edição: deixe em branco para manter a senha atual ou digite uma nova para alterá-la.",
+      "guardarCambios": "Salvar alterações",
+      "nuevoUsuario": "Novo usuário",
+      "directorioDeIdentidadesCredenciales": "Diretório de identidades & credenciais",
+      "obligatorioDebeTenerAl": "Obrigatória: deve ter pelo menos 8 caracteres seguros para entrar.",
+      "crearYGuardarUsuario": "Criar e salvar usuário",
+      "elNombreCompletoEs": "O nome completo é obrigatório.",
+      "ingresaUnCorreoElectronico": "Informe um e-mail válido.",
+      "debesAsignarUnaContrasena": "Defina uma senha para o novo usuário.",
+      "laContrasenaDebeTener": "A senha deve ter pelo menos 8 caracteres seguros.",
+      "lasContrasenasNoCoinciden": "As senhas não coincidem. Verifique-as.",
+      "laNuevaContrasenaDebe": "A nova senha deve ter pelo menos 8 caracteres.",
+      "errorAlGuardar": "Erro ao salvar: {p0}",
+      "usuarioNoEncontrado": "Usuário não encontrado.",
+      "laContrasenaDebeContener": "A senha deve conter pelo menos 8 caracteres seguros.",
+      "lasContrasenasNoCoinciden2": "As senhas não coincidem.",
+      "actualizandoContrasena": "Atualizando senha...",
+      "contrasenaDeActualizadaCon": "Senha de {p0} atualizada com sucesso.",
+      "errorAlActualizarContrasena": "Erro ao atualizar senha: {p0}",
+      "usuarioMarcadoComo": "Usuário \"{p0}\" marcado como {p1}.",
+      "porSeguridadNoPuedes": "Por segurança, você não pode excluir a própria conta com a sessão ativa.",
+      "accionBloqueadaNoSe": "Ação bloqueada: não é possível excluir o único superadministrador do sistema.",
+      "usuarioEliminadoDefinitivamente": "Usuário \"{p0}\" excluído definitivamente.",
+      "errorAlEliminar": "Erro ao excluir: {p0}",
+      "contrasenaGeneradaYCopiada": "Senha gerada e copiada para a área de transferência: {p0}",
+      "contrasenaGenerada": "Senha gerada: {p0}",
+      "suspendAccess": "Suspender acesso",
+      "reactivateAccess": "Reativar acesso"
+    },
+    "engine": {
+      "losRegistrosDeAuditoria": "Os registros de auditoria são imutáveis: não podem ser excluídos (rastreabilidade protegida).",
+      "registroDeAuditoriaEliminado": "Registro de auditoria excluído com sucesso.",
+      "elHistorialDeAuditoria": "O histórico de auditoria é imutável: não pode ser esvaziado (rastreabilidade protegida).",
+      "noHayRegistrosDe": "Não há registros de auditoria para excluir.",
+      "historialDeAuditoriaVaciado": "Histórico de auditoria esvaziado por completo.",
+      "estadoActualizadoA": "Status atualizado para \"{p0}\"",
+      "registroEliminadoPermanentementeDe": "Registro excluído definitivamente do banco de dados.",
+      "registroDuplicadoEnModo": "Registro duplicado como rascunho.",
+      "accionMasivaCompletadaPara": "Ação em massa concluída para {p0} registros.",
+      "iniciandoSincronizacionCanonicaHacia": "Iniciando sincronização canônica com o Cloud Firestore...",
+      "catalogoCompletoSincronizadoDestinos": "Catálogo completo sincronizado! Destinos, negócios e páginas ao vivo no Firestore e no Supabase.",
+      "avisoLaRedEsta": "Aviso: a rede está instável. As alterações serão salvas localmente.",
+      "seccionAhoraEsta": "A seção \"{p0}\" agora está {p1}.",
+      "ordenDeSeccionesActualizado": "Ordem das seções atualizada.",
+      "seccionMovidaALa": "Seção movida para a lixeira.",
+      "seccionRestauradaYPublicada": "Seção restaurada e publicada no site.",
+      "contenidoOriginalRestauradoY": "Conteúdo original restaurado e publicado.",
+      "seccionEliminadaPermanentemente": "Seção excluída definitivamente.",
+      "plantillaOriginalRestablecidaPara": "Modelo original restabelecido para {p0}.html.",
+      "archivoCargadoYListo": "Arquivo \"{p0}\" carregado e pronto para publicar.",
+      "errorAlProcesarArchivo": "Erro ao processar arquivo: {p0}",
+      "elTituloNombreEs": "O título / nome é um campo obrigatório.",
+      "registroGuardadoComo": "Registro salvo como \"{p0}\".",
+      "errorAlGuardar": "Erro ao salvar: {p0}",
+      "medioSubidoAFirebase": "Mídia enviada para o Firebase Storage.",
+      "errorSubiendoMedio": "Erro ao enviar mídia: {p0}",
+      "elTituloEncabezadoDel": "O título / cabeçalho do componente é obrigatório.",
+      "componenteGuardadoConExito": "Componente \"{p0}\" salvo com sucesso e publicado em {p1}.html!",
+      "avisoDeMigracion": "Aviso de migração: ",
+      "sincronizandoEcosistemaWebAndroid": "Sincronizando ecossistema Web, Android, Firestore e Supabase...",
+      "ecosistema100SincronizadoY": "Ecossistema 100% sincronizado e conectado ao vivo!",
+      "firestoreNoEstaDisponible": "O Firestore não está disponível para publicar os vídeos.",
+      "revisaLasUrlsDel": "Verifique as URLs do espaço {p0}.",
+      "videosPublicadosPermaneceranFijos": "Vídeos publicados. Permanecerão fixos até a próxima atualização do Ops Center.",
+      "noFuePosiblePublicar": "Não foi possível publicar os vídeos: {p0}",
+      "actualizandoTelemetriaDeResguardo": "Atualizando telemetria de backup...",
+      "iniciandoCicloDeSincronizacion": "Iniciando ciclo de sincronização Firebase-Supabase...",
+      "sincronizacionProcesadaPorEl": "Sincronização processada pelo servidor.",
+      "sinSincronizacion": "Sem sincronização: {p0}",
+      "selloOficialAsignadoExitosamente": "Selo oficial atribuído com sucesso.",
+      "selloDeVerificacionRevocado": "Selo de verificação revogado.",
+      "membresiaRenovadaPor1": "Assinatura renovada por 1 ano.",
+      "anuncioGlobalSincronizadoCon": "Anúncio global sincronizado com o site e o Android.",
+      "seleccionaUnArchivoApk": "Selecione um arquivo APK e informe a versão.",
+      "elArchivoDebeSer": "O arquivo deve ser um APK válido e não pode passar de 500 MB.",
+      "elArchivoSeleccionadoNo": "O arquivo selecionado não tem uma estrutura de APK válida.",
+      "noSePudoCargar": "Não foi possível enviar o APK: {p0}",
+      "indicaLaVersionY": "Informe a versão e cole o link compartilhado do Google Drive.",
+      "elEnlaceNoParece": "O link não parece ser um arquivo compartilhado válido do Google Drive.",
+      "noSePudoGuardar": "Não foi possível salvar o link: {p0}",
+      "laDescargaDelApk": "O download do APK foi retirado do site; o arquivo é mantido.",
+      "completada": "{p0} concluído: {p1}.",
+      "describeElTrabajoQue": "Descreva a tarefa que deseja delegar.",
+      "archivoSubidoEnlaceCopiado": "Arquivo \"{p0}\" enviado. Link copiado para a área de transferência.",
+      "errorDeCarga": "Erro de carregamento: {p0}",
+      "leyendoTextosImagenesEnlaces": "Lendo textos, imagens, links, botões e mídia da página...",
+      "elementosRealesIncorporadosAl": "{p0} elementos reais incorporados ao Website Builder.",
+      "noSePudoInventariar": "Não foi possível inventariar a página: {p0}",
+      "copiaDeSeguridadDescargada": "Backup baixado: {p0} ({p1} registros).",
+      "ecosistemaRestauradoExitosamenteDesde": "Ecossistema restaurado com sucesso a partir do backup de {p0} ({p1})!",
+      "errorAlRestaurarCopia": "Erro ao restaurar backup: {p0}",
+      "ingresaUnaTasaDe": "Informe uma taxa de câmbio válida e verificável.",
+      "registraLaFuenteY": "Registre a fonte e a data da taxa de câmbio.",
+      "parametrosGlobalesGuardadosY": "Parâmetros globais salvos e sincronizados no Firebase e no Supabase.",
+      "parametrosGuardadosLocalmenteCon": "Parâmetros salvos localmente.",
+      "configuracionSeoActualizadaY": "Configuração de SEO atualizada e aplicada ao site.",
+      "metadatosSeoGuardadosLocalmente": "Metadados de SEO salvos localmente.",
+      "iniciandoDiagnosticoEnVivo": "Iniciando diagnóstico ao vivo de 6 nós na nuvem...",
+      "diagnosticoCompletado66": "Diagnóstico concluído: 6/6 serviços 100% operacionais com latência ideal.",
+      "auditandoTls13": "Auditando TLS 1.3, RLS e permissões RBAC...",
+      "auditoriaAprobadaCeroVulnerabilidades": "Auditoria aprovada: zero vulnerabilidades. Tokens e regras 100% verificados.",
+      "rolAuditorAccesoDe": "Função auditor: acesso somente leitura. Esta ação exige um administrador.",
+      "laAuditoriaEsInmutable": "A auditoria é imutável: só o superadministrador pode depurar registros."
+    },
+    "common": {
+      "saving": "Salvando..."
+    },
+    "health": {
+      "summary": "{ok} de {total} serviços operacionais",
+      "more": "Ver mais",
+      "less": "Ver menos"
     }
   },
   "consent": {
@@ -6079,7 +6656,10 @@
     "reviewRejectedTitle": "Sua avaliação não foi aprovada",
     "reviewRejectedBody": "Motivo da equipe: {reason}",
     "reviewResponseTitle": "O BAQUEANO respondeu sua avaliação",
-    "reviewResponseBody": "Você pode ler a resposta no seu histórico de avaliações."
+    "reviewResponseBody": "Você pode ler a resposta no seu histórico de avaliações.",
+    "newArrived": "Você tem {n} novas notificações",
+    "soundOnLabel": "Som ativado: toque para silenciar",
+    "soundOffLabel": "Som silenciado: toque para ativar"
   },
   "baquiBrain": {
     "groupKids": "{adults} adultos e {kids} crianças",
@@ -6514,7 +7094,8 @@
   },
   "marquee": {
     "pause": "Pausar",
-    "play": "Continuar"
+    "play": "Continuar",
+    "region": "Galeria"
   },
   "musicArchive": {
     "pendingCredits": "Créditos a documentar",

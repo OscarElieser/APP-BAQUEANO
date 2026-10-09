@@ -200,8 +200,21 @@
     return node;
   }
 
+  // i18n de los textos nuevos del panel (claves ops.health.*; respaldo en español).
+  function i18n(key, fallback, vars) {
+    let out = fallback;
+    try { if (window.BaqueanoLanguage && window.BaqueanoLanguage.t) out = window.BaqueanoLanguage.t(key, { fallback }) || fallback; } catch (_) { out = fallback; }
+    return String(out).replace(/\{(\w+)\}/g, (m, k) => (vars && vars[k] != null ? vars[k] : m));
+  }
+  // Ícono por servicio según su nombre real (el servidor no envía ícono).
+  const HEALTH_ICONS = [[/postgis|geometr/i, 'fa-draw-polygon'], [/storage|bucket/i, 'fa-box-archive'], [/supabase|postgres/i, 'fa-database'],
+    [/firebase.*auth|clave|firma/i, 'fa-key'], [/firebase|hosting/i, 'fa-fire'], [/android|apk|app/i, 'fa-mobile-screen'],
+    [/disponib|uptime|24 ?h/i, 'fa-heart-pulse'], [/azure|web|dominio/i, 'fa-globe']];
+  const healthIcon = (label) => (HEALTH_ICONS.find(([re]) => re.test(label || '')) || [null, 'fa-server'])[1];
+  const latencyClass = (ms) => (ms == null ? '' : ms < 200 ? 'is-fast' : ms < 600 ? 'is-medium' : 'is-slow');
+
   function healthCard(compact) {
-    const wrap = el('section', `ops-health ${compact ? 'is-compact' : ''}`);
+    const wrap = el('section', `ops-health is-premium ${compact ? 'is-compact' : ''}`);
     wrap.setAttribute('aria-label', 'Estado real de los servicios');
     const head = el('div', 'ops-health-head');
     const title = el('h3', 'ops-health-title', compact ? 'Estado real de los servicios' : 'Health Center · comprobaciones en vivo');
@@ -209,14 +222,47 @@
     const btn = el('button', 'btn-ops-matte', 'Volver a comprobar');
     btn.type = 'button';
     btn.addEventListener('click', () => refresh({ health: true, force: true }));
-    head.append(title, meta, btn);
+    // 2026-10-09 (pedido del propietario: «hacerlo más premium»): resumen general arriba.
+    const checks = state.health ? state.health.checks : [];
+    const okCount = checks.filter((c) => HEALTH_COLORS[c.state] === 'ok').length;
+    const badCount = checks.filter((c) => HEALTH_COLORS[c.state] === 'bad').length;
+    const summary = el('div', `ops-health-summary ${!checks.length ? 'is-idle' : badCount ? 'is-bad' : okCount === checks.length ? 'is-ok' : 'is-warn'}`);
+    if (checks.length) {
+      const ring = el('span', 'ops-health-ring');
+      ring.style.setProperty('--pct', String(Math.round((okCount / checks.length) * 100)));
+      ring.append(el('b', '', String(okCount)), el('small', '', '/' + checks.length));
+      summary.append(ring, el('span', 'ops-health-summary-text', i18n('ops.health.summary', '{ok} de {total} servicios operativos', { ok: okCount, total: checks.length })));
+    }
+    const headText = el('div', 'ops-health-head-text');
+    headText.append(title, meta);
+    head.append(summary, headText, btn);
     const grid = el('div', 'ops-health-grid');
-    (state.health ? state.health.checks : []).forEach((check) => {
-      const item = el('article', `ops-health-item is-${HEALTH_COLORS[check.state] || 'idle'}`);
+    checks.forEach((check) => {
+      const tone = HEALTH_COLORS[check.state] || 'idle';
+      const item = el('article', `ops-health-item is-${tone}`);
       const top = el('div', 'ops-health-item-top');
-      top.append(el('strong', '', check.label), el('span', 'ops-health-state', HEALTH_LABEL[check.state] || check.state));
-      item.append(top, el('p', 'ops-health-detail', check.detail));
-      item.append(el('small', 'ops-health-source', `Fuente: ${check.source}${check.latency_ms != null ? ` · ${check.latency_ms} ms` : ''}`));
+      const ico = el('span', 'ops-health-icon');
+      const i = el('i', 'fa-solid ' + healthIcon(check.label)); i.setAttribute('aria-hidden', 'true'); ico.append(i);
+      const state = el('span', 'ops-health-state');
+      state.append(el('span', 'ops-health-dot'), document.createTextNode(HEALTH_LABEL[check.state] || check.state));
+      top.append(ico, el('strong', '', check.label), state);
+      const detail = el('p', 'ops-health-detail', check.detail);
+      detail.title = check.detail || '';
+      item.append(top, detail);
+      if ((check.detail || '').length > 120) {
+        const more = el('button', 'ops-health-more', i18n('ops.health.more', 'Ver más'));
+        more.type = 'button'; more.setAttribute('aria-expanded', 'false');
+        more.addEventListener('click', () => {
+          const open = item.classList.toggle('is-expanded');
+          more.setAttribute('aria-expanded', String(open));
+          more.textContent = open ? i18n('ops.health.less', 'Ver menos') : i18n('ops.health.more', 'Ver más');
+        });
+        item.append(more);
+      }
+      const foot = el('div', 'ops-health-foot');
+      foot.append(el('small', 'ops-health-source', `Fuente: ${check.source}`));
+      if (check.latency_ms != null) foot.append(el('span', 'ops-health-latency ' + latencyClass(check.latency_ms), check.latency_ms + ' ms'));
+      item.append(foot);
       grid.append(item);
     });
     if (!state.health) grid.append(el('p', 'ops-health-detail', state.error ? `No se pudo comprobar: ${state.error}` : 'Consultando cada servicio…'));

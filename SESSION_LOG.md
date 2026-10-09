@@ -18,6 +18,17 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 EJECUCIÓN DE LA APLICACIÓN FLUTTER EN EL EMULADOR ANDROID (09-10-2026 ~05:20 CST)
+- **Consulta / Solicitud del Usuario:**
+  *"correr la apk en el emulador"*
+- **Objetivos:**
+  1. Detectar emuladores Android disponibles y dispositivos activos (lutter emulators, db devices).
+  2. Iniciar el emulador disponible en caso de no estar en ejecución.
+  3. Ejecutar e instalar la aplicación BAQUEANO en el emulador (lutter run o instalación directa del APK optimizado).
+  4. Validar el inicio y funcionamiento de la actividad principal 
+i.baqueano.app/.MainActivity.
+
+
 ## 🧭 ACTUALIZACIÓN DE FICHA HISTÓRICA: GLORIA BACON EN historia.html (09-10-2026 ~03:20 CST)
 - **Consulta / Solicitud del Usuario:**
   *"Gloria Isabel Bacon Hogson es una bailarina, coreógrafa, maestra de danza contemporánea y promotora cultural nicaragüense. Fundadora de la Escuela de Danza Espacio Abierto y del Festival Internacional de Danza Contemporánea. Orden Independencia Cultural Rubén Darío en 2008. corregir la informacion de gloria bacon y cambiar la foto https://baqueanonicaragua.com/historia.html"*
@@ -6273,6 +6284,18 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
   - Causa real (mía, del atlas del mismo día): `.bq-atlas-cluster-wrap { position: relative; }` pisaba el `position: absolute` con que Leaflet ubica cada ícono; las agrupaciones se corrían según el orden de dibujo y cambiaban al hacer zoom. Ahora `position: relative` va en el círculo interno (`.bq-atlas-cluster`). CSS v=20261009-atlas-3.
   - Datos revisados en Supabase: los 197 lugares con coordenadas están dentro de Nicaragua (el más al sur, San Juan de Nicaragua 10.92).
   - Verificación: prueba que mide, en zoom 6/7/8/9/11 y a 1366 y 390 px, la distancia entre cada ícono dibujado y su coordenada: máximo 1,4 px (PASS 10/10). Control con la regla vieja reinyectada: FAIL con desvíos de 177 a 911 px (la prueba detecta el error). Las imágenes del mapa también coinciden con su cuadro z/x/y (±1 px de borde).
+
+## 2026-10-09 — Deploy a Azure destrabado (i18n + QA), Ops Center premium y campanita con sonido
+
+- Hallazgo: el deploy «BAQUEANO Producción (Azure)» fallaba desde los commits del Ops Center de la mañana (puerta i18n con 7 errores + QA en navegador con 4 fallos axe); el sitio en vivo seguía en una versión vieja (sin trip-store, mapa viejo, /health 404). También hubo un corte: el dominio raíz quedó en DNS directo a Azure con certificado de staging (el propietario lo restableció en Cloudflare).
+- Puerta i18n → 0 errores: `admin.html` migrado con `i18n-migrate-html.mjs` (233 textos); `ops-guides/messages/businesses/payments/users.js` a 0 textos sin clave y `ops-engine.js` 330→256 (avisos emergentes) con ayudante `i18n()`; atributos `title` en plantillas con `q()`. 418 claves nuevas traducidas a mano en 6 idiomas (el servicio de traducción bloqueó la conexión con 429; no se eludió).
+- Codificación rota reparada (UTF-8 leído como Windows-1252): 33 líneas de `admin.html` (ficha de Guías: «GuÃ­a» → «Guía»), `ops-engine.js` y `ops-live-presence.js` (textos visibles del panel de presencia).
+- QA en navegador: `bq-marquee.js` hace enfocable la cinta sin elementos enfocables (axe scrollable-region-focusable, historia.html); crédito «Leaflet» subrayado en todos los mapas (axe link-in-text-block, mi-viaje.html). Relanzada localmente: 0 fallos en las páginas afectadas.
+- Ops Center «Estado real de los servicios» premium (`ops-live-data.js` + `ops-matte-theme.css`): resumen «N de M operativos» con anillo, ícono por servicio, punto vivo, detalle recortado con «Ver más», latencia coloreada. Prueba con el módulo real: PASS 1366/390 px.
+- Campanita (`baqueano-notifications.js`): timbre Web Audio + sacudida + aviso a lectores de pantalla cuando el contador sube; botón para silenciar (localStorage). Crear alertas desde el superadmin/admin requiere una acción nueva en la Edge Function (pendiente de publicar en Supabase).
+- `tools/kronox-prod-evidence.mjs`: el 8080 abierto en IP de Cloudflare se informa como puerto de borde (reenvía al 80 del origen); `ORIGIN_IP` mide el origen real.
+- Incluye, por decisión del propietario, el cambio paralelo de la ficha de Gloria Bacon (otra persona trabajando en el repo).
+- Pendiente: acción de alertas del superadmin y contacto por correo (Edge Function + publicación), editor de destinos por módulo, coreano y chino.
 
 ## 2026-10-09 — Auditoría de Iconografía y Tipografías Ecosistema Baqueano (App & Web)
 

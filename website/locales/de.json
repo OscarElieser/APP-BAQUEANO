@@ -1778,7 +1778,355 @@
       "entityKeywords": {
         "inputPlaceholder1": "Nicaragua, ländlicher Tourismus, Vulkane, Baqueano"
       },
-      "statusUnchecked": "⚪ NICHT GEPRÜFT"
+      "statusUnchecked": "⚪ NICHT GEPRÜFT",
+      "opsBizDrawerTitle": {
+        "span1": "Neues Unternehmen & Gemeinschaftspartner"
+      },
+      "opsBizDrawerSubtitle": {
+        "p1": "Modul: Gemeinschaftsbetriebe, Gastgeber und Unternehmer"
+      },
+      "opsBusinessDrawer": {
+        "button1": "Allgemein & Branche",
+        "button2": "Wissen & Fotos"
+      },
+      "opsBizPaneGeneral": {
+        "span1": "Geschäftsidentität & Verantwortliche",
+        "label1": "Handelsname des Unternehmens / Vorhabens *",
+        "label2": "Gastgeber / verantwortliche Inhaber",
+        "label3": "Branche / Geschäftskategorie *",
+        "label4": "Betriebsstatus auf der Plattform *",
+        "span2": "Leistungen & offizielle Auszeichnungen",
+        "span3": "Offizielles Verifizierungssiegel (blaues Häkchen)",
+        "span4": "Bestätigt einen Vor-Ort-Besuch und die Einhaltung von Gesetz 1210 / Gesetz 1211.",
+        "span5": "Gemeinschaftlicher Tagesbesuch (Day Pass verfügbar)",
+        "span6": "Reisende können den Ort tagsüber besuchen, ohne übernachten zu müssen.",
+        "span7": "Authentischer Geheimtipp (lokale Empfehlung)",
+        "span8": "Ländliches Erlebnis abseits der Massenrouten."
+      },
+      "opsBizFormCategory": {
+        "option1": "Ländliche Unterkunft / Ecolodge / Hütte",
+        "option2": "Typisches Lokal / Restaurant / Gastronomie",
+        "option3": "Einheimischer Guide / lokaler Reiseveranstalter / Ausflüge",
+        "option4": "Ländlicher / Seen- / Gemeinschaftstransport",
+        "option5": "Kunsthandwerk / Live-Werkstätten / Kultur",
+        "option6": "Agrotourismus / Familienbetrieb / Kaffee & Kakao",
+        "option7": "Gemeinschaftliche Ökotourismus-Kooperative",
+        "option8": "Sonstiges Gemeinschaftsvorhaben"
+      },
+      "opsBizFormStatus": {
+        "option1": "Veröffentlicht (sichtbar auf der Website und in der Android-App)",
+        "option2": "Ausgesetzt / Entwurf (vorübergehend zur Prüfung ausgeblendet)",
+        "option3": "In Prüfung (Freigabe durch das Team ausstehend)",
+        "option4": "Archiviert (historisch / außer Betrieb)"
+      },
+      "opsBizPaneTerritorio": {
+        "span1": "Gebiet & Georeferenzierung",
+        "label1": "Departamento *",
+        "label2": "Adresse / örtlicher Orientierungspunkt",
+        "label3": "GPS-Breitengrad (Nicaragua: 10,6 bis 15,1)",
+        "label4": "GPS-Längengrad (Nicaragua: -87,8 bis -82,5)"
+      },
+      "opsBizPaneContacto": {
+        "span1": "Richtpreise (Córdobas zuerst · Regel 11)",
+        "span2": "BCN-Kurs: C$ 36,6243 / 1 USD",
+        "label1": "Grundpreis in Córdobas (C$) *",
+        "label2": "Entsprechender Preis in Dollar (USD)",
+        "span3": "Direkter Kontakt zu den Gastgebern (0 % Provision)",
+        "label3": "Festnetz / Mobiltelefon",
+        "label4": "Direktes WhatsApp (für Buchungen)",
+        "label5": "Offizielle E-Mail"
+      },
+      "opsBizPaneHistoria": {
+        "span1": "Geschichte der Gastgeber & bäuerliches Wissen",
+        "label1": "Bäuerliche Geschichte / Erzählung der Gastgeber",
+        "label2": "Allgemeine Beschreibung des Betriebs & der Leistungen",
+        "span2": "Titelbild / Logo",
+        "label3": "Bild-URL (oder unten eine Datei hochladen)"
+      },
+      "opsBizDropzoneText": {
+        "div1": "Klicken oder ziehen, um ein Foto oder Logo hochzuladen"
+      },
+      "opsBizDropzone": {
+        "small1": "Unterstützt JPG, PNG und WebP bis 15 MB"
+      },
+      "btnOpsBizDrawerSave": {
+        "button1": "Unternehmen speichern"
+      },
+      "opsUserDrawerTitle": {
+        "span1": "Neuer Benutzer"
+      },
+      "opsUserDrawerSubtitle": {
+        "p1": "Modul: Benutzerverzeichnis & RBAC-Zugriffskontrolle"
+      },
+      "opsUserDrawer": {
+        "span1": "Identität & Konto",
+        "label1": "Vollständiger offizieller Name *",
+        "label2": "E-Mail (Login-E-Mail) *",
+        "span2": "Zugangspasswort",
+        "button1": "Sicheres Passwort erzeugen",
+        "label3": "Passwort bestätigen",
+        "span3": "Rolle im Ökosystem & Status",
+        "label4": "Zugewiesene Rolle *",
+        "label5": "Kontostatus *",
+        "label6": "Departamento / Gebiet",
+        "label7": "Entdeckerstufe / Titel",
+        "label8": "Verifizierungsabzeichen",
+        "span4": "Verifiziertes Profil (blaues Häkchen)",
+        "label9": "Bemerkungen / interne Notizen"
+      },
+      "opsUserFormPasswordHint": {
+        "p1": "Beim Anlegen erforderlich: mindestens 8 sichere Zeichen für die Anmeldung."
+      },
+      "opsUserFormRole": {
+        "option1": "Entdecker / Tourist (allgemeine Web- und App-Nutzer)",
+        "option2": "Guide & einheimischer Baqueano (im Gebiet akkreditiert)",
+        "option3": "Partnerunternehmer (ländliche Gastgeber / Betrieb)",
+        "option4": "Gebietsprüfer (nur lesende Aufsicht)",
+        "option5": "Hauptadministrator (Redaktions- und Katalogverwaltung)",
+        "option6": "Superadministrator (volle Systemkontrolle)"
+      },
+      "opsUserFormStatus": {
+        "option1": "Aktiv (Zugang freigegeben)",
+        "option2": "Ausgesetzt (administrative Pause)",
+        "option3": "Gesperrt (Zugang aus Sicherheitsgründen entzogen)",
+        "option4": "Verifizierung ausstehend"
+      },
+      "btnOpsUserDrawerDelete": {
+        "button1": "Benutzer löschen"
+      },
+      "opsUserSaveBtnText": {
+        "span1": "Benutzer speichern"
+      },
+      "opsUserPasswordModal": {
+        "h21": "Passwort ändern",
+        "span1": "Ausgewählter Benutzer:",
+        "label1": "Neues Passwort *",
+        "button1": "Sicher erzeugen",
+        "label2": "Neues Passwort bestätigen *",
+        "button2": "Passwort aktualisieren"
+      },
+      "opsPaymentDrawerTitle": {
+        "span1": "Neuer Zahlungsbeleg"
+      },
+      "opsPaymentDrawerSubtitle": {
+        "p1": "Modul: Zahlungen & Bankbelege"
+      },
+      "opsPaymentDrawer": {
+        "span1": "Steuerkennung & Bankreferenz",
+        "span2": "Belegnummer *",
+        "button1": "Erzeugen",
+        "label1": "Referenznr. / Einzahlungsbeleg *",
+        "label2": "Bank / Zahlungsart *",
+        "label3": "Abgleichstatus *",
+        "label4": "Transaktionsdatum *",
+        "span3": "Inhaber / Entdecker, der die Zahlung geleistet hat",
+        "label5": "Vollständiger Name des Kunden *",
+        "label6": "Telefon / WhatsApp (zum Senden des Belegs)",
+        "label7": "E-Mail (zum Senden der digitalen Quittung)",
+        "span4": "Leistungsbeschreibung & verknüpfte Buchung",
+        "label8": "Zahlungszweck oder Beschreibung *",
+        "label9": "Zugehöriger Buchungscode (optional)",
+        "span5": "Betrag & offizielle Umrechnung (Regel 11: Córdobas zuerst)",
+        "span6": "BCN-Kurs: C$ 36,6243 = 1 USD",
+        "p1": "Gib den Betrag in Córdobas ein, und das System berechnet automatisch den Gegenwert in Dollar oder umgekehrt.",
+        "label10": "Betrag in Córdobas (C$ NIO) *",
+        "label11": "Gegenwert in Dollar (USD)",
+        "span7": "Einzahlungsbeleg oder digitaler Beleg (visueller Nachweis)",
+        "label12": "Beleg-URL (oder unten ein Bild/PDF hochladen)",
+        "span8": "Notizen zu Abgleich & Buchprüfung",
+        "label13": "Gutschriftkonto / Prüfbemerkungen"
+      },
+      "opsPaymentFormBank": {
+        "option1": "BAC Credomatic Nicaragua",
+        "option2": "Banco de la Producción (Banpro)",
+        "option3": "Banco LAFISE Bancentro",
+        "option4": "Banco de Finanzas (BDF)",
+        "option5": "Banco Avanz Nicaragua",
+        "option6": "Mobile Wallet (Kash / Banpro)",
+        "option7": "Debit- / Kreditkarte (Visa / Mastercard)",
+        "option8": "Bargeld vor Ort (0 % Guide-Provision)",
+        "option9": "Internationales Stripe-Gateway",
+        "option10": "ACH- / SWIFT-Überweisung"
+      },
+      "opsPaymentFormStatus": {
+        "option1": "Abgeglichen & geprüft (gutgeschrieben)",
+        "option2": "Abgelehnt / nicht gutgeschrieben",
+        "option3": "Erstattet / storniert"
+      },
+      "opsPaymentDropzoneText": {
+        "div1": "Klicken oder ziehen, um ein Foto des Bankbelegs hochzuladen"
+      },
+      "opsPaymentDropzone": {
+        "small1": "Unterstützt Bilder (JPG, PNG, WebP) oder PDF-Dateien"
+      },
+      "btnOpsPaymentDrawerShare": {
+        "button1": "An Kunden senden"
+      },
+      "btnOpsPaymentDrawerSave": {
+        "button1": "Beleg speichern"
+      },
+      "opsPaymentShareModal": {
+        "span1": "Beleg an Kunden senden",
+        "span2": "KUNDE",
+        "span3": "GESAMT BEZAHLT",
+        "span4": "BANK / REFERENZ",
+        "label1": "WhatsApp des Kunden",
+        "label2": "E-Mail des Kunden",
+        "span5": "Per WhatsApp senden",
+        "span6": "Per E-Mail senden",
+        "span7": "Drucken / PDF-Quittung",
+        "span8": "In die Zwischenablage kopieren"
+      },
+      "opsShareModalCode": {
+        "span1": "COMP-2026-XXXX"
+      },
+      "opsBaucherModalTitle": {
+        "span1": "Beleg / Bankeinzahlung"
+      },
+      "opsGuideDrawerTitle": {
+        "h21": "Neuer akkreditierter einheimischer Guide"
+      },
+      "opsGuideDrawerSubtitle": {
+        "p1": "Registrierung gemäß Gesetz 1211 und INTUR"
+      },
+      "opsGuideForm": {
+        "span1": "Siegel für verifizierte Guides (INTUR / Baqueano)",
+        "span2": "Akkreditiert den Guide als offiziell verifizierten Gastgeber in der App und im öffentlichen Katalog, ohne Vermittler.",
+        "label1": "Vollständiger Name des Guides / ländlichen Baqueano *",
+        "label2": "INTUR-Ausweis / offizielle Akkreditierung",
+        "label3": "Betriebsstatus",
+        "span3": "Gebiet & einheimische Spezialisierung",
+        "label4": "Departamento / Gebiet *",
+        "label5": "Gemeinde / Ort",
+        "label6": "Touristische Spezialisierung & Führungsbereich *",
+        "label7": "Bäuerliche Kooperative oder Gemeinde",
+        "span4": "Direkter Kontakt & Fähigkeiten",
+        "label8": "Telefon / direktes WhatsApp *",
+        "label9": "E-Mail (zugewiesen)",
+        "label10": "Gesprochene Sprachen",
+        "label11": "Jahre Erfahrung im Gebiet",
+        "span5": "Tagessatz (Regel 11: Córdobas zuerst)",
+        "label12": "Tagessatz in Córdobas (C$ NIO) *",
+        "label13": "Gegenwert in Dollar (USD)",
+        "label14": "Bäuerliches Wissen, Routen & Biografie",
+        "label15": "URL des Profil- / Akkreditierungsfotos",
+        "button1": "Guide-Profil speichern"
+      },
+      "opsGuideStatus": {
+        "option1": "Aktiv im Einsatz",
+        "option2": "In Überprüfung",
+        "option3": "Vorübergehend ausgesetzt"
+      },
+      "opsGuideDepartment": {
+        "option1": "Estelí",
+        "option2": "León",
+        "option3": "Río San Juan"
+      },
+      "opsGuideDeleteModal": {
+        "h31": "Guide aus dem Katalog entfernen?",
+        "p1": "Du bist dabei, Folgendes aus dem Katalog zu entfernen:",
+        "p2": ". Diese Aktion kann nicht rückgängig gemacht werden.",
+        "button1": "Entfernen bestätigen"
+      },
+      "opsBizFormName": {
+        "inputPlaceholder1": "Z. B. Comedor Tradicional Doña Haydée, Hospedaje Campesino Somoto ..."
+      },
+      "opsBizFormHost": {
+        "inputPlaceholder1": "Z. B. Doña Haydée Palacios, Parkranger-Kooperative ..."
+      },
+      "opsBizFormMunicipality": {
+        "inputPlaceholder1": "Z. B. Somoto, Ometepe, San Ramón, Matagalpa ..."
+      },
+      "opsBizFormAddress": {
+        "textareaPlaceholder1": "Z. B. 2 Blocks nördlich vom Zentralpark, gegenüber dem Fluss ..."
+      },
+      "opsBizFormLatitude": {
+        "inputPlaceholder1": "Z. B. 13.4862"
+      },
+      "opsBizFormLongitude": {
+        "inputPlaceholder1": "Z. B. -86.5824"
+      },
+      "opsBizFormPriceNio": {
+        "inputPlaceholder1": "Z. B. 350.00"
+      },
+      "opsBizFormPriceUsd": {
+        "inputPlaceholder1": "Z. B. 9.56"
+      },
+      "opsBizFormPhone": {
+        "inputPlaceholder1": "Z. B. +505 2713-2200 oder 8888-1234"
+      },
+      "opsBizFormWhatsapp": {
+        "inputPlaceholder1": "Z. B. 88881234 oder +50588881234"
+      },
+      "opsBizFormStory": {
+        "textareaPlaceholder1": "Wer die Gastgeber sind, ihre bäuerliche Familiengeschichte und wie das Vorhaben entstand ..."
+      },
+      "opsBizFormDescription": {
+        "textareaPlaceholder1": "Details zu Gerichten, Zimmern, Wegen, Öffnungszeiten und Tipps für Reisende ..."
+      },
+      "opsUserFormName": {
+        "inputPlaceholder1": "Z. B. Carlos Silva Mendieta"
+      },
+      "opsUserFormLevel": {
+        "inputPlaceholder1": "Z. B. Oberster Hüter, Gebietsguide ..."
+      },
+      "opsUserFormNotes": {
+        "textareaPlaceholder1": "Grund der Aussetzung, Zuweisungsnotizen oder Referenzkontakt ..."
+      },
+      "opsQuickPassNewPass": {
+        "inputPlaceholder1": "Mindestens 8 Zeichen"
+      },
+      "opsQuickPassConfirmPass": {
+        "inputPlaceholder1": "Passwort wiederholen"
+      },
+      "opsPaymentFormCode": {
+        "inputPlaceholder1": "Z. B. COMP-2026-0042"
+      },
+      "opsPaymentFormReference": {
+        "inputPlaceholder1": "Z. B. BAC-TRX-441098, REF-88912"
+      },
+      "opsPaymentFormCustomerName": {
+        "inputPlaceholder1": "Z. B. Mateo Silva Rostrán"
+      },
+      "opsPaymentFormConcept": {
+        "inputPlaceholder1": "Z. B. Somoto-Canyon-Expedition + Gemeinschaftsguide, Ecolodge-Hütte ..."
+      },
+      "opsPaymentFormOrderCode": {
+        "inputPlaceholder1": "Z. B. RES-BQ-104"
+      },
+      "opsPaymentBaucherPreviewImg": {
+        "imgAlt1": "Beleg"
+      },
+      "opsPaymentFormNotes": {
+        "textareaPlaceholder1": "Z. B. Gutgeschrieben auf BAC-Girokonto in Córdobas Nr. 4410. Mit dem Kontoauszug abgeglichen ..."
+      },
+      "opsGuideName": {
+        "inputPlaceholder1": "Z. B. Carlos „El Baqueano“ Silva"
+      },
+      "opsGuideCarnet": {
+        "inputPlaceholder1": "Z. B. INTUR-MAD-0012"
+      },
+      "opsGuideMunicipality": {
+        "inputPlaceholder1": "Z. B. Somoto, Altagracia, Diriamba ..."
+      },
+      "opsGuideSpecialty": {
+        "inputPlaceholder1": "Z. B. Somoto-Canyon, Höhlenforschung, Vulkane, Vogelbeobachtung, Flora ..."
+      },
+      "opsGuideCommunity": {
+        "inputPlaceholder1": "Z. B. Parkranger-Kooperative Somoto, Baqueano-Netzwerk ..."
+      },
+      "opsGuideLanguages": {
+        "inputPlaceholder1": "Z. B. Spanisch (Muttersprache), fließend Englisch, Miskito"
+      },
+      "opsGuideExperience": {
+        "inputPlaceholder1": "Z. B. 12"
+      },
+      "opsGuideBio": {
+        "textareaPlaceholder1": "Beschreibe das traditionelle Wissen des Baqueano, die Wege, die er kennt, Botanik, Legenden und Tipps für Reisende ..."
+      },
+      "opsGuidePhotoUrl": {
+        "inputPlaceholder1": "https://... oder assets/images/guias/..."
+      }
     },
     "aliados": {
       "body": {
@@ -5344,6 +5692,235 @@
       "colTerritory": "Gebiet",
       "coverageTable": "Abdeckung nach Departamento und Region",
       "matrix": "Matrix der nationalen Ausrichtung"
+    },
+    "guides": {
+      "buscarPorNombreTerritorio": "Nach Name, Gebiet, Spezialisierung oder Ausweis suchen ...",
+      "guiaVerificadoConAcreditacion": "Verifizierter Guide mit offizieller Akkreditierung",
+      "abrirWhatsapp": "WhatsApp öffnen",
+      "editarFichaDelGuia": "Guide-Profil bearbeiten",
+      "eliminarGuiaDelCatalogo": "Guide aus dem Katalog entfernen",
+      "porFavorIngresaEl": "Bitte gib den vollständigen Namen des Guides ein.",
+      "porFavorEspecificaLa": "Bitte gib die touristische Spezialisierung des Guides an.",
+      "guiaGuardadoExitosamente": "Guide „{p0}“ erfolgreich gespeichert.",
+      "guiaEliminadoDelCatalogo": "Guide „{p0}“ aus dem Katalog entfernt.",
+      "reactivateGuide": "Guide reaktivieren",
+      "suspendGuide": "Guide aussetzen",
+      "reactivate": "Reaktivieren",
+      "suspend": "Aussetzen"
+    },
+    "messages": {
+      "buscarPorAsuntoO": "Nach Betreff oder E-Mail suchen ...",
+      "cerrarVistaDeConversacion": "Unterhaltungsansicht schließen",
+      "escribeAquiTuRespuesta": "Schreibe hier deine offizielle Antwort. Die reisende Person erhält eine Benachrichtigung in der Glocke ihres Webprofils und der Android-App ...",
+      "porFavorEscribeEl": "Bitte schreibe die Antwort vor dem Senden.",
+      "escribeLaRespuestaAntes": "Schreibe die Antwort vor dem Senden.",
+      "respuestaEnviadaElViajero": "Antwort gesendet. Die reisende Person wurde benachrichtigt.",
+      "errorAlResponder": "Fehler beim Antworten: {p0}",
+      "conversacionCerrada": "Unterhaltung geschlossen.",
+      "errorAlCerrar": "Fehler beim Schließen: {p0}",
+      "conversacionReabierta": "Unterhaltung wieder geöffnet.",
+      "sending": "Wird gesendet ...",
+      "sendReply": "Antwort an Reisende senden"
+    },
+    "businesses": {
+      "buscarPorNegocioAnfitrion": "Nach Betrieb, Gastgeber, Gemeinde oder Telefon suchen ...",
+      "verificadoOficialmenteSelloAutentico": "Offiziell verifiziert (echtes BAQUEANO-Siegel)",
+      "abrirWhatsappDirectoCon": "WhatsApp direkt mit {p0} öffnen",
+      "editarDatosComercialesContacto": "Geschäftsdaten, Kontakt und Gebiet bearbeiten",
+      "restaurarDeLaPapelera": "Aus dem Papierkorb wiederherstellen",
+      "eliminarArchivarNegocio": "Betrieb löschen / archivieren",
+      "idActualizado": "ID: {p0} · Aktualisiert: {p1}",
+      "moduloNegociosComunitariosAnfitriones": "Modul: Gemeinschaftsbetriebe, Gastgeber und Unternehmer",
+      "subiendoImagenAStorage": "Bild wird in Storage hochgeladen ...",
+      "hazClicOArrastra": "Klicken oder ziehen, um ein Foto oder Logo hochzuladen",
+      "elNombreComercialDel": "Der Handelsname des Betriebs ist erforderlich.",
+      "negocioGuardadoExitosamente": "Betrieb „{p0}“ erfolgreich gespeichert.",
+      "errorAlGuardar": "Fehler beim Speichern: {p0}",
+      "error": "Fehler: {p0}",
+      "negocio": "Betrieb „{p0}“ {p1}.",
+      "errorAlSuspenderReactivar": "Fehler beim Aussetzen/Reaktivieren: {p0}",
+      "negocioArchivadoConExito": "Betrieb „{p0}“ erfolgreich archiviert.",
+      "errorAlArchivar": "Fehler beim Archivieren: {p0}",
+      "negocioRestauradoABorradores": "Betrieb „{p0}“ als Entwurf wiederhergestellt.",
+      "errorAlRestaurar": "Fehler beim Wiederherstellen: {p0}",
+      "selloDeVerificacionRevocado": "Verifizierungssiegel widerrufen.",
+      "errorAlVerificar": "Fehler beim Verifizieren: {p0}",
+      "elArchivoDebeSer": "Die Datei muss ein gültiges Bild sein (JPG, PNG oder WebP).",
+      "laImagenSuperaEl": "Das Bild überschreitet die zulässige Grenze von 15 MB.",
+      "fotografiaSubidaExitosamente": "Foto erfolgreich hochgeladen.",
+      "errorEnSubida": "Fehler beim Hochladen: {p0}",
+      "sealActiveManage": "Verifiziertes Siegel aktiv (zum Verwalten klicken)",
+      "sealGrant": "Offizielles BAQUEANO-Siegel vergeben",
+      "reactivatePublish": "Betrieb reaktivieren / veröffentlichen",
+      "suspendHide": "Betrieb aussetzen (vorübergehend ausblenden)",
+      "editTitle": "Betrieb bearbeiten: {p0}",
+      "newTitle": "Neues Unternehmen & Gemeinschaftspartner",
+      "saveBusiness": "Betrieb speichern"
+    },
+    "payments": {
+      "buscarPorClienteComprobante": "Nach Kunde, Beleg, Referenz oder Bank suchen ...",
+      "verBaucherComprobanteBancario": "Einzahlungs- / Bankbeleg ansehen",
+      "sinComprobanteAdjunto": "Kein Beleg angehängt",
+      "enviarComprobanteAlCliente": "Beleg an Kunden senden (WhatsApp, E-Mail, PDF)",
+      "aprobarYConciliarPago": "Zahlung freigeben und abgleichen (Betrag gutgeschrieben)",
+      "cambiarAPendienteDe": "Auf „Prüfung ausstehend“ setzen",
+      "editarDatosDelComprobante": "Belegdaten bearbeiten",
+      "eliminarComprobante": "Beleg löschen",
+      "idCliente": "ID: {p0} · Kunde: {p1}",
+      "moduloPagosComprobantesBancarios": "Modul: Zahlungen & Bankbelege",
+      "ref": "{p0} (Ref.: {p1})",
+      "baucherDepositoBancario": "Beleg / Bankeinzahlung — {p0}",
+      "subiendoComprobanteAStorage": "Beleg wird in Storage hochgeladen ...",
+      "hazClicOArrastra": "Klicken oder ziehen, um ein Foto des Bankbelegs hochzuladen",
+      "elNombreDelCliente": "Der Name des Kunden bzw. Entdeckers ist erforderlich.",
+      "elNombreDelCliente2": "Der Kundenname ist erforderlich.",
+      "debesIngresarUnMonto": "Du musst einen gültigen Betrag in Córdobas (C$) größer als 0 eingeben.",
+      "montoEnCordobasObligatorio": "Betrag in Córdobas erforderlich.",
+      "comprobanteGuardadoConExito": "Beleg „{p0}“ erfolgreich gespeichert.",
+      "comprobanteGuardadoConExito2": "Beleg {p0} erfolgreich gespeichert.",
+      "errorAlGuardarComprobante": "Fehler beim Speichern des Belegs: {p0}",
+      "comprobanteMarcadoComo": "Beleg markiert als: {p0}",
+      "error": "Fehler: {p0}",
+      "comprobanteEliminadoConExito": "Beleg „{p0}“ erfolgreich gelöscht.",
+      "errorAlEliminar": "Fehler beim Löschen: {p0}",
+      "porFavorIngresaEl": "Bitte gib die WhatsApp-Nummer des Kunden ein.",
+      "numeroDeWhatsappRequerido": "WhatsApp-Nummer erforderlich",
+      "abriendoWhatsappConComprobante": "WhatsApp wird mit dem offiziellen Beleg geöffnet ...",
+      "porFavorIngresaEl2": "Bitte gib die E-Mail des Kunden ein.",
+      "correoElectronicoRequerido": "E-Mail erforderlich",
+      "abriendoClienteDeCorreo": "E-Mail-Programm wird geöffnet ...",
+      "textoDelComprobanteCopiado": "Belegtext in die Zwischenablage kopiert.",
+      "comprobanteCopiadoAlPortapapeles": "Beleg in die Zwischenablage kopiert",
+      "noSePudoCopiar": "Automatisches Kopieren nicht möglich.",
+      "porFavorPermiteVentanas": "Bitte erlaube Pop-up-Fenster zum Drucken.",
+      "elArchivoDebeSer": "Die Datei muss ein Bild (JPG, PNG, WebP) oder eine PDF-Datei sein.",
+      "elArchivoSuperaEl": "Die Datei überschreitet die Grenze von 15 MB.",
+      "comprobanteSubidoExitosamente": "Beleg erfolgreich hochgeladen.",
+      "errorAlSubirComprobante": "Fehler beim Hochladen des Belegs: {p0}",
+      "editTitle": "Beleg bearbeiten: {p0}",
+      "newTitle": "Neuen Beleg erfassen",
+      "saveReceipt": "Beleg speichern"
+    },
+    "users": {
+      "buscarPorNombreCorreo": "Nach Name, E-Mail, Rolle oder ID suchen ...",
+      "perfilVerificado": "Verifiziertes Profil",
+      "escribirCorreoA": "E-Mail an {p0} schreiben",
+      "editarUsuarioPerfilRol": "Benutzer bearbeiten (Profil, Rolle, Passwort)",
+      "cambiarContrasenaDeAcceso": "Schnelle Passwortänderung",
+      "eliminarUsuarioDefinitivamente": "Benutzer endgültig löschen",
+      "editarUsuario": "Benutzer bearbeiten: {p0}",
+      "idModificacionDePerfil": "ID: {p0} · Änderung von Profil & Berechtigungen",
+      "opcionalEnEdicionDeja": "Beim Bearbeiten optional: leer lassen, um das aktuelle Passwort zu behalten, oder ein neues eingeben, um es zu ändern.",
+      "guardarCambios": "Änderungen speichern",
+      "nuevoUsuario": "Neuer Benutzer",
+      "directorioDeIdentidadesCredenciales": "Verzeichnis für Identitäten & Zugangsdaten",
+      "obligatorioDebeTenerAl": "Erforderlich: mindestens 8 sichere Zeichen für die Anmeldung.",
+      "crearYGuardarUsuario": "Benutzer anlegen und speichern",
+      "elNombreCompletoEs": "Der vollständige Name ist erforderlich.",
+      "ingresaUnCorreoElectronico": "Gib eine gültige E-Mail ein.",
+      "debesAsignarUnaContrasena": "Du musst für den neuen Benutzer ein Passwort festlegen.",
+      "laContrasenaDebeTener": "Das Passwort muss mindestens 8 sichere Zeichen haben.",
+      "lasContrasenasNoCoinciden": "Die Passwörter stimmen nicht überein. Bitte prüfen.",
+      "laNuevaContrasenaDebe": "Das neue Passwort muss mindestens 8 Zeichen haben.",
+      "errorAlGuardar": "Fehler beim Speichern: {p0}",
+      "usuarioNoEncontrado": "Benutzer nicht gefunden.",
+      "laContrasenaDebeContener": "Das Passwort muss mindestens 8 sichere Zeichen enthalten.",
+      "lasContrasenasNoCoinciden2": "Die Passwörter stimmen nicht überein.",
+      "actualizandoContrasena": "Passwort wird aktualisiert ...",
+      "contrasenaDeActualizadaCon": "Passwort von {p0} erfolgreich aktualisiert.",
+      "errorAlActualizarContrasena": "Fehler beim Aktualisieren des Passworts: {p0}",
+      "usuarioMarcadoComo": "Benutzer „{p0}“ markiert als {p1}.",
+      "porSeguridadNoPuedes": "Aus Sicherheitsgründen kannst du dein eigenes Konto nicht in einer aktiven Sitzung löschen.",
+      "accionBloqueadaNoSe": "Aktion gesperrt: Der einzige Superadministrator des Systems kann nicht gelöscht werden.",
+      "usuarioEliminadoDefinitivamente": "Benutzer „{p0}“ endgültig gelöscht.",
+      "errorAlEliminar": "Fehler beim Löschen: {p0}",
+      "contrasenaGeneradaYCopiada": "Passwort erzeugt und in die Zwischenablage kopiert: {p0}",
+      "contrasenaGenerada": "Passwort erzeugt: {p0}",
+      "suspendAccess": "Zugang aussetzen",
+      "reactivateAccess": "Zugang reaktivieren"
+    },
+    "engine": {
+      "losRegistrosDeAuditoria": "Prüfprotokolle sind unveränderlich: Sie können nicht gelöscht werden (geschützte Nachverfolgbarkeit).",
+      "registroDeAuditoriaEliminado": "Prüfprotokoll erfolgreich gelöscht.",
+      "elHistorialDeAuditoria": "Der Prüfverlauf ist unveränderlich: Er kann nicht geleert werden (geschützte Nachverfolgbarkeit).",
+      "noHayRegistrosDe": "Es gibt keine Prüfprotokolle zum Löschen.",
+      "historialDeAuditoriaVaciado": "Prüfverlauf vollständig geleert.",
+      "estadoActualizadoA": "Status aktualisiert auf „{p0}“",
+      "registroEliminadoPermanentementeDe": "Datensatz endgültig aus der Datenbank gelöscht.",
+      "registroDuplicadoEnModo": "Datensatz als Entwurf dupliziert.",
+      "accionMasivaCompletadaPara": "Sammelaktion für {p0} Datensätze abgeschlossen.",
+      "iniciandoSincronizacionCanonicaHacia": "Kanonische Synchronisierung mit Cloud Firestore wird gestartet ...",
+      "catalogoCompletoSincronizadoDestinos": "Vollständiger Katalog synchronisiert! Reiseziele, Betriebe und Live-Seiten in Firestore und Supabase.",
+      "avisoLaRedEsta": "Hinweis: Das Netzwerk ist instabil. Änderungen werden lokal gespeichert.",
+      "seccionAhoraEsta": "Abschnitt „{p0}“ ist jetzt {p1}.",
+      "ordenDeSeccionesActualizado": "Reihenfolge der Abschnitte aktualisiert.",
+      "seccionMovidaALa": "Abschnitt in den Papierkorb verschoben.",
+      "seccionRestauradaYPublicada": "Abschnitt wiederhergestellt und auf der Website veröffentlicht.",
+      "contenidoOriginalRestauradoY": "Ursprünglicher Inhalt wiederhergestellt und veröffentlicht.",
+      "seccionEliminadaPermanentemente": "Abschnitt endgültig gelöscht.",
+      "plantillaOriginalRestablecidaPara": "Ursprüngliche Vorlage für {p0}.html wiederhergestellt.",
+      "archivoCargadoYListo": "Datei „{p0}“ hochgeladen und bereit zur Veröffentlichung.",
+      "errorAlProcesarArchivo": "Fehler beim Verarbeiten der Datei: {p0}",
+      "elTituloNombreEs": "Titel / Name ist ein Pflichtfeld.",
+      "registroGuardadoComo": "Datensatz gespeichert als „{p0}“.",
+      "errorAlGuardar": "Fehler beim Speichern: {p0}",
+      "medioSubidoAFirebase": "Medium in Firebase Storage hochgeladen.",
+      "errorSubiendoMedio": "Fehler beim Hochladen des Mediums: {p0}",
+      "elTituloEncabezadoDel": "Titel / Überschrift der Komponente ist erforderlich.",
+      "componenteGuardadoConExito": "Komponente „{p0}“ erfolgreich gespeichert und auf {p1}.html veröffentlicht!",
+      "avisoDeMigracion": "Migrationshinweis: ",
+      "sincronizandoEcosistemaWebAndroid": "Ökosystem Web, Android, Firestore und Supabase wird synchronisiert ...",
+      "ecosistema100SincronizadoY": "Ökosystem zu 100 % synchronisiert und live verbunden!",
+      "firestoreNoEstaDisponible": "Firestore ist zum Veröffentlichen der Videos nicht verfügbar.",
+      "revisaLasUrlsDel": "Prüfe die URLs von Slot {p0}.",
+      "videosPublicadosPermaneceranFijos": "Videos veröffentlicht. Sie bleiben bis zur nächsten Aktualisierung des Ops Center bestehen.",
+      "noFuePosiblePublicar": "Videos konnten nicht veröffentlicht werden: {p0}",
+      "actualizandoTelemetriaDeResguardo": "Backup-Telemetrie wird aktualisiert ...",
+      "iniciandoCicloDeSincronizacion": "Synchronisationszyklus Firebase-Supabase wird gestartet ...",
+      "sincronizacionProcesadaPorEl": "Synchronisierung vom Server verarbeitet.",
+      "sinSincronizacion": "Keine Synchronisierung: {p0}",
+      "selloOficialAsignadoExitosamente": "Offizielles Siegel erfolgreich vergeben.",
+      "selloDeVerificacionRevocado": "Verifizierungssiegel widerrufen.",
+      "membresiaRenovadaPor1": "Mitgliedschaft um 1 Jahr verlängert.",
+      "anuncioGlobalSincronizadoCon": "Globale Ankündigung mit Website und Android synchronisiert.",
+      "seleccionaUnArchivoApk": "Wähle eine APK-Datei und gib ihre Version an.",
+      "elArchivoDebeSer": "Die Datei muss eine gültige APK sein und darf 500 MB nicht überschreiten.",
+      "elArchivoSeleccionadoNo": "Die ausgewählte Datei hat keine gültige APK-Struktur.",
+      "noSePudoCargar": "APK konnte nicht hochgeladen werden: {p0}",
+      "indicaLaVersionY": "Gib die Version an und füge den geteilten Google-Drive-Link ein.",
+      "elEnlaceNoParece": "Der Link scheint keine gültige geteilte Google-Drive-Datei zu sein.",
+      "noSePudoGuardar": "Link konnte nicht gespeichert werden: {p0}",
+      "laDescargaDelApk": "Der APK-Download wurde von der Website entfernt; die Datei bleibt erhalten.",
+      "completada": "{p0} abgeschlossen: {p1}.",
+      "describeElTrabajoQue": "Beschreibe die Aufgabe, die du delegieren möchtest.",
+      "archivoSubidoEnlaceCopiado": "Datei „{p0}“ hochgeladen. Link in die Zwischenablage kopiert.",
+      "errorDeCarga": "Ladefehler: {p0}",
+      "leyendoTextosImagenesEnlaces": "Texte, Bilder, Links, Schaltflächen und Medien der Seite werden gelesen ...",
+      "elementosRealesIncorporadosAl": "{p0} echte Elemente in den Website Builder übernommen.",
+      "noSePudoInventariar": "Seite konnte nicht erfasst werden: {p0}",
+      "copiaDeSeguridadDescargada": "Sicherung heruntergeladen: {p0} ({p1} Datensätze).",
+      "ecosistemaRestauradoExitosamenteDesde": "Ökosystem erfolgreich aus der Sicherung vom {p0} ({p1}) wiederhergestellt!",
+      "errorAlRestaurarCopia": "Fehler beim Wiederherstellen der Sicherung: {p0}",
+      "ingresaUnaTasaDe": "Gib einen gültigen, überprüfbaren Wechselkurs ein.",
+      "registraLaFuenteY": "Erfasse Quelle und Datum des Wechselkurses.",
+      "parametrosGlobalesGuardadosY": "Globale Einstellungen gespeichert und in Firebase und Supabase synchronisiert.",
+      "parametrosGuardadosLocalmenteCon": "Einstellungen lokal gespeichert.",
+      "configuracionSeoActualizadaY": "SEO-Einstellungen aktualisiert und auf die Website übertragen.",
+      "metadatosSeoGuardadosLocalmente": "SEO-Metadaten lokal gespeichert.",
+      "iniciandoDiagnosticoEnVivo": "Live-Diagnose von 6 Cloud-Knoten wird gestartet ...",
+      "diagnosticoCompletado66": "Diagnose abgeschlossen: 6/6 Dienste zu 100 % betriebsbereit mit optimaler Latenz.",
+      "auditandoTls13": "TLS 1.3, RLS und RBAC-Berechtigungen werden geprüft ...",
+      "auditoriaAprobadaCeroVulnerabilidades": "Prüfung bestanden: keine Schwachstellen. Tokens und Regeln zu 100 % geprüft.",
+      "rolAuditorAccesoDe": "Rolle Prüfer: nur Lesezugriff. Diese Aktion erfordert einen Administrator.",
+      "laAuditoriaEsInmutable": "Das Prüfprotokoll ist unveränderlich: Nur der Superadministrator kann Einträge bereinigen."
+    },
+    "common": {
+      "saving": "Wird gespeichert ..."
+    },
+    "health": {
+      "summary": "{ok} von {total} Diensten betriebsbereit",
+      "more": "Mehr anzeigen",
+      "less": "Weniger anzeigen"
     }
   },
   "consent": {
@@ -6079,7 +6656,10 @@
     "reviewRejectedTitle": "Deine Bewertung wurde nicht freigegeben",
     "reviewRejectedBody": "Begründung des Teams: {reason}",
     "reviewResponseTitle": "BAQUEANO hat auf deine Bewertung geantwortet",
-    "reviewResponseBody": "Du kannst die Antwort in deinem Bewertungsverlauf lesen."
+    "reviewResponseBody": "Du kannst die Antwort in deinem Bewertungsverlauf lesen.",
+    "newArrived": "Du hast {n} neue Benachrichtigungen",
+    "soundOnLabel": "Ton an: tippen zum Stummschalten",
+    "soundOffLabel": "Ton aus: tippen zum Einschalten"
   },
   "baquiBrain": {
     "groupKids": "{adults} Erwachsene und {kids} Kinder",
@@ -6514,7 +7094,8 @@
   },
   "marquee": {
     "pause": "Pausieren",
-    "play": "Fortsetzen"
+    "play": "Fortsetzen",
+    "region": "Galerie"
   },
   "musicArchive": {
     "pendingCredits": "Angaben werden noch dokumentiert",

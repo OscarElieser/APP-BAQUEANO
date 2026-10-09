@@ -269,7 +269,7 @@
     return box;
   }
 
-  // Franja ejecutiva en el Dashboard (Presencia & TelemetrÃ­a en Vivo).
+  // Franja ejecutiva en el Dashboard (Presencia & Telemetría en Vivo).
   function renderStrip() {
     var host = document.getElementById('opsLiveStrip');
     if (!host) return;
@@ -279,8 +279,8 @@
     var header = el('div', { className: 'ops-live-strip-header' }, [
       el('div', { style: 'display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap' }, [
         el('span', { className: 'ops-pulse-dot' }),
-        el('strong', { style: 'color:#F8FAFC;font-size:0.86rem;font-weight:700;letter-spacing:0.4px;text-transform:uppercase', text: tr('opsLive.pulseTitle', 'Presencia & TelemetrÃ­a en Vivo') }),
-        el('span', { style: 'font-size:0.72rem;color:var(--ops-text-muted,#94A3B8);background:rgba(255,255,255,.06);padding:.15rem .55rem;border-radius:4px;border:1px solid rgba(255,255,255,.08)', text: tr('opsLive.pulseSub', 'Latido continuo 25 s Â· Cero rastreo invasivo') })
+        el('strong', { style: 'color:#F8FAFC;font-size:0.86rem;font-weight:700;letter-spacing:0.4px;text-transform:uppercase', text: tr('opsLive.pulseTitle', 'Presencia & Telemetría en Vivo') }),
+        el('span', { style: 'font-size:0.72rem;color:var(--ops-text-muted,#94A3B8);background:rgba(255,255,255,.06);padding:.15rem .55rem;border-radius:4px;border:1px solid rgba(255,255,255,.08)', text: tr('opsLive.pulseSub', 'Latido continuo 25 s · Cero rastreo invasivo') })
       ]),
       el('span', { style: 'font-size:.75rem;color:var(--ops-text-muted,#94A3B8);font-variant-numeric:tabular-nums', text: state.at ? tr('opsLive.updated', 'Actualizado {when}', { when: new Date(state.at).toLocaleTimeString('es-NI') }) : '' })
     ]);

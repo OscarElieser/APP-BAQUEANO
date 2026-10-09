@@ -67,7 +67,15 @@
       '.bq-notify-item strong{font-size:.92rem;color:#fff}.bq-notify-item p{margin:0;font-size:.85rem;color:#CBD5E1;line-height:1.45}' +
       '.bq-notify-item time{font-size:.76rem;color:#94A3B8}.bq-notify-item a{color:#FDBA74;font-weight:700;font-size:.84rem}' +
       '.bq-notify-row{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}' +
-      '.bq-notify-empty{padding:18px 14px;color:#CBD5E1;font-size:.9rem}';
+      '.bq-notify-empty{padding:18px 14px;color:#CBD5E1;font-size:.9rem}' +
+      // Aviso nuevo: la campana se sacude (sin animación si se pide movimiento reducido).
+      '.bq-bell.is-ringing i{animation:bqBellRing .9s ease-in-out 1;transform-origin:50% 0}' +
+      '.bq-bell.is-ringing .bq-bell-count{animation:bqBellPop .5s ease-out 1}' +
+      '@keyframes bqBellRing{0%,100%{transform:rotate(0)}15%{transform:rotate(18deg)}30%{transform:rotate(-16deg)}45%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}75%{transform:rotate(4deg)}}' +
+      '@keyframes bqBellPop{0%{transform:scale(.6)}60%{transform:scale(1.25)}100%{transform:scale(1)}}' +
+      '@media (prefers-reduced-motion:reduce){.bq-bell.is-ringing i,.bq-bell.is-ringing .bq-bell-count{animation:none}}' +
+      '.bq-notify-sound{min-width:36px;padding:0 10px}.bq-notify-sound[aria-pressed="false"]{color:#94A3B8}' +
+      '.bq-sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}';
     var style = el('style'); style.id = 'bqNotifyStyle'; style.appendChild(document.createTextNode(css)); document.head.appendChild(style);
   }
 
@@ -98,9 +106,60 @@
     btn.setAttribute('aria-label', state.unread ? t('notify.bellUnread', 'Notificaciones: {n} sin leer', { n: state.unread }) : t('notify.bell', 'Notificaciones'));
   }
 
+  // ---------------------------------------------------------------- sonido al recibir
+  // 2026-10-09 (pedido del propietario): cuando llega un aviso nuevo (p. ej. una alerta del
+  // superadministrador o del administrador) la campana suena, se sacude y lo anuncia a lectores de
+  // pantalla. Solo si el contador SUBE respecto de la consulta anterior (nunca al cargar la página),
+  // con la pestaña visible y si la persona no lo silenció. El timbre se genera con Web Audio (sin
+  // archivos); los navegadores exigen una interacción previa para reproducir audio.
+  var SOUND_KEY = 'baqueano_bell_sound';
+  var audioCtx = null;
+  var primed = false; // la primera consulta solo fija la línea base
+  function soundOn() { try { return window.localStorage.getItem(SOUND_KEY) !== 'off'; } catch (_) { return true; } }
+  function setSound(on) { try { window.localStorage.setItem(SOUND_KEY, on ? 'on' : 'off'); } catch (_) { /* sin almacenamiento: solo esta visita */ } }
+  function unlockAudio() {
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      if (!audioCtx) audioCtx = new AC();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    } catch (_) { audioCtx = null; }
+  }
+  ['pointerdown', 'keydown'].forEach(function (ev) { document.addEventListener(ev, unlockAudio, { once: true, passive: true }); });
+  function chime() {
+    if (!audioCtx || audioCtx.state !== 'running') return;
+    var now = audioCtx.currentTime;
+    [[880, 0], [1318.5, 0.16]].forEach(function (note) {
+      var osc = audioCtx.createOscillator(); var gain = audioCtx.createGain();
+      osc.type = 'sine'; osc.frequency.value = note[0];
+      gain.gain.setValueAtTime(0.0001, now + note[1]);
+      gain.gain.exponentialRampToValueAtTime(0.18, now + note[1] + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + note[1] + 0.55);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now + note[1]); osc.stop(now + note[1] + 0.6);
+    });
+  }
+  function announce(text) {
+    var live = document.getElementById('bqNotifyLive');
+    if (!live) { live = el('div', 'bq-sr-only'); live.id = 'bqNotifyLive'; live.setAttribute('role', 'status'); live.setAttribute('aria-live', 'polite'); document.body.appendChild(live); }
+    live.textContent = ''; window.setTimeout(function () { live.textContent = text; }, 50);
+  }
+  function ring(added, total) {
+    if (document.hidden) return;
+    if (soundOn()) chime();
+    var btn = state.button;
+    if (btn) { btn.classList.remove('is-ringing'); void btn.offsetWidth; btn.classList.add('is-ringing'); }
+    announce(t('notify.newArrived', 'Tenés {n} notificaciones nuevas', { n: total }));
+  }
+
   function refreshCount() {
     if (!user() || document.hidden) return Promise.resolve();
-    return call('count').then(function (d) { setUnread(d.unread || 0, false); }).catch(function () { /* sin red: se reintenta */ });
+    return call('count').then(function (d) {
+      var n = d.unread || 0;
+      if (primed && n > state.unread) ring(n - state.unread, n);
+      primed = true;
+      setUnread(n, false);
+    }).catch(function () { /* sin red: se reintenta */ });
   }
   function setUnread(n, broadcast) {
     state.unread = n; paintCount();
@@ -153,6 +212,19 @@
       all.addEventListener('click', function () { call('mark_read', { all: true }).then(function () { setUnread(0, true); loadList(); }); });
       head.append(all);
     }
+    // Sonido de la campana: activado por defecto; la elección queda en este navegador.
+    var snd = el('button', 'bq-notify-act bq-notify-sound');
+    snd.type = 'button';
+    var paintSound = function () {
+      var on = soundOn();
+      snd.setAttribute('aria-pressed', on ? 'true' : 'false');
+      snd.setAttribute('aria-label', on ? t('notify.soundOnLabel', 'Sonido activado: tocá para silenciar') : t('notify.soundOffLabel', 'Sonido silenciado: tocá para activarlo'));
+      var ico = el('i', 'fa-solid ' + (on ? 'fa-volume-high' : 'fa-volume-xmark')); ico.setAttribute('aria-hidden', 'true');
+      snd.replaceChildren(ico);
+    };
+    paintSound();
+    snd.addEventListener('click', function () { setSound(!soundOn()); unlockAudio(); paintSound(); if (soundOn()) chime(); });
+    head.append(snd);
     var x = el('button', 'bq-notify-act', '×'); x.type = 'button'; x.setAttribute('aria-label', t('notify.close', 'Cerrar notificaciones'));
     x.addEventListener('click', function () { close(); });
     head.append(x);

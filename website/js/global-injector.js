@@ -923,7 +923,7 @@
     // Campana de notificaciones (2026-10-06): solo aparece con sesión de Firebase.
     if (!window.BaqueanoNotifications && !document.querySelector('script[data-bq-notify]')) {
       var notifyScript = document.createElement('script');
-      notifyScript.src = 'js/baqueano-notifications.js?v=20261006-1';
+      notifyScript.src = 'js/baqueano-notifications.js?v=20261009-sound-1';
       notifyScript.dataset.bqNotify = 'true';
       notifyScript.defer = true;
       document.body.appendChild(notifyScript);

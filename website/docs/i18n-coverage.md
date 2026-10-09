@@ -1,23 +1,19 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-09T09:53:26.559Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 5123 · en 5123 · fr 5123 · it 5123 · pt 5123 · de 5123
+Generado: 2026-10-09T11:25:50.275Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 5544 · en 5544 · fr 5544 · it 5544 · pt 5544 · de 5544
 
-HTML: 4007/4241 textos con clave (234 pendientes) · JS: 873 textos dinámicos pendientes · TSX: 1093 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
+HTML: 4237/4238 textos con clave (1 pendientes) · JS: 655 textos dinámicos pendientes · TSX: 1093 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
-| js/ops-center/ops-engine.js | js | 368 | 38 | 330 | 10.3 % |
-| admin.html | html | 729 | 496 | 233 | 68 % |
+| js/ops-center/ops-engine.js | js | 368 | 112 | 256 | 30.4 % |
 | apps/web/src/app/baqueano-ai/page.tsx | tsx | 72 | 0 | 72 | 0 % |
 | apps/admin/src/app/spatial/page.tsx | tsx | 58 | 0 | 58 | 0 % |
 | apps/admin/src/app/strategic/page.tsx | tsx | 52 | 0 | 52 | 0 % |
 | apps/admin/src/app/control-tower/page.tsx | tsx | 49 | 0 | 49 | 0 % |
-| js/ops-center/ops-payments.js | js | 47 | 0 | 47 | 0 % |
 | apps/admin/src/app/plataforma/page.tsx | tsx | 43 | 0 | 43 | 0 % |
 | apps/admin/src/app/paises/page.tsx | tsx | 38 | 0 | 38 | 0 % |
-| js/ops-center/ops-users.js | js | 38 | 0 | 38 | 0 % |
 | js/theme-switcher.js | js | 37 | 0 | 37 | 0 % |
-| js/ops-center/ops-businesses.js | js | 35 | 0 | 35 | 0 % |
 | apps/web/src/app/confianza/metodologia/page.tsx | tsx | 34 | 0 | 34 | 0 % |
 | apps/admin/src/app/operaciones-campo/page.tsx | tsx | 30 | 0 | 30 | 0 % |
 | apps/admin/src/app/desarrolladores/page.tsx | tsx | 29 | 0 | 29 | 0 % |
@@ -48,8 +44,6 @@ HTML: 4007/4241 textos con clave (234 pendientes) · JS: 873 textos dinámicos p
 | apps/admin/src/app/municipios/page.tsx | tsx | 12 | 0 | 12 | 0 % |
 | apps/web/src/app/p/[slug]/page.tsx | tsx | 12 | 0 | 12 | 0 % |
 | js/baqueano-route-weather.js | js | 12 | 0 | 12 | 0 % |
-| js/ops-center/ops-guides.js | js | 12 | 0 | 12 | 0 % |
-| js/ops-center/ops-messages.js | js | 12 | 0 | 12 | 0 % |
 | apps/admin/src/app/pagos/page.tsx | tsx | 11 | 0 | 11 | 0 % |
 | apps/admin/src/components/ai/AdminCopilot.tsx | tsx | 11 | 0 | 11 | 0 % |
 | apps/web/src/app/alquiler-vehiculos/page.tsx | tsx | 11 | 0 | 11 | 0 % |
@@ -145,6 +139,7 @@ HTML: 4007/4241 textos con clave (234 pendientes) · JS: 873 textos dinámicos p
 | js/territory-carousel.js | js | 1 | 0 | 1 | 0 % |
 | js/territory-media-experience.js | js | 1 | 0 | 1 | 0 % |
 | 404.html | html | 25 | 25 | 0 | 100 % |
+| admin.html | html | 726 | 726 | 0 | 100 % |
 | aliados.html | html | 189 | 189 | 0 | 100 % |
 | ambiental.html | html | 131 | 131 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -227,13 +222,18 @@ HTML: 4007/4241 textos con clave (234 pendientes) · JS: 873 textos dinámicos p
 | js/ops-center/ops-alerts.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-android-app.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-automation.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-businesses.js | js | 36 | 36 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-guides.js | js | 13 | 13 | 0 | 100 % |
 | js/ops-center/ops-intake-inbox.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-live-presence.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-messages.js | js | 12 | 12 | 0 | 100 % |
 | js/ops-center/ops-nav-groups.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-payments.js | js | 44 | 44 | 0 | 100 % |
 | js/ops-center/ops-places.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-tech-report.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-users.js | js | 38 | 38 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/profile-editor.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |

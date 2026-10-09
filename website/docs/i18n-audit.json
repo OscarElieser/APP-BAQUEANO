@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T09:53:26.559Z",
+  "generatedAt": "2026-10-09T11:25:50.275Z",
   "languages": [
     "es",
     "en",
@@ -9,23 +9,23 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 5123,
-    "en": 5123,
-    "fr": 5123,
-    "it": 5123,
-    "pt": 5123,
-    "de": 5123
+    "es": 5544,
+    "en": 5544,
+    "fr": 5544,
+    "it": 5544,
+    "pt": 5544,
+    "de": 5544
   },
   "html": {
     "files": 36,
-    "total": 4241,
-    "translated": 4007,
-    "untranslated": 234
+    "total": 4238,
+    "translated": 4237,
+    "untranslated": 1
   },
   "js": {
     "files": 128,
-    "translated": 225,
-    "untranslated": 873
+    "translated": 442,
+    "untranslated": 655
   },
   "jsEditorial": {
     "files": 8,
@@ -39,6 +39,7 @@
   },
   "fullyCovered": [
     "404.html",
+    "admin.html",
     "aliados.html",
     "ambiental.html",
     "aviso-legal.html",
@@ -119,13 +120,18 @@
     "js/ops-center/ops-alerts.js",
     "js/ops-center/ops-android-app.js",
     "js/ops-center/ops-automation.js",
+    "js/ops-center/ops-businesses.js",
     "js/ops-center/ops-community-moderation.js",
+    "js/ops-center/ops-guides.js",
     "js/ops-center/ops-intake-inbox.js",
     "js/ops-center/ops-live-presence.js",
+    "js/ops-center/ops-messages.js",
     "js/ops-center/ops-nav-groups.js",
+    "js/ops-center/ops-payments.js",
     "js/ops-center/ops-places.js",
     "js/ops-center/ops-platform-reviews.js",
     "js/ops-center/ops-tech-report.js",
+    "js/ops-center/ops-users.js",
     "js/platform-reviews.js",
     "js/profile-editor.js",
     "js/safety-gallery.js",
@@ -162,15 +168,7 @@
     "packages/i18n/src/index.tsx",
     "packages/ui/src/index.tsx"
   ],
-  "errors": [
-    "admin.html: archivo nuevo con 233 textos de interfaz sin clave i18n (debe ser 0).",
-    "js/ops-center/ops-businesses.js: archivo nuevo con 35 textos de interfaz sin clave i18n (debe ser 0).",
-    "js/ops-center/ops-engine.js: 330 textos sin clave (línea base 322). No se permite agregar texto de interfaz sin clave.",
-    "js/ops-center/ops-guides.js: archivo nuevo con 12 textos de interfaz sin clave i18n (debe ser 0).",
-    "js/ops-center/ops-messages.js: archivo nuevo con 12 textos de interfaz sin clave i18n (debe ser 0).",
-    "js/ops-center/ops-payments.js: archivo nuevo con 47 textos de interfaz sin clave i18n (debe ser 0).",
-    "js/ops-center/ops-users.js: archivo nuevo con 38 textos de interfaz sin clave i18n (debe ser 0)."
-  ],
+  "errors": [],
   "files": [
     {
       "file": "404.html",
@@ -184,11 +182,11 @@
     {
       "file": "admin.html",
       "type": "html",
-      "total": 729,
-      "translated": 496,
-      "untranslated": 233,
-      "legacyPhrase": 26,
-      "coverage": 68
+      "total": 726,
+      "translated": 726,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
     },
     {
       "file": "aliados.html",
@@ -1291,11 +1289,11 @@
     {
       "file": "js/ops-center/ops-businesses.js",
       "type": "js",
-      "total": 35,
-      "translated": 0,
-      "untranslated": 35,
+      "total": 36,
+      "translated": 36,
+      "untranslated": 0,
       "editorialStrings": 0,
-      "coverage": 0
+      "coverage": 100
     },
     {
       "file": "js/ops-center/ops-community-moderation.js",
@@ -1310,19 +1308,19 @@
       "file": "js/ops-center/ops-engine.js",
       "type": "js",
       "total": 368,
-      "translated": 38,
-      "untranslated": 330,
+      "translated": 112,
+      "untranslated": 256,
       "editorialStrings": 0,
-      "coverage": 10.3
+      "coverage": 30.4
     },
     {
       "file": "js/ops-center/ops-guides.js",
       "type": "js",
-      "total": 12,
-      "translated": 0,
-      "untranslated": 12,
+      "total": 13,
+      "translated": 13,
+      "untranslated": 0,
       "editorialStrings": 0,
-      "coverage": 0
+      "coverage": 100
     },
     {
       "file": "js/ops-center/ops-ia-copilot.js",
@@ -1345,11 +1343,11 @@
     {
       "file": "js/ops-center/ops-live-data.js",
       "type": "js-editorial",
-      "total": 21,
-      "translated": 0,
+      "total": 25,
+      "translated": 4,
       "untranslated": 0,
       "editorialStrings": 21,
-      "coverage": 0
+      "coverage": 16
     },
     {
       "file": "js/ops-center/ops-live-presence.js",
@@ -1364,10 +1362,10 @@
       "file": "js/ops-center/ops-messages.js",
       "type": "js",
       "total": 12,
-      "translated": 0,
-      "untranslated": 12,
+      "translated": 12,
+      "untranslated": 0,
       "editorialStrings": 0,
-      "coverage": 0
+      "coverage": 100
     },
     {
       "file": "js/ops-center/ops-mock-data.js",
@@ -1390,11 +1388,11 @@
     {
       "file": "js/ops-center/ops-payments.js",
       "type": "js",
-      "total": 47,
-      "translated": 0,
-      "untranslated": 47,
+      "total": 44,
+      "translated": 44,
+      "untranslated": 0,
       "editorialStrings": 0,
-      "coverage": 0
+      "coverage": 100
     },
     {
       "file": "js/ops-center/ops-places.js",
@@ -1427,10 +1425,10 @@
       "file": "js/ops-center/ops-users.js",
       "type": "js",
       "total": 38,
-      "translated": 0,
-      "untranslated": 38,
+      "translated": 38,
+      "untranslated": 0,
       "editorialStrings": 0,
-      "coverage": 0
+      "coverage": 100
     },
     {
       "file": "js/panorama-viewer.js",
