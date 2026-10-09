@@ -2994,7 +2994,8 @@
       "pageN": "Seite {n}",
       "noResults": "Keine Reiseziele mit diesen Filtern gefunden. Versuche eine andere Kategorie oder ein anderes Departamento.",
       "allCtaTitle": "Entdecke den vollständigen Katalog",
-      "allCtaText": "Alle veröffentlichten Orte der 17 Territorien, mit Verifizierungsstatus und Filtern nach Departamento und Kategorie."
+      "allCtaText": "Alle veröffentlichten Orte der 17 Territorien, mit Verifizierungsstatus und Filtern nach Departamento und Kategorie.",
+      "cardNumber": "Reiseziel {n} von {total}"
     },
     "experiencias": {
       "body": {
@@ -3928,6 +3929,23 @@
       },
       "drawerImg": {
         "imgAlt1": "Reiseziel"
+      },
+      "atlas": {
+        "cat": {
+          "all": "Alle",
+          "volcan": "Vulkane",
+          "playa": "Strände",
+          "agua": "Flüsse, Seen und Wasserfälle",
+          "naturaleza": "Natur",
+          "cultura": "Kultur und Geschichte",
+          "comunidad": "Gemeindetourismus",
+          "hospedaje": "Unterkünfte"
+        },
+        "approx": "Ungefährer Standort: Bestätige den Zugang mit der Gemeinde oder dem Anbieter.",
+        "directions": "Route",
+        "missingNote": "{n} veröffentlichte Orte haben noch keine verifizierten Koordinaten und werden nicht angezeigt.",
+        "statPlaces": "Orte auf der Karte",
+        "empty": "Keine Orte mit diesem Filter."
       }
     },
     "miNegocio": {

@@ -2994,7 +2994,8 @@
       "pageN": "Página {n}",
       "noResults": "Não encontramos destinos com esses filtros. Tente outra categoria ou departamento.",
       "allCtaTitle": "Explore o catálogo completo",
-      "allCtaText": "Todos os lugares publicados dos 17 territórios, com seu status de verificação e filtros por departamento e categoria."
+      "allCtaText": "Todos os lugares publicados dos 17 territórios, com seu status de verificação e filtros por departamento e categoria.",
+      "cardNumber": "Destino {n} de {total}"
     },
     "experiencias": {
       "body": {
@@ -3928,6 +3929,23 @@
       },
       "drawerImg": {
         "imgAlt1": "Destino"
+      },
+      "atlas": {
+        "cat": {
+          "all": "Todos",
+          "volcan": "Vulcões",
+          "playa": "Praias",
+          "agua": "Rios, lagos e cachoeiras",
+          "naturaleza": "Natureza",
+          "cultura": "Cultura e história",
+          "comunidad": "Turismo comunitário",
+          "hospedaje": "Hospedagens"
+        },
+        "approx": "Localização aproximada: confirme o acesso com a comunidade ou o prestador.",
+        "directions": "Como chegar",
+        "missingNote": "{n} lugares publicados ainda não têm coordenadas verificadas e não são exibidos.",
+        "statPlaces": "lugares no mapa",
+        "empty": "Nenhum lugar com esse filtro."
       }
     },
     "miNegocio": {

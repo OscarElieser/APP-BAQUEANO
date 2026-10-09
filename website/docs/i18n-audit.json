@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T09:29:20.048Z",
+  "generatedAt": "2026-10-09T09:38:21.402Z",
   "languages": [
     "es",
     "en",
@@ -9,22 +9,22 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 5072,
-    "en": 5072,
-    "fr": 5072,
-    "it": 5072,
-    "pt": 5072,
-    "de": 5072
+    "es": 5086,
+    "en": 5086,
+    "fr": 5086,
+    "it": 5086,
+    "pt": 5086,
+    "de": 5086
   },
   "html": {
     "files": 36,
-    "total": 4242,
-    "translated": 4008,
+    "total": 4241,
+    "translated": 4007,
     "untranslated": 234
   },
   "js": {
-    "files": 126,
-    "translated": 193,
+    "files": 127,
+    "translated": 201,
     "untranslated": 874
   },
   "jsEditorial": {
@@ -113,6 +113,7 @@
     "js/impact-public.js",
     "js/intake-api.js",
     "js/lodging-showcase.js",
+    "js/mapa-atlas.js",
     "js/musica-archivo.js",
     "js/ops-center/ops-alerts.js",
     "js/ops-center/ops-android-app.js",
@@ -371,8 +372,8 @@
     {
       "file": "mapa.html",
       "type": "html",
-      "total": 43,
-      "translated": 43,
+      "total": 42,
+      "translated": 42,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -902,11 +903,11 @@
     {
       "file": "js/destinos-interactions.js",
       "type": "js",
-      "total": 15,
-      "translated": 5,
+      "total": 16,
+      "translated": 6,
       "untranslated": 10,
       "editorialStrings": 0,
-      "coverage": 33.3
+      "coverage": 37.5
     },
     {
       "file": "js/destinos-provenance.js",
@@ -1195,6 +1196,15 @@
       "untranslated": 2,
       "editorialStrings": 0,
       "coverage": 86.7
+    },
+    {
+      "file": "js/mapa-atlas.js",
+      "type": "js",
+      "total": 7,
+      "translated": 7,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/mi-viaje-interactions.js",

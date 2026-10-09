@@ -134,6 +134,9 @@
       const pageCards = filtered.slice((state.page - 1) * pageSize, state.page * pageSize);
       // appendChild en orden reconstruye el orden vigente (filtro u orden elegido).
       if (isAllMode) cards.forEach((card) => catalogRows[0]?.appendChild(card));
+      // 2026-10-09 (pedido del propietario): cada destino lleva su número dentro de la lista
+      // vigente («13 / 237») para que el visitante sepa siempre en qué parte del catálogo va.
+      if (isAllMode) filtered.forEach((card, index) => numberCard(card, index + 1, filtered.length));
       pageCards.forEach((card, index) => {
         card.hidden = false;
         const row = isAllMode ? catalogRows[0] : catalogRows[Math.min(catalogRows.length - 1, Math.floor(index / rowCapacity))];
@@ -152,6 +155,21 @@
       renderPagination(filtered.length);
       updateResultCount(filtered.length);
       updateUrl();
+    }
+
+    function numberCard(card, position, total) {
+      const media = card.querySelector('.dest-catalog-media');
+      if (!media) return;
+      let badge = media.querySelector('.dest-card-number');
+      if (!badge) {
+        badge = document.createElement('span'); badge.className = 'dest-card-number';
+        badge.append(document.createElement('b'), document.createElement('small'));
+        media.appendChild(badge);
+      }
+      badge.firstChild.textContent = position;
+      badge.lastChild.textContent = '/' + total;
+      badge.setAttribute('aria-label', i18n('pages.destinos.cardNumber', 'Destino {n} de {total}', { n: position, total }));
+      badge.setAttribute('role', 'img');
     }
 
     function updateResultCount(count) {

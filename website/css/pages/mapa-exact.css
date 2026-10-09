@@ -68,3 +68,71 @@ QUÉ:
 @media (max-width:1120px) { .map-intro-grid { grid-template-columns:1fr; } .map-intro-stats { max-width:620px; } .page-mapa-exact .map-hub-toolbar-inner { align-items:stretch; } .page-mapa-exact .map-search-group { width:100%; } .page-mapa-exact .map-cat-filter-chips { order:3; width:100%; } }
 @media (max-width:720px) { .map-intro { padding:34px 0 30px; } .map-intro h1 { font-size:clamp(2rem,11vw,3.2rem); } .map-intro-copy p { margin-top:18px; line-height:1.6; } .map-intro-stats { padding:12px 6px; border-radius:17px; } .map-stat strong { font-size:1.3rem; } .page-mapa-exact .map-hub-toolbar { padding:14px 0; } .page-mapa-exact .map-view-actions { width:100%; overflow-x:auto; } .page-mapa-exact .btn-map-action { flex:1 0 auto; justify-content:center; } .page-mapa-exact .map-main-viewport-container { min-height:560px; padding:10px; } .page-mapa-exact #fullInteractiveMap { min-height:540px; height:68vh; border-radius:18px; } .map-live-badge { top:25px; left:24px; } .map-legend { right:24px; bottom:25px; grid-template-columns:1fr; } .map-legend strong { grid-column:auto; } .page-mapa-exact .map-floating-drawer { left:20px; right:20px; bottom:20px; width:auto; max-width:none; } }
 @media (prefers-reduced-motion:reduce) { .page-mapa-exact *,.page-mapa-exact *::before,.page-mapa-exact *::after { transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; } }
+
+/* ============================================================================
+   2026-10-09 — ATLAS DE TODOS LOS DESTINOS (js/mapa-atlas.js)
+   POR QUÉ: mostrar todos los lugares con coordenadas reales sin que se encimen.
+   CÓMO: pin en gota con el color del grupo; agrupación por zona con anillo de colores
+     proporcional; globo con la ficha de BAQUEANO (crema, línea de color, sello).
+   QUÉ: .bq-atlas-pin, .bq-atlas-cluster, .bq-atlas-popup, chips con conteo, leyenda viva.
+   ============================================================================ */
+.bq-atlas-pin-wrap, .bq-atlas-cluster-wrap { background: transparent; border: 0; }
+.bq-atlas-pin {
+  position: relative; display: grid; place-items: center; width: 32px; height: 32px; margin: 1px 0 0 1px;
+  background: var(--pin); border: 3px solid #FFFFFF; border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.35); transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.bq-atlas-pin i { transform: rotate(45deg); color: #FFFFFF; font-size: 0.82rem; }
+.bq-atlas-pin.is-approx { border-style: dashed; opacity: 0.88; }
+.leaflet-marker-icon:hover .bq-atlas-pin, .leaflet-marker-icon:focus-visible .bq-atlas-pin { transform: rotate(-45deg) scale(1.15); box-shadow: 0 10px 20px rgba(15, 23, 42, 0.45); }
+.bq-atlas-cluster {
+  display: grid; place-items: center; border-radius: 50%; background: var(--ring);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.35); transition: transform 0.18s ease;
+}
+.bq-atlas-cluster::before { content: ''; position: absolute; inset: 6px; border-radius: 50%; background: #0F172A; border: 2px solid #FFFFFF; }
+.bq-atlas-cluster b { position: relative; color: #F4E6C1; font: 900 0.95rem/1 'League Spartan', 'Plus Jakarta Sans', sans-serif; }
+.bq-atlas-cluster-wrap { position: relative; }
+.bq-atlas-cluster-wrap:hover .bq-atlas-cluster { transform: scale(1.08); }
+
+.bq-atlas-tip { padding: 5px 10px; border: 0; border-radius: 999px; background: #0F172A; color: #F4E6C1; font: 700 0.74rem/1.2 'Plus Jakarta Sans', sans-serif; box-shadow: 0 6px 16px rgba(15, 23, 42, 0.3); }
+.bq-atlas-tip::before { border-top-color: #0F172A; }
+
+.bq-atlas-popup .leaflet-popup-content-wrapper { padding: 0; overflow: hidden; border-radius: 18px; background: #FBF7EE; box-shadow: 0 22px 48px rgba(15, 23, 42, 0.3); }
+.bq-atlas-popup .leaflet-popup-content { margin: 0; width: 280px !important; }
+.bq-atlas-popup .leaflet-popup-tip { background: #FBF7EE; }
+.bq-atlas-popup a.leaflet-popup-close-button { top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%; background: rgba(15, 23, 42, 0.72); color: #FFFFFF; font: 700 18px/26px sans-serif; text-align: center; z-index: 2; }
+.bq-atlas-card { border-top: 5px solid var(--pin); font-family: 'Plus Jakarta Sans', sans-serif; color: #0F172A; }
+.bq-atlas-photo { position: relative; height: 128px; background: #E2E8F0; }
+.bq-atlas-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bq-atlas-photo span { position: absolute; right: 8px; bottom: 8px; padding: 2px 8px; border-radius: 999px; background: rgba(15, 23, 42, 0.75); color: #F4E6C1; font-size: 0.62rem; font-weight: 700; }
+.bq-atlas-body { padding: 12px 14px 14px; display: grid; gap: 6px; }
+.bq-atlas-kind { justify-self: start; display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; background: #0F172A; color: #F4E6C1; font: 800 0.62rem/1.3 'League Spartan', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+.bq-atlas-kind i { color: var(--pin); filter: brightness(1.5); }
+.bq-atlas-body h4 { margin: 0; font: 800 1.02rem/1.2 'League Spartan', 'Plus Jakarta Sans', sans-serif; color: #0F172A; }
+.bq-atlas-where { margin: 0; font-size: 0.76rem; color: #1E293B; }
+.bq-atlas-where i { color: #F65E01; }
+.bq-atlas-seal { justify-self: start; display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px; border-radius: 999px; background: #FFFFFF; border: 1px solid #E7DCC3; color: #475569; font-size: 0.66rem; font-weight: 800; }
+.bq-atlas-seal.is-verified { background: #165D6F; border-color: #165D6F; color: #FFFFFF; }
+.bq-atlas-desc { margin: 0; font-size: 0.76rem; line-height: 1.45; color: #1E293B; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.bq-atlas-approx { margin: 0; padding: 6px 8px; border-radius: 10px; background: #F4E6C1; color: #7A4A12; font-size: 0.7rem; line-height: 1.4; }
+.bq-atlas-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+.bq-atlas-actions a { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; padding: 8px 10px; border-radius: 11px; border: 2px solid #165D6F; background: #FFFFFF; color: #165D6F !important; font: 800 0.78rem/1.1 'League Spartan', sans-serif; text-decoration: none; }
+.bq-atlas-actions a.is-primary { background: #F65E01; border-color: #F65E01; color: #FFFFFF !important; }
+.bq-atlas-actions a:focus-visible { outline: 3px solid #0F172A; outline-offset: 2px; }
+
+.page-mapa-exact .map-chip-btn { display: inline-flex; align-items: center; gap: 7px; }
+.page-mapa-exact .map-chip-btn i.fa-solid { color: var(--chip, #165D6F); }
+.page-mapa-exact .map-chip-btn.active i.fa-solid { color: #FFFFFF; }
+.map-chip-count { min-width: 22px; padding: 1px 7px; border-radius: 999px; background: #F1F5F9; color: #0F172A; font-size: 0.7rem; font-weight: 800; text-align: center; }
+.page-mapa-exact .map-chip-btn.active .map-chip-count { background: rgba(255, 255, 255, 0.22); color: #FFFFFF; }
+.map-chip-btn[hidden] { display: none !important; }
+.map-legend small { margin-left: auto; color: #0F172A; font-weight: 800; }
+.map-legend .legend-dot { flex: none; width: 11px; height: 11px; border: 2px solid #FFFFFF; box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.15); }
+.map-legend #mapAtlasLegendItems { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, auto)); gap: 7px 16px; }
+.map-atlas-missing { grid-column: 1 / -1; max-width: 300px; margin: 2px 0 0; color: #475569; font-size: 0.68rem; line-height: 1.4; }
+.map-atlas-missing[hidden], .map-atlas-empty[hidden] { display: none; }
+.map-atlas-empty { position: absolute; z-index: 610; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 12px 18px; border-radius: 14px; background: #0F172A; color: #F4E6C1; font-weight: 700; box-shadow: 0 16px 40px rgba(15, 23, 42, 0.35); }
+@media (max-width: 720px) {
+  .map-legend { right: 26px; bottom: 26px; left: 26px; }
+  .map-legend #mapAtlasLegendItems { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

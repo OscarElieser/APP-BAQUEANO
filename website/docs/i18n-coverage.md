@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-09T09:29:20.048Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 5072 · en 5072 · fr 5072 · it 5072 · pt 5072 · de 5072
+Generado: 2026-10-09T09:38:21.402Z · Idiomas: es, en, fr, it, pt, de · Claves por idioma: es 5086 · en 5086 · fr 5086 · it 5086 · pt 5086 · de 5086
 
-HTML: 4008/4242 textos con clave (234 pendientes) · JS: 874 textos dinámicos pendientes · TSX: 1093 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
+HTML: 4007/4241 textos con clave (234 pendientes) · JS: 874 textos dinámicos pendientes · TSX: 1093 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -62,7 +62,7 @@ HTML: 4008/4242 textos con clave (234 pendientes) · JS: 874 textos dinámicos p
 | apps/admin/src/app/website-builder/page.tsx | tsx | 10 | 0 | 10 | 0 % |
 | apps/web/src/app/open-data/page.tsx | tsx | 10 | 0 | 10 | 0 % |
 | apps/web/src/components/sections/DestinationExplorer.tsx | tsx | 10 | 0 | 10 | 0 % |
-| js/destinos-interactions.js | js | 15 | 5 | 10 | 33.3 % |
+| js/destinos-interactions.js | js | 16 | 6 | 10 | 37.5 % |
 | js/global-injector.js | js | 30 | 20 | 10 | 66.7 % |
 | apps/admin/src/app/categorias/page.tsx | tsx | 9 | 0 | 9 | 0 % |
 | apps/admin/src/app/configuracion/page.tsx | tsx | 9 | 0 | 9 | 0 % |
@@ -221,6 +221,7 @@ HTML: 4008/4242 textos con clave (234 pendientes) · JS: 874 textos dinámicos p
 | js/impact-public.js | js | 6 | 6 | 0 | 100 % |
 | js/intake-api.js | js | 0 | 0 | 0 | 100 % |
 | js/lodging-showcase.js | js | 0 | 0 | 0 | 100 % |
+| js/mapa-atlas.js | js | 7 | 7 | 0 | 100 % |
 | js/musica-archivo.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-alerts.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-android-app.js | js | 0 | 0 | 0 | 100 % |
@@ -249,7 +250,7 @@ HTML: 4008/4242 textos con clave (234 pendientes) · JS: 874 textos dinámicos p
 | js/website-business-catalog.js | js | 0 | 0 | 0 | 100 % |
 | js/website-operations-catalog.js | js | 0 | 0 | 0 | 100 % |
 | legal.html | html | 15 | 15 | 0 | 100 % |
-| mapa.html | html | 43 | 43 | 0 | 100 % |
+| mapa.html | html | 42 | 42 | 0 | 100 % |
 | mi-negocio.html | html | 188 | 188 | 0 | 100 % |
 | mi-viaje.html | html | 122 | 122 | 0 | 100 % |
 | musica.html | html | 199 | 199 | 0 | 100 % |

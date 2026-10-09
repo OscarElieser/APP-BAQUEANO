@@ -2994,7 +2994,8 @@
       "pageN": "Page {n}",
       "noResults": "Aucune destination ne correspond à ces filtres. Essayez une autre catégorie ou un autre département.",
       "allCtaTitle": "Explorez le catalogue complet",
-      "allCtaText": "Tous les lieux publiés des 17 territoires, avec leur statut de vérification et des filtres par département et catégorie."
+      "allCtaText": "Tous les lieux publiés des 17 territoires, avec leur statut de vérification et des filtres par département et catégorie.",
+      "cardNumber": "Destination {n} sur {total}"
     },
     "experiencias": {
       "body": {
@@ -3928,6 +3929,23 @@
       },
       "drawerImg": {
         "imgAlt1": "Destination"
+      },
+      "atlas": {
+        "cat": {
+          "all": "Tous",
+          "volcan": "Volcans",
+          "playa": "Plages",
+          "agua": "Rivières, lacs et cascades",
+          "naturaleza": "Nature",
+          "cultura": "Culture et histoire",
+          "comunidad": "Tourisme communautaire",
+          "hospedaje": "Hébergements"
+        },
+        "approx": "Emplacement approximatif : confirmez l'accès auprès de la communauté ou du prestataire.",
+        "directions": "Itinéraire",
+        "missingNote": "{n} lieux publiés n'ont pas encore de coordonnées vérifiées et ne sont pas affichés.",
+        "statPlaces": "lieux sur la carte",
+        "empty": "Aucun lieu ne correspond à ce filtre."
       }
     },
     "miNegocio": {

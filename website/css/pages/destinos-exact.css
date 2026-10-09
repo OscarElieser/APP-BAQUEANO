@@ -1226,3 +1226,16 @@ html body.page-destinos-exact .destinos-pagination-wrap .pagination-btn.active {
   .destinos-all-cta { flex-direction: column; align-items: stretch; text-align: left; padding: 20px; }
   .destinos-all-cta-btn { justify-content: center; }
 }
+
+/* 2026-10-09 — Número de cada destino en el catálogo completo («13 / 237»), arriba a la
+   derecha de la foto: el visitante sabe en qué parte de la lista va. Noche + arena + volcán. */
+html[data-destinos-mode="all"] .dest-catalog-media { position: relative; }
+.dest-card-number {
+  position: absolute; top: 10px; right: 10px; z-index: 2;
+  display: inline-flex; align-items: baseline; gap: 1px; padding: 4px 10px; border-radius: 999px;
+  background: #0F172A; border: 2px solid #F65E01; color: #F4E6C1;
+  font-family: 'League Spartan', 'Plus Jakarta Sans', sans-serif; line-height: 1;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.35);
+}
+.dest-card-number b { font-size: 1rem; font-weight: 900; }
+.dest-card-number small { font-size: 0.66rem; font-weight: 700; opacity: 0.85; }

@@ -2994,7 +2994,8 @@
       "pageN": "Pagina {n}",
       "noResults": "Nessuna destinazione con questi filtri. Prova un'altra categoria o un altro dipartimento.",
       "allCtaTitle": "Esplora il catalogo completo",
-      "allCtaText": "Tutti i luoghi pubblicati dei 17 territori, con il loro stato di verifica e filtri per dipartimento e categoria."
+      "allCtaText": "Tutti i luoghi pubblicati dei 17 territori, con il loro stato di verifica e filtri per dipartimento e categoria.",
+      "cardNumber": "Destinazione {n} di {total}"
     },
     "experiencias": {
       "body": {
@@ -3928,6 +3929,23 @@
       },
       "drawerImg": {
         "imgAlt1": "Destinazione"
+      },
+      "atlas": {
+        "cat": {
+          "all": "Tutti",
+          "volcan": "Vulcani",
+          "playa": "Spiagge",
+          "agua": "Fiumi, laghi e cascate",
+          "naturaleza": "Natura",
+          "cultura": "Cultura e storia",
+          "comunidad": "Turismo comunitario",
+          "hospedaje": "Alloggi"
+        },
+        "approx": "Posizione approssimativa: conferma l'accesso con la comunità o il fornitore.",
+        "directions": "Indicazioni",
+        "missingNote": "{n} luoghi pubblicati non hanno ancora coordinate verificate e non vengono mostrati.",
+        "statPlaces": "luoghi sulla mappa",
+        "empty": "Nessun luogo con questo filtro."
       }
     },
     "miNegocio": {

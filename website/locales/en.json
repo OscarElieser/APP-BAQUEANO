@@ -2994,7 +2994,8 @@
       "pageN": "Page {n}",
       "noResults": "We couldn't find destinations with those filters. Try another category or department.",
       "allCtaTitle": "Explore the full catalog",
-      "allCtaText": "Every published place across the 17 territories, with its verification status and filters by department and category."
+      "allCtaText": "Every published place across the 17 territories, with its verification status and filters by department and category.",
+      "cardNumber": "Destination {n} of {total}"
     },
     "experiencias": {
       "body": {
@@ -3928,6 +3929,23 @@
       },
       "drawerImg": {
         "imgAlt1": "Destination"
+      },
+      "atlas": {
+        "cat": {
+          "all": "All",
+          "volcan": "Volcanoes",
+          "playa": "Beaches",
+          "agua": "Rivers, lakes and waterfalls",
+          "naturaleza": "Nature",
+          "cultura": "Culture and history",
+          "comunidad": "Community tourism",
+          "hospedaje": "Places to stay"
+        },
+        "approx": "Approximate location: confirm access with the community or the provider.",
+        "directions": "Directions",
+        "missingNote": "{n} published places don't have verified coordinates yet and are not shown.",
+        "statPlaces": "places on the map",
+        "empty": "No places match that filter."
       }
     },
     "miNegocio": {
