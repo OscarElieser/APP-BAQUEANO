@@ -1,4 +1,4 @@
-﻿<!-- ============================================================
+<!-- ============================================================
 BACKUP ESTABLE — 30 SEPTIEMBRE 2026 — 16:40 CST
 COMMIT: a4a23bdb | TAG GIT: BACKUP-30SEPT-2026-ESTABLE
 FIREBASE: <https://app-baqueano.web.app> (668 archivos, deploy OK)
@@ -2807,10 +2807,6 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 - **POR QUÃ‰:** La portada habÃ­a perdido en una ediciÃ³n reciente todo el bloque SEO y las hojas de estilo del `head`; ademÃ¡s, cuatro recursos canÃ³nicos de marca habÃ­an quedado eliminados del Ã­ndice y las rutas histÃ³ricas dejaban de resolver el logo en numerosas pÃ¡ginas.
 - **CÃ“MO:** Se restauraron desde el historial inmediato los cuatro recursos de marca sin retirar los logos nuevos. En `website/index.html` se repuso el orden correcto del `head`: metadatos, Open Graph, fuentes, proveedores visuales, sistema global, mÃ³dulos y estilos especÃ­ficos de portada. Se conservaron el favicon solicitado, el mapa corregido, el footer vigente y todo el contenido.
 - **QUÃ‰:** Actualizados `website/index.html` y `SESSION_LOG.md`; restaurados `website/assets/images/logo.png`, `website/assets/images/LOGOS/logo.png`, `website/assets/images/baqueano_icono_2000x2000-blanco.png` y `website/assets/images/LOGOS/baqueano_icono_2000x2000-blanco.png` (3,246,226 bytes cada uno).
-- **ValidaciÃ³n final:** `flutter analyze` sin hallazgos; `flutter test` con 31 pruebas aprobadas; pruebas de humo de producciÃ³n web aprobadas; portada verificada por navegador automatizado a 390, 768 y 1440 px, sin desbordamiento horizontal ni errores JavaScript, con 22 hojas locales activas, logo cargado y mapa estable a 300 px de altura.
-
-## <<<<<<< HEAD
-
 - **Consulta:** *"revisa que se cayó toda la calidad del sitio web; rectifica, no vas a borrar nada, solo ordenar"*.
 - **POR QUÉ:** La portada había perdido en una edición reciente todo el bloque SEO y las hojas de estilo del `head`; además, cuatro recursos canónicos de marca habían quedado eliminados del índice y las rutas históricas dejaban de resolver el logo en numerosas páginas.
 - **CÓMO:** Se restauraron desde el historial inmediato los cuatro recursos de marca sin retirar los logos nuevos. En `website/index.html` se repuso el orden correcto del `head`: metadatos, Open Graph, fuentes, proveedores visuales, sistema global, módulos y estilos específicos de portada. Se conservaron el favicon solicitado, el mapa corregido, el footer vigente y todo el contenido.
@@ -6119,30 +6115,6 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - Rama remota `origin/wip/tipografias-ops-2026-10-08` sincronizada 100% en GitHub.
 - Regla de repositorio GitHub identificada vía API: Ruleset ID `24771709` (`pull_request` requerida en `main`). Se proporcionan enlaces directos al usuario para completar el merge en GitHub con un clic.
 
-## 2026-10-09 — Generación de Flujos de Usuario Duales (User Flows) en Mermaid.js para Pitch y Figma
-
-### 🎯 1. POR QUÉ (Why / Propósito)
-- Mapear la arquitectura completa de interacción y experiencia de usuario (UX) tanto para la aplicación nativa Android (`./lib/`) como para la plataforma Web (`./website/`), proveyendo especificaciones visuales estandarizadas en sintaxis Mermaid.js para su exportación a Figma y presentación en el pitch del hackathon.
-
-### ⚙️ 2. CÓMO (How / Arquitectura e Implementación)
-1. **Flujo A (Android App - Mobile First):**
-   - Mapeo desde `lib/main.dart` y `lib/config/app_router.dart`.
-   - Ciclo de vida: `SplashScreen` ➔ Verificación de Sesión (Firebase Auth) ➔ `LoginScreen` / `HomeScreen`.
-   - Navegación multinodal: `MapScreen` (GPS/Google Maps), `AiAssistantScreen` (Baqüi IA), `PlaceDetailScreen`, `ProfileScreen` (Pasaporte Digital) y `EmergencySosScreen`.
-2. **Flujo B (Plataforma Web - Desktop/Responsive):**
-   - Mapeo desde `website/index.html` ("No se visita, se descubre").
-   - Embudo de conversión: Hero ➔ Franja de 10 Categorías ➔ `destinos.html` / `destino.html` ➔ `mapa.html` ➔ `baqueano-ia.html` ➔ Red de Anfitriones Campesinos (`aliados.html` / `mi-negocio.html`) ➔ CTA de Descarga (`descargar.html`).
-3. **Formato Mermaid.js:**
-   - Sintaxis estricta `flowchart TD` con formas semánticas diferenciadas (rombos de decisión, rectángulos redondeados de pantallas, subgrafos temáticos y paleta de estilos corporativa).
-
-### 📦 3. QUÉ (What / Entregables)
-- Código fuente Mermaid.js listo para Figma.
-- Generación de artefactos visuales de alta fidelidad en imagen (16:9) de los User Flows de la App Android y de la Plataforma Web para diapositivas de Pitch y presentaciones ejecutivas.
-
-
-
-
-
 ## 2026-10-09 — Contraste de descripciones en «Lugares Turísticos» de departamentos
 
 - Solicitud: el texto dorado/arena de las tarjetas de lugares turísticos casi no se ve; Madriz está bien, corregir el resto de departamentos y regiones.
@@ -6176,3 +6148,4 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
   - Retirado del pie de página (`index.html` y pie inyectado en `js/global-injector.js`, bloque `.footer-badge-wrap`) y de los héroes de `baqueano-ia.html`, `nosotros.html`, `perfil.html`, `privacidad.html`, `terminos.html`.
   - Portada de la pista «Son de Mi Tierra» en `js/global-music-player.js` y `js/musica-player.js` → `assets/images/LOGOS/baqueano_icono_oficial.png`.
   - El archivo PNG se conserva en el repo (no se eliminó). Los textos «NICARAGUA AUTÉNTICA» (no imagen) se mantienen.
+
