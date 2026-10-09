@@ -311,7 +311,7 @@
       "hidden": "No sale en el mapa",
       "planner": "Planificar viaje"
     },
-    "welcome": "¡Hola! Soy Baqüi, tu guía guardabarranco. ¿Qué querés descubrir hoy?",
+    "welcome": "¡Hola! Soy Baqüi, tu pájaro guía de BAQUEANO. ¿Qué querés descubrir hoy?",
     "open": "Abrí Baqüi, tu guía digital",
     "homeCard": {
       "status": "Guía activo",
@@ -1095,7 +1095,7 @@
         "div1": "NUEVOS DESTINOS",
         "div2": "GRANDES HISTORIAS",
         "div3": "SIGUE EXPLORANDO",
-        "imgAlt1": "BAQUI, el guardabarranco explorador, con su mapa"
+        "imgAlt1": "BAQUI, el pájaro explorador de BAQUEANO, con sombrero y cámara"
       },
       "center404MessageBlock": {
         "h11": "Este camino",
@@ -5034,7 +5034,7 @@
       "sec17": {
         "h41": "17. Propiedad intelectual",
         "p1": "Derechos sobre la marca BAQUEANO, código, diseño e iconografía.",
-        "div1": "Todos los logotipos, diseños, código fuente, ilustraciones del Guardabarranco Baqüi y textos editoriales son propiedad exclusiva de BAQUEANO o cuentan con licencias legítimas de uso."
+        "div1": "Todos los logotipos, diseños, código fuente, ilustraciones de la mascota Baqüi y textos editoriales son propiedad exclusiva de BAQUEANO o cuentan con licencias legítimas de uso."
       },
       "sec18": {
         "h41": "18. Uso de imágenes y medios",
@@ -5145,7 +5145,7 @@
     "bomberosUnificados115": "Bomberos Unificados (115)",
     "anterior": "Anterior",
     "siguiente": "Siguiente",
-    "baquiGuardabarranco": "Baqüi Guardabarranco",
+    "baquiGuardabarranco": "Baqüi, el pájaro explorador",
     "verMasHistorias": "Ver más historias",
     "registrarMiNegocio": "Registrar mi negocio",
     "nicaraguaAutentica": "NICARAGUA AUTÉNTICA",

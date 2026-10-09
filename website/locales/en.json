@@ -113,7 +113,7 @@
     "processing": "Processing…"
   },
   "baqui": {
-    "welcome": "Hi! I'm Baqüi, your guardabarranco guide. What would you like to discover today?",
+    "welcome": "Hi! I'm Baqüi, BAQUEANO's bird guide. What would you like to discover today?",
     "placeholder": "Ask about destinations, routes, or experiences…",
     "inputLabel": "Type your question",
     "open": "Open Baqüi, your digital guide",
@@ -1095,7 +1095,7 @@
         "div1": "NEW DESTINATIONS",
         "div2": "GREAT STORIES",
         "div3": "KEEP EXPLORING",
-        "imgAlt1": "BAQUI, the explorer motmot, with his map"
+        "imgAlt1": "BAQUI, BAQUEANO's explorer bird, with hat and camera"
       },
       "center404MessageBlock": {
         "h11": "This path",
@@ -5034,7 +5034,7 @@
       "sec17": {
         "h41": "17. Intellectual property",
         "p1": "Rights over the BAQUEANO brand, code, design and iconography.",
-        "div1": "All logos, designs, source code, illustrations of the Guardabarranco Baqüi and editorial texts are the exclusive property of BAQUEANO or are used under legitimate licenses."
+        "div1": "All logos, designs, source code, illustrations of the Baqüi mascot and editorial texts are the exclusive property of BAQUEANO or are used under legitimate licenses."
       },
       "sec18": {
         "h41": "18. Use of images and media",
@@ -5145,7 +5145,7 @@
     "bomberosUnificados115": "Unified Fire Department (115)",
     "anterior": "Previous",
     "siguiente": "Next",
-    "baquiGuardabarranco": "Baqüi the Motmot",
+    "baquiGuardabarranco": "Baqüi the explorer bird",
     "verMasHistorias": "See more stories",
     "registrarMiNegocio": "Register my business",
     "nicaraguaAutentica": "AUTHENTIC NICARAGUA",

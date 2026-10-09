@@ -6137,3 +6137,11 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
   - Respaldo sin eliminar: el guardabarranco anterior queda en `website/assets/images/assistant/baqui-guardabarranco-legacy.png`.
   - `website/css/baqueano-assistant.css`: recalibrados los `clip-path`/`transform-origin` de `.bq-character-head/-wing/-tail` para la nueva pose (verificado dibujando las zonas sobre la imagen).
 - Pendiente: los textos alternativos/i18n aún dicen «guardabarranco» (`common.baquiGuardabarranco`, 404, asistente); se actualizarán en los 6 idiomas cuando el usuario confirme qué ave es la nueva mascota. Verificación visual en navegador pendiente.
+
+## 2026-10-09 — Textos de Baqui sin «guardabarranco» (6 idiomas, web + app)
+
+- Solicitud: actualizar los textos que describían a Baqui como guardabarranco tras el cambio de imagen. La especie de la nueva mascota no fue confirmada, así que se usó una descripción neutral («pájaro explorador»).
+- Claves cambiadas en `website/locales/*.json` y `assets/i18n/*.json` (es, en, fr, de, it, pt): `baqui.welcome`, `common.baquiGuardabarranco` (se conserva el nombre de la clave), `pages.page.sideSignpostBaquiWrap.imgAlt1` (ahora «con sombrero y cámara»), `pages.terminos.sec17.div1`.
+- Textos de respaldo: `404.html`, `aliados.html`, `destinos.html`, `js/baqueano-assistant.js` (texto para lector de pantalla), comentario en `css/baqueano-assistant.css`.
+- No se tocó: ave nacional, Dúo Guardabarranco, crónica «La guardia silenciosa del Guardabarranco», etiqueta de fauna de Madriz.
+- Verificación: los 12 JSON parsean; web y app coinciden en las 4 claves × 6 idiomas (0 diferencias). `npm run i18n` NO se ejecutó: Node no está instalado en esta máquina.
