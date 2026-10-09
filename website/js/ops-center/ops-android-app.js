@@ -59,7 +59,7 @@
     ]);
   }
   var BOX = 'background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;margin-top:16px;color:#E2E8F0';
-  var H = 'margin:0 0 10px;font:800 1rem/1.3 Montserrat,sans-serif;color:#F4E6C1';
+  var H = 'margin:0 0 10px;font:800 1rem/1.3 League Spartan,sans-serif;color:#F4E6C1';
   var MONO = 'display:block;padding:8px 10px;border-radius:8px;background:rgba(0,0,0,.25);font:600 .8rem/1.5 ui-monospace,Menlo,Consolas,monospace;overflow-wrap:anywhere;word-break:break-all;color:#F4E6C1';
 
   function row(label, value, mono) {

@@ -24,7 +24,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/models/cultural_models.dart';
@@ -246,7 +246,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                       children: [
                         Text(
                           'CANALES DE RESERVA DIRECTA',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 10,
                             fontWeight: FontWeight.w800,
                             color: AppColors.goldLight,
@@ -255,7 +255,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                         ),
                         Text(
                           spot.name,
-                          style: GoogleFonts.montserrat(
+                          style: BaqueanoFonts.display(
                             fontSize: 17,
                             fontWeight: FontWeight.w900,
                             color: Colors.white,
@@ -287,7 +287,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                         const SizedBox(width: 6),
                         Text(
                           'Política y Canal Recomendado:',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: AppColors.goldLight,
@@ -298,7 +298,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                     const SizedBox(height: 6),
                     Text(
                       spot.reservationInfo ?? 'Contacto directo con la administración.',
-                      style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white70, height: 1.4),
+                      style: BaqueanoFonts.text(fontSize: 12.5, color: Colors.white70, height: 1.4),
                     ),
                   ],
                 ),
@@ -330,7 +330,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                         children: [
                           Text(
                             'TARIFA ESTIMADA DE HOSPEDAJE',
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 10,
                               fontWeight: FontWeight.w800,
                               color: AppColors.goldLight,
@@ -340,7 +340,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                           const SizedBox(height: 2),
                           Text(
                             spot.priceRange ?? '\$${spot.pricePerNightUsd.toInt()} USD / noche',
-                            style: GoogleFonts.montserrat(
+                            style: BaqueanoFonts.display(
                               fontSize: 13.5,
                               fontWeight: FontWeight.w800,
                               color: AppColors.jungleGreenLight,
@@ -356,7 +356,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
               const SizedBox(height: 16),
               Text(
                 'Elige cómo deseas reservar:',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
                   color: AppColors.textMuted,
@@ -488,7 +488,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                       children: [
                         Text(
                           'ITINERARIO VIAL Y RUTA SATELITAL',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 10,
                             fontWeight: FontWeight.w800,
                             color: AppColors.goldLight,
@@ -497,7 +497,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                         ),
                         Text(
                           spot.name,
-                          style: GoogleFonts.montserrat(
+                          style: BaqueanoFonts.display(
                             fontSize: 18,
                             fontWeight: FontWeight.w900,
                             color: Colors.white,
@@ -529,7 +529,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                         Expanded(
                           child: Text(
                             'Punto de partida: Tu ubicación actual (GPS)',
-                            style: GoogleFonts.inter(
+                            style: BaqueanoFonts.text(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: AppColors.jungleGreenLight,
@@ -546,7 +546,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                         Expanded(
                           child: Text(
                             spot.estimatedTime ?? 'Calculando tiempo de llegada...',
-                            style: GoogleFonts.inter(
+                            style: BaqueanoFonts.text(
                               fontSize: 12.5,
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
@@ -564,7 +564,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                         Expanded(
                           child: Text(
                             spot.howToGetThere ?? 'Sigue las indicaciones de navegación vehicular asistida.',
-                            style: GoogleFonts.inter(
+                            style: BaqueanoFonts.text(
                               fontSize: 12,
                               color: Colors.white70,
                               height: 1.35,
@@ -688,7 +688,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                           children: [
                             Text(
                               'HOSPEDAJE AUTÉNTICO & RESERVA DIRECTA',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.goldLight,
@@ -698,7 +698,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                             const SizedBox(height: 3),
                             Text(
                               'Contacto directo con anfitriones y hoteles locales sin intermediarios.',
-                              style: GoogleFonts.inter(
+                              style: BaqueanoFonts.text(
                                 fontSize: 12,
                                 color: Colors.white70,
                                 fontStyle: FontStyle.italic,
@@ -771,7 +771,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                         ),
                         child: Text(
                           category == 'Todos' ? 'Todos (${allLodgings.length})' : category,
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
                             color: Colors.white,
@@ -834,7 +834,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                                   ),
                                   child: Text(
                                     lodge.type.toUpperCase(),
-                                    style: GoogleFonts.spaceGrotesk(
+                                    style: BaqueanoFonts.text(
                                       fontSize: 10,
                                       fontWeight: FontWeight.w700,
                                       color: AppColors.goldLight,
@@ -847,7 +847,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                                     const SizedBox(width: 4),
                                     Text(
                                       '${lodge.rating}',
-                                      style: GoogleFonts.spaceGrotesk(
+                                      style: BaqueanoFonts.text(
                                         fontSize: 12.5,
                                         fontWeight: FontWeight.w800,
                                         color: Colors.white,
@@ -861,7 +861,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                             // Nombre del local completo (hasta 2 líneas sin recortes prematuros)
                             Text(
                               lodge.name,
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.textLight,
@@ -873,7 +873,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                             const SizedBox(height: 3),
                             Text(
                               lodge.location,
-                              style: GoogleFonts.inter(
+                              style: BaqueanoFonts.text(
                                 fontSize: 11,
                                 color: AppColors.textMuted,
                               ),
@@ -883,7 +883,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                             const SizedBox(height: 6),
                             Text(
                               lodge.description,
-                              style: GoogleFonts.inter(
+                              style: BaqueanoFonts.text(
                                 fontSize: 11.5,
                                 color: Colors.white70,
                                 height: 1.35,
@@ -906,7 +906,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                                   ),
                                   child: Text(
                                     '✨ $a',
-                                    style: GoogleFonts.inter(fontSize: 10, color: AppColors.goldLight),
+                                    style: BaqueanoFonts.text(fontSize: 10, color: AppColors.goldLight),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -952,7 +952,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                                       children: [
                                         Text(
                                           'RANGO DE PRECIO ESTIMADO',
-                                          style: GoogleFonts.spaceGrotesk(
+                                          style: BaqueanoFonts.text(
                                             fontSize: 9.5,
                                             fontWeight: FontWeight.w800,
                                             color: AppColors.goldLight,
@@ -962,7 +962,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
                                         const SizedBox(height: 1),
                                         Text(
                                           lodge.priceRange ?? '\$${lodge.pricePerNightUsd.toInt()} USD / noche',
-                                          style: GoogleFonts.montserrat(
+                                          style: BaqueanoFonts.display(
                                             fontSize: 12.5,
                                             fontWeight: FontWeight.w800,
                                             color: AppColors.jungleGreenLight,
@@ -1028,7 +1028,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
         const SizedBox(width: 6),
         Text(
           text,
-          style: GoogleFonts.spaceGrotesk(
+          style: BaqueanoFonts.text(
             fontSize: 12,
             fontWeight: FontWeight.w700,
             color: Colors.white,

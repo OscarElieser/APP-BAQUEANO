@@ -20,7 +20,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/models/cultural_models.dart';
@@ -178,7 +178,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                           children: [
                             Text(
                               'SOBERANÍA DEL MAÍZ & SABORES DE TIERRA ADENTRO',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.goldLight,
@@ -188,7 +188,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                             const SizedBox(height: 3),
                             Text(
                               '«Somos hijos del maíz». Recetas heredadas de abuelas y cocineras rurales.',
-                              style: GoogleFonts.inter(
+                              style: BaqueanoFonts.text(
                                 fontSize: 12,
                                 color: Colors.white70,
                                 fontStyle: FontStyle.italic,
@@ -253,7 +253,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                         ),
                         child: Text(
                           category == 'Todos' ? 'Todos (${allDishes.length})' : category,
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
                             color: isSelected ? Colors.white : AppColors.textMuted,
@@ -295,7 +295,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
         const SizedBox(width: 5),
         Text(
           text,
-          style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+          style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.goldLight),
         ),
       ],
     );
@@ -381,7 +381,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                             Flexible(
                               child: Text(
                                 dish.region,
-                                style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                                style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.goldLight),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -416,7 +416,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                                 alignment: Alignment.centerRight,
                                 child: Text(
                                   dish.estimatedPrice,
-                                  style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w900, color: Colors.white),
+                                  style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w900, color: Colors.white),
                                   maxLines: 1,
                                 ),
                               ),
@@ -448,7 +448,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                     Expanded(
                       child: Text(
                         dish.name,
-                        style: GoogleFonts.montserrat(
+                        style: BaqueanoFonts.display(
                           fontSize: 19,
                           fontWeight: FontWeight.w900,
                           color: Colors.white,
@@ -475,7 +475,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                 // Reseña Histórica Ancestral
                 Text(
                   dish.history,
-                  style: GoogleFonts.inter(fontSize: 12.5, color: AppColors.textLight.withValues(alpha: 0.88), height: 1.45),
+                  style: BaqueanoFonts.text(fontSize: 12.5, color: AppColors.textLight.withValues(alpha: 0.88), height: 1.45),
                 ),
                 const SizedBox(height: 14),
 
@@ -494,7 +494,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                       Expanded(
                         child: Text(
                           'Maridaje recomendado: ${_getPairing(dish.name)}',
-                          style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.goldLight, fontWeight: FontWeight.w600),
+                          style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.goldLight, fontWeight: FontWeight.w600),
                         ),
                       ),
                     ],
@@ -506,7 +506,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                 // Ingredientes Principales
                 Text(
                   'INGREDIENTES ANCESTRALES:',
-                  style: GoogleFonts.spaceGrotesk(fontSize: 10.5, fontWeight: FontWeight.w800, color: AppColors.terracottaLight, letterSpacing: 0.8),
+                  style: BaqueanoFonts.text(fontSize: 10.5, fontWeight: FontWeight.w800, color: AppColors.terracottaLight, letterSpacing: 0.8),
                 ),
                 const SizedBox(height: 6),
                 Wrap(
@@ -522,7 +522,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                       ),
                       child: Text(
                         ing,
-                        style: GoogleFonts.inter(fontSize: 11, color: AppColors.textLight.withValues(alpha: 0.9)),
+                        style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textLight.withValues(alpha: 0.9)),
                       ),
                     );
                   }).toList(),
@@ -558,7 +558,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                           Expanded(
                             child: Text(
                               'PUESTO & COMEDOR CAMPESINO RECOMENDADO',
-                              style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 0.8),
+                              style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 0.8),
                             ),
                           ),
                         ],
@@ -641,7 +641,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                         icon: const Icon(Icons.phone_in_talk_rounded, size: 16, color: Colors.white),
                         label: Text(
                           'Llamar al Local',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.bold),
+                          style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -658,7 +658,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                         icon: const Icon(Icons.chat_rounded, size: 16, color: Color(0xFF25D366)),
                         label: Text(
                           'WhatsApp',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                          style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
                         ),
                       ),
                     ),
@@ -703,7 +703,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
         const SizedBox(width: 8),
         Text(
           label,
-          style: GoogleFonts.spaceGrotesk(
+          style: BaqueanoFonts.text(
             fontSize: 11,
             fontWeight: FontWeight.w700,
             color: Colors.white70,
@@ -713,7 +713,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
         Expanded(
           child: Text(
             value,
-            style: GoogleFonts.inter(
+            style: BaqueanoFonts.text(
               fontSize: 11.5,
               fontWeight: isHighlight ? FontWeight.w700 : FontWeight.w500,
               color: valueColor ?? (isHighlight ? AppColors.goldLight : Colors.white),

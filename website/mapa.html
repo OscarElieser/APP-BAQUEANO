@@ -36,7 +36,7 @@
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -206,7 +206,7 @@
     }
 
     .drawer-title {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'League Spartan', sans-serif;
       font-size: 1.15rem;
       font-weight: 800;
       margin: 0 0 4px;
@@ -541,7 +541,7 @@
           const amenitiesHtml = place.amenities ? `<p style="margin:4px 0; font-size:0.73rem; color:#64748B;">${place.amenities.join(' · ')}</p>` : '';
           const routeUrl = `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}`;
           const popupHtml = `
-            <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:210px; color:#0F172A; padding:2px;">
+            <div style="font-family:'Aristotelica Pro', 'Plus Jakarta Sans',sans-serif; min-width:210px; color:#0F172A; padding:2px;">
               <h4 style="margin:0 0 4px; font-size:0.92rem; font-weight:700;">${place.name} ${checkIcon}</h4>
               <p style="margin:0 0 4px; font-size:0.75rem; color:#165D6F; font-weight:600;">${place.type || place.cat.toUpperCase()} · ${place.muni || place.dept}</p>
               ${amenitiesHtml}

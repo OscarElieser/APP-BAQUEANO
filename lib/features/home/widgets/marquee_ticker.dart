@@ -19,7 +19,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
 
@@ -122,7 +122,7 @@ class _MarqueeTickerState extends State<MarqueeTicker> {
               ),
               child: Text(
                 'RED DE ALIANZAS',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 10,
                   fontWeight: FontWeight.w900,
                   color: Colors.white,
@@ -140,7 +140,7 @@ class _MarqueeTickerState extends State<MarqueeTicker> {
                     const SizedBox(width: 6),
                     Text(
                       partner,
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                         color: AppColors.textLight.withValues(alpha: 0.9),

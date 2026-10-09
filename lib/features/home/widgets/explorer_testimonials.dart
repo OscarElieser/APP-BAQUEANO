@@ -21,7 +21,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
@@ -81,7 +81,7 @@ class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
                     children: [
                       Text(
                         rev.author,
-                        style: GoogleFonts.montserrat(
+                        style: BaqueanoFonts.display(
                           fontSize: 18,
                           fontWeight: FontWeight.w900,
                           color: Colors.white,
@@ -89,7 +89,7 @@ class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
                       ),
                       Text(
                         'Destino explorado: ${rev.destination}',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 12, color: AppColors.gold),
+                        style: BaqueanoFonts.text(fontSize: 12, color: AppColors.gold),
                       ),
                     ],
                   ),
@@ -108,7 +108,7 @@ class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
                       const SizedBox(width: 4),
                       Text(
                         'VERIFICADO',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 9.5,
                           fontWeight: FontWeight.w800,
                           color: AppColors.success,
@@ -131,7 +131,7 @@ class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
             const SizedBox(height: 12),
             Text(
               'Bitácora del Explorador:',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
                 color: Colors.white70,
@@ -140,7 +140,7 @@ class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
             const SizedBox(height: 8),
             Text(
               '"${rev.review}"',
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 14,
                 color: Colors.white.withValues(alpha: 0.95),
                 height: 1.6,
@@ -159,7 +159,7 @@ class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
                 ),
                 child: Text(
                   'Cerrar Reseña',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontWeight: FontWeight.w800,
                     color: Colors.white,
                   ),
@@ -208,7 +208,7 @@ class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
                     const SizedBox(width: 6),
                     Text(
                       'RESEÑAS VERIFICADAS · ${reviews.length} EXPEDICIONARIOS',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 10,
                         fontWeight: FontWeight.w800,
                         letterSpacing: 0.8,
@@ -290,7 +290,7 @@ class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
                                         children: [
                                           Text(
                                             rev.author,
-                                            style: GoogleFonts.montserrat(
+                                            style: BaqueanoFonts.display(
                                               fontSize: 13,
                                               fontWeight: FontWeight.w800,
                                               color: AppColors.textLight,
@@ -300,7 +300,7 @@ class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
                                           ),
                                           Text(
                                             rev.destination,
-                                            style: GoogleFonts.spaceGrotesk(
+                                            style: BaqueanoFonts.text(
                                               fontSize: 11,
                                               color: AppColors.goldLight,
                                             ),
@@ -329,7 +329,7 @@ class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
                           Expanded(
                             child: Text(
                               rev.review,
-                              style: GoogleFonts.inter(
+                              style: BaqueanoFonts.text(
                                 fontSize: 12,
                                 color: AppColors.textLight.withValues(alpha: 0.85),
                                 height: 1.45,
@@ -346,7 +346,7 @@ class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
                             children: [
                               Text(
                                 'Toca para leer completa 💬',
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 10,
                                   color: AppColors.goldLight.withValues(alpha: 0.7),
                                   fontWeight: FontWeight.w600,

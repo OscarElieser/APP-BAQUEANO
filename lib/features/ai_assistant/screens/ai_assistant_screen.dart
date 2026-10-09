@@ -25,7 +25,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/data/catalog_data.dart';
@@ -332,7 +332,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
       ),
       child: Text(
         label,
-        style: GoogleFonts.inter(
+        style: BaqueanoFonts.text(
           fontSize: 11,
           fontWeight: FontWeight.w600,
           color: AppColors.goldLight,
@@ -400,7 +400,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
                     controller: _messageController,
                     minLines: 1,
                     maxLines: 3,
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       color: AppColors.textLight,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -408,7 +408,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
                     cursorColor: AppColors.gold,
                     decoration: InputDecoration(
                       hintText: 'Pregunta sobre rutas, presupuestos, guías...',
-                      hintStyle: GoogleFonts.inter(
+                      hintStyle: BaqueanoFonts.text(
                         color: AppColors.textMuted.withValues(alpha: 0.85),
                         fontSize: 13,
                       ),
@@ -436,7 +436,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(11),
                       decoration: BoxDecoration(
-                        gradient: AppGradients.sunsetTerracotta,
+                        color: AppColors.terracotta,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -501,7 +501,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
                 const SizedBox(width: 6),
                 Text(
                   msg.isUser ? 'Tú' : 'Baqueano AI',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
                     color: msg.isUser ? Colors.white : AppColors.goldLight,
@@ -526,7 +526,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
                           const SizedBox(width: 3),
                           Text(
                             'Verificado Baqueano',
-                            style: GoogleFonts.inter(fontSize: 9, color: Colors.tealAccent, fontWeight: FontWeight.bold),
+                            style: BaqueanoFonts.text(fontSize: 9, color: Colors.tealAccent, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -542,7 +542,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
                       ),
                       child: Text(
                         'Offline',
-                        style: GoogleFonts.inter(fontSize: 9, color: Colors.lightBlueAccent, fontWeight: FontWeight.bold),
+                        style: BaqueanoFonts.text(fontSize: 9, color: Colors.lightBlueAccent, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -552,7 +552,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
             const SizedBox(height: 8),
             Text(
               msg.text,
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 13,
                 color: Colors.white,
                 height: 1.5,
@@ -590,7 +590,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
                     icon: Icon(_getIconForTool(tool.type), size: 14, color: AppColors.bgDark),
                     label: Text(
                       tool.label,
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
                         color: AppColors.bgDark,
@@ -635,7 +635,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
                       ),
                       child: Text(
                         action,
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 11,
                           fontWeight: FontWeight.w600,
                           color: AppColors.goldLight,
@@ -690,7 +690,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
             const SizedBox(width: 10),
             Text(
               'Baqueano AI está consultando la base de datos de Nicaragua...',
-              style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
+              style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textMuted),
             ),
           ],
         ),

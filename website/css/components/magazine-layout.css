@@ -90,7 +90,7 @@
 
 .bq-mag-title {
   margin: 0.25rem 0 0;
-  font-family: Montserrat, sans-serif;
+  font-family: League Spartan, sans-serif;
   font-weight: 900;
   font-size: clamp(2rem, 5vw, 3.4rem);
   color: var(--bq-mag-dark);
@@ -167,7 +167,7 @@
 }
 
 .bq-mag-rail-heading {
-  font-family: Montserrat, sans-serif;
+  font-family: League Spartan, sans-serif;
   font-size: 0.95rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -273,7 +273,7 @@
 
 .bq-mag-lead-title {
   margin: 0;
-  font-family: Montserrat, sans-serif;
+  font-family: League Spartan, sans-serif;
   font-size: clamp(1.4rem, 2.5vw, 2.1rem);
   font-weight: 900;
   color: var(--bq-mag-dark);
@@ -367,7 +367,7 @@
 
 .bq-mag-card-sm-title {
   margin: 0;
-  font-family: Montserrat, sans-serif;
+  font-family: League Spartan, sans-serif;
   font-size: 1.05rem;
   font-weight: 800;
   line-height: 1.3;
@@ -425,7 +425,7 @@
 }
 
 .bq-mag-rank-number {
-  font-family: Montserrat, sans-serif;
+  font-family: League Spartan, sans-serif;
   font-size: 1.5rem;
   font-weight: 900;
   color: var(--bq-mag-primary);

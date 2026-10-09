@@ -21,7 +21,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/app_colors.dart';
@@ -148,7 +148,7 @@ class HelpScreen extends StatelessWidget {
                       children: [
                         Text(
                           'MESA DE AYUDA & SOPORTE',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 13,
                             fontWeight: FontWeight.w800,
                             color: AppColors.goldLight,
@@ -157,7 +157,7 @@ class HelpScreen extends StatelessWidget {
                         ),
                         Text(
                           'Atención directa 24/7 sin intermediarios',
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 11.5,
                             color: AppColors.textMuted,
                           ),
@@ -174,7 +174,7 @@ class HelpScreen extends StatelessWidget {
               const Divider(color: AppColors.borderLight, height: 24),
               Text(
                 'Correo Oficial de Soporte:',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                   color: Colors.white70,
@@ -199,7 +199,7 @@ class HelpScreen extends StatelessWidget {
                     Expanded(
                       child: Text(
                         AppConstants.supportEmail,
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
                           color: AppColors.goldLight,
@@ -237,7 +237,7 @@ class HelpScreen extends StatelessWidget {
                             const SizedBox(width: 4),
                             Text(
                               'Copiar',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w700,
                                 color: Colors.white,
@@ -253,7 +253,7 @@ class HelpScreen extends StatelessWidget {
               const SizedBox(height: 14),
               Text(
                 'Tiempo estimado de respuesta: menos de 15 minutos en horario diurno.',
-                style: GoogleFonts.inter(
+                style: BaqueanoFonts.text(
                   fontSize: 11.5,
                   color: AppColors.textMuted,
                   height: 1.3,
@@ -274,7 +274,7 @@ class HelpScreen extends StatelessWidget {
                   icon: const Icon(Icons.chat, size: 18, color: Colors.white),
                   label: Text(
                     'Contactar por WhatsApp Directo',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
                     ),
@@ -346,7 +346,7 @@ class HelpScreen extends StatelessWidget {
                       Expanded(
                         child: Text(
                           'LÍNEAS DE ASISTENCIA & EMERGENCIA NACIONAL (SOS)',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w800,
                             color: AppColors.error,
@@ -358,7 +358,7 @@ class HelpScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     'En caso de cualquier imprevisto en sendero o montaña, puedes marcar directamente a los servicios oficiales de auxilio de Nicaragua:',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 12,
                       color: AppColors.textLight.withValues(alpha: 0.85),
                       height: 1.4,
@@ -403,7 +403,7 @@ class HelpScreen extends StatelessWidget {
             // Lista interactiva de FAQs
             Text(
               'PREGUNTAS FRECUENTES',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 12,
                 fontWeight: FontWeight.w800,
                 color: AppColors.goldLight,
@@ -437,7 +437,7 @@ class HelpScreen extends StatelessWidget {
                       childrenPadding: const EdgeInsets.only(bottom: 12),
                       title: Text(
                         faq['q']!,
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w700,
                           color: AppColors.textLight,
@@ -446,7 +446,7 @@ class HelpScreen extends StatelessWidget {
                       children: [
                         Text(
                           faq['a']!,
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 12.5,
                             color: AppColors.textMuted,
                             height: 1.45,
@@ -485,7 +485,7 @@ class HelpScreen extends StatelessWidget {
                       Expanded(
                         child: Text(
                           '¿Tienes una consulta específica o necesitas apoyo en ruta?',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 14,
                             fontWeight: FontWeight.w800,
                             color: Colors.white,
@@ -497,7 +497,7 @@ class HelpScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     'Nuestro equipo de soporte territorial y asistencia al viajero está disponible para ayudarte en tu expedición.',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 12,
                       color: AppColors.textMuted,
                       height: 1.4,
@@ -638,7 +638,7 @@ class HelpScreen extends StatelessWidget {
             const SizedBox(width: 6),
             Text(
               '$entity: $shortNumber',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
                 color: Colors.white,

@@ -28,7 +28,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/baqueano_button.dart';
@@ -105,7 +105,7 @@ class AdminScreen extends StatelessWidget {
                   Text(
                     'CENTRO DE CONTROL BAQUEANO',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 12,
                       fontWeight: FontWeight.w800,
                       letterSpacing: 2.0,
@@ -117,7 +117,7 @@ class AdminScreen extends StatelessWidget {
                   Text(
                     'Portal Administrativo Independiente',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.montserrat(
+                    style: BaqueanoFonts.display(
                       fontSize: isDesktop ? 26 : 20,
                       fontWeight: FontWeight.w900,
                       color: Colors.white,
@@ -128,7 +128,7 @@ class AdminScreen extends StatelessWidget {
                   Text(
                     'Por directriz de arquitectura, la administración, auditoría, publicación de negocios y gestión multimedia se realiza exclusivamente desde la Web Administrativa independiente.',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 14,
                       color: AppColors.textMuted,
                       height: 1.6,
@@ -139,7 +139,7 @@ class AdminScreen extends StatelessWidget {
                   Text(
                     'Esta aplicación está dedicada 100% a la exploración, mapas, expediciones campesinas y pasaporte cultural del turista.',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 13,
                       color: AppColors.goldLight,
                       fontWeight: FontWeight.w600,

@@ -94,13 +94,13 @@ const ENTITIES: Record<string, Entity> = {
     required: ["name", "department_id"],
   },
   businesses: {
-    table: "businesses", order: "name", search: "name", softDelete: true, idPrefix: "biz",
+    table: "businesses", order: "name", search: "name", softDelete: true, statusColumn: "status", idPrefix: "biz",
     select: "id,name,category,department,municipality,department_id,municipality_id,status,verification_status,verified_at,source_name,source_url,source_type,valid_until,description,email,website_url,opening_hours,sustainability_attributes,phone,whatsapp,address,latitude,longitude,cover_image,verified,host_name,host_story,day_pass_available,hidden_gem,metadata,created_at,updated_at,deleted_at",
     write: {
       name: "text", category: "text", department: "text", municipality: "text", phone: "phone", whatsapp: "phone",
       address: "longtext", latitude: "lat", longitude: "lng", cover_image: "url", host_name: "text", host_story: "longtext",
       day_pass_available: "bool", hidden_gem: "bool", department_id: "id", municipality_id: "id", description: "longtext",
-      website_url: "url", source_name: "text", source_url: "url",
+      website_url: "url", source_name: "text", source_url: "url", status: "status", email: "text",
     },
     required: ["name"],
   },

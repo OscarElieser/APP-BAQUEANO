@@ -27,7 +27,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/custom_toast.dart';
@@ -208,12 +208,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       size: 22,
                     ),
                     const SizedBox(width: 10),
-                    Text(
-                      'Foto de Perfil & Avatar Baqueano',
-                      style: GoogleFonts.spaceGrotesk(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
+                    Expanded(
+                      child: Text(
+                        'Foto de Perfil & Avatar Baqueano',
+                        style: BaqueanoFonts.text(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
@@ -221,7 +225,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 const SizedBox(height: 6),
                 Text(
                   'Selecciona uno de los avatares de expedición o ingresa un enlace web personalizado.',
-                  style: GoogleFonts.inter(fontSize: 12, color: Colors.white70),
+                  style: BaqueanoFonts.text(fontSize: 12, color: Colors.white70),
                 ),
                 const SizedBox(height: 18),
 
@@ -356,12 +360,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   size: 24,
                 ),
                 const SizedBox(width: 10),
-                Text(
-                  'Editar Datos del Perfil',
-                  style: GoogleFonts.spaceGrotesk(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16,
+                Expanded(
+                  child: Text(
+                    'Editar Datos del Perfil',
+                    style: BaqueanoFonts.text(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
@@ -471,12 +479,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   size: 24,
                 ),
                 const SizedBox(width: 10),
-                Text(
-                  'Cambiar Contraseña',
-                  style: GoogleFonts.spaceGrotesk(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16,
+                Expanded(
+                  child: Text(
+                    'Cambiar Contraseña',
+                    style: BaqueanoFonts.text(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
@@ -486,7 +498,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               children: [
                 Text(
                   'Ingresa tu clave actual y define tu nueva contraseña segura para proteger tu cuenta y pagos.',
-                  style: GoogleFonts.inter(fontSize: 12, color: Colors.white70),
+                  style: BaqueanoFonts.text(fontSize: 12, color: Colors.white70),
                 ),
                 const SizedBox(height: 14),
                 TextField(
@@ -636,7 +648,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 Expanded(
                   child: Text(
                     stamp['title'] as String,
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 16,
                       fontWeight: FontWeight.w800,
                       color: Colors.white,
@@ -667,7 +679,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     unlocked
                         ? 'SELLO OFICIAL CERTIFICADO'
                         : 'SELLO POR DESBLOQUEAR',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 10,
                       fontWeight: FontWeight.w800,
                       color: unlocked ? color : Colors.white60,
@@ -677,7 +689,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 const SizedBox(height: 12),
                 Text(
                   stamp['description'] as String,
-                  style: GoogleFonts.inter(
+                  style: BaqueanoFonts.text(
                     fontSize: 12,
                     color: Colors.white.withValues(alpha: 0.85),
                     height: 1.4,
@@ -726,16 +738,26 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: GoogleFonts.inter(fontSize: 11, color: Colors.white54),
+          Flexible(
+            child: Text(
+              label,
+              style: BaqueanoFonts.text(fontSize: 11, color: Colors.white54),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-          Text(
-            value,
-            style: GoogleFonts.spaceGrotesk(
-              fontSize: 11,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
+          const SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              value,
+              textAlign: TextAlign.end,
+              style: BaqueanoFonts.text(
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
@@ -791,11 +813,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               children: [
                 Icon(Icons.logout_rounded, color: Color(0xFFE11D48)),
                 SizedBox(width: 10),
-                Text(
-                  'Cerrar Sesión',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    'Cerrar Sesión',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
@@ -856,11 +882,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               children: [
                 Icon(Icons.warning_amber_rounded, color: Color(0xFFE11D48)),
                 SizedBox(width: 10),
-                Text(
-                  'Eliminar Cuenta',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    'Eliminar Cuenta',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
@@ -1056,7 +1086,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
                 label: Text(
                   'Guardar Todas las Configuraciones',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 14,
                     fontWeight: FontWeight.w800,
                     color: Colors.white,
@@ -1084,7 +1114,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         Expanded(
           child: Text(
             title,
-            style: GoogleFonts.spaceGrotesk(
+            style: BaqueanoFonts.text(
               fontSize: 12,
               fontWeight: FontWeight.w800,
               color: const Color(0xFFD4AF37),
@@ -1134,7 +1164,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             const SizedBox(height: 12),
             Text(
               'Sin Sesión de Google Iniciada',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 17,
                 fontWeight: FontWeight.w800,
                 color: Colors.white,
@@ -1144,7 +1174,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             Text(
               'No se ha identificado ninguna cuenta de Google. Conecta tu cuenta oficial para acceder a tu perfil y sincronizar expediciones.',
               textAlign: TextAlign.center,
-              style: GoogleFonts.inter(fontSize: 12, color: Colors.white70),
+              style: BaqueanoFonts.text(fontSize: 12, color: Colors.white70),
             ),
             const SizedBox(height: 18),
             ElevatedButton.icon(
@@ -1165,7 +1195,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               ),
               label: Text(
                 'Iniciar Sesión con Google',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
@@ -1250,7 +1280,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   children: [
                     Text(
                       displayName,
-                      style: GoogleFonts.montserrat(
+                      style: BaqueanoFonts.display(
                         fontSize: 18 * _fontScale,
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
@@ -1269,7 +1299,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       ),
                       child: Text(
                         'RANGO: BAQUEANO MAESTRO',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 10,
                           fontWeight: FontWeight.w800,
                           color: const Color(0xFFD4AF37),
@@ -1279,7 +1309,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     const SizedBox(height: 4),
                     Text(
                       displayEmail,
-                      style: GoogleFonts.inter(
+                      style: BaqueanoFonts.text(
                         fontSize: 12 * _fontScale,
                         color: Colors.white70,
                       ),
@@ -1340,14 +1370,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             children: [
               Text(
                 '1,150 XP acumulados',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 10,
                   color: Colors.white54,
                 ),
               ),
               Text(
                 'Siguiente Nivel: 2,000 XP',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 10,
                   color: const Color(0xFFD4AF37),
                   fontWeight: FontWeight.w700,
@@ -1367,7 +1397,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         const SizedBox(height: 4),
         Text(
           value,
-          style: GoogleFonts.spaceGrotesk(
+          style: BaqueanoFonts.text(
             fontSize: 13,
             fontWeight: FontWeight.w800,
             color: Colors.white,
@@ -1375,7 +1405,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         ),
         Text(
           label,
-          style: GoogleFonts.inter(fontSize: 10, color: Colors.white54),
+          style: BaqueanoFonts.text(fontSize: 10, color: Colors.white54),
         ),
       ],
     );
@@ -1402,7 +1432,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   children: [
                     Text(
                       'Moneda de Cotización',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
@@ -1413,7 +1443,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     const SizedBox(height: 2),
                     Text(
                       'C\$ 36.65 NIO / USD (Oficial)',
-                      style: GoogleFonts.inter(
+                      style: BaqueanoFonts.text(
                         fontSize: 11,
                         color: Colors.white54,
                       ),
@@ -1465,7 +1495,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             thumbColor: const WidgetStatePropertyAll(Color(0xFFC86432)),
             title: Text(
               'Exoneración de IVA (Turista Extranjero 0% - Ley 306)',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
@@ -1475,7 +1505,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               _isTouristTaxExempt
                   ? 'Aplica tarifa libre de impuestos según la Ley de Incentivos Turísticos.'
                   : 'Aplica 15% IVA General DGI para residentes nacionales.',
-              style: GoogleFonts.inter(fontSize: 11, color: Colors.white54),
+              style: BaqueanoFonts.text(fontSize: 11, color: Colors.white54),
             ),
             value: _isTouristTaxExempt,
             onChanged: (val) {
@@ -1510,7 +1540,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         ),
         child: Text(
           label,
-          style: GoogleFonts.spaceGrotesk(
+          style: BaqueanoFonts.text(
             fontSize: 10.5,
             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
             color: isSelected ? Colors.white : Colors.white70,
@@ -1578,7 +1608,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             children: [
               Text(
                 'Tamaño de Texto en Pantalla',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
                   color: Colors.white,
@@ -1586,7 +1616,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               ),
               Text(
                 '${(_fontScale * 100).toInt()}%',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 12,
                   color: const Color(0xFFD4AF37),
                   fontWeight: FontWeight.w800,
@@ -1615,7 +1645,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             ),
             child: Text(
               'Vista previa del tamaño de texto en la bitácora Baqueano.',
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 12 * _fontScale,
                 color: Colors.white70,
               ),
@@ -1651,7 +1681,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       thumbColor: const WidgetStatePropertyAll(Color(0xFFC86432)),
       title: Text(
         title,
-        style: GoogleFonts.spaceGrotesk(
+        style: BaqueanoFonts.text(
           fontSize: 13 * _fontScale,
           fontWeight: FontWeight.w600,
           color: Colors.white,
@@ -1659,7 +1689,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       ),
       subtitle: Text(
         subtitle,
-        style: GoogleFonts.inter(
+        style: BaqueanoFonts.text(
           fontSize: 11 * _fontScale,
           color: Colors.white54,
         ),
@@ -1689,7 +1719,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               Expanded(
                 child: Text(
                   '4 de 5 Sellos Desbloqueados (Toca para ver)',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
                     color: const Color(0xFFD4AF37),
@@ -1701,7 +1731,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               const SizedBox(width: 8),
               Text(
                 '+1,150 XP',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
                   color: Colors.white70,
@@ -1758,7 +1788,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           children: [
                             Text(
                               stamp['title'] as String,
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w700,
                                 color: unlocked ? Colors.white : Colors.white38,
@@ -1770,7 +1800,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               unlocked
                                   ? stamp['date'] as String
                                   : 'Por descubrir',
-                              style: GoogleFonts.inter(
+                              style: BaqueanoFonts.text(
                                 fontSize: 9,
                                 color:
                                     unlocked
@@ -1824,7 +1854,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         children: [
                           Text(
                             'Cuenta de Google',
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
@@ -1832,7 +1862,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           ),
                           Text(
                             user?.email ?? _userEmail,
-                            style: GoogleFonts.inter(
+                            style: BaqueanoFonts.text(
                               fontSize: 11,
                               color: Colors.white54,
                             ),
@@ -1883,7 +1913,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 },
                 child: Text(
                   isGoogleLinked ? 'VINCULADA' : 'CONECTAR',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 10,
                     fontWeight: FontWeight.w800,
                     color:
@@ -1933,7 +1963,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
                 label: Text(
                   'Cambiar Clave',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 12,
                     color: const Color(0xFFD4AF37),
                     fontWeight: FontWeight.w700,
@@ -1959,7 +1989,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
                 label: Text(
                   'Cerrar Sesión',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 12,
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
@@ -1978,7 +2008,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 icon: const Icon(Icons.delete_forever_rounded, size: 16),
                 label: Text(
                   'Eliminar Cuenta',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
                   ),
@@ -2067,7 +2097,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       passport.isActive
                           ? 'MEMBRESÍA ACTIVA'
                           : 'PASE TURÍSTICO EXCLUSIVO',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 10.5,
                         fontWeight: FontWeight.w800,
                         color:
@@ -2081,7 +2111,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       passport.isActive
                           ? 'Pasaporte de Explorador VIP'
                           : 'Pasaporte Digital de Explorador',
-                      style: GoogleFonts.montserrat(
+                      style: BaqueanoFonts.display(
                         fontSize: 16,
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
@@ -2103,7 +2133,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                   child: Text(
                     '15% OFF',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 11,
                       fontWeight: FontWeight.w900,
                       color: AppColors.jungleGreenLight,
@@ -2117,7 +2147,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           if (passport.isActive) ...[
             Text(
               'Tienes activados todos los beneficios de explorador: 15% de descuento directo en tus reservas, mapas sin conexión e IA ilimitada.',
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 12.5,
                 color: Colors.white.withValues(alpha: 0.85),
                 height: 1.4,
@@ -2134,7 +2164,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 const SizedBox(width: 6),
                 Text(
                   'Válido hasta: ${passport.expiryDate != null ? "${passport.expiryDate!.day}/${passport.expiryDate!.month}/${passport.expiryDate!.year}" : "Activo"}',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
                     color: AppColors.goldLight,
@@ -2145,7 +2175,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ] else ...[
             Text(
               'Ahorra más de \$40 USD en tu viaje a Nicaragua. Accede a 15% de descuento en expediciones y eco-lodges, guía territorial y asistente IA ilimitado.',
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 12.5,
                 color: Colors.white.withValues(alpha: 0.85),
                 height: 1.4,
@@ -2177,7 +2207,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 icon: const Icon(Icons.stars_rounded, size: 18),
                 label: Text(
                   'ACTIVAR PASAPORTE (\$9.99 USD)',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 13,
                     fontWeight: FontWeight.w900,
                   ),
@@ -2207,7 +2237,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             Flexible(
               child: Text(
                 text,
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 10.5,
                   fontWeight: FontWeight.w700,
                   color: Colors.white70,
@@ -2265,7 +2295,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       const SizedBox(width: 10),
                       Text(
                         'Activar Pasaporte Explorador',
-                        style: GoogleFonts.montserrat(
+                        style: BaqueanoFonts.display(
                           fontSize: 18,
                           fontWeight: FontWeight.w900,
                           color: Colors.white,
@@ -2331,7 +2361,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             kReleaseMode
                                 ? 'La integración de pagos con pasarela bancaria nacional está en proceso de certificación oficial. La suscripción automatizada estará disponible próximamente.'
                                 : '[MODO PRUEBAS / DEMO] En desarrollo local puedes activar la suscripción de prueba para validar la UI.',
-                            style: GoogleFonts.inter(
+                            style: BaqueanoFonts.text(
                               fontSize: 11.5,
                               color: Colors.white70,
                             ),
@@ -2392,7 +2422,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         kReleaseMode
                             ? 'PRÓXIMAMENTE DISPONIBLE'
                             : 'ACTIVAR (TEST LOCAL)',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 13,
                           fontWeight: FontWeight.w900,
                         ),
@@ -2447,7 +2477,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 children: [
                   Text(
                     title,
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 13,
                       fontWeight: FontWeight.w800,
                       color: Colors.white,
@@ -2455,7 +2485,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                   Text(
                     price,
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
                       color: AppColors.goldLight,
@@ -2463,7 +2493,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                   Text(
                     subtitle,
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 11,
                       color: Colors.white60,
                     ),
@@ -2487,7 +2517,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               onPressed: () => context.go('/ayuda'),
               child: Text(
                 'Centro de Ayuda',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 11,
                   color: Colors.white54,
                 ),
@@ -2498,7 +2528,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               onPressed: () => context.go('/terminos'),
               child: Text(
                 'Términos',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 11,
                   color: Colors.white54,
                 ),
@@ -2509,7 +2539,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               onPressed: () => context.go('/privacidad'),
               child: Text(
                 'Privacidad',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 11,
                   color: Colors.white54,
                 ),
@@ -2519,7 +2549,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         ),
         Text(
           'Baqueano Nicaragua v1.0.0 Oficial • Build 2026.09',
-          style: GoogleFonts.spaceGrotesk(fontSize: 10, color: Colors.white38),
+          style: BaqueanoFonts.text(fontSize: 10, color: Colors.white38),
         ),
       ],
     );

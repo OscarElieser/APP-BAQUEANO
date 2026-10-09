@@ -17,7 +17,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../theme/baqueano_fonts.dart';
 import '../services/weather_radar_service.dart';
 import '../theme/app_colors.dart';
 
@@ -62,7 +62,7 @@ class WeatherRadarBadge extends StatelessWidget {
             const SizedBox(width: 5),
             Text(
               '${weather.temperatureCelsius}°C',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: compact ? 11 : 12,
                 fontWeight: FontWeight.w800,
                 color: Colors.white,
@@ -72,7 +72,7 @@ class WeatherRadarBadge extends StatelessWidget {
               const SizedBox(width: 6),
               Text(
                 weather.condition,
-                style: GoogleFonts.inter(
+                style: BaqueanoFonts.text(
                   fontSize: 10,
                   fontWeight: FontWeight.w500,
                   color: AppColors.goldLight,
@@ -122,11 +122,11 @@ class WeatherRadarBadge extends StatelessWidget {
                         children: [
                           Text(
                             'RADAR METEOROLÓGICO',
-                            style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w800, color: AppColors.gold),
+                            style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w800, color: AppColors.gold),
                           ),
                           Text(
                             weather.condition,
-                            style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white),
+                            style: BaqueanoFonts.display(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white),
                           ),
                         ],
                       ),
@@ -142,7 +142,7 @@ class WeatherRadarBadge extends StatelessWidget {
               // Temperatura principal
               Text(
                 '${weather.temperatureCelsius}°C',
-                style: GoogleFonts.montserrat(
+                style: BaqueanoFonts.display(
                   fontSize: 48,
                   fontWeight: FontWeight.w900,
                   color: Colors.white,
@@ -181,11 +181,11 @@ class WeatherRadarBadge extends StatelessWidget {
                         children: [
                           Text(
                             'CONDICIÓN DEL SENDERO',
-                            style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w800, color: AppColors.jungleGreenLight),
+                            style: BaqueanoFonts.text(fontSize: 9, fontWeight: FontWeight.w800, color: AppColors.jungleGreenLight),
                           ),
                           Text(
                             weather.trailStatus,
-                            style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white),
+                            style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white),
                           ),
                         ],
                       ),
@@ -210,9 +210,9 @@ class WeatherRadarBadge extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(label, style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted)),
+          Text(label, style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted)),
           const SizedBox(height: 4),
-          Text(value, style: GoogleFonts.montserrat(fontSize: 15, fontWeight: FontWeight.w900, color: Colors.white)),
+          Text(value, style: BaqueanoFonts.display(fontSize: 15, fontWeight: FontWeight.w900, color: Colors.white)),
         ],
       ),
     );

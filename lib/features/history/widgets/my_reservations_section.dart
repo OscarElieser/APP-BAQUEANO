@@ -19,7 +19,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/theme/app_colors.dart';
@@ -48,7 +48,7 @@ class MyReservationsSection extends ConsumerWidget {
             Expanded(
               child: Text(
                 'MIS SOLICITUDES DE RESERVA',
-                style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight, letterSpacing: 1.1),
+                style: BaqueanoFonts.text(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight, letterSpacing: 1.1),
               ),
             ),
             IconButton(
@@ -60,7 +60,7 @@ class MyReservationsSection extends ConsumerWidget {
         ),
         Text(
           'El precio y el pago se acuerdan directamente con el negocio por WhatsApp o llamada. BAQUEANO no cobra en línea.',
-          style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted, height: 1.4),
+          style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textMuted, height: 1.4),
         ),
         const SizedBox(height: 10),
         reservations.when(
@@ -99,7 +99,7 @@ class MyReservationsSection extends ConsumerWidget {
 
   static Widget _note(String text) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 6),
-        child: Text(text, style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white70, height: 1.45)),
+        child: Text(text, style: BaqueanoFonts.text(fontSize: 12.5, color: Colors.white70, height: 1.45)),
       );
 }
 
@@ -173,23 +173,23 @@ class _ReservationCard extends ConsumerWidget {
               Expanded(
                 child: Text(
                   reservation.businessName.isEmpty ? reservation.serviceTitle : reservation.businessName,
-                  style: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
+                  style: BaqueanoFonts.text(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
                 ),
               ),
-              Text(reservation.code, style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold)),
+              Text(reservation.code, style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold)),
             ],
           ),
           const SizedBox(height: 4),
           Text(
             [if (reservation.destinationName.isNotEmpty) reservation.destinationName, if (date.isNotEmpty) date, '${reservation.peopleCount} persona${reservation.peopleCount == 1 ? '' : 's'}']
                 .join(' · '),
-            style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.goldLight),
+            style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.goldLight),
           ),
           const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(color: color.withValues(alpha: 0.18), borderRadius: BorderRadius.circular(999)),
-            child: Text(reservation.statusLabel, style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white)),
+            child: Text(reservation.statusLabel, style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white)),
           ),
           const SizedBox(height: 8),
           Wrap(

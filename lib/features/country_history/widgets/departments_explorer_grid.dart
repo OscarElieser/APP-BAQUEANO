@@ -22,7 +22,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/country_history_models.dart';
 import 'department_live_section.dart';
@@ -83,7 +83,7 @@ class DepartmentsExplorerGrid extends StatelessWidget {
                 Expanded(
                   child: Text(
                     dept.name,
-                    style: GoogleFonts.montserrat(fontSize: 22, fontWeight: FontWeight.w900, color: Colors.white),
+                    style: BaqueanoFonts.display(fontSize: 22, fontWeight: FontWeight.w900, color: Colors.white),
                   ),
                 ),
                 Container(
@@ -95,7 +95,7 @@ class DepartmentsExplorerGrid extends StatelessWidget {
                   ),
                   child: Text(
                     dept.zone,
-                    style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                    style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.goldLight),
                   ),
                 ),
               ],
@@ -103,7 +103,7 @@ class DepartmentsExplorerGrid extends StatelessWidget {
 
             Text(
               'Cabecera: ${dept.capital}',
-              style: GoogleFonts.spaceGrotesk(fontSize: 13, color: AppColors.goldLight),
+              style: BaqueanoFonts.text(fontSize: 13, color: AppColors.goldLight),
             ),
 
             const SizedBox(height: 14),
@@ -152,7 +152,7 @@ class DepartmentsExplorerGrid extends StatelessWidget {
             const SizedBox(height: 12),
             Text(
               '📍 Sitios Turísticos Imperdibles:',
-              style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+              style: BaqueanoFonts.display(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight),
             ),
             const SizedBox(height: 6),
             Wrap(
@@ -168,7 +168,7 @@ class DepartmentsExplorerGrid extends StatelessWidget {
                   ),
                   child: Text(
                     '🧭 $attraction',
-                    style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white),
+                    style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white),
                   ),
                 );
               }).toList(),
@@ -193,7 +193,7 @@ class DepartmentsExplorerGrid extends StatelessWidget {
                       const SizedBox(width: 8),
                       Text(
                         'CONEXIÓN TERRITORIAL BAQUEANO',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 11.5,
                           fontWeight: FontWeight.w800,
                           color: AppColors.goldLight,
@@ -205,7 +205,7 @@ class DepartmentsExplorerGrid extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text(
                     'Descubre senderos alternativos, apoya a guías campesinos y orienta tu ruta con mapas de campo.',
-                    style: GoogleFonts.inter(fontSize: 11, color: Colors.white70),
+                    style: BaqueanoFonts.text(fontSize: 11, color: Colors.white70),
                   ),
                   const SizedBox(height: 12),
                   ElevatedButton.icon(
@@ -236,7 +236,7 @@ class DepartmentsExplorerGrid extends StatelessWidget {
                           icon: const Icon(Icons.support_agent_rounded, size: 15, color: AppColors.goldLight),
                           label: Text(
                             'Baqueanos',
-                            style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white),
+                            style: BaqueanoFonts.text(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white),
                           ),
                           style: OutlinedButton.styleFrom(
                             side: BorderSide(color: AppColors.goldLight.withValues(alpha: 0.5)),
@@ -256,7 +256,7 @@ class DepartmentsExplorerGrid extends StatelessWidget {
                           icon: const Icon(Icons.map_rounded, size: 15, color: AppColors.goldLight),
                           label: Text(
                             'Mapa GPS',
-                            style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white),
+                            style: BaqueanoFonts.text(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white),
                           ),
                           style: OutlinedButton.styleFrom(
                             side: BorderSide(color: AppColors.goldLight.withValues(alpha: 0.5)),
@@ -289,7 +289,7 @@ class DepartmentsExplorerGrid extends StatelessWidget {
         children: [
           Icon(icon, size: 14, color: AppColors.gold),
           const SizedBox(width: 6),
-          Text(text, style: GoogleFonts.spaceGrotesk(fontSize: 11, color: Colors.white)),
+          Text(text, style: BaqueanoFonts.text(fontSize: 11, color: Colors.white)),
         ],
       ),
     );
@@ -303,12 +303,12 @@ class DepartmentsExplorerGrid extends StatelessWidget {
         children: [
           Text(
             title,
-            style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+            style: BaqueanoFonts.display(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight),
           ),
           const SizedBox(height: 4),
           Text(
             content,
-            style: GoogleFonts.inter(fontSize: 12.5, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.4),
+            style: BaqueanoFonts.text(fontSize: 12.5, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.4),
           ),
         ],
       ),
@@ -399,7 +399,7 @@ class DepartmentsExplorerGrid extends StatelessWidget {
                             ),
                             child: Text(
                               dept.zone.toUpperCase(),
-                              style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w800, color: Colors.white),
+                              style: BaqueanoFonts.text(fontSize: 9, fontWeight: FontWeight.w800, color: Colors.white),
                             ),
                           ),
                           const Spacer(),
@@ -409,20 +409,20 @@ class DepartmentsExplorerGrid extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         dept.name,
-                        style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white),
+                        style: BaqueanoFonts.display(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         'Cabecera: ${dept.capital}',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 11.5, color: AppColors.goldLight),
+                        style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.goldLight),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 6),
                       Text(
                         dept.cultureDescription,
-                        style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted, height: 1.3),
+                        style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted, height: 1.3),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),

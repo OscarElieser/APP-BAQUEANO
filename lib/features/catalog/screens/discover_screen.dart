@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/badge_chip.dart';
@@ -66,10 +66,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             // Search Bar
             TextField(
               onChanged: (val) => setState(() => _searchQuery = val),
-              style: GoogleFonts.spaceGrotesk(color: AppColors.textLight),
+              style: BaqueanoFonts.text(color: AppColors.textLight),
               decoration: InputDecoration(
                 hintText: 'Buscar por destino, volcán, cascada o departamento...',
-                hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 13),
+                hintStyle: BaqueanoFonts.text(color: AppColors.textMuted, fontSize: 13),
                 prefixIcon: const Icon(Icons.search, color: AppColors.gold),
                 suffixIcon: _searchQuery.isNotEmpty
                     ? IconButton(
@@ -133,7 +133,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             // Results count
             Text(
               '${filtered.length} experiencia(s) encontrada(s)',
-              style: GoogleFonts.spaceGrotesk(fontSize: 13, color: AppColors.goldLight, fontWeight: FontWeight.w600),
+              style: BaqueanoFonts.text(fontSize: 13, color: AppColors.goldLight, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 16),
 
@@ -153,12 +153,12 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     const SizedBox(height: 12),
                     Text(
                       'No encontramos resultados para tu búsqueda.',
-                      style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textLight),
+                      style: BaqueanoFonts.display(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textLight),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Intenta ajustar los filtros de categoría o departamento.',
-                      style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
+                      style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textMuted),
                     ),
                   ],
                 ),

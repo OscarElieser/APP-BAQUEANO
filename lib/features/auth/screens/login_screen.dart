@@ -1,23 +1,23 @@
 // ============================================================================
-// ðŸ§­ BAQUEANO â€” ACCESO ANDROID CON GOOGLE Y FIREBASE
+// 🧭 BAQUEANO — ACCESO ANDROID CON GOOGLE Y FIREBASE
 // ============================================================================
 //
-// ðŸŽ¯ POR QUÃ‰ (WHY / PROPÃ“SITO):
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
 // - Ofrecer acceso claro a funciones personales sin confundir un correo escrito
 //   manualmente con una identidad verificada.
-// - Mantener disponible la exploraciÃ³n como invitado, indicando que esa opciÃ³n no
-//   crea ni conserva una sesiÃ³n autenticada.
+// - Mantener disponible la exploración como invitado, indicando que esa opción no
+//   crea ni conserva una sesión autenticada.
 //
-// âš™ï¸ CÃ“MO (HOW / ARQUITECTURA & IMPLEMENTACIÃ“N):
-// - El botÃ³n Google delega en `AuthService`; la navegaciÃ³n solo ocurre cuando
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - El botón Google delega en `AuthService`; la navegación solo ocurre cuando
 //   Firebase Auth confirma la credencial y el servicio publica el mismo UID.
-// - Los errores de configuraciÃ³n se explican sin habilitar rutas alternativas de
+// - Los errores de configuración se explican sin habilitar rutas alternativas de
 //   identidad. El resto se comunica con mensajes breves y recuperables.
-// - La opciÃ³n invitado cierra cualquier sesiÃ³n Firebase antes de entrar y cada
-//   continuaciÃ³n asÃ­ncrona comprueba `mounted` antes de usar el contexto.
+// - La opción invitado cierra cualquier sesión Firebase antes de entrar y cada
+//   continuación asíncrona comprueba `mounted` antes de usar el contexto.
 //
-// ðŸ“¦ QUÃ‰ (WHAT / ENTREGABLES):
-// - `LoginScreen`: acceso Google verificado y entrada explÃ­cita como invitado.
+// 📦 3. QUÉ (WHAT / ENTREGABLES):
+// - `LoginScreen`: acceso Google verificado y entrada explícita como invitado.
 // ============================================================================
 
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -25,7 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 
 import '../../../core/theme/app_gradients.dart';
 import '../../../services/auth_service.dart';
@@ -58,7 +58,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       final verifiedUser = auth.currentUser;
       if (!auth.isAuthenticated || verifiedUser == null) {
         _showErrorMessage(
-          'Firebase no pudo confirmar tu sesiÃ³n. IntÃ©ntalo nuevamente.',
+          'Firebase no pudo confirmar tu sesión. Inténtalo nuevamente.',
         );
         return;
       }
@@ -72,8 +72,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  'Â¡Bienvenido a Baqueano, ${verifiedUser.displayName}!',
-                  style: GoogleFonts.spaceGrotesk(
+                  '¡Bienvenido a Baqueano, ${verifiedUser.displayName}!',
+                  style: BaqueanoFonts.text(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
@@ -107,7 +107,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         _showFirebaseConfigurationDialog(errorCode, sanitizedMessage);
       } else {
         _showErrorMessage(
-          'No fue posible verificar tu cuenta [$errorCode]. Intentalo de nuevo.',
+          'No fue posible verificar tu cuenta [$errorCode]. Inténtalo de nuevo.',
         );
       }
     } finally {
@@ -133,7 +133,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       }
       if (auth.isAuthenticated) {
         _showErrorMessage(
-          'No fue posible cerrar la sesiÃ³n activa. IntÃ©ntalo nuevamente.',
+          'No fue posible cerrar la sesión activa. Inténtalo nuevamente.',
         );
         return;
       }
@@ -198,7 +198,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Expanded(
                   child: Text(
                     'Identidad no verificada',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       color: Colors.white,
                       fontWeight: FontWeight.w800,
                       fontSize: 16,
@@ -208,11 +208,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               ],
             ),
             content: Text(
-              'Google o Firebase rechazaron la configuracion de acceso [$code]. '
+              'Google o Firebase rechazaron la configuración de acceso [$code]. '
               '$message '
-              'Por seguridad, Baqueano no creara una cuenta local ni permitira '
+              'Por seguridad, Baqueano no creará una cuenta local ni permitirá '
               'continuar como si la identidad estuviera autenticada.',
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 color: Colors.white.withValues(alpha: 0.78),
                 fontSize: 12,
                 height: 1.45,
@@ -314,7 +314,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   const SizedBox(height: 8),
                   Text(
                     'Ecoturismo Campesino de Nicaragua',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       color: const Color(0xFFF4E6C1).withValues(alpha: 0.95),
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
@@ -346,8 +346,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     child: Column(
                       children: [
                         Text(
-                          'Iniciar SesiÃ³n',
-                          style: GoogleFonts.spaceGrotesk(
+                          'Iniciar Sesión',
+                          style: BaqueanoFonts.text(
                             color: Colors.white,
                             fontSize: 22,
                             fontWeight: FontWeight.w800,
@@ -356,7 +356,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         const SizedBox(height: 6),
                         Text(
                           'Accede a tu perfil de explorador y reservas',
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             color: Colors.white.withValues(alpha: 0.7),
                             fontSize: 13,
                           ),
@@ -365,7 +365,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         const SizedBox(height: 32),
                         Semantics(
                           button: true,
-                          label: 'Iniciar sesiÃ³n con Google',
+                          label: 'Iniciar sesión con Google',
                           child: InkWell(
                             onTap: _isLoading ? null : _handleGoogleSignIn,
                             borderRadius: BorderRadius.circular(44),
@@ -380,7 +380,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     0xFFF65E01,
                                   ).withValues(alpha: 0.7),
                                   width: 2,
-                                ),
+                                  ),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withValues(alpha: 0.35),
@@ -430,7 +430,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         const SizedBox(height: 20),
                         Text(
                           'Toca el icono de Google para acceder',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             color: const Color(0xFFF4E6C1),
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
@@ -438,8 +438,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Tu sesiÃ³n solo se activa despuÃ©s de validarse con Firebase',
-                          style: GoogleFonts.inter(
+                          'Tu sesión solo se activa después de validarse con Firebase',
+                          style: BaqueanoFonts.text(
                             color: Colors.white.withValues(alpha: 0.58),
                             fontSize: 11,
                           ),
@@ -452,8 +452,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   TextButton(
                     onPressed: _isLoading ? null : _handleGuestAccess,
                     child: Text(
-                      'Explorar como invitado, sin sesiÃ³n â†’',
-                      style: GoogleFonts.spaceGrotesk(
+                      'Explorar como invitado, sin sesión →',
+                      style: BaqueanoFonts.text(
                         color: const Color(0xFFF4E6C1).withValues(alpha: 0.9),
                         fontSize: 14,
                         fontWeight: FontWeight.w700,

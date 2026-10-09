@@ -22,7 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
@@ -127,7 +127,7 @@ class _CountryHistoryScreenState extends ConsumerState<CountryHistoryScreen> {
                           ),
                           child: Text(
                             '📖 PATRIMONIO, IDENTIDAD & CULTURA',
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 10.5,
                               fontWeight: FontWeight.w800,
                               color: AppColors.gold,
@@ -165,7 +165,7 @@ class _CountryHistoryScreenState extends ConsumerState<CountryHistoryScreen> {
                             Expanded(
                               child: Text(
                                 'Conoce Nicaragua: Corazón de América Central',
-                                style: GoogleFonts.montserrat(
+                                style: BaqueanoFonts.display(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w800,
                                   color: Colors.white,
@@ -177,7 +177,7 @@ class _CountryHistoryScreenState extends ConsumerState<CountryHistoryScreen> {
                         const SizedBox(height: 10),
                         Text(
                           profile.overviewText,
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 13,
                             color: AppColors.textLight.withValues(alpha: 0.9),
                             height: 1.5,
@@ -463,7 +463,7 @@ class _CountryHistoryScreenState extends ConsumerState<CountryHistoryScreen> {
                   children: [
                     Text(
                       'ECOSISTEMA BAQUEANO',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 11,
                         fontWeight: FontWeight.w800,
                         color: AppColors.goldLight,
@@ -472,7 +472,7 @@ class _CountryHistoryScreenState extends ConsumerState<CountryHistoryScreen> {
                     ),
                     Text(
                       'Conecta la Memoria con el Territorio',
-                      style: GoogleFonts.montserrat(
+                      style: BaqueanoFonts.display(
                         fontSize: isDesktop ? 20 : 16,
                         fontWeight: FontWeight.w800,
                         color: Colors.white,
@@ -486,7 +486,7 @@ class _CountryHistoryScreenState extends ConsumerState<CountryHistoryScreen> {
           const SizedBox(height: 14),
           Text(
             'Ahora que conoces las raíces, héroes y geografía de Nicaragua, conviértete en un Explorador Responsable. Recorre senderos alternativos, contacta baqueanos campesinos sin intermediarios y degusta sabores auténticos en comedores locales.',
-            style: GoogleFonts.inter(
+            style: BaqueanoFonts.text(
               fontSize: 13,
               color: AppColors.textLight.withValues(alpha: 0.9),
               height: 1.5,
@@ -551,7 +551,7 @@ class _CountryHistoryScreenState extends ConsumerState<CountryHistoryScreen> {
         icon: Icon(icon, size: 16, color: Colors.white),
         label: Text(
           label,
-          style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+          style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
         ),
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.terracotta,
@@ -569,7 +569,7 @@ class _CountryHistoryScreenState extends ConsumerState<CountryHistoryScreen> {
       icon: Icon(icon, size: 16, color: AppColors.goldLight),
       label: Text(
         label,
-        style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+        style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
       ),
       style: OutlinedButton.styleFrom(
         side: BorderSide(color: AppColors.goldLight.withValues(alpha: 0.5)),

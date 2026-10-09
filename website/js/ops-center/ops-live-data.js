@@ -318,9 +318,9 @@
         });
       case 'businesses':
         return Object.assign(base, {
-          title: row.name, name: row.name, category: row.category || '', department: row.department || '', municipality: row.municipality || '',
+          title: row.name, name: row.name, category: row.category || '', department: row.department || (row.department_id ? (DEPARTMENTS[row.department_id] || row.department_id) : ''), municipality: row.municipality || '', hostName: row.host_name || '', hostStory: row.host_story || '', email: row.email || '', websiteUrl: row.website_url || '', priceNio: (row.metadata && row.metadata.price_nio) || row.price_nio || '', priceUsd: (row.metadata && row.metadata.price_usd) || row.price_usd || '',
           phone: row.phone || '', whatsapp: row.whatsapp || '', address: row.address || '', latitude: row.latitude, longitude: row.longitude,
-          imageUrl: row.cover_image || '', description: row.host_story || '', dayPass: row.day_pass_available ? 'Sí' : '',
+          imageUrl: row.cover_image || '', description: row.description || row.host_story || '', dayPass: row.day_pass_available ? 'Sí' : '', day_pass_available: Boolean(row.day_pass_available), hiddenGem: Boolean(row.hidden_gem),
           verification: row.metadata && row.metadata.verification ? row.metadata.verification : null
         });
       case 'departments':
@@ -411,7 +411,7 @@
     return Object.assign({
       name: p.title || p.name, category: p.category || null, department: p.department && p.department !== 'Nacional' ? p.department : null,
       municipality: p.municipality || null, phone: p.phone || null, whatsapp: p.whatsapp || null, address: p.address || null,
-      cover_image: p.imageUrl || null, host_story: p.description || null, day_pass_available: Boolean(p.dayPass)
+      cover_image: p.imageUrl || null, host_name: p.hostName || p.host_name || null, host_story: p.hostStory || p.host_story || p.description || null, description: p.description || null, day_pass_available: Boolean(p.dayPass || p.day_pass_available), hidden_gem: Boolean(p.hiddenGem || p.hidden_gem), email: p.email || null, website_url: p.websiteUrl || p.website_url || p.website || null, status: ['draft', 'published', 'pending_review', 'archived'].includes(p.status) ? p.status : undefined, department_id: departmentIdFromName(p.department) || undefined
     }, coords);
   }
 

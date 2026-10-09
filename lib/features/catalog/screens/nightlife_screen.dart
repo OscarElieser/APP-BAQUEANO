@@ -18,7 +18,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/glass_container.dart';
@@ -96,7 +96,7 @@ class NightlifeScreen extends StatelessWidget {
                                 Expanded(
                                   child: Text(
                                     spot.city.toUpperCase(),
-                                    style: GoogleFonts.spaceGrotesk(
+                                    style: BaqueanoFonts.text(
                                       fontSize: 11,
                                       fontWeight: FontWeight.w800,
                                       color: AppColors.terracottaLight,
@@ -115,7 +115,7 @@ class NightlifeScreen extends StatelessWidget {
                                     ),
                                     child: Text(
                                       spot.schedule,
-                                      style: GoogleFonts.inter(fontSize: 10, color: AppColors.goldLight),
+                                      style: BaqueanoFonts.text(fontSize: 10, color: AppColors.goldLight),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -126,7 +126,7 @@ class NightlifeScreen extends StatelessWidget {
                             const SizedBox(height: 4),
                             Text(
                               spot.name,
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.textLight,
@@ -136,21 +136,21 @@ class NightlifeScreen extends StatelessWidget {
                             ),
                             Text(
                               spot.area,
-                              style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                              style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(height: 6),
                             Text(
                               spot.description,
-                              style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted, height: 1.35),
+                              style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textMuted, height: 1.35),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(height: 10),
                             Text(
                               'TRAGOS & CÓCTELES RECOMENDADOS:',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.gold,
@@ -170,7 +170,7 @@ class NightlifeScreen extends StatelessWidget {
                                   ),
                                   child: Text(
                                     '🍹 $drink',
-                                    style: GoogleFonts.inter(fontSize: 10, color: AppColors.textLight),
+                                    style: BaqueanoFonts.text(fontSize: 10, color: AppColors.textLight),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),

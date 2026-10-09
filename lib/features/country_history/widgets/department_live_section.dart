@@ -29,7 +29,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../data/repositories/catalog_repository.dart';
@@ -65,7 +65,7 @@ class DepartmentLiveSection extends ConsumerWidget {
         if (territory != null && territory.shortDesc.isNotEmpty) ...[
           Text(
             territory.shortDesc,
-            style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white.withValues(alpha: 0.85), height: 1.5),
+            style: BaqueanoFonts.text(fontSize: 12.5, color: Colors.white.withValues(alpha: 0.85), height: 1.5),
           ),
           const SizedBox(height: 14),
         ],
@@ -79,7 +79,7 @@ class DepartmentLiveSection extends ConsumerWidget {
           const SizedBox(height: 4),
           Text(
             'Toca un lugar para ver su ficha.',
-            style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.textMuted),
+            style: BaqueanoFonts.text(fontSize: 10.5, color: AppColors.textMuted),
           ),
           const SizedBox(height: 16),
         ],
@@ -98,7 +98,7 @@ class DepartmentLiveSection extends ConsumerWidget {
           ...municipalities.map((m) => _MunicipalityTile(municipality: m)),
           Text(
             'Contornos: geoBoundaries · © OpenStreetMap (ODbL). El área se calcula del contorno y puede incluir agua. Población, historia y fiestas patronales: por verificar con fuente oficial.',
-            style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.textMuted, height: 1.4),
+            style: BaqueanoFonts.text(fontSize: 10.5, color: AppColors.textMuted, height: 1.4),
           ),
         ],
         if (territory != null && territory.bestSeason.isNotEmpty) ...[
@@ -119,12 +119,12 @@ class DepartmentLiveSection extends ConsumerWidget {
 
   static Widget _heading(String text) => Text(
         text,
-        style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+        style: BaqueanoFonts.display(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight),
       );
 
   static Widget _note(String text) => Text(
         text,
-        style: GoogleFonts.inter(fontSize: 12, color: Colors.white70, height: 1.45),
+        style: BaqueanoFonts.text(fontSize: 12, color: Colors.white70, height: 1.45),
       );
 }
 
@@ -151,12 +151,12 @@ class _DestinationTile extends StatelessWidget {
               children: [
                 Text(
                   place.name,
-                  style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white),
+                  style: BaqueanoFonts.text(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   [place.categoryName, if (place.verified) 'Verificado'].join(' · '),
-                  style: GoogleFonts.inter(fontSize: 11, color: AppColors.goldLight),
+                  style: BaqueanoFonts.text(fontSize: 11, color: AppColors.goldLight),
                 ),
               ],
             ),
@@ -170,7 +170,7 @@ class _DestinationTile extends StatelessWidget {
               );
             },
             icon: const Icon(Icons.map_rounded, size: 16, color: AppColors.gold),
-            label: Text('Ver en mapa', style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.gold)),
+            label: Text('Ver en mapa', style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.gold)),
           ),
         ],
       ),
@@ -202,18 +202,18 @@ class _MunicipalityTile extends StatelessWidget {
         children: [
           Text(
             municipality.name,
-            style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white),
+            style: BaqueanoFonts.text(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white),
           ),
           if (municipality.identity.isNotEmpty) ...[
             const SizedBox(height: 2),
             Text(
               municipality.identity,
-              style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70, height: 1.4),
+              style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white70, height: 1.4),
             ),
           ],
           if (areaText != null) ...[
             const SizedBox(height: 2),
-            Text(areaText, style: GoogleFonts.inter(fontSize: 11, color: AppColors.goldLight)),
+            Text(areaText, style: BaqueanoFonts.text(fontSize: 11, color: AppColors.goldLight)),
           ],
         ],
       ),
@@ -286,16 +286,16 @@ class _PlacesStripState extends State<_PlacesStrip> with SingleTickerProviderSta
       context: context,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: const Color(0xFF082B35),
-        title: Text(place.name, style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 16)),
+        title: Text(place.name, style: BaqueanoFonts.display(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 16)),
         content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               if (place.type.isNotEmpty)
-                Text(place.type, style: GoogleFonts.inter(color: AppColors.goldLight, fontSize: 12, fontWeight: FontWeight.w600)),
+                Text(place.type, style: BaqueanoFonts.text(color: AppColors.goldLight, fontSize: 12, fontWeight: FontWeight.w600)),
               const SizedBox(height: 8),
-              Text(place.desc, style: GoogleFonts.inter(color: Colors.white.withValues(alpha: 0.9), fontSize: 13, height: 1.5)),
+              Text(place.desc, style: BaqueanoFonts.text(color: Colors.white.withValues(alpha: 0.9), fontSize: 13, height: 1.5)),
             ],
           ),
         ),
@@ -364,7 +364,7 @@ class _PlacesStripState extends State<_PlacesStrip> with SingleTickerProviderSta
                           place.name,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.inter(fontSize: 12.5, fontWeight: FontWeight.w700, color: Colors.white),
+                          style: BaqueanoFonts.text(fontSize: 12.5, fontWeight: FontWeight.w700, color: Colors.white),
                         ),
                         if (place.type.isNotEmpty) ...[
                           const SizedBox(height: 4),
@@ -372,7 +372,7 @@ class _PlacesStripState extends State<_PlacesStrip> with SingleTickerProviderSta
                             place.type,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.goldLight),
+                            style: BaqueanoFonts.text(fontSize: 10.5, color: AppColors.goldLight),
                           ),
                         ],
                       ],

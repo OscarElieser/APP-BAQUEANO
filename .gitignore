@@ -117,3 +117,6 @@ graphify-out/
 
 # Respaldos locales de migración (pueden contener datos de usuarios): nunca al repositorio
 backups/
+
+# Artefactos autogenerados de Flutter Windows (enfoque exclusivo en Android)
+windows/flutter/generated_*

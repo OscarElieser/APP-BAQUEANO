@@ -23,7 +23,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -191,7 +191,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
               const SizedBox(height: 12),
               Text(
                 'Lugar no encontrado',
-                style: GoogleFonts.montserrat(fontSize: 16, color: Colors.white70),
+                style: BaqueanoFonts.display(fontSize: 16, color: Colors.white70),
               ),
               const SizedBox(height: 16),
               BaqueanoButton(
@@ -239,7 +239,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                         const SizedBox(width: 6),
                         Text(
                           'Directorio Nacional',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: AppColors.goldLight,
@@ -331,7 +331,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                               ),
                               child: Text(
                                 place.categoryName.toUpperCase(),
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w800,
                                   color: Colors.white,
@@ -354,7 +354,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                                     const SizedBox(width: 4),
                                     Text(
                                       '✓ Lugar verificado',
-                                      style: GoogleFonts.spaceGrotesk(
+                                      style: BaqueanoFonts.text(
                                         fontSize: 9.5,
                                         fontWeight: FontWeight.w800,
                                         color: AppColors.jungleGreenLight,
@@ -369,7 +369,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                         const SizedBox(height: 8),
                         Text(
                           place.name,
-                          style: GoogleFonts.montserrat(
+                          style: BaqueanoFonts.display(
                             fontSize: isDesktop ? 26 : 20,
                             fontWeight: FontWeight.w900,
                             color: Colors.white,
@@ -384,7 +384,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                             Expanded(
                               child: Text(
                                 '${place.municipalityName}, ${place.departmentName}',
-                                style: GoogleFonts.inter(
+                                style: BaqueanoFonts.text(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.goldLight,
@@ -397,7 +397,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                               const SizedBox(width: 8),
                               Text(
                                 '• ${place.formattedDistance}',
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 11.5,
                                   fontWeight: FontWeight.w700,
                                   color: AppColors.jungleGreenLight,
@@ -464,7 +464,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                 children: [
                   Text(
                     'ACERCA DE ESTE LUGAR',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
                       color: AppColors.goldLight,
@@ -476,7 +476,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                     place.description.isNotEmpty
                         ? place.description
                         : 'Establecimiento y punto geográfico registrado en el Directorio Nacional de Baqueano Nicaragua.',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 13.5,
                       color: Colors.white.withValues(alpha: 0.9),
                       height: 1.5,
@@ -519,7 +519,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
             // Mini Mapa de Ubicación Geográfica
             Text(
               '📍 UBICACIÓN EN MAPA',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 11.5,
                 fontWeight: FontWeight.w800,
                 color: AppColors.goldLight,
@@ -571,7 +571,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
             if (_nearbyServices.isNotEmpty) ...[
               Text(
                 'SERVICIOS Y LUGARES CERCANOS',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 11.5,
                   fontWeight: FontWeight.w800,
                   color: AppColors.goldLight,
@@ -624,7 +624,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                                 children: [
                                   Text(
                                     nearby.name,
-                                    style: GoogleFonts.montserrat(
+                                    style: BaqueanoFonts.display(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w700,
                                       color: Colors.white,
@@ -634,7 +634,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                                   ),
                                   Text(
                                     '${nearby.categoryName} • ${nearby.municipalityName}',
-                                    style: GoogleFonts.inter(
+                                    style: BaqueanoFonts.text(
                                       fontSize: 11,
                                       color: Colors.white60,
                                     ),
@@ -645,7 +645,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
                             if (nearby.distanceKm != null)
                               Text(
                                 nearby.formattedDistance,
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w700,
                                   color: AppColors.jungleGreenLight,
@@ -676,7 +676,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
             children: [
               Text(
                 title,
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
                   color: AppColors.textMuted,
@@ -685,7 +685,7 @@ class _PlaceDetailScreenState extends ConsumerState<PlaceDetailScreen> {
               const SizedBox(height: 2),
               Text(
                 value,
-                style: GoogleFonts.inter(
+                style: BaqueanoFonts.text(
                   fontSize: 13,
                   color: Colors.white,
                 ),

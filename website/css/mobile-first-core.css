@@ -56,7 +56,7 @@ body {
   position: relative;
   background-color: var(--bg-space, #0F172A);
   color: var(--text-secondary, #E2E8F0);
-  font-family: var(--font-main, 'Inter', system-ui, -apple-system, sans-serif);
+  font-family: var(--font-main, 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif);
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -137,7 +137,7 @@ li {
 }
 
 .baq-title-hero {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-family: var(--font-display, 'League Spartan', sans-serif);
   font-size: var(--step-6);
   font-weight: 900;
   line-height: 1.08;
@@ -147,7 +147,7 @@ li {
 }
 
 .baq-title-section {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-family: var(--font-display, 'League Spartan', sans-serif);
   font-size: var(--step-4);
   font-weight: 800;
   line-height: 1.18;
@@ -157,7 +157,7 @@ li {
 }
 
 .baq-title-card {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-family: var(--font-display, 'League Spartan', sans-serif);
   font-size: var(--step-2);
   font-weight: 700;
   line-height: 1.25;
@@ -253,7 +253,7 @@ li {
   min-height: 48px;
   padding: 0.75rem 1.5rem;
   border-radius: 9999px;
-  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-family: var(--font-display, 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif);
   font-size: var(--step-0);
   font-weight: 700;
   text-decoration: none;

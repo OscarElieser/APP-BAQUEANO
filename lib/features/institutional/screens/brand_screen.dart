@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/baqueano_logo.dart';
@@ -66,7 +66,7 @@ class BrandScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     '«En Nicaragua, un "Baqueano" es el conocedor nato de los senderos secretos, volcanes y ríos donde ningún mapa tradicional llega. Existimos para dignificar su labor y proteger nuestra tierra.»',
-                    style: GoogleFonts.montserrat(
+                    style: BaqueanoFonts.display(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
@@ -140,7 +140,7 @@ class BrandScreen extends StatelessWidget {
                       children: [
                         Text(
                           'EL EMBLEMA BAQUEANO: LA "Q" ANCESTRAL',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 13,
                             fontWeight: FontWeight.w800,
                             color: AppColors.goldLight,
@@ -150,7 +150,7 @@ class BrandScreen extends StatelessWidget {
                         const SizedBox(height: 6),
                         Text(
                           'El anillo circular en Naranja Fuego (#F65E01) representa la energía del sol pinolero y el sendero que guía al viajero. En su corazón, la silueta volcánica y el río serpenteante en Petróleo Teal (#165D6F) simbolizan la cordillera viva de los Maribios y las aguas vírgenes de Nicaragua.',
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             color: AppColors.textMuted,
                             height: 1.4,
@@ -214,9 +214,9 @@ class BrandScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(tag, style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: accentColor)),
+          Text(tag, style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w800, color: accentColor)),
           const SizedBox(height: 10),
-          Text(text, style: GoogleFonts.inter(fontSize: 12, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.45)),
+          Text(text, style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.45)),
         ],
       ),
     );
@@ -244,9 +244,9 @@ class BrandScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.textLight)),
+                Text(title, style: BaqueanoFonts.display(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.textLight)),
                 const SizedBox(height: 4),
-                Text(desc, style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted, height: 1.35)),
+                Text(desc, style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textMuted, height: 1.35)),
               ],
             ),
           ),

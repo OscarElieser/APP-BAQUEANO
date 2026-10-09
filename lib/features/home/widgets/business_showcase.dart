@@ -26,7 +26,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../data/repositories/catalog_repository.dart';
 import '../../checkout/widgets/reservation_request_sheet.dart';
@@ -163,12 +163,12 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
                 const SizedBox(height: 16),
                 Text(
                   'Contactar a ${biz.name}',
-                  style: GoogleFonts.spaceGrotesk(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: BaqueanoFonts.text(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   'Elige tu canal preferido de comunicación directa:',
-                  style: GoogleFonts.inter(fontSize: 12, color: Colors.white70),
+                  style: BaqueanoFonts.text(fontSize: 12, color: Colors.white70),
                 ),
                 const SizedBox(height: 16),
                 ListTile(
@@ -305,7 +305,7 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
                       ),
                       child: Text(
                         biz.badge,
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
                           color: AppColors.jungleGreenLight,
@@ -319,7 +319,7 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
                 const SizedBox(height: 12),
                 Text(
                   'Sobre el Emprendimiento Comunitario:',
-                  style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: BaqueanoFonts.text(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 const SizedBox(height: 6),
                 Text(
@@ -358,7 +358,7 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
                 // CANALES DE COMUNICACIÓN DIRECTA
                 Text(
                   'CANALES DE CONTACTO OFICIAL:',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 10.5,
                     fontWeight: FontWeight.w800,
                     color: AppColors.goldLight,
@@ -497,7 +497,7 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
             children: [
               Text(
                 label,
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 10,
                   color: Colors.white.withValues(alpha: 0.5),
                   fontWeight: FontWeight.w600,
@@ -505,7 +505,7 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
               ),
               Text(
                 val,
-                style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white),
+                style: BaqueanoFonts.text(fontSize: 12.5, color: Colors.white),
               ),
             ],
           ),
@@ -561,7 +561,7 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
                         'CONTACTO DIRECTO · ${businesses.length} EMPRENDIMIENTOS',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 10,
                           fontWeight: FontWeight.w800,
                           letterSpacing: 0.8,
@@ -587,7 +587,7 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
                   ? 'Cargando negocios verificados…'
                   : 'Aún no hay negocios verificados publicados. Cuando el equipo los verifique en el Ops Center aparecerán aquí y en la web.',
               textAlign: TextAlign.center,
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 13,
                 color: Colors.white.withValues(alpha: 0.75),
                 height: 1.5,
@@ -663,7 +663,7 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
                                 ),
                                 child: Text(
                                   biz.badge,
-                                  style: GoogleFonts.spaceGrotesk(
+                                  style: BaqueanoFonts.text(
                                     fontSize: 10,
                                     fontWeight: FontWeight.w700,
                                     color: AppColors.jungleGreenLight,
@@ -763,7 +763,7 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
                                     child: Center(
                                       child: Text(
                                         'Ver Ficha',
-                                        style: GoogleFonts.spaceGrotesk(
+                                        style: BaqueanoFonts.text(
                                           fontSize: 11,
                                           fontWeight: FontWeight.bold,
                                           color: AppColors.terracottaLight,

@@ -21,7 +21,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../models/country_history_models.dart';
@@ -93,7 +93,7 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                         children: [
                           Text(
                             period.title,
-                            style: GoogleFonts.montserrat(
+                            style: BaqueanoFonts.display(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: isSelected ? Colors.white : AppColors.textLight,
@@ -101,7 +101,7 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                           ),
                           Text(
                             period.periodYears,
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 10,
                               fontWeight: FontWeight.w500,
                               color: isSelected ? AppColors.goldLight : AppColors.textMuted,
@@ -149,7 +149,7 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                   children: [
                     Text(
                       _currentPeriod.title,
-                      style: GoogleFonts.montserrat(
+                      style: BaqueanoFonts.display(
                         fontSize: 16,
                         fontWeight: FontWeight.w800,
                         color: AppColors.goldLight,
@@ -158,7 +158,7 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                     const SizedBox(height: 4),
                     Text(
                       _currentPeriod.summary,
-                      style: GoogleFonts.inter(
+                      style: BaqueanoFonts.text(
                         fontSize: 12.5,
                         color: AppColors.textLight.withValues(alpha: 0.9),
                         height: 1.4,
@@ -201,7 +201,7 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                         ),
                         child: Text(
                           event.year,
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w800,
                             color: AppColors.gold,
@@ -219,7 +219,7 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                               Flexible(
                                 child: Text(
                                   event.locations.join(' · '),
-                                  style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                                  style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                 ),
@@ -235,7 +235,7 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                   // Título del evento
                   Text(
                     event.title,
-                    style: GoogleFonts.montserrat(
+                    style: BaqueanoFonts.display(
                       fontSize: 16,
                       fontWeight: FontWeight.w800,
                       color: Colors.white,
@@ -247,7 +247,7 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                   // Descripción
                   Text(
                     event.description,
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 13,
                       color: AppColors.textLight.withValues(alpha: 0.85),
                       height: 1.45,
@@ -272,7 +272,7 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                             ),
                             child: Text(
                               '👤 $c',
-                              style: GoogleFonts.spaceGrotesk(fontSize: 11, color: AppColors.textLight),
+                              style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textLight),
                             ),
                           );
                         }).toList(),
@@ -295,7 +295,7 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                         Expanded(
                           child: Text(
                             'Importancia: ${event.historicalSignificance}',
-                            style: GoogleFonts.inter(
+                            style: BaqueanoFonts.text(
                               fontSize: 11.5,
                               fontStyle: FontStyle.italic,
                               color: AppColors.goldLight,
@@ -319,7 +319,7 @@ class _HistoryTimelineWidgetState extends State<HistoryTimelineWidget> {
                         icon: const Icon(Icons.navigation_rounded, size: 16, color: AppColors.terracottaLight),
                         label: Text(
                           '📍 Conocer este lugar en Baqueano',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: AppColors.terracottaLight,

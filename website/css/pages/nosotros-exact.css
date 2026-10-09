@@ -24,7 +24,7 @@
 body.page-nosotros {
   background-color: #F8FAFC;
   color: var(--nos-text);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -61,7 +61,7 @@ body.page-nosotros {
 
 .nos-hero-title {
   color: #FFFFFF; /* el H1 global usa --text-primary (oscuro en tema claro); la portada es oscura */
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: clamp(2.4rem, 5vw, 4.2rem);
   font-weight: 900;
   line-height: 1.1;
@@ -474,7 +474,7 @@ body.page-nosotros {
 }
 
 .nos-id-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.15rem;
   font-weight: 900;
   color: var(--nos-dark);
@@ -605,7 +605,7 @@ body.page-nosotros {
 }
 
 .nos-num-val {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.6rem;
   font-weight: 900;
   color: var(--nos-dark);
@@ -664,7 +664,7 @@ body.page-nosotros {
 }
 
 .nos-manifesto-quote {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'League Spartan', Georgia, serif;
   font-style: italic;
   font-size: 1.25rem;
   color: var(--nos-sand);
@@ -792,7 +792,7 @@ body.page-nosotros {
 }
 
 .nos-final-cta h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: clamp(1.4rem, 2.5vw, 2rem);
   font-weight: 900;
   margin: 0;

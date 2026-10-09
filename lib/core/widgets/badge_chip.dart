@@ -18,7 +18,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../theme/baqueano_fonts.dart';
 import '../theme/app_colors.dart';
 
 class BadgeChip extends StatelessWidget {
@@ -93,7 +93,7 @@ class BadgeChip extends StatelessWidget {
             // Texto estilizado con Space Grotesk
             Text(
               label,
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 12,
                 fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                 color: effectiveTextColor,

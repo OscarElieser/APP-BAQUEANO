@@ -143,7 +143,7 @@
 }
 
 .nav-search-dropdown-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 14.5px;
   font-weight: 800;
   color: #FFFFFF;
@@ -185,7 +185,7 @@
   border: 1.5px solid rgba(244, 230, 193, 0.24);
   border-radius: 14px;
   color: #FFFFFF;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 14px;
   outline: none;
   transition: all 0.2s ease;
@@ -313,7 +313,7 @@
   border: 1px solid rgba(246, 94, 1, 0.4);
   border-radius: 30px;
   color: var(--baqueano-cream);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -330,7 +330,7 @@
 
 .hero-main-title {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: clamp(32px, 4.5vw, 56px);
   font-weight: 900;
   line-height: 1.12;
@@ -346,7 +346,7 @@
 
 .hero-main-subtitle {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: clamp(15px, 1.4vw, 19px);
   line-height: 1.6;
   color: #E2E8F0;
@@ -354,7 +354,7 @@
 }
 
 .hero-manifesto-subtle {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: var(--baqueano-cream);
@@ -387,7 +387,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 14px;
   color: #0D1B2A;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 14px;
   font-weight: 800;
   text-transform: uppercase;
@@ -413,7 +413,7 @@
   border: 1px solid rgba(244, 230, 193, 0.35);
   border-radius: 14px;
   color: #FFFFFF;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 14px;
   font-weight: 800;
   text-transform: uppercase;
@@ -483,7 +483,7 @@
 
 .mosaic-badge {
   display: inline-block;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
@@ -493,7 +493,7 @@
 
 .mosaic-title {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 15px;
   font-weight: 800;
   color: #FFFFFF;
@@ -501,7 +501,7 @@
 
 .mosaic-meta {
   margin: 2px 0 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 12px;
   color: var(--baqueano-cream);
 }
@@ -532,7 +532,7 @@
   border: 1px solid rgba(244, 230, 193, 0.25);
   border-radius: 30px;
   color: var(--baqueano-cream);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
@@ -542,7 +542,7 @@
 
 .section-title-nicaragua {
   margin: 0 0 12px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: clamp(26px, 3.2vw, 42px);
   font-weight: 900;
   color: #FFFFFF;
@@ -550,7 +550,7 @@
 
 .section-sub-nicaragua {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: clamp(14px, 1.2vw, 17px);
   line-height: 1.6;
   color: #94A3B8;
@@ -607,7 +607,7 @@
 
 .category-card-title {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 17px;
   font-weight: 800;
   color: #FFFFFF;
@@ -615,7 +615,7 @@
 
 .category-card-desc {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 11.5px;
   line-height: 1.35;
   color: #CBD5E1;
@@ -629,7 +629,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 700;
   color: var(--baqueano-orange);
@@ -694,7 +694,7 @@
 
 .experience-info h4 {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 15px;
   font-weight: 800;
   color: #FFFFFF;
@@ -702,7 +702,7 @@
 
 .experience-info p {
   margin: 3px 0 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 12px;
   color: #94A3B8;
 }
@@ -740,7 +740,7 @@
   border: 1px solid rgba(244, 230, 193, 0.1);
   border-radius: 16px;
   color: #E2E8F0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
@@ -828,7 +828,7 @@
   border: 1px solid rgba(246, 94, 1, 0.38);
   border-radius: 30px;
   color: #FF9B58;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
@@ -837,7 +837,7 @@
 
 .culture-title {
   margin: 0 0 12px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: clamp(28px, 3.5vw, 44px);
   font-weight: 900;
   color: #F4E6C1;
@@ -848,7 +848,7 @@
 
 .culture-sub {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: clamp(14px, 1.2vw, 17px);
   line-height: 1.6;
   color: #AFC0D2;
@@ -905,7 +905,7 @@
 
 .culture-feature-card h3 {
   margin: 0 0 8px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 18px;
   font-weight: 800;
   color: #F4E6C1;
@@ -913,7 +913,7 @@
 
 .culture-feature-card p {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 13px;
   line-height: 1.5;
   color: #9FB0C4;
@@ -923,7 +923,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 700;
   color: #F65E01;
@@ -969,7 +969,7 @@
   max-width: 85%;
   padding: 14px 18px;
   border-radius: 18px;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 13.5px;
   line-height: 1.5;
 }
@@ -994,7 +994,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 800;
   color: var(--baqueano-orange);
@@ -1045,7 +1045,7 @@
   margin: 24px 0 18px;
   max-width: 760px;
   color: #fff7ed;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: clamp(42px, 5.4vw, 76px);
   font-weight: 900;
   line-height: 0.98;
@@ -1089,8 +1089,8 @@
   backdrop-filter: blur(16px);
 }
 
-.app-trust-strip strong { color: #f65e01; font: 800 22px 'Space Grotesk', sans-serif; }
-.app-trust-strip span { color: #cbd5e1; font: 600 11px 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+.app-trust-strip strong { color: #f65e01; font: 800 22px 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif; }
+.app-trust-strip span { color: #cbd5e1; font: 600 11px 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
 
 .app-features-list {
   display: grid;
@@ -1136,12 +1136,12 @@
 .app-feature-row strong {
   display: block;
   color: #fff;
-  font: 750 14px/1.3 'Montserrat', sans-serif;
+  font: 750 14px/1.3 'League Spartan', sans-serif;
 }
 
 .app-feature-row h4 {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 15px;
   font-weight: 700;
   color: #FFFFFF;
@@ -1149,16 +1149,16 @@
 
 .app-feature-row p {
   margin: 3px 0 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 12.5px;
   color: #94A3B8;
 }
 
 .app-download-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 15px 20px; }
 .app-download-actions .btn-hero-primary { min-height: 56px; box-shadow: 0 16px 36px rgba(246, 94, 1, 0.28); }
-.app-web-route-link { display: inline-flex; align-items: center; gap: 9px; min-height: 50px; padding: 0 18px; border: 1px solid rgba(244,230,193,0.18); border-radius: 14px; color: #f4e6c1; background: rgba(244,230,193,0.05); font: 700 12px 'Montserrat', sans-serif; transition: transform 200ms ease, border-color 200ms ease, background 200ms ease; }
+.app-web-route-link { display: inline-flex; align-items: center; gap: 9px; min-height: 50px; padding: 0 18px; border: 1px solid rgba(244,230,193,0.18); border-radius: 14px; color: #f4e6c1; background: rgba(244,230,193,0.05); font: 700 12px 'League Spartan', sans-serif; transition: transform 200ms ease, border-color 200ms ease, background 200ms ease; }
 .app-web-route-link:hover { transform: translateY(-3px); border-color: rgba(246,94,1,0.55); background: rgba(246,94,1,0.1); }
-.app-download-note { width: 100%; color: #94a3b8; font: 600 11px 'Inter', sans-serif; }
+.app-download-note { width: 100%; color: #94a3b8; font: 600 11px 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif; }
 .app-download-note i { margin-right: 6px; color: #4ade80; }
 
 .app-mockup-col {
@@ -1200,19 +1200,19 @@
 .app-screen-preview { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 38px; background: #0f172a; }
 .app-screen-img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.08) contrast(1.04); }
 .app-screen-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 54px 19px 21px; background: linear-gradient(180deg, rgba(2,6,23,0.52), transparent 38%, rgba(2,6,23,0.2) 50%, rgba(2,6,23,0.96) 82%); }
-.app-screen-topbar { display: flex; justify-content: space-between; color: #fff; font: 800 10px 'Space Grotesk', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+.app-screen-topbar { display: flex; justify-content: space-between; color: #fff; font: 800 10px 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
 .app-gps-live { display: flex; align-items: center; gap: 5px; }
 .app-gps-live i { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 12px #4ade80; animation: appGpsPulse 1.8s ease-in-out infinite; }
-.app-screen-category { display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; border: 1px solid rgba(246,94,1,0.4); border-radius: 999px; color: #ffb27d; background: rgba(246,94,1,0.13); font: 700 9px 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
-.app-screen-footbar h4 { margin: 12px 0 5px; color: #fff; font: 800 24px 'Montserrat', sans-serif; }
-.app-screen-footbar p { margin: 0; color: #cbd5e1; font: 500 12px 'Inter', sans-serif; }
-.app-screen-route { display: flex; align-items: center; gap: 13px; margin-top: 18px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.15); color: #e2e8f0; font: 650 10px 'Inter', sans-serif; }
+.app-screen-category { display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; border: 1px solid rgba(246,94,1,0.4); border-radius: 999px; color: #ffb27d; background: rgba(246,94,1,0.13); font: 700 9px 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
+.app-screen-footbar h4 { margin: 12px 0 5px; color: #fff; font: 800 24px 'League Spartan', sans-serif; }
+.app-screen-footbar p { margin: 0; color: #cbd5e1; font: 500 12px 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif; }
+.app-screen-route { display: flex; align-items: center; gap: 13px; margin-top: 18px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.15); color: #e2e8f0; font: 650 10px 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif; }
 .app-screen-route button { display: grid; width: 34px; height: 34px; margin-left: auto; place-items: center; border: 0; border-radius: 50%; color: #fff; background: #f65e01; box-shadow: 0 8px 20px rgba(246,94,1,0.4); }
 
 .app-floating-chip { position: absolute; z-index: 4; display: grid; grid-template-columns: 38px auto; column-gap: 10px; min-width: 174px; padding: 13px 15px; border: 1px solid rgba(244,230,193,0.2); border-radius: 16px; color: #fff; background: rgba(7,15,25,0.78); box-shadow: 0 20px 50px rgba(0,0,0,0.35); backdrop-filter: blur(18px); }
 .app-floating-chip > i { grid-row: 1 / 3; display: grid; width: 38px; height: 38px; place-items: center; border-radius: 12px; color: #f65e01; background: rgba(246,94,1,0.13); }
-.app-floating-chip span { color: #94a3b8; font: 700 9px 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; }
-.app-floating-chip strong { font: 700 12px 'Montserrat', sans-serif; }
+.app-floating-chip span { color: #94a3b8; font: 700 9px 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; }
+.app-floating-chip strong { font: 700 12px 'League Spartan', sans-serif; }
 .app-floating-chip--gps { top: 16%; right: -2%; animation: appFloat 4s ease-in-out infinite; }
 .app-floating-chip--offline { bottom: 17%; left: -8%; animation: appFloat 4s 1.2s ease-in-out infinite; }
 
@@ -1257,7 +1257,7 @@
   border: 1px solid rgba(244, 230, 193, 0.15);
   border-radius: 30px;
   color: #E2E8F0;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 700;
   white-space: nowrap;
@@ -1308,7 +1308,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 800;
   color: var(--baqueano-orange);
@@ -1319,7 +1319,7 @@
 
 .terr-inspect-name {
   margin: 0 0 6px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: clamp(22px, 2.5vw, 32px);
   font-weight: 900;
   color: #FFFFFF;
@@ -1327,7 +1327,7 @@
 
 .terr-inspect-tagline {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 14px;
   color: #94A3B8;
   line-height: 1.5;
@@ -1342,7 +1342,7 @@
 
 .terr-inspect-title {
   margin: 0 0 10px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 14px;
   font-weight: 800;
   color: var(--baqueano-cream);
@@ -1373,7 +1373,7 @@
   background: rgba(22, 93, 111, 0.25);
   border: 1px solid rgba(22, 93, 111, 0.4);
   border-radius: 8px;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 12px;
   color: #E2E8F0;
 }
@@ -1385,7 +1385,7 @@
 
 .terr-inspect-text {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 13px;
   line-height: 1.55;
   color: #CBD5E1;
@@ -1404,7 +1404,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 12.5px;
   color: #CBD5E1;
 }
@@ -1429,7 +1429,7 @@
   align-items: center;
   gap: 10px;
   color: #94A3B8;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 13px;
 }
 
@@ -1445,7 +1445,7 @@
   padding: 12px 24px;
   background: var(--baqueano-orange);
   color: #0D1B2A !important;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 13px;
   font-weight: 800;
   text-transform: uppercase;
@@ -1486,7 +1486,7 @@
 
 .sos-card-title {
   margin: 0 0 10px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: clamp(24px, 3vw, 36px);
   font-weight: 900;
   color: #FFFFFF;
@@ -1498,7 +1498,7 @@
 
 .sos-card-desc {
   margin: 0 0 20px;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 14.5px;
   line-height: 1.6;
   color: #CBD5E1;
@@ -1529,14 +1529,14 @@
 }
 
 .sos-num-val {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 18px;
   font-weight: 800;
   color: #EF4444;
 }
 
 .sos-num-lbl {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 11px;
   font-weight: 600;
   color: #E2E8F0;
@@ -1563,7 +1563,7 @@
   padding: 16px 24px;
   background: #DC2626;
   color: #FFFFFF !important;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 15px;
   font-weight: 900;
   text-transform: uppercase;
@@ -1582,7 +1582,7 @@
 }
 
 .sos-note {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 11.5px;
   color: #94A3B8;
   line-height: 1.4;
@@ -1880,7 +1880,7 @@
   gap: 4px;
   color: rgba(244, 230, 193, 0.75);
   text-decoration: none;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -1998,7 +1998,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -2011,7 +2011,7 @@
 }
 
 .living-card-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 20px;
   font-weight: 800;
   color: #fff;
@@ -2031,7 +2031,7 @@
   align-items: center;
   gap: 6px;
   color: var(--baqueano-orange);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 700;
   text-decoration: none;
@@ -2056,7 +2056,7 @@
 }
 
 .substrip-label {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 700;
   color: var(--baqueano-cream);
@@ -2169,7 +2169,7 @@
   border-radius: 999px;
   color: #F4E6C1;
   background: rgba(255, 255, 255, 0.04);
-  font: 700 10px 'Space Grotesk', sans-serif;
+  font: 700 10px 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   cursor: pointer;
   transition: border-color 180ms ease, color 180ms ease, background 180ms ease, transform 180ms ease;
 }
@@ -2242,7 +2242,7 @@
   color: var(--baqueano-cream);
   padding: 4px 12px;
   border-radius: 20px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -2257,7 +2257,7 @@
 }
 
 .dest-card-territory {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -2266,7 +2266,7 @@
 }
 
 .dest-card-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 19px;
   font-weight: 800;
   color: #fff;
@@ -2297,7 +2297,7 @@
 
 .dest-card-cta {
   color: var(--baqueano-orange);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 700;
   text-decoration: none;
@@ -2342,7 +2342,7 @@
   border: none;
   border-radius: 24px;
   color: rgba(244, 230, 193, 0.75);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
@@ -2433,7 +2433,7 @@
   color: var(--baqueano-cream);
   padding: 4px 12px;
   border-radius: 20px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -2448,7 +2448,7 @@
 }
 
 .pillar-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 20px;
   font-weight: 800;
   color: #fff;
@@ -2478,7 +2478,7 @@
   border: 1px solid rgba(246, 94, 1, 0.45);
   border-radius: 20px;
   color: var(--baqueano-cream);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
@@ -2500,7 +2500,7 @@
   border: 1px solid rgba(244, 230, 193, 0.2);
   border-radius: 20px;
   color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 700;
   text-decoration: none;
@@ -2553,7 +2553,7 @@
 }
 
 .service-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 17px;
   font-weight: 800;
   color: #fff;
@@ -2582,7 +2582,7 @@
   background: rgba(7, 11, 20, 0.6);
   border: 1px solid rgba(244, 230, 193, 0.15);
   color: rgba(244, 230, 193, 0.8);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
@@ -2649,7 +2649,7 @@
   align-items: baseline;
   justify-content: center;
   color: var(--baqueano-orange);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(32px, 3.5vw, 44px);
   font-weight: 800;
   line-height: 1;
@@ -2662,7 +2662,7 @@
 }
 
 .stat-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 14px;
   font-weight: 800;
   color: #fff;
@@ -2724,7 +2724,7 @@
 }
 
 .impact-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 800;
   color: #fff;
@@ -2750,7 +2750,7 @@
   border: 1px solid rgba(244, 230, 193, 0.15);
   border-radius: 10px;
   color: var(--baqueano-cream);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
@@ -2823,7 +2823,7 @@
 
 .compact-nl-info strong {
   display: block;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 15px;
   font-weight: 800;
   color: #fff;
@@ -2869,7 +2869,7 @@
   border: none;
   border-radius: 12px;
   color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
@@ -2920,7 +2920,7 @@
   border: 1px solid rgba(246, 94, 1, 0.45);
   border-radius: 30px;
   color: var(--baqueano-cream);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;

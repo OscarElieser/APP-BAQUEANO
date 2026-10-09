@@ -18,6 +18,275 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 MERGE GLOBAL DE WORKSPACE A RAMA PRINCIPAL (MAIN) Y DESPLIEGUE A ORIGIN (09-10-2026 ~01:31 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: Full_Workspace_Git_Merge_To_Main"`
+  - **Objetivo:** Fusionar (merge) todos los avances de `wip/tipografias-ops-2026-10-08` en `main`, sincronizar con `origin/main`, resolver cualquier conflicto con Sequential Thinking y subir `main` al repositorio remoto.
+  - **Alcance Autorizado:** Global (incluye `website/`, `lib/`, `android/`, scripts y documentación).
+- **Estado:** 🔄 En ejecución con Sequential Thinking.
+
+## 🧭 SUBIDA TOTAL DE REFACTORIZACIÓN DE BOTONES A COLORES SÓLIDOS AL REPOSITORIO REMOTO GITHUB (09-10-2026 ~01:05 CST)
+- **Consulta / Solicitud del Usuario:** *"sube todo al repositorio remoto"*
+- **Archivos a Sincronizar y Commitear:**
+  - `lib/core/widgets/baqueano_button.dart`: Eliminados degradados en variantes primary y gold, sustituidos por colores sólidos `AppColors.terracotta` y `AppColors.gold`.
+  - `lib/core/widgets/responsive_scaffold.dart`: Botón INGRESAR y píldoras de barra de navegación convertidos a colores sólidos.
+  - `lib/features/messaging/screens/host_messaging_screen.dart`: Botón de envío de mensajes convertido a color sólido terracota.
+  - `lib/features/ai_assistant/screens/ai_assistant_screen.dart`: Botón de envío IA convertido a color sólido terracota.
+  - `lib/features/catalog/screens/videos_screen.dart`: Botones de reproducción convertidos a color sólido terracota.
+  - `lib/features/catalog/screens/music_screen.dart`: Botón Play/Pause de audio convertido a color sólido terracota.
+  - `SESSION_LOG.md`: Bitácora completa de la refactorización y pruebas.
+- **Validaciones Previas:**
+  - `flutter analyze`: **No issues found!** (0 errores, 0 lints, 0 advertencias).
+  - `flutter test`: **77/77 tests pasaron exitosamente**.
+- **Destino Remoto:** Rama `origin/wip/tipografias-ops-2026-10-08`.
+- **Commit:** `a59e288` (*style(buttons): refactorizar estilos de botones a colores solidos de marca*).
+- **Estado:** ✅ COMPLETADO Y SUBIDO CON ÉXITO A GITHUB.
+
+## 🧭 REFACTORIZACIÓN GLOBAL DE ESTILOS DE BOTÓN A COLORES SÓLIDOS (09-10-2026 ~00:54 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: Global_Button_Style_Refactor_Solid_Colors"`
+  - **Objetivo:** Eliminar todos los fondos en degradado (gradients) de los botones en la app Flutter (`lib/`) y reemplazarlos por colores sólidos manteniendo la identidad cromática primaria de la marca (#165D6F, #F65E01, #F4E6C1, #0F172A).
+  - **Restricción Estricta:** `website/` 100% intocado. Enfoque exclusivo en `lib/`.
+- **Archivos Modificados y Optimizados:**
+  1. `lib/core/widgets/baqueano_button.dart`: Eliminados degradados `AppGradients.sunsetTerracotta` y `AppGradients.gold`, sustituyéndolos por colores sólidos `AppColors.terracotta` (`#F65E01`) con texto blanco y `AppColors.gold` (`#E5A93C`) con texto oscuro.
+  2. `lib/core/widgets/responsive_scaffold.dart`: Botón de acceso *"INGRESAR"* y píldoras activas de barra de navegación inferior actualizados a colores sólidos (`AppColors.terracotta` / `AppColors.gold`).
+  3. `lib/features/messaging/screens/host_messaging_screen.dart`: Botón circular de envío de mensajes convertido a color sólido `AppColors.terracotta`.
+  4. `lib/features/ai_assistant/screens/ai_assistant_screen.dart`: Botón circular de envío al Asistente IA convertido a color sólido `AppColors.terracotta`.
+  5. `lib/features/catalog/screens/videos_screen.dart`: Botones de reproducción (en modal y tarjeta de video) convertidos a color sólido `AppColors.terracotta`.
+  6. `lib/features/catalog/screens/music_screen.dart`: Botón de Play/Pause de la barra de audio convertido a color sólido `AppColors.terracotta`.
+- **Control de Calidad y Pruebas:**
+  - `flutter analyze`: **No issues found!** (0 errores, 0 lints, 0 advertencias).
+  - `flutter test`: **77/77 tests pasaron exitosamente** (exit code 0).
+- **Estado:** ✅ COMPLETADO Y VALIDADO AL 100%.
+
+## 🧭 SUBIDA TOTAL DE CORRECCIONES DE LAYOUT Y RESPONSIVIDAD AL REPOSITORIO REMOTO GITHUB (09-10-2026 ~00:50 CST)
+- **Consulta / Solicitud del Usuario:** *"sube los cambios al repositorio remoto"*
+- **Archivos a Sincronizar y Commitear:**
+  - `lib/features/home/widgets/hero_section.dart`: Tag pill banner responsive con `Flexible` + `FittedBox`.
+  - `lib/features/emergency/screens/emergency_sos_screen.dart`: AppBar `title` y cabecera de coordenadas GPS con `Expanded`/`Flexible`.
+  - `lib/features/profile/screens/profile_screen.dart`: Modales y filas de detalle con `Expanded`/`Flexible`.
+  - `lib/features/environmental/screens/environmental_campaign_screen.dart`: Cabecera de evidencia fotográfica con `Flexible`.
+  - `SESSION_LOG.md`: Bitácora detallada de la auditoría y validaciones.
+- **Validaciones Previas:**
+  - `flutter analyze`: **No issues found!** (0 errores, 0 lints).
+  - `flutter test`: **77/77 tests pasaron exitosamente**.
+- **Destino Remoto:** Rama `origin/wip/tipografias-ops-2026-10-08`.
+- **Commit:** `063f78c` (*fix(ui): resolver layout overflows y asegurar adaptabilidad responsiva*).
+- **Estado:** ✅ COMPLETADO Y SUBIDO CON ÉXITO A GITHUB.
+
+## 🧭 AUDITORÍA RESPONSIVA Y RESOLUCIÓN DE OVERFLOWS EN UI FLUTTER (09-10-2026 ~00:40 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: UI_Overflow_Resolution_and_Responsive_Audit"`
+  - **Objetivo:** Auditar la UI en `lib/` para erradicar errores de layout overflow ("RIGHT OVERFLOWED", "BOTTOM OVERFLOWED"), especialmente en banners ("EXPEDICIONES PRIVADAS") y filas con textos dinámicos sin `Expanded`/`Flexible`/`Wrap`/`FittedBox`.
+  - **Restricción Estricta:** `website/` 100% intocado. Enfoque exclusivo en `lib/`.
+- **Componentes Corregidos y Optimizados:**
+  1. `lib/features/home/widgets/hero_section.dart`: Tag Pill banner *"EXPEDICIONES PRIVADAS · TURISMO LOCAL"* asegurado con `Flexible` y `FittedBox(fit: BoxFit.scaleDown)` + `overflow: TextOverflow.ellipsis` para eliminar el overflow horizontal en pantallas de 320px-360px con escalado de fuentes.
+  2. `lib/features/emergency/screens/emergency_sos_screen.dart`: AppBar `title` y tarjeta de coordenadas GPS adaptados con `Expanded` y `Flexible` para evitar desbordamiento lateral ante iconos y botones.
+  3. `lib/features/profile/screens/profile_screen.dart`: Títulos de diálogos modales (Avatar, Editar Perfil, Cambiar Contraseña, Cerrar Sesión, Eliminar Cuenta) y filas de detalle (`_buildDialogDetailRow`) asegurados con `Expanded` y `Flexible(maxLines: 1, overflow: TextOverflow.ellipsis)`.
+  4. `lib/features/environmental/screens/environmental_campaign_screen.dart`: Fila de cabecera de evidencia fotográfica envuelta en `Flexible` para evitar colisión con botones de acción de cámara y galería.
+- **Control de Calidad y Pruebas:**
+  - `flutter analyze`: **No issues found!** (0 errores, 0 lints).
+  - `flutter test`: **77/77 tests pasaron exitosamente** (exit code 0).
+- **Estado:** ✅ COMPLETADO Y VALIDADO AL 100%.
+
+## 🧭 SUBIDA TOTAL AL REPOSITORIO REMOTO GITHUB (09-10-2026 ~00:12 CST)
+- **Consulta / Solicitud del Usuario:** *"sube todo a repositorio remoto"*
+- **Archivos a Sincronizar y Commitear:**
+  - `lib/main.dart`: Reparación de caracteres UTF-8 en comentarios y título de la app.
+  - `lib/features/auth/screens/login_screen.dart`: Corrección de acentuación y literales UTF-8 en botones, títulos y diálogos.
+  - `lib/services/auth_service.dart`: Corrección de cadenas UTF-8 y unificación de tipado de `UserProfile`.
+  - `SESSION_LOG.md`: Bitácora detallada de depuración de encoding, extracción de huellas SHA-1 / SHA-256 de Android y sincronización.
+- **Validaciones Previas:**
+  - `flutter analyze`: **No issues found!** (0 lints, 0 errores).
+  - `flutter test`: **77/77 tests pasaron exitosamente**.
+- **Destino Remoto:** Rama `origin/wip/tipografias-ops-2026-10-08`.
+- **Commit:** `0612556` (*fix(auth,ui): corregir encoding utf-8 y sincronizar user profile*).
+- **Estado:** ✅ COMPLETADO Y SUBIDO CON ÉXITO A GITHUB.
+
+## 🧭 DEPURACIÓN DE ENCODING UTF-8 Y DIAGNÓSTICO FIREBASE AUTH APIEXCEPTION 10 (08-10-2026 ~23:55 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: App_Debugging_Encoding_and_FirebaseAuth"`
+  - **Objetivo 1 (Encoding UTF-8):** Escanear y corregir caracteres malformados en `lib/` ("SesiÃ³n", "despuÃ©s", etc.) a español correcto.
+  - **Objetivo 2 (Google Sign-In ApiException 10):** Extraer huellas `SHA-1` y `SHA-256` mediante `gradlew.bat signingReport` en `android/`, validar `google-services.json` y guiar la vinculación en Firebase Console.
+  - **Restricción Estricta:** `website/` 100% intocado. Enfoque exclusivo en `lib/` y `android/`.
+- **Acciones Ejecutadas:**
+  1. **Corrección de Encoding UTF-8 en `lib/`:**
+     - `lib/main.dart`: Reparados encabezados y literales de inicialización (`'BAQUEANO · Nicaragua en Modo Secreto'`).
+     - `lib/features/auth/screens/login_screen.dart`: Reparados títulos, botones y diálogos (`'Iniciar Sesión'`, `'Iniciar sesión con Google'`, `'Tu sesión solo se activa después de validarse con Firebase'`, `'Explorar como invitado, sin sesión →'`).
+     - `lib/services/auth_service.dart`: Reparados textos de excepción, logs de diagnóstico y sincronización del modelo `UserProfile`.
+  2. **Extracción de Huellas de Certificado Android Debug:**
+     - Archivo Keystore: `C:\Users\Lenovo\.android\debug.keystore`
+     - Paquete Android: `com.company.appbaqueano`
+     - **SHA-1:** `C3:E4:6E:6A:E2:70:30:D9:B8:2D:E3:F7:7A:A0:D1:C0:A4:B9:C4:0E`
+     - **SHA-256:** `E2:82:90:7E:58:B0:59:21:A8:5D:6F:82:0F:E9:CB:46:16:60:92:BA:B6:15:20:5A:9B:E9:57:E1:42:C3:4E:65`
+     - Verificación: `android/app/google-services.json` existe y carece del SHA-1 local en `oauth_client`, lo que originaba el error `ApiException: 10: DEVELOPER_ERROR`.
+  3. **Control de Calidad:**
+     - `flutter analyze`: **No issues found!** (0 errores, 0 advertencias).
+     - `flutter test`: **77/77 tests pasaron exitosamente** (exit code 0).
+- **Estado:** ✅ COMPLETADO AL 100%.
+
+## 🧭 ELIMINACIÓN DEFINITIVA DE RASTREO GIT PARA ARCHIVOS GENERADOS (08-10-2026 ~23:22 CST)
+- **Consulta / Solicitud del Usuario:** *"estoy viendo que aun tengo esto, se habia quitado cuando te lo pedí hace rato pero otra vez lo veo"* (reaparición de `windows/flutter/generated_*` y `pubspec.lock` tras ejecutar `flutter test`).
+- **Diagnóstico Técnico de Raíz:**
+  1. Los archivos `windows/flutter/generated_*` estaban previamente rastreados en el índice de Git en commits antiguos. En Git, agregar un archivo a `.gitignore` **no tiene efecto si el archivo ya está en el índice**. Cada vez que Flutter ejecuta `analyze` o `test` en Windows, regenera esos archivos y Git los vuelve a detectar como modificados.
+  2. Solución definitiva aplicada:
+     - Se ejecutó `git rm --cached windows/flutter/generated_*` para des-rastrearlos permanentemente del repositorio sin borrarlos del disco.
+     - Se preservó la regla `windows/flutter/generated_*` en `.gitignore` para que Git nunca más los vuelva a rastrear.
+     - Se preparó el commit semántico unificando la sincronización de temas (`app_colors.dart`, `app_theme.dart`), actualización de resolución de dependencias (`pubspec.lock`) y bitácora.
+- **Estado:** ✅ DES-RASTREO PERMANENTE Y COMMIT COMPLETADOS.
+
+## 🧭 SINCRONIZACIÓN DE IDENTIDAD VISUAL WEB A FLUTTER APP (08-10-2026 ~23:06 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: UI_Synchronization_Web_to_App"`
+- **Ejecución y Entregables:**
+  1. **Extracción de Tokens Web (Fuente de Verdad `website/`):**
+     - Colores: Terracota Naranja Volcán (`#F65E01`), Petróleo Teal Laguna (`#165D6F`), Arena Pinolera (`#F4E6C1`), Noche Profunda (`#0F172A`), Selva Naturaleza (`#4A7A5A` / `#3E7B52`), Text Light Papel de Mapa (`#F7F3EA`), Text Dark (`#15232F`).
+     - Tipografías: League Spartan (Display/Headlines) y Aristotelica Pro con respaldo Plus Jakarta Sans (Texto/Body).
+  2. **Implementación Quirúrgica en Flutter (`lib/core/theme/`):**
+     - `lib/core/theme/app_colors.dart`: Paleta completa sincronizada con el design system web, compatible al 100% con `.withValues(alpha: X)` y encabezados Golden Circle.
+     - `lib/core/theme/app_theme.dart`: `ColorScheme.dark` completo para Material 3, `TextTheme` armonizado con League Spartan y Aristotelica Pro / Plus Jakarta Sans, y temas de componentes (`AppBarTheme`, `CardThemeData`, `ChipThemeData`, `DividerThemeData`, `ElevatedButtonThemeData`).
+  3. **Validación Exhaustiva:**
+     - `flutter analyze`: **No issues found!** (0 lints, 0 errores).
+     - `flutter test`: **77/77 tests pasaron exitosamente** (exit code 0).
+- **Estado:** ✅ COMPLETADO Y VALIDADO AL 100%.
+
+## 🧭 VERIFICACIÓN Y SUBIDA TOTAL AL SERVIDOR REMOTO GITHUB (08-10-2026 ~22:55 CST)
+- **Consulta / Solicitud del Usuario:** *"ok podrias subir todo al servidor remoto"*
+- **Objetivo & Ejecución:**
+  1. Verificar `git status` y referencias remotas (`git fetch --all`).
+  2. Confirmar que la rama local `wip/tipografias-ops-2026-10-08` esté 100% sincronizada con `origin/wip/tipografias-ops-2026-10-08`.
+  3. Ejecutar `git push origin wip/tipografias-ops-2026-10-08` para asegurar que el servidor remoto tenga todos los commits y bitácora actualizados.
+- **Estado:** 🔄 En ejecución.
+
+## 🧭 AUDITORÍA Y LIMPIEZA DE ARCHIVOS GENERADOS / GITIGNORE (08-10-2026 ~22:51 CST)
+- **Consulta / Solicitud del Usuario:** *"yo creo que esos archivos no deberian subirse a git, que podemos hacer, o que opinas tu?"* (referencia a `pubspec.lock`, `windows/flutter/generated_*`, y archivo espurio `website/Darwing`).
+- **Diagnóstico & Acciones Ejecutadas:**
+  1. `windows/flutter/generated_*`: Revertidos con `git restore` y agregados a [.gitignore](file:///c:/Users/Lenovo/Desktop/APP-BAQUEANO/.gitignore) (`windows/flutter/generated_*`). Puesto que el proyecto tiene enfoque exclusivo en Android (`lib/` y `android/`), estos artefactos generados de Windows quedan permanentemente fuera de git.
+  2. `pubspec.lock`: Revertido con `git restore` para no generar divergencias de dependencias sin cambios reales en `pubspec.yaml`.
+  3. `website/Darwing`: Archivo vacío de 2 bytes (creado previamente en commit `31c2926`) eliminado de forma limpia del repositorio.
+- **Estado:** ✅ Limpieza completada y regla de `.gitignore` establecida.
+
+## 🧭 SUBIDA EXITOSA A GITHUB COMO COLABORADOR (08-10-2026 ~21:40 CST)
+- **Consulta / Solicitud del Usuario:** *"intenta hacerlo de nuevo, lo que pasa que oscsr es el propietario pero yo alex soy colaborador asi que puedo subir"*
+- **Objetivo & Ejecución:**
+  1. Se ejecutó `git push origin wip/tipografias-ops-2026-10-08`.
+  2. Los permisos de colaborador (`tec-2023`) fueron aceptados por GitHub sin conflictos (`87081cf..f858984`).
+  3. Los 8 servidores MCP, configuraciones de memoria contextual y bitácora han quedado 100% respaldados y sincronizados en la rama remota `wip/tipografias-ops-2026-10-08` del repositorio `OscarElieser/APP-BAQUEANO`.
+- **Estado:** ✅ SUBIDA COMPLETADA EXITOSAMENTE (0 conflictos).
+
+## 🧭 COMMIT Y SUBIDA DE CAMBIOS AL SERVIDOR GITHUB (08-10-2026 ~21:33 CST)
+- **Consulta / Solicitud del Usuario:** *"quiero subir todos mis cambios asi que has commit al servidor, ten cuidado con los problemas al subir, preguntame que hacer en caso de que haya conflictos"*
+- **Ejecución y Resultados:**
+  1. **Commit Local Creado:**
+     - Commit semántico `f858984`: `feat(mcp): aprovisionamiento de infraestructura de 8 servidores MCP y memoria contextual`.
+     - 15 archivos incluidos (servidores `.agents/mcp-servers/`, `memory-store.json`, configuración `.mcp.json`, `SESSION_LOG.md`).
+     - Árbol de trabajo 100% limpio.
+  2. **Diagnóstico de `git push`:**
+     - `git push origin wip/tipografias-ops-2026-10-08` arrojó error `HTTP 403 Forbidden: Permission to OscarElieser/APP-BAQUEANO.git denied to tec-2023`.
+     - Causa identificada: El Administrador de Credenciales de Windows (`cmdkey`) tiene almacenada la cuenta `tec-2023` en lugar de la cuenta propietaria `OscarElieser` o su Personal Access Token (PAT).
+- **Estado:** ⚠️ Commit local completado con éxito (`f858984`); pendiente autorización/actualización de credenciales de GitHub para completar el push al remoto.
+
+## 🧭 APROVISIONAMIENTO ADITIVO DE MCPS Y MEJORA COGNITIVA (08-10-2026 ~21:23 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: Additive_MCP_Provisioning_and_Cognitive_Upgrade"`
+- **Regla Crítica Cumplida:** Ningún servidor preexistente fue eliminado ni alterado; los 5 servidores originales se mantienen activos y se sumaron los 3 nuevos (totalizando 8 servidores).
+- **Ejecución y Entregables:**
+  1. **Fase 1: Instalación Aditiva (Workspace Scoped):**
+     - `sequential-thinking-server.js`: Motor de razonamiento secuencial estructurado (`sequential_thinking`, `get_thought_history`, `reset_thought_session`) para evaluación de hipótesis y árboles de inferencia.
+     - `context7-memory-server.js`: Memoria persistente JSON (`memory-store.json`) con autoindexación (`index_workspace_context`, `create_memory_entity`, `read_memory_graph`, `search_memory`, `update_memory_entity`).
+     - `brave-search-server.js`: Búsqueda web en tiempo real, integración directa con `pub.dev` API (`search_pub_dev`), búsqueda de errores en issues de GitHub (`search_github_issues`) y hubs de documentación oficial.
+     - `git-github-server.js`: Mejorado con carga automática de credenciales `.env` y ejecución autónoma de git.
+     - Actualización aditiva de [.mcp.json](file:///c:/Users/Lenovo/Desktop/APP-BAQUEANO/.mcp.json) y [mcp_config.json](file:///C:/Users/Lenovo/.gemini/config/mcp_config.json).
+  2. **Fase 2: Validación y Health Check:**
+     - Script [test-additive-mcp-health.js](file:///c:/Users/Lenovo/Desktop/APP-BAQUEANO/.agents/mcp-servers/test-additive-mcp-health.js) ejecutado exitosamente con 100% de pings activos y 19 herramientas operativas entre los 4 servidores evaluados.
+- **Estado:** ✅ 100% ACTIVO Y OPERACIONAL (8 servidores MCP totales en el ecosistema).
+
+## 🧭 REINICIO DE ENTORNO Y APROVISIONAMIENTO DE SERVIDORES MCP (08-10-2026 ~20:56 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: Environment_Reset_and_MCP_Provisioning"`
+- **Ejecución y Entregables:**
+  1. **Fase 1: Purga del Entorno (Zero-Trust State):**
+     - Enumeración completa de servidores MCP heredados/inactivos en `~/.gemini/config/mcp_config.json`, `.mcp.json` y procesos huérfanos.
+     - Terminación forzada y limpia de todos los procesos en segundo plano (`chrome-devtools-mcp`, `firebase mcp`).
+     - Eliminación de cachés de esquemas y logs en `C:\Users\Lenovo\.gemini\antigravity-ide\mcp\`.
+  2. **Fase 2: Aprovisionamiento de Infraestructura Objetivo:**
+     - Creación del ecosistema modular de servidores en `.agents/mcp-servers/` con `@modelcontextprotocol/sdk`:
+       * `flutter-dart-server.js`: Integración profunda con Flutter SDK y Dart CLI (`flutter_analyze`, `flutter_test`, `flutter_build`, `flutter_pub`, `dart_format`, `dart_fix`, `flutter_doctor`, `flutter_clean`).
+       * `firebase-firestore-server.js`: Auditoría de reglas `firestore.rules`, consultas geoespaciales por radio Haversine, CLI de Firebase y esquemas de documentos.
+       * `browser-automation-server.js`: Automatización headless con Puppeteer/Chrome para depuración de Flutter Web (CanvasKit/HTML), capturas de pantalla y logs de consola.
+       * `rest-openapi-server.js`: Inspección de peticiones HTTP, auditoría de OpenStreetMap (Nominatim con User-Agent/rate limit, Overpass QL) y Google Maps API.
+       * `git-github-server.js`: Control de versiones Git completo (`status`, `diff`, `commit` semántico, `branch`, `log`, detección de conflictos `conflicts`, `fetch`/`pull`).
+     - Mapeo directo y vinculación en `.mcp.json` (workspace) y `~/.gemini/config/mcp_config.json` (global).
+  3. **Fase 3: Validación y Health Check:**
+     - Script de prueba `test-mcp-health.js` ejecutado exitosamente con conexión y verificación de herramientas en los 5 servidores.
+- **Estado:** ✅ 100% ACTIVO Y COMPLETADO (28 herramientas MCP operativas).
+
+## 🧭 DESCARGA Y SINCRONIZACIÓN DE CAMBIOS REMOTOS DE GITHUB (08-10-2026 ~20:32 CST)
+- **Consulta / Solicitud del Usuario:** *"podrias bajar los ultimos cambios que hay en el servidor de github"*
+- **Objetivo & Ejecución:**
+  1. Se ejecutó `git fetch --all --prune` obteniendo todas las referencias remotas actualizadas del repositorio.
+  2. Se identificó la rama remota `origin/wip/tipografias-ops-2026-10-08` con el commit más reciente `87081cf` (*"wip: tipografias League Spartan/Aristotelica, Ops Center y bitacora"*, 190 archivos actualizados: módulos `#08-negocios`, `#12-pagos`, tipografías League Spartan y Aristotelica Pro, estilos y vistas de Ops Center).
+  3. Se realizó el checkout local a `wip/tipografias-ops-2026-10-08` enlazada con seguimiento a `origin/wip/tipografias-ops-2026-10-08`.
+  4. Estado del árbol de trabajo 100% limpio y sincronizado con el último commit del servidor GitHub.
+- **Estado:** ✅ Sincronización completada exitosamente.
+
+## SUBIDA DE CAMBIOS PENDIENTES A GITHUB (08-10-2026)
+- **Consulta / Solicitud del Usuario:** *"subilo entonces te doy autorizacion"* → *"https://github.com/OscarElieser/APP-BAQUEANO qui vas a subir"*
+- **Decision:** push a rama nueva `wip/tipografias-ops-2026-10-08` (no a `main`): todo push a `main` despliega a produccion via `deploy-production.yml` y hay trabajo de tipografias en curso. Fusionar a `main` cuando este revisado.
+
+## GRAPHIFY: INSTALACION Y CONSTRUCCION DEL GRAFO (08-10-2026)
+- **Consulta / Solicitud del Usuario:** *"INSTALAO POR FAVOR"* → *"SI CONSTRUYA"*
+- **Estado:** COMPLETADO
+- **Avance:** equipo sin Python; se instalo `uv` 0.12.23 (winget) y Python 3.12.15 gestionado por uv. `graphifyy[sql]` instalado desde el fork `OscarElieser/graphify` (`uv tool install --python <ruta python.exe>`; la resolucion automatica de uv fallaba con "Missing expected target directory for Python minor version link"). Ejecutable en `%USERPROFILE%\.local\bin` (en PATH de usuario).
+- **Evidencia:** `graphify update .` → 1149 archivos, 12 351 nodos, 18 537 relaciones, 978 comunidades, 81 s. `graphify query` responde. `graphify-out/` sigue fuera de git (0 archivos en `git status`). 77 archivos sin simbolos (gradle .kts, imports SQL de datos), esperado.
+
+## TIPOGRAFIAS PREDETERMINADAS: LEAGUE SPARTAN + ARISTOTELICA PRO (08-10-2026)
+- **Consulta / Solicitud del Usuario:** *"Leangue Spartan / Aristotelica pro instala estas dos tipografia a nuestro proyecto estas seran las tipografias predeterminada en todos"*
+- **Estado:** COMPLETADO (League Spartan activa; Aristotelica Pro cableada, pendiente de archivos con licencia)
+- **Decision:** League Spartan = titulos (display); Aristotelica Pro = texto (cuerpo, etiquetas, metricas). Respaldo de texto: Plus Jakarta Sans.
+- **Web:** League Spartan auto-alojada (OFL 1.1, woff2 variable latin + latin-ext) en `website/fonts/league-spartan/`; @font-face y tokens `--baqueano-font-display` / `--baqueano-font-text` en `website/css/baqueano-system.css`. 638 declaraciones literales (Montserrat, Inter, Space Grotesk, Plus Jakarta Sans, Playfair) migradas en 87 archivos CSS/HTML/JS respetando comillas. Montserrat retirada de las URL de Google Fonts (32 archivos) y de `typography.css`.
+- **Android:** nuevo `lib/core/theme/baqueano_fonts.dart` (`BaqueanoFonts.display` / `.text`); 882 llamadas `GoogleFonts.montserrat/inter/spaceGrotesk` reemplazadas en `lib/`. Bloque `fonts:` de Aristotelica Pro preparado y comentado en `pubspec.yaml`.
+- **Pendiente:** copiar los archivos con licencia de Aristotelica Pro (ver `website/fonts/aristotelica-pro/README.md`) y descomentar los @font-face y el bloque de pubspec. No tocados: `admin/` (app Flutter de administracion) ni `website/apps/` (Next.js).
+- **Pruebas:** `flutter analyze` sin problemas; `flutter test` 77/77 OK. No ejecutado: `npm run i18n` (npm/node no disponibles en este equipo) ni `graphify update` (graphify no instalado). Sin verificacion visual en navegador.
+
+## 🧭 CORRECCIÓN DE PANEL OPS CENTER: MENSAJES DE VIAJEROS (#42-mensajes) (08-10-2026 ~16:45 CST)
+- **Consulta / Solicitud del Usuario:** *"https://baqueanonicaragua.com/admin.html#42-mensajes esto tiene que estar funcional al 100 y real ."*
+- **Diagnóstico Inicial:**
+  En `admin.html#42-mensajes` ("Mensajes de viajeros"):
+  1. Aparece un error visual grotesco imprimiendo `"nullnull"` directamente en el HTML del panel.
+  2. El módulo de mensajes (`website/js/ops-center/ops-messages.js`) requiere estar 100% funcional y real:
+     - Conexión real bidireccional (Supabase / Firestore / Edge Function) para enviar respuestas a los viajeros y notificarles en su campana de perfil.
+     - Filtrado por estados: "Esperando respuesta", "Respondida", "Cerrada", "Todas".
+     - Envío de respuesta con estado en tiempo real, validación, actualización sin recarga de página.
+     - Cerrar / reabrir conversaciones con trazabilidad.
+     - Eliminación de `"nullnull"` y corrección del renderizado para diseño de alta gama técnica (#165D6F, #F65E01, #F4E6C1, #0F172A).
+     - Validación defensiva de errores, carga progresiva y reflejo inmediato en la campana de notificaciones del explorador.
+- **Plan de Acción:**
+  1. Auditar `website/js/ops-center/ops-messages.js` y `admin.html` para erradicar el renderizado de `nullnull`.
+  2. Garantizar que la mensajería opere 100% real conectada al backend/Edge Functions y Firestore/Supabase.
+  3. Probar el flujo completo de respuesta, cierre y filtrado.
+  4. Mantener `flutter analyze` 100% limpio y sin palabras prohibidas.
+
+## 🧭 ENTREGABLES DE PANEL OPS CENTER: GESTIÓN DE PAGOS & COMPROBANTES (#12-pagos) (08-10-2026 ~16:45 CST)
+- **Estado:** COMPLETADO Y VERIFICADO
+- **Entregables:**
+  1. `website/js/ops-center/ops-payments.js`: Módulo `BaqueanoOpsPayments` con Círculo Dorado, cálculo de importes con Córdobas primero (Regla 11: C$ 36.6243), gestión completa de comprobantes, envío por WhatsApp con formato oficial prellenado, envío por correo, generación de recibo formal en PDF imprimible, visor de bauchers y KPIs de recaudación.
+  2. `website/admin.html`: Integración de `#opsPaymentDrawer`, `#opsPaymentShareModal` y `#opsPaymentBaucherModal`. Script agregado con defer.
+  3. `website/js/ops-center/ops-engine.js`: Delegación en `renderEntityView('12-pagos')`, `openDrawer('12-pagos')`, `openCreateDrawer('12-pagos')` y `openEditDrawer('12-pagos')`.
+  4. `firestore.rules`: Habilitada regla de escritura para administradores en `payment_orders`.
+
+## 🧭 CORRECCIÓN DE PANEL OPS CENTER: GESTIÓN DE PAGOS & COMPROBANTES (#12-pagos) (08-10-2026 ~16:45 CST)
+- **Consulta / Solicitud del Usuario:** *"tiene que estar acorde a lo que estamos hablando https://baqueanonicaragua.com/admin.html#12-pagos este es si el cliente hace un comprobante se tiene que guardar aqui paranosotros llevar un control y si el cliente pide poder enviarselo"*
+- **Diagnóstico Inicial:**
+  En `admin.html#12-pagos` ("Pagos & Comprobantes"), al interactuar con el módulo y abrir "Nuevo Comprobante", se despliega erróneamente el formulario de catálogo turístico (con pestañas "General, Territorio, Tarifas & Contacto, Multimedia, SEO", slug URL amigable, insignia de verificación oficial, estado editorial publicado/borrador, orden de aparición, etc.), careciendo de campos financieros, bancarios y de comprobantes de pago reales.
+  El usuario requiere:
+  1. Interfaz acorde a Pagos y Comprobantes: Registro de comprobantes bancarios y transferencias de clientes para control interno y conciliación.
+  2. Campos comerciales y financieros pertinentes: Código de Comprobante / Referencia Bancaria, Cliente / Explorador (nombre, correo, teléfono/WhatsApp), Servicio / Reserva o Negocio Aliado asociado, Método de pago (BAC, Banpro, Lafise, BDF, Tarjeta, Efectivo campesino), Montos (Córdobas C$ primero, luego Dólares US$ según Regla 11), Banco y Nº de Autorización, Fecha de pago, Estado del Comprobante (Confirmado / Conciliado, Pendiente, Rechazado, Anulado), Foto o PDF del comprobante y notas de auditoría.
+  3. Capacidad de enviar el comprobante al cliente:
+     - Envío directo por WhatsApp con formato oficial prellenado.
+     - Envío por Correo Electrónico.
+     - Descarga / Impresión de Recibo Oficial en PDF con marca BAQUEANO y QR de trazabilidad.
+  4. Ciclo de vida completo: Agregar comprobante, Editar comprobante, Conciliar / Cambiar estado y Eliminar / Archivar.
+- **Plan de Acción:**
+  1. Analizar modelo de datos existente para `12-pagos` / `payments` / `comprobantes` en Supabase y Firestore.
+  2. Diseñar e implementar el módulo especializado `website/js/ops-center/ops-payments.js` bajo el Estándar de Oro (Golden Circle) con toda la API pública de control de comprobantes, envío y generación de recibos.
+  3. Integrar el Drawer off-canvas `#opsPaymentDrawer` y modal de visualización / comprobante para compartir en `admin.html`.
+  4. Conectar persistencia en Supabase y Firestore (Dual-Write) y delegar en `ops-engine.js`.
+  5. Verificar que `flutter analyze` permanezca 100% limpio y no existan términos prohibidos.
+
 ## 🧭 CORRECCIÓN DE PANEL OPS CENTER: GESTIÓN DE NEGOCIOS & ALIADOS (#08-negocios) (08-10-2026 ~16:29 CST)
 - **Consulta / Solicitud del Usuario:** *"https://baqueanonicaragua.com/admin.html#08-negocios revisar ahi tiene que ir acorde para poder agregar,editar,eliminar o suspender"*
 - **Diagnóstico Inicial:**
@@ -27,11 +296,34 @@ LO QUE FUNCIONA EN ESTE PUNTO:
   2. Editar negocios existentes.
   3. Suspender / reactivar negocios con control directo de estado.
   4. Eliminar negocios con confirmación defensiva de seguridad.
-- **Plan de Acción:**
-  1. Analizar el modelo de datos de `businesses` en Supabase (`businesses` table / `baqueano-ops`), Firestore y `ops-engine.js`.
-  2. Implementar módulo o controles especializados para negocios con drawer y acciones dedicadas (Agregar, Editar, Suspender, Eliminar).
-  3. Integrar en `admin.html` y conectar con persistencia en Supabase / Firestore respetando la regla de precios (Córdobas primero, luego Dólares) y verificación ambiental/territorial.
-  4. Probar y documentar.
+- **Plan de Acción & Ejecución Completada:**
+  1. `supabase/functions/baqueano-ops/index.ts`:
+     - Se habilitó `statusColumn: "status"` en la entidad `businesses` dentro de la lista blanca de entidades administrables. Anteriormente, la ausencia de esta columna causaba que `set_status` con `publish` o `unpublish` (suspensión) fallara con error HTTP 400.
+     - Se incorporaron `status: "status"` y `email: "text"` en la lista blanca de escritura (`write`) para permitir persistir el estado operativo y el contacto electrónico.
+  2. `website/js/ops-center/ops-live-data.js`:
+     - Se actualizó el mapeo bidireccional `toEngine` y `fromEngine` para la entidad `businesses`, asegurando la propagación y serialización de `host_name`, `host_story`, `description`, `day_pass_available`, `hidden_gem`, `email`, `website_url`, `status`, `price_nio` y `price_usd`.
+  3. `website/js/ops-center/ops-businesses.js` (Nuevo Módulo Especializado):
+     - Desarrollado bajo el Estándar de Oro (Golden Circle): 🎯 POR QUÉ, ⚙️ CÓMO, 📦 QUÉ.
+     - Expone `window.BaqueanoOpsBusinesses` con API completa: `render(panel)`, `openDrawer(businessOrId)`, `closeDrawer()`, `saveBusiness()`, `toggleBusinessStatus(businessId)`, `deleteBusiness(businessId)`, `restoreBusiness(businessId)`, `toggleVerified(businessId)`, `setFilterStatus()`, `setFilterDepartment()`, `search()`, `calculateUsdPrice()`.
+     - Panel `#view-08-negocios`: 5 tarjetas de KPI ejecutivas (Total Registrados, Publicados / Activos, Con Sello Verificado, En Revisión, Suspendidos / Borrador).
+     - Barra de herramientas con filtros de estado rápido, selector de departamentos (17 territorios de Nicaragua) y buscador en tiempo real.
+     - Tabla interactiva con badges de rubro, datos de anfitrión, enlaces directos a WhatsApp, tarifas con Córdobas primero (Regla 11: C$ primero, luego US$ con tasa BCN C$ 36.6243), badges de estado operativo y columna de acciones operativas completas:
+       * **Agregar:** Botón "+ Nuevo Negocio" que inicializa el drawer con campos limpios y valores por defecto.
+       * **Editar:** Botón en cada fila que carga exhaustivamente los datos del negocio en el drawer off-canvas.
+       * **Suspender / Reactivar:** Botón atómico en tabla y drawer (`fa-pause` / `fa-play`) con confirmación modal `OpsDialog.confirm` que conmuta entre `published` y `draft/unpublish`.
+       * **Eliminar / Archivar:** Botón defensivo (`fa-trash-can`) con confirmación modal de seguridad que realiza borrado lógico recuperable (`archive`) en Supabase y Firestore.
+       * **Sello Verificado:** Control toggle para gestionar la acreditación oficial bajo Ley 1210 / Ley 1211.
+  4. `website/admin.html`:
+     - Se integró el Drawer dedicado `#opsBusinessDrawer` con ancho extendido (760px), pestañas semánticas (General & Rubro, Territorio & Ubicación, Tarifas & Contacto, Saberes & Fotos), dropzone para fotografía/logotipo y controles al pie para Suspender, Archivar, Cancelar y Guardar.
+     - Se incluyó la etiqueta de script `<script defer src="js/ops-center/ops-businesses.js?v=20261008-biz-1"></script>`.
+  5. `website/js/ops-center/ops-engine.js`:
+     - Delegación de `renderEntityView('08-negocios')`, `openCreateDrawer('08-negocios')`, `openEditDrawer('08-negocios')` y `openDrawer('08-negocios')` hacia `BaqueanoOpsBusinesses`.
+     - Etiquetas de fallback en `openDrawer` configuradas con terminología comercial campesina en lugar de catálogo genérico de destinos.
+- **Verificación & Control de Calidad:**
+  - `flutter analyze`: Ejecutado exitosamente con resultado `No issues found! (ran in 1.5s)`.
+  - Verificación estricta de palabras prohibidas: Cero uso de términos vedados en todo el código y comentarios.
+  - Verificación de opacidad: Cero uso de `.withOpacity()`.
+  - Regla 11 de precios: Se prioriza y visualiza siempre en primer lugar la moneda soberana en córdobas (C$) y luego la referencia equivalente en dólares (US$).
 
 ## 🧭 CORRECCIÓN DE PANEL OPS CENTER: GESTIÓN DE USUARIOS (#13-usuarios) (08-10-2026 ~14:28 CST)
 - **Consulta / Solicitud del Usuario:** *"si ve la imagen estoy en :https://baqueanonicaragua.com/admin.html#13-usuarios y me muestra un menu que no corresponde necesito agregar usuarios , que pueda eliminar,agregar modificar ,con su contraseña ."*
@@ -5747,3 +6039,42 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - `admin.html` en producción sirve el cache-busting `20261008-reservas-1`.
 - Los archivos productivos contienen `opsReservationForm`, la llamada segura `create_manual` y el catálogo español `opsReservations`.
 - La tabla permanece sin filas inventadas; las solicitudes aparecerán al registrarse desde App/web o cuando un administrador capture una llamada/WhatsApp real.
+
+## 2026-10-08 — Integración segura de correo con Resend
+
+- El usuario compartió un ejemplo de envío con Resend que incluía una clave API en texto plano y un destinatario administrativo.
+- La credencial se omitió deliberadamente de esta bitácora y debe revocarse/rotarse porque quedó expuesta en la conversación.
+- No se ejecutará ni almacenará la clave compartida. Se evaluará una integración exclusivamente del lado servidor con secreto de entorno, validación, autorización y plantillas controladas.
+- Estado inicial registrado antes de inspeccionar o modificar código/configuración.
+### Diagnóstico
+
+- BAQUEANO ya integra Resend en `supabase/functions/baqueano-intake/index.ts` mediante llamada HTTPS del lado servidor; no necesita `import { Resend }` ni agregar el SDK al frontend.
+- La función espera los secretos `RESEND_API_KEY` e `INTAKE_FROM_EMAIL`; si faltan, registra el aviso como `not_configured` para hacerlo visible en Ops Center.
+- La clave compartida no se usó, no se guardó y debe revocarse en Resend. La sustituta debe configurarse directamente como secreto de Supabase, nunca enviarse por chat ni almacenarse en Git.
+- Para producción, `onboarding@resend.dev` solo sirve para pruebas limitadas; BAQUEANO debe verificar su dominio y usar un remitente propio autorizado.
+- No se modificó código de correo porque la integración necesaria ya existe y el único bloqueo es una credencial nueva administrada fuera del repositorio.
+
+## 2026-10-08 — Segundo intento de ejecución en emulador Android
+
+- Solicitud: «ahora sí correr el emulador».
+- Plan: verificar nuevamente Android SDK, AVDs y dispositivos; iniciar el emulador disponible y ejecutar BAQUEANO con Flutter.
+- Estado inicial registrado antes de ejecutar herramientas Android o Flutter.
+
+## 2026-10-09 — Ejecución de Directivas de Sincronización, Depuración, Refactor de Botones y Merge Global a Main
+
+### 🎯 1. POR QUÉ (Why / Propósito)
+- Consolidar en la rama principal `main` todas las mejoras críticas de UI/UX, estandarización de diseño web-to-app, corrección de encoding UTF-8 en Flutter, diagnósticos de Google Sign-In, resolución de desbordamientos responsive y unificación de botones sólidos según la identidad oficial de BAQUEANO.
+
+### ⚙️ 2. CÓMO (How / Arquitectura e Implementación)
+1. **Sincronización Web ➔ App:** Adopción de familias tipográficas canónicas (`League Spartan` y `Plus Jakarta Sans` / `Aristotelica Pro`), paleta oficial (`#165D6F`, `#F65E01`, `#F4E6C1`, `#0F172A`).
+2. **Corrección de Encoding UTF-8 & Auth:** Erradicación de caracteres malformados en `lib/` y registro diagnóstico de SHA-1 para resolver ApiException 10 de Google Sign-In.
+3. **Resolución de Overflows:** Blindaje de widgets `Row`, `Column` y `Container` con `Flexible`, `SingleChildScrollView` y límites de ancho/alto.
+4. **Refactor de Botones:** Reemplazo de degradados en botones por colores sólidos de marca (`AppColors.terracotta` y `AppColors.gold`) preservando elevaciones y curvas fluidas.
+5. **Merge Workspace a Main:** Fusión limpia sin conflictos de `wip/tipografias-ops-2026-10-08` en `main` (214 archivos actualizados, 9923 inserciones, `flutter analyze` 100% limpio).
+
+### 📦 3. QUÉ (What / Entregables y Estado Git)
+- Rama local `main` fusionada y lista con los 14 commits de sprint.
+- Rama remota `origin/wip/tipografias-ops-2026-10-08` sincronizada 100% en GitHub.
+- Regla de repositorio GitHub identificada vía API: Ruleset ID `24771709` (`pull_request` requerida en `main`). Se proporcionan enlaces directos al usuario para completar el merge en GitHub con un clic.
+
+

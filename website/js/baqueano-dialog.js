@@ -41,7 +41,7 @@
       '.bqd-body{padding:22px 22px 8px;display:flex;gap:14px;align-items:flex-start}' +
       '.bqd-icon{flex:0 0 auto;width:40px;height:40px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;background:#E6F2F4;color:#165D6F;font-size:1.1rem}' +
       '.bqd.is-warning .bqd-icon{background:#FFF7ED;color:#C2410C}.bqd.is-danger .bqd-icon{background:#FEF2F2;color:#B91C1C}.bqd.is-success .bqd-icon{background:#ECFDF5;color:#166534}' +
-      '.bqd h2{margin:0 0 6px;font:800 1.08rem/1.3 Montserrat,system-ui,sans-serif;color:#0D1B2A}' +
+      '.bqd h2{margin:0 0 6px;font:800 1.08rem/1.3 League Spartan,system-ui,sans-serif;color:#0D1B2A}' +
       '.bqd p{margin:0;font-size:.93rem;line-height:1.55;color:#334155;white-space:pre-line;overflow-wrap:anywhere}' +
       '.bqd-field{width:100%;box-sizing:border-box;margin-top:12px;min-height:44px;border:1.5px solid #CBD5E1;border-radius:10px;padding:10px 12px;font:inherit;font-size:.92rem;color:#0D1B2A}' +
       '.bqd-field:focus-visible{outline:3px solid rgba(22,93,111,.35);border-color:#165D6F}' +

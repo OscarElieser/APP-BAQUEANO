@@ -32,7 +32,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/constants/app_constants.dart';
@@ -386,7 +386,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                             _isConfirmed
                                 ? 'COMPROBANTE OFICIAL DE RESERVA'
                                 : 'SOLICITUD DE RESERVA & PAGO DIRECTO',
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 10.5,
                               fontWeight: FontWeight.w700,
                               color: AppColors.terracottaLight,
@@ -397,7 +397,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                           ),
                           Text(
                             widget.destination.title,
-                            style: GoogleFonts.montserrat(
+                            style: BaqueanoFonts.display(
                               fontSize: 15,
                               fontWeight: FontWeight.w800,
                               color: AppColors.textLight,
@@ -455,7 +455,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 children: [
                   Text(
                     'MONEDA DE COBRO',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
                       color: AppColors.textMuted,
@@ -464,7 +464,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   ),
                   Text(
                     'Tasa Oficial: C\$ 36.65 NIO = \$1.00 USD',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 11.5,
                       color: AppColors.goldLight,
                       fontWeight: FontWeight.w500,
@@ -628,7 +628,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                       children: [
                         Text(
                           _hostEnterprise.businessName,
-                          style: GoogleFonts.montserrat(
+                          style: BaqueanoFonts.display(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
                             color: Colors.white,
@@ -637,7 +637,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                         const SizedBox(height: 2),
                         Text(
                           'Propietario / Responsable: ${_hostEnterprise.ownerLabel}',
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             color: AppColors.goldLight,
                             fontWeight: FontWeight.w600,
@@ -719,7 +719,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                     Expanded(
                       child: Text(
                         'Comercio Justo: El 100% de tu pago se transfiere o entrega directamente al anfitrión comunitario sin comisiones.',
-                        style: GoogleFonts.inter(
+                        style: BaqueanoFonts.text(
                           fontSize: 11,
                           color: Colors.white70,
                         ),
@@ -732,7 +732,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
 
               Text(
                 'Anfitrión Responsable: ${_hostEnterprise.ownerLabel}',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
                   color: AppColors.goldLight,
@@ -741,7 +741,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               const SizedBox(height: 4),
               Text(
                 _hostEnterprise.businessName,
-                style: GoogleFonts.inter(
+                style: BaqueanoFonts.text(
                   fontSize: 11,
                   color: Colors.white60,
                 ),
@@ -759,7 +759,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                       icon: const Icon(Icons.chat, color: Color(0xFF25D366), size: 18),
                       label: Text(
                         'WhatsApp',
-                        style: GoogleFonts.inter(
+                        style: BaqueanoFonts.text(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -781,7 +781,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                       icon: const Icon(Icons.phone, color: AppColors.gold, size: 18),
                       label: Text(
                         'Llamar',
-                        style: GoogleFonts.inter(
+                        style: BaqueanoFonts.text(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -801,7 +801,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               const SizedBox(height: 10),
               Text(
                 'El anfitrión coordinará contigo el método de pago local (efectivo al llegar, transferencia o billetera) al confirmar las fechas.',
-                style: GoogleFonts.inter(
+                style: BaqueanoFonts.text(
                   fontSize: 11,
                   fontStyle: FontStyle.italic,
                   color: Colors.white54,
@@ -841,7 +841,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   children: [
                     Text(
                       'Exploradores',
-                      style: GoogleFonts.inter(
+                      style: BaqueanoFonts.text(
                         fontSize: 11,
                         color: AppColors.textMuted,
                       ),
@@ -870,7 +870,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                         ),
                         Text(
                           '$_participants pax',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                             color: AppColors.textLight,
@@ -944,7 +944,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                     children: [
                       Text(
                         'Fecha de Salida',
-                        style: GoogleFonts.inter(
+                        style: BaqueanoFonts.text(
                           fontSize: 11,
                           color: AppColors.textMuted,
                         ),
@@ -960,7 +960,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                           const SizedBox(width: 6),
                           Text(
                             DateFormat('dd MMM yyyy').format(_selectedDate),
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
                               color: AppColors.textLight,
@@ -1009,7 +1009,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 dense: true,
                 title: Text(
                   'Turista Extranjero (0% IVA Exonerado)',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: AppColors.textLight,
@@ -1017,7 +1017,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 ),
                 subtitle: Text(
                   'Aplica exoneración fiscal de la Ley de Incentivos Turísticos de Nicaragua (Ley 306 INTUR).',
-                  style: GoogleFonts.inter(
+                  style: BaqueanoFonts.text(
                     fontSize: 12,
                     color: AppColors.textMuted,
                   ),
@@ -1037,7 +1037,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 dense: true,
                 title: Text(
                   'Residente Local / Nacional (15% IVA General DGI)',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: AppColors.textLight,
@@ -1045,7 +1045,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 ),
                 subtitle: Text(
                   'Incluye impuesto al valor agregado nacional para facturación fiscal DGI.',
-                  style: GoogleFonts.inter(
+                  style: BaqueanoFonts.text(
                     fontSize: 12,
                     color: AppColors.textMuted,
                   ),
@@ -1071,13 +1071,13 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             Expanded(
               child: TextField(
                 controller: _couponController,
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   color: AppColors.textLight,
                   fontWeight: FontWeight.w600,
                 ),
                 decoration: InputDecoration(
                   hintText: 'Ingresa código (ej. BAQUEANO2026)',
-                  hintStyle: GoogleFonts.inter(
+                  hintStyle: BaqueanoFonts.text(
                     color: AppColors.textMuted,
                     fontSize: 13,
                   ),
@@ -1115,7 +1115,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
           const SizedBox(height: 6),
           Text(
             _couponError,
-            style: GoogleFonts.inter(fontSize: 12, color: AppColors.error),
+            style: BaqueanoFonts.text(fontSize: 12, color: AppColors.error),
           ),
         ],
         if (_couponApplied) ...[
@@ -1130,7 +1130,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               const SizedBox(width: 6),
               Text(
                 'Cupón activo: 15% de descuento en esta expedición',
-                style: GoogleFonts.inter(
+                style: BaqueanoFonts.text(
                   fontSize: 12,
                   color: AppColors.success,
                 ),
@@ -1196,7 +1196,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                     children: [
                       Text(
                         'TOTAL A PAGAR',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
                           color: AppColors.goldLight,
@@ -1205,7 +1205,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                       ),
                       Text(
                         'Pago 100% directo a los anfitriones',
-                        style: GoogleFonts.inter(
+                        style: BaqueanoFonts.text(
                           fontSize: 11,
                           color: AppColors.textMuted,
                         ),
@@ -1214,7 +1214,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                   ),
                   Text(
                     _formatCurrency(_totalUsd, _totalNio),
-                    style: GoogleFonts.montserrat(
+                    style: BaqueanoFonts.display(
                       fontSize: 18,
                       fontWeight: FontWeight.w900,
                       color: AppColors.gold,
@@ -1284,7 +1284,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         Expanded(
           child: Text(
             title,
-            style: GoogleFonts.spaceGrotesk(
+            style: BaqueanoFonts.text(
               fontSize: 11,
               fontWeight: FontWeight.w800,
               color: AppColors.gold,
@@ -1308,7 +1308,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
       children: [
         Text(
           label,
-          style: GoogleFonts.inter(
+          style: BaqueanoFonts.text(
             fontSize: 11,
             fontWeight: FontWeight.w600,
             color: AppColors.textMuted,
@@ -1318,14 +1318,14 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         TextField(
           controller: controller,
           keyboardType: keyboardType,
-          style: GoogleFonts.inter(
+          style: BaqueanoFonts.text(
             fontSize: 13,
             color: Colors.white,
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: GoogleFonts.inter(
+            hintStyle: BaqueanoFonts.text(
               color: AppColors.textMuted.withValues(alpha: 0.6),
               fontSize: 12,
             ),
@@ -1368,7 +1368,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             width: 120,
             child: Text(
               label,
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 12,
                 color: AppColors.textMuted,
                 fontWeight: FontWeight.w600,
@@ -1380,12 +1380,12 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               value,
               style:
                   isMonospace
-                      ? GoogleFonts.spaceGrotesk(
+                      ? BaqueanoFonts.text(
                         fontSize: 12,
                         color: AppColors.goldLight,
                         fontWeight: FontWeight.w700,
                       )
-                      : GoogleFonts.inter(fontSize: 12, color: Colors.white70),
+                      : BaqueanoFonts.text(fontSize: 12, color: Colors.white70),
             ),
           ),
         ],
@@ -1436,7 +1436,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         Expanded(
           child: Text(
             label,
-            style: GoogleFonts.inter(
+            style: BaqueanoFonts.text(
               fontSize: 12.5,
               color: AppColors.textMuted,
             ),
@@ -1447,7 +1447,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         Flexible(
           child: Text(
             value,
-            style: GoogleFonts.spaceGrotesk(
+            style: BaqueanoFonts.text(
               fontSize: 13,
               fontWeight: FontWeight.w700,
               color: textColor ?? AppColors.textLight,
@@ -1473,7 +1473,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
         ),
         child: Text(
           label,
-          style: GoogleFonts.spaceGrotesk(
+          style: BaqueanoFonts.text(
             fontSize: 12,
             fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
             color: isSelected ? Colors.white : AppColors.textMuted,
@@ -1522,7 +1522,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                         children: [
                           Text(
                             'REPÚBLICA DE NICARAGUA',
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 11,
                               fontWeight: FontWeight.w800,
                               color: AppColors.gold,
@@ -1530,7 +1530,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                           ),
                           Text(
                             'BAQUEANO EXPEDITION PASS',
-                            style: GoogleFonts.montserrat(
+                            style: BaqueanoFonts.display(
                               fontSize: 12.5,
                               fontWeight: FontWeight.w900,
                               color: Colors.white,
@@ -1552,7 +1552,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                     ),
                     child: Text(
                       'SOLICITUD EN ESPERA',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 10.5,
                         fontWeight: FontWeight.w800,
                         color: AppColors.goldLight,
@@ -1575,7 +1575,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                     children: [
                       Text(
                         'CÓDIGO ÚNICO',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 10,
                           color: AppColors.textMuted,
                         ),
@@ -1585,7 +1585,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                         children: [
                           Text(
                             _expeditionCode,
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 18,
                               fontWeight: FontWeight.w900,
                               color: AppColors.goldLight,
@@ -1612,14 +1612,14 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                     children: [
                       Text(
                         'FECHA DE VIAJE',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 10,
                           color: AppColors.textMuted,
                         ),
                       ),
                       Text(
                         DateFormat('dd MMMM yyyy').format(_selectedDate),
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
@@ -1634,7 +1634,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               // Datos del Explorador
               Text(
                 'DATOS DEL EXPLORADOR',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
                   color: AppColors.gold,
@@ -1653,7 +1653,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
               // Datos del Local
               Text(
                 'EMPRENDIMIENTO RECEPTOR',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
                   color: AppColors.gold,
@@ -1704,7 +1704,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                     Expanded(
                       child: Text(
                         'Comunícate con ${_hostEnterprise.contactName} para coordinar disponibilidad y llegada. Al confirmar tu expedición, el pago se realiza directo al anfitrión sin intermediarios.',
-                        style: GoogleFonts.inter(
+                        style: BaqueanoFonts.text(
                           fontSize: 12,
                           color: AppColors.textLight,
                         ),
@@ -1735,7 +1735,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 icon: const Icon(Icons.chat, size: 16, color: Colors.white),
                 label: Text(
                   'WhatsApp',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontWeight: FontWeight.bold,
                     fontSize: 13,
                   ),
@@ -1760,7 +1760,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
                 icon: const Icon(Icons.phone_in_talk, size: 16),
                 label: Text(
                   'Llamar',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontWeight: FontWeight.bold,
                     fontSize: 13,
                   ),
@@ -1790,7 +1790,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             ),
             label: Text(
               'Coordinar por Chat en la App',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 12.5,
@@ -1848,7 +1848,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             flex: 4,
             child: Text(
               label,
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 11.5,
                 color: AppColors.textMuted,
                 fontWeight: FontWeight.w500,
@@ -1860,7 +1860,7 @@ class _CheckoutModalState extends ConsumerState<CheckoutModal> {
             flex: 5,
             child: Text(
               value,
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 11.5,
                 fontWeight: FontWeight.w600,
                 color: AppColors.textLight,

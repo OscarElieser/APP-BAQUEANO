@@ -26,7 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/theme/app_colors.dart';
@@ -235,12 +235,12 @@ class _ReservationRequestSheetState extends ConsumerState<ReservationRequestShee
             const SizedBox(height: 14),
             Text(
               'Solicitud de reserva',
-              style: GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white),
+              style: BaqueanoFonts.display(fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white),
             ),
             const SizedBox(height: 6),
             Text(
               'BAQUEANO no cobra en línea. Registras tu solicitud y coordinas disponibilidad, precio y pago directamente con el negocio verificado por WhatsApp o llamada.',
-              style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white70, height: 1.45),
+              style: BaqueanoFonts.text(fontSize: 12.5, color: Colors.white70, height: 1.45),
             ),
             const SizedBox(height: 16),
             if (_created != null) _buildConfirmation() else if (_business == null) _buildBusinessPicker() else _buildForm(),
@@ -281,10 +281,10 @@ class _ReservationRequestSheetState extends ConsumerState<ReservationRequestShee
             margin: const EdgeInsets.only(bottom: 8),
             child: ListTile(
               key: ValueKey('biz_${business.id}'),
-              title: Text(business.name, style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13.5)),
+              title: Text(business.name, style: BaqueanoFonts.text(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13.5)),
               subtitle: Text(
                 [business.category, business.municipality, business.department].where((p) => p.isNotEmpty).join(' · '),
-                style: GoogleFonts.inter(color: AppColors.goldLight, fontSize: 11.5),
+                style: BaqueanoFonts.text(color: AppColors.goldLight, fontSize: 11.5),
               ),
               trailing: const Icon(Icons.chevron_right_rounded, color: AppColors.gold),
               onTap: () => setState(() => _business = business),
@@ -311,13 +311,13 @@ class _ReservationRequestSheetState extends ConsumerState<ReservationRequestShee
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(business.name, style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 15)),
+              Text(business.name, style: BaqueanoFonts.text(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 15)),
               const SizedBox(height: 2),
               Text(
                 ['✅ Verificado', business.department, if (widget.destinationName != null) widget.destinationName!]
                     .where((p) => p.isNotEmpty)
                     .join(' · '),
-                style: GoogleFonts.inter(color: AppColors.goldLight, fontSize: 11.5),
+                style: BaqueanoFonts.text(color: AppColors.goldLight, fontSize: 11.5),
               ),
             ],
           ),
@@ -338,7 +338,7 @@ class _ReservationRequestSheetState extends ConsumerState<ReservationRequestShee
               onPressed: _people > 1 ? () => setState(() => _people--) : null,
               icon: const Icon(Icons.remove_circle_outline, color: AppColors.gold),
             ),
-            Text('$_people', style: GoogleFonts.inter(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700)),
+            Text('$_people', style: BaqueanoFonts.text(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700)),
             IconButton(
               tooltip: 'Más personas',
               onPressed: _people < 50 ? () => setState(() => _people++) : null,
@@ -391,17 +391,17 @@ class _ReservationRequestSheetState extends ConsumerState<ReservationRequestShee
           ),
           child: Column(
             children: [
-              Text('Código de solicitud', style: GoogleFonts.inter(color: Colors.white70, fontSize: 12)),
+              Text('Código de solicitud', style: BaqueanoFonts.text(color: Colors.white70, fontSize: 12)),
               const SizedBox(height: 4),
               SelectableText(
                 created.code,
-                style: GoogleFonts.spaceGrotesk(color: AppColors.gold, fontSize: 26, fontWeight: FontWeight.w800, letterSpacing: 1.5),
+                style: BaqueanoFonts.text(color: AppColors.gold, fontSize: 26, fontWeight: FontWeight.w800, letterSpacing: 1.5),
               ),
               const SizedBox(height: 8),
               Text(
                 'Guardada en Mi Viaje como "${created.statusLabel}". El negocio aún no la confirmó: escríbele o llámale con este código.',
                 textAlign: TextAlign.center,
-                style: GoogleFonts.inter(color: Colors.white70, fontSize: 12, height: 1.45),
+                style: BaqueanoFonts.text(color: Colors.white70, fontSize: 12, height: 1.45),
               ),
             ],
           ),
@@ -451,12 +451,12 @@ class _ReservationRequestSheetState extends ConsumerState<ReservationRequestShee
 
   Widget _label(String text) => Padding(
         padding: const EdgeInsets.only(bottom: 6),
-        child: Text(text, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.goldLight)),
+        child: Text(text, style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.goldLight)),
       );
 
   Widget _note(String text) => Text(
         text,
-        style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white70, height: 1.45),
+        style: BaqueanoFonts.text(fontSize: 12.5, color: Colors.white70, height: 1.45),
       );
 
   Widget _field(

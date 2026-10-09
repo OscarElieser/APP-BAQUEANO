@@ -18,12 +18,12 @@
 .dl-hero-grid { display: grid; gap: 28px; align-items: center; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 900px) { .dl-hero-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } }
 
-.dl-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(244, 230, 193, 0.14); color: #F4E6C1; font: 800 0.72rem/1.2 Montserrat, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; }
-.dl-hero h1 { margin: 14px 0 10px; font: 900 clamp(1.9rem, 5vw, 3.2rem)/1.08 Montserrat, sans-serif; color: #FFFFFF; }
+.dl-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(244, 230, 193, 0.14); color: #F4E6C1; font: 800 0.72rem/1.2 League Spartan, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; }
+.dl-hero h1 { margin: 14px 0 10px; font: 900 clamp(1.9rem, 5vw, 3.2rem)/1.08 League Spartan, sans-serif; color: #FFFFFF; }
 .dl-lead { margin: 0; max-width: 58ch; font-size: clamp(1rem, 1.6vw, 1.12rem); line-height: 1.6; color: rgba(255, 255, 255, 0.92); }
 
 .dl-actions { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
-.dl-button { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 14px 26px; border-radius: 14px; background: #C2410C; color: #FFFFFF; font: 800 1.02rem/1.2 Montserrat, sans-serif; text-decoration: none; box-shadow: 0 10px 24px rgba(194, 65, 12, 0.35); }
+.dl-button { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 14px 26px; border-radius: 14px; background: #C2410C; color: #FFFFFF; font: 800 1.02rem/1.2 League Spartan, sans-serif; text-decoration: none; box-shadow: 0 10px 24px rgba(194, 65, 12, 0.35); }
 .dl-button:hover, .dl-button:focus-visible { background: #9A3412; color: #FFFFFF; }
 .dl-button:focus-visible { outline: 3px solid #F4E6C1; outline-offset: 3px; }
 .dl-meta { margin: 0; font-size: 0.92rem; color: rgba(255, 255, 255, 0.9); }
@@ -39,7 +39,7 @@
 @media (min-width: 900px) { .dl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
 
 .dl-card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 18px; padding: clamp(18px, 3vw, 26px); color: #334155; box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05); }
-.dl-card h2 { margin: 0 0 12px; font: 800 1.2rem/1.25 Montserrat, sans-serif; color: #0F172A; }
+.dl-card h2 { margin: 0 0 12px; font: 800 1.2rem/1.25 League Spartan, sans-serif; color: #0F172A; }
 .dl-card p { line-height: 1.6; }
 .dl-muted { color: #475569; }
 .dl-note { margin: 14px 0 0; padding: 10px 12px; border-left: 4px solid #165D6F; background: #EEF6F8; border-radius: 8px; color: #1E3A44; font-size: 0.92rem; }

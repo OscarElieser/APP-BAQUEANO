@@ -18,7 +18,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/models/destination_model.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
@@ -110,7 +110,7 @@ class BaqueanoVoucherDialog extends StatelessWidget {
                             const SizedBox(width: 8),
                             Text(
                               'PASE DE EXPEDICIÓN OFICIAL',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w900,
                                 color: Colors.white,
@@ -127,7 +127,7 @@ class BaqueanoVoucherDialog extends StatelessWidget {
                           ),
                           child: Text(
                             orderId,
-                            style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                            style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.goldLight),
                           ),
                         ),
                       ],
@@ -135,7 +135,7 @@ class BaqueanoVoucherDialog extends StatelessWidget {
                     const SizedBox(height: 12),
                     Text(
                       destination.title.toUpperCase(),
-                      style: GoogleFonts.montserrat(
+                      style: BaqueanoFonts.display(
                         fontSize: 20,
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
@@ -145,7 +145,7 @@ class BaqueanoVoucherDialog extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       '${destination.department} · Nicaragua',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                         color: Colors.white.withValues(alpha: 0.9),
@@ -196,7 +196,7 @@ class BaqueanoVoucherDialog extends StatelessWidget {
                           const SizedBox(height: 10),
                           Text(
                             'Escanea este código al encontrarte con tu guía nativo',
-                            style: GoogleFonts.inter(fontSize: 10, color: AppColors.textMuted),
+                            style: BaqueanoFonts.text(fontSize: 10, color: AppColors.textMuted),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -211,20 +211,20 @@ class BaqueanoVoucherDialog extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('TOTAL ABONADO', style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted)),
+                            Text('TOTAL ABONADO', style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted)),
                             Text(
                               '\$${totalUsd.toInt()} USD',
-                              style: GoogleFonts.montserrat(fontSize: 22, fontWeight: FontWeight.w900, color: AppColors.gold),
+                              style: BaqueanoFonts.display(fontSize: 22, fontWeight: FontWeight.w900, color: AppColors.gold),
                             ),
                           ],
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text('EQUIVALENTE EN CÓRDOBAS', style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted)),
+                            Text('EQUIVALENTE EN CÓRDOBAS', style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted)),
                             Text(
                               'C\$${totalNio.toInt()}',
-                              style: GoogleFonts.spaceGrotesk(fontSize: 16, fontWeight: FontWeight.w800, color: AppColors.textLight),
+                              style: BaqueanoFonts.text(fontSize: 16, fontWeight: FontWeight.w800, color: AppColors.textLight),
                             ),
                           ],
                         ),
@@ -286,7 +286,7 @@ class BaqueanoVoucherDialog extends StatelessWidget {
               Expanded(
                 child: Text(
                   label,
-                  style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w800, color: AppColors.textMuted),
+                  style: BaqueanoFonts.text(fontSize: 9, fontWeight: FontWeight.w800, color: AppColors.textMuted),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -296,7 +296,7 @@ class BaqueanoVoucherDialog extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             value,
-            style: GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.w800, color: Colors.white),
+            style: BaqueanoFonts.display(fontSize: 12, fontWeight: FontWeight.w800, color: Colors.white),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

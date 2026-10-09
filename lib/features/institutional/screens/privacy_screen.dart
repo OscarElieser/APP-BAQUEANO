@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
@@ -93,7 +93,7 @@ class PrivacyScreen extends StatelessWidget {
                         ),
                         child: Text(
                           art['num']!,
-                          style: GoogleFonts.spaceGrotesk(fontSize: 14, fontWeight: FontWeight.w900, color: AppColors.craterTealLight),
+                          style: BaqueanoFonts.text(fontSize: 14, fontWeight: FontWeight.w900, color: AppColors.craterTealLight),
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -103,12 +103,12 @@ class PrivacyScreen extends StatelessWidget {
                           children: [
                             Text(
                               art['title']!,
-                              style: GoogleFonts.montserrat(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.textLight),
+                              style: BaqueanoFonts.display(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.textLight),
                             ),
                             const SizedBox(height: 6),
                             Text(
                               art['content']!,
-                              style: GoogleFonts.inter(fontSize: 13, color: AppColors.textMuted, height: 1.45),
+                              style: BaqueanoFonts.text(fontSize: 13, color: AppColors.textMuted, height: 1.45),
                             ),
                           ],
                         ),

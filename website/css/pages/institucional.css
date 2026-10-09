@@ -86,7 +86,7 @@
   border: 1px solid rgba(246, 94, 1, 0.35);
   border-radius: 999px;
   color: #F65E01;
-  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-family: var(--font-tech, 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif);
   font-weight: 700;
   font-size: 0.82rem;
   letter-spacing: 0.12em;
@@ -124,7 +124,7 @@
 /* Título Hero H1 con gradiente Sunset oficial */
 .hero-headline,
 .institucional-hero-title {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-family: var(--font-display, 'League Spartan', sans-serif);
   font-size: clamp(2.2rem, 5.5vw, 3.6rem);
   font-weight: 900;
   color: #FFFFFF;
@@ -145,7 +145,7 @@
 
 .hero-subtext,
 .institucional-hero-subtitle {
-  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-family: var(--font-sans, 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif);
   font-size: clamp(1.02rem, 2vw, 1.22rem);
   color: rgba(244, 230, 193, 0.88);
   line-height: 1.7;
@@ -195,7 +195,7 @@
 }
 
 .sidebar-title {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-family: var(--font-display, 'League Spartan', sans-serif);
   font-size: 1.05rem;
   font-weight: 800;
   color: #F4E6C1;
@@ -211,7 +211,7 @@
 }
 
 .toc-active-counter {
-  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-family: var(--font-tech, 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif);
   font-size: 0.76rem;
   font-weight: 700;
   color: #F65E01;
@@ -256,7 +256,7 @@
   padding: 0.42rem 0.6rem;
   font-size: 0.75rem;
   font-weight: 700;
-  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-family: var(--font-tech, 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif);
   color: rgba(244, 230, 193, 0.85);
   background: rgba(22, 93, 111, 0.25);
   border: 1px solid rgba(22, 93, 111, 0.4);
@@ -361,7 +361,7 @@
 }
 
 .toc-nav-num {
-  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-family: var(--font-tech, 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif);
   font-size: 0.75rem;
   font-weight: 700;
   color: #F4E6C1;
@@ -467,7 +467,7 @@
   position: absolute;
   top: -10px;
   right: 22px;
-  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-family: var(--font-display, 'League Spartan', sans-serif);
   font-size: 5.5rem;
   font-weight: 900;
   color: rgba(255, 255, 255, 0.03);
@@ -483,7 +483,7 @@
 }
 
 .legal-card-title {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-family: var(--font-display, 'League Spartan', sans-serif);
   font-size: clamp(1.3rem, 2.2vw, 1.65rem);
   font-weight: 800;
   color: #FFFFFF;
@@ -624,7 +624,7 @@
 }
 
 .manifesto-master-title {
-  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-family: var(--font-display, 'League Spartan', sans-serif);
   font-size: clamp(1.9rem, 4vw, 3rem);
   font-weight: 900;
   color: #FFFFFF;
@@ -679,7 +679,7 @@
 }
 
 .manifesto-pillar-title {
-  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-family: var(--font-tech, 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif);
   font-size: 1.05rem;
   font-weight: 800;
   color: #FFFFFF;
@@ -694,7 +694,7 @@
 
 .manifesto-action-slogan {
   display: inline-block;
-  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-family: var(--font-tech, 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif);
   font-size: clamp(1.1rem, 2.5vw, 1.45rem);
   font-weight: 800;
   color: #F65E01;

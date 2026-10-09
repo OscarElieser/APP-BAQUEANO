@@ -20,7 +20,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/country_history_models.dart';
 
@@ -110,7 +110,7 @@ class HistoryHeroSection extends StatelessWidget {
                             const SizedBox(width: 8),
                             Text(
                               profile.name.toUpperCase(),
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800,
                                 letterSpacing: 1.6,
@@ -127,7 +127,7 @@ class HistoryHeroSection extends StatelessWidget {
                       Text(
                         profile.heroTitle,
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.montserrat(
+                        style: BaqueanoFonts.display(
                           fontSize: isDesktop ? 38 : 24,
                           fontWeight: FontWeight.w900,
                           color: Colors.white,
@@ -149,7 +149,7 @@ class HistoryHeroSection extends StatelessWidget {
                       Text(
                         profile.heroSubtitle,
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.inter(
+                        style: BaqueanoFonts.text(
                           fontSize: isDesktop ? 16 : 13.5,
                           fontWeight: FontWeight.w400,
                           color: AppColors.textLight.withValues(alpha: 0.9),
@@ -174,7 +174,7 @@ class HistoryHeroSection extends StatelessWidget {
                             icon: const Icon(Icons.explore_rounded, size: 20),
                             label: Text(
                               'Explorar Nicaragua',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w800,
                                 letterSpacing: 0.5,
@@ -199,7 +199,7 @@ class HistoryHeroSection extends StatelessWidget {
                             icon: const Icon(Icons.location_on_rounded, size: 20, color: AppColors.goldLight),
                             label: Text(
                               'Descubrir Destinos',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
                                 letterSpacing: 0.5,

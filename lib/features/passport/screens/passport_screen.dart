@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
@@ -108,7 +108,7 @@ class PassportScreen extends StatelessWidget {
                           children: [
                             Text(
                               'REPÚBLICA DE NICARAGUA',
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w900,
                                 letterSpacing: 1.5,
@@ -119,7 +119,7 @@ class PassportScreen extends StatelessWidget {
                             ),
                             Text(
                               'PASAPORTE DE EXPEDICIÓN BAQUEANO',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w700,
                                 letterSpacing: 0.8,
@@ -144,7 +144,7 @@ class PassportScreen extends StatelessWidget {
                   ),
                   child: Text(
                     'OFICIAL',
-                    style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                    style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w800, color: AppColors.goldLight),
                   ),
                 ),
               ],
@@ -223,7 +223,7 @@ class PassportScreen extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           'ID: BAQ-849204',
-          style: GoogleFonts.spaceGrotesk(fontSize: 10, color: AppColors.goldLight, fontWeight: FontWeight.w700),
+          style: BaqueanoFonts.text(fontSize: 10, color: AppColors.goldLight, fontWeight: FontWeight.w700),
         ),
       ],
     );
@@ -242,10 +242,10 @@ class PassportScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('TITULAR DEL PASAPORTE', style: GoogleFonts.spaceGrotesk(fontSize: 10, color: AppColors.textMuted, letterSpacing: 1.0)),
+                Text('TITULAR DEL PASAPORTE', style: BaqueanoFonts.text(fontSize: 10, color: AppColors.textMuted, letterSpacing: 1.0)),
                 Text(
                   'VALERIA MENDOZA',
-                  style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.w900, color: Colors.white),
+                  style: BaqueanoFonts.display(fontSize: 18, fontWeight: FontWeight.w900, color: Colors.white),
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
@@ -258,7 +258,7 @@ class PassportScreen extends StatelessWidget {
               ),
               child: Text(
                 'RANGO: BAQUEANO MAESTRO',
-                style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w800, color: Colors.white),
+                style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w800, color: Colors.white),
               ),
             ),
           ],
@@ -281,7 +281,7 @@ class PassportScreen extends StatelessWidget {
         const SizedBox(height: 18),
 
         // XP Progress Bar
-        Text('EXPERIENCIA DE VIAJE (XP)', style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.goldLight)),
+        Text('EXPERIENCIA DE VIAJE (XP)', style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.goldLight)),
         const SizedBox(height: 6),
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
@@ -299,7 +299,7 @@ class PassportScreen extends StatelessWidget {
             Flexible(
               child: Text(
                 '1,150 XP acumulados',
-                style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -307,7 +307,7 @@ class PassportScreen extends StatelessWidget {
             Flexible(
               child: Text(
                 'Nivel Siguiente: 2,000 XP',
-                style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.goldLight),
+                style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.goldLight),
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.end,
               ),
@@ -322,8 +322,8 @@ class PassportScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: GoogleFonts.spaceGrotesk(fontSize: 9, color: AppColors.textMuted, letterSpacing: 0.8)),
-        Text(value, style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.textLight)),
+        Text(label, style: BaqueanoFonts.text(fontSize: 9, color: AppColors.textMuted, letterSpacing: 0.8)),
+        Text(value, style: BaqueanoFonts.text(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.textLight)),
       ],
     );
   }
@@ -382,7 +382,7 @@ class PassportScreen extends StatelessWidget {
                   children: [
                     Text(
                       s['name'] as String,
-                      style: GoogleFonts.montserrat(
+                      style: BaqueanoFonts.display(
                         fontSize: 13,
                         fontWeight: FontWeight.w800,
                         color: isStamped ? AppColors.textLight : AppColors.textMuted,
@@ -393,11 +393,11 @@ class PassportScreen extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       'Guía: ${s['guide']}',
-                      style: GoogleFonts.inter(fontSize: 11, color: isStamped ? AppColors.goldLight : AppColors.textMuted),
+                      style: BaqueanoFonts.text(fontSize: 11, color: isStamped ? AppColors.goldLight : AppColors.textMuted),
                     ),
                     Text(
                       isStamped ? '✓ SELLADO EL ${s['date']}' : '🔒 BLOQUEADO',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 10,
                         fontWeight: FontWeight.w800,
                         color: isStamped ? AppColors.success : AppColors.textMuted,
@@ -463,7 +463,7 @@ class PassportScreen extends StatelessWidget {
                       children: [
                         Text(
                           badge.title,
-                          style: GoogleFonts.montserrat(
+                          style: BaqueanoFonts.display(
                             fontSize: 13,
                             fontWeight: FontWeight.w800,
                             color: badge.isUnlocked ? AppColors.goldLight : AppColors.textMuted,
@@ -471,14 +471,14 @@ class PassportScreen extends StatelessWidget {
                         ),
                         Text(
                           '+${badge.xpValue} XP',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.terracottaLight),
+                          style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.terracottaLight),
                         ),
                       ],
                     ),
                     const SizedBox(height: 4),
                     Text(
                       badge.description,
-                      style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted, height: 1.3),
+                      style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted, height: 1.3),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

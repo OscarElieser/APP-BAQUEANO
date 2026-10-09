@@ -40,7 +40,7 @@ body.page-aliados-exact {
   padding: 0;
   background-color: var(--aliados-bg);
   color: var(--aliados-text);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -85,7 +85,7 @@ body.page-aliados-exact {
 }
 
 .aliados-hero-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: clamp(2.2rem, 4.5vw, 3.8rem);
   font-weight: 900;
   line-height: 1.08;
@@ -167,7 +167,7 @@ body.page-aliados-exact {
 }
 
 .aliados-hero-stamp-text {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-style: italic;
   font-size: 1.15rem;
   font-weight: 800;
@@ -324,7 +324,7 @@ body.page-aliados-exact {
 }
 
 .aliados-title-group h2 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.65rem;
   font-weight: 800;
   color: var(--aliados-noche);
@@ -472,7 +472,7 @@ body.page-aliados-exact {
 }
 
 .aliado-card-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--aliados-noche);
@@ -601,7 +601,7 @@ body.page-aliados-exact {
 }
 
 .aliados-map-header-overlay h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.15rem;
   font-weight: 800;
   margin: 0 0 4px;
@@ -654,7 +654,7 @@ body.page-aliados-exact {
 }
 
 .aliados-nearby-head h4 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--aliados-noche);
@@ -755,7 +755,7 @@ body.page-aliados-exact {
 }
 
 .aliados-verif-head h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.35rem;
   font-weight: 800;
   color: var(--aliados-noche);
@@ -850,7 +850,7 @@ body.page-aliados-exact {
 }
 
 .aliados-impact-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.5rem;
   font-weight: 800;
   margin: 0 0 8px;
@@ -887,7 +887,7 @@ body.page-aliados-exact {
 }
 
 .aliados-impact-stat-num {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.2rem;
   font-weight: 800;
   color: #FFFFFF;
@@ -908,7 +908,7 @@ body.page-aliados-exact {
 }
 
 .aliados-impact-quote-side p {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-style: italic;
   font-size: 1.2rem;
   font-weight: 800;
@@ -949,7 +949,7 @@ body.page-aliados-exact {
 }
 
 .aliados-biz-text h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.25rem;
   font-weight: 800;
   color: var(--aliados-noche);
@@ -1052,7 +1052,7 @@ body.page-aliados-exact {
 }
 
 .triad-text h5 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   margin: 0 0 2px;
@@ -1228,7 +1228,7 @@ body.page-aliados-exact {
 .bq-ally-dialog { width: min(92vw, 640px); max-height: 88vh; border: none; border-radius: 20px; padding: 0; background: #FFFFFF; color: #0D1B2A; box-shadow: 0 30px 80px rgba(13, 27, 42, .35); }
 .bq-ally-dialog::backdrop { background: rgba(13, 27, 42, .6); }
 .bq-ally-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 18px 22px; border-bottom: 1px solid #E2E8F0; background: #F8FAFC; position: sticky; top: 0; }
-.bq-ally-head h2 { margin: 0; font: 800 1.2rem/1.3 Montserrat, system-ui, sans-serif; overflow-wrap: anywhere; }
+.bq-ally-head h2 { margin: 0; font: 800 1.2rem/1.3 League Spartan, system-ui, sans-serif; overflow-wrap: anywhere; }
 .bq-ally-close { width: 44px; height: 44px; flex: 0 0 auto; border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; color: #0D1B2A; cursor: pointer; }
 .bq-ally-body { padding: 16px 22px 22px; }
 .bq-ally-kicker { margin: 0 0 10px; font-size: .84rem; color: #334155; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }

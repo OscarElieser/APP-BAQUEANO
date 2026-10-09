@@ -35,8 +35,8 @@
   --bq-text-dark: #0B253A;
   --bq-text-muted: #64748B;
   --bq-border-light: #E2E8F0;
-  --bq-font-heading: 'Montserrat', sans-serif;
-  --bq-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --bq-font-heading: 'League Spartan', sans-serif;
+  --bq-font-body: 'Aristotelica Pro', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .page-ambiental-exact {
@@ -864,7 +864,7 @@
 }
 
 .amb-verification-header h2 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.45rem;
   font-weight: 900;
   color: #0F172A;
@@ -891,7 +891,7 @@
 .amb-verification-icon { font-size: 1.4rem; color: #F65E01; margin-bottom: 8px; }
 
 .amb-verification-card h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.02rem;
   font-weight: 800;
   color: #0F172A;

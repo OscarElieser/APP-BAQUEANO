@@ -1,0 +1,57 @@
+{
+  "entities": {
+    "baqueano-core": {
+      "name": "Baqueano Core Architecture",
+      "type": "Architecture",
+      "tags": [
+        "flutter",
+        "firebase",
+        "supabase",
+        "nicaragua"
+      ],
+      "summary": "Plataforma de ecoturismo rural y comunitario en Nicaragua sin comisiones abusivas.",
+      "observations": [
+        "Colores oficiales: #165D6F (Petróleo Teal), #F65E01 (Naranja Terracota), #F4E6C1 (Crema Arena), #0F172A (Noche).",
+        "Flutter exclusivamente en Android (lib/ y android/). No modificar ios/ ni web/.",
+        "Supabase es la fuente principal de verdad operacional; Firebase Auth/Hosting coexistente.",
+        "Precios: Córdobas (C$) primero, luego Dólares (US$). Tasa ref C$ 36.6243.",
+        "Franja viva de lugares en todos los 15 departamentos y 2 regiones con descripciones únicas."
+      ]
+    },
+    "data-models": {
+      "name": "Modelos de Datos Ecoturísticos",
+      "type": "Model",
+      "tags": [
+        "places",
+        "businesses",
+        "profiles",
+        "bookings",
+        "prices"
+      ],
+      "summary": "Catálogo territorial de lugares, fichas de negocios con precios NIO/USD y perfiles.",
+      "observations": [
+        "Colección 'places': 15 departamentos + 2 regiones autónomas.",
+        "Colección 'businesses': 7 categorías, precios córdobas prioritarios.",
+        "Regla ambiental obligatoria: verificación con evidencia trazable antes de publicar check."
+      ]
+    },
+    "state-patterns": {
+      "name": "Patrones de Estado y UI",
+      "type": "State",
+      "tags": [
+        "riverpod",
+        "state-notifier",
+        "vanilla-js",
+        "ops-center"
+      ],
+      "summary": "Gestión de estado reactiva en Flutter (Riverpod) y modular en Ops Center (JS).",
+      "observations": [
+        "Flutter: RepaintBoundary en listas y galerías para 60fps.",
+        "Uso estricto de .withValues(alpha: X) en vez de .withOpacity().",
+        "Ops Center: renderizado dinámico con validaciones defensivas sin nullnull."
+      ]
+    }
+  },
+  "relations": [],
+  "lastUpdated": "2026-10-09T03:26:18.720Z"
+}

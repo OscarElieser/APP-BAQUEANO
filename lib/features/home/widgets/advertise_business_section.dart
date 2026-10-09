@@ -26,7 +26,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
@@ -247,7 +247,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                                 children: [
                                   Text(
                                     'ALIANZAS & AFILIACIÓN COMERCIAL',
-                                    style: GoogleFonts.spaceGrotesk(
+                                    style: BaqueanoFonts.text(
                                       fontSize: 10.5,
                                       fontWeight: FontWeight.w800,
                                       color: AppColors.goldLight,
@@ -256,7 +256,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                                   ),
                                   Text(
                                     'Registra tu Negocio en Baqueano',
-                                    style: GoogleFonts.montserrat(
+                                    style: BaqueanoFonts.display(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w900,
                                       color: Colors.white,
@@ -278,7 +278,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
 
                         Text(
                           'Completa tus datos comerciales y nuestro equipo te contactará en menos de 24 horas para verificar y activar tu ficha destacada.',
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             color: Colors.white70,
                             height: 1.4,
@@ -289,7 +289,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         // Nombre Comercial
                         Text(
                           'Nombre Comercial del Negocio:',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
@@ -298,7 +298,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         const SizedBox(height: 6),
                         TextFormField(
                           controller: businessNameCtrl,
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 13.5,
                             color: Colors.white,
                           ),
@@ -317,7 +317,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         // Rubro o Categoría
                         Text(
                           'Categoría o Rubro:',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
@@ -346,7 +346,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                                       value: cat,
                                       child: Text(
                                         cat,
-                                        style: GoogleFonts.inter(
+                                        style: BaqueanoFonts.text(
                                           fontSize: 13,
                                           color: Colors.white,
                                         ),
@@ -366,7 +366,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         // Departamento
                         Text(
                           'Departamento donde opera:',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
@@ -397,7 +397,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                                           value: dept,
                                           child: Text(
                                             dept,
-                                            style: GoogleFonts.inter(
+                                            style: BaqueanoFonts.text(
                                               fontSize: 13,
                                               color: Colors.white,
                                             ),
@@ -418,7 +418,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         // Persona de Contacto
                         Text(
                           'Persona de Contacto:',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
@@ -427,7 +427,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         const SizedBox(height: 6),
                         TextFormField(
                           controller: contactNameCtrl,
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 13.5,
                             color: Colors.white,
                           ),
@@ -446,7 +446,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         // Teléfono / WhatsApp
                         Text(
                           'Teléfono o WhatsApp:',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
@@ -456,7 +456,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         TextFormField(
                           controller: phoneCtrl,
                           keyboardType: TextInputType.phone,
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 13.5,
                             color: Colors.white,
                           ),
@@ -475,7 +475,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         // Correo
                         Text(
                           'Correo Electrónico:',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
@@ -485,7 +485,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         TextFormField(
                           controller: emailCtrl,
                           keyboardType: TextInputType.emailAddress,
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 13.5,
                             color: Colors.white,
                           ),
@@ -499,7 +499,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         // Red Social o Web
                         Text(
                           'Instagram, Facebook o Web (Opcional):',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: Colors.white70,
@@ -508,7 +508,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         const SizedBox(height: 6),
                         TextFormField(
                           controller: linkCtrl,
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 13.5,
                             color: Colors.white,
                           ),
@@ -522,7 +522,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         // Breve descripción
                         Text(
                           'Breve descripción de tus servicios:',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: Colors.white70,
@@ -532,7 +532,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                         TextFormField(
                           controller: descriptionCtrl,
                           maxLines: 2,
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 13.5,
                             color: Colors.white,
                           ),
@@ -577,7 +577,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
   InputDecoration _buildInputDecoration(String hint, IconData icon) {
     return InputDecoration(
       hintText: hint,
-      hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12.5),
+      hintStyle: BaqueanoFonts.text(color: AppColors.textMuted, fontSize: 12.5),
       prefixIcon: Icon(icon, color: AppColors.gold, size: 20),
       filled: true,
       fillColor: AppColors.primaryDark,
@@ -660,7 +660,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                   const SizedBox(width: 6),
                   Text(
                     'IMPULSA TU NEGOCIO CON BAQUEANO',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
                       color: AppColors.goldLight,
@@ -675,7 +675,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
             // Titular Monumental
             Text(
               '¿Quieres que tu negocio aparezca aquí?',
-              style: GoogleFonts.montserrat(
+              style: BaqueanoFonts.display(
                 fontSize: isDesktop ? 24 : 20,
                 fontWeight: FontWeight.w900,
                 color: Colors.white,
@@ -687,7 +687,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
             // Subtítulo comercial
             Text(
               'Conecta de inmediato con miles de exploradores nacionales y extranjeros. Sin intermediarios abusivos: las reservas, llamadas y consultas van 100% directas a tu WhatsApp o teléfono.',
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 13.5,
                 color: Colors.white.withValues(alpha: 0.9),
                 height: 1.45,
@@ -820,7 +820,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
                 Expanded(
                   child: Text(
                     'Respuesta garantizada en menos de 24 horas por nuestro equipo comercial.',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 11.5,
                       color: Colors.white60,
                       height: 1.35,
@@ -850,7 +850,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
           const SizedBox(height: 6),
           Text(
             title,
-            style: GoogleFonts.montserrat(
+            style: BaqueanoFonts.display(
               fontSize: 13,
               fontWeight: FontWeight.w800,
               color: AppColors.goldLight,
@@ -859,7 +859,7 @@ class _AdvertiseBusinessSectionState extends State<AdvertiseBusinessSection> {
           const SizedBox(height: 4),
           Text(
             description,
-            style: GoogleFonts.inter(
+            style: BaqueanoFonts.text(
               fontSize: 11.5,
               color: Colors.white70,
               height: 1.35,

@@ -13,14 +13,14 @@
 // - Enumeración `BaqueanoLogoSize` para variantes: `small` (AppBar móvil), `medium` (Navbar desktop),
 //   `large` (Hero/Splash) e `iconOnly` (Emblema circular con volcán y sol dorado).
 // - Carga `assets/images/logo_baqueano.png` con `Image.asset` y renderiza tipografía vectorial
-//   con `GoogleFonts.montserrat` y badges dorados con `AppGradients.gold`.
+//   con `BaqueanoFonts.display` (League Spartan) y badges dorados con `AppGradients.gold`.
 //
 // 📦 3. QUÉ (WHAT / ENTREGABLES & WIDGET EXPUESTO):
 // - `BaqueanoLogo`: Widget reutilizable con callback interactivo opcional `onTap`.
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../theme/baqueano_fonts.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_gradients.dart';
 
@@ -125,7 +125,7 @@ class BaqueanoLogo extends StatelessWidget {
           ),
           child: Text(
             'NI',
-            style: GoogleFonts.spaceGrotesk(
+            style: BaqueanoFonts.text(
               fontSize: 8,
               fontWeight: FontWeight.w900,
               color: AppColors.textDark,
@@ -160,7 +160,7 @@ class BaqueanoLogo extends StatelessWidget {
           ),
           child: Text(
             'NICARAGUA',
-            style: GoogleFonts.spaceGrotesk(
+            style: BaqueanoFonts.text(
               fontSize: 9,
               fontWeight: FontWeight.w900,
               color: AppColors.textDark,
@@ -199,7 +199,7 @@ class BaqueanoLogo extends StatelessWidget {
             const Text('🇳🇮', style: TextStyle(fontSize: 14)),
             Text(
               'PLATAFORMA OFICIAL DE ECOTURISMO',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 10,
                 fontWeight: FontWeight.w800,
                 letterSpacing: 1.1,
@@ -218,7 +218,7 @@ class BaqueanoLogo extends StatelessWidget {
   Widget _buildFallbackTypography(double fontSize, double letterSpacing) {
     return Text(
       'BAQUEANO',
-      style: GoogleFonts.montserrat(
+      style: BaqueanoFonts.display(
         fontSize: fontSize,
         fontWeight: FontWeight.w900,
         letterSpacing: letterSpacing,

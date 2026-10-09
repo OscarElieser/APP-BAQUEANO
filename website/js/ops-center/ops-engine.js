@@ -4178,8 +4178,22 @@
       // Si es una vista especializada del sistema, delegar al renderizador correspondiente
       if (tabId === '01-dashboard') return this.renderDashboardMetrics();
       if (tabId === '02-contenido') return this.renderWebsiteBuilderModule('02-contenido');
+      if (tabId === '08-negocios') {
+        if (window.BaqueanoOpsBusinesses) return window.BaqueanoOpsBusinesses.render(panel);
+        setTimeout(() => {
+          if (window.BaqueanoOpsBusinesses) window.BaqueanoOpsBusinesses.render(panel);
+        }, 80);
+        return;
+      }
       if (tabId === '09-verificaciones') return this.renderVerificationsModule();
       if (tabId === '10-suscripciones') return this.renderSubscriptionsModule();
+      if (tabId === '12-pagos') {
+        if (window.BaqueanoOpsPayments) return window.BaqueanoOpsPayments.render(panel);
+        setTimeout(() => {
+          if (window.BaqueanoOpsPayments) window.BaqueanoOpsPayments.render(panel);
+        }, 80);
+        return;
+      }
       if (tabId === '13-usuarios') {
         if (window.BaqueanoOpsUsers) return window.BaqueanoOpsUsers.render(panel);
         setTimeout(() => {
@@ -4574,6 +4588,13 @@
     },
 
     openDrawer(tabId, item = null) {
+      if (tabId === '08-negocios') {
+        if (window.BaqueanoOpsBusinesses) return window.BaqueanoOpsBusinesses.openDrawer(item ? item.id : null);
+      }
+      if (tabId === '12-pagos') {
+        if (window.BaqueanoOpsPayments) return window.BaqueanoOpsPayments.openDrawer(item ? item.id : null);
+      }
+
       if (tabId === '13-usuarios') {
         if (window.BaqueanoOpsUsers) return window.BaqueanoOpsUsers.openModal(item ? item.id : null);
       }
@@ -4686,6 +4707,16 @@
         if (shortDescInput) shortDescInput.placeholder = 'Ej. Mateo Silva (mateo@explorador.com) · +505 8888-1234';
         if (labelDesc) labelDesc.textContent = 'Detalle de Itinerario, Servicios y Pasajeros';
         if (descInput) descInput.placeholder = 'Fecha de expedición, guía asignado, número de personas y notas...';
+      } else if (tabId === '08-negocios') {
+        if (labelTitle) labelTitle.textContent = 'Nombre Comercial del Negocio *';
+        if (titleInput) titleInput.placeholder = 'Ej. Comedor Tradicional Doña Haydée, Hospedaje Campesino...';
+        if (labelCategory) labelCategory.textContent = 'Rubro / Categoría Comercial';
+        if (categoryInput) categoryInput.placeholder = 'Hospedaje, Gastronomía, Guías, Transporte, Artesanía, Finca';
+        if (labelShortDesc) labelShortDesc.textContent = 'Anfitrión / Propietario Responsable';
+        if (shortDescInput) shortDescInput.placeholder = 'Ej. Doña Haydée Palacios, Cooperativa Guardaparques...';
+        if (labelDesc) labelDesc.textContent = 'Historia Campesina & Descripción del Negocio';
+        if (descInput) descInput.placeholder = 'Relato del anfitrión, servicios, especialidades y recomendaciones...';
+        if (dropzone) dropzone.querySelector('div').textContent = 'Haz clic para subir fotografía o logotipo a Storage';
       } else {
         // Restaurar etiquetas universales de catálogo turístico
         if (labelTitle) labelTitle.textContent = 'Nombre / Título Oficial *';
@@ -6818,6 +6849,12 @@
 
     // Operaciones de Formulario / Drawer
     openCreateDrawer(tabId) {
+      if (tabId === '08-negocios' && window.BaqueanoOpsBusinesses) {
+        return window.BaqueanoOpsBusinesses.openDrawer();
+      }
+      if (tabId === '12-pagos' && window.BaqueanoOpsPayments) {
+        return window.BaqueanoOpsPayments.openDrawer();
+      }
       if (tabId === '13-usuarios' && window.BaqueanoOpsUsers) {
         return window.BaqueanoOpsUsers.openModal();
       }
@@ -6825,6 +6862,12 @@
     },
 
     openEditDrawer(tabId, entityId) {
+      if (tabId === '08-negocios' && window.BaqueanoOpsBusinesses) {
+        return window.BaqueanoOpsBusinesses.openDrawer(entityId);
+      }
+      if (tabId === '12-pagos' && window.BaqueanoOpsPayments) {
+        return window.BaqueanoOpsPayments.openDrawer(entityId);
+      }
       if (tabId === '13-usuarios' && window.BaqueanoOpsUsers) {
         return window.BaqueanoOpsUsers.openModal(entityId);
       }

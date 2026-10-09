@@ -19,7 +19,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../theme/baqueano_fonts.dart';
 import '../data/catalog_data.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_gradients.dart';
@@ -125,11 +125,11 @@ class _UniversalSearchModalState extends State<UniversalSearchModal> {
                     child: TextField(
                       controller: _controller,
                       autofocus: true,
-                      style: GoogleFonts.inter(fontSize: 14, color: Colors.white),
+                      style: BaqueanoFonts.text(fontSize: 14, color: Colors.white),
                       onChanged: (val) => setState(() => _query = val.trim()),
                       decoration: InputDecoration(
                         hintText: 'Buscar volcán, laguna, platillo, cabaña...',
-                        hintStyle: GoogleFonts.inter(fontSize: 13, color: AppColors.textMuted),
+                        hintStyle: BaqueanoFonts.text(fontSize: 13, color: AppColors.textMuted),
                         prefixIcon: const Icon(Icons.search_rounded, color: AppColors.gold, size: 22),
                         suffixIcon: _query.isNotEmpty
                             ? IconButton(
@@ -151,7 +151,7 @@ class _UniversalSearchModalState extends State<UniversalSearchModal> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     'Cerrar',
-                    style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                    style: BaqueanoFonts.text(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.goldLight),
                   ),
                 ),
               ],
@@ -183,7 +183,7 @@ class _UniversalSearchModalState extends State<UniversalSearchModal> {
                       ),
                       child: Text(
                         cat,
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 11,
                           fontWeight: isSelected ? FontWeight.w800 : FontWeight.w500,
                           color: Colors.white,
@@ -263,7 +263,7 @@ class _UniversalSearchModalState extends State<UniversalSearchModal> {
                           const SizedBox(height: 12),
                           Text(
                             'No se encontraron resultados para "$_query"',
-                            style: GoogleFonts.inter(fontSize: 14, color: AppColors.textMuted),
+                            style: BaqueanoFonts.text(fontSize: 14, color: AppColors.textMuted),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -283,7 +283,7 @@ class _UniversalSearchModalState extends State<UniversalSearchModal> {
       padding: const EdgeInsets.only(bottom: 8, top: 4),
       child: Text(
         title,
-        style: GoogleFonts.spaceGrotesk(
+        style: BaqueanoFonts.text(
           fontSize: 10,
           fontWeight: FontWeight.w900,
           color: AppColors.gold,
@@ -318,11 +318,11 @@ class _UniversalSearchModalState extends State<UniversalSearchModal> {
         ),
         title: Text(
           title,
-          style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white),
+          style: BaqueanoFonts.display(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white),
         ),
         subtitle: Text(
           subtitle,
-          style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+          style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
         ),
         trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 14, color: AppColors.gold),
       ),

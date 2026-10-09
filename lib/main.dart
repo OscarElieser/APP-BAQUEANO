@@ -1,22 +1,22 @@
 // ============================================================================
-// ðŸ§­ BAQUEANO ECOSYSTEM â€” PUNTO DE ENTRADA PRINCIPAL (MAIN.DART)
+// 🧭 BAQUEANO ECOSYSTEM — PUNTO DE ENTRADA PRINCIPAL (MAIN.DART)
 // ============================================================================
 //
-// ðŸŽ¯ POR QUÃ‰ (WHY / PROPÃ“SITO):
-// Proveer una experiencia de usuario inmersiva, exÃ³tica y de alto rendimiento que
-// digitalice las rutas turÃ­sticas campesinas de Nicaragua, garantizando acceso
-// directo sin intermediarios entre exploradores nacionales/internacionales y
-// comunidades locales mediante una infraestructura multiplataforma moderna.
+// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+// - Proveer una experiencia de usuario inmersiva, auténtica y de alto rendimiento que
+//   digitalice las rutas turísticas campesinas de Nicaragua, garantizando acceso
+//   directo sin intermediarios entre exploradores nacionales/internacionales y
+//   comunidades locales mediante una infraestructura multiplataforma moderna.
 //
-// âš™ï¸ CÃ“MO (HOW / ARQUITECTURA & IMPLEMENTACIÃ“N):
-// 1. ConfiguraciÃ³n de pantalla Edge-to-Edge con barras de sistema transparentes.
-// 2. InicializaciÃ³n asÃ­ncrona de Firebase (Cloud Firestore, Auth, Storage).
-// 3. Envoltorio global en ProviderScope (Riverpod) para inyecciÃ³n de dependencias.
-// 4. Enrutamiento declarativo y responsivo con GoRouter y tema oscuro volcÃ¡nico.
+// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+// - 1. Configuración de pantalla Edge-to-Edge con barras de sistema transparentes.
+// - 2. Inicialización asíncrona de Firebase (Cloud Firestore, Auth, Storage).
+// - 3. Envoltorio global en ProviderScope (Riverpod) para inyección de dependencias.
+// - 4. Enrutamiento declarativo y responsivo con GoRouter y tema oscuro oficial.
 //
-// ðŸ“¦ QUÃ‰ (WHAT / ENTREGABLE):
-// Widget raÃ­z BaqueanoApp configurado con MaterialApp.router, soporte adaptativo
-// para Android, iOS y Web, tipografÃ­a Montserrat/Space Grotesk y paleta volcÃ¡nica.
+// 📦 3. QUÉ (WHAT / ENTREGABLE):
+// - Widget raíz BaqueanoApp configurado con MaterialApp.router, soporte adaptativo
+//   para Android, tipografía oficial League Spartan / Aristotelica Pro y paleta oficial.
 // ============================================================================
 
 import 'package:flutter/foundation.dart';
@@ -103,7 +103,7 @@ class BaqueanoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'BAQUEANO Â· Nicaragua en Modo Secreto',
+      title: 'BAQUEANO · Nicaragua en Modo Secreto',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       routerConfig: AppRouter.router,

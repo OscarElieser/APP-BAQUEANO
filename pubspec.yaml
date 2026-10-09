@@ -119,6 +119,21 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 
+  # Tipografía oficial de texto BAQUEANO (directiva 2026-10-08). Aristotelica Pro
+  # es comercial (Zetafonts): copiar los .ttf con licencia en
+  # assets/fonts/aristotelica-pro/ y descomentar. El nombre de familia debe
+  # coincidir con BaqueanoFonts.textFamily (lib/core/theme/baqueano_fonts.dart).
+  # League Spartan (títulos) ya llega por google_fonts y no necesita entrada aquí.
+  # fonts:
+  #   - family: Aristotelica Pro
+  #     fonts:
+  #       - asset: assets/fonts/aristotelica-pro/AristotelicaPro-Regular.ttf
+  #         weight: 400
+  #       - asset: assets/fonts/aristotelica-pro/AristotelicaPro-SemiBold.ttf
+  #         weight: 600
+  #       - asset: assets/fonts/aristotelica-pro/AristotelicaPro-Bold.ttf
+  #         weight: 700
+
 flutter_launcher_icons:
   android: true
   ios: false

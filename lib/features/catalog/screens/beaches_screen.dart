@@ -22,7 +22,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/models/cultural_models.dart';
@@ -138,7 +138,7 @@ class BeachesScreen extends StatelessWidget {
                   Expanded(
                     child: Text(
                       'Políticas de Acceso & Reserva',
-                      style: GoogleFonts.montserrat(
+                      style: BaqueanoFonts.display(
                         fontSize: 18,
                         fontWeight: FontWeight.w800,
                         color: Colors.white,
@@ -150,11 +150,11 @@ class BeachesScreen extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 spot.name,
-                style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.terracotta),
+                style: BaqueanoFonts.text(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.terracotta),
               ),
               Text(
                 spot.location,
-                style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
               ),
               const SizedBox(height: 16),
               Container(
@@ -166,7 +166,7 @@ class BeachesScreen extends StatelessWidget {
                 ),
                 child: Text(
                   spot.reservationInfo ?? 'Acceso público y libre según regulaciones locales.',
-                  style: GoogleFonts.inter(
+                  style: BaqueanoFonts.text(
                     fontSize: 13,
                     color: AppColors.textLight,
                     height: 1.5,
@@ -250,7 +250,7 @@ class BeachesScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Hoja de Ruta & Navegación',
-                            style: GoogleFonts.montserrat(
+                            style: BaqueanoFonts.display(
                               fontSize: 18,
                               fontWeight: FontWeight.w900,
                               color: Colors.white,
@@ -258,7 +258,7 @@ class BeachesScreen extends StatelessWidget {
                           ),
                           Text(
                             spot.name,
-                            style: GoogleFonts.inter(
+                            style: BaqueanoFonts.text(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
                               color: AppColors.terracotta,
@@ -288,7 +288,7 @@ class BeachesScreen extends StatelessWidget {
                       Expanded(
                         child: Text(
                           'Punto de partida: Tu ubicación actual (GPS)',
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 11,
                             fontWeight: FontWeight.w600,
                             color: AppColors.goldLight,
@@ -329,7 +329,7 @@ class BeachesScreen extends StatelessWidget {
                             const SizedBox(width: 4),
                             Text(
                               spot.location,
-                              style: GoogleFonts.inter(
+                              style: BaqueanoFonts.text(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
@@ -363,7 +363,7 @@ class BeachesScreen extends StatelessWidget {
                           children: [
                             Text(
                               'TIEMPO ESTIMADO DE LLEGADA',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.terracotta,
@@ -373,7 +373,7 @@ class BeachesScreen extends StatelessWidget {
                             const SizedBox(height: 4),
                             Text(
                               spot.estimatedTime ?? 'Aproximadamente 2 horas según tráfico.',
-                              style: GoogleFonts.inter(
+                              style: BaqueanoFonts.text(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w700,
                                 color: Colors.white,
@@ -407,7 +407,7 @@ class BeachesScreen extends StatelessWidget {
                           children: [
                             Text(
                               'CÓMO LLEGAR (RUTA EXACTA & ENTRADA VIAL)',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.craterTeal,
@@ -417,7 +417,7 @@ class BeachesScreen extends StatelessWidget {
                             const SizedBox(height: 4),
                             Text(
                               spot.howToGetThere ?? 'Sigue las indicaciones oficiales por la carretera principal.',
-                              style: GoogleFonts.inter(
+                              style: BaqueanoFonts.text(
                                 fontSize: 12,
                                 color: AppColors.textLight,
                                 height: 1.45,
@@ -450,7 +450,7 @@ class BeachesScreen extends StatelessWidget {
                             const SizedBox(width: 6),
                             Text(
                               'GPS Entrada: ${spot.latitude!.toStringAsFixed(4)}, ${spot.longitude!.toStringAsFixed(4)}',
-                              style: GoogleFonts.spaceGrotesk(fontSize: 11, color: AppColors.goldLight),
+                              style: BaqueanoFonts.text(fontSize: 11, color: AppColors.goldLight),
                             ),
                           ],
                         ),
@@ -462,7 +462,7 @@ class BeachesScreen extends StatelessWidget {
                           ),
                           child: Text(
                             'Carretera Conectada',
-                            style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.jungleGreen),
+                            style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.jungleGreen),
                           ),
                         ),
                       ],
@@ -502,7 +502,7 @@ class BeachesScreen extends StatelessWidget {
                     onPressed: () => Navigator.of(ctx).pop(),
                     child: Text(
                       'Cerrar',
-                      style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
+                      style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textMuted),
                     ),
                   ),
                 ),
@@ -579,7 +579,7 @@ class BeachesScreen extends StatelessWidget {
                                 Expanded(
                                   child: Text(
                                     spot.type.toUpperCase(),
-                                    style: GoogleFonts.spaceGrotesk(
+                                    style: BaqueanoFonts.text(
                                       fontSize: 10,
                                       fontWeight: FontWeight.w700,
                                       color: AppColors.craterTeal,
@@ -595,7 +595,7 @@ class BeachesScreen extends StatelessWidget {
                                     const SizedBox(width: 4),
                                     Text(
                                       '${spot.rating}',
-                                      style: GoogleFonts.spaceGrotesk(
+                                      style: BaqueanoFonts.text(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w700,
                                         color: Colors.white,
@@ -608,7 +608,7 @@ class BeachesScreen extends StatelessWidget {
                             const SizedBox(height: 4),
                             Text(
                               spot.name,
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.textLight,
@@ -619,12 +619,12 @@ class BeachesScreen extends StatelessWidget {
                             ),
                             Text(
                               spot.location,
-                              style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                              style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                             ),
                             const SizedBox(height: 8),
                             Text(
                               spot.description,
-                              style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted, height: 1.35),
+                              style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textMuted, height: 1.35),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -641,7 +641,7 @@ class BeachesScreen extends StatelessWidget {
                                   ),
                                   child: Text(
                                     '• $a',
-                                    style: GoogleFonts.inter(fontSize: 10, color: AppColors.goldLight),
+                                    style: BaqueanoFonts.text(fontSize: 10, color: AppColors.goldLight),
                                   ),
                                 );
                               }).toList(),
@@ -670,7 +670,7 @@ class BeachesScreen extends StatelessWidget {
                                       const SizedBox(width: 5),
                                       Text(
                                         '¿Requiere reserva? Toca para ver',
-                                        style: GoogleFonts.inter(
+                                        style: BaqueanoFonts.text(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w600,
                                           color: AppColors.goldLight,
@@ -687,7 +687,7 @@ class BeachesScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   'Desde \$${spot.pricePerNightUsd.toInt()} USD',
-                                  style: GoogleFonts.montserrat(
+                                  style: BaqueanoFonts.display(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w900,
                                     color: AppColors.gold,

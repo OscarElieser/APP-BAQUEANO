@@ -26,7 +26,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -372,7 +372,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                             children: [
                               Text(
                                 'CANAL DE REPORTE AMBIENTAL',
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w800,
                                   color: AppColors.goldLight,
@@ -381,7 +381,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                               ),
                               Text(
                                 'Formulario de Evidencia Legal',
-                                style: GoogleFonts.montserrat(
+                                style: BaqueanoFonts.display(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w800,
                                   color: Colors.white,
@@ -401,7 +401,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                     // Tipo de Infracción
                     Text(
                       'Tipo de Infracción Observada:',
-                      style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
+                      style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
                     ),
                     const SizedBox(height: 6),
                     Container(
@@ -422,7 +422,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                               value: item,
                               child: Text(
                                 item,
-                                style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white),
+                                style: BaqueanoFonts.text(fontSize: 12.5, color: Colors.white),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -441,7 +441,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                     // Ubicación con botón GPS
                     Text(
                       'Ubicación Exacta o Coordenadas GPS:',
-                      style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
+                      style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
                     ),
                     const SizedBox(height: 6),
                     Row(
@@ -449,10 +449,10 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                         Expanded(
                           child: TextField(
                             controller: locationCtrl,
-                            style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                            style: BaqueanoFonts.text(fontSize: 13, color: Colors.white),
                             decoration: InputDecoration(
                               hintText: 'Ej: Sendero Volcán Telica, km 4...',
-                              hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                              hintStyle: BaqueanoFonts.text(color: AppColors.textMuted, fontSize: 12),
                               filled: true,
                               fillColor: AppColors.primaryDark,
                               contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -476,7 +476,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                               : const Icon(Icons.my_location_rounded, size: 16),
                           label: Text(
                             isLocating ? 'GPS...' : 'Mi GPS',
-                            style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700),
+                            style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700),
                           ),
                         ),
                       ],
@@ -486,16 +486,16 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                     // Descripción
                     Text(
                       'Descripción de los Hechos:',
-                      style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
+                      style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
                     ),
                     const SizedBox(height: 6),
                     TextField(
                       controller: detailsCtrl,
                       maxLines: 3,
-                      style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                      style: BaqueanoFonts.text(fontSize: 13, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: 'Detalla qué observaste: número aproximado de personas, herramientas, vehículos, fecha y hora...',
-                        hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                        hintStyle: BaqueanoFonts.text(color: AppColors.textMuted, fontSize: 12),
                         filled: true,
                         fillColor: AppColors.primaryDark,
                         contentPadding: const EdgeInsets.all(12),
@@ -510,11 +510,21 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Evidencia Fotográfica (${attachedPhotos.length}):',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white70),
+                        Flexible(
+                          child: Text(
+                            'Evidencia Fotográfica (${attachedPhotos.length}):',
+                            style: BaqueanoFonts.text(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white70,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
+                        const SizedBox(width: 8),
                         Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
                               icon: const Icon(Icons.camera_alt_rounded, color: AppColors.gold, size: 20),
@@ -597,7 +607,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                           Expanded(
                             child: Text(
                               'Reporte 100% Anónimo y Confidencial',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
                                 color: Colors.white,
@@ -619,10 +629,10 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                       const SizedBox(height: 8),
                       TextField(
                         controller: contactNameCtrl,
-                        style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                        style: BaqueanoFonts.text(fontSize: 13, color: Colors.white),
                         decoration: InputDecoration(
                           hintText: 'Tu nombre completo (confidencial)',
-                          hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                          hintStyle: BaqueanoFonts.text(color: AppColors.textMuted, fontSize: 12),
                           filled: true,
                           fillColor: AppColors.primaryDark,
                           contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -632,10 +642,10 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                       const SizedBox(height: 6),
                       TextField(
                         controller: contactPhoneCtrl,
-                        style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                        style: BaqueanoFonts.text(fontSize: 13, color: Colors.white),
                         decoration: InputDecoration(
                           hintText: 'Teléfono o correo de contacto',
-                          hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                          hintStyle: BaqueanoFonts.text(color: AppColors.textMuted, fontSize: 12),
                           filled: true,
                           fillColor: AppColors.primaryDark,
                           contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -744,7 +754,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                           children: [
                             Text(
                               'TURISMO REGENERATIVO & SOSTENIBLE',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.goldLight,
@@ -754,7 +764,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                             const SizedBox(height: 3),
                             Text(
                               'Nicaragua no se visita: se cuida, se respeta y se honra.',
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w900,
                                 color: Colors.white,
@@ -768,7 +778,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                   const SizedBox(height: 16),
                   Text(
                     'Cada volcán que escalas, cada laguna cratérica donde nadas y cada playa donde desovan las tortugas marinas es el hogar de comunidades campesinas e indígenas. Nuestro compromiso innegociable es garantizar que tu visita deje una huella positiva imborrable en las familias locales y cero impacto destructivo en la naturaleza.',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 13,
                       color: Colors.white.withValues(alpha: 0.88),
                       height: 1.5,
@@ -793,7 +803,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
             // Título de Mandamientos
             Text(
               'LOS 8 MANDAMIENTOS DEL VIAJERO RESPONSABLE',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 13,
                 fontWeight: FontWeight.w800,
                 color: AppColors.goldLight,
@@ -803,7 +813,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
             const SizedBox(height: 6),
             Text(
               'Reglas de oro para preservar la biodiversidad nicaragüense durante tus expediciones:',
-              style: GoogleFonts.inter(fontSize: 13, color: Colors.white70),
+              style: BaqueanoFonts.text(fontSize: 13, color: Colors.white70),
             ),
             const SizedBox(height: 16),
 
@@ -840,7 +850,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                           children: [
                             Text(
                               item['title'] as String,
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
                                 color: Colors.white,
@@ -849,7 +859,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                             const SizedBox(height: 3),
                             Text(
                               item['highlight'] as String,
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 11.5,
                                 fontWeight: FontWeight.w700,
                                 color: accentColor,
@@ -858,7 +868,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                             const SizedBox(height: 6),
                             Text(
                               item['description'] as String,
-                              style: GoogleFonts.inter(
+                              style: BaqueanoFonts.text(
                                 fontSize: 12.5,
                                 color: Colors.white70,
                                 height: 1.45,
@@ -911,7 +921,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                           children: [
                             Text(
                               'PLEDGE DEL EXPLORADOR BAQUEANO',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.goldLight,
@@ -920,7 +930,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                             ),
                             Text(
                               'Firma tu Compromiso Verde Oficial',
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w900,
                                 color: Colors.white,
@@ -934,7 +944,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                   const SizedBox(height: 14),
                   Text(
                     '«Como explorador consciente en suelo nicaragüense, prometo honrar la naturaleza, respetar a los baqueanos campesinos, no dejar ningún rastro de basura, proteger la fauna silvestre y consumir comercio justo para que las familias rurales sigan siendo las guardianas de nuestras selvas y volcanes.»',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 13,
                       fontStyle: FontStyle.italic,
                       color: Colors.white.withValues(alpha: 0.9),
@@ -959,7 +969,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                           const SizedBox(height: 6),
                           Text(
                             '¡COMPROMISO VERDE FIRMADO!',
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 13,
                               fontWeight: FontWeight.w800,
                               color: AppColors.jungleGreenLight,
@@ -969,7 +979,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                           const SizedBox(height: 4),
                           Text(
                             'Guardián(a) Oficial: ${_nameController.text.trim()}',
-                            style: GoogleFonts.montserrat(
+                            style: BaqueanoFonts.display(
                               fontSize: 15,
                               fontWeight: FontWeight.w800,
                               color: Colors.white,
@@ -991,13 +1001,13 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                     // Formulario de Firma
                     TextField(
                       controller: _nameController,
-                      style: GoogleFonts.inter(color: Colors.white, fontSize: 14),
+                      style: BaqueanoFonts.text(color: Colors.white, fontSize: 14),
                       cursorColor: AppColors.gold,
                       decoration: InputDecoration(
                         labelText: 'Tu Nombre Completo para el Certificado',
-                        labelStyle: GoogleFonts.spaceGrotesk(color: AppColors.goldLight, fontSize: 13),
+                        labelStyle: BaqueanoFonts.text(color: AppColors.goldLight, fontSize: 13),
                         hintText: 'Ej: María José Morales',
-                        hintStyle: GoogleFonts.inter(color: Colors.white38, fontSize: 13),
+                        hintStyle: BaqueanoFonts.text(color: Colors.white38, fontSize: 13),
                         prefixIcon: const Icon(Icons.edit_note_rounded, color: AppColors.gold),
                         filled: true,
                         fillColor: AppColors.primaryDark,
@@ -1065,7 +1075,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                           children: [
                             Text(
                               'CANAL INSTITUCIONAL OFICIAL',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 10.5,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.terracottaLight,
@@ -1074,7 +1084,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                             ),
                             Text(
                               'Alerta y Reporte Ambiental — Baqueano',
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 16.5,
                                 fontWeight: FontWeight.w900,
                                 color: Colors.white,
@@ -1088,7 +1098,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                   const SizedBox(height: 14),
                   Text(
                     '«Si durante tu recorrido presencias actividades ilegales como caza furtiva, tala no autorizada, extracción de especies o vertido de contaminantes, repórtalo directamente a nuestro equipo. En Baqueano canalizamos y tramitamos formalmente la denuncia con las evidencias correspondientes ante las autoridades ambientales (MARENA, Alcaldía y Policía Nacional).»',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 13,
                       fontStyle: FontStyle.italic,
                       color: Colors.white.withValues(alpha: 0.9),
@@ -1100,7 +1110,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                   // 4 Pilares del Canal
                   Text(
                     'VENTAJAS ESTRATÉGICAS DE REPORTAR CON BAQUEANO:',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
                       color: AppColors.goldLight,
@@ -1137,11 +1147,11 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
                             children: [
                               Text(
                                 'CORREO DE EVIDENCIAS LEGALES:',
-                                style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted),
+                                style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textMuted),
                               ),
                               Text(
                                 'denuncias@baqueano.com',
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w800,
                                   color: AppColors.goldLight,
@@ -1190,7 +1200,7 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
       ),
       child: Text(
         text,
-        style: GoogleFonts.spaceGrotesk(
+        style: BaqueanoFonts.text(
           fontSize: 11,
           fontWeight: FontWeight.w700,
           color: color,
@@ -1208,11 +1218,11 @@ class _EnvironmentalCampaignScreenState extends State<EnvironmentalCampaignScree
         Expanded(
           child: RichText(
             text: TextSpan(
-              style: GoogleFonts.inter(fontSize: 12, color: Colors.white70, height: 1.4),
+              style: BaqueanoFonts.text(fontSize: 12, color: Colors.white70, height: 1.4),
               children: [
                 TextSpan(
                   text: '$title: ',
-                  style: GoogleFonts.spaceGrotesk(fontWeight: FontWeight.w800, color: Colors.white),
+                  style: BaqueanoFonts.text(fontWeight: FontWeight.w800, color: Colors.white),
                 ),
                 TextSpan(text: description),
               ],

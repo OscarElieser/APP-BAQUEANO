@@ -26,7 +26,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/payment/models/payment_method_type.dart';
@@ -150,7 +150,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
             Expanded(
               child: Text(
                 'Sesión de Pago Iniciada',
-                style: GoogleFonts.montserrat(
+                style: BaqueanoFonts.display(
                   fontWeight: FontWeight.w800,
                   color: Colors.white,
                   fontSize: 16,
@@ -168,7 +168,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
             children: [
             Text(
               'Abrimos la sesión hospedada que autorizó el servidor para ${_selectedMethod.displayName}.',
-              style: GoogleFonts.inter(fontSize: 13, color: Colors.white70),
+              style: BaqueanoFonts.text(fontSize: 13, color: Colors.white70),
             ),
             const SizedBox(height: 14),
             Container(
@@ -183,7 +183,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                 children: [
                   Text(
                     'Plan: ${order.planTitle}',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontWeight: FontWeight.w700,
                       color: AppColors.goldLight,
                       fontSize: 12,
@@ -192,7 +192,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                   const SizedBox(height: 4),
                   Text(
                     'Monto: \$${order.amountUsd.toInt()} USD (C\$ ${(order.amountNio).toInt()} NIO)',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                       fontSize: 12,
@@ -201,7 +201,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                   const SizedBox(height: 4),
                   Text(
                     'Estado: pendiente de confirmación bancaria',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 11,
                       color: AppColors.jungleGreenLight,
                     ),
@@ -209,7 +209,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                   const SizedBox(height: 4),
                   Text(
                     'Orden: ${order.orderId}',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 10,
                       color: Colors.white38,
                     ),
@@ -220,7 +220,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
             const SizedBox(height: 12),
             Text(
               'Completar el formulario no confirma el pago. La activación ocurrirá únicamente cuando el webhook bancario valide monto, moneda y orden.',
-              style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white60),
+              style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white60),
             ),
           ],
         ),
@@ -230,7 +230,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
             onPressed: () => Navigator.of(ctx).pop(),
             child: Text(
               'Entendido',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontWeight: FontWeight.w700,
                 color: AppColors.goldLight,
               ),
@@ -330,7 +330,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                     children: [
                       Text(
                         'MÉTODO DE PAGO',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 12,
                           fontWeight: FontWeight.w800,
                           letterSpacing: 1.2,
@@ -340,7 +340,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                       const SizedBox(height: 2),
                       Text(
                         'Checkout Seguro Oficial',
-                        style: GoogleFonts.montserrat(
+                        style: BaqueanoFonts.display(
                           fontSize: 18,
                           fontWeight: FontWeight.w800,
                           color: Colors.white,
@@ -370,7 +370,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                       children: [
                         Text(
                           widget.planTitle,
-                          style: GoogleFonts.montserrat(
+                          style: BaqueanoFonts.display(
                             fontSize: 14,
                             fontWeight: FontWeight.w800,
                             color: Colors.white,
@@ -379,7 +379,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                         const SizedBox(height: 2),
                         Text(
                           billingCycle,
-                          style: GoogleFonts.inter(fontSize: 11, color: Colors.white60),
+                          style: BaqueanoFonts.text(fontSize: 11, color: Colors.white60),
                         ),
                       ],
                     ),
@@ -388,7 +388,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                       children: [
                         Text(
                         'Estimado: \$${widget.amountUsd.toInt()} USD',
-                          style: GoogleFonts.montserrat(
+                          style: BaqueanoFonts.display(
                             fontSize: 16,
                             fontWeight: FontWeight.w900,
                             color: AppColors.goldLight,
@@ -396,7 +396,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                         ),
                         Text(
                           'C\$ $nioAmount NIO',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
                             color: AppColors.jungleGreenLight,
@@ -411,7 +411,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
 
               Text(
                 'Solicita un canal; el servidor confirmará su disponibilidad:',
-                style: GoogleFonts.inter(
+                style: BaqueanoFonts.text(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                   color: Colors.white70,
@@ -457,7 +457,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                   Expanded(
                     child: Text(
                       'Baqueano no recibe números de tarjeta ni CVV. El precio definitivo y el canal disponible se validan en el servidor.',
-                      style: GoogleFonts.inter(
+                      style: BaqueanoFonts.text(
                         fontSize: 10.5,
                         color: Colors.white54,
                         height: 1.25,
@@ -486,7 +486,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                   icon: const Icon(Icons.chat_outlined, size: 16, color: AppColors.goldLight),
                   label: Text(
                     '¿Prefieres coordinar con un asesor comercial?',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 11.5,
                       fontWeight: FontWeight.w700,
                       color: AppColors.goldLight,
@@ -553,7 +553,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                       Flexible(
                         child: Text(
                           type.displayName,
-                          style: GoogleFonts.montserrat(
+                          style: BaqueanoFonts.display(
                             fontSize: 13.5,
                             fontWeight: FontWeight.w800,
                             color: isSelected ? Colors.white : Colors.white70,
@@ -571,7 +571,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                         ),
                         child: Text(
                           badgeText,
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 8.5,
                             fontWeight: FontWeight.w800,
                             color: badgeColor,
@@ -583,7 +583,7 @@ class _PaymentMethodSheetState extends ConsumerState<PaymentMethodSheet> {
                   const SizedBox(height: 2),
                   Text(
                     type.subtitle,
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 11,
                       color: Colors.white54,
                     ),

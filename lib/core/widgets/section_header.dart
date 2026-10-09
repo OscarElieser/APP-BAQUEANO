@@ -18,7 +18,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../theme/baqueano_fonts.dart';
 import '../theme/app_colors.dart';
 
 class SectionHeader extends StatelessWidget {
@@ -73,7 +73,7 @@ class SectionHeader extends StatelessWidget {
                   ),
                   child: Text(
                     tag.toUpperCase(),
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 1.2,

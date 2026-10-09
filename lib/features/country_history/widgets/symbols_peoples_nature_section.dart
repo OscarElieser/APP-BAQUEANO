@@ -20,7 +20,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../models/country_history_models.dart';
@@ -82,7 +82,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                         ),
                         child: Text(
                           sym.category.toUpperCase(),
-                          style: GoogleFonts.spaceGrotesk(fontSize: 9.5, fontWeight: FontWeight.w800, color: AppColors.gold),
+                          style: BaqueanoFonts.text(fontSize: 9.5, fontWeight: FontWeight.w800, color: AppColors.gold),
                         ),
                       ),
                       if (sym.scientificName != null) ...[
@@ -90,7 +90,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                         Expanded(
                           child: Text(
                             sym.scientificName!,
-                            style: GoogleFonts.inter(fontSize: 10, fontStyle: FontStyle.italic, color: AppColors.textMuted),
+                            style: BaqueanoFonts.text(fontSize: 10, fontStyle: FontStyle.italic, color: AppColors.textMuted),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -101,14 +101,14 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     sym.name,
-                    style: GoogleFonts.montserrat(fontSize: 14.5, fontWeight: FontWeight.w800, color: Colors.white),
+                    style: BaqueanoFonts.display(fontSize: 14.5, fontWeight: FontWeight.w800, color: Colors.white),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 6),
                   Text(
                     sym.significance,
-                    style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.85), height: 1.35),
+                    style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.85), height: 1.35),
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -122,7 +122,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                     ),
                     child: Text(
                       'Dato curioso: ${sym.interestingFact}',
-                      style: GoogleFonts.inter(fontSize: 10, color: AppColors.goldLight),
+                      style: BaqueanoFonts.text(fontSize: 10, color: AppColors.goldLight),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -168,7 +168,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                       Expanded(
                         child: Text(
                           people.name,
-                          style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                          style: BaqueanoFonts.display(fontSize: 16, fontWeight: FontWeight.w800, color: AppColors.goldLight),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -178,7 +178,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                       Flexible(
                         child: Text(
                           people.region,
-                          style: GoogleFonts.spaceGrotesk(fontSize: 11, color: AppColors.textMuted),
+                          style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.end,
@@ -189,19 +189,19 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text(
                     'Lengua: ${people.language}',
-                    style: GoogleFonts.inter(fontSize: 11.5, fontWeight: FontWeight.w600, color: AppColors.terracottaLight),
+                    style: BaqueanoFonts.text(fontSize: 11.5, fontWeight: FontWeight.w600, color: AppColors.terracottaLight),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     people.history,
-                    style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.85), height: 1.3),
+                    style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.85), height: 1.3),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Tradiciones: ${people.traditions}',
-                    style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.textMuted),
+                    style: BaqueanoFonts.text(fontSize: 10.5, color: AppColors.textMuted),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -216,7 +216,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                       icon: const Icon(Icons.handshake_rounded, size: 13, color: AppColors.goldLight),
                       label: Text(
                         'Artesanías & Cooperativas',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 10.5, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                        style: BaqueanoFonts.text(fontSize: 10.5, fontWeight: FontWeight.w700, color: AppColors.goldLight),
                       ),
                     ),
                   ),
@@ -271,7 +271,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                       Flexible(
                         child: Text(
                           wonder.category.toUpperCase(),
-                          style: GoogleFonts.spaceGrotesk(fontSize: 9.5, fontWeight: FontWeight.w800, color: AppColors.terracottaLight),
+                          style: BaqueanoFonts.text(fontSize: 9.5, fontWeight: FontWeight.w800, color: AppColors.terracottaLight),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
@@ -281,7 +281,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                       Flexible(
                         child: Text(
                           wonder.department,
-                          style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.textMuted),
+                          style: BaqueanoFonts.text(fontSize: 10.5, color: AppColors.textMuted),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           textAlign: TextAlign.end,
@@ -292,14 +292,14 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     wonder.name,
-                    style: GoogleFonts.montserrat(fontSize: 14.5, fontWeight: FontWeight.w800, color: Colors.white),
+                    style: BaqueanoFonts.display(fontSize: 14.5, fontWeight: FontWeight.w800, color: Colors.white),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
                   Text(
                     wonder.description,
-                    style: GoogleFonts.inter(fontSize: 11, color: AppColors.textLight.withValues(alpha: 0.8), height: 1.3),
+                    style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textLight.withValues(alpha: 0.8), height: 1.3),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -314,7 +314,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
                       icon: const Icon(Icons.explore_rounded, size: 14, color: Colors.white),
                       label: Text(
                         '📍 Conocer este lugar',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800),
+                        style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w800),
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.terracotta,
@@ -341,7 +341,7 @@ class SymbolsPeoplesNatureSection extends StatelessWidget {
         Expanded(
           child: Text(
             title,
-            style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 0.8),
+            style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 0.8),
           ),
         ),
       ],

@@ -25,7 +25,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/models/cultural_models.dart';
@@ -261,7 +261,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                 Expanded(
                   child: Text(
                     'Enlace de Video o YouTube',
-                    style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white),
+                    style: BaqueanoFonts.display(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white),
                   ),
                 ),
               ],
@@ -269,15 +269,15 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
             const SizedBox(height: 6),
             Text(
               'Pista: ${track.title} · ${track.artist}',
-              style: GoogleFonts.spaceGrotesk(fontSize: 12, color: AppColors.goldLight),
+              style: BaqueanoFonts.text(fontSize: 12, color: AppColors.goldLight),
             ),
             const SizedBox(height: 14),
             TextField(
               controller: controller,
-              style: GoogleFonts.spaceGrotesk(color: Colors.white, fontSize: 13),
+              style: BaqueanoFonts.text(color: Colors.white, fontSize: 13),
               decoration: InputDecoration(
                 labelText: 'URL de YouTube o Video MP4/WebM',
-                labelStyle: GoogleFonts.inter(color: Colors.white60, fontSize: 12),
+                labelStyle: BaqueanoFonts.text(color: Colors.white60, fontSize: 12),
                 prefixIcon: const Icon(Icons.link_rounded, color: AppColors.terracotta),
                 filled: true,
                 fillColor: AppColors.bgDark,
@@ -383,7 +383,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                     const SizedBox(width: 8),
                     Text(
                       'REPERTORIO FOLCLÓRICO TRADICIONAL (${_tracks.length} PIEZAS)',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 10,
                         fontWeight: FontWeight.w800,
                         letterSpacing: 0.8,
@@ -449,7 +449,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                           children: [
                             Text(
                               track.title,
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
                                 color: isCurrent ? AppColors.goldLight : AppColors.textLight,
@@ -460,7 +460,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                             const SizedBox(height: 2),
                             Text(
                               '${track.artist} · ${track.genre}',
-                              style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                              style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -565,12 +565,12 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
                     children: [
                       Text(
                         'CONTEXTO HISTÓRICO & CULTURAL',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                        style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.goldLight),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         _currentTrack.history,
-                        style: GoogleFonts.inter(fontSize: 12, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.4),
+                        style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.4),
                       ),
                     ],
                   ),
@@ -637,7 +637,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
               ),
               child: Text(
                 _currentTrack.genre.toUpperCase(),
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   color: AppColors.terracottaLight,
@@ -649,7 +649,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
               child: Text(
                 _currentTrack.region,
                 textAlign: TextAlign.end,
-                style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -659,7 +659,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
         const SizedBox(height: 8),
         Text(
           _currentTrack.title,
-          style: GoogleFonts.montserrat(
+          style: BaqueanoFonts.display(
             fontSize: 19,
             fontWeight: FontWeight.w800,
             color: AppColors.textLight,
@@ -669,7 +669,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
         ),
         Text(
           _currentTrack.artist,
-          style: GoogleFonts.spaceGrotesk(
+          style: BaqueanoFonts.text(
             fontSize: 13.5,
             fontWeight: FontWeight.w600,
             color: AppColors.goldLight,
@@ -698,8 +698,8 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('01:14', style: GoogleFonts.spaceGrotesk(fontSize: 10, color: AppColors.textMuted)),
-            Text(_currentTrack.duration, style: GoogleFonts.spaceGrotesk(fontSize: 10, color: AppColors.textMuted)),
+            Text('01:14', style: BaqueanoFonts.text(fontSize: 10, color: AppColors.textMuted)),
+            Text(_currentTrack.duration, style: BaqueanoFonts.text(fontSize: 10, color: AppColors.textMuted)),
           ],
         ),
 
@@ -720,7 +720,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
               child: Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  gradient: AppGradients.sunsetTerracotta,
+                  color: AppColors.terracotta,
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
@@ -807,12 +807,12 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
             children: [
               Text(
                 g['title']!,
-                style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                style: BaqueanoFonts.display(fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.goldLight),
               ),
               const SizedBox(height: 6),
               Text(
                 g['desc']!,
-                style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted, height: 1.35),
+                style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textMuted, height: 1.35),
               ),
             ],
           ),

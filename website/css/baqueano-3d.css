@@ -98,7 +98,7 @@
 
 .compass-marker {
   position: absolute;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.52rem;
   font-weight: 800;
   color: var(--b3d-arena);
@@ -118,7 +118,7 @@
 }
 
 .compass-legend strong {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.82rem;
   font-weight: 700;
   color: #FFFFFF;
@@ -198,7 +198,7 @@
 }
 
 .mapa-3d-title-text {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.88rem;
   font-weight: 700;
   color: #FFFFFF;
@@ -216,7 +216,7 @@
   background: rgba(8, 13, 26, 0.8);
   border: 1px solid rgba(244, 230, 193, 0.2);
   color: var(--b3d-arena);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   padding: 0.45rem 0.85rem;
@@ -377,7 +377,7 @@
 }
 
 .drawer-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.2rem;
   font-weight: 800;
   color: #FFFFFF;
@@ -474,7 +474,7 @@
   width: 100%;
   background: linear-gradient(135deg, #F65E01 0%, #D946EF 120%);
   color: #FFFFFF;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.88rem;
   font-weight: 700;
   padding: 0.75rem 1rem;
@@ -563,7 +563,7 @@
 }
 
 .builder-header-bar h3 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 1.05rem;
   font-weight: 700;
   color: #FFFFFF;
@@ -602,7 +602,7 @@
   background: rgba(8, 13, 26, 0.75);
   border: 1px solid rgba(244, 230, 193, 0.2);
   color: var(--b3d-arena);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   padding: 0.5rem 0.85rem;
@@ -652,7 +652,7 @@
   background: linear-gradient(135deg, #F65E01 0%, #E11D48 100%);
   border: none;
   color: #FFFFFF;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.92rem;
   font-weight: 700;
   padding: 0.85rem 1.5rem;
@@ -704,7 +704,7 @@
 
 .bs-val {
   display: block;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 1.25rem;
   font-weight: 800;
   line-height: 1.2;
@@ -742,7 +742,7 @@
 .stop-day-badge {
   background: var(--b3d-petroleo);
   color: #FFFFFF;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.72rem;
   font-weight: 800;
   padding: 0.35rem 0.6rem;
@@ -755,7 +755,7 @@
 }
 
 .stop-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
   color: #FFFFFF;
@@ -780,7 +780,7 @@
   background: linear-gradient(135deg, #165D6F 0%, #0F172A 100%);
   border: 1px solid var(--b3d-petroleo-glow);
   color: #FFFFFF;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.82rem;
   font-weight: 700;
   padding: 0.75rem;
@@ -802,7 +802,7 @@
   background: #25D366;
   border: none;
   color: #FFFFFF;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.82rem;
   font-weight: 700;
   padding: 0.75rem 1rem;
@@ -846,7 +846,7 @@
   box-shadow: 0 8px 25px rgba(246, 94, 1, 0.5);
   cursor: pointer;
   color: #FFFFFF;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
   transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
@@ -927,7 +927,7 @@
 }
 
 .assistant-name {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.88rem;
   font-weight: 700;
   color: #FFFFFF;
@@ -1003,7 +1003,7 @@
   background: rgba(15, 23, 42, 0.9) !important;
   border: 1px solid rgba(244, 230, 193, 0.22) !important;
   color: var(--b3d-arena) !important;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.76rem;
   font-weight: 600;
   padding: 0.55rem 0.8rem;
@@ -1086,7 +1086,7 @@
 }
 
 .panorama-destination-name {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.05rem;
   font-weight: 700;
   color: #FFFFFF;
@@ -1351,7 +1351,7 @@
 .rb-biz-header h4 {
   margin: 0.35rem 0 0.2rem;
   color: #fff;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.05rem;
   font-weight: 800;
 }
@@ -1617,7 +1617,7 @@
   color: #fff;
   margin: 0.5rem 0;
   font-weight: 800;
-  font-family: 'Space Grotesk', 'Montserrat', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', 'League Spartan', sans-serif;
 }
 
 .planner-cta-body p {

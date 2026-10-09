@@ -68,7 +68,7 @@
     return el('span', { style: 'display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-weight:800;font-size:.78rem;color:#fff;background:' + (COLORS[s] || '#475569') }, [icon(ICONS[s] || 'fa-circle'), document.createTextNode(statusLabel(s))]);
   }
   var BOX = 'background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;margin-top:16px;color:#E2E8F0';
-  var H = 'margin:0 0 10px;font:800 1rem/1.3 Montserrat,sans-serif;color:#F4E6C1';
+  var H = 'margin:0 0 10px;font:800 1rem/1.3 League Spartan,sans-serif;color:#F4E6C1';
 
   function latestBox() {
     var run = state.items && state.items[0];

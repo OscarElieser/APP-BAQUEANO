@@ -551,7 +551,7 @@ button.territory-pill-card span {
 .madriz-map-heading h2 {
   margin: 0.8rem 0 0.65rem;
   color: #F4E6C1;
-  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-family: var(--font-display, 'League Spartan', sans-serif);
   font-size: clamp(1.8rem, 4vw, 3rem);
   line-height: 1.08;
 }
@@ -621,7 +621,7 @@ button.territory-pill-card span {
   border-radius: 999px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(14px);
-  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-family: var(--font-tech, 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -2435,7 +2435,7 @@ button.territory-pill-card span {
 
 .video-info h4 {
   color: #FFFFFF;
-  font-family: var(--font-tech, 'Space Grotesk', sans-serif);
+  font-family: var(--font-tech, 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif);
   font-size: 1.1rem;
   margin: 0 0 0.4rem 0;
 }

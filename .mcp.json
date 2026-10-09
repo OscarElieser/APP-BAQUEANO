@@ -1,10 +1,52 @@
 {
   "mcpServers": {
-    "21st": {
-      "url": "https://21st.dev/api/mcp",
-      "headers": {
-        "x-api-key": "${API_KEY_21ST}"
-      }
+    "flutter-dart-mcp": {
+      "command": "node",
+      "args": [
+        "c:\\Users\\Lenovo\\Desktop\\APP-BAQUEANO\\.agents\\mcp-servers\\flutter-dart-server.js"
+      ]
+    },
+    "firebase-firestore-mcp": {
+      "command": "node",
+      "args": [
+        "c:\\Users\\Lenovo\\Desktop\\APP-BAQUEANO\\.agents\\mcp-servers\\firebase-firestore-server.js"
+      ]
+    },
+    "browser-automation-mcp": {
+      "command": "node",
+      "args": [
+        "c:\\Users\\Lenovo\\Desktop\\APP-BAQUEANO\\.agents\\mcp-servers\\browser-automation-server.js"
+      ]
+    },
+    "rest-openapi-mcp": {
+      "command": "node",
+      "args": [
+        "c:\\Users\\Lenovo\\Desktop\\APP-BAQUEANO\\.agents\\mcp-servers\\rest-openapi-server.js"
+      ]
+    },
+    "git-github-mcp": {
+      "command": "node",
+      "args": [
+        "c:\\Users\\Lenovo\\Desktop\\APP-BAQUEANO\\.agents\\mcp-servers\\git-github-server.js"
+      ]
+    },
+    "sequential-thinking-mcp": {
+      "command": "node",
+      "args": [
+        "c:\\Users\\Lenovo\\Desktop\\APP-BAQUEANO\\.agents\\mcp-servers\\sequential-thinking-server.js"
+      ]
+    },
+    "context7-memory-mcp": {
+      "command": "node",
+      "args": [
+        "c:\\Users\\Lenovo\\Desktop\\APP-BAQUEANO\\.agents\\mcp-servers\\context7-memory-server.js"
+      ]
+    },
+    "brave-search-mcp": {
+      "command": "node",
+      "args": [
+        "c:\\Users\\Lenovo\\Desktop\\APP-BAQUEANO\\.agents\\mcp-servers\\brave-search-server.js"
+      ]
     }
   }
 }

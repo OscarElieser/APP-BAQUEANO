@@ -54,7 +54,7 @@
   /* ========================================================================
      3. TIPOGRAFÍA Y ENLACES HORIZONTALES
      ======================================================================== */
-  --nav-font: 'Inter', sans-serif;
+  --nav-font: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   --nav-font-size: 0.875rem;
   --nav-font-weight: 600;
   --nav-link-height: 36px;
