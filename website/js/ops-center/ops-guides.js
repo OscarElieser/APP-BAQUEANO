@@ -533,7 +533,7 @@
       if (guide) {
         suspendBtn.style.display = 'inline-flex';
         const isSusp = guide.status === 'suspended';
-        suspendBtn.innerHTML = `<i class="fa-solid ${isSusp ? 'fa-play' : 'fa-pause'}"></i> ${isSusp ? 'Reactivar' : 'Suspender'}`;
+        suspendBtn.innerHTML = `<i class="fa-solid ${isSusp ? 'fa-play' : 'fa-pause'}"></i> ${escapeHtml(isSusp ? i18n('ops.guides.reactivate', 'Reactivar') : i18n('ops.guides.suspend', 'Suspender'))}`;
         suspendBtn.onclick = function () { toggleSuspend(guide.id); closeDrawer(); };
       } else {
         suspendBtn.style.display = 'none';

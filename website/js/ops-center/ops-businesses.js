@@ -502,7 +502,7 @@
     const suspendBtn = document.getElementById('btnOpsBizDrawerSuspend');
 
     if (item) {
-      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-pen-to-square" style="color: var(--bq-accent);"></i> <span>Editar Negocio: ${escapeHtml(item.name || item.title)}</span>`;
+      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-pen-to-square" style="color: var(--bq-accent);"></i> <span>${escapeHtml(i18n('ops.businesses.editTitle', 'Editar Negocio: {p0}', { p0: item.name || item.title }))}</span>`;
       if (subtitleEl) subtitleEl.textContent = i18n('ops.businesses.idActualizado', 'ID: {p0} · Actualizado: {p1}', { p0: (item.id), p1: (item.updatedAt ? new Date(item.updatedAt).toLocaleDateString('es-NI') : 'Hoy') });
       if (deleteBtn) deleteBtn.style.display = 'inline-flex';
       if (suspendBtn) {
@@ -512,7 +512,7 @@
         suspendBtn.className = isSusp ? 'btn-ops-matte' : 'btn-ops-matte danger';
       }
     } else {
-      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-store" style="color: var(--bq-secondary);"></i> <span>Nuevo Negocio &amp; Aliado Comunitario</span>`;
+      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-store" style="color: var(--bq-secondary);"></i> <span>${escapeHtml(i18n('ops.businesses.newTitle', 'Nuevo Negocio & Aliado Comunitario'))}</span>`;
       if (subtitleEl) subtitleEl.textContent = i18n('ops.businesses.moduloNegociosComunitariosAnfitriones', 'Módulo: Negocios Comunitarios, Anfitriones y Emprendedores');
       if (deleteBtn) deleteBtn.style.display = 'none';
       if (suspendBtn) suspendBtn.style.display = 'none';
@@ -687,7 +687,7 @@
     state.isSubmitting = true;
     if (saveBtn) {
       saveBtn.disabled = true;
-      saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
+      saveBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${escapeHtml(i18n('ops.common.saving', 'Guardando...'))}`;
     }
 
     try {
@@ -735,7 +735,7 @@
       state.isSubmitting = false;
       if (saveBtn) {
         saveBtn.disabled = false;
-        saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Negocio';
+        saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> ${escapeHtml(i18n('ops.businesses.saveBusiness', 'Guardar Negocio'))}`;
       }
     }
   }

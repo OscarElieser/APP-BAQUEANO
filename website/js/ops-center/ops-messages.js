@@ -453,7 +453,7 @@
     const sendBtn = document.getElementById('btnOpsMsgSendReply');
     if (sendBtn) {
       sendBtn.disabled = true;
-      sendBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+      sendBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${escapeHtml(i18n('ops.messages.sending', 'Enviando...'))}`;
     }
 
     state.busy = true;
@@ -481,7 +481,7 @@
       state.busy = false;
       if (sendBtn) {
         sendBtn.disabled = false;
-        sendBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Respuesta al Viajero';
+        sendBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> ${escapeHtml(i18n('ops.messages.sendReply', 'Enviar Respuesta al Viajero'))}`;
       }
     }
   }

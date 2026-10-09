@@ -585,12 +585,12 @@
     const shareBtn = document.getElementById('btnOpsPaymentDrawerShare');
 
     if (item) {
-      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-pen-to-square" style="color: var(--bq-accent);"></i> <span>Editar Comprobante: ${escapeHtml(item.receiptCode || item.id)}</span>`;
+      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-pen-to-square" style="color: var(--bq-accent);"></i> <span>${escapeHtml(i18n('ops.payments.editTitle', 'Editar Comprobante: {p0}', { p0: item.receiptCode || item.id }))}</span>`;
       if (subtitleEl) subtitleEl.textContent = i18n('ops.payments.idCliente', 'ID: {p0} · Cliente: {p1}', { p0: (item.id), p1: (item.touristName || item.customerName || 'N/A') });
       if (deleteBtn) deleteBtn.style.display = 'inline-flex';
       if (shareBtn) shareBtn.style.display = 'inline-flex';
     } else {
-      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-receipt" style="color: var(--bq-accent);"></i> <span>Registrar Nuevo Comprobante</span>`;
+      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-receipt" style="color: var(--bq-accent);"></i> <span>${escapeHtml(i18n('ops.payments.newTitle', 'Registrar Nuevo Comprobante'))}</span>`;
       if (subtitleEl) subtitleEl.textContent = i18n('ops.payments.moduloPagosComprobantesBancarios', 'Módulo: Pagos & Comprobantes Bancarios');
       if (deleteBtn) deleteBtn.style.display = 'none';
       if (shareBtn) shareBtn.style.display = 'none';
@@ -752,7 +752,7 @@
     const saveBtn = document.getElementById('btnOpsPaymentDrawerSave');
     if (saveBtn) {
       saveBtn.disabled = true;
-      saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
+      saveBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${escapeHtml(i18n('ops.common.saving', 'Guardando...'))}`;
     }
 
     try {
@@ -810,7 +810,7 @@
       state.isSubmitting = false;
       if (saveBtn) {
         saveBtn.disabled = false;
-        saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Comprobante';
+        saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> ${escapeHtml(i18n('ops.payments.saveReceipt', 'Guardar Comprobante'))}`;
       }
     }
   }
@@ -922,11 +922,21 @@
 
     if (codeEl) codeEl.textContent = item.receiptCode || item.id;
     if (customerEl) customerEl.textContent = item.touristName || item.customerName || 'Cliente';
-    if (amountEl) amountEl.innerHTML = `<strong style="color:#F4E6C1;">C$ ${nio.toLocaleString('es-NI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong> <span style="color:#94A3B8; font-size:0.8rem;">(≈ $${usd.toFixed(2)} USD)</span>`;
+    if (amountEl) {
+      // Montos con nodos y textContent (sin HTML armado a mano).
+      const amountStrong = document.createElement('strong'); amountStrong.style.color = '#F4E6C1';
+      amountStrong.textContent = 'C$ ' + nio.toLocaleString('es-NI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const amountUsd = document.createElement('span'); amountUsd.style.cssText = 'color:#94A3B8; font-size:0.8rem;';
+      amountUsd.textContent = '(≈ $' + usd.toFixed(2) + ' USD)';
+      amountEl.replaceChildren(amountStrong, ' ', amountUsd);
+    }
     if (bankEl) bankEl.textContent = i18n('ops.payments.ref', '{p0} (Ref: {p1})', { p0: (item.paymentMethod || item.bank || 'Banco'), p1: (item.reference || 'S/N') });
     if (statusEl) {
       const st = getStatusBadge(item.status);
-      statusEl.innerHTML = `<span style="color:${st.color}; font-weight:700;"><i class="fa-solid ${st.icon}"></i> ${st.label}</span>`;
+      const stSpan = document.createElement('span'); stSpan.style.color = st.color; stSpan.style.fontWeight = '700';
+      const stIcon = document.createElement('i'); stIcon.className = 'fa-solid ' + st.icon; stIcon.setAttribute('aria-hidden', 'true');
+      stSpan.append(stIcon, ' ' + st.label);
+      statusEl.replaceChildren(stSpan);
     }
 
     if (phoneInput) phoneInput.value = item.customerPhone || item.phone || '';
