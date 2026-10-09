@@ -436,7 +436,7 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(11),
                       decoration: BoxDecoration(
-                        gradient: AppGradients.sunsetTerracotta,
+                        color: AppColors.terracotta,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(

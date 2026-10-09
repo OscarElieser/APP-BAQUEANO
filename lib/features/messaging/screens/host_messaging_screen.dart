@@ -1059,7 +1059,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                     child: Container(
                       padding: const EdgeInsets.all(11),
                       decoration: BoxDecoration(
-                        gradient: AppGradients.sunsetTerracotta,
+                        color: AppColors.terracotta,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(

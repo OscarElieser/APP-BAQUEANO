@@ -96,7 +96,7 @@ class VideosScreen extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            gradient: AppGradients.sunsetTerracotta,
+                            color: AppColors.terracotta,
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
@@ -242,7 +242,7 @@ class VideosScreen extends StatelessWidget {
                             child: Container(
                               padding: const EdgeInsets.all(14),
                               decoration: BoxDecoration(
-                                gradient: AppGradients.sunsetTerracotta,
+                                color: AppColors.terracotta,
                                 shape: BoxShape.circle,
                                 boxShadow: [
                                   BoxShadow(

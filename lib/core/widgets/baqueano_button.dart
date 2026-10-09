@@ -21,11 +21,10 @@
 import 'package:flutter/material.dart';
 import '../theme/baqueano_fonts.dart';
 import '../theme/app_colors.dart';
-import '../theme/app_gradients.dart';
 
 /// Variantes de diseño disponibles para el botón según la jerarquía de la acción.
 enum BaqueanoButtonVariant {
-  /// Acción principal (CTA) con gradiente terracota y sombra profunda.
+  /// Acción principal (CTA) con color sólido terracota y sombra profunda.
   primary,
 
   /// Acción secundaria sobre fondo oscuro con borde sutil.
@@ -184,7 +183,7 @@ class _BaqueanoButtonState extends State<BaqueanoButton> with SingleTickerProvid
     switch (widget.variant) {
       case BaqueanoButtonVariant.primary:
         return BoxDecoration(
-          gradient: AppGradients.sunsetTerracotta,
+          color: AppColors.terracotta,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
@@ -196,7 +195,7 @@ class _BaqueanoButtonState extends State<BaqueanoButton> with SingleTickerProvid
         );
       case BaqueanoButtonVariant.gold:
         return BoxDecoration(
-          gradient: AppGradients.gold,
+          color: AppColors.gold,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(

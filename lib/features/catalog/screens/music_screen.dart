@@ -720,7 +720,7 @@ class _MusicScreenState extends State<MusicScreen> with SingleTickerProviderStat
               child: Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  gradient: AppGradients.sunsetTerracotta,
+                  color: AppColors.terracotta,
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(

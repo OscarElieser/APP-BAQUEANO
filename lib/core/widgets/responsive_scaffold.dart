@@ -26,7 +26,6 @@ import 'package:go_router/go_router.dart';
 import '../theme/baqueano_fonts.dart';
 import '../services/app_lifecycle_service.dart';
 import '../theme/app_colors.dart';
-import '../theme/app_gradients.dart';
 import 'baqueano_button.dart';
 import 'baqueano_logo.dart';
 import 'custom_toast.dart';
@@ -859,17 +858,11 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                         vertical: 8,
                       ),
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFFFF5722), Color(0xFFE64A19)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
+                        color: AppColors.terracotta,
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(
-                              0xFFFF5722,
-                            ).withValues(alpha: 0.4),
+                            color: AppColors.terracotta.withValues(alpha: 0.4),
                             blurRadius: 10,
                             offset: const Offset(0, 2),
                           ),
@@ -1216,8 +1209,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
             vertical: isCompact ? 4 : 6,
           ),
           decoration: BoxDecoration(
-            gradient:
-                isSelected ? AppGradients.sunsetTerracotta : AppGradients.gold,
+            color: isSelected ? AppColors.terracotta : AppColors.gold,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
