@@ -47,7 +47,7 @@
   <link rel="stylesheet" href="styles.css?v=20260927-ops-nav-7">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/modules.css">
-  <link rel="stylesheet" href="css/pages/nosotros-exact.css?v=20261007-valores-1">
+  <link rel="stylesheet" href="css/pages/nosotros-exact.css?v=20261009-logos-2">
   <link rel="stylesheet" href="css/pages/impacto.css?v=20261005-impact-1">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
@@ -385,8 +385,36 @@
   <!-- NUESTRA IDENTIDAD (CROMÁTICA & PETROGLIFO) -->
   <section class="nos-identity-section">
     <div class="nos-identity-card">
+      <!--
+        POR QUÉ: pedido del propietario (2026-10-09): mostrar los 4 logos oficiales arriba de la paleta.
+        CÓMO: versiones en negro (nuevas) y a color (las mismas de assets/images/LOGOS) en fichas claras.
+        QUÉ: logotipo e isotipo, en negro y a color; ocupa todo el ancho de la tarjeta.
+      -->
+      <div class="nos-logo-suite">
+        <h4 data-i18n="pages.nosotros.logoSuite.title" class="nos-logo-suite-title">Nuestros logos</h4>
+        <div class="nos-logo-grid">
+          <figure class="nos-logo-tile is-wordmark">
+            <img src="assets/images/LOGOS/baqueano_logo_horizontal_negro.png" alt="BAQUEANO" decoding="async" loading="lazy" width="1579" height="322">
+            <figcaption data-i18n="pages.nosotros.logoSuite.blackWordmark">Logotipo en negro</figcaption>
+          </figure>
+          <figure class="nos-logo-tile is-icon">
+            <img src="assets/images/LOGOS/baqueano_icono_negro.png" alt="BAQUEANO" decoding="async" loading="lazy" width="564" height="564">
+            <figcaption data-i18n="pages.nosotros.logoSuite.blackIcon">Isotipo en negro</figcaption>
+          </figure>
+          <figure class="nos-logo-tile is-wordmark">
+            <img src="assets/images/LOGOS/baqueano_logo_horizontal.png" alt="BAQUEANO" decoding="async" loading="lazy" width="1551" height="215">
+            <figcaption data-i18n="pages.nosotros.logoSuite.colorWordmark">Logotipo a color</figcaption>
+          </figure>
+          <figure class="nos-logo-tile is-icon">
+            <img src="assets/images/LOGOS/baqueano_icono_oficial.png" alt="BAQUEANO" decoding="async" loading="lazy" width="478" height="478">
+            <figcaption data-i18n="pages.nosotros.logoSuite.colorIcon">Isotipo a color</figcaption>
+          </figure>
+        </div>
+      </div>
+
       <div class="nos-id-left">
-        <img src="assets/images/logo.png" alt="BAQUEANO" class="nos-id-logo" decoding="async" loading="lazy" width="600" height="608">
+        <!-- 2026-10-09: logo.png es el isotipo BLANCO y no se veía sobre la tarjeta blanca. -->
+        <img src="assets/images/LOGOS/baqueano_icono_oficial.png" alt="BAQUEANO" class="nos-id-logo" decoding="async" loading="lazy" width="478" height="478">
         <h4 class="nos-id-title">BAQUEANO</h4>
         <span data-i18n="common.nicaraguaAutentica" class="nos-id-claim">NICARAGUA AUTÉNTICA</span>
         <p data-i18n="pages.nosotros.nosIdentitySection.p1" style="font-size:0.7rem;color:var(--nos-muted);margin-top:6px">DESCUBRE LO QUE NO SALE EN EL MAPA.</p>

@@ -4599,6 +4599,13 @@
           "title": "Tecnologia responsável",
           "text": "Usamos a tecnologia e a inteligência artificial para aproximar, não para substituir, e protegemos os dados de cada pessoa."
         }
+      },
+      "logoSuite": {
+        "title": "Nossos logotipos",
+        "blackWordmark": "Logotipo em preto",
+        "blackIcon": "Símbolo em preto",
+        "colorWordmark": "Logotipo colorido",
+        "colorIcon": "Símbolo colorido"
       }
     },
     "offline": {

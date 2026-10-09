@@ -4599,6 +4599,13 @@
           "title": "Verantwortungsvolle Technologie",
           "text": "Wir nutzen Technologie und künstliche Intelligenz, um Menschen näherzubringen, nicht um sie zu ersetzen, und schützen die Daten jeder Person."
         }
+      },
+      "logoSuite": {
+        "title": "Unsere Logos",
+        "blackWordmark": "Schriftzug in Schwarz",
+        "blackIcon": "Bildzeichen in Schwarz",
+        "colorWordmark": "Schriftzug in Farbe",
+        "colorIcon": "Bildzeichen in Farbe"
       }
     },
     "offline": {

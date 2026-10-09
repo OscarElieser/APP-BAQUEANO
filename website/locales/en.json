@@ -4599,6 +4599,13 @@
           "title": "Responsible technology",
           "text": "We use technology and artificial intelligence to bring people closer, not to replace them, and we protect everyone's data."
         }
+      },
+      "logoSuite": {
+        "title": "Our logos",
+        "blackWordmark": "Black wordmark",
+        "blackIcon": "Black icon",
+        "colorWordmark": "Color wordmark",
+        "colorIcon": "Color icon"
       }
     },
     "offline": {

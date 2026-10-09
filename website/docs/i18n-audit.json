@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T09:13:55.170Z",
+  "generatedAt": "2026-10-09T09:29:20.048Z",
   "languages": [
     "es",
     "en",
@@ -9,17 +9,17 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 5067,
-    "en": 5067,
-    "fr": 5067,
-    "it": 5067,
-    "pt": 5067,
-    "de": 5067
+    "es": 5072,
+    "en": 5072,
+    "fr": 5072,
+    "it": 5072,
+    "pt": 5072,
+    "de": 5072
   },
   "html": {
     "files": 36,
-    "total": 4237,
-    "translated": 4003,
+    "total": 4242,
+    "translated": 4008,
     "untranslated": 234
   },
   "js": {
@@ -416,8 +416,8 @@
     {
       "file": "nosotros.html",
       "type": "html",
-      "total": 182,
-      "translated": 182,
+      "total": 187,
+      "translated": 187,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100

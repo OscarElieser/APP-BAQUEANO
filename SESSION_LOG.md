@@ -6199,3 +6199,13 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - Causa real: en `css/pages/destinos-exact.css` la regla de catálogo completo usaba `.page-destinos-exact:not([data-destinos-mode="featured"]) .destinos-catalog-row` (0,3,0) con `display: grid !important; repeat(4, 1fr)`. El atributo `data-destinos-mode` vive en `<html>`, no en `<body>`, así que el `:not()` siempre era verdadero y le ganaba a `.destinos-featured-row.bq-marquee { display: block !important }` (0,2,0): el contenedor de la cinta era una grilla de 4 columnas (botón en la 1.ª, cinta de ~270 px en la 2.ª).
 - Arreglo: el selector pasa a `html:not([data-destinos-mode="featured"]) body.page-destinos-exact .destinos-catalog-row`. CSS versionado `?v=20261009-ficha-4`.
 - Verificación real (Edge, datos vivos de Supabase): QA 23/23 PASS; nueva comprobación «cinta a todo el ancho con varias tarjetas»: viewport 1184 px, `display: block`, 4 tarjetas visibles a la vez; catálogo completo sigue en 4/2/1 columnas.
+
+## 2026-10-09 — Logos oficiales arriba de la paleta de colores (nosotros.html)
+
+- Solicitud: «estos 4 logos que te estoy compartiendo meterlo ahí arriba de la paleta de colores de BAQUEANO» (sección «Nuestra identidad» de nosotros.html).
+- Logos: los dos a color ya existían y son idénticos byte a byte (`cmp`) a `assets/images/LOGOS/baqueano_logo_horizontal.png` y `baqueano_icono_oficial.png`. Agregados los dos en negro (PNG transparentes): `assets/images/LOGOS/baqueano_logo_horizontal_negro.png` (1579×322) y `baqueano_icono_negro.png` (564×564).
+- `nosotros.html`: bloque `.nos-logo-suite` «Nuestros logos» como primera fila de `.nos-identity-card` (ancho completo), en el orden enviado: logotipo negro, isotipo negro, logotipo color, isotipo color.
+- Error corregido: el ícono sobre «BAQUEANO» usaba `assets/images/logo.png`, que `global-asset-curator.js` cambia por `LOGOS/logo.png` (isotipo BLANCO de 3 MB): era invisible sobre la tarjeta blanca. Ahora usa `baqueano_icono_oficial.png`, centrado.
+- CSS en `css/pages/nosotros-exact.css` (v=20261009-logos-2): fichas crema, 4 columnas (2fr 1fr 2fr 1fr), 2 en tablet, 1 en celular.
+- i18n: 5 claves nuevas `pages.nosotros.logoSuite.*` en 6 idiomas (i18n-add-keys) y exportadas a la app.
+- Verificación real (Edge): 1280/820/390 px PASS — las 5 imágenes cargan, bloque arriba de la paleta, sin scroll horizontal, sin errores JS. `validate-i18n` PASS (5071 ×6); `i18n-audit` mismos 7 errores preexistentes del Ops Center.
