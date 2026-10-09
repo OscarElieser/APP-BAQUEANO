@@ -18,6 +18,40 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 SUBIDA TOTAL AL REPOSITORIO REMOTO GITHUB (09-10-2026 ~00:12 CST)
+- **Consulta / Solicitud del Usuario:** *"sube todo a repositorio remoto"*
+- **Archivos a Sincronizar y Commitear:**
+  - `lib/main.dart`: Reparación de caracteres UTF-8 en comentarios y título de la app.
+  - `lib/features/auth/screens/login_screen.dart`: Corrección de acentuación y literales UTF-8 en botones, títulos y diálogos.
+  - `lib/services/auth_service.dart`: Corrección de cadenas UTF-8 y unificación de tipado de `UserProfile`.
+  - `SESSION_LOG.md`: Bitácora detallada de depuración de encoding, extracción de huellas SHA-1 / SHA-256 de Android y sincronización.
+- **Validaciones Previas:**
+  - `flutter analyze`: **No issues found!** (0 lints, 0 errores).
+  - `flutter test`: **77/77 tests pasaron exitosamente**.
+- **Destino Remoto:** Rama `origin/wip/tipografias-ops-2026-10-08`.
+- **Estado:** 🔄 En ejecución.
+
+## 🧭 DEPURACIÓN DE ENCODING UTF-8 Y DIAGNÓSTICO FIREBASE AUTH APIEXCEPTION 10 (08-10-2026 ~23:55 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: App_Debugging_Encoding_and_FirebaseAuth"`
+  - **Objetivo 1 (Encoding UTF-8):** Escanear y corregir caracteres malformados en `lib/` ("SesiÃ³n", "despuÃ©s", etc.) a español correcto.
+  - **Objetivo 2 (Google Sign-In ApiException 10):** Extraer huellas `SHA-1` y `SHA-256` mediante `gradlew.bat signingReport` en `android/`, validar `google-services.json` y guiar la vinculación en Firebase Console.
+  - **Restricción Estricta:** `website/` 100% intocado. Enfoque exclusivo en `lib/` y `android/`.
+- **Acciones Ejecutadas:**
+  1. **Corrección de Encoding UTF-8 en `lib/`:**
+     - `lib/main.dart`: Reparados encabezados y literales de inicialización (`'BAQUEANO · Nicaragua en Modo Secreto'`).
+     - `lib/features/auth/screens/login_screen.dart`: Reparados títulos, botones y diálogos (`'Iniciar Sesión'`, `'Iniciar sesión con Google'`, `'Tu sesión solo se activa después de validarse con Firebase'`, `'Explorar como invitado, sin sesión →'`).
+     - `lib/services/auth_service.dart`: Reparados textos de excepción, logs de diagnóstico y sincronización del modelo `UserProfile`.
+  2. **Extracción de Huellas de Certificado Android Debug:**
+     - Archivo Keystore: `C:\Users\Lenovo\.android\debug.keystore`
+     - Paquete Android: `com.company.appbaqueano`
+     - **SHA-1:** `C3:E4:6E:6A:E2:70:30:D9:B8:2D:E3:F7:7A:A0:D1:C0:A4:B9:C4:0E`
+     - **SHA-256:** `E2:82:90:7E:58:B0:59:21:A8:5D:6F:82:0F:E9:CB:46:16:60:92:BA:B6:15:20:5A:9B:E9:57:E1:42:C3:4E:65`
+     - Verificación: `android/app/google-services.json` existe y carece del SHA-1 local en `oauth_client`, lo que originaba el error `ApiException: 10: DEVELOPER_ERROR`.
+  3. **Control de Calidad:**
+     - `flutter analyze`: **No issues found!** (0 errores, 0 advertencias).
+     - `flutter test`: **77/77 tests pasaron exitosamente** (exit code 0).
+- **Estado:** ✅ COMPLETADO AL 100%.
+
 ## 🧭 ELIMINACIÓN DEFINITIVA DE RASTREO GIT PARA ARCHIVOS GENERADOS (08-10-2026 ~23:22 CST)
 - **Consulta / Solicitud del Usuario:** *"estoy viendo que aun tengo esto, se habia quitado cuando te lo pedí hace rato pero otra vez lo veo"* (reaparición de `windows/flutter/generated_*` y `pubspec.lock` tras ejecutar `flutter test`).
 - **Diagnóstico Técnico de Raíz:**
