@@ -6077,4 +6077,26 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - Rama remota `origin/wip/tipografias-ops-2026-10-08` sincronizada 100% en GitHub.
 - Regla de repositorio GitHub identificada vía API: Ruleset ID `24771709` (`pull_request` requerida en `main`). Se proporcionan enlaces directos al usuario para completar el merge en GitHub con un clic.
 
+## 2026-10-09 — Generación de Flujos de Usuario Duales (User Flows) en Mermaid.js para Pitch y Figma
+
+### 🎯 1. POR QUÉ (Why / Propósito)
+- Mapear la arquitectura completa de interacción y experiencia de usuario (UX) tanto para la aplicación nativa Android (`./lib/`) como para la plataforma Web (`./website/`), proveyendo especificaciones visuales estandarizadas en sintaxis Mermaid.js para su exportación a Figma y presentación en el pitch del hackathon.
+
+### ⚙️ 2. CÓMO (How / Arquitectura e Implementación)
+1. **Flujo A (Android App - Mobile First):**
+   - Mapeo desde `lib/main.dart` y `lib/config/app_router.dart`.
+   - Ciclo de vida: `SplashScreen` ➔ Verificación de Sesión (Firebase Auth) ➔ `LoginScreen` / `HomeScreen`.
+   - Navegación multinodal: `MapScreen` (GPS/Google Maps), `AiAssistantScreen` (Baqüi IA), `PlaceDetailScreen`, `ProfileScreen` (Pasaporte Digital) y `EmergencySosScreen`.
+2. **Flujo B (Plataforma Web - Desktop/Responsive):**
+   - Mapeo desde `website/index.html` ("No se visita, se descubre").
+   - Embudo de conversión: Hero ➔ Franja de 10 Categorías ➔ `destinos.html` / `destino.html` ➔ `mapa.html` ➔ `baqueano-ia.html` ➔ Red de Anfitriones Campesinos (`aliados.html` / `mi-negocio.html`) ➔ CTA de Descarga (`descargar.html`).
+3. **Formato Mermaid.js:**
+   - Sintaxis estricta `flowchart TD` con formas semánticas diferenciadas (rombos de decisión, rectángulos redondeados de pantallas, subgrafos temáticos y paleta de estilos corporativa).
+
+### 📦 3. QUÉ (What / Entregables)
+- Código fuente Mermaid.js listo para Figma.
+- Generación de artefactos visuales de alta fidelidad en imagen (16:9) de los User Flows de la App Android y de la Plataforma Web para diapositivas de Pitch y presentaciones ejecutivas.
+
+
+
 
