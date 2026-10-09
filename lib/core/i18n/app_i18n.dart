@@ -3,8 +3,10 @@
 // ============================================================================
 //
 // 🎯 POR QUÉ (Propósito):
-// - La Web habla 6 idiomas (es, en, fr, it, pt, de); la APK solo español y sus
-//   chips "ES/EN" no traducían nada. Una sola fuente evita que diverjan.
+// - La Web habla 8 idiomas (es, en, fr, it, pt, de, ko, zh); la APK solo español
+//   y sus chips "ES/EN" no traducían nada. Una sola fuente evita que diverjan.
+// - 2026-10-09: se suman coreano (ko) y chino simplificado (zh). Un teléfono en
+//   chino tradicional (zh_TW, zh_HK) también recibe `zh` (simplificado).
 //
 // ⚙️ CÓMO (Arquitectura):
 // - `assets/i18n/<idioma>.json` se genera desde `website/locales/*.json`
@@ -29,7 +31,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const List<String> kSupportedLanguages = ['es', 'en', 'fr', 'it', 'pt', 'de'];
+const List<String> kSupportedLanguages = [
+  'es',
+  'en',
+  'fr',
+  'it',
+  'pt',
+  'de',
+  'ko',
+  'zh',
+];
 
 const Map<String, String> kLanguageNames = {
   'es': 'Español',
@@ -38,6 +49,8 @@ const Map<String, String> kLanguageNames = {
   'it': 'Italiano',
   'pt': 'Português',
   'de': 'Deutsch',
+  'ko': '한국어',
+  'zh': '简体中文',
 };
 
 class AppStrings {

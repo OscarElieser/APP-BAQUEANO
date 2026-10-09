@@ -11,6 +11,8 @@
     "it": "Italiano",
     "pt": "Português",
     "de": "Deutsch",
+    "ko": "한국어",
+    "zh": "简体中文",
     "select": "Selecione o idioma"
   },
   "nav": {
@@ -1081,7 +1083,8 @@
       "tooManyRequests": "Muitas tentativas. Aguarde alguns minutos e tente de novo.",
       "generic": "Não foi possível concluir o acesso.",
       "logout": "Não foi possível encerrar a sessão."
-    }
+    },
+    "signinOrCreate": "Entrar ou criar conta"
   },
   "errors": {
     "sessionExpired": "Sua sessão expirou. Entre novamente.",
@@ -6057,7 +6060,7 @@
         "culture": "Promove música, gastronomia e tradições",
         "heritage": "Documenta história e patrimônio",
         "rural": "Ajuda a encontrar fazendas, cooperativas e experiências camponesas",
-        "access": "Melhora o acesso à informação em 6 idiomas",
+        "access": "Melhora o acesso à informação em 8 idiomas",
         "connect": "Conecta o turista diretamente com a oferta local",
         "sustainable": "Promove experiências sustentáveis com práticas declaradas ou verificadas",
         "tech": "Usa tecnologia (BAQUI) para planejar viagens"
@@ -6559,7 +6562,8 @@
     "error": "Não foi possível gerar o PDF. Verifique sua conexão e tente de novo.",
     "ecoTitle": "Comprovante de denúncia ambiental",
     "ecoSubtitle": "Recebido de forma confidencial pelo BAQUEANO.",
-    "ecoPrivacy": "Este comprovante não inclui fotos, vídeos nem dados de contato. Para consultar o status você precisa do código e do token privado que viu ao enviar; por segurança o token não é impresso aqui."
+    "ecoPrivacy": "Este comprovante não inclui fotos, vídeos nem dados de contato. Para consultar o status você precisa do código e do token privado que viu ao enviar; por segurança o token não é impresso aqui.",
+    "latinFallback": "Este PDF é gerado em inglês: a fonte do documento não suporta caracteres coreanos nem chineses."
   },
   "opsLive": {
     "actorStaff": "Administrador",

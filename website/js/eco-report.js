@@ -318,11 +318,14 @@
         var pdf = document.createElement('button'); pdf.type = 'button'; pdf.className = 'eco-btn-secondary';
         pdf.textContent = t('ecoReport.downloadReceipt', 'Descargar comprobante (PDF)');
         pdf.addEventListener('click', function () {
+          var chosen = form.category.options[form.category.selectedIndex];
+          // Claves y fecha original: en coreano/chino el PDF sale en inglés y rehace estos valores.
           window.BaqueanoPdf.ecoReceipt({
-            code: data.code, createdAt: when, category: form.category.options[form.category.selectedIndex].textContent,
+            code: data.code, createdAt: when, createdAtDate: created,
+            category: chosen.textContent, categoryKey: chosen.getAttribute('data-i18n') || '',
             territory: [form.department.value, el.muni.value].filter(Boolean).join(' · '),
             reference: form.reference.value.trim(), evidence: stored.ok + ' / ' + stored.total,
-            status: t('ecoReport.statusReceived', 'Recibido por BAQUEANO')
+            status: t('ecoReport.statusReceived', 'Recibido por BAQUEANO'), statusKey: 'ecoReport.statusReceived'
           });
         });
         el.receipt.append(pdf);

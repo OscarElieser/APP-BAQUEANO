@@ -16,6 +16,10 @@
 //   <main>. La fecha de generación es distinta y se indica por separado.
 // - Tipografía Helvetica estándar del PDF (texto real). Se descartan los caracteres que esa
 //   fuente no puede representar (emojis).
+// - Coreano y chino (2026-10-09): Helvetica solo dibuja Latin-1/WinAnsi, así que un PDF en ko/zh
+//   saldría en blanco. En esos idiomas el PDF se genera en inglés: el texto sale del catálogo
+//   locales/en.json con las mismas claves data-i18n de la página, y antes se avisa a la persona en
+//   su idioma. Incrustar una fuente CJK (6–10 MB) haría la descarga inviable en el teléfono.
 // - Logo oficial horizontal (PNG), con su proporción original.
 //
 // 📦 QUÉ:
@@ -41,13 +45,55 @@
     cookies: { file: 'Politica_de_Cookies', key: 'pdf.docCookies', es: 'Política de Cookies', url: 'cookies.html' }
   };
 
+  // Idiomas cuya escritura no cabe en Helvetica: el PDF se arma con el catálogo en inglés.
+  var LATIN_ONLY_FALLBACK = /^(ko|zh)$/;
+  var PDF_FALLBACK_LANG = 'en';
+  var pdfCatalog = null;
+  var fallbackCatalogPromise = null;
+
+  function getPath(source, key) {
+    return String(key || '').split('.').reduce(function (value, part) {
+      return value && Object.prototype.hasOwnProperty.call(value, part) ? value[part] : undefined;
+    }, source);
+  }
   function t(key, fallback, vars) {
     var text = fallback;
-    try { if (window.BaqueanoLanguage && window.BaqueanoLanguage.t) text = window.BaqueanoLanguage.t(key, Object.assign({ fallback: fallback }, vars || {})); } catch (_) { /* respaldo */ }
+    var fixed = pdfCatalog ? getPath(pdfCatalog, key) : null;
+    if (typeof fixed === 'string' && fixed.trim()) text = fixed;
+    else {
+      try { if (window.BaqueanoLanguage && window.BaqueanoLanguage.t) text = window.BaqueanoLanguage.t(key, Object.assign({ fallback: fallback }, vars || {})); } catch (_) { /* respaldo */ }
+    }
     return String(text).replace(/\{(\w+)\}/g, function (m, k) { return vars && vars[k] != null ? vars[k] : m; });
   }
-  function lang() {
+  function uiLang() {
     try { return ((window.BaqueanoLanguage && window.BaqueanoLanguage.get && window.BaqueanoLanguage.get()) || document.documentElement.lang || 'es').slice(0, 2); } catch (_) { return 'es'; }
+  }
+  function lang() {
+    return pdfCatalog ? PDF_FALLBACK_LANG : uiLang();
+  }
+  // Cada PDF arranca aquí: en ko/zh carga el catálogo inglés y avisa en el idioma de la persona.
+  function prepare() {
+    pdfCatalog = null;
+    if (!LATIN_ONLY_FALLBACK.test(uiLang())) return Promise.resolve(null);
+    var message = t('pdf.latinFallback', 'Este PDF se genera en inglés: la tipografía del documento no admite caracteres coreanos ni chinos.');
+    fallbackCatalogPromise = fallbackCatalogPromise || fetch('locales/' + PDF_FALLBACK_LANG + '.json', { credentials: 'same-origin', cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .catch(function (error) { fallbackCatalogPromise = null; throw error; });
+    return fallbackCatalogPromise.then(function (catalog) {
+      pdfCatalog = catalog;
+      if (window.BaqueanoDialog) window.BaqueanoDialog.notice(message, { tone: 'info' });
+      return catalog;
+    });
+  }
+  // Copia del contenido con los textos data-i18n en el idioma del PDF (la página no cambia).
+  function translatedClone(root) {
+    var clone = root.cloneNode(true);
+    [clone].concat(Array.prototype.slice.call(clone.querySelectorAll('[data-i18n]'))).forEach(function (el) {
+      var key = el.getAttribute && el.getAttribute('data-i18n');
+      var value = key ? getPath(pdfCatalog, key) : null;
+      if (typeof value === 'string' && value.trim()) el.textContent = value;
+    });
+    return clone;
   }
   function fmtDate(value) {
     // 'AAAA-MM-DD' se interpreta como mediodía UTC para que en Managua sea el mismo día.
@@ -277,21 +323,28 @@
     if (!main) return Promise.reject(new Error('no-legal-doc'));
     var key = main.getAttribute('data-legal-doc');
     var base = DOCS[key] || { file: 'Documento', key: 'pdf.docGeneric', es: 'Documento legal', url: window.location.pathname.split('/').pop() };
-    var h1 = main.querySelector('h1') || document.querySelector('h1');
-    var description = document.querySelector('meta[name="description"]');
-    var heading = h1 ? h1.innerText.replace(/\s+/g, ' ').trim() : '';
-    var meta = {
-      // Título = nombre oficial del documento; el encabezado de la página va como subtítulo.
-      title: t(base.key, base.es),
-      shortTitle: t(base.key, base.es),
-      scope: [heading, description ? description.getAttribute('content') : ''].filter(Boolean).join(' — '),
-      version: main.getAttribute('data-legal-version') || '1.0',
-      updated: main.getAttribute('data-legal-updated') || '',
-      file: base.file, url: base.url
-    };
     var label = button ? button.innerHTML : '';
     if (button) { button.disabled = true; button.setAttribute('aria-busy', 'true'); }
-    return legal({ meta: meta, blocks: extract(main) }).then(function (result) {
+    return prepare().then(function () {
+      // En ko/zh se lee una copia con los textos del catálogo inglés (la página sigue en su idioma).
+      var source = pdfCatalog ? translatedClone(main) : main;
+      var h1 = source.querySelector('h1') || (pdfCatalog && document.querySelector('h1') ? translatedClone(document.querySelector('h1')) : document.querySelector('h1'));
+      var description = document.querySelector('meta[name="description"]');
+      var descriptionKey = document.documentElement.dataset.i18nDescription || (document.body && document.body.dataset.i18nDescription);
+      var descriptionText = description ? description.getAttribute('content') : '';
+      if (pdfCatalog && descriptionKey) descriptionText = t(descriptionKey, descriptionText);
+      var heading = h1 ? (h1.innerText && h1.offsetParent !== null ? h1.innerText : h1.textContent).replace(/\s+/g, ' ').trim() : '';
+      var meta = {
+        // Título = nombre oficial del documento; el encabezado de la página va como subtítulo.
+        title: t(base.key, base.es),
+        shortTitle: t(base.key, base.es),
+        scope: [heading, descriptionText].filter(Boolean).join(' — '),
+        version: main.getAttribute('data-legal-version') || '1.0',
+        updated: main.getAttribute('data-legal-updated') || '',
+        file: base.file, url: base.url
+      };
+      return legal({ meta: meta, blocks: extract(source) });
+    }).then(function (result) {
       document.dispatchEvent(new CustomEvent('baqueano:pdfGenerated', { detail: Object.assign({ kind: 'legal', doc: key }, result) }));
       return result;
     }).catch(function (error) {
@@ -303,8 +356,10 @@
   }
 
   // ------------------------------------------------------------------ comprobante de denuncia
+  // data.categoryKey / data.statusKey / data.createdAtDate (opcionales) permiten rehacer esos
+  // valores en el idioma del PDF cuando no es el de la página (ko/zh → inglés).
   function ecoReceipt(data) {
-    return Promise.all([loadJsPdf(), loadLogo()]).then(function (res) {
+    return prepare().then(function () { return Promise.all([loadJsPdf(), loadLogo()]); }).then(function (res) {
       var JsPDF = res[0], logo = res[1];
       var doc = new JsPDF({ unit: 'mm', format: 'a4', compress: true });
       if (logo) doc.addImage(logo, 'PNG', A4.margin, 18, 60, 60 / LOGO_RATIO);
@@ -312,14 +367,18 @@
       w.y = 40;
       w.text(t('pdf.ecoTitle', 'Comprobante de reporte ambiental'), { size: 18, bold: true, color: COLORS.ink, after: 2 });
       w.text(t('pdf.ecoSubtitle', 'Recibido por BAQUEANO de forma confidencial.'), { size: 10.5, color: COLORS.body, after: 8 });
+      var createdAt = data.createdAt;
+      if (pdfCatalog && data.createdAtDate instanceof Date && isFinite(data.createdAtDate.getTime())) {
+        try { createdAt = data.createdAtDate.toLocaleString(lang(), { dateStyle: 'long', timeStyle: 'short' }); } catch (_) { createdAt = data.createdAtDate.toISOString(); }
+      }
       [
         [t('ecoReport.receiptCode', 'Código'), data.code],
-        [t('ecoReport.receiptDate', 'Fecha y hora'), data.createdAt],
-        [t('ecoReport.receiptCategory', 'Tipo'), data.category],
+        [t('ecoReport.receiptDate', 'Fecha y hora'), createdAt],
+        [t('ecoReport.receiptCategory', 'Tipo'), data.categoryKey ? t(data.categoryKey, data.category) : data.category],
         [t('ecoReport.receiptPlace', 'Territorio'), data.territory],
         [t('ecoReport.reference', 'Dirección o punto de referencia'), data.reference || '—'],
         [t('ecoReport.receiptEvidence', 'Evidencias guardadas'), data.evidence],
-        [t('ecoReport.receiptStatus', 'Estado'), data.status]
+        [t('ecoReport.receiptStatus', 'Estado'), data.statusKey ? t(data.statusKey, data.status) : data.status]
       ].forEach(function (row) {
         w.text(row[0], { size: 8.5, bold: true, color: COLORS.muted, after: 0.4 });
         w.text(row[1] || '—', { size: 11.5, color: COLORS.ink, after: 3.5 });
@@ -337,7 +396,7 @@
 
   // ------------------------------------------------------------------ PDF de Mi Viaje
   function tripPlan(trip, weather) {
-    return Promise.all([loadJsPdf(), loadLogo()]).then(function (res) {
+    return prepare().then(function () { return Promise.all([loadJsPdf(), loadLogo()]); }).then(function (res) {
       var JsPDF = res[0], logo = res[1];
       var doc = new JsPDF({ unit: 'mm', format: 'a4', compress: true });
       var days = (trip && trip.days) || [];
@@ -404,7 +463,7 @@
   // report = { generatedBy, sections: [{ title, source, at, note, rows: [[etiqueta, valor, estado?]], error }] }
   // estado opcional: 'ok' | 'warn' | 'fail' (se escribe como texto, no solo color).
   function techReport(report) {
-    return Promise.all([loadJsPdf(), loadLogo()]).then(function (res) {
+    return prepare().then(function () { return Promise.all([loadJsPdf(), loadLogo()]); }).then(function (res) {
       var JsPDF = res[0], logo = res[1];
       var doc = new JsPDF({ unit: 'mm', format: 'a4', compress: true });
       var title = t('techReport.title', 'Informe técnico de BAQUEANO');

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * 🎯 POR QUÉ: cada artista debe aparecer en Historia dentro de su territorio y
- *    en la guía de ese departamento o región, siempre traducido a los 6 idiomas.
+ *    en la guía de ese departamento o región, siempre traducido a los 8 idiomas.
  *    Esta prueba impide un artista sin territorio real, sin clave o huérfano.
  * ⚙️ CÓMO: carga js/territory-artists-data.js y js/territories-data.js en un
  *    contexto aislado (sin navegador) y cruza ids y claves con locales/*.json;
@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (file) => fs.readFileSync(path.join(ROOT, file), 'utf8');
-const LANGS = ['es', 'en', 'fr', 'it', 'pt', 'de'];
+const LANGS = ['es', 'en', 'fr', 'it', 'pt', 'de', 'ko', 'zh'];
 const BASE = 'pages.historia.artistas.';
 
 const sandbox = { window: {} };
@@ -91,4 +91,4 @@ if (errors.length) {
   console.error(`❌ Artistas por territorio: ${errors.length} problemas\n- ${errors.join('\n- ')}`);
   process.exit(1);
 }
-console.log(`✅ Artistas por territorio: ${artists.length} artistas en ${groups.length} territorios, 6 idiomas, ambas páginas conectadas.`);
+console.log(`✅ Artistas por territorio: ${artists.length} artistas en ${groups.length} territorios, ${LANGS.length} idiomas, ambas páginas conectadas.`);

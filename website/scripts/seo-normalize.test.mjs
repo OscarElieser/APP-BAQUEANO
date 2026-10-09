@@ -39,7 +39,7 @@ check('canonical y og:url pasan al dominio oficial', () => {
 check('el cuerpo de la página no se modifica', () => {
   assert.match(normalizeHtml(legacy, 'index.html'), /<a href="https:\/\/app-baqueano\.web\.app\/x">/);
 });
-check('hreflang para los 6 idiomas + x-default', () => {
+check('hreflang para los 8 idiomas + x-default', () => {
   const out = normalizeHtml(legacy, 'destinos.html');
   for (const lang of LANGUAGES) assert.ok(out.includes(`hreflang="${lang}" href="${SITE}/destinos.html?lang=${lang}"`), lang);
   assert.ok(out.includes(`hreflang="x-default" href="${SITE}/destinos.html"`));

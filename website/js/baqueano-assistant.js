@@ -76,6 +76,14 @@
   }
 
   const safeJson = (value, fallback) => { try { return JSON.parse(value) ?? fallback; } catch (_) { return fallback; } };
+  // 2026-10-09: la web ya habla coreano y chino, pero la función baqueano-ai del servidor solo
+  // responde en es/en/fr/it/pt/de (a otro idioma le contesta en español). Hasta publicar ko/zh en
+  // el servidor, a esas personas se les pide la respuesta en inglés, más útil que el español.
+  const SERVER_ANSWER_LANGUAGES = ['es', 'en', 'fr', 'it', 'pt', 'de'];
+  const answerLanguage = (language) => {
+    const code = String(language || 'es').toLowerCase().split('-')[0];
+    return SERVER_ANSWER_LANGUAGES.includes(code) ? code : 'en';
+  };
   const initialLanguage = window.BaqueanoLanguage?.get?.() || localStorage.getItem('baqueano_language_v2') || localStorage.getItem('baqueano_language_v1') || localStorage.getItem('baqueano_language') || 'es';
   const session = Object.assign({ id: crypto.randomUUID?.() || `bq-${Date.now()}`, messages: [], tripProfile: {}, greeted: false, hidden: false, hiddenUntil: 0, minimized: false, lastSuggestion: 0, currentLanguage: initialLanguage, preferredLanguage: initialLanguage }, safeJson(sessionStorage.getItem(KEYS.session), {}));
   const preferences = Object.assign({ voice: false, edge: 'right', y: null, enabled: true, suggestions: true }, safeJson(localStorage.getItem(KEYS.preferences), {}));
@@ -184,7 +192,7 @@
       currentFood: document.querySelector('[data-food].is-active,[data-dish].is-active')?.dataset.food || null,
       currentArticle: document.querySelector('article.is-active,[data-article].is-active')?.dataset.article || null,
       activeFilters, recentPlaces: safeJson(sessionStorage.getItem('baqueano_recent_items'), []).slice(-5), filters: { active: activeFilters }, recentItems: safeJson(sessionStorage.getItem('baqueano_recent_items'), []).slice(-5), tripProfile: session.tripProfile,
-      currentLanguage: session.currentLanguage, preferredLanguage: session.preferredLanguage
+      currentLanguage: answerLanguage(session.currentLanguage), preferredLanguage: answerLanguage(session.preferredLanguage)
     };
   }
 
@@ -880,7 +888,7 @@ Seguinos para descubrir contenido en video, historias de artesanos locales y el 
       serverTimer = setTimeout(() => { state.serverTimedOut = true; state.controller?.abort(); }, 20000);
       state.serverTimedOut = false;
       for (let attempt = 1; attempt <= CONFIG.requestAttempts; attempt += 1) {
-        response = await fetch(CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: state.controller.signal, body: JSON.stringify({ message, conversationId: session.id, history: session.messages.slice(-12, -1), countryCode: 'NI', currentLanguage: session.currentLanguage, preferredLanguage: session.preferredLanguage, context: context(), conversationState: session.brain ? Object.assign({}, session.brain, { recientes: undefined }) : null, intent: understood ? understood.intent : null }) });
+        response = await fetch(CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: state.controller.signal, body: JSON.stringify({ message, conversationId: session.id, history: session.messages.slice(-12, -1), countryCode: 'NI', currentLanguage: answerLanguage(session.currentLanguage), preferredLanguage: answerLanguage(session.preferredLanguage), context: context(), conversationState: session.brain ? Object.assign({}, session.brain, { recientes: undefined }) : null, intent: understood ? understood.intent : null }) });
         if (response.ok || response.status < 500) break;
         if (attempt < CONFIG.requestAttempts) await new Promise(resolve => setTimeout(resolve, 500 * (2 ** (attempt - 1))));
       }

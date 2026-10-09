@@ -11,6 +11,8 @@
     "it": "Italiano",
     "pt": "Português",
     "de": "Deutsch",
+    "ko": "한국어",
+    "zh": "简体中文",
     "select": "Sprache wählen"
   },
   "nav": {
@@ -1081,7 +1083,8 @@
       "tooManyRequests": "Zu viele Versuche. Warte ein paar Minuten und versuche es erneut.",
       "generic": "Die Anmeldung konnte nicht abgeschlossen werden.",
       "logout": "Abmelden war nicht möglich."
-    }
+    },
+    "signinOrCreate": "Anmelden oder Konto erstellen"
   },
   "errors": {
     "sessionExpired": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.",
@@ -6057,7 +6060,7 @@
         "culture": "Fördert Musik, Gastronomie und Traditionen",
         "heritage": "Dokumentiert Geschichte und Kulturerbe",
         "rural": "Hilft, Höfe, Genossenschaften und bäuerliche Erlebnisse zu finden",
-        "access": "Verbessert den Zugang zu Informationen in 6 Sprachen",
+        "access": "Verbessert den Zugang zu Informationen in 8 Sprachen",
         "connect": "Verbindet Reisende direkt mit lokalen Anbietern",
         "sustainable": "Fördert nachhaltige Erlebnisse mit gemeldeten oder geprüften Praktiken",
         "tech": "Nutzt Technologie (BAQUI) zur Reiseplanung"
@@ -6559,7 +6562,8 @@
     "error": "Das PDF konnte nicht erstellt werden. Prüfe deine Verbindung und versuche es erneut.",
     "ecoTitle": "Bestätigung der Umweltmeldung",
     "ecoSubtitle": "Vertraulich von BAQUEANO erhalten.",
-    "ecoPrivacy": "Diese Bestätigung enthält keine Fotos, Videos oder Kontaktdaten. Für die Statusabfrage brauchst du den Code und das private Token, das beim Senden angezeigt wurde; aus Sicherheitsgründen wird das Token hier nicht gedruckt."
+    "ecoPrivacy": "Diese Bestätigung enthält keine Fotos, Videos oder Kontaktdaten. Für die Statusabfrage brauchst du den Code und das private Token, das beim Senden angezeigt wurde; aus Sicherheitsgründen wird das Token hier nicht gedruckt.",
+    "latinFallback": "Dieses PDF wird auf Englisch erstellt: Die Schrift des Dokuments unterstützt keine koreanischen oder chinesischen Zeichen."
   },
   "opsLive": {
     "actorStaff": "Administrator",

@@ -140,7 +140,8 @@ for (const page of pages) {
       if (!/^https:\/\//.test(ogImage)) add('critical', page, 'og-image-absolute', `og:image debe ser absoluta: ${ogImage}`);
       if (t && !exists(t.rel)) add('critical', page, 'og-image-missing', `og:image no existe: ${ogImage}`);
     }
-    if (hreflangs < 7) add('critical', page, 'hreflang', `${hreflangs} hreflang (se esperan 6 idiomas + x-default)`);
+    // 2026-10-09: 8 idiomas (se sumaron coreano y chino) + x-default.
+    if (hreflangs < 9) add('critical', page, 'hreflang', `${hreflangs} hreflang (se esperan 8 idiomas + x-default)`);
     if (!jsonLd.length) add('critical', page, 'jsonld', 'falta JSON-LD');
     if (title) titles.set(title, [...(titles.get(title) || []), page]);
     if (description) descriptions.set(description, [...(descriptions.get(description) || []), page]);

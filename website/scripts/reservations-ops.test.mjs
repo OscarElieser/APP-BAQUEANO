@@ -31,7 +31,7 @@ const engine = read('website/js/ops-center/ops-engine.js');
 assert.match(engine, /id="opsReservationForm"/);
 assert.match(engine, /data-i18n="opsReservations\.title"/);
 
-for (const language of ['es', 'en', 'fr', 'it', 'pt', 'de']) {
+for (const language of ['es', 'en', 'fr', 'it', 'pt', 'de', 'ko', 'zh']) {
   const catalog = JSON.parse(read(`website/locales/${language}.json`));
   for (const key of ['title', 'new', 'formTitle', 'phone', 'whatsapp', 'business', 'traveler', 'save', 'empty', 'loadError']) {
     assert.equal(typeof catalog.opsReservations?.[key], 'string', `${language}: falta opsReservations.${key}`);

@@ -2,7 +2,7 @@
 // BAQUEANO — VALIDADOR DE CATÁLOGOS I18N
 // ============================================================================
 // 🎯 POR QUÉ: una clave ausente o vacía reaparece como texto sin traducir.
-// ⚙️ CÓMO: aplana los seis JSON, compara sus rutas con español y falla ante
+// ⚙️ CÓMO: aplana los ocho JSON (es, en, fr, it, pt, de, ko, zh), compara sus rutas con español y falla ante
 //    diferencias estructurales, valores vacíos o JSON inválido.
 // 📦 QUÉ: reporte por idioma con TOTAL_KEYS, TRANSLATED_KEYS, MISSING_KEYS,
 //    EXTRA_KEYS y EMPTY_KEYS, apto para CI y validación local.
@@ -12,7 +12,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..', 'locales');
-const languages = ['es', 'en', 'fr', 'it', 'pt', 'de'];
+const languages = ['es', 'en', 'fr', 'it', 'pt', 'de', 'ko', 'zh'];
 
 function flatten(value, prefix = '', output = new Map()) {
   for (const [key, child] of Object.entries(value)) {

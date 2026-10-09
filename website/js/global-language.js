@@ -11,6 +11,12 @@
 //    descarta sus propias mutaciones (takeRecords). Antes reescribía la etiqueta "ES" del
 //    selector en cada pasada: el MutationObserver la veía como texto nuevo y volvía a traducir
 //    en bucle (~20 veces por segundo, recálculo de estilo de toda la página en cada vuelta).
+// 🌏 COREANO Y CHINO (2026-10-09): 8 idiomas. ko → ko-KR y zh → zh-CN (chino simplificado).
+//    El coreano corta líneas entre palabras (word-break: keep-all) como lo leen los coreanos;
+//    la regla va sobre cada elemento porque mobile-first-core.css y responsive-ecosystem.css
+//    fijan `word-break: normal` en p/h1–h6/span/a/label/li y la herencia no alcanzaba;
+//    el chino corta entre caracteres (comportamiento normal del navegador). Las fuentes de la
+//    marca no traen Hangul ni Hanzi: el navegador usa la del sistema (Malgun Gothic, Noto CJK…).
 // ============================================================================
 (function initializeBaqueanoI18n(window, document) {
   'use strict';
@@ -18,11 +24,11 @@
   if (window.__BAQUEANO_I18N_LOADED__) return;
   window.__BAQUEANO_I18N_LOADED__ = true;
 
-  var SUPPORTED = Object.freeze(['es', 'en', 'fr', 'it', 'pt', 'de']);
-  var LOCALES = Object.freeze({ es: 'es-NI', en: 'en-US', fr: 'fr-FR', it: 'it-IT', pt: 'pt-BR', de: 'de-DE' });
+  var SUPPORTED = Object.freeze(['es', 'en', 'fr', 'it', 'pt', 'de', 'ko', 'zh']);
+  var LOCALES = Object.freeze({ es: 'es-NI', en: 'en-US', fr: 'fr-FR', it: 'it-IT', pt: 'pt-BR', de: 'de-DE', ko: 'ko-KR', zh: 'zh-CN' });
   var STORAGE_KEY = 'baqueano_language_v2';
   var LEGACY_STORAGE_KEYS = Object.freeze(['baqueano_language_v1', 'baqueano_language']);
-  var VERSION = '2026.10.06-opiniones-1';
+  var VERSION = '2026.10.09-ko-zh-1';
   var cache = new Map();
   var semanticFallbackKeys = new Map();
   var originals = new WeakMap();
@@ -347,7 +353,7 @@
     if (document.getElementById('baqueano-language-style')) return;
     var style = document.createElement('style');
     style.id = 'baqueano-language-style';
-    style.textContent = '.bq-language-menu{position:fixed;z-index:2147483000;width:min(220px,calc(100vw - 20px));max-height:min(420px,calc(100vh - 20px));overflow:auto;padding:7px;background:#fff;border:1px solid #DCE6E9;border-radius:14px;box-shadow:0 18px 45px rgba(15,23,42,.22);font-family:Aristotelica Pro, Plus Jakarta Sans,system-ui,sans-serif}.bq-language-menu button{width:100%;min-width:0;display:grid;grid-template-columns:35px minmax(0,1fr) auto;align-items:center;gap:8px;padding:10px;border:0;border-radius:9px;background:transparent;color:#0F172A;text-align:left;cursor:pointer}.bq-language-menu button:hover,.bq-language-menu button:focus-visible,.bq-language-menu button.is-active{background:#EEF6F7;outline:2px solid transparent}.bq-language-menu button:focus-visible{box-shadow:0 0 0 3px #F65E01}.bq-language-menu strong{color:#165D6F}.bq-language-menu span{font-weight:700;overflow-wrap:anywhere}.bq-language-menu i{visibility:hidden;color:#F65E01}.bq-language-menu button.is-active i{visibility:visible}@media(max-width:960px){#mainNavbar .global-language,#mainNavbar .navbar-lang-pill{display:inline-flex!important}}';
+    style.textContent = '.bq-language-menu{position:fixed;z-index:2147483000;width:min(220px,calc(100vw - 20px));max-height:min(420px,calc(100vh - 20px));overflow:auto;padding:7px;background:#fff;border:1px solid #DCE6E9;border-radius:14px;box-shadow:0 18px 45px rgba(15,23,42,.22);font-family:Aristotelica Pro, Plus Jakarta Sans,system-ui,sans-serif}.bq-language-menu button{width:100%;min-width:0;display:grid;grid-template-columns:35px minmax(0,1fr) auto;align-items:center;gap:8px;padding:10px;border:0;border-radius:9px;background:transparent;color:#0F172A;text-align:left;cursor:pointer}.bq-language-menu button:hover,.bq-language-menu button:focus-visible,.bq-language-menu button.is-active{background:#EEF6F7;outline:2px solid transparent}.bq-language-menu button:focus-visible{box-shadow:0 0 0 3px #F65E01}.bq-language-menu strong{color:#165D6F}.bq-language-menu span{font-weight:700;overflow-wrap:anywhere}.bq-language-menu i{visibility:hidden;color:#F65E01}.bq-language-menu button.is-active i{visibility:visible}@media(max-width:960px){#mainNavbar .global-language,#mainNavbar .navbar-lang-pill{display:inline-flex!important}}html:lang(ko) body,html:lang(ko) body *{word-break:keep-all}';
     document.head.appendChild(style);
   }
 

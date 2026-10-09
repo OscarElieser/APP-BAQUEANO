@@ -18,6 +18,32 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 CAMBIOS DE GITHUB NO VISIBLES EN LA PLATAFORMA + COREANO Y CHINO EN EL SELECTOR (09-10-2026)
+- **Consulta / Solicitud del Usuario:**
+  *"revisas los cambios que se subieron en github no lo veo en la plataforma y ademas aplica el idioma coreano y chino al selector de idiomas"*
+- **Objetivos:**
+  1. Diagnosticar por qué lo subido a `origin/main` no aparece en la plataforma publicada (pipeline de despliegue, caché, rama de deploy).
+  2. Agregar coreano (ko) y chino (zh) al selector de idiomas, con catálogos completos y la puerta i18n en verde.
+- **Diagnóstico del despliegue (evidencia: API pública de GitHub Actions y `/health.json` en vivo):**
+  - El workflow que publica es «🚀 BAQUEANO Producción (Azure)», no «🧭 Production CI/CD Pipeline» (ese verde no despliega). Último despliegue exitoso: **07-10-2026 14:41 UTC, commit `324df5f`**.
+  - Desde entonces fallaba la puerta i18n/QA y, tras destrabarla (`d797041`), falla siempre el paso **«Preparar acceso SSH»** (runs 37924461560, 37952925115): `ssh-keyscan` no llega al `AZURE_HOST` (los secretos existen: no aparece «Falta AZURE_…»).
+  - La IP documentada `20.80.81.65` no responde en 22/80/443. La IP `20.98.27.186` (en `~/.ssh/known_hosts` de esta PC) sí responde en 22/80/443: muy probablemente es la VM actual. El acceso SSH/HTTP directo a esa IP fue bloqueado por el modo automático (no se insistió).
+  - El sitio en vivo sirve `fc49ef5` con `health.json` de formato build (`"host":"staging"`), no el de `deploy.sh`; `/health` y `/api/azure/health` dan 404 → el servidor actual no tiene la configuración nginx del repo.
+  - **Acción del propietario:** actualizar el secreto `AZURE_HOST` (y verificar `AZURE_SSH_PRIVATE_KEY` autorizada en la VM nueva y el NSG del puerto 22) y aplicar `azure/setup-server.sh`/nginx del repo en esa VM; luego re-ejecutar el workflow.
+- **Coreano y chino — entregables:**
+  1. `website/locales/ko.json` y `zh.json` (5.548 claves cada uno, mismas que es-NI). 5.078 valores únicos traducidos por Claude (IA) y validados por script: ids completos, marcadores `{x}` idénticos, sin vacíos. Pendiente revisión de hablantes nativos.
+  2. `language.ko = 한국어`, `language.zh = 简体中文` en los 8 catálogos; «6 idiomas» → 8 en `impact.public.how.access`; claves nuevas `pdf.latinFallback` y `auth.signinOrCreate` (este último corrige un texto en español sin clave del cajón móvil, que afectaba a los 7 idiomas no españoles).
+  3. `js/global-language.js`: `SUPPORTED`/`LOCALES` con `ko-KR` y `zh-CN`, versión `2026.10.09-ko-zh-1`, `word-break: keep-all` por elemento para el coreano (había reglas `word-break: normal` en `mobile-first-core.css`/`responsive-ecosystem.css`).
+  4. `js/baqueano-pdf.js` + `js/eco-report.js`: Helvetica no dibuja Hangul/Hanzi; en ko/zh el PDF se genera en inglés (catálogo `en` + mismas claves `data-i18n`) y se avisa antes en el idioma de la persona.
+  5. `js/baqueano-assistant.js`: `baqueano-ai` (servidor) solo responde en 6 idiomas; para ko/zh se pide la respuesta en inglés hasta publicar ko/zh en el servidor (requiere migración de CHECK de idioma + Edge Functions; no desplegado).
+  6. SEO: hreflang ko y zh en todas las páginas y en el sitemap (`scripts/lib/seo-normalize.mjs`); auditoría exige 8 + x-default.
+  7. Puertas y pruebas con 8 idiomas: `validate-i18n`, `i18n-scan`, `i18n-add-keys`, `export-locales-for-app`, `i18n-browser.test`, `territory-artists`, `historia-audioguia`, `reservations-ops`, `impact-section`.
+  8. App Android: `assets/i18n/ko.json`/`zh.json`, `kSupportedLanguages`/`kLanguageNames` con ko/zh, selector de escritorio convertido en menú desplegable (8 chips desbordaban la barra desde 840 px), prueba nueva. El APK publicado no se recompiló.
+  9. `AGENTS.md`/`CLAUDE.md`: regla i18n ahora con 8 idiomas; `docs/audit/I18N_AUDIT.md` con estado KO/ZH.
+- **Verificación:** `npm run i18n` 8×5.548 claves, 0 errores · `flutter analyze` sin problemas · `flutter test` 78/78 · build estático 878 archivos · SEO 13/13 · auditoría 20/20 0 críticos · artistas/audioguía/reservas/franja PASS · navegador Edge: contrato i18n 19 rutas × 8 idiomas PASS; ko/zh 10 páginas × 360/1366 px sin desborde, sin errores JS, sin restos en español; menú con 8 idiomas; PDF ko descargado en inglés con aviso en coreano · QA de CI (31 páginas × 360/390/1366, axe) 0 fallos.
+- **Notas de entorno (no causadas por este cambio):** en esta PC `export-territories-for-app --check` y `kronox --check` fallan porque `core.autocrlf=true` deja CRLF en el checkout; el contenido generado es idéntico al del repo (en CI Linux pasan). `graphify update .` falla aquí («uv trampoline failed»); `graphify-out/` no se versiona.
+- **Estado:** ✅ Código verificado. Se sube a `main`; **no llegará a baqueanonicaragua.com hasta corregir `AZURE_HOST`/SSH**.
+
 ## 🧭 ACTUALIZACIÓN Y SINCRONIZACIÓN TOTAL CON GITHUB MAIN (09-10-2026 ~09:23 CST)
 - **Consulta / Solicitud del Usuario:**
   *"quiero que actualize github veo que no se actualizo"*

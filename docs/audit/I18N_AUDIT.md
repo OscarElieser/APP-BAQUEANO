@@ -24,6 +24,7 @@ Lectura de `website/js/global-language.js`, `website/locales/*.json` y ejecució
 | ID | Prioridad | Hallazgo | Evidencia |
 | --- | --- | --- | --- |
 | I18N-P2-01 | P2 | Solo **6 de 9** idiomas: faltan **KO, ZH, RU** | `SUPPORTED = ['es','en','fr','it','pt','de']`; `locales/ko.json` → 404 |
+| ↳ Estado 2026-10-09 | — | **KO y ZH resueltos**: 8 idiomas en web (selector, catálogos completos de 5.548 claves, hreflang, puerta CI) y app Android. Traducción hecha con IA (Claude) y validada automáticamente (claves, marcadores {x}); **pendiente revisión de hablantes nativos**. RU sigue pendiente. | `website/locales/ko.json`, `website/locales/zh.json` |
 | I18N-P2-02 | P2 | Cobertura: `es` 342 claves; `en/fr/it/pt/de` **45 traducidas (13 %)**, 297 faltantes, 7 sobrantes | Salida de `validate-i18n.mjs` |
 | I18N-P2-03 | P2 | Casi ningún HTML usa `data-i18n` (0 en 29 páginas; 4 en `i18n-test.html`). La traducción depende de un mapa de textos heredados (`legacyKeys`, ~40 cadenas) → el contenido de página queda en español | `grep -c data-i18n` |
 | I18N-P2-04 | P2 | Fallback de un solo nivel (→ ES). Se pide `ko/zh/ru/fr/it/pt/de → en → es` | `global-language.js` |

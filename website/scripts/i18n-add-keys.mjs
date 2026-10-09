@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * 🌐 BAQUEANO — FUSIÓN SEGURA DE CLAVES EN LOS 6 CATÁLOGOS
+ * 🌐 BAQUEANO — FUSIÓN SEGURA DE CLAVES EN LOS 8 CATÁLOGOS
  *
- * 🎯 POR QUÉ: cada clave nueva debe entrar a la vez en es, en, fr, it, pt y de;
- *   editar seis JSON a mano produce faltantes y sobrescrituras accidentales.
- * ⚙️ CÓMO: recibe un lote JSON `{ "clave.semántica": { es, en, fr, it, pt, de } }`
+ * 🎯 POR QUÉ: cada clave nueva debe entrar a la vez en es, en, fr, it, pt, de, ko y zh;
+ *   editar ocho JSON a mano produce faltantes y sobrescrituras accidentales.
+ * ⚙️ CÓMO: recibe un lote JSON `{ "clave.semántica": { es, en, fr, it, pt, de, ko, zh } }`
  *   y lo fusiona en `locales/<idioma>.json` (estructura anidada). Rechaza el
  *   lote completo si falta un idioma, si un texto está vacío o si una clave ya
  *   existe con otro valor (salvo `--update`). Nunca borra claves.
@@ -14,7 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const LANGS = ['es', 'en', 'fr', 'it', 'pt', 'de'];
+const LANGS = ['es', 'en', 'fr', 'it', 'pt', 'de', 'ko', 'zh'];
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [, , batchPath, ...flags] = process.argv;
 const update = flags.includes('--update');

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
  * 🎯 POR QUÉ: Verificar el contrato multilingüe en un navegador real y entre navegaciones.
- * ⚙️ CÓMO: Recorre los seis idiomas en el fixture heredable y comprueba API, evento, DOM, atributo lang y almacenamiento v2.
+ * ⚙️ CÓMO: Recorre los ocho idiomas en el fixture heredable y comprueba API, evento, DOM, atributo lang y almacenamiento v2.
  * 📦 QUÉ: Prueba Playwright ejecutable contra BASE_URL, sin credenciales ni mutaciones externas.
  */
 import { chromium } from '@playwright/test';
 
 const base = process.env.BASE_URL || 'http://127.0.0.1:4179/';
-const languages = ['es', 'en', 'fr', 'it', 'pt', 'de'];
+const languages = ['es', 'en', 'fr', 'it', 'pt', 'de', 'ko', 'zh'];
 const requiredPages = [
   'index.html', 'destinos.html', 'departamento.html?depto=madriz', 'departamento.html?depto=managua',
   'destino.html', 'experiencias.html', 'historia.html', 'gastronomia.html', 'musica.html', 'ambiental.html',
@@ -53,7 +53,8 @@ for (const language of languages) {
 await page.goto(`${base}destinos.html`, { waitUntil: 'domcontentloaded' });
 await page.waitForFunction(() => Boolean(window.BaqueanoLanguage));
 const persisted = await page.evaluate(() => ({ language: window.BaqueanoLanguage.get(), stored: localStorage.getItem('baqueano_language_v2') }));
-if (persisted.language !== 'de' || persisted.stored !== 'de') throw new Error(`Persistencia fallida: ${JSON.stringify(persisted)}`);
+const lastLanguage = languages[languages.length - 1];
+if (persisted.language !== lastLanguage || persisted.stored !== lastLanguage) throw new Error(`Persistencia fallida: ${JSON.stringify(persisted)}`);
 
 for (const route of requiredPages) {
   console.log(`Checking ${route}…`);
@@ -74,4 +75,4 @@ for (const route of requiredPages) {
 }
 
 await browser.close();
-console.log(`I18N browser contract passed for ${requiredPages.length} required routes in es, en, fr, it, pt and de with cross-page persistence.`);
+console.log(`I18N browser contract passed for ${requiredPages.length} required routes in ${languages.join(", ")} with cross-page persistence.`);

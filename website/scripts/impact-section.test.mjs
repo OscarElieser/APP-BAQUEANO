@@ -14,7 +14,7 @@
  *   3. 320–1920 px: sin desbordamiento horizontal ni objetivos táctiles < 44 px.
  *   4. Accesibilidad: h2 con aria-labelledby, enlaces con nombre, contraste AA
  *      del texto de la sección, foco visible en enlaces.
- *   5. i18n: la cabecera cambia en los 6 idiomas (?lang=xx).
+ *   5. i18n: la cabecera cambia en los 8 idiomas (?lang=xx).
  *   6. Ninguna frase afirma reconocimiento "oficial" de BAQUEANO.
  * 📦 QUÉ: `node scripts/impact-section.test.mjs` → código de salida 0 si todo pasa.
  */
@@ -29,7 +29,9 @@ const LANG_TITLES = {
   fr: "Ce qu'apporte BAQUEANO, preuves à l'appui",
   it: 'Cosa apporta BAQUEANO, con prove',
   pt: 'O que o BAQUEANO oferece, com evidências',
-  de: 'Was BAQUEANO beiträgt – mit Nachweisen'
+  de: 'Was BAQUEANO beiträgt – mit Nachweisen',
+  ko: 'BAQUEANO가 기여하는 것, 증거와 함께',
+  zh: 'BAQUEANO 的贡献，有据可查'
 };
 const SUMMARY = {
   generated_at: '2026-10-05T12:00:00Z', destinos_publicados: 7, destinos_verificados: 0, negocios_locales: 5, negocios_verificados: 5,
@@ -132,7 +134,7 @@ try {
     await page.close();
   }
 
-  // 5) i18n en 6 idiomas y 6) sin reclamos de reconocimiento oficial.
+  // 5) i18n en 8 idiomas y 6) sin reclamos de reconocimiento oficial.
   for (const [lang, title] of Object.entries(LANG_TITLES)) {
     const page = await browser.newPage({ viewport: { width: 1024, height: 900 } });
     await page.route(SUPABASE, (route) => route.abort());

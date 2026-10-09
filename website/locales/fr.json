@@ -11,6 +11,8 @@
     "it": "Italiano",
     "pt": "Português",
     "de": "Deutsch",
+    "ko": "한국어",
+    "zh": "简体中文",
     "select": "Choisir la langue"
   },
   "nav": {
@@ -1081,7 +1083,8 @@
       "tooManyRequests": "Trop de tentatives. Patientez quelques minutes et réessayez.",
       "generic": "Impossible de finaliser l’accès.",
       "logout": "Impossible de vous déconnecter."
-    }
+    },
+    "signinOrCreate": "Se connecter ou créer un compte"
   },
   "errors": {
     "sessionExpired": "Votre session a expiré. Reconnectez-vous.",
@@ -6057,7 +6060,7 @@
         "culture": "Valorise la musique, la gastronomie et les traditions",
         "heritage": "Documente l'histoire et le patrimoine",
         "rural": "Aide à trouver des fermes, des coopératives et des expériences paysannes",
-        "access": "Améliore l'accès à l'information en 6 langues",
+        "access": "Améliore l'accès à l'information en 8 langues",
         "connect": "Met le voyageur en contact direct avec l'offre locale",
         "sustainable": "Promeut des expériences durables avec des pratiques déclarées ou vérifiées",
         "tech": "Utilise la technologie (BAQUI) pour planifier des voyages"
@@ -6559,7 +6562,8 @@
     "error": "Impossible de générer le PDF. Vérifiez votre connexion et réessayez.",
     "ecoTitle": "Justificatif de signalement environnemental",
     "ecoSubtitle": "Reçu de manière confidentielle par BAQUEANO.",
-    "ecoPrivacy": "Ce justificatif n'inclut ni photos, ni vidéos, ni coordonnées. Pour consulter l'état, il vous faut le code et le jeton privé affichés lors de l'envoi ; le jeton n'est pas imprimé ici par sécurité."
+    "ecoPrivacy": "Ce justificatif n'inclut ni photos, ni vidéos, ni coordonnées. Pour consulter l'état, il vous faut le code et le jeton privé affichés lors de l'envoi ; le jeton n'est pas imprimé ici par sécurité.",
+    "latinFallback": "Ce PDF est généré en anglais : la police du document ne prend pas en charge les caractères coréens ni chinois."
   },
   "opsLive": {
     "actorStaff": "Administrateur",

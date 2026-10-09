@@ -2,7 +2,7 @@
  * 🎯 POR QUÉ: la evidencia en vivo (Kronox 2026) mostró que producción declaraba
  *   como canónico el dominio de respaldo (web.app), sin hreflang, sin manifest
  *   enlazado ni datos estructurados, y con sitemap/robots apuntando al respaldo.
- *   Eso reparte la autoridad SEO entre dos dominios y oculta los 6 idiomas.
+ *   Eso reparte la autoridad SEO entre dos dominios y oculta los 8 idiomas.
  * ⚙️ CÓMO: transformaciones puras de texto aplicadas SOLO a la copia publicada
  *   (`dist-hostinger/`) durante el build. Los HTML fuente no se tocan: el sitio
  *   oficial es uno solo y se decide en un único lugar (SITE). Idempotente: si una
@@ -13,7 +13,7 @@
 
 export const SITE = 'https://baqueanonicaragua.com';
 export const LEGACY_HOSTS = ['https://app-baqueano.web.app', 'https://app-baqueano.firebaseapp.com'];
-export const LANGUAGES = ['es', 'en', 'fr', 'it', 'pt', 'de'];
+export const LANGUAGES = ['es', 'en', 'fr', 'it', 'pt', 'de', 'ko', 'zh'];
 // Imagen social por defecto (1200×630, generada de assets/images/destinos/isla_de_ometepe.jpg).
 export const DEFAULT_OG_IMAGE = `${SITE}/assets/images/og-image.jpg`;
 // Perfiles públicos reales enlazados en el footer del sitio (global-injector.js).

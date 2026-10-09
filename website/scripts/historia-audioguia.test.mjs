@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (file) => fs.readFileSync(path.join(ROOT, file), 'utf8');
-const LANGS = ['es', 'en', 'fr', 'it', 'pt', 'de'];
+const LANGS = ['es', 'en', 'fr', 'it', 'pt', 'de', 'ko', 'zh'];
 const TYPES = new Set(['historical_fact', 'heritage', 'oral_tradition']);
 
 const sandbox = { window: {} };
@@ -71,4 +71,4 @@ if (errors.length) {
   console.error(`❌ Biblioteca sonora: ${errors.length} problemas\n- ${errors.join('\n- ')}`);
   process.exit(1);
 }
-console.log(`✅ Biblioteca sonora: ${chapters.length} capítulos en ${periods.length} períodos, todos con fuente https, fecha de verificación y 6 idiomas.`);
+console.log(`✅ Biblioteca sonora: ${chapters.length} capítulos en ${periods.length} períodos, todos con fuente https, fecha de verificación y ${LANGS.length} idiomas.`);

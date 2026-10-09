@@ -47,9 +47,9 @@
    - Detalle: `.agents/rules/franja_viva_territorios.md`. Prueba obligatoria en CI: `website/scripts/territory-places-rule.test.mjs`.
 
 9. **Internacionalización obligatoria (Regla del propietario, 2026-10-05)**:
-   - Todo texto visible de interfaz (HTML, JS dinámico, React/Next, Ops Center, BAQUI, errores, toasts, modales, `aria-label`, `placeholder`, `title`, `alt`, títulos y meta) usa una **clave semántica** de los catálogos `website/locales/{es,en,fr,it,pt,de}.json` (es-NI es fuente y respaldo).
+   - Todo texto visible de interfaz (HTML, JS dinámico, React/Next, Ops Center, BAQUI, errores, toasts, modales, `aria-label`, `placeholder`, `title`, `alt`, títulos y meta) usa una **clave semántica** de los catálogos `website/locales/{es,en,fr,it,pt,de,ko,zh}.json` (es-NI es fuente y respaldo; ko y zh se sumaron el 2026-10-09).
    - HTML: `data-i18n`, `data-i18n-placeholder`, `data-i18n-title`, `data-i18n-aria-label`, `data-i18n-alt`. JS: `BaqueanoLanguage.t('clave')`. React: `useBaqueanoI18n().t('clave')` o `<T k="clave" />` (`@baqueano/i18n`). Nombres propios y marcas: `data-no-translate` / `translate="no"`.
-   - Toda clave nueva entra en los 6 idiomas a la vez (`npm run i18n:add lote.json`). Prohibido crear catálogos paralelos o claves tipo `texto1`.
+   - Toda clave nueva entra en los 8 idiomas a la vez (`npm run i18n:add lote.json`). Prohibido crear catálogos paralelos o claves tipo `texto1`.
    - Puerta CI `npm run i18n`: falla si falta una clave/traducción o si un archivo agrega texto de interfaz sin clave (trinquete contra `website/scripts/i18n-baseline.json`, que solo puede bajar). Cobertura: `website/docs/i18n-coverage.md`.
 
 10. **Verificación ambiental con evidencia trazable (Regla del propietario, 2026-10-05)**:
@@ -93,7 +93,7 @@ Use 21st MCP for UI discovery, component research, interface generation and visu
 
 ## OPENDESIGN (herramienta local de diseño, 2026-10-05)
 
-OpenDesign (`nexu-io/open-design`, Apache-2.0) se instala en la computadora del propietario y se conecta a Antigravity / Claude Code por MCP (`od mcp install antigravity`). No se copia al repositorio ni forma parte del build de producción. Sus propuestas se adaptan a la arquitectura, paleta, i18n (6 idiomas), accesibilidad y seguridad de BAQUEANO; nunca se aplican a ciegas. Guía: `docs/architecture/OPEN_DESIGN_ANTIGRAVITY.md`.
+OpenDesign (`nexu-io/open-design`, Apache-2.0) se instala en la computadora del propietario y se conecta a Antigravity / Claude Code por MCP (`od mcp install antigravity`). No se copia al repositorio ni forma parte del build de producción. Sus propuestas se adaptan a la arquitectura, paleta, i18n (8 idiomas), accesibilidad y seguridad de BAQUEANO; nunca se aplican a ciegas. Guía: `docs/architecture/OPEN_DESIGN_ANTIGRAVITY.md`.
 
 ## GRAPHIFY (grafo de código para agentes, 2026-10-05)
 

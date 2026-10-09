@@ -7,7 +7,7 @@
 -->
 # BAQUEANO — Claude Code
 
-**Las reglas del proyecto están en `AGENTS.md`** (bitácora en `SESSION_LOG.md` primero, no eliminar nada, i18n en 6 idiomas, sin verdes falsos, Android + web únicamente). Este archivo no las reemplaza.
+**Las reglas del proyecto están en `AGENTS.md`** (bitácora en `SESSION_LOG.md` primero, no eliminar nada, i18n en 8 idiomas, sin verdes falsos, Android + web únicamente). Este archivo no las reemplaza.
 
 ## graphify
 

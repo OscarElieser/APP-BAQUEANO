@@ -785,29 +785,10 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
 
                   const SizedBox(width: 8),
 
-                  // Language Selector Pill [NI ES/EN]
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryLight.withValues(alpha: 0.6),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: AppColors.borderLight),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text('🇳🇮', style: TextStyle(fontSize: 12)),
-                        const SizedBox(width: 4),
-                        for (final lang in kSupportedLanguages) ...[
-                          _buildLangChip(lang.toUpperCase()),
-                          if (lang != kSupportedLanguages.last) const SizedBox(width: 2),
-                        ],
-                      ],
-                    ),
-                  ),
+                  // Selector de idioma [🇳🇮 ES ▾] (2026-10-09): con 8 idiomas la fila de
+                  // chips ocupaba ~290 px y desbordaba la barra desde 840 px; ahora es un
+                  // menú desplegable con el código y el nombre de cada idioma, como la Web.
+                  _buildDesktopLanguageMenu(),
 
                   const SizedBox(width: 14),
 
@@ -1098,6 +1079,53 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                 ),
               ],
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Menú de idioma de la barra de escritorio: muestra el idioma activo y despliega
+  /// los 8 (código + nombre propio), marcando el elegido.
+  Widget _buildDesktopLanguageMenu() {
+    final current = ref.watch(appLanguageProvider);
+    final s = ref.strings;
+    return PopupMenuButton<String>(
+      tooltip: s.t('language.change', 'Cambiar idioma'),
+      initialValue: current,
+      onSelected: (code) => ref.read(appLanguageProvider.notifier).setLanguage(code),
+      itemBuilder: (context) => [
+        for (final lang in kSupportedLanguages)
+          CheckedPopupMenuItem<String>(
+            value: lang,
+            checked: lang == current,
+            child: Text(
+              '${lang.toUpperCase()}  ${kLanguageNames[lang] ?? lang}',
+              style: BaqueanoFonts.text(fontSize: 13, fontWeight: FontWeight.w600),
+            ),
+          ),
+      ],
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        decoration: BoxDecoration(
+          color: AppColors.primaryLight.withValues(alpha: 0.6),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: AppColors.borderLight),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('🇳🇮', style: TextStyle(fontSize: 12)),
+            const SizedBox(width: 6),
+            Text(
+              current.toUpperCase(),
+              style: BaqueanoFonts.text(
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                color: AppColors.textLight,
+              ),
+            ),
+            const Icon(Icons.expand_more_rounded, size: 16, color: AppColors.textMuted),
           ],
         ),
       ),

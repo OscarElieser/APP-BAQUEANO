@@ -1,8 +1,8 @@
 // ============================================================================
 // 🌐 BAQUEANO — EXPORTA LOS IDIOMAS DE LA WEB A LA APP ANDROID
 // ============================================================================
-// 🎯 POR QUÉ: Web y APK deben hablar los mismos 6 idiomas (es, en, fr, it, pt,
-//   de) con una sola fuente de traducciones; copiar a mano haría divergir.
+// 🎯 POR QUÉ: Web y APK deben hablar los mismos 8 idiomas (es, en, fr, it, pt,
+//   de, ko, zh) con una sola fuente de traducciones; copiar a mano haría divergir.
 // ⚙️ CÓMO: lee `website/locales/<idioma>.json` (incluida la sección `app.*`
 //   para textos propios de la App), los aplana a claves con puntos
 //   (`nav.home`) y escribe `assets/i18n/<idioma>.json` en el proyecto Flutter.
@@ -15,7 +15,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const LANGS = ['es', 'en', 'fr', 'it', 'pt', 'de'];
+const LANGS = ['es', 'en', 'fr', 'it', 'pt', 'de', 'ko', 'zh'];
 const here = dirname(fileURLToPath(import.meta.url));
 const sourceDir = resolve(here, '../locales');
 const targetDir = resolve(here, '../../assets/i18n');

@@ -19,7 +19,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { decodeEntities, tokenize } from './html-tokens.mjs';
 
-export const LANGS = ['es', 'en', 'fr', 'it', 'pt', 'de'];
+export const LANGS = ['es', 'en', 'fr', 'it', 'pt', 'de', 'ko', 'zh'];
 export const TRANSLATABLE_ATTRIBUTES = ['placeholder', 'title', 'aria-label', 'alt', 'aria-description', 'aria-valuetext'];
 const SKIP_TAGS = new Set(['script', 'style', 'svg', 'code', 'pre', 'noscript', 'template', 'math']);
 

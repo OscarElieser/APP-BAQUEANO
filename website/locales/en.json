@@ -11,6 +11,8 @@
     "it": "Italiano",
     "pt": "Português",
     "de": "Deutsch",
+    "ko": "한국어",
+    "zh": "简体中文",
     "select": "Select language"
   },
   "nav": {
@@ -1081,7 +1083,8 @@
       "tooManyRequests": "Too many attempts. Wait a few minutes and try again.",
       "generic": "We couldn’t complete the sign-in.",
       "logout": "We couldn’t sign you out."
-    }
+    },
+    "signinOrCreate": "Sign in or create an account"
   },
   "errors": {
     "sessionExpired": "Your session expired. Please sign in again.",
@@ -6057,7 +6060,7 @@
         "culture": "Promotes music, food and traditions",
         "heritage": "Documents history and heritage",
         "rural": "Helps you find farms, cooperatives and rural experiences",
-        "access": "Improves access to information in 6 languages",
+        "access": "Improves access to information in 8 languages",
         "connect": "Connects travelers directly with local providers",
         "sustainable": "Promotes sustainable experiences with reported or verified practices",
         "tech": "Uses technology (BAQUI) to plan trips"
@@ -6559,7 +6562,8 @@
     "error": "The PDF couldn't be generated. Check your connection and try again.",
     "ecoTitle": "Environmental report receipt",
     "ecoSubtitle": "Received confidentially by BAQUEANO.",
-    "ecoPrivacy": "This receipt doesn't include photos, videos or contact details. To check the status you need the code and the private token you saw when submitting; the token isn't printed here for security."
+    "ecoPrivacy": "This receipt doesn't include photos, videos or contact details. To check the status you need the code and the private token you saw when submitting; the token isn't printed here for security.",
+    "latinFallback": "This PDF is generated in English: the document's typeface does not support Korean or Chinese characters."
   },
   "opsLive": {
     "actorStaff": "Administrator",

@@ -89,7 +89,7 @@ for (const entry of await fs.readdir(root, { withFileTypes: true })) {
 for (const directory of publicDirectories) await copyTree(path.join(root, directory), path.join(output, directory));
 
 // SEO del dominio oficial solo en la copia publicada (los HTML fuente no cambian):
-// canonical, og:url, hreflang ×6 + x-default, manifest, JSON-LD, sitemap y robots.
+// canonical, og:url, hreflang ×8 + x-default, manifest, JSON-LD, sitemap y robots.
 const publishedPages = (await fs.readdir(output)).filter((name) => name.endsWith('.html'));
 const injectorSheets = readInjectorSheets(await fs.readFile(path.join(root, 'js/global-injector.js'), 'utf8'));
 if (injectorSheets.length < 5) throw new Error('No se pudo leer la lista de hojas de global-injector.js');
