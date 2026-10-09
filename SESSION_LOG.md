@@ -18,6 +18,28 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 REVISIÓN Y ELEVACIÓN INTEGRAL DEL OPS CENTER (08-10-2026 ~18:50 CST)
+- **Consulta / Solicitudes del Usuario:**
+  1. *"esto tiene que estar conforme a lo qu se pide por favor revisar y corregir https://baqueanonicaragua.com/admin.html#14-guias"*
+  2. *"revisar ahi todos los formularios para agregar ,eliminar, modificar o suspender debe estar conforme salga trabaja con datos reales y ojo revisa y corregir"*
+  3. *"revisar ahi tiene que ser real este funcionamiento nada de esta inventando"*
+  4. *"recuerda que deben de salir los correos asignado tambien para si tambin llevar un mejor control"* (Usuarios y SOS)
+  5. *"revisar el logo esta feo"* (Logo pixelado en cabecera del Ops Center)
+  6. *"por favor revisarlo y mejoralo lo quiero premium https://baqueanonicaragua.com/admin.html#01-dashboard si ves en la segunda imagen esta horrible eso ."*
+- **Diagnóstico Integral:**
+  1. **#14-guias (Guías & Baqueanos):** El drawer abría el formulario genérico con tabs de destinos (playas, volcanes, Cañón de Somoto). Requiere formulario dedicado para Guías Comunitarios Nativos: Nombre, Territorio/Municipio, Especialidad (alta montaña, senderismo, avistamiento de aves, lacustre), Carnet INTUR/Acreditación, Teléfono/WhatsApp, Idiomas, Experiencia, Tarifa por día (C$ primero, luego USD), Estado (Activo, En verificación, Suspendido), Sello Verificado y Foto.
+  2. **Formularios Especializados (#15-gastronomia, #16-historia, #17-cultura, #18-sostenibilidad, #19-ambiental):** El drawer genérico `#opsEntityDrawer` debe adaptar sus campos y tabs dinámicamente según la entidad activa para mostrar los campos reales correspondientes (ingredientes/saberes ancestrales para gastronomía; época/héroes para historia; ritmo/instrumentación/autor para cultura; eje ecológico/impacto para sostenibilidad y ambiental), permitiendo Crear, Modificar, Suspender y Eliminar con datos reales.
+  3. **#13-usuarios:** El panel mostraba 0 usuarios porque la colección no sincronizaba los datos reales de Supabase/Firebase. Debe garantizar la lista real completa con correos electrónicos visibles, rol asignado, nivel de explorador, estado de cuenta y modal de cambio de contraseña.
+  4. **Logo de la barra lateral (Ops Command):** El logo actual es un icono monocromático en blanco y negro de baja resolución y bordes dentados. Debe usarse el logotipo oficial institucional nítido (`images/BAQUEANO LOGO.png` o SVG pulcro con clase y estilizado de alta gama).
+  5. **#01-dashboard (Pulso de Presencia en Línea):** El widget de presencia en vivo se renderizaba como una columna vertical de texto crudo sin tarjetas (`5 Personas en línea ahora`, `5 Web`, `0 Android`, etc.) con barras oscuras no estilizadas. Se rediseñará en tarjetas de métricas ejecutivas de alta gama con glassmorphism, microinteracciones, paleta oficial (#165D6F, #F65E01, #F4E6C1, #0F172A) y visualización en tiempo real.
+- **Plan de Acción:**
+  - Paso 1: Reemplazar el logo del sidebar por el logotipo oficial de alta fidelidad.
+  - Paso 2: Rediseñar el widget de presencia en vivo en `#01-dashboard` con un Grid de tarjetas de alta gama técnica.
+  - Paso 3: Corregir `#13-usuarios` para mostrar los usuarios reales y sus correos electrónicos asignados.
+  - Paso 4: Implementar el módulo y drawer dedicado para `#14-guias` (Guías Nativos Certificados).
+  - Paso 5: Dinamizar `#opsEntityDrawer` en `ops-engine.js` para que adapte los campos según `#15-gastronomia`, `#16-historia`, `#17-cultura`, `#18-sostenibilidad`, `#19-ambiental`.
+  - Paso 6: Verificar con `flutter analyze` que se mantenga limpio y sin términos prohibidos.
+
 ## SUBIDA DE CAMBIOS PENDIENTES A GITHUB (08-10-2026)
 - **Consulta / Solicitud del Usuario:** *"subilo entonces te doy autorizacion"* → *"https://github.com/OscarElieser/APP-BAQUEANO qui vas a subir"*
 - **Decision:** push a rama nueva `wip/tipografias-ops-2026-10-08` (no a `main`): todo push a `main` despliega a produccion via `deploy-production.yml` y hay trabajo de tipografias en curso. Fusionar a `main` cuando este revisado.
