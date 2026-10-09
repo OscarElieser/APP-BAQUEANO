@@ -63,6 +63,15 @@
 (function (window, document) {
   'use strict';
 
+  // i18n de la interfaz del Ops Center (claves ops.<módulo>.*; respaldo en español si falta la traducción).
+  function i18n(key, fallback, vars) {
+    var out = fallback;
+    try { if (window.BaqueanoLanguage && window.BaqueanoLanguage.t) out = window.BaqueanoLanguage.t(key, { fallback: fallback }) || fallback; } catch (_) { out = fallback; }
+    return String(out).replace(/\{(\w+)\}/g, function (m, k) { return vars && vars[k] != null ? vars[k] : m; });
+  }
+  // Valor de atributo HTML ya entre comillas (title=${q(…)}); escapa comillas dobles.
+  function q(value) { return '"' + String(value == null ? '' : value).replace(/"/g, '&quot;') + '"'; }
+
   // Tasa oficial de cambio de referencia del proyecto (Regla 11: Córdobas primero, verificado 2026-10-01)
   const FX_RATE_USD_NIO = 36.6243;
 
@@ -379,7 +388,7 @@
         <div class="ops-search-input-wrap" style="flex: 1; max-width: 380px;">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input type="text" class="ops-filter-search-input" id="opsPaymentSearchInput"
-            placeholder="Buscar por cliente, comprobante, referencia o banco..."
+            placeholder=i18n('ops.payments.buscarPorClienteComprobante', 'Buscar por cliente, comprobante, referencia o banco...')
             value="${escapeHtml(state.searchQuery)}"
             oninput="window.BaqueanoOpsPayments.search(this.value)">
         </div>
@@ -465,7 +474,7 @@
                 </a>
               ` : ''}
               ${email ? `
-                <span style="font-size: 0.74rem; color: var(--ops-text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${escapeHtml(email)}">
+                <span style="font-size: 0.74rem; color: var(--ops-text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title=${q(`${escapeHtml(email)}`)}>
                   <i class="fa-regular fa-envelope" style="font-size: 0.7rem;"></i> ${escapeHtml(email)}
                 </span>
               ` : ''}
@@ -507,11 +516,11 @@
         <!-- 6. Baucher / Foto -->
         <td style="text-align: center;">
           ${voucherUrl ? `
-            <button type="button" class="btn-ops-icon" title="Ver baucher / comprobante bancario" style="color: #38BDF8;" onclick="window.BaqueanoOpsPayments.openBaucherModal('${escapeHtml(voucherUrl)}', '${escapeHtml(code)}')">
+            <button type="button" class="btn-ops-icon" title=${q(i18n('ops.payments.verBaucherComprobanteBancario', 'Ver baucher / comprobante bancario'))} style="color: #38BDF8;" onclick="window.BaqueanoOpsPayments.openBaucherModal('${escapeHtml(voucherUrl)}', '${escapeHtml(code)}')">
               <i class="fa-solid fa-image"></i>
             </button>
           ` : `
-            <span title="Sin comprobante adjunto" style="color: var(--ops-text-muted); font-size: 0.78rem;">
+            <span title=${q(i18n('ops.payments.sinComprobanteAdjunto', 'Sin comprobante adjunto'))} style="color: var(--ops-text-muted); font-size: 0.78rem;">
               <i class="fa-regular fa-image" style="opacity: 0.4;"></i>
             </span>
           `}
@@ -521,28 +530,28 @@
         <td>
           <div class="ops-table-actions" style="justify-content: flex-end; gap: 0.35rem;">
             <!-- Botón Enviar / Compartir al Cliente -->
-            <button type="button" class="btn-ops-icon" title="Enviar comprobante al cliente (WhatsApp, Correo, PDF)" style="color: #10B981;" onclick="window.BaqueanoOpsPayments.openShareModal('${escapeHtml(item.id)}')">
+            <button type="button" class="btn-ops-icon" title=${q(i18n('ops.payments.enviarComprobanteAlCliente', 'Enviar comprobante al cliente (WhatsApp, Correo, PDF)'))} style="color: #10B981;" onclick="window.BaqueanoOpsPayments.openShareModal('${escapeHtml(item.id)}')">
               <i class="fa-solid fa-paper-plane"></i>
             </button>
 
             <!-- Conciliar Rápido Toggle -->
             ${stBadge.key === 'pending' ? `
-              <button type="button" class="btn-ops-icon" title="Aprobar y Conciliar Pago (Fondo Acreditado)" style="color: #F59E0B;" onclick="window.BaqueanoOpsPayments.togglePaymentStatus('${escapeHtml(item.id)}', 'approved')">
+              <button type="button" class="btn-ops-icon" title=${q(i18n('ops.payments.aprobarYConciliarPago', 'Aprobar y Conciliar Pago (Fondo Acreditado)'))} style="color: #F59E0B;" onclick="window.BaqueanoOpsPayments.togglePaymentStatus('${escapeHtml(item.id)}', 'approved')">
                 <i class="fa-solid fa-check-double"></i>
               </button>
             ` : `
-              <button type="button" class="btn-ops-icon" title="Cambiar a Pendiente de Revisión" style="color: #94A3B8;" onclick="window.BaqueanoOpsPayments.togglePaymentStatus('${escapeHtml(item.id)}', 'pending')">
+              <button type="button" class="btn-ops-icon" title=${q(i18n('ops.payments.cambiarAPendienteDe', 'Cambiar a Pendiente de Revisión'))} style="color: #94A3B8;" onclick="window.BaqueanoOpsPayments.togglePaymentStatus('${escapeHtml(item.id)}', 'pending')">
                 <i class="fa-solid fa-clock-rotate-left"></i>
               </button>
             `}
 
             <!-- Editar Comprobante -->
-            <button type="button" class="btn-ops-icon" title="Editar datos del comprobante" style="color: #38BDF8;" onclick="window.BaqueanoOpsPayments.openDrawer('${escapeHtml(item.id)}')">
+            <button type="button" class="btn-ops-icon" title=${q(i18n('ops.payments.editarDatosDelComprobante', 'Editar datos del comprobante'))} style="color: #38BDF8;" onclick="window.BaqueanoOpsPayments.openDrawer('${escapeHtml(item.id)}')">
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
 
             <!-- Eliminar Comprobante -->
-            <button type="button" class="btn-ops-icon danger" title="Eliminar comprobante" style="color: #EF4444;" onclick="window.BaqueanoOpsPayments.deletePayment('${escapeHtml(item.id)}')">
+            <button type="button" class="btn-ops-icon danger" title=${q(i18n('ops.payments.eliminarComprobante', 'Eliminar comprobante'))} style="color: #EF4444;" onclick="window.BaqueanoOpsPayments.deletePayment('${escapeHtml(item.id)}')">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </div>
@@ -576,13 +585,13 @@
     const shareBtn = document.getElementById('btnOpsPaymentDrawerShare');
 
     if (item) {
-      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-pen-to-square" style="color: var(--bq-accent);"></i> <span>Editar Comprobante: ${escapeHtml(item.receiptCode || item.id)}</span>`;
-      if (subtitleEl) subtitleEl.textContent = `ID: ${item.id} · Cliente: ${item.touristName || item.customerName || 'N/A'}`;
+      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-pen-to-square" style="color: var(--bq-accent);"></i> <span>${escapeHtml(i18n('ops.payments.editTitle', 'Editar Comprobante: {p0}', { p0: item.receiptCode || item.id }))}</span>`;
+      if (subtitleEl) subtitleEl.textContent = i18n('ops.payments.idCliente', 'ID: {p0} · Cliente: {p1}', { p0: (item.id), p1: (item.touristName || item.customerName || 'N/A') });
       if (deleteBtn) deleteBtn.style.display = 'inline-flex';
       if (shareBtn) shareBtn.style.display = 'inline-flex';
     } else {
-      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-receipt" style="color: var(--bq-accent);"></i> <span>Registrar Nuevo Comprobante</span>`;
-      if (subtitleEl) subtitleEl.textContent = 'Módulo: Pagos & Comprobantes Bancarios';
+      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-receipt" style="color: var(--bq-accent);"></i> <span>${escapeHtml(i18n('ops.payments.newTitle', 'Registrar Nuevo Comprobante'))}</span>`;
+      if (subtitleEl) subtitleEl.textContent = i18n('ops.payments.moduloPagosComprobantesBancarios', 'Módulo: Pagos & Comprobantes Bancarios');
       if (deleteBtn) deleteBtn.style.display = 'none';
       if (shareBtn) shareBtn.style.display = 'none';
     }
@@ -687,15 +696,15 @@
     const amountUsd = parseFloat(document.getElementById('opsPaymentFormAmountUsd').value);
 
     if (!customerName) {
-      if (window.OpsToast) window.OpsToast.show('El Nombre del Cliente o Explorador es obligatorio.', 'warning');
-      else alert('El Nombre del Cliente es obligatorio.');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.elNombreDelCliente', 'El Nombre del Cliente o Explorador es obligatorio.'), 'warning');
+      else alert(i18n('ops.payments.elNombreDelCliente2', 'El Nombre del Cliente es obligatorio.'));
       document.getElementById('opsPaymentFormCustomerName').focus();
       return;
     }
 
     if (!Number.isFinite(amountNio) || amountNio <= 0) {
-      if (window.OpsToast) window.OpsToast.show('Debes ingresar un Monto en Córdobas (C$) válido mayor a 0.', 'warning');
-      else alert('Monto en Córdobas obligatorio.');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.debesIngresarUnMonto', 'Debes ingresar un Monto en Córdobas (C$) válido mayor a 0.'), 'warning');
+      else alert(i18n('ops.payments.montoEnCordobasObligatorio', 'Monto en Córdobas obligatorio.'));
       document.getElementById('opsPaymentFormAmountNio').focus();
       return;
     }
@@ -743,7 +752,7 @@
     const saveBtn = document.getElementById('btnOpsPaymentDrawerSave');
     if (saveBtn) {
       saveBtn.disabled = true;
-      saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
+      saveBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${escapeHtml(i18n('ops.common.saving', 'Guardando...'))}`;
     }
 
     try {
@@ -783,9 +792,9 @@
       }
 
       if (window.OpsToast) {
-        window.OpsToast.show(`Comprobante "${payload.receiptCode}" guardado con éxito.`, 'success');
+        window.OpsToast.show(i18n('ops.payments.comprobanteGuardadoConExito', 'Comprobante \"{p0}\" guardado con éxito.', { p0: (payload.receiptCode) }), 'success');
       } else {
-        alert(`Comprobante ${payload.receiptCode} guardado con éxito.`);
+        alert(i18n('ops.payments.comprobanteGuardadoConExito2', 'Comprobante {p0} guardado con éxito.', { p0: (payload.receiptCode) }));
       }
 
       closeDrawer();
@@ -793,15 +802,15 @@
     } catch (err) {
       console.error('[BaqueanoOpsPayments] Error al guardar comprobante:', err);
       if (window.OpsToast) {
-        window.OpsToast.show(`Error al guardar comprobante: ${err.message}`, 'error');
+        window.OpsToast.show(i18n('ops.payments.errorAlGuardarComprobante', 'Error al guardar comprobante: {p0}', { p0: (err.message) }), 'error');
       } else {
-        alert(`Error al guardar comprobante: ${err.message}`);
+        alert(i18n('ops.payments.errorAlGuardarComprobante', 'Error al guardar comprobante: {p0}', { p0: (err.message) }));
       }
     } finally {
       state.isSubmitting = false;
       if (saveBtn) {
         saveBtn.disabled = false;
-        saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Comprobante';
+        saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> ${escapeHtml(i18n('ops.payments.saveReceipt', 'Guardar Comprobante'))}`;
       }
     }
   }
@@ -829,13 +838,13 @@
 
       const label = targetStatus === 'approved' ? 'Conciliado & Verificado' : 'Pendiente de Revisión';
       if (window.OpsToast) {
-        window.OpsToast.show(`Comprobante marcado como: ${label}`, 'success');
+        window.OpsToast.show(i18n('ops.payments.comprobanteMarcadoComo', 'Comprobante marcado como: {p0}', { p0: (label) }), 'success');
       }
 
       render();
     } catch (err) {
       console.error('[BaqueanoOpsPayments] Error en togglePaymentStatus:', err);
-      if (window.OpsToast) window.OpsToast.show(`Error: ${err.message}`, 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.error', 'Error: {p0}', { p0: (err.message) }), 'error');
     }
   }
 
@@ -870,14 +879,14 @@
       }
 
       if (window.OpsToast) {
-        window.OpsToast.show(`Comprobante "${item.receiptCode || item.id}" eliminado con éxito.`, 'success');
+        window.OpsToast.show(i18n('ops.payments.comprobanteEliminadoConExito', 'Comprobante \"{p0}\" eliminado con éxito.', { p0: (item.receiptCode || item.id) }), 'success');
       }
 
       if (state.editingPaymentId === paymentId) closeDrawer();
       render();
     } catch (err) {
       console.error('[BaqueanoOpsPayments] Error al eliminar:', err);
-      if (window.OpsToast) window.OpsToast.show(`Error al eliminar: ${err.message}`, 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.errorAlEliminar', 'Error al eliminar: {p0}', { p0: (err.message) }), 'error');
     }
   }
 
@@ -913,11 +922,21 @@
 
     if (codeEl) codeEl.textContent = item.receiptCode || item.id;
     if (customerEl) customerEl.textContent = item.touristName || item.customerName || 'Cliente';
-    if (amountEl) amountEl.innerHTML = `<strong style="color:#F4E6C1;">C$ ${nio.toLocaleString('es-NI', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong> <span style="color:#94A3B8; font-size:0.8rem;">(≈ $${usd.toFixed(2)} USD)</span>`;
-    if (bankEl) bankEl.textContent = `${item.paymentMethod || item.bank || 'Banco'} (Ref: ${item.reference || 'S/N'})`;
+    if (amountEl) {
+      // Montos con nodos y textContent (sin HTML armado a mano).
+      const amountStrong = document.createElement('strong'); amountStrong.style.color = '#F4E6C1';
+      amountStrong.textContent = 'C$ ' + nio.toLocaleString('es-NI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const amountUsd = document.createElement('span'); amountUsd.style.cssText = 'color:#94A3B8; font-size:0.8rem;';
+      amountUsd.textContent = '(≈ $' + usd.toFixed(2) + ' USD)';
+      amountEl.replaceChildren(amountStrong, ' ', amountUsd);
+    }
+    if (bankEl) bankEl.textContent = i18n('ops.payments.ref', '{p0} (Ref: {p1})', { p0: (item.paymentMethod || item.bank || 'Banco'), p1: (item.reference || 'S/N') });
     if (statusEl) {
       const st = getStatusBadge(item.status);
-      statusEl.innerHTML = `<span style="color:${st.color}; font-weight:700;"><i class="fa-solid ${st.icon}"></i> ${st.label}</span>`;
+      const stSpan = document.createElement('span'); stSpan.style.color = st.color; stSpan.style.fontWeight = '700';
+      const stIcon = document.createElement('i'); stIcon.className = 'fa-solid ' + st.icon; stIcon.setAttribute('aria-hidden', 'true');
+      stSpan.append(stIcon, ' ' + st.label);
+      statusEl.replaceChildren(stSpan);
     }
 
     if (phoneInput) phoneInput.value = item.customerPhone || item.phone || '';
@@ -971,8 +990,8 @@ _Emisión oficial protegida bajo Ley 1210 / Ley 1211._
     phone = phone.replace(/[^\d]/g, '');
 
     if (!phone) {
-      if (window.OpsToast) window.OpsToast.show('Por favor ingresa el número de WhatsApp del cliente.', 'warning');
-      else alert('Número de WhatsApp requerido');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.porFavorIngresaEl', 'Por favor ingresa el número de WhatsApp del cliente.'), 'warning');
+      else alert(i18n('ops.payments.numeroDeWhatsappRequerido', 'Número de WhatsApp requerido'));
       return;
     }
 
@@ -985,7 +1004,7 @@ _Emisión oficial protegida bajo Ley 1210 / Ley 1211._
     const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank', 'noopener,noreferrer');
 
-    if (window.OpsToast) window.OpsToast.show('Abriendo WhatsApp con comprobante oficial...', 'success');
+    if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.abriendoWhatsappConComprobante', 'Abriendo WhatsApp con comprobante oficial...'), 'success');
   }
 
   function sendEmail(paymentId) {
@@ -995,8 +1014,8 @@ _Emisión oficial protegida bajo Ley 1210 / Ley 1211._
     const email = (document.getElementById('opsShareModalEmailInput') ? document.getElementById('opsShareModalEmailInput').value : (item.customerEmail || item.email || '')).trim();
 
     if (!email) {
-      if (window.OpsToast) window.OpsToast.show('Por favor ingresa el correo del cliente.', 'warning');
-      else alert('Correo electrónico requerido');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.porFavorIngresaEl2', 'Por favor ingresa el correo del cliente.'), 'warning');
+      else alert(i18n('ops.payments.correoElectronicoRequerido', 'Correo electrónico requerido'));
       return;
     }
 
@@ -1005,7 +1024,7 @@ _Emisión oficial protegida bajo Ley 1210 / Ley 1211._
     const mailtoUrl = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoUrl;
 
-    if (window.OpsToast) window.OpsToast.show('Abriendo cliente de correo...', 'success');
+    if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.abriendoClienteDeCorreo', 'Abriendo cliente de correo...'), 'success');
   }
 
   function copyReceiptText(paymentId) {
@@ -1014,11 +1033,11 @@ _Emisión oficial protegida bajo Ley 1210 / Ley 1211._
 
     const text = buildReceiptText(item);
     navigator.clipboard.writeText(text).then(() => {
-      if (window.OpsToast) window.OpsToast.show('Texto del comprobante copiado al portapapeles.', 'success');
-      else alert('Comprobante copiado al portapapeles');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.textoDelComprobanteCopiado', 'Texto del comprobante copiado al portapapeles.'), 'success');
+      else alert(i18n('ops.payments.comprobanteCopiadoAlPortapapeles', 'Comprobante copiado al portapapeles'));
     }).catch(err => {
       console.error('Error al copiar:', err);
-      if (window.OpsToast) window.OpsToast.show('No se pudo copiar automáticamente.', 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.noSePudoCopiar', 'No se pudo copiar automáticamente.'), 'error');
     });
   }
 
@@ -1039,7 +1058,7 @@ _Emisión oficial protegida bajo Ley 1210 / Ley 1211._
 
     const printWin = window.open('', '_blank', 'width=800,height=900');
     if (!printWin) {
-      if (window.OpsToast) window.OpsToast.show('Por favor permite ventanas emergentes para imprimir.', 'warning');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.porFavorPermiteVentanas', 'Por favor permite ventanas emergentes para imprimir.'), 'warning');
       return;
     }
 
@@ -1154,7 +1173,7 @@ _Emisión oficial protegida bajo Ley 1210 / Ley 1211._
     if (!modal || !imgEl) return;
 
     imgEl.src = imageUrl;
-    if (titleEl) titleEl.textContent = `Baucher / Depósito Bancario — ${paymentCode || 'Comprobante'}`;
+    if (titleEl) titleEl.textContent = i18n('ops.payments.baucherDepositoBancario', 'Baucher / Depósito Bancario — {p0}', { p0: (paymentCode || 'Comprobante') });
     modal.style.display = 'flex';
   }
 
@@ -1170,17 +1189,17 @@ _Emisión oficial protegida bajo Ley 1210 / Ley 1211._
     if (!file) return;
 
     if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
-      if (window.OpsToast) window.OpsToast.show('El archivo debe ser una imagen (JPG, PNG, WebP) o un archivo PDF.', 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.elArchivoDebeSer', 'El archivo debe ser una imagen (JPG, PNG, WebP) o un archivo PDF.'), 'error');
       return;
     }
 
     if (file.size > 15 * 1024 * 1024) {
-      if (window.OpsToast) window.OpsToast.show('El archivo supera el límite de 15 MB.', 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.elArchivoSuperaEl', 'El archivo supera el límite de 15 MB.'), 'error');
       return;
     }
 
     const dropzoneText = document.getElementById('opsPaymentDropzoneText');
-    if (dropzoneText) dropzoneText.textContent = 'Subiendo comprobante a Storage...';
+    if (dropzoneText) dropzoneText.textContent = i18n('ops.payments.subiendoComprobanteAStorage', 'Subiendo comprobante a Storage...');
 
     try {
       if (window.OpsStorage && typeof window.OpsStorage.uploadFile === 'function') {
@@ -1188,7 +1207,7 @@ _Emisión oficial protegida bajo Ley 1210 / Ley 1211._
         const urlInput = document.getElementById('opsPaymentFormVoucherUrl');
         if (urlInput) urlInput.value = res.downloadURL;
         updateBaucherPreview(res.downloadURL);
-        if (window.OpsToast) window.OpsToast.show('Comprobante subido exitosamente.', 'success');
+        if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.comprobanteSubidoExitosamente', 'Comprobante subido exitosamente.'), 'success');
       } else {
         // Fallback local con FileReader
         const reader = new FileReader();
@@ -1201,9 +1220,9 @@ _Emisión oficial protegida bajo Ley 1210 / Ley 1211._
       }
     } catch (err) {
       console.error('[BaqueanoOpsPayments] Error al subir baucher:', err);
-      if (window.OpsToast) window.OpsToast.show(`Error al subir comprobante: ${err.message}`, 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.payments.errorAlSubirComprobante', 'Error al subir comprobante: {p0}', { p0: (err.message) }), 'error');
     } finally {
-      if (dropzoneText) dropzoneText.textContent = 'Haz clic o arrastra para subir foto del baucher bancario';
+      if (dropzoneText) dropzoneText.textContent = i18n('ops.payments.hazClicOArrastra', 'Haz clic o arrastra para subir foto del baucher bancario');
     }
   }
 

@@ -168,10 +168,12 @@
         '</div>' +
         '<h4 style="font-family:League Spartan,sans-serif;font-size:1rem;font-weight:700;color:#0B253A;margin:0 0 8px">' + esc(d.title) + '</h4>' +
         '<p style="font-size:.85rem;color:#475569;margin:0 0 10px">' + esc(d.desc) + '</p>' +
-        '<div class="day-extra-tag">' + esc(d.extra) + '</div>' +
+        (d.extra ? '<div class="day-extra-tag">' + esc(d.extra) + '</div>' : '') +
+        (d.link ? '<a class="day-dest-link" href="' + esc(d.link) + '" style="display:inline-flex;gap:6px;align-items:center;margin:0 0 10px;color:#165D6F;font-weight:700;font-size:.82rem"><i class="fa-solid fa-book-open"></i> ' + esc(tr('trip.viewPlace', 'Ver ficha del destino')) + '</a>' : '') +
         '<div class="day-stats-row">' +
-          '<span class="day-stat"><i class="fa-solid fa-car"></i> ' + d.km + ' km</span>' +
-          '<span class="day-stat"><i class="fa-regular fa-clock"></i> ' + d.hours + ' h</span>' +
+          // km y horas solo cuando se conocen (los destinos guardados desde el catálogo no los traen).
+          (d.km != null && d.km !== '' ? '<span class="day-stat"><i class="fa-solid fa-car"></i> ' + esc(d.km) + ' km</span>' : '') +
+          (d.hours != null && d.hours !== '' ? '<span class="day-stat"><i class="fa-regular fa-clock"></i> ' + esc(d.hours) + ' h</span>' : '') +
           '<span class="day-stat">' + esc(tr('trip.costLabel', 'Costo:')) + ' <strong>' + esc(d.cost || tr('trip.toConfirm', 'Por confirmar')) + '</strong></span>' +
         '</div>' +
         '<div class="viaje-action-row">' +
@@ -193,7 +195,7 @@
   function renderWeather() {
     var el = document.getElementById('weatherWidget');
     if (!el) return;
-    var day = trip.days && trip.days.filter(function (d) { return isFinite(Number(d.lat)) && isFinite(Number(d.lng)); })[0];
+    var day = trip.days && trip.days.filter(function (d) { return d.lat != null && d.lng != null && isFinite(Number(d.lat)) && isFinite(Number(d.lng)); })[0];
     function paint(html) { el.innerHTML = '<div class="weather-card">' + html + '</div>'; }
     var head = '<div class="weather-header"><i class="fa-solid fa-cloud-sun" style="color:#F65E01" aria-hidden="true"></i><strong>' + esc(tr('trip.weatherTitle', 'Clima en tu ruta')) + '</strong></div>';
     if (!day) { weatherState = null; paint(head + '<p class="weather-cond">' + esc(tr('trip.weatherNoPlace', 'Agregá destinos a tu viaje para ver el pronóstico.')) + '</p>'); return; }
@@ -226,9 +228,12 @@
     var day = null;
     for (var i = 0; i < trip.days.length; i++) { if (trip.days[i].id === dayId) { day = trip.days[i]; break; } }
     if (!day) return;
+    var hasCoords = day.lat != null && day.lng != null && isFinite(Number(day.lat)) && isFinite(Number(day.lng));
     try { sessionStorage.setItem('baqueano_map_focus', JSON.stringify({ lat: day.lat, lng: day.lng, title: day.title })); } catch(e) {}
     toast('Abriendo mapa → ' + day.location, 'info');
-    window.open('https://www.google.com/maps/search/?api=1&query=' + day.lat + ',' + day.lng, '_blank', 'noopener');
+    // Sin coordenadas verificadas se abre el mapa de BAQUEANO buscando por nombre (no se inventa un punto).
+    if (hasCoords) window.open('https://www.google.com/maps/search/?api=1&query=' + day.lat + ',' + day.lng, '_blank', 'noopener');
+    else window.location.href = 'mapa.html?q=' + encodeURIComponent(day.title);
   };
 
   window.saveDay = function(dayId, btn) {
@@ -461,7 +466,11 @@
       attribution: '&copy; OpenStreetMap contributors', maxZoom: 18
     }).addTo(bqMap);
     var seenSpots = {};
-    trip.days.forEach(function(day) {
+    // 2026-10-09: los destinos agregados desde el catálogo pueden no tener coordenadas verificadas;
+    // solo se dibujan los que sí (antes day.lat.toFixed rompía el mapa con null).
+    var mapped = trip.days.filter(function (d) { return d.lat != null && d.lng != null && isFinite(Number(d.lat)) && isFinite(Number(d.lng)); });
+    mapped.forEach(function(day) {
+      day = Object.assign({}, day, { lat: Number(day.lat), lng: Number(day.lng) });
       // Días en el mismo lugar: el pin se desplaza para que cada uno se pueda tocar (WCAG 2.5.8).
       var spot = day.lat.toFixed(4) + ',' + day.lng.toFixed(4);
       var stacked = seenSpots[spot] || 0;
@@ -474,8 +483,9 @@
       L.marker([day.lat, day.lng], { icon: icon }).addTo(bqMap)
         .bindPopup('<strong>Día ' + day.id + '</strong><br>' + day.location + '<br><small>' + day.title + '</small>');
     });
-    var coords = trip.days.map(function(d) { return [d.lat, d.lng]; });
-    L.polyline(coords, { color: '#F65E01', weight: 3, opacity: .7, dashArray: '8 6' }).addTo(bqMap);
+    var coords = mapped.map(function(d) { return [Number(d.lat), Number(d.lng)]; });
+    if (coords.length > 1) L.polyline(coords, { color: '#F65E01', weight: 3, opacity: .7, dashArray: '8 6' }).addTo(bqMap);
+    if (coords.length) bqMap.fitBounds(coords, { padding: [40, 40], maxZoom: 11 });
   }
 
   // ─── Init ──────────────────────────────────────────────────────────────────

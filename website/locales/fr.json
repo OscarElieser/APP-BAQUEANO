@@ -787,7 +787,9 @@
     "priceToConfirm": "Prix à confirmer",
     "mapItemUnverified": "Non vérifié sur BAQUEANO · prix et note à confirmer",
     "mapItemVerified": "Partenaire avec source vérifiable · prix à confirmer",
-    "pdfSummaryStops": "{n} étapes · {places}"
+    "pdfSummaryStops": "{n} étapes · {places}",
+    "stopBadge": "Destination enregistrée",
+    "viewPlace": "Voir la fiche de la destination"
   },
   "profile": {
     "title": "Mon profil",
@@ -2986,7 +2988,41 @@
       },
       "featuredRowTitle": "Lieux à la une",
       "featuredLabel": "Destinations à la une en mouvement",
-      "viewAllN": "Voir les {n} destinations"
+      "viewAllN": "Voir les {n} destinations",
+      "sortVerified": "Vérifiés d'abord",
+      "sortAZ": "Nom (A–Z)",
+      "sortDepartment": "Par département",
+      "pageInfo": "Affichage de {from}–{to} sur {total} destinations",
+      "pageN": "Page {n}",
+      "noResults": "Aucune destination ne correspond à ces filtres. Essayez une autre catégorie ou un autre département.",
+      "allCtaTitle": "Explorez le catalogue complet",
+      "allCtaText": "Tous les lieux publiés des 17 territoires, avec leur statut de vérification et des filtres par département et catégorie.",
+      "cardNumber": "Destination {n} sur {total}",
+      "detail": {
+        "kicker": "Destination BAQUEANO",
+        "lead": "Informations pratiques pour planifier une visite responsable et contacter directement les prestataires locaux.",
+        "access": "Comment y aller",
+        "duration": "Durée conseillée",
+        "price": "Prix indicatif",
+        "before": "Avant de partir",
+        "defaultAccess": "Consultez la carte pour un itinéraire depuis votre position",
+        "defaultDuration": "Selon le point de départ",
+        "defaultPrice": "À confirmer avec le prestataire",
+        "defaultBefore": "Vérifier la météo, l'accès et la disponibilité",
+        "noteStrong": "Conseil responsable :",
+        "note": "horaires, tarifs, accès et conditions peuvent changer. Confirmez-les avant de voyager.",
+        "route": "Itinéraire et emplacement",
+        "contact": "Contacter sur WhatsApp",
+        "trip": "Ajouter à Mon voyage",
+        "added": "Dans Mon voyage",
+        "addedToast": "{name} ajouté à Mon voyage.",
+        "territory": "Voir la fiche du territoire",
+        "close": "Fermer",
+        "waMessage": "Bonjour, je souhaite des informations à jour sur {name} depuis BAQUEANO"
+      },
+      "tripIn": "✓ Dans Mon voyage",
+      "tripRemoved": "{name} a été retiré de Mon voyage.",
+      "tripStorageError": "Impossible d'enregistrer dans ce navigateur."
     },
     "experiencias": {
       "body": {
@@ -3535,7 +3571,7 @@
             "milestone": "Pionnier de l’art public de la capitale et bras droit de Peñalba aux Beaux-Arts ; il a sculpté des reliefs et des figures qui documentent le métissage et l’anatomie vernaculaire du Pacifique."
           },
           "bacon": {
-            "milestone": "Pionnière de la danse contemporaine afro-caribéenne et des danses de salon caribéennes ; elle a relié le folklore du Palo de Mayo (Maypole) et les rythmes de la côte caraïbe aux scènes du Pacifique."
+            "milestone": "Danseuse, chorégraphe, professeure de danse contemporaine et promotrice culturelle nicaraguayenne. Fondatrice de l'École de Danse Espacio Abierto et du Festival International de Danse Contemporaine. Décorée de l'Ordre de l'Indépendance Culturelle Rubén Darío en 2008."
           },
           "lopez": {
             "milestone": "Référence nationale dans la recherche et la systématisation des sones de marimba, des danzas de negras, des bailes de húngaras et du métissage chorégraphique de Monimbó et Masaya."
@@ -3920,6 +3956,23 @@
       },
       "drawerImg": {
         "imgAlt1": "Destination"
+      },
+      "atlas": {
+        "cat": {
+          "all": "Tous",
+          "volcan": "Volcans",
+          "playa": "Plages",
+          "agua": "Rivières, lacs et cascades",
+          "naturaleza": "Nature",
+          "cultura": "Culture et histoire",
+          "comunidad": "Tourisme communautaire",
+          "hospedaje": "Hébergements"
+        },
+        "approx": "Emplacement approximatif : confirmez l'accès auprès de la communauté ou du prestataire.",
+        "directions": "Itinéraire",
+        "missingNote": "{n} lieux publiés n'ont pas encore de coordonnées vérifiées et ne sont pas affichés.",
+        "statPlaces": "lieux sur la carte",
+        "empty": "Aucun lieu ne correspond à ce filtre."
       }
     },
     "miNegocio": {
@@ -4591,6 +4644,13 @@
           "title": "Technologie responsable",
           "text": "Nous utilisons la technologie et l'intelligence artificielle pour rapprocher, non pour remplacer, et nous protégeons les données de chacun."
         }
+      },
+      "logoSuite": {
+        "title": "Nos logos",
+        "blackWordmark": "Logotype noir",
+        "blackIcon": "Symbole noir",
+        "colorWordmark": "Logotype en couleur",
+        "colorIcon": "Symbole en couleur"
       }
     },
     "offline": {
@@ -6611,7 +6671,19 @@
     "lifecycle": "Publication et vérification",
     "verifySource": "Comment cela a été vérifié (obligatoire)",
     "verifyEvidence": "Preuve (lien, facultatif)",
-    "verifyNext": "Prochaine révision (le sceau expire ce jour-là)"
+    "verifyNext": "Prochaine révision (le sceau expire ce jour-là)",
+    "colActions": "Actions",
+    "actionsFor": "Actions pour {name}",
+    "edit": "Modifier",
+    "view": "Voir",
+    "suspend": "Suspendre",
+    "suspendHint": "Suspendre : n'apparaît plus sur le site ni sur la carte",
+    "activate": "Activer",
+    "activateHint": "Activer : publié sur le site et la carte",
+    "delete": "Supprimer",
+    "deleteHint": "Supprimer : archivé, il peut être restauré",
+    "confirm": "Confirmer",
+    "deleteConfirm": "Supprimer « {name} » ? Il sera archivé : masqué du site et de la carte, et vous pourrez le restaurer depuis « Archivés ». Touchez « Confirmer » pour continuer."
   },
   "opsReservations": {
     "title": "Réservations par WhatsApp et téléphone",

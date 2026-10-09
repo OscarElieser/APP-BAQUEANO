@@ -52,8 +52,26 @@
     // 📦 QUÉ: ninguna sección queda vacía ni con huecos.
     const catalogRows = [...document.querySelectorAll('.destinos-catalog-row')];
     const rowCapacity = 5;
-    const pageSize = Math.max(rowCapacity, catalogRows.length * rowCapacity);
+    // 2026-10-09 (pedido del propietario): todos-los-destinos.html es un catálogo
+    // paginado propio — UNA sola grilla de 12 tarjetas por página con el diseño de
+    // tarjeta de BAQUEANO, sin precios ni calificaciones sin fuente.
+    const isAllMode = document.documentElement.getAttribute('data-destinos-mode') === 'all';
+    const pageSize = isAllMode ? 12 : Math.max(rowCapacity, catalogRows.length * rowCapacity);
     const state = { query: '', category: 'todos', department: '', price: '', rating: 0, verified: false, favoritesOnly: false, page: 1 };
+    const i18n = (key, fallback, vars) => {
+      let out = fallback;
+      try { out = (window.BaqueanoLanguage && window.BaqueanoLanguage.t(key, { fallback })) || fallback; } catch (_) { out = fallback; }
+      return String(out).replace(/\{(\w+)\}/g, (match, name) => (vars && vars[name] != null ? vars[name] : match));
+    };
+
+    if (isAllMode && catalogRows.length > 1) {
+      cards.forEach((card) => catalogRows[0].appendChild(card));
+      catalogRows.slice(1).forEach((row) => {
+        row.hidden = true;
+        const header = row.previousElementSibling;
+        if (header && header.classList.contains('section-header-exact')) header.hidden = true;
+      });
+    }
 
     allCards.forEach((card, index) => {
       const title = card.querySelector('h4')?.textContent.trim() || `Destino ${index + 1}`;
@@ -71,6 +89,7 @@
       card.dataset.price = String(price);
       // "Solo verificados" = verificación real de la fuente, nunca una calificación alta.
       card.dataset.verified = card.dataset.verification === 'verified' ? 'true' : 'false';
+      card.dataset.order = String(index);
     });
 
     function inferCategory(title) {
@@ -113,16 +132,19 @@
       state.page = Math.min(state.page, maxPage);
       cards.forEach((card) => { card.hidden = true; });
       const pageCards = filtered.slice((state.page - 1) * pageSize, state.page * pageSize);
+      // appendChild en orden reconstruye el orden vigente (filtro u orden elegido).
+      if (isAllMode) cards.forEach((card) => catalogRows[0]?.appendChild(card));
+      // 2026-10-09 (pedido del propietario): cada destino lleva su número dentro de la lista
+      // vigente («13 / 237») para que el visitante sepa siempre en qué parte del catálogo va.
+      if (isAllMode) filtered.forEach((card, index) => numberCard(card, index + 1, filtered.length));
       pageCards.forEach((card, index) => {
         card.hidden = false;
-        const row = catalogRows[Math.min(catalogRows.length - 1, Math.floor(index / rowCapacity))];
-        // appendChild en orden reconstruye el orden original aunque un filtro
-        // anterior haya movido la tarjeta de fila.
+        const row = isAllMode ? catalogRows[0] : catalogRows[Math.min(catalogRows.length - 1, Math.floor(index / rowCapacity))];
         if (row) row.appendChild(card);
       });
       // Una fila sin tarjetas visibles se oculta junto con su título.
       catalogRows.forEach((row, index) => {
-        if (index === 0) return;
+        if (index === 0 || isAllMode) return;
         const empty = ![...row.children].some((child) => !child.hidden);
         row.hidden = empty;
         const header = row.previousElementSibling;
@@ -133,6 +155,21 @@
       renderPagination(filtered.length);
       updateResultCount(filtered.length);
       updateUrl();
+    }
+
+    function numberCard(card, position, total) {
+      const media = card.querySelector('.dest-catalog-media');
+      if (!media) return;
+      let badge = media.querySelector('.dest-card-number');
+      if (!badge) {
+        badge = document.createElement('span'); badge.className = 'dest-card-number';
+        badge.append(document.createElement('b'), document.createElement('small'));
+        media.appendChild(badge);
+      }
+      badge.firstChild.textContent = position;
+      badge.lastChild.textContent = '/' + total;
+      badge.setAttribute('aria-label', i18n('pages.destinos.cardNumber', 'Destino {n} de {total}', { n: position, total }));
+      badge.setAttribute('role', 'img');
     }
 
     function updateResultCount(count) {
@@ -146,6 +183,7 @@
       state.query ? url.searchParams.set('q', state.query) : url.searchParams.delete('q');
       state.category !== 'todos' ? url.searchParams.set('categoria', state.category) : url.searchParams.delete('categoria');
       state.page > 1 ? url.searchParams.set('pagina', state.page) : url.searchParams.delete('pagina');
+      state.sort && state.sort !== 'verified' ? url.searchParams.set('orden', state.sort) : url.searchParams.delete('orden');
       history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
     }
 
@@ -216,16 +254,25 @@
       );
     });
 
-    document.querySelector('.dest-order-select')?.addEventListener('change', (event) => {
-      const mode = event.target.selectedIndex;
-      document.querySelectorAll('.destinos-catalog-row').forEach((row) => {
-        [...row.querySelectorAll('.dest-catalog-card')].sort((a, b) => {
-          if (mode === 1) return Number(b.dataset.rating) - Number(a.dataset.rating);
-          if (mode === 2) return Number(a.dataset.price) - Number(b.dataset.price);
-          if (mode === 3) return Number(b.dataset.price) - Number(a.dataset.price);
-          return Number(b.dataset.rating) - Number(a.dataset.rating);
-        }).forEach((card) => row.appendChild(card));
+    // Orden con datos reales: verificación de la fuente, nombre o departamento.
+    // (Antes reordenaba el DOM pero la paginación seguía el orden original, y
+    // ordenaba por calificación/precio que no existen → no hacía nada.)
+    const VERIFICATION_RANK = { verified: 0, partial: 1 };
+    const SORT_MODES = ['verified', 'az', 'department'];
+    function sortCards(mode) {
+      state.sort = SORT_MODES.includes(mode) ? mode : 'verified';
+      const byOrder = (a, b) => Number(a.dataset.order) - Number(b.dataset.order);
+      const byName = (a, b) => a.dataset.title.localeCompare(b.dataset.title, 'es');
+      cards.sort((a, b) => {
+        if (state.sort === 'az') return byName(a, b);
+        if (state.sort === 'department') return a.dataset.location.localeCompare(b.dataset.location, 'es') || byName(a, b);
+        const rank = (card) => VERIFICATION_RANK[card.dataset.verification] ?? 2;
+        return rank(a) - rank(b) || byOrder(a, b);
       });
+    }
+    document.querySelector('.dest-order-select')?.addEventListener('change', (event) => {
+      sortCards(event.target.value);
+      state.page = 1;
       applyFilters();
     });
 
@@ -240,7 +287,37 @@
       if (view !== 'list') setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
     }));
 
+    // Páginas visibles: primera, última y vecinas de la actual; el resto con «…»
+    // (con 237 destinos eran 24 botones seguidos).
+    function visiblePages(pages, current) {
+      // En celular solo primera, actual y última (‹ 1 … 7 … 20 ›) para que entre en un renglón.
+      const narrow = window.matchMedia('(max-width: 520px)').matches;
+      if (pages <= (narrow ? 5 : 7)) return Array.from({ length: pages }, (_, i) => i + 1);
+      const keep = new Set(narrow ? [1, pages, current] : [1, pages, current - 1, current, current + 1]);
+      if (!narrow && current <= 4) [2, 3, 4, 5].forEach((p) => keep.add(p));
+      if (!narrow && current >= pages - 3) [pages - 1, pages - 2, pages - 3, pages - 4].forEach((p) => keep.add(p));
+      if (narrow && current <= 2) keep.add(2);
+      if (narrow && current >= pages - 1) keep.add(pages - 1);
+      const list = [...keep].filter((p) => p >= 1 && p <= pages).sort((a, b) => a - b);
+      return list.flatMap((p, i) => (i && p - list[i - 1] > 1 ? ['…', p] : [p]));
+    }
+
+    function renderPageInfo(total) {
+      const info = document.querySelector('.destinos-page-info');
+      if (!info) return;
+      if (!total) { info.textContent = i18n('pages.destinos.noResults', 'No encontramos destinos con esos filtros. Probá con otra categoría o departamento.'); return; }
+      const from = (state.page - 1) * pageSize + 1;
+      info.textContent = i18n('pages.destinos.pageInfo', 'Mostrando {from}–{to} de {total} destinos', { from, to: Math.min(total, state.page * pageSize), total });
+    }
+
+    function goToPage(page) {
+      state.page = page; applyFilters();
+      const anchor = isAllMode ? document.getElementById('todosDestinosGrid') : document.querySelector('.destinos-pagination-wrap');
+      anchor?.scrollIntoView({ behavior: 'smooth', block: isAllMode ? 'start' : 'center' });
+    }
+
     function renderPagination(total) {
+      renderPageInfo(total);
       const wrap = document.querySelector('.destinos-pagination-wrap');
       if (!wrap) return;
       const pages = Math.max(1, Math.ceil(total / pageSize));
@@ -248,17 +325,24 @@
       // Con una sola página no hay nada que paginar.
       wrap.hidden = pages <= 1;
       if (pages <= 1) return;
-      const addButton = (label, page, ariaLabel, disabled) => {
-        const button = document.createElement('button'); button.type = 'button'; button.className = 'pagination-btn';
-        button.textContent = label; button.disabled = disabled; if (ariaLabel) button.setAttribute('aria-label', ariaLabel);
-        if (page === state.page && !ariaLabel) { button.classList.add('active'); button.setAttribute('aria-current', 'page'); }
-        button.addEventListener('click', () => { state.page = page; applyFilters(); wrap.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+      const addButton = (label, page, ariaLabel, disabled, extraClass) => {
+        const button = document.createElement('button'); button.type = 'button'; button.className = `pagination-btn${extraClass ? ` ${extraClass}` : ''}`;
+        button.textContent = label; button.disabled = disabled; button.setAttribute('aria-label', ariaLabel);
+        if (page === state.page && !extraClass) { button.classList.add('active'); button.setAttribute('aria-current', 'page'); }
+        button.addEventListener('click', () => goToPage(page));
         wrap.appendChild(button);
       };
-      addButton('‹', Math.max(1, state.page - 1), 'Página anterior', state.page === 1);
-      for (let page = 1; page <= pages; page += 1) addButton(String(page), page, '', false);
-      addButton('›', Math.min(pages, state.page + 1), 'Página siguiente', state.page === pages);
+      addButton('‹', Math.max(1, state.page - 1), i18n('actions.prevPage', 'Página anterior'), state.page === 1, 'pagination-step');
+      visiblePages(pages, state.page).forEach((page) => {
+        if (page === '…') {
+          const gap = document.createElement('span'); gap.className = 'pagination-gap'; gap.setAttribute('aria-hidden', 'true');
+          gap.append('…'); wrap.appendChild(gap); return;
+        }
+        addButton(String(page), page, i18n('pages.destinos.pageN', 'Página {n}', { n: page }), false, '');
+      });
+      addButton('›', Math.min(pages, state.page + 1), i18n('actions.nextPage', 'Página siguiente'), state.page === pages, 'pagination-step');
     }
+    if (isAllMode) window.addEventListener('baqueano:languageChanged', () => renderPagination(cards.filter(matches).length));
 
     function toggleSaved(button, key, addedText) {
       const card = button.closest('article'); const id = card?.dataset.destinationId; if (!id) return;
@@ -271,9 +355,35 @@
       toast(exists ? 'Destino eliminado.' : addedText);
     }
     document.querySelectorAll('.dest-highlight-heart').forEach((button) => button.addEventListener('click', () => toggleSaved(button, 'baqueano-favorites', 'Destino guardado en favoritos.')));
+    // 2026-10-09: «+ Mi viaje» escribe en el viaje real que lee mi-viaje.html (js/baqueano-trip-store.js),
+    // con nombre, territorio, descripción, enlace y coordenadas reales de la tarjeta. Antes guardaba
+    // solo el id en otra clave (`baqueano-trip`) y Mi viaje nunca lo veía.
+    const tripStore = window.BaqueanoTrip || null;
+    const tripLabel = (inTrip) => (inTrip ? i18n('pages.destinos.tripIn', '✓ En Mi viaje') : i18n('pages.destinos.destCatalogCard.button1', '+ Mi viaje'));
+    function stopFromCard(card) {
+      return {
+        destId: card.dataset.destinationId, name: card.querySelector('h4')?.textContent.trim() || '',
+        location: card.querySelector('.location')?.textContent.trim() || '',
+        desc: card.querySelector('.dest-live-desc')?.textContent.trim() || '',
+        lat: card.dataset.lat, lng: card.dataset.lng,
+        link: card.querySelector('.dest-btn-green')?.getAttribute('href') || '',
+        image: card.querySelector('.dest-catalog-media img')?.getAttribute('src') || ''
+      };
+    }
+    function paintTripButton(button, inTrip) {
+      button.classList.toggle('active', inTrip); button.setAttribute('aria-pressed', String(inTrip));
+      button.textContent = tripLabel(inTrip);
+    }
+    window.__bqTripFromCard = stopFromCard;
     document.querySelectorAll('.dest-btn-subtle').forEach((button) => button.addEventListener('click', () => {
-      toggleSaved(button, 'baqueano-trip', 'Destino agregado a Mi Viaje.');
-      button.textContent = button.classList.contains('active') ? '✓ En Mi viaje' : '+ Mi viaje';
+      const card = button.closest('article'); if (!card) return;
+      if (!tripStore) { toggleSaved(button, 'baqueano-trip', 'Destino agregado a Mi Viaje.'); return; }
+      const stop = stopFromCard(card);
+      const inTrip = tripStore.has(stop.destId);
+      const ok = inTrip ? tripStore.remove(stop.destId) : tripStore.add(stop);
+      if (!ok) { toast(i18n('pages.destinos.tripStorageError', 'No fue posible guardar en este navegador.')); return; }
+      paintTripButton(button, !inTrip);
+      toast(inTrip ? i18n('pages.destinos.tripRemoved', '{name} se quitó de Mi viaje.', { name: stop.name }) : i18n('pages.destinos.detail.addedToast', '{name} agregado a Mi Viaje.', { name: stop.name }));
     }));
 
     const savedFavoriteIds = favoriteIds();
@@ -282,18 +392,32 @@
       button.classList.toggle('active', saved); button.setAttribute('aria-pressed', String(saved));
       const icon = button.querySelector('i'); if (icon && saved) icon.className = 'fa-solid fa-heart';
     });
-    const tripIds = safeStorage.read('baqueano-trip');
+    // Recupera lo que quedó en la clave vieja (`baqueano-trip`, solo ids) cuando la tarjeta existe.
+    if (tripStore) {
+      const legacy = tripStore.legacyIds();
+      if (Array.isArray(legacy) && legacy.length) {
+        const pending = legacy.filter((id) => {
+          const card = allCards.find((c) => c.dataset.destinationId === id);
+          if (card) { tripStore.add(stopFromCard(card)); return false; }
+          return true;
+        });
+        if (!pending.length) tripStore.clearLegacyIds(); else safeStorage.write('baqueano-trip', pending);
+      }
+    }
+    const tripIds = tripStore ? null : safeStorage.read('baqueano-trip');
     document.querySelectorAll('.dest-btn-subtle').forEach((button) => {
-      const saved = tripIds.includes(button.closest('article')?.dataset.destinationId);
-      button.classList.toggle('active', saved); button.setAttribute('aria-pressed', String(saved));
-      if (saved) button.textContent = '✓ En Mi viaje';
+      const id = button.closest('article')?.dataset.destinationId;
+      const saved = tripStore ? tripStore.has(id) : tripIds.includes(id);
+      if (saved) paintTripButton(button, true);
     });
 
     document.querySelectorAll('.dest-btn-green, .destinos-preview-btn').forEach((link) => link.addEventListener('click', (event) => {
       const card = link.closest('article, .destinos-map-preview-card'); if (!card) return;
       event.preventDefault(); openDetails(card);
     }));
-    document.querySelectorAll('.section-header-link').forEach((link) => link.addEventListener('click', (event) => {
+    // El enlace al catálogo completo (data-destinos-all-link) navega de verdad;
+    // antes este manejador lo cancelaba y «Ver los N destinos» no abría la página.
+    document.querySelectorAll('.section-header-link:not([data-destinos-all-link])').forEach((link) => link.addEventListener('click', (event) => {
       event.preventDefault(); state.query = ''; state.category = 'todos'; state.department = ''; state.price = ''; state.rating = 0; state.page = 1;
       if (searchInput) searchInput.value = ''; categoryButtons.forEach((item, index) => item.classList.toggle('active', index === 0)); applyFilters();
     }));
@@ -314,7 +438,94 @@
         'Laguna de Apoyo': { access:'Desvío entre Masaya y Granada', duration:'Medio día o día completo', price:'Depende del acceso o establecimiento', best:'Confirmar acceso, clima y normas locales', contact:'50584431289' },
         'Corn Island': { access:'Vuelo nacional o conexión marítima confirmada', duration:'3–5 días', price:'Variable según transporte y temporada', best:'Revisar condiciones marítimas', contact:'50584431289' }
       };
-      const info = detailByDestination[title] || { access:'Consultá el mapa para una ruta desde tu ubicación', duration:'Según punto de partida', price:'Confirmar con el prestador', best:'Verificar clima, acceso y disponibilidad', contact:'50584431289' };
+      const info = detailByDestination[title] || {
+        access: i18n('pages.destinos.detail.defaultAccess', 'Consultá el mapa para una ruta desde tu ubicación'),
+        duration: i18n('pages.destinos.detail.defaultDuration', 'Según punto de partida'),
+        price: i18n('pages.destinos.detail.defaultPrice', 'Confirmar con el prestador'),
+        best: i18n('pages.destinos.detail.defaultBefore', 'Verificar clima, acceso y disponibilidad'),
+        contact: '50584431289'
+      };
+      // 2026-10-09 (pedido del propietario: «más bonito y que se vea completo, que no se corte nada»):
+      // foto más baja con el título encima, cuerpo con desplazamiento propio y acciones fijas al pie
+      // dentro de la altura visible. Datos reales de la tarjeta: categoría, verificación, descripción
+      // y enlace a la ficha del territorio. Todo con textContent y claves i18n.
+      const make = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text != null) node.textContent = text; return node; };
+      const iconEl = (name) => { const i = make('i', name); i.setAttribute('aria-hidden', 'true'); return i; };
+      const dialog = make('dialog', 'dest-detail-dialog is-v2');
+      dialog.setAttribute('aria-labelledby', 'destDetailTitle');
+      const closeBtn = make('button', 'dest-dialog-close', '×'); closeBtn.type = 'button';
+      closeBtn.setAttribute('aria-label', i18n('pages.destinos.detail.close', 'Cerrar'));
+      const hero = make('header', 'dest-detail-hero');
+      if (image) { const img = make('img'); img.src = image; img.alt = ''; img.decoding = 'async'; hero.appendChild(img); }
+      const heroText = make('div', 'dest-detail-hero-text');
+      const kicker = make('span', 'dest-dialog-kicker', i18n('pages.destinos.detail.kicker', 'Destino BAQUEANO'));
+      const tag = card.querySelector('.dest-catalog-tag')?.textContent.trim();
+      const h2 = make('h2', '', title); h2.id = 'destDetailTitle'; h2.setAttribute('translate', 'no');
+      const where = make('p', 'dest-detail-where'); where.append(iconEl('fa-solid fa-location-dot'), ' ' + location);
+      heroText.append(kicker, h2, where);
+      if (card.querySelector('.dest-live-photo-note')) heroText.appendChild(make('span', 'dest-detail-photo-note', card.querySelector('.dest-live-photo-note').textContent.trim()));
+      hero.appendChild(heroText);
+      const body = make('div', 'dest-detail-body');
+      const chips = make('div', 'dest-detail-chips');
+      if (tag) chips.appendChild(make('span', 'dest-detail-chip is-kind', tag));
+      const seal = card.querySelector('.dest-live-verification');
+      if (seal) { const s = make('span', 'dest-detail-chip ' + (seal.classList.contains('is-verified') ? 'is-verified' : 'is-pending')); s.append(iconEl('fa-solid ' + (seal.classList.contains('is-verified') ? 'fa-circle-check' : 'fa-clock')), ' ' + seal.textContent.trim()); chips.appendChild(s); }
+      if (chips.children.length) body.appendChild(chips);
+      const desc = card.querySelector('.dest-live-desc')?.textContent.trim();
+      body.appendChild(make('p', 'dest-detail-lead', desc || i18n('pages.destinos.detail.lead', 'Información práctica para planificar una visita responsable y conectar directamente con prestadores locales.')));
+      const facts = make('div', 'bq-destination-facts');
+      [['fa-route', 'pages.destinos.detail.access', 'Cómo llegar', info.access], ['fa-clock', 'pages.destinos.detail.duration', 'Tiempo recomendado', info.duration],
+        ['fa-coins', 'pages.destinos.detail.price', 'Precio orientativo', info.price], ['fa-cloud-sun', 'pages.destinos.detail.before', 'Antes de salir', info.best]].forEach(([ic, key, label, value]) => {
+        const fact = make('div', 'bq-destination-fact');
+        const small = make('small'); small.append(iconEl('fa-solid ' + ic), ' ' + i18n(key, label));
+        fact.append(small, make('strong', '', value));
+        facts.appendChild(fact);
+      });
+      body.appendChild(facts);
+      const note = make('p', 'bq-destination-note');
+      note.append(make('strong', '', i18n('pages.destinos.detail.noteStrong', 'Dato responsable:')), ' ' + i18n('pages.destinos.detail.note', 'horarios, tarifas, accesos y condiciones pueden cambiar. Confirmalos antes de viajar.'));
+      body.appendChild(note);
+      const territoryHref = card.querySelector('.dest-btn-green')?.getAttribute('href');
+      if (territoryHref && territoryHref.indexOf('departamento.html') === 0) {
+        const more = make('a', 'dest-detail-more'); more.href = territoryHref;
+        more.append(iconEl('fa-solid fa-book-open'), ' ' + i18n('pages.destinos.detail.territory', 'Ver ficha del territorio'), ' ', iconEl('fa-solid fa-arrow-right'));
+        body.appendChild(more);
+      }
+      const actions = make('footer', 'dest-detail-actions');
+      const route = make('a', 'dest-detail-btn is-route'); route.href = 'mapa.html?q=' + encodeURIComponent(title);
+      route.append(iconEl('fa-solid fa-map-location-dot'), ' ' + i18n('pages.destinos.detail.route', 'Ver ruta y ubicación'));
+      const wa = make('a', 'dest-detail-btn is-whatsapp'); wa.target = '_blank'; wa.rel = 'noopener';
+      wa.href = 'https://wa.me/' + info.contact + '?text=' + encodeURIComponent(i18n('pages.destinos.detail.waMessage', 'Hola, deseo información actualizada sobre {name} desde BAQUEANO', { name: title }));
+      wa.append(iconEl('fa-brands fa-whatsapp'), ' ' + i18n('pages.destinos.detail.contact', 'Contactar por WhatsApp'));
+      const trip = make('button', 'dest-detail-btn is-trip'); trip.type = 'button';
+      const store = window.BaqueanoTrip;
+      const inTrip = store ? store.has(card.dataset.destinationId) : safeStorage.read('baqueano-trip').includes(card.dataset.destinationId);
+      trip.append(iconEl('fa-solid ' + (inTrip ? 'fa-check' : 'fa-route')), ' ' + (inTrip ? i18n('pages.destinos.detail.added', 'En Mi Viaje') : i18n('pages.destinos.detail.trip', 'Agregar a Mi Viaje')));
+      trip.disabled = inTrip;
+      trip.addEventListener('click', () => {
+        if (store && window.__bqTripFromCard) {
+          if (!store.add(window.__bqTripFromCard(card))) { toast(i18n('pages.destinos.tripStorageError', 'No fue posible guardar en este navegador.')); return; }
+        } else {
+          const list = safeStorage.read('baqueano-trip');
+          if (!list.includes(card.dataset.destinationId)) list.push(card.dataset.destinationId);
+          safeStorage.write('baqueano-trip', list);
+        }
+        const cardBtn = card.querySelector('.dest-btn-subtle');
+        if (cardBtn) { cardBtn.classList.add('active'); cardBtn.setAttribute('aria-pressed', 'true'); cardBtn.textContent = i18n('pages.destinos.tripIn', '✓ En Mi viaje'); }
+        trip.replaceChildren(iconEl('fa-solid fa-check'), ' ' + i18n('pages.destinos.detail.added', 'En Mi Viaje')); trip.disabled = true;
+        toast(i18n('pages.destinos.detail.addedToast', '{name} agregado a Mi Viaje.', { name: title }));
+      });
+      actions.append(route, wa, trip);
+      dialog.append(closeBtn, hero, body, actions);
+      document.body.appendChild(dialog); closeBtn.addEventListener('click', () => dialog.close());
+      dialog.addEventListener('close', () => dialog.remove()); dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); }); dialog.showModal();
+      closeBtn.focus();
+    }
+
+    // Versión anterior del detalle (hasta 2026-10-09), conservada como referencia por la regla de
+    // no eliminar; ya no se llama. La activa es openDetails (arriba).
+    // eslint-disable-next-line no-unused-vars
+    function openDetailsLegacy(card, title, image, location, info) {
       const dialog = document.createElement('dialog'); dialog.className = 'dest-detail-dialog';
       dialog.innerHTML = `<button type="button" class="dest-dialog-close" aria-label="Cerrar">×</button>${image ? `<img src="${image}" alt="${title}">` : ''}<div><span class="dest-dialog-kicker">DESTINO BAQUEANO</span><h2>${title}</h2><p><i class="fa-solid fa-location-dot"></i> ${location}</p><p>Información práctica para planificar una visita responsable y conectar directamente con prestadores locales.</p><div class="bq-destination-facts"><div class="bq-destination-fact"><small>Cómo llegar</small><strong>${info.access}</strong></div><div class="bq-destination-fact"><small>Tiempo recomendado</small><strong>${info.duration}</strong></div><div class="bq-destination-fact"><small>Precio orientativo</small><strong>${info.price}</strong></div><div class="bq-destination-fact"><small>Antes de salir</small><strong>${info.best}</strong></div></div><p class="bq-destination-note"><strong>Dato responsable:</strong> horarios, tarifas, accesos y condiciones pueden cambiar. Confirmalos antes de viajar.</p><div class="bq-destination-actions"><a href="mapa.html?q=${encodeURIComponent(title)}" class="dest-btn-green"><i class="fa-solid fa-map-location-dot"></i> Ver ruta y ubicación</a><a href="https://wa.me/${info.contact}?text=${encodeURIComponent('Hola, deseo información actualizada sobre '+title+' desde BAQUEANO')}" target="_blank" rel="noopener" class="dest-btn-green"><i class="fa-brands fa-whatsapp"></i> Contactar</a><button type="button" class="dest-btn-subtle bq-dialog-trip"><i class="fa-solid fa-route"></i> Agregar a Mi Viaje</button></div></div>`;
       document.body.appendChild(dialog); dialog.querySelector('.dest-dialog-close').addEventListener('click', () => dialog.close());
@@ -344,6 +555,11 @@
     state.query = params.get('q') || ''; state.category = params.get('categoria') || 'todos'; state.favoritesOnly = params.get('favs') === '1'; state.page = Math.max(1, Number(params.get('pagina')) || 1);
     if (searchInput) searchInput.value = state.query;
     categoryButtons.forEach((button) => button.classList.toggle('active', button.dataset.category === state.category));
+    if (isAllMode) {
+      sortCards(params.get('orden') || 'verified');
+      const orderSelect = document.querySelector('.dest-order-select');
+      if (orderSelect) orderSelect.value = state.sort;
+    }
     applyFilters();
   }));
 })();

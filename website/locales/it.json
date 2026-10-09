@@ -787,7 +787,9 @@
     "priceToConfirm": "Prezzo da confermare",
     "mapItemUnverified": "Non verificato su BAQUEANO · prezzo e valutazione da confermare",
     "mapItemVerified": "Partner con fonte verificabile · prezzo da confermare",
-    "pdfSummaryStops": "{n} tappe · {places}"
+    "pdfSummaryStops": "{n} tappe · {places}",
+    "stopBadge": "Destinazione salvata",
+    "viewPlace": "Vedi la scheda della destinazione"
   },
   "profile": {
     "title": "Il mio profilo",
@@ -2986,7 +2988,41 @@
       },
       "featuredRowTitle": "Luoghi in evidenza",
       "featuredLabel": "Destinazioni in evidenza in movimento",
-      "viewAllN": "Vedi le {n} destinazioni"
+      "viewAllN": "Vedi le {n} destinazioni",
+      "sortVerified": "Prima i verificati",
+      "sortAZ": "Nome (A–Z)",
+      "sortDepartment": "Per dipartimento",
+      "pageInfo": "Visualizzati {from}–{to} di {total} destinazioni",
+      "pageN": "Pagina {n}",
+      "noResults": "Nessuna destinazione con questi filtri. Prova un'altra categoria o un altro dipartimento.",
+      "allCtaTitle": "Esplora il catalogo completo",
+      "allCtaText": "Tutti i luoghi pubblicati dei 17 territori, con il loro stato di verifica e filtri per dipartimento e categoria.",
+      "cardNumber": "Destinazione {n} di {total}",
+      "detail": {
+        "kicker": "Destinazione BAQUEANO",
+        "lead": "Informazioni pratiche per pianificare una visita responsabile e contattare direttamente i fornitori locali.",
+        "access": "Come arrivare",
+        "duration": "Tempo consigliato",
+        "price": "Prezzo indicativo",
+        "before": "Prima di partire",
+        "defaultAccess": "Consulta la mappa per un percorso dalla tua posizione",
+        "defaultDuration": "In base al punto di partenza",
+        "defaultPrice": "Da confermare con il fornitore",
+        "defaultBefore": "Verifica meteo, accesso e disponibilità",
+        "noteStrong": "Consiglio responsabile:",
+        "note": "orari, tariffe, accessi e condizioni possono cambiare. Confermali prima di partire.",
+        "route": "Percorso e posizione",
+        "contact": "Contatta su WhatsApp",
+        "trip": "Aggiungi al Mio viaggio",
+        "added": "Nel Mio viaggio",
+        "addedToast": "{name} aggiunto al Mio viaggio.",
+        "territory": "Vedi la scheda del territorio",
+        "close": "Chiudi",
+        "waMessage": "Ciao, vorrei informazioni aggiornate su {name} da BAQUEANO"
+      },
+      "tripIn": "✓ Nel Mio viaggio",
+      "tripRemoved": "{name} è stato rimosso dal Mio viaggio.",
+      "tripStorageError": "Impossibile salvare in questo browser."
     },
     "experiencias": {
       "body": {
@@ -3535,7 +3571,7 @@
             "milestone": "Membro fondatore dell’arte pubblica della capitale e braccio destro di Peñalba alle Belle Arti; scolpì rilievi e figure che documentano il meticciato e l’anatomia vernacolare del Pacifico."
           },
           "bacon": {
-            "milestone": "Pioniera della danza contemporanea afrocaraibica e dei balli da sala caraibici; collegò il folclore del Palo de Mayo (Maypole) e i ritmi della Costa Caraibica con i palcoscenici del Pacifico."
+            "milestone": "Ballerina, coreografa, maestra di danza contemporanea e promotrice culturale nicaraguense. Fondatrice della Scuola di Danza Espacio Abierto e del Festival Internazionale di Danza Contemporanea. Insignita dell'Ordine dell'Indipendenza Culturale Rubén Darío nel 2008."
           },
           "lopez": {
             "milestone": "Riferimento nazionale nella ricerca e sistematizzazione dei sones de marimba, delle danzas de negras, dei bailes de húngaras e del meticciato coreografico di Monimbó e Masaya."
@@ -3920,6 +3956,23 @@
       },
       "drawerImg": {
         "imgAlt1": "Destinazione"
+      },
+      "atlas": {
+        "cat": {
+          "all": "Tutti",
+          "volcan": "Vulcani",
+          "playa": "Spiagge",
+          "agua": "Fiumi, laghi e cascate",
+          "naturaleza": "Natura",
+          "cultura": "Cultura e storia",
+          "comunidad": "Turismo comunitario",
+          "hospedaje": "Alloggi"
+        },
+        "approx": "Posizione approssimativa: conferma l'accesso con la comunità o il fornitore.",
+        "directions": "Indicazioni",
+        "missingNote": "{n} luoghi pubblicati non hanno ancora coordinate verificate e non vengono mostrati.",
+        "statPlaces": "luoghi sulla mappa",
+        "empty": "Nessun luogo con questo filtro."
       }
     },
     "miNegocio": {
@@ -4591,6 +4644,13 @@
           "title": "Tecnologia responsabile",
           "text": "Usiamo la tecnologia e l'intelligenza artificiale per avvicinare, non per sostituire, e proteggiamo i dati di ogni persona."
         }
+      },
+      "logoSuite": {
+        "title": "I nostri loghi",
+        "blackWordmark": "Logotipo nero",
+        "blackIcon": "Simbolo nero",
+        "colorWordmark": "Logotipo a colori",
+        "colorIcon": "Simbolo a colori"
       }
     },
     "offline": {
@@ -6611,7 +6671,19 @@
     "lifecycle": "Pubblicazione e verifica",
     "verifySource": "Come è stato verificato (obbligatorio)",
     "verifyEvidence": "Prova (link, facoltativo)",
-    "verifyNext": "Prossima revisione (il sigillo scade quel giorno)"
+    "verifyNext": "Prossima revisione (il sigillo scade quel giorno)",
+    "colActions": "Azioni",
+    "actionsFor": "Azioni per {name}",
+    "edit": "Modifica",
+    "view": "Vedi",
+    "suspend": "Sospendi",
+    "suspendHint": "Sospendi: non appare più sul sito né sulla mappa",
+    "activate": "Attiva",
+    "activateHint": "Attiva: viene pubblicato sul sito e sulla mappa",
+    "delete": "Elimina",
+    "deleteHint": "Elimina: viene archiviato e si può ripristinare",
+    "confirm": "Conferma",
+    "deleteConfirm": "Eliminare «{name}»? Verrà archiviato: non apparirà sul sito né sulla mappa e potrai ripristinarlo da «Archiviati». Tocca «Conferma» per continuare."
   },
   "opsReservations": {
     "title": "Prenotazioni tramite WhatsApp e telefono",

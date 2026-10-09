@@ -42,6 +42,8 @@
 
   <!-- Leaflet Map CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <!-- Agrupación de pines por zona (js/mapa-atlas.js); los íconos son propios de BAQUEANO. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css">
 
   <!-- Estilos del Ecosistema -->
   <link rel="stylesheet" href="styles.css?v=20260927-exact-1">
@@ -260,9 +262,9 @@
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
-  <link rel="stylesheet" href="css/pages/mapa-exact.css?v=20260929-map-light-1">
+  <link rel="stylesheet" href="css/pages/mapa-exact.css?v=20261009-atlas-3">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
-  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261009-a11y-4">
   <meta name="theme-color" content="#165D6F">
   <!-- Favicon e Iconografía Oficial BAQUEANO -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -338,8 +340,9 @@
       </div>
       <div data-i18n-aria-label="pages.mapa.mapIntro.divAriaLabel1" class="map-intro-stats" aria-label="Resumen del mapa">
         <div class="map-stat"><strong>17</strong><span data-i18n="pages.mapa.mapIntro.span2">territorios</span></div>
-        <div class="map-stat"><strong>10</strong><span data-i18n="pages.mapa.mapIntro.span3">lugares destacados</span></div>
-        <div class="map-stat"><strong>5</strong><span data-i18n="pages.mapa.mapIntro.span4">categorías</span></div>
+        <!-- 2026-10-09: números reales; js/mapa-atlas.js los completa con lo que hay en el mapa. -->
+        <div class="map-stat"><strong data-atlas-stat="places">…</strong><span data-i18n="pages.mapa.atlas.statPlaces">lugares en el mapa</span></div>
+        <div class="map-stat"><strong data-atlas-stat="groups">…</strong><span data-i18n="pages.mapa.mapIntro.span4">categorías</span></div>
       </div>
     </div>
   </header>
@@ -352,16 +355,16 @@
       </div>
 
       <div class="map-cat-filter-chips">
-        <button data-i18n="pages.mapa.body.button1" type="button" class="map-chip-btn active" data-cat="all">Todos (22)</button>
-        <button data-i18n="pages.mapa.body.button2" type="button" class="map-chip-btn" data-cat="volcan">🌋 Volcanes</button>
-        <button data-i18n="pages.mapa.body.button3" type="button" class="map-chip-btn" data-cat="playa">🏖️ Playas</button>
-        <button data-i18n="common.naturaleza" type="button" class="map-chip-btn" data-cat="naturaleza">🌿 Naturaleza</button>
-        <button data-i18n="common.cultura" type="button" class="map-chip-btn" data-cat="cultura">🏛️ Cultura</button>
-        <button data-i18n="common.hoteles" type="button" class="map-chip-btn" data-cat="hoteles">🏨 Hoteles</button>
-        <button data-i18n="common.hostales" type="button" class="map-chip-btn" data-cat="hostales">🛏️ Hostales</button>
-        <button data-i18n="common.ecoLodges" type="button" class="map-chip-btn" data-cat="ecolodges">🌿 Eco-lodges</button>
-        <button data-i18n="common.resorts" type="button" class="map-chip-btn" data-cat="resorts">🌴 Resorts</button>
-        <button data-i18n="pages.mapa.body.button4" type="button" class="map-chip-btn" data-cat="coop">🤝 Cooperativas</button>
+        <!-- 2026-10-09: grupos con conteo real (js/mapa-atlas.js). Hoteles, hostales, eco-lodges y
+             resorts quedan juntos en «Hospedajes»; cooperativas en «Turismo comunitario». -->
+        <button type="button" class="map-chip-btn active" data-cat="all" aria-pressed="true"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> <span data-i18n="pages.mapa.atlas.cat.all">Todos</span> <span class="map-chip-count"></span></button>
+        <button type="button" class="map-chip-btn" data-cat="volcan" aria-pressed="false" style="--chip:#DC2626"><i class="fa-solid fa-volcano" aria-hidden="true"></i> <span data-i18n="pages.mapa.atlas.cat.volcan">Volcanes</span> <span class="map-chip-count"></span></button>
+        <button type="button" class="map-chip-btn" data-cat="playa" aria-pressed="false" style="--chip:#0284C7"><i class="fa-solid fa-umbrella-beach" aria-hidden="true"></i> <span data-i18n="pages.mapa.atlas.cat.playa">Playas</span> <span class="map-chip-count"></span></button>
+        <button type="button" class="map-chip-btn" data-cat="agua" aria-pressed="false" style="--chip:#0D9488"><i class="fa-solid fa-water" aria-hidden="true"></i> <span data-i18n="pages.mapa.atlas.cat.agua">Ríos, lagos y cascadas</span> <span class="map-chip-count"></span></button>
+        <button type="button" class="map-chip-btn" data-cat="naturaleza" aria-pressed="false" style="--chip:#4A7A5A"><i class="fa-solid fa-leaf" aria-hidden="true"></i> <span data-i18n="pages.mapa.atlas.cat.naturaleza">Naturaleza</span> <span class="map-chip-count"></span></button>
+        <button type="button" class="map-chip-btn" data-cat="cultura" aria-pressed="false" style="--chip:#F65E01"><i class="fa-solid fa-landmark" aria-hidden="true"></i> <span data-i18n="pages.mapa.atlas.cat.cultura">Cultura e historia</span> <span class="map-chip-count"></span></button>
+        <button type="button" class="map-chip-btn" data-cat="comunidad" aria-pressed="false" style="--chip:#165D6F"><i class="fa-solid fa-people-roof" aria-hidden="true"></i> <span data-i18n="pages.mapa.atlas.cat.comunidad">Turismo comunitario</span> <span class="map-chip-count"></span></button>
+        <button type="button" class="map-chip-btn" data-cat="hospedaje" aria-pressed="false" style="--chip:#B7791F"><i class="fa-solid fa-bed" aria-hidden="true"></i> <span data-i18n="pages.mapa.atlas.cat.hospedaje">Hospedajes</span> <span class="map-chip-count"></span></button>
       </div>
 
       <div class="map-view-actions">
@@ -386,11 +389,16 @@
 
     <aside data-i18n-aria-label="pages.mapa.mapLegend.asideAriaLabel1" class="map-legend" aria-label="Leyenda de categorías">
       <strong data-i18n="pages.mapa.mapLegend.strong1">Leyenda</strong>
-      <span><i class="legend-dot is-volcano"></i> <span data-i18n="home.destinations.filters.volcanoes">Volcanes</span></span>
-      <span><i class="legend-dot is-beach"></i> <span data-i18n="home.destinations.filters.beaches">Playas</span></span>
-      <span><i class="legend-dot is-nature"></i> <span data-i18n="home.destinations.filters.nature">Naturaleza</span></span>
-      <span><i class="legend-dot is-culture"></i> <span data-i18n="nav.culture">Cultura</span></span>
+      <!-- js/mapa-atlas.js reemplaza estas 4 por los grupos reales con su conteo. -->
+      <div id="mapAtlasLegendItems">
+        <span><i class="legend-dot is-volcano"></i> <span data-i18n="home.destinations.filters.volcanoes">Volcanes</span></span>
+        <span><i class="legend-dot is-beach"></i> <span data-i18n="home.destinations.filters.beaches">Playas</span></span>
+        <span><i class="legend-dot is-nature"></i> <span data-i18n="home.destinations.filters.nature">Naturaleza</span></span>
+        <span><i class="legend-dot is-culture"></i> <span data-i18n="nav.culture">Cultura</span></span>
+      </div>
+      <p class="map-atlas-missing" id="mapAtlasMissing" hidden></p>
     </aside>
+    <p class="map-atlas-empty" id="mapAtlasEmpty" role="status" data-i18n="pages.mapa.atlas.empty" hidden>No hay lugares con ese filtro.</p>
 
     <!-- Tarjeta flotante de destino seleccionado -->
     <div class="map-floating-drawer" id="mapPlaceDrawer">
@@ -431,6 +439,11 @@
 
   <!-- Leaflet JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous"></script>
+  <!-- Atlas de todos los destinos: agrupación, lugares de Supabase, fotos reales del territorio. -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+  <script defer src="js/services/places-service.js?v=20261005-1"></script>
+  <script defer src="js/territory-media-catalog.js?v=20260926-1"></script>
+  <script defer src="js/mapa-atlas.js?v=20261009-1"></script>
 
   <script>
     // Inventario Maestro de Destinos Georreferenciados de Nicaragua
@@ -489,7 +502,10 @@
         maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
       }).addTo(mapInstance);
 
-      renderMarkers('all');
+      // 2026-10-09: todos los lugares publicados con coordenadas reales (js/mapa-atlas.js);
+      // NICARAGUA_PLACES aporta los hospedajes verificados y el respaldo sin conexión.
+      if (window.BaqueanoAtlas) window.BaqueanoAtlas.mount(mapInstance, NICARAGUA_PLACES);
+      else renderMarkers('all');
 
       // 2026-10-06: "Ver en el mapa" desde la ficha de un aliado o un destino llega con ?lat=&lng=.
       // Solo se centra si el punto está dentro de Nicaragua; nunca se inventa una ubicación.
@@ -505,13 +521,19 @@
       if (initialQuery) {
         const search = document.getElementById('mapSearchInput');
         if (search) search.value = initialQuery;
-        renderMarkers('all', initialQuery);
-        const place = NICARAGUA_PLACES.find(item => item.name.toLowerCase().includes(initialQuery.toLowerCase()) || initialQuery.toLowerCase().includes(item.name.toLowerCase()));
-        if (place) setTimeout(() => showPlaceDetails(place), 250);
+        if (window.BaqueanoAtlas) {
+          // El atlas filtra por ?q= y abre el globo del lugar cuando termina de cargar.
+          window.BaqueanoAtlas.render('all', initialQuery);
+        } else {
+          renderMarkers('all', initialQuery);
+          const place = NICARAGUA_PLACES.find(item => item.name.toLowerCase().includes(initialQuery.toLowerCase()) || initialQuery.toLowerCase().includes(item.name.toLowerCase()));
+          if (place) setTimeout(() => showPlaceDetails(place), 250);
+        }
       }
     }
 
     function renderMarkers(categoryFilter, searchQuery = '') {
+      if (window.BaqueanoAtlas && mapInstance) { window.BaqueanoAtlas.render(categoryFilter, searchQuery); return; }
       markersList.forEach(m => mapInstance.removeLayer(m));
       markersList = [];
 
@@ -592,8 +614,9 @@
       const chips = document.querySelectorAll('.map-chip-btn');
       chips.forEach(chip => {
         chip.addEventListener('click', function () {
-          chips.forEach(c => c.classList.remove('active'));
+          chips.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
           this.classList.add('active');
+          this.setAttribute('aria-pressed', 'true');
           const cat = this.getAttribute('data-cat');
           const q = document.getElementById('mapSearchInput').value;
           renderMarkers(cat, q);

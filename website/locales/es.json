@@ -420,7 +420,9 @@
     "priceToConfirm": "Precio por confirmar",
     "mapItemUnverified": "Sin verificar en BAQUEANO · precio y valoración por confirmar",
     "mapItemVerified": "Aliado con fuente verificable · precio por confirmar",
-    "pdfSummaryStops": "{n} paradas · {places}"
+    "pdfSummaryStops": "{n} paradas · {places}",
+    "stopBadge": "Destino guardado",
+    "viewPlace": "Ver ficha del destino"
   },
   "profile": {
     "title": "Mi Perfil",
@@ -2986,7 +2988,41 @@
       },
       "featuredRowTitle": "Lugares destacados",
       "featuredLabel": "Destinos destacados en movimiento",
-      "viewAllN": "Ver los {n} destinos"
+      "viewAllN": "Ver los {n} destinos",
+      "sortVerified": "Verificados primero",
+      "sortAZ": "Nombre (A–Z)",
+      "sortDepartment": "Por departamento",
+      "pageInfo": "Mostrando {from}–{to} de {total} destinos",
+      "pageN": "Página {n}",
+      "noResults": "No encontramos destinos con esos filtros. Probá con otra categoría o departamento.",
+      "allCtaTitle": "Explorá el catálogo completo",
+      "allCtaText": "Todos los lugares publicados de los 17 territorios, con su estado de verificación, filtros por departamento y categoría.",
+      "cardNumber": "Destino {n} de {total}",
+      "detail": {
+        "kicker": "Destino BAQUEANO",
+        "lead": "Información práctica para planificar una visita responsable y conectar directamente con prestadores locales.",
+        "access": "Cómo llegar",
+        "duration": "Tiempo recomendado",
+        "price": "Precio orientativo",
+        "before": "Antes de salir",
+        "defaultAccess": "Consultá el mapa para una ruta desde tu ubicación",
+        "defaultDuration": "Según punto de partida",
+        "defaultPrice": "Confirmar con el prestador",
+        "defaultBefore": "Verificar clima, acceso y disponibilidad",
+        "noteStrong": "Dato responsable:",
+        "note": "horarios, tarifas, accesos y condiciones pueden cambiar. Confirmalos antes de viajar.",
+        "route": "Ver ruta y ubicación",
+        "contact": "Contactar por WhatsApp",
+        "trip": "Agregar a Mi Viaje",
+        "added": "En Mi Viaje",
+        "addedToast": "{name} agregado a Mi Viaje.",
+        "territory": "Ver ficha del territorio",
+        "close": "Cerrar",
+        "waMessage": "Hola, deseo información actualizada sobre {name} desde BAQUEANO"
+      },
+      "tripIn": "✓ En Mi viaje",
+      "tripRemoved": "{name} se quitó de Mi viaje.",
+      "tripStorageError": "No fue posible guardar en este navegador."
     },
     "experiencias": {
       "body": {
@@ -3535,7 +3571,7 @@
             "milestone": "Miembro fundador del arte público capitalino y mano derecha de Peñalba en Bellas Artes; esculpió relieves y figuras que documentan el mestizaje y la anatomía vernácula del Pacífico."
           },
           "bacon": {
-            "milestone": "Pionera de la danza contemporánea afrocaribeña y de las danzas de salón caribeñas; conectó el folclore del Palo de Mayo (Maypole) y los ritmos de la Costa Caribe con los escenarios del Pacífico."
+            "milestone": "Bailarina, coreógrafa, maestra de danza contemporánea y promotora cultural nicaragüense. Fundadora de la Escuela de Danza Espacio Abierto y del Festival Internacional de Danza Contemporánea. Condecorada con la Orden de la Independencia Cultural Rubén Darío en 2008."
           },
           "lopez": {
             "milestone": "Referente nacional en la investigación y sistematización de los sones de marimba, las danzas de negras, los bailes de húngaras y el mestizaje coreográfico de Monimbó y Masaya."
@@ -3920,6 +3956,23 @@
       },
       "drawerImg": {
         "imgAlt1": "Destino"
+      },
+      "atlas": {
+        "cat": {
+          "all": "Todos",
+          "volcan": "Volcanes",
+          "playa": "Playas",
+          "agua": "Ríos, lagos y cascadas",
+          "naturaleza": "Naturaleza",
+          "cultura": "Cultura e historia",
+          "comunidad": "Turismo comunitario",
+          "hospedaje": "Hospedajes"
+        },
+        "approx": "Ubicación aproximada: confirmá el acceso con la comunidad o el prestador.",
+        "directions": "Cómo llegar",
+        "missingNote": "{n} lugares publicados aún no tienen coordenadas verificadas y no se muestran.",
+        "statPlaces": "lugares en el mapa",
+        "empty": "No hay lugares con ese filtro."
       }
     },
     "miNegocio": {
@@ -4591,6 +4644,13 @@
           "title": "Tecnología responsable",
           "text": "Usamos la tecnología y la inteligencia artificial para acercar, no para reemplazar, y protegemos los datos de cada persona."
         }
+      },
+      "logoSuite": {
+        "title": "Nuestros logos",
+        "blackWordmark": "Logotipo en negro",
+        "blackIcon": "Isotipo en negro",
+        "colorWordmark": "Logotipo a color",
+        "colorIcon": "Isotipo a color"
       }
     },
     "offline": {
@@ -6611,7 +6671,19 @@
     "lifecycle": "Publicación y verificación",
     "verifySource": "Cómo se comprobó (obligatorio)",
     "verifyEvidence": "Evidencia (enlace, opcional)",
-    "verifyNext": "Próxima revisión (el sello vence ese día)"
+    "verifyNext": "Próxima revisión (el sello vence ese día)",
+    "colActions": "Acciones",
+    "actionsFor": "Acciones para {name}",
+    "edit": "Modificar",
+    "view": "Ver",
+    "suspend": "Suspender",
+    "suspendHint": "Suspender: deja de verse en la web y el mapa",
+    "activate": "Activar",
+    "activateHint": "Activar: se publica en la web y el mapa",
+    "delete": "Eliminar",
+    "deleteHint": "Eliminar: se archiva y se puede restaurar",
+    "confirm": "Confirmar",
+    "deleteConfirm": "¿Eliminar «{name}»? Se archiva: deja de verse en la web y el mapa, y podés restaurarlo desde «Archivados». Tocá «Confirmar» para seguir."
   },
   "opsReservations": {
     "title": "Reservas por WhatsApp y teléfono",

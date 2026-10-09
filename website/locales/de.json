@@ -787,7 +787,9 @@
     "priceToConfirm": "Preis noch zu bestätigen",
     "mapItemUnverified": "Nicht auf BAQUEANO verifiziert · Preis und Bewertung noch offen",
     "mapItemVerified": "Partner mit überprüfbarer Quelle · Preis noch offen",
-    "pdfSummaryStops": "{n} Stationen · {places}"
+    "pdfSummaryStops": "{n} Stationen · {places}",
+    "stopBadge": "Gespeichertes Reiseziel",
+    "viewPlace": "Reisezielseite ansehen"
   },
   "profile": {
     "title": "Mein Profil",
@@ -2986,7 +2988,41 @@
       },
       "featuredRowTitle": "Ausgewählte Orte",
       "featuredLabel": "Ausgewählte Reiseziele in Bewegung",
-      "viewAllN": "Alle {n} Reiseziele ansehen"
+      "viewAllN": "Alle {n} Reiseziele ansehen",
+      "sortVerified": "Verifizierte zuerst",
+      "sortAZ": "Name (A–Z)",
+      "sortDepartment": "Nach Departamento",
+      "pageInfo": "{from}–{to} von {total} Reisezielen",
+      "pageN": "Seite {n}",
+      "noResults": "Keine Reiseziele mit diesen Filtern gefunden. Versuche eine andere Kategorie oder ein anderes Departamento.",
+      "allCtaTitle": "Entdecke den vollständigen Katalog",
+      "allCtaText": "Alle veröffentlichten Orte der 17 Territorien, mit Verifizierungsstatus und Filtern nach Departamento und Kategorie.",
+      "cardNumber": "Reiseziel {n} von {total}",
+      "detail": {
+        "kicker": "BAQUEANO-Reiseziel",
+        "lead": "Praktische Informationen, um einen verantwortungsvollen Besuch zu planen und direkt mit lokalen Anbietern in Kontakt zu treten.",
+        "access": "Anreise",
+        "duration": "Empfohlene Dauer",
+        "price": "Richtpreis",
+        "before": "Vor der Abreise",
+        "defaultAccess": "Sieh auf der Karte nach einer Route von deinem Standort",
+        "defaultDuration": "Je nach Ausgangspunkt",
+        "defaultPrice": "Beim Anbieter bestätigen",
+        "defaultBefore": "Wetter, Zugang und Verfügbarkeit prüfen",
+        "noteStrong": "Verantwortungsvoller Hinweis:",
+        "note": "Öffnungszeiten, Preise, Zugänge und Bedingungen können sich ändern. Bestätige sie vor der Reise.",
+        "route": "Route und Standort",
+        "contact": "Per WhatsApp kontaktieren",
+        "trip": "Zu Meine Reise hinzufügen",
+        "added": "In Meine Reise",
+        "addedToast": "{name} zu Meine Reise hinzugefügt.",
+        "territory": "Seite des Territoriums ansehen",
+        "close": "Schließen",
+        "waMessage": "Hallo, ich hätte gern aktuelle Informationen zu {name} über BAQUEANO"
+      },
+      "tripIn": "✓ In Meine Reise",
+      "tripRemoved": "{name} wurde aus Meine Reise entfernt.",
+      "tripStorageError": "Speichern in diesem Browser nicht möglich."
     },
     "experiencias": {
       "body": {
@@ -3535,7 +3571,7 @@
             "milestone": "Mitbegründer der öffentlichen Kunst der Hauptstadt und rechte Hand Peñalbas an der Kunstschule; er schuf Reliefs und Figuren, die die Mestizenkultur und die volkstümliche Anatomie der Pazifikregion festhalten."
           },
           "bacon": {
-            "milestone": "Pionierin des afrokaribischen zeitgenössischen Tanzes und karibischer Gesellschaftstänze; sie verband die Folklore des Palo de Mayo (Maypole) und die Rhythmen der Karibikküste mit den Bühnen der Pazifikregion."
+            "milestone": "Nicaraguanische Tänzerin, Choreografin, Dozentin für zeitgenössischen Tanz und Kulturförderin. Gründerin der Tanzschule Espacio Abierto und des Internationalen Festivals für Zeitgenössischen Tanz. 2008 mit dem Kulturunabhängigkeitsorden Rubén Darío ausgezeichnet."
           },
           "lopez": {
             "milestone": "Nationale Referenz für die Erforschung und Systematisierung der Marimba-Sones, der Danzas de Negras, der Bailes de Húngaras und der choreografischen Mestizenkultur von Monimbó und Masaya."
@@ -3920,6 +3956,23 @@
       },
       "drawerImg": {
         "imgAlt1": "Reiseziel"
+      },
+      "atlas": {
+        "cat": {
+          "all": "Alle",
+          "volcan": "Vulkane",
+          "playa": "Strände",
+          "agua": "Flüsse, Seen und Wasserfälle",
+          "naturaleza": "Natur",
+          "cultura": "Kultur und Geschichte",
+          "comunidad": "Gemeindetourismus",
+          "hospedaje": "Unterkünfte"
+        },
+        "approx": "Ungefährer Standort: Bestätige den Zugang mit der Gemeinde oder dem Anbieter.",
+        "directions": "Route",
+        "missingNote": "{n} veröffentlichte Orte haben noch keine verifizierten Koordinaten und werden nicht angezeigt.",
+        "statPlaces": "Orte auf der Karte",
+        "empty": "Keine Orte mit diesem Filter."
       }
     },
     "miNegocio": {
@@ -4591,6 +4644,13 @@
           "title": "Verantwortungsvolle Technologie",
           "text": "Wir nutzen Technologie und künstliche Intelligenz, um Menschen näherzubringen, nicht um sie zu ersetzen, und schützen die Daten jeder Person."
         }
+      },
+      "logoSuite": {
+        "title": "Unsere Logos",
+        "blackWordmark": "Schriftzug in Schwarz",
+        "blackIcon": "Bildzeichen in Schwarz",
+        "colorWordmark": "Schriftzug in Farbe",
+        "colorIcon": "Bildzeichen in Farbe"
       }
     },
     "offline": {
@@ -6611,7 +6671,19 @@
     "lifecycle": "Veröffentlichung und Verifizierung",
     "verifySource": "Wie es geprüft wurde (Pflichtfeld)",
     "verifyEvidence": "Nachweis (Link, optional)",
-    "verifyNext": "Nächste Prüfung (das Siegel läuft an diesem Tag ab)"
+    "verifyNext": "Nächste Prüfung (das Siegel läuft an diesem Tag ab)",
+    "colActions": "Aktionen",
+    "actionsFor": "Aktionen für {name}",
+    "edit": "Bearbeiten",
+    "view": "Ansehen",
+    "suspend": "Aussetzen",
+    "suspendHint": "Aussetzen: wird auf der Website und der Karte nicht mehr angezeigt",
+    "activate": "Aktivieren",
+    "activateHint": "Aktivieren: wird auf der Website und der Karte veröffentlicht",
+    "delete": "Löschen",
+    "deleteHint": "Löschen: wird archiviert und kann wiederhergestellt werden",
+    "confirm": "Bestätigen",
+    "deleteConfirm": "„{name}“ löschen? Es wird archiviert: nicht mehr auf der Website und der Karte sichtbar und unter „Archiviert“ wiederherstellbar. Tippe auf „Bestätigen“, um fortzufahren."
   },
   "opsReservations": {
     "title": "Reservierungen per WhatsApp und Telefon",

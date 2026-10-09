@@ -31,13 +31,13 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
   <link rel="stylesheet" href="styles.css?v=20260930-quality-restore-1">
   <link rel="stylesheet" href="css/modules.css">
   <link rel="stylesheet" href="css/pages/index-exact.css?v=20260927-exact-1">
-  <link rel="stylesheet" href="css/pages/destinos-exact.css?v=20261007-featured-1">
+  <link rel="stylesheet" href="css/pages/destinos-exact.css?v=20261009-detalle-2">
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
   <link rel="stylesheet" href="css/components/lodging-showcase.css?v=20261007-7">
   <link rel="stylesheet" href="css/components/bq-marquee.css?v=20261007-1">
-  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261009-a11y-4">
   <!-- Favicon e Iconografía Oficial BAQUEANO -->
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -153,8 +153,7 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
       <div class="destinos-filter-bar" data-destinos-more>
         <div class="destinos-filters-left">
           <button type="button" class="dest-dropdown-btn" data-filter="department" aria-expanded="false"><span data-i18n="testimonials.departmentLabel">Departamento</span> <i class="fa-solid fa-chevron-down"></i></button>
-          <button type="button" class="dest-dropdown-btn" data-filter="price" aria-expanded="false"><span data-i18n="experiences.price">Precio</span> <i class="fa-solid fa-chevron-down"></i></button>
-          <button type="button" class="dest-dropdown-btn" data-filter="rating" aria-expanded="false"><span data-i18n="pages.destinos.mainContent.button2">Valoración</span> <i class="fa-solid fa-chevron-down"></i></button>
+          <!-- 2026-10-09: sin filtros de Precio/Valoración (sin tarifas ni reseñas verificadas). -->
           <button type="button" class="dest-toggle-btn" aria-pressed="false">
             <span class="toggle-switch-ui"></span> <span data-i18n="common.verificados">Verificados</span>
           </button>
@@ -163,10 +162,9 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <div class="dest-order-right">
           <span data-i18n="pages.destinos.mainContent.span1">Ordenar por:</span>
           <select data-i18n-aria-label="pages.destinos.mainContent.selectAriaLabel1" class="dest-order-select" aria-label="Ordenar destinos">
-            <option data-i18n="pages.destinos.mainContent.option1">Más populares</option>
-            <option data-i18n="pages.destinos.mainContent.option2">Mejor valorados</option>
-            <option data-i18n="pages.destinos.mainContent.option3">Precio: menor a mayor</option>
-            <option data-i18n="pages.destinos.mainContent.option4">Precio: mayor a menor</option>
+            <option value="verified" data-i18n="pages.destinos.sortVerified">Verificados primero</option>
+            <option value="az" data-i18n="pages.destinos.sortAZ">Nombre (A–Z)</option>
+            <option value="department" data-i18n="pages.destinos.sortDepartment">Por departamento</option>
           </select>
         </div>
       </div>
@@ -308,7 +306,7 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
         <div class="title-group">
           <h2><span data-i18n="pages.destinos.featuredRowTitle">Lugares destacados</span> <span style="color: #F65E01; font-weight: 800;" aria-live="polite"></span></h2>
         </div>
-        <a href="todos-los-destinos.html" class="section-header-link" data-destinos-all-link><span data-i18n="actions.viewAll">Ver todos</span> <i class="fa-solid fa-arrow-right"></i></a>
+        <!-- «Ver los N destinos» pasó a su propio bloque (.destinos-all-cta) debajo de la galería. -->
       </div>
 
       <div class="destinos-catalog-row destinos-featured-row" data-bq-marquee data-bq-gallery-ready="true" data-bq-speed="40" data-bq-label="Lugares destacados en movimiento" style="--bq-marquee-item: 280px;">
@@ -402,6 +400,20 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
           </div>
         </article>
       </div>
+
+      <!-- ============================================================================
+           5b. CATÁLOGO COMPLETO — BOTÓN APARTE (2026-10-09, pedido del propietario)
+           POR QUÉ: «Ver los N destinos» debe estar aparte, no escondido en el título.
+           CÓMO: destinos-featured.js pinta el total real de Supabase en [data-destinos-all-link].
+           QUÉ: lleva a todos-los-destinos.html (catálogo paginado propio de BAQUEANO).
+           ============================================================================ -->
+      <section class="destinos-all-cta" aria-labelledby="destinosAllCtaTitle">
+        <div class="destinos-all-cta-copy">
+          <h3 id="destinosAllCtaTitle" data-i18n="pages.destinos.allCtaTitle">Explorá el catálogo completo</h3>
+          <p data-i18n="pages.destinos.allCtaText">Todos los lugares publicados de los 17 territorios, con su estado de verificación, filtros por departamento y categoría.</p>
+        </div>
+        <a href="todos-los-destinos.html" class="destinos-all-cta-btn" data-destinos-all-link><span data-i18n="actions.viewAll">Ver todos</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+      </section>
 
       <!-- ============================================================================
            6. MÁS DESTINOS QUE TE ENCANTARÁN (IMAGEN 3)
@@ -679,8 +691,9 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
        estáticas de arriba quedan solo como respaldo sin conexión. Orden: servicio → catálogo → interacciones. -->
   <script defer src="js/services/places-service.js?v=20261005-1"></script>
   <script defer src="js/territory-media-catalog.js?v=20260926-1"></script>
-  <script defer src="js/destinos-catalog-live.js?v=20261007-featured-1"></script>
-  <script defer src="js/destinos-interactions.js?v=20261005-live-1"></script>
+  <script defer src="js/destinos-catalog-live.js?v=20261009-trip-1"></script>
+  <script defer src="js/baqueano-trip-store.js?v=20261009-1"></script>
+  <script defer src="js/destinos-interactions.js?v=20261009-trip-1"></script>
   <script defer src="js/destinos-verified.js?v=20261005-nat-1"></script>
   <script defer src="js/destinos-featured.js?v=20261007-1"></script>
 
@@ -801,7 +814,7 @@ paginación, recomendaciones de Baqüi, llamada comunitaria y footer institucion
 <script src="js/lodging-showcase.js?v=20261007-9" defer></script>
 <script src="js/navigation.js?v=20261007-app-2"></script>
 <script src="js/global-injector.js"></script>
-<script src="js/bq-marquee.js?v=20261007-1" defer></script>
+<script src="js/bq-marquee.js?v=20261009-1" defer></script>
 </body>
 
 </html>

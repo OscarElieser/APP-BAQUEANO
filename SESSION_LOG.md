@@ -18,6 +18,42 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 ACTUALIZACIÓN DE FICHA HISTÓRICA: GLORIA BACON EN historia.html (09-10-2026 ~03:20 CST)
+- **Consulta / Solicitud del Usuario:**
+  *"Gloria Isabel Bacon Hogson es una bailarina, coreógrafa, maestra de danza contemporánea y promotora cultural nicaragüense. Fundadora de la Escuela de Danza Espacio Abierto y del Festival Internacional de Danza Contemporánea. Orden Independencia Cultural Rubén Darío en 2008. corregir la informacion de gloria bacon y cambiar la foto https://baqueanonicaragua.com/historia.html"*
+- **Objetivos & Entregables Completados:**
+  1. **Fotografía Oficial de la Artista Integrada:**
+     - Se procesó y optimizó la fotografía aportada por el usuario (media_1791537077852.jpg), eliminando artefactos y recortes para encuadrarla exactamente en proporción áurea 4:3 (website/assets/images/artistas/bacon.jpg, 364x273 px, 12.8 KB, calidad 90, ultra-rápida y ligera).
+     - Se guardó el original completo para el archivo histórico en website/assets/images/artistas/gloria_bacon_danzante_original.jpg.
+  2. **Catálogo de Artistas por Territorio (website/js/territory-artists-data.js):**
+     - Nombre oficial completo actualizado a Gloria Isabel Bacon Hodgson.
+     - Disciplina: Danza / Gestión cultural (danceManagement).
+     - Territorio: Bluefields / Costa Caribe Sur (RACCS).
+     - Fuente fotográfica: ssets/images/artistas/bacon.jpg, provista directamente por el propietario (providedBy: 'owner', providedAt: '2026-10-09').
+     - Pie de foto trazable y transparente bajo la Regla 10: "Imagen aportada a BAQUEANO · fuente original por confirmar".
+  3. **Internacionalización en 6 Idiomas (Regla 9) en website/locales/ y ssets/i18n/:**
+     - **ES:** *"Bailarina, coreógrafa, maestra de danza contemporánea y promotora cultural nicaragüense. Fundadora de la Escuela de Danza Espacio Abierto y del Festival Internacional de Danza Contemporánea. Condecorada con la Orden de la Independencia Cultural Rubén Darío en 2008."*
+     - **EN:** *"Nicaraguan dancer, choreographer, contemporary dance teacher, and cultural promoter. Founder of the Espacio Abierto Dance School and the International Contemporary Dance Festival. Awarded the Rubén Darío Order of Cultural Independence in 2008."*
+     - **FR:** *"Danseuse, chorégraphe, professeure de danse contemporaine et promotrice culturelle nicaraguayenne. Fondatrice de l'École de Danse Espacio Abierto et du Festival International de Danse Contemporaine. Décorée de l'Ordre de l'Indépendance Culturelle Rubén Darío en 2008."*
+     - **IT:** *"Ballerina, coreografa, maestra di danza contemporanea e promotrice culturale nicaraguense. Fondatrice della Scuola di Danza Espacio Abierto e del Festival Internazionale di Danza Contemporanea. Insignita dell'Ordine dell'Indipendenza Culturale Rubén Darío nel 2008."*
+     - **PT:** *"Bailarina, coreógrafa, professora de dança contemporânea e promotora cultural nicaraguense. Fundadora da Escola de Dança Espacio Abierto e do Festival Internacional de Danza Contemporânea. Condecorada com a Ordem da Independência Cultural Rubén Darío em 2008."*
+     - **DE:** *"Nicaraguanische Tänzerin, Choreografin, Dozentin für zeitgenössischen Tanz und Kulturförderin. Gründerin der Tanzschule Espacio Abierto und des Internationalen Festivals für Zeitgenössischen Tanz. 2008 mit dem Kulturunabhängigkeitsorden Rubén Darío ausgezeichnet."*
+  4. **Páginas Conectadas & Cache Busters:**
+     - website/historia.html: versión actualizada a js/territory-artists-data.js?v=20261009-bacon-1.
+     - website/departamento.html: versión actualizada a js/territory-artists-data.js?v=20261009-bacon-1.
+  5. **Verificaciones & Pruebas Automatizadas:**
+     - 
+pm run test:artistas: 14 artistas en 7 territorios, 6 idiomas, ambas páginas conectadas (100% PASS).
+     - 
+pm run test:i18n: 5122 claves traducidas en los 6 idiomas, 0 faltantes (100% PASS).
+     - 
+pm run test:app-locales: 5123 claves compartidas y sincronizadas (100% PASS).
+     - 
+pm run build:hostinger & 	est:hostinger: 876 archivos compilados, 10 rutas críticas verificadas (100% PASS).
+     - lutter analyze: No issues found!
+     - lutter test: 77/77 tests passed.
+  6. **Estado:** ✅ Completado y verificado. Listo para subida exclusiva a la rama main en GitHub.
+
 ## ðŸ§­ DIRECTIVA OBLIGATORIA DE CONTROL DE VERSIONES Y DESPLIEGUE A GITHUB (09-10-2026 ~01:30 CST)
 - **Consulta / InstrucciÃ³n Expresa del Usuario:**
   *"te voy a dar una indicacion todo lo que vamos a subir a github tiene que ser al main nada de subir rama por aparte porejemplo asi :si se pede revisar y corregir seria super"*
@@ -6149,6 +6185,95 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
   - Portada de la pista «Son de Mi Tierra» en `js/global-music-player.js` y `js/musica-player.js` → `assets/images/LOGOS/baqueano_icono_oficial.png`.
   - El archivo PNG se conserva en el repo (no se eliminó). Los textos «NICARAGUA AUTÉNTICA» (no imagen) se mantienen.
 
+## 2026-10-09 — Instalación de Node.js y verificación i18n real
+
+- Solicitud: «hay que instalarlo» (Node.js, faltaba para `npm run i18n` y pruebas).
+- Instalado con `winget install OpenJS.NodeJS.LTS`: Node v24.20.0, npm 11.19.0 (el CI usa Node 20/22).
+- `npm run i18n` real:
+  - `validate-i18n`: es/en/fr/it/pt/de con 5058/5058 claves, 0 faltantes, 0 vacías. PASS.
+  - `i18n-audit`: FAIL con 7 errores preexistentes del Ops Center (textos sin clave en `admin.html`, `ops-businesses.js`, `ops-engine.js` 330 vs base 322, `ops-guides.js`, `ops-messages.js`, `ops-payments.js`, `ops-users.js`). No provienen de los cambios de Baqui/logo; quedan pendientes.
+  - `export-locales-for-app --check`: FAIL por 43 claves `opsReservations.*` nunca exportadas a la app. Regenerado con `npm run export:app-locales` (solo agrega esas 43 claves; las ediciones de Baqui coinciden con la salida del script). Re-check: «App y Web comparten 6 idiomas · 5059 claves». PASS.
+
+## 2026-10-09 — Catálogo paginado propio de destinos y botón «Ver los 237 destinos» aparte
+
+- Solicitud: «crear una página aparte como paginación donde el botón de Ver los 237 destinos esté aparte y se muestre como venimos trabajando; nada de Booking u otra plataforma, auténtica; aplicarlo en destinos.html sin romper lo que llevamos; si hay errores corregir y mejorar». Luego: «auténtico de BAQUEANO, que el estilo sea único» (referencia: ficha del Hotel Encanto del Sur).
+- Errores encontrados y corregidos:
+  1. `destinos-interactions.js` cancelaba el clic en todo `.section-header-link`: el enlace «Ver los N destinos» de destinos.html NO abría la página. Ahora excluye `[data-destinos-all-link]`.
+  2. El orden reordenaba el DOM pero la paginación usaba el orden original, y ordenaba por calificación/precio inexistentes, así que no hacía nada. Ahora ordena el arreglo real: Verificados primero / Nombre A–Z / Por departamento (`?orden=`).
+  3. Filtros Precio/Valoración sin datos reales dejaban 0 resultados: retirados del HTML (destinos.html y todos-los-destinos.html).
+  4. Paginación fija 1–13 en el HTML; la generada mostraba 24 botones seguidos. Ahora es compacta con «…» (en celular ‹ 1 … 7 … 20 ›), botones de 44 px.
+  5. En celular/tablet el catálogo completo quedaba en 4 columnas (el selector `.page-destinos-exact:not([data-destinos-mode="featured"])` pesaba más que los @media). Ahora 4/3/2/1 columnas reales.
+- Catálogo completo (`todos-los-destinos.html`): una grilla, 12 por página, cinta «Mostrando X–Y de N destinos», `?pagina=` persistente; categoría/departamento/verificados recalculan la paginación.
+- `destinos.html`: los 10 destacados en movimiento se mantienen; el botón pasó a un bloque propio `.destinos-all-cta` debajo de la galería con el total real de Supabase.
+- Identidad «Ficha de destino BAQUEANO» (`css/pages/destinos-exact.css`): estructura de las fichas de hospedaje con la paleta oficial (noche #0F172A, laguna #165D6F, volcán #F65E01, arena #F4E6C1): cuerpo crema, línea laguna bajo la foto, etiquetas noche/arena, botón secundario con borde laguna y sello «Disponible en BAQUEANO» al pie (claves existentes `lodgingShowcase.seal*`).
+- i18n: 8 claves nuevas en 6 idiomas (`pages.destinos.sortVerified/sortAZ/sortDepartment/pageInfo/pageN/noResults/allCtaTitle/allCtaText`) vía `i18n-add-keys.mjs`; exportadas a la app.
+- Verificación real:
+  - QA en Microsoft Edge (playwright-core en scratchpad, servidor local, datos vivos de Supabase: 237 lugares): 22/22 PASS. 12 tarjetas por página, página 2, orden A–Z, filtro Playas (18), 4/2/1 columnas a 1280/768/390 px, sin scroll horizontal, el botón aparte navega, destacados siguen en movimiento, sin errores JS (solo aviso del navegador por `@view-transition` al navegar, preexistente).
+  - `validate-i18n` PASS (5066 claves ×6), `export-locales-for-app --check` PASS, `build-hostinger-static` + `verify-hostinger-static` PASS (10 rutas).
+  - `i18n-audit`: mismos 7 errores preexistentes del Ops Center.
+  - `global-shell.test.mjs` NO ejecutado: falta `@playwright/test` (dependencias del workspace no instaladas).
+
+## 2026-10-09 — Galería «Lugares destacados» mostraba una sola tarjeta (destinos.html)
+
+- Reporte del usuario (captura): en destinos.html la galería en movimiento mostraba una sola tarjeta cortada, con «Pausar» a la izquierda; «hay que corregir para que salgan todos».
+- Causa real: en `css/pages/destinos-exact.css` la regla de catálogo completo usaba `.page-destinos-exact:not([data-destinos-mode="featured"]) .destinos-catalog-row` (0,3,0) con `display: grid !important; repeat(4, 1fr)`. El atributo `data-destinos-mode` vive en `<html>`, no en `<body>`, así que el `:not()` siempre era verdadero y le ganaba a `.destinos-featured-row.bq-marquee { display: block !important }` (0,2,0): el contenedor de la cinta era una grilla de 4 columnas (botón en la 1.ª, cinta de ~270 px en la 2.ª).
+- Arreglo: el selector pasa a `html:not([data-destinos-mode="featured"]) body.page-destinos-exact .destinos-catalog-row`. CSS versionado `?v=20261009-ficha-4`.
+- Verificación real (Edge, datos vivos de Supabase): QA 23/23 PASS; nueva comprobación «cinta a todo el ancho con varias tarjetas»: viewport 1184 px, `display: block`, 4 tarjetas visibles a la vez; catálogo completo sigue en 4/2/1 columnas.
+
+## 2026-10-09 — Logos oficiales arriba de la paleta de colores (nosotros.html)
+
+- Solicitud: «estos 4 logos que te estoy compartiendo meterlo ahí arriba de la paleta de colores de BAQUEANO» (sección «Nuestra identidad» de nosotros.html).
+- Logos: los dos a color ya existían y son idénticos byte a byte (`cmp`) a `assets/images/LOGOS/baqueano_logo_horizontal.png` y `baqueano_icono_oficial.png`. Agregados los dos en negro (PNG transparentes): `assets/images/LOGOS/baqueano_logo_horizontal_negro.png` (1579×322) y `baqueano_icono_negro.png` (564×564).
+- `nosotros.html`: bloque `.nos-logo-suite` «Nuestros logos» como primera fila de `.nos-identity-card` (ancho completo), en el orden enviado: logotipo negro, isotipo negro, logotipo color, isotipo color.
+- Error corregido: el ícono sobre «BAQUEANO» usaba `assets/images/logo.png`, que `global-asset-curator.js` cambia por `LOGOS/logo.png` (isotipo BLANCO de 3 MB): era invisible sobre la tarjeta blanca. Ahora usa `baqueano_icono_oficial.png`, centrado.
+- CSS en `css/pages/nosotros-exact.css` (v=20261009-logos-2): fichas crema, 4 columnas (2fr 1fr 2fr 1fr), 2 en tablet, 1 en celular.
+- i18n: 5 claves nuevas `pages.nosotros.logoSuite.*` en 6 idiomas (i18n-add-keys) y exportadas a la app.
+- Verificación real (Edge): 1280/820/390 px PASS — las 5 imágenes cargan, bloque arriba de la paleta, sin scroll horizontal, sin errores JS. `validate-i18n` PASS (5071 ×6); `i18n-audit` mismos 7 errores preexistentes del Ops Center.
+
+## 2026-10-09 — Atlas con todos los destinos en mapa.html + numeración del catálogo
+
+- Solicitud 1: «quiero mostrar todos los pines de todos los destinos que tenemos, en total son 244, que se vean bien bonito» (mapa.html tenía 22 puntos escritos a mano con etiquetas fijas encimadas).
+- Datos reales consultados en Supabase (no 244): 237 lugares publicados; 197 con coordenadas (21 exact, 67 reference, 98 approximate, 11 centroid) y 40 sin coordenadas. Solo 3 de esos 40 aparecen en `data/territory-places.json`; no se inventaron ubicaciones. «Cañón de Somoto» no existe como lugar en Supabase (solo estaba en la lista manual): hueco de datos a cargar.
+- Nuevo `js/mapa-atlas.js` (window.BaqueanoAtlas): 197 lugares de Supabase + 12 hospedajes verificados de mapa.html = 209 pines. Pines en gota por grupo (7 grupos), ubicación aproximada/centroide con borde punteado y aviso en el globo; agrupación por zona con Leaflet.markercluster 1.5.3 (cdnjs) y anillo de colores proporcional; globo con la ficha BAQUEANO (foto real o del territorio, tipo, sello, «Ver destino» y «Cómo llegar»); filtros con conteo real, buscador, `?q=` abre el globo; encabezado con números reales; leyenda viva + «40 lugares publicados aún no tienen coordenadas verificadas». Sin Supabase usa los puntos de respaldo.
+- `mapa.html`: filtros reemplazados por grupos (Hoteles/Hostales/Eco-lodges/Resorts → Hospedajes; Cooperativas → Turismo comunitario); `renderMarkers` delega en el atlas; estilos en `css/pages/mapa-exact.css` (v=20261009-atlas-1). 13 claves `pages.mapa.atlas.*` en 6 idiomas.
+- Solicitud 2: «en todos-los-destinos.html enumerar 1 x 1 cada destino para que el usuario no sienta que se perdió». Cada tarjeta muestra su número en la lista vigente («13/237»), sigue el filtro y el orden; `aria-label` «Destino 13 de 237» (clave `pages.destinos.cardNumber` ×6).
+- Verificación real (Edge, datos vivos): mapa 12/12 PASS (fuente Supabase, 209 lugares, 0 etiquetas fijas, 29 agrupaciones + 15 pines, chips con conteo, filtro Volcanes, globo con 2 acciones, `?q=Volcán Cosigüina` abre su globo, 390 px sin scroll horizontal, sin errores JS). Destinos 25/25 PASS (incluye 1–12/237 y 13–24/237). `validate-i18n` PASS (5085 ×6), app sincronizada, build + verify Hostinger PASS; `i18n-audit` con los mismos 7 errores preexistentes del Ops Center.
+- Pendiente anotado: pedido de agregar coreano y chino como idiomas 7 y 8.
+
+## 2026-10-09 — Ops Center «Lugares» (#43-lugares): acciones por fila y botones premium
+
+- Solicitud: «en esta parte yo podré agregar, eliminar, modificar, suspender, verificar (admin.html#43-lugares) y también los botones hacerlo premium»; luego: «el superadmin va a tener el derecho de eliminar, agregar, modificar o suspender… ojo con los botones, premium».
+- Errores encontrados y corregidos:
+  1. Aparecía el texto «null» bajo el encabezado: `paint()` pasaba `null` a `replaceChildren()` cuando no había aviso. Ahora filtra los nodos.
+  2. «Actualizar» y «Nuevo lugar» se veían como texto subrayado: la clase `.ops-btn` no tenía estilo en ningún CSS (también la usa Automatización). Ahora tiene estilo premium (relieve, borde arena, primario naranja volcán, foco visible, 42 px).
+- Nueva columna «Acciones» por fila (`js/ops-center/ops-places.js`), usando las mismas acciones auditadas de la Edge Function `baqueano-ops` (sin cambios de servidor):
+  - Modificar (abre la ficha), Suspender/Activar (`set_status` unpublish/publish), Verificar (abre la ficha con foco en «Cómo se comprobó», porque exige fuente; si ya está verificado muestra el sello), Eliminar (`set_status` archive: NO borra la fila, se restaura desde «Archivados»; pide confirmación en la misma fila con aviso rojo), Restaurar en archivados.
+  - Rol de solo lectura: solo «Ver». Permisos reales en el servidor: escritura `super_admin` y `admin`, lectura `auditor` (sin cambios).
+- CSS `css/components/ops-places.css` (v=20261009-premium-1); JS v=20261009-acciones-1; 12 claves `opsPlaces.*` nuevas en 6 idiomas.
+- Verificación: prueba en Edge con el módulo real y servidor simulado (sin escribir datos reales) 13/13 PASS: sin «null», botones premium 42 px, columna Acciones, botones según estado (publicado/verificado/suspendido/archivado), Suspender envía `unpublish`, Eliminar pide confirmación sin llamar al servidor y luego envía `archive`, Verificar abre la ficha con foco en la fuente, 390 px botones de 40 px, sin errores JS. No se probó contra Supabase real (requiere sesión de administrador).
+- Pendiente: el formulario genérico `#opsEntityDrawer` (Destinos, Municipios…) muestra los mismos campos y ejemplos de destino para todo; decidir si solo `super_admin` (y no `admin`) puede escribir (requiere cambiar y publicar la Edge Function).
+
+## 2026-10-09 — Detalle de destino sin cortes + «+ Mi viaje» que sí llega a mi-viaje.html
+
+- Solicitud 1: «hacer este diseño más bonito y que se vea completo, no quiero que se corte nada» (detalle «Ver destino» en destinos/todos-los-destinos).
+  - `openDetails` reescrito con DOM y claves i18n (20 claves `pages.destinos.detail.*` ×6): foto baja con título encima, chips con categoría y sello reales de la tarjeta, descripción real, 4 datos prácticos, aviso responsable, enlace «Ver ficha del territorio» y acciones fijas al pie (Ver ruta · WhatsApp · Agregar a Mi Viaje). La versión anterior queda como `openDetailsLegacy` (sin uso).
+  - CSS `.dest-detail-dialog.is-v2`: columna dentro de 100dvh, cuerpo con desplazamiento propio. Corregidos: `* { margin: 0 }` de styles.css anulaba el centrado del `<dialog>` (ahora `margin: auto`), y una regla de títulos dejaba `-webkit-text-fill-color` oscuro sobre la foto.
+- Solicitud 2: «cuando le das + Mi viaje no se guarda en mi-viaje.html».
+  - Causa real: tres claves distintas. El catálogo guardaba solo ids en `baqueano-trip`, destino.html en `baqueano_trip_plan` y mi-viaje.html solo lee `baqueano_trip` ({ name, days }).
+  - Nuevo `js/baqueano-trip-store.js` (window.BaqueanoTrip): escribe en `baqueano_trip` con el formato de Mi viaje (nombre, territorio, descripción, enlace, imagen y coordenadas reales si existen; nunca inventadas) y migra una vez lo guardado en las claves viejas. Lo usan la tarjeta («+ Mi viaje» agrega/quita), el detalle y destino.html. `destinos-catalog-live.js` agrega `data-lat/lng` reales a cada tarjeta.
+  - `mi-viaje-interactions.js`: el mapa solo dibuja paradas con coordenadas (antes `day.lat.toFixed` rompía con null), «Ver en mapa» sin coordenadas abre el mapa de BAQUEANO por nombre, km/horas solo si se conocen, enlace «Ver ficha del destino», y el clima ya no toma null como 0,0.
+  - 5 claves nuevas (`pages.destinos.tripIn/tripRemoved/tripStorageError`, `trip.stopBadge`, `trip.viewPlace`).
+- Verificación real (Edge, datos vivos): detalle 19/19 PASS en 1366×768, 1280×640, 390×740 y 360×600 (cabe, 3 botones visibles sin cortes, título/cerrar visibles, guarda en `baqueano_trip`). Mi viaje 9/9 PASS de punta a punta: migración de claves viejas, «+ Mi viaje» y detalle sincronizados, mi-viaje.html muestra los 4 destinos, sin «undefined km», mapa con 3 pines sin errores, quitar funciona. Regresión: destinos 25/25, mapa 12/12. `validate-i18n` 5122 ×6 PASS, app sincronizada, build + verify Hostinger PASS; `i18n-audit` mismos 7 errores preexistentes.
+- En cola (pedidos del propietario): Ops Center más premium (tarjetas de estado de servicios); campanita de alertas con sonido cuando el superadmin/admin envía una alerta; contacto por correo entre usuarios autenticados; editor de Destinos y formularios por módulo; coreano y chino.
+
+## 2026-10-09 — Mapa: filtros completos y pines fijos en su lugar al hacer zoom
+
+- Reporte 1: «no se ven completos» (filtros de mapa.html: «Hospedajes» cortado). La fila era un carrusel horizontal con barra oculta. Ahora ocupa su propio renglón y pasa al siguiente (`flex-wrap`). QA en Edge: 8/8 filtros completos sin recorte ni desplazamiento a 1440, 1280, 1024, 768 y 390 px.
+- Reporte 2: «corregir los pines: aunque el mapa se haga pequeño o grande se tiene que mantener en su lugar» (agrupaciones dibujadas sobre Costa Rica y el mar).
+  - Causa real (mía, del atlas del mismo día): `.bq-atlas-cluster-wrap { position: relative; }` pisaba el `position: absolute` con que Leaflet ubica cada ícono; las agrupaciones se corrían según el orden de dibujo y cambiaban al hacer zoom. Ahora `position: relative` va en el círculo interno (`.bq-atlas-cluster`). CSS v=20261009-atlas-3.
+  - Datos revisados en Supabase: los 197 lugares con coordenadas están dentro de Nicaragua (el más al sur, San Juan de Nicaragua 10.92).
+  - Verificación: prueba que mide, en zoom 6/7/8/9/11 y a 1366 y 390 px, la distancia entre cada ícono dibujado y su coordenada: máximo 1,4 px (PASS 10/10). Control con la regla vieja reinyectada: FAIL con desvíos de 177 a 911 px (la prueba detecta el error). Las imágenes del mapa también coinciden con su cuadro z/x/y (±1 px de borde).
+
 ## 2026-10-09 — Auditoría de Iconografía y Tipografías Ecosistema Baqueano (App & Web)
 
 ### 🎯 1. POR QUÉ (Why / Propósito)
@@ -6196,7 +6321,3 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 
 ### 📦 3. QUÉ (What / Entregables)
 - Espacio de trabajo local sincronizado con el repositorio remoto de GitHub.
-
-
-
-

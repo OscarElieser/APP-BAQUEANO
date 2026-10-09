@@ -91,6 +91,12 @@
       'data-verification': place.verification_status || 'pending_review',
       'data-live': 'true'
     });
+    // Coordenadas reales (si existen) para «Mi viaje» y su mapa; nunca se completan si faltan.
+    if (place.latitude != null && place.longitude != null && place.location_precision !== 'missing' &&
+        Number(place.latitude) >= 10.5 && Number(place.latitude) <= 15.2 && Number(place.longitude) >= -88 && Number(place.longitude) <= -82.5) {
+      article.setAttribute('data-lat', String(place.latitude));
+      article.setAttribute('data-lng', String(place.longitude));
+    }
 
     var media = el('div', 'dest-catalog-media');
     var tagKey = K + place.category;
@@ -134,6 +140,17 @@
     actions.appendChild(keyed('button', 'dest-btn-subtle', 'pages.destinos.destCatalogCard.button1')).setAttribute('type', 'button');
     body.appendChild(actions);
     article.appendChild(body);
+    // Firma propia de BAQUEANO al pie (misma identidad que las fichas de hospedaje).
+    var footSeal = el('footer', 'dest-card-seal');
+    footSeal.appendChild(el('img', 'dest-card-seal-logo', { src: 'assets/images/LOGOS/baqueano_icono_oficial.png', alt: '', width: '480', height: '480', loading: 'lazy', decoding: 'async' }));
+    var sealText = el('p');
+    sealText.appendChild(keyed('strong', '', 'lodgingShowcase.sealTitle'));
+    var tagline = el('span', 'dest-card-seal-tagline');
+    tagline.appendChild(document.createTextNode(' · '));
+    tagline.appendChild(keyed('span', '', 'lodgingShowcase.sealTagline'));
+    sealText.appendChild(tagline);
+    footSeal.appendChild(sealText);
+    article.appendChild(footSeal);
     return article;
   }
 

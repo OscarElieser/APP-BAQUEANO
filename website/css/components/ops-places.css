@@ -39,3 +39,55 @@
   .ops-places-form { grid-template-columns: 1fr; }
   .ops-places-pager { flex-wrap: wrap; justify-content: center; }
 }
+
+/* ============================================================================
+   2026-10-09 — BOTONES PREMIUM Y ACCIONES POR FILA (pedido del propietario)
+   POR QUÉ: «Actualizar» y «Nuevo lugar» usaban .ops-btn, que no tenía estilo (se veían como
+     texto subrayado); y agregar, modificar, suspender, verificar y eliminar debían estar a mano.
+   CÓMO: .ops-btn con relieve, borde arena y foco visible (también lo usa Automatización);
+     .ops-btn-primary en naranja volcán. Botones de fila de 40 px con color por intención.
+     Contrastes AA sobre #0D1322: texto #F8FAFC 17:1 · #FCD34D 12:1 · #86EFAC 13:1 · #FCA5A5 9:1.
+   QUÉ: .ops-btn, .ops-btn-primary, .ops-places-actions, .ops-row-btn.is-*.
+   ============================================================================ */
+.ops-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 0 16px;
+  border-radius: 12px; border: 1px solid rgba(244, 230, 193, 0.22);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)), #16213A;
+  color: #F8FAFC; font: 700 0.86rem/1 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
+  text-decoration: none; cursor: pointer; white-space: nowrap;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 6px 16px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+.ops-btn:hover:not(:disabled) { border-color: #F4E6C1; transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 10px 22px rgba(0, 0, 0, 0.45); }
+.ops-btn:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.ops-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.ops-btn i { color: #F4E6C1; }
+.ops-btn.ops-btn-primary { border-color: #F65E01; background: linear-gradient(180deg, #FF7A26, #F65E01 55%, #D94F00); color: #FFFFFF; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 10px 24px rgba(246, 94, 1, 0.35); }
+.ops-btn.ops-btn-primary i { color: #FFFFFF; }
+.ops-btn.ops-btn-primary:hover:not(:disabled) { border-color: #FFB27A; }
+.ops-view-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.ops-places-actions { display: flex; flex-wrap: wrap; gap: 6px; min-width: 300px; }
+.ops-row-btn {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 10px; border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.04); color: #F8FAFC;
+  font: 700 0.76rem/1 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif; cursor: pointer; white-space: nowrap;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.ops-row-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.ops-row-btn:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.ops-row-btn:disabled { opacity: 0.45; cursor: progress; }
+.ops-row-btn.is-edit i { color: #F4E6C1; }
+.ops-row-btn.is-edit:hover { border-color: #F4E6C1; background: rgba(244, 230, 193, 0.1); }
+.ops-row-btn.is-suspend { color: #FCD34D; border-color: rgba(252, 211, 77, 0.35); }
+.ops-row-btn.is-suspend:hover { background: rgba(252, 211, 77, 0.12); }
+.ops-row-btn.is-activate, .ops-row-btn.is-restore { color: #86EFAC; border-color: rgba(134, 239, 172, 0.35); }
+.ops-row-btn.is-activate:hover, .ops-row-btn.is-restore:hover { background: rgba(134, 239, 172, 0.12); }
+.ops-row-btn.is-verify { color: #7DD3FC; border-color: rgba(125, 211, 252, 0.35); }
+.ops-row-btn.is-verify:hover { background: rgba(125, 211, 252, 0.12); }
+.ops-row-btn.is-verified { color: #FFFFFF; border-color: #165D6F; background: #165D6F; }
+.ops-row-btn.is-delete { color: #FCA5A5; border-color: rgba(252, 165, 165, 0.3); }
+.ops-row-btn.is-delete:hover { background: rgba(239, 68, 68, 0.14); }
+.ops-row-btn.is-delete.is-confirming { color: #FFFFFF; border-color: #DC2626; background: #B91C1C; }
+.ops-places-notice.is-warning { background: rgba(220, 38, 38, 0.16); color: #FECACA; }
+@media (max-width: 900px) { .ops-places-actions { min-width: 0; } .ops-row-btn span { display: none; } .ops-row-btn { width: 40px; justify-content: center; padding: 0; } }

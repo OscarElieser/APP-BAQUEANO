@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T00:32:14.537Z",
+  "generatedAt": "2026-10-09T09:53:26.559Z",
   "languages": [
     "es",
     "en",
@@ -9,37 +9,36 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 5016,
-    "en": 5016,
-    "fr": 5016,
-    "it": 5016,
-    "pt": 5016,
-    "de": 5016
+    "es": 5123,
+    "en": 5123,
+    "fr": 5123,
+    "it": 5123,
+    "pt": 5123,
+    "de": 5123
   },
   "html": {
     "files": 36,
-    "total": 4015,
-    "translated": 4014,
-    "untranslated": 1
+    "total": 4241,
+    "translated": 4007,
+    "untranslated": 234
   },
   "js": {
-    "files": 123,
-    "translated": 152,
-    "untranslated": 721
+    "files": 128,
+    "translated": 225,
+    "untranslated": 873
   },
   "jsEditorial": {
     "files": 8,
-    "strings": 23
+    "strings": 21
   },
   "tsx": {
     "files": 97,
-    "total": 1154,
+    "total": 1153,
     "translated": 60,
-    "untranslated": 1094
+    "untranslated": 1093
   },
   "fullyCovered": [
     "404.html",
-    "admin.html",
     "aliados.html",
     "ambiental.html",
     "aviso-legal.html",
@@ -88,6 +87,7 @@
     "js/baqueano-pdf.js",
     "js/baqueano-presence.js",
     "js/baqueano-traffic-tracker.js",
+    "js/baqueano-trip-store.js",
     "js/baqui-brain.js",
     "js/bq-marquee.js",
     "js/business-application.js",
@@ -113,8 +113,8 @@
     "js/historia-enlaces.js",
     "js/impact-public.js",
     "js/intake-api.js",
-    "js/local-keys.js",
     "js/lodging-showcase.js",
+    "js/mapa-atlas.js",
     "js/musica-archivo.js",
     "js/ops-center/ops-alerts.js",
     "js/ops-center/ops-android-app.js",
@@ -122,7 +122,6 @@
     "js/ops-center/ops-community-moderation.js",
     "js/ops-center/ops-intake-inbox.js",
     "js/ops-center/ops-live-presence.js",
-    "js/ops-center/ops-messages.js",
     "js/ops-center/ops-nav-groups.js",
     "js/ops-center/ops-places.js",
     "js/ops-center/ops-platform-reviews.js",
@@ -163,7 +162,15 @@
     "packages/i18n/src/index.tsx",
     "packages/ui/src/index.tsx"
   ],
-  "errors": [],
+  "errors": [
+    "admin.html: archivo nuevo con 233 textos de interfaz sin clave i18n (debe ser 0).",
+    "js/ops-center/ops-businesses.js: archivo nuevo con 35 textos de interfaz sin clave i18n (debe ser 0).",
+    "js/ops-center/ops-engine.js: 330 textos sin clave (línea base 322). No se permite agregar texto de interfaz sin clave.",
+    "js/ops-center/ops-guides.js: archivo nuevo con 12 textos de interfaz sin clave i18n (debe ser 0).",
+    "js/ops-center/ops-messages.js: archivo nuevo con 12 textos de interfaz sin clave i18n (debe ser 0).",
+    "js/ops-center/ops-payments.js: archivo nuevo con 47 textos de interfaz sin clave i18n (debe ser 0).",
+    "js/ops-center/ops-users.js: archivo nuevo con 38 textos de interfaz sin clave i18n (debe ser 0)."
+  ],
   "files": [
     {
       "file": "404.html",
@@ -177,11 +184,11 @@
     {
       "file": "admin.html",
       "type": "html",
-      "total": 496,
+      "total": 729,
       "translated": 496,
-      "untranslated": 0,
-      "legacyPhrase": 0,
-      "coverage": 100
+      "untranslated": 233,
+      "legacyPhrase": 26,
+      "coverage": 68
     },
     {
       "file": "aliados.html",
@@ -231,8 +238,8 @@
     {
       "file": "baqueano-ia.html",
       "type": "html",
-      "total": 194,
-      "translated": 194,
+      "total": 193,
+      "translated": 193,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -294,8 +301,8 @@
     {
       "file": "destinos.html",
       "type": "html",
-      "total": 133,
-      "translated": 133,
+      "total": 132,
+      "translated": 132,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -366,8 +373,8 @@
     {
       "file": "mapa.html",
       "type": "html",
-      "total": 43,
-      "translated": 43,
+      "total": 42,
+      "translated": 42,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -411,8 +418,8 @@
     {
       "file": "nosotros.html",
       "type": "html",
-      "total": 183,
-      "translated": 183,
+      "total": 187,
+      "translated": 187,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -438,8 +445,8 @@
     {
       "file": "perfil.html",
       "type": "html",
-      "total": 169,
-      "translated": 169,
+      "total": 168,
+      "translated": 168,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -447,8 +454,8 @@
     {
       "file": "privacidad.html",
       "type": "html",
-      "total": 89,
-      "translated": 89,
+      "total": 88,
+      "translated": 88,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -456,8 +463,8 @@
     {
       "file": "terminos.html",
       "type": "html",
-      "total": 193,
-      "translated": 193,
+      "total": 192,
+      "translated": 192,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -474,8 +481,8 @@
     {
       "file": "todos-los-destinos.html",
       "type": "html",
-      "total": 89,
-      "translated": 89,
+      "total": 84,
+      "translated": 84,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -715,6 +722,15 @@
       "coverage": 75.8
     },
     {
+      "file": "js/baqueano-trip-store.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/baqui-brain.js",
       "type": "js",
       "total": 0,
@@ -897,11 +913,11 @@
     {
       "file": "js/destinos-interactions.js",
       "type": "js",
-      "total": 10,
-      "translated": 0,
-      "untranslated": 10,
+      "total": 39,
+      "translated": 30,
+      "untranslated": 9,
       "editorialStrings": 0,
-      "coverage": 0
+      "coverage": 76.9
     },
     {
       "file": "js/destinos-provenance.js",
@@ -1156,15 +1172,6 @@
       "coverage": 0
     },
     {
-      "file": "js/local-keys.js",
-      "type": "js",
-      "total": 0,
-      "translated": 0,
-      "untranslated": 0,
-      "editorialStrings": 0,
-      "coverage": 100
-    },
-    {
       "file": "js/lodging-showcase-data.js",
       "type": "js-editorial",
       "total": 0,
@@ -1199,6 +1206,15 @@
       "untranslated": 2,
       "editorialStrings": 0,
       "coverage": 86.7
+    },
+    {
+      "file": "js/mapa-atlas.js",
+      "type": "js",
+      "total": 7,
+      "translated": 7,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/mi-viaje-interactions.js",
@@ -1273,6 +1289,15 @@
       "coverage": 100
     },
     {
+      "file": "js/ops-center/ops-businesses.js",
+      "type": "js",
+      "total": 35,
+      "translated": 0,
+      "untranslated": 35,
+      "editorialStrings": 0,
+      "coverage": 0
+    },
+    {
       "file": "js/ops-center/ops-community-moderation.js",
       "type": "js",
       "total": 0,
@@ -1284,11 +1309,20 @@
     {
       "file": "js/ops-center/ops-engine.js",
       "type": "js",
-      "total": 323,
-      "translated": 2,
-      "untranslated": 321,
+      "total": 368,
+      "translated": 38,
+      "untranslated": 330,
       "editorialStrings": 0,
-      "coverage": 0.6
+      "coverage": 10.3
+    },
+    {
+      "file": "js/ops-center/ops-guides.js",
+      "type": "js",
+      "total": 12,
+      "translated": 0,
+      "untranslated": 12,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/ops-center/ops-ia-copilot.js",
@@ -1311,10 +1345,10 @@
     {
       "file": "js/ops-center/ops-live-data.js",
       "type": "js-editorial",
-      "total": 23,
+      "total": 21,
       "translated": 0,
       "untranslated": 0,
-      "editorialStrings": 23,
+      "editorialStrings": 21,
       "coverage": 0
     },
     {
@@ -1329,11 +1363,11 @@
     {
       "file": "js/ops-center/ops-messages.js",
       "type": "js",
-      "total": 0,
+      "total": 12,
       "translated": 0,
-      "untranslated": 0,
+      "untranslated": 12,
       "editorialStrings": 0,
-      "coverage": 100
+      "coverage": 0
     },
     {
       "file": "js/ops-center/ops-mock-data.js",
@@ -1352,6 +1386,15 @@
       "untranslated": 0,
       "editorialStrings": 0,
       "coverage": 100
+    },
+    {
+      "file": "js/ops-center/ops-payments.js",
+      "type": "js",
+      "total": 47,
+      "translated": 0,
+      "untranslated": 47,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/ops-center/ops-places.js",
@@ -1379,6 +1422,15 @@
       "untranslated": 0,
       "editorialStrings": 0,
       "coverage": 100
+    },
+    {
+      "file": "js/ops-center/ops-users.js",
+      "type": "js",
+      "total": 38,
+      "translated": 0,
+      "untranslated": 38,
+      "editorialStrings": 0,
+      "coverage": 0
     },
     {
       "file": "js/panorama-viewer.js",
@@ -2263,9 +2315,9 @@
     {
       "file": "apps/web/src/app/research/page.tsx",
       "type": "tsx",
-      "total": 24,
+      "total": 23,
       "translated": 0,
-      "untranslated": 24,
+      "untranslated": 23,
       "coverage": 0
     },
     {

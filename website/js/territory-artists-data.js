@@ -58,7 +58,7 @@
     { id: 'saenz', name: 'Leoncio Sáenz', discipline: 'paintingDrawing', group: 'matagalpa', depts: ['matagalpa'], locality: 'Paxila, Matagalpa', photo: { src: 'assets/images/artistas/saenz.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'marin', name: 'Raúl Marín', discipline: 'painting', group: 'carazo', depts: ['carazo'], locality: 'Jinotepe', photo: { src: 'assets/images/artistas/marin.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
     { id: 'beer', name: 'June Beer', discipline: 'paintingPoetry', group: 'raccs', depts: ['raccs'], locality: 'Bluefields', photo: { src: 'assets/images/artistas/beer.webp', providedBy: 'owner', providedAt: '2026-10-07' } },
-    { id: 'bacon', name: 'Gloria Bacon', discipline: 'danceManagement', group: 'raccs', depts: ['raccs'], locality: 'Bluefields', photo: { src: 'assets/images/artistas/bacon.webp', providedBy: 'owner', providedAt: '2026-10-07', credit: 'Gabriel García' } }
+    { id: 'bacon', name: 'Gloria Isabel Bacon Hodgson', discipline: 'danceManagement', group: 'raccs', depts: ['raccs'], locality: 'Bluefields', photo: { src: 'assets/images/artistas/bacon.jpg', providedBy: 'owner', providedAt: '2026-10-09' } }
   ];
 
   window.BAQUEANO_TERRITORY_ARTISTS = Object.freeze({ groups: groups, artists: artists });

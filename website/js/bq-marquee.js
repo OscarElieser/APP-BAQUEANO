@@ -112,6 +112,15 @@
     state.box.classList.toggle('is-static', !state.moving);
     state.box.classList.toggle('is-reduced', reduce);
     state.controls.hidden = !state.moving;
+    // axe «scrollable-region-focusable» (2026-10-09, historia.html): si la cinta no contiene nada
+    // enfocable, la zona se vuelve alcanzable con el teclado para poder recorrerla con las flechas.
+    var hasFocusable = !!state.track.querySelector('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (!hasFocusable) {
+      state.viewport.setAttribute('tabindex', '0');
+      if (!state.viewport.hasAttribute('aria-label')) state.viewport.setAttribute('aria-label', state.box.getAttribute('aria-label') || t('marquee.region', 'Galería'));
+    } else if (state.viewport.getAttribute('tabindex') === '0') {
+      state.viewport.removeAttribute('tabindex');
+    }
     if (!state.moving) { state.track.style.removeProperty('--bq-marquee-duration'); return; }
     originals.forEach(function (node) {
       var copy = node.cloneNode(true);
