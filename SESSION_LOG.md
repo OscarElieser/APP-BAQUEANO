@@ -6149,3 +6149,23 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
   - Portada de la pista «Son de Mi Tierra» en `js/global-music-player.js` y `js/musica-player.js` → `assets/images/LOGOS/baqueano_icono_oficial.png`.
   - El archivo PNG se conserva en el repo (no se eliminó). Los textos «NICARAGUA AUTÉNTICA» (no imagen) se mantienen.
 
+## 2026-10-09 — Auditoría de Iconografía y Tipografías Ecosistema Baqueano (App & Web)
+
+### 🎯 1. POR QUÉ (Why / Propósito)
+- Proveer un informe técnico formal y exhaustivo en PDF para la mentoría de diseño gráfico que documente todos los proveedores de iconografía (FontAwesome, Flutter Material Icons, Leaflet SVG markers) y familias tipográficas (`League Spartan`, `Plus Jakarta Sans`, `Aristotelica Pro`, `Cinzel`, `Inter`, `Montserrat`) utilizadas en la App Flutter y la Web.
+- Blindar el control de versiones garantizando que los archivos de reporte del mentor permanezcan estrictamente ignorados y no se suban al repositorio remoto.
+
+### ⚙️ 2. CÓMO (How / Arquitectura e Implementación)
+1. **Aislamiento Git:** Inserción previa de `baqueano_iconography.md` y `Baqueano_Iconography.pdf` en `.gitignore` raíz.
+2. **Descubrimiento y Extracción:**
+   - Análisis de `pubspec.yaml` y `lib/` (FontAwesome Flutter, Material Icons, Google Fonts, activos locales).
+   - Análisis de `website/` (CDN FontAwesome 6.5.1 con SRI hash, Google Fonts `League Spartan`, `Plus Jakarta Sans`, `Cinzel`, `Montserrat`).
+3. **Estructuración y Categorización:**
+   - División semántica entre Iconos Primarios (Navegación central, mapa GPS, asistente Baqüi, SOS) e Iconos Secundarios (Detalles de ficha, badges, filtros, controles de audio y estado).
+4. **Generación y Conversión:** Creación de `baqueano_iconography.md` y compilación a `Baqueano_Iconography.pdf`.
+
+### 📦 3. QUÉ (What / Entregables)
+- Entradas añadidas en `.gitignore`.
+- Archivos locales generados e ignorados por Git: `baqueano_iconography.md` y `Baqueano_Iconography.pdf`.
+
+
