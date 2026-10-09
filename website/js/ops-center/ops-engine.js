@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // 🧭 BAQUEANO ECOSYSTEM — OPS CENTER & UNIVERSAL CMS ENGINE (ops-engine.js)
 // ============================================================================
 //
@@ -4201,6 +4201,13 @@
         }, 80);
         return;
       }
+      if (tabId === '14-guias') {
+        if (window.BaqueanoOpsGuides) return window.BaqueanoOpsGuides.render(panel);
+        setTimeout(() => {
+          if (window.BaqueanoOpsGuides) window.BaqueanoOpsGuides.render(panel);
+        }, 80);
+        return;
+      }
       if (tabId === '23-ai') return this.renderAiAdminModule();
       if (tabId === '24-builder') return this.renderWebsiteBuilderModule('24-builder');
       if (tabId === '25-android') return this.renderAndroidReleaseModule();
@@ -4598,6 +4605,9 @@
       if (tabId === '13-usuarios') {
         if (window.BaqueanoOpsUsers) return window.BaqueanoOpsUsers.openModal(item ? item.id : null);
       }
+      if (tabId === '14-guias') {
+        if (window.BaqueanoOpsGuides) return window.BaqueanoOpsGuides.openDrawer(item ? item.id : null);
+      }
       const drawer = document.getElementById('opsEntityDrawer');
       const titleEl = document.getElementById('opsDrawerTitle');
       const subEl = document.getElementById('opsDrawerSubtitle');
@@ -4615,6 +4625,32 @@
       if (verCheckbox) {
         verCheckbox.checked = item ? (item.verified === true || item.verificationStatus === 'verified') : false;
       }
+
+      // Adaptar visibilidad de pestaÃ±as segÃºn la entidad activa
+      const tabBtnPricing = drawer.querySelector('[data-drawer-tab="pricing"]');
+      const tabBtnSeo = drawer.querySelector('[data-drawer-tab="seo"]');
+      if (tabBtnPricing) {
+        if (['16-historia', '17-cultura', '18-sostenibilidad', '19-ambiental', '29-fuentes', '30-legislacion'].includes(tabId)) {
+          tabBtnPricing.style.display = 'none';
+        } else {
+          tabBtnPricing.style.display = 'inline-flex';
+        }
+      }
+      if (tabBtnSeo) {
+        if (['16-historia', '17-cultura', '18-sostenibilidad', '19-ambiental', '21-multimedia', '29-fuentes', '30-legislacion'].includes(tabId)) {
+          tabBtnSeo.style.display = 'none';
+        } else {
+          tabBtnSeo.style.display = 'inline-flex';
+        }
+      }
+
+      // Activar siempre la pestaÃ±a General al abrir
+      drawer.querySelectorAll('.ops-drawer-tab-btn').forEach(b => b.classList.remove('is-active'));
+      drawer.querySelectorAll('.ops-drawer-tab-pane').forEach(p => p.classList.remove('is-active'));
+      const defaultTab = drawer.querySelector('[data-drawer-tab="general"]');
+      const defaultPane = document.getElementById('pane-general');
+      if (defaultTab) defaultTab.classList.add('is-active');
+      if (defaultPane) defaultPane.classList.add('is-active');
 
       // Elementos de etiquetas y placeholders
       const titleInput = document.getElementById('entityTitle');
@@ -6858,6 +6894,9 @@
       if (tabId === '13-usuarios' && window.BaqueanoOpsUsers) {
         return window.BaqueanoOpsUsers.openModal();
       }
+      if (tabId === '14-guias' && window.BaqueanoOpsGuides) {
+        return window.BaqueanoOpsGuides.openDrawer();
+      }
       OpsUI.openDrawer(tabId, null);
     },
 
@@ -6870,6 +6909,9 @@
       }
       if (tabId === '13-usuarios' && window.BaqueanoOpsUsers) {
         return window.BaqueanoOpsUsers.openModal(entityId);
+      }
+      if (tabId === '14-guias' && window.BaqueanoOpsGuides) {
+        return window.BaqueanoOpsGuides.openDrawer(entityId);
       }
       const item = (OpsState.collectionsData[tabId] || []).find((x) => x.id === entityId);
       if (item) OpsUI.openDrawer(tabId, item);
