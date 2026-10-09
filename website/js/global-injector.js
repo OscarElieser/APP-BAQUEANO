@@ -321,9 +321,6 @@
             '<a href="https://www.tiktok.com/@baqueano.nicaragu?_r=1&_t=ZS-99iTnKK0i3e" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>' +
             '<a href="https://wa.me/50584431289" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
           '</div>' +
-          '<div class="footer-badge-wrap">' +
-            '<img loading="lazy" decoding="async" src="assets/images/PROPUESTA/NICARAGUA AUTENTICA.png" alt="Nicaragua Auténtica" class="footer-autentica-badge" width="1983" height="793">' +
-          '</div>' +
         '</div>' +
         bqFooterLinks('EXPLORÁ', [['index.html', 'Inicio'], ['destinos.html', 'Destinos'], ['mapa.html', 'Mapa Interactivo'], ['experiencias.html', 'Experiencias'], ['departamento.html', 'Departamentos']]) +
         bqFooterLinks('CULTURA', [['historia.html', 'Historia &amp; Memoria'], ['gastronomia.html', 'Gastronomía Ancestral'], ['musica.html', 'Son Sonoro Folk'], ['ambiental.html', 'Custodia Ambiental'], ['aliados.html', 'Red de Aliados']]) +
@@ -1019,7 +1016,7 @@
       '<a href="mapa.html"' + current('map') + '><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i><span data-i18n="nav.map">Mapa</span></a>' +
       '<a href="mi-viaje.html"' + current('trip') + '><i class="fa-solid fa-route" aria-hidden="true"></i><span data-i18n="nav.trip">Mi Viaje</span></a>' +
       '<button type="button" class="bq-thumbbar-baqui">' +
-        '<img src="assets/images/assistant/baqui.png" alt="" width="30" height="30" decoding="async">' +
+        '<img src="assets/images/assistant/baqui.png?v=20261009" alt="" width="30" height="30" decoding="async">' +
         '<span class="notranslate">BAQUI</span>' +
       '</button>';
     bar.querySelector('.bq-thumbbar-baqui').addEventListener('click', function () {

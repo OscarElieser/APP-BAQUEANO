@@ -10,7 +10,7 @@
   'use strict';
   var logo='assets/images/LOGOS/baqueano_icono_500x386-blanco.png';
   var icon='assets/images/LOGOS/logo.png';
-  var baqui='assets/images/assistant/baqui.png';
+  var baqui='assets/images/assistant/baqui.png?v=20261009';
   var replacements={
     'assets/images/logo.png':icon,
     'assets/images/baqui.png':baqui,

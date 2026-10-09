@@ -127,7 +127,7 @@
   display: block;
   object-fit: contain;
   object-position: center;
-  background: center / contain no-repeat url('../assets/images/assistant/baqui.png');
+  background: center / contain no-repeat url('../assets/images/assistant/baqui.png?v=20261009');
   transform: translateZ(0);
   backface-visibility: hidden;
   pointer-events: none;

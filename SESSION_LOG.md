@@ -6145,3 +6145,12 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - Textos de respaldo: `404.html`, `aliados.html`, `destinos.html`, `js/baqueano-assistant.js` (texto para lector de pantalla), comentario en `css/baqueano-assistant.css`.
 - No se tocó: ave nacional, Dúo Guardabarranco, crónica «La guardia silenciosa del Guardabarranco», etiqueta de fauna de Madriz.
 - Verificación: los 12 JSON parsean; web y app coinciden en las 4 claves × 6 idiomas (0 diferencias). `npm run i18n` NO se ejecutó: Node no está instalado en esta máquina.
+
+## 2026-10-09 — Caché de la nueva imagen de Baqui y retiro del logo «Nicaragua Auténtica»
+
+- Reporte del usuario: el sitio en vivo seguía mostrando el guardabarranco. Diagnóstico real: `https://baqueanonicaragua.com/assets/images/assistant/baqui.png` servía 117242 bytes (imagen vieja), `cf-cache-status: HIT`, `Cache-Control: max-age=604800` (Cloudflare + `.htaccess`, 7 días); los deploys de `51cd61d`/`dc1d7aa` estaban aún `in_progress`.
+- Arreglo: versionado de URL `?v=20261009` en las 26 referencias a `assistant/baqui.png` y `assistant/baqui-bird.png` (HTML, JS, CSS). `global-asset-curator.js` ignora la query (`cleanSource` usa `pathname`).
+- Solicitud: «quitar este logo en cualquier lado que salga en el sitio web por completo» (logo `assets/images/PROPUESTA/NICARAGUA AUTENTICA.png`).
+  - Retirado del pie de página (`index.html` y pie inyectado en `js/global-injector.js`, bloque `.footer-badge-wrap`) y de los héroes de `baqueano-ia.html`, `nosotros.html`, `perfil.html`, `privacidad.html`, `terminos.html`.
+  - Portada de la pista «Son de Mi Tierra» en `js/global-music-player.js` y `js/musica-player.js` → `assets/images/LOGOS/baqueano_icono_oficial.png`.
+  - El archivo PNG se conserva en el repo (no se eliminó). Los textos «NICARAGUA AUTÉNTICA» (no imagen) se mantienen.

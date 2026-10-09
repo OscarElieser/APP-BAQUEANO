@@ -13,7 +13,7 @@
   var KEY = 'baqueano_music_session_v1';
   var tracks = [
     { title:'La Mora Limpia', artist:'Justo Santos', file:'la_mora_limpia.mp3', image:'assets/artistas/justo santos.jpg' },
-    { title:'Son de Mi Tierra', artist:'Tradición nicaragüense', file:'Fiesta Pinolera.mp3', image:'assets/images/PROPUESTA/NICARAGUA AUTENTICA.png' },
+    { title:'Son de Mi Tierra', artist:'Tradición nicaragüense', file:'Fiesta Pinolera.mp3', image:'assets/images/LOGOS/baqueano_icono_oficial.png' },
     { title:'Sirena del Lago', artist:'Camilo Zapata', file:'Cocibolca.mp3', image:'assets/artistas/camilo zapata.jpg' },
     { title:'Nicaragua Nicaragüita', artist:'Carlos Mejía Godoy', file:'nicaragua,nicaraguita.mp3', image:'assets/artistas/carlos mejia godoy.jpg' },
     { title:'El Solar de Monimbó', artist:'Luis Enrique Mejía Godoy', file:'el_solar_de_monimbo.mp3', image:'assets/artistas/Luis Enrique Mejía Godoy.jpg' },
