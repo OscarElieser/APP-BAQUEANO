@@ -52,6 +52,15 @@
 (function (window, document) {
   'use strict';
 
+  // i18n de la interfaz del Ops Center (claves ops.<módulo>.*; respaldo en español si falta la traducción).
+  function i18n(key, fallback, vars) {
+    var out = fallback;
+    try { if (window.BaqueanoLanguage && window.BaqueanoLanguage.t) out = window.BaqueanoLanguage.t(key, { fallback: fallback }) || fallback; } catch (_) { out = fallback; }
+    return String(out).replace(/\{(\w+)\}/g, function (m, k) { return vars && vars[k] != null ? vars[k] : m; });
+  }
+  // Valor de atributo HTML ya entre comillas (title=${q(…)}); escapa comillas dobles.
+  function q(value) { return '"' + String(value == null ? '' : value).replace(/"/g, '&quot;') + '"'; }
+
   // Tasa oficial de referencia del proyecto (Regla 11: Córdobas primero, verificado 2026-10-01)
   const FX_RATE_USD_NIO = 36.6243;
 
@@ -287,7 +296,7 @@
         <div class="ops-search-input-wrap" style="flex: 1; max-width: 360px;">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input type="text" class="ops-filter-search-input" id="opsBusinessSearchInput"
-            placeholder="Buscar por negocio, anfitrión, municipio o teléfono..."
+            placeholder=i18n('ops.businesses.buscarPorNegocioAnfitrion', 'Buscar por negocio, anfitrión, municipio o teléfono...')
             value="${escapeHtml(state.searchQuery)}"
             oninput="window.BaqueanoOpsBusinesses.search(this.value)">
         </div>
@@ -382,7 +391,7 @@
             <div style="display: flex; flex-direction: column; min-width: 0;">
               <span style="font-weight: 700; color: #FFFFFF; font-size: 0.92rem; display: flex; align-items: center; gap: 0.35rem;">
                 ${escapeHtml(title)}
-                ${isVerified ? `<span title="Verificado Oficialmente (Sello Auténtico BAQUEANO)" style="color: #00BAF2; font-size: 0.85rem;"><i class="fa-solid fa-circle-check"></i></span>` : ''}
+                ${isVerified ? `<span title=${q(i18n('ops.businesses.verificadoOficialmenteSelloAutentico', 'Verificado Oficialmente (Sello Auténtico BAQUEANO)'))} style="color: #00BAF2; font-size: 0.85rem;"><i class="fa-solid fa-circle-check"></i></span>` : ''}
               </span>
               <span style="font-size: 0.78rem; color: var(--ops-text-secondary); display: flex; align-items: center; gap: 0.35rem; margin-top: 0.15rem;">
                 <i class="fa-solid fa-user-tag" style="font-size: 0.72rem; color: var(--bq-accent);"></i> ${escapeHtml(host)}
@@ -397,7 +406,7 @@
 
         <!-- 2. Rubro Comercial -->
         <td>
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.78rem; font-weight: 700; background: rgba(22, 93, 111, 0.2); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.35);" title="${escapeHtml(categoryMeta.label)}">
+          <span style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.78rem; font-weight: 700; background: rgba(22, 93, 111, 0.2); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.35);" title=${q(`${escapeHtml(categoryMeta.label)}`)}>
             <i class="fa-solid ${categoryMeta.icon}"></i>
             <span>${escapeHtml(categoryMeta.label.split('/')[0].trim())}</span>
           </span>
@@ -412,7 +421,7 @@
             </span>
             <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
               ${whatsapp ? `
-                <a href="https://wa.me/505${escapeHtml(whatsapp.replace(/[^\d]/g, ''))}" target="_blank" rel="noopener noreferrer" style="font-size: 0.76rem; color: #10B981; text-decoration: none; display: flex; align-items: center; gap: 0.25rem;" title="Abrir WhatsApp directo con ${escapeHtml(title)}">
+                <a href="https://wa.me/505${escapeHtml(whatsapp.replace(/[^\d]/g, ''))}" target="_blank" rel="noopener noreferrer" style="font-size: 0.76rem; color: #10B981; text-decoration: none; display: flex; align-items: center; gap: 0.25rem;" title=${q(i18n('ops.businesses.abrirWhatsappDirectoCon', 'Abrir WhatsApp directo con {p0}', { p0: (escapeHtml(title)) }))}>
                   <i class="fa-brands fa-whatsapp"></i> ${escapeHtml(whatsapp)}
                 </a>
               ` : (phone ? `<span style="font-size: 0.76rem; color: var(--ops-text-muted);"><i class="fa-solid fa-phone"></i> ${escapeHtml(phone)}</span>` : '<span style="font-size: 0.75rem; color: var(--ops-text-muted);">Sin contacto directo</span>')}
@@ -437,28 +446,28 @@
         <td>
           <div class="ops-table-actions" style="justify-content: flex-end; gap: 0.35rem;">
             <!-- Sello Verificado Toggle -->
-            <button type="button" class="btn-ops-icon" title="${isVerified ? 'Sello Verificado Activo (Clic para gestionar)' : 'Acreditar Sello Oficial BAQUEANO'}" onclick="window.BaqueanoOpsBusinesses.toggleVerified('${escapeHtml(item.id)}')">
+            <button type="button" class="btn-ops-icon" title=${q(isVerified ? i18n('ops.businesses.sealActiveManage', 'Sello Verificado Activo (Clic para gestionar)') : i18n('ops.businesses.sealGrant', 'Acreditar Sello Oficial BAQUEANO'))} onclick="window.BaqueanoOpsBusinesses.toggleVerified('${escapeHtml(item.id)}')">
               <i class="fa-solid fa-circle-check" style="${isVerified ? 'color: #00BAF2;' : 'color: var(--ops-text-muted);'}"></i>
             </button>
 
             <!-- Editar Negocio -->
-            <button type="button" class="btn-ops-icon" title="Editar datos comerciales, contacto y territorio" onclick="window.BaqueanoOpsBusinesses.openDrawer('${escapeHtml(item.id)}')">
+            <button type="button" class="btn-ops-icon" title=${q(i18n('ops.businesses.editarDatosComercialesContacto', 'Editar datos comerciales, contacto y territorio'))} onclick="window.BaqueanoOpsBusinesses.openDrawer('${escapeHtml(item.id)}')">
               <i class="fa-solid fa-pen-to-square" style="color: #38BDF8;"></i>
             </button>
 
             <!-- Suspender / Reactivar Negocio -->
             ${!isArchived ? `
-              <button type="button" class="btn-ops-icon" title="${isSuspended ? 'Reactivar / Publicar Negocio' : 'Suspender Negocio (Ocultar temporalmente)'}" onclick="window.BaqueanoOpsBusinesses.toggleBusinessStatus('${escapeHtml(item.id)}')">
+              <button type="button" class="btn-ops-icon" title=${q(isSuspended ? i18n('ops.businesses.reactivatePublish', 'Reactivar / Publicar Negocio') : i18n('ops.businesses.suspendHide', 'Suspender Negocio (Ocultar temporalmente)'))} onclick="window.BaqueanoOpsBusinesses.toggleBusinessStatus('${escapeHtml(item.id)}')">
                 <i class="fa-solid ${isSuspended ? 'fa-play' : 'fa-pause'}" style="color: ${isSuspended ? '#10B981' : '#F59E0B'};"></i>
               </button>
             ` : `
-              <button type="button" class="btn-ops-icon" title="Restaurar de la papelera" onclick="window.BaqueanoOpsBusinesses.restoreBusiness('${escapeHtml(item.id)}')">
+              <button type="button" class="btn-ops-icon" title=${q(i18n('ops.businesses.restaurarDeLaPapelera', 'Restaurar de la papelera'))} onclick="window.BaqueanoOpsBusinesses.restoreBusiness('${escapeHtml(item.id)}')">
                 <i class="fa-solid fa-rotate-left" style="color: #10B981;"></i>
               </button>
             `}
 
             <!-- Eliminar / Archivar Negocio -->
-            <button type="button" class="btn-ops-icon danger" title="Eliminar / Archivar Negocio" onclick="window.BaqueanoOpsBusinesses.deleteBusiness('${escapeHtml(item.id)}')">
+            <button type="button" class="btn-ops-icon danger" title=${q(i18n('ops.businesses.eliminarArchivarNegocio', 'Eliminar / Archivar Negocio'))} onclick="window.BaqueanoOpsBusinesses.deleteBusiness('${escapeHtml(item.id)}')">
               <i class="fa-solid fa-trash-can" style="color: #EF4444;"></i>
             </button>
           </div>
@@ -494,7 +503,7 @@
 
     if (item) {
       if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-pen-to-square" style="color: var(--bq-accent);"></i> <span>Editar Negocio: ${escapeHtml(item.name || item.title)}</span>`;
-      if (subtitleEl) subtitleEl.textContent = `ID: ${item.id} · Actualizado: ${item.updatedAt ? new Date(item.updatedAt).toLocaleDateString('es-NI') : 'Hoy'}`;
+      if (subtitleEl) subtitleEl.textContent = i18n('ops.businesses.idActualizado', 'ID: {p0} · Actualizado: {p1}', { p0: (item.id), p1: (item.updatedAt ? new Date(item.updatedAt).toLocaleDateString('es-NI') : 'Hoy') });
       if (deleteBtn) deleteBtn.style.display = 'inline-flex';
       if (suspendBtn) {
         suspendBtn.style.display = 'inline-flex';
@@ -504,7 +513,7 @@
       }
     } else {
       if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-store" style="color: var(--bq-secondary);"></i> <span>Nuevo Negocio &amp; Aliado Comunitario</span>`;
-      if (subtitleEl) subtitleEl.textContent = 'Módulo: Negocios Comunitarios, Anfitriones y Emprendedores';
+      if (subtitleEl) subtitleEl.textContent = i18n('ops.businesses.moduloNegociosComunitariosAnfitriones', 'Módulo: Negocios Comunitarios, Anfitriones y Emprendedores');
       if (deleteBtn) deleteBtn.style.display = 'none';
       if (suspendBtn) suspendBtn.style.display = 'none';
     }
@@ -604,8 +613,8 @@
     const name = nameInput ? nameInput.value.trim() : '';
 
     if (!name) {
-      if (window.OpsToast) window.OpsToast.show('El Nombre Comercial del negocio es obligatorio.', 'warning');
-      else alert('El Nombre Comercial del negocio es obligatorio.');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.elNombreComercialDel', 'El Nombre Comercial del negocio es obligatorio.'), 'warning');
+      else alert(i18n('ops.businesses.elNombreComercialDel', 'El Nombre Comercial del negocio es obligatorio.'));
       switchDrawerTab('general');
       if (nameInput) nameInput.focus();
       return;
@@ -713,15 +722,15 @@
       }
 
       if (window.OpsToast) {
-        window.OpsToast.show(`Negocio "${name}" guardado exitosamente.`, 'success');
+        window.OpsToast.show(i18n('ops.businesses.negocioGuardadoExitosamente', 'Negocio \"{p0}\" guardado exitosamente.', { p0: (name) }), 'success');
       }
 
       closeDrawer();
       render();
     } catch (err) {
       console.error('[BaqueanoOpsBusinesses] Error al guardar negocio:', err);
-      if (window.OpsToast) window.OpsToast.show(`Error al guardar: ${err.message}`, 'error');
-      else alert(`Error: ${err.message}`);
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.errorAlGuardar', 'Error al guardar: {p0}', { p0: (err.message) }), 'error');
+      else alert(i18n('ops.businesses.error', 'Error: {p0}', { p0: (err.message) }));
     } finally {
       state.isSubmitting = false;
       if (saveBtn) {
@@ -779,14 +788,14 @@
       item.updatedAt = new Date().toISOString();
 
       if (window.OpsToast) {
-        window.OpsToast.show(`Negocio "${item.name || item.title}" ${isCurrentSuspended ? 'reactivado y publicado' : 'suspendido'}.`, 'success');
+        window.OpsToast.show(i18n('ops.businesses.negocio', 'Negocio \"{p0}\" {p1}.', { p0: (item.name || item.title), p1: (isCurrentSuspended ? 'reactivado y publicado' : 'suspendido') }), 'success');
       }
 
       if (state.editingBusinessId === businessId) closeDrawer();
       render();
     } catch (err) {
       console.error('[BaqueanoOpsBusinesses] Error al cambiar estado:', err);
-      if (window.OpsToast) window.OpsToast.show(`Error al suspender/reactivar: ${err.message}`, 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.errorAlSuspenderReactivar', 'Error al suspender/reactivar: {p0}', { p0: (err.message) }), 'error');
     }
   }
 
@@ -832,14 +841,14 @@
       item.deleted_at = new Date().toISOString();
 
       if (window.OpsToast) {
-        window.OpsToast.show(`Negocio "${item.name || item.title}" archivado con éxito.`, 'success');
+        window.OpsToast.show(i18n('ops.businesses.negocioArchivadoConExito', 'Negocio \"{p0}\" archivado con éxito.', { p0: (item.name || item.title) }), 'success');
       }
 
       if (state.editingBusinessId === businessId) closeDrawer();
       render();
     } catch (err) {
       console.error('[BaqueanoOpsBusinesses] Error al archivar negocio:', err);
-      if (window.OpsToast) window.OpsToast.show(`Error al archivar: ${err.message}`, 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.errorAlArchivar', 'Error al archivar: {p0}', { p0: (err.message) }), 'error');
     }
   }
 
@@ -866,10 +875,10 @@
       item.status = 'draft';
       item.deleted_at = null;
 
-      if (window.OpsToast) window.OpsToast.show(`Negocio "${item.name || item.title}" restaurado a borradores.`, 'success');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.negocioRestauradoABorradores', 'Negocio \"{p0}\" restaurado a borradores.', { p0: (item.name || item.title) }), 'success');
       render();
     } catch (err) {
-      if (window.OpsToast) window.OpsToast.show(`Error al restaurar: ${err.message}`, 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.errorAlRestaurar', 'Error al restaurar: {p0}', { p0: (err.message) }), 'error');
     }
   }
 
@@ -900,10 +909,10 @@
         }
         item.verified = false;
         item.verificationStatus = 'unverified';
-        if (window.OpsToast) window.OpsToast.show('Sello de verificación revocado.', 'warning');
+        if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.selloDeVerificacionRevocado', 'Sello de verificación revocado.'), 'warning');
         render();
       } catch (err) {
-        if (window.OpsToast) window.OpsToast.show(`Error: ${err.message}`, 'error');
+        if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.error', 'Error: {p0}', { p0: (err.message) }), 'error');
       }
       return;
     }
@@ -916,7 +925,7 @@
         item.verificationStatus = 'verified';
         render();
       } catch (err) {
-        if (window.OpsToast) window.OpsToast.show(`Error al verificar: ${err.message}`, 'error');
+        if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.errorAlVerificar', 'Error al verificar: {p0}', { p0: (err.message) }), 'error');
       }
     } else {
       item.verified = true;
@@ -932,17 +941,17 @@
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {
-      if (window.OpsToast) window.OpsToast.show('El archivo debe ser una imagen válida (JPG, PNG o WebP).', 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.elArchivoDebeSer', 'El archivo debe ser una imagen válida (JPG, PNG o WebP).'), 'error');
       return;
     }
 
     if (file.size > 15 * 1024 * 1024) {
-      if (window.OpsToast) window.OpsToast.show('La imagen supera el límite permitido de 15 MB.', 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.laImagenSuperaEl', 'La imagen supera el límite permitido de 15 MB.'), 'error');
       return;
     }
 
     const dropzone = document.getElementById('opsBizDropzoneText');
-    if (dropzone) dropzone.textContent = 'Subiendo imagen a Storage...';
+    if (dropzone) dropzone.textContent = i18n('ops.businesses.subiendoImagenAStorage', 'Subiendo imagen a Storage...');
 
     try {
       if (window.OpsStorage && window.OpsStorage.uploadFile) {
@@ -950,7 +959,7 @@
         const urlInput = document.getElementById('opsBizFormImageUrl');
         if (urlInput) urlInput.value = res.downloadURL;
         updateImagePreview(res.downloadURL);
-        if (window.OpsToast) window.OpsToast.show('Fotografía subida exitosamente.', 'success');
+        if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.fotografiaSubidaExitosamente', 'Fotografía subida exitosamente.'), 'success');
       } else {
         // Fallback local FileReader preview
         const reader = new FileReader();
@@ -962,9 +971,9 @@
         reader.readAsDataURL(file);
       }
     } catch (err) {
-      if (window.OpsToast) window.OpsToast.show(`Error en subida: ${err.message}`, 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.businesses.errorEnSubida', 'Error en subida: {p0}', { p0: (err.message) }), 'error');
     } finally {
-      if (dropzone) dropzone.textContent = 'Haz clic o arrastra para subir fotografía o logotipo';
+      if (dropzone) dropzone.textContent = i18n('ops.businesses.hazClicOArrastra', 'Haz clic o arrastra para subir fotografía o logotipo');
     }
   }
 

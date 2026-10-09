@@ -43,6 +43,15 @@
 (function (window, document) {
   'use strict';
 
+  // i18n de la interfaz del Ops Center (claves ops.<módulo>.*; respaldo en español si falta la traducción).
+  function i18n(key, fallback, vars) {
+    var out = fallback;
+    try { if (window.BaqueanoLanguage && window.BaqueanoLanguage.t) out = window.BaqueanoLanguage.t(key, { fallback: fallback }) || fallback; } catch (_) { out = fallback; }
+    return String(out).replace(/\{(\w+)\}/g, function (m, k) { return vars && vars[k] != null ? vars[k] : m; });
+  }
+  // Valor de atributo HTML ya entre comillas (title=${q(…)}); escapa comillas dobles.
+  function q(value) { return '"' + String(value == null ? '' : value).replace(/"/g, '&quot;') + '"'; }
+
   const ENDPOINT = 'https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-messages';
 
   // Estados de conversación
@@ -246,7 +255,7 @@
           <!-- Buscador en tiempo real -->
           <div class="ops-search-input-wrap" style="max-width: 300px; flex: 1;">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" class="ops-filter-search-input" placeholder="Buscar por asunto o correo..."
+            <input type="text" class="ops-filter-search-input" placeholder=i18n('ops.messages.buscarPorAsuntoO', 'Buscar por asunto o correo...')
               value="${escapeHtml(state.searchQuery)}"
               oninput="window.BaqueanoOpsMessages.search(this.value)">
           </div>
@@ -359,7 +368,7 @@
             </div>
           </div>
 
-          <button type="button" class="ops-drawer-close-btn" title="Cerrar vista de conversación" onclick="window.BaqueanoOpsMessages.closeThreadView()">
+          <button type="button" class="ops-drawer-close-btn" title=${q(i18n('ops.messages.cerrarVistaDeConversacion', 'Cerrar vista de conversación'))} onclick="window.BaqueanoOpsMessages.closeThreadView()">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
@@ -404,7 +413,7 @@
               <i class="fa-solid fa-reply"></i> Escribir respuesta para el viajero (se identificará como «Equipo BAQUEANO»):
             </label>
             <textarea id="opsMsgReplyText" rows="4" maxlength="2000" class="ops-form-textarea"
-              placeholder="Escribe aquí tu respuesta oficial. El viajero recibirá una notificación en la campana de su perfil web y app Android..."
+              placeholder=i18n('ops.messages.escribeAquiTuRespuesta', 'Escribe aquí tu respuesta oficial. El viajero recibirá una notificación en la campana de su perfil web y app Android...')
               style="width: 100%; box-sizing: border-box; margin-bottom: 0.85rem; font-size: 0.92rem;"></textarea>
             
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
@@ -435,8 +444,8 @@
     const text = replyInput ? replyInput.value.trim() : '';
 
     if (!text) {
-      if (window.OpsToast) window.OpsToast.show('Por favor escribe el contenido de la respuesta antes de enviar.', 'warning');
-      else alert('Escribe la respuesta antes de enviar.');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.messages.porFavorEscribeEl', 'Por favor escribe el contenido de la respuesta antes de enviar.'), 'warning');
+      else alert(i18n('ops.messages.escribeLaRespuestaAntes', 'Escribe la respuesta antes de enviar.'));
       if (replyInput) replyInput.focus();
       return;
     }
@@ -455,7 +464,7 @@
 
       state.notice = 'Respuesta enviada con éxito. El viajero recibió una notificación en su campana.';
       if (window.OpsToast) {
-        window.OpsToast.show('Respuesta enviada. El viajero fue notificado.', 'success');
+        window.OpsToast.show(i18n('ops.messages.respuestaEnviadaElViajero', 'Respuesta enviada. El viajero fue notificado.'), 'success');
       }
 
       // Limpiar textarea y refrescar hilo
@@ -465,7 +474,7 @@
       console.error('[BaqueanoOpsMessages] Error al enviar respuesta:', err);
       state.error = err.message;
       if (window.OpsToast) {
-        window.OpsToast.show(`Error al responder: ${err.message}`, 'error');
+        window.OpsToast.show(i18n('ops.messages.errorAlResponder', 'Error al responder: {p0}', { p0: (err.message) }), 'error');
       }
       render();
     } finally {
@@ -496,13 +505,13 @@
       await callEdgeFunction('staff_close', { id: threadId });
 
       state.notice = 'Conversación cerrada con éxito.';
-      if (window.OpsToast) window.OpsToast.show('Conversación cerrada.', 'success');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.messages.conversacionCerrada', 'Conversación cerrada.'), 'success');
 
       await openThread(threadId, true);
     } catch (err) {
       console.error('[BaqueanoOpsMessages] Error al cerrar conversación:', err);
       state.error = err.message;
-      if (window.OpsToast) window.OpsToast.show(`Error al cerrar: ${err.message}`, 'error');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.messages.errorAlCerrar', 'Error al cerrar: {p0}', { p0: (err.message) }), 'error');
       render();
     } finally {
       state.busy = false;
@@ -517,7 +526,7 @@
       // Reabrir enviando una reapertura o respuesta administrativa
       await callEdgeFunction('staff_reply', { id: threadId, body: 'Conversación reabierta por el equipo de atención de BAQUEANO.' });
       state.notice = 'Conversación reabierta exitosamente.';
-      if (window.OpsToast) window.OpsToast.show('Conversación reabierta.', 'success');
+      if (window.OpsToast) window.OpsToast.show(i18n('ops.messages.conversacionReabierta', 'Conversación reabierta.'), 'success');
       await openThread(threadId, true);
     } catch (err) {
       state.error = err.message;

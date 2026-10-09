@@ -29,6 +29,15 @@
 (function (window, document) {
   'use strict';
 
+  // i18n de la interfaz del Ops Center (claves ops.<módulo>.*; respaldo en español si falta la traducción).
+  function i18n(key, fallback, vars) {
+    var out = fallback;
+    try { if (window.BaqueanoLanguage && window.BaqueanoLanguage.t) out = window.BaqueanoLanguage.t(key, { fallback: fallback }) || fallback; } catch (_) { out = fallback; }
+    return String(out).replace(/\{(\w+)\}/g, function (m, k) { return vars && vars[k] != null ? vars[k] : m; });
+  }
+  // Valor de atributo HTML ya entre comillas (title=${q(…)}); escapa comillas dobles.
+  function q(value) { return '"' + String(value == null ? '' : value).replace(/"/g, '&quot;') + '"'; }
+
   const BCN_EXCHANGE_RATE = 36.6243; // Tasa oficial Banco Central de Nicaragua (Regla 11)
 
   // Catálogo inicial de Guías Nativos Acreditados de Nicaragua
@@ -333,7 +342,7 @@
         <div class="ops-search-input-wrap" style="flex: 1; max-width: 380px;">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input type="text" class="ops-filter-search-input" id="opsGuideSearchInput"
-            placeholder="Buscar por nombre, territorio, especialidad o carnet..."
+            placeholder=i18n('ops.guides.buscarPorNombreTerritorio', 'Buscar por nombre, territorio, especialidad o carnet...')
             value="${escapeHtml(state.searchQuery)}"
             oninput="window.BaqueanoOpsGuides.search(this.value)">
         </div>
@@ -403,7 +412,7 @@
             <div style="display: flex; flex-direction: column; min-width: 0;">
               <span style="font-weight: 700; color: #FFFFFF; font-size: 0.92rem; display: flex; align-items: center; gap: 0.35rem;">
                 ${escapeHtml(name)}
-                ${isVerified ? `<span title="Guía Verificado con Acreditación Oficial" style="color: #00BAF2; font-size: 0.85rem;"><i class="fa-solid fa-circle-check"></i></span>` : ''}
+                ${isVerified ? `<span title=${q(i18n('ops.guides.guiaVerificadoConAcreditacion', 'Guía Verificado con Acreditación Oficial'))} style="color: #00BAF2; font-size: 0.85rem;"><i class="fa-solid fa-circle-check"></i></span>` : ''}
               </span>
               <span style="font-size: 0.74rem; color: var(--ops-text-muted); font-family: monospace;">
                 <i class="fa-solid fa-id-card" style="color: var(--bq-accent); margin-right: 0.25rem;"></i>${escapeHtml(carnet)}
@@ -422,7 +431,7 @@
           </div>
         </td>
         <td>
-          <span style="color: #E2E8F0; font-size: 0.84rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.35;" title="${escapeHtml(guide.specialty || '')}">
+          <span style="color: #E2E8F0; font-size: 0.84rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.35;" title=${q(`${escapeHtml(guide.specialty || '')}`)}>
             ${escapeHtml(guide.specialty || 'Guianza general')}
           </span>
         </td>
@@ -435,7 +444,7 @@
         <td>
           <div style="display: flex; flex-direction: column; gap: 0.2rem;">
             ${whatsappLink ? `
-              <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" style="color: #10B981; font-weight: 700; font-size: 0.82rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;" title="Abrir WhatsApp">
+              <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" style="color: #10B981; font-weight: 700; font-size: 0.82rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;" title=${q(i18n('ops.guides.abrirWhatsapp', 'Abrir WhatsApp'))}>
                 <i class="fa-brands fa-whatsapp" style="font-size: 0.95rem;"></i> ${escapeHtml(guide.phone || '')}
               </a>
             ` : `<span style="color: var(--ops-text-muted); font-size: 0.82rem;">${escapeHtml(guide.phone || '—')}</span>`}
@@ -465,13 +474,13 @@
         </td>
         <td>
           <div class="ops-table-actions" style="justify-content: flex-end; gap: 0.35rem;">
-            <button type="button" class="btn-ops-icon" title="Editar ficha del guía" onclick="window.BaqueanoOpsGuides.openDrawer('${escapeHtml(guide.id)}')">
+            <button type="button" class="btn-ops-icon" title=${q(i18n('ops.guides.editarFichaDelGuia', 'Editar ficha del guía'))} onclick="window.BaqueanoOpsGuides.openDrawer('${escapeHtml(guide.id)}')">
               <i class="fa-solid fa-pen-to-square" style="color: #38BDF8;"></i>
             </button>
-            <button type="button" class="btn-ops-icon" title="${isSuspended ? 'Reactivar guía' : 'Suspender guía'}" onclick="window.BaqueanoOpsGuides.toggleSuspend('${escapeHtml(guide.id)}')">
+            <button type="button" class="btn-ops-icon" title=${q(isSuspended ? i18n('ops.guides.reactivateGuide', 'Reactivar guía') : i18n('ops.guides.suspendGuide', 'Suspender guía'))} onclick="window.BaqueanoOpsGuides.toggleSuspend('${escapeHtml(guide.id)}')">
               <i class="fa-solid ${isSuspended ? 'fa-play' : 'fa-pause'}" style="color: ${isSuspended ? '#10B981' : '#F59E0B'};"></i>
             </button>
-            <button type="button" class="btn-ops-icon" title="Eliminar guía del catálogo" onclick="window.BaqueanoOpsGuides.openDeleteModal('${escapeHtml(guide.id)}')">
+            <button type="button" class="btn-ops-icon" title=${q(i18n('ops.guides.eliminarGuiaDelCatalogo', 'Eliminar guía del catálogo'))} onclick="window.BaqueanoOpsGuides.openDeleteModal('${escapeHtml(guide.id)}')">
               <i class="fa-solid fa-trash-can" style="color: #EF4444;"></i>
             </button>
           </div>
@@ -591,12 +600,12 @@
     const status = document.getElementById('opsGuideStatus').value;
 
     if (!name) {
-      alert('Por favor ingresa el nombre completo del guía.');
+      alert(i18n('ops.guides.porFavorIngresaEl', 'Por favor ingresa el nombre completo del guía.'));
       document.getElementById('opsGuideName').focus();
       return;
     }
     if (!specialty) {
-      alert('Por favor especifica la especialidad turística del guía.');
+      alert(i18n('ops.guides.porFavorEspecificaLa', 'Por favor especifica la especialidad turística del guía.'));
       document.getElementById('opsGuideSpecialty').focus();
       return;
     }
@@ -664,7 +673,7 @@
 
     // Notificación Toast
     if (window.OpsToast) {
-      window.OpsToast.show(`Guía "${name}" guardado exitosamente.`, 'success');
+      window.OpsToast.show(i18n('ops.guides.guiaGuardadoExitosamente', 'Guía \"{p0}\" guardado exitosamente.', { p0: (name) }), 'success');
     }
 
     // Sincronización asíncrona con Supabase / Firestore
@@ -733,7 +742,7 @@
     render();
 
     if (window.OpsToast) {
-      window.OpsToast.show(`Guía "${guideName}" eliminado del catálogo.`, 'error');
+      window.OpsToast.show(i18n('ops.guides.guiaEliminadoDelCatalogo', 'Guía \"{p0}\" eliminado del catálogo.', { p0: (guideName) }), 'error');
     }
   }
 

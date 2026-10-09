@@ -48,6 +48,15 @@
 (function (window, document) {
   'use strict';
 
+  // i18n de la interfaz del Ops Center (claves ops.<módulo>.*; respaldo en español si falta la traducción).
+  function i18n(key, fallback, vars) {
+    var out = fallback;
+    try { if (window.BaqueanoLanguage && window.BaqueanoLanguage.t) out = window.BaqueanoLanguage.t(key, { fallback: fallback }) || fallback; } catch (_) { out = fallback; }
+    return String(out).replace(/\{(\w+)\}/g, function (m, k) { return vars && vars[k] != null ? vars[k] : m; });
+  }
+  // Valor de atributo HTML ya entre comillas (title=${q(…)}); escapa comillas dobles.
+  function q(value) { return '"' + String(value == null ? '' : value).replace(/"/g, '&quot;') + '"'; }
+
   // Configuración de Roles y Etiquetas Oficiales
   const ROLES_CONFIG = {
     superadmin: {
@@ -302,7 +311,7 @@
         <div class="ops-search-input-wrap" style="flex: 1; max-width: 380px;">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input type="text" class="ops-filter-search-input" id="opsUserSearchInput"
-            placeholder="Buscar por nombre, correo, rol o ID..."
+            placeholder=i18n('ops.users.buscarPorNombreCorreo', 'Buscar por nombre, correo, rol o ID...')
             value="${escapeHtml(state.searchQuery)}"
             oninput="window.BaqueanoOpsUsers.search(this.value)">
         </div>
@@ -370,19 +379,19 @@
             <div style="display: flex; flex-direction: column; min-width: 0;">
               <span style="font-weight: 700; color: #FFFFFF; font-size: 0.92rem; display: flex; align-items: center; gap: 0.35rem;">
                 ${escapeHtml(name)}
-                ${isVerified ? `<span title="Perfil Verificado" style="color: #00BAF2; font-size: 0.85rem;"><i class="fa-solid fa-circle-check"></i></span>` : ''}
+                ${isVerified ? `<span title=${q(i18n('ops.users.perfilVerificado', 'Perfil Verificado'))} style="color: #00BAF2; font-size: 0.85rem;"><i class="fa-solid fa-circle-check"></i></span>` : ''}
               </span>
               <span style="font-size: 0.73rem; color: var(--ops-text-muted); font-family: monospace;">ID: ${escapeHtml(user.id)}</span>
             </div>
           </div>
         </td>
         <td>
-          <a href="mailto:${escapeHtml(email)}" style="color: #38BDF8; font-size: 0.85rem; text-decoration: none;" title="Escribir correo a ${escapeHtml(name)}">
+          <a href="mailto:${escapeHtml(email)}" style="color: #38BDF8; font-size: 0.85rem; text-decoration: none;" title=${q(i18n('ops.users.escribirCorreoA', 'Escribir correo a {p0}', { p0: (escapeHtml(name)) }))}>
             <i class="fa-regular fa-envelope" style="margin-right: 0.3rem; opacity: 0.7;"></i>${escapeHtml(email)}
           </a>
         </td>
         <td>
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.78rem; font-weight: 700; ${roleMeta.style}" title="${roleMeta.description}">
+          <span style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.78rem; font-weight: 700; ${roleMeta.style}" title=${q(`${roleMeta.description}`)}>
             <i class="fa-solid ${roleMeta.icon}"></i>
             <span>${roleMeta.label}</span>
           </span>
@@ -404,16 +413,16 @@
         </td>
         <td>
           <div class="ops-table-actions" style="justify-content: flex-end; gap: 0.35rem;">
-            <button type="button" class="btn-ops-icon" title="Editar usuario (perfil, rol, contraseña)" onclick="window.BaqueanoOpsUsers.openModal('${escapeHtml(user.id)}')">
+            <button type="button" class="btn-ops-icon" title=${q(i18n('ops.users.editarUsuarioPerfilRol', 'Editar usuario (perfil, rol, contraseña)'))} onclick="window.BaqueanoOpsUsers.openModal('${escapeHtml(user.id)}')">
               <i class="fa-solid fa-user-pen" style="color: #38BDF8;"></i>
             </button>
-            <button type="button" class="btn-ops-icon" title="Cambiar contraseña de acceso rápido" onclick="window.BaqueanoOpsUsers.openPasswordModal('${escapeHtml(user.id)}')">
+            <button type="button" class="btn-ops-icon" title=${q(i18n('ops.users.cambiarContrasenaDeAcceso', 'Cambiar contraseña de acceso rápido'))} onclick="window.BaqueanoOpsUsers.openPasswordModal('${escapeHtml(user.id)}')">
               <i class="fa-solid fa-key" style="color: #F59E0B;"></i>
             </button>
-            <button type="button" class="btn-ops-icon" title="${statusNorm === 'active' ? 'Suspender acceso' : 'Reactivar acceso'}" onclick="window.BaqueanoOpsUsers.toggleUserStatus('${escapeHtml(user.id)}')">
+            <button type="button" class="btn-ops-icon" title=${q(statusNorm === 'active' ? i18n('ops.users.suspendAccess', 'Suspender acceso') : i18n('ops.users.reactivateAccess', 'Reactivar acceso'))} onclick="window.BaqueanoOpsUsers.toggleUserStatus('${escapeHtml(user.id)}')">
               <i class="fa-solid ${statusNorm === 'active' ? 'fa-pause' : 'fa-play'}" style="color: ${statusNorm === 'active' ? '#F59E0B' : '#10B981'};"></i>
             </button>
-            <button type="button" class="btn-ops-icon danger" title="Eliminar usuario definitivamente" onclick="window.BaqueanoOpsUsers.deleteUser('${escapeHtml(user.id)}')">
+            <button type="button" class="btn-ops-icon danger" title=${q(i18n('ops.users.eliminarUsuarioDefinitivamente', 'Eliminar usuario definitivamente'))} onclick="window.BaqueanoOpsUsers.deleteUser('${escapeHtml(user.id)}')">
               <i class="fa-solid fa-trash-can" style="color: #EF4444;"></i>
             </button>
           </div>
@@ -462,14 +471,14 @@
 
     if (user) {
       // Modo Edición
-      if (titleEl) titleEl.textContent = `Editar Usuario: ${user.displayName || user.name || user.id}`;
-      if (subtitleEl) subtitleEl.textContent = `ID: ${user.id} · Modificación de Perfil & Permisos`;
+      if (titleEl) titleEl.textContent = i18n('ops.users.editarUsuario', 'Editar Usuario: {p0}', { p0: (user.displayName || user.name || user.id) });
+      if (subtitleEl) subtitleEl.textContent = i18n('ops.users.idModificacionDePerfil', 'ID: {p0} · Modificación de Perfil & Permisos', { p0: (user.id) });
       if (idInput) idInput.value = user.id;
       if (nameInput) nameInput.value = user.displayName || user.name || '';
       if (emailInput) emailInput.value = user.email || '';
       if (passInput) passInput.value = '';
       if (passConfirmInput) passConfirmInput.value = '';
-      if (passHintEl) passHintEl.textContent = 'Opcional en edición: deja en blanco para conservar la contraseña actual o escribe una nueva para cambiarla.';
+      if (passHintEl) passHintEl.textContent = i18n('ops.users.opcionalEnEdicionDeja', 'Opcional en edición: deja en blanco para conservar la contraseña actual o escribe una nueva para cambiarla.');
       if (roleSelect) roleSelect.value = normalizeRole(user.role);
       if (statusSelect) statusSelect.value = normalizeStatus(user.status);
       if (phoneInput) phoneInput.value = user.phone || '';
@@ -478,17 +487,17 @@
       if (verifiedCheckbox) verifiedCheckbox.checked = Boolean(user.verified || user.profile_verified);
       if (notesInput) notesInput.value = user.notes || user.status_reason || '';
       if (deleteBtn) deleteBtn.style.display = 'inline-flex';
-      if (saveBtnText) saveBtnText.textContent = 'Guardar Cambios';
+      if (saveBtnText) saveBtnText.textContent = i18n('ops.users.guardarCambios', 'Guardar Cambios');
     } else {
       // Modo Creación
-      if (titleEl) titleEl.textContent = 'Nuevo Usuario';
-      if (subtitleEl) subtitleEl.textContent = 'Directorio de Identidades & Credenciales';
+      if (titleEl) titleEl.textContent = i18n('ops.users.nuevoUsuario', 'Nuevo Usuario');
+      if (subtitleEl) subtitleEl.textContent = i18n('ops.users.directorioDeIdentidadesCredenciales', 'Directorio de Identidades & Credenciales');
       if (idInput) idInput.value = '';
       if (nameInput) nameInput.value = '';
       if (emailInput) emailInput.value = '';
       if (passInput) passInput.value = '';
       if (passConfirmInput) passConfirmInput.value = '';
-      if (passHintEl) passHintEl.textContent = 'Obligatorio: debe tener al menos 8 caracteres seguros para iniciar sesión.';
+      if (passHintEl) passHintEl.textContent = i18n('ops.users.obligatorioDebeTenerAl', 'Obligatorio: debe tener al menos 8 caracteres seguros para iniciar sesión.');
       if (roleSelect) roleSelect.value = 'turista';
       if (statusSelect) statusSelect.value = 'active';
       if (phoneInput) phoneInput.value = '';
@@ -497,7 +506,7 @@
       if (verifiedCheckbox) verifiedCheckbox.checked = false;
       if (notesInput) notesInput.value = '';
       if (deleteBtn) deleteBtn.style.display = 'none';
-      if (saveBtnText) saveBtnText.textContent = 'Crear y Guardar Usuario';
+      if (saveBtnText) saveBtnText.textContent = i18n('ops.users.crearYGuardarUsuario', 'Crear y Guardar Usuario');
     }
 
     drawer.classList.add('is-open');
@@ -543,12 +552,12 @@
 
     // Validaciones Defensivas
     if (!name) {
-      toast('El nombre completo es obligatorio.', 'warning');
+      toast(i18n('ops.users.elNombreCompletoEs', 'El nombre completo es obligatorio.'), 'warning');
       nameInput && nameInput.focus();
       return;
     }
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast('Ingresa un correo electrónico válido.', 'warning');
+      toast(i18n('ops.users.ingresaUnCorreoElectronico', 'Ingresa un correo electrónico válido.'), 'warning');
       emailInput && emailInput.focus();
       return;
     }
@@ -557,29 +566,29 @@
 
     if (isCreating) {
       if (!password) {
-        toast('Debes asignar una contraseña para el nuevo usuario.', 'warning');
+        toast(i18n('ops.users.debesAsignarUnaContrasena', 'Debes asignar una contraseña para el nuevo usuario.'), 'warning');
         passInput && passInput.focus();
         return;
       }
       if (password.length < 8) {
-        toast('La contraseña debe tener al menos 8 caracteres seguros.', 'warning');
+        toast(i18n('ops.users.laContrasenaDebeTener', 'La contraseña debe tener al menos 8 caracteres seguros.'), 'warning');
         passInput && passInput.focus();
         return;
       }
       if (password !== confirmPassword) {
-        toast('Las contraseñas no coinciden. Verifícalas.', 'warning');
+        toast(i18n('ops.users.lasContrasenasNoCoinciden', 'Las contraseñas no coinciden. Verifícalas.'), 'warning');
         passConfirmInput && passConfirmInput.focus();
         return;
       }
     } else {
       if (password) {
         if (password.length < 8) {
-          toast('La nueva contraseña debe tener al menos 8 caracteres.', 'warning');
+          toast(i18n('ops.users.laNuevaContrasenaDebe', 'La nueva contraseña debe tener al menos 8 caracteres.'), 'warning');
           passInput && passInput.focus();
           return;
         }
         if (password !== confirmPassword) {
-          toast('Las contraseñas no coinciden. Verifícalas.', 'warning');
+          toast(i18n('ops.users.lasContrasenasNoCoinciden', 'Las contraseñas no coinciden. Verifícalas.'), 'warning');
           passConfirmInput && passConfirmInput.focus();
           return;
         }
@@ -699,7 +708,7 @@
       render();
     } catch (err) {
       console.error('[BaqueanoOpsUsers] Error al guardar usuario:', err);
-      toast(`Error al guardar: ${err.message}`, 'error');
+      toast(i18n('ops.users.errorAlGuardar', 'Error al guardar: {p0}', { p0: (err.message) }), 'error');
     } finally {
       state.busy = false;
       if (saveBtn) saveBtn.disabled = false;
@@ -712,7 +721,7 @@
   function openPasswordModal(userId) {
     const user = getUsersCollection().find(u => u.id === userId);
     if (!user) {
-      toast('Usuario no encontrado.', 'warning');
+      toast(i18n('ops.users.usuarioNoEncontrado', 'Usuario no encontrado.'), 'warning');
       return;
     }
 
@@ -750,12 +759,12 @@
 
     if (!id) return;
     if (!newPass || newPass.length < 8) {
-      toast('La contraseña debe contener al menos 8 caracteres seguros.', 'warning');
+      toast(i18n('ops.users.laContrasenaDebeContener', 'La contraseña debe contener al menos 8 caracteres seguros.'), 'warning');
       passInput && passInput.focus();
       return;
     }
     if (newPass !== confirmPass) {
-      toast('Las contraseñas no coinciden.', 'warning');
+      toast(i18n('ops.users.lasContrasenasNoCoinciden2', 'Las contraseñas no coinciden.'), 'warning');
       confirmInput && confirmInput.focus();
       return;
     }
@@ -763,7 +772,7 @@
     const user = getUsersCollection().find(u => u.id === id);
     const userEmail = user ? user.email : '';
 
-    toast('Actualizando contraseña...', 'info');
+    toast(i18n('ops.users.actualizandoContrasena', 'Actualizando contraseña...'), 'info');
 
     try {
       // 1. Si Supabase está conectado, actualizar vía API administrativa
@@ -783,10 +792,10 @@
         } catch (_) {}
       }
 
-      toast(`Contraseña de ${user ? (user.displayName || user.email) : id} actualizada con éxito.`, 'success');
+      toast(i18n('ops.users.contrasenaDeActualizadaCon', 'Contraseña de {p0} actualizada con éxito.', { p0: (user ? (user.displayName || user.email) : id) }), 'success');
       closePasswordModal();
     } catch (err) {
-      toast(`Error al actualizar contraseña: ${err.message}`, 'error');
+      toast(i18n('ops.users.errorAlActualizarContrasena', 'Error al actualizar contraseña: {p0}', { p0: (err.message) }), 'error');
     }
   }
 
@@ -821,7 +830,7 @@
       } catch (_) {}
     }
 
-    toast(`Usuario "${user.displayName || user.email}" marcado como ${statusLabel}.`, 'info');
+    toast(i18n('ops.users.usuarioMarcadoComo', 'Usuario \"{p0}\" marcado como {p1}.', { p0: (user.displayName || user.email), p1: (statusLabel) }), 'info');
     render();
   }
 
@@ -835,7 +844,7 @@
     // Salvaguarda 1: No eliminar la propia cuenta en sesión
     const currentAdminEmail = (window.OpsState && window.OpsState.currentUser && window.OpsState.currentUser.email) || '';
     if (user && user.email && currentAdminEmail && user.email.toLowerCase() === currentAdminEmail.toLowerCase()) {
-      toast('Por seguridad, no puedes eliminar tu propia cuenta en sesión activa.', 'warning');
+      toast(i18n('ops.users.porSeguridadNoPuedes', 'Por seguridad, no puedes eliminar tu propia cuenta en sesión activa.'), 'warning');
       return;
     }
 
@@ -843,7 +852,7 @@
     const allUsers = getUsersCollection();
     const superAdmins = allUsers.filter(u => normalizeRole(u.role) === 'superadmin');
     if (user && normalizeRole(user.role) === 'superadmin' && superAdmins.length <= 1) {
-      toast('Acción bloqueada: No se puede eliminar al único Super Administrador del sistema.', 'warning');
+      toast(i18n('ops.users.accionBloqueadaNoSe', 'Acción bloqueada: No se puede eliminar al único Super Administrador del sistema.'), 'warning');
       return;
     }
 
@@ -887,11 +896,11 @@
         window.OpsState.metrics.totalUsers = items.length;
       }
 
-      toast(`Usuario "${userName}" eliminado definitivamente.`, 'success');
+      toast(i18n('ops.users.usuarioEliminadoDefinitivamente', 'Usuario \"{p0}\" eliminado definitivamente.', { p0: (userName) }), 'success');
       closeModal();
       render();
     } catch (err) {
-      toast(`Error al eliminar: ${err.message}`, 'error');
+      toast(i18n('ops.users.errorAlEliminar', 'Error al eliminar: {p0}', { p0: (err.message) }), 'error');
     }
   }
 
@@ -944,12 +953,12 @@
     // Copiar al portapapeles
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(pwd).then(() => {
-        toast(`Contraseña generada y copiada al portapapeles: ${pwd}`, 'success');
+        toast(i18n('ops.users.contrasenaGeneradaYCopiada', 'Contraseña generada y copiada al portapapeles: {p0}', { p0: (pwd) }), 'success');
       }).catch(() => {
-        toast(`Contraseña generada: ${pwd}`, 'info');
+        toast(i18n('ops.users.contrasenaGenerada', 'Contraseña generada: {p0}', { p0: (pwd) }), 'info');
       });
     } else {
-      toast(`Contraseña generada: ${pwd}`, 'info');
+      toast(i18n('ops.users.contrasenaGenerada', 'Contraseña generada: {p0}', { p0: (pwd) }), 'info');
     }
   }
 
