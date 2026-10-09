@@ -1582,9 +1582,9 @@
         <div class="ops-drawer-title-wrap">
           <h2 class="ops-drawer-title" id="opsBizDrawerTitle" style="display:flex; align-items:center; gap:0.6rem;">
             <i class="fa-solid fa-store" style="color: var(--bq-secondary);"></i>
-            <span>Nuevo Negocio &amp; Aliado Comunitario</span>
+            <span data-i18n="pages.admin.opsBizDrawerTitle.span1">Nuevo Negocio &amp; Aliado Comunitario</span>
           </h2>
-          <p class="ops-drawer-subtitle" id="opsBizDrawerSubtitle">Módulo: Negocios Comunitarios, Anfitriones y Emprendedores</p>
+          <p class="ops-drawer-subtitle" id="opsBizDrawerSubtitle"><span data-i18n="pages.admin.opsBizDrawerSubtitle.p1">Módulo: Negocios Comunitarios, Anfitriones y Emprendedores</span></p>
         </div>
         <button type="button" class="ops-drawer-close-btn" id="opsBizDrawerCloseBtn" onclick="window.BaqueanoOpsBusinesses.closeDrawer()">
           <i class="fa-solid fa-xmark"></i>
@@ -1594,16 +1594,16 @@
       <!-- Tabs de Navegación del Negocio -->
       <div class="ops-drawer-tabs" style="display: flex; gap: 0.5rem; padding: 0.75rem 1.75rem; background: var(--ops-surface-1); border-bottom: 1px solid var(--ops-border-subtle);">
         <button type="button" class="ops-drawer-tab-btn ops-biz-tab-btn is-active" data-biz-tab="general" onclick="window.BaqueanoOpsBusinesses.switchDrawerTab('general')">
-          <i class="fa-solid fa-store"></i> General &amp; Rubro
+          <i class="fa-solid fa-store"></i> <span data-i18n="pages.admin.opsBusinessDrawer.button1">General &amp; Rubro</span>
         </button>
         <button type="button" class="ops-drawer-tab-btn ops-biz-tab-btn" data-biz-tab="territorio" onclick="window.BaqueanoOpsBusinesses.switchDrawerTab('territorio')">
-          <i class="fa-solid fa-map-location-dot"></i> Territorio
+          <i class="fa-solid fa-map-location-dot"></i> <span data-i18n="common.territorio">Territorio</span>
         </button>
         <button type="button" class="ops-drawer-tab-btn ops-biz-tab-btn" data-biz-tab="contacto" onclick="window.BaqueanoOpsBusinesses.switchDrawerTab('contacto')">
-          <i class="fa-solid fa-hand-holding-dollar"></i> Tarifas &amp; Contacto
+          <i class="fa-solid fa-hand-holding-dollar"></i> <span data-i18n="pages.admin.opsEntityDrawer.button2">Tarifas &amp; Contacto</span>
         </button>
         <button type="button" class="ops-drawer-tab-btn ops-biz-tab-btn" data-biz-tab="historia" onclick="window.BaqueanoOpsBusinesses.switchDrawerTab('historia')">
-          <i class="fa-solid fa-book-open"></i> Saberes &amp; Fotos
+          <i class="fa-solid fa-book-open"></i> <span data-i18n="pages.admin.opsBusinessDrawer.button2">Saberes &amp; Fotos</span>
         </button>
       </div>
 
@@ -1615,42 +1615,42 @@
           <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
             <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
               <i class="fa-solid fa-id-card" style="color: var(--bq-secondary);"></i>
-              <span>Identidad Comercial &amp; Responsable</span>
+              <span data-i18n="pages.admin.opsBizPaneGeneral.span1">Identidad Comercial &amp; Responsable</span>
             </h3>
 
             <div class="ops-form-group" style="margin-bottom: 1rem;">
-              <label class="ops-form-label">Nombre Comercial del Negocio / Emprendimiento *</label>
-              <input type="text" class="ops-form-input" id="opsBizFormName" placeholder="Ej. Comedor Tradicional Doña Haydée, Hospedaje Campesino Somoto...">
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneGeneral.label1">Nombre Comercial del Negocio / Emprendimiento *</span></label>
+              <input data-i18n-placeholder="pages.admin.opsBizFormName.inputPlaceholder1" type="text" class="ops-form-input" id="opsBizFormName" placeholder="Ej. Comedor Tradicional Doña Haydée, Hospedaje Campesino Somoto...">
             </div>
 
             <div class="ops-form-grid-2" style="margin-bottom: 1rem;">
               <div class="ops-form-group">
-                <label class="ops-form-label">Anfitrión / Propietario Responsable</label>
-                <input type="text" class="ops-form-input" id="opsBizFormHost" placeholder="Ej. Doña Haydée Palacios, Cooperativa Guardaparques...">
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneGeneral.label2">Anfitrión / Propietario Responsable</span></label>
+                <input data-i18n-placeholder="pages.admin.opsBizFormHost.inputPlaceholder1" type="text" class="ops-form-input" id="opsBizFormHost" placeholder="Ej. Doña Haydée Palacios, Cooperativa Guardaparques...">
               </div>
 
               <div class="ops-form-group">
-                <label class="ops-form-label">Rubro / Categoría Comercial *</label>
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneGeneral.label3">Rubro / Categoría Comercial *</span></label>
                 <select class="ops-form-select" id="opsBizFormCategory">
-                  <option value="hospedaje">Hospedaje Campesino / Ecolodge / Cabaña</option>
-                  <option value="comedor">Comedor Típico / Restaurante / Gastronomía</option>
-                  <option value="guia">Guía Nativo / Tour Operador Local / Excursiones</option>
-                  <option value="transporte">Transporte Rural / Lacustre / Comunitario</option>
-                  <option value="artesano">Artesanías / Talleres Vivos / Cultura</option>
-                  <option value="finca">Agroturismo / Finca Familiar / Café &amp; Cacao</option>
-                  <option value="cooperativa">Cooperativa Ecoturística Comunitaria</option>
-                  <option value="emprendimiento">Emprendimiento Comunitario Diverso</option>
+                  <option data-i18n="pages.admin.opsBizFormCategory.option1" value="hospedaje">Hospedaje Campesino / Ecolodge / Cabaña</option>
+                  <option data-i18n="pages.admin.opsBizFormCategory.option2" value="comedor">Comedor Típico / Restaurante / Gastronomía</option>
+                  <option data-i18n="pages.admin.opsBizFormCategory.option3" value="guia">Guía Nativo / Tour Operador Local / Excursiones</option>
+                  <option data-i18n="pages.admin.opsBizFormCategory.option4" value="transporte">Transporte Rural / Lacustre / Comunitario</option>
+                  <option data-i18n="pages.admin.opsBizFormCategory.option5" value="artesano">Artesanías / Talleres Vivos / Cultura</option>
+                  <option data-i18n="pages.admin.opsBizFormCategory.option6" value="finca">Agroturismo / Finca Familiar / Café &amp; Cacao</option>
+                  <option data-i18n="pages.admin.opsBizFormCategory.option7" value="cooperativa">Cooperativa Ecoturística Comunitaria</option>
+                  <option data-i18n="pages.admin.opsBizFormCategory.option8" value="emprendimiento">Emprendimiento Comunitario Diverso</option>
                 </select>
               </div>
             </div>
 
             <div class="ops-form-group">
-              <label class="ops-form-label">Estado Operativo en Plataforma *</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneGeneral.label4">Estado Operativo en Plataforma *</span></label>
               <select class="ops-form-select" id="opsBizFormStatus">
-                <option value="published">Publicado (Visible en el portal web y la app Android)</option>
-                <option value="draft">Suspendido / Borrador (Oculto temporalmente para revisión)</option>
-                <option value="pending_review">En Revisión (Pendiente de aprobación de staff)</option>
-                <option value="archived">Archivado (Histórico / Fuera de servicio)</option>
+                <option data-i18n="pages.admin.opsBizFormStatus.option1" value="published">Publicado (Visible en el portal web y la app Android)</option>
+                <option data-i18n="pages.admin.opsBizFormStatus.option2" value="draft">Suspendido / Borrador (Oculto temporalmente para revisión)</option>
+                <option data-i18n="pages.admin.opsBizFormStatus.option3" value="pending_review">En Revisión (Pendiente de aprobación de staff)</option>
+                <option data-i18n="pages.admin.opsBizFormStatus.option4" value="archived">Archivado (Histórico / Fuera de servicio)</option>
               </select>
             </div>
           </div>
@@ -1659,7 +1659,7 @@
           <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem;">
             <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
               <i class="fa-solid fa-award" style="color: var(--bq-accent);"></i>
-              <span>Servicios &amp; Distintivos Oficiales</span>
+              <span data-i18n="pages.admin.opsBizPaneGeneral.span2">Servicios &amp; Distintivos Oficiales</span>
             </h3>
 
             <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
@@ -1667,9 +1667,9 @@
                 <input type="checkbox" id="opsBizFormVerified" style="accent-color:#00BAF2; width:20px; height:20px; cursor:pointer;">
                 <div style="display:flex; flex-direction:column;">
                   <span style="font-size:0.88rem; font-weight:700; color:#fff; display:flex; align-items:center; gap:0.35rem;">
-                    <i class="fa-solid fa-circle-check" style="color:#00BAF2;"></i> Sello Oficial de Verificación (Check Azul)
+                    <i class="fa-solid fa-circle-check" style="color:#00BAF2;"></i> <span data-i18n="pages.admin.opsBizPaneGeneral.span3">Sello Oficial de Verificación (Check Azul)</span>
                   </span>
-                  <span style="font-size:0.75rem; color:var(--ops-text-muted);">Acredita visita de campo y cumplimiento bajo Ley 1210 / Ley 1211.</span>
+                  <span data-i18n="pages.admin.opsBizPaneGeneral.span4" style="font-size:0.75rem; color:var(--ops-text-muted);">Acredita visita de campo y cumplimiento bajo Ley 1210 / Ley 1211.</span>
                 </div>
               </label>
 
@@ -1677,9 +1677,9 @@
                 <input type="checkbox" id="opsBizFormDayPass" style="accent-color:#F65E01; width:20px; height:20px; cursor:pointer;">
                 <div style="display:flex; flex-direction:column;">
                   <span style="font-size:0.88rem; font-weight:700; color:#fff; display:flex; align-items:center; gap:0.35rem;">
-                    <i class="fa-solid fa-sun" style="color:#F65E01;"></i> Servicio de Pasadía Comunitario (Day Pass Disponible)
+                    <i class="fa-solid fa-sun" style="color:#F65E01;"></i> <span data-i18n="pages.admin.opsBizPaneGeneral.span5">Servicio de Pasadía Comunitario (Day Pass Disponible)</span>
                   </span>
-                  <span style="font-size:0.75rem; color:var(--ops-text-muted);">El viajero puede visitar el lugar por el día sin pernoctar obligatoriamente.</span>
+                  <span data-i18n="pages.admin.opsBizPaneGeneral.span6" style="font-size:0.75rem; color:var(--ops-text-muted);">El viajero puede visitar el lugar por el día sin pernoctar obligatoriamente.</span>
                 </div>
               </label>
 
@@ -1687,9 +1687,9 @@
                 <input type="checkbox" id="opsBizFormHiddenGem" style="accent-color:#F4E6C1; width:20px; height:20px; cursor:pointer;">
                 <div style="display:flex; flex-direction:column;">
                   <span style="font-size:0.88rem; font-weight:700; color:#F4E6C1; display:flex; align-items:center; gap:0.35rem;">
-                    <i class="fa-solid fa-gem" style="color:#F4E6C1;"></i> Joya Oculta Auténtica (Recomendación Campesina)
+                    <i class="fa-solid fa-gem" style="color:#F4E6C1;"></i> <span data-i18n="pages.admin.opsBizPaneGeneral.span7">Joya Oculta Auténtica (Recomendación Campesina)</span>
                   </span>
-                  <span style="font-size:0.75rem; color:var(--ops-text-muted);">Experiencia rural fuera de rutas comerciales masivas.</span>
+                  <span data-i18n="pages.admin.opsBizPaneGeneral.span8" style="font-size:0.75rem; color:var(--ops-text-muted);">Experiencia rural fuera de rutas comerciales masivas.</span>
                 </div>
               </label>
             </div>
@@ -1701,12 +1701,12 @@
           <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem;">
             <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
               <i class="fa-solid fa-map-pin" style="color: var(--bq-accent);"></i>
-              <span>Territorio &amp; Georreferenciación Soberana</span>
+              <span data-i18n="pages.admin.opsBizPaneTerritorio.span1">Territorio &amp; Georreferenciación Soberana</span>
             </h3>
 
             <div class="ops-form-grid-2" style="margin-bottom: 1rem;">
               <div class="ops-form-group">
-                <label class="ops-form-label">Departamento *</label>
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneTerritorio.label1">Departamento *</span></label>
                 <select class="ops-form-select" id="opsBizFormDepartment">
                   <option value="Matagalpa">Matagalpa</option>
                   <option value="Boaco">Boaco</option>
@@ -1723,31 +1723,31 @@
                   <option value="Nueva Segovia">Nueva Segovia</option>
                   <option value="Rivas">Rivas</option>
                   <option value="Río San Juan">Río San Juan</option>
-                  <option value="RACCN">RACCN (Caribe Norte)</option>
-                  <option value="RACCS">RACCS (Caribe Sur)</option>
+                  <option data-i18n="pages.admin.entityDepartment.option2" value="RACCN">RACCN (Caribe Norte)</option>
+                  <option data-i18n="pages.admin.entityDepartment.option3" value="RACCS">RACCS (Caribe Sur)</option>
                 </select>
               </div>
 
               <div class="ops-form-group">
-                <label class="ops-form-label">Municipio</label>
-                <input type="text" class="ops-form-input" id="opsBizFormMunicipality" placeholder="Ej. Somoto, Ometepe, San Ramón, Matagalpa...">
+                <label class="ops-form-label"><span data-i18n="testimonials.fieldMunicipality">Municipio</span></label>
+                <input data-i18n-placeholder="pages.admin.opsBizFormMunicipality.inputPlaceholder1" type="text" class="ops-form-input" id="opsBizFormMunicipality" placeholder="Ej. Somoto, Ometepe, San Ramón, Matagalpa...">
               </div>
             </div>
 
             <div class="ops-form-group" style="margin-bottom: 1rem;">
-              <label class="ops-form-label">Dirección / Punto de Referencia Campesino</label>
-              <textarea class="ops-form-textarea" id="opsBizFormAddress" rows="2" placeholder="Ej. Del Parque Central 2 cuadras al norte, frente al río..."></textarea>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneTerritorio.label2">Dirección / Punto de Referencia Campesino</span></label>
+              <textarea data-i18n-placeholder="pages.admin.opsBizFormAddress.textareaPlaceholder1" class="ops-form-textarea" id="opsBizFormAddress" rows="2" placeholder="Ej. Del Parque Central 2 cuadras al norte, frente al río..."></textarea>
             </div>
 
             <div class="ops-form-grid-2">
               <div class="ops-form-group">
-                <label class="ops-form-label">Latitud GPS (Nicaragua: 10.6 a 15.1)</label>
-                <input type="number" step="any" class="ops-form-input" id="opsBizFormLatitude" placeholder="Ej. 13.4862">
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneTerritorio.label3">Latitud GPS (Nicaragua: 10.6 a 15.1)</span></label>
+                <input data-i18n-placeholder="pages.admin.opsBizFormLatitude.inputPlaceholder1" type="number" step="any" class="ops-form-input" id="opsBizFormLatitude" placeholder="Ej. 13.4862">
               </div>
 
               <div class="ops-form-group">
-                <label class="ops-form-label">Longitud GPS (Nicaragua: -87.8 a -82.5)</label>
-                <input type="number" step="any" class="ops-form-input" id="opsBizFormLongitude" placeholder="Ej. -86.5824">
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneTerritorio.label4">Longitud GPS (Nicaragua: -87.8 a -82.5)</span></label>
+                <input data-i18n-placeholder="pages.admin.opsBizFormLongitude.inputPlaceholder1" type="number" step="any" class="ops-form-input" id="opsBizFormLongitude" placeholder="Ej. -86.5824">
               </div>
             </div>
           </div>
@@ -1760,20 +1760,20 @@
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
               <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0; display:flex; align-items:center; gap:0.5rem;">
                 <i class="fa-solid fa-coins" style="color: #F4E6C1;"></i>
-                <span>Tarifas de Referencia (Córdobas Primero · Regla 11)</span>
+                <span data-i18n="pages.admin.opsBizPaneContacto.span1">Tarifas de Referencia (Córdobas Primero · Regla 11)</span>
               </h3>
-              <span style="font-size:0.75rem; color:var(--ops-text-muted);">Tasa BCN: C$ 36.6243 / $1 USD</span>
+              <span data-i18n="pages.admin.opsBizPaneContacto.span2" style="font-size:0.75rem; color:var(--ops-text-muted);">Tasa BCN: C$ 36.6243 / $1 USD</span>
             </div>
 
             <div class="ops-form-grid-2">
               <div class="ops-form-group">
-                <label class="ops-form-label">Tarifa Base en Córdobas (C$) *</label>
-                <input type="number" step="0.01" class="ops-form-input" id="opsBizFormPriceNio" placeholder="Ej. 350.00" oninput="window.BaqueanoOpsBusinesses.calculateUsdPrice()">
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneContacto.label1">Tarifa Base en Córdobas (C$) *</span></label>
+                <input data-i18n-placeholder="pages.admin.opsBizFormPriceNio.inputPlaceholder1" type="number" step="0.01" class="ops-form-input" id="opsBizFormPriceNio" placeholder="Ej. 350.00" oninput="window.BaqueanoOpsBusinesses.calculateUsdPrice()">
               </div>
 
               <div class="ops-form-group">
-                <label class="ops-form-label">Tarifa Equivalente en Dólares ($ USD)</label>
-                <input type="number" step="0.01" class="ops-form-input" id="opsBizFormPriceUsd" placeholder="Ej. 9.56">
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneContacto.label2">Tarifa Equivalente en Dólares ($ USD)</span></label>
+                <input data-i18n-placeholder="pages.admin.opsBizFormPriceUsd.inputPlaceholder1" type="number" step="0.01" class="ops-form-input" id="opsBizFormPriceUsd" placeholder="Ej. 9.56">
               </div>
             </div>
           </div>
@@ -1782,29 +1782,29 @@
           <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem;">
             <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
               <i class="fa-solid fa-address-book" style="color: #10B981;"></i>
-              <span>Contacto Directo con el Anfitrión (0% Comisiones)</span>
+              <span data-i18n="pages.admin.opsBizPaneContacto.span3">Contacto Directo con el Anfitrión (0% Comisiones)</span>
             </h3>
 
             <div class="ops-form-grid-2" style="margin-bottom: 1rem;">
               <div class="ops-form-group">
-                <label class="ops-form-label">Teléfono Convencional / Móvil</label>
-                <input type="tel" class="ops-form-input" id="opsBizFormPhone" placeholder="Ej. +505 2713-2200 o 8888-1234">
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneContacto.label3">Teléfono Convencional / Móvil</span></label>
+                <input data-i18n-placeholder="pages.admin.opsBizFormPhone.inputPlaceholder1" type="tel" class="ops-form-input" id="opsBizFormPhone" placeholder="Ej. +505 2713-2200 o 8888-1234">
               </div>
 
               <div class="ops-form-group">
-                <label class="ops-form-label">WhatsApp Directo (Para Reservas)</label>
-                <input type="tel" class="ops-form-input" id="opsBizFormWhatsapp" placeholder="Ej. 88881234 o +50588881234">
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneContacto.label4">WhatsApp Directo (Para Reservas)</span></label>
+                <input data-i18n-placeholder="pages.admin.opsBizFormWhatsapp.inputPlaceholder1" type="tel" class="ops-form-input" id="opsBizFormWhatsapp" placeholder="Ej. 88881234 o +50588881234">
               </div>
             </div>
 
             <div class="ops-form-grid-2">
               <div class="ops-form-group">
-                <label class="ops-form-label">Correo Electrónico Oficial</label>
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneContacto.label5">Correo Electrónico Oficial</span></label>
                 <input type="email" class="ops-form-input" id="opsBizFormEmail" placeholder="contacto@negociocampesino.com">
               </div>
 
               <div class="ops-form-group">
-                <label class="ops-form-label">Sitio Web / Red Social</label>
+                <label class="ops-form-label"><span data-i18n="pages.admin.panePricing.label5">Sitio Web / Red Social</span></label>
                 <input type="url" class="ops-form-input" id="opsBizFormWebsite" placeholder="https://facebook.com/negocio...">
               </div>
             </div>
@@ -1816,17 +1816,17 @@
           <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
             <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
               <i class="fa-solid fa-feather-pointed" style="color: var(--bq-accent);"></i>
-              <span>Relato del Anfitrión &amp; Saberes Campesinos</span>
+              <span data-i18n="pages.admin.opsBizPaneHistoria.span1">Relato del Anfitrión &amp; Saberes Campesinos</span>
             </h3>
 
             <div class="ops-form-group" style="margin-bottom: 1rem;">
-              <label class="ops-form-label">Historia Campesina / Relato del Anfitrión</label>
-              <textarea class="ops-form-textarea" id="opsBizFormStory" rows="3" placeholder="Quiénes son los anfitriones, historia familiar campesina y cómo nació el emprendimiento..."></textarea>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneHistoria.label1">Historia Campesina / Relato del Anfitrión</span></label>
+              <textarea data-i18n-placeholder="pages.admin.opsBizFormStory.textareaPlaceholder1" class="ops-form-textarea" id="opsBizFormStory" rows="3" placeholder="Quiénes son los anfitriones, historia familiar campesina y cómo nació el emprendimiento..."></textarea>
             </div>
 
             <div class="ops-form-group">
-              <label class="ops-form-label">Descripción General del Negocio &amp; Servicios</label>
-              <textarea class="ops-form-textarea" id="opsBizFormDescription" rows="4" placeholder="Detalle de platillos, habitaciones, senderos, horarios y recomendaciones para viajeros..."></textarea>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneHistoria.label2">Descripción General del Negocio &amp; Servicios</span></label>
+              <textarea data-i18n-placeholder="pages.admin.opsBizFormDescription.textareaPlaceholder1" class="ops-form-textarea" id="opsBizFormDescription" rows="4" placeholder="Detalle de platillos, habitaciones, senderos, horarios y recomendaciones para viajeros..."></textarea>
             </div>
           </div>
 
@@ -1834,19 +1834,19 @@
           <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem;">
             <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
               <i class="fa-solid fa-image" style="color: var(--bq-secondary);"></i>
-              <span>Fotografía de Portada / Logotipo</span>
+              <span data-i18n="pages.admin.opsBizPaneHistoria.span2">Fotografía de Portada / Logotipo</span>
             </h3>
 
             <div class="ops-form-group" style="margin-bottom: 1rem;">
-              <label class="ops-form-label">URL de la Imagen (o sube archivo abajo)</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsBizPaneHistoria.label3">URL de la Imagen (o sube archivo abajo)</span></label>
               <input type="url" class="ops-form-input" id="opsBizFormImageUrl" placeholder="https://..." oninput="window.BaqueanoOpsBusinesses.updateImagePreview(this.value)">
             </div>
 
             <!-- Dropzone para Subida -->
             <div id="opsBizDropzone" style="border: 2px dashed rgba(244, 230, 193, 0.25); border-radius: 8px; padding: 1.5rem; text-align: center; cursor: pointer; background: var(--ops-surface-2); margin-bottom: 1rem;" onclick="document.getElementById('opsBizFileInput').click()">
               <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.8rem; color: var(--bq-accent); margin-bottom: 0.5rem;"></i>
-              <div id="opsBizDropzoneText" style="font-size: 0.85rem; color: #FFFFFF;">Haz clic o arrastra para subir fotografía o logotipo</div>
-              <small style="font-size: 0.72rem; color: var(--ops-text-muted);">Soporta JPG, PNG y WebP hasta 15 MB</small>
+              <div id="opsBizDropzoneText" style="font-size: 0.85rem; color: #FFFFFF;"><span data-i18n="pages.admin.opsBizDropzoneText.div1">Haz clic o arrastra para subir fotografía o logotipo</span></div>
+              <small data-i18n="pages.admin.opsBizDropzone.small1" style="font-size: 0.72rem; color: var(--ops-text-muted);">Soporta JPG, PNG y WebP hasta 15 MB</small>
             </div>
             <input type="file" id="opsBizFileInput" accept="image/*" style="display:none;" onchange="window.BaqueanoOpsBusinesses.handleImageUpload(this.files[0])">
 
@@ -1862,18 +1862,18 @@
       <div class="ops-drawer-footer" style="display:flex; justify-content:space-between; align-items:center; padding: 1rem 1.75rem; background: var(--ops-surface-1); border-top: 1px solid var(--ops-border-subtle);">
         <div style="display:flex; gap:0.5rem;">
           <button type="button" class="btn-ops-matte danger" id="btnOpsBizDrawerDelete" style="display:none;" onclick="window.BaqueanoOpsBusinesses.deleteBusiness()">
-            <i class="fa-solid fa-trash-can"></i> Archivar
+            <i class="fa-solid fa-trash-can"></i> <span data-i18n="notify.archive">Archivar</span>
           </button>
           <button type="button" class="btn-ops-matte" id="btnOpsBizDrawerSuspend" style="display:none;" onclick="window.BaqueanoOpsBusinesses.toggleBusinessStatus()">
-            <i class="fa-solid fa-pause"></i> Suspender
+            <i class="fa-solid fa-pause"></i> <span data-i18n="opsPlaces.suspend">Suspender</span>
           </button>
         </div>
         <div style="display:flex; gap:0.75rem;">
-          <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsBusinesses.closeDrawer()">
+          <button data-i18n="actions.cancel" type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsBusinesses.closeDrawer()">
             Cancelar
           </button>
           <button type="button" class="btn-ops-matte primary" id="btnOpsBizDrawerSave" onclick="window.BaqueanoOpsBusinesses.saveBusiness()">
-            <i class="fa-solid fa-floppy-disk"></i> Guardar Negocio
+            <i class="fa-solid fa-floppy-disk"></i> <span data-i18n="pages.admin.btnOpsBizDrawerSave.button1">Guardar Negocio</span>
           </button>
         </div>
       </div>
@@ -1887,9 +1887,9 @@
         <div class="ops-drawer-title-wrap">
           <h2 class="ops-drawer-title" id="opsUserDrawerTitle" style="display:flex; align-items:center; gap:0.6rem;">
             <i class="fa-solid fa-user-shield" style="color: var(--bq-accent);"></i>
-            <span>Nuevo Usuario</span>
+            <span data-i18n="pages.admin.opsUserDrawerTitle.span1">Nuevo Usuario</span>
           </h2>
-          <p class="ops-drawer-subtitle" id="opsUserDrawerSubtitle">Módulo: Directorio de Usuarios &amp; Control de Acceso RBAC</p>
+          <p class="ops-drawer-subtitle" id="opsUserDrawerSubtitle"><span data-i18n="pages.admin.opsUserDrawerSubtitle.p1">Módulo: Directorio de Usuarios &amp; Control de Acceso RBAC</span></p>
         </div>
         <button type="button" class="ops-drawer-close-btn" id="opsUserDrawerCloseBtn" onclick="window.BaqueanoOpsUsers.closeModal()">
           <i class="fa-solid fa-xmark"></i>
@@ -1903,16 +1903,16 @@
         <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
           <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
             <i class="fa-solid fa-id-card" style="color: var(--bq-secondary);"></i>
-            <span>Identidad &amp; Cuenta</span>
+            <span data-i18n="pages.admin.opsUserDrawer.span1">Identidad &amp; Cuenta</span>
           </h3>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">Nombre Completo Oficial *</label>
-            <input type="text" class="ops-form-input" id="opsUserFormName" placeholder="Ej. Carlos Silva Mendieta">
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsUserDrawer.label1">Nombre Completo Oficial *</span></label>
+            <input data-i18n-placeholder="pages.admin.opsUserFormName.inputPlaceholder1" type="text" class="ops-form-input" id="opsUserFormName" placeholder="Ej. Carlos Silva Mendieta">
           </div>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">Correo Electrónico (Email de Acceso) *</label>
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsUserDrawer.label2">Correo Electrónico (Email de Acceso) *</span></label>
             <input type="email" class="ops-form-input" id="opsUserFormEmail" placeholder="usuario@baqueanonicaragua.com">
           </div>
         </div>
@@ -1922,20 +1922,20 @@
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem;">
             <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0; display:flex; align-items:center; gap:0.5rem;">
               <i class="fa-solid fa-key" style="color: #F59E0B;"></i>
-              <span>Contraseña de Acceso</span>
+              <span data-i18n="pages.admin.opsUserDrawer.span2">Contraseña de Acceso</span>
             </h3>
             <button type="button" class="btn-ops-matte accent" style="padding: 0.35rem 0.75rem; font-size: 0.76rem;" onclick="window.BaqueanoOpsUsers.generateSecurePassword('opsUserFormPassword')">
-              <i class="fa-solid fa-wand-magic-sparkles"></i> Generar Contraseña Segura
+              <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="pages.admin.opsUserDrawer.button1">Generar Contraseña Segura</span>
             </button>
           </div>
 
           <p id="opsUserFormPasswordHint" style="font-size: 0.77rem; color: var(--ops-text-secondary); margin: 0 0 1rem 0; line-height: 1.45;">
-            Obligatorio al crear: debe contener al menos 8 caracteres seguros para iniciar sesión.
+            <span data-i18n="pages.admin.opsUserFormPasswordHint.p1">Obligatorio al crear: debe contener al menos 8 caracteres seguros para iniciar sesión.</span>
           </p>
 
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label">Contraseña</label>
+              <label class="ops-form-label"><span data-i18n="forms.password">Contraseña</span></label>
               <div style="position: relative; display: flex; align-items: center;">
                 <input type="password" class="ops-form-input" id="opsUserFormPassword" placeholder="••••••••••••" style="padding-right: 2.75rem;">
                 <button type="button" class="btn-ops-icon" style="position: absolute; right: 0.4rem; background: none; border: none; cursor: pointer;" onclick="window.BaqueanoOpsUsers.togglePasswordVisibility('opsUserFormPassword', this)">
@@ -1945,7 +1945,7 @@
             </div>
 
             <div class="ops-form-group">
-              <label class="ops-form-label">Confirmar Contraseña</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsUserDrawer.label3">Confirmar Contraseña</span></label>
               <div style="position: relative; display: flex; align-items: center;">
                 <input type="password" class="ops-form-input" id="opsUserFormPasswordConfirm" placeholder="••••••••••••" style="padding-right: 2.75rem;">
                 <button type="button" class="btn-ops-icon" style="position: absolute; right: 0.4rem; background: none; border: none; cursor: pointer;" onclick="window.BaqueanoOpsUsers.togglePasswordVisibility('opsUserFormPasswordConfirm', this)">
@@ -1960,43 +1960,43 @@
         <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
           <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
             <i class="fa-solid fa-user-shield" style="color: var(--bq-accent);"></i>
-            <span>Rol en el Ecosistema &amp; Estado</span>
+            <span data-i18n="pages.admin.opsUserDrawer.span3">Rol en el Ecosistema &amp; Estado</span>
           </h3>
 
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label">Rol Asignado *</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsUserDrawer.label4">Rol Asignado *</span></label>
               <select class="ops-form-select" id="opsUserFormRole">
-                <option value="turista">Explorador / Turista (Usuario general web y app)</option>
-                <option value="guia">Guía &amp; Baqueano Nativo (Acreditado en territorio)</option>
-                <option value="emprendedor">Emprendedor Aliado (Anfitrión campesino / Negocio)</option>
-                <option value="auditor">Auditor Territorial (Supervisión solo lectura)</option>
-                <option value="admin">Administrador General (Gestión editorial y catálogo)</option>
-                <option value="superadmin">Super Administrador (Control total del sistema)</option>
+                <option data-i18n="pages.admin.opsUserFormRole.option1" value="turista">Explorador / Turista (Usuario general web y app)</option>
+                <option data-i18n="pages.admin.opsUserFormRole.option2" value="guia">Guía &amp; Baqueano Nativo (Acreditado en territorio)</option>
+                <option data-i18n="pages.admin.opsUserFormRole.option3" value="emprendedor">Emprendedor Aliado (Anfitrión campesino / Negocio)</option>
+                <option data-i18n="pages.admin.opsUserFormRole.option4" value="auditor">Auditor Territorial (Supervisión solo lectura)</option>
+                <option data-i18n="pages.admin.opsUserFormRole.option5" value="admin">Administrador General (Gestión editorial y catálogo)</option>
+                <option data-i18n="pages.admin.opsUserFormRole.option6" value="superadmin">Super Administrador (Control total del sistema)</option>
               </select>
             </div>
 
             <div class="ops-form-group">
-              <label class="ops-form-label">Estado de la Cuenta *</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsUserDrawer.label5">Estado de la Cuenta *</span></label>
               <select class="ops-form-select" id="opsUserFormStatus">
-                <option value="active">Activo (Acceso habilitado)</option>
-                <option value="suspended">Suspendido (Pausa administrativa)</option>
-                <option value="blocked">Bloqueado (Acceso revocado por seguridad)</option>
-                <option value="pending">Pendiente de Verificación</option>
+                <option data-i18n="pages.admin.opsUserFormStatus.option1" value="active">Activo (Acceso habilitado)</option>
+                <option data-i18n="pages.admin.opsUserFormStatus.option2" value="suspended">Suspendido (Pausa administrativa)</option>
+                <option data-i18n="pages.admin.opsUserFormStatus.option3" value="blocked">Bloqueado (Acceso revocado por seguridad)</option>
+                <option data-i18n="pages.admin.opsUserFormStatus.option4" value="pending">Pendiente de Verificación</option>
               </select>
             </div>
           </div>
 
           <div class="ops-form-grid-2" style="margin-top: 0.75rem;">
             <div class="ops-form-group">
-              <label class="ops-form-label">Teléfono / WhatsApp</label>
+              <label class="ops-form-label"><span data-i18n="forms.phoneWhatsapp">Teléfono / WhatsApp</span></label>
               <input type="tel" class="ops-form-input" id="opsUserFormPhone" placeholder="+505 8888-0000">
             </div>
 
             <div class="ops-form-group">
-              <label class="ops-form-label">Departamento / Territorio</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsUserDrawer.label6">Departamento / Territorio</span></label>
               <select class="ops-form-select" id="opsUserFormDepartment">
-                <option value="Nacional">Nacional / Multiterritorial</option>
+                <option data-i18n="pages.admin.entityDepartment.option1" value="Nacional">Nacional / Multiterritorial</option>
                 <option value="Boaco">Boaco</option>
                 <option value="Carazo">Carazo</option>
                 <option value="Chinandega">Chinandega</option>
@@ -2012,32 +2012,32 @@
                 <option value="Nueva Segovia">Nueva Segovia</option>
                 <option value="Rivas">Rivas</option>
                 <option value="Río San Juan">Río San Juan</option>
-                <option value="RACCN">RACCN (Caribe Norte)</option>
-                <option value="RACCS">RACCS (Caribe Sur)</option>
+                <option data-i18n="pages.admin.entityDepartment.option2" value="RACCN">RACCN (Caribe Norte)</option>
+                <option data-i18n="pages.admin.entityDepartment.option3" value="RACCS">RACCS (Caribe Sur)</option>
               </select>
             </div>
           </div>
 
           <div class="ops-form-grid-2" style="margin-top: 0.75rem;">
             <div class="ops-form-group">
-              <label class="ops-form-label">Nivel de Explorador / Título</label>
-              <input type="text" class="ops-form-input" id="opsUserFormLevel" placeholder="Ej. Guardián Supremo, Guía Territorial...">
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsUserDrawer.label7">Nivel de Explorador / Título</span></label>
+              <input data-i18n-placeholder="pages.admin.opsUserFormLevel.inputPlaceholder1" type="text" class="ops-form-input" id="opsUserFormLevel" placeholder="Ej. Guardián Supremo, Guía Territorial...">
             </div>
 
             <div class="ops-form-group" style="display:flex; flex-direction:column; justify-content:center;">
-              <label class="ops-form-label">Distintivo de Verificación</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsUserDrawer.label8">Distintivo de Verificación</span></label>
               <label style="cursor:pointer; display:flex; align-items:center; gap:0.5rem; background:var(--ops-surface-2); padding:0.6rem 0.9rem; border-radius:var(--ops-radius-md); border:1px solid rgba(0,186,242,0.35);">
                 <input type="checkbox" id="opsUserFormVerified" style="accent-color:#00BAF2; width:18px; height:18px; cursor:pointer;">
                 <span style="font-size:0.82rem; font-weight:700; color:#fff; display:flex; align-items:center; gap:0.35rem;">
-                  <i class="fa-solid fa-circle-check" style="color:#00BAF2;"></i> Perfil Verificado (Check Azul)
+                  <i class="fa-solid fa-circle-check" style="color:#00BAF2;"></i> <span data-i18n="pages.admin.opsUserDrawer.span4">Perfil Verificado (Check Azul)</span>
                 </span>
               </label>
             </div>
           </div>
 
           <div class="ops-form-group" style="margin-top: 0.75rem;">
-            <label class="ops-form-label">Observaciones / Notas Internas</label>
-            <textarea class="ops-form-textarea" id="opsUserFormNotes" rows="2" placeholder="Motivo de suspensión, notas de asignación o contacto de referencia..."></textarea>
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsUserDrawer.label9">Observaciones / Notas Internas</span></label>
+            <textarea data-i18n-placeholder="pages.admin.opsUserFormNotes.textareaPlaceholder1" class="ops-form-textarea" id="opsUserFormNotes" rows="2" placeholder="Motivo de suspensión, notas de asignación o contacto de referencia..."></textarea>
           </div>
         </div>
       </div>
@@ -2045,16 +2045,16 @@
       <div class="ops-drawer-footer" style="display:flex; justify-content:space-between; align-items:center;">
         <div>
           <button type="button" class="btn-ops-matte danger" id="btnOpsUserDrawerDelete" style="display:none;" onclick="window.BaqueanoOpsUsers.deleteUser()">
-            <i class="fa-solid fa-trash-can"></i> Eliminar Usuario
+            <i class="fa-solid fa-trash-can"></i> <span data-i18n="pages.admin.btnOpsUserDrawerDelete.button1">Eliminar Usuario</span>
           </button>
         </div>
         <div style="display:flex; gap:0.75rem;">
-          <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsUsers.closeModal()">
+          <button data-i18n="actions.cancel" type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsUsers.closeModal()">
             Cancelar
           </button>
           <button type="button" class="btn-ops-matte primary" id="btnOpsUserDrawerSave" onclick="window.BaqueanoOpsUsers.saveUser()">
             <i class="fa-solid fa-floppy-disk"></i>
-            <span id="opsUserSaveBtnText">Guardar Usuario</span>
+            <span id="opsUserSaveBtnText"><span data-i18n="pages.admin.opsUserSaveBtnText.span1">Guardar Usuario</span></span>
           </button>
         </div>
       </div>
@@ -2066,7 +2066,7 @@
     <div class="ops-modal-card" style="width: 100%; max-width: 480px; background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-lg); padding: 1.75rem; box-shadow: var(--ops-shadow-lg); animation: opsFadeIn 0.25s ease;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
         <h2 style="font-size: 1.15rem; color: #fff; margin:0; display:flex; align-items:center; gap:0.5rem;">
-          <i class="fa-solid fa-key" style="color: #F59E0B;"></i> Cambiar Contraseña
+          <i class="fa-solid fa-key" style="color: #F59E0B;"></i> <span data-i18n="pages.admin.opsUserPasswordModal.h21">Cambiar Contraseña</span>
         </h2>
         <button type="button" class="ops-drawer-close-btn" onclick="window.BaqueanoOpsUsers.closePasswordModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
@@ -2074,20 +2074,20 @@
       <input type="hidden" id="opsQuickPassUserId" value="">
 
       <div style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 0.85rem 1rem; margin-bottom: 1.25rem;">
-        <span style="font-size: 0.75rem; color: var(--ops-text-muted); display: block;">Usuario Seleccionado:</span>
+        <span data-i18n="pages.admin.opsUserPasswordModal.span1" style="font-size: 0.75rem; color: var(--ops-text-muted); display: block;">Usuario Seleccionado:</span>
         <strong id="opsQuickPassUserName" style="font-size: 0.92rem; color: #fff; display: block; margin-top: 0.15rem;">—</strong>
         <span id="opsQuickPassUserEmail" style="font-size: 0.8rem; color: #38BDF8; font-family: monospace;">—</span>
       </div>
 
       <div class="ops-form-group" style="margin-bottom: 1rem;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
-          <label class="ops-form-label" style="margin:0;">Nueva Contraseña *</label>
+          <label class="ops-form-label" style="margin:0;"><span data-i18n="pages.admin.opsUserPasswordModal.label1">Nueva Contraseña *</span></label>
           <button type="button" style="background:none; border:none; color:var(--bq-accent); font-size:0.75rem; cursor:pointer; font-weight:700;" onclick="window.BaqueanoOpsUsers.generateSecurePassword('opsQuickPassNewPass')">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Generar segura
+            <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="pages.admin.opsUserPasswordModal.button1">Generar segura</span>
           </button>
         </div>
         <div style="position: relative; display: flex; align-items: center;">
-          <input type="password" class="ops-form-input" id="opsQuickPassNewPass" placeholder="Mínimo 8 caracteres" style="padding-right: 2.75rem;">
+          <input data-i18n-placeholder="pages.admin.opsQuickPassNewPass.inputPlaceholder1" type="password" class="ops-form-input" id="opsQuickPassNewPass" placeholder="Mínimo 8 caracteres" style="padding-right: 2.75rem;">
           <button type="button" class="btn-ops-icon" style="position: absolute; right: 0.4rem; background: none; border: none; cursor: pointer;" onclick="window.BaqueanoOpsUsers.togglePasswordVisibility('opsQuickPassNewPass', this)">
             <i class="fa-solid fa-eye" style="color: var(--ops-text-muted);"></i>
           </button>
@@ -2095,9 +2095,9 @@
       </div>
 
       <div class="ops-form-group" style="margin-bottom: 1.5rem;">
-        <label class="ops-form-label">Confirmar Nueva Contraseña *</label>
+        <label class="ops-form-label"><span data-i18n="pages.admin.opsUserPasswordModal.label2">Confirmar Nueva Contraseña *</span></label>
         <div style="position: relative; display: flex; align-items: center;">
-          <input type="password" class="ops-form-input" id="opsQuickPassConfirmPass" placeholder="Repetir contraseña" style="padding-right: 2.75rem;">
+          <input data-i18n-placeholder="pages.admin.opsQuickPassConfirmPass.inputPlaceholder1" type="password" class="ops-form-input" id="opsQuickPassConfirmPass" placeholder="Repetir contraseña" style="padding-right: 2.75rem;">
           <button type="button" class="btn-ops-icon" style="position: absolute; right: 0.4rem; background: none; border: none; cursor: pointer;" onclick="window.BaqueanoOpsUsers.togglePasswordVisibility('opsQuickPassConfirmPass', this)">
             <i class="fa-solid fa-eye" style="color: var(--ops-text-muted);"></i>
           </button>
@@ -2105,9 +2105,9 @@
       </div>
 
       <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
-        <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsUsers.closePasswordModal()">Cancelar</button>
+        <button data-i18n="actions.cancel" type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsUsers.closePasswordModal()">Cancelar</button>
         <button type="button" class="btn-ops-matte primary" onclick="window.BaqueanoOpsUsers.saveNewPassword()">
-          <i class="fa-solid fa-check"></i> Actualizar Contraseña
+          <i class="fa-solid fa-check"></i> <span data-i18n="pages.admin.opsUserPasswordModal.button2">Actualizar Contraseña</span>
         </button>
       </div>
     </div>
@@ -2122,9 +2122,9 @@
         <div class="ops-drawer-title-wrap">
           <h2 class="ops-drawer-title" id="opsPaymentDrawerTitle" style="display:flex; align-items:center; gap:0.6rem;">
             <i class="fa-solid fa-receipt" style="color: var(--bq-accent);"></i>
-            <span>Nuevo Comprobante de Pago</span>
+            <span data-i18n="pages.admin.opsPaymentDrawerTitle.span1">Nuevo Comprobante de Pago</span>
           </h2>
-          <p class="ops-drawer-subtitle" id="opsPaymentDrawerSubtitle">Módulo: Pagos &amp; Comprobantes Bancarios</p>
+          <p class="ops-drawer-subtitle" id="opsPaymentDrawerSubtitle"><span data-i18n="pages.admin.opsPaymentDrawerSubtitle.p1">Módulo: Pagos &amp; Comprobantes Bancarios</span></p>
         </div>
         <button type="button" class="ops-drawer-close-btn" id="opsPaymentDrawerCloseBtn" onclick="window.BaqueanoOpsPayments.closeDrawer()">
           <i class="fa-solid fa-xmark"></i>
@@ -2138,56 +2138,56 @@
         <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
           <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
             <i class="fa-solid fa-file-invoice-dollar" style="color: var(--bq-secondary);"></i>
-            <span>Identificación Fiscal &amp; Referencia Bancaria</span>
+            <span data-i18n="pages.admin.opsPaymentDrawer.span1">Identificación Fiscal &amp; Referencia Bancaria</span>
           </h3>
 
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
               <label class="ops-form-label" style="display:flex; justify-content:space-between; align-items:center;">
-                <span>Código de Comprobante *</span>
+                <span data-i18n="pages.admin.opsPaymentDrawer.span2">Código de Comprobante *</span>
                 <button type="button" style="background:none; border:none; color:var(--bq-accent); font-size:0.75rem; cursor:pointer; font-weight:700;" onclick="document.getElementById('opsPaymentFormCode').value = window.BaqueanoOpsPayments.generateReceiptCode()">
-                  <i class="fa-solid fa-wand-magic-sparkles"></i> Generar
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="pages.admin.opsPaymentDrawer.button1">Generar</span>
                 </button>
               </label>
-              <input type="text" class="ops-form-input" id="opsPaymentFormCode" placeholder="Ej. COMP-2026-0042" style="font-family: monospace; font-weight: 700;">
+              <input data-i18n-placeholder="pages.admin.opsPaymentFormCode.inputPlaceholder1" type="text" class="ops-form-input" id="opsPaymentFormCode" placeholder="Ej. COMP-2026-0042" style="font-family: monospace; font-weight: 700;">
             </div>
 
             <div class="ops-form-group">
-              <label class="ops-form-label">Nº de Referencia / Baucher *</label>
-              <input type="text" class="ops-form-input" id="opsPaymentFormReference" placeholder="Ej. BAC-TRX-441098, REF-88912" style="font-family: monospace;">
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsPaymentDrawer.label1">Nº de Referencia / Baucher *</span></label>
+              <input data-i18n-placeholder="pages.admin.opsPaymentFormReference.inputPlaceholder1" type="text" class="ops-form-input" id="opsPaymentFormReference" placeholder="Ej. BAC-TRX-441098, REF-88912" style="font-family: monospace;">
             </div>
           </div>
 
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label">Entidad Bancaria / Medio de Pago *</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsPaymentDrawer.label2">Entidad Bancaria / Medio de Pago *</span></label>
               <select class="ops-form-select" id="opsPaymentFormBank">
-                <option value="BAC Credomatic">BAC Credomatic Nicaragua</option>
-                <option value="Banpro Promerica">Banco de la Producción (Banpro)</option>
-                <option value="Banco Lafise">Banco LAFISE Bancentro</option>
-                <option value="BDF">Banco de Finanzas (BDF)</option>
-                <option value="Banco Avanz">Banco Avanz Nicaragua</option>
-                <option value="Billetera Movil">Billetera Móvil (Kash / Banpro)</option>
-                <option value="Tarjeta Debito/Credito">Tarjeta Débito / Crédito (Visa / Mastercard)</option>
-                <option value="Efectivo Cordobas">Efectivo en Territorio (0% Comisión Guía)</option>
-                <option value="Stripe Global">Stripe Pasarela Internacional</option>
-                <option value="Transferencia ACH/SWIFT">Transferencia ACH / SWIFT</option>
+                <option data-i18n="pages.admin.opsPaymentFormBank.option1" value="BAC Credomatic">BAC Credomatic Nicaragua</option>
+                <option data-i18n="pages.admin.opsPaymentFormBank.option2" value="Banpro Promerica">Banco de la Producción (Banpro)</option>
+                <option data-i18n="pages.admin.opsPaymentFormBank.option3" value="Banco Lafise">Banco LAFISE Bancentro</option>
+                <option data-i18n="pages.admin.opsPaymentFormBank.option4" value="BDF">Banco de Finanzas (BDF)</option>
+                <option data-i18n="pages.admin.opsPaymentFormBank.option5" value="Banco Avanz">Banco Avanz Nicaragua</option>
+                <option data-i18n="pages.admin.opsPaymentFormBank.option6" value="Billetera Movil">Billetera Móvil (Kash / Banpro)</option>
+                <option data-i18n="pages.admin.opsPaymentFormBank.option7" value="Tarjeta Debito/Credito">Tarjeta Débito / Crédito (Visa / Mastercard)</option>
+                <option data-i18n="pages.admin.opsPaymentFormBank.option8" value="Efectivo Cordobas">Efectivo en Territorio (0% Comisión Guía)</option>
+                <option data-i18n="pages.admin.opsPaymentFormBank.option9" value="Stripe Global">Stripe Pasarela Internacional</option>
+                <option data-i18n="pages.admin.opsPaymentFormBank.option10" value="Transferencia ACH/SWIFT">Transferencia ACH / SWIFT</option>
               </select>
             </div>
 
             <div class="ops-form-group">
-              <label class="ops-form-label">Estado de Conciliación *</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsPaymentDrawer.label3">Estado de Conciliación *</span></label>
               <select class="ops-form-select" id="opsPaymentFormStatus">
-                <option value="approved">Conciliado &amp; Verificado (Acreditado)</option>
-                <option value="pending">Pendiente de Verificación</option>
-                <option value="rejected">Rechazado / No Acreditado</option>
-                <option value="refunded">Reembolsado / Anulado</option>
+                <option data-i18n="pages.admin.opsPaymentFormStatus.option1" value="approved">Conciliado &amp; Verificado (Acreditado)</option>
+                <option data-i18n="pages.admin.opsUserFormStatus.option4" value="pending">Pendiente de Verificación</option>
+                <option data-i18n="pages.admin.opsPaymentFormStatus.option2" value="rejected">Rechazado / No Acreditado</option>
+                <option data-i18n="pages.admin.opsPaymentFormStatus.option3" value="refunded">Reembolsado / Anulado</option>
               </select>
             </div>
           </div>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">Fecha de la Transacción *</label>
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsPaymentDrawer.label4">Fecha de la Transacción *</span></label>
             <input type="date" class="ops-form-input" id="opsPaymentFormDate">
           </div>
         </div>
@@ -2196,22 +2196,22 @@
         <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
           <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
             <i class="fa-solid fa-user-check" style="color: #10B981;"></i>
-            <span>Titular / Explorador que Realizó el Pago</span>
+            <span data-i18n="pages.admin.opsPaymentDrawer.span3">Titular / Explorador que Realizó el Pago</span>
           </h3>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">Nombre Completo del Cliente *</label>
-            <input type="text" class="ops-form-input" id="opsPaymentFormCustomerName" placeholder="Ej. Mateo Silva Rostrán">
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsPaymentDrawer.label5">Nombre Completo del Cliente *</span></label>
+            <input data-i18n-placeholder="pages.admin.opsPaymentFormCustomerName.inputPlaceholder1" type="text" class="ops-form-input" id="opsPaymentFormCustomerName" placeholder="Ej. Mateo Silva Rostrán">
           </div>
 
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label">Teléfono / WhatsApp (Para enviar comprobante)</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsPaymentDrawer.label6">Teléfono / WhatsApp (Para enviar comprobante)</span></label>
               <input type="tel" class="ops-form-input" id="opsPaymentFormCustomerPhone" placeholder="+505 8888 1234">
             </div>
 
             <div class="ops-form-group">
-              <label class="ops-form-label">Correo Electrónico (Para envío de recibo digital)</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsPaymentDrawer.label7">Correo Electrónico (Para envío de recibo digital)</span></label>
               <input type="email" class="ops-form-input" id="opsPaymentFormCustomerEmail" placeholder="mateo@explorador.com">
             </div>
           </div>
@@ -2221,17 +2221,17 @@
         <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
           <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
             <i class="fa-solid fa-compass" style="color: var(--bq-accent);"></i>
-            <span>Concepto del Servicio &amp; Reserva Vinculada</span>
+            <span data-i18n="pages.admin.opsPaymentDrawer.span4">Concepto del Servicio &amp; Reserva Vinculada</span>
           </h3>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">Concepto o Descripción del Pago *</label>
-            <input type="text" class="ops-form-input" id="opsPaymentFormConcept" placeholder="Ej. Expedición Cañón de Somoto + Guía Comunitario, Cabaña Ecolodge...">
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsPaymentDrawer.label8">Concepto o Descripción del Pago *</span></label>
+            <input data-i18n-placeholder="pages.admin.opsPaymentFormConcept.inputPlaceholder1" type="text" class="ops-form-input" id="opsPaymentFormConcept" placeholder="Ej. Expedición Cañón de Somoto + Guía Comunitario, Cabaña Ecolodge...">
           </div>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">Código de Reserva Asociada (Opcional)</label>
-            <input type="text" class="ops-form-input" id="opsPaymentFormOrderCode" placeholder="Ej. RES-BQ-104" style="font-family: monospace;">
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsPaymentDrawer.label9">Código de Reserva Asociada (Opcional)</span></label>
+            <input data-i18n-placeholder="pages.admin.opsPaymentFormOrderCode.inputPlaceholder1" type="text" class="ops-form-input" id="opsPaymentFormOrderCode" placeholder="Ej. RES-BQ-104" style="font-family: monospace;">
           </div>
         </div>
 
@@ -2240,20 +2240,20 @@
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.75rem;">
             <h3 style="font-size: 0.95rem; font-weight: 700; color: #F4E6C1; margin: 0; display:flex; align-items:center; gap:0.5rem;">
               <i class="fa-solid fa-coins" style="color: #F4E6C1;"></i>
-              <span>Importe &amp; Conversión Oficial (Regla 11: Córdobas Primero)</span>
+              <span data-i18n="pages.admin.opsPaymentDrawer.span5">Importe &amp; Conversión Oficial (Regla 11: Córdobas Primero)</span>
             </h3>
-            <span style="font-size: 0.75rem; color: #38BDF8; font-weight: 700; background: rgba(22, 93, 111, 0.35); padding: 0.2rem 0.5rem; border-radius: 4px;">
+            <span data-i18n="pages.admin.opsPaymentDrawer.span6" style="font-size: 0.75rem; color: #38BDF8; font-weight: 700; background: rgba(22, 93, 111, 0.35); padding: 0.2rem 0.5rem; border-radius: 4px;">
               Tasa BCN: C$ 36.6243 = $1 USD
             </span>
           </div>
 
-          <p style="font-size: 0.78rem; color: var(--ops-text-secondary); margin: 0 0 1rem 0; line-height: 1.45;">
+          <p data-i18n="pages.admin.opsPaymentDrawer.p1" style="font-size: 0.78rem; color: var(--ops-text-secondary); margin: 0 0 1rem 0; line-height: 1.45;">
             Ingresa el importe en Córdobas y el sistema calculará automáticamente el equivalente en Dólares, o viceversa.
           </p>
 
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label" style="color: #F4E6C1; font-weight: 700;">Monto en Córdobas (C$ NIO) *</label>
+              <label class="ops-form-label" style="color: #F4E6C1; font-weight: 700;"><span data-i18n="pages.admin.opsPaymentDrawer.label10">Monto en Córdobas (C$ NIO) *</span></label>
               <div style="position: relative; display: flex; align-items: center;">
                 <span style="position: absolute; left: 0.75rem; color: #F4E6C1; font-weight: 800; font-size: 0.95rem;">C$</span>
                 <input type="number" step="0.01" class="ops-form-input" id="opsPaymentFormAmountNio" placeholder="0.00" style="padding-left: 2.5rem; font-weight: 800; font-size: 1.05rem; color: #F4E6C1;" oninput="window.BaqueanoOpsPayments.calculateUsdFromNio()">
@@ -2261,7 +2261,7 @@
             </div>
 
             <div class="ops-form-group">
-              <label class="ops-form-label" style="color: #38BDF8; font-weight: 700;">Equivalente en Dólares ($ USD)</label>
+              <label class="ops-form-label" style="color: #38BDF8; font-weight: 700;"><span data-i18n="pages.admin.opsPaymentDrawer.label11">Equivalente en Dólares ($ USD)</span></label>
               <div style="position: relative; display: flex; align-items: center;">
                 <span style="position: absolute; left: 0.75rem; color: #38BDF8; font-weight: 800; font-size: 0.95rem;">$</span>
                 <input type="number" step="0.01" class="ops-form-input" id="opsPaymentFormAmountUsd" placeholder="0.00" style="padding-left: 2.2rem; font-weight: 700; font-size: 1.05rem; color: #38BDF8;" oninput="window.BaqueanoOpsPayments.calculateNioFromUsd()">
@@ -2274,25 +2274,25 @@
         <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
           <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
             <i class="fa-solid fa-receipt" style="color: var(--bq-secondary);"></i>
-            <span>Baucher o Comprobante Digital (Soporte Visual)</span>
+            <span data-i18n="pages.admin.opsPaymentDrawer.span7">Baucher o Comprobante Digital (Soporte Visual)</span>
           </h3>
 
           <div class="ops-form-group" style="margin-bottom: 0.75rem;">
-            <label class="ops-form-label">URL del Comprobante (o sube imagen/PDF abajo)</label>
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsPaymentDrawer.label12">URL del Comprobante (o sube imagen/PDF abajo)</span></label>
             <input type="url" class="ops-form-input" id="opsPaymentFormVoucherUrl" placeholder="https://..." oninput="window.BaqueanoOpsPayments.updateBaucherPreview(this.value)">
           </div>
 
           <!-- Dropzone para Subida -->
           <div id="opsPaymentDropzone" style="border: 2px dashed rgba(244, 230, 193, 0.25); border-radius: 8px; padding: 1.5rem; text-align: center; cursor: pointer; background: var(--ops-surface-2); margin-bottom: 0.75rem;" onclick="document.getElementById('opsPaymentFileInput').click()">
             <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.8rem; color: var(--bq-accent); margin-bottom: 0.5rem;"></i>
-            <div id="opsPaymentDropzoneText" style="font-size: 0.85rem; color: #FFFFFF;">Haz clic o arrastra para subir foto del baucher bancario</div>
-            <small style="font-size: 0.72rem; color: var(--ops-text-muted);">Soporta imágenes (JPG, PNG, WebP) o archivos PDF</small>
+            <div id="opsPaymentDropzoneText" style="font-size: 0.85rem; color: #FFFFFF;"><span data-i18n="pages.admin.opsPaymentDropzoneText.div1">Haz clic o arrastra para subir foto del baucher bancario</span></div>
+            <small data-i18n="pages.admin.opsPaymentDropzone.small1" style="font-size: 0.72rem; color: var(--ops-text-muted);">Soporta imágenes (JPG, PNG, WebP) o archivos PDF</small>
           </div>
           <input type="file" id="opsPaymentFileInput" accept="image/*,application/pdf" style="display:none;" onchange="window.BaqueanoOpsPayments.handleBaucherUpload(this.files[0])">
 
           <!-- Vista Previa de Baucher -->
           <div id="opsPaymentBaucherPreviewBox" style="display: none; border-radius: 8px; overflow: hidden; border: 1px solid var(--ops-border-subtle); max-height: 220px; text-align: center; background: #000;">
-            <img id="opsPaymentBaucherPreviewImg" src="" style="width: auto; max-width: 100%; height: 220px; object-fit: contain; cursor: pointer;" alt="Baucher" onclick="window.BaqueanoOpsPayments.openBaucherModal(this.src, document.getElementById('opsPaymentFormCode').value)">
+            <img data-i18n-alt="pages.admin.opsPaymentBaucherPreviewImg.imgAlt1" id="opsPaymentBaucherPreviewImg" src="" style="width: auto; max-width: 100%; height: 220px; object-fit: contain; cursor: pointer;" alt="Baucher" onclick="window.BaqueanoOpsPayments.openBaucherModal(this.src, document.getElementById('opsPaymentFormCode').value)">
           </div>
         </div>
 
@@ -2300,12 +2300,12 @@
         <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem;">
           <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 0.75rem 0; display:flex; align-items:center; gap:0.5rem;">
             <i class="fa-solid fa-clipboard-check" style="color: var(--ops-text-muted);"></i>
-            <span>Notas de Conciliación &amp; Auditoría Contable</span>
+            <span data-i18n="pages.admin.opsPaymentDrawer.span8">Notas de Conciliación &amp; Auditoría Contable</span>
           </h3>
 
           <div class="ops-form-group" style="margin-bottom: 0;">
-            <label class="ops-form-label">Cuenta de Abono / Observaciones de Auditoría</label>
-            <textarea class="ops-form-textarea" id="opsPaymentFormNotes" rows="2" placeholder="Ej. Acreditado en Cuenta Corriente BAC Córdobas #4410. Verificado contra estado de cuenta..."></textarea>
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsPaymentDrawer.label13">Cuenta de Abono / Observaciones de Auditoría</span></label>
+            <textarea data-i18n-placeholder="pages.admin.opsPaymentFormNotes.textareaPlaceholder1" class="ops-form-textarea" id="opsPaymentFormNotes" rows="2" placeholder="Ej. Acreditado en Cuenta Corriente BAC Córdobas #4410. Verificado contra estado de cuenta..."></textarea>
           </div>
         </div>
       </div>
@@ -2314,18 +2314,18 @@
       <div class="ops-drawer-footer" style="display:flex; justify-content:space-between; align-items:center; padding: 1rem 1.75rem; background: var(--ops-surface-1); border-top: 1px solid var(--ops-border-subtle);">
         <div style="display:flex; gap:0.5rem;">
           <button type="button" class="btn-ops-matte danger" id="btnOpsPaymentDrawerDelete" style="display:none;" onclick="window.BaqueanoOpsPayments.deletePayment()">
-            <i class="fa-solid fa-trash-can"></i> Eliminar
+            <i class="fa-solid fa-trash-can"></i> <span data-i18n="actions.delete">Eliminar</span>
           </button>
           <button type="button" class="btn-ops-matte" id="btnOpsPaymentDrawerShare" style="display:none; color:#10B981; border-color:rgba(16,185,129,0.4);" onclick="window.BaqueanoOpsPayments.openShareModal()">
-            <i class="fa-solid fa-paper-plane"></i> Enviar al Cliente
+            <i class="fa-solid fa-paper-plane"></i> <span data-i18n="pages.admin.btnOpsPaymentDrawerShare.button1">Enviar al Cliente</span>
           </button>
         </div>
         <div style="display:flex; gap:0.75rem;">
-          <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsPayments.closeDrawer()">
+          <button data-i18n="actions.cancel" type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsPayments.closeDrawer()">
             Cancelar
           </button>
           <button type="button" class="btn-ops-matte primary" id="btnOpsPaymentDrawerSave" onclick="window.BaqueanoOpsPayments.savePayment()">
-            <i class="fa-solid fa-floppy-disk"></i> Guardar Comprobante
+            <i class="fa-solid fa-floppy-disk"></i> <span data-i18n="pages.admin.btnOpsPaymentDrawerSave.button1">Guardar Comprobante</span>
           </button>
         </div>
       </div>
@@ -2340,7 +2340,7 @@
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.25rem;">
         <h2 style="font-size: 1.2rem; color: #fff; margin:0; display:flex; align-items:center; gap:0.6rem;">
           <i class="fa-solid fa-paper-plane" style="color: #10B981;"></i>
-          <span>Enviar Comprobante al Cliente</span>
+          <span data-i18n="pages.admin.opsPaymentShareModal.span1">Enviar Comprobante al Cliente</span>
         </h2>
         <button type="button" class="ops-drawer-close-btn" onclick="window.BaqueanoOpsPayments.closeShareModal()">
           <i class="fa-solid fa-xmark"></i>
@@ -2350,20 +2350,20 @@
       <!-- Resumen del Comprobante -->
       <div style="background: var(--ops-surface-2); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1rem 1.25rem; margin-bottom: 1.25rem;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.5rem;">
-          <span style="font-family: monospace; font-size: 0.95rem; font-weight: 800; color: #F4E6C1;" id="opsShareModalCode">COMP-2026-XXXX</span>
+          <span style="font-family: monospace; font-size: 0.95rem; font-weight: 800; color: #F4E6C1;" id="opsShareModalCode"><span data-i18n="pages.admin.opsShareModalCode.span1">COMP-2026-XXXX</span></span>
           <div id="opsShareModalStatus"></div>
         </div>
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.84rem;">
           <div>
-            <span style="color: var(--ops-text-muted); display:block; font-size: 0.74rem;">CLIENTE</span>
+            <span data-i18n="pages.admin.opsPaymentShareModal.span2" style="color: var(--ops-text-muted); display:block; font-size: 0.74rem;">CLIENTE</span>
             <strong style="color: #fff;" id="opsShareModalCustomer">—</strong>
           </div>
           <div>
-            <span style="color: var(--ops-text-muted); display:block; font-size: 0.74rem;">TOTAL PAGADO</span>
+            <span data-i18n="pages.admin.opsPaymentShareModal.span3" style="color: var(--ops-text-muted); display:block; font-size: 0.74rem;">TOTAL PAGADO</span>
             <div id="opsShareModalAmount">—</div>
           </div>
           <div style="grid-column: span 2;">
-            <span style="color: var(--ops-text-muted); display:block; font-size: 0.74rem;">BANCO / REFERENCIA</span>
+            <span data-i18n="pages.admin.opsPaymentShareModal.span4" style="color: var(--ops-text-muted); display:block; font-size: 0.74rem;">BANCO / REFERENCIA</span>
             <span style="color: #E2E8F0;" id="opsShareModalBank">—</span>
           </div>
         </div>
@@ -2372,12 +2372,12 @@
       <!-- Campos de Envío (WhatsApp & Email) -->
       <div class="ops-form-grid-2" style="margin-bottom: 1.25rem;">
         <div class="ops-form-group">
-          <label class="ops-form-label"><i class="fa-brands fa-whatsapp" style="color: #10B981;"></i> WhatsApp del Cliente</label>
+          <label class="ops-form-label"><i class="fa-brands fa-whatsapp" style="color: #10B981;"></i> <span data-i18n="pages.admin.opsPaymentShareModal.label1">WhatsApp del Cliente</span></label>
           <input type="tel" class="ops-form-input" id="opsShareModalPhoneInput" placeholder="+505 8888 1234">
         </div>
 
         <div class="ops-form-group">
-          <label class="ops-form-label"><i class="fa-regular fa-envelope" style="color: #38BDF8;"></i> Correo del Cliente</label>
+          <label class="ops-form-label"><i class="fa-regular fa-envelope" style="color: #38BDF8;"></i> <span data-i18n="pages.admin.opsPaymentShareModal.label2">Correo del Cliente</span></label>
           <input type="email" class="ops-form-input" id="opsShareModalEmailInput" placeholder="cliente@correo.com">
         </div>
       </div>
@@ -2387,30 +2387,30 @@
         <!-- Botón 1: WhatsApp -->
         <button type="button" class="btn-ops-matte" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #10B981; padding: 0.75rem; font-weight: 700; display:flex; align-items:center; justify-content:center; gap:0.5rem;" onclick="window.BaqueanoOpsPayments.sendWhatsapp()">
           <i class="fa-brands fa-whatsapp" style="font-size: 1.15rem;"></i>
-          <span>Enviar por WhatsApp</span>
+          <span data-i18n="pages.admin.opsPaymentShareModal.span5">Enviar por WhatsApp</span>
         </button>
 
         <!-- Botón 2: Correo -->
         <button type="button" class="btn-ops-matte" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.4); color: #38BDF8; padding: 0.75rem; font-weight: 700; display:flex; align-items:center; justify-content:center; gap:0.5rem;" onclick="window.BaqueanoOpsPayments.sendEmail()">
           <i class="fa-regular fa-envelope" style="font-size: 1.15rem;"></i>
-          <span>Enviar por Correo</span>
+          <span data-i18n="pages.admin.opsPaymentShareModal.span6">Enviar por Correo</span>
         </button>
 
         <!-- Botón 3: Imprimir / PDF -->
         <button type="button" class="btn-ops-matte" style="background: rgba(244, 230, 193, 0.12); border-color: rgba(244, 230, 193, 0.35); color: #F4E6C1; padding: 0.75rem; font-weight: 700; display:flex; align-items:center; justify-content:center; gap:0.5rem;" onclick="window.BaqueanoOpsPayments.printReceipt()">
           <i class="fa-solid fa-print" style="font-size: 1.15rem;"></i>
-          <span>Imprimir / Recibo PDF</span>
+          <span data-i18n="pages.admin.opsPaymentShareModal.span7">Imprimir / Recibo PDF</span>
         </button>
 
         <!-- Botón 4: Copiar Texto -->
         <button type="button" class="btn-ops-matte" style="background: rgba(246, 94, 1, 0.12); border-color: rgba(246, 94, 1, 0.35); color: #F65E01; padding: 0.75rem; font-weight: 700; display:flex; align-items:center; justify-content:center; gap:0.5rem;" onclick="window.BaqueanoOpsPayments.copyReceiptText()">
           <i class="fa-solid fa-copy" style="font-size: 1.15rem;"></i>
-          <span>Copiar al Portapapeles</span>
+          <span data-i18n="pages.admin.opsPaymentShareModal.span8">Copiar al Portapapeles</span>
         </button>
       </div>
 
       <div style="display:flex; justify-content:flex-end;">
-        <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsPayments.closeShareModal()">Cerrar</button>
+        <button data-i18n="actions.close" type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsPayments.closeShareModal()">Cerrar</button>
       </div>
     </div>
   </div>
@@ -2423,15 +2423,15 @@
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
         <h2 style="font-size: 1.1rem; color: #fff; margin:0; display:flex; align-items:center; gap:0.5rem;">
           <i class="fa-solid fa-image" style="color: #38BDF8;"></i>
-          <span id="opsBaucherModalTitle">Baucher / Depósito Bancario</span>
+          <span id="opsBaucherModalTitle"><span data-i18n="pages.admin.opsBaucherModalTitle.span1">Baucher / Depósito Bancario</span></span>
         </h2>
         <button type="button" class="ops-drawer-close-btn" onclick="window.BaqueanoOpsPayments.closeBaucherModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div style="background: #000; border-radius: 8px; overflow: hidden; max-height: 70vh; display: flex; align-items: center; justify-content: center;">
-        <img id="opsBaucherModalImg" src="" style="max-width: 100%; max-height: 70vh; object-fit: contain;" alt="Baucher">
+        <img data-i18n-alt="pages.admin.opsPaymentBaucherPreviewImg.imgAlt1" id="opsBaucherModalImg" src="" style="max-width: 100%; max-height: 70vh; object-fit: contain;" alt="Baucher">
       </div>
       <div style="display:flex; justify-content:flex-end; margin-top: 1rem;">
-        <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsPayments.closeBaucherModal()">Cerrar</button>
+        <button data-i18n="actions.close" type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsPayments.closeBaucherModal()">Cerrar</button>
       </div>
     </div>
   </div>
@@ -2488,8 +2488,8 @@
     <div class="ops-drawer-panel">
       <div class="ops-drawer-header">
         <div>
-          <h2 class="ops-drawer-title" id="opsGuideDrawerTitle">Nuevo GuÃ­a Nativo Acreditado</h2>
-          <p class="ops-drawer-subtitle" id="opsGuideDrawerSubtitle">Registro bajo Ley 1211 e INTUR</p>
+          <h2 class="ops-drawer-title" id="opsGuideDrawerTitle"><span data-i18n="pages.admin.opsGuideDrawerTitle.h21">Nuevo GuÃ­a Nativo Acreditado</span></h2>
+          <p class="ops-drawer-subtitle" id="opsGuideDrawerSubtitle"><span data-i18n="pages.admin.opsGuideDrawerSubtitle.p1">Registro bajo Ley 1211 e INTUR</span></p>
         </div>
         <button type="button" class="ops-drawer-close-btn" onclick="window.BaqueanoOpsGuides.closeDrawer()">
           <i class="fa-solid fa-xmark"></i>
@@ -2505,35 +2505,35 @@
             <div style="display:flex; justify-content:space-between; align-items:center;">
               <div>
                 <strong style="color:#00BAF2; font-size:0.92rem; display:flex; align-items:center; gap:0.4rem;">
-                  <i class="fa-solid fa-circle-check"></i> <span>Sello de GuÃ­a Verificado (INTUR / Baqueano)</span>
+                  <i class="fa-solid fa-circle-check"></i> <span data-i18n="pages.admin.opsGuideForm.span1">Sello de GuÃ­a Verificado (INTUR / Baqueano)</span>
                 </strong>
-                <span style="font-size:0.75rem; color:var(--ops-text-muted); display:block; margin-top:0.2rem;">
+                <span data-i18n="pages.admin.opsGuideForm.span2" style="font-size:0.75rem; color:var(--ops-text-muted); display:block; margin-top:0.2rem;">
                   Acredita al guÃ­a como anfitriÃ³n oficial verificado en la app y el catÃ¡logo pÃºblico sin intermediarios.
                 </span>
               </div>
               <label style="cursor:pointer; display:flex; align-items:center; gap:0.5rem; background:var(--ops-surface-2); padding:0.4rem 0.8rem; border-radius:var(--ops-radius-md); border:1px solid rgba(0,186,242,0.4);">
                 <input type="checkbox" id="opsGuideVerified" style="accent-color:#00BAF2; width:18px; height:18px; cursor:pointer;" checked>
-                <span style="font-size:0.82rem; font-weight:700; color:#fff;">Verificado</span>
+                <span data-i18n="app.res.verified" style="font-size:0.82rem; font-weight:700; color:#fff;">Verificado</span>
               </label>
             </div>
           </div>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">Nombre Completo del GuÃ­a / Baqueano Campesino *</label>
-            <input type="text" class="ops-form-input" id="opsGuideName" placeholder="Ej. Carlos 'El Baqueano' Silva" required>
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label1">Nombre Completo del GuÃ­a / Baqueano Campesino *</span></label>
+            <input data-i18n-placeholder="pages.admin.opsGuideName.inputPlaceholder1" type="text" class="ops-form-input" id="opsGuideName" placeholder="Ej. Carlos 'El Baqueano' Silva" required>
           </div>
 
           <div class="ops-form-grid-2">
             <div class="ops-form-group">
-              <label class="ops-form-label">Carnet INTUR / AcreditaciÃ³n Oficial</label>
-              <input type="text" class="ops-form-input" id="opsGuideCarnet" placeholder="Ej. INTUR-MAD-0012">
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label2">Carnet INTUR / AcreditaciÃ³n Oficial</span></label>
+              <input data-i18n-placeholder="pages.admin.opsGuideCarnet.inputPlaceholder1" type="text" class="ops-form-input" id="opsGuideCarnet" placeholder="Ej. INTUR-MAD-0012">
             </div>
             <div class="ops-form-group">
-              <label class="ops-form-label">Estado Operativo</label>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label3">Estado Operativo</span></label>
               <select class="ops-form-select" id="opsGuideStatus">
-                <option value="published">Activo en Servicio</option>
-                <option value="pending">En VerificaciÃ³n</option>
-                <option value="suspended">Suspendido Temporalmente</option>
+                <option data-i18n="pages.admin.opsGuideStatus.option1" value="published">Activo en Servicio</option>
+                <option data-i18n="pages.admin.opsGuideStatus.option2" value="pending">En VerificaciÃ³n</option>
+                <option data-i18n="pages.admin.opsGuideStatus.option3" value="suspended">Suspendido Temporalmente</option>
               </select>
             </div>
           </div>
@@ -2542,46 +2542,46 @@
           <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
             <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
               <i class="fa-solid fa-map-location-dot" style="color: var(--bq-accent);"></i>
-              <span>Territorio &amp; Especialidad Nativa</span>
+              <span data-i18n="pages.admin.opsGuideForm.span3">Territorio &amp; Especialidad Nativa</span>
             </h3>
 
             <div class="ops-form-grid-2">
               <div class="ops-form-group">
-                <label class="ops-form-label">Departamento / Territorio *</label>
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label4">Departamento / Territorio *</span></label>
                 <select class="ops-form-select" id="opsGuideDepartment">
                   <option value="Boaco">Boaco</option>
                   <option value="Carazo">Carazo</option>
                   <option value="Chinandega">Chinandega</option>
                   <option value="Chontales">Chontales</option>
-                  <option value="EstelÃ­">EstelÃ­</option>
+                  <option data-i18n="pages.admin.opsGuideDepartment.option1" value="EstelÃ­">EstelÃ­</option>
                   <option value="Granada">Granada</option>
                   <option value="Jinotega">Jinotega</option>
-                  <option value="LeÃ³n">LeÃ³n</option>
+                  <option data-i18n="pages.admin.opsGuideDepartment.option2" value="LeÃ³n">LeÃ³n</option>
                   <option value="Madriz" selected>Madriz</option>
                   <option value="Managua">Managua</option>
                   <option value="Masaya">Masaya</option>
                   <option value="Matagalpa">Matagalpa</option>
                   <option value="Nueva Segovia">Nueva Segovia</option>
                   <option value="Rivas">Rivas</option>
-                  <option value="RÃ­o San Juan">RÃ­o San Juan</option>
-                  <option value="RACCN">RACCN (Caribe Norte)</option>
-                  <option value="RACCS">RACCS (Caribe Sur)</option>
+                  <option data-i18n="pages.admin.opsGuideDepartment.option3" value="RÃ­o San Juan">RÃ­o San Juan</option>
+                  <option data-i18n="pages.admin.entityDepartment.option2" value="RACCN">RACCN (Caribe Norte)</option>
+                  <option data-i18n="pages.admin.entityDepartment.option3" value="RACCS">RACCS (Caribe Sur)</option>
                 </select>
               </div>
               <div class="ops-form-group">
-                <label class="ops-form-label">Municipio / Localidad</label>
-                <input type="text" class="ops-form-input" id="opsGuideMunicipality" placeholder="Ej. Somoto, Altagracia, Diriamba...">
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label5">Municipio / Localidad</span></label>
+                <input data-i18n-placeholder="pages.admin.opsGuideMunicipality.inputPlaceholder1" type="text" class="ops-form-input" id="opsGuideMunicipality" placeholder="Ej. Somoto, Altagracia, Diriamba...">
               </div>
             </div>
 
             <div class="ops-form-group">
-              <label class="ops-form-label">Especialidad TurÃ­stica &amp; Campo de Guianza *</label>
-              <input type="text" class="ops-form-input" id="opsGuideSpecialty" placeholder="Ej. CaÃ±Ã³n de Somoto, EspeleologÃ­a, Volcanes, Avistamiento de Aves, Flora..." required>
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label6">Especialidad TurÃ­stica &amp; Campo de Guianza *</span></label>
+              <input data-i18n-placeholder="pages.admin.opsGuideSpecialty.inputPlaceholder1" type="text" class="ops-form-input" id="opsGuideSpecialty" placeholder="Ej. CaÃ±Ã³n de Somoto, EspeleologÃ­a, Volcanes, Avistamiento de Aves, Flora..." required>
             </div>
 
             <div class="ops-form-group">
-              <label class="ops-form-label">Cooperativa Campesina o Comunidad</label>
-              <input type="text" class="ops-form-input" id="opsGuideCommunity" placeholder="Ej. Cooperativa Guardaparques Somoto, Red de Baqueanos...">
+              <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label7">Cooperativa Campesina o Comunidad</span></label>
+              <input data-i18n-placeholder="pages.admin.opsGuideCommunity.inputPlaceholder1" type="text" class="ops-form-input" id="opsGuideCommunity" placeholder="Ej. Cooperativa Guardaparques Somoto, Red de Baqueanos...">
             </div>
           </div>
 
@@ -2589,28 +2589,28 @@
           <div style="background: var(--ops-surface-1); border: 1px solid var(--ops-border-subtle); border-radius: var(--ops-radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
             <h3 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 1rem 0; display:flex; align-items:center; gap:0.5rem;">
               <i class="fa-solid fa-address-book" style="color: var(--bq-secondary);"></i>
-              <span>Contacto Directo &amp; Competencias</span>
+              <span data-i18n="pages.admin.opsGuideForm.span4">Contacto Directo &amp; Competencias</span>
             </h3>
 
             <div class="ops-form-grid-2">
               <div class="ops-form-group">
-                <label class="ops-form-label">TelÃ©fono / WhatsApp Directo *</label>
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label8">TelÃ©fono / WhatsApp Directo *</span></label>
                 <input type="tel" class="ops-form-input" id="opsGuidePhone" placeholder="+505 8891 0021" required>
               </div>
               <div class="ops-form-group">
-                <label class="ops-form-label">Correo ElectrÃ³nico (Asignado)</label>
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label9">Correo ElectrÃ³nico (Asignado)</span></label>
                 <input type="email" class="ops-form-input" id="opsGuideEmail" placeholder="guia@baqueano.ni">
               </div>
             </div>
 
             <div class="ops-form-grid-2">
               <div class="ops-form-group">
-                <label class="ops-form-label">Idiomas que Domina</label>
-                <input type="text" class="ops-form-input" id="opsGuideLanguages" placeholder="Ej. EspaÃ±ol nativo, InglÃ©s fluido, Miskito">
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label10">Idiomas que Domina</span></label>
+                <input data-i18n-placeholder="pages.admin.opsGuideLanguages.inputPlaceholder1" type="text" class="ops-form-input" id="opsGuideLanguages" placeholder="Ej. EspaÃ±ol nativo, InglÃ©s fluido, Miskito">
               </div>
               <div class="ops-form-group">
-                <label class="ops-form-label">AÃ±os de Experiencia en Territorio</label>
-                <input type="number" min="0" max="60" class="ops-form-input" id="opsGuideExperience" placeholder="Ej. 12">
+                <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label11">AÃ±os de Experiencia en Territorio</span></label>
+                <input data-i18n-placeholder="pages.admin.opsGuideExperience.inputPlaceholder1" type="number" min="0" max="60" class="ops-form-input" id="opsGuideExperience" placeholder="Ej. 12">
               </div>
             </div>
           </div>
@@ -2620,16 +2620,16 @@
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.75rem;">
               <h3 style="font-size: 0.95rem; font-weight: 700; color: #F4E6C1; margin: 0; display:flex; align-items:center; gap:0.5rem;">
                 <i class="fa-solid fa-coins" style="color: #F4E6C1;"></i>
-                <span>Tarifa por Jornada (Regla 11: CÃ³rdobas Primero)</span>
+                <span data-i18n="pages.admin.opsGuideForm.span5">Tarifa por Jornada (Regla 11: CÃ³rdobas Primero)</span>
               </h3>
-              <span style="font-size: 0.74rem; color: #38BDF8; font-weight: 700; background: rgba(22, 93, 111, 0.35); padding: 0.2rem 0.5rem; border-radius: 4px;">
+              <span data-i18n="pages.admin.opsPaymentDrawer.span6" style="font-size: 0.74rem; color: #38BDF8; font-weight: 700; background: rgba(22, 93, 111, 0.35); padding: 0.2rem 0.5rem; border-radius: 4px;">
                 Tasa BCN: C$ 36.6243 = $1 USD
               </span>
             </div>
 
             <div class="ops-form-grid-2">
               <div class="ops-form-group">
-                <label class="ops-form-label" style="color: #F4E6C1; font-weight: 700;">Tarifa Diaria en CÃ³rdobas (C$ NIO) *</label>
+                <label class="ops-form-label" style="color: #F4E6C1; font-weight: 700;"><span data-i18n="pages.admin.opsGuideForm.label12">Tarifa Diaria en CÃ³rdobas (C$ NIO) *</span></label>
                 <div style="position: relative; display: flex; align-items: center;">
                   <span style="position: absolute; left: 0.75rem; color: #F4E6C1; font-weight: 800; font-size: 0.95rem;">C$</span>
                   <input type="number" step="10" class="ops-form-input" id="opsGuidePriceNio" placeholder="800" style="padding-left: 2.5rem; font-weight: 800; font-size: 1.05rem; color: #F4E6C1;" oninput="window.BaqueanoOpsGuides.calculateUsdFromNio()" required>
@@ -2637,7 +2637,7 @@
               </div>
 
               <div class="ops-form-group">
-                <label class="ops-form-label" style="color: #38BDF8; font-weight: 700;">Equivalente en DÃ³lares ($ USD)</label>
+                <label class="ops-form-label" style="color: #38BDF8; font-weight: 700;"><span data-i18n="pages.admin.opsGuideForm.label13">Equivalente en DÃ³lares ($ USD)</span></label>
                 <div style="position: relative; display: flex; align-items: center;">
                   <span style="position: absolute; left: 0.75rem; color: #38BDF8; font-weight: 800; font-size: 0.95rem;">$</span>
                   <input type="number" step="0.01" class="ops-form-input" id="opsGuidePriceUsd" placeholder="21.84" style="padding-left: 2.2rem; font-weight: 700; font-size: 1.05rem; color: #38BDF8;" oninput="window.BaqueanoOpsGuides.calculateNioFromUsd()">
@@ -2648,27 +2648,27 @@
 
           <!-- SECCIÃ“N 5: RESEÃ‘A & SABERES ANCESTRALES -->
           <div class="ops-form-group">
-            <label class="ops-form-label">Saberes Campesinos, Rutas &amp; ReseÃ±a BiogrÃ¡fica</label>
-            <textarea class="ops-form-textarea" id="opsGuideBio" rows="3" placeholder="Describe los conocimientos tradicionales del baqueano, senderos que domina, botÃ¡nica, leyendas y recomendaciones para los viajeros..."></textarea>
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label14">Saberes Campesinos, Rutas &amp; ReseÃ±a BiogrÃ¡fica</span></label>
+            <textarea data-i18n-placeholder="pages.admin.opsGuideBio.textareaPlaceholder1" class="ops-form-textarea" id="opsGuideBio" rows="3" placeholder="Describe los conocimientos tradicionales del baqueano, senderos que domina, botÃ¡nica, leyendas y recomendaciones para los viajeros..."></textarea>
           </div>
 
           <div class="ops-form-group">
-            <label class="ops-form-label">URL de FotografÃ­a de Perfil / AcreditaciÃ³n</label>
-            <input type="url" class="ops-form-input" id="opsGuidePhotoUrl" placeholder="https://... o assets/images/guias/...">
+            <label class="ops-form-label"><span data-i18n="pages.admin.opsGuideForm.label15">URL de FotografÃ­a de Perfil / AcreditaciÃ³n</span></label>
+            <input data-i18n-placeholder="pages.admin.opsGuidePhotoUrl.inputPlaceholder1" type="url" class="ops-form-input" id="opsGuidePhotoUrl" placeholder="https://... o assets/images/guias/...">
           </div>
 
           <div class="ops-drawer-footer" style="display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--ops-border-subtle);">
             <div>
               <button type="button" class="btn-ops-matte danger" id="opsGuideDrawerSuspendBtn" style="display:none;">
-                <i class="fa-solid fa-pause"></i> Suspender
+                <i class="fa-solid fa-pause"></i> <span data-i18n="opsPlaces.suspend">Suspender</span>
               </button>
             </div>
             <div style="display:flex; gap:0.65rem;">
-              <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsGuides.closeDrawer()">
+              <button data-i18n="actions.cancel" type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsGuides.closeDrawer()">
                 Cancelar
               </button>
               <button type="submit" class="btn-ops-matte primary">
-                <i class="fa-solid fa-floppy-disk"></i> Guardar Ficha de GuÃ­a
+                <i class="fa-solid fa-floppy-disk"></i> <span data-i18n="pages.admin.opsGuideForm.button1">Guardar Ficha de GuÃ­a</span>
               </button>
             </div>
           </div>
@@ -2684,17 +2684,17 @@
         <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 0.85rem;">
           <i class="fa-solid fa-triangle-exclamation" style="color: #EF4444; font-size: 1.6rem;"></i>
         </div>
-        <h3 style="color: #fff; margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700;">Â¿Eliminar GuÃ­a del CatÃ¡logo?</h3>
+        <h3 data-i18n="pages.admin.opsGuideDeleteModal.h31" style="color: #fff; margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 700;">Â¿Eliminar GuÃ­a del CatÃ¡logo?</h3>
         <p style="color: var(--ops-text-secondary); font-size: 0.85rem; margin: 0; line-height: 1.45;">
-          EstÃ¡s a punto de retirar del catÃ¡logo a <strong id="opsGuideDeleteName" style="color: #F4E6C1;"></strong>. Esta acciÃ³n no se puede deshacer.
+          <span data-i18n="pages.admin.opsGuideDeleteModal.p1">EstÃ¡s a punto de retirar del catÃ¡logo a</span> <strong id="opsGuideDeleteName" style="color: #F4E6C1;"></strong><span data-i18n="pages.admin.opsGuideDeleteModal.p2">. Esta acciÃ³n no se puede deshacer.</span>
         </p>
       </div>
       <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
-        <button type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsGuides.closeDeleteModal()">
+        <button data-i18n="actions.cancel" type="button" class="btn-ops-matte" onclick="window.BaqueanoOpsGuides.closeDeleteModal()">
           Cancelar
         </button>
         <button type="button" class="btn-ops-matte danger" onclick="window.BaqueanoOpsGuides.confirmDelete()">
-          <i class="fa-solid fa-trash-can"></i> Confirmar EliminaciÃ³n
+          <i class="fa-solid fa-trash-can"></i> <span data-i18n="pages.admin.opsGuideDeleteModal.button1">Confirmar EliminaciÃ³n</span>
         </button>
       </div>
     </div>

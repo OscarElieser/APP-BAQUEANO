@@ -1473,3 +1473,7 @@ html[data-bq-page="musica"] body .musica-archive-grid > * { min-width: 0; }
   html[data-bq-page="cookies"] body :is(.pref-action-btn-neutral, #purgeStorageBtn) { white-space: normal; max-width: 100%; }
   html[data-bq-page="perfil"] body .prof-final-actions { flex-wrap: wrap; }
 }
+
+/* 2026-10-09 — axe «link-in-text-block» (mi-viaje.html): el enlace «Leaflet» del crédito del mapa
+   solo se distinguía por color. Subrayado en todos los mapas del sitio. */
+.leaflet-control-attribution a { text-decoration: underline !important; text-underline-offset: 2px; }

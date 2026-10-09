@@ -157,7 +157,18 @@ await safe('S2-15/api', 'API Azure consulta Supabase vía HTTPS', async () => {
 }, true);
 
 // 8) Puertos (perímetro) --------------------------------------------------------------
-const ip = (await dns.resolve4(HOST).catch(() => []))[0];
+// 2026-10-09: el dominio pasa por Cloudflare (104.21.x.x). Cloudflare deja abiertos en TODOS sus
+// bordes los puertos HTTP 8080/8880/2052/2082/2086/2095 y los reenvía al 80 del origen: ver el 8080
+// abierto en esa IP no es un servicio del servidor (el sitio usa 80/443). Si se define ORIGIN_IP
+// (IP pública de la VM de Azure), los puertos se miden en el origen real.
+const edgeIp = (await dns.resolve4(HOST).catch(() => []))[0];
+const ORIGIN_IP = process.env.ORIGIN_IP || '';
+const ip = ORIGIN_IP || edgeIp;
+const CLOUDFLARE_V4 = ['173.245.48.0/20', '103.21.244.0/22', '103.22.200.0/22', '103.31.4.0/22', '141.101.64.0/18', '108.162.192.0/18', '190.93.240.0/20', '188.114.96.0/20', '197.234.240.0/22', '198.41.128.0/17', '162.158.0.0/15', '104.16.0.0/13', '104.24.0.0/14', '172.64.0.0/13', '131.0.72.0/22'];
+const ipToInt = (a) => a.split('.').reduce((n, o) => (n << 8) + Number(o), 0) >>> 0;
+const inCidr = (a, cidr) => { const [base, bits] = cidr.split('/'); const mask = bits === '0' ? 0 : (~0 << (32 - Number(bits))) >>> 0; return (ipToInt(a) & mask) === (ipToInt(base) & mask); };
+const behindCloudflare = !ORIGIN_IP && !!ip && CLOUDFLARE_V4.some((c) => inCidr(ip, c));
+const CLOUDFLARE_HTTP_PORTS = new Set([8080, 8880, 2052, 2082, 2086, 2095]);
 const portOpen = (port) => new Promise((resolve) => {
   const s = net.createConnection({ host: ip, port });
   const done = (open) => { s.destroy(); resolve(open); };
@@ -166,7 +177,12 @@ const portOpen = (port) => new Promise((resolve) => {
 if (ip) {
   for (const [port, shouldOpen] of [[80, true], [443, true], [5432, false], [3000, false], [6379, false], [8080, false], [3306, false]]) {
     const open = await portOpen(port);
-    record(`S2-15/port-${port}`, `Puerto ${port} ${shouldOpen ? 'abierto' : 'cerrado al público'}`, open === shouldOpen, `${ip}:${port} ${open ? 'abierto' : 'cerrado/filtrado'}`, !shouldOpen);
+    if (behindCloudflare && CLOUDFLARE_HTTP_PORTS.has(port)) {
+      record(`S2-15/port-${port}`, `Puerto ${port}: borde de Cloudflare (no es del servidor)`, true,
+        `${ip}:${port} ${open ? 'abierto' : 'cerrado'} en el borde de Cloudflare, que lo reenvía al 80 del origen; el servidor solo publica 80/443. Para medir el origen: ORIGIN_IP=<IP de la VM>.`);
+      continue;
+    }
+    record(`S2-15/port-${port}`, `Puerto ${port} ${shouldOpen ? 'abierto' : 'cerrado al público'}`, open === shouldOpen, `${ip}:${port} ${open ? 'abierto' : 'cerrado/filtrado'}${behindCloudflare ? ' (borde Cloudflare)' : ''}`, !shouldOpen);
   }
   const ssh = await portOpen(22);
   record('S2-15/port-22', 'SSH restringido (no abierto a Internet)', !ssh, `${ip}:22 ${ssh ? 'ABIERTO desde el runner de GitHub (revisar NSG)' : 'cerrado/filtrado para IPs no autorizadas'}`);
