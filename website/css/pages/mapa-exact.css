@@ -91,7 +91,8 @@ QUÉ:
 }
 .bq-atlas-cluster::before { content: ''; position: absolute; inset: 6px; border-radius: 50%; background: #0F172A; border: 2px solid #FFFFFF; }
 .bq-atlas-cluster b { position: relative; color: #F4E6C1; font: 900 0.95rem/1 'League Spartan', 'Plus Jakarta Sans', sans-serif; }
-.bq-atlas-cluster-wrap { position: relative; }
+/* 2026-10-09: NO tocar position del contenedor: Leaflet lo ubica con position:absolute; con relative las agrupaciones se corrían al hacer zoom. */
+.bq-atlas-cluster { position: relative; }
 .bq-atlas-cluster-wrap:hover .bq-atlas-cluster { transform: scale(1.08); }
 
 .bq-atlas-tip { padding: 5px 10px; border: 0; border-radius: 999px; background: #0F172A; color: #F4E6C1; font: 700 0.74rem/1.2 'Plus Jakarta Sans', sans-serif; box-shadow: 0 6px 16px rgba(15, 23, 42, 0.3); }
@@ -135,4 +136,13 @@ QUÉ:
 @media (max-width: 720px) {
   .map-legend { right: 26px; bottom: 26px; left: 26px; }
   .map-legend #mapAtlasLegendItems { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* 2026-10-09 — Filtros del mapa siempre completos: antes la fila era un carrusel horizontal
+   con la barra oculta y «Hospedajes» quedaba cortado. Ahora ocupa su propio renglón y
+   pasa al siguiente cuando no entra; ningún filtro queda escondido. */
+.page-mapa-exact .map-cat-filter-chips { order: 3; flex: 1 1 100%; flex-wrap: wrap; overflow: visible; padding: 2px 0 0; }
+@media (max-width: 560px) {
+  .page-mapa-exact .map-cat-filter-chips { gap: 6px; }
+  .page-mapa-exact .map-chip-btn { min-height: 40px; padding: 6px 11px; font-size: 0.74rem; }
 }
