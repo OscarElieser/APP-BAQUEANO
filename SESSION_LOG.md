@@ -6154,3 +6154,12 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
   - Retirado del pie de página (`index.html` y pie inyectado en `js/global-injector.js`, bloque `.footer-badge-wrap`) y de los héroes de `baqueano-ia.html`, `nosotros.html`, `perfil.html`, `privacidad.html`, `terminos.html`.
   - Portada de la pista «Son de Mi Tierra» en `js/global-music-player.js` y `js/musica-player.js` → `assets/images/LOGOS/baqueano_icono_oficial.png`.
   - El archivo PNG se conserva en el repo (no se eliminó). Los textos «NICARAGUA AUTÉNTICA» (no imagen) se mantienen.
+
+## 2026-10-09 — Instalación de Node.js y verificación i18n real
+
+- Solicitud: «hay que instalarlo» (Node.js, faltaba para `npm run i18n` y pruebas).
+- Instalado con `winget install OpenJS.NodeJS.LTS`: Node v24.20.0, npm 11.19.0 (el CI usa Node 20/22).
+- `npm run i18n` real:
+  - `validate-i18n`: es/en/fr/it/pt/de con 5058/5058 claves, 0 faltantes, 0 vacías. PASS.
+  - `i18n-audit`: FAIL con 7 errores preexistentes del Ops Center (textos sin clave en `admin.html`, `ops-businesses.js`, `ops-engine.js` 330 vs base 322, `ops-guides.js`, `ops-messages.js`, `ops-payments.js`, `ops-users.js`). No provienen de los cambios de Baqui/logo; quedan pendientes.
+  - `export-locales-for-app --check`: FAIL por 43 claves `opsReservations.*` nunca exportadas a la app. Regenerado con `npm run export:app-locales` (solo agrega esas 43 claves; las ediciones de Baqui coinciden con la salida del script). Re-check: «App y Web comparten 6 idiomas · 5059 claves». PASS.
