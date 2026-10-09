@@ -6073,7 +6073,8 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 5. **Merge Workspace a Main:** Fusión limpia sin conflictos de `wip/tipografias-ops-2026-10-08` en `main` (214 archivos actualizados, 9923 inserciones, `flutter analyze` 100% limpio).
 
 ### 📦 3. QUÉ (What / Entregables y Estado Git)
-- Rama local `main` fusionada y lista con los 13 commits de sprint.
+- Rama local `main` fusionada y lista con los 14 commits de sprint.
 - Rama remota `origin/wip/tipografias-ops-2026-10-08` sincronizada 100% en GitHub.
-- Regla de repositorio GitHub (GH013 / branch protection) identificada en `refs/heads/main` que requiere resolución de conversación/PR para el merge remoto en GitHub.
+- Regla de repositorio GitHub identificada vía API: Ruleset ID `24771709` (`pull_request` requerida en `main`). Se proporcionan enlaces directos al usuario para completar el merge en GitHub con un clic.
+
 
