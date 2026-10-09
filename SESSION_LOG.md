@@ -6127,3 +6127,13 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - Causa: en `website/css/pages/departamento.css`, `.departamento-inline-031` usaba `--arena-pinolera` (#F4E6C1) y `.departamento-inline-030` `--oro-noble` (#D4AF37) sobre tarjeta clara #F8FAFC (contraste < 3:1).
 - Cambio: descripción a teal de marca #165D6F (~7:1) e ícono a ámbar oscuro #A16207 (~5:1). Solo CSS; no se eliminó nada.
 - Verificación pendiente: revisión visual en navegador por el usuario.
+
+## 2026-10-09 — Nueva imagen de Baqui (mascota con sombrero, mochila y cámara)
+
+- Solicitud: «vamos a cambiar a baqui por esta imagen» (fuente: `website/assets/logo oficiales/Macota Baqueano1.png`, 3300×2550 con fondo ya transparente).
+- Proceso (sin Python/Node; .NET System.Drawing): recorte por alfa al contorno del personaje (2109×2318), centrado en lienzo cuadrado 600×600 con margen, PNG transparente.
+- Cambios:
+  - `website/assets/images/assistant/baqui.png` y `baqui-bird.png` reemplazados por la nueva mascota (los usan ~20 páginas y `baqueano-assistant.js`).
+  - Respaldo sin eliminar: el guardabarranco anterior queda en `website/assets/images/assistant/baqui-guardabarranco-legacy.png`.
+  - `website/css/baqueano-assistant.css`: recalibrados los `clip-path`/`transform-origin` de `.bq-character-head/-wing/-tail` para la nueva pose (verificado dibujando las zonas sobre la imagen).
+- Pendiente: los textos alternativos/i18n aún dicen «guardabarranco» (`common.baquiGuardabarranco`, 404, asistente); se actualizarán en los 6 idiomas cuando el usuario confirme qué ave es la nueva mascota. Verificación visual en navegador pendiente.
