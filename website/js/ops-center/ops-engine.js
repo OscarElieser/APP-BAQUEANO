@@ -37,6 +37,15 @@
 (function (window, document) {
   'use strict';
 
+  // i18n de la interfaz del Ops Center (claves ops.<módulo>.*; respaldo en español si falta la traducción).
+  function i18n(key, fallback, vars) {
+    var out = fallback;
+    try { if (window.BaqueanoLanguage && window.BaqueanoLanguage.t) out = window.BaqueanoLanguage.t(key, { fallback: fallback }) || fallback; } catch (_) { out = fallback; }
+    return String(out).replace(/\{(\w+)\}/g, function (m, k) { return vars && vars[k] != null ? vars[k] : m; });
+  }
+  // Valor de atributo HTML ya entre comillas (title=${q(…)}); escapa comillas dobles.
+  function q(value) { return '"' + String(value == null ? '' : value).replace(/"/g, '&quot;') + '"'; }
+
   // 🔒 SEGURIDAD (2026-10-04): el navegador NO escribe en Supabase con la clave
   // pública. Las escrituras del Ops Center van a Firestore (fuente prioritaria) y
   // js/firestore-mirror.js las replica en Supabase vía la Edge Function
@@ -2644,7 +2653,7 @@
       // "eliminado exitosamente" aunque el borrado fallaba. Se conserva la
       // función, pero ya no intenta borrar ni simula éxito.
       if (AUDIT_LOGS_IMMUTABLE) {
-        OpsToast.show('Los registros de auditoría son inmutables: no se pueden eliminar (trazabilidad protegida).', 'info');
+        OpsToast.show(i18n('ops.engine.losRegistrosDeAuditoria', 'Los registros de auditoría son inmutables: no se pueden eliminar (trazabilidad protegida).'), 'info');
         return;
       }
       const confirmed = await OpsDialog.confirm({
@@ -2681,17 +2690,17 @@
       }
 
       OpsUI.renderAuditFeed();
-      OpsToast.show('Registro de auditoría eliminado exitosamente.', 'success');
+      OpsToast.show(i18n('ops.engine.registroDeAuditoriaEliminado', 'Registro de auditoría eliminado exitosamente.'), 'success');
     },
 
     async clearAuditLogs() {
       if (AUDIT_LOGS_IMMUTABLE) {
-        OpsToast.show('El historial de auditoría es inmutable: no se puede vaciar (trazabilidad protegida).', 'info');
+        OpsToast.show(i18n('ops.engine.elHistorialDeAuditoria', 'El historial de auditoría es inmutable: no se puede vaciar (trazabilidad protegida).'), 'info');
         return;
       }
       const logs = OpsState.collectionsData['27-auditoria'] || [];
       if (logs.length === 0) {
-        OpsToast.show('No hay registros de auditoría para eliminar.', 'info');
+        OpsToast.show(i18n('ops.engine.noHayRegistrosDe', 'No hay registros de auditoría para eliminar.'), 'info');
         return;
       }
 
@@ -2727,7 +2736,7 @@
       OpsState.collectionsData['27-auditoria'] = [];
       OpsState.metrics.auditEventsCount = 0;
       OpsUI.renderAuditFeed();
-      OpsToast.show('Historial de auditoría vaciado por completo.', 'success');
+      OpsToast.show(i18n('ops.engine.historialDeAuditoriaVaciado', 'Historial de auditoría vaciado por completo.'), 'success');
     },
 
     // 7.3 Guardado y Actualización Universal (con Dual-Write Atómico)
@@ -2901,7 +2910,7 @@
 
       await batch.commit();
 
-      OpsToast.show(`Estado actualizado a "${newStatus}"`, 'success');
+      OpsToast.show(i18n('ops.engine.estadoActualizadoA', 'Estado actualizado a \"{p0}\"', { p0: (newStatus) }), 'success');
       await this.logAuditEvent({
         action: 'STATUS_CHANGED',
         module: config.title,
@@ -2992,7 +3001,7 @@
         } catch (_) {}
       }
 
-      OpsToast.show('Registro eliminado permanentemente de la base de datos.', 'info');
+      OpsToast.show(i18n('ops.engine.registroEliminadoPermanentementeDe', 'Registro eliminado permanentemente de la base de datos.'), 'info');
       await this.logAuditEvent({
         action: 'PERMANENTLY_DELETED',
         module: config.title,
@@ -3018,7 +3027,7 @@
       clone.slug = `${clone.slug || 'item'}-copia-${Date.now()}`;
 
       await this.saveEntity(tabId, clone);
-      OpsToast.show('Registro duplicado en modo borrador.', 'success');
+      OpsToast.show(i18n('ops.engine.registroDuplicadoEnModo', 'Registro duplicado en modo borrador.'), 'success');
     },
 
     // 7.7b Check de Verificado Manual (TikTok / Instagram / X / FB Style)
@@ -3093,7 +3102,7 @@
 
       OpsState.selectedIds.clear();
       OpsUI.updateBulkBar();
-      OpsToast.show(`Acción masiva completada para ${ids.length} registros.`, 'success');
+      OpsToast.show(i18n('ops.engine.accionMasivaCompletadaPara', 'Acción masiva completada para {p0} registros.', { p0: (ids.length) }), 'success');
     },
 
     // 7.9 Migración Progresiva & Poblado Inicial Canónico
@@ -3101,7 +3110,7 @@
       const db = this.getDb();
       if (!db) throw new Error('Base de datos no conectada.');
 
-      OpsToast.show('Iniciando sincronización canónica hacia Cloud Firestore...', 'info');
+      OpsToast.show(i18n('ops.engine.iniciandoSincronizacionCanonicaHacia', 'Iniciando sincronización canónica hacia Cloud Firestore...'), 'info');
 
       // 1. Sembrar Negocios / Cooperativas Aliadas
       const seedBusinesses = [
@@ -3628,7 +3637,7 @@
         }
       }
 
-      OpsToast.show('¡Catálogo Completo Sincronizado! Destinos, negocios y páginas en vivo en Firestore y Supabase.', 'success');
+      OpsToast.show(i18n('ops.engine.catalogoCompletoSincronizadoDestinos', '¡Catálogo Completo Sincronizado! Destinos, negocios y páginas en vivo en Firestore y Supabase.'), 'success');
       await this.logAuditEvent({
         action: 'CANONICAL_SEED_COMPLETED',
         module: 'Sistema',
@@ -3721,7 +3730,7 @@
         updatedBy: OpsState.currentUser?.email || 'admin'
       }, { merge: true }).catch(err => {
         console.warn('[OpsCMS] Error guardando sección en segundo plano:', err.message);
-        OpsToast.show('Aviso: La red está inestable. Los cambios se guardarán localmente.', 'warning');
+        OpsToast.show(i18n('ops.engine.avisoLaRedEsta', 'Aviso: La red está inestable. Los cambios se guardarán localmente.'), 'warning');
       });
 
       // Ejecutar auditoría en segundo plano (fire-and-forget) para no bloquear la UI
@@ -3824,7 +3833,7 @@
         updatedBy: OpsState.currentUser?.email || 'admin'
       }, { merge: true }).catch(e => console.warn(e));
 
-      OpsToast.show(`Sección "${target.name || target.title}" ahora está ${target.status === 'published' ? 'Publicada' : 'en Borrador / Oculta'}.`, 'success');
+      OpsToast.show(i18n('ops.engine.seccionAhoraEsta', 'Sección \"{p0}\" ahora está {p1}.', { p0: (target.name || target.title), p1: (target.status === 'published' ? 'Publicada' : 'en Borrador / Oculta') }), 'success');
       this.logAuditEvent({
         action: 'PAGE_SECTION_STATUS_TOGGLED',
         module: 'Website Builder',
@@ -3865,7 +3874,7 @@
         updatedBy: OpsState.currentUser?.email || 'admin'
       }, { merge: true }).catch(e => console.warn(e));
 
-      OpsToast.show('Orden de secciones actualizado.', 'info');
+      OpsToast.show(i18n('ops.engine.ordenDeSeccionesActualizado', 'Orden de secciones actualizado.'), 'info');
     },
 
     async trashPageSection(pageId, sectionId) {
@@ -3888,7 +3897,7 @@
         updatedBy: OpsState.currentUser?.email || 'admin'
       }, { merge: true }).catch(e => console.warn(e));
 
-      OpsToast.show(`Sección movida a la papelera.`, 'warning');
+      OpsToast.show(i18n('ops.engine.seccionMovidaALa', 'Sección movida a la papelera.'), 'warning');
       this.logAuditEvent({
         action: 'PAGE_SECTION_TRASHED',
         module: 'Website Builder',
@@ -3917,7 +3926,7 @@
         updatedBy: OpsState.currentUser?.email || 'admin'
       }, { merge: true }).catch(e => console.warn(e));
 
-      OpsToast.show(`Sección restaurada y publicada en la web.`, 'success');
+      OpsToast.show(i18n('ops.engine.seccionRestauradaYPublicada', 'Sección restaurada y publicada en la web.'), 'success');
       this.logAuditEvent({
         action: 'PAGE_SECTION_RESTORED',
         module: 'Website Builder',
@@ -3950,7 +3959,7 @@
         updatedBy: OpsState.currentUser?.email || 'admin'
       }, { merge: true });
       OpsState.pageSections[pageId] = sections;
-      OpsToast.show('Contenido original restaurado y publicado.', 'success');
+      OpsToast.show(i18n('ops.engine.contenidoOriginalRestauradoY', 'Contenido original restaurado y publicado.'), 'success');
     },
 
     async hardDeletePageSection(pageId, sectionId) {
@@ -3985,7 +3994,7 @@
         updatedBy: OpsState.currentUser?.email || 'admin'
       }, { merge: true }).catch(e => console.warn(e));
 
-      OpsToast.show(`Sección eliminada permanentemente.`, 'error');
+      OpsToast.show(i18n('ops.engine.seccionEliminadaPermanentemente', 'Sección eliminada permanentemente.'), 'error');
       this.logAuditEvent({
         action: 'PAGE_SECTION_HARD_DELETED',
         module: 'Website Builder',
@@ -4027,7 +4036,7 @@
         updatedBy: OpsState.currentUser?.email || 'admin'
       }, { merge: true }).catch(e => console.warn(e));
 
-      OpsToast.show(`Plantilla original restablecida para ${pageId}.html.`, 'success');
+      OpsToast.show(i18n('ops.engine.plantillaOriginalRestablecidaPara', 'Plantilla original restablecida para {p0}.html.', { p0: (pageId) }), 'success');
     }
   };
 
@@ -4584,10 +4593,10 @@
             <div style="font-size:0.76rem; color:var(--bq-secondary);">Canal: ${provLabel} · Clic para cambiar de archivo</div>
           `;
         }
-        OpsToast.show(`Archivo "${file.name}" cargado y listo para publicar.`, 'success');
+        OpsToast.show(i18n('ops.engine.archivoCargadoYListo', 'Archivo \"{p0}\" cargado y listo para publicar.', { p0: (file.name) }), 'success');
       } catch (err) {
         console.error('[handleFileUpload] Error al subir:', err);
-        OpsToast.show(`Error al procesar archivo: ${err.message}`, 'error');
+        OpsToast.show(i18n('ops.engine.errorAlProcesarArchivo', 'Error al procesar archivo: {p0}', { p0: (err.message) }), 'error');
         if (dropzone) {
           dropzone.innerHTML = '<i class="fa-solid fa-cloud-arrow-up ops-dropzone-icon"></i><div>Reintentar carga de archivo</div>';
         }
@@ -4819,7 +4828,7 @@
       const titleInput = document.getElementById('entityTitle');
 
       if (!titleInput.value.trim()) {
-        OpsToast.show('El título / nombre es un campo obligatorio.', 'warning');
+        OpsToast.show(i18n('ops.engine.elTituloNombreEs', 'El título / nombre es un campo obligatorio.'), 'warning');
         titleInput.focus();
         return;
       }
@@ -4869,10 +4878,10 @@
         if (drawer) drawer.classList.remove('is-open');
         this.renderEntityView(tabId);
         if (!(window.BaqueanoOpsData && window.BaqueanoOpsData.manages(tabId))) {
-          OpsToast.show(`Registro guardado como "${statusToSave}".`, 'success');
+          OpsToast.show(i18n('ops.engine.registroGuardadoComo', 'Registro guardado como \"{p0}\".', { p0: (statusToSave) }), 'success');
         }
       } catch (err) {
-        OpsToast.show(`Error al guardar: ${err.message}`, 'error');
+        OpsToast.show(i18n('ops.engine.errorAlGuardar', 'Error al guardar: {p0}', { p0: (err.message) }), 'error');
       }
     },
 
@@ -5253,10 +5262,10 @@
             const { downloadURL } = await OpsStorage.uploadFile(file, 'pages');
             const imgInput = document.getElementById('secFormImageUrl');
             if (imgInput) imgInput.value = downloadURL;
-            OpsToast.show('Medio subido a Firebase Storage.', 'success');
+            OpsToast.show(i18n('ops.engine.medioSubidoAFirebase', 'Medio subido a Firebase Storage.'), 'success');
             uploadBtn.innerHTML = '<i class="fa-solid fa-check" style="color:var(--bq-jungle);"></i> Listo';
           } catch (err) {
-            OpsToast.show(`Error subiendo medio: ${err.message}`, 'error');
+            OpsToast.show(i18n('ops.engine.errorSubiendoMedio', 'Error subiendo medio: {p0}', { p0: (err.message) }), 'error');
             uploadBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Subir a Storage';
           }
         });
@@ -5489,7 +5498,7 @@
       const titleInput = document.getElementById('secFormTitle');
 
       if (!titleInput.value.trim()) {
-        OpsToast.show('El título / encabezado del componente es obligatorio.', 'warning');
+        OpsToast.show(i18n('ops.engine.elTituloEncabezadoDel', 'El título / encabezado del componente es obligatorio.'), 'warning');
         titleInput.focus();
         return;
       }
@@ -5518,10 +5527,10 @@
         await OpsCMS.savePageSection(pageId, sectionData);
         const modal = document.getElementById('opsSectionModal');
         if (modal) modal.classList.remove('is-open');
-        OpsToast.show(`¡Componente "${sectionData.title}" guardado con éxito y publicado en ${pageId}.html!`, 'success');
+        OpsToast.show(i18n('ops.engine.componenteGuardadoConExito', '¡Componente \"{p0}\" guardado con éxito y publicado en {p1}.html!', { p0: (sectionData.title), p1: (pageId) }), 'success');
         this.renderWebsiteBuilderModule(OpsState.activeTab);
       } catch (err) {
-        OpsToast.show(`Error al guardar: ${err.message}`, 'error');
+        OpsToast.show(i18n('ops.engine.errorAlGuardar', 'Error al guardar: {p0}', { p0: (err.message) }), 'error');
       } finally {
         if (saveBtn) saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios en Vivo';
       }
@@ -6662,7 +6671,7 @@
       } catch (err) {
         console.error('[BaqueanoOpsEngine] Error en migración de catálogo:', err);
         if (typeof OpsToast !== 'undefined') {
-          OpsToast.show('Aviso de migración: ' + (err.message || 'error de conexión'), 'warning', 4500);
+          OpsToast.show(i18n('ops.engine.avisoDeMigracion', 'Aviso de migración: ') + (err.message || 'error de conexión'), 'warning', 4500);
         }
         await this.syncAll();
       } finally {
@@ -6679,7 +6688,7 @@
         btn.innerHTML = '<i class="fa-solid fa-arrows-rotate fa-spin"></i> Sincronizando...';
       }
       if (typeof OpsToast !== 'undefined') {
-        OpsToast.show('Sincronizando ecosistema Web, Android, Firestore y Supabase...', 'info', 2500);
+        OpsToast.show(i18n('ops.engine.sincronizandoEcosistemaWebAndroid', 'Sincronizando ecosistema Web, Android, Firestore y Supabase...'), 'info', 2500);
       }
       try {
         OpsCMS.initDataSync();
@@ -6697,7 +6706,7 @@
           OpsUI.renderEntityView(OpsState.activeTab);
         }
         if (typeof OpsToast !== 'undefined') {
-          OpsToast.show('¡Ecosistema 100% sincronizado y conectado en vivo!', 'success', 3500);
+          OpsToast.show(i18n('ops.engine.ecosistema100SincronizadoY', '¡Ecosistema 100% sincronizado y conectado en vivo!'), 'success', 3500);
         }
       } catch (err) {
         console.warn('[BaqueanoOpsEngine] Error en syncAll:', err);
@@ -6713,7 +6722,7 @@
     async saveSiteVideoConfiguration() {
       const db = OpsCMS.getDb();
       if (!db) {
-        OpsToast.show('Firestore no está disponible para publicar los videos.', 'error');
+        OpsToast.show(i18n('ops.engine.firestoreNoEstaDisponible', 'Firestore no está disponible para publicar los videos.'), 'error');
         return;
       }
 
@@ -6735,7 +6744,7 @@
         const poster = document.querySelector(`.ops-site-video-poster[data-slot="${slotId}"]`)?.value.trim() || fallback.poster;
         const title = document.querySelector(`.ops-site-video-title[data-slot="${slotId}"]`)?.value.trim() || fallback.title;
         if (!isSafeUrl(src, 'video') || !isSafeUrl(poster, 'poster')) {
-          OpsToast.show(`Revisa las URLs del slot ${fallback.label || slotId}.`, 'warning');
+          OpsToast.show(i18n('ops.engine.revisaLasUrlsDel', 'Revisa las URLs del slot {p0}.', { p0: (fallback.label || slotId) }), 'warning');
           return;
         }
         slots[slotId] = { src, poster, title: title.slice(0, 180) };
@@ -6764,9 +6773,9 @@
           description: `Configuración fija publicada para ${Object.keys(slots).length} slots audiovisuales.`,
           status: 'success'
         });
-        OpsToast.show('Videos publicados. Permanecerán fijos hasta la próxima actualización del Ops Center.', 'success', 5000);
+        OpsToast.show(i18n('ops.engine.videosPublicadosPermaneceranFijos', 'Videos publicados. Permanecerán fijos hasta la próxima actualización del Ops Center.'), 'success', 5000);
       } catch (error) {
-        OpsToast.show(`No fue posible publicar los videos: ${error.message}`, 'error');
+        OpsToast.show(i18n('ops.engine.noFuePosiblePublicar', 'No fue posible publicar los videos: {p0}', { p0: (error.message) }), 'error');
       } finally {
         if (button) {
           button.disabled = false;
@@ -6776,7 +6785,7 @@
     },
 
     refreshBackupStatus() {
-      if (typeof OpsToast !== 'undefined') OpsToast.show('Actualizando telemetría de resguardo...', 'info');
+      if (typeof OpsToast !== 'undefined') OpsToast.show(i18n('ops.engine.actualizandoTelemetriaDeResguardo', 'Actualizando telemetría de resguardo...'), 'info');
       OpsUI.renderBackupSyncModule();
     },
 
@@ -6792,7 +6801,7 @@
         btn.innerHTML = '<i class="fa-solid fa-arrows-rotate fa-spin"></i> Sincronizando...';
       }
 
-      if (typeof OpsToast !== 'undefined') OpsToast.show('Iniciando ciclo de sincronización Firebase-Supabase...', 'info');
+      if (typeof OpsToast !== 'undefined') OpsToast.show(i18n('ops.engine.iniciandoCicloDeSincronizacion', 'Iniciando ciclo de sincronización Firebase-Supabase...'), 'info');
 
       try {
         const token = OpsAuth.currentUser ? await OpsAuth.currentUser.getIdToken().catch(() => null) : null;
@@ -6808,13 +6817,13 @@
         if (!res.ok) throw new Error(res.status === 404 ? 'El servicio de reintento de respaldo no está configurado en el servidor (NO CONFIGURADO).' : `El servidor respondió ${res.status}.`);
         const data = await res.json();
         if (data.ok || data.success) {
-          if (typeof OpsToast !== 'undefined') OpsToast.show('Sincronización procesada por el servidor.', 'success');
+          if (typeof OpsToast !== 'undefined') OpsToast.show(i18n('ops.engine.sincronizacionProcesadaPorEl', 'Sincronización procesada por el servidor.'), 'success');
         } else {
           if (typeof OpsToast !== 'undefined') OpsToast.show(data.message || 'El servidor no confirmó la sincronización.', 'warning');
         }
       } catch (err) {
         // Auditoría 2026-10-05 (C4): antes se informaba "éxito" aunque fallara.
-        if (typeof OpsToast !== 'undefined') OpsToast.show(`Sin sincronización: ${err.message || 'el servicio no respondió'}`, 'error', 6000);
+        if (typeof OpsToast !== 'undefined') OpsToast.show(i18n('ops.engine.sinSincronizacion', 'Sin sincronización: {p0}', { p0: (err.message || 'el servicio no respondió') }), 'error', 6000);
       } finally {
         if (btn) {
           btn.disabled = false;
@@ -7010,7 +7019,7 @@
         updatedAt: new Date().toISOString()
       }, { merge: true });
 
-      OpsToast.show('Sello oficial asignado exitosamente.', 'success');
+      OpsToast.show(i18n('ops.engine.selloOficialAsignadoExitosamente', 'Sello oficial asignado exitosamente.'), 'success');
       OpsUI.renderVerificationsModule();
     },
 
@@ -7032,7 +7041,7 @@
         updatedAt: new Date().toISOString()
       }, { merge: true });
 
-      OpsToast.show('Sello de verificación revocado.', 'warning');
+      OpsToast.show(i18n('ops.engine.selloDeVerificacionRevocado', 'Sello de verificación revocado.'), 'warning');
       OpsUI.renderVerificationsModule();
     },
 
@@ -7055,7 +7064,7 @@
         updatedAt: new Date().toISOString()
       }, { merge: true });
 
-      OpsToast.show('Membresía renovada por 1 año.', 'success');
+      OpsToast.show(i18n('ops.engine.membresiaRenovadaPor1', 'Membresía renovada por 1 año.'), 'success');
       OpsUI.renderSubscriptionsModule();
     },
 
@@ -7072,7 +7081,7 @@
         updatedBy: OpsState.currentUser?.email || 'admin'
       }, { merge: true });
 
-      OpsToast.show('Anuncio global sincronizado con Website y Android.', 'success');
+      OpsToast.show(i18n('ops.engine.anuncioGlobalSincronizadoCon', 'Anuncio global sincronizado con Website y Android.'), 'success');
     },
 
     async uploadAndroidRelease() {
@@ -7086,17 +7095,17 @@
       const version = versionInput?.value.trim() || '';
 
       if (!file || !version) {
-        OpsToast.show('Selecciona un archivo APK e indica su versión.', 'warning');
+        OpsToast.show(i18n('ops.engine.seleccionaUnArchivoApk', 'Selecciona un archivo APK e indica su versión.'), 'warning');
         return;
       }
       if (!/\.apk$/i.test(file.name) || file.size <= 0 || file.size > 500 * 1024 * 1024) {
-        OpsToast.show('El archivo debe ser un APK válido y no superar 500 MB.', 'error');
+        OpsToast.show(i18n('ops.engine.elArchivoDebeSer', 'El archivo debe ser un APK válido y no superar 500 MB.'), 'error');
         return;
       }
 
       const signature = new Uint8Array(await file.slice(0, 4).arrayBuffer());
       if (signature[0] !== 0x50 || signature[1] !== 0x4b) {
-        OpsToast.show('El archivo seleccionado no tiene una estructura APK válida.', 'error');
+        OpsToast.show(i18n('ops.engine.elArchivoSeleccionadoNo', 'El archivo seleccionado no tiene una estructura APK válida.'), 'error');
         return;
       }
 
@@ -7153,7 +7162,7 @@
       } catch (error) {
         console.error('[AndroidRelease] No se pudo cargar el APK:', error);
         if (progress) progress.textContent = 'La carga no pudo completarse. La versión pública no cambió.';
-        OpsToast.show(`No se pudo cargar el APK: ${error.message || 'almacenamiento no disponible'}`, 'error', 7000);
+        OpsToast.show(i18n('ops.engine.noSePudoCargar', 'No se pudo cargar el APK: {p0}', { p0: (error.message || 'almacenamiento no disponible') }), 'error', 7000);
       }
     },
 
@@ -7174,7 +7183,7 @@
       const progress = document.getElementById('androidApkProgress');
 
       if (!version || !rawUrl) {
-        OpsToast.show('Indicá la versión y pegá el enlace compartido de Google Drive.', 'warning');
+        OpsToast.show(i18n('ops.engine.indicaLaVersionY', 'Indicá la versión y pegá el enlace compartido de Google Drive.'), 'warning');
         return;
       }
 
@@ -7190,7 +7199,7 @@
           || '';
         if (!/^[a-zA-Z0-9_-]{10,}$/.test(fileId)) throw new Error('id');
       } catch (_) {
-        OpsToast.show('El enlace no parece ser un archivo compartido válido de Google Drive.', 'error');
+        OpsToast.show(i18n('ops.engine.elEnlaceNoParece', 'El enlace no parece ser un archivo compartido válido de Google Drive.'), 'error');
         return;
       }
 
@@ -7241,7 +7250,7 @@
       } catch (error) {
         console.error('[AndroidRelease] No se pudo publicar el enlace externo:', error);
         if (progress) progress.textContent = 'No fue posible registrar el enlace.';
-        OpsToast.show(`No se pudo guardar el enlace: ${error.message || 'error desconocido'}`, 'error', 7000);
+        OpsToast.show(i18n('ops.engine.noSePudoGuardar', 'No se pudo guardar el enlace: {p0}', { p0: (error.message || 'error desconocido') }), 'error', 7000);
       }
     },
 
@@ -7262,7 +7271,7 @@
         updatedAt: new Date().toISOString(),
         updatedBy: OpsState.currentUser?.email || 'admin'
       }, { merge: true });
-      OpsToast.show('La descarga del APK fue retirada de la web; el archivo se conserva.', 'success');
+      OpsToast.show(i18n('ops.engine.laDescargaDelApk', 'La descarga del APK fue retirada de la web; el archivo se conserva.'), 'success');
     },
 
     async runAiJob(jobType, instruction = '') {
@@ -7339,7 +7348,7 @@
           status: 'success'
         });
       }
-      OpsToast.show(`${title} completada: ${report.status}.`, actionableCount ? 'warning' : 'success');
+      OpsToast.show(i18n('ops.engine.completada', '{p0} completada: {p1}.', { p0: (title), p1: (report.status) }), actionableCount ? 'warning' : 'success');
       OpsUI.renderAiAdminModule();
       return report;
     },
@@ -7348,7 +7357,7 @@
       const input = document.getElementById('aiOpsInstruction');
       const instruction = input?.value.trim() || '';
       if (!instruction) {
-        OpsToast.show('Describe el trabajo que deseas delegar.', 'warning');
+        OpsToast.show(i18n('ops.engine.describeElTrabajoQue', 'Describe el trabajo que deseas delegar.'), 'warning');
         return;
       }
       const normalized = instruction.toLowerCase();
@@ -7411,9 +7420,9 @@
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(downloadURL).catch(() => {});
         }
-        OpsToast.show(`Archivo "${file.name}" subido. Enlace copiado al portapapeles.`, 'success', 4500);
+        OpsToast.show(i18n('ops.engine.archivoSubidoEnlaceCopiado', 'Archivo \"{p0}\" subido. Enlace copiado al portapapeles.', { p0: (file.name) }), 'success', 4500);
       } catch (err) {
-        OpsToast.show(`Error de carga: ${err.message}`, 'error');
+        OpsToast.show(i18n('ops.engine.errorDeCarga', 'Error de carga: {p0}', { p0: (err.message) }), 'error');
       }
     },
 
@@ -7439,12 +7448,12 @@
 
     async scanWebsitePage(pageId) {
       try {
-        OpsToast.show('Leyendo textos, imágenes, enlaces, botones y multimedia de la página...', 'info');
+        OpsToast.show(i18n('ops.engine.leyendoTextosImagenesEnlaces', 'Leyendo textos, imágenes, enlaces, botones y multimedia de la página...'), 'info');
         const count = await OpsCMS.discoverPageElements(pageId);
-        OpsToast.show(`${count} elementos reales incorporados al Website Builder.`, 'success');
+        OpsToast.show(i18n('ops.engine.elementosRealesIncorporadosAl', '{p0} elementos reales incorporados al Website Builder.', { p0: (count) }), 'success');
         OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
       } catch (error) {
-        OpsToast.show(`No se pudo inventariar la página: ${error.message}`, 'error');
+        OpsToast.show(i18n('ops.engine.noSePudoInventariar', 'No se pudo inventariar la página: {p0}', { p0: (error.message) }), 'error');
       }
     },
 
@@ -7552,7 +7561,7 @@
       document.body.removeChild(downloadAnchor);
       URL.revokeObjectURL(url);
 
-      OpsToast.show(`Copia de seguridad descargada: ${friendlyDateTime} (${totalRecords} registros).`, 'success', 5000);
+      OpsToast.show(i18n('ops.engine.copiaDeSeguridadDescargada', 'Copia de seguridad descargada: {p0} ({p1} registros).', { p0: (friendlyDateTime), p1: (totalRecords) }), 'success', 5000);
     },
 
     async importBackupFile(file) {
@@ -7596,11 +7605,11 @@
         OpsUI.renderEntityView(OpsState.activeTab);
         OpsUI.renderDashboardMetrics();
 
-        OpsToast.show(`¡Ecosistema restaurado exitosamente desde la copia del ${backupData.calendarDay || ''} (${backupData.formattedDate || file.name})!`, 'success', 6000);
+        OpsToast.show(i18n('ops.engine.ecosistemaRestauradoExitosamenteDesde', '¡Ecosistema restaurado exitosamente desde la copia del {p0} ({p1})!', { p0: (backupData.calendarDay || ''), p1: (backupData.formattedDate || file.name) }), 'success', 6000);
 
       } catch (err) {
         console.error('[importBackupFile] Error:', err);
-        OpsToast.show(`Error al restaurar copia: ${err.message}`, 'error', 5000);
+        OpsToast.show(i18n('ops.engine.errorAlRestaurarCopia', 'Error al restaurar copia: {p0}', { p0: (err.message) }), 'error', 5000);
       }
     },
 
@@ -7612,11 +7621,11 @@
       const exchangeSource = document.getElementById('cfgExchangeSource')?.value?.trim();
       const exchangeDate = document.getElementById('cfgExchangeDate')?.value;
       if (!(exchangeRate > 0)) {
-        OpsToast.show('Ingresá una tasa de cambio válida y verificable.', 'error', 5000);
+        OpsToast.show(i18n('ops.engine.ingresaUnaTasaDe', 'Ingresá una tasa de cambio válida y verificable.'), 'error', 5000);
         return;
       }
       if (!exchangeSource || !exchangeDate) {
-        OpsToast.show('Registrá la fuente y la fecha de la tasa de cambio.', 'error', 5000);
+        OpsToast.show(i18n('ops.engine.registraLaFuenteY', 'Registrá la fuente y la fecha de la tasa de cambio.'), 'error', 5000);
         return;
       }
       const sosPhone = document.getElementById('cfgSosPhone')?.value?.trim() || '118';
@@ -7656,9 +7665,9 @@
             updated_at: new Date().toISOString()
           }, { onConflict: 'id' }).catch(() => {});
         }
-        OpsToast.show('Parámetros globales guardados y sincronizados en Firebase y Supabase.', 'success');
+        OpsToast.show(i18n('ops.engine.parametrosGlobalesGuardadosY', 'Parámetros globales guardados y sincronizados en Firebase y Supabase.'), 'success');
       } catch (err) {
-        OpsToast.show('Parámetros guardados localmente con éxito.', 'success');
+        OpsToast.show(i18n('ops.engine.parametrosGuardadosLocalmenteCon', 'Parámetros guardados localmente con éxito.'), 'success');
       }
     },
 
@@ -7681,24 +7690,24 @@
         if (db) {
           await db.collection('system_settings').doc('seo_config').set(seoPayload, { merge: true });
         }
-        OpsToast.show('Configuración SEO actualizada y propagada al portal.', 'success');
+        OpsToast.show(i18n('ops.engine.configuracionSeoActualizadaY', 'Configuración SEO actualizada y propagada al portal.'), 'success');
       } catch (err) {
-        OpsToast.show('Metadatos SEO guardados localmente con éxito.', 'success');
+        OpsToast.show(i18n('ops.engine.metadatosSeoGuardadosLocalmente', 'Metadatos SEO guardados localmente con éxito.'), 'success');
       }
     },
 
     runSystemDiagnostics() {
-      OpsToast.show('Iniciando diagnóstico en vivo de 6 nodos cloud...', 'info', 2000);
+      OpsToast.show(i18n('ops.engine.iniciandoDiagnosticoEnVivo', 'Iniciando diagnóstico en vivo de 6 nodos cloud...'), 'info', 2000);
       setTimeout(() => {
         OpsUI.renderSystemStatusModule();
-        OpsToast.show('Diagnóstico completado: 6/6 servicios 100% operativos con latencia óptima.', 'success', 4500);
+        OpsToast.show(i18n('ops.engine.diagnosticoCompletado66', 'Diagnóstico completado: 6/6 servicios 100% operativos con latencia óptima.'), 'success', 4500);
       }, 750);
     },
 
     auditSecurityPolicies() {
-      OpsToast.show('Auditando TLS 1.3, RLS y permisos RBAC...', 'info', 1500);
+      OpsToast.show(i18n('ops.engine.auditandoTls13', 'Auditando TLS 1.3, RLS y permisos RBAC...'), 'info', 1500);
       setTimeout(() => {
-        OpsToast.show('Auditoría aprobada: Cero vulnerabilidades. Tokens y reglas verificadas al 100%.', 'success', 4500);
+        OpsToast.show(i18n('ops.engine.auditoriaAprobadaCeroVulnerabilidades', 'Auditoría aprobada: Cero vulnerabilidades. Tokens y reglas verificadas al 100%.'), 'success', 4500);
       }, 600);
     }
   };
@@ -7781,13 +7790,13 @@
       if (typeof original !== 'function' || original.__bqReadOnlyGuard) return;
       const guarded = function (...args) {
         if (!opsCanWrite()) {
-          OpsToast.show('Rol Auditor: acceso de solo lectura. Esta acción requiere un administrador.', 'warning', 4200);
+          OpsToast.show(i18n('ops.engine.rolAuditorAccesoDe', 'Rol Auditor: acceso de solo lectura. Esta acción requiere un administrador.'), 'warning', 4200);
           return Promise.resolve(false);
         }
         // La auditoría es inmutable (firestore.rules): solo el superadministrador
         // depura registros por retención.
         if (SUPER_ADMIN_ONLY.has(name) && OpsState.currentRole !== 'super_admin') {
-          OpsToast.show('La auditoría es inmutable: solo el Superadministrador puede depurar registros.', 'warning', 4200);
+          OpsToast.show(i18n('ops.engine.laAuditoriaEsInmutable', 'La auditoría es inmutable: solo el Superadministrador puede depurar registros.'), 'warning', 4200);
           return Promise.resolve(false);
         }
         return original.apply(this, args);
