@@ -21,7 +21,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/badge_chip.dart';
@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Text(
                                 'MISIÓN FUNDAMENTAL DE BAQUEANO',
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w800,
                                   color: AppColors.goldLight,
@@ -140,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Text(
                                 'Campaña Ambiental & Cuidado de Nuestros Recursos',
-                                style: GoogleFonts.montserrat(
+                                style: BaqueanoFonts.display(
                                   fontSize: 15.5,
                                   fontWeight: FontWeight.w900,
                                   color: Colors.white,
@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 12),
                     Text(
                       'Sensibilización activa para turistas nacionales e internacionales: protejamos los volcanes, lagunas, arrecifes, nebliselvas y fauna silvestre de Nicaragua.',
-                      style: GoogleFonts.inter(
+                      style: BaqueanoFonts.text(
                         fontSize: 12.5,
                         color: Colors.white.withValues(alpha: 0.85),
                         height: 1.4,

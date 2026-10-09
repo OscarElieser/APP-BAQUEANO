@@ -125,7 +125,7 @@
 }
 
 .bq-dossier-badge {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -156,7 +156,7 @@
 }
 
 .bq-dossier-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-weight: 900;
   font-size: 1.85rem;
   color: #FFFFFF;
@@ -166,7 +166,7 @@
 }
 
 .bq-dossier-loc {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
   font-size: 0.92rem;
   color: #F4E6C1;
   display: flex;
@@ -227,7 +227,7 @@
   font-size: 0.95rem;
   font-weight: 800;
   color: #FFFFFF;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
 }
 
 /* Secciones de contenido */
@@ -240,7 +240,7 @@
 }
 
 .bq-dossier-section h4 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 0.95rem;
   font-weight: 800;
   color: #F4E6C1;
@@ -301,7 +301,7 @@
 }
 
 .bq-dossier-trust-text h5 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 0.85rem;
   font-weight: 800;
   color: #8DBF9A;
@@ -335,7 +335,7 @@
 }
 
 .bq-dossier-act-btn {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 0.82rem;
   font-weight: 700;
   padding: 9px 16px;
@@ -398,7 +398,7 @@
 }
 
 .bq-dossier-feedback-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-weight: 700;
   font-size: 0.92rem;
   color: #F4E6C1;
@@ -483,7 +483,7 @@
 }
 .bq-dest-community-head h2 {
   margin: 0 0 6px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: clamp(1.15rem, 3.2vw, 1.45rem);
   color: #F4E6C1;
 }

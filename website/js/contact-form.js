@@ -100,7 +100,7 @@
         var icon = document.createElement('i'); icon.className = 'fa-solid fa-circle-check'; icon.setAttribute('aria-hidden', 'true');
         icon.style.cssText = 'font-size:2.4rem;color:#4A7A5A;';
         var title = document.createElement('h3'); title.textContent = t('intake.contact.successTitle', '¡Recibimos tu mensaje!');
-        title.style.cssText = "font-family:'Montserrat',sans-serif;color:#0B253A;margin:12px 0 8px;";
+        title.style.cssText = "font-family:'League Spartan',sans-serif;color:#0B253A;margin:12px 0 8px;";
         var p = document.createElement('p'); p.style.cssText = 'color:#334155;margin:0 0 12px;';
         p.textContent = t('intake.contact.successBody', 'Quedó registrado con el código {code}. El equipo de BAQUEANO lo revisará y te responderá a {email}.', { code: data.code, email: email });
         var code = document.createElement('p'); code.style.cssText = 'font-family:monospace;font-size:1.1rem;font-weight:700;color:#165D6F;margin:0 0 16px;';

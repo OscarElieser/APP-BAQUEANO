@@ -17,7 +17,7 @@
     body {
       background: var(--noche-profunda);
       color: #FFFFFF;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -71,7 +71,7 @@
     }
 
     .error-code {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'League Spartan', sans-serif;
       font-size: 8rem;
       font-weight: 900;
       line-height: 1;
@@ -83,7 +83,7 @@
     }
 
     .error-title {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'League Spartan', sans-serif;
       font-size: 1.5rem;
       font-weight: 700;
       color: #FFFFFF;

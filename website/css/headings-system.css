@@ -7,7 +7,7 @@
   --heading-ink: #082b4b;
   --heading-muted: #165d6f;
   --heading-on-dark: #ffffff;
-  --heading-font: 'Montserrat', 'Inter', system-ui, sans-serif;
+  --heading-font: 'League Spartan', 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 body main h2:not(.title-handwritten):not(.handwriting-h2) {

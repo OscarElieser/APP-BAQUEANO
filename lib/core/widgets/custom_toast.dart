@@ -18,7 +18,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../theme/baqueano_fonts.dart';
 import '../theme/app_colors.dart';
 
 class CustomToast {
@@ -65,7 +65,7 @@ class CustomToast {
               Expanded(
                 child: Text(
                   message,
-                  style: GoogleFonts.inter(
+                  style: BaqueanoFonts.text(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
                     color: AppColors.textLight,

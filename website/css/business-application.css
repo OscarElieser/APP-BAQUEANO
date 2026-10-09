@@ -16,7 +16,7 @@
 .bza-dialog:not([open]) { display: none; }
 .bza-dialog::backdrop { background: rgba(13, 27, 42, .62); }
 .bza-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 20px 24px 14px; border-bottom: 1px solid #E2E8F0; background: #F8FAFC; }
-.bza-head h2 { margin: 0 0 4px; font-family: 'Montserrat', sans-serif; font-size: clamp(1.1rem, 2.6vw, 1.45rem); color: #0D1B2A; }
+.bza-head h2 { margin: 0 0 4px; font-family: 'League Spartan', sans-serif; font-size: clamp(1.1rem, 2.6vw, 1.45rem); color: #0D1B2A; }
 .bza-head p { margin: 0; font-size: .88rem; color: #334155; }
 .bza-close { width: 44px; height: 44px; flex: 0 0 auto; border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; color: #0D1B2A; cursor: pointer; font-size: 1.1rem; }
 .bza-close:hover, .bza-close:focus-visible { background: #0D1B2A; color: #FFFFFF; }
@@ -50,7 +50,7 @@ textarea.bza-input { resize: vertical; }
 .bza-login p { color: #334155; line-height: 1.55; }
 .bza-success { text-align: center; }
 .bza-success > i { font-size: 2.6rem; color: #4A7A5A; }
-.bza-success h3 { margin: 10px 0 6px; font-family: 'Montserrat', sans-serif; color: #0D1B2A; }
+.bza-success h3 { margin: 10px 0 6px; font-family: 'League Spartan', sans-serif; color: #0D1B2A; }
 .bza-success p { color: #334155; }
 .bza-code { font-family: ui-monospace, monospace; font-size: 1.15rem; font-weight: 800; color: #165D6F; }
 .bza-success .bza-actions { justify-content: center; }

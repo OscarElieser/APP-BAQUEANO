@@ -53,12 +53,12 @@
     if (document.getElementById('bqNotifyStyle')) return;
     var css = '.bq-bell{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;font-size:1.05rem}' +
       '.bq-bell:focus-visible{outline:3px solid #F4E6C1;outline-offset:2px}' +
-      '.bq-bell-count{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:#C2410C;color:#fff;font:800 .72rem/20px Montserrat,sans-serif;text-align:center;border:2px solid #0D1B2A}' +
+      '.bq-bell-count{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:#C2410C;color:#fff;font:800 .72rem/20px League Spartan,sans-serif;text-align:center;border:2px solid #0D1B2A}' +
       '.bq-notify-panel{position:fixed;z-index:10050;top:72px;right:12px;width:min(380px,calc(100vw - 24px));max-height:min(70vh,560px);display:flex;flex-direction:column;background:#0D1B2A;color:#F8FAFC;border:1px solid rgba(255,255,255,.14);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.45)}' +
       '.bq-notify-head{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.1)}' +
-      '.bq-notify-panel .bq-notify-head h2{margin:0;font:800 1rem/1.2 Montserrat,sans-serif;flex:1;color:#fff;-webkit-text-fill-color:#fff;background:none;letter-spacing:0}' +
+      '.bq-notify-panel .bq-notify-head h2{margin:0;font:800 1rem/1.2 League Spartan,sans-serif;flex:1;color:#fff;-webkit-text-fill-color:#fff;background:none;letter-spacing:0}' +
       '.bq-notify-tabs{display:flex;gap:6px;padding:8px 14px}' +
-      '.bq-notify-tab,.bq-notify-act{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#E2E8F0;font:700 .8rem/1 Montserrat,sans-serif;cursor:pointer}' +
+      '.bq-notify-tab,.bq-notify-act{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#E2E8F0;font:700 .8rem/1 League Spartan,sans-serif;cursor:pointer}' +
       '.bq-notify-tab[aria-selected="true"]{background:#165D6F;border-color:#165D6F;color:#fff}' +
       '.bq-notify-tab:focus-visible,.bq-notify-act:focus-visible,.bq-notify-item a:focus-visible{outline:3px solid #F4E6C1;outline-offset:2px}' +
       '.bq-notify-list{list-style:none;margin:0;padding:4px 8px 10px;overflow:auto}' +

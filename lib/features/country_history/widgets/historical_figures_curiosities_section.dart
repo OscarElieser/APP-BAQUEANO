@@ -19,7 +19,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../models/country_history_models.dart';
@@ -50,7 +50,7 @@ class HistoricalFiguresCuriositiesSection extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               'PERSONAJES QUE HICIERON HISTORIA',
-              style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 0.8),
+              style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 0.8),
             ),
           ],
         ),
@@ -99,20 +99,20 @@ class HistoricalFiguresCuriositiesSection extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 fig.name,
-                                style: GoogleFonts.montserrat(fontSize: 14.5, fontWeight: FontWeight.w800, color: Colors.white),
+                                style: BaqueanoFonts.display(fontSize: 14.5, fontWeight: FontWeight.w800, color: Colors.white),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             Text(
                               fig.epoch,
-                              style: GoogleFonts.spaceGrotesk(fontSize: 10.5, color: AppColors.goldLight),
+                              style: BaqueanoFonts.text(fontSize: 10.5, color: AppColors.goldLight),
                             ),
                           ],
                         ),
                         Text(
                           fig.role,
-                          style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.terracottaLight),
+                          style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.terracottaLight),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -120,7 +120,7 @@ class HistoricalFiguresCuriositiesSection extends StatelessWidget {
                         Expanded(
                           child: Text(
                             fig.biography,
-                            style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.85), height: 1.35),
+                            style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.85), height: 1.35),
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -137,7 +137,7 @@ class HistoricalFiguresCuriositiesSection extends StatelessWidget {
                               icon: const Icon(Icons.place_rounded, size: 14, color: AppColors.goldLight),
                               label: Text(
                                 'Conocer lugares de su gesta',
-                                style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                                style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.goldLight),
                               ),
                             ),
                           ),
@@ -160,7 +160,7 @@ class HistoricalFiguresCuriositiesSection extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               '¿SABÍAS QUE...? · CURIOSIDADES DE NICARAGUA',
-              style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 0.8),
+              style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 0.8),
             ),
           ],
         ),
@@ -203,7 +203,7 @@ class HistoricalFiguresCuriositiesSection extends StatelessWidget {
                       Expanded(
                         child: Text(
                           cur.title,
-                          style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                          style: BaqueanoFonts.display(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.goldLight),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -214,7 +214,7 @@ class HistoricalFiguresCuriositiesSection extends StatelessWidget {
                   Expanded(
                     child: Text(
                       cur.fact,
-                      style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.3),
+                      style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.3),
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -222,7 +222,7 @@ class HistoricalFiguresCuriositiesSection extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     'Fuente: ${cur.source}',
-                    style: GoogleFonts.spaceGrotesk(fontSize: 9.5, color: AppColors.textMuted),
+                    style: BaqueanoFonts.text(fontSize: 9.5, color: AppColors.textMuted),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

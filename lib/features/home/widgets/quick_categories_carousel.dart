@@ -21,7 +21,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 
@@ -117,7 +117,7 @@ class _QuickCategoriesCarouselState extends State<QuickCategoriesCarousel> {
                       const SizedBox(height: 6),
                       Text(
                         cat['title']!,
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
                           color: AppColors.textLight,
@@ -127,7 +127,7 @@ class _QuickCategoriesCarouselState extends State<QuickCategoriesCarousel> {
                       ),
                       Text(
                         cat['sub']!,
-                        style: GoogleFonts.inter(
+                        style: BaqueanoFonts.text(
                           fontSize: 10,
                           color: AppColors.textMuted,
                         ),

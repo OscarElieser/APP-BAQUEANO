@@ -25,7 +25,7 @@ if (endIndex === -1) {
 const updatedFooterCSS = `.site-footer-exact {
   background: #081827;
   color: #94A3B8;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   padding-top: 50px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -76,7 +76,7 @@ const updatedFooterCSS = `.site-footer-exact {
 }
 
 .footer-brand-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.05rem;
   font-weight: 900;
   letter-spacing: 0.09em;
@@ -130,7 +130,7 @@ const updatedFooterCSS = `.site-footer-exact {
 }
 
 .footer-nav-col h4 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 0.82rem;
   font-weight: 800;
   color: #F4E6C1;

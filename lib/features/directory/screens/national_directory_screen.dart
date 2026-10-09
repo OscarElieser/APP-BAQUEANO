@@ -28,7 +28,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -286,11 +286,11 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                     ),
                     child: TextField(
                       controller: _searchController,
-                      style: GoogleFonts.inter(fontSize: 13.5, color: Colors.white),
+                      style: BaqueanoFonts.text(fontSize: 13.5, color: Colors.white),
                       onChanged: _onSearchChanged,
                       decoration: InputDecoration(
                         hintText: 'Buscar museos, hospitales, bomberos, bancos...',
-                        hintStyle: GoogleFonts.inter(fontSize: 12.5, color: Colors.white54),
+                        hintStyle: BaqueanoFonts.text(fontSize: 12.5, color: Colors.white54),
                         prefixIcon: const Icon(Icons.search_rounded, color: AppColors.goldLight, size: 20),
                         suffixIcon: _searchController.text.isNotEmpty
                             ? IconButton(
@@ -338,7 +338,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                           const SizedBox(width: 6),
                           Text(
                             _isLocating ? 'Buscando...' : 'Cerca de Mí',
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
@@ -363,7 +363,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
               children: [
                 Text(
                   '${_places.length} LUGARES ENCONTRADOS',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 11,
                     fontWeight: FontWeight.w800,
                     letterSpacing: 1.1,
@@ -415,7 +415,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
               // Lista "Cerca de ti" y explorador
               Text(
                 _userLat != null ? '📍 LUGARES & SERVICIOS CERCA DE TI' : '📍 CATÁLOGO GENERAL DE LUGARES',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 12,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 1.1,
@@ -459,7 +459,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
               const SizedBox(width: 8),
               Text(
                 'SERVICIOS DE EMERGENCIA 24/7 EN NICARAGUA',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 1.1,
@@ -471,7 +471,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
           const SizedBox(height: 4),
           Text(
             'Líneas de auxilio y rescate inmediato oficiales a nivel nacional:',
-            style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70),
+            style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white70),
           ),
           const SizedBox(height: 12),
           Wrap(
@@ -493,7 +493,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                 Expanded(
                   child: Text(
                     'Más cercano: ${_emergencyPlaces.first.name} (${_emergencyPlaces.first.formattedDistance})',
-                    style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.jungleGreenLight),
+                    style: BaqueanoFonts.text(fontSize: 10.5, color: AppColors.jungleGreenLight),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -521,7 +521,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
           children: [
             Text(
               title,
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 11.5,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
@@ -536,7 +536,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
               ),
               child: Text(
                 number,
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 10,
                   fontWeight: FontWeight.w800,
                   color: Colors.white,
@@ -560,7 +560,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
           FilterChip(
             label: Text(
               '🚨 Emergencias',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 11.5,
                 fontWeight: FontWeight.w700,
                 color: _filterEmergenciesOnly ? Colors.white : AppColors.error,
@@ -582,7 +582,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
           FilterChip(
             label: Text(
               '✓ Verificados',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 11.5,
                 fontWeight: FontWeight.w700,
                 color: _filterVerifiedOnly ? Colors.white : AppColors.jungleGreenLight,
@@ -613,10 +613,10 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                 value: _selectedDepartment,
                 hint: Text(
                   'Todos los Departamentos',
-                  style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70),
+                  style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white70),
                 ),
                 dropdownColor: AppColors.bgDark,
-                style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white),
+                style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white),
                 icon: const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.goldLight, size: 18),
                 items: [
                   const DropdownMenuItem(
@@ -652,10 +652,10 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                   value: _selectedMunicipality,
                   hint: Text(
                     'Todos los Municipios',
-                    style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70),
+                    style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white70),
                   ),
                   dropdownColor: AppColors.bgDark,
-                  style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white),
+                  style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white),
                   icon: const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.goldLight, size: 18),
                   items: [
                     const DropdownMenuItem(
@@ -692,10 +692,10 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                 value: _selectedCategory,
                 hint: Text(
                   'Todas las Categorías',
-                  style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70),
+                  style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white70),
                 ),
                 dropdownColor: AppColors.bgDark,
-                style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white),
+                style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white),
                 icon: const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.goldLight, size: 18),
                 items: [
                   const DropdownMenuItem(
@@ -740,7 +740,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
             const SizedBox(width: 4),
             Text(
               label,
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 11,
                 fontWeight: FontWeight.w800,
                 color: isSelected ? const Color(0xFF041920) : Colors.white60,
@@ -844,7 +844,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                       ),
                       child: Text(
                         place.categoryName,
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 9.5,
                           fontWeight: FontWeight.w700,
                           color: place.isEmergency ? AppColors.error : AppColors.goldLight,
@@ -855,7 +855,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                       const SizedBox(width: 6),
                       Text(
                         '• ${place.formattedDistance}',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 10,
                           fontWeight: FontWeight.w800,
                           color: AppColors.jungleGreenLight,
@@ -867,7 +867,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                 const SizedBox(height: 4),
                 Text(
                   place.name,
-                  style: GoogleFonts.montserrat(
+                  style: BaqueanoFonts.display(
                     fontSize: 14,
                     fontWeight: FontWeight.w800,
                     color: Colors.white,
@@ -877,7 +877,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                 ),
                 Text(
                   '${place.municipalityName}, ${place.departmentName}',
-                  style: GoogleFonts.inter(fontSize: 11, color: Colors.white60),
+                  style: BaqueanoFonts.text(fontSize: 11, color: Colors.white60),
                 ),
                 const SizedBox(height: 10),
                 Wrap(
@@ -929,7 +929,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
             const SizedBox(height: 12),
             Text(
               'No se encontraron lugares con los filtros seleccionados',
-              style: GoogleFonts.inter(fontSize: 13, color: Colors.white70),
+              style: BaqueanoFonts.text(fontSize: 13, color: Colors.white70),
               textAlign: TextAlign.center,
             ),
           ],
@@ -999,7 +999,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                             ),
                             child: Text(
                               place.categoryName,
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 9.5,
                                 fontWeight: FontWeight.w700,
                                 color: place.isEmergency ? AppColors.error : AppColors.goldLight,
@@ -1015,7 +1015,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                       const SizedBox(height: 4),
                       Text(
                         place.name,
-                        style: GoogleFonts.montserrat(
+                        style: BaqueanoFonts.display(
                           fontSize: 13.5,
                           fontWeight: FontWeight.w800,
                           color: Colors.white,
@@ -1025,7 +1025,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                       ),
                       Text(
                         '${place.municipalityName}, ${place.departmentName}',
-                        style: GoogleFonts.inter(fontSize: 11, color: Colors.white60),
+                        style: BaqueanoFonts.text(fontSize: 11, color: Colors.white60),
                       ),
                     ],
                   ),
@@ -1036,7 +1036,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                     children: [
                       Text(
                         place.formattedDistance,
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 12,
                           fontWeight: FontWeight.w800,
                           color: AppColors.jungleGreenLight,
@@ -1044,7 +1044,7 @@ class _NationalDirectoryScreenState extends ConsumerState<NationalDirectoryScree
                       ),
                       Text(
                         'distancia',
-                        style: GoogleFonts.inter(fontSize: 9, color: Colors.white38),
+                        style: BaqueanoFonts.text(fontSize: 9, color: Colors.white38),
                       ),
                     ],
                   ),

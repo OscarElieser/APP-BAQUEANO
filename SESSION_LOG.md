@@ -18,6 +18,70 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## SUBIDA DE CAMBIOS PENDIENTES A GITHUB (08-10-2026)
+- **Consulta / Solicitud del Usuario:** *"subilo entonces te doy autorizacion"* → *"https://github.com/OscarElieser/APP-BAQUEANO qui vas a subir"*
+- **Decision:** push a rama nueva `wip/tipografias-ops-2026-10-08` (no a `main`): todo push a `main` despliega a produccion via `deploy-production.yml` y hay trabajo de tipografias en curso. Fusionar a `main` cuando este revisado.
+
+## GRAPHIFY: INSTALACION Y CONSTRUCCION DEL GRAFO (08-10-2026)
+- **Consulta / Solicitud del Usuario:** *"INSTALAO POR FAVOR"* → *"SI CONSTRUYA"*
+- **Estado:** COMPLETADO
+- **Avance:** equipo sin Python; se instalo `uv` 0.12.23 (winget) y Python 3.12.15 gestionado por uv. `graphifyy[sql]` instalado desde el fork `OscarElieser/graphify` (`uv tool install --python <ruta python.exe>`; la resolucion automatica de uv fallaba con "Missing expected target directory for Python minor version link"). Ejecutable en `%USERPROFILE%\.local\bin` (en PATH de usuario).
+- **Evidencia:** `graphify update .` → 1149 archivos, 12 351 nodos, 18 537 relaciones, 978 comunidades, 81 s. `graphify query` responde. `graphify-out/` sigue fuera de git (0 archivos en `git status`). 77 archivos sin simbolos (gradle .kts, imports SQL de datos), esperado.
+
+## TIPOGRAFIAS PREDETERMINADAS: LEAGUE SPARTAN + ARISTOTELICA PRO (08-10-2026)
+- **Consulta / Solicitud del Usuario:** *"Leangue Spartan / Aristotelica pro instala estas dos tipografia a nuestro proyecto estas seran las tipografias predeterminada en todos"*
+- **Estado:** COMPLETADO (League Spartan activa; Aristotelica Pro cableada, pendiente de archivos con licencia)
+- **Decision:** League Spartan = titulos (display); Aristotelica Pro = texto (cuerpo, etiquetas, metricas). Respaldo de texto: Plus Jakarta Sans.
+- **Web:** League Spartan auto-alojada (OFL 1.1, woff2 variable latin + latin-ext) en `website/fonts/league-spartan/`; @font-face y tokens `--baqueano-font-display` / `--baqueano-font-text` en `website/css/baqueano-system.css`. 638 declaraciones literales (Montserrat, Inter, Space Grotesk, Plus Jakarta Sans, Playfair) migradas en 87 archivos CSS/HTML/JS respetando comillas. Montserrat retirada de las URL de Google Fonts (32 archivos) y de `typography.css`.
+- **Android:** nuevo `lib/core/theme/baqueano_fonts.dart` (`BaqueanoFonts.display` / `.text`); 882 llamadas `GoogleFonts.montserrat/inter/spaceGrotesk` reemplazadas en `lib/`. Bloque `fonts:` de Aristotelica Pro preparado y comentado en `pubspec.yaml`.
+- **Pendiente:** copiar los archivos con licencia de Aristotelica Pro (ver `website/fonts/aristotelica-pro/README.md`) y descomentar los @font-face y el bloque de pubspec. No tocados: `admin/` (app Flutter de administracion) ni `website/apps/` (Next.js).
+- **Pruebas:** `flutter analyze` sin problemas; `flutter test` 77/77 OK. No ejecutado: `npm run i18n` (npm/node no disponibles en este equipo) ni `graphify update` (graphify no instalado). Sin verificacion visual en navegador.
+
+## 🧭 CORRECCIÓN DE PANEL OPS CENTER: MENSAJES DE VIAJEROS (#42-mensajes) (08-10-2026 ~16:45 CST)
+- **Consulta / Solicitud del Usuario:** *"https://baqueanonicaragua.com/admin.html#42-mensajes esto tiene que estar funcional al 100 y real ."*
+- **Diagnóstico Inicial:**
+  En `admin.html#42-mensajes` ("Mensajes de viajeros"):
+  1. Aparece un error visual grotesco imprimiendo `"nullnull"` directamente en el HTML del panel.
+  2. El módulo de mensajes (`website/js/ops-center/ops-messages.js`) requiere estar 100% funcional y real:
+     - Conexión real bidireccional (Supabase / Firestore / Edge Function) para enviar respuestas a los viajeros y notificarles en su campana de perfil.
+     - Filtrado por estados: "Esperando respuesta", "Respondida", "Cerrada", "Todas".
+     - Envío de respuesta con estado en tiempo real, validación, actualización sin recarga de página.
+     - Cerrar / reabrir conversaciones con trazabilidad.
+     - Eliminación de `"nullnull"` y corrección del renderizado para diseño de alta gama técnica (#165D6F, #F65E01, #F4E6C1, #0F172A).
+     - Validación defensiva de errores, carga progresiva y reflejo inmediato en la campana de notificaciones del explorador.
+- **Plan de Acción:**
+  1. Auditar `website/js/ops-center/ops-messages.js` y `admin.html` para erradicar el renderizado de `nullnull`.
+  2. Garantizar que la mensajería opere 100% real conectada al backend/Edge Functions y Firestore/Supabase.
+  3. Probar el flujo completo de respuesta, cierre y filtrado.
+  4. Mantener `flutter analyze` 100% limpio y sin palabras prohibidas.
+
+## 🧭 ENTREGABLES DE PANEL OPS CENTER: GESTIÓN DE PAGOS & COMPROBANTES (#12-pagos) (08-10-2026 ~16:45 CST)
+- **Estado:** COMPLETADO Y VERIFICADO
+- **Entregables:**
+  1. `website/js/ops-center/ops-payments.js`: Módulo `BaqueanoOpsPayments` con Círculo Dorado, cálculo de importes con Córdobas primero (Regla 11: C$ 36.6243), gestión completa de comprobantes, envío por WhatsApp con formato oficial prellenado, envío por correo, generación de recibo formal en PDF imprimible, visor de bauchers y KPIs de recaudación.
+  2. `website/admin.html`: Integración de `#opsPaymentDrawer`, `#opsPaymentShareModal` y `#opsPaymentBaucherModal`. Script agregado con defer.
+  3. `website/js/ops-center/ops-engine.js`: Delegación en `renderEntityView('12-pagos')`, `openDrawer('12-pagos')`, `openCreateDrawer('12-pagos')` y `openEditDrawer('12-pagos')`.
+  4. `firestore.rules`: Habilitada regla de escritura para administradores en `payment_orders`.
+
+## 🧭 CORRECCIÓN DE PANEL OPS CENTER: GESTIÓN DE PAGOS & COMPROBANTES (#12-pagos) (08-10-2026 ~16:45 CST)
+- **Consulta / Solicitud del Usuario:** *"tiene que estar acorde a lo que estamos hablando https://baqueanonicaragua.com/admin.html#12-pagos este es si el cliente hace un comprobante se tiene que guardar aqui paranosotros llevar un control y si el cliente pide poder enviarselo"*
+- **Diagnóstico Inicial:**
+  En `admin.html#12-pagos` ("Pagos & Comprobantes"), al interactuar con el módulo y abrir "Nuevo Comprobante", se despliega erróneamente el formulario de catálogo turístico (con pestañas "General, Territorio, Tarifas & Contacto, Multimedia, SEO", slug URL amigable, insignia de verificación oficial, estado editorial publicado/borrador, orden de aparición, etc.), careciendo de campos financieros, bancarios y de comprobantes de pago reales.
+  El usuario requiere:
+  1. Interfaz acorde a Pagos y Comprobantes: Registro de comprobantes bancarios y transferencias de clientes para control interno y conciliación.
+  2. Campos comerciales y financieros pertinentes: Código de Comprobante / Referencia Bancaria, Cliente / Explorador (nombre, correo, teléfono/WhatsApp), Servicio / Reserva o Negocio Aliado asociado, Método de pago (BAC, Banpro, Lafise, BDF, Tarjeta, Efectivo campesino), Montos (Córdobas C$ primero, luego Dólares US$ según Regla 11), Banco y Nº de Autorización, Fecha de pago, Estado del Comprobante (Confirmado / Conciliado, Pendiente, Rechazado, Anulado), Foto o PDF del comprobante y notas de auditoría.
+  3. Capacidad de enviar el comprobante al cliente:
+     - Envío directo por WhatsApp con formato oficial prellenado.
+     - Envío por Correo Electrónico.
+     - Descarga / Impresión de Recibo Oficial en PDF con marca BAQUEANO y QR de trazabilidad.
+  4. Ciclo de vida completo: Agregar comprobante, Editar comprobante, Conciliar / Cambiar estado y Eliminar / Archivar.
+- **Plan de Acción:**
+  1. Analizar modelo de datos existente para `12-pagos` / `payments` / `comprobantes` en Supabase y Firestore.
+  2. Diseñar e implementar el módulo especializado `website/js/ops-center/ops-payments.js` bajo el Estándar de Oro (Golden Circle) con toda la API pública de control de comprobantes, envío y generación de recibos.
+  3. Integrar el Drawer off-canvas `#opsPaymentDrawer` y modal de visualización / comprobante para compartir en `admin.html`.
+  4. Conectar persistencia en Supabase y Firestore (Dual-Write) y delegar en `ops-engine.js`.
+  5. Verificar que `flutter analyze` permanezca 100% limpio y no existan términos prohibidos.
+
 ## 🧭 CORRECCIÓN DE PANEL OPS CENTER: GESTIÓN DE NEGOCIOS & ALIADOS (#08-negocios) (08-10-2026 ~16:29 CST)
 - **Consulta / Solicitud del Usuario:** *"https://baqueanonicaragua.com/admin.html#08-negocios revisar ahi tiene que ir acorde para poder agregar,editar,eliminar o suspender"*
 - **Diagnóstico Inicial:**
@@ -27,11 +91,34 @@ LO QUE FUNCIONA EN ESTE PUNTO:
   2. Editar negocios existentes.
   3. Suspender / reactivar negocios con control directo de estado.
   4. Eliminar negocios con confirmación defensiva de seguridad.
-- **Plan de Acción:**
-  1. Analizar el modelo de datos de `businesses` en Supabase (`businesses` table / `baqueano-ops`), Firestore y `ops-engine.js`.
-  2. Implementar módulo o controles especializados para negocios con drawer y acciones dedicadas (Agregar, Editar, Suspender, Eliminar).
-  3. Integrar en `admin.html` y conectar con persistencia en Supabase / Firestore respetando la regla de precios (Córdobas primero, luego Dólares) y verificación ambiental/territorial.
-  4. Probar y documentar.
+- **Plan de Acción & Ejecución Completada:**
+  1. `supabase/functions/baqueano-ops/index.ts`:
+     - Se habilitó `statusColumn: "status"` en la entidad `businesses` dentro de la lista blanca de entidades administrables. Anteriormente, la ausencia de esta columna causaba que `set_status` con `publish` o `unpublish` (suspensión) fallara con error HTTP 400.
+     - Se incorporaron `status: "status"` y `email: "text"` en la lista blanca de escritura (`write`) para permitir persistir el estado operativo y el contacto electrónico.
+  2. `website/js/ops-center/ops-live-data.js`:
+     - Se actualizó el mapeo bidireccional `toEngine` y `fromEngine` para la entidad `businesses`, asegurando la propagación y serialización de `host_name`, `host_story`, `description`, `day_pass_available`, `hidden_gem`, `email`, `website_url`, `status`, `price_nio` y `price_usd`.
+  3. `website/js/ops-center/ops-businesses.js` (Nuevo Módulo Especializado):
+     - Desarrollado bajo el Estándar de Oro (Golden Circle): 🎯 POR QUÉ, ⚙️ CÓMO, 📦 QUÉ.
+     - Expone `window.BaqueanoOpsBusinesses` con API completa: `render(panel)`, `openDrawer(businessOrId)`, `closeDrawer()`, `saveBusiness()`, `toggleBusinessStatus(businessId)`, `deleteBusiness(businessId)`, `restoreBusiness(businessId)`, `toggleVerified(businessId)`, `setFilterStatus()`, `setFilterDepartment()`, `search()`, `calculateUsdPrice()`.
+     - Panel `#view-08-negocios`: 5 tarjetas de KPI ejecutivas (Total Registrados, Publicados / Activos, Con Sello Verificado, En Revisión, Suspendidos / Borrador).
+     - Barra de herramientas con filtros de estado rápido, selector de departamentos (17 territorios de Nicaragua) y buscador en tiempo real.
+     - Tabla interactiva con badges de rubro, datos de anfitrión, enlaces directos a WhatsApp, tarifas con Córdobas primero (Regla 11: C$ primero, luego US$ con tasa BCN C$ 36.6243), badges de estado operativo y columna de acciones operativas completas:
+       * **Agregar:** Botón "+ Nuevo Negocio" que inicializa el drawer con campos limpios y valores por defecto.
+       * **Editar:** Botón en cada fila que carga exhaustivamente los datos del negocio en el drawer off-canvas.
+       * **Suspender / Reactivar:** Botón atómico en tabla y drawer (`fa-pause` / `fa-play`) con confirmación modal `OpsDialog.confirm` que conmuta entre `published` y `draft/unpublish`.
+       * **Eliminar / Archivar:** Botón defensivo (`fa-trash-can`) con confirmación modal de seguridad que realiza borrado lógico recuperable (`archive`) en Supabase y Firestore.
+       * **Sello Verificado:** Control toggle para gestionar la acreditación oficial bajo Ley 1210 / Ley 1211.
+  4. `website/admin.html`:
+     - Se integró el Drawer dedicado `#opsBusinessDrawer` con ancho extendido (760px), pestañas semánticas (General & Rubro, Territorio & Ubicación, Tarifas & Contacto, Saberes & Fotos), dropzone para fotografía/logotipo y controles al pie para Suspender, Archivar, Cancelar y Guardar.
+     - Se incluyó la etiqueta de script `<script defer src="js/ops-center/ops-businesses.js?v=20261008-biz-1"></script>`.
+  5. `website/js/ops-center/ops-engine.js`:
+     - Delegación de `renderEntityView('08-negocios')`, `openCreateDrawer('08-negocios')`, `openEditDrawer('08-negocios')` y `openDrawer('08-negocios')` hacia `BaqueanoOpsBusinesses`.
+     - Etiquetas de fallback en `openDrawer` configuradas con terminología comercial campesina en lugar de catálogo genérico de destinos.
+- **Verificación & Control de Calidad:**
+  - `flutter analyze`: Ejecutado exitosamente con resultado `No issues found! (ran in 1.5s)`.
+  - Verificación estricta de palabras prohibidas: Cero uso de términos vedados en todo el código y comentarios.
+  - Verificación de opacidad: Cero uso de `.withOpacity()`.
+  - Regla 11 de precios: Se prioriza y visualiza siempre en primer lugar la moneda soberana en córdobas (C$) y luego la referencia equivalente en dólares (US$).
 
 ## 🧭 CORRECCIÓN DE PANEL OPS CENTER: GESTIÓN DE USUARIOS (#13-usuarios) (08-10-2026 ~14:28 CST)
 - **Consulta / Solicitud del Usuario:** *"si ve la imagen estoy en :https://baqueanonicaragua.com/admin.html#13-usuarios y me muestra un menu que no corresponde necesito agregar usuarios , que pueda eliminar,agregar modificar ,con su contraseña ."*
@@ -5747,3 +5834,23 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - `admin.html` en producción sirve el cache-busting `20261008-reservas-1`.
 - Los archivos productivos contienen `opsReservationForm`, la llamada segura `create_manual` y el catálogo español `opsReservations`.
 - La tabla permanece sin filas inventadas; las solicitudes aparecerán al registrarse desde App/web o cuando un administrador capture una llamada/WhatsApp real.
+
+## 2026-10-08 — Integración segura de correo con Resend
+
+- El usuario compartió un ejemplo de envío con Resend que incluía una clave API en texto plano y un destinatario administrativo.
+- La credencial se omitió deliberadamente de esta bitácora y debe revocarse/rotarse porque quedó expuesta en la conversación.
+- No se ejecutará ni almacenará la clave compartida. Se evaluará una integración exclusivamente del lado servidor con secreto de entorno, validación, autorización y plantillas controladas.
+- Estado inicial registrado antes de inspeccionar o modificar código/configuración.
+### Diagnóstico
+
+- BAQUEANO ya integra Resend en `supabase/functions/baqueano-intake/index.ts` mediante llamada HTTPS del lado servidor; no necesita `import { Resend }` ni agregar el SDK al frontend.
+- La función espera los secretos `RESEND_API_KEY` e `INTAKE_FROM_EMAIL`; si faltan, registra el aviso como `not_configured` para hacerlo visible en Ops Center.
+- La clave compartida no se usó, no se guardó y debe revocarse en Resend. La sustituta debe configurarse directamente como secreto de Supabase, nunca enviarse por chat ni almacenarse en Git.
+- Para producción, `onboarding@resend.dev` solo sirve para pruebas limitadas; BAQUEANO debe verificar su dominio y usar un remitente propio autorizado.
+- No se modificó código de correo porque la integración necesaria ya existe y el único bloqueo es una credencial nueva administrada fuera del repositorio.
+
+## 2026-10-08 — Segundo intento de ejecución en emulador Android
+
+- Solicitud: «ahora sí correr el emulador».
+- Plan: verificar nuevamente Android SDK, AVDs y dispositivos; iniciar el emulador disponible y ejecutar BAQUEANO con Flutter.
+- Estado inicial registrado antes de ejecutar herramientas Android o Flutter.

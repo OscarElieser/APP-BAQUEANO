@@ -25,7 +25,7 @@
 body.page-baqueano-ia {
   background-color: #F1F5F9;
   color: var(--ia-text);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -71,7 +71,7 @@ body.page-baqueano-ia {
 
 .ia-hero-title {
   color: #FFFFFF; /* el H1 global usa --text-primary (oscuro en tema claro); la portada es oscura */
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: clamp(2.4rem, 5vw, 4rem);
   font-weight: 900;
   line-height: 1.15;
@@ -79,7 +79,7 @@ body.page-baqueano-ia {
 }
 
 .ia-hero-title .ia-script {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'League Spartan', Georgia, serif;
   font-style: italic;
   font-weight: 700;
   color: var(--ia-accent);
@@ -1131,7 +1131,7 @@ QUÉ:
 .ia-weather-current { display:flex; align-items:center; gap:15px; margin-bottom:16px; }
 .ia-weather-main-icon { width:54px; height:54px; display:grid; place-items:center; flex:0 0 54px; border-radius:17px; background:#FFF7ED; color:#F59E0B; font-size:1.75rem; box-shadow:0 8px 22px rgba(245,158,11,.15); }
 .ia-weather-location { display:block; margin-bottom:3px; color:#165D6F; font-size:.7rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
-.ia-weather-temperature { display:block; color:#0F172A; font:900 1.35rem/1.2 'Montserrat',sans-serif; }
+.ia-weather-temperature { display:block; color:#0F172A; font:900 1.35rem/1.2 'League Spartan',sans-serif; }
 .ia-weather-condition { display:block; margin-top:3px; color:#64748B; font-size:.76rem; }
 .ia-weather-details { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-bottom:14px; }
 .ia-weather-details > span { display:grid; grid-template-columns:auto 1fr; align-items:center; gap:1px 6px; padding:9px; background:#FFFFFF; border:1px solid #E2E8F0; border-radius:11px; }
@@ -1438,7 +1438,7 @@ body .ia-tags-cloud .ia-dest-empty {
   display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
   min-height: 34px; padding: 5px 12px 5px 6px; border-radius: 999px; cursor: pointer;
   border: 1px solid rgba(22, 93, 111, 0.22); background: #F4F9FA; color: #165D6F;
-  font: 700 0.76rem/1.1 "Plus Jakarta Sans", Inter, sans-serif;
+  font: 700 0.76rem/1.1 "Aristotelica Pro", "Plus Jakarta Sans", Aristotelica Pro, Plus Jakarta Sans, sans-serif;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 .ia-rot-tabs button span {

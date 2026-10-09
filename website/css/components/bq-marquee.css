@@ -9,7 +9,7 @@
 .bq-marquee-controls { display: flex; justify-content: flex-end; margin: 0 0 10px; }
 .bq-marquee-controls[hidden] { display: none; }
 .bq-marquee-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px;
-  border: 2px solid rgba(22, 93, 111, 0.35); background: #FFFFFF; color: #0E5566; font: 800 0.85rem/1 Montserrat, sans-serif; cursor: pointer; }
+  border: 2px solid rgba(22, 93, 111, 0.35); background: #FFFFFF; color: #0E5566; font: 800 0.85rem/1 League Spartan, sans-serif; cursor: pointer; }
 .bq-marquee-toggle:hover { background: #E8F1F3; }
 .bq-marquee-toggle[aria-pressed="true"] { background: #165D6F; border-color: #165D6F; color: #FFFFFF; }
 .bq-marquee-toggle:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }

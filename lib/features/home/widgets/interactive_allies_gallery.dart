@@ -27,7 +27,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/custom_toast.dart';
@@ -190,7 +190,7 @@ class _InteractiveAlliesGalleryState extends State<InteractiveAlliesGallery> {
                         'DESLIZA Y VOLTEA · ${_allies.length} COOPERATIVAS EN MODO 3D',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 10,
                           fontWeight: FontWeight.w800,
                           letterSpacing: 0.8,
@@ -433,7 +433,7 @@ class _FlipAllyCardState extends State<_FlipAllyCard>
                         const SizedBox(width: 3),
                         Text(
                           ally['department'] as String,
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 9.5,
                             fontWeight: FontWeight.w700,
                             color: AppColors.goldLight,
@@ -465,7 +465,7 @@ class _FlipAllyCardState extends State<_FlipAllyCard>
                         const SizedBox(width: 3),
                         Text(
                           '3D',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 9.5,
                             fontWeight: FontWeight.w800,
                             color: AppColors.goldLight,
@@ -485,7 +485,7 @@ class _FlipAllyCardState extends State<_FlipAllyCard>
             children: [
               Text(
                 ally['name'] as String,
-                style: GoogleFonts.montserrat(
+                style: BaqueanoFonts.display(
                   fontSize: 15,
                   fontWeight: FontWeight.w800,
                   color: Colors.white,
@@ -496,7 +496,7 @@ class _FlipAllyCardState extends State<_FlipAllyCard>
               const SizedBox(height: 5),
               Text(
                 ally['specialty'] as String,
-                style: GoogleFonts.inter(
+                style: BaqueanoFonts.text(
                   fontSize: 12,
                   color: AppColors.textLight.withValues(alpha: 0.85),
                   height: 1.35,
@@ -513,7 +513,7 @@ class _FlipAllyCardState extends State<_FlipAllyCard>
             children: [
               Text(
                 ally['category'] as String,
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 10.5,
                   fontWeight: FontWeight.w700,
                   color: AppColors.gold,
@@ -525,7 +525,7 @@ class _FlipAllyCardState extends State<_FlipAllyCard>
                   const SizedBox(width: 4),
                   Text(
                     'Toca para girar',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 10,
                       fontWeight: FontWeight.w700,
                       color: accentColor,
@@ -572,7 +572,7 @@ class _FlipAllyCardState extends State<_FlipAllyCard>
             children: [
               Text(
                 'CONTACTO DIRECTO',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 10.5,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 1.1,
@@ -589,7 +589,7 @@ class _FlipAllyCardState extends State<_FlipAllyCard>
                   const SizedBox(width: 4),
                   Text(
                     'Verificado',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 9.5,
                       fontWeight: FontWeight.w700,
                       color: AppColors.goldLight,
@@ -606,7 +606,7 @@ class _FlipAllyCardState extends State<_FlipAllyCard>
             children: [
               Text(
                 ally['leader'] as String,
-                style: GoogleFonts.montserrat(
+                style: BaqueanoFonts.display(
                   fontSize: 13.5,
                   fontWeight: FontWeight.w800,
                   color: Colors.white,
@@ -615,7 +615,7 @@ class _FlipAllyCardState extends State<_FlipAllyCard>
               const SizedBox(height: 2),
               Text(
                 ally['phone'] as String,
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 11.5,
                   color: AppColors.textLight.withValues(alpha: 0.8),
                 ),
@@ -642,7 +642,7 @@ class _FlipAllyCardState extends State<_FlipAllyCard>
                     fit: BoxFit.scaleDown,
                     child: Text(
                       'WHATSAPP',
-                      style: GoogleFonts.montserrat(
+                      style: BaqueanoFonts.display(
                         fontSize: 9.5,
                         fontWeight: FontWeight.w800,
                       ),
@@ -700,7 +700,7 @@ class _FlipAllyCardState extends State<_FlipAllyCard>
           Center(
             child: Text(
               'Toca para volver al frente',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 9.5,
                 color: AppColors.gold.withValues(alpha: 0.7),
               ),

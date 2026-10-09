@@ -19,7 +19,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../theme/baqueano_fonts.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_gradients.dart';
 
@@ -233,21 +233,21 @@ class _BaqueanoButtonState extends State<BaqueanoButton> with SingleTickerProvid
       case BaqueanoButtonVariant.primary:
       case BaqueanoButtonVariant.secondary:
       case BaqueanoButtonVariant.glass:
-        return GoogleFonts.spaceGrotesk(
+        return BaqueanoFonts.text(
           fontSize: 14,
           fontWeight: FontWeight.w700,
           color: Colors.white,
           letterSpacing: 0.5,
         );
       case BaqueanoButtonVariant.gold:
-        return GoogleFonts.spaceGrotesk(
+        return BaqueanoFonts.text(
           fontSize: 14,
           fontWeight: FontWeight.w800,
           color: AppColors.textDark,
           letterSpacing: 0.5,
         );
       case BaqueanoButtonVariant.outline:
-        return GoogleFonts.spaceGrotesk(
+        return BaqueanoFonts.text(
           fontSize: 14,
           fontWeight: FontWeight.w700,
           color: AppColors.goldLight,

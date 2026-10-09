@@ -19,7 +19,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/baqueano_adaptive_image.dart';
 import '../../../core/widgets/glass_container.dart';
@@ -68,7 +68,7 @@ class _CountryGastronomySectionState extends State<CountryGastronomySection> {
               return FilterChip(
                 selected: isSelected,
                 label: Text(cat),
-                labelStyle: GoogleFonts.spaceGrotesk(
+                labelStyle: BaqueanoFonts.text(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                   color: isSelected ? Colors.white : AppColors.textLight,
@@ -134,14 +134,14 @@ class _CountryGastronomySectionState extends State<CountryGastronomySection> {
                         ),
                         child: Text(
                           dish.category.toUpperCase(),
-                          style: GoogleFonts.spaceGrotesk(fontSize: 9.5, fontWeight: FontWeight.w800, color: AppColors.terracottaLight),
+                          style: BaqueanoFonts.text(fontSize: 9.5, fontWeight: FontWeight.w800, color: AppColors.terracottaLight),
                         ),
                       ),
                       Expanded(
                         child: Text(
                           dish.region,
                           textAlign: TextAlign.end,
-                          style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.textMuted),
+                          style: BaqueanoFonts.text(fontSize: 10.5, color: AppColors.textMuted),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -154,7 +154,7 @@ class _CountryGastronomySectionState extends State<CountryGastronomySection> {
                   // Nombre del platillo
                   Text(
                     dish.name,
-                    style: GoogleFonts.montserrat(fontSize: 15.5, fontWeight: FontWeight.w800, color: Colors.white),
+                    style: BaqueanoFonts.display(fontSize: 15.5, fontWeight: FontWeight.w800, color: Colors.white),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -164,7 +164,7 @@ class _CountryGastronomySectionState extends State<CountryGastronomySection> {
                   // Descripción
                   Text(
                     dish.description,
-                    style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.85), height: 1.35),
+                    style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.85), height: 1.35),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -187,7 +187,7 @@ class _CountryGastronomySectionState extends State<CountryGastronomySection> {
                         Expanded(
                           child: Text(
                             dish.culturalCuriosity,
-                            style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.goldLight, height: 1.25),
+                            style: BaqueanoFonts.text(fontSize: 10.5, color: AppColors.goldLight, height: 1.25),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -210,7 +210,7 @@ class _CountryGastronomySectionState extends State<CountryGastronomySection> {
                           icon: const Icon(Icons.storefront_rounded, size: 14, color: Colors.white),
                           label: Text(
                             'Comedores Típicos',
-                            style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+                            style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.terracotta,

@@ -22,7 +22,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 
@@ -193,7 +193,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                         cacheHeight: 138,
                         errorBuilder: (_, __, ___) => Text(
                           'BAQUEANO',
-                          style: GoogleFonts.montserrat(
+                          style: BaqueanoFonts.display(
                             fontSize: 36,
                             fontWeight: FontWeight.w900,
                             letterSpacing: 4.0,
@@ -206,7 +206,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                       // Lema oficial en oro brillante
                       Text(
                         'NICARAGUA EN MODO SECRETO',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 13,
                           fontWeight: FontWeight.w800,
                           letterSpacing: 3.0,
@@ -218,7 +218,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                       // Subtítulo descriptivo
                       Text(
                         'Expediciones Comunitarias & Guías Locales',
-                        style: GoogleFonts.inter(
+                        style: BaqueanoFonts.text(
                           fontSize: 12,
                           color: AppColors.textMuted,
                           letterSpacing: 0.8,
@@ -243,7 +243,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                             const SizedBox(height: 12),
                             Text(
                               'Cargando rutas y volcanes... ${(_loadProgress * 100).toInt().clamp(0, 100)}%',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.textMuted,
@@ -274,7 +274,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   const SizedBox(width: 8),
                   Text(
                     'PLATAFORMA OFICIAL DE TURISMO',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 10,
                       fontWeight: FontWeight.w800,
                       letterSpacing: 1.5,

@@ -23,7 +23,7 @@
 
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 
@@ -162,7 +162,7 @@ class _InteractiveImpactSectionState extends State<InteractiveImpactSection>
                 Text(
                   'TRANSPARENCIA & COMERCIO JUSTO',
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 11,
                     fontWeight: FontWeight.w800,
                     letterSpacing: 1.6,
@@ -173,7 +173,7 @@ class _InteractiveImpactSectionState extends State<InteractiveImpactSection>
                 Text(
                   'El Retorno que Transforma a Nicaragua',
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.montserrat(
+                  style: BaqueanoFonts.display(
                     fontSize: isDesktop ? 22 : 18,
                     fontWeight: FontWeight.w900,
                     color: Colors.white,
@@ -264,7 +264,7 @@ class _InteractiveImpactSectionState extends State<InteractiveImpactSection>
                           children: [
                             Text(
                               '${selectedStat['title']} (${selectedStat['number']})',
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w800,
                                 color: Colors.white,
@@ -272,7 +272,7 @@ class _InteractiveImpactSectionState extends State<InteractiveImpactSection>
                             ),
                             Text(
                               'Toca otra para ver desglose',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 10,
                                 color: AppColors.goldLight.withValues(alpha: 0.7),
                               ),
@@ -282,7 +282,7 @@ class _InteractiveImpactSectionState extends State<InteractiveImpactSection>
                         const SizedBox(height: 6),
                         Text(
                           selectedStat['detail'] as String,
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 12.5,
                             fontWeight: FontWeight.w400,
                             color: AppColors.textLight.withValues(alpha: 0.85),
@@ -334,7 +334,7 @@ class _InteractiveImpactSectionState extends State<InteractiveImpactSection>
                           shaderCallback: (bounds) => AppGradients.gold.createShader(bounds),
                           child: Text(
                             '${value.toInt()}%',
-                            style: GoogleFonts.montserrat(
+                            style: BaqueanoFonts.display(
                               fontSize: 32,
                               fontWeight: FontWeight.w900,
                               color: Colors.white,
@@ -346,7 +346,7 @@ class _InteractiveImpactSectionState extends State<InteractiveImpactSection>
                     ),
                     Text(
                       'A COMUNIDADES',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 9,
                         fontWeight: FontWeight.w800,
                         letterSpacing: 1.1,
@@ -429,7 +429,7 @@ class _InteractiveImpactSectionState extends State<InteractiveImpactSection>
                   alignment: Alignment.centerLeft,
                   child: Text(
                     item['number'] as String,
-                    style: GoogleFonts.montserrat(
+                    style: BaqueanoFonts.display(
                       fontSize: 21,
                       fontWeight: FontWeight.w900,
                       color: Colors.white,
@@ -438,7 +438,7 @@ class _InteractiveImpactSectionState extends State<InteractiveImpactSection>
                 ),
                 Text(
                   item['title'] as String,
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 10.5,
                     fontWeight: FontWeight.w700,
                     color: AppColors.textLight.withValues(alpha: 0.9),

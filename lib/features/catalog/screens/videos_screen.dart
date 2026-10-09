@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
@@ -64,7 +64,7 @@ class VideosScreen extends StatelessWidget {
                     ),
                     child: Text(
                       video.quality,
-                      style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: Colors.white),
+                      style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w800, color: Colors.white),
                     ),
                   ),
                   IconButton(
@@ -117,7 +117,7 @@ class VideosScreen extends StatelessWidget {
                           ),
                           child: Text(
                             '▶️ Toca para ver en YouTube (4K)',
-                            style: GoogleFonts.spaceGrotesk(fontSize: 12, color: AppColors.goldLight, fontWeight: FontWeight.w700),
+                            style: BaqueanoFonts.text(fontSize: 12, color: AppColors.goldLight, fontWeight: FontWeight.w700),
                           ),
                         ),
                       ],
@@ -128,12 +128,12 @@ class VideosScreen extends StatelessWidget {
               const SizedBox(height: 16),
               Text(
                 video.title,
-                style: GoogleFonts.montserrat(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.textLight),
+                style: BaqueanoFonts.display(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.textLight),
               ),
               const SizedBox(height: 6),
               Text(
                 video.description,
-                style: GoogleFonts.inter(fontSize: 12.5, color: AppColors.textMuted, height: 1.4),
+                style: BaqueanoFonts.text(fontSize: 12.5, color: AppColors.textMuted, height: 1.4),
               ),
               const SizedBox(height: 18),
               Row(
@@ -266,7 +266,7 @@ class VideosScreen extends StatelessWidget {
                               ),
                               child: Text(
                                 video.quality,
-                                style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w800, color: Colors.white),
+                                style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w800, color: Colors.white),
                               ),
                             ),
                           ),
@@ -286,7 +286,7 @@ class VideosScreen extends StatelessWidget {
                                   const SizedBox(width: 4),
                                   Text(
                                     video.duration,
-                                    style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
+                                    style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
                                   ),
                                 ],
                               ),
@@ -303,12 +303,12 @@ class VideosScreen extends StatelessWidget {
                           children: [
                             Text(
                               video.department.toUpperCase(),
-                              style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.terracottaLight),
+                              style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.terracottaLight),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               video.title,
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.textLight,
@@ -319,7 +319,7 @@ class VideosScreen extends StatelessWidget {
                             const SizedBox(height: 6),
                             Text(
                               video.description,
-                              style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted, height: 1.35),
+                              style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textMuted, height: 1.35),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -332,7 +332,7 @@ class VideosScreen extends StatelessWidget {
                                     icon: const Icon(Icons.play_circle_fill_rounded, size: 16, color: Colors.white),
                                     label: Text(
                                       'Ver en YouTube (4K)',
-                                      style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+                                      style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
                                     ),
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: AppColors.terracotta,

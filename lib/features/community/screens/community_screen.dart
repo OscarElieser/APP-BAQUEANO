@@ -34,7 +34,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../data/repositories/community_repository.dart';
 import '../../../core/models/cultural_models.dart';
@@ -369,7 +369,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                   children: [
                                     Text(
                                       'PUBLICAR RELATO DE EXPEDICIÓN',
-                                      style: GoogleFonts.spaceGrotesk(
+                                      style: BaqueanoFonts.text(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w800,
                                         color: AppColors.goldLight,
@@ -380,7 +380,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                     ),
                                     Text(
                                       'Gana +200 XP en tu Pasaporte Baqueano',
-                                      style: GoogleFonts.inter(fontSize: 11, color: AppColors.terracottaLight),
+                                      style: BaqueanoFonts.text(fontSize: 11, color: AppColors.terracottaLight),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -429,7 +429,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                       Flexible(
                                         child: Text(
                                           nameController.text.isNotEmpty ? nameController.text : 'Cuenta de Google',
-                                          style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w800, color: Colors.white),
+                                          style: BaqueanoFonts.display(fontSize: 13, fontWeight: FontWeight.w800, color: Colors.white),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -440,7 +440,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                   ),
                                   Text(
                                     'Cuenta de Google vinculada con éxito',
-                                    style: GoogleFonts.inter(fontSize: 11, color: const Color(0xFF10B981)),
+                                    style: BaqueanoFonts.text(fontSize: 11, color: const Color(0xFF10B981)),
                                   ),
                                 ],
                               ),
@@ -482,11 +482,11 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                   children: [
                                     Text(
                                       'Conectar con Cuenta de Google',
-                                      style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white),
+                                      style: BaqueanoFonts.display(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white),
                                     ),
                                     Text(
                                       'Verifica tu identidad y sincroniza XP en tu pasaporte',
-                                      style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                                      style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                                     ),
                                   ],
                                 ),
@@ -500,14 +500,14 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                     const SizedBox(height: 14),
 
                     // Nombre del Explorador
-                    Text('Nombre del Explorador / Viajero:', style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
+                    Text('Nombre del Explorador / Viajero:', style: BaqueanoFonts.text(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
                     const SizedBox(height: 6),
                     TextField(
                       controller: nameController,
-                      style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                      style: BaqueanoFonts.text(fontSize: 13, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: 'Tu nombre o apodo viajero (ej. Carlos Mendoza)',
-                        hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                        hintStyle: BaqueanoFonts.text(color: AppColors.textMuted, fontSize: 12),
                         filled: true,
                         fillColor: AppColors.primaryDark,
                         contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -524,19 +524,19 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                         Expanded(
                           child: Text(
                             'País de Origen:',
-                            style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70),
+                            style: BaqueanoFonts.text(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70),
                           ),
                         ),
                         Text(
                           'Detección automática',
-                          style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.goldLight, fontWeight: FontWeight.w600),
+                          style: BaqueanoFonts.text(fontSize: 10.5, color: AppColors.goldLight, fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
                     const SizedBox(height: 6),
                     TextField(
                       controller: countryController,
-                      style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                      style: BaqueanoFonts.text(fontSize: 13, color: Colors.white),
                       onChanged: (val) {
                         setModalState(() {
                           detectionResult = CountryFlagHelper.detectFlag(val);
@@ -544,7 +544,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Escribe tu país (ej. España, Costa Rica, México, EE.UU.)...',
-                        hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                        hintStyle: BaqueanoFonts.text(color: AppColors.textMuted, fontSize: 12),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Center(
@@ -592,7 +592,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                               detectionResult.isRecognized
                                   ? 'Bandera reconocida: ${detectionResult.canonicalName}'
                                   : 'Escribe el nombre de tu país para autodetectar la bandera',
-                              style: GoogleFonts.inter(
+                              style: BaqueanoFonts.text(
                                 fontSize: 11,
                                 color: detectionResult.isRecognized ? AppColors.goldLight : AppColors.textMuted,
                                 fontWeight: detectionResult.isRecognized ? FontWeight.w600 : FontWeight.w400,
@@ -636,7 +636,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                 const SizedBox(width: 4),
                                 Text(
                                   c['name']!,
-                                  style: GoogleFonts.spaceGrotesk(
+                                  style: BaqueanoFonts.text(
                                     fontSize: 10.5,
                                     fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                                     color: isSelected ? Colors.white : AppColors.textLight,
@@ -651,7 +651,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                     const SizedBox(height: 14),
 
                     // Destino
-                    Text('Destino / Ruta Explorada:', style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
+                    Text('Destino / Ruta Explorada:', style: BaqueanoFonts.text(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
                     const SizedBox(height: 6),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -669,7 +669,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                           items: destinations.map((d) {
                             return DropdownMenuItem<String>(
                               value: d,
-                              child: Text(d, style: GoogleFonts.inter(fontSize: 13, color: Colors.white)),
+                              child: Text(d, style: BaqueanoFonts.text(fontSize: 13, color: Colors.white)),
                             );
                           }).toList(),
                           onChanged: (val) {
@@ -685,7 +685,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                     // Calificación en Estrellas
                     Row(
                       children: [
-                        Text('Calificación:', style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
+                        Text('Calificación:', style: BaqueanoFonts.text(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
                         const SizedBox(width: 8),
                         Row(
                           children: List.generate(5, (index) {
@@ -713,7 +713,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                         const SizedBox(width: 6),
                         Text(
                           '¿Cuidaste a Nicaragua en esta ruta? (Opcional):',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 11.5,
                             fontWeight: FontWeight.w700,
                             color: AppColors.jungleGreenLight,
@@ -740,14 +740,14 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                           isExpanded: true,
                           hint: Text(
                             'Selecciona una acción verde que realizaste...',
-                            style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
+                            style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textMuted),
                           ),
                           dropdownColor: AppColors.bgDark,
                           icon: const Icon(Icons.arrow_drop_down, color: AppColors.jungleGreenLight),
                           items: [
                             DropdownMenuItem<String?>(
                               value: null,
-                              child: Text('Ninguna en específico', style: GoogleFonts.inter(fontSize: 12.5, color: Colors.white60)),
+                              child: Text('Ninguna en específico', style: BaqueanoFonts.text(fontSize: 12.5, color: Colors.white60)),
                             ),
                             ...[
                               '🧹 Limpieza de plásticos y basura en sendero',
@@ -759,7 +759,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                               '🚫 No dejé ningún rastro de basura',
                             ].map((eco) => DropdownMenuItem<String?>(
                                   value: eco,
-                                  child: Text(eco, style: GoogleFonts.inter(fontSize: 12.5, color: AppColors.jungleGreenLight)),
+                                  child: Text(eco, style: BaqueanoFonts.text(fontSize: 12.5, color: AppColors.jungleGreenLight)),
                                 )),
                           ],
                           onChanged: (val) {
@@ -784,7 +784,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                             Expanded(
                               child: Text(
                                 '¡Esta reseña recibirá el sello oficial de Guardián de Nicaragua!',
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w700,
                                   color: AppColors.jungleGreenLight,
@@ -803,11 +803,11 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                       children: [
                         Text(
                           'Fotos de la Expedición (Opcional):',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70),
+                          style: BaqueanoFonts.text(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70),
                         ),
                         Text(
                           '${selectedPhotos.length}/5 fotos',
-                          style: GoogleFonts.inter(fontSize: 11, color: AppColors.goldLight, fontWeight: FontWeight.w600),
+                          style: BaqueanoFonts.text(fontSize: 11, color: AppColors.goldLight, fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
@@ -828,7 +828,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                             const SizedBox(height: 6),
                             Text(
                               'Comparte momentos visuales de tu travesía',
-                              style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted),
+                              style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textMuted),
                             ),
                             const SizedBox(height: 12),
                             Row(
@@ -842,7 +842,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                                   ),
                                   icon: const Icon(Icons.photo_camera_rounded, size: 16),
-                                  label: Text('Cámara', style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700)),
+                                  label: Text('Cámara', style: BaqueanoFonts.text(fontSize: 11.5, fontWeight: FontWeight.w700)),
                                   onPressed: () => pickPhotos(ImageSource.camera),
                                 ),
                                 const SizedBox(width: 12),
@@ -855,7 +855,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                                   ),
                                   icon: const Icon(Icons.photo_library_rounded, size: 16),
-                                  label: Text('Galería', style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700)),
+                                  label: Text('Galería', style: BaqueanoFonts.text(fontSize: 11.5, fontWeight: FontWeight.w700)),
                                   onPressed: () => pickPhotos(ImageSource.gallery),
                                 ),
                               ],
@@ -940,12 +940,12 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                               TextButton.icon(
                                 onPressed: () => pickPhotos(ImageSource.camera),
                                 icon: const Icon(Icons.photo_camera_rounded, size: 14, color: AppColors.gold),
-                                label: Text('Tomar otra', style: GoogleFonts.inter(fontSize: 11, color: AppColors.gold)),
+                                label: Text('Tomar otra', style: BaqueanoFonts.text(fontSize: 11, color: AppColors.gold)),
                               ),
                               const Spacer(),
                               TextButton(
                                 onPressed: () => setModalState(() => selectedPhotos.clear()),
-                                child: Text('Eliminar fotos', style: GoogleFonts.inter(fontSize: 11, color: Colors.redAccent.shade100)),
+                                child: Text('Eliminar fotos', style: BaqueanoFonts.text(fontSize: 11, color: Colors.redAccent.shade100)),
                               ),
                             ],
                           ),
@@ -955,15 +955,15 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                     const SizedBox(height: 14),
 
                     // Relato / Experiencia
-                    Text('Tu Relato o Consejo de Sendero:', style: GoogleFonts.spaceGrotesk(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
+                    Text('Tu Relato o Consejo de Sendero:', style: BaqueanoFonts.text(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white70)),
                     const SizedBox(height: 6),
                     TextField(
                       controller: storyController,
                       maxLines: 4,
-                      style: GoogleFonts.inter(fontSize: 13, color: Colors.white),
+                      style: BaqueanoFonts.text(fontSize: 13, color: Colors.white),
                       decoration: InputDecoration(
                         hintText: 'Cuéntanos cómo fue tu experiencia con los baqueanos locales, qué llevar, consejos ecológicos...',
-                        hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12),
+                        hintStyle: BaqueanoFonts.text(color: AppColors.textMuted, fontSize: 12),
                         filled: true,
                         fillColor: AppColors.primaryDark,
                         contentPadding: const EdgeInsets.all(14),
@@ -1125,13 +1125,13 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
             const SizedBox(height: 10),
             Text(
               'No hay relatos registrados en esta fecha',
-              style: GoogleFonts.montserrat(fontSize: 15, fontWeight: FontWeight.w700, color: Colors.white),
+              style: BaqueanoFonts.display(fontSize: 15, fontWeight: FontWeight.w700, color: Colors.white),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 6),
             Text(
               'Sé el primer explorador en compartir tu experiencia de este día.',
-              style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
+              style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textMuted),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
@@ -1196,7 +1196,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                   children: [
                     Text(
                       'MODO GALERÍA DINÁMICA EN MOVIMIENTO',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w800,
                         color: AppColors.goldLight,
@@ -1207,7 +1207,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                     ),
                     Text(
                       'Relatos de expedición del ${_formatDateHeader(_selectedDate!)}',
-                      style: GoogleFonts.inter(fontSize: 10.5, color: Colors.white70),
+                      style: BaqueanoFonts.text(fontSize: 10.5, color: Colors.white70),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -1287,7 +1287,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                             Flexible(
                                               child: Text(
                                                 rev.author,
-                                                style: GoogleFonts.montserrat(
+                                                style: BaqueanoFonts.display(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w800,
                                                   color: Colors.white,
@@ -1304,7 +1304,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                         ),
                                         Text(
                                           '🗓️ ${formatReviewDate(rev)}',
-                                          style: GoogleFonts.inter(fontSize: 10.5, color: AppColors.goldLight),
+                                          style: BaqueanoFonts.text(fontSize: 10.5, color: AppColors.goldLight),
                                         ),
                                       ],
                                     ),
@@ -1323,7 +1323,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                 ),
                                 child: Text(
                                   rev.destination,
-                                  style: GoogleFonts.spaceGrotesk(
+                                  style: BaqueanoFonts.text(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w700,
                                     color: AppColors.goldLight,
@@ -1352,7 +1352,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                             const SizedBox(width: 8),
                             Text(
                               rev.rating.toStringAsFixed(1),
-                              style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.gold),
+                              style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.gold),
                             ),
                           ],
                         ),
@@ -1361,7 +1361,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                         // Texto del relato en galería
                         Text(
                           rev.review,
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 13.5,
                             color: Colors.white.withValues(alpha: 0.95),
                             height: 1.45,
@@ -1386,7 +1386,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                 Flexible(
                                   child: Text(
                                     'Acción Verde: ${rev.ecoAction!}',
-                                    style: GoogleFonts.spaceGrotesk(
+                                    style: BaqueanoFonts.text(
                                       fontSize: 11.5,
                                       fontWeight: FontWeight.w700,
                                       color: AppColors.jungleGreenLight,
@@ -1490,7 +1490,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
               ),
               child: Text(
                 '${_currentGalleryIndex + 1}/${dateReviews.length}',
-                style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.goldLight),
               ),
             ),
           ],
@@ -1517,7 +1517,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                 const SizedBox(width: 6),
                 Text(
                   'FILTRAR POR FECHA DE EXPEDICIÓN:',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 11.5,
                     fontWeight: FontWeight.w800,
                     color: AppColors.goldLight,
@@ -1531,7 +1531,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                 onTap: () => _onSelectDate(null),
                 child: Text(
                   'Ver todas',
-                  style: GoogleFonts.inter(
+                  style: BaqueanoFonts.text(
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
                     color: AppColors.terracottaLight,
@@ -1619,7 +1619,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                       const SizedBox(width: 4),
                       Text(
                         'Otra fecha...',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white70),
+                        style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white70),
                       ),
                     ],
                   ),
@@ -1666,7 +1666,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
           children: [
             Text(
               label,
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 11.5,
                 fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
                 color: isSelected ? const Color(0xFF041920) : Colors.white,
@@ -1681,7 +1681,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
               ),
               child: Text(
                 '$count',
-                style: GoogleFonts.inter(
+                style: BaqueanoFonts.text(
                   fontSize: 10,
                   fontWeight: FontWeight.w800,
                   color: isSelected ? AppColors.gold : AppColors.goldLight,
@@ -1713,7 +1713,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
           Text(
             text,
             textAlign: TextAlign.center,
-            style: GoogleFonts.inter(fontSize: 13, color: AppColors.textMuted, height: 1.5),
+            style: BaqueanoFonts.text(fontSize: 13, color: AppColors.textMuted, height: 1.5),
           ),
           if (!_loadingReviews && _reviewsError != null) ...[
             const SizedBox(height: 10),
@@ -1775,7 +1775,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                       Expanded(
                         child: Text(
                           'DECÁLOGO DEL EXPLORADOR ÉTICO',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 13.5,
                             fontWeight: FontWeight.w800,
                             color: AppColors.goldLight,
@@ -1844,7 +1844,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                           children: [
                             Text(
                               'IMPACTO ECOLÓGICO DE LA COMUNIDAD',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 10.5,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.goldLight,
@@ -1853,7 +1853,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                             ),
                             Text(
                               '¿Cómo cuidamos nuestro país en cada ruta?',
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w900,
                                 color: Colors.white,
@@ -1867,7 +1867,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                   const SizedBox(height: 10),
                   Text(
                     'Nuestra comunidad no solo viaja: recoge plásticos en volcanes, protege nidos de tortugas, utiliza bloqueadores biodegradables en lagunas cratéricas y reforesta con cooperativas campesinas.',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 12.5,
                       color: Colors.white.withValues(alpha: 0.88),
                       height: 1.4,
@@ -1909,7 +1909,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                 _filterEcoOnly
                                     ? 'Viendo: Guardianes del País (${_reviews.where((r) => r.isEcoGuardian || r.ecoAction != null).length})'
                                     : 'Filtrar Relatos con Acciones Verdes (${_reviews.where((r) => r.isEcoGuardian || r.ecoAction != null).length})',
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 11.5,
                                   fontWeight: FontWeight.w700,
                                   color: _filterEcoOnly ? const Color(0xFF041920) : Colors.white,
@@ -1936,7 +1936,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                               const SizedBox(width: 6),
                               Text(
                                 'Ver Campaña Ambiental',
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 11.5,
                                   fontWeight: FontWeight.w700,
                                   color: AppColors.goldLight,
@@ -1975,7 +1975,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                   children: [
                     Text(
                       'EXPERIENCIAS EN SENDERO (${_reviews.length})',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 13,
                         fontWeight: FontWeight.w800,
                         color: AppColors.goldLight,
@@ -2032,7 +2032,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                         Flexible(
                                           child: Text(
                                             rev.author,
-                                            style: GoogleFonts.montserrat(
+                                            style: BaqueanoFonts.display(
                                               fontSize: 13.5,
                                               fontWeight: FontWeight.w800,
                                               color: AppColors.textLight,
@@ -2065,7 +2065,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                 ),
                                 child: Text(
                                   rev.destination,
-                                  style: GoogleFonts.spaceGrotesk(
+                                  style: BaqueanoFonts.text(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w700,
                                     color: AppColors.goldLight,
@@ -2093,7 +2093,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                             const SizedBox(width: 8),
                             Text(
                               '🗓️ ${formatReviewDate(rev)}',
-                              style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                              style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                             ),
                           ],
                         ),
@@ -2101,7 +2101,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
 
                         Text(
                           rev.review,
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             fontSize: 13,
                             color: AppColors.textLight.withValues(alpha: 0.9),
                             height: 1.45,
@@ -2125,7 +2125,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                 Flexible(
                                   child: Text(
                                     'Acción Verde: ${rev.ecoAction!}',
-                                    style: GoogleFonts.spaceGrotesk(
+                                    style: BaqueanoFonts.text(
                                       fontSize: 11.5,
                                       fontWeight: FontWeight.w700,
                                       color: AppColors.jungleGreenLight,
@@ -2220,7 +2220,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                             children: [
                               Text(
                                 '¿Completaste una ruta con Baqueano?',
-                                style: GoogleFonts.montserrat(
+                                style: BaqueanoFonts.display(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w800,
                                   color: Colors.white,
@@ -2229,7 +2229,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                               const SizedBox(height: 2),
                               Text(
                                 'Comparte tu relato y fotos para ganar +200 XP en tu pasaporte.',
-                                style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
+                                style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textMuted),
                               ),
                             ],
                           ),
@@ -2264,7 +2264,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                 children: [
                                   Text(
                                     '¿Completaste una ruta con Baqueano?',
-                                    style: GoogleFonts.montserrat(
+                                    style: BaqueanoFonts.display(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w800,
                                       color: Colors.white,
@@ -2273,7 +2273,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
                                   const SizedBox(height: 3),
                                   Text(
                                     'Comparte tu relato y fotos para ganar +200 XP en tu pasaporte.',
-                                    style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted, height: 1.3),
+                                    style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textMuted, height: 1.3),
                                   ),
                                 ],
                               ),
@@ -2304,10 +2304,10 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(num, style: GoogleFonts.spaceGrotesk(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.gold)),
+          Text(num, style: BaqueanoFonts.text(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.gold)),
           const SizedBox(width: 8),
           Expanded(
-            child: Text(text, style: GoogleFonts.inter(fontSize: 12, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.35)),
+            child: Text(text, style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textLight.withValues(alpha: 0.9), height: 1.35)),
           ),
         ],
       ),

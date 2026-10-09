@@ -25,7 +25,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
@@ -87,7 +87,7 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                     const SizedBox(width: 8),
                     Text(
                       'Volver a la Pantalla Principal',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
                         color: AppColors.goldLight,
@@ -133,7 +133,7 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                         ),
                         child: Text(
                           status == 'Todas' ? 'Todas las Rutas (${allBookings.length})' : status,
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
                             color: isSelected ? Colors.white : AppColors.textMuted,
@@ -164,13 +164,13 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                     const SizedBox(height: 16),
                     Text(
                       'Aún no tienes expediciones reservadas',
-                      style: GoogleFonts.spaceGrotesk(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white),
+                      style: BaqueanoFonts.text(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
                     Text(
                       'Cuando reserves una ruta en el mapa o catálogo, aquí aparecerán tus reservas reales, comprobantes oficiales, cuentas bancarias y pase QR.',
-                      style: GoogleFonts.inter(fontSize: 13, color: AppColors.textMuted, height: 1.4),
+                      style: BaqueanoFonts.text(fontSize: 13, color: AppColors.textMuted, height: 1.4),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 22),
@@ -183,7 +183,7 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                       icon: const Icon(Icons.map_rounded, color: Colors.white, size: 18),
                       label: Text(
                         'Explorar Mapa de Nicaragua',
-                        style: GoogleFonts.spaceGrotesk(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13),
+                        style: BaqueanoFonts.text(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13),
                       ),
                       onPressed: () => context.go('/mapa'),
                     ),
@@ -205,7 +205,7 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                     const SizedBox(height: 12),
                     Text(
                       'No hay expediciones con el filtro "$_selectedFilter"',
-                      style: GoogleFonts.spaceGrotesk(fontSize: 15, fontWeight: FontWeight.w700, color: Colors.white),
+                      style: BaqueanoFonts.text(fontSize: 15, fontWeight: FontWeight.w700, color: Colors.white),
                     ),
                   ],
                 ),
@@ -282,13 +282,13 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                       ),
                       child: Text(
                         exp.code,
-                        style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                        style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.goldLight),
                       ),
                     ),
                     const SizedBox(width: 8),
                     Text(
                       exp.date,
-                      style: GoogleFonts.inter(fontSize: 12, color: AppColors.textMuted),
+                      style: BaqueanoFonts.text(fontSize: 12, color: AppColors.textMuted),
                     ),
                   ],
                 ),
@@ -306,7 +306,7 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                       const SizedBox(width: 4),
                       Text(
                         exp.status.toUpperCase(),
-                        style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w800, color: statusColor),
+                        style: BaqueanoFonts.text(fontSize: 10, fontWeight: FontWeight.w800, color: statusColor),
                       ),
                     ],
                   ),
@@ -342,23 +342,23 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                     children: [
                       Text(
                         exp.destinationTitle,
-                        style: GoogleFonts.montserrat(fontSize: 15, fontWeight: FontWeight.w800, color: Colors.white),
+                        style: BaqueanoFonts.display(fontSize: 15, fontWeight: FontWeight.w800, color: Colors.white),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 3),
                       Text(
                         '${exp.department} • ${exp.participants} explorador(es)',
-                        style: GoogleFonts.inter(fontSize: 12, color: AppColors.goldLight, fontWeight: FontWeight.w500),
+                        style: BaqueanoFonts.text(fontSize: 12, color: AppColors.goldLight, fontWeight: FontWeight.w500),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Anfitrión: ${exp.hostName}',
-                        style: GoogleFonts.inter(fontSize: 11, color: Colors.white70),
+                        style: BaqueanoFonts.text(fontSize: 11, color: Colors.white70),
                       ),
                       Text(
                         exp.hostBusiness,
-                        style: GoogleFonts.inter(fontSize: 10, color: AppColors.textMuted),
+                        style: BaqueanoFonts.text(fontSize: 10, color: AppColors.textMuted),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -384,12 +384,12 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                   children: [
                     Text(
                       'TOTAL A PAGAR',
-                      style: GoogleFonts.spaceGrotesk(fontSize: 9, fontWeight: FontWeight.w700, color: AppColors.textMuted),
+                      style: BaqueanoFonts.text(fontSize: 9, fontWeight: FontWeight.w700, color: AppColors.textMuted),
                     ),
                     // Texto de precio dual: Flexible + ellipsis evita right overflow
                     Text(
                       '\$${exp.totalUsd.toStringAsFixed(2)} USD / C\$ ${exp.totalNio.toStringAsFixed(2)} NIO',
-                      style: GoogleFonts.montserrat(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.gold),
+                      style: BaqueanoFonts.display(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.gold),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -407,7 +407,7 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                       ),
                       icon: const Icon(Icons.chat_bubble_outline_rounded, color: AppColors.goldLight, size: 14),
-                      label: Text('Mensaje', style: GoogleFonts.spaceGrotesk(fontSize: 11, color: AppColors.goldLight, fontWeight: FontWeight.w700)),
+                      label: Text('Mensaje', style: BaqueanoFonts.text(fontSize: 11, color: AppColors.goldLight, fontWeight: FontWeight.w700)),
                       onPressed: () {
                         // Conectar con el anfitrión de la reserva
                         String hostKey = 'h-1';
@@ -434,7 +434,7 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       ),
                       icon: const Icon(Icons.qr_code_rounded, color: Colors.white, size: 14),
-                      label: Text('Pase QR', style: GoogleFonts.spaceGrotesk(fontSize: 11, color: Colors.white, fontWeight: FontWeight.w700)),
+                      label: Text('Pase QR', style: BaqueanoFonts.text(fontSize: 11, color: Colors.white, fontWeight: FontWeight.w700)),
                       onPressed: () {
                         final dest = CatalogData.destinations.firstWhere(
                           (d) => d.id == exp.destinationId,

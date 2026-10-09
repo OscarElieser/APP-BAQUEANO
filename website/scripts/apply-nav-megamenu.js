@@ -229,7 +229,7 @@ const newCssPanel = `/* PANEL MEGA MENU — EN EL NAV, MOVIDO A LA DERECHA Y CEN
 #mainNavbar .global-mega-column h2,
 #globalMegaMenu .global-mega-column h2,
 .global-mega-column h2 {
-  font-family: Montserrat, sans-serif !important; font-size: 0.72rem !important;
+  font-family: League Spartan, sans-serif !important; font-size: 0.72rem !important;
   font-weight: 800 !important; color: #F4E6C1 !important;
   text-transform: uppercase !important; letter-spacing: 0.1em !important;
   margin: 0 0 10px 0 !important; padding-bottom: 8px !important;
@@ -244,7 +244,7 @@ const newCssPanel = `/* PANEL MEGA MENU — EN EL NAV, MOVIDO A LA DERECHA Y CEN
 #mainNavbar .global-mega-column a,
 #globalMegaMenu .global-mega-column a,
 .global-mega-column a {
-  color: #8FA5BC !important; font-family: Inter, sans-serif !important;
+  color: #8FA5BC !important; font-family: Aristotelica Pro, Plus Jakarta Sans, sans-serif !important;
   font-size: 0.84rem !important; font-weight: 500 !important;
   text-decoration: none !important; padding: 5px 6px !important;
   display: flex !important; align-items: center !important; gap: 9px !important;

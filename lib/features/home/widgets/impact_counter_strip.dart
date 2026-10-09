@@ -20,7 +20,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 
@@ -102,7 +102,7 @@ class ImpactCounterStrip extends StatelessWidget {
           ),
           child: Text(
             number,
-            style: GoogleFonts.montserrat(
+            style: BaqueanoFonts.display(
               fontSize: 32,
               fontWeight: FontWeight.w900,
               color: Colors.white,
@@ -113,7 +113,7 @@ class ImpactCounterStrip extends StatelessWidget {
         // Etiqueta principal
         Text(
           label,
-          style: GoogleFonts.spaceGrotesk(
+          style: BaqueanoFonts.text(
             fontSize: 14,
             fontWeight: FontWeight.w700,
             color: AppColors.textLight,
@@ -123,7 +123,7 @@ class ImpactCounterStrip extends StatelessWidget {
         // Subtítulo explicativo
         Text(
           sublabel,
-          style: GoogleFonts.inter(
+          style: BaqueanoFonts.text(
             fontSize: 11,
             color: AppColors.textMuted,
           ),
@@ -145,7 +145,7 @@ class ImpactCounterStrip extends StatelessWidget {
             ),
             child: Text(
               number,
-              style: GoogleFonts.montserrat(
+              style: BaqueanoFonts.display(
                 fontSize: 26,
                 fontWeight: FontWeight.w900,
                 color: Colors.white,
@@ -155,7 +155,7 @@ class ImpactCounterStrip extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             label,
-            style: GoogleFonts.spaceGrotesk(
+            style: BaqueanoFonts.text(
               fontSize: 12,
               fontWeight: FontWeight.w700,
               color: AppColors.textLight,
@@ -164,7 +164,7 @@ class ImpactCounterStrip extends StatelessWidget {
           ),
           Text(
             sublabel,
-            style: GoogleFonts.inter(
+            style: BaqueanoFonts.text(
               fontSize: 10,
               color: AppColors.textMuted,
             ),

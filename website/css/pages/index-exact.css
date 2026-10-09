@@ -42,8 +42,8 @@
   --bq-text-dark: #0B253A;
   --bq-text-muted: #64748B;
   --bq-border-light: #E2E8F0;
-  --bq-font-heading: 'Montserrat', sans-serif;
-  --bq-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --bq-font-heading: 'League Spartan', sans-serif;
+  --bq-font-body: 'Aristotelica Pro', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* ============================================================================
@@ -1344,7 +1344,7 @@
 .bq-home-community-link:hover .bq-home-community-title,
 .bq-home-community-link:focus-visible .bq-home-community-title { color: #F65E01; }
 .bq-home-community-link:focus-visible { outline: 2px solid #F65E01; outline-offset: 4px; border-radius: 8px; }
-.bq-home-community-title { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--bq-navy); line-height: 1.35; margin: 0 0 8px; overflow-wrap: anywhere; transition: color 0.18s ease; }
+.bq-home-community-title { display: block; font-family: 'League Spartan', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--bq-navy); line-height: 1.35; margin: 0 0 8px; overflow-wrap: anywhere; transition: color 0.18s ease; }
 .bq-home-community-card .test-quote-text { overflow-wrap: anywhere; }
 .bq-home-community-card .bq-test-action { text-decoration: none; }
 .bq-home-community-count { font-weight: 700; color: #64748B; }
@@ -1642,7 +1642,7 @@
 .site-footer-exact {
   background: #081827;
   color: #94A3B8;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
   padding-top: 50px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -1702,7 +1702,7 @@
 }
 
 .footer-brand-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.35rem;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -1765,7 +1765,7 @@
 }
 
 .footer-nav-col h4 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 0.82rem;
   font-weight: 800;
   color: #F4E6C1;

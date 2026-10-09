@@ -24,7 +24,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
@@ -273,7 +273,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                           children: [
                             Text(
                               'CALCULADORA DE RENTABILIDAD',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 10.5,
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.goldLight,
@@ -282,7 +282,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                             ),
                             Text(
                               'Comprueba cómo tu plan se paga solo',
-                              style: GoogleFonts.montserrat(
+                              style: BaqueanoFonts.display(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w800,
                                 color: Colors.white,
@@ -297,7 +297,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
 
                   Text(
                     'Si recibes al mes a través de la app Baqueano:',
-                    style: GoogleFonts.inter(fontSize: 13, color: Colors.white70),
+                    style: BaqueanoFonts.text(fontSize: 13, color: Colors.white70),
                   ),
                   const SizedBox(height: 8),
 
@@ -307,7 +307,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                       Expanded(
                         child: Text(
                           '${_estimatedClients.toInt()} clientes adicionales',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 14,
                             fontWeight: FontWeight.w800,
                             color: AppColors.goldLight,
@@ -317,7 +317,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                       const SizedBox(width: 8),
                       Text(
                         '(Ticket: \$${_averageTicketUsd.toInt()} USD)',
-                        style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted),
+                        style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textMuted),
                       ),
                     ],
                   ),
@@ -351,7 +351,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                             children: [
                               Text(
                                 'Ingreso Estimado:',
-                                style: GoogleFonts.inter(fontSize: 11, color: Colors.white70),
+                                style: BaqueanoFonts.text(fontSize: 11, color: Colors.white70),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -361,7 +361,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   '+\$${extraRevenueUsd.toInt()} USD / mes',
-                                  style: GoogleFonts.spaceGrotesk(
+                                  style: BaqueanoFonts.text(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w900,
                                     color: AppColors.jungleGreenLight,
@@ -383,7 +383,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                             children: [
                               Text(
                                 'Ganancia Neta:',
-                                style: GoogleFonts.inter(fontSize: 11, color: Colors.white70),
+                                style: BaqueanoFonts.text(fontSize: 11, color: Colors.white70),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -393,7 +393,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                                 alignment: Alignment.centerRight,
                                 child: Text(
                                   '+\$${netProfit.toInt()} USD neto',
-                                  style: GoogleFonts.spaceGrotesk(
+                                  style: BaqueanoFonts.text(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w900,
                                     color: AppColors.goldLight,
@@ -411,7 +411,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                   Center(
                     child: Text(
                       '⚡ Con solo 1 cliente al mes recuperas tu inversión. Todo lo demás es ganancia directa para tu negocio.',
-                      style: GoogleFonts.inter(fontSize: 12, color: Colors.white60, fontStyle: FontStyle.italic),
+                      style: BaqueanoFonts.text(fontSize: 12, color: Colors.white60, fontStyle: FontStyle.italic),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -444,7 +444,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                             Expanded(
                               child: Text(
                                 '¿Deseas una propuesta personalizada para tu cooperativa o cadena?',
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w800,
                                   color: Colors.white,
@@ -456,7 +456,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                         const SizedBox(height: 8),
                         Text(
                           'Contacta a nuestro equipo de alianzas estratégicas para convenios institucionales.',
-                          style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70),
+                          style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white70),
                         ),
                         const SizedBox(height: 12),
                         BaqueanoButton(
@@ -480,7 +480,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                           children: [
                             Text(
                               '¿Deseas una propuesta personalizada para tu cooperativa o cadena?',
-                              style: GoogleFonts.spaceGrotesk(
+                              style: BaqueanoFonts.text(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w800,
                                 color: Colors.white,
@@ -489,7 +489,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                             const SizedBox(height: 2),
                             Text(
                               'Contacta a nuestro equipo de alianzas estratégicas para convenios institucionales.',
-                              style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white70),
+                              style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white70),
                             ),
                           ],
                         ),
@@ -529,7 +529,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
         ),
         child: Text(
           label,
-          style: GoogleFonts.spaceGrotesk(
+          style: BaqueanoFonts.text(
             fontSize: 12,
             fontWeight: FontWeight.w800,
             color: isSelected ? const Color(0xFF041920) : Colors.white70,
@@ -573,7 +573,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
             ),
             child: Text(
               badge,
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 10,
                 fontWeight: FontWeight.w800,
                 color: isFeatured ? AppColors.goldLight : Colors.white,
@@ -586,7 +586,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
           // Título
           Text(
             title,
-            style: GoogleFonts.montserrat(
+            style: BaqueanoFonts.display(
               fontSize: 18,
               fontWeight: FontWeight.w900,
               color: Colors.white,
@@ -595,7 +595,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
           const SizedBox(height: 4),
           Text(
             subtitle,
-            style: GoogleFonts.inter(fontSize: 11.5, color: Colors.white60, height: 1.3),
+            style: BaqueanoFonts.text(fontSize: 11.5, color: Colors.white60, height: 1.3),
           ),
           const SizedBox(height: 14),
 
@@ -606,7 +606,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
             children: [
               Text(
                 price,
-                style: GoogleFonts.montserrat(
+                style: BaqueanoFonts.display(
                   fontSize: 28,
                   fontWeight: FontWeight.w900,
                   color: isFeatured ? AppColors.goldLight : Colors.white,
@@ -616,7 +616,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                 const SizedBox(width: 4),
                 Text(
                   '/ mes',
-                  style: GoogleFonts.inter(fontSize: 12, color: Colors.white60),
+                  style: BaqueanoFonts.text(fontSize: 12, color: Colors.white60),
                 ),
               ],
             ],
@@ -625,7 +625,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
             const SizedBox(height: 2),
             Text(
               convertedPrice,
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 11.5,
                 fontWeight: FontWeight.w700,
                 color: AppColors.jungleGreenLight,
@@ -648,7 +648,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                     Expanded(
                       child: Text(
                         b,
-                        style: GoogleFonts.inter(fontSize: 12, color: Colors.white70, height: 1.35),
+                        style: BaqueanoFonts.text(fontSize: 12, color: Colors.white70, height: 1.35),
                       ),
                     ),
                   ],

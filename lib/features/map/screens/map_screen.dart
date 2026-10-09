@@ -29,7 +29,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/app_gradients.dart';
@@ -458,7 +458,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                                             : _currentMapType == MapType.terrain
                                                 ? 'Relieve'
                                                 : 'Nocturno',
-                                        style: GoogleFonts.spaceGrotesk(
+                                        style: BaqueanoFonts.text(
                                           fontSize: 11,
                                           fontWeight: FontWeight.w800,
                                           color: Colors.white,
@@ -538,7 +538,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                                 const SizedBox(width: 6),
                                 Text(
                                   'Google Maps SDK • Nicaragua: 12.86° N, 85.20° W',
-                                  style: GoogleFonts.spaceGrotesk(fontSize: 10, color: Colors.white70, fontWeight: FontWeight.w600),
+                                  style: BaqueanoFonts.text(fontSize: 10, color: Colors.white70, fontWeight: FontWeight.w600),
                                 ),
                               ],
                             ),
@@ -627,12 +627,12 @@ class _MapScreenState extends ConsumerState<MapScreen> {
               children: [
                 Text(
                   'GOOGLE MAPS',
-                  style: GoogleFonts.spaceGrotesk(fontSize: 8.5, fontWeight: FontWeight.w800, color: const Color(0xFFD4AF37), letterSpacing: 0.8),
+                  style: BaqueanoFonts.text(fontSize: 8.5, fontWeight: FontWeight.w800, color: const Color(0xFFD4AF37), letterSpacing: 0.8),
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   'Satélite & GPS',
-                  style: GoogleFonts.inter(fontSize: 9.5, color: Colors.white, fontWeight: FontWeight.w600),
+                  style: BaqueanoFonts.text(fontSize: 9.5, color: Colors.white, fontWeight: FontWeight.w600),
                   overflow: TextOverflow.ellipsis,
                 ),
               ],

@@ -21,7 +21,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/models/destination_model.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/baqueano_adaptive_image.dart';
@@ -194,7 +194,7 @@ class _DestinationCardState extends State<DestinationCard> {
                         const SizedBox(width: 6),
                         Text(
                           destination.difficulty,
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
@@ -240,7 +240,7 @@ class _DestinationCardState extends State<DestinationCard> {
                     ),
                     child: Text(
                       destination.department.toUpperCase(),
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 10,
                         fontWeight: FontWeight.w800,
                         color: Colors.white,
@@ -282,7 +282,7 @@ class _DestinationCardState extends State<DestinationCard> {
                           const SizedBox(width: 4),
                           Text(
                             'Sin reseñas',
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
@@ -291,13 +291,13 @@ class _DestinationCardState extends State<DestinationCard> {
                           const SizedBox(width: 4),
                           Text(
                             'verificadas',
-                            style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                            style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                           ),
                         ],
                       ),
                       Text(
                         '${destination.duration} · ${destination.distance}',
-                        style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                        style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                       ),
                     ],
                   ),
@@ -307,7 +307,7 @@ class _DestinationCardState extends State<DestinationCard> {
                   // Título de la expedición con protección de desbordamiento
                   Text(
                     destination.title.isNotEmpty ? destination.title : 'Destino Baqueano',
-                    style: GoogleFonts.montserrat(
+                    style: BaqueanoFonts.display(
                       fontSize: 16,
                       fontWeight: FontWeight.w800,
                       color: AppColors.textLight,
@@ -321,7 +321,7 @@ class _DestinationCardState extends State<DestinationCard> {
                   // Descripción breve
                   Text(
                     destination.description,
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 12,
                       color: AppColors.textMuted,
                       height: 1.4,
@@ -346,7 +346,7 @@ class _DestinationCardState extends State<DestinationCard> {
                           ),
                           child: Text(
                             '#$tag',
-                            style: GoogleFonts.spaceGrotesk(fontSize: 10, color: AppColors.goldLight),
+                            style: BaqueanoFonts.text(fontSize: 10, color: AppColors.goldLight),
                           ),
                         );
                       }),
@@ -373,7 +373,7 @@ class _DestinationCardState extends State<DestinationCard> {
                               const SizedBox(width: 4),
                               Text(
                                 'Cuidado Ambiental',
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 10,
                                   color: AppColors.jungleGreenLight,
                                   fontWeight: FontWeight.w700,
@@ -400,13 +400,13 @@ class _DestinationCardState extends State<DestinationCard> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Precio x persona', style: GoogleFonts.inter(fontSize: 10, color: AppColors.textMuted)),
+                            Text('Precio x persona', style: BaqueanoFonts.text(fontSize: 10, color: AppColors.textMuted)),
                             Wrap(
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
                                 Text(
                                   'Por confirmar',
-                                  style: GoogleFonts.montserrat(
+                                  style: BaqueanoFonts.display(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w900,
                                     color: AppColors.gold,
@@ -415,7 +415,7 @@ class _DestinationCardState extends State<DestinationCard> {
                                 const SizedBox(width: 4),
                                 Text(
                                   'con el anfitrión',
-                                  style: GoogleFonts.spaceGrotesk(
+                                  style: BaqueanoFonts.text(
                                     fontSize: 11,
                                     color: AppColors.textMuted,
                                   ),

@@ -39,7 +39,7 @@
 }
 
 .bq-artists-group-title h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1.1rem;
   font-weight: 800;
   color: var(--bq-artist-title);
@@ -158,7 +158,7 @@
 }
 
 .bq-artist-name {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   font-size: 1rem;
   font-weight: 800;
   color: var(--bq-artist-title);

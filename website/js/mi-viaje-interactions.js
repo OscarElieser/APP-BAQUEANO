@@ -98,7 +98,7 @@
     t.style.cssText = 'background:#0F172A;color:#FFF;border-left:4px solid ' + colors[type] + ';' +
       'padding:13px 18px;border-radius:10px;font-size:0.88rem;font-weight:600;' +
       'box-shadow:0 8px 32px rgba(0,0,0,.45);display:flex;align-items:center;gap:10px;' +
-      'min-width:240px;max-width:320px;font-family:Inter,system-ui,sans-serif;' +
+      'min-width:240px;max-width:320px;font-family:Aristotelica Pro, Plus Jakarta Sans,system-ui,sans-serif;' +
       'animation:bqSlideIn .3s ease;pointer-events:auto;';
     t.innerHTML = '<span style="font-size:1rem">' + icons[type] + '</span><span>' + msg + '</span>';
     if (!document.getElementById('bqToastCSS')) {
@@ -140,14 +140,14 @@
       c.innerHTML =
         '<div style="background:#0F2A33;border:1.5px dashed rgba(244,230,193,0.35);border-radius:18px;padding:48px 24px;text-align:center;margin-bottom:24px;">' +
           '<div style="font-size:3rem;margin-bottom:12px;">🎒</div>' +
-          '<h3 style="font-family:Montserrat,sans-serif;color:#FFF;font-size:1.25rem;font-weight:800;margin:0 0 8px">Todavía no tenés un viaje guardado</h3>' +
+          '<h3 style="font-family:League Spartan,sans-serif;color:#FFF;font-size:1.25rem;font-weight:800;margin:0 0 8px">Todavía no tenés un viaje guardado</h3>' +
           '<p style="color:#CBD5E1;max-width:540px;margin:0 auto 24px;font-size:.9rem;line-height:1.6">' +
             'Descubrí los 17 territorios de Nicaragua, elegí tus atractivos favoritos o dejá que Baqueano Digital planifique una ruta a tu medida según tu presupuesto y días disponibles.' +
           '</p>' +
           '<div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">' +
-            '<a href="destinos.html" style="background:#165D6F;color:#FFF;padding:11px 22px;border-radius:10px;font-weight:700;font-family:Montserrat,sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:8px">' +
+            '<a href="destinos.html" style="background:#165D6F;color:#FFF;padding:11px 22px;border-radius:10px;font-weight:700;font-family:League Spartan,sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:8px">' +
               '<i class="fa-solid fa-mountain-sun"></i> Explorar destinos</a>' +
-            '<a href="baqueano-ia.html" style="background:#C2410C;color:#FFF;padding:11px 22px;border-radius:10px;font-weight:700;font-family:Montserrat,sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:8px">' +
+            '<a href="baqueano-ia.html" style="background:#C2410C;color:#FFF;padding:11px 22px;border-radius:10px;font-weight:700;font-family:League Spartan,sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:8px">' +
               '<i class="fa-solid fa-wand-magic-sparkles"></i> Planificar con Baqueano Digital</a>' +
             '<button type="button" onclick="loadDemoTrip()" style="background:#24404A;color:#F4E6C1;border:1px solid rgba(244,230,193,.35);padding:11px 18px;border-radius:10px;font-weight:600;cursor:pointer">' +
               'Cargar viaje demostrativo</button>' +
@@ -166,7 +166,7 @@
           '<span class="itinerary-day-badge">' + esc(d.badge) + '</span>' +
           '<span class="day-location-label"><i class="fa-solid fa-location-dot"></i> ' + esc(d.location) + '</span>' +
         '</div>' +
-        '<h4 style="font-family:Montserrat,sans-serif;font-size:1rem;font-weight:700;color:#0B253A;margin:0 0 8px">' + esc(d.title) + '</h4>' +
+        '<h4 style="font-family:League Spartan,sans-serif;font-size:1rem;font-weight:700;color:#0B253A;margin:0 0 8px">' + esc(d.title) + '</h4>' +
         '<p style="font-size:.85rem;color:#475569;margin:0 0 10px">' + esc(d.desc) + '</p>' +
         '<div class="day-extra-tag">' + esc(d.extra) + '</div>' +
         '<div class="day-stats-row">' +
@@ -287,17 +287,17 @@
     modal.innerHTML =
       '<div style="background:#FFF;border-radius:18px;padding:28px;max-width:520px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)">' +
         '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">' +
-          '<h3 style="font-family:Montserrat,sans-serif;font-size:1rem;font-weight:800;color:#0B253A;margin:0">✏️ Editar ' + esc(day.badge) + '</h3>' +
+          '<h3 style="font-family:League Spartan,sans-serif;font-size:1rem;font-weight:800;color:#0B253A;margin:0">✏️ Editar ' + esc(day.badge) + '</h3>' +
           '<button onclick="closeEditModal()" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#64748B">×</button>' +
         '</div>' +
         '<label style="display:block;margin-bottom:12px"><span style="font-size:.78rem;font-weight:700;color:#64748B;display:block;margin-bottom:5px">TÍTULO</span>' +
-          '<input id="editDayTitle" type="text" value="' + esc(day.title) + '" style="width:100%;border:1.5px solid #E2E8F0;border-radius:8px;padding:9px 13px;font-size:.9rem;box-sizing:border-box;font-family:Inter,sans-serif" oninput="this.style.borderColor=\'#165D6F\'"></label>' +
+          '<input id="editDayTitle" type="text" value="' + esc(day.title) + '" style="width:100%;border:1.5px solid #E2E8F0;border-radius:8px;padding:9px 13px;font-size:.9rem;box-sizing:border-box;font-family:Aristotelica Pro, Plus Jakarta Sans,sans-serif" oninput="this.style.borderColor=\'#165D6F\'"></label>' +
         '<label style="display:block;margin-bottom:12px"><span style="font-size:.78rem;font-weight:700;color:#64748B;display:block;margin-bottom:5px">DESCRIPCIÓN</span>' +
-          '<textarea id="editDayDesc" rows="4" style="width:100%;border:1.5px solid #E2E8F0;border-radius:8px;padding:9px 13px;font-size:.9rem;resize:vertical;box-sizing:border-box;font-family:Inter,sans-serif" oninput="this.style.borderColor=\'#165D6F\'">' + esc(day.desc) + '</textarea></label>' +
+          '<textarea id="editDayDesc" rows="4" style="width:100%;border:1.5px solid #E2E8F0;border-radius:8px;padding:9px 13px;font-size:.9rem;resize:vertical;box-sizing:border-box;font-family:Aristotelica Pro, Plus Jakarta Sans,sans-serif" oninput="this.style.borderColor=\'#165D6F\'">' + esc(day.desc) + '</textarea></label>' +
         '<label style="display:block;margin-bottom:18px"><span style="font-size:.78rem;font-weight:700;color:#64748B;display:block;margin-bottom:5px">NOTA PERSONAL</span>' +
-          '<input id="editDayExtra" type="text" value="' + esc(day.extra) + '" style="width:100%;border:1.5px solid #E2E8F0;border-radius:8px;padding:9px 13px;font-size:.9rem;box-sizing:border-box;font-family:Inter,sans-serif" oninput="this.style.borderColor=\'#165D6F\'"></label>' +
+          '<input id="editDayExtra" type="text" value="' + esc(day.extra) + '" style="width:100%;border:1.5px solid #E2E8F0;border-radius:8px;padding:9px 13px;font-size:.9rem;box-sizing:border-box;font-family:Aristotelica Pro, Plus Jakarta Sans,sans-serif" oninput="this.style.borderColor=\'#165D6F\'"></label>' +
         '<div style="display:flex;gap:10px">' +
-          '<button onclick="saveEditModal(' + day.id + ')" style="flex:1;background:#F65E01;color:#FFF;border:none;padding:11px;border-radius:10px;font-weight:700;font-size:.9rem;cursor:pointer;font-family:Montserrat,sans-serif">Guardar cambios</button>' +
+          '<button onclick="saveEditModal(' + day.id + ')" style="flex:1;background:#F65E01;color:#FFF;border:none;padding:11px;border-radius:10px;font-weight:700;font-size:.9rem;cursor:pointer;font-family:League Spartan,sans-serif">Guardar cambios</button>' +
           '<button onclick="closeEditModal()" style="background:#F1F5F9;color:#475569;border:none;padding:11px 18px;border-radius:10px;font-weight:600;cursor:pointer">Cancelar</button>' +
         '</div>' +
       '</div>';
@@ -381,7 +381,7 @@
       document.body.appendChild(m);
     }
     m.innerHTML = '<div style="background:#0F172A;border-radius:20px;padding:28px;text-align:center;max-width:290px;width:100%;color:#FFF;box-shadow:0 20px 60px rgba(0,0,0,.5)">' +
-      '<h3 style="font-family:Montserrat,sans-serif;margin:0 0 14px;font-size:1rem">📲 Código QR de tu Ruta</h3>' +
+      '<h3 style="font-family:League Spartan,sans-serif;margin:0 0 14px;font-size:1rem">📲 Código QR de tu Ruta</h3>' +
       '<img src="' + qrSrc + '" alt="QR Ruta" style="width:200px;height:200px;border-radius:12px;background:#FFF;padding:8px;display:block;margin:0 auto 14px">' +
       '<p style="font-size:.78rem;color:#94A3B8;margin:0 0 14px">Escaneá para abrir en otro dispositivo</p>' +
       '<button onclick="document.getElementById(\'bqQRModal\').style.display=\'none\'" style="background:#F65E01;color:#FFF;border:none;padding:10px 22px;border-radius:10px;font-weight:700;cursor:pointer">Cerrar</button>' +

@@ -24,7 +24,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/baqueano_adaptive_image.dart';
 import '../../checkout/widgets/checkout_modal.dart';
@@ -317,7 +317,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
                   const SizedBox(width: 4),
                   Text(
                     'DESTACADO',
-                    style: GoogleFonts.montserrat(
+                    style: BaqueanoFonts.display(
                       fontSize: 10,
                       fontWeight: FontWeight.w900,
                       letterSpacing: 1.2,
@@ -348,7 +348,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
                 const SizedBox(width: 4),
                 Text(
                   (destination.department as String? ?? 'Matagalpa').toUpperCase(),
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
                     color: AppColors.goldLight,
@@ -378,7 +378,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
                 const SizedBox(width: 4),
                 Text(
                   '3D INTERACTIVO',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 9,
                     fontWeight: FontWeight.w700,
                     color: Colors.white70,
@@ -403,7 +403,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
           // Subtítulo de linaje campesino
           Text(
             'RUTA CURADA POR LOCALES',
-            style: GoogleFonts.spaceGrotesk(
+            style: BaqueanoFonts.text(
               fontSize: 11,
               fontWeight: FontWeight.w800,
               letterSpacing: 1.5,
@@ -415,7 +415,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
           // Título del destino
           Text(
             destination.title.toUpperCase(),
-            style: GoogleFonts.montserrat(
+            style: BaqueanoFonts.display(
               fontSize: 20,
               fontWeight: FontWeight.w900,
               letterSpacing: 0.5,
@@ -429,7 +429,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
           // Descripción concisa
           Text(
             destination.description ?? 'Aventura única entre cascadas y senderos ocultos de Nicaragua.',
-            style: GoogleFonts.inter(
+            style: BaqueanoFonts.text(
               fontSize: 13,
               fontWeight: FontWeight.w400,
               color: AppColors.textLight.withValues(alpha: 0.8),
@@ -482,7 +482,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
                   children: [
                     Text(
                       'PRECIO BASE',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 10,
                         fontWeight: FontWeight.w700,
                         color: AppColors.textLight.withValues(alpha: 0.6),
@@ -499,7 +499,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
                         children: [
                           Text(
                             'Por confirmar',
-                            style: GoogleFonts.montserrat(
+                            style: BaqueanoFonts.display(
                               fontSize: 21,
                               fontWeight: FontWeight.w900,
                               color: AppColors.gold,
@@ -507,7 +507,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
                           ),
                           Text(
                             '',
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
                               color: AppColors.gold.withValues(alpha: 0.7),
@@ -516,7 +516,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
                           const SizedBox(width: 6),
                           Text(
                             '· con el anfitrión',
-                            style: GoogleFonts.inter(
+                            style: BaqueanoFonts.text(
                               fontSize: 11,
                               fontWeight: FontWeight.w500,
                               color: AppColors.textLight.withValues(alpha: 0.65),
@@ -536,7 +536,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
                 icon: const Icon(Icons.bookmark_add_rounded, size: 15, color: Colors.white),
                 label: Text(
                   'RESERVAR',
-                  style: GoogleFonts.montserrat(
+                  style: BaqueanoFonts.display(
                     fontSize: 11.5,
                     fontWeight: FontWeight.w800,
                     letterSpacing: 0.8,
@@ -581,7 +581,7 @@ class _Interactive3DFeaturedCardState extends State<Interactive3DFeaturedCard>
           const SizedBox(width: 5),
           Text(
             label,
-            style: GoogleFonts.spaceGrotesk(
+            style: BaqueanoFonts.text(
               fontSize: 11,
               fontWeight: FontWeight.w700,
               color: AppColors.textLight,

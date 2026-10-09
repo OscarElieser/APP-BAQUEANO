@@ -25,7 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 
 import '../../../core/theme/app_gradients.dart';
 import '../../../services/auth_service.dart';
@@ -73,7 +73,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               Expanded(
                 child: Text(
                   'Â¡Bienvenido a Baqueano, ${verifiedUser.displayName}!',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
@@ -198,7 +198,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Expanded(
                   child: Text(
                     'Identidad no verificada',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       color: Colors.white,
                       fontWeight: FontWeight.w800,
                       fontSize: 16,
@@ -212,7 +212,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               '$message '
               'Por seguridad, Baqueano no creara una cuenta local ni permitira '
               'continuar como si la identidad estuviera autenticada.',
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 color: Colors.white.withValues(alpha: 0.78),
                 fontSize: 12,
                 height: 1.45,
@@ -314,7 +314,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   const SizedBox(height: 8),
                   Text(
                     'Ecoturismo Campesino de Nicaragua',
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       color: const Color(0xFFF4E6C1).withValues(alpha: 0.95),
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
@@ -347,7 +347,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       children: [
                         Text(
                           'Iniciar SesiÃ³n',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             color: Colors.white,
                             fontSize: 22,
                             fontWeight: FontWeight.w800,
@@ -356,7 +356,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         const SizedBox(height: 6),
                         Text(
                           'Accede a tu perfil de explorador y reservas',
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             color: Colors.white.withValues(alpha: 0.7),
                             fontSize: 13,
                           ),
@@ -430,7 +430,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         const SizedBox(height: 20),
                         Text(
                           'Toca el icono de Google para acceder',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             color: const Color(0xFFF4E6C1),
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
@@ -439,7 +439,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         const SizedBox(height: 4),
                         Text(
                           'Tu sesiÃ³n solo se activa despuÃ©s de validarse con Firebase',
-                          style: GoogleFonts.inter(
+                          style: BaqueanoFonts.text(
                             color: Colors.white.withValues(alpha: 0.58),
                             fontSize: 11,
                           ),
@@ -453,7 +453,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     onPressed: _isLoading ? null : _handleGuestAccess,
                     child: Text(
                       'Explorar como invitado, sin sesiÃ³n â†’',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         color: const Color(0xFFF4E6C1).withValues(alpha: 0.9),
                         fontSize: 14,
                         fontWeight: FontWeight.w700,

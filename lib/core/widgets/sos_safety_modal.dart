@@ -22,7 +22,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../constants/app_constants.dart';
 import '../theme/app_colors.dart';
@@ -128,7 +128,7 @@ class SosSafetyModal extends StatelessWidget {
                         children: [
                           Text(
                             'CENTRO DE AUXILIO & SOS',
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 11,
                               fontWeight: FontWeight.w900,
                               color: Colors.white.withValues(alpha: 0.9),
@@ -137,7 +137,7 @@ class SosSafetyModal extends StatelessWidget {
                           ),
                           Text(
                             'Emergencias en Sendero',
-                            style: GoogleFonts.montserrat(
+                            style: BaqueanoFonts.display(
                               fontSize: 18,
                               fontWeight: FontWeight.w900,
                               color: Colors.white,
@@ -165,7 +165,7 @@ class SosSafetyModal extends StatelessWidget {
                   children: [
                     Text(
                       'LÍNEAS DE ASISTENCIA NACIONAL 24/7',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 11,
                         fontWeight: FontWeight.w800,
                         color: AppColors.gold,
@@ -237,7 +237,7 @@ class SosSafetyModal extends StatelessWidget {
                               const SizedBox(width: 8),
                               Text(
                                 'COORDENADAS GPS DE REFERENCIA',
-                                style: GoogleFonts.spaceGrotesk(
+                                style: BaqueanoFonts.text(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w800,
                                   color: AppColors.goldLight,
@@ -248,7 +248,7 @@ class SosSafetyModal extends StatelessWidget {
                           const SizedBox(height: 6),
                           Text(
                             '12.865400, -85.207200\n(Región Central / Cordillera Dariense · Formato Google Maps)',
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 12,
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
@@ -359,7 +359,7 @@ class SosSafetyModal extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.montserrat(
+                  style: BaqueanoFonts.display(
                     fontSize: 12,
                     fontWeight: FontWeight.w800,
                     color: Colors.white,
@@ -370,7 +370,7 @@ class SosSafetyModal extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   subtitle,
-                  style: GoogleFonts.inter(
+                  style: BaqueanoFonts.text(
                     fontSize: 10,
                     color: Colors.white60,
                   ),
@@ -404,7 +404,7 @@ class SosSafetyModal extends StatelessWidget {
                   const SizedBox(width: 5),
                   Text(
                     buttonLabel,
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 12,
                       fontWeight: FontWeight.w900,
                       color: Colors.white,

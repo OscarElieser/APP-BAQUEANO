@@ -20,7 +20,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/models/destination_model.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../checkout/widgets/checkout_modal.dart';
@@ -46,7 +46,7 @@ class InfiniteDestinationsGallery extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(
           'No hay destinos en este departamento.',
-          style: GoogleFonts.inter(color: AppColors.textLight.withValues(alpha: 0.6)),
+          style: BaqueanoFonts.text(color: AppColors.textLight.withValues(alpha: 0.6)),
         ),
       );
     }
@@ -79,7 +79,7 @@ class InfiniteDestinationsGallery extends StatelessWidget {
                     const SizedBox(width: 6),
                     Text(
                       'DESLIZA · ${destinations.length} DESTINOS VERIFICADOS',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 10,
                         fontWeight: FontWeight.w800,
                         letterSpacing: 0.8,

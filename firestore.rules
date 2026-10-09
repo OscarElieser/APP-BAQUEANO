@@ -353,7 +353,7 @@ service cloud.firestore {
     match /payment_orders/{orderId} {
       allow read: if isAdmin()
         || (isSignedIn() && resource.data.createdByUid == request.auth.uid);
-      allow write: if false;
+      allow write: if isAdmin();
     }
 
     match /payment_transactions/{transactionId} {

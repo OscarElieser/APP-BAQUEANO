@@ -22,7 +22,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/baqueano_button.dart';
@@ -117,7 +117,7 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
                     children: [
                       Text(
                         std['title']!,
-                        style: GoogleFonts.montserrat(
+                        style: BaqueanoFonts.display(
                           fontSize: 17,
                           fontWeight: FontWeight.w900,
                           color: Colors.white,
@@ -125,7 +125,7 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
                       ),
                       Text(
                         'Pilar Fundamental Baqueano',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 12, color: AppColors.gold),
+                        style: BaqueanoFonts.text(fontSize: 12, color: AppColors.gold),
                       ),
                     ],
                   ),
@@ -137,7 +137,7 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
             const SizedBox(height: 12),
             Text(
               std['detail']!,
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 13.5,
                 color: Colors.white.withValues(alpha: 0.9),
                 height: 1.55,
@@ -155,7 +155,7 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
                 ),
                 child: Text(
                   'Entendido',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontWeight: FontWeight.w800,
                     color: Colors.white,
                   ),
@@ -204,7 +204,7 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
                     Flexible(
                       child: Text(
                         '4 PILARES INNEGOCIABLES · ÉTICA & TECNOLOGÍA',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 10,
                           fontWeight: FontWeight.w800,
                           letterSpacing: 0.8,
@@ -291,7 +291,7 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
                               children: [
                                 Text(
                                   std['title']!,
-                                  style: GoogleFonts.montserrat(
+                                  style: BaqueanoFonts.display(
                                     fontSize: 13.5,
                                     fontWeight: FontWeight.w800,
                                     color: AppColors.textLight,
@@ -302,7 +302,7 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
                                 const SizedBox(height: 4),
                                 Text(
                                   std['desc']!,
-                                  style: GoogleFonts.inter(
+                                  style: BaqueanoFonts.text(
                                     fontSize: 11,
                                     color: AppColors.textMuted,
                                     height: 1.35,
@@ -348,7 +348,7 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
               children: [
                 Text(
                   '¿Listo para explorar la Nicaragua auténtica?',
-                  style: GoogleFonts.montserrat(
+                  style: BaqueanoFonts.display(
                     fontSize: 22,
                     fontWeight: FontWeight.w900,
                     color: Colors.white,
@@ -358,7 +358,7 @@ class _BaqueanoStandardState extends State<BaqueanoStandard> {
                 const SizedBox(height: 8),
                 Text(
                   'Únete a miles de exploradores que viajan con propósito, apoyando a las comunidades locales y viviendo aventuras inolvidables.',
-                  style: GoogleFonts.inter(
+                  style: BaqueanoFonts.text(
                     fontSize: 13,
                     color: Colors.white.withValues(alpha: 0.95),
                     height: 1.4,

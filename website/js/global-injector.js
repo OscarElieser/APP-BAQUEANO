@@ -70,7 +70,7 @@
       },
       // Dos familias del sistema (Montserrat + Plus Jakarta Sans). Si la página ya
       // pide Google Fonts en su <head>, no se repite la petición.
-      { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap' },
+      { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap' },
       // Capa de identidad "Cartografía viva": correcciones de contraste y responsive.
       { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261006-player-1' },
       // Sistema de diseño global: SIEMPRE la última hoja. Ver css/baqueano-system.css
@@ -101,7 +101,7 @@
         /* ── Footer Oficial Baqueano ── */
         .bq-global-footer {
           background: #081827; color: #94A3B8;
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
           border-top: 1px solid rgba(255,255,255,.06);
           margin-top: 60px;
         }
@@ -112,7 +112,7 @@
         .bq-footer-brand a { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-bottom: 14px; }
         .bq-footer-brand img.bq-footer-logo-icon { height: 48px; width: 48px; object-fit: contain; }
         .bq-footer-brand-text { display: flex; flex-direction: column; }
-        .bq-footer-brand-name { font-family: 'Montserrat', sans-serif; font-size: 1.35rem; font-weight: 900; color: #FFFFFF; line-height: 1; letter-spacing: 0.08em; }
+        .bq-footer-brand-name { font-family: 'League Spartan', sans-serif; font-size: 1.35rem; font-weight: 900; color: #FFFFFF; line-height: 1; letter-spacing: 0.08em; }
         .bq-footer-brand-sub  { font-size: .68rem; color: #F4E6C1; letter-spacing: .12em; font-weight: 700; margin-top: 4px; text-transform: uppercase; }
         .bq-footer-tagline { font-size: .82rem; color: #64748B; margin-bottom: 18px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
         .bq-footer-socials { display: flex; gap: 10px; margin-bottom: 16px; }
@@ -123,7 +123,7 @@
           justify-content: center; color: #94A3B8; text-decoration: none; font-size: .9rem; transition: all .2s;
         }
         .bq-social-btn:hover { background: #F65E01; border-color: #F65E01; color: #FFF; }
-        .bq-footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: .82rem; font-weight: 800; color: #F4E6C1; text-transform: uppercase; letter-spacing: .1em; margin: 0 0 6px; }
+        .bq-footer-col h4 { font-family: 'League Spartan', sans-serif; font-size: .82rem; font-weight: 800; color: #F4E6C1; text-transform: uppercase; letter-spacing: .1em; margin: 0 0 6px; }
         .bq-footer-accent { width: 28px; height: 3px; background: #F65E01; border-radius: 2px; margin-bottom: 16px; }
         .bq-footer-col ul { list-style: none; padding: 0; margin: 0; }
         .bq-footer-col ul li { margin-bottom: 8px; }
@@ -141,7 +141,7 @@
           border: 2px solid rgba(244,230,193,.2); border-radius: 10px; padding: 8px 14px;
           display: flex; flex-direction: column; align-items: center;
         }
-        .bq-stamp-title { font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 900; color: #F4E6C1; }
+        .bq-stamp-title { font-family: 'League Spartan', sans-serif; font-size: .9rem; font-weight: 900; color: #F4E6C1; }
         .bq-stamp-sub   { font-size: .65rem; color: #64748B; text-transform: uppercase; letter-spacing: .1em; }
 
         /* ── Botón OPS Center Flotante ── */
@@ -163,23 +163,23 @@
           background: #0B253A; border-radius: 22px; padding: 28px; max-width: 680px; width: 100%; max-height: min(88vh,760px); overflow-y: auto;
           box-shadow: 0 20px 60px rgba(0,0,0,.6); border: 1px solid rgba(239,68,68,.3);
         }
-        .bq-sos-title { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 900; color: #FFF; margin: 0 0 6px; }
+        .bq-sos-title { font-family: 'League Spartan', sans-serif; font-size: 1.2rem; font-weight: 900; color: #FFF; margin: 0 0 6px; }
         .bq-sos-sub { color: #94A3B8; font-size: .85rem; margin-bottom: 20px; }
         .bq-sos-location { background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.24);border-radius:12px;padding:13px 14px;margin-bottom:16px;font-size:.82rem;color:#CBD5E1;display:flex;gap:10px;align-items:flex-start; }
         .bq-sos-location strong{display:block;color:#FFF;margin-bottom:3px}.bq-sos-location a{color:#7DD3FC;font-weight:700;text-decoration:none}.bq-sos-btns { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
         .bq-sos-call {
           display: flex; align-items: center; justify-content: flex-start;
           gap: 10px; padding: 13px; border-radius: 12px; text-decoration: none;
-          font-weight: 700; font-size: .9rem; font-family: 'Montserrat', sans-serif; transition: opacity .2s;
+          font-weight: 700; font-size: .9rem; font-family: 'League Spartan', sans-serif; transition: opacity .2s;
         }
         .bq-sos-call:hover { opacity: .85; }
         .bq-sos-call.police { background: rgba(59,130,246,.2); color: #60A5FA; border: 1px solid rgba(59,130,246,.3); }
         .bq-sos-call.medical { background: rgba(239,68,68,.2); color: #F87171; border: 1px solid rgba(239,68,68,.3); }
         .bq-sos-call.fire { background:rgba(246,94,1,.16);color:#FDBA74;border:1px solid rgba(246,94,1,.35) }
         .bq-sos-call.general { background:rgba(16,185,129,.14);color:#6EE7B7;border:1px solid rgba(16,185,129,.3) }
-        .bq-sos-call span{display:block}.bq-sos-call small{display:block;font:500 .68rem/1.3 'Inter',sans-serif;color:#94A3B8;margin-top:2px}
+        .bq-sos-call span{display:block}.bq-sos-call small{display:block;font:500 .68rem/1.3 'Aristotelica Pro', 'Plus Jakarta Sans',sans-serif;color:#94A3B8;margin-top:2px}
         .bq-sos-tools{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}.bq-sos-tool{flex:1;min-width:180px;border:1px solid rgba(148,163,184,.25);background:rgba(255,255,255,.05);color:#E2E8F0;border-radius:11px;padding:11px 13px;font-weight:750;cursor:pointer;text-align:center}
-        .bq-sos-guide{margin-top:17px;padding-top:16px;border-top:1px solid rgba(148,163,184,.16)}.bq-sos-guide h3{font:800 .88rem/1.3 'Montserrat',sans-serif;color:#F4E6C1;margin:0 0 9px}.bq-sos-guide ol{margin:0;padding-left:20px;color:#CBD5E1;font-size:.78rem;line-height:1.55}.bq-sos-note{margin:12px 0 0;color:#94A3B8;font-size:.7rem;line-height:1.45}
+        .bq-sos-guide{margin-top:17px;padding-top:16px;border-top:1px solid rgba(148,163,184,.16)}.bq-sos-guide h3{font:800 .88rem/1.3 'League Spartan',sans-serif;color:#F4E6C1;margin:0 0 9px}.bq-sos-guide ol{margin:0;padding-left:20px;color:#CBD5E1;font-size:.78rem;line-height:1.55}.bq-sos-note{margin:12px 0 0;color:#94A3B8;font-size:.7rem;line-height:1.45}
         .bq-sos-close {
           float: right; background: none; border: none; color: #64748B; font-size: 1.5rem;
           cursor: pointer; margin-top: -8px; transition: color .2s;
@@ -654,9 +654,9 @@
     style.textContent = `
       .bq-cookie-layer{position:fixed;inset:0;z-index:2147483000;background:rgba(15,23,42,.5);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding:20px}
       .bq-cookie-layer[hidden],.bq-cookie-settings[hidden]{display:none!important}
-      .bq-cookie-card{width:min(1120px,100%);background:#fff;color:#0F172A;border:1px solid #D7E2E6;border-radius:22px;box-shadow:0 24px 70px rgba(15,23,42,.25);padding:24px;display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;font-family:'Inter',system-ui,sans-serif}
+      .bq-cookie-card{width:min(1120px,100%);background:#fff;color:#0F172A;border:1px solid #D7E2E6;border-radius:22px;box-shadow:0 24px 70px rgba(15,23,42,.25);padding:24px;display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;font-family:'Aristotelica Pro', 'Plus Jakarta Sans',system-ui,sans-serif}
       .bq-cookie-copy{display:flex;gap:16px;align-items:flex-start}.bq-cookie-icon{width:48px;height:48px;flex:0 0 48px;border-radius:14px;background:#FFF1E8;color:#F65E01;display:grid;place-items:center;font-size:1.35rem}
-      .bq-cookie-title{font:800 1.15rem/1.25 'Montserrat',sans-serif;margin:0 0 7px;color:#0F172A}.bq-cookie-text{margin:0;color:#52627A;font-size:.91rem;line-height:1.55}.bq-cookie-text a{color:#165D6F;font-weight:800}.bq-cookie-version{display:block;margin-top:6px;color:#475569;font-size:.78rem}.bq-cookie-option label{cursor:pointer}.bq-cookie-btn:focus-visible,.bq-cookie-check:focus-visible{outline:3px solid #F65E01;outline-offset:2px}
+      .bq-cookie-title{font:800 1.15rem/1.25 'League Spartan',sans-serif;margin:0 0 7px;color:#0F172A}.bq-cookie-text{margin:0;color:#52627A;font-size:.91rem;line-height:1.55}.bq-cookie-text a{color:#165D6F;font-weight:800}.bq-cookie-version{display:block;margin-top:6px;color:#475569;font-size:.78rem}.bq-cookie-option label{cursor:pointer}.bq-cookie-btn:focus-visible,.bq-cookie-check:focus-visible{outline:3px solid #F65E01;outline-offset:2px}
       .bq-cookie-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.bq-cookie-btn{border-radius:12px;padding:11px 16px;font-weight:800;font-size:.84rem;cursor:pointer;transition:transform .2s,box-shadow .2s;border:1px solid #CBD5E1;background:#fff;color:#0F172A}.bq-cookie-btn:hover{transform:translateY(-1px)}
       .bq-cookie-reject{color:#165D6F;border-color:#165D6F}.bq-cookie-accept{color:#fff;background:#165D6F;border-color:#165D6F;box-shadow:0 8px 18px rgba(22,93,111,.22)}
       .bq-cookie-settings{grid-column:1/-1;border-top:1px solid #E2E8F0;padding-top:18px}.bq-cookie-option{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:12px 0}.bq-cookie-option+ .bq-cookie-option{border-top:1px solid #EEF2F6}.bq-cookie-option strong{display:block;font-size:.9rem}.bq-cookie-option small{display:block;color:#64748B;margin-top:3px}.bq-cookie-check{width:20px;height:20px;accent-color:#165D6F}

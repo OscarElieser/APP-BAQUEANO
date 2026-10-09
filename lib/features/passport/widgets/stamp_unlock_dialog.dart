@@ -16,7 +16,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/models/cultural_models.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
@@ -103,7 +103,7 @@ class _StampUnlockDialogState extends State<StampUnlockDialog> with SingleTicker
                 const SizedBox(width: 8),
                 Text(
                   'PASAPORTE OFICIAL DE EXPEDICIÓN',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 10,
                     fontWeight: FontWeight.w900,
                     color: AppColors.gold,
@@ -154,7 +154,7 @@ class _StampUnlockDialogState extends State<StampUnlockDialog> with SingleTicker
             // Título del sello
             Text(
               badge.title.toUpperCase(),
-              style: GoogleFonts.montserrat(
+              style: BaqueanoFonts.display(
                 fontSize: 18,
                 fontWeight: FontWeight.w900,
                 color: Colors.white,
@@ -167,7 +167,7 @@ class _StampUnlockDialogState extends State<StampUnlockDialog> with SingleTicker
             // Descripción del hito
             Text(
               badge.description,
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 12,
                 color: AppColors.textMuted,
                 height: 1.4,
@@ -193,7 +193,7 @@ class _StampUnlockDialogState extends State<StampUnlockDialog> with SingleTicker
                   const SizedBox(width: 6),
                   Text(
                     '+${badge.xpValue} PUNTOS DE EXPERIENCIA',
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       fontSize: 12,
                       fontWeight: FontWeight.w900,
                       color: AppColors.goldLight,

@@ -85,7 +85,7 @@
 }
 
 .demo-main-title {
-  font-family: 'Space Grotesk', 'Montserrat', sans-serif;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', 'League Spartan', sans-serif;
   font-size: clamp(1.35rem, 2.8vw, 1.85rem);
   font-weight: 800;
   color: #FFFFFF;
@@ -239,7 +239,7 @@
   border: 1px solid rgba(45, 212, 191, 0.3);
   border-radius: 12px;
   padding: 1rem;
-  font-family: 'Space Grotesk', monospace;
+  font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', monospace;
   font-size: 0.88rem;
   color: #A7F3D0;
   margin-bottom: 1rem;

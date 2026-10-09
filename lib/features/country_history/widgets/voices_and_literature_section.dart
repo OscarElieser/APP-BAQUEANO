@@ -20,7 +20,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/glass_container.dart';
@@ -55,7 +55,7 @@ class VoicesAndLiteratureSection extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               'OTRAS GRANDES VOCES DE LAS LETRAS PATRIAS',
-              style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 0.8),
+              style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 0.8),
             ),
           ],
         ),
@@ -102,13 +102,13 @@ class VoicesAndLiteratureSection extends StatelessWidget {
                           children: [
                             Text(
                               author.name,
-                              style: GoogleFonts.montserrat(fontSize: 13.5, fontWeight: FontWeight.w800, color: Colors.white),
+                              style: BaqueanoFonts.display(fontSize: 13.5, fontWeight: FontWeight.w800, color: Colors.white),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
                               author.epoch,
-                              style: GoogleFonts.spaceGrotesk(fontSize: 10.5, color: AppColors.goldLight),
+                              style: BaqueanoFonts.text(fontSize: 10.5, color: AppColors.goldLight),
                             ),
                           ],
                         ),
@@ -119,13 +119,13 @@ class VoicesAndLiteratureSection extends StatelessWidget {
 
                   Text(
                     'Género: ${author.genre}',
-                    style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.terracottaLight),
+                    style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.terracottaLight),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     'Lugar de origen: ${author.birthplace}',
-                    style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                    style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -133,7 +133,7 @@ class VoicesAndLiteratureSection extends StatelessWidget {
                   Expanded(
                     child: Text(
                       author.literaryContribution,
-                      style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.85), height: 1.3),
+                      style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.85), height: 1.3),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -143,7 +143,7 @@ class VoicesAndLiteratureSection extends StatelessWidget {
                     const Divider(color: AppColors.borderLight, height: 16),
                     Text(
                       'Obra: "${author.works.first.title}" (${author.works.first.year})',
-                      style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                      style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.goldLight),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -190,7 +190,7 @@ class VoicesAndLiteratureSection extends StatelessWidget {
                 ),
                 child: Text(
                   'PRÍNCIPE DE LAS LETRAS CASTELLANAS',
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 10,
                     fontWeight: FontWeight.w900,
                     color: Colors.black87,
@@ -200,7 +200,7 @@ class VoicesAndLiteratureSection extends StatelessWidget {
               ),
               Text(
                 '1867 — 1916',
-                style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.goldLight),
+                style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.goldLight),
               ),
             ],
           ),
@@ -208,7 +208,7 @@ class VoicesAndLiteratureSection extends StatelessWidget {
 
           Text(
             dario.name,
-            style: GoogleFonts.montserrat(
+            style: BaqueanoFonts.display(
               fontSize: isDesktop ? 24 : 20,
               fontWeight: FontWeight.w900,
               color: Colors.white,
@@ -216,14 +216,14 @@ class VoicesAndLiteratureSection extends StatelessWidget {
           ),
           Text(
             'Nacimiento: ${dario.birthplace}',
-            style: GoogleFonts.spaceGrotesk(fontSize: 12.5, color: AppColors.goldLight),
+            style: BaqueanoFonts.text(fontSize: 12.5, color: AppColors.goldLight),
           ),
 
           const SizedBox(height: 10),
 
           Text(
             dario.biography,
-            style: GoogleFonts.inter(
+            style: BaqueanoFonts.text(
               fontSize: 13,
               color: AppColors.textLight.withValues(alpha: 0.9),
               height: 1.45,
@@ -253,24 +253,24 @@ class VoicesAndLiteratureSection extends StatelessWidget {
                       children: [
                         Text(
                           work.title,
-                          style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.goldLight),
+                          style: BaqueanoFonts.display(fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.goldLight),
                         ),
                         Text(
                           work.year,
-                          style: GoogleFonts.spaceGrotesk(fontSize: 11, color: AppColors.textMuted),
+                          style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                         ),
                       ],
                     ),
                     const SizedBox(height: 4),
                     Text(
                       work.description,
-                      style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.8)),
+                      style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textLight.withValues(alpha: 0.8)),
                     ),
                     if (work.famousQuote != null) ...[
                       const SizedBox(height: 6),
                       Text(
                         work.famousQuote!,
-                        style: GoogleFonts.inter(fontSize: 11, fontStyle: FontStyle.italic, color: AppColors.gold),
+                        style: BaqueanoFonts.text(fontSize: 11, fontStyle: FontStyle.italic, color: AppColors.gold),
                       ),
                     ],
                   ],
@@ -292,7 +292,7 @@ class VoicesAndLiteratureSection extends StatelessWidget {
               icon: const Icon(Icons.location_city_rounded, size: 16, color: Colors.white),
               label: Text(
                 'Visitar la Tumba de Darío en la Catedral de León',
-                style: GoogleFonts.spaceGrotesk(fontSize: 12, fontWeight: FontWeight.w700),
+                style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.w700),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.terracotta,

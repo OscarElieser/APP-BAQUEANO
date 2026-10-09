@@ -6,10 +6,11 @@
 // - Centralizar la apariencia visual de la aplicación bajo un estándar consistente,
 //   elegante y oscuro (Dark Luxury Theme), optimizado para reducir fatiga visual
 //   y ahorrar batería en pantallas OLED/AMOLED de teléfonos modernos.
-// - Implementar una jerarquía tipográfica triple de clase mundial:
-//   * Montserrat (Títulos de gran impacto y presencia imponente).
-//   * Space Grotesk (Subtítulos técnicos, métricas y etiquetas geográficas).
-//   * Inter (Párrafos y descripciones con máxima legibilidad en lectura continua).
+// - Aplicar las dos tipografías oficiales de BAQUEANO (directiva 2026-10-08),
+//   centralizadas en `baqueano_fonts.dart`:
+//   * League Spartan (títulos de gran impacto y presencia imponente).
+//   * Aristotelica Pro (subtítulos, métricas, etiquetas y lectura continua;
+//     respaldo Plus Jakarta Sans hasta registrar sus archivos con licencia).
 //
 // ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
 // - Configura `ThemeData` conforme a la especificación Material Design 3 (`useMaterial3: true`).
@@ -21,11 +22,11 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'baqueano_fonts.dart';
 import 'app_colors.dart';
 
 class AppTheme {
-  /// Retorna el tema oscuro oficial de Baqueano con tipografías cargadas vía GoogleFonts.
+  /// Retorna el tema oscuro oficial de Baqueano con tipografías oficiales de BaqueanoFonts.
   static ThemeData get darkTheme {
     return ThemeData(
       // Activación del estándar moderno Material 3
@@ -48,11 +49,11 @@ class AppTheme {
       ),
 
       // ----------------------------------------------------------------------
-      // 🔤 JERARQUÍA TIPOGRÁFICA EDITORIAL (Montserrat + Space Grotesk + Inter)
+      // 🔤 JERARQUÍA TIPOGRÁFICA OFICIAL (League Spartan + Aristotelica Pro)
       // ----------------------------------------------------------------------
       textTheme: TextTheme(
         // Título monumental del Hero (Ej: "NICARAGUA EN MODO SECRETO")
-        displayLarge: GoogleFonts.montserrat(
+        displayLarge: BaqueanoFonts.display(
           fontSize: 48,
           fontWeight: FontWeight.w900,
           color: AppColors.textLight,
@@ -60,7 +61,7 @@ class AppTheme {
           height: 1.1,
         ),
         // Títulos de secciones mayores y modales de bienvenida
-        displayMedium: GoogleFonts.montserrat(
+        displayMedium: BaqueanoFonts.display(
           fontSize: 36,
           fontWeight: FontWeight.w800,
           color: AppColors.textLight,
@@ -68,67 +69,67 @@ class AppTheme {
           height: 1.15,
         ),
         // Encabezados de tarjetas principales de destino
-        displaySmall: GoogleFonts.montserrat(
+        displaySmall: BaqueanoFonts.display(
           fontSize: 28,
           fontWeight: FontWeight.w800,
           color: AppColors.textLight,
           height: 1.2,
         ),
         // Títulos técnicos con estilo monoespaciado moderno
-        headlineLarge: GoogleFonts.spaceGrotesk(
+        headlineLarge: BaqueanoFonts.text(
           fontSize: 24,
           fontWeight: FontWeight.w700,
           color: AppColors.textLight,
           letterSpacing: -0.3,
         ),
-        headlineMedium: GoogleFonts.spaceGrotesk(
+        headlineMedium: BaqueanoFonts.text(
           fontSize: 20,
           fontWeight: FontWeight.w600,
           color: AppColors.textLight,
         ),
-        headlineSmall: GoogleFonts.spaceGrotesk(
+        headlineSmall: BaqueanoFonts.text(
           fontSize: 18,
           fontWeight: FontWeight.w600,
           color: AppColors.textLight,
         ),
         // Títulos de tarjetas en cuadrícula
-        titleLarge: GoogleFonts.montserrat(
+        titleLarge: BaqueanoFonts.display(
           fontSize: 18,
           fontWeight: FontWeight.w700,
           color: AppColors.textLight,
         ),
-        titleMedium: GoogleFonts.spaceGrotesk(
+        titleMedium: BaqueanoFonts.text(
           fontSize: 16,
           fontWeight: FontWeight.w600,
           color: AppColors.textLight,
         ),
-        titleSmall: GoogleFonts.spaceGrotesk(
+        titleSmall: BaqueanoFonts.text(
           fontSize: 14,
           fontWeight: FontWeight.w500,
           color: AppColors.textMuted,
         ),
         // Cuerpo de texto principal para relatos y descripciones
-        bodyLarge: GoogleFonts.inter(
+        bodyLarge: BaqueanoFonts.text(
           fontSize: 16,
           fontWeight: FontWeight.w400,
           color: AppColors.textLight,
           height: 1.6,
         ),
         // Cuerpo de texto secundario para metadatos y reseñas
-        bodyMedium: GoogleFonts.inter(
+        bodyMedium: BaqueanoFonts.text(
           fontSize: 14,
           fontWeight: FontWeight.w400,
           color: AppColors.textMuted,
           height: 1.5,
         ),
-        bodySmall: GoogleFonts.inter(
+        bodySmall: BaqueanoFonts.text(
           fontSize: 12,
           fontWeight: FontWeight.w400,
           color: AppColors.textMuted,
           height: 1.4,
         ),
         // Texto para botones interactivos y chips
-        labelLarge: GoogleFonts.spaceGrotesk(
+        labelLarge: BaqueanoFonts.text(
           fontSize: 14,
           fontWeight: FontWeight.w700,
           letterSpacing: 0.5,
@@ -159,7 +160,7 @@ class AppTheme {
       // Chips de filtros de departamento y categoría
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.primaryLight.withValues(alpha: 0.5),
-        labelStyle: GoogleFonts.spaceGrotesk(
+        labelStyle: BaqueanoFonts.text(
           fontSize: 12,
           fontWeight: FontWeight.w600,
           color: AppColors.goldLight,

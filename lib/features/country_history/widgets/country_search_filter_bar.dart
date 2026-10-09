@@ -17,7 +17,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 
 class CountrySearchFilterBar extends StatefulWidget {
@@ -78,10 +78,10 @@ class _CountrySearchFilterBarState extends State<CountrySearchFilterBar> {
           child: TextField(
             controller: _controller,
             onChanged: widget.onSearchChanged,
-            style: GoogleFonts.spaceGrotesk(color: Colors.white, fontSize: 13.5),
+            style: BaqueanoFonts.text(color: Colors.white, fontSize: 13.5),
             decoration: InputDecoration(
               hintText: '¿Qué quieres conocer de Nicaragua? (personas, comidas, poetas, volcanes...)',
-              hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 12.5),
+              hintStyle: BaqueanoFonts.text(color: AppColors.textMuted, fontSize: 12.5),
               prefixIcon: const Icon(Icons.search_rounded, color: AppColors.gold, size: 22),
               suffixIcon: _controller.text.isNotEmpty
                   ? IconButton(
@@ -116,7 +116,7 @@ class _CountrySearchFilterBarState extends State<CountrySearchFilterBar> {
               return FilterChip(
                 selected: isSelected,
                 label: Text(cat),
-                labelStyle: GoogleFonts.spaceGrotesk(
+                labelStyle: BaqueanoFonts.text(
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
                   color: isSelected ? Colors.white : AppColors.textLight,

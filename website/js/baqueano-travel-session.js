@@ -458,7 +458,7 @@
     markerLayer.clearLayers(); if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
     const points = travelSession.route.filter((item) => Number.isFinite(item.latitude) && Number.isFinite(item.longitude));
     points.forEach((point, index) => {
-      const icon = window.L.divIcon({ className: 'custom-map-pin', html: `<div style="background:#165D6F;width:28px;height:28px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;box-shadow:0 4px 10px rgba(15,23,42,.35);color:#fff;font:800 12px Inter">${index + 1}</div>`, iconSize: [28, 28], iconAnchor: [14, 14] });
+      const icon = window.L.divIcon({ className: 'custom-map-pin', html: `<div style="background:#165D6F;width:28px;height:28px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;box-shadow:0 4px 10px rgba(15,23,42,.35);color:#fff;font:800 12px Aristotelica Pro, Plus Jakarta Sans">${index + 1}</div>`, iconSize: [28, 28], iconAnchor: [14, 14] });
       window.L.marker([point.latitude, point.longitude], { icon }).addTo(markerLayer).bindPopup(`<strong>${escapeHtml(point.name)}</strong>`);
     });
     if (points.length > 1) routeLayer = window.L.polyline(points.map((point) => [point.latitude, point.longitude]), { color: '#F65E01', weight: 4, opacity: 0.9, dashArray: '6,8' }).addTo(map);

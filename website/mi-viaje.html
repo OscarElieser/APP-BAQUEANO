@@ -38,7 +38,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <!-- FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -52,7 +52,7 @@
 
   <style>
     /* ── Variables de Página ── */
-    .page-viaje-exact { background: #F8FAFC; color: #1E293B; font-family: 'Inter', system-ui, sans-serif; }
+    .page-viaje-exact { background: #F8FAFC; color: #1E293B; font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', system-ui, sans-serif; }
 
     /* ── Hero ── */
     .viaje-hero {
@@ -60,7 +60,7 @@
                   url('assets/images/destinos/Posada Rural San Ramón Ometepe.avif') center/cover;
       padding: 70px 0 50px; color: #FFF;
     }
-    .viaje-hero h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 900; margin: 0 0 12px; }
+    .viaje-hero h1 { font-family: 'League Spartan', sans-serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 900; margin: 0 0 12px; }
     .viaje-hero p  { font-size: 1.05rem; color: #CBD5E1; max-width: 620px; margin: 0; }
 
     /* ── Layout ── */
@@ -99,7 +99,7 @@
     .btn-day-map, .btn-day-save, .btn-day-edit {
       border: 1.5px solid; padding: 7px 14px; border-radius: 8px; font-size: .82rem;
       font-weight: 600; cursor: pointer; display: inline-flex; align-items: center;
-      gap: 6px; transition: all .18s; font-family: 'Inter', sans-serif; background: none;
+      gap: 6px; transition: all .18s; font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif; background: none;
     }
     .btn-day-map  { border-color: #165D6F; color: #165D6F; }
     .btn-day-map:hover { background: #165D6F; color: #FFF; }
@@ -114,12 +114,12 @@
       padding: 22px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.04);
       display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
     }
-    .route-ready-body h3  { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: #0B253A; margin: 0 0 6px; }
+    .route-ready-body h3  { font-family: 'League Spartan', sans-serif; font-size: 1.05rem; font-weight: 800; color: #0B253A; margin: 0 0 6px; }
     .route-ready-body p   { font-size: .85rem; color: #64748B; margin: 0 0 14px; max-width: 420px; }
     .btn-modify-ai {
       display: inline-flex; align-items: center; gap: 8px; background: #165D6F;
       color: #FFF; border: none; padding: 10px 22px; border-radius: 10px;
-      font-weight: 700; font-size: .9rem; cursor: pointer; font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: .9rem; cursor: pointer; font-family: 'League Spartan', sans-serif;
       transition: background .2s; text-decoration: none;
     }
     .btn-modify-ai:hover { background: #0B253A; color: #FFF; }
@@ -131,13 +131,13 @@
       border: 1.5px solid #E2E8F0; background: #FFF; color: #475569;
       padding: 9px 16px; border-radius: 9px; font-size: .84rem; font-weight: 600;
       cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
-      transition: all .18s; font-family: 'Inter', sans-serif;
+      transition: all .18s; font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
     }
     .btn-route-action:hover { border-color: #165D6F; color: #165D6F; background: rgba(22,93,111,.05); }
     .btn-reserve-all {
       background: #F65E01; color: #FFF; border: none; padding: 10px 22px;
       border-radius: 10px; font-weight: 700; font-size: .92rem; cursor: pointer;
-      font-family: 'Montserrat', sans-serif; display: inline-flex; align-items: center;
+      font-family: 'League Spartan', sans-serif; display: inline-flex; align-items: center;
       gap: 8px; transition: background .2s; margin-left: auto;
     }
     .btn-reserve-all:hover { background: #D94E00; }
@@ -145,7 +145,7 @@
     /* ── Calculadora ── */
     .budget-calc-box { background: #FFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px; max-width: 600px; box-shadow: 0 4px 16px rgba(0,0,0,.04); }
     .calc-row  { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #E2E8F0; font-size: .9rem; }
-    .calc-total { display: flex; align-items: center; justify-content: space-between; padding: 16px 0 0; font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 800; color: #165D6F; }
+    .calc-total { display: flex; align-items: center; justify-content: space-between; padding: 16px 0 0; font-family: 'League Spartan', sans-serif; font-size: 1.25rem; font-weight: 800; color: #165D6F; }
 
     /* ── Checklist ── */
     .checklist-wrap { background: #FFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px; max-width: 600px; }
@@ -155,7 +155,7 @@
     /* ── Recomendaciones ── */
     .recommendations-section { margin-top: 28px; }
     .rec-section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
-    .rec-section-head h2 { font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800; color: #0B253A; margin: 0; }
+    .rec-section-head h2 { font-family: 'League Spartan', sans-serif; font-size: 1.15rem; font-weight: 800; color: #0B253A; margin: 0; }
     .rec-section-head a  { font-size: .85rem; color: #165D6F; font-weight: 700; text-decoration: none; }
     .rec-section-head a:hover { text-decoration: underline; }
     .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 16px; }
@@ -208,7 +208,7 @@
     .btn-rec-action {
       width: 100%; border: 1.5px solid #E2E8F0; background: #FFF; color: #475569;
       padding: 8px; border-radius: 8px; font-size: .82rem; font-weight: 600;
-      cursor: pointer; transition: all .18s; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: all .18s; font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
     }
     .btn-rec-action.primary { background: #F65E01; color: #FFF; border-color: #F65E01; }
     .btn-rec-action:hover { border-color: #F65E01; color: #F65E01; }
@@ -222,7 +222,7 @@
     .weather-header { display: flex; align-items: center; gap: 8px; font-weight: 700; color: #0B253A; margin-bottom: 14px; font-size: .9rem; }
     .weather-main   { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
     .weather-icon   { font-size: 2.2rem; }
-    .weather-city   { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem; color: #0B253A; }
+    .weather-city   { font-family: 'League Spartan', sans-serif; font-weight: 800; font-size: 1.1rem; color: #0B253A; }
     .weather-cond   { font-size: .82rem; color: #64748B; margin-top: 2px; }
     .weather-forecast { display: flex; gap: 0; border-top: 1px solid #F1F5F9; padding-top: 12px; }
     .forecast-day { flex: 1; text-align: center; }
@@ -236,7 +236,7 @@
       flex: 1; min-width: 90px; padding: 12px 10px; background: none; border: none;
       font-size: .85rem; font-weight: 700; color: #64748B; cursor: pointer;
       border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all .2s;
-      white-space: nowrap; font-family: 'Inter', sans-serif;
+      white-space: nowrap; font-family: 'Aristotelica Pro', 'Plus Jakarta Sans', sans-serif;
     }
     .map-tab-btn.active { color: #F65E01; border-bottom-color: #F65E01; }
     .map-tab-panel { display: none; }
@@ -245,14 +245,14 @@
     .map-day-cards { display: flex; flex-direction: column; gap: 0; }
     .map-day-row { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; border-bottom: 1px solid #F1F5F9; }
     .map-day-num { width: 34px; height: 34px; background: #F65E01; color: #FFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .9rem; flex-shrink: 0; }
-    .map-day-info h5 { font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 800; color: #0B253A; margin: 0 0 3px; }
+    .map-day-info h5 { font-family: 'League Spartan', sans-serif; font-size: .9rem; font-weight: 800; color: #0B253A; margin: 0 0 3px; }
     .map-day-info span { font-size: .8rem; color: #64748B; }
 
     /* ── Calculadora Presupuesto Panel ── */
     .sidebar-budget-mini { background: #FFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px; }
-    .sidebar-budget-mini h4 { font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 800; color: #0B253A; margin: 0 0 14px; }
+    .sidebar-budget-mini h4 { font-family: 'League Spartan', sans-serif; font-size: .9rem; font-weight: 800; color: #0B253A; margin: 0 0 14px; }
     .budget-mini-row { display: flex; justify-content: space-between; font-size: .82rem; padding: 7px 0; border-bottom: 1px dashed #F1F5F9; color: #475569; }
-    .budget-mini-total { display: flex; justify-content: space-between; padding: 10px 0 0; font-weight: 800; color: #165D6F; font-size: .95rem; font-family: 'Montserrat', sans-serif; }
+    .budget-mini-total { display: flex; justify-content: space-between; padding: 10px 0 0; font-weight: 800; color: #165D6F; font-size: .95rem; font-family: 'League Spartan', sans-serif; }
   </style>
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261005-a11y-3">
@@ -443,7 +443,7 @@
           <!-- ── PANEL 2: Calculadora ── -->
           <div class="viaje-tab-panel" id="tabPresupuesto">
             <div class="budget-calc-box">
-              <h3 data-i18n="trip.budgetTitle" style="font-family:'Montserrat',sans-serif;margin:0 0 8px">Categorías de gasto de tu viaje</h3>
+              <h3 data-i18n="trip.budgetTitle" style="font-family:'League Spartan',sans-serif;margin:0 0 8px">Categorías de gasto de tu viaje</h3>
               <p data-i18n="trip.budgetHonest" style="font-size:0.82rem;color:#475569;margin:0 0 16px">BAQUEANO no publica montos sin una fuente verificable. Cada costo se confirma directamente con el prestador antes de viajar.</p>
               
               <div class="calc-row">
@@ -479,7 +479,7 @@
           <!-- ── PANEL 3: Checklist ── -->
           <div class="viaje-tab-panel" id="tabChecklist">
             <div class="checklist-wrap">
-              <h3 data-i18n="pages.miViaje.tabChecklist.h31" style="font-family:'Montserrat',sans-serif;margin:0 0 16px">Lista de Equipaje para el Sendero</h3>
+              <h3 data-i18n="pages.miViaje.tabChecklist.h31" style="font-family:'League Spartan',sans-serif;margin:0 0 16px">Lista de Equipaje para el Sendero</h3>
               <label class="check-item"><input type="checkbox" checked> <span data-i18n="pages.miViaje.tabChecklist.label1">Botella de agua reutilizable (evitar plásticos de un solo uso)</span></label>
               <label class="check-item"><input type="checkbox" checked> <span data-i18n="pages.miViaje.tabChecklist.label2">Protector solar biodegradable y repelente de insectos</span></label>
               <label class="check-item"><input type="checkbox"> <span data-i18n="pages.miViaje.tabChecklist.label3">Calzado de senderismo con buen agarre para terreno volcánico</span></label>
@@ -495,7 +495,7 @@
           <div class="viaje-tab-panel" id="tabFavoritos">
             <div style="background:#FFF;border:1px solid #E2E8F0;border-radius:14px;padding:30px;text-align:center">
               <i class="fa-solid fa-heart" style="font-size:2.5rem;color:#EF4444;display:block;margin-bottom:12px"></i>
-              <h3 data-i18n="pages.miViaje.tabFavoritos.h31" style="font-family:'Montserrat',sans-serif;margin:0 0 8px">Tus destinos favoritos</h3>
+              <h3 data-i18n="pages.miViaje.tabFavoritos.h31" style="font-family:'League Spartan',sans-serif;margin:0 0 8px">Tus destinos favoritos</h3>
               <p data-i18n="pages.miViaje.tabFavoritos.p1" style="color:#64748B;max-width:450px;margin:0 auto 18px">
                 Al hacer clic en el corazón de cualquier destino, cooperativa o platillo típico, quedará registrado aquí para tu próxima ruta.
               </p>
@@ -693,7 +693,7 @@
           <!-- Acceso Rápido a Baqueano IA -->
           <div style="background:linear-gradient(135deg,#0B253A 0%,#165D6F 100%);border-radius:14px;padding:20px;color:#FFF;text-align:center">
             <i class="fa-solid fa-robot" style="font-size:2rem;margin-bottom:10px;display:block;color:#F4E6C1"></i>
-            <h4 data-i18n="pages.miViaje.viajeSidebar.h42" style="font-family:'Montserrat',sans-serif;margin:0 0 8px;font-size:.95rem">Baqueano Digital IA</h4>
+            <h4 data-i18n="pages.miViaje.viajeSidebar.h42" style="font-family:'League Spartan',sans-serif;margin:0 0 8px;font-size:.95rem">Baqueano Digital IA</h4>
             <p data-i18n="pages.miViaje.viajeSidebar.p1" style="font-size:.82rem;color:#CBD5E1;margin:0 0 14px">Generá una ruta personalizada o ajustá esta en segundos.</p>
             <a href="baqueano-ia.html" class="btn-modify-ai" style="width:100%;justify-content:center;box-sizing:border-box">
               <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="baqui.openPanel">Abrir asistente</span>

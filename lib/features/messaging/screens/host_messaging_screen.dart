@@ -26,7 +26,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/app_colors.dart';
@@ -428,7 +428,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                       const SizedBox(width: 8),
                       Text(
                         'Volver a la Pantalla Principal',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
                           color: AppColors.goldLight,
@@ -548,7 +548,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                     children: [
                       Text(
                         host.hostName.split(' ').first,
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 12,
                           fontWeight: FontWeight.w800,
                           color: isSelected ? AppColors.goldLight : Colors.white,
@@ -556,7 +556,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                       ),
                       Text(
                         host.department,
-                        style: GoogleFonts.inter(fontSize: 10, color: AppColors.textMuted),
+                        style: BaqueanoFonts.text(fontSize: 10, color: AppColors.textMuted),
                       ),
                     ],
                   ),
@@ -610,7 +610,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                     Flexible(
                       child: Text(
                         host.hostName,
-                        style: GoogleFonts.spaceGrotesk(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
+                        style: BaqueanoFonts.text(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -621,7 +621,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                 ),
                 Text(
                   host.businessName,
-                  style: GoogleFonts.inter(fontSize: 11, color: AppColors.goldLight),
+                  style: BaqueanoFonts.text(fontSize: 11, color: AppColors.goldLight),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -639,7 +639,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                     const SizedBox(width: 5),
                     Text(
                       'Canal verificado • Respuesta según cobertura',
-                      style: GoogleFonts.inter(
+                      style: BaqueanoFonts.text(
                         fontSize: 10,
                         color: Colors.white70,
                       ),
@@ -701,13 +701,13 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
             const SizedBox(height: 12),
             Text(
               'Canal Directo con ${host.hostName}',
-              style: GoogleFonts.spaceGrotesk(fontSize: 15, fontWeight: FontWeight.w800, color: Colors.white),
+              style: BaqueanoFonts.text(fontSize: 15, fontWeight: FontWeight.w800, color: Colors.white),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 4),
             Text(
               '${host.businessName} • ${host.department}',
-              style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.goldLight),
+              style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.goldLight),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
@@ -727,7 +727,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                     Flexible(
                       child: Text(
                         'Reserva ${booking.code} activa: ${booking.date}',
-                        style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+                        style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
                       ),
                     ),
                   ],
@@ -736,7 +736,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
             const SizedBox(height: 12),
             Text(
               'Envía tu consulta o utiliza una sugerencia rápida para coordinar tu llegada, consultar tarifas o enviar tu comprobante de pago bancario.',
-              style: GoogleFonts.inter(fontSize: 11.5, color: AppColors.textMuted, height: 1.35),
+              style: BaqueanoFonts.text(fontSize: 11.5, color: AppColors.textMuted, height: 1.35),
               textAlign: TextAlign.center,
             ),
           ],
@@ -793,7 +793,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
             const SizedBox(width: 6),
             Text(
               'Escribiendo...',
-              style: GoogleFonts.inter(fontSize: 11, color: AppColors.goldLight, fontStyle: FontStyle.italic),
+              style: BaqueanoFonts.text(fontSize: 11, color: AppColors.goldLight, fontStyle: FontStyle.italic),
             ),
           ],
         ),
@@ -832,7 +832,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
           children: [
             Text(
               msg.text,
-              style: GoogleFonts.inter(
+              style: BaqueanoFonts.text(
                 fontSize: 13,
                 color: Colors.white,
                 height: 1.4,
@@ -844,7 +844,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
               children: [
                 Text(
                   msg.formattedTime,
-                  style: GoogleFonts.inter(
+                  style: BaqueanoFonts.text(
                     fontSize: 9.5,
                     color: Colors.white70,
                   ),
@@ -909,7 +909,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
               side: const BorderSide(color: AppColors.borderGold, width: 1),
               label: Text(
                 text,
-                style: GoogleFonts.spaceGrotesk(fontSize: 11, color: AppColors.goldLight, fontWeight: FontWeight.w600),
+                style: BaqueanoFonts.text(fontSize: 11, color: AppColors.goldLight, fontWeight: FontWeight.w600),
               ),
               onPressed: () => _sendMessage(text, bookingCode: bookingCode),
             ),
@@ -942,7 +942,7 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
             const SizedBox(height: 16),
             Text(
               'Adjuntar Información al Anfitrión',
-              style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white),
+              style: BaqueanoFonts.display(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white),
             ),
             const SizedBox(height: 14),
             ListTile(
@@ -951,8 +951,8 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                 decoration: BoxDecoration(color: AppColors.gold.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)),
                 child: const Icon(Icons.receipt_long_rounded, color: AppColors.gold, size: 22),
               ),
-              title: Text('Comprobante Bancario (BAC / Banpro / LaFise)', style: GoogleFonts.spaceGrotesk(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w700)),
-              subtitle: Text('Enviar notificación de transferencia realizada', style: GoogleFonts.inter(fontSize: 11, color: Colors.white60)),
+              title: Text('Comprobante Bancario (BAC / Banpro / LaFise)', style: BaqueanoFonts.text(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w700)),
+              subtitle: Text('Enviar notificación de transferencia realizada', style: BaqueanoFonts.text(fontSize: 11, color: Colors.white60)),
               onTap: () {
                 Navigator.pop(ctx);
                 _sendMessage('📄 [Comprobante Adjunto]: Transferencia bancaria exitosa de reserva ${bookingCode ?? "BAQ-78219"}.', bookingCode: bookingCode);
@@ -965,8 +965,8 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                 decoration: BoxDecoration(color: AppColors.jungleGreen.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(10)),
                 child: const Icon(Icons.add_location_alt_rounded, color: AppColors.jungleGreenLight, size: 22),
               ),
-              title: Text('Compartir Coordenadas GPS en Tiempo Real', style: GoogleFonts.spaceGrotesk(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w700)),
-              subtitle: Text('Enviar ubicación exacta del dispositivo para encuentro', style: GoogleFonts.inter(fontSize: 11, color: Colors.white60)),
+              title: Text('Compartir Coordenadas GPS en Tiempo Real', style: BaqueanoFonts.text(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w700)),
+              subtitle: Text('Enviar ubicación exacta del dispositivo para encuentro', style: BaqueanoFonts.text(fontSize: 11, color: Colors.white60)),
               onTap: () {
                 Navigator.pop(ctx);
                 _shareRealGpsLocation(context, bookingCode);
@@ -978,8 +978,8 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                 decoration: BoxDecoration(color: AppColors.terracotta.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(10)),
                 child: const Icon(Icons.photo_camera_rounded, color: AppColors.terracottaLight, size: 22),
               ),
-              title: Text('Foto o Captura de Pantalla', style: GoogleFonts.spaceGrotesk(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w700)),
-              subtitle: Text('Adjuntar imagen desde tu galería o cámara', style: GoogleFonts.inter(fontSize: 11, color: Colors.white60)),
+              title: Text('Foto o Captura de Pantalla', style: BaqueanoFonts.text(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w700)),
+              subtitle: Text('Adjuntar imagen desde tu galería o cámara', style: BaqueanoFonts.text(fontSize: 11, color: Colors.white60)),
               onTap: () {
                 Navigator.pop(ctx);
                 _pickAndSendPhoto(context, bookingCode);
@@ -1039,11 +1039,11 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
                     controller: _textController,
                     minLines: 1,
                     maxLines: 3,
-                    style: GoogleFonts.inter(color: AppColors.textLight, fontSize: 14),
+                    style: BaqueanoFonts.text(color: AppColors.textLight, fontSize: 14),
                     cursorColor: AppColors.gold,
                     decoration: InputDecoration(
                       hintText: 'Escribe a ${host.hostName.split(' ').first}...',
-                      hintStyle: GoogleFonts.inter(color: AppColors.textMuted, fontSize: 13),
+                      hintStyle: BaqueanoFonts.text(color: AppColors.textMuted, fontSize: 13),
                       border: InputBorder.none,
                       contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 10),
                     ),

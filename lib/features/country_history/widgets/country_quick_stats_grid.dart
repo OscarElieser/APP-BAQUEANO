@@ -20,7 +20,7 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/country_history_models.dart';
 
@@ -125,7 +125,7 @@ class CountryQuickStatsGrid extends StatelessWidget {
                   Expanded(
                     child: Text(
                       item['tag']!,
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 10.5,
                         fontWeight: FontWeight.w800,
                         letterSpacing: 1.0,
@@ -142,7 +142,7 @@ class CountryQuickStatsGrid extends StatelessWidget {
               // Cifra o dato principal destacado
               Text(
                 item['value']!,
-                style: GoogleFonts.montserrat(
+                style: BaqueanoFonts.display(
                   fontSize: 15,
                   fontWeight: FontWeight.w800,
                   color: Colors.white,
@@ -155,7 +155,7 @@ class CountryQuickStatsGrid extends StatelessWidget {
               // Texto secundario contextual de apoyo (hasta 2 líneas de texto descriptivo)
               Text(
                 item['detail']!,
-                style: GoogleFonts.inter(
+                style: BaqueanoFonts.text(
                   fontSize: 11,
                   color: AppColors.textMuted,
                   height: 1.25,

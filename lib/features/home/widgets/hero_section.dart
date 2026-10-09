@@ -24,7 +24,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/data/catalog_data.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/baqueano_button.dart';
@@ -199,7 +199,7 @@ class _HeroSectionState extends State<HeroSection> {
               const SizedBox(width: 8),
               Text(
                 'EXPEDICIONES PRIVADAS · TURISMO LOCAL',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
                   color: AppColors.goldLight,
@@ -219,7 +219,7 @@ class _HeroSectionState extends State<HeroSection> {
             children: [
               TextSpan(
                 text: 'NICARAGUA\n',
-                style: GoogleFonts.montserrat(
+                style: BaqueanoFonts.display(
                   fontSize: isDesktop ? 54 : 38,
                   fontWeight: FontWeight.w900,
                   color: Colors.white,
@@ -229,7 +229,7 @@ class _HeroSectionState extends State<HeroSection> {
               ),
               TextSpan(
                 text: 'EN MODO\nSECRETO.',
-                style: GoogleFonts.montserrat(
+                style: BaqueanoFonts.display(
                   fontSize: isDesktop ? 54 : 38,
                   fontWeight: FontWeight.w900,
                   color: const Color(
@@ -249,7 +249,7 @@ class _HeroSectionState extends State<HeroSection> {
         Text(
           'Diseña rutas inmersivas con guías locales, reservas directas, mapa satelital interactivo y un asistente AI que convierte tus gustos en una aventura lista para vivir.',
           textAlign: isDesktop ? TextAlign.start : TextAlign.center,
-          style: GoogleFonts.inter(
+          style: BaqueanoFonts.text(
             fontSize: isDesktop ? 16 : 14,
             fontWeight: FontWeight.w400,
             color: AppColors.textLight.withValues(alpha: 0.9),

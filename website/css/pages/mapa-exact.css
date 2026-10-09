@@ -25,13 +25,13 @@ QUÉ:
 .map-intro-grid { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr); align-items:end; gap:clamp(32px,7vw,96px); }
 .map-eyebrow { display:inline-flex; align-items:center; gap:9px; margin-bottom:17px; color:var(--map-teal); font-size:.76rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
 .map-eyebrow i { color:var(--map-orange); }
-.map-intro h1 { max-width:790px; margin:0; color:var(--map-ink); font-family:'Montserrat',sans-serif; font-size:clamp(2.25rem,5vw,4.65rem); font-weight:900; letter-spacing:-.055em; line-height:.98; }
+.map-intro h1 { max-width:790px; margin:0; color:var(--map-ink); font-family:'League Spartan',sans-serif; font-size:clamp(2.25rem,5vw,4.65rem); font-weight:900; letter-spacing:-.055em; line-height:.98; }
 .map-intro h1 span { color:var(--map-teal); }
 .map-intro-copy p { max-width:720px; margin:24px 0 0; color:var(--map-muted); font-size:clamp(.98rem,1.35vw,1.12rem); line-height:1.75; }
 .map-intro-stats { display:grid; grid-template-columns:repeat(3,1fr); padding:19px; background:rgba(255,255,255,.82); border:1px solid rgba(22,93,111,.13); border-radius:22px; box-shadow:0 22px 60px rgba(15,23,42,.09); backdrop-filter:blur(16px); }
 .map-stat { display:flex; flex-direction:column; align-items:center; gap:3px; padding:8px 10px; text-align:center; }
 .map-stat + .map-stat { border-left:1px solid var(--map-line); }
-.map-stat strong { color:var(--map-orange); font:900 1.6rem/1 'Montserrat',sans-serif; }
+.map-stat strong { color:var(--map-orange); font:900 1.6rem/1 'League Spartan',sans-serif; }
 .map-stat span { color:var(--map-muted); font-size:.68rem; font-weight:700; line-height:1.2; }
 .page-mapa-exact .map-hub-toolbar { position:relative; top:auto; z-index:700; padding:20px 0; background:rgba(255,255,255,.96); border-bottom:1px solid var(--map-line); box-shadow:0 12px 30px rgba(15,23,42,.05); }
 .page-mapa-exact .map-hub-toolbar-inner { gap:14px; }
@@ -51,7 +51,7 @@ QUÉ:
 .map-live-badge { position:absolute; z-index:610; top:55px; left:58px; display:inline-flex; align-items:center; gap:8px; padding:9px 13px; background:rgba(255,255,255,.93); border:1px solid rgba(22,93,111,.15); border-radius:999px; color:var(--map-ink); font-size:.72rem; font-weight:800; box-shadow:0 8px 24px rgba(15,23,42,.14); backdrop-filter:blur(12px); }
 .map-live-badge span { width:8px; height:8px; background:#4A7A5A; border-radius:50%; box-shadow:0 0 0 5px rgba(16,185,129,.14); }
 .map-legend { position:absolute; z-index:610; right:56px; bottom:55px; display:grid; grid-template-columns:repeat(2,auto); gap:9px 18px; padding:16px 18px; background:rgba(255,255,255,.94); border:1px solid rgba(22,93,111,.13); border-radius:16px; color:#475569; font-size:.72rem; font-weight:700; box-shadow:0 12px 35px rgba(15,23,42,.15); backdrop-filter:blur(14px); }
-.map-legend strong { grid-column:1/-1; color:var(--map-ink); font:800 .74rem 'Montserrat',sans-serif; }
+.map-legend strong { grid-column:1/-1; color:var(--map-ink); font:800 .74rem 'League Spartan',sans-serif; }
 .map-legend span { display:flex; align-items:center; gap:7px; }
 .legend-dot { width:9px; height:9px; border-radius:50%; }
 .legend-dot.is-volcano { background:#DC2626; } .legend-dot.is-beach { background:#0284C7; } .legend-dot.is-nature { background:#4A7A5A; } .legend-dot.is-culture { background:var(--map-orange); }

@@ -38,8 +38,8 @@
   --bq-text-dark: #0B253A;
   --bq-text-muted: #64748B;
   --bq-border-light: #E2E8F0;
-  --bq-font-heading: 'Montserrat', sans-serif;
-  --bq-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --bq-font-heading: 'League Spartan', sans-serif;
+  --bq-font-body: 'Aristotelica Pro', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .page-historia-exact {
@@ -1141,9 +1141,9 @@ html[data-theme] .hist-dept-map-card .hist-dept-map-header p {
 .hist-era-dialog-head { position: absolute; left: 22px; right: 70px; bottom: 16px; z-index: 1; display: grid; gap: 4px; }
 .hist-era-dialog-dates {
   justify-self: start; padding: 3px 10px; border-radius: 999px;
-  background: #C54B01; color: #FFFFFF; font: 700 0.72rem/1.3 'Montserrat', sans-serif; letter-spacing: 0.04em;
+  background: #C54B01; color: #FFFFFF; font: 700 0.72rem/1.3 'League Spartan', sans-serif; letter-spacing: 0.04em;
 }
-.hist-era-dialog-title { margin: 0; color: #FFFFFF !important; font: 900 clamp(1.5rem, 1.2rem + 1.4vw, 2.1rem)/1.05 'Montserrat', sans-serif; letter-spacing: -0.02em; text-wrap: balance; }
+.hist-era-dialog-title { margin: 0; color: #FFFFFF !important; font: 900 clamp(1.5rem, 1.2rem + 1.4vw, 2.1rem)/1.05 'League Spartan', sans-serif; letter-spacing: -0.02em; text-wrap: balance; }
 .hist-era-dialog-close {
   position: absolute; top: 12px; right: 12px; z-index: 2;
   width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid rgba(244, 230, 193, 0.6);
@@ -1156,7 +1156,7 @@ html[data-theme] .hist-dept-map-card .hist-dept-map-header p {
 .hist-era-dialog-body { overflow-y: auto; padding: 20px 22px 22px; display: grid; gap: 12px; }
 .hist-era-dialog-summary { margin: 0; max-width: 62ch; font-size: 0.98rem; line-height: 1.6; color: #15232F; }
 .hist-era-dialog-sub {
-  margin: 6px 0 0; font: 700 0.72rem/1.2 'Montserrat', sans-serif; letter-spacing: 0.14em;
+  margin: 6px 0 0; font: 700 0.72rem/1.2 'League Spartan', sans-serif; letter-spacing: 0.14em;
   text-transform: uppercase; color: #A74001;
 }
 .hist-era-dialog-facts { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
@@ -1177,13 +1177,13 @@ html[data-theme] .hist-dept-map-card .hist-dept-map-header p {
 .hist-era-dialog-place:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
 .hist-era-dialog-place > i { color: #C54B01; margin-top: 3px; }
 .hist-era-dialog-place span { display: grid; gap: 2px; }
-.hist-era-dialog-place strong { font: 700 0.88rem/1.25 'Montserrat', sans-serif; }
+.hist-era-dialog-place strong { font: 700 0.88rem/1.25 'League Spartan', sans-serif; }
 .hist-era-dialog-place small { font-size: 0.76rem; color: #4F5E6B; }
 
 .hist-era-dialog-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
 .hist-era-dialog-listen, .hist-era-dialog-explore {
   display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 18px;
-  border-radius: 8px; font: 700 0.9rem/1 'Montserrat', sans-serif; cursor: pointer; text-decoration: none;
+  border-radius: 8px; font: 700 0.9rem/1 'League Spartan', sans-serif; cursor: pointer; text-decoration: none;
 }
 .hist-era-dialog-listen { background: #165D6F; color: #FFFFFF; border: 0; }
 .hist-era-dialog-listen:hover { background: #0E4655; }

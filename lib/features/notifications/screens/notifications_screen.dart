@@ -22,7 +22,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/baqueano_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
@@ -82,7 +82,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                     const SizedBox(width: 8),
                     Text(
                       'Volver a la Pantalla Principal',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
                         color: AppColors.goldLight,
@@ -118,7 +118,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                       ),
                       icon: const Icon(Icons.done_all_rounded, size: 16),
                       label: Text('Marcar todas leídas ($unreadCount)',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700)),
+                          style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700)),
                       onPressed: () {
                         ref.read(bookingCommunicationProvider.notifier).markAllNotificationsAsRead();
                         CustomToast.success(context, 'Notificaciones marcadas como leídas');
@@ -161,7 +161,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                           ),
                           child: Text(
                             cat['label']!,
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 12,
                               fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
                               color: isSelected ? Colors.white : AppColors.textMuted,
@@ -193,12 +193,12 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                     const SizedBox(height: 12),
                     Text(
                       'No tienes notificaciones en esta categoría',
-                      style: GoogleFonts.spaceGrotesk(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
+                      style: BaqueanoFonts.text(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
                     ),
                     const SizedBox(height: 6),
                     Text(
                       'Te notificaremos en cuanto haya cambios en tus reservas o mensajes de anfitriones.',
-                      style: GoogleFonts.inter(fontSize: 13, color: AppColors.textMuted),
+                      style: BaqueanoFonts.text(fontSize: 13, color: AppColors.textMuted),
                     ),
                   ],
                 ),
@@ -272,7 +272,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                       Expanded(
                         child: Text(
                           notif.title,
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 14,
                             fontWeight: notif.isRead ? FontWeight.w600 : FontWeight.w800,
                             color: notif.isRead ? Colors.white70 : Colors.white,
@@ -281,14 +281,14 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                       ),
                       Text(
                         notif.timeAgo,
-                        style: GoogleFonts.inter(fontSize: 11, color: AppColors.textMuted),
+                        style: BaqueanoFonts.text(fontSize: 11, color: AppColors.textMuted),
                       ),
                     ],
                   ),
                   const SizedBox(height: 6),
                   Text(
                     notif.message,
-                    style: GoogleFonts.inter(
+                    style: BaqueanoFonts.text(
                       fontSize: 12,
                       color: notif.isRead ? AppColors.textMuted : Colors.white.withValues(alpha: 0.85),
                       height: 1.4,
@@ -300,7 +300,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                       children: [
                         Text(
                           'Toca para ver detalles',
-                          style: GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w700, color: notif.accentColor),
+                          style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w700, color: notif.accentColor),
                         ),
                         const SizedBox(width: 4),
                         Icon(Icons.arrow_forward_rounded, color: notif.accentColor, size: 12),

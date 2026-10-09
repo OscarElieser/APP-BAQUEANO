@@ -23,7 +23,7 @@ import 'dart:ui';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../theme/baqueano_fonts.dart';
 import '../services/app_lifecycle_service.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_gradients.dart';
@@ -167,7 +167,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                       child: Text(
                         'BAQUEANO',
                         maxLines: 1,
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           color: AppColors.textLight,
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
@@ -210,7 +210,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                               const SizedBox(width: 10),
                               Text(
                                 'Buscar',
-                                style: GoogleFonts.inter(
+                                style: BaqueanoFonts.text(
                                   fontSize: 12,
                                   color: AppColors.textMuted,
                                 ),
@@ -439,7 +439,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
       padding: const EdgeInsets.fromLTRB(12, 14, 8, 6),
       child: Text(
         label,
-        style: GoogleFonts.spaceGrotesk(
+        style: BaqueanoFonts.text(
           color: AppColors.gold,
           fontSize: 9.5,
           fontWeight: FontWeight.w800,
@@ -510,7 +510,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                     label,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.spaceGrotesk(
+                    style: BaqueanoFonts.text(
                       color: foreground,
                       fontSize: 12.5,
                       fontWeight:
@@ -664,7 +664,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                 const SizedBox(width: 6),
                 Text(
                   '¡OFERTAS EXCLUSIVAS! Descubre las mejores promociones de negocios locales y explora nuestros lugares de referencia nacional.',
-                  style: GoogleFonts.inter(
+                  style: BaqueanoFonts.text(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
@@ -693,7 +693,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                   children: [
                     Text(
                       'EXPLORAR →',
-                      style: GoogleFonts.spaceGrotesk(
+                      style: BaqueanoFonts.text(
                         fontSize: 11,
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
@@ -836,7 +836,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                           const SizedBox(width: 6),
                           Text(
                             'MI PERFIL',
-                            style: GoogleFonts.spaceGrotesk(
+                            style: BaqueanoFonts.text(
                               fontSize: 11,
                               fontWeight: FontWeight.w800,
                               color: Colors.white,
@@ -877,7 +877,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                       ),
                       child: Text(
                         'INGRESAR',
-                        style: GoogleFonts.spaceGrotesk(
+                        style: BaqueanoFonts.text(
                           fontSize: 12,
                           fontWeight: FontWeight.w900,
                           letterSpacing: 1.0,
@@ -919,7 +919,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
         ),
         child: Text(
           title,
-          style: GoogleFonts.spaceGrotesk(
+          style: BaqueanoFonts.text(
             fontSize: 13,
             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
             letterSpacing: 0.8,
@@ -944,7 +944,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
           children: [
             Text(
               'EXPLORAR ▾',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
                 color: AppColors.textLight,
@@ -1030,7 +1030,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
           children: [
             Text(
               'NOSOTROS ▾',
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
                 color: AppColors.textLight,
@@ -1090,7 +1090,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.spaceGrotesk(
+                  style: BaqueanoFonts.text(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
                     color: AppColors.textLight,
@@ -1098,7 +1098,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                 ),
                 Text(
                   subtitle,
-                  style: GoogleFonts.inter(
+                  style: BaqueanoFonts.text(
                     fontSize: 11,
                     color: AppColors.textMuted,
                   ),
@@ -1125,7 +1125,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
         ),
         child: Text(
           lang,
-          style: GoogleFonts.spaceGrotesk(
+          style: BaqueanoFonts.text(
             fontSize: 11,
             fontWeight: FontWeight.w700,
             color: isSelected ? Colors.white : AppColors.textMuted,
@@ -1239,7 +1239,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
               const SizedBox(width: 4),
               Text(
                 'AI',
-                style: GoogleFonts.spaceGrotesk(
+                style: BaqueanoFonts.text(
                   fontSize: isCompact ? 10.5 : 12,
                   fontWeight: FontWeight.w800,
                   color: isSelected ? Colors.white : AppColors.textDark,
@@ -1267,7 +1267,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
             if (!isCompact) const SizedBox(height: 2),
             Text(
               label,
-              style: GoogleFonts.spaceGrotesk(
+              style: BaqueanoFonts.text(
                 fontSize: isCompact ? 9 : 10,
                 fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                 color: isSelected ? AppColors.goldLight : AppColors.textMuted,
@@ -1318,7 +1318,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                       Expanded(
                         child: Text(
                           'BAQUEANO',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             color: AppColors.textLight,
                             fontSize: 16,
                             fontWeight: FontWeight.w900,
@@ -1363,7 +1363,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                           const SizedBox(width: 10),
                           Text(
                             'Buscar en Baqueano',
-                            style: GoogleFonts.inter(
+                            style: BaqueanoFonts.text(
                               fontSize: 12,
                               color: AppColors.textMuted,
                             ),
@@ -1568,7 +1568,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
       padding: const EdgeInsets.fromLTRB(12, 16, 8, 6),
       child: Text(
         label,
-        style: GoogleFonts.spaceGrotesk(
+        style: BaqueanoFonts.text(
           color: AppColors.gold,
           fontSize: 9.5,
           fontWeight: FontWeight.w800,
@@ -1617,7 +1617,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
           ),
           title: Text(
             label,
-            style: GoogleFonts.spaceGrotesk(
+            style: BaqueanoFonts.text(
               color:
                   isSelected || highlighted
                       ? AppColors.textLight
@@ -1833,7 +1833,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                   Expanded(
                     child: Text(
                       '85% del valor directo a comunidades campesinas',
-                      style: GoogleFonts.inter(
+                      style: BaqueanoFonts.text(
                         fontSize: 11,
                         color: AppColors.textMuted,
                       ),
@@ -1854,7 +1854,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
       padding: const EdgeInsets.only(top: 10, bottom: 4, left: 8),
       child: Text(
         title,
-        style: GoogleFonts.spaceGrotesk(
+        style: BaqueanoFonts.text(
           fontSize: 10,
           fontWeight: FontWeight.w700,
           color: AppColors.gold,
@@ -1877,7 +1877,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
       leading: Text(icon, style: const TextStyle(fontSize: 18)),
       title: Text(
         title,
-        style: GoogleFonts.spaceGrotesk(
+        style: BaqueanoFonts.text(
           fontSize: 13,
           fontWeight: FontWeight.w600,
           color: isGold ? AppColors.goldLight : AppColors.textLight,
@@ -1925,7 +1925,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                       const SizedBox(height: 20),
                       Text(
                         '¡Bienvenido a Baqueano!',
-                        style: GoogleFonts.montserrat(
+                        style: BaqueanoFonts.display(
                           fontSize: 18,
                           fontWeight: FontWeight.w900,
                           color: Colors.white,
@@ -1935,7 +1935,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                       Text(
                         'Inicia sesión para acumular sellos en tu Pasaporte y acceder a tarifas exclusivas comunitarias.',
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.inter(
+                        style: BaqueanoFonts.text(
                           fontSize: 12,
                           color: AppColors.textMuted,
                           height: 1.4,
@@ -1994,7 +1994,7 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                         onPressed: () => Navigator.pop(ctx),
                         child: Text(
                           'Continuar como explorador invitado',
-                          style: GoogleFonts.spaceGrotesk(
+                          style: BaqueanoFonts.text(
                             fontSize: 12,
                             color: AppColors.goldLight,
                             fontWeight: FontWeight.w700,
