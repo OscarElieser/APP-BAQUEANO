@@ -18,6 +18,58 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 COMMIT Y SUBIDA DE CAMBIOS AL SERVIDOR GITHUB (08-10-2026 ~21:33 CST)
+- **Consulta / Solicitud del Usuario:** *"quiero subir todos mis cambios asi que has commit al servidor, ten cuidado con los problemas al subir, preguntame que hacer en caso de que haya conflictos"*
+- **Objetivo & Ejecución:**
+  1. Revisar `git status` para inspeccionar los archivos modificados y los nuevos servidores MCP aprovisionados.
+  2. Verificar que `.gitignore` excluya apropiadamente `node_modules` en `.agents/mcp-servers/` para evitar subir dependencias pesadas no rastreadas.
+  3. Crear un commit semántico claro y ordenado.
+  4. Realizar `git push` a la rama de trabajo remota (`origin/wip/tipografias-ops-2026-10-08`).
+  5. En caso de conflictos con el servidor remoto, consultar al usuario de inmediato según la directiva explícita.
+- **Estado:** 🔄 En ejecución autónoma.
+
+## 🧭 APROVISIONAMIENTO ADITIVO DE MCPS Y MEJORA COGNITIVA (08-10-2026 ~21:23 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: Additive_MCP_Provisioning_and_Cognitive_Upgrade"`
+- **Regla Crítica Cumplida:** Ningún servidor preexistente fue eliminado ni alterado; los 5 servidores originales se mantienen activos y se sumaron los 3 nuevos (totalizando 8 servidores).
+- **Ejecución y Entregables:**
+  1. **Fase 1: Instalación Aditiva (Workspace Scoped):**
+     - `sequential-thinking-server.js`: Motor de razonamiento secuencial estructurado (`sequential_thinking`, `get_thought_history`, `reset_thought_session`) para evaluación de hipótesis y árboles de inferencia.
+     - `context7-memory-server.js`: Memoria persistente JSON (`memory-store.json`) con autoindexación (`index_workspace_context`, `create_memory_entity`, `read_memory_graph`, `search_memory`, `update_memory_entity`).
+     - `brave-search-server.js`: Búsqueda web en tiempo real, integración directa con `pub.dev` API (`search_pub_dev`), búsqueda de errores en issues de GitHub (`search_github_issues`) y hubs de documentación oficial.
+     - `git-github-server.js`: Mejorado con carga automática de credenciales `.env` y ejecución autónoma de git.
+     - Actualización aditiva de [.mcp.json](file:///c:/Users/Lenovo/Desktop/APP-BAQUEANO/.mcp.json) y [mcp_config.json](file:///C:/Users/Lenovo/.gemini/config/mcp_config.json).
+  2. **Fase 2: Validación y Health Check:**
+     - Script [test-additive-mcp-health.js](file:///c:/Users/Lenovo/Desktop/APP-BAQUEANO/.agents/mcp-servers/test-additive-mcp-health.js) ejecutado exitosamente con 100% de pings activos y 19 herramientas operativas entre los 4 servidores evaluados.
+- **Estado:** ✅ 100% ACTIVO Y OPERACIONAL (8 servidores MCP totales en el ecosistema).
+
+## 🧭 REINICIO DE ENTORNO Y APROVISIONAMIENTO DE SERVIDORES MCP (08-10-2026 ~20:56 CST)
+- **Consulta / Solicitud del Usuario:** `"/system_directive: Environment_Reset_and_MCP_Provisioning"`
+- **Ejecución y Entregables:**
+  1. **Fase 1: Purga del Entorno (Zero-Trust State):**
+     - Enumeración completa de servidores MCP heredados/inactivos en `~/.gemini/config/mcp_config.json`, `.mcp.json` y procesos huérfanos.
+     - Terminación forzada y limpia de todos los procesos en segundo plano (`chrome-devtools-mcp`, `firebase mcp`).
+     - Eliminación de cachés de esquemas y logs en `C:\Users\Lenovo\.gemini\antigravity-ide\mcp\`.
+  2. **Fase 2: Aprovisionamiento de Infraestructura Objetivo:**
+     - Creación del ecosistema modular de servidores en `.agents/mcp-servers/` con `@modelcontextprotocol/sdk`:
+       * `flutter-dart-server.js`: Integración profunda con Flutter SDK y Dart CLI (`flutter_analyze`, `flutter_test`, `flutter_build`, `flutter_pub`, `dart_format`, `dart_fix`, `flutter_doctor`, `flutter_clean`).
+       * `firebase-firestore-server.js`: Auditoría de reglas `firestore.rules`, consultas geoespaciales por radio Haversine, CLI de Firebase y esquemas de documentos.
+       * `browser-automation-server.js`: Automatización headless con Puppeteer/Chrome para depuración de Flutter Web (CanvasKit/HTML), capturas de pantalla y logs de consola.
+       * `rest-openapi-server.js`: Inspección de peticiones HTTP, auditoría de OpenStreetMap (Nominatim con User-Agent/rate limit, Overpass QL) y Google Maps API.
+       * `git-github-server.js`: Control de versiones Git completo (`status`, `diff`, `commit` semántico, `branch`, `log`, detección de conflictos `conflicts`, `fetch`/`pull`).
+     - Mapeo directo y vinculación en `.mcp.json` (workspace) y `~/.gemini/config/mcp_config.json` (global).
+  3. **Fase 3: Validación y Health Check:**
+     - Script de prueba `test-mcp-health.js` ejecutado exitosamente con conexión y verificación de herramientas en los 5 servidores.
+- **Estado:** ✅ 100% ACTIVO Y COMPLETADO (28 herramientas MCP operativas).
+
+## 🧭 DESCARGA Y SINCRONIZACIÓN DE CAMBIOS REMOTOS DE GITHUB (08-10-2026 ~20:32 CST)
+- **Consulta / Solicitud del Usuario:** *"podrias bajar los ultimos cambios que hay en el servidor de github"*
+- **Objetivo & Ejecución:**
+  1. Se ejecutó `git fetch --all --prune` obteniendo todas las referencias remotas actualizadas del repositorio.
+  2. Se identificó la rama remota `origin/wip/tipografias-ops-2026-10-08` con el commit más reciente `87081cf` (*"wip: tipografias League Spartan/Aristotelica, Ops Center y bitacora"*, 190 archivos actualizados: módulos `#08-negocios`, `#12-pagos`, tipografías League Spartan y Aristotelica Pro, estilos y vistas de Ops Center).
+  3. Se realizó el checkout local a `wip/tipografias-ops-2026-10-08` enlazada con seguimiento a `origin/wip/tipografias-ops-2026-10-08`.
+  4. Estado del árbol de trabajo 100% limpio y sincronizado con el último commit del servidor GitHub.
+- **Estado:** ✅ Sincronización completada exitosamente.
+
 ## SUBIDA DE CAMBIOS PENDIENTES A GITHUB (08-10-2026)
 - **Consulta / Solicitud del Usuario:** *"subilo entonces te doy autorizacion"* → *"https://github.com/OscarElieser/APP-BAQUEANO qui vas a subir"*
 - **Decision:** push a rama nueva `wip/tipografias-ops-2026-10-08` (no a `main`): todo push a `main` despliega a produccion via `deploy-production.yml` y hay trabajo de tipografias en curso. Fusionar a `main` cuando este revisado.
