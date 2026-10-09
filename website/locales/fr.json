@@ -6644,7 +6644,19 @@
     "lifecycle": "Publication et vérification",
     "verifySource": "Comment cela a été vérifié (obligatoire)",
     "verifyEvidence": "Preuve (lien, facultatif)",
-    "verifyNext": "Prochaine révision (le sceau expire ce jour-là)"
+    "verifyNext": "Prochaine révision (le sceau expire ce jour-là)",
+    "colActions": "Actions",
+    "actionsFor": "Actions pour {name}",
+    "edit": "Modifier",
+    "view": "Voir",
+    "suspend": "Suspendre",
+    "suspendHint": "Suspendre : n'apparaît plus sur le site ni sur la carte",
+    "activate": "Activer",
+    "activateHint": "Activer : publié sur le site et la carte",
+    "delete": "Supprimer",
+    "deleteHint": "Supprimer : archivé, il peut être restauré",
+    "confirm": "Confirmer",
+    "deleteConfirm": "Supprimer « {name} » ? Il sera archivé : masqué du site et de la carte, et vous pourrez le restaurer depuis « Archivés ». Touchez « Confirmer » pour continuer."
   },
   "opsReservations": {
     "title": "Réservations par WhatsApp et téléphone",

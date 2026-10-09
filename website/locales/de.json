@@ -6644,7 +6644,19 @@
     "lifecycle": "Veröffentlichung und Verifizierung",
     "verifySource": "Wie es geprüft wurde (Pflichtfeld)",
     "verifyEvidence": "Nachweis (Link, optional)",
-    "verifyNext": "Nächste Prüfung (das Siegel läuft an diesem Tag ab)"
+    "verifyNext": "Nächste Prüfung (das Siegel läuft an diesem Tag ab)",
+    "colActions": "Aktionen",
+    "actionsFor": "Aktionen für {name}",
+    "edit": "Bearbeiten",
+    "view": "Ansehen",
+    "suspend": "Aussetzen",
+    "suspendHint": "Aussetzen: wird auf der Website und der Karte nicht mehr angezeigt",
+    "activate": "Aktivieren",
+    "activateHint": "Aktivieren: wird auf der Website und der Karte veröffentlicht",
+    "delete": "Löschen",
+    "deleteHint": "Löschen: wird archiviert und kann wiederhergestellt werden",
+    "confirm": "Bestätigen",
+    "deleteConfirm": "„{name}“ löschen? Es wird archiviert: nicht mehr auf der Website und der Karte sichtbar und unter „Archiviert“ wiederherstellbar. Tippe auf „Bestätigen“, um fortzufahren."
   },
   "opsReservations": {
     "title": "Reservierungen per WhatsApp und Telefon",

@@ -6219,3 +6219,16 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - Solicitud 2: «en todos-los-destinos.html enumerar 1 x 1 cada destino para que el usuario no sienta que se perdió». Cada tarjeta muestra su número en la lista vigente («13/237»), sigue el filtro y el orden; `aria-label` «Destino 13 de 237» (clave `pages.destinos.cardNumber` ×6).
 - Verificación real (Edge, datos vivos): mapa 12/12 PASS (fuente Supabase, 209 lugares, 0 etiquetas fijas, 29 agrupaciones + 15 pines, chips con conteo, filtro Volcanes, globo con 2 acciones, `?q=Volcán Cosigüina` abre su globo, 390 px sin scroll horizontal, sin errores JS). Destinos 25/25 PASS (incluye 1–12/237 y 13–24/237). `validate-i18n` PASS (5085 ×6), app sincronizada, build + verify Hostinger PASS; `i18n-audit` con los mismos 7 errores preexistentes del Ops Center.
 - Pendiente anotado: pedido de agregar coreano y chino como idiomas 7 y 8.
+
+## 2026-10-09 — Ops Center «Lugares» (#43-lugares): acciones por fila y botones premium
+
+- Solicitud: «en esta parte yo podré agregar, eliminar, modificar, suspender, verificar (admin.html#43-lugares) y también los botones hacerlo premium»; luego: «el superadmin va a tener el derecho de eliminar, agregar, modificar o suspender… ojo con los botones, premium».
+- Errores encontrados y corregidos:
+  1. Aparecía el texto «null» bajo el encabezado: `paint()` pasaba `null` a `replaceChildren()` cuando no había aviso. Ahora filtra los nodos.
+  2. «Actualizar» y «Nuevo lugar» se veían como texto subrayado: la clase `.ops-btn` no tenía estilo en ningún CSS (también la usa Automatización). Ahora tiene estilo premium (relieve, borde arena, primario naranja volcán, foco visible, 42 px).
+- Nueva columna «Acciones» por fila (`js/ops-center/ops-places.js`), usando las mismas acciones auditadas de la Edge Function `baqueano-ops` (sin cambios de servidor):
+  - Modificar (abre la ficha), Suspender/Activar (`set_status` unpublish/publish), Verificar (abre la ficha con foco en «Cómo se comprobó», porque exige fuente; si ya está verificado muestra el sello), Eliminar (`set_status` archive: NO borra la fila, se restaura desde «Archivados»; pide confirmación en la misma fila con aviso rojo), Restaurar en archivados.
+  - Rol de solo lectura: solo «Ver». Permisos reales en el servidor: escritura `super_admin` y `admin`, lectura `auditor` (sin cambios).
+- CSS `css/components/ops-places.css` (v=20261009-premium-1); JS v=20261009-acciones-1; 12 claves `opsPlaces.*` nuevas en 6 idiomas.
+- Verificación: prueba en Edge con el módulo real y servidor simulado (sin escribir datos reales) 13/13 PASS: sin «null», botones premium 42 px, columna Acciones, botones según estado (publicado/verificado/suspendido/archivado), Suspender envía `unpublish`, Eliminar pide confirmación sin llamar al servidor y luego envía `archive`, Verificar abre la ficha con foco en la fuente, 390 px botones de 40 px, sin errores JS. No se probó contra Supabase real (requiere sesión de administrador).
+- Pendiente: el formulario genérico `#opsEntityDrawer` (Destinos, Municipios…) muestra los mismos campos y ejemplos de destino para todo; decidir si solo `super_admin` (y no `admin`) puede escribir (requiere cambiar y publicar la Edge Function).

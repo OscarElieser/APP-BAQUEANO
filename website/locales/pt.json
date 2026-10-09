@@ -6644,7 +6644,19 @@
     "lifecycle": "Publicação e verificação",
     "verifySource": "Como foi conferido (obrigatório)",
     "verifyEvidence": "Evidência (link, opcional)",
-    "verifyNext": "Próxima revisão (o selo vence nesse dia)"
+    "verifyNext": "Próxima revisão (o selo vence nesse dia)",
+    "colActions": "Ações",
+    "actionsFor": "Ações para {name}",
+    "edit": "Editar",
+    "view": "Ver",
+    "suspend": "Suspender",
+    "suspendHint": "Suspender: deixa de aparecer no site e no mapa",
+    "activate": "Ativar",
+    "activateHint": "Ativar: é publicado no site e no mapa",
+    "delete": "Excluir",
+    "deleteHint": "Excluir: é arquivado e pode ser restaurado",
+    "confirm": "Confirmar",
+    "deleteConfirm": "Excluir “{name}”? Ele será arquivado: deixa de aparecer no site e no mapa, e você pode restaurá-lo em “Arquivados”. Toque em “Confirmar” para continuar."
   },
   "opsReservations": {
     "title": "Reservas por WhatsApp e telefone",

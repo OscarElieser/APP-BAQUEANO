@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T09:38:21.402Z",
+  "generatedAt": "2026-10-09T09:41:20.150Z",
   "languages": [
     "es",
     "en",
@@ -9,12 +9,12 @@
     "de"
   ],
   "keysPerLanguage": {
-    "es": 5086,
-    "en": 5086,
-    "fr": 5086,
-    "it": 5086,
-    "pt": 5086,
-    "de": 5086
+    "es": 5098,
+    "en": 5098,
+    "fr": 5098,
+    "it": 5098,
+    "pt": 5098,
+    "de": 5098
   },
   "html": {
     "files": 36,
@@ -186,7 +186,7 @@
       "total": 729,
       "translated": 496,
       "untranslated": 233,
-      "legacyPhrase": 24,
+      "legacyPhrase": 26,
       "coverage": 68
     },
     {

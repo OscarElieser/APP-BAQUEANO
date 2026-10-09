@@ -6644,7 +6644,19 @@
     "lifecycle": "Pubblicazione e verifica",
     "verifySource": "Come è stato verificato (obbligatorio)",
     "verifyEvidence": "Prova (link, facoltativo)",
-    "verifyNext": "Prossima revisione (il sigillo scade quel giorno)"
+    "verifyNext": "Prossima revisione (il sigillo scade quel giorno)",
+    "colActions": "Azioni",
+    "actionsFor": "Azioni per {name}",
+    "edit": "Modifica",
+    "view": "Vedi",
+    "suspend": "Sospendi",
+    "suspendHint": "Sospendi: non appare più sul sito né sulla mappa",
+    "activate": "Attiva",
+    "activateHint": "Attiva: viene pubblicato sul sito e sulla mappa",
+    "delete": "Elimina",
+    "deleteHint": "Elimina: viene archiviato e si può ripristinare",
+    "confirm": "Conferma",
+    "deleteConfirm": "Eliminare «{name}»? Verrà archiviato: non apparirà sul sito né sulla mappa e potrai ripristinarlo da «Archiviati». Tocca «Conferma» per continuare."
   },
   "opsReservations": {
     "title": "Prenotazioni tramite WhatsApp e telefono",

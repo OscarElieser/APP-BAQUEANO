@@ -6644,7 +6644,19 @@
     "lifecycle": "Publishing and verification",
     "verifySource": "How it was checked (required)",
     "verifyEvidence": "Evidence (link, optional)",
-    "verifyNext": "Next review (the seal expires that day)"
+    "verifyNext": "Next review (the seal expires that day)",
+    "colActions": "Actions",
+    "actionsFor": "Actions for {name}",
+    "edit": "Edit",
+    "view": "View",
+    "suspend": "Suspend",
+    "suspendHint": "Suspend: hide it from the website and the map",
+    "activate": "Activate",
+    "activateHint": "Activate: publish it on the website and the map",
+    "delete": "Delete",
+    "deleteHint": "Delete: it is archived and can be restored",
+    "confirm": "Confirm",
+    "deleteConfirm": "Delete “{name}”? It will be archived: hidden from the website and the map, and you can restore it from “Archived”. Tap “Confirm” to continue."
   },
   "opsReservations": {
     "title": "WhatsApp and phone reservations",

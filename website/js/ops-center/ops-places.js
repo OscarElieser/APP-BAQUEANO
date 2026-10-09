@@ -195,7 +195,8 @@
         el('td', {}, [flag(hasCoords(p), tr('opsPlaces.coordsOk', 'Ubicado'), tr('opsPlaces.noCoords', 'Sin coordenadas'))]),
         el('td', {}, [hasSource(p) ? el('span', { text: p.source_name || p.source_url }) : flag(false, '', tr('opsPlaces.noSource', 'Sin fuente'))]),
         el('td', {}, [flag(p.verification_status === 'verified', tr('opsPlaces.verified', 'Verificado'), tr('opsPlaces.unverified', 'Sin verificar'))]),
-        el('td', {}, [el('span', { className: 'ops-badge-status ' + (p.is_published && !p.archived_at ? 'published' : 'draft'), text: pub })])
+        el('td', {}, [el('span', { className: 'ops-badge-status ' + (p.is_published && !p.archived_at ? 'published' : 'draft'), text: pub })]),
+        el('td', {}, [rowActions(p)])
       ]));
     });
     var from = state.page * PAGE + 1, to = state.page * PAGE + state.items.length;
@@ -209,7 +210,8 @@
           el('caption', { className: 'ops-sr-only', text: tr('opsPlaces.caption', 'Lugares del catálogo con su estado de calidad') }),
           el('thead', {}, [el('tr', {}, [
             tr('opsPlaces.colName', 'Lugar'), tr('opsPlaces.colTerritory', 'Territorio'), tr('opsPlaces.colLocation', 'Ubicación'),
-            tr('opsPlaces.colSource', 'Fuente'), tr('opsPlaces.colVerification', 'Verificación'), tr('opsPlaces.colStatus', 'Estado')
+            tr('opsPlaces.colSource', 'Fuente'), tr('opsPlaces.colVerification', 'Verificación'), tr('opsPlaces.colStatus', 'Estado'),
+            tr('opsPlaces.colActions', 'Acciones')
           ].map(function (h) { return el('th', { scope: 'col', text: h }); }))]),
           tbody
         ])
@@ -225,13 +227,79 @@
   function paint() {
     if (!state.panel) return;
     state.paintedCanWrite = canWrite();
-    state.panel.replaceChildren(
+    // 2026-10-09: replaceChildren(null) escribía el texto «null» debajo del encabezado
+    // cuando no había aviso; ahora solo se pasan nodos reales.
+    state.panel.replaceChildren.apply(state.panel, [
       header(),
       state.notice ? el('p', { className: 'ops-places-notice', role: 'status', text: state.notice }) : null,
       chips(),
       filters(),
       table()
-    );
+    ].filter(Boolean));
+  }
+
+  // ---------------------------------------------------------------- acciones por fila
+  // 2026-10-09 (pedido del propietario): agregar, modificar, suspender, verificar y eliminar
+  // directamente desde la lista. Usan las mismas acciones auditadas del servidor:
+  //  - Suspender/Activar = set_status unpublish/publish (deja de verse en la web y el mapa).
+  //  - Eliminar = set_status archive: NO borra la fila (regla del proyecto); se restaura desde
+  //    «Archivados». Pide confirmación en la misma fila.
+  //  - Verificar abre la ficha en la sección de verificación, porque exige la fuente.
+  function quick(action, place, payload, okText, buttons) {
+    buttons.forEach(function (b) { b.disabled = true; });
+    return call(action, Object.assign({ entity: 'places', id: place.id }, payload)).then(function () {
+      state.notice = okText; refresh();
+    }, function (err) {
+      state.notice = errText(err); buttons.forEach(function (b) { b.disabled = false; }); paint();
+    });
+  }
+
+  function rowActions(p) {
+    var wrap = el('div', { className: 'ops-places-actions', role: 'group', 'aria-label': tr('opsPlaces.actionsFor', 'Acciones para {name}', { name: p.name }) });
+    function btn(cls, iconName, label, title) {
+      return el('button', { type: 'button', className: 'ops-row-btn ' + cls, title: title || label, 'aria-label': (title || label) + ' · ' + p.name }, [icon(iconName), el('span', { text: label })]);
+    }
+    var edit = btn('is-edit', canWrite() ? 'fa-pen-to-square' : 'fa-eye', canWrite() ? tr('opsPlaces.edit', 'Modificar') : tr('opsPlaces.view', 'Ver'));
+    edit.addEventListener('click', function () { openEditor(p); });
+    wrap.appendChild(edit);
+    if (!canWrite()) return wrap;
+    var all = [];
+    if (p.archived_at) {
+      var restore = btn('is-restore', 'fa-rotate-left', tr('opsPlaces.restore', 'Restaurar'));
+      restore.addEventListener('click', function () { quick('set_status', p, { op: 'restore' }, tr('opsPlaces.restoredOk', 'Lugar restaurado como borrador.'), all); });
+      all.push(restore);
+    } else {
+      var toggle = p.is_published
+        ? btn('is-suspend', 'fa-circle-pause', tr('opsPlaces.suspend', 'Suspender'), tr('opsPlaces.suspendHint', 'Suspender: deja de verse en la web y el mapa'))
+        : btn('is-activate', 'fa-circle-play', tr('opsPlaces.activate', 'Activar'), tr('opsPlaces.activateHint', 'Activar: se publica en la web y el mapa'));
+      toggle.addEventListener('click', function () {
+        quick('set_status', p, { op: p.is_published ? 'unpublish' : 'publish' }, p.is_published ? tr('opsPlaces.unpublishedOk', 'El lugar ya no se muestra en la web.') : tr('opsPlaces.publishedOk', 'El lugar se publicó en la web y el mapa.'), all);
+      });
+      var verified = p.verification_status === 'verified';
+      var verify = btn(verified ? 'is-verified' : 'is-verify', verified ? 'fa-certificate' : 'fa-circle-check', verified ? tr('opsPlaces.verified', 'Verificado') : tr('opsPlaces.verify', 'Verificar'), verified ? tr('opsPlaces.unverify', 'Retirar verificación') : tr('opsPlaces.verify', 'Verificar'));
+      verify.addEventListener('click', function () { openEditor(p, { focusVerify: true }); });
+      var del = btn('is-delete', 'fa-trash-can', tr('opsPlaces.delete', 'Eliminar'), tr('opsPlaces.deleteHint', 'Eliminar: se archiva y se puede restaurar'));
+      del.addEventListener('click', function () {
+        if (del.dataset.confirm !== '1') {
+          del.dataset.confirm = '1';
+          del.classList.add('is-confirming');
+          del.lastChild.textContent = tr('opsPlaces.confirm', 'Confirmar');
+          state.notice = tr('opsPlaces.deleteConfirm', '¿Eliminar «{name}»? Se archiva: deja de verse en la web y el mapa, y podés restaurarlo desde «Archivados». Tocá «Confirmar» para seguir.', { name: p.name });
+          var note = state.panel.querySelector('.ops-places-notice');
+          if (note) { note.textContent = state.notice; note.classList.add('is-warning'); }
+          else state.panel.insertBefore(el('p', { className: 'ops-places-notice is-warning', role: 'status', text: state.notice }), state.panel.children[1] || null);
+          window.setTimeout(function () {
+            if (!document.contains(del) || del.disabled) return;
+            del.dataset.confirm = ''; del.classList.remove('is-confirming'); del.lastChild.textContent = tr('opsPlaces.delete', 'Eliminar');
+          }, 8000);
+          return;
+        }
+        quick('set_status', p, { op: 'archive' }, tr('opsPlaces.archivedOk', 'Lugar archivado. Podés restaurarlo desde «Archivados».'), all);
+      });
+      all.push(toggle, verify, del);
+    }
+    all.forEach(function (b) { wrap.appendChild(b); });
+    return wrap;
   }
 
   // ---------------------------------------------------------------- editor
@@ -266,7 +334,8 @@
       .forEach(function (m) { select.appendChild(el('option', { value: m.id, text: m.name, selected: current === m.id ? 'selected' : null })); });
   }
 
-  function openEditor(place) {
+  function openEditor(place, options) {
+    options = options || {};
     var d = ensureDialog();
     d.__opener = document.activeElement;
     var writable = canWrite();
@@ -342,7 +411,15 @@
     form.appendChild(el('div', { className: 'ops-places-dialog-actions' }, buttons));
     d.replaceChildren.apply(d, body.filter(Boolean));
     if (!d.open) d.showModal();
-    window.setTimeout(function () { inputs.name.focus(); }, 0);
+    window.setTimeout(function () {
+      // «Verificar» desde la lista: lleva directo a la sección de verificación (pide la fuente).
+      var lifecycle = options.focusVerify && d.querySelector('.ops-places-lifecycle');
+      if (lifecycle) {
+        lifecycle.scrollIntoView({ block: 'center' });
+        var target = d.querySelector('#opsPlaceVerifySource') || lifecycle.querySelector('button');
+        if (target) target.focus();
+      } else inputs.name.focus();
+    }, 0);
   }
 
   // Publicación, archivo y verificación: acciones separadas, cada una auditada en el servidor.
