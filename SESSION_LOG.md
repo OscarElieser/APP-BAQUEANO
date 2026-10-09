@@ -6059,3 +6059,21 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
 - Solicitud: «ahora sí correr el emulador».
 - Plan: verificar nuevamente Android SDK, AVDs y dispositivos; iniciar el emulador disponible y ejecutar BAQUEANO con Flutter.
 - Estado inicial registrado antes de ejecutar herramientas Android o Flutter.
+
+## 2026-10-09 — Ejecución de Directivas de Sincronización, Depuración, Refactor de Botones y Merge Global a Main
+
+### 🎯 1. POR QUÉ (Why / Propósito)
+- Consolidar en la rama principal `main` todas las mejoras críticas de UI/UX, estandarización de diseño web-to-app, corrección de encoding UTF-8 en Flutter, diagnósticos de Google Sign-In, resolución de desbordamientos responsive y unificación de botones sólidos según la identidad oficial de BAQUEANO.
+
+### ⚙️ 2. CÓMO (How / Arquitectura e Implementación)
+1. **Sincronización Web ➔ App:** Adopción de familias tipográficas canónicas (`League Spartan` y `Plus Jakarta Sans` / `Aristotelica Pro`), paleta oficial (`#165D6F`, `#F65E01`, `#F4E6C1`, `#0F172A`).
+2. **Corrección de Encoding UTF-8 & Auth:** Erradicación de caracteres malformados en `lib/` y registro diagnóstico de SHA-1 para resolver ApiException 10 de Google Sign-In.
+3. **Resolución de Overflows:** Blindaje de widgets `Row`, `Column` y `Container` con `Flexible`, `SingleChildScrollView` y límites de ancho/alto.
+4. **Refactor de Botones:** Reemplazo de degradados en botones por colores sólidos de marca (`AppColors.terracotta` y `AppColors.gold`) preservando elevaciones y curvas fluidas.
+5. **Merge Workspace a Main:** Fusión limpia sin conflictos de `wip/tipografias-ops-2026-10-08` en `main` (214 archivos actualizados, 9923 inserciones, `flutter analyze` 100% limpio).
+
+### 📦 3. QUÉ (What / Entregables y Estado Git)
+- Rama local `main` fusionada y lista con los 13 commits de sprint.
+- Rama remota `origin/wip/tipografias-ops-2026-10-08` sincronizada 100% en GitHub.
+- Regla de repositorio GitHub (GH013 / branch protection) identificada en `refs/heads/main` que requiere resolución de conversación/PR para el merge remoto en GitHub.
+
