@@ -4635,7 +4635,7 @@
         verCheckbox.checked = item ? (item.verified === true || item.verificationStatus === 'verified') : false;
       }
 
-      // Adaptar visibilidad de pestaÃ±as segÃºn la entidad activa
+      // Adaptar visibilidad de pestañas según la entidad activa
       const tabBtnPricing = drawer.querySelector('[data-drawer-tab="pricing"]');
       const tabBtnSeo = drawer.querySelector('[data-drawer-tab="seo"]');
       if (tabBtnPricing) {
@@ -4653,7 +4653,7 @@
         }
       }
 
-      // Activar siempre la pestaÃ±a General al abrir
+      // Activar siempre la pestaña General al abrir
       drawer.querySelectorAll('.ops-drawer-tab-btn').forEach(b => b.classList.remove('is-active'));
       drawer.querySelectorAll('.ops-drawer-tab-pane').forEach(p => p.classList.remove('is-active'));
       const defaultTab = drawer.querySelector('[data-drawer-tab="general"]');
