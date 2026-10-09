@@ -18,6 +18,16 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 ACTUALIZACIÓN DE FICHA HISTÓRICA: GLORIA BACON EN historia.html (09-10-2026 ~03:20 CST)
+- **Consulta / Solicitud del Usuario:**
+  *"Gloria Isabel Bacon Hogson es una bailarina, coreógrafa, maestra de danza contemporánea y promotora cultural nicaragüense. Fundadora de la Escuela de Danza Espacio Abierto y del Festival Internacional de Danza Contemporánea. Orden Independencia Cultural Rubén Darío en 2008. corregir la informacion de gloria bacon y cambiar la foto https://baqueanonicaragua.com/historia.html"*
+- **Objetivos:**
+  1. Integrar la nueva imagen oficial aportada por el usuario para Gloria Isabel Bacon Hodgson en los assets web.
+  2. Actualizar la ficha biográfica con los datos fidedignos: bailarina, coreógrafa, maestra de danza contemporánea y promotora cultural; fundadora de Espacio Abierto y del Festival Internacional de Danza Contemporánea; condecorada con la Orden de la Independencia Cultural Rubén Darío en 2008.
+  3. Sincronizar catálogo de artistas y traducciones i18n en los 6 idiomas oficiales (Regla 9).
+  4. Subir todos los cambios directamente a la rama main en GitHub cumpliendo la directiva estricta del propietario.
+
+
 ## ðŸ§­ DIRECTIVA OBLIGATORIA DE CONTROL DE VERSIONES Y DESPLIEGUE A GITHUB (09-10-2026 ~01:30 CST)
 - **Consulta / InstrucciÃ³n Expresa del Usuario:**
   *"te voy a dar una indicacion todo lo que vamos a subir a github tiene que ser al main nada de subir rama por aparte porejemplo asi :si se pede revisar y corregir seria super"*
@@ -6182,3 +6192,10 @@ pm run i18n 0 errores, lutter analyze 0 issues, 	est:hostinger 10/10 PASS.
   - `validate-i18n` PASS (5066 claves ×6), `export-locales-for-app --check` PASS, `build-hostinger-static` + `verify-hostinger-static` PASS (10 rutas).
   - `i18n-audit`: mismos 7 errores preexistentes del Ops Center.
   - `global-shell.test.mjs` NO ejecutado: falta `@playwright/test` (dependencias del workspace no instaladas).
+
+## 2026-10-09 — Galería «Lugares destacados» mostraba una sola tarjeta (destinos.html)
+
+- Reporte del usuario (captura): en destinos.html la galería en movimiento mostraba una sola tarjeta cortada, con «Pausar» a la izquierda; «hay que corregir para que salgan todos».
+- Causa real: en `css/pages/destinos-exact.css` la regla de catálogo completo usaba `.page-destinos-exact:not([data-destinos-mode="featured"]) .destinos-catalog-row` (0,3,0) con `display: grid !important; repeat(4, 1fr)`. El atributo `data-destinos-mode` vive en `<html>`, no en `<body>`, así que el `:not()` siempre era verdadero y le ganaba a `.destinos-featured-row.bq-marquee { display: block !important }` (0,2,0): el contenedor de la cinta era una grilla de 4 columnas (botón en la 1.ª, cinta de ~270 px en la 2.ª).
+- Arreglo: el selector pasa a `html:not([data-destinos-mode="featured"]) body.page-destinos-exact .destinos-catalog-row`. CSS versionado `?v=20261009-ficha-4`.
+- Verificación real (Edge, datos vivos de Supabase): QA 23/23 PASS; nueva comprobación «cinta a todo el ancho con varias tarjetas»: viewport 1184 px, `display: block`, 4 tarjetas visibles a la vez; catálogo completo sigue en 4/2/1 columnas.
