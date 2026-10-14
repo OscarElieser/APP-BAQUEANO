@@ -18,12 +18,18 @@
  *   "Cómo llegar"), map_open (mapa.html) y place_view/qr_generated por evento
  *   'baqueano:impact' { event, entityType, entityId, departmentId } — BAQUEANO
  *   IMPACTO: alimentan la vista impact_events (embudo descubrir → contactar).
+ * 📞 CONTACTO DIRECTO (2026-10-14): BAQUEANO no gestiona reservas; el visitante contacta al
+ *   propietario. Un WhatsApp, llamada o correo dentro de un elemento con data-business-id se
+ *   registra con la RPC public.track_commercial_action (fila en commercial_actions + evento
+ *   whatsapp_clicked/phone_clicked/inquiry_sent), que el Ops Center cuenta en «Contactos
+ *   directos». Sin data-business-id sigue el evento simple de siempre (sin doble conteo).
  */
 (function (window, document) {
   'use strict';
   if (window.BaqueanoAnalytics) return;
 
   var ENDPOINT = 'https://heiudfpthqwtjrtluqlm.supabase.co/rest/v1/rpc/track_event';
+  var COMMERCIAL_ENDPOINT = 'https://heiudfpthqwtjrtluqlm.supabase.co/rest/v1/rpc/track_commercial_action';
   var PUBLIC_KEY = 'sb_publishable_q7ZhqRIRjlerZK7WOu_Qxw_X_AqXV1d';
   // Nombre canónico del checklist → tipo de evento del catálogo en Supabase.
   var EVENT_MAP = {
@@ -127,6 +133,22 @@
     return true;
   }
 
+  // Acción comercial ligada a un negocio real (el servidor valida que exista y limita la frecuencia).
+  var commercialSent = 0;
+  function trackCommercial(actionType, businessId) {
+    if (!consentGranted() || !businessId || commercialSent >= 30) return false;
+    commercialSent += 1;
+    try {
+      window.fetch(COMMERCIAL_ENDPOINT, {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json', apikey: PUBLIC_KEY, Authorization: 'Bearer ' + PUBLIC_KEY },
+        body: JSON.stringify({ p_action_type: actionType, p_anonymous_id: anonymousId(), p_session_id: sessionId(), p_platform: 'web', p_business_id: String(businessId).slice(0, 120) })
+      }).catch(function () { /* la analítica nunca rompe la navegación */ });
+    } catch (_) { /* sin red o fetch bloqueado */ }
+    return true;
+  }
+
   // ── Eventos automáticos ────────────────────────────────────────────────────
   function closestAttr(el, attr) {
     var node = el && el.closest ? el.closest('[' + attr + ']') : null;
@@ -137,10 +159,13 @@
     if (!target || !target.closest) return;
     var link = target.closest('a[href]');
     var href = link ? link.getAttribute('href') || '' : '';
+    var businessId = closestAttr(link, 'data-business-id');
     if (/wa\.me\/|api\.whatsapp\.com|whatsapp:/i.test(href)) {
-      track('whatsapp_click', { entityType: closestAttr(link, 'data-business-id') ? 'business' : null, entityId: closestAttr(link, 'data-business-id') });
+      if (!trackCommercial('whatsapp', businessId)) track('whatsapp_click', { entityType: businessId ? 'business' : null, entityId: businessId });
     } else if (/^tel:/i.test(href)) {
-      track('phone_click', { entityType: closestAttr(link, 'data-business-id') ? 'business' : null, entityId: closestAttr(link, 'data-business-id') });
+      if (!trackCommercial('call', businessId)) track('phone_click', { entityType: businessId ? 'business' : null, entityId: businessId });
+    } else if (/^mailto:/i.test(href) && businessId) {
+      trackCommercial('contact', businessId);
     } else if (/google\.[a-z.]+\/maps|maps\.google\.|maps\.apple\.com|waze\.com\/ul|[?&]destination=/i.test(href)) {
       // "Cómo llegar": solo el tipo de evento y el id público; nunca coordenadas del visitante.
       var placeId = closestAttr(link, 'data-business-id') || closestAttr(link, 'data-place-id');

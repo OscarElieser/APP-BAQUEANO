@@ -307,7 +307,8 @@
       menu.append(
         head,
         accountMenuItem('perfil.html', 'fa-regular fa-user', 'Mi perfil'),
-        accountMenuItem('perfil.html#reservas', 'fa-regular fa-calendar-days', 'Mis reservas'),
+        // 2026-10-14: sin reservas; contacto directo con el propietario (texto = menu.reservations en es).
+        accountMenuItem('perfil.html#reservas', 'fa-regular fa-address-book', 'Negocios contactados'),
         accountMenuItem('favoritos.html', 'fa-regular fa-heart', 'Favoritos')
       );
       if (navMeta.isPrivileged) {

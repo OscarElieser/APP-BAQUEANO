@@ -36,6 +36,8 @@ import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/i18n/app_i18n.dart';
 
 class LodgingScreen extends StatefulWidget {
   const LodgingScreen({super.key});
@@ -110,7 +112,7 @@ class _LodgingScreenState extends State<LodgingScreen> {
   Future<void> _launchEmail(BuildContext context, LodgingSpot spot) async {
     HapticFeedback.lightImpact();
     final email = spot.email ?? 'info@baqueano.ni';
-    final subject = Uri.encodeComponent('Solicitud de Reserva - ${spot.name} (App Baqueano)');
+    final subject = Uri.encodeComponent('Consulta - ${spot.name} (App Baqueano)');
     final body = Uri.encodeComponent(
       'Estimado equipo de ${spot.name},\n\n'
       'Deseo solicitar información y disponibilidad para hospedaje:\n'
@@ -244,14 +246,16 @@ class _LodgingScreenState extends State<LodgingScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'CANALES DE RESERVA DIRECTA',
+                        Consumer(
+                          builder: (context, ref, _) => Text(
+                          ref.strings.t('contact.owner.lodgingChannels', 'CANALES DE CONTACTO DIRECTO'),
                           style: BaqueanoFonts.text(
                             fontSize: 10,
                             fontWeight: FontWeight.w800,
                             color: AppColors.goldLight,
                             letterSpacing: 1.0,
                           ),
+                        ),
                         ),
                         Text(
                           spot.name,
@@ -354,12 +358,15 @@ class _LodgingScreenState extends State<LodgingScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              Text(
-                'Elige cómo deseas reservar:',
-                style: BaqueanoFonts.text(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.textMuted,
+              // 📞 2026-10-14: sin reservas; contacto directo con el alojamiento (8 idiomas).
+              Consumer(
+                builder: (context, ref, _) => Text(
+                  ref.strings.t('contact.owner.lodgingChoose', 'Elegí cómo contactar al alojamiento:'),
+                  style: BaqueanoFonts.text(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textMuted,
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -994,13 +1001,16 @@ class _LodgingScreenState extends State<LodgingScreen> {
                                 ),
                                 const SizedBox(width: 8),
                                 Expanded(
-                                  child: BaqueanoButton(
-                                    text: 'Reservar',
-                                    icon: const Icon(Icons.calendar_month_rounded, size: 16),
-                                    variant: BaqueanoButtonVariant.primary,
-                                    height: 38,
-                                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                                    onPressed: () => _showReservationModal(context, lodge),
+                                  // 📞 2026-10-14: «Reservar» → «Contactar» (mismos canales directos del alojamiento).
+                                  child: Consumer(
+                                    builder: (context, ref, _) => BaqueanoButton(
+                                      text: ref.strings.t('contact.owner.ctaShort', 'Contactar'),
+                                      icon: const Icon(Icons.forum_rounded, size: 16),
+                                      variant: BaqueanoButtonVariant.primary,
+                                      height: 38,
+                                      padding: const EdgeInsets.symmetric(horizontal: 6),
+                                      onPressed: () => _showReservationModal(context, lodge),
+                                    ),
                                   ),
                                 ),
                               ],

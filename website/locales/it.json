@@ -283,7 +283,7 @@
     "complaints": "Segnalazione",
     "complaintsDesc": "Segnalazione ambientale riservata",
     "profile": "Profilo",
-    "reservations": "Prenotazioni",
+    "reservations": "Attività contattate",
     "favorites": "Preferiti",
     "help": "Aiuto",
     "about": "Chi siamo",
@@ -1836,7 +1836,7 @@
         "label2": "Tariffa equivalente in dollari ($ USD)",
         "span3": "Contatto diretto con l'host (0% di commissioni)",
         "label3": "Telefono fisso / cellulare",
-        "label4": "WhatsApp diretto (per le prenotazioni)",
+        "label4": "WhatsApp diretto del proprietario",
         "label5": "E-mail ufficiale"
       },
       "opsBizPaneHistoria": {
@@ -2542,7 +2542,7 @@
     "ayuda": {
       "body": {
         "title1": "Centro assistenza | Baqueano Nicaragua",
-        "metaDescription1": "Centro assistenza di Baqueano Nicaragua: risposte su viaggi, preferiti, prenotazioni, attività, sicurezza e account."
+        "metaDescription1": "Centro assistenza di Baqueano Nicaragua: risposte su viaggi, preferiti, contatto con le attività, sicurezza e account."
       },
       "helpHero": {
         "span1": "Siamo qui per orientarti",
@@ -2567,7 +2567,7 @@
         "strong1": "Pianifica il mio viaggio",
         "span2": "Crea e modifica un percorso",
         "span3": "Vedi le destinazioni salvate",
-        "span4": "Consulta i viaggi prenotati",
+        "span4": "Vedi le attività contattate",
         "strong2": "Registra attività",
         "span5": "Pubblica un'attività",
         "strong3": "Segnala un problema",
@@ -2591,8 +2591,8 @@
         "p3": "Vai su",
         "p4": "per scegliere territori, giorni e budget. Puoi anche usare",
         "p5": "per ricevere una proposta e consultare il meteo.",
-        "summary3": "Dove compaiono le mie prenotazioni?",
-        "p6": "Le trovi nella sezione Prenotazioni del tuo",
+        "summary3": "Dove vedo le attività che ho contattato?",
+        "p6": "Li trovi in «Attività contattate» del tuo",
         "a1": "profilo",
         "p7": ". Se non hai ancora effettuato l'accesso, la piattaforma ti chiederà di identificarti.",
         "summary4": "Come registro la mia attività turistica?",
@@ -2618,7 +2618,7 @@
         "a2": "Invia e-mail"
       },
       "helpSearch": {
-        "inputPlaceholder1": "Es.: salvare una destinazione, prenotazioni o registrare un'attività"
+        "inputPlaceholder1": "Es.: salvare una destinazione, contattare un'attività o registrare la tua"
       }
     },
     "baqueanoAi": {
@@ -2639,7 +2639,7 @@
         "p1": "Un copilota IA che combina il meglio del Nicaragua per creare percorsi unici, realistici e su misura.",
         "span2": "Costruisci il tuo viaggio chiacchierando con BAQUI",
         "span3": "Percorsi personalizzati su mappa e itinerario",
-        "span4": "Consigli reali e pronti da prenotare"
+        "span4": "Consigli reali e contatto diretto con ogni attività"
       },
       "iaTriadSection": {
         "p1": "Il tuo copilota di viaggio in Nicaragua",
@@ -5037,7 +5037,7 @@
     "perfil": {
       "body": {
         "title1": "Il mio profilo | BAQUEANO Nicaragua autentico",
-        "metaDescription1": "Le tue informazioni, prenotazioni, preferenze di viaggio e traguardi come esploratore BAQUEANO in Nicaragua, in un unico posto."
+        "metaDescription1": "I tuoi dati, le attività contattate, le preferenze di viaggio e i traguardi da Esploratore BAQUEANO in Nicaragua, in un unico posto."
       },
       "profHero": {
         "h11": "Un viaggiatore,",
@@ -5071,7 +5071,7 @@
         "button1": "Prossime 0",
         "button2": "Completate 0",
         "button3": "Annullate 0",
-        "p1": "Non hai ancora prenotazioni."
+        "p1": "Non hai ancora contattato nessuna attività da questo browser. Ogni scheda verificata offre WhatsApp, telefono o email per parlare direttamente con il proprietario."
       },
       "pasaporte": {
         "h31": "PASSAPORTO BAQUEANO · SPEDIZIONE NICARAGUA",
@@ -5173,7 +5173,7 @@
       },
       "profFinalCta": {
         "h31": "La tua prossima avventura inizia dal tuo profilo",
-        "p1": "Pianifica, salva, prenota e vivi un Nicaragua autentico."
+        "p1": "Pianifica, salva, contatta e vivi un Nicaragua autentico."
       }
     },
     "privacidad": {
@@ -5686,7 +5686,9 @@
       "orphanProfiles": "Profili senza utente Auth",
       "pendingVerifications": "Verifiche in sospeso",
       "signIn": "Accedi per vedere gli indicatori.",
-      "error": "Non è stato possibile calcolare gli indicatori: {error}"
+      "error": "Non è stato possibile calcolare gli indicatori: {error}",
+      "directContacts": "Contatti diretti con i proprietari",
+      "directContactsDetail": "WhatsApp {whatsapp} · chiamate {call} · email {contact} (web e Android)"
     },
     "strategic": {
       "title": "Impatto e allineamento strategico",
@@ -7348,5 +7350,51 @@
     "retryLater": "Impossibile aggiornare. Riproveremo.",
     "connectionPending": "Connessione in attesa",
     "tagTitle": "Consulta il meteo di questo territorio"
+  },
+  "contact": {
+    "history": {
+      "title": "Attività contattate",
+      "empty": "Non hai ancora contattato nessuna attività da questo browser. Ogni scheda verificata offre WhatsApp, telefono o email per parlare direttamente con il proprietario.",
+      "again": "Contatta di nuovo",
+      "privacy": "Questo elenco è salvato solo in questo browser.",
+      "when": "{channel} · {date}"
+    },
+    "channel": {
+      "call": "Chiamata",
+      "email": "Email"
+    },
+    "banner": {
+      "kicker": "CONTATTO DIRETTO",
+      "localTitle": "Contatta fornitori locali verificati",
+      "localCopy": "Verifica disponibilità, prezzo e punto d'incontro direttamente con il proprietario su WhatsApp.",
+      "volcanoTitle": "Vulcani con guida e attrezzatura adeguata",
+      "volcanoCopy": "Scegli esperienze con informazioni chiare su difficoltà, meteo e condizioni di accesso.",
+      "waterTitle": "Avventura in acqua in sicurezza",
+      "waterCopy": "Controlla attrezzatura, livello dell'acqua, condizioni del mare e orario di rientro.",
+      "communityTitle": "Conosci le comunità ospitanti",
+      "communityCopy": "La tua visita sostiene guide, cooperative, cucine e alloggi locali.",
+      "tripTitle": "Salva tutto in Il mio viaggio",
+      "tripCopy": "Organizza esperienze, costi e contatti in un unico percorso disponibile durante il viaggio."
+    },
+    "owner": {
+      "title": "Contatto diretto con il proprietario",
+      "cta": "Contatta il proprietario",
+      "ctaShort": "Contatta",
+      "call": "Chiama",
+      "email": "Scrivi un'email",
+      "note": "BAQUEANO non applica commissioni né gestisce prenotazioni: date, prezzo e dettagli li concordi direttamente con l'attività.",
+      "waMessage": "Ciao {name}, vi ho trovati su BAQUEANO. Vorrei informazioni su {topic}.",
+      "topicGeneric": "i vostri servizi",
+      "noneIn": "Non ci sono ancora attività verificate con contatti pubblicati a {department}. Compariranno qui quando il team BAQUEANO le avrà verificate.",
+      "noneAny": "Non ci sono ancora attività verificate con contatti pubblicati.",
+      "noChannel": "Questa attività non ha ancora pubblicato un canale di contatto.",
+      "verified": "Verificato da BAQUEANO",
+      "nearTitle": "Attività verificate a {department}",
+      "openError": "Impossibile aprire l'app. Riprova.",
+      "lodgingChoose": "Scegli come contattare l'alloggio:",
+      "beachAccess": "Accesso e contatto: tocca per vedere",
+      "beachTitle": "Accesso e contatto",
+      "lodgingChannels": "CANALI DI CONTATTO DIRETTO"
+    }
   }
 }

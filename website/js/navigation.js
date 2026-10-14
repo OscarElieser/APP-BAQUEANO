@@ -91,7 +91,7 @@ const BQ_MENU_GROUPS = [
     sections: [
       { key: 'yourAccount', label: 'Tu cuenta', items: [
         ['perfil.html', 'fa-regular fa-user', 'profile', 'Perfil'],
-        ['perfil.html#reservas', 'fa-regular fa-calendar-days', 'reservations', 'Reservas'],
+        ['perfil.html#reservas', 'fa-regular fa-address-book', 'reservations', 'Negocios contactados'],
         ['favoritos.html', 'fa-regular fa-heart', 'favorites', 'Favoritos']
       ] },
       { key: 'platform', label: 'Plataforma', items: [
@@ -1223,7 +1223,7 @@ function ensureUserSessionLoaded() {
     document.head.appendChild(script);
   };
   load('js/shared/roles.js?v=20261003-1', window.BaqueanoRoles);
-  load('js/user-session.js?v=20261006-volver-1', window.BaqueanoSession);
+  load('js/user-session.js?v=20261014-contacto-1', window.BaqueanoSession);
 }
 
 /**

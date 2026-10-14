@@ -32,7 +32,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Mi Perfil | BAQUEANO Nicaragua Auténtica</title>
-  <meta name="description" content="Tu información, reservas, preferencias de viaje y logros como Explorador BAQUEANO en Nicaragua, en un solo lugar.">
+  <meta name="description" content="Tu información, negocios contactados, preferencias de viaje y logros como Explorador BAQUEANO en Nicaragua, en un solo lugar.">
 
   <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -207,7 +207,7 @@
       <a href="#resumen" class="prof-tab-btn active"><i class="fa-regular fa-id-card"></i> <span data-i18n="pages.perfil.profTabsSection.a1">Resumen</span></a>
       <a href="#pasaporte" class="prof-tab-btn"><i class="fa-solid fa-passport"></i> <span data-i18n="pages.perfil.profTabsSection.a2">Pasaporte Baqueano</span></a>
       <a href="mi-viaje.html" class="prof-tab-btn"><i class="fa-solid fa-route"></i> <span data-i18n="nav.trip">Mi Viaje</span></a>
-      <a href="#reservas" class="prof-tab-btn"><i class="fa-regular fa-calendar-days"></i> <span data-i18n="environmental.reserves">Reservas</span></a>
+      <a href="#reservas" class="prof-tab-btn"><i class="fa-regular fa-address-book"></i> <span data-i18n="menu.reservations">Negocios contactados</span></a>
       <a href="mi-viaje.html#favoritos" class="prof-tab-btn"><i class="fa-regular fa-heart"></i> <span data-i18n="nav.favorites">Favoritos</span></a>
       <a href="#preferencias" class="prof-tab-btn"><i class="fa-solid fa-sliders"></i> <span data-i18n="common.preferencias">Preferencias</span></a>
       <a href="#seguridad" class="prof-tab-btn"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="common.seguridad">Seguridad</span></a>
@@ -235,10 +235,12 @@
     <!-- MIS RESERVAS -->
     <div class="prof-card" id="reservas">
       <div class="prof-card-header">
-        <h4><i class="fa-solid fa-bag-shopping" style="color:var(--prof-green)"></i> <span data-i18n="common.misReservas">Mis gestiones</span></h4>
-        <a data-i18n="common.verTodas" href="mi-viaje.html#reservas">Ver todas →</a>
+        <!-- 2026-10-14: BAQUEANO no gestiona reservas. Esta tarjeta (id #reservas, se conserva por los enlaces)
+             muestra los negocios que la persona contactó desde este navegador (js/platform-enhancements.js). -->
+        <h4><i class="fa-solid fa-address-book" style="color:var(--prof-green)"></i> <span data-i18n="contact.history.title">Negocios contactados</span></h4>
+        <a data-i18n="common.verTodas" href="mi-viaje.html#reservas" hidden>Ver todas →</a>
       </div>
-      <div class="prof-res-tabs">
+      <div class="prof-res-tabs" hidden>
         <button data-i18n="pages.perfil.reservas.button1" type="button" class="prof-res-pill active" data-reservation-filter="proximas">Próximas 0</button>
         <button data-i18n="pages.perfil.reservas.button2" type="button" class="prof-res-pill" data-reservation-filter="completadas">Completadas 0</button>
         <button data-i18n="pages.perfil.reservas.button3" type="button" class="prof-res-pill" data-reservation-filter="canceladas">Canceladas 0</button>
@@ -246,7 +248,7 @@
       <div class="prof-res-list">
         <div class="prof-empty">
           <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-          <p data-i18n="pages.perfil.reservas.p1">No tenés reservas todavía.</p>
+          <p data-i18n="pages.perfil.reservas.p1">Todavía no contactaste a ningún negocio desde este navegador. En cada ficha verificada tenés WhatsApp, llamada o correo directo con el propietario.</p>
         </div>
       </div>
     </div>
@@ -805,9 +807,9 @@
 <script src="js/firebase-config.js?v=20261004-1"></script>
 <script src="js/supabase-config.js?v=20261003-1"></script>
 <script src="js/shared/roles.js?v=20261003-1"></script>
-<script src="js/navigation.js?v=20261007-app-2"></script>
+<script src="js/navigation.js?v=20261014-contacto-1"></script>
 <script src="js/global-injector.js"></script>
-<script src="js/user-session.js?v=20261003-3"></script>
+<script src="js/user-session.js?v=20261014-contacto-1"></script>
 <script src="js/auth-panel.js?v=20261004-1" defer></script>
 <script src="js/baqueano-messages.js?v=20261007-1" defer></script>
 <!-- 🎯 Perfil editable (2026-10-07): datos, idioma y moneda, accesibilidad, intereses, permisos y foto en Supabase (baqueano-profile). -->

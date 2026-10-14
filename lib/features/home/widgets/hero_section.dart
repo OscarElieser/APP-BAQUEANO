@@ -254,7 +254,7 @@ class _HeroSectionState extends State<HeroSection> {
 
         // Subtítulo descriptivo de la propuesta de valor
         Text(
-          'Diseña rutas inmersivas con guías locales, reservas directas, mapa satelital interactivo y un asistente AI que convierte tus gustos en una aventura lista para vivir.',
+          'Diseña rutas inmersivas con guías locales, contacto directo con los negocios, mapa satelital interactivo y un asistente AI que convierte tus gustos en una aventura lista para vivir.',
           textAlign: isDesktop ? TextAlign.start : TextAlign.center,
           style: BaqueanoFonts.text(
             fontSize: isDesktop ? 16 : 14,

@@ -34,6 +34,7 @@ import '../../../core/widgets/section_header.dart';
 import '../../../services/booking_and_communication_service.dart';
 import '../../checkout/widgets/baqueano_voucher_dialog.dart';
 import '../widgets/my_reservations_section.dart';
+import '../../../config/feature_flags.dart';
 
 class ExpeditionHistoryScreen extends ConsumerStatefulWidget {
   const ExpeditionHistoryScreen({super.key});
@@ -100,15 +101,19 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
             const SizedBox(height: 14),
 
             const SectionHeader(
-              tag: 'MI VIAJE · RESERVAS POR WHATSAPP Y TELÉFONO',
+              // 📞 2026-10-14: sin reservas; contacto directo con cada negocio verificado.
+              tag: 'MI VIAJE · CONTACTO DIRECTO CON NEGOCIOS',
               title: '🧳 Mi Viaje',
-              subtitle: 'Tus solicitudes de reserva guardadas, su estado real y el contacto directo con cada negocio verificado.',
+              subtitle: 'Tus rutas guardadas y el contacto directo con cada negocio verificado, sin intermediarios ni comisiones.',
             ),
             const SizedBox(height: 16),
 
-            // Solicitudes reales guardadas en Supabase (baqueano-reservas).
-            const MyReservationsSection(),
-            const SizedBox(height: 22),
+            // Solicitudes reales guardadas en Supabase (baqueano-reservas). Se conserva en el código
+            // y se oculta por `kReservationRequestsEnabled` (regla del propietario, 2026-10-14).
+            if (kReservationRequestsEnabled) ...[
+              const MyReservationsSection(),
+              const SizedBox(height: 22),
+            ],
 
             // Filtros de Estado
             SingleChildScrollView(
@@ -163,13 +168,13 @@ class _ExpeditionHistoryScreenState extends ConsumerState<ExpeditionHistoryScree
                     const Icon(Icons.history_toggle_off_rounded, color: AppColors.gold, size: 54),
                     const SizedBox(height: 16),
                     Text(
-                      'Aún no tienes expediciones reservadas',
+                      'Aún no tienes expediciones guardadas',
                       style: BaqueanoFonts.text(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Cuando reserves una ruta en el mapa o catálogo, aquí aparecerán tus reservas reales, comprobantes oficiales, cuentas bancarias y pase QR.',
+                      'Cuando guardes una ruta en el mapa o en el catálogo, aparecerá aquí con el contacto directo de cada negocio verificado.',
                       style: BaqueanoFonts.text(fontSize: 13, color: AppColors.textMuted, height: 1.4),
                       textAlign: TextAlign.center,
                     ),

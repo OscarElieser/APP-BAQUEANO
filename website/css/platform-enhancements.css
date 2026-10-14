@@ -52,3 +52,23 @@ html[data-theme] main #heroNicaragua .hero-exact-subtitle{color:#fff!important;-
 @media print{.main-navbar,.main-navbar-exact,footer,.ia-chat-box,.ia-config-panel,.bq-gallery-control,.bq-cookie-layer{display:none!important}.page-baqueano-ia{background:#fff!important}.ia-itinerary-section,.ia-ready-card,.ia-recs-section,.ia-utility-section{break-inside:avoid;box-shadow:none!important}.ia-itinerary-section::before{content:"BAQUEANO · ITINERARIO BAQUI";display:block;margin-bottom:20px;color:#165D6F;font:900 20px League Spartan,sans-serif;border-bottom:3px solid #F65E01;padding-bottom:10px}}
 @media(max-width:640px){.bq-info-dialog{width:calc(100% - 1rem);border-radius:18px}.bq-dialog-head,.bq-dialog-body{padding:1.15rem}.bq-dialog-actions{display:grid}.bq-dialog-action{width:100%}}
 @media(prefers-reduced-motion:reduce){.bq-continuous-gallery{scroll-behavior:auto!important}.bq-filter-reset{transition:none}}
+
+/* 📞 Negocios contactados (perfil #reservas, 2026-10-14): lista de contactos directos guardada en el
+   navegador. Paleta oficial (#165D6F, #F65E01, #F4E6C1, #0F172A); fila en columna bajo 420 px. */
+.bq-owner-contacts{display:grid;gap:.75rem}
+.bq-owner-contacts ul{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.bq-owner-contact{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.85rem;padding:.8rem 1rem;border-radius:16px;background:linear-gradient(135deg,rgba(22,93,111,.07),rgba(244,230,193,.35));border:1px solid rgba(22,93,111,.16);box-shadow:0 8px 22px rgba(15,23,42,.06);transition:transform .2s ease,box-shadow .2s ease}
+.bq-owner-contact:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(15,23,42,.1)}
+.bq-owner-contact-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:#165D6F;color:#fff;font-size:1.1rem}
+.bq-owner-contact .fa-whatsapp.bq-owner-contact-icon{background:#128C4B}
+.bq-owner-contact-text{min-width:0;display:grid;gap:.15rem}
+.bq-owner-contact-text strong{color:#0F172A;font-weight:800;overflow-wrap:anywhere}
+.bq-owner-contact-text small{color:#475569;font-size:.82rem}
+.bq-owner-contact-again{justify-self:end;display:inline-flex;align-items:center;min-height:44px;padding:.55rem 1rem;border-radius:999px;background:#F65E01;color:#fff;font-weight:800;font-size:.85rem;text-decoration:none;white-space:nowrap}
+.bq-owner-contact-again:hover,.bq-owner-contact-again:focus-visible{background:#D94F00;color:#fff}
+.bq-owner-contact-again:focus-visible{outline:3px solid #0F172A;outline-offset:2px}
+.bq-owner-contacts-note{margin:0;color:#64748B;font-size:.78rem}
+@media (max-width:420px){.bq-owner-contact{grid-template-columns:auto 1fr}.bq-owner-contact-again{grid-column:1/-1;justify-self:stretch;justify-content:center}}
+@media (prefers-reduced-motion:reduce){.bq-owner-contact{transition:none}.bq-owner-contact:hover{transform:none}}
+/* El atributo hidden debe ganar a los display de la tarjeta (pestañas, "Ver todas", vacío). */
+#reservas [hidden]{display:none!important}

@@ -283,7 +283,7 @@
     "complaints": "Report",
     "complaintsDesc": "Confidential environmental report",
     "profile": "Profile",
-    "reservations": "Bookings",
+    "reservations": "Businesses you contacted",
     "favorites": "Favorites",
     "help": "Help",
     "about": "About us",
@@ -1836,7 +1836,7 @@
         "label2": "Equivalent Rate in Dollars ($ USD)",
         "span3": "Direct Contact with the Host (0% Commission)",
         "label3": "Landline / Mobile Phone",
-        "label4": "Direct WhatsApp (For Bookings)",
+        "label4": "Owner's direct WhatsApp",
         "label5": "Official Email"
       },
       "opsBizPaneHistoria": {
@@ -2542,7 +2542,7 @@
     "ayuda": {
       "body": {
         "title1": "Help Center | Baqueano Nicaragua",
-        "metaDescription1": "Baqueano Nicaragua help center: answers about trips, favorites, reservations, businesses, safety and account."
+        "metaDescription1": "Baqueano Nicaragua help center: answers about trips, favorites, contacting businesses, safety and your account."
       },
       "helpHero": {
         "span1": "We're here to guide you",
@@ -2567,7 +2567,7 @@
         "strong1": "Plan my trip",
         "span2": "Create and adjust a route",
         "span3": "See saved destinations",
-        "span4": "Check booked trips",
+        "span4": "See businesses you contacted",
         "strong2": "Register business",
         "span5": "Publish a venture",
         "strong3": "Report an issue",
@@ -2591,8 +2591,8 @@
         "p3": "Go to",
         "p4": "to choose territories, days and budget. You can also use",
         "p5": "to get a proposal and check the weather.",
-        "summary3": "Where do my reservations appear?",
-        "p6": "You'll find them in the Reservations section of your",
+        "summary3": "Where can I see the businesses I contacted?",
+        "p6": "You'll find them under “Businesses you contacted” in your",
         "a1": "profile",
         "p7": ". If you haven't signed in yet, the platform will ask you to identify yourself.",
         "summary4": "How do I register my tourism business?",
@@ -2618,7 +2618,7 @@
         "a2": "Send email"
       },
       "helpSearch": {
-        "inputPlaceholder1": "E.g.: save a destination, reservations or register a business"
+        "inputPlaceholder1": "E.g.: save a destination, contact a business or register yours"
       }
     },
     "baqueanoAi": {
@@ -2639,7 +2639,7 @@
         "p1": "An AI copilot that combines the best of Nicaragua to create unique, realistic routes tailored to you.",
         "span2": "Build your trip by chatting with BAQUI",
         "span3": "Personalized routes on a map and itinerary",
-        "span4": "Real recommendations, ready to book"
+        "span4": "Real recommendations and direct contact with each business"
       },
       "iaTriadSection": {
         "p1": "Your travel copilot for Nicaragua",
@@ -5037,7 +5037,7 @@
     "perfil": {
       "body": {
         "title1": "My Profile | BAQUEANO Authentic Nicaragua",
-        "metaDescription1": "Your information, bookings, travel preferences and achievements as a BAQUEANO Explorer in Nicaragua, all in one place."
+        "metaDescription1": "Your details, the businesses you contacted, travel preferences and achievements as a BAQUEANO Explorer in Nicaragua, all in one place."
       },
       "profHero": {
         "h11": "One traveler,",
@@ -5071,7 +5071,7 @@
         "button1": "Upcoming 0",
         "button2": "Completed 0",
         "button3": "Cancelled 0",
-        "p1": "You don't have any bookings yet."
+        "p1": "You haven't contacted any business from this browser yet. Every verified listing has WhatsApp, a phone number or an email to reach the owner directly."
       },
       "pasaporte": {
         "h31": "BAQUEANO PASSPORT · NICARAGUA EXPEDITION",
@@ -5173,7 +5173,7 @@
       },
       "profFinalCta": {
         "h31": "Your next adventure starts from your profile",
-        "p1": "Plan, save, book and experience an authentic Nicaragua."
+        "p1": "Plan, save, get in touch and experience an authentic Nicaragua."
       }
     },
     "privacidad": {
@@ -5686,7 +5686,9 @@
       "orphanProfiles": "Profiles without an Auth user",
       "pendingVerifications": "Pending verifications",
       "signIn": "Sign in to see the indicators.",
-      "error": "The indicators could not be calculated: {error}"
+      "error": "The indicators could not be calculated: {error}",
+      "directContacts": "Direct contacts with owners",
+      "directContactsDetail": "WhatsApp {whatsapp} · calls {call} · email {contact} (web and Android)"
     },
     "strategic": {
       "title": "Impact and strategic alignment",
@@ -7348,5 +7350,51 @@
     "retryLater": "Couldn't update. We'll try again.",
     "connectionPending": "Connection pending",
     "tagTitle": "Check the weather for this territory"
+  },
+  "contact": {
+    "history": {
+      "title": "Businesses you contacted",
+      "empty": "You haven't contacted any business from this browser yet. Every verified listing has WhatsApp, a phone number or an email to reach the owner directly.",
+      "again": "Contact again",
+      "privacy": "This list is saved only in this browser.",
+      "when": "{channel} · {date}"
+    },
+    "channel": {
+      "call": "Call",
+      "email": "Email"
+    },
+    "banner": {
+      "kicker": "DIRECT CONTACT",
+      "localTitle": "Contact verified local providers",
+      "localCopy": "Check availability, price and meeting point directly with the owner on WhatsApp.",
+      "volcanoTitle": "Volcanoes with a guide and the right gear",
+      "volcanoCopy": "Choose experiences with clear information on difficulty, weather and access conditions.",
+      "waterTitle": "Water adventures, safely",
+      "waterCopy": "Check gear, water level, sea conditions and return time.",
+      "communityTitle": "Meet the host communities",
+      "communityCopy": "Your visit supports local guides, cooperatives, kitchens and lodgings.",
+      "tripTitle": "Keep everything in My Trip",
+      "tripCopy": "Organize experiences, costs and contacts in one route you can use along the way."
+    },
+    "owner": {
+      "title": "Contact the owner directly",
+      "cta": "Contact the owner",
+      "ctaShort": "Contact",
+      "call": "Call",
+      "email": "Send an email",
+      "note": "BAQUEANO charges no commission and handles no bookings: you agree on dates, price and details directly with the business.",
+      "waMessage": "Hi {name}, I found you on BAQUEANO. I'd like information about {topic}.",
+      "topicGeneric": "your services",
+      "noneIn": "There are no verified businesses with published contact details in {department} yet. They will appear here once the BAQUEANO team verifies them.",
+      "noneAny": "There are no verified businesses with published contact details yet.",
+      "noChannel": "This business hasn't published a contact channel yet.",
+      "verified": "Verified by BAQUEANO",
+      "nearTitle": "Verified businesses in {department}",
+      "openError": "Couldn't open the app. Please try again.",
+      "lodgingChoose": "Choose how to contact the lodging:",
+      "beachAccess": "Access and contact: tap to view",
+      "beachTitle": "Access and contact",
+      "lodgingChannels": "DIRECT CONTACT CHANNELS"
+    }
   }
 }

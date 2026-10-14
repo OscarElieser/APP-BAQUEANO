@@ -18,6 +18,23 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 CONTACTO DIRECTO CON EL PROPIETARIO EN LUGAR DE RESERVAS (14-10-2026)
+- **Consulta / Solicitud del Usuario:**
+  *"y no ponga reserva ponerle contacto directo con el el local o propietario."* → *"a como tu lo vea conveniente pero recuerda que no vas a borrar nada de lo que tenemos"*
+- **Contexto (mismas fechas):** todo lo de la web debe estar en la app Android; la app se conecta a los mismos datos que la web y se verifica desde el Ops Center (web). El Ops Center **no** se agrega a la app. Rediseño más llamativo sin borrar nada, responsive en todo dispositivo.
+- **Objetivos:**
+  1. Web y app: los botones y textos de «Reservar» pasan a contacto directo con el local/propietario (WhatsApp, llamada, correo) con claves en los 8 idiomas. «Reserva natural» (área protegida) no se toca.
+  2. No se borra código ni datos de reservas: dejan de mostrarse al visitante.
+  3. Ops Center: registro de contactos por negocio y canal.
+- **Regla del propietario (14-10-2026):** *"tiene que ser una regla obligatoria que todos los commits tienes que estar con el ckeck en verde nada de errores."*
+- **Entregables (verificados localmente, sin subir aún):**
+  1. Web: `allies-directory.js` marca cada ficha con `data-business-id/name`; `baqueano-analytics.js` registra WhatsApp/llamada/correo con la RPC existente `track_commercial_action` (con consentimiento, sin doble conteo); `platform-enhancements.js` guarda «Negocios contactados» en el navegador y los muestra en `perfil.html#reservas` (pestañas de reservas ocultas, no borradas); banner de experiencias «CONTACTO DIRECTO» con claves `contact.banner.*`; menús y ayuda sin «reservas»; Ops Center con tarjeta «Contactos directos con propietarios» (la de reservas se conserva). 50 claves nuevas/actualizadas en 8 idiomas.
+  2. App: `OwnerContactSheet` (hoja en teléfono, diálogo desde 700 px), `ContactActionService` (commercial_actions, plataforma android, ids en memoria), interruptor `kReservationRequestsEnabled = false` (el flujo de reservas queda en el código). Tarjetas de destino, mapa, negocios, hospedaje, playas, BAQUI, Mi Viaje, perfil y notificaciones pasan a contacto directo. Prueba nueva `test/owner_contact_test.dart` (7 casos, 320/360/1024 px).
+  3. CI: «Evidencia Kronox» corre al terminar con éxito el despliegue (antes corría a la vez y siempre fallaba en el push).
+- **Verificación:** `flutter analyze` 0 problemas · `flutter test` 85/85 · `npm run i18n` 8×5.600 claves 0 errores · navegador: aliados → WhatsApp registrado en `track_commercial_action` y en el historial; perfil ko muestra «연락한 업체»; banner zh/es traducido; 0 errores JS; sin desborde a 390 px · `i18n-browser` 19 rutas × 8 · BAQUI 20/20 · impacto 28/28 · consentimiento 5/5 · build 878 · SEO 13/13 · auditoría 0 críticos · Kronox docs OK.
+- **Checks rojos previos (no vienen del código):** Supabase Preview («Remote migration versions not found in local migrations directory»: el historial remoto de 92 versiones no coincide con los 78 archivos locales; se arregla con `supabase migration fetch` desde una máquina con acceso a la base) y «Desplegar en Azure» (secreto `AZURE_HOST`).
+- **Estado:** ⏸️ Verificado, pendiente de subir según la regla de checks en verde.
+
 ## 🧭 MEJORAS DEL CATÁLOGO COREANO Y CHINO (14-10-2026)
 - **Consulta / Solicitud del Usuario:**
   *"trabajemos con el catalago de idioma. chino y coreano"* → *"ok mejorarlo entonces y lo adapta al catalogo de los idiomas"*

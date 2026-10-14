@@ -639,7 +639,7 @@
     "complaints": "举报",
     "complaintsDesc": "环境问题保密举报",
     "profile": "个人主页",
-    "reservations": "保护区",
+    "reservations": "已联系的商家",
     "favorites": "收藏",
     "help": "帮助",
     "about": "关于我们",
@@ -1836,7 +1836,7 @@
         "label2": "美元等值费率（$ USD）",
         "span3": "直接联系接待方（0% 佣金）",
         "label3": "固定电话 / 手机",
-        "label4": "WhatsApp 直联（用于预订）",
+        "label4": "业主的直接 WhatsApp",
         "label5": "官方邮箱"
       },
       "opsBizPaneHistoria": {
@@ -2542,7 +2542,7 @@
     "ayuda": {
       "body": {
         "title1": "帮助中心 | Baqueano Nicaragua",
-        "metaDescription1": "Baqueano Nicaragua 帮助中心：关于行程、收藏、预订、商家、安全和账户的解答。"
+        "metaDescription1": "Baqueano Nicaragua 帮助中心：关于旅行、收藏、联系商家、安全和账户的解答。"
       },
       "helpHero": {
         "span1": "我们随时为你指引",
@@ -2567,7 +2567,7 @@
         "strong1": "规划我的行程",
         "span2": "创建和调整路线",
         "span3": "查看已保存的目的地",
-        "span4": "查看已预订的行程",
+        "span4": "查看已联系的商家",
         "strong2": "登记商家",
         "span5": "发布创业项目",
         "strong3": "报告问题",
@@ -2591,10 +2591,10 @@
         "p3": "要选择地区、天数和预算，请进入",
         "p4": "。你也可以使用",
         "p5": "获取路线建议并查看天气。",
-        "summary3": "我的预订显示在哪里？",
+        "summary3": "在哪里查看我联系过的商家？",
         "p6": "你可以在",
         "a1": "个人主页",
-        "p7": "的\"预订\"栏目中找到。如果尚未登录，平台会要求你先登录。",
+        "p7": "的「已联系的商家」中找到。如果尚未登录，平台会要求你先登录。",
         "summary4": "如何登记我的旅游商家？",
         "p8": "访问",
         "p9": "，填写所需资料并提交审核。",
@@ -2618,7 +2618,7 @@
         "a2": "发送邮件"
       },
       "helpSearch": {
-        "inputPlaceholder1": "例如：收藏目的地、预订或登记商家"
+        "inputPlaceholder1": "例如：收藏目的地、联系商家或登记你的商家"
       }
     },
     "baqueanoAi": {
@@ -2639,7 +2639,7 @@
         "p1": "一位 AI 副驾驶，融合尼加拉瓜的精华，为你打造独特、务实、量身定制的路线。",
         "span2": "和 BAQUI 聊天，规划你的行程",
         "span3": "地图与行程中的个性化路线",
-        "span4": "真实推荐，随时可预订"
+        "span4": "真实推荐，并可直接联系每家商家"
       },
       "iaTriadSection": {
         "p1": "你的尼加拉瓜旅行副驾驶",
@@ -5037,7 +5037,7 @@
     "perfil": {
       "body": {
         "title1": "我的主页 | BAQUEANO 地道尼加拉瓜",
-        "metaDescription1": "你的信息、预订、旅行偏好以及作为 BAQUEANO 尼加拉瓜探险者的成就，尽在一处。"
+        "metaDescription1": "你的资料、已联系的商家、旅行偏好和尼加拉瓜 BAQUEANO 探索者成就，尽在一处。"
       },
       "profHero": {
         "h11": "一位旅行者，",
@@ -5071,7 +5071,7 @@
         "button1": "即将出行 0",
         "button2": "已完成 0",
         "button3": "已取消 0",
-        "p1": "你还没有任何预订。"
+        "p1": "你还没有在此浏览器上联系过任何商家。每个经过验证的商家页面都提供 WhatsApp、电话或电子邮件，可直接联系业主。"
       },
       "pasaporte": {
         "h31": "BAQUEANO 护照 · 尼加拉瓜探险",
@@ -5173,7 +5173,7 @@
       },
       "profFinalCta": {
         "h31": "你的下一次冒险从个人主页开始",
-        "p1": "规划、收藏、预订，体验地道的尼加拉瓜。"
+        "p1": "规划、收藏、联系，体验真实的尼加拉瓜。"
       }
     },
     "privacidad": {
@@ -5686,7 +5686,9 @@
       "orphanProfiles": "没有 Auth 用户的个人资料",
       "pendingVerifications": "待核实",
       "signIn": "登录后查看指标。",
-      "error": "无法计算指标：{error}"
+      "error": "无法计算指标：{error}",
+      "directContacts": "与业主的直接联系",
+      "directContactsDetail": "WhatsApp {whatsapp} · 电话 {call} · 电子邮件 {contact}（网页和 Android）"
     },
     "strategic": {
       "title": "影响与战略对齐",
@@ -7348,5 +7350,51 @@
     "retryLater": "无法更新，我们会再试一次。",
     "connectionPending": "等待连接",
     "tagTitle": "查看该地区的天气"
+  },
+  "contact": {
+    "history": {
+      "title": "已联系的商家",
+      "empty": "你还没有在此浏览器上联系过任何商家。每个经过验证的商家页面都提供 WhatsApp、电话或电子邮件，可直接联系业主。",
+      "again": "再次联系",
+      "privacy": "此列表仅保存在本浏览器中。",
+      "when": "{channel} · {date}"
+    },
+    "channel": {
+      "call": "电话",
+      "email": "电子邮件"
+    },
+    "banner": {
+      "kicker": "直接联系",
+      "localTitle": "联系经过验证的本地服务商",
+      "localCopy": "通过 WhatsApp 直接向业主确认空位、价格和集合地点。",
+      "volcanoTitle": "有向导和合适装备的火山之旅",
+      "volcanoCopy": "选择难度、天气和通行条件信息清楚的体验。",
+      "waterTitle": "安全的水上探险",
+      "waterCopy": "检查装备、水位、海况和返回时间。",
+      "communityTitle": "认识当地接待社区",
+      "communityCopy": "你的到访能支持当地向导、合作社、餐馆和住宿。",
+      "tripTitle": "把一切保存在「我的旅程」",
+      "tripCopy": "把体验、费用和联系方式整理成一条旅途中随时可用的路线。"
+    },
+    "owner": {
+      "title": "直接联系业主",
+      "cta": "联系业主",
+      "ctaShort": "联系",
+      "call": "打电话",
+      "email": "发送电子邮件",
+      "note": "BAQUEANO 不收取佣金，也不代办预订：日期、价格和细节请直接与商家商定。",
+      "waMessage": "你好，{name}。我在 BAQUEANO 上看到你们，想了解{topic}。",
+      "topicGeneric": "你们的服务",
+      "noneIn": "{department}暂时还没有公开联系方式的已验证商家。BAQUEANO 团队验证后会显示在这里。",
+      "noneAny": "暂时还没有公开联系方式的已验证商家。",
+      "noChannel": "该商家尚未公布联系方式。",
+      "verified": "经 BAQUEANO 验证",
+      "nearTitle": "{department}的已验证商家",
+      "openError": "无法打开应用，请重试。",
+      "lodgingChoose": "选择联系住宿的方式：",
+      "beachAccess": "交通与联系方式：点按查看",
+      "beachTitle": "交通与联系方式",
+      "lodgingChannels": "直接联系渠道"
+    }
   }
 }

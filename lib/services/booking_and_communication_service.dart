@@ -141,7 +141,7 @@ class BookingAndCommunicationService extends ChangeNotifier {
       id: 'notif-welcome',
       title: '¡Bienvenido al Ecosistema Baqueano!',
       message:
-          'Explora Nicaragua y reserva de forma transparente con anfitriones campesinos. Aquí recibirás el estatus de tus reservas y mensajes.',
+          'Explora Nicaragua y contacta directamente a anfitriones campesinos, sin intermediarios ni comisiones. Aquí recibirás avisos y mensajes.',
       timestamp: DateTime.now().subtract(const Duration(hours: 1)),
       category: 'comunidad',
       icon: Icons.explore_rounded,

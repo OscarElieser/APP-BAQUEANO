@@ -35,6 +35,8 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/section_header.dart';
+import '../../../config/feature_flags.dart';
+import '../../../services/contact_action_service.dart';
 
 class BusinessShowcase extends ConsumerStatefulWidget {
   const BusinessShowcase({super.key});
@@ -367,8 +369,10 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
                 ),
                 const SizedBox(height: 10),
 
-                // Botón 0: Solicitud de reserva registrada (sin pago en línea)
-                Builder(builder: (_) {
+                // Botón 0: Solicitud de reserva registrada (sin pago en línea).
+                // 📞 2026-10-14: apagado por `kReservationRequestsEnabled` (sin reservas; los
+                // canales de contacto directo con el propietario quedan debajo).
+                if (kReservationRequestsEnabled) Builder(builder: (_) {
                   final catalogBusiness = ref
                       .read(catalogSnapshotProvider)
                       .valueOrNull
@@ -402,7 +406,10 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
                 if (biz.whatsapp.isNotEmpty) SizedBox(
                   width: double.infinity,
                   child: ElevatedButton.icon(
-                    onPressed: () => _launchWhatsApp(ctx, biz.whatsapp, biz.name),
+                    onPressed: () {
+                      ContactActionService.instance.record(ContactChannel.whatsapp, biz.id);
+                      _launchWhatsApp(ctx, biz.whatsapp, biz.name);
+                    },
                     icon: const Icon(Icons.chat_rounded, color: Colors.white, size: 18),
                     label: const Text('Contactar por WhatsApp Oficial'),
                     style: ElevatedButton.styleFrom(
@@ -461,7 +468,10 @@ class _BusinessShowcaseState extends ConsumerState<BusinessShowcase> {
                     if (biz.contact.isNotEmpty) const SizedBox(width: 8),
                     if (biz.contact.isNotEmpty) Expanded(
                       child: OutlinedButton.icon(
-                        onPressed: () => _launchPhone(ctx, biz.contact),
+                        onPressed: () {
+                          ContactActionService.instance.record(ContactChannel.call, biz.id);
+                          _launchPhone(ctx, biz.contact);
+                        },
                         icon: const Icon(Icons.call_rounded, color: AppColors.gold, size: 16),
                         label: const FittedBox(
                           fit: BoxFit.scaleDown,

@@ -139,7 +139,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     {'id': 'Todas', 'label': 'Todas ($unreadCount no leídas)'},
-                    {'id': 'reservas', 'label': '💳 Reservas & Pagos'},
+                    {'id': 'reservas', 'label': '🤝 Negocios contactados'},
                     {'id': 'mensajes', 'label': '💬 Mensajes'},
                     {'id': 'seguridad', 'label': '⚠️ Seguridad & Clima'},
                     {'id': 'comunidad', 'label': '🌿 Comunidad Baqueano'},
@@ -197,7 +197,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'Te notificaremos en cuanto haya cambios en tus reservas o mensajes de anfitriones.',
+                      'Te notificaremos cuando los negocios que contactaste o los anfitriones te escriban.',
                       style: BaqueanoFonts.text(fontSize: 13, color: AppColors.textMuted),
                     ),
                   ],

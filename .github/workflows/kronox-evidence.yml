@@ -8,7 +8,12 @@
 #   este workflow registra TODOS los controles aunque alguno falle.
 # ⚙️ CÓMO: tools/kronox-prod-evidence.mjs desde un runner de GitHub (fuera de la
 #   VM). Resultado en el resumen del job y como artefacto JSON + Markdown.
-# 📦 QUÉ: manual (workflow_dispatch), diario y en cada push a main.
+# 📦 QUÉ: manual (workflow_dispatch), diario y al TERMINAR con éxito el despliegue de producción.
+# ⏱️ 2026-10-14: antes corría en cada push, al mismo tiempo que el despliegue, y comparaba
+#   /health con un commit que todavía no estaba publicado: fallaba siempre en el push aunque
+#   todo estuviera bien. Ahora espera al workflow «🚀 BAQUEANO Producción (Azure)» y verifica
+#   el commit que ese despliegue publicó. Si el despliegue falla, el rojo queda en su propio
+#   workflow (no se oculta nada) y el control diario sigue registrando el estado real.
 # ============================================================================
 name: 🧪 Evidencia de producción (Kronox 2026)
 
@@ -16,7 +21,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '17 12 * * *'
-  push:
+  workflow_run:
+    workflows: ['🚀 BAQUEANO Producción (Azure)']
+    types: [completed]
     branches: [main]
 
 permissions:
@@ -29,6 +36,8 @@ concurrency:
 jobs:
   evidence:
     name: Controles en vivo de producción
+    # Tras un despliegue solo si terminó bien; manual y diario, siempre.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -37,7 +46,8 @@ jobs:
         with:
           node-version: '22'
       - name: Ejecutar controles (no se detiene en el primer fallo)
-        run: node tools/kronox-prod-evidence.mjs --expected="${GITHUB_SHA}" --out=kronox-evidence
+        # Tras un despliegue se compara con el commit que ese despliegue publicó.
+        run: node tools/kronox-prod-evidence.mjs --expected="${{ github.event.workflow_run.head_sha || github.sha }}" --out=kronox-evidence
       - name: Publicar evidencia como artefacto
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4

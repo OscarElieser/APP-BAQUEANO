@@ -29,6 +29,8 @@ import '../../../core/widgets/baqueano_button.dart';
 import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/weather_radar_badge.dart';
 import '../../checkout/widgets/checkout_modal.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/i18n/app_i18n.dart';
 
 class DestinationCard extends StatefulWidget {
   /// Modelo de datos con toda la información de la expedición
@@ -109,7 +111,7 @@ class _DestinationCardState extends State<DestinationCard> {
     } catch (e) {
       debugPrint('[DestinationCard] Error controlado al abrir checkout: $e');
       if (mounted) {
-        CustomToast.error(context, 'No se pudo iniciar la reserva en este momento.');
+        CustomToast.error(context, 'No se pudo abrir el contacto en este momento.');
       }
     }
   }
@@ -426,13 +428,16 @@ class _DestinationCardState extends State<DestinationCard> {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      // Botón de llamada a la acción directo al checkout protegido
-                      BaqueanoButton(
-                        text: 'Reservar',
-                        variant: BaqueanoButtonVariant.primary,
-                        height: 38,
-                        padding: const EdgeInsets.symmetric(horizontal: 14),
-                        onPressed: _handleReservationTap,
+                      // 📞 2026-10-14: «Reservar» → «Contactar»: abre el contacto directo con los
+                      // negocios verificados del destino (CheckoutModal.show → OwnerContactSheet).
+                      Consumer(
+                        builder: (context, ref, _) => BaqueanoButton(
+                          text: ref.strings.t('contact.owner.ctaShort', 'Contactar'),
+                          variant: BaqueanoButtonVariant.primary,
+                          height: 38,
+                          padding: const EdgeInsets.symmetric(horizontal: 14),
+                          onPressed: _handleReservationTap,
+                        ),
                       ),
                     ],
                   ),

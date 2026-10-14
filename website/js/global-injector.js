@@ -60,7 +60,7 @@
       { id: 'bq-index-ui',  href: 'css/pages/index-exact.css?v=20260927-exact-1' },
       { id: 'bq-headings',  href: 'css/headings-system.css?v=20260927-1' },
       { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20261004-menu-2' },
-      { id: 'bq-platform-enhancements', href: 'css/platform-enhancements.css?v=20261005-a11y-1' },
+      { id: 'bq-platform-enhancements', href: 'css/platform-enhancements.css?v=20261014-contacto-1' },
       { id: 'bq-accessibility', href: 'css/accessibility.css?v=20260930-1' },
       { 
         id: 'bq-fa',        
@@ -694,7 +694,7 @@
     function loadAnalytics() {
       if (document.querySelector('script[data-baqueano-analytics]')) return;
       var script = document.createElement('script');
-      script.src = 'js/baqueano-analytics.js?v=20261005-1';
+      script.src = 'js/baqueano-analytics.js?v=20261014-contacto-1';
       script.defer = true;
       script.dataset.baqueanoAnalytics = 'true';
       document.body.appendChild(script);
@@ -930,7 +930,7 @@
     }
     if (!document.querySelector('script[data-platform-enhancements]')) {
       var enhancementScript = document.createElement('script');
-      enhancementScript.src = 'js/platform-enhancements.js?v=20261006-pdf-1';
+      enhancementScript.src = 'js/platform-enhancements.js?v=20261014-contacto-1';
       enhancementScript.dataset.platformEnhancements = 'true';
       enhancementScript.defer = true;
       document.body.appendChild(enhancementScript);

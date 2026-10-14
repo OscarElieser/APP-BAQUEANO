@@ -218,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SectionHeader(
                     tag: 'EXPEDICIONES VERIFICADAS',
                     title: 'Top Destinos Populares',
-                    subtitle: 'Selección curada por baqueanos nativos con cálculo exacto de presupuesto y reserva directa.',
+                    subtitle: 'Selección curada por baqueanos nativos con cálculo exacto de presupuesto y contacto directo con cada negocio.',
                     isCentered: true,
                   ),
                   const SizedBox(height: 8),

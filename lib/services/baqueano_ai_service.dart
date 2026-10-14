@@ -394,7 +394,8 @@ class BaqueanoAiService extends ChangeNotifier {
       if (matched != null) {
         finalActions.add(
           AiToolAction(
-            label: '🛎️ Reservar ${matched.title}',
+            // 📞 2026-10-14: sin reservas → contacto directo con negocios verificados del destino.
+            label: '📞 Contactar negocios en ${matched.title}',
             type: AiToolType.openCheckout,
             params: {
               'destination': matched.title,
@@ -694,13 +695,13 @@ class BaqueanoAiService extends ChangeNotifier {
   List<String> _generateQuickActions(String query) {
     final q = query.toLowerCase();
     if (q.contains('ometepe')) {
-      return ['Reservar Tour Ometepe', 'Ver Mapa de Ometepe', 'Contactar Guía Mayra'];
+      return ['Contactar negocios en Ometepe', 'Ver Mapa de Ometepe', 'Contactar Guía Mayra'];
     } else if (q.contains('somoto')) {
-      return ['Reservar Cañón de Somoto', 'Ver Ficha de Don Toño', 'Calcular en Córdobas'];
+      return ['Contactar negocios en Cañón de Somoto', 'Ver Ficha de Don Toño', 'Calcular en Córdobas'];
     } else if (q.contains('cerro negro') || q.contains('sandboarding')) {
-      return ['Reservar Cerro Negro', 'Ver Videos 4K', 'Guías de León'];
+      return ['Contactar negocios en Cerro Negro', 'Ver Videos 4K', 'Guías de León'];
     } else if (q.contains('matagalpa') || q.contains('cascada')) {
-      return ['Reservar Cascada La Luna', 'Ficha Doña Rosa Amelia', 'Ruta del Café'];
+      return ['Contactar negocios en Cascada La Luna', 'Ficha Doña Rosa Amelia', 'Ruta del Café'];
     } else {
       return ['Calcular en USD & NIO', 'Ver Mapa GPS Satelital', 'Planificar Itinerario'];
     }

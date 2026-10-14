@@ -39,6 +39,8 @@ import '../../../core/widgets/section_header.dart';
 import '../../../data/repositories/catalog_repository.dart';
 import '../../checkout/widgets/reservation_request_sheet.dart';
 import '../../directory/models/place_model.dart';
+import '../../../config/feature_flags.dart';
+import '../../../services/contact_action_service.dart';
 
 class MapScreen extends ConsumerStatefulWidget {
   final double? initialLat;
@@ -704,15 +706,23 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                   style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF25D366)),
                   icon: const Icon(Icons.chat_rounded, color: Colors.white, size: 18),
                   label: const Text('WhatsApp', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                  onPressed: () => _launchWhatsApp(whatsapp, biz.name),
+                  onPressed: () {
+                    ContactActionService.instance.record(ContactChannel.whatsapp, biz.id);
+                    _launchWhatsApp(whatsapp, biz.name);
+                  },
                 ),
               if (phone.isNotEmpty)
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0284C7)),
                   icon: const Icon(Icons.phone_rounded, color: Colors.white, size: 18),
                   label: const Text('Llamar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                  onPressed: () => _launchCall(phone),
+                  onPressed: () {
+                    ContactActionService.instance.record(ContactChannel.call, biz.id);
+                    _launchCall(phone);
+                  },
                 ),
+              // 📞 2026-10-14: sin reservas; el botón se conserva apagado por la regla de no borrar.
+              if (kReservationRequestsEnabled)
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFF65E01)),
                 icon: const Icon(Icons.event_available_rounded, color: Colors.white, size: 18),

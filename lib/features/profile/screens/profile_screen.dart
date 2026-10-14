@@ -1561,8 +1561,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       child: Column(
         children: [
           _buildSwitchRow(
-            'Confirmación de Reservas & Pagos Bancarios',
-            'Avisos en tiempo real cuando el anfitrión recibe y verifica tu transferencia.',
+            // 📞 2026-10-14: sin reservas ni pagos en la plataforma; avisos de los negocios contactados.
+            'Mensajes de negocios contactados',
+            'Avisos cuando un negocio que contactaste te responde en la mensajería de BAQUEANO.',
             _notifBookings,
             (v) => setState(() => _notifBookings = v),
           ),
@@ -1926,7 +1927,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           const Divider(color: Colors.white12, height: 20),
           _buildSwitchRow(
             'Autenticación Biométrica / Huella',
-            'Solicita huella digital para confirmar transacciones y reservas.',
+            'Solicita huella digital para confirmar acciones sensibles de tu cuenta.',
             _biometricAuth,
             (v) {
               setState(() => _biometricAuth = v);
@@ -2146,7 +2147,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
           if (passport.isActive) ...[
             Text(
-              'Tienes activados todos los beneficios de explorador: 15% de descuento directo en tus reservas, mapas sin conexión e IA ilimitada.',
+              // 📞 2026-10-14: sin reservas no hay descuento sobre reservas; se mantienen los beneficios reales.
+              'Tienes activados todos los beneficios de explorador: mapas sin conexión e IA ilimitada.',
               style: BaqueanoFonts.text(
                 fontSize: 12.5,
                 color: Colors.white.withValues(alpha: 0.85),

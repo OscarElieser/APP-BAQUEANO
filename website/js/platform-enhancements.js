@@ -4,6 +4,11 @@
  * POR QUÉ: completar estados equivalentes que estaban fragmentados entre páginas.
  * CÓMO: usa delegación, almacenamiento defensivo y mejoras progresivas.
  * QUÉ: favoritos con contador, galerías pausables y filtros limpiables.
+ *
+ * 📞 CONTACTO DIRECTO (2026-10-14): BAQUEANO no gestiona reservas. Cada WhatsApp, llamada o correo
+ *   a un negocio con data-business-id se guarda (solo en este navegador, máx. 20) y se muestra en
+ *   «Negocios contactados» del perfil (#reservas). El banner de experiencias habla de contacto
+ *   directo y sus textos salen de los catálogos (contact.banner.*).
  */
 (function BaqueanoPlatformEnhancements(){
   'use strict';
@@ -13,6 +18,9 @@
 
   function readJson(key,fallback){try{var value=JSON.parse(localStorage.getItem(key)||'null');return value===null?fallback:value;}catch(error){return fallback;}}
   function writeJson(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true;}catch(error){return false;}}
+  // Texto del catálogo activo con respaldo en español (el motor i18n puede cargar después).
+  function tr(key,fallback,params){try{var L=window.BaqueanoLanguage;var v=L&&L.t?L.t(key,Object.assign({fallback:fallback},params||{})):'';return v||fallback;}catch(error){return fallback;}}
+  function esc(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function slug(value){return String(value||'elemento').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');}
   function itemData(button){
     var card=button.closest('article,.dest-card,.dest-highlight-card,.dish-card,.aliado-card,.musica-card,.track-row');
@@ -151,15 +159,17 @@
 
   function initExperienceBanner(){
     if(!document.body.classList.contains('page-exp-exact')||document.getElementById('bqReservationBanner'))return;
-    var entries=[
-      {title:'Reservá con prestadores locales verificados',copy:'Confirmá disponibilidad, precio y punto de encuentro directamente por WhatsApp.',image:'assets/images/destinos/isla_de_ometepe.jpg',href:'aliados.html'},
-      {title:'Volcanes con guía y equipo adecuado',copy:'Elegí experiencias con información clara de dificultad, clima y condiciones de acceso.',image:'assets/images/destinos/cerro_negro.jpg',href:'#expCardsGrid'},
-      {title:'Aventura acuática con seguridad',copy:'Revisá equipo, nivel del agua, condiciones marítimas y horario de retorno.',image:'assets/images/destinos/canon_de_somoto.jpg',href:'#expCardsGrid'},
-      {title:'Conocé a las comunidades anfitrionas',copy:'Tu reserva puede fortalecer guías, cooperativas, cocinas y alojamientos locales.',image:'assets/images/destinos/selva_negra.jpg',href:'aliados.html'},
-      {title:'Guardá todo en Mi Viaje',copy:'Organizá experiencias, costos y contactos en una sola ruta disponible durante el recorrido.',image:'assets/images/destinos/laguna_de_apoyo.jpg',href:'mi-viaje.html'}
-    ];var banner=document.createElement('section');banner.id='bqReservationBanner';banner.className='bq-reservation-banner';banner.setAttribute('aria-live','polite');var main=document.querySelector('.exp-catalog-section');(main||document.querySelector('main')).insertAdjacentElement('afterend',banner);var index=0;var timer;
-    function render(){var item=entries[index];banner.style.setProperty('--bq-banner-image','url("'+item.image+'")');banner.innerHTML='<div class="bq-banner-content"><span class="bq-banner-kicker">RESERVAS RESPONSABLES</span><h2>'+item.title+'</h2><p>'+item.copy+'</p><a class="bq-dialog-action accent" href="'+item.href+'">Continuar <i class="fa-solid fa-arrow-right"></i></a></div><div class="bq-banner-dots">'+entries.map(function(_,i){return'<button type="button" class="bq-banner-dot '+(i===index?'active':'')+'" data-banner-index="'+i+'" aria-label="Mostrar mensaje '+(i+1)+'"></button>';}).join('')+'</div>';banner.querySelectorAll('[data-banner-index]').forEach(function(dot){dot.addEventListener('click',function(){index=Number(dot.dataset.bannerIndex);render();restart();});});}
+    function buildEntries(){return [
+      {title:tr('contact.banner.localTitle','Contactá a prestadores locales verificados'),copy:tr('contact.banner.localCopy','Consultá disponibilidad, precio y punto de encuentro directamente con el propietario por WhatsApp.'),image:'assets/images/destinos/isla_de_ometepe.jpg',href:'aliados.html'},
+      {title:tr('contact.banner.volcanoTitle','Volcanes con guía y equipo adecuado'),copy:tr('contact.banner.volcanoCopy','Elegí experiencias con información clara de dificultad, clima y condiciones de acceso.'),image:'assets/images/destinos/cerro_negro.jpg',href:'#expCardsGrid'},
+      {title:tr('contact.banner.waterTitle','Aventura acuática con seguridad'),copy:tr('contact.banner.waterCopy','Revisá equipo, nivel del agua, condiciones marítimas y horario de retorno.'),image:'assets/images/destinos/canon_de_somoto.jpg',href:'#expCardsGrid'},
+      {title:tr('contact.banner.communityTitle','Conocé a las comunidades anfitrionas'),copy:tr('contact.banner.communityCopy','Tu visita fortalece a guías, cooperativas, cocinas y alojamientos locales.'),image:'assets/images/destinos/selva_negra.jpg',href:'aliados.html'},
+      {title:tr('contact.banner.tripTitle','Guardá todo en Mi Viaje'),copy:tr('contact.banner.tripCopy','Organizá experiencias, costos y contactos en una sola ruta disponible durante el recorrido.'),image:'assets/images/destinos/laguna_de_apoyo.jpg',href:'mi-viaje.html'}
+    ];}var entries=buildEntries();var banner=document.createElement('section');banner.id='bqReservationBanner';banner.className='bq-reservation-banner';banner.setAttribute('aria-live','polite');var main=document.querySelector('.exp-catalog-section');(main||document.querySelector('main')).insertAdjacentElement('afterend',banner);var index=0;var timer;
+    function render(){var item=entries[index];banner.style.setProperty('--bq-banner-image','url("'+item.image+'")');banner.innerHTML='<div class="bq-banner-content"><span class="bq-banner-kicker">'+esc(tr('contact.banner.kicker','CONTACTO DIRECTO'))+'</span><h2>'+esc(item.title)+'</h2><p>'+esc(item.copy)+'</p><a class="bq-dialog-action accent" href="'+item.href+'">'+esc(tr('actions.continue','Continuar'))+' <i class="fa-solid fa-arrow-right"></i></a></div><div class="bq-banner-dots">'+entries.map(function(_,i){return'<button type="button" class="bq-banner-dot '+(i===index?'active':'')+'" data-banner-index="'+i+'" aria-label="Mostrar mensaje '+(i+1)+'"></button>';}).join('')+'</div>';banner.querySelectorAll('[data-banner-index]').forEach(function(dot){dot.addEventListener('click',function(){index=Number(dot.dataset.bannerIndex);render();restart();});});}
     function restart(){window.clearInterval(timer);timer=window.setInterval(function(){index=(index+1)%entries.length;render();},10000);}render();restart();
+    // Textos en el idioma activo: se rehacen cuando carga el catálogo o cambia el idioma.
+    ['baqueano:languageChanged','baqueano:i18nReady'].forEach(function(type){window.addEventListener(type,function(){entries=buildEntries();render();});});
   }
 
   function initEnvironmentalPoints(){
@@ -179,6 +189,55 @@
   // comunidad real (Edge Function baqueano-community). Se retiró la versión
   // anterior que guardaba comentarios y "me gusta" solo en localStorage.
 
-  function init(){initLikes();initGalleries();initAllyFilters();initAdvancedAllySearch();initVideoNavigation();initBaquiActions();initHistoryCards();initExperienceBanner();initEnvironmentalPoints();initMusicDock();initFormalReport();new MutationObserver(function(){initLikes();initVideoNavigation();}).observe(document.body,{childList:true,subtree:true});}
+  // ── Negocios contactados (solo en este navegador) ───────────────────────────
+  var CONTACT_KEY='baqueano_owner_contacts_v1';
+  function contactChannel(href){if(/wa\.me\/|api\.whatsapp\.com|whatsapp:/i.test(href))return 'whatsapp';if(/^tel:/i.test(href))return 'call';if(/^mailto:/i.test(href))return 'email';return null;}
+  function initOwnerContactLog(){
+    if(document.documentElement.dataset.bqContactLog)return;document.documentElement.dataset.bqContactLog='1';
+    document.addEventListener('click',function(event){
+      var link=event.target&&event.target.closest?event.target.closest('a[href]'):null;if(!link)return;
+      var href=link.getAttribute('href')||'';var channel=contactChannel(href);if(!channel)return;
+      var holder=link.closest('[data-business-id]');if(!holder)return;
+      var id=holder.getAttribute('data-business-id');var name=holder.getAttribute('data-business-name')||'';if(!id)return;
+      var list=readJson(CONTACT_KEY,[]);if(!Array.isArray(list))list=[];
+      list=list.filter(function(item){return item&&!(item.id===id&&item.channel===channel);});
+      list.unshift({id:String(id).slice(0,120),name:String(name).slice(0,120),channel:channel,href:String(href).slice(0,600),at:new Date().toISOString()});
+      writeJson(CONTACT_KEY,list.slice(0,20));
+    },true);
+  }
+  function renderOwnerContacts(){
+    var card=document.getElementById('reservas');var box=card&&card.querySelector('.prof-res-list');if(!box)return;
+    var list=readJson(CONTACT_KEY,[]);if(!Array.isArray(list))list=[];
+    list=list.filter(function(item){return item&&item.id&&item.href&&contactChannel(item.href);});
+    var old=box.querySelector('.bq-owner-contacts');if(old)old.remove();
+    var empty=box.querySelector('.prof-empty');if(empty)empty.hidden=list.length>0;
+    if(!list.length)return;
+    var locale=(window.BaqueanoLanguage&&window.BaqueanoLanguage.getLocale&&window.BaqueanoLanguage.getLocale())||'es-NI';
+    var ul=document.createElement('ul');ul.className='bq-owner-contacts';ul.setAttribute('role','list');
+    var labels={whatsapp:'WhatsApp',call:tr('contact.channel.call','Llamada'),email:tr('contact.channel.email','Correo')};
+    var icons={whatsapp:'fa-brands fa-whatsapp',call:'fa-solid fa-phone',email:'fa-regular fa-envelope'};
+    list.forEach(function(item){
+      var li=document.createElement('li');li.className='bq-owner-contact';li.setAttribute('data-business-id',item.id);li.setAttribute('data-business-name',item.name||'');
+      var icon=document.createElement('i');icon.className=icons[item.channel]+' bq-owner-contact-icon';icon.setAttribute('aria-hidden','true');
+      var text=document.createElement('div');text.className='bq-owner-contact-text';
+      var strong=document.createElement('strong');strong.textContent=item.name||'—';strong.setAttribute('translate','no');
+      var small=document.createElement('small');var when='';try{when=new Intl.DateTimeFormat(locale,{day:'numeric',month:'short',year:'numeric'}).format(new Date(item.at));}catch(error){when='';}
+      small.textContent=tr('contact.history.when','{channel} · {date}',{channel:labels[item.channel],date:when});
+      text.append(strong,small);
+      var again=document.createElement('a');again.className='bq-owner-contact-again';again.href=item.href;
+      if(item.channel==='whatsapp'){again.target='_blank';again.rel='noopener noreferrer';}
+      again.textContent=tr('contact.history.again','Volver a contactar');
+      li.append(icon,text,again);ul.appendChild(li);
+    });
+    var note=document.createElement('p');note.className='bq-owner-contacts-note';note.textContent=tr('contact.history.privacy','Esta lista se guarda solo en este navegador.');
+    var wrap=document.createElement('div');wrap.className='bq-owner-contacts';wrap.append(ul,note);
+    box.appendChild(wrap);
+  }
+  function initOwnerContactHistory(){
+    if(!document.getElementById('reservas'))return;renderOwnerContacts();
+    ['baqueano:languageChanged','baqueano:i18nReady','storage'].forEach(function(type){window.addEventListener(type,function(event){if(type==='storage'&&event.key&&event.key!==CONTACT_KEY)return;renderOwnerContacts();});});
+  }
+
+  function init(){initLikes();initGalleries();initAllyFilters();initAdvancedAllySearch();initVideoNavigation();initBaquiActions();initHistoryCards();initExperienceBanner();initEnvironmentalPoints();initMusicDock();initFormalReport();initOwnerContactLog();initOwnerContactHistory();new MutationObserver(function(){initLikes();initVideoNavigation();}).observe(document.body,{childList:true,subtree:true});}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

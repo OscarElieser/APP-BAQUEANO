@@ -100,7 +100,9 @@
       ? el('img', { src: b.cover_image, alt: b.name, className: 'aliado-card-img', loading: 'lazy', decoding: 'async', width: 399, height: 260 })
       : el('div', { className: 'aliado-card-img bq-ally-noimg', role: 'img', 'aria-label': t(cat.key, cat.es) }, [icon(cat.icon)]);
     var wa = waLink(b);
-    return el('article', { className: 'aliado-card-exact bq-ally-live', 'data-dept': b.department_id || '', 'data-cat': cat.filter, 'data-id': b.id }, [
+    // data-business-id / data-business-name: el contacto (WhatsApp, llamada, correo) queda atribuido al
+    // negocio real en el Ops Center (commercial_actions) y en «Negocios contactados» del perfil.
+    return el('article', { className: 'aliado-card-exact bq-ally-live', 'data-dept': b.department_id || '', 'data-cat': cat.filter, 'data-id': b.id, 'data-business-id': b.id, 'data-business-name': b.name }, [
       el('div', { className: 'aliado-img-box' }, [media, el('span', { className: 'bq-ally-seal is-' + s.kind }, [icon(s.kind === 'verified' ? 'fa-check' : 'fa-clock'), ' ', s.text])]),
       el('div', { className: 'aliado-card-body' }, [
         el('h3', { className: 'aliado-card-title', text: b.name }),
@@ -129,6 +131,8 @@
       document.body.append(state.dialog);
     }
     state.opener = opener;
+    state.dialog.setAttribute('data-business-id', b.id);
+    state.dialog.setAttribute('data-business-name', b.name);
     var cat = CAT[b.category] || { icon: 'fa-store', key: 'allies.cat.other', es: 'Otro' };
     var s = seal(b);
     var wa = waLink(b);

@@ -355,7 +355,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          'Accede a tu perfil de explorador y reservas',
+                          'Accede a tu perfil de explorador y a los negocios que contactaste',
                           style: BaqueanoFonts.text(
                             color: Colors.white.withValues(alpha: 0.7),
                             fontSize: 13,

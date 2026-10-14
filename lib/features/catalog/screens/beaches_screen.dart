@@ -33,6 +33,8 @@ import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/glass_container.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../core/widgets/section_header.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/i18n/app_i18n.dart';
 
 class BeachesScreen extends StatelessWidget {
   const BeachesScreen({super.key});
@@ -136,12 +138,14 @@ class BeachesScreen extends StatelessWidget {
                   const Icon(Icons.event_available_rounded, color: AppColors.gold, size: 22),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: Text(
-                      'Políticas de Acceso & Reserva',
-                      style: BaqueanoFonts.display(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
+                    child: Consumer(
+                      builder: (context, ref, _) => Text(
+                        ref.strings.t('contact.owner.beachTitle', 'Acceso y contacto'),
+                        style: BaqueanoFonts.display(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -668,12 +672,15 @@ class BeachesScreen extends StatelessWidget {
                                     children: [
                                       const Icon(Icons.info_outline_rounded, size: 12, color: AppColors.goldLight),
                                       const SizedBox(width: 5),
-                                      Text(
-                                        '¿Requiere reserva? Toca para ver',
-                                        style: BaqueanoFonts.text(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.goldLight,
+                                      // 📞 2026-10-14: sin reservas; información de acceso y contacto.
+                                      Consumer(
+                                        builder: (context, ref, _) => Text(
+                                          ref.strings.t('contact.owner.beachAccess', 'Acceso y contacto: toca para ver'),
+                                          style: BaqueanoFonts.text(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w600,
+                                            color: AppColors.goldLight,
+                                          ),
                                         ),
                                       ),
                                     ],

@@ -283,7 +283,7 @@
     "complaints": "Denúncia",
     "complaintsDesc": "Denúncia ambiental confidencial",
     "profile": "Perfil",
-    "reservations": "Reservas",
+    "reservations": "Negócios contatados",
     "favorites": "Favoritos",
     "help": "Ajuda",
     "about": "Sobre nós",
@@ -1836,7 +1836,7 @@
         "label2": "Tarifa equivalente em dólares (US$)",
         "span3": "Contato direto com o anfitrião (0% de comissão)",
         "label3": "Telefone fixo / celular",
-        "label4": "WhatsApp direto (para reservas)",
+        "label4": "WhatsApp direto do proprietário",
         "label5": "E-mail oficial"
       },
       "opsBizPaneHistoria": {
@@ -2542,7 +2542,7 @@
     "ayuda": {
       "body": {
         "title1": "Central de Ajuda | Baqueano Nicaragua",
-        "metaDescription1": "Central de ajuda do Baqueano Nicarágua: respostas sobre viagens, favoritos, reservas, negócios, segurança e conta."
+        "metaDescription1": "Central de ajuda do Baqueano Nicaragua: respostas sobre viagens, favoritos, contato com negócios, segurança e conta."
       },
       "helpHero": {
         "span1": "Estamos aqui para orientar você",
@@ -2567,7 +2567,7 @@
         "strong1": "Planejar minha viagem",
         "span2": "Criar e ajustar uma rota",
         "span3": "Ver destinos salvos",
-        "span4": "Consultar viagens reservadas",
+        "span4": "Ver negócios contatados",
         "strong2": "Cadastrar negócio",
         "span5": "Publicar um empreendimento",
         "strong3": "Relatar ocorrência",
@@ -2591,8 +2591,8 @@
         "p3": "Acesse",
         "p4": "para escolher territórios, dias e orçamento. Você também pode usar",
         "p5": "para receber uma proposta e consultar o clima.",
-        "summary3": "Onde aparecem minhas reservas?",
-        "p6": "Você as encontra na seção Reservas do seu",
+        "summary3": "Onde vejo os negócios que contatei?",
+        "p6": "Você os encontra em “Negócios contatados” no seu",
         "a1": "perfil",
         "p7": ". Se você ainda não entrou, a plataforma pedirá que se identifique.",
         "summary4": "Como cadastro meu negócio turístico?",
@@ -2618,7 +2618,7 @@
         "a2": "Enviar e-mail"
       },
       "helpSearch": {
-        "inputPlaceholder1": "Ex.: salvar um destino, reservas ou cadastrar negócio"
+        "inputPlaceholder1": "Ex.: salvar um destino, contatar um negócio ou cadastrar o seu"
       }
     },
     "baqueanoAi": {
@@ -2639,7 +2639,7 @@
         "p1": "Um copiloto de IA que combina o melhor da Nicarágua para criar rotas únicas, realistas e sob medida.",
         "span2": "Monte sua viagem conversando com o BAQUI",
         "span3": "Rotas personalizadas em mapa e itinerário",
-        "span4": "Recomendações reais e prontas para reservar"
+        "span4": "Recomendações reais e contato direto com cada negócio"
       },
       "iaTriadSection": {
         "p1": "Seu copiloto de viagem pela Nicarágua",
@@ -5037,7 +5037,7 @@
     "perfil": {
       "body": {
         "title1": "Meu perfil | BAQUEANO Nicarágua autêntica",
-        "metaDescription1": "Suas informações, reservas, preferências de viagem e conquistas como Explorador BAQUEANO na Nicarágua, num só lugar."
+        "metaDescription1": "Suas informações, negócios contatados, preferências de viagem e conquistas como Explorador BAQUEANO na Nicarágua, em um só lugar."
       },
       "profHero": {
         "h11": "Um viajante,",
@@ -5071,7 +5071,7 @@
         "button1": "Próximas 0",
         "button2": "Concluídas 0",
         "button3": "Canceladas 0",
-        "p1": "Você ainda não tem reservas."
+        "p1": "Você ainda não contatou nenhum negócio a partir deste navegador. Cada ficha verificada tem WhatsApp, telefone ou e-mail para falar direto com o proprietário."
       },
       "pasaporte": {
         "h31": "PASSAPORTE BAQUEANO · EXPEDIÇÃO NICARÁGUA",
@@ -5173,7 +5173,7 @@
       },
       "profFinalCta": {
         "h31": "Sua próxima aventura começa no seu perfil",
-        "p1": "Planeje, salve, reserve e viva uma Nicarágua autêntica."
+        "p1": "Planeje, guarde, entre em contato e viva uma Nicarágua autêntica."
       }
     },
     "privacidad": {
@@ -5686,7 +5686,9 @@
       "orphanProfiles": "Perfis sem usuário do Auth",
       "pendingVerifications": "Verificações pendentes",
       "signIn": "Entre para ver os indicadores.",
-      "error": "Não foi possível calcular os indicadores: {error}"
+      "error": "Não foi possível calcular os indicadores: {error}",
+      "directContacts": "Contatos diretos com proprietários",
+      "directContactsDetail": "WhatsApp {whatsapp} · ligações {call} · e-mail {contact} (web e Android)"
     },
     "strategic": {
       "title": "Impacto e alinhamento estratégico",
@@ -7348,5 +7350,51 @@
     "retryLater": "Não foi possível atualizar. Vamos tentar novamente.",
     "connectionPending": "Conexão pendente",
     "tagTitle": "Ver o clima deste território"
+  },
+  "contact": {
+    "history": {
+      "title": "Negócios contatados",
+      "empty": "Você ainda não contatou nenhum negócio a partir deste navegador. Cada ficha verificada tem WhatsApp, telefone ou e-mail para falar direto com o proprietário.",
+      "again": "Contatar de novo",
+      "privacy": "Esta lista fica salva apenas neste navegador.",
+      "when": "{channel} · {date}"
+    },
+    "channel": {
+      "call": "Ligação",
+      "email": "E-mail"
+    },
+    "banner": {
+      "kicker": "CONTATO DIRETO",
+      "localTitle": "Fale com prestadores locais verificados",
+      "localCopy": "Confira disponibilidade, preço e ponto de encontro direto com o proprietário pelo WhatsApp.",
+      "volcanoTitle": "Vulcões com guia e equipamento adequado",
+      "volcanoCopy": "Escolha experiências com informação clara sobre dificuldade, clima e condições de acesso.",
+      "waterTitle": "Aventura na água com segurança",
+      "waterCopy": "Confira equipamento, nível da água, condições do mar e horário de volta.",
+      "communityTitle": "Conheça as comunidades anfitriãs",
+      "communityCopy": "Sua visita fortalece guias, cooperativas, cozinhas e hospedagens locais.",
+      "tripTitle": "Guarde tudo em Minha Viagem",
+      "tripCopy": "Organize experiências, custos e contatos em uma única rota disponível durante o percurso."
+    },
+    "owner": {
+      "title": "Contato direto com o proprietário",
+      "cta": "Falar com o proprietário",
+      "ctaShort": "Contatar",
+      "call": "Ligar",
+      "email": "Enviar e-mail",
+      "note": "O BAQUEANO não cobra comissão nem gerencia reservas: você combina datas, preço e detalhes direto com o negócio.",
+      "waMessage": "Olá {name}, encontrei vocês no BAQUEANO. Gostaria de informações sobre {topic}.",
+      "topicGeneric": "os seus serviços",
+      "noneIn": "Ainda não há negócios verificados com contato publicado em {department}. Eles aparecerão aqui quando a equipe do BAQUEANO os verificar.",
+      "noneAny": "Ainda não há negócios verificados com contato publicado.",
+      "noChannel": "Este negócio ainda não publicou um canal de contato.",
+      "verified": "Verificado pelo BAQUEANO",
+      "nearTitle": "Negócios verificados em {department}",
+      "openError": "Não foi possível abrir o aplicativo. Tente de novo.",
+      "lodgingChoose": "Escolha como falar com a hospedagem:",
+      "beachAccess": "Acesso e contato: toque para ver",
+      "beachTitle": "Acesso e contato",
+      "lodgingChannels": "CANAIS DE CONTATO DIRETO"
+    }
   }
 }

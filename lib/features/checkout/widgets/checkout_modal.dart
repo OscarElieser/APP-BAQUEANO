@@ -47,6 +47,8 @@ import '../../../services/booking_and_communication_service.dart';
 import '../../../services/passport_membership_service.dart';
 import 'baqueano_voucher_dialog.dart';
 import 'reservation_request_sheet.dart';
+import '../../../config/feature_flags.dart';
+import 'owner_contact_sheet.dart';
 
 /// Ficha técnica y de contacto oficial del emprendimiento campesino anfitrión
 class HostEnterpriseProfile {
@@ -172,8 +174,18 @@ class CheckoutModal extends ConsumerStatefulWidget {
   /// negocios VERIFICADOS de Supabase (`ReservationRequestSheet`). El flujo
   /// anterior (`legacyShow`) mostraba anfitriones, teléfonos y precios
   /// ficticios; se conserva en código pero ya no se usa.
+  /// 📞 2026-10-14: sin reservas (regla del propietario). Abre el contacto directo con
+  /// los negocios verificados del departamento (`OwnerContactSheet`). El flujo de
+  /// solicitud de reserva sigue en el código detrás de `kReservationRequestsEnabled`.
   static Future<void> show(BuildContext context, DestinationModel destination) {
-    return ReservationRequestSheet.show(
+    if (kReservationRequestsEnabled) {
+      return ReservationRequestSheet.show(
+        context,
+        destinationName: destination.title,
+        department: destination.department,
+      );
+    }
+    return OwnerContactSheet.show(
       context,
       destinationName: destination.title,
       department: destination.department,

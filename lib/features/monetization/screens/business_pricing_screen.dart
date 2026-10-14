@@ -170,7 +170,7 @@ class _BusinessPricingScreenState extends State<BusinessPricingScreen> {
                     'Botón directo de WhatsApp Oficial (1-Click) para clientes',
                     'Llamada telefónica directa sin intermediarios',
                     'Prioridad en recomendaciones del Asistente IA',
-                    'Cero comisiones por reserva o contacto',
+                    'Cero comisiones por contacto',
                     'Soporte comercial prioritario 24/7',
                   ],
                   buttonText: 'Elegir Plan Aliado',

@@ -619,8 +619,15 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
                 children: msg.quickActions!.map((action) {
                   return InkWell(
                     onTap: () {
-                      if (action.contains('Reservar')) {
-                        CheckoutModal.show(context, CatalogData.destinations.first);
+                      // 📞 2026-10-14: «Contactar negocios en X» (antes «Reservar X») abre el contacto
+                      // directo con los negocios verificados del destino nombrado en el botón.
+                      if (action.contains('Reservar') || action.startsWith('Contactar negocios')) {
+                        final label = action.toLowerCase();
+                        final destination = CatalogData.destinations
+                                .where((d) => label.contains(d.title.toLowerCase()))
+                                .firstOrNull ??
+                            CatalogData.destinations.first;
+                        CheckoutModal.show(context, destination);
                       } else {
                         _sendMessage(action);
                       }

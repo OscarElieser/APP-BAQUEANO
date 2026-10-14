@@ -1055,6 +1055,14 @@
     grid.append(impactCard('ops.impact.reservations', 'Solicitudes de reserva', resTotal || null,
       Object.keys(reservations).map((key) => `${key}: ${reservations[key]}`).join(' · ') || null, 'reservations'));
     const conv = k.commercial_conversion || {};
+    // 📞 2026-10-14: BAQUEANO no gestiona reservas; el visitante contacta al propietario. La web
+    // (baqueano-analytics.js) y la app Android registran cada WhatsApp, llamada o correo a un negocio
+    // con track_commercial_action → commercial_actions.by_type. La tarjeta de reservas se conserva.
+    const byType = conv.by_type || {};
+    const directTotal = ['whatsapp', 'call', 'contact'].reduce((sum, key) => sum + Number(byType[key] || 0), 0);
+    grid.append(impactCard('ops.impact.directContacts', 'Contactos directos con propietarios', directTotal || null,
+      t('ops.impact.directContactsDetail', 'WhatsApp {whatsapp} · llamadas {call} · correo {contact} (web y Android)', { whatsapp: kFmt(Number(byType.whatsapp || 0)), call: kFmt(Number(byType.call || 0)), contact: kFmt(Number(byType.contact || 0)) }),
+      'commercial_actions (whatsapp · call · contact)'));
     grid.append(impactCard('ops.impact.conversion', 'Conversión comercial', conv.status === 'ok' ? kFmt(conv.value_pct, ' %') : null,
       conv.status === 'ok' ? t('ops.impact.conversionDetail', '{num} de {den} actores expuestos · {total} acciones', { num: kFmt(conv.numerator_actors_with_qualified_action), den: kFmt(conv.denominator_exposed_actors), total: kFmt(conv.qualified_actions_total) }) : conv.definition,
       'commercial_actions / analytics_events', conv.status));
