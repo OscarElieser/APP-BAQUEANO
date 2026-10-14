@@ -7396,5 +7396,40 @@
       "beachTitle": "交通与联系方式",
       "lodgingChannels": "直接联系渠道"
     }
+  },
+  "authModal": {
+    "titleSignin": "登录",
+    "titleSignup": "创建账户",
+    "subtitle": "用 BAQUEANO 账户收藏地点、规划行程，并直接联系每家商家。",
+    "noAccount": "还没有账户？",
+    "createOne": "立即创建",
+    "haveAccount": "已有账户？",
+    "signinLink": "登录",
+    "name": "姓名",
+    "email": "电子邮件",
+    "password": "密码",
+    "passwordHint": "至少 8 个字符。",
+    "showPassword": "显示密码",
+    "hidePassword": "隐藏密码",
+    "forgot": "忘记密码？",
+    "resetSent": "如果该电子邮件已注册，我们已发送设置新密码的链接。",
+    "submitSignin": "登录",
+    "submitSignup": "创建我的账户",
+    "or": "或通过以下方式继续",
+    "google": "使用 Google 继续",
+    "close": "关闭",
+    "working": "处理中…",
+    "welcome": "你好，{name}！你已登录。",
+    "created": "{name}，账户已创建！我们已发送验证邮件。",
+    "secure": "通过 Firebase Authentication 安全登录，我们永远看不到你的密码。",
+    "errors": {
+      "unavailable": "无法连接登录服务，请检查网络后重试。",
+      "popupClosed": "你在完成前关闭了 Google 窗口。",
+      "popupBlocked": "浏览器拦截了 Google 窗口，请允许弹出窗口后重试。",
+      "unauthorizedDomain": "本网站尚未开通 Google 登录，请使用电子邮件和密码。",
+      "invalidEmail": "电子邮件格式无效。",
+      "nameRequired": "请输入你的姓名。",
+      "resetNeedsEmail": "请输入电子邮件以接收链接。"
+    }
   }
 }

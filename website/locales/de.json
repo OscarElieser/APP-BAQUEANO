@@ -7396,5 +7396,40 @@
       "beachTitle": "Zugang und Kontakt",
       "lodgingChannels": "DIREKTE KONTAKTWEGE"
     }
+  },
+  "authModal": {
+    "titleSignin": "Anmelden",
+    "titleSignup": "Konto erstellen",
+    "subtitle": "Speichere Favoriten, plane deine Reise und kontaktiere jeden Betrieb mit deinem BAQUEANO-Konto.",
+    "noAccount": "Noch kein Konto?",
+    "createOne": "Jetzt erstellen",
+    "haveAccount": "Schon ein Konto?",
+    "signinLink": "Anmelden",
+    "name": "Vollständiger Name",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "passwordHint": "Mindestens 8 Zeichen.",
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort verbergen",
+    "forgot": "Passwort vergessen?",
+    "resetSent": "Wenn die E-Mail registriert ist, haben wir dir einen Link für ein neues Passwort geschickt.",
+    "submitSignin": "Anmelden",
+    "submitSignup": "Mein Konto erstellen",
+    "or": "oder weiter mit",
+    "google": "Mit Google fortfahren",
+    "close": "Schließen",
+    "working": "Wird verarbeitet…",
+    "welcome": "Hallo {name}! Du bist angemeldet.",
+    "created": "Konto erstellt, {name}! Wir haben dir eine E-Mail zur Bestätigung geschickt.",
+    "secure": "Sicherer Zugang mit Firebase Authentication. Wir sehen dein Passwort nie.",
+    "errors": {
+      "unavailable": "Der Anmeldedienst ist nicht erreichbar. Prüfe deine Verbindung und versuche es erneut.",
+      "popupClosed": "Du hast das Google-Fenster vor dem Abschluss geschlossen.",
+      "popupBlocked": "Dein Browser hat das Google-Fenster blockiert. Erlaube Pop-ups und versuche es erneut.",
+      "unauthorizedDomain": "Diese Seite ist noch nicht für die Google-Anmeldung freigegeben. Nutze E-Mail und Passwort.",
+      "invalidEmail": "Die E-Mail-Adresse ist ungültig.",
+      "nameRequired": "Gib deinen Namen ein.",
+      "resetNeedsEmail": "Gib deine E-Mail ein, damit wir dir den Link senden können."
+    }
   }
 }

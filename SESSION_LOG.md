@@ -18,6 +18,12 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 LOGIN Y REGISTRO SOBRE LA PÁGINA + CARRUSEL «¿QUÉ QUERÉS VIVIR?» (14-10-2026)
+- **Consulta / Solicitud del Usuario:**
+  *"lo que quiero es crear un login up y login out que cuando de click sobre el boton iniciar sesion salga encima de la pagina que este"* (diseño de referencia: tarjeta de vidrio sobre fondo desenfocado) · *"asi quiero poner la card donde dice DESCUBRÍ NICARAGUA ¿Qué querés vivir?"* (carrusel 3D de tarjetas de vidrio) · *"el de facebook no lo agregue... estamos trabajando con google, el usuario tendra para crear su usuario y contraseña."*
+- **Objetivos:** modal de vidrio con «Iniciar sesión / Crear cuenta» (Google + correo y contraseña, sin Facebook) que se abre sobre cualquier página y «Cerrar sesión» desde el menú de cuenta; carrusel 3D para «¿Qué querés vivir?». 8 idiomas, responsive, sin borrar nada.
+- **Estado:** ⏳ En curso (rama `feat/login-modal`, a partir de `feat/contacto-directo`).
+
 ## 🧭 CONTACTO DIRECTO CON EL PROPIETARIO EN LUGAR DE RESERVAS (14-10-2026)
 - **Consulta / Solicitud del Usuario:**
   *"y no ponga reserva ponerle contacto directo con el el local o propietario."* → *"a como tu lo vea conveniente pero recuerda que no vas a borrar nada de lo que tenemos"*

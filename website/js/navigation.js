@@ -1223,7 +1223,7 @@ function ensureUserSessionLoaded() {
     document.head.appendChild(script);
   };
   load('js/shared/roles.js?v=20261003-1', window.BaqueanoRoles);
-  load('js/user-session.js?v=20261014-contacto-1', window.BaqueanoSession);
+  load('js/user-session.js?v=20261014-login-1', window.BaqueanoSession);
 }
 
 /**

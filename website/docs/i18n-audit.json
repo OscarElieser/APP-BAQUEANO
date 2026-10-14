@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T21:41:20.580Z",
+  "generatedAt": "2026-10-14T22:01:03.993Z",
   "languages": [
     "es",
     "en",
@@ -11,14 +11,14 @@
     "zh"
   ],
   "keysPerLanguage": {
-    "es": 5600,
-    "en": 5600,
-    "fr": 5600,
-    "it": 5600,
-    "pt": 5600,
-    "de": 5600,
-    "ko": 5600,
-    "zh": 5600
+    "es": 5631,
+    "en": 5631,
+    "fr": 5631,
+    "it": 5631,
+    "pt": 5631,
+    "de": 5631,
+    "ko": 5631,
+    "zh": 5631
   },
   "html": {
     "files": 36,
@@ -27,7 +27,7 @@
     "untranslated": 1
   },
   "js": {
-    "files": 128,
+    "files": 129,
     "translated": 442,
     "untranslated": 648
   },
@@ -82,6 +82,7 @@
     "js/ambiental-report-handoff.js",
     "js/app-download.js",
     "js/async-styles.js",
+    "js/auth-modal.js",
     "js/ayuda.js",
     "js/baqueano-analytics.js",
     "js/baqueano-api.js",
@@ -560,6 +561,15 @@
       "untranslated": 3,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/auth-modal.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/auth-panel.js",

@@ -7396,5 +7396,40 @@
       "beachTitle": "Accès et contact",
       "lodgingChannels": "CANAUX DE CONTACT DIRECT"
     }
+  },
+  "authModal": {
+    "titleSignin": "Se connecter",
+    "titleSignup": "Créer un compte",
+    "subtitle": "Enregistrez vos favoris, préparez votre voyage et contactez chaque établissement depuis votre compte BAQUEANO.",
+    "noAccount": "Pas encore de compte ?",
+    "createOne": "Créez-en un",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "signinLink": "Connectez-vous",
+    "name": "Nom complet",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "passwordHint": "8 caractères minimum.",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe",
+    "forgot": "Mot de passe oublié ?",
+    "resetSent": "Si l'e-mail est enregistré, nous vous avons envoyé un lien pour créer un nouveau mot de passe.",
+    "submitSignin": "Se connecter",
+    "submitSignup": "Créer mon compte",
+    "or": "ou continuer avec",
+    "google": "Continuer avec Google",
+    "close": "Fermer",
+    "working": "En cours…",
+    "welcome": "Bonjour {name} ! Vous êtes connecté.",
+    "created": "Compte créé, {name} ! Nous vous avons envoyé un e-mail pour le vérifier.",
+    "secure": "Accès sécurisé avec Firebase Authentication. Nous ne voyons jamais votre mot de passe.",
+    "errors": {
+      "unavailable": "Impossible de joindre le service de connexion. Vérifiez votre connexion et réessayez.",
+      "popupClosed": "Vous avez fermé la fenêtre Google avant la fin.",
+      "popupBlocked": "Le navigateur a bloqué la fenêtre Google. Autorisez les fenêtres pop-up et réessayez.",
+      "unauthorizedDomain": "Ce site n'est pas encore autorisé pour la connexion Google. Utilisez votre e-mail et votre mot de passe.",
+      "invalidEmail": "L'adresse e-mail n'est pas valide.",
+      "nameRequired": "Saisissez votre nom.",
+      "resetNeedsEmail": "Saisissez votre e-mail pour recevoir le lien."
+    }
   }
 }

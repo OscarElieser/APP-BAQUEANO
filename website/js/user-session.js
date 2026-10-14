@@ -266,6 +266,8 @@
         login.className = 'exact-nav-btn-login global-session navbar-login-btn';
         login.href = 'perfil.html';
         login.setAttribute('aria-label', 'Iniciar sesión');
+        // Abre el login sobre la página (js/auth-modal.js); sin JS sigue llevando a perfil.html.
+        login.setAttribute('data-bq-login', 'signin');
         login.innerHTML = '<i class="fa-solid fa-circle-user" aria-hidden="true"></i><span>Iniciar sesión</span>';
         slot.appendChild(login);
         return;
@@ -338,7 +340,9 @@
       box.replaceChildren();
 
       if (!isAuthenticated) {
-        box.appendChild(accountMenuItem('perfil.html', 'fa-solid fa-circle-user', 'Iniciar sesión o crear cuenta', 'is-primary'));
+        const loginItem = accountMenuItem('perfil.html', 'fa-solid fa-circle-user', 'Iniciar sesión o crear cuenta', 'is-primary');
+        loginItem.setAttribute('data-bq-login', 'signin');
+        box.appendChild(loginItem);
         return;
       }
       const card = document.createElement('div');
@@ -405,7 +409,8 @@
         button.setAttribute('aria-busy', 'true');
         try {
           await window.BaqueanoSession.logout();
-          window.bqToast?.('Cerraste sesión. ¡Volvé pronto!', 'success');
+          const L = window.BaqueanoLanguage;
+          window.bqToast?.((L && L.t && L.t('auth.logoutSuccess', { fallback: '' })) || 'Cerraste sesión. ¡Volvé pronto!', 'success');
         } finally {
           button.removeAttribute('aria-busy');
         }
@@ -663,9 +668,23 @@
   // ==========================================================================
   // API PÚBLICA DE SESIÓN (BaqueanoSession)
   // ==========================================================================
+  // 🔐 2026-10-14: los errores conservan el código de Firebase (`error.code`) además del mensaje en
+  // español, para que el login sobre la página (js/auth-modal.js) muestre el texto en el idioma activo.
+  function sessionError(message, code) {
+    const error = new Error(message);
+    if (code) error.code = code;
+    return error;
+  }
+
   const BaqueanoSession = {
     getUser: function() {
       return loadSession();
+    },
+
+    // Carga el SDK de Firebase Auth bajo demanda (páginas que no lo traen). Lo usa el login
+    // sobre la página (js/auth-modal.js) antes de llamar a login/register/loginWithGoogle.
+    loadAuth: function() {
+      return loadFirebaseAuth();
     },
 
     // Repinta el estado de sesión en el menú. global-injector.js lo llama tras
@@ -701,11 +720,11 @@
       } catch (error) {
         console.error('[Baqueano Session] Error en inicio de sesión:', error);
         if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
-          throw new Error('Credenciales incorrectas o la cuenta no existe. Si es tu primera vez, pulsa "Crear cuenta".');
+          throw sessionError('Credenciales incorrectas o la cuenta no existe. Si es tu primera vez, pulsa "Crear cuenta".', error.code);
         } else if (error.code === 'auth/invalid-email') {
-          throw new Error('El formato del correo electrónico no es válido.');
+          throw sessionError('El formato del correo electrónico no es válido.', error.code);
         } else if (error.code === 'auth/too-many-requests') {
-          throw new Error('Demasiados intentos fallidos. Espera unos minutos antes de reintentar.');
+          throw sessionError('Demasiados intentos fallidos. Espera unos minutos antes de reintentar.', error.code);
         }
         throw error;
       }
@@ -736,11 +755,11 @@
       } catch (error) {
         console.error('[Baqueano Session] Error en registro:', error);
         if (error.code === 'auth/email-already-in-use') {
-          throw new Error('Este correo ya está registrado. Ingresa tu contraseña para iniciar sesión.');
+          throw sessionError('Este correo ya está registrado. Ingresa tu contraseña para iniciar sesión.', error.code);
         } else if (error.code === 'auth/weak-password') {
-          throw new Error('La contraseña debe tener al menos 8 caracteres seguros.');
+          throw sessionError('La contraseña debe tener al menos 8 caracteres seguros.', error.code);
         } else if (error.code === 'auth/invalid-email') {
-          throw new Error('El formato del correo electrónico no es válido.');
+          throw sessionError('El formato del correo electrónico no es válido.', error.code);
         }
         throw error;
       }
@@ -758,9 +777,9 @@
         await window.firebase.auth().sendPasswordResetEmail(email.trim());
       } catch (error) {
         if (error.code === 'auth/invalid-email') {
-          throw new Error('El formato del correo electrónico no es válido.');
+          throw sessionError('El formato del correo electrónico no es válido.', error.code);
         } else if (error.code === 'auth/too-many-requests') {
-          throw new Error('Demasiados intentos. Esperá unos minutos antes de reintentar.');
+          throw sessionError('Demasiados intentos. Esperá unos minutos antes de reintentar.', error.code);
         } else if (error.code !== 'auth/user-not-found') {
           throw error;
         }
@@ -780,13 +799,13 @@
       } catch (error) {
         console.error('[Baqueano Session] Error en Google Auth:', error);
         if (error.code === 'auth/popup-closed-by-user') {
-          throw new Error('La ventana de Google fue cerrada antes de completar el inicio de sesión.');
+          throw sessionError('La ventana de Google fue cerrada antes de completar el inicio de sesión.', error.code);
         } else if (error.code === 'auth/popup-blocked') {
-          throw new Error('El navegador bloqueó la ventana emergente de Google. Por favor permite popups en tu navegador.');
+          throw sessionError('El navegador bloqueó la ventana emergente de Google. Por favor permite popups en tu navegador.', error.code);
         } else if (error.code === 'auth/unauthorized-domain') {
-          throw new Error('El dominio actual (' + (window.location.hostname || 'local') + ') no está en la lista blanca de Firebase Auth. Usa el Acceso Rápido de Prueba o autoriza el dominio en Firebase Console.');
+          throw sessionError('El dominio actual (' + (window.location.hostname || 'local') + ') no está en la lista blanca de Firebase Auth. Usa el Acceso Rápido de Prueba o autoriza el dominio en Firebase Console.', error.code);
         } else if (error.code === 'auth/operation-not-supported-in-this-environment') {
-          throw new Error('La autenticación emergente no está soportada en el protocolo file://. Abre la página mediante un servidor local (http://localhost) o usa el Acceso Rápido.');
+          throw sessionError('La autenticación emergente no está soportada en el protocolo file://. Abre la página mediante un servidor local (http://localhost) o usa el Acceso Rápido.', error.code);
         }
         throw error;
       }

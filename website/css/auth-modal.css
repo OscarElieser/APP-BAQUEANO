@@ -1,0 +1,147 @@
+/* ============================================================================
+   🔐 BAQUEANO — LOGIN / REGISTRO SOBRE LA PÁGINA (css/auth-modal.css)
+   🎯 POR QUÉ: el acceso aparece encima de la página actual (pedido del propietario,
+      2026-10-14) con tarjeta de vidrio sobre el fondo desenfocado, como su referencia.
+   ⚙️ CÓMO: <dialog> + ::backdrop con backdrop-filter; paleta oficial #165D6F,
+      #F65E01, #F4E6C1, #0F172A; campos con línea inferior; foco visible; sin
+      animaciones si la persona pide movimiento reducido.
+   📦 QUÉ: estilos de js/auth-modal.js (clases .bq-auth-*).
+   ============================================================================ */
+html.bq-auth-open { overflow: hidden; }
+
+.bq-auth-dialog {
+  width: min(440px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #F7F3EA;
+  overflow: visible;
+}
+.bq-auth-dialog::backdrop {
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(246, 94, 1, .28), transparent 60%),
+    radial-gradient(900px 520px at 85% 90%, rgba(22, 93, 111, .45), transparent 60%),
+    rgba(15, 23, 42, .58);
+  -webkit-backdrop-filter: blur(10px) saturate(1.15);
+  backdrop-filter: blur(10px) saturate(1.15);
+}
+.bq-auth-dialog[open] .bq-auth-card { animation: bqAuthIn .38s cubic-bezier(.2, .8, .2, 1) both; }
+.bq-auth-dialog[open]::backdrop { animation: bqAuthFade .3s ease both; }
+@keyframes bqAuthIn { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes bqAuthFade { from { opacity: 0; } to { opacity: 1; } }
+
+.bq-auth-card {
+  position: relative;
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(1.4rem, 5vw, 2.2rem) clamp(1.2rem, 5vw, 2.1rem) 1.5rem;
+  border-radius: 28px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, .08) 45%, rgba(22, 93, 111, .22));
+  border: 1px solid rgba(244, 230, 193, .45);
+  box-shadow: 0 30px 80px rgba(15, 23, 42, .55), inset 0 1px 0 rgba(255, 255, 255, .35);
+  -webkit-backdrop-filter: blur(22px) saturate(1.3);
+  backdrop-filter: blur(22px) saturate(1.3);
+  text-align: center;
+}
+/* Sin backdrop-filter (navegadores antiguos): fondo sólido legible. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .bq-auth-card { background: linear-gradient(160deg, #165D6F, #0F172A); }
+}
+
+.bq-auth-close {
+  position: absolute; top: 12px; right: 12px;
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
+  border: 1px solid rgba(255, 255, 255, .28); border-radius: 50%;
+  background: rgba(15, 23, 42, .35); color: #fff; font-size: 1.05rem; cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.bq-auth-close:hover { background: rgba(246, 94, 1, .85); transform: rotate(90deg); }
+
+.bq-auth-logo { width: 56px; height: 56px; margin: 0 auto .5rem; display: block; filter: drop-shadow(0 6px 16px rgba(15, 23, 42, .45)); }
+.bq-auth-title { margin: .1rem 0 .35rem; color: #fff; font: 800 clamp(1.7rem, 6vw, 2.15rem)/1.1 'League Spartan', 'Plus Jakarta Sans', sans-serif; letter-spacing: -.01em; }
+.bq-auth-switch { margin: 0 0 .55rem; color: rgba(247, 243, 234, .9); font-size: .95rem; }
+.bq-auth-switch-link { padding: 0; border: 0; background: none; color: #FFB27A; font: inherit; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.bq-auth-switch-link:hover { color: #fff; }
+.bq-auth-subtitle { margin: 0 auto 1.1rem; max-width: 34ch; color: rgba(247, 243, 234, .78); font-size: .86rem; line-height: 1.5; }
+
+.bq-auth-form { display: grid; gap: .55rem; text-align: left; }
+.bq-auth-field { position: relative; padding-top: 1.15rem; }
+.bq-auth-input {
+  width: 100%; box-sizing: border-box;
+  padding: .55rem 2.6rem .55rem 0;
+  border: 0; border-bottom: 2px solid rgba(244, 230, 193, .55); border-radius: 0;
+  background: transparent; color: #fff; font: 600 1rem/1.4 'Plus Jakarta Sans', sans-serif;
+  transition: border-color .2s ease;
+}
+.bq-auth-input:focus { outline: none; border-bottom-color: #F65E01; }
+.bq-auth-input:-webkit-autofill { -webkit-text-fill-color: #fff; transition: background-color 9999s ease-out; }
+.bq-auth-label {
+  position: absolute; left: 0; top: 1.7rem;
+  color: rgba(247, 243, 234, .82); font-size: 1rem; font-weight: 600;
+  pointer-events: none; transform-origin: left top;
+  transition: transform .2s ease, color .2s ease;
+}
+.bq-auth-input:focus + .bq-auth-label,
+.bq-auth-input:not(:placeholder-shown) + .bq-auth-label { transform: translateY(-1.35rem) scale(.78); color: #F4E6C1; }
+.bq-auth-eye {
+  position: absolute; right: 0; bottom: .1rem;
+  display: grid; place-items: center; width: 44px; height: 44px;
+  border: 0; background: none; color: rgba(247, 243, 234, .85); cursor: pointer;
+}
+.bq-auth-hint { margin: -.1rem 0 .1rem; color: rgba(247, 243, 234, .7); font-size: .78rem; }
+.bq-auth-forgot { justify-self: end; min-height: 44px; padding: 0 .1rem; border: 0; background: none; color: #F4E6C1; font: 700 .84rem 'Plus Jakarta Sans', sans-serif; cursor: pointer; }
+.bq-auth-forgot:hover { color: #fff; text-decoration: underline; }
+.bq-auth-terms { display: flex; gap: .6rem; align-items: flex-start; margin: .35rem 0 .15rem; color: rgba(247, 243, 234, .9); font-size: .84rem; line-height: 1.45; cursor: pointer; }
+.bq-auth-terms a { color: #FFB27A; font-weight: 700; }
+.bq-auth-check { flex: none; width: 20px; height: 20px; margin-top: .1rem; accent-color: #F65E01; }
+
+.bq-auth-submit {
+  margin-top: .45rem; min-height: 52px; width: 100%;
+  border: 0; border-radius: 14px;
+  background: linear-gradient(135deg, #F65E01, #FF7B26);
+  color: #fff; font: 800 1.05rem 'Plus Jakarta Sans', sans-serif; letter-spacing: .01em;
+  box-shadow: 0 14px 30px rgba(246, 94, 1, .42); cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+.bq-auth-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 18px 38px rgba(246, 94, 1, .5); }
+.bq-auth-submit:disabled, .bq-auth-google:disabled { opacity: .7; cursor: progress; }
+.bq-auth-status { min-height: 1.2em; margin: .2rem 0 0; font-size: .86rem; line-height: 1.45; text-align: center; }
+.bq-auth-status.is-error { color: #FFD1BC; }
+.bq-auth-status.is-success { color: #BFF5DF; }
+
+.bq-auth-or { display: flex; align-items: center; gap: .75rem; margin: 1rem 0 .8rem; color: rgba(247, 243, 234, .82); font-size: .82rem; }
+.bq-auth-or::before, .bq-auth-or::after { content: ""; flex: 1; height: 1px; background: rgba(244, 230, 193, .45); }
+.bq-auth-google {
+  display: flex; align-items: center; justify-content: center; gap: .65rem;
+  width: 100%; min-height: 50px;
+  border: 1px solid rgba(255, 255, 255, .7); border-radius: 14px;
+  background: #fff; color: #0F172A; font: 800 .98rem 'Plus Jakarta Sans', sans-serif; cursor: pointer;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, .25);
+  transition: transform .2s ease;
+}
+.bq-auth-google:hover:not(:disabled) { transform: translateY(-2px); }
+.bq-auth-secure { margin: .9rem 0 0; color: rgba(247, 243, 234, .65); font-size: .74rem; line-height: 1.4; }
+
+.bq-auth-dialog button:focus-visible,
+.bq-auth-dialog a:focus-visible,
+.bq-auth-check:focus-visible { outline: 3px solid #F4E6C1; outline-offset: 3px; }
+[hidden].bq-auth-field, .bq-auth-dialog [hidden] { display: none !important; }
+
+@media (max-width: 380px) {
+  .bq-auth-card { border-radius: 22px; }
+  .bq-auth-title { font-size: 1.55rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bq-auth-dialog[open] .bq-auth-card, .bq-auth-dialog[open]::backdrop { animation: none; }
+  .bq-auth-close, .bq-auth-submit, .bq-auth-google { transition: none; }
+}
+
+/* Prioridad sobre estilos globales de títulos y foco del sitio. */
+.bq-auth-dialog .bq-auth-title { color: #fff !important; -webkit-text-fill-color: #fff !important; text-shadow: 0 2px 18px rgba(15, 23, 42, .45); }
+.bq-auth-dialog .bq-auth-input:focus,
+.bq-auth-dialog .bq-auth-input:focus-visible { outline: none !important; box-shadow: 0 2px 0 0 #F65E01 !important; border-bottom-color: #F65E01; }
+.bq-auth-close svg, .bq-auth-eye svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }

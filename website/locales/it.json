@@ -7396,5 +7396,40 @@
       "beachTitle": "Accesso e contatto",
       "lodgingChannels": "CANALI DI CONTATTO DIRETTO"
     }
+  },
+  "authModal": {
+    "titleSignin": "Accedi",
+    "titleSignup": "Crea un account",
+    "subtitle": "Salva i preferiti, organizza il viaggio e contatta ogni attività dal tuo account BAQUEANO.",
+    "noAccount": "Non hai un account?",
+    "createOne": "Creane uno",
+    "haveAccount": "Hai già un account?",
+    "signinLink": "Accedi",
+    "name": "Nome e cognome",
+    "email": "Email",
+    "password": "Password",
+    "passwordHint": "Almeno 8 caratteri.",
+    "showPassword": "Mostra password",
+    "hidePassword": "Nascondi password",
+    "forgot": "Hai dimenticato la password?",
+    "resetSent": "Se l'email è registrata, ti abbiamo inviato un link per creare una nuova password.",
+    "submitSignin": "Accedi",
+    "submitSignup": "Crea il mio account",
+    "or": "o continua con",
+    "google": "Continua con Google",
+    "close": "Chiudi",
+    "working": "Elaborazione…",
+    "welcome": "Ciao {name}! Hai effettuato l'accesso.",
+    "created": "Account creato, {name}! Ti abbiamo inviato un'email per verificarlo.",
+    "secure": "Accesso sicuro con Firebase Authentication. Non vediamo mai la tua password.",
+    "errors": {
+      "unavailable": "Impossibile raggiungere il servizio di accesso. Controlla la connessione e riprova.",
+      "popupClosed": "Hai chiuso la finestra di Google prima di finire.",
+      "popupBlocked": "Il browser ha bloccato la finestra di Google. Consenti i popup e riprova.",
+      "unauthorizedDomain": "Questo sito non è ancora autorizzato per l'accesso con Google. Usa email e password.",
+      "invalidEmail": "L'indirizzo email non è valido.",
+      "nameRequired": "Inserisci il tuo nome.",
+      "resetNeedsEmail": "Inserisci la tua email per ricevere il link."
+    }
   }
 }

@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-14T21:41:20.580Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 5600 · en 5600 · fr 5600 · it 5600 · pt 5600 · de 5600 · ko 5600 · zh 5600
+Generado: 2026-10-14T22:01:03.993Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 5631 · en 5631 · fr 5631 · it 5631 · pt 5631 · de 5631 · ko 5631 · zh 5631
 
 HTML: 4237/4238 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
@@ -180,6 +180,7 @@ HTML: 4237/4238 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/ambiental-report-handoff.js | js | 0 | 0 | 0 | 100 % |
 | js/app-download.js | js | 0 | 0 | 0 | 100 % |
 | js/async-styles.js | js | 0 | 0 | 0 | 100 % |
+| js/auth-modal.js | js | 0 | 0 | 0 | 100 % |
 | js/ayuda.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-analytics.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-api.js | js | 0 | 0 | 0 | 100 % |
