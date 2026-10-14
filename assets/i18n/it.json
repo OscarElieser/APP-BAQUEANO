@@ -5546,5 +5546,19 @@
   "trip.weatherNote": "Previsioni dei prossimi 3 giorni (il viaggio non ha ancora date).",
   "trip.weatherSource": "Fonte: Open-Meteo",
   "trip.weatherTitle": "Meteo sul tuo percorso",
-  "trip.weatherUnavailable": "Le previsioni non sono disponibili al momento. Non mostriamo dati inventati."
+  "trip.weatherUnavailable": "Le previsioni non sono disponibili al momento. Non mostriamo dati inventati.",
+  "weather.clear": "Sereno",
+  "weather.cloudy": "Nuvoloso",
+  "weather.connectionPending": "Connessione in attesa",
+  "weather.drizzle": "Pioviggine",
+  "weather.feelsLike": "Percepita {temp}",
+  "weather.fog": "Nebbia",
+  "weather.partlyCloudy": "Parzialmente nuvoloso",
+  "weather.rain": "Pioggia",
+  "weather.retryLater": "Impossibile aggiornare. Riproveremo.",
+  "weather.storms": "Temporali",
+  "weather.tagTitle": "Consulta il meteo di questo territorio",
+  "weather.unavailable": "Non disponibile",
+  "weather.updated": "Aggiornato alle {time}",
+  "weather.variable": "Condizioni variabili"
 }

@@ -18,6 +18,26 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 MEJORAS DEL CATÁLOGO COREANO Y CHINO (14-10-2026)
+- **Consulta / Solicitud del Usuario:**
+  *"trabajemos con el catalago de idioma. chino y coreano"* → *"ok mejorarlo entonces y lo adapta al catalogo de los idiomas"*
+- **Objetivos:**
+  1. Fechas y horas del sitio público en el idioma activo (no `es-NI` fijo) y textos fijos en español movidos a claves en los 8 catálogos.
+  2. Etiquetas de testimonios separadas también por comas chinas (「，」「、」).
+  3. Glosario ko/zh de nombres de lugares y unificación en los catálogos.
+- **Regla del propietario (14-10-2026):** *"todos los commits se tiene que subir sin errores al github. es una regla"* → cada commit se verifica (puertas y pruebas de CI) antes de subirlo.
+- **Diagnóstico:** catálogos ko/zh completos (5.548 claves, sin vacíos, marcadores intactos, zh 100 % simplificado, ko en 해요체). Problemas reales: fechas/horas con `es-NI` fijo en el sitio público (en ko/zh salía «hace 3 días», «mié», «p. m.»), clima de ruta con textos en español sin clave, etiquetas que no se separaban con comas chinas, y pueblos originarios/Somoto en latín en unos textos y transliterados en otros.
+- **Entregables:**
+  1. 14 claves nuevas `weather.*` en los 8 idiomas (`i18n-add-keys`): condiciones, «Sensación {temp}», «Actualizado {time}», no disponible, reintento, conexión pendiente y título de la etiqueta.
+  2. `js/baqueano-route-weather.js`: textos por clave, días/horas con el locale activo, repinta al cargar el catálogo (`baqueano:i18nReady`) y al cambiar de idioma sin reconsultar Open-Meteo.
+  3. `js/testimonios.js`: fecha relativa y «Visitó en…» con locale activo y claves existentes (`testimonials.justNow/visited/edited`); el primer render espera al motor i18n (que carga el shell después); recarga al cambiar de idioma; etiquetas separadas también por 「，」「、」「;」「；」.
+  4. `js/destination-community.js`, `js/auth-panel.js`, `js/user-session.js`, `js/baqueano-assistant.js`, `js/baqueano-travel-session.js`: fechas/horas con el locale activo.
+  5. Glosario `website/scripts/i18n-glossary-ko-zh.json` (18 lugares + 5 pueblos), regla en `website/docs/i18n-glossary-ko-zh.md` y prueba `website/scripts/i18n-cjk-glossary.test.mjs` (en `npm run i18n` y en CI). Corregidos 13 textos (초로테가족/乔罗特加人, 니카라오족/尼加拉奥人, 마타갈파족/马塔加尔帕人, 마양나족/马扬纳人, 소모토/索莫托). Ejemplos zh de etiquetas con comas chinas.
+  6. Catálogos exportados a la app (`assets/i18n`), línea base i18n bajada (JS pendientes 655 → 648), CI con paso del glosario y nombres «8 idiomas».
+- **Verificación:** `npm run i18n` 8×5.561 claves 0 errores · glosario 23 nombres/364 textos 0 diferencias · navegador (Chromium): clima en ko «구름 조금 · 체감 33°C / 오후 02:15 업데이트 / 수 목 금», zh «局部多云 · 体感 33°C / 14:15 更新 / 周三…», cambio ko→zh en vivo OK; testimonios «3일 전» / «3天前» / «hace 3 días»; 0 errores JS · `i18n-browser` 19 rutas × 8 idiomas PASS · `baqui-intent` 20/20 · `impact-section` 28/28 · `consent-analytics` 5/5 · build estático 878 archivos · SEO 13/13 · auditoría 0 críticos · Kronox 4 documentos · franja y paridad de territorios PASS · QA de navegador de CI (31 páginas × 16 anchos, axe) 0 fallos.
+- **Notas de entorno (no causadas por este cambio):** `global-shell.test.mjs` (no está en CI) falla también en `main` sin cambios en este contenedor (cabecera al hacer scroll y cierres del navegador a 1440 px); `places-consistency.test.mjs` falla en `main` («destinos.html debe cargar destinos-supabase.js»). Flutter no está instalado aquí: los JSON de la app solo cambian por el exportador y `app_i18n_test` exige claves no vacías, que se cumplen.
+- **Estado:** ✅ Verificado. Se sube a `main`.
+
 ## 🧭 CAMBIOS DE GITHUB NO VISIBLES EN LA PLATAFORMA + COREANO Y CHINO EN EL SELECTOR (09-10-2026)
 - **Consulta / Solicitud del Usuario:**
   *"revisas los cambios que se subieron en github no lo veo en la plataforma y ademas aplica el idioma coreano y chino al selector de idiomas"*

@@ -21,6 +21,9 @@
 // - Sección "Lo que cuentan los viajeros" con hasta 3 experiencias y botones
 //   "Ver todas" (testimonios.html?destino=) y "Compartí la tuya"
 //   (testimonios.html?accion=compartir).
+//
+// 🌐 IDIOMA (2026-10-14): fechas con el locale activo de BaqueanoLanguage (antes `es-NI` fijo;
+//   en coreano o chino aparecían meses en español).
 // ============================================================================
 (function (window, document) {
   'use strict';
@@ -56,7 +59,7 @@
     if (!value) return null;
     var date = new Date(value);
     if (!isFinite(date.getTime())) return null;
-    try { return date.toLocaleDateString('es-NI', { month: 'long', year: 'numeric', timeZone: 'UTC' }); } catch (_) { return null; }
+    try { return date.toLocaleDateString((window.BaqueanoLanguage && window.BaqueanoLanguage.getLocale && window.BaqueanoLanguage.getLocale()) || 'es-NI', { month: 'long', year: 'numeric', timeZone: 'UTC' }); } catch (_) { return null; }
   }
 
   function card(item) {
@@ -124,6 +127,20 @@
     setTimeout(function () { observer.disconnect(); }, 15000);
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
-  else start();
+  // 🌐 Espera el catálogo del idioma (fechas en el idioma activo); sin motor i18n arranca igual.
+  function whenLanguageReady() {
+    // global-language.js lo carga el shell (global-injector) y puede llegar después de este
+    // script: si aún no existe, se espera su evento «baqueano:i18nReady» (máx. 3 s).
+    return new Promise(function (resolve) {
+      var L = window.BaqueanoLanguage;
+      if (L && L.ready) { Promise.resolve(L.ready()).then(resolve, resolve); return; }
+      var done = false;
+      var finish = function () { if (!done) { done = true; resolve(); } };
+      window.addEventListener('baqueano:i18nReady', finish, { once: true });
+      setTimeout(finish, 3000);
+    });
+  }
+  function startWhenLanguageReady() { whenLanguageReady().then(start); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startWhenLanguageReady);
+  else startWhenLanguageReady();
 })(window, document);

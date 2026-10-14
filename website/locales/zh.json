@@ -721,7 +721,7 @@
     "stars2": "2 星",
     "stars1": "1 星",
     "fieldTags": "标签",
-    "tagsPlaceholder": "海滩, 家庭, 日落（用逗号分隔）",
+    "tagsPlaceholder": "海滩，家庭，日落（用逗号分隔）",
     "fieldRecommendations": "推荐",
     "recommendationsPlaceholder": "有什么不容错过的？（选填）",
     "fieldTips": "给其他旅行者的建议",
@@ -898,7 +898,7 @@
     "stars2": "2 星",
     "stars1": "1 星",
     "tags": "标签",
-    "tagsPh": "海滩, 家庭, 日落（用逗号分隔）",
+    "tagsPh": "海滩，家庭，日落（用逗号分隔）",
     "recommendations": "推荐",
     "recommendationsPh": "有什么不容错过的？（选填）",
     "tips": "给其他旅行者的建议",
@@ -2413,7 +2413,7 @@
         "p1": "每次行动都能累积积分、解锁新等级。去探索、去守护，成为更鲜活的尼加拉瓜的一部分。",
         "a1": "查看我的护照",
         "span1": "等级 1",
-        "h41": "Somoto 徒步者",
+        "h41": "索莫托徒步者",
         "span2": "等级 2",
         "h42": "熔岩探险者",
         "span3": "等级 3",
@@ -3727,15 +3727,15 @@
         "a1": "进一步了解我们的民族"
       },
       "histPeopleCard": {
-        "h41": "Chorotega 人",
+        "h41": "乔罗特加人",
         "p1": "太平洋地区的根源、制陶传统与文化遗产。",
-        "h42": "Nicarao 人",
+        "h42": "尼加拉奥人",
         "p2": "大湖与沃土之民。",
-        "h43": "Matagalpa 人",
+        "h43": "马塔加尔帕人",
         "p3": "北部山区的守护者。",
         "h44": "米斯基托人",
         "p4": "加勒比的文化、海洋、河流与生物多样性。",
-        "h45": "Mayangna 人",
+        "h45": "马扬纳人",
         "p5": "生物圈保护区里的祖先智慧。"
       },
       "histCharactersSection": {
@@ -3745,7 +3745,7 @@
       },
       "histCharacterCard": {
         "h41": "Diriangén",
-        "p1": "Chorotega 领袖，抵抗与尊严的象征。",
+        "p1": "乔罗特加领袖，抵抗与尊严的象征。",
         "h42": "Andrés Castro",
         "p2": "民族战争英雄，主权捍卫者。",
         "h43": "José Dolores Estrada",
@@ -7332,5 +7332,21 @@
     "empty": "没有找到与该搜索匹配的菜肴。",
     "count": "来自 {t} 个地区的 {n} 道菜",
     "countOne": "来自 1 个地区的 {n} 道菜"
+  },
+  "weather": {
+    "clear": "晴",
+    "partlyCloudy": "局部多云",
+    "cloudy": "阴",
+    "fog": "雾",
+    "drizzle": "毛毛雨",
+    "rain": "雨",
+    "storms": "雷暴",
+    "variable": "天气多变",
+    "feelsLike": "体感 {temp}",
+    "updated": "{time} 更新",
+    "unavailable": "暂不可用",
+    "retryLater": "无法更新，我们会再试一次。",
+    "connectionPending": "等待连接",
+    "tagTitle": "查看该地区的天气"
   }
 }

@@ -7332,5 +7332,21 @@
     "empty": "No encontramos platos con esa búsqueda.",
     "count": "{n} platos de {t} territorios",
     "countOne": "{n} platos de 1 territorio"
+  },
+  "weather": {
+    "clear": "Despejado",
+    "partlyCloudy": "Parcialmente nublado",
+    "cloudy": "Nublado",
+    "fog": "Neblina",
+    "drizzle": "Llovizna",
+    "rain": "Lluvia",
+    "storms": "Tormentas",
+    "variable": "Condición variable",
+    "feelsLike": "Sensación {temp}",
+    "updated": "Actualizado {time}",
+    "unavailable": "No disponible",
+    "retryLater": "No se pudo actualizar. Intentaremos nuevamente.",
+    "connectionPending": "Conexión pendiente",
+    "tagTitle": "Consultar clima de este territorio"
   }
 }

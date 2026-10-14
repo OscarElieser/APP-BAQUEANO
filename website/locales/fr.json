@@ -7332,5 +7332,21 @@
     "empty": "Aucun plat ne correspond à cette recherche.",
     "count": "{n} plats de {t} territoires",
     "countOne": "{n} plats d'un territoire"
+  },
+  "weather": {
+    "clear": "Dégagé",
+    "partlyCloudy": "Partiellement nuageux",
+    "cloudy": "Nuageux",
+    "fog": "Brouillard",
+    "drizzle": "Bruine",
+    "rain": "Pluie",
+    "storms": "Orages",
+    "variable": "Conditions variables",
+    "feelsLike": "Ressenti {temp}",
+    "updated": "Mis à jour à {time}",
+    "unavailable": "Indisponible",
+    "retryLater": "Mise à jour impossible. Nous réessaierons.",
+    "connectionPending": "Connexion en attente",
+    "tagTitle": "Voir la météo de ce territoire"
   }
 }

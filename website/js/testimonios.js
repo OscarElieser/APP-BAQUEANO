@@ -21,6 +21,11 @@
 //
 // 📦 QUÉ: feed con filtros y buscador, detalle con comentarios y respuestas,
 //   formulario "Comparte tu experiencia", denuncias y "Mis experiencias".
+//
+// 🌐 IDIOMA (2026-10-14): fechas relativas y "Visitó en…" con el locale activo y las claves
+//   `testimonials.justNow` / `testimonials.visited` / `testimonials.edited` (antes `es`/`es-NI`
+//   fijos: en coreano o chino salía "hace 3 días"). Las etiquetas se separan también por las
+//   comas chinas 「，」「、」 y el punto y coma, como se escriben en chino y japonés.
 // ============================================================================
 (function (window, document) {
   'use strict';
@@ -57,21 +62,28 @@
   function toast(message, type) { if (window.bqToast) window.bqToast(message, type || 'info'); }
   function norm(value) { return String(value || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim(); }
 
+  function locale() { var L = window.BaqueanoLanguage; return (L && L.getLocale && L.getLocale()) || 'es-NI'; }
+  function tr(key, fallback, params) {
+    var L = window.BaqueanoLanguage;
+    try { return (L && L.t && L.t(key, Object.assign({ fallback: fallback }, params || {}))) || fallback; } catch (_) { return fallback; }
+  }
   function relativeDate(iso) {
     var date = new Date(iso);
     if (!isFinite(date)) return '';
     var diff = (date.getTime() - Date.now()) / 1000;
     var units = [['year', 31536000], ['month', 2592000], ['week', 604800], ['day', 86400], ['hour', 3600], ['minute', 60]];
-    var rtf = new Intl.RelativeTimeFormat('es', { numeric: 'auto' });
+    var rtf = new Intl.RelativeTimeFormat(locale(), { numeric: 'auto' });
     for (var i = 0; i < units.length; i += 1) {
       if (Math.abs(diff) >= units[i][1]) return rtf.format(Math.round(diff / units[i][1]), units[i][0]);
     }
-    return 'hace un momento';
+    return tr('testimonials.justNow', 'hace un momento');
   }
   function visitLabel(value) {
     if (!value) return '';
     var d = new Date(value + 'T12:00:00');
-    return isFinite(d) ? 'Visitó en ' + d.toLocaleDateString('es-NI', { month: 'long', year: 'numeric' }) : '';
+    if (!isFinite(d)) return '';
+    var month = d.toLocaleDateString(locale(), { month: 'long', year: 'numeric' });
+    return tr('testimonials.visited', 'Visitó en ' + month, { date: month });
   }
 
   function avatar(name, url) {
@@ -397,7 +409,7 @@
     head.appendChild(avatar(c.author_name, c.author_avatar));
     var meta = el('div', 'tm-card-who');
     meta.appendChild(el('strong', null, c.author_name));
-    meta.appendChild(el('small', null, relativeDate(c.created_at) + (c.edited ? ' · editado' : '')));
+    meta.appendChild(el('small', null, relativeDate(c.created_at) + (c.edited ? ' · ' + tr('testimonials.edited', 'editado') : '')));
     head.appendChild(meta);
     li.appendChild(head);
     var text = el('p', 'tm-comment-text', c.body);
@@ -600,7 +612,7 @@
       visit_month: get('visit') || null,
       rating: rating ? Number(rating.value) : null,
       experience_type: get('type') || null,
-      tags: get('tags').split(/[,#]/).map(function (t) { return t.trim(); }).filter(Boolean).slice(0, 8),
+      tags: get('tags').split(/[,#，、;；]/).map(function (t) { return t.trim(); }).filter(Boolean).slice(0, 8),
       recommendations: get('recommendations') || null,
       tips: get('tips') || null
     };
@@ -819,6 +831,19 @@
     }
   }
 
+  function whenLanguageReady() {
+    // global-language.js lo carga el shell (global-injector) y puede llegar después de este
+    // script: si aún no existe, se espera su evento «baqueano:i18nReady» (máx. 3 s).
+    return new Promise(function (resolve) {
+      var L = window.BaqueanoLanguage;
+      if (L && L.ready) { Promise.resolve(L.ready()).then(resolve, resolve); return; }
+      var done = false;
+      var finish = function () { if (!done) { done = true; resolve(); } };
+      window.addEventListener('baqueano:i18nReady', finish, { once: true });
+      setTimeout(finish, 3000);
+    });
+  }
+
   function init() {
     if (!API) { setFeedMessage('error', 'No se pudo iniciar la comunidad.', 'Recargá la página.', false); return; }
     fillSelects();
@@ -826,7 +851,12 @@
     bind();
     watchAuth();
     var params = new URLSearchParams(window.location.search);
-    API.available().then(function (ok) {
+    // 🌐 Se espera el catálogo del idioma antes del primer render para que las fechas
+    // («hace 3 días», «Visitó en…») salgan ya en el idioma activo; si el motor no carga, sigue igual.
+    var languageReady = whenLanguageReady();
+    window.addEventListener('baqueano:languageChanged', function () { if (state.service) loadFeed(true); });
+    Promise.all([API.available(), languageReady]).then(function (results) {
+      var ok = results[0];
       state.service = ok;
       if (!ok) {
         $('#tmUnavailable').hidden = false;

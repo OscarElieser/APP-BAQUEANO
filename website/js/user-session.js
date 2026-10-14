@@ -926,7 +926,7 @@
       ? window.BaqueanoRoles.resolve({ email, emailVerified: firebaseUser.emailVerified === true })
       : (privileged ? privileged.role : 'explorer');
     const createdAt = firebaseUser.metadata && firebaseUser.metadata.creationTime
-      ? new Date(firebaseUser.metadata.creationTime).toLocaleDateString('es-NI', { month: 'long', year: 'numeric' })
+      ? new Date(firebaseUser.metadata.creationTime).toLocaleDateString((window.BaqueanoLanguage && window.BaqueanoLanguage.getLocale && window.BaqueanoLanguage.getLocale()) || 'es-NI', { month: 'long', year: 'numeric' })
       : '';
 
     let resolvedName = (firebaseUser.displayName || '').trim();

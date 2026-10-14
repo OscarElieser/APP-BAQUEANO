@@ -7332,5 +7332,21 @@
     "empty": "Keine Gerichte für diese Suche gefunden.",
     "count": "{n} Gerichte aus {t} Gebieten",
     "countOne": "{n} Gerichte aus 1 Gebiet"
+  },
+  "weather": {
+    "clear": "Klar",
+    "partlyCloudy": "Teilweise bewölkt",
+    "cloudy": "Bewölkt",
+    "fog": "Nebel",
+    "drizzle": "Nieselregen",
+    "rain": "Regen",
+    "storms": "Gewitter",
+    "variable": "Wechselhaft",
+    "feelsLike": "Gefühlt {temp}",
+    "updated": "Aktualisiert {time}",
+    "unavailable": "Nicht verfügbar",
+    "retryLater": "Aktualisierung fehlgeschlagen. Wir versuchen es erneut.",
+    "connectionPending": "Verbindung ausstehend",
+    "tagTitle": "Wetter für dieses Gebiet abrufen"
   }
 }

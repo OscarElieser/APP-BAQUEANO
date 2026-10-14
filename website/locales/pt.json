@@ -7332,5 +7332,21 @@
     "empty": "Não encontramos pratos com essa busca.",
     "count": "{n} pratos de {t} territórios",
     "countOne": "{n} pratos de 1 território"
+  },
+  "weather": {
+    "clear": "Céu limpo",
+    "partlyCloudy": "Parcialmente nublado",
+    "cloudy": "Nublado",
+    "fog": "Neblina",
+    "drizzle": "Garoa",
+    "rain": "Chuva",
+    "storms": "Tempestades",
+    "variable": "Condições variáveis",
+    "feelsLike": "Sensação {temp}",
+    "updated": "Atualizado às {time}",
+    "unavailable": "Indisponível",
+    "retryLater": "Não foi possível atualizar. Vamos tentar novamente.",
+    "connectionPending": "Conexão pendente",
+    "tagTitle": "Ver o clima deste território"
   }
 }

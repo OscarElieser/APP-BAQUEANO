@@ -5546,5 +5546,19 @@
   "trip.weatherNote": "Prévisions des 3 prochains jours (votre voyage n'a pas encore de dates).",
   "trip.weatherSource": "Source : Open-Meteo",
   "trip.weatherTitle": "Météo sur votre itinéraire",
-  "trip.weatherUnavailable": "Les prévisions ne sont pas disponibles pour le moment. Nous n'affichons pas de données inventées."
+  "trip.weatherUnavailable": "Les prévisions ne sont pas disponibles pour le moment. Nous n'affichons pas de données inventées.",
+  "weather.clear": "Dégagé",
+  "weather.cloudy": "Nuageux",
+  "weather.connectionPending": "Connexion en attente",
+  "weather.drizzle": "Bruine",
+  "weather.feelsLike": "Ressenti {temp}",
+  "weather.fog": "Brouillard",
+  "weather.partlyCloudy": "Partiellement nuageux",
+  "weather.rain": "Pluie",
+  "weather.retryLater": "Mise à jour impossible. Nous réessaierons.",
+  "weather.storms": "Orages",
+  "weather.tagTitle": "Voir la météo de ce territoire",
+  "weather.unavailable": "Indisponible",
+  "weather.updated": "Mis à jour à {time}",
+  "weather.variable": "Conditions variables"
 }

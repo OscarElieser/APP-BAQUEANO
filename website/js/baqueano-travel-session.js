@@ -868,7 +868,7 @@
   function addMessage(text, sender = 'user') {
     const box = $('#iaChatMessages'); if (!box) return;
     const message = document.createElement('div'); message.className = `ia-msg ${sender}`; message.append(document.createTextNode(text));
-    const time = document.createElement('span'); time.className = 'ia-msg-time'; time.textContent = new Intl.DateTimeFormat('es-NI', { hour: '2-digit', minute: '2-digit' }).format(new Date()); message.appendChild(time);
+    const time = document.createElement('span'); time.className = 'ia-msg-time'; time.textContent = new Intl.DateTimeFormat((window.BaqueanoLanguage && window.BaqueanoLanguage.getLocale && window.BaqueanoLanguage.getLocale()) || 'es-NI', { hour: '2-digit', minute: '2-digit' }).format(new Date()); message.appendChild(time);
     box.appendChild(message); box.scrollTop = box.scrollHeight;
   }
 

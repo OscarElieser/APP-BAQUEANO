@@ -136,9 +136,11 @@ RELACIÓN:
   function formatDate(value, withTime) {
     var date = value ? new Date(value) : null;
     if (!date || !Number.isFinite(date.getTime())) return null;
+    // 🌐 2026-10-14: locale activo (antes `es-NI` fijo; en ko/zh salían meses en español).
+    var locale = (window.BaqueanoLanguage && window.BaqueanoLanguage.getLocale && window.BaqueanoLanguage.getLocale()) || 'es-NI';
     return withTime
-      ? date.toLocaleString('es-NI', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
-      : date.toLocaleDateString('es-NI', { month: 'short', year: 'numeric' });
+      ? date.toLocaleString(locale, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+      : date.toLocaleDateString(locale, { month: 'short', year: 'numeric' });
   }
 
   // Construye el panel con nodos DOM; el único HTML estático es el SVG del logotipo.

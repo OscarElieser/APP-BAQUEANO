@@ -5546,5 +5546,19 @@
   "trip.weatherNote": "Forecast for the next 3 days (your trip doesn't have dates yet).",
   "trip.weatherSource": "Source: Open-Meteo",
   "trip.weatherTitle": "Weather on your route",
-  "trip.weatherUnavailable": "The forecast isn't available right now. We don't show made-up data."
+  "trip.weatherUnavailable": "The forecast isn't available right now. We don't show made-up data.",
+  "weather.clear": "Clear",
+  "weather.cloudy": "Cloudy",
+  "weather.connectionPending": "Connection pending",
+  "weather.drizzle": "Drizzle",
+  "weather.feelsLike": "Feels like {temp}",
+  "weather.fog": "Fog",
+  "weather.partlyCloudy": "Partly cloudy",
+  "weather.rain": "Rain",
+  "weather.retryLater": "Couldn't update. We'll try again.",
+  "weather.storms": "Thunderstorms",
+  "weather.tagTitle": "Check the weather for this territory",
+  "weather.unavailable": "Unavailable",
+  "weather.updated": "Updated {time}",
+  "weather.variable": "Variable conditions"
 }

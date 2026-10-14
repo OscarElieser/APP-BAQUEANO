@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-09T17:06:01.600Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 5548 · en 5548 · fr 5548 · it 5548 · pt 5548 · de 5548 · ko 5548 · zh 5548
+Generado: 2026-10-14T20:17:57.584Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 5562 · en 5562 · fr 5562 · it 5562 · pt 5562 · de 5562 · ko 5562 · zh 5562
 
-HTML: 4237/4238 textos con clave (1 pendientes) · JS: 655 textos dinámicos pendientes · TSX: 1093 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
+HTML: 4237/4238 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -22,7 +22,7 @@ HTML: 4237/4238 textos con clave (1 pendientes) · JS: 655 textos dinámicos pen
 | js/mi-viaje-interactions.js | js | 28 | 0 | 28 | 0 % |
 | apps/admin/src/app/dispositivos/page.tsx | tsx | 25 | 0 | 25 | 0 % |
 | apps/admin/src/app/simulation/page.tsx | tsx | 24 | 0 | 24 | 0 % |
-| apps/web/src/app/research/page.tsx | tsx | 23 | 0 | 23 | 0 % |
+| apps/web/src/app/research/page.tsx | tsx | 24 | 0 | 24 | 0 % |
 | apps/web/src/app/viaje/[tripId]/page.tsx | tsx | 23 | 0 | 23 | 0 % |
 | apps/admin/src/app/strategic/briefing/page.tsx | tsx | 22 | 0 | 22 | 0 % |
 | apps/web/src/app/developers/page.tsx | tsx | 22 | 0 | 22 | 0 % |
@@ -43,7 +43,6 @@ HTML: 4237/4238 textos con clave (1 pendientes) · JS: 655 textos dinámicos pen
 | apps/admin/src/app/strategic/scorecard/page.tsx | tsx | 13 | 0 | 13 | 0 % |
 | apps/admin/src/app/municipios/page.tsx | tsx | 12 | 0 | 12 | 0 % |
 | apps/web/src/app/p/[slug]/page.tsx | tsx | 12 | 0 | 12 | 0 % |
-| js/baqueano-route-weather.js | js | 12 | 0 | 12 | 0 % |
 | apps/admin/src/app/pagos/page.tsx | tsx | 11 | 0 | 11 | 0 % |
 | apps/admin/src/components/ai/AdminCopilot.tsx | tsx | 11 | 0 | 11 | 0 % |
 | apps/web/src/app/alquiler-vehiculos/page.tsx | tsx | 11 | 0 | 11 | 0 % |
@@ -91,6 +90,7 @@ HTML: 4237/4238 textos con clave (1 pendientes) · JS: 655 textos dinámicos pen
 | js/baqueano-ai.js | js | 6 | 0 | 6 | 0 % |
 | apps/admin/src/app/negocios/[id]/page.tsx | tsx | 5 | 0 | 5 | 0 % |
 | apps/web/src/app/marca/page.tsx | tsx | 5 | 0 | 5 | 0 % |
+| js/baqueano-route-weather.js | js | 5 | 0 | 5 | 0 % |
 | js/business-portal.js | js | 5 | 0 | 5 | 0 % |
 | js/destination-dossier.js | js | 5 | 0 | 5 | 0 % |
 | js/epic-music-player.js | js | 5 | 0 | 5 | 0 % |

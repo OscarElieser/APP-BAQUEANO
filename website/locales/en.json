@@ -7332,5 +7332,21 @@
     "empty": "We found no dishes for that search.",
     "count": "{n} dishes from {t} territories",
     "countOne": "{n} dishes from 1 territory"
+  },
+  "weather": {
+    "clear": "Clear",
+    "partlyCloudy": "Partly cloudy",
+    "cloudy": "Cloudy",
+    "fog": "Fog",
+    "drizzle": "Drizzle",
+    "rain": "Rain",
+    "storms": "Thunderstorms",
+    "variable": "Variable conditions",
+    "feelsLike": "Feels like {temp}",
+    "updated": "Updated {time}",
+    "unavailable": "Unavailable",
+    "retryLater": "Couldn't update. We'll try again.",
+    "connectionPending": "Connection pending",
+    "tagTitle": "Check the weather for this territory"
   }
 }

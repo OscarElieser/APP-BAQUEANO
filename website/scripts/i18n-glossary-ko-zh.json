@@ -1,0 +1,30 @@
+{
+  "_comment": "🎯 POR QUÉ: un mismo lugar o pueblo escrito de dos formas confunde a quien lee en coreano o chino. ⚙️ CÓMO: forma fija por nombre; la verifica scripts/i18n-cjk-glossary.test.mjs (este archivo vive en scripts/ para que ningún cargador de locales/ lo tome como idioma). 📦 QUÉ: departamentos, regiones, ciudades y pueblos originarios. Regla completa: docs/i18n-glossary-ko-zh.md.",
+  "places": {
+    "Managua": { "ko": "마나과", "zh": "马那瓜" },
+    "Granada": { "ko": "그라나다", "zh": "格拉纳达" },
+    "León": { "ko": "레온", "zh": "莱昂" },
+    "Masaya": { "ko": "마사야", "zh": "马萨亚" },
+    "Ometepe": { "ko": "오메테페", "zh": "奥梅特佩" },
+    "Matagalpa": { "ko": "마타갈파", "zh": "马塔加尔帕" },
+    "Jinotega": { "ko": "히노테가", "zh": "希诺特加" },
+    "Estelí": { "ko": "에스텔리", "zh": "埃斯特利" },
+    "Chinandega": { "ko": "치난데가", "zh": "奇南德加" },
+    "Rivas": { "ko": "리바스", "zh": "里瓦斯" },
+    "Bluefields": { "ko": "블루필즈", "zh": "布卢菲尔兹" },
+    "Boaco": { "ko": "보아코", "zh": "博阿科" },
+    "Carazo": { "ko": "카라소", "zh": "卡拉索" },
+    "Chontales": { "ko": "촌탈레스", "zh": "琼塔莱斯" },
+    "Nueva Segovia": { "ko": "누에바세고비아", "zh": "新塞哥维亚" },
+    "Madriz": { "ko": "마드리스", "zh": "马德里斯" },
+    "Río San Juan": { "ko": "리오산후안", "zh": "圣胡安河" },
+    "Somoto": { "ko": "소모토", "zh": "索莫托" }
+  },
+  "peoples": {
+    "Chorotega": { "ko": "초로테가", "zh": "乔罗特加" },
+    "Nicarao": { "ko": "니카라오", "zh": "尼加拉奥" },
+    "Matagalpas": { "ko": "마타갈파족", "zh": "马塔加尔帕人" },
+    "Miskito": { "ko": "미스키토", "zh": "米斯基托" },
+    "Mayangna": { "ko": "마양나", "zh": "马扬纳" }
+  }
+}

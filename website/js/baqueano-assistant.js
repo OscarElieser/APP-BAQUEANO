@@ -224,7 +224,10 @@
   }
 
   function updateClock() {
-    const now = new Intl.DateTimeFormat('es-NI', { timeZone: 'America/Managua', hour: '2-digit', minute: '2-digit', hour12: true }).format(new Date());
+    // 🌐 2026-10-14: hora de Managua en el formato del idioma activo (antes `es-NI` fijo:
+    //   en coreano o chino salía «p. m.»; ahora 오후 / 下午).
+    const locale = (window.BaqueanoLanguage && window.BaqueanoLanguage.getLocale && window.BaqueanoLanguage.getLocale()) || 'es-NI';
+    const now = new Intl.DateTimeFormat(locale, { timeZone: 'America/Managua', hour: '2-digit', minute: '2-digit', hour12: true }).format(new Date());
     $('#bqClock').textContent = now;
     // La hora del botón flotante se pinta por CSS (attr(data-time)): es decorativa y, como texto, no
     // coincidía con el nombre accesible del botón (WCAG 2.5.3, auditoría 2026-10-06).

@@ -7332,5 +7332,21 @@
     "empty": "Nessun piatto per questa ricerca.",
     "count": "{n} piatti da {t} territori",
     "countOne": "{n} piatti da 1 territorio"
+  },
+  "weather": {
+    "clear": "Sereno",
+    "partlyCloudy": "Parzialmente nuvoloso",
+    "cloudy": "Nuvoloso",
+    "fog": "Nebbia",
+    "drizzle": "Pioviggine",
+    "rain": "Pioggia",
+    "storms": "Temporali",
+    "variable": "Condizioni variabili",
+    "feelsLike": "Percepita {temp}",
+    "updated": "Aggiornato alle {time}",
+    "unavailable": "Non disponibile",
+    "retryLater": "Impossibile aggiornare. Riproveremo.",
+    "connectionPending": "Connessione in attesa",
+    "tagTitle": "Consulta il meteo di questo territorio"
   }
 }
