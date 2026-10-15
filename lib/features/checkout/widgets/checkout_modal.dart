@@ -71,8 +71,8 @@ class HostEnterpriseProfile {
   final bool verified;
 
   /// Línea oficial de la Mesa Técnica BAQUEANO (la misma de la web y Ops Center).
-  static const String officialPhone = '+505 8443-1289';
-  static const String officialEmail = 'contacto@baqueano.ni';
+  static const String officialPhone = '+505 7797 6973';
+  static const String officialEmail = 'baqueanonicaragua@gmail.com';
   static const String officialTeam = 'Mesa Técnica BAQUEANO';
 
   String get contactPhone => verified ? phone : officialPhone;
