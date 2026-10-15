@@ -36,8 +36,14 @@ concurrency:
 jobs:
   evidence:
     name: Controles en vivo de producción
-    # Tras un despliegue solo si terminó bien; manual y diario, siempre.
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    # Manual, siempre. Tras un despliegue (si terminó bien) y a diario, solo mientras
+    # producción se publique por este pipeline (DEPLOY_TARGET=azure). 2026-10-15: el
+    # propietario retira Azure y publica en Hostinger/Cloudflare; el control en vivo se
+    # corre a mano (Run workflow) hasta conectar la nueva publicación.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (vars.DEPLOY_TARGET == 'azure' &&
+       (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'))
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

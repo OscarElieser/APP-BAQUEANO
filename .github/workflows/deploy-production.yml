@@ -30,6 +30,13 @@
 #   AZURE_SSH_PRIVATE_KEY
 #
 # RELACIÓN: azure/deploy.sh, docs/deployment/AZURE_DEPLOYMENT.md.
+#
+# ⏸️ 2026-10-15 (propietario): «voy a quitarlo de azure, trabajaré directamente con
+#   hostinger y cloudflare». deploy-azure y verify-azure quedan EN PAUSA (no se borran):
+#   solo corren si la variable del repositorio DEPLOY_TARGET vale «azure»
+#   (Settings → Secrets and variables → Actions → Variables). checks y browser-qa
+#   siguen validando cada push y construyen dist-hostinger/, la salida que se publica
+#   en Hostinger / Cloudflare.
 # =====================================================
 name: 🚀 BAQUEANO Producción (Azure)
 
@@ -134,6 +141,7 @@ jobs:
   deploy-azure:
     name: ☁️ Desplegar directamente en Azure
     needs: [checks, browser-qa]
+    if: vars.DEPLOY_TARGET == 'azure'
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -233,6 +241,7 @@ jobs:
   verify-azure:
     name: ☁️ Verificar despliegue en Azure
     needs: deploy-azure
+    if: vars.DEPLOY_TARGET == 'azure'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
