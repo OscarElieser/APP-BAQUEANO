@@ -38,6 +38,7 @@ import '../widgets/interactive_allies_gallery.dart';
 import '../widgets/interactive_impact_section.dart';
 import '../widgets/marquee_ticker.dart';
 import '../widgets/quick_categories_carousel.dart';
+import '../widgets/vivir_coverflow.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -74,6 +75,11 @@ class _HomeScreenState extends State<HomeScreen> {
             // 1. HERO SECTION (Titular Monumental + Tarjeta 3D Cascada La Luna)
             // ----------------------------------------------------------------
             const HeroSection(),
+
+            // ----------------------------------------------------------------
+            // 1.5 «¿QUÉ QUERÉS VIVIR?» — carrusel 3D de vivencias (paridad con la web)
+            // ----------------------------------------------------------------
+            const VivirCoverflow(),
 
             // ----------------------------------------------------------------
             // 2. SECCIÓN DINÁMICA DE IMPACTO SOCIAL (85% a Familias Rurales)
