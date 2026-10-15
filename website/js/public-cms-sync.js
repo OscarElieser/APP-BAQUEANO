@@ -137,7 +137,13 @@
           .then((res) => (res.ok ? res.json() : []))
           .then((rows) => {
             const sections = Array.isArray(rows) && rows[0] && Array.isArray(rows[0].sections) ? rows[0].sections : [];
-            if (!sections.length) return;
+            if (!sections.length) {
+              // Supabase ya no tiene nada publicado para esta página: se borra la copia local y
+              // se ocultan los bloques que la copia vieja haya pintado.
+              try { localStorage.removeItem(`bq_cms_${cacheKey}`); } catch (_) {}
+              document.querySelectorAll('.bq-dynamic-cms-section').forEach((el) => { el.style.display = 'none'; });
+              return;
+            }
             this.writeCache(cacheKey, sections);
             this.applyPageSections(pageId, sections);
             // Si el usuario cambia de idioma, se vuelve a aplicar (textos solo en español).
@@ -169,7 +175,17 @@
     },
 
     applyPageSections(pageId, sections) {
-      sections.forEach((sec) => {
+      // 2026-10-15 — «me sigue saliendo esto, eliminarlo» (propietario, portada): el Website
+      // Builder guardó la página completa con las secciones de plantilla del Ops Center (textos de
+      // ejemplo que nadie editó) y aquí se agregaban al final de la portada. Ahora solo se aplica
+      // lo que el equipo editó y guardó a propósito (edited: true) y solo se agrega un bloque
+      // nuevo si se creó como sección propia (custom: true).
+      const applied = (Array.isArray(sections) ? sections : []).filter((sec) => sec && sec.edited === true);
+      document.querySelectorAll('.bq-dynamic-cms-section').forEach((el) => {
+        const id = el.id.replace(/^dynSec_/, '');
+        if (!applied.some((sec) => sec.id === id && sec.custom === true)) el.style.display = 'none';
+      });
+      applied.forEach((sec) => {
         const status = sec.status || 'published';
         const secId = sec.id || '';
         const secType = sec.type || '';
@@ -401,7 +417,7 @@
               targetEl.style.backgroundImage = `url("${sec.imageUrl}")`;
             }
           }
-        } else if (status === 'published' && (sec.content || sec.title) && this.isSpanish()) {
+        } else if (sec.custom === true && status === 'published' && (sec.content || sec.title) && this.isSpanish()) {
           // Sección dinámica adicional creada en vivo desde el Ops Center
           let dynContainer = document.getElementById(`dynSec_${secId}`);
           if (!dynContainer) {

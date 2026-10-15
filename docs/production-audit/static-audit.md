@@ -5,7 +5,7 @@
 -->
 # Auditoría estática de la salida publicada
 
-Generado: 2026-10-15T18:16:42.999Z · Páginas: 36 · URLs en sitemap: 27 · **Críticos: 0** · Advertencias: 71
+Generado: 2026-10-15T23:26:18.303Z · Páginas: 36 · URLs en sitemap: 27 · **Críticos: 0** · Advertencias: 71
 
 ## SEO por página
 

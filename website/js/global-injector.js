@@ -943,7 +943,7 @@
     if (!window.BaqueanoPublicSync && !/admin(\.html)?$/i.test(location.pathname) &&
         !document.querySelector('script[src*="public-cms-sync.js"]')) {
       var cmsScript = document.createElement('script');
-      cmsScript.src = 'js/public-cms-sync.js?v=20261015-supabase-1';
+      cmsScript.src = 'js/public-cms-sync.js?v=20261015-sin-plantilla-1';
       cmsScript.defer = true;
       document.body.appendChild(cmsScript);
     }
