@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-15T18:16:42.788Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 5987 · en 5987 · fr 5987 · it 5987 · pt 5987 · de 5987 · ko 5987 · zh 5987
+Generado: 2026-10-15T23:08:16.607Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 5987 · en 5987 · fr 5987 · it 5987 · pt 5987 · de 5987 · ko 5987 · zh 5987
 
-HTML: 4245/4246 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
+HTML: 4246/4247 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -159,7 +159,7 @@ HTML: 4245/4246 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | apps/web/src/components/navigation/ScrollProgress.tsx | tsx | 0 | 0 | 0 | 100 % |
 | apps/web/src/components/OfflineRegistration.tsx | tsx | 0 | 0 | 0 | 100 % |
 | apps/web/src/components/sections/DataSourceBanner.tsx | tsx | 0 | 0 | 0 | 100 % |
-| aviso-legal.html | html | 93 | 93 | 0 | 100 % |
+| aviso-legal.html | html | 94 | 94 | 0 | 100 % |
 | ayuda.html | html | 64 | 64 | 0 | 100 % |
 | baqueano-ai.html | html | 3 | 3 | 0 | 100 % |
 | baqueano-ia.html | html | 193 | 193 | 0 | 100 % |

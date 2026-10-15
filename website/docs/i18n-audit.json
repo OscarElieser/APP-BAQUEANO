@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T18:16:42.788Z",
+  "generatedAt": "2026-10-15T23:08:16.607Z",
   "languages": [
     "es",
     "en",
@@ -22,8 +22,8 @@
   },
   "html": {
     "files": 36,
-    "total": 4246,
-    "translated": 4245,
+    "total": 4247,
+    "translated": 4246,
     "untranslated": 1
   },
   "js": {
@@ -217,8 +217,8 @@
     {
       "file": "aviso-legal.html",
       "type": "html",
-      "total": 93,
-      "translated": 93,
+      "total": 94,
+      "translated": 94,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
