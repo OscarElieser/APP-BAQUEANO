@@ -581,6 +581,34 @@ pm run build:hostinger & 	est:hostinger: 876 archivos compilados, 10 rutas crít
   4. Garantizar rendimiento fluido, cumplimiento del estándar de Android (`lib/`, `android/`) y cero bloqueos.
 - **Estado Inicial:** Iniciando verificación de herramientas de Android SDK, emuladores y dispositivos.
 
+## 🧭 SINCRONIZACIÓN DEL REPOSITORIO DESDE GITHUB (15-10-2026 ~13:59 CST)
+- **Consulta / Solicitud del Usuario:** *"actualiza el repositorio traerlo para aca el de https://github.com/OscarElieser/APP-BAQUEANO"*
+- **Objetivo:** Traer los últimos cambios de `origin` (GitHub) al repositorio local sin perder trabajo local (inspeccionar estado, fetch, pull seguro).
+- **Resultado:** `git fetch` → local estaba 67 commits atrás. Se guardó esta bitácora con `git stash`, `git pull --ff-only origin main` (avance rápido, sin conflictos), `git stash pop` (auto-merge OK). HEAD = `f0361719` (fix(ops): descarga del APK acepta redirección a GitHub Releases). Rama `main` al día con `origin/main`.
+- **Estado:** Completado.
+- **Consulta de seguimiento (14:01):** *"ya esta todo aqui"* → verificación: GitHub había recibido 5 commits más (PR #8 contactos oficiales, PR #9 SEO de marca). Segundo `git pull --ff-only` OK. HEAD = `a954048c`; diferencia con `origin/main` = 0/0. Único cambio local: esta bitácora.
+
+## 🧭 DESPLIEGUE REDIRECCIÓN 301 + REGLA CLOUDFLARE WWW→RAÍZ (15-10-2026 ~14:04 CST)
+- **Consulta / Solicitud del Usuario:** *"Publicar la redirección desde tu computadora con npx firebase-tools deploy --only hosting, y avisarme para verificarla. Crear en Cloudflare la regla 'Redirect from WWW to root'."*
+- **Objetivo:** 1) Desplegar Firebase Hosting (autorizado expresamente) con la 301 `app-baqueano.web.app` → `baqueanonicaragua.com` (commit `4f917f2f`). 2) Crear en Cloudflare la regla de redirección `www.baqueanonicaragua.com` → `baqueanonicaragua.com`.
+- **Resultado 1 (Firebase Hosting):** Despliegue completado con `npx firebase-tools deploy --only hosting --project app-baqueano`. Redirección 301 permanente en vivo preservando rutas y queries.
+- **Resultado 2 (Cloudflare Redirect Rules):** Regla "Redirect from WWW to root" creada y desplegada en la zona `baqueanonicaragua.com`. Expresión comodín `https://www.baqueanonicaragua.com/*` redirige con código 301 a `https://baqueanonicaragua.com/${1}` preservando query string.
+- **Verificación en Vivo (curl):**
+  - `https://www.baqueanonicaragua.com/` → `301 -> https://baqueanonicaragua.com/`
+  - `https://www.baqueanonicaragua.com/destinos.html` → `301 -> https://baqueanonicaragua.com/destinos.html`
+  - `https://app-baqueano.web.app/` → `301 -> https://baqueanonicaragua.com/`
+  - `https://app-baqueano.firebaseapp.com/` → `301 -> https://baqueanonicaragua.com/`
+- **Estado:** Completado 100% y verificado.
+
+## 🧭 EJECUCIÓN Y PRUEBA DE APK EN EMULADOR ANDROID (08-10-2026 ~13:01 CST)
+- **Consulta / Solicitud del Usuario:** *"correr la la apk aqui en el emulador"*
+- **Objetivo:**
+  1. Verificar dispositivos y emuladores Android disponibles (`flutter devices`, `adb devices`, `emulator -list-avds`).
+  2. Si no hay emulador activo, arrancar el emulador Android disponible en el sistema.
+  3. Ejecutar la aplicación BAQUEANO en el emulador Android (`flutter run` o instalación/ejecución del APK correspondiente).
+  4. Garantizar la estabilidad y visualización adecuada siguiendo el estándar de Android (`android/`, `lib/`).
+- **Estado:** En progreso.
+
 ## 🧭 CORRECCIÓN DE DISEÑO: "LUGARES DESTACADOS (10)" Y LINK TODOS LOS DESTINOS (07-10-2026 ~18:03 CST)
 - **Consulta / Solicitud del Usuario:** *"eso se feo le di ver [Ver los 237 destinos](https://baqueanonicaragua.com/todos-los-destinos.html) Pausar corregirlo es tener la misma diseño que losotros"* con captura de pantalla donde las tarjetas de "Lugares destacados (10)" se apilan verticalmente con imágenes desproporcionadas a pantalla completa.
 - **Objetivo:**
