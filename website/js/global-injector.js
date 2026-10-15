@@ -949,7 +949,7 @@
     }
     if (!document.querySelector('script[data-platform-enhancements]')) {
       var enhancementScript = document.createElement('script');
-      enhancementScript.src = 'js/platform-enhancements.js?v=20261014-contacto-1';
+      enhancementScript.src = 'js/platform-enhancements.js?v=20261015-sin-banner-1';
       enhancementScript.dataset.platformEnhancements = 'true';
       enhancementScript.defer = true;
       document.body.appendChild(enhancementScript);

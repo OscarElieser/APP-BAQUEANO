@@ -238,6 +238,6 @@
     ['baqueano:languageChanged','baqueano:i18nReady','storage'].forEach(function(type){window.addEventListener(type,function(event){if(type==='storage'&&event.key&&event.key!==CONTACT_KEY)return;renderOwnerContacts();});});
   }
 
-  function init(){initLikes();initGalleries();initAllyFilters();initAdvancedAllySearch();initVideoNavigation();initBaquiActions();initHistoryCards();initExperienceBanner();initEnvironmentalPoints();initMusicDock();initFormalReport();initOwnerContactLog();initOwnerContactHistory();new MutationObserver(function(){initLikes();initVideoNavigation();}).observe(document.body,{childList:true,subtree:true});}
+  function init(){initLikes();initGalleries();initAllyFilters();initAdvancedAllySearch();initVideoNavigation();initBaquiActions();initHistoryCards();/* 2026-10-15: «en experiencia eliminar esto» (propietario): el carrusel «Contacto directo» ya no se muestra en experiencias.html; la función se conserva sin llamarse. */initEnvironmentalPoints();initMusicDock();initFormalReport();initOwnerContactLog();initOwnerContactHistory();new MutationObserver(function(){initLikes();initVideoNavigation();}).observe(document.body,{childList:true,subtree:true});}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
