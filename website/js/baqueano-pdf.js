@@ -448,7 +448,7 @@
       w.text(t('trip.budgetHonest', 'BAQUEANO no publica montos sin una fuente verificable. Cada costo se confirma directamente con el prestador antes de viajar.'), { size: 10 });
       w.ensure(26);
       w.text(t('trip.pdfContact', 'Contacto'), { size: 15, bold: true, color: COLORS.teal, after: 2 });
-      w.text(t('trip.pdfContactBody', 'Para coordinar con los prestadores de esta ruta: línea oficial de BAQUEANO +505 8443-1289 (WhatsApp) o baqueanonicaragua@gmail.com. BAQUEANO te conecta con los negocios; no procesa reservas ni pagos.'), { size: 10 });
+      w.text(t('trip.pdfContactBody', 'Para coordinar con los prestadores de esta ruta: línea oficial de BAQUEANO +505 7797 6973 (WhatsApp) o baqueanonicaragua@gmail.com. BAQUEANO te conecta con los negocios; no procesa reservas ni pagos.'), { size: 10 });
       w.text(t('trip.pdfQrPending', 'Código QR para compartir: próximamente, cuando el viaje pueda guardarse en tu cuenta con un enlace privado.'), { size: 9, italic: true, color: COLORS.muted });
       drawHeaderFooter(doc, { title: title }, logo);
       doc.setProperties({ title: title + ' — BAQUEANO', subject: t('trip.pdfItinerary', 'Itinerario día por día'), author: 'BAQUEANO — Nicaragua Auténtica', creator: 'BAQUEANO (' + SITE + ')', keywords: 'BAQUEANO, Nicaragua, ' + places.join(', ') });
