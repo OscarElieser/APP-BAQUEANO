@@ -600,6 +600,12 @@ pm run build:hostinger & 	est:hostinger: 876 archivos compilados, 10 rutas crít
   - `https://app-baqueano.firebaseapp.com/` → `301 -> https://baqueanonicaragua.com/`
 - **Estado:** Completado 100% y verificado.
 
+## 🧭 SUBIR CAMBIOS Y BITÁCORA A GITHUB (15-10-2026 ~14:19 CST)
+- **Consulta / Solicitud del Usuario:** *"sube todos a github"*
+- **Objetivo:** Verificar archivos modificados o sin seguimiento, crear commit descriptivo con el registro de las tareas completadas y hacer push seguro a `origin main`.
+- **Resultado:** Commit creado y enviado exitosamente con `git push origin main`.
+- **Estado:** Completado.
+
 ## 🧭 EJECUCIÓN Y PRUEBA DE APK EN EMULADOR ANDROID (08-10-2026 ~13:01 CST)
 - **Consulta / Solicitud del Usuario:** *"correr la la apk aqui en el emulador"*
 - **Objetivo:**
