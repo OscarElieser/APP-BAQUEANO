@@ -148,6 +148,7 @@ export function normalizeHtml(html, page) {
         ? [website, {
           '@type': 'Organization', '@id': `${SITE}/#organization`, name: 'BAQUEANO Nicaragua', alternateName: ['BAQUEANO', 'Baqueano Nicaragua'],
           description: 'Plataforma turística de Nicaragua que conecta viajeros con destinos, cultura, naturaleza y emprendedores locales.', url: `${SITE}/`,
+          email: 'baqueanonicaragua@gmail.com', telephone: '+50577976973',
           logo: `${SITE}/android-chrome-512x512.png`, image: DEFAULT_OG_IMAGE, sameAs: SOCIAL_PROFILES,
           areaServed: { '@type': 'Country', name: 'Nicaragua' }
         }]

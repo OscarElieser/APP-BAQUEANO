@@ -64,7 +64,7 @@ Allow: /assets/icons/
 Disallow: /assets/BaqueanoNicaragua.apk
 
 # Sitemap oficial
-Sitemap: https://app-baqueano.web.app/sitemap.xml
+Sitemap: https://baqueanonicaragua.com/sitemap.xml
 
 # ============================================================================
 # NOTAS DE SEGURIDAD:
