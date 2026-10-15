@@ -7431,5 +7431,35 @@
       "nameRequired": "Digite seu nome.",
       "resetNeedsEmail": "Digite seu e-mail para receber o link."
     }
+  },
+  "vivir": {
+    "desc": {
+      "aventura": "Desça de prancha pela areia negra de um vulcão ativo e caminhe pela cratera com guias locais.",
+      "naturaleza": "Navegue e nade entre paredes de rocha de um cânion esculpido pela água no norte do país.",
+      "cultura": "Percorra a rua de pedestres mais animada de Granada, entre casas coloniais, música e artesanato.",
+      "descanso": "Água turquesa, areia branca e ritmo caribenho nas ilhas do Caribe Sul.",
+      "historia": "Suba à fortaleza do século XVII que defendia o rio San Juan dos ataques piratas.",
+      "gastronomia": "Prove o vigorón de Granada: mandioca, torresmo e salada de repolho servidos em folha de bananeira.",
+      "comunidades": "Hospede-se com famílias camponesas que cultivam café e compartilham sua vida na ilha de Ometepe.",
+      "romance": "Pores do sol sobre a baía e o mirante do Cristo da Misericórdia, em San Juan del Sur.",
+      "familia": "Nade em uma lagoa de cratera de águas mornas e calmas, a minutos de Masaya e Granada.",
+      "algoDiferente": "Cachoeiras escondidas nas montanhas de Jinotega, longe das rotas de sempre."
+    },
+    "carousel": {
+      "label": "Vivências na Nicarágua",
+      "prev": "Vivência anterior",
+      "next": "Próxima vivência",
+      "goTo": "Ir para {name}",
+      "position": "{name}, {n} de {total}",
+      "explore": "Explorar"
+    }
+  },
+  "gallery": {
+    "arc": {
+      "label": "Galeria de fotos em arco",
+      "prev": "Foto anterior",
+      "next": "Próxima foto",
+      "position": "Foto {n} de {total}"
+    }
   }
 }

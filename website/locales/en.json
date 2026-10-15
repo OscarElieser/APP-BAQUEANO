@@ -7431,5 +7431,35 @@
       "nameRequired": "Enter your name.",
       "resetNeedsEmail": "Enter your email so we can send you the link."
     }
+  },
+  "vivir": {
+    "desc": {
+      "aventura": "Board down the black sand of an active volcano and hike its crater with local guides.",
+      "naturaleza": "Float and swim between the rock walls of a water-carved canyon in the north of the country.",
+      "cultura": "Stroll Granada's liveliest pedestrian street, among colonial houses, music and crafts.",
+      "descanso": "Turquoise water, white sand and Caribbean rhythm on the islands of the South Caribbean.",
+      "historia": "Climb the 17th-century fortress that defended the San Juan River from pirate attacks.",
+      "gastronomia": "Taste Granada's vigorón: cassava, pork crackling and cabbage salad served on a banana leaf.",
+      "comunidades": "Stay with farming families who grow coffee and share their way of life on Ometepe Island.",
+      "romance": "Sunsets over the bay and the Christ of Mercy lookout in San Juan del Sur.",
+      "familia": "Swim in a crater lagoon with warm, calm water, minutes from Masaya and Granada.",
+      "algoDiferente": "Hidden waterfalls in the mountains of Jinotega, far from the usual routes."
+    },
+    "carousel": {
+      "label": "Nicaragua experiences",
+      "prev": "Previous experience",
+      "next": "Next experience",
+      "goTo": "Go to {name}",
+      "position": "{name}, {n} of {total}",
+      "explore": "Explore"
+    }
+  },
+  "gallery": {
+    "arc": {
+      "label": "Photo gallery arc",
+      "prev": "Previous photo",
+      "next": "Next photo",
+      "position": "Photo {n} of {total}"
+    }
   }
 }

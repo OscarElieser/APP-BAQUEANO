@@ -7431,5 +7431,35 @@
       "nameRequired": "Inserisci il tuo nome.",
       "resetNeedsEmail": "Inserisci la tua email per ricevere il link."
     }
+  },
+  "vivir": {
+    "desc": {
+      "aventura": "Scendi in tavola sulla sabbia nera di un vulcano attivo e cammina sul suo cratere con guide locali.",
+      "naturaleza": "Naviga e nuota tra le pareti di roccia di un canyon scolpito dall'acqua nel nord del paese.",
+      "cultura": "Percorri la via pedonale più vivace di Granada, tra case coloniali, musica e artigianato.",
+      "descanso": "Acqua turchese, sabbia bianca e ritmo caraibico sulle isole dei Caraibi del Sud.",
+      "historia": "Sali sulla fortezza del XVII secolo che difendeva il fiume San Juan dagli attacchi dei pirati.",
+      "gastronomia": "Assaggia il vigorón di Granada: manioca, cotenna croccante e insalata di cavolo servite su foglia di banano.",
+      "comunidades": "Soggiorna con famiglie contadine che coltivano caffè e condividono la loro vita sull'isola di Ometepe.",
+      "romance": "Tramonti sulla baia e il belvedere del Cristo della Misericordia a San Juan del Sur.",
+      "familia": "Nuota in una laguna vulcanica dalle acque tiepide e tranquille, a pochi minuti da Masaya e Granada.",
+      "algoDiferente": "Cascate nascoste tra le montagne di Jinotega, lontano dai soliti percorsi."
+    },
+    "carousel": {
+      "label": "Esperienze in Nicaragua",
+      "prev": "Esperienza precedente",
+      "next": "Esperienza successiva",
+      "goTo": "Vai a {name}",
+      "position": "{name}, {n} di {total}",
+      "explore": "Esplora"
+    }
+  },
+  "gallery": {
+    "arc": {
+      "label": "Galleria fotografica ad arco",
+      "prev": "Foto precedente",
+      "next": "Foto successiva",
+      "position": "Foto {n} di {total}"
+    }
   }
 }

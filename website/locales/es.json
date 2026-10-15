@@ -7431,5 +7431,35 @@
       "nameRequired": "Escribí tu nombre.",
       "resetNeedsEmail": "Escribí tu correo para enviarte el enlace."
     }
+  },
+  "vivir": {
+    "desc": {
+      "aventura": "Bajá en tabla por la arena negra de un volcán activo y caminá su cráter con guías locales.",
+      "naturaleza": "Navegá y nadá entre paredes de roca de un cañón esculpido por el agua en el norte del país.",
+      "cultura": "Recorré la calle peatonal más viva de Granada, entre casas coloniales, música y artesanía.",
+      "descanso": "Agua turquesa, arena blanca y ritmo caribeño en las islas del Caribe Sur.",
+      "historia": "Subí a la fortaleza del siglo XVII que defendía el río San Juan de los ataques piratas.",
+      "gastronomia": "Probá el vigorón granadino: yuca, chicharrón y ensalada de repollo servidos en hoja de chagüite.",
+      "comunidades": "Quedate con familias campesinas que cultivan café y comparten su vida en la isla de Ometepe.",
+      "romance": "Atardeceres sobre la bahía y el mirador del Cristo de la Misericordia, en San Juan del Sur.",
+      "familia": "Nadá en una laguna de cráter de aguas tibias y tranquilas, a minutos de Masaya y Granada.",
+      "algoDiferente": "Cascadas escondidas en la montaña de Jinotega, lejos de las rutas de siempre."
+    },
+    "carousel": {
+      "label": "Vivencias de Nicaragua",
+      "prev": "Vivencia anterior",
+      "next": "Siguiente vivencia",
+      "goTo": "Ir a {name}",
+      "position": "{name}, {n} de {total}",
+      "explore": "Explorar"
+    }
+  },
+  "gallery": {
+    "arc": {
+      "label": "Galería de fotos en arco",
+      "prev": "Foto anterior",
+      "next": "Foto siguiente",
+      "position": "Foto {n} de {total}"
+    }
   }
 }

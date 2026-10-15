@@ -23,6 +23,10 @@ LO QUE FUNCIONA EN ESTE PUNTO:
   *"lo que quiero es crear un login up y login out que cuando de click sobre el boton iniciar sesion salga encima de la pagina que este"* (diseño de referencia: tarjeta de vidrio sobre fondo desenfocado) · *"asi quiero poner la card donde dice DESCUBRÍ NICARAGUA ¿Qué querés vivir?"* (carrusel 3D de tarjetas de vidrio) · *"el de facebook no lo agregue... estamos trabajando con google, el usuario tendra para crear su usuario y contraseña."*
 - **Objetivos:** modal de vidrio con «Iniciar sesión / Crear cuenta» (Google + correo y contraseña, sin Facebook) que se abre sobre cualquier página y «Cerrar sesión» desde el menú de cuenta; carrusel 3D para «¿Qué querés vivir?». 8 idiomas, responsive, sin borrar nada.
 - **Estado:** ⏳ En curso (rama `feat/login-modal`, a partir de `feat/contacto-directo`).
+  - ✅ Modal de login/registro (commit `7024fd9`).
+  - ✅ Carrusel 3D «¿Qué querés vivir?» (`js/vivir-carousel.js`, `css/vivir-carousel.css`, 16 claves `vivir.*` en 8 idiomas). Mejora progresiva sobre los 10 botones originales: lateral al centro, central elige como antes, flechas, puntos, teclado, deslizamiento, anuncio accesible. Probado en es/ko/zh/en a 320/390/768/1366 px, sin desborde ni errores JS.
+  - ✅ Galería en arco 3D por departamento (`js/territory-arc-gallery.js`, `css/territory-arc-gallery.css`, 4 claves `gallery.arc.*`, enlazados en `departamento.html`). Usa las mismas fotos; la copia del bucle solo se oculta; el botón «Pausar galería» detiene el arco. Probado en Madriz, León, Chinandega y Granada.
+  - 🔧 QA en navegador encontró 3 fallos y se corrigieron: los estilos del modal (`.bq-auth-forgot`, etc.) chocaban con `auth-panel.css` en `perfil.html` → ahora van bajo `.bq-auth-dialog`; el cajón de BAQUI cerrado ahora es `inert` (axe aria-hidden-focus en `baqueano-ia.html`).
 
 ## 🧭 CONTACTO DIRECTO CON EL PROPIETARIO EN LUGAR DE RESERVAS (14-10-2026)
 - **Consulta / Solicitud del Usuario:**

@@ -7431,5 +7431,35 @@
       "nameRequired": "Saisissez votre nom.",
       "resetNeedsEmail": "Saisissez votre e-mail pour recevoir le lien."
     }
+  },
+  "vivir": {
+    "desc": {
+      "aventura": "Dévalez en planche le sable noir d'un volcan actif et parcourez son cratère avec des guides locaux.",
+      "naturaleza": "Naviguez et nagez entre les parois rocheuses d'un canyon sculpté par l'eau, au nord du pays.",
+      "cultura": "Parcourez la rue piétonne la plus animée de Granada, entre maisons coloniales, musique et artisanat.",
+      "descanso": "Eau turquoise, sable blanc et rythme caribéen sur les îles de la Caraïbe Sud.",
+      "historia": "Montez à la forteresse du XVIIe siècle qui défendait le fleuve San Juan contre les pirates.",
+      "gastronomia": "Goûtez le vigorón de Granada : manioc, couenne croustillante et salade de chou servis sur une feuille de bananier.",
+      "comunidades": "Séjournez chez des familles paysannes qui cultivent le café et partagent leur vie sur l'île d'Ometepe.",
+      "romance": "Couchers de soleil sur la baie et le belvédère du Christ de la Miséricorde à San Juan del Sur.",
+      "familia": "Nagez dans une lagune de cratère aux eaux tièdes et calmes, à quelques minutes de Masaya et Granada.",
+      "algoDiferente": "Des cascades cachées dans les montagnes de Jinotega, loin des circuits habituels."
+    },
+    "carousel": {
+      "label": "Expériences au Nicaragua",
+      "prev": "Expérience précédente",
+      "next": "Expérience suivante",
+      "goTo": "Aller à {name}",
+      "position": "{name}, {n} sur {total}",
+      "explore": "Explorer"
+    }
+  },
+  "gallery": {
+    "arc": {
+      "label": "Galerie de photos en arc",
+      "prev": "Photo précédente",
+      "next": "Photo suivante",
+      "position": "Photo {n} sur {total}"
+    }
   }
 }

@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-14T22:01:03.993Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 5631 · en 5631 · fr 5631 · it 5631 · pt 5631 · de 5631 · ko 5631 · zh 5631
+Generado: 2026-10-15T03:59:00.318Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 5651 · en 5651 · fr 5651 · it 5651 · pt 5651 · de 5651 · ko 5651 · zh 5651
 
 HTML: 4237/4238 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
@@ -242,6 +242,7 @@ HTML: 4237/4238 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/shared/roles.js | js | 0 | 0 | 0 | 100 % |
 | js/smart-search.js | js | 0 | 0 | 0 | 100 % |
 | js/supabase-config.js | js | 0 | 0 | 0 | 100 % |
+| js/territory-arc-gallery.js | js | 0 | 0 | 0 | 100 % |
 | js/territory-artists.js | js | 0 | 0 | 0 | 100 % |
 | js/territory-inspector.js | js | 0 | 0 | 0 | 100 % |
 | js/territory-media-catalog.js | js | 0 | 0 | 0 | 100 % |
@@ -249,6 +250,7 @@ HTML: 4237/4238 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/territory-rich-sections.js | js | 0 | 0 | 0 | 100 % |
 | js/todos-los-platos.js | js | 0 | 0 | 0 | 100 % |
 | js/video-registry.js | js | 0 | 0 | 0 | 100 % |
+| js/vivir-carousel.js | js | 0 | 0 | 0 | 100 % |
 | js/website-business-catalog.js | js | 0 | 0 | 0 | 100 % |
 | js/website-operations-catalog.js | js | 0 | 0 | 0 | 100 % |
 | legal.html | html | 15 | 15 | 0 | 100 % |

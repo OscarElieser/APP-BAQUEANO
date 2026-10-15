@@ -7431,5 +7431,35 @@
       "nameRequired": "Gib deinen Namen ein.",
       "resetNeedsEmail": "Gib deine E-Mail ein, damit wir dir den Link senden können."
     }
+  },
+  "vivir": {
+    "desc": {
+      "aventura": "Fahre mit dem Board den schwarzen Sand eines aktiven Vulkans hinab und erkunde seinen Krater mit lokalen Guides.",
+      "naturaleza": "Gleite und schwimme zwischen den Felswänden einer vom Wasser geformten Schlucht im Norden des Landes.",
+      "cultura": "Schlendere durch Granadas lebendigste Fußgängerstraße zwischen Kolonialhäusern, Musik und Kunsthandwerk.",
+      "descanso": "Türkisfarbenes Wasser, weißer Sand und karibischer Rhythmus auf den Inseln der Südkaribik.",
+      "historia": "Steige zur Festung aus dem 17. Jahrhundert, die den Río San Juan gegen Piratenangriffe verteidigte.",
+      "gastronomia": "Probiere Granadas Vigorón: Maniok, knusprige Schwarte und Krautsalat, serviert auf einem Bananenblatt.",
+      "comunidades": "Wohne bei Bauernfamilien, die Kaffee anbauen und ihr Leben auf der Insel Ometepe mit dir teilen.",
+      "romance": "Sonnenuntergänge über der Bucht und der Aussichtspunkt des Barmherzigen Christus in San Juan del Sur.",
+      "familia": "Schwimme in einer Kraterlagune mit warmem, ruhigem Wasser, nur Minuten von Masaya und Granada entfernt.",
+      "algoDiferente": "Versteckte Wasserfälle in den Bergen von Jinotega, abseits der üblichen Routen."
+    },
+    "carousel": {
+      "label": "Erlebnisse in Nicaragua",
+      "prev": "Vorheriges Erlebnis",
+      "next": "Nächstes Erlebnis",
+      "goTo": "Zu {name}",
+      "position": "{name}, {n} von {total}",
+      "explore": "Entdecken"
+    }
+  },
+  "gallery": {
+    "arc": {
+      "label": "Fotogalerie im Bogen",
+      "prev": "Vorheriges Foto",
+      "next": "Nächstes Foto",
+      "position": "Foto {n} von {total}"
+    }
   }
 }

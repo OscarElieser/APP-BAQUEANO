@@ -62,7 +62,7 @@
       { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20261004-menu-2' },
       { id: 'bq-platform-enhancements', href: 'css/platform-enhancements.css?v=20261014-contacto-1' },
       // Login / registro sobre la página (2026-10-14).
-      { id: 'bq-auth-modal', href: 'css/auth-modal.css?v=20261014-login-3' },
+      { id: 'bq-auth-modal', href: 'css/auth-modal.css?v=20261014-login-4' },
       { id: 'bq-accessibility', href: 'css/accessibility.css?v=20260930-1' },
       { 
         id: 'bq-fa',        

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-07T09:45:21.783Z",
+ "generatedAt": "2026-10-15T03:57:58.460Z",
  "base": "http://127.0.0.1:8790/",
  "widths": [
   320,
@@ -71,13 +71,7 @@
   }
  ],
  "fails": [],
- "slowLoads": [
-  "favoritos.html@480",
-  "favoritos.html@600",
-  "favoritos.html@820",
-  "legal.html@1280",
-  "legal.html@1440"
- ],
+ "slowLoads": [],
  "results": [
   {
    "page": "404.html",
@@ -594,12 +588,12 @@
    "width": 320,
    "overflowPx": 0,
    "offscreen": [
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]"
+    "a.sidebar-index-link [41,361]",
+    "a.sidebar-index-link [41,361]",
+    "a.sidebar-index-link [41,361]",
+    "a.sidebar-index-link [41,361]",
+    "a.sidebar-index-link [41,361]",
+    "a.sidebar-index-link [41,361]"
    ],
    "imgNoAlt": [],
    "error": null,
@@ -609,14 +603,7 @@
    "page": "aviso-legal.html",
    "width": 360,
    "overflowPx": 0,
-   "offscreen": [
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]"
-   ],
+   "offscreen": [],
    "imgNoAlt": [],
    "error": null,
    "slowLoad": false
@@ -625,14 +612,7 @@
    "page": "aviso-legal.html",
    "width": 375,
    "overflowPx": 0,
-   "offscreen": [
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]"
-   ],
+   "offscreen": [],
    "imgNoAlt": [],
    "error": null,
    "slowLoad": false
@@ -641,14 +621,7 @@
    "page": "aviso-legal.html",
    "width": 390,
    "overflowPx": 0,
-   "offscreen": [
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]",
-    "a.sidebar-index-link [41,392]"
-   ],
+   "offscreen": [],
    "imgNoAlt": [],
    "error": null,
    "slowLoad": false,
@@ -2765,7 +2738,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": true
+   "slowLoad": false
   },
   {
    "page": "favoritos.html",
@@ -2774,7 +2747,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": true
+   "slowLoad": false
   },
   {
    "page": "favoritos.html",
@@ -2792,7 +2765,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": true
+   "slowLoad": false
   },
   {
    "page": "favoritos.html",
@@ -3572,7 +3545,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": true
+   "slowLoad": false
   },
   {
    "page": "legal.html",
@@ -3599,7 +3572,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": true
+   "slowLoad": false
   },
   {
    "page": "legal.html",
@@ -4143,7 +4116,9 @@
    "page": "musica.html",
    "width": 320,
    "overflowPx": 0,
-   "offscreen": [],
+   "offscreen": [
+    "button.player-ctrl-btn [309,365]"
+   ],
    "imgNoAlt": [],
    "error": null,
    "slowLoad": false
@@ -4152,7 +4127,9 @@
    "page": "musica.html",
    "width": 360,
    "overflowPx": 0,
-   "offscreen": [],
+   "offscreen": [
+    "button.player-ctrl-btn [309,365]"
+   ],
    "imgNoAlt": [],
    "error": null,
    "slowLoad": false

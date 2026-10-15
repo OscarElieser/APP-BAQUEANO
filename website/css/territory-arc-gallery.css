@@ -1,0 +1,140 @@
+/* ============================================================================
+   🧭 BAQUEANO — GALERÍA EN ARCO 3D DE CADA DEPARTAMENTO (css/territory-arc-gallery.css)
+   🎯 POR QUÉ: pedido del propietario (2026-10-14): la tira de fotos de cada
+      departamento se muestra como un arco curvo de tarjetas en 3D, sin borrar nada.
+   ⚙️ CÓMO: solo aplica cuando js/territory-arc-gallery.js agrega .is-arc; sin
+      JavaScript queda la tira continua original (css/pages/departamento.css).
+      La posición de cada tarjeta la calcula el JS.
+   📦 QUÉ: .is-arc, .bq-arc-card, .bq-arc-bar.
+   ============================================================================ */
+.infinite-gallery-section.is-arc {
+  padding: clamp(2.2rem, 5vw, 3.6rem) 0 clamp(1.6rem, 4vw, 2.6rem);
+  background:
+    radial-gradient(900px 380px at 50% 18%, rgba(246, 94, 1, .16), transparent 65%),
+    radial-gradient(1100px 520px at 50% 110%, rgba(22, 93, 111, .45), transparent 70%),
+    rgba(15, 23, 42, .78);
+}
+.infinite-carousel-container.is-arc {
+  overflow: hidden;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* Escenario */
+.infinite-carousel-container.is-arc .bq-arc-track {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: calc(var(--arc-card-w, 280px) * 1.33 + 90px);
+  padding: 0;
+  animation: none !important;
+  transform: none !important;
+  perspective: 1500px;
+  perspective-origin: 50% 20%;
+  transform-style: preserve-3d;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.infinite-carousel-container.is-arc .bq-arc-track:active { cursor: grabbing; }
+.infinite-carousel-container.is-arc .bq-arc-track:focus-visible { outline: 3px solid #F65E01; outline-offset: -3px; border-radius: 18px; }
+/* La copia técnica del bucle no se usa en el arco (no se borra, solo se oculta). */
+.infinite-carousel-container.is-arc .territory-carousel-clone { display: none !important; }
+
+/* Tarjetas */
+.infinite-carousel-container.is-arc .bq-arc-card {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  width: var(--arc-card-w, 280px);
+  height: auto;
+  aspect-ratio: 3 / 4;
+  margin: 0;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  background: #165D6F;
+  box-shadow: 0 28px 60px -24px rgba(0, 0, 0, .75), inset 0 1px 0 rgba(255, 255, 255, .25);
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  transition: transform 760ms cubic-bezier(.22, 1, .36, 1), opacity 520ms ease, box-shadow 520ms ease, filter 520ms ease;
+  filter: brightness(.72) saturate(.85);
+  cursor: pointer;
+}
+.infinite-carousel-container.is-arc .bq-arc-card.is-center {
+  filter: none;
+  border-color: rgba(244, 230, 193, .7);
+  box-shadow:
+    0 0 0 1px rgba(244, 230, 193, .35),
+    0 40px 80px -26px rgba(0, 0, 0, .85),
+    0 0 70px -12px rgba(246, 94, 1, .45);
+}
+.infinite-carousel-container.is-arc .bq-arc-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  transition: transform 900ms cubic-bezier(.22, 1, .36, 1);
+}
+.infinite-carousel-container.is-arc .bq-arc-card.is-center:hover img { transform: scale(1.05); }
+.infinite-carousel-container.is-arc .bq-arc-card:not(.is-center):hover { filter: brightness(.88) saturate(1); }
+.bq-arc-shine {
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(125deg, rgba(255, 255, 255, .24) 0%, rgba(255, 255, 255, .05) 26%, transparent 44%),
+    linear-gradient(to top, rgba(15, 23, 42, .45), transparent 40%);
+  pointer-events: none;
+}
+
+/* Barra de control en vidrio (el botón original «Pausar galería» queda debajo) */
+.bq-arc-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(420px, calc(100% - 32px));
+  margin: 6px auto 12px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 16px 34px -18px rgba(0, 0, 0, .7);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+.bq-arc-btn {
+  flex: none;
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
+  border: 0; border-radius: 50%;
+  background: rgba(244, 230, 193, .95); color: #0F172A;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+.bq-arc-btn:hover { background: #F65E01; color: #fff; transform: scale(1.06); }
+.bq-arc-btn:focus-visible { outline: 3px solid #F65E01; outline-offset: 3px; }
+.bq-arc-btn svg { width: 20px !important; min-width: 20px; max-width: none; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.bq-arc-count {
+  flex: none;
+  min-width: 3.4em;
+  color: #F7F3EA;
+  font: 800 .92rem/1 var(--baqueano-font-display, 'League Spartan', sans-serif);
+  letter-spacing: .04em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.bq-arc-progress { flex: 1; height: 4px; border-radius: 999px; background: rgba(255, 255, 255, .18); overflow: hidden; }
+.bq-arc-progress-fill { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, #F4E6C1, #F65E01); transition: width 520ms ease; }
+.bq-arc-live { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 639px) {
+  .infinite-carousel-container.is-arc .bq-arc-track { height: calc(var(--arc-card-w, 240px) * 1.33 + 60px); perspective: 1000px; }
+  .infinite-carousel-container.is-arc .bq-arc-card { border-radius: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .infinite-carousel-container.is-arc .bq-arc-card,
+  .infinite-carousel-container.is-arc .bq-arc-card img,
+  .bq-arc-progress-fill, .bq-arc-btn { transition: none; }
+}
