@@ -3,5 +3,31 @@
   "functions": {
     "source": "functions",
     "runtime": "nodejs20"
+  },
+  "hosting": {
+    "site": "app-baqueano",
+    "public": "hosting-redirect",
+    "ignore": [
+      "firebase.json",
+      "**/.*"
+    ],
+    "redirects": [
+      {
+        "regex": "^/(?P<path>|_|[^_].*|_[^_].*)$",
+        "destination": "https://baqueanonicaragua.com/:path",
+        "type": 301
+      }
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex"
+          }
+        ]
+      }
+    ]
   }
 }
