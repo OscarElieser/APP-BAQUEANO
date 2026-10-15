@@ -148,7 +148,7 @@
   <!-- Comparte tu experiencia -->
   <dialog class="tm-dialog" id="tmComposeDialog" aria-labelledby="tmComposeTitle">
     <div class="tm-dialog-head">
-      <h2 id="tmComposeTitle"><span data-i18n="testimonials.ctaShare">Compartí tu experiencia</span></h2>
+      <h2 id="tmComposeTitle"><span id="tmComposeTitleText" data-i18n="testimonials.ctaShare">Compartí tu experiencia</span></h2>
       <button data-i18n-aria-label="actions.close" type="button" class="tm-close" data-close-dialog="1" aria-label="Cerrar"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     </div>
     <form class="tm-dialog-body tm-compose" id="tmComposeForm" novalidate>
@@ -203,6 +203,9 @@
         <small data-i18n="testimonials.mediaHint">Hasta 6 fotos (se optimizan a WebP) y 1 video MP4/WebM de máx. 90 s y 40 MB.</small>
         <div class="tm-previews" id="tmPreviews"></div>
       </div>
+      <label class="tm-consent" id="tmChronicleRow">
+        <input type="checkbox" id="tmAsChronicle" name="as_chronicle"> <span data-i18n="testimonials.asChronicle">Publicar también en Crónicas: mi relato aparecerá como crónica de la comunidad cuando el equipo lo apruebe.</span>
+      </label>
       <label class="tm-consent" id="tmPublicConsentRow" hidden>
         <input type="checkbox" id="tmPublicConsent"> <span data-i18n="testimonials.publicConsent">Entiendo que mis fotos y videos serán visibles públicamente en BAQUEANO cuando se publique la experiencia.</span>
       </label>
@@ -237,8 +240,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="js/firebase-config.js?v=20261004-1"></script>
   <script src="js/community-api.js?v=20261004-1"></script>
-  <script src="js/testimonios.js?v=20261006-dialog-1" defer></script>
-  <script src="js/navigation.js?v=20261014-baqui-7"></script>
+  <script src="js/testimonios.js?v=20261015-cronica-1" defer></script>
+  <script src="js/navigation.js?v=20261015-baqui-8"></script>
   <script src="js/global-injector.js"></script>
 <script src="js/community-faces.js?v=20261007-1" defer></script>
 </body>

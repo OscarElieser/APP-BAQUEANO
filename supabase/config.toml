@@ -19,6 +19,12 @@ verify_jwt = false
 import_map = "./functions/baqueano-community/deno.json"
 entrypoint = "./functions/baqueano-community/index.ts"
 
+[functions.baqueano-cms]
+enabled = true
+verify_jwt = false
+import_map = "./functions/baqueano-cms/deno.json"
+entrypoint = "./functions/baqueano-cms/index.ts"
+
 [functions.baqueano-ops]
 enabled = true
 verify_jwt = false

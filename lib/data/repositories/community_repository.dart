@@ -85,6 +85,27 @@ class CommunityRepository {
         .toList(growable: false);
   }
 
+  /// Crónicas de la comunidad (2026-10-15): relatos aprobados con la etiqueta
+  /// [chronicleTag], los mismos que muestra cronicas.html en la Web. La búsqueda
+  /// del servidor indexa las etiquetas; el filtro exacto se hace aquí.
+  static const chronicleTag = 'cronica';
+
+  Future<List<CommunityChronicle>> listChronicles({int limit = 24}) async {
+    final data = await _post({'action': 'list', 'q': chronicleTag, 'limit': limit, 'page': 0});
+    final items = data['items'];
+    if (items is! List) return const [];
+    return items
+        .whereType<Map>()
+        .map((row) => Map<String, dynamic>.from(row))
+        .where((row) {
+          final tags = row['tags'];
+          return tags is List && tags.any((t) => t.toString().toLowerCase() == chronicleTag);
+        })
+        .map(CommunityChronicle.fromRow)
+        .whereType<CommunityChronicle>()
+        .toList(growable: false);
+  }
+
   /// Valida con los mismos límites del servidor. Devuelve `null` si es válido.
   static String? validate({
     required String title,
@@ -112,6 +133,7 @@ class CommunityRepository {
     String? destinationName,
     int? rating,
     String? experienceType,
+    List<String> tags = const [],
   }) async {
     final invalid = validate(title: title, body: body, rating: rating);
     if (invalid != null) {
@@ -133,6 +155,7 @@ class CommunityRepository {
           'destination_name': destinationName.trim(),
         if (rating != null) 'rating': rating,
         if (experienceType != null) 'experience_type': experienceType,
+        if (tags.isNotEmpty) 'tags': tags.take(8).toList(),
       }, token: token);
       return CommunitySubmitResult(
         CommunitySubmitStatus.pendingReview,
@@ -250,3 +273,61 @@ class CommunityRepository {
 final communityRepositoryProvider = Provider<CommunityRepository>((ref) {
   return CommunityRepository();
 });
+
+/// Crónica publicada por la comunidad (solo datos públicos del servidor).
+class CommunityChronicle {
+  final String id;
+  final String title;
+  final String body;
+  final String place;
+  final String author;
+  final String? photoUrl;
+  final DateTime? publishedAt;
+
+  const CommunityChronicle({
+    required this.id,
+    required this.title,
+    required this.body,
+    required this.place,
+    required this.author,
+    this.photoUrl,
+    this.publishedAt,
+  });
+
+  int get readMinutes {
+    final words = body.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).length;
+    return words < 200 ? 1 : (words / 200).round();
+  }
+
+  static CommunityChronicle? fromRow(Map<String, dynamic> row) {
+    final id = row['id']?.toString() ?? '';
+    final title = row['title']?.toString().trim() ?? '';
+    final body = row['body']?.toString().trim() ?? '';
+    if (id.isEmpty || title.isEmpty || body.isEmpty) return null;
+    String? photo;
+    final media = row['media'];
+    if (media is List) {
+      for (final item in media.whereType<Map>()) {
+        if (item['kind'] != 'image') continue;
+        final url = (item['thumb'] ?? item['url'])?.toString() ?? '';
+        final uri = Uri.tryParse(url);
+        if (uri != null && uri.scheme == 'https' && uri.host.isNotEmpty) {
+          photo = url;
+          break;
+        }
+      }
+    }
+    final place = [row['destination_name'], row['place_name'], row['municipality']]
+        .map((v) => v?.toString().trim() ?? '')
+        .firstWhere((v) => v.isNotEmpty, orElse: () => '');
+    return CommunityChronicle(
+      id: id,
+      title: title,
+      body: body,
+      place: place,
+      author: row['author_name']?.toString().trim() ?? '',
+      photoUrl: photo,
+      publishedAt: DateTime.tryParse((row['published_at'] ?? row['created_at'])?.toString() ?? ''),
+    );
+  }
+}

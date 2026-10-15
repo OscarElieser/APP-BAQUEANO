@@ -310,3 +310,39 @@ RELACIÓN:
   .bq-auth-google, .bq-auth-submit { transition: none; }
   .bq-auth-google:hover:not(:disabled), .bq-auth-submit:hover:not(:disabled) { transform: none; }
 }
+
+/* =====================================================
+   2026-10-15 · Perfil para visitantes: tarjeta de acceso con el estilo del login nuevo
+   (css/auth-modal.css). El formulario anterior queda oculto como respaldo.
+   ===================================================== */
+.bq-auth-panel.is-gate {
+  max-width: 30rem;
+  background: linear-gradient(160deg, #1B4F5E 0%, #0F172A 70%);
+  border: 1px solid rgba(244, 230, 193, .35);
+  box-shadow: 0 30px 70px rgba(15, 23, 42, .35), inset 0 1px 0 rgba(255, 255, 255, .15);
+  color: #F7F3EA;
+}
+.bq-auth-panel.is-gate > :is(.bq-auth-google, .bq-auth-divider, form, .bq-auth-privacy) { display: none !important; }
+.bq-auth-panel:not(.is-gate) > :is(.bq-auth-gate-logo, .bq-auth-gate-actions) { display: none; }
+.bq-auth-gate-logo {
+  display: block; width: 72px; height: 72px; margin: 0 auto .75rem; padding: 9px; box-sizing: border-box;
+  border-radius: 50%; object-fit: contain;
+  background: radial-gradient(circle at 30% 25%, #FFFFFF, #F7F3EA 70%);
+  box-shadow: 0 0 0 3px rgba(244, 230, 193, .55), 0 0 0 7px rgba(246, 94, 1, .22), 0 14px 30px rgba(15, 23, 42, .45);
+}
+#bq-auth-panel.is-gate h2.bq-auth-title { color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important; }
+.bq-auth-panel.is-gate .bq-auth-lead { color: rgba(247, 243, 234, .85); }
+.bq-auth-gate-actions { display: grid; gap: .65rem; max-width: 22rem; margin: 0 auto; }
+.bq-auth-gate-btn {
+  min-height: 50px; border-radius: 14px; cursor: pointer;
+  font: 800 1rem 'Plus Jakarta Sans', sans-serif;
+  border: 1px solid rgba(244, 230, 193, .6); background: rgba(255, 255, 255, .08); color: #F7F3EA;
+  transition: transform .2s ease, background .2s ease;
+}
+.bq-auth-gate-btn.is-primary { border: 0; background: linear-gradient(135deg, #F65E01, #FF7B26); color: #FFFFFF; box-shadow: 0 14px 30px rgba(246, 94, 1, .38); }
+.bq-auth-gate-btn:hover { transform: translateY(-2px); }
+.bq-auth-gate-btn:not(.is-primary):hover { background: rgba(255, 255, 255, .16); }
+.bq-auth-gate-btn:focus-visible { outline: 3px solid #F4E6C1; outline-offset: 3px; }
+/* Título del panel siempre legible (las reglas globales de títulos pisaban el color). */
+.bq-auth-panel .bq-auth-title { -webkit-text-fill-color: currentColor; }
+@media (prefers-reduced-motion: reduce) { .bq-auth-gate-btn { transition: none; } }

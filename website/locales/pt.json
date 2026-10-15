@@ -478,7 +478,9 @@
       "reported": "Em revisão por denúncias",
       "draft": "Rascunho",
       "archived": "Arquivada"
-    }
+    },
+    "asChronicle": "Publicar também em Crônicas: meu relato aparecerá como crônica da comunidade quando a equipe aprovar.",
+    "chronicleTitle": "Escreva sua crônica"
   },
   "community": {
     "eyebrow": "Comunidade BAQUEANO",
@@ -736,7 +738,15 @@
     "listen": "Ouvir",
     "artists": "Artistas",
     "festivals": "Festivais",
-    "archiveCountLabel": "peças no arquivo"
+    "archiveCountLabel": "peças no arquivo",
+    "ui": {
+      "play": "Reproduzir {name}",
+      "viewArtist": "Ver ficha de {name}",
+      "likes": "Curtir {n}",
+      "favorite": "Favorito {n}",
+      "move": "Mudar posição",
+      "minimizePlayer": "Minimizar player"
+    }
   },
   "environmental": {
     "title": "Proteção ambiental",
@@ -806,7 +816,16 @@
     "settings": "Configurações",
     "logout": "Sair",
     "editProfile": "Editar perfil",
-    "favorites": "Meus favoritos"
+    "favorites": "Meus favoritos",
+    "gate": {
+      "eyebrow": "Conta BAQUEANO",
+      "title": "Entre para ver seu perfil",
+      "lead": "Salve destinos, organize Minha Viagem e leve seu Passaporte Baqueano em qualquer dispositivo.",
+      "orEmail": "ou com seu e-mail",
+      "passwordMin": "Senha (mínimo de 8 caracteres)",
+      "noService": "Não conseguimos conectar ao serviço de acesso. Verifique sua conexão e recarregue a página.",
+      "termsPrefix": "Ao continuar, você aceita os"
+    }
   },
   "favorites": {
     "title": "Favoritos",
@@ -3058,7 +3077,30 @@
         "sectionAriaLabel1": "Revista de crônicas territoriais"
       },
       "exploreTerritory": "Explorar o território",
-      "filterEmpty": "Ainda não há uma crônica completa nesta seção. Veja as leituras recomendadas."
+      "filterEmpty": "Ainda não há uma crônica completa nesta seção. Veja as leituras recomendadas.",
+      "community": {
+        "write": "Escreva sua crônica",
+        "kicker": "Escritas pela comunidade",
+        "title": "Crônicas de viajantes e anfitriões",
+        "lead": "Viveu uma história em algum canto da Nicarágua? Escreva com suas fotos. A equipe BAQUEANO revisa e publica aqui e no app.",
+        "empty": "Ainda não há crônicas da comunidade. A sua pode ser a primeira!",
+        "kickerPlace": "Crônica · {place}",
+        "kickerPlain": "Crônica da comunidade",
+        "byline": "Por {name} · {min} min de leitura",
+        "anon": "Viajante BAQUEANO",
+        "sent": "Sua crônica foi enviada para revisão. Ela aparecerá aqui e na web quando a equipe BAQUEANO aprovar.",
+        "error": "Não foi possível carregar as crônicas. Verifique sua conexão.",
+        "invalid": "O título precisa de pelo menos 5 caracteres e a crônica de pelo menos 30.",
+        "signIn": "Entre para publicar sua crônica.",
+        "failed": "Não foi possível enviar sua crônica. Tente novamente em instantes.",
+        "fieldTitle": "Título da sua crônica *",
+        "fieldBody": "Sua crônica *"
+      },
+      "place": {
+        "somoto": "Cânion de Somoto",
+        "ometepe": "Ilha de Ometepe",
+        "cornBluefields": "Corn Island e Bluefields"
+      }
     },
     "denuncias": {
       "body": {
@@ -4022,8 +4064,8 @@
     },
     "index": {
       "body": {
-        "title1": "Baqueano Nicaragua | Descubra o que não está no mapa",
-        "metaDescription1": "Portal oficial de turismo comunitário e ecoturismo na Nicarágua. Explore vulcões, lagos, reservas da biosfera, praias e cooperativas camponesas."
+        "title1": "BAQUEANO Nicaragua | Descubra o que não está no mapa",
+        "metaDescription1": "BAQUEANO Nicaragua: plataforma turística que conecta viajantes a destinos, cultura, natureza e empreendedores locais. Vulcões, praias e turismo comunitário."
       },
       "heroNicaragua": {
         "span1": "AUTÊNTICA",
@@ -4231,6 +4273,10 @@
       },
       "bizDescription": {
         "textareaPlaceholder1": "Descreva seu serviço, refeições, passeios ou hospedagem..."
+      },
+      "heroBrand": {
+        "name": "BAQUEANO Nicaragua",
+        "lead": "Plataforma turística da Nicarágua que conecta viajantes a destinos, cultura, natureza e empreendedores locais."
       }
     },
     "legal": {
@@ -5926,6 +5972,9 @@
       "summary": "{ok} de {total} serviços operacionais",
       "more": "Ver mais",
       "less": "Ver menos"
+    },
+    "cms": {
+      "noSession": "Entre com sua conta de administrador."
     }
   },
   "consent": {
@@ -7460,6 +7509,365 @@
       "prev": "Foto anterior",
       "next": "Próxima foto",
       "position": "Foto {n} de {total}"
+    }
+  },
+  "ui": {
+    "sos": {
+      "drawerItem": "SOS · Emergências",
+      "subtitle": "Acesso imediato aos serviços de emergência na Nicarágua. Toque em um contato para ligar.",
+      "gpsLoading": "Obtendo localização segura…",
+      "gpsAllow": "Permita o acesso ao GPS para compartilhar coordenadas exatas.",
+      "openMap": "Abrir localização no mapa",
+      "emergencies118": "Emergências: 118",
+      "prehospital128": "Atendimento pré-hospitalar: 128",
+      "fire115": "Incêndios e resgate: 115",
+      "general": "Emergência geral",
+      "alt911": "Linha alternativa: 911",
+      "share": "Compartilhar minha localização",
+      "copy": "Copiar coordenadas",
+      "whileWaiting": "Enquanto a ajuda chega",
+      "tip1": "Informe sua localização, pontos de referência e o tipo de emergência.",
+      "tip2": "Mantenha a linha livre e siga as instruções do atendente.",
+      "tip3": "Não mova uma pessoa ferida, a menos que haja perigo imediato.",
+      "tip4": "Em uma área remota, compartilhe estas coordenadas com uma pessoa de confiança.",
+      "coverage": "A cobertura e os tempos de resposta podem variar conforme o território e o sinal disponível.",
+      "center": "Central de socorro SOS",
+      "centerDialog": "Central SOS e socorro"
+    },
+    "footer": {
+      "exploreUpper": "EXPLORE",
+      "cultureUpper": "CULTURA",
+      "communityUpper": "COMUNIDADE",
+      "androidApp": "App para Android",
+      "copyright": "© 2026 BAQUEANO. Todos os direitos reservados.",
+      "madeWith": "Feito com",
+      "inNicaragua": "na Nicarágua"
+    },
+    "baqui": {
+      "offline": "Sem sinal por enquanto · respondo com o que sei",
+      "timeNic": "Hora na Nicarágua",
+      "promos": "Promoções",
+      "noAlerts": "Sem alertas",
+      "greeting": "Olá! Sou o Baqüi. O que você quer descobrir hoje? Posso encontrar lugares, montar uma rota ou dizer o que há por perto.",
+      "chipPlan": "🗺️ Planejar viagem",
+      "chipDiscover": "🌋 Descobrir destinos",
+      "chipEat": "🍽️ Onde comer",
+      "chipMusic": "🎶 Música",
+      "chipHistory": "📖 História",
+      "chipNearby": "📍 O que há por perto",
+      "chipFavorites": "❤️ Favoritos",
+      "chipNicaragua": "🇳🇮 Conhecer a Nicarágua",
+      "chipSurprise": "✨ Surpreenda-me",
+      "chipLodging": "🏨 Hospedagem",
+      "hide30": "Ocultar por 30 min",
+      "birdGuide": "Baqüi, o pássaro guia virtual da BAQUEANO",
+      "talk": "Falar com o Baqüi",
+      "digitalGuide": "Baqüi, guia digital da Nicarágua",
+      "voiceRead": "Ativar voz e ler mensagem",
+      "voiceOn": "Ativar voz",
+      "minimize": "Minimizar",
+      "minimizeBaqui": "Minimizar o Baqüi",
+      "usefulInfo": "Informações úteis",
+      "useful": "Resposta útil",
+      "improve": "Resposta a melhorar",
+      "quickActions": "Ações rápidas",
+      "openOffline": "Abrir o Baqüi, assistente inteligente sem conexão",
+      "showAgain": "Mostrar o Baqüi novamente",
+      "closeSuggestion": "Fechar sugestão",
+      "listen": "Ouvir",
+      "openPanel": "Abrir painel",
+      "typeQuery": "Escreva sua pergunta",
+      "askPlaceholder": "Pergunte sobre destinos, rotas ou experiências…",
+      "dictate": "Iniciar ditado",
+      "generalGuide": "Baqüi · Guia geral",
+      "chipAdventures": "🥾 Aventuras"
+    },
+    "common": {
+      "notNow": "Agora não",
+      "unavailable": "Indisponível",
+      "clear": "Limpar",
+      "stop": "Parar",
+      "send": "Enviar",
+      "updating": "Atualizando…",
+      "saveCount": "Salvar {n}",
+      "useful": "Útil?",
+      "today": "Hoje"
+    },
+    "a11y": {
+      "skipNav": "Pular navegação e ir direto ao conteúdo principal"
+    },
+    "search": {
+      "shortcut": "Buscar (/)"
+    },
+    "allies": {
+      "searchLabel": "Buscar parceiro por nome ou serviço",
+      "clearFilters": "Limpar filtros",
+      "visibleMany": "{n} parceiros visíveis.",
+      "visibleOne": "{n} parceiro visível.",
+      "searchPlaceholder": "Nome, território ou serviço…"
+    },
+    "passport": {
+      "points": "pontos"
+    },
+    "form": {
+      "inputField": "Campo de entrada",
+      "emailExample": "voce@exemplo.com",
+      "emailExample2": "jose@exemplo.com"
+    },
+    "theme": {
+      "label": "Tema",
+      "openPalettes": "Abrir catálogo de paletas de cores",
+      "customize": "Personalizar paleta de cores"
+    },
+    "trip": {
+      "baquiIntro": "Olá! Sou o BAQUI. Conte destinos, dias, quantas pessoas viajam e seu orçamento, e eu monto o mapa, o roteiro e o custo de uma vez.",
+      "example": "Por exemplo: “3 dias entre Granada e Masaya, 2 pessoas, 400 dólares”.",
+      "addToBuild": "Adicione destinos para montar a rota",
+      "noneYet": "Você ainda não escolheu destinos. Escreva para o BAQUI ou comece por um destes:",
+      "tellBaqui": "Conte ao BAQÜI quais destinos você quer visitar para criar um roteiro.",
+      "budgetPending": "Orçamento pendente",
+      "traceablePrices": "Preços rastreáveis:",
+      "traceableNote": "cada categoria usa apenas preços vigentes de negócios verificados na BAQUEANO. Não somamos valores inventados.",
+      "noVerifiedPrices": "Sem preços verificados",
+      "pricesTbc": "Preços a confirmar",
+      "noCap": "○ Sem limite definido",
+      "busManagua": "Saem dos mercados de Managua: Roberto Huembes para Masaya, Granada e Rivas; Israel Lewites para León.",
+      "ferryOmetepe": "Barco para Ometepe.",
+      "ferrySanJorge": "Sai de San Jorge (Rivas). Chegue cedo na alta temporada.",
+      "taxiFare": "Não usam taxímetro: combine a tarifa antes de entrar.",
+      "cornIsland": "Chega-se a Corn Island de avião pequeno saindo de Managua ou de barco saindo de Bluefields.",
+      "noSessionAlerts": "Sem alertas ativos para sua sessão",
+      "rainySeason": "De maio a outubro é temporada de chuvas: confira estradas e saídas de barco.",
+      "sunscreen": "Protetor solar, chapéu e água, sobretudo em vulcões e praias do Pacífico.",
+      "cash": "Leve córdobas em dinheiro para comunidades e mercados.",
+      "emergencyNumbers": "Emergências: Polícia 118 · Bombeiros 115 · Cruz Vermelha 128.",
+      "addToRoute": "Adicionar {name} à rota",
+      "emptyTitle": "Você ainda não tem uma viagem salva",
+      "emptyText": "Descubra os 17 territórios da Nicarágua, escolha suas atrações favoritas ou deixe o Baqueano Digital planejar uma rota sob medida conforme seu orçamento e dias",
+      "loadDemo": "Carregar viagem de exemplo"
+    },
+    "help": {
+      "welcome": "Que bom ver você por aqui! Se já sabe para onde quer ir, comece por Destinos. Se ainda não, conte do que gosta e montamos a rota juntos."
+    },
+    "reports": {
+      "intro": "Se viu algo errado, pode contar aqui. Leia as orientações antes de compartilhar dados pessoais."
+    },
+    "pager": {
+      "page": "Página {n}"
+    },
+    "gallery": {
+      "pause": "Pausar galeria",
+      "resume": "Retomar galeria",
+      "pauseAuto": "Pausar galeria automática",
+      "resumeAuto": "Retomar galeria automática",
+      "photoN": "{name} — foto {n}",
+      "landscapeOf": "Paisagem de {name}"
+    },
+    "messages": {
+      "showN": "Mostrar mensagem {n}"
+    },
+    "managua": {
+      "title": "Capital viva",
+      "desc": "Memória nacional, arquitetura, lagoas e cultura urbana diante do Xolotlán.",
+      "explore": "Explorar Managua"
+    },
+    "history": {
+      "openGuide": "Abra o guia territorial para conhecer contexto, localização, patrimônio relacionado e recomendações de visita sobre {name}.",
+      "chapter": "Capítulo {n} de {total}"
+    },
+    "madriz": {
+      "tagline": "Água cristalina, rocha milenar e guias comunitários em uma das paisagens geológicas mais antigas da América Central."
+    },
+    "map": {
+      "hiddenNoCoords": "{n} lugares publicados ainda não têm coordenadas verificadas e não são exibidos."
+    },
+    "business": {
+      "helpIntro": "Tem um negócio turístico? Aqui explico como publicá-lo para que mais viajantes encontrem você.",
+      "earn100": "Sua comunidade merece ganhar 100% do que cobra"
+    },
+    "destinations": {
+      "showing": "Mostrando {from}–{to} de {total} destinos",
+      "itemN": "Destino {n} de {total}"
+    }
+  },
+  "dept": {
+    "tagline": {
+      "madriz": "Terra de cânions milenares, rosquillas douradas, café e montanhas segovianas",
+      "leon": "Onde a história caminha entre vulcões",
+      "rivas": "Onde o Pacífico encontra o Cocibolca",
+      "jinotega": "Entre montanhas, café e águas que tocam as nuvens",
+      "masaya": "Terra de fogo, tradição e mãos criadoras",
+      "granada": "Entre vulcões, ilhotas e séculos de história",
+      "matagalpa": "Onde o café nasce entre montanhas",
+      "esteli": "Montanhas, arte e tradição nascidos da terra",
+      "chinandega": "Terra de vulcões gigantes e costas selvagens",
+      "managua": "Muito mais que uma capital",
+      "carazo": "Onde a tradição dança entre cafezais e o Pacífico",
+      "chontales": "Onde os rios são de leite e as pedras são coalhada",
+      "boaco": "O coração verde onde as montanhas contam histórias",
+      "nuevaSegovia": "Onde a Nicarágua toca as nuvens",
+      "rioSanJuan": "Navegue pela história. Entre na selva",
+      "caribeNorte": "Onde a selva, os rios e o Caribe guardam culturas ancestrais",
+      "caribeSur": "Onde a Nicarágua fala muitas línguas e o Caribe pinta o horizonte"
+    },
+    "ui": {
+      "loadingPlaces": "Consultando lugares publicados…",
+      "experience": "Experiência:",
+      "routeN": "Rota {n}",
+      "photoArchiveUpper": "ARQUIVO FOTOGRÁFICO DO TERRITÓRIO",
+      "photoArchive": "Arquivo do território",
+      "keyMoments": "Momentos que explicam o território",
+      "whatToTry": "O que provar, como se cozinha e onde",
+      "dish": "Prato",
+      "howMade": "Como se prepara",
+      "celebrations": "Celebrações e lugares declarados",
+      "observe": "Observe sem perturbar",
+      "suggestedRoutes": "Rotas sugeridas",
+      "prepare": "Prepare-se conforme o clima e a atividade",
+      "emergencies": "Emergências no território",
+      "hospital": "Hospital de referência:",
+      "police118": "Polícia Nacional: 118",
+      "ambulance128": "Ambulância / Cruz Vermelha: 128",
+      "fire115": "Bombeiros: 115",
+      "sourcesDate": "Fontes oficiais consultadas em 26 de setembro de 2026.",
+      "uniqueImages": "{n} imagens únicas",
+      "location": "Localização:",
+      "buyFromMaker": "Compre direto de quem faz",
+      "rule": "Regra BAQUEANO:",
+      "indigenousRoot": "Raiz indígena",
+      "access": "Acesso:",
+      "wholeDept": "Todo o departamento",
+      "musicTitle": "Música e tradição sonora",
+      "listenMusic": "Ouvir música nicaraguense",
+      "legendsN": "{n}. Lendas e tradição oral",
+      "legends": "Lendas e tradição oral",
+      "legendsNote": "Estes relatos fazem parte da memória popular e não são apresentados como fatos históricos comprovados.",
+      "exploreMunicipalities": "Explorar {n} municípios",
+      "waterfallHiking": "Cachoeira · Trilha",
+      "highCoffee": "Café de altitude",
+      "cloudBirds": "Aves da floresta nublada",
+      "raincoat": "Capa de chuva",
+      "hikingShoes": "Calçado de montanha",
+      "natureReserve": "Reserva Natural",
+      "century19": "Século XIX"
+    },
+    "code": {
+      "noExtract": "Não retire pedras, plantas, fósseis nem peças arqueológicas.",
+      "buyDirect": "Compre direto de produtores, artesãos e cooperativas locais.",
+      "trash": "Leve todo o seu lixo de volta, principalmente os plásticos.",
+      "respect": "Respeite cerimônias, templos e tradições de cada comunidade.",
+      "askPhoto": "Peça permissão antes de fotografar as pessoas.",
+      "localGuides": "Use guias locais em vulcões, rios, selva e áreas protegidas.",
+      "title": "Código do Explorador",
+      "titleN": "{n}. Código do Explorador"
+    }
+  },
+  "dishes": {
+    "ui": {
+      "countTerritories": "{n} pratos de {total} territórios",
+      "count": "{n} pratos",
+      "viewDept": "Ver a ficha de {name}"
+    },
+    "desc": {
+      "000": "Queijo suave e salgado feito com leite de vacas criadas em pastos de altitude.",
+      "001": "Cozida na lenha por 10 horas com mandioca doce e banana-da-terra madura.",
+      "002": "Bebida quente e energizante de origem indígena.",
+      "003": "Assadas no comal com coalhada fresca.",
+      "004": "Leite, queijo, coalhada e creme produzidos em comunidades pecuaristas.",
+      "005": "Güirilas, nacatamales, carnes, sopas, mel, tortilhas e café de montanha.",
+      "006": "Rota entre San Marcos, Diriamba, Dolores, Jinotepe e fazendas: cultivo, torra e degustação.",
+      "007": "Preparos tradicionais ligados à cozinha familiar e festiva.",
+      "008": "Receita do território feita com milho, carne, legumes e saberes de família.",
+      "009": "Pão artesanal, melcochas e doces de produção local.",
+      "010": "Bebidas e sobremesas associadas especialmente a Jinotepe e suas comunidades.",
+      "011": "Peixes e frutos do mar preparados em La Boquita, Casares, Huehuete e outros povoados costeiros.",
+      "012": "Tamal de milho recheado com carne temperada e envolto em folhas.",
+      "013": "Recém-colhidos nos manguezais de Corinto e Aserradores.",
+      "014": "Reconhecidas entre as mais finas do país.",
+      "015": "Feita com milho roxo nativo.",
+      "016": "De fama internacional: quesillo, queijo com pimenta e creme puro da fazenda.",
+      "017": "Servida nos dias de feira com tortilhas gigantes.",
+      "018": "Milho tratado com cinza de carvalho e sal marinho.",
+      "019": "Bebida de milho vermelho fermentado.",
+      "020": "Produto emblemático feito com leite, queijo, creme e tradição pecuária.",
+      "021": "Peixe, carne, güirilas, nacatamales, sopas e café das terras altas.",
+      "022": "Milho colhido a 1.200 m de altitude com queijo da serra.",
+      "023": "Famosa pela textura amanteigada e sabor inconfundível.",
+      "024": "Com tortilha quente, chimichurri e queijo frito.",
+      "025": "Café orgânico cultivado por cooperativas camponesas.",
+      "026": "Café de montanha, tortilha, coalhada, creme, ovos e feijão.",
+      "027": "Produtos comunitários ligados a La Garnacha e às fazendas.",
+      "028": "Mandioca cozida, torresmo e salada de repolho servidos no Parque Central, mercados e cozinhas locais.",
+      "029": "Peixes, frutos do mar e preparos ligados à vida no lago.",
+      "030": "Porco com mandioca, nacatamal, indio viejo e quesillos.",
+      "031": "Doces tradicionais que ligam Granada às oficinas familiares de Diriomo.",
+      "032": "Cacau, sucos naturais, chicha e pinolillo.",
+      "033": "Atol de ánimas de Diriá e preparos tradicionais de Nandaime.",
+      "034": "Notas de chocolate, jasmim e frutas cítricas, colhido acima de 1.400 m.",
+      "035": "Tortilha doce de milho verde assada em folha de bananeira.",
+      "036": "Bebida de milho cozido com gengibre e açúcar de rapadura.",
+      "037": "Cozida na lenha em fogões camponeses.",
+      "038": "Rosquillas, perrerreque, quesadillas, semitas, doces e bebidas tradicionais de milho.",
+      "039": "Cacau, mel, coalhada, queijo, creme, feijão, tamales e sopa de coalhada.",
+      "040": "Nagarote e La Paz Centro compartilham esta tradição de tortilha, queijo, creme e cebola em conserva.",
+      "041": "Vigorón, nacatamal, indio viejo, porco com mandioca, carne assada e tamales.",
+      "042": "Sopa de carne, sopa de queijo, güirilas e tortilhas feitas com saberes de família.",
+      "043": "Queijos, cajetas, rosquillas e outros doces tradicionais do ocidente.",
+      "044": "Cacau, pinolillo, tiste, chicha e várias bebidas tradicionais de milho.",
+      "045": "Mercados, docerias, cafés e negócios familiares com cozinha local.",
+      "046": "Feitas artesanalmente com milho branco selecionado, queijo seco crioulo, coalhada fresca e manteiga da fazenda, douradas na lenha em fornos de barro.",
+      "047": "Bocados crocantes de massa de milho com rapadura derretida no centro.",
+      "048": "Tamal macio de milho verde temperado com frango caipira, hortelã, leite e um toque sutil de chile congo.",
+      "049": "Variedades Caturra, Bourbon e Catuaí cultivadas à sombra na montanha em San Juan del Río Coco, entre 1.000 e 1.400 m.",
+      "050": "Bolinhos doces assados em folhas de bananeira, servidos com coalhada fresca da fazenda.",
+      "051": "Sobremesa tradicional da Semana Santa e das festas padroeiras, banhada em calda de dulce de atado.",
+      "052": "Carne assada, tajadas, enchiladas, tacos, repochetas e comida popular da noite.",
+      "053": "Nacatamal, vigorón, quesillo, indio viejo, baho e receitas de todos os departamentos.",
+      "054": "Sopa de carne e sopa de bucho preparadas em mercados, bairros e restaurantes.",
+      "055": "Cozinhas tradicionais, produtos locais e encontros cotidianos com a cidade.",
+      "056": "Café nacional e propostas modernas inspiradas em ingredientes nicaraguenses.",
+      "057": "Um dos sabores mais característicos do departamento e de sua cozinha festiva.",
+      "058": "Preparo tradicional intimamente ligado à identidade comunitária de Monimbó.",
+      "059": "Preparos populares presentes em mercados, bairros e celebrações.",
+      "060": "Doces tradicionais feitos por famílias e pequenos negócios locais.",
+      "061": "Cacau, tiste, pinolillo e bebidas de milho.",
+      "062": "Bebida densa e aromática feita com cacau puro cultivado na montanha.",
+      "063": "Massa de milho verde recheada com carne marinada em laranja-azeda.",
+      "064": "Queijo artesanal curado com madeira de carvalho.",
+      "065": "Feitos por artesãs rurais do vale.",
+      "066": "Güirilas, coalhada, creme, tamales, indio viejo, sopas e produtos da fazenda.",
+      "067": "Produtos de montanha oferecidos em fazendas, comunidades e cafés locais.",
+      "068": "Massa de milho temperada com banha e recheada com frango caipira.",
+      "069": "Reconhecido com as maiores notas internacionais de café especial.",
+      "070": "Assadas e crocantes, com queijo da serra.",
+      "071": "Fritas na hora em banha pura.",
+      "072": "Güirilas, coalhada, creme, feijão, carnes, mel, rosquillas e pães.",
+      "073": "Produtos, doces e bebidas ligados a Jalapa e Macuelizo.",
+      "074": "Sopa ancestral miskita de carne bovina cozida com mandioca, banana-da-terra e coentro-do-mato.",
+      "075": "Bebida espessa e nutritiva de banana-da-terra madura batida com leite de coco fresco.",
+      "076": "Técnica tradicional indígena de conservação.",
+      "077": "Assado na lenha com coco recém-ralado.",
+      "078": "Coco, tubérculos e peixe ou carne preparados segundo a tradição comunitária.",
+      "079": "Mandioca fermentada, peixe, frutos do mar, banana-da-terra, milho e coco.",
+      "080": "Peixe fresco, lagosta, caranguejo, mandioca, banana-da-terra e fruta-pão cozidos lentamente no leite de coco com chile cabro.",
+      "081": "Bebida fermentada afro-caribenha condimentada.",
+      "082": "Pastéis crocantes recheados com carne moída picante.",
+      "083": "Confeitaria fina tradicional.",
+      "084": "Arroz com feijão no coco e pastel tradicional da cozinha caribenha.",
+      "085": "Peixe, camarão, caranguejo e lagosta somente na temporada autorizada.",
+      "086": "Camarões gigantes de água doce preparados com manteiga e alho.",
+      "087": "Fóssil vivo preparado com legumes da selva e leite de coco.",
+      "088": "Bocados crocantes com peixe fresco.",
+      "089": "Acompanhada de coalhada fresca ribeirinha.",
+      "090": "Fruto, fermentação, secagem, torra, chocolate e degustação em fazendas e comunidades.",
+      "091": "Peixe, sopas, banana-da-terra, milho, produtos tropicais, mel e laticínios rurais.",
+      "092": "Peixe fresco preparado por famílias e cozinhas ligadas à vida no lago.",
+      "093": "Frutos do mar servidos em San Juan del Sur, Tola e comunidades pesqueiras.",
+      "094": "Tostones, tajadas e outros preparos essenciais da cozinha de Rivas.",
+      "095": "Receitas tradicionais acompanhadas de tortilhas e produtos locais.",
+      "096": "Banana-da-terra, frutas, mel, café, peixe e cozinha camponesa das fazendas da ilha.",
+      "097": "Bebidas e produtos tropicais feitos por comunidades e pequenos negócios.",
+      "098": "Cacau, pinolillo, tiste, chicha, bebida de cevada e semente de jícaro."
     }
   }
 }

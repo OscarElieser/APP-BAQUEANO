@@ -38,6 +38,27 @@
     // ------------------------------------------------------------------------
     // OBTENCIÓN DEFENSIVA DE LA INSTANCIA DE FIRESTORE
     // ------------------------------------------------------------------------
+    // 2026-10-15: antes cada sincronizador reintentaba cada 600 ms para siempre cuando
+    // Firestore no estaba cargado (el sitio ya no carga Firestore en páginas públicas).
+    // Ahora se reintenta como máximo 8 veces y luego se conserva el HTML nativo.
+    retryLater(method) {
+      this._retries = this._retries || {};
+      const n = (this._retries[method] || 0) + 1;
+      this._retries[method] = n;
+      if (n > 8) return;
+      setTimeout(() => this[method](), 600 * n);
+    },
+
+    isSpanish() {
+      try {
+        const api = window.BaqueanoLanguage;
+        const code = String((api && api.get && api.get()) || document.documentElement.lang || 'es').toLowerCase();
+        return code.indexOf('es') === 0;
+      } catch (_) {
+        return true;
+      }
+    },
+
     getDb() {
       if (window.firebase && window.firebase.firestore) {
         return window.firebase.firestore();
@@ -101,15 +122,39 @@
       const pageId = this.detectCurrentPageId();
       if (pageId === 'admin') return;
 
-      const db = this.getDb();
-      if (!db) {
-        setTimeout(() => this.syncDynamicPageSections(), 600);
-        return;
-      }
-
       const cacheKey = `page_${pageId}`;
       const cachedSections = this.readCache(cacheKey);
       if (Array.isArray(cachedSections) && cachedSections.length) this.applyPageSections(pageId, cachedSections);
+
+      // Fuente principal: Supabase public.site_pages (lectura pública por RLS), lo que guarda
+      // el Website Builder del Ops Center. Firestore queda como respaldo heredado.
+      const SUPABASE_URL = 'https://heiudfpthqwtjrtluqlm.supabase.co';
+      const PUBLIC_KEY = 'sb_publishable_q7ZhqRIRjlerZK7WOu_Qxw_X_AqXV1d';
+      if (window.fetch) {
+        fetch(`${SUPABASE_URL}/rest/v1/site_pages?page_id=eq.${encodeURIComponent(pageId)}&select=sections`, {
+          headers: { apikey: PUBLIC_KEY, Authorization: `Bearer ${PUBLIC_KEY}` }
+        })
+          .then((res) => (res.ok ? res.json() : []))
+          .then((rows) => {
+            const sections = Array.isArray(rows) && rows[0] && Array.isArray(rows[0].sections) ? rows[0].sections : [];
+            if (!sections.length) return;
+            this.writeCache(cacheKey, sections);
+            this.applyPageSections(pageId, sections);
+            // Si el usuario cambia de idioma, se vuelve a aplicar (textos solo en español).
+            if (!this._langHooked) {
+              this._langHooked = true;
+              window.addEventListener('baqueano:languageChanged', () => this.applyPageSections(pageId, sections));
+            }
+          })
+          .catch(() => {});
+        return;
+      }
+
+      const db = this.getDb();
+      if (!db) {
+        this.retryLater('syncDynamicPageSections');
+        return;
+      }
 
       db.collection('site_pages').doc(pageId).get()
         .then((doc) => {
@@ -169,6 +214,16 @@
           }
 
           targetEl.style.display = '';
+
+          // Los textos editados en el Builder están en español. En los otros 7 idiomas se
+          // conserva la traducción del catálogo; solo se aplican visibilidad e imágenes.
+          if (!this.isSpanish()) {
+            if (secType === 'element' && sec.imageUrl) {
+              const t = (sec.elementTag || targetEl.tagName || '').toLowerCase();
+              if (t === 'img' || t === 'video') targetEl.src = sec.imageUrl;
+            }
+            return;
+          }
 
           if (secType === 'element') {
             const tag = (sec.elementTag || targetEl.tagName || '').toLowerCase();
@@ -346,7 +401,7 @@
               targetEl.style.backgroundImage = `url("${sec.imageUrl}")`;
             }
           }
-        } else if (status === 'published' && (sec.content || sec.title)) {
+        } else if (status === 'published' && (sec.content || sec.title) && this.isSpanish()) {
           // Sección dinámica adicional creada en vivo desde el Ops Center
           let dynContainer = document.getElementById(`dynSec_${secId}`);
           if (!dynContainer) {
@@ -390,7 +445,7 @@
     syncDestinationsCatalog() {
       const db = this.getDb();
       if (!db) {
-        setTimeout(() => this.syncDestinationsCatalog(), 600);
+        this.retryLater('syncDestinationsCatalog');
         return;
       }
 

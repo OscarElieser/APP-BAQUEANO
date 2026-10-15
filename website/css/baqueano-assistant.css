@@ -303,8 +303,13 @@
 
 .bq-suggestion .bq-suggestion-close {
   position: absolute;
-  top: 6px;
-  right: 7px;
+  top: 4px;
+  right: 4px;
+  min-width: 28px;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bq-suggestion-actions {

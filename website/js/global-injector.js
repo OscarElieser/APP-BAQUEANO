@@ -62,7 +62,7 @@
       { id: 'bq-mega-nav',  href: 'css/navigation-mega.css?v=20261004-menu-2' },
       { id: 'bq-platform-enhancements', href: 'css/platform-enhancements.css?v=20261014-contacto-1' },
       // Login / registro sobre la página (2026-10-14).
-      { id: 'bq-auth-modal', href: 'css/auth-modal.css?v=20261014-login-4' },
+      { id: 'bq-auth-modal', href: 'css/auth-modal.css?v=20261015-contrast-2' },
       { id: 'bq-accessibility', href: 'css/accessibility.css?v=20260930-1' },
       { 
         id: 'bq-fa',        
@@ -933,10 +933,19 @@
     // 🔐 Login / registro sobre la página: se abre con [data-bq-login] sin salir de la página actual.
     if (!document.querySelector('script[data-bq-auth-modal]')) {
       var authModalScript = document.createElement('script');
-      authModalScript.src = 'js/auth-modal.js?v=20261014-login-2';
+      authModalScript.src = 'js/auth-modal.js?v=20261015-logo-1';
       authModalScript.dataset.bqAuthModal = 'true';
       authModalScript.defer = true;
       document.body.appendChild(authModalScript);
+    }
+    // Website Builder (Ops Center → Supabase site_pages): cada página pública aplica lo que el
+    // equipo publique. Antes solo cargaba en 3 páginas.
+    if (!window.BaqueanoPublicSync && !/admin(\.html)?$/i.test(location.pathname) &&
+        !document.querySelector('script[src*="public-cms-sync.js"]')) {
+      var cmsScript = document.createElement('script');
+      cmsScript.src = 'js/public-cms-sync.js?v=20261015-supabase-1';
+      cmsScript.defer = true;
+      document.body.appendChild(cmsScript);
     }
     if (!document.querySelector('script[data-platform-enhancements]')) {
       var enhancementScript = document.createElement('script');
@@ -953,7 +962,7 @@
     }
     if (!window.__BAQUEANO_I18N_LOADED__ && !document.querySelector('script[data-global-language]')) {
       var languageScript = document.createElement('script');
-      languageScript.src = 'js/global-language.js?v=20261009-ko-zh-1';
+      languageScript.src = 'js/global-language.js?v=20261015-frases-1';
       languageScript.defer = true;
       languageScript.dataset.globalLanguage = 'true';
       document.body.appendChild(languageScript);

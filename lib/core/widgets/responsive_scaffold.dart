@@ -326,6 +326,12 @@ class _ResponsiveScaffoldState extends ConsumerState<ResponsiveScaffold> {
                     ),
                     _buildSidebarItem(
                       context,
+                      Icons.menu_book_rounded,
+                      'Crónicas',
+                      '/cronicas',
+                    ),
+                    _buildSidebarItem(
+                      context,
                       Icons.route_rounded,
                       'Mis expediciones',
                       '/historial',

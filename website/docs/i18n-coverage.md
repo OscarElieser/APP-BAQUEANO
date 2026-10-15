@@ -1,12 +1,12 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-15T15:19:06.068Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 5651 · en 5651 · fr 5651 · it 5651 · pt 5651 · de 5651 · ko 5651 · zh 5651
+Generado: 2026-10-15T18:16:42.788Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 5987 · en 5987 · fr 5987 · it 5987 · pt 5987 · de 5987 · ko 5987 · zh 5987
 
-HTML: 4237/4238 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
+HTML: 4245/4246 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
-| js/ops-center/ops-engine.js | js | 368 | 112 | 256 | 30.4 % |
+| js/ops-center/ops-engine.js | js | 369 | 113 | 256 | 30.6 % |
 | apps/web/src/app/baqueano-ai/page.tsx | tsx | 72 | 0 | 72 | 0 % |
 | apps/admin/src/app/spatial/page.tsx | tsx | 58 | 0 | 58 | 0 % |
 | apps/admin/src/app/strategic/page.tsx | tsx | 52 | 0 | 52 | 0 % |
@@ -164,7 +164,7 @@ HTML: 4237/4238 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | baqueano-ai.html | html | 3 | 3 | 0 | 100 % |
 | baqueano-ia.html | html | 193 | 193 | 0 | 100 % |
 | cookies.html | html | 123 | 123 | 0 | 100 % |
-| cronicas.html | html | 51 | 51 | 0 | 100 % |
+| cronicas.html | html | 57 | 57 | 0 | 100 % |
 | denuncias.html | html | 61 | 61 | 0 | 100 % |
 | departamento.html | html | 82 | 82 | 0 | 100 % |
 | descargar.html | html | 33 | 33 | 0 | 100 % |
@@ -174,7 +174,7 @@ HTML: 4237/4238 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | favoritos.html | html | 8 | 8 | 0 | 100 % |
 | gastronomia.html | html | 205 | 205 | 0 | 100 % |
 | historia.html | html | 184 | 184 | 0 | 100 % |
-| index.html | html | 236 | 236 | 0 | 100 % |
+| index.html | html | 237 | 237 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
 | js/allies-directory.js | js | 0 | 0 | 0 | 100 % |
 | js/ambiental-report-handoff.js | js | 0 | 0 | 0 | 100 % |
@@ -199,6 +199,7 @@ HTML: 4237/4238 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/community-api.js | js | 0 | 0 | 0 | 100 % |
 | js/community-faces.js | js | 0 | 0 | 0 | 100 % |
 | js/contact-form.js | js | 0 | 0 | 0 | 100 % |
+| js/cronicas-community.js | js | 0 | 0 | 0 | 100 % |
 | js/cronicas-filter.js | js | 0 | 0 | 0 | 100 % |
 | js/definitive-index-interactions.js | js | 0 | 0 | 0 | 100 % |
 | js/destination-community.js | js | 0 | 0 | 0 | 100 % |
@@ -267,6 +268,6 @@ HTML: 4237/4238 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | perfil.html | html | 168 | 168 | 0 | 100 % |
 | privacidad.html | html | 88 | 88 | 0 | 100 % |
 | terminos.html | html | 192 | 192 | 0 | 100 % |
-| testimonios.html | html | 79 | 79 | 0 | 100 % |
+| testimonios.html | html | 80 | 80 | 0 | 100 % |
 | todos-los-destinos.html | html | 84 | 84 | 0 | 100 % |
 | todos-los-platos.html | html | 18 | 18 | 0 | 100 % |

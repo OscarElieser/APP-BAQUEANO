@@ -1,42 +1,47 @@
-// ============================================================================
-// 🧭 BAQUEANO ECOSYSTEM — COMPONENTE EDITORIAL MAGAZINE (VANILLA CSS)
-// Basado en el patrón arquitectónico Magazine Layout (Atheros Builder / Ember Studio)
-// Adaptado con rigor al Sistema de Diseño BAQUEANO NICARAGUA
-// ============================================================================
-//
-// 🎯 1. POR QUÉ (WHY / PROPÓSITO):
-// - Proveer una experiencia de lectura editorial y narrativa de alto nivel para
-//   las crónicas, relatos territoriales y voces campesinas de Nicaragua.
-// - Reemplazar grids simples y monótonos por una jerarquía editorial con:
-//   cabecera de sección, riel izquierdo temático, historia principal destacada,
-//   artículos populares en rejilla, y riel derecho de lecturas indispensables
-//   con citas destacadas (pull-quotes).
-//
-// ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
-// - 100% Vanilla CSS modular con `grid-template-areas` y Mobile-First.
-// - Tokens de color oficiales de BAQUEANO:
-//   * Petróleo Teal (#165D6F)
-//   * Naranja Terracota Fuego (#F65E01)
-//   * Crema Arena Pinolera (#F4E6C1)
-//   * Noche Profunda (#0F172A)
-// - Accesibilidad: soporte estricto para `prefers-reduced-motion: reduce`,
-//   `:focus-visible` de alto contraste, targets táctiles mínimos de 44px
-//   y semántica ARIA (`aria-label="Magazine layout"`).
-// - Responsividad fluida: se apila verticalmente en móviles (<768px) y se
-//   despliega en layout editorial asimétrico de 3 columnas en pantallas amplias.
-//
-// 📦 3. QUÉ (WHAT / ENTREGABLES & CLASES EXPUESTAS):
-// - `.bq-magazine-container`: Contenedor principal con grid editorial.
-// - `.bq-magazine-masthead`: Titular y barra de navegación de sección.
-// - `.bq-magazine-left-rail`: Columna lateral con filtros y autores locales.
-// - `.bq-magazine-lead`: Noticia/historia principal con figura multimedia y byline.
-// - `.bq-magazine-grid`: Rejilla de artículos populares y crónicas de campo.
-// - `.bq-magazine-right-rail`: Riel de 'Lo más leído' y pull-quote testimonial.
-// ============================================================================
+/*
+ ============================================================================
+ 🧭 BAQUEANO ECOSYSTEM — COMPONENTE EDITORIAL MAGAZINE (VANILLA CSS)
+ Basado en el patrón arquitectónico Magazine Layout (Atheros Builder / Ember Studio)
+ Adaptado con rigor al Sistema de Diseño BAQUEANO NICARAGUA
+ ============================================================================
+
+ 🎯 1. POR QUÉ (WHY / PROPÓSITO):
+ - Proveer una experiencia de lectura editorial y narrativa de alto nivel para
+   las crónicas, relatos territoriales y voces campesinas de Nicaragua.
+ - Reemplazar grids simples y monótonos por una jerarquía editorial con:
+   cabecera de sección, riel izquierdo temático, historia principal destacada,
+   artículos populares en rejilla, y riel derecho de lecturas indispensables
+   con citas destacadas (pull-quotes).
+
+ ⚙️ 2. CÓMO (HOW / ARQUITECTURA & IMPLEMENTACIÓN):
+ - 100% Vanilla CSS modular con `grid-template-areas` y Mobile-First.
+ - Tokens de color oficiales de BAQUEANO:
+   * Petróleo Teal (#165D6F)
+   * Naranja Terracota Fuego (#F65E01)
+   * Crema Arena Pinolera (#F4E6C1)
+   * Noche Profunda (#0F172A)
+ - Accesibilidad: soporte estricto para `prefers-reduced-motion: reduce`,
+   `:focus-visible` de alto contraste, targets táctiles mínimos de 44px
+   y semántica ARIA (`aria-label="Magazine layout"`).
+ - Responsividad fluida: se apila verticalmente en móviles (<768px) y se
+   despliega en layout editorial asimétrico de 3 columnas en pantallas amplias.
+
+ 📦 3. QUÉ (WHAT / ENTREGABLES & CLASES EXPUESTAS):
+ - `.bq-magazine-container`: Contenedor principal con grid editorial.
+ - `.bq-magazine-masthead`: Titular y barra de navegación de sección.
+ - `.bq-magazine-left-rail`: Columna lateral con filtros y autores locales.
+ - `.bq-magazine-lead`: Noticia/historia principal con figura multimedia y byline.
+ - `.bq-magazine-grid`: Rejilla de artículos populares y crónicas de campo.
+ - `.bq-magazine-right-rail`: Riel de 'Lo más leído' y pull-quote testimonial.
+ ============================================================================
+ * 2026-10-15: este encabezado usaba comentarios con // (no válidos en CSS); el navegador
+ * descartaba el bloque :root siguiente y las variables --bq-mag-* quedaban sin definir
+ * (la cita destacada se veía como un recuadro en blanco).
+ */
 
 :root {
   --bq-mag-primary: #165D6F;
-  --bq-mag-accent: #F65E01;
+  --bq-mag-accent: #C54B01; /* AA sobre blanco (4.6:1); antes #F65E01 */
   --bq-mag-sand: #F4E6C1;
   --bq-mag-dark: #0F172A;
   --bq-mag-slate: #334155;
@@ -188,8 +193,10 @@
 
 .bq-mag-topic-link {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.3rem;
+  justify-content: flex-start;
+  align-items: flex-start;
   color: var(--bq-mag-slate);
   text-decoration: none;
   font-size: 0.85rem;
@@ -202,7 +209,16 @@
   color: var(--bq-mag-accent);
 }
 
+.bq-mag-topic-link > span:first-child {
+  min-width: 0;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: manual;
+}
+
 .bq-mag-topic-badge {
+  flex-shrink: 0;
+  white-space: nowrap;
   background: #F1F5F9;
   color: var(--bq-mag-primary);
   font-size: 0.75rem;
@@ -430,7 +446,10 @@
   font-weight: 900;
   color: var(--bq-mag-primary);
   line-height: 1;
-  min-width: 24px;
+  min-width: 2.2ch;
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .bq-mag-rank-content {
@@ -519,3 +538,116 @@ button.bq-mag-chip { font-family: inherit; cursor: pointer; line-height: 1.2; }
 button.bq-mag-chip:focus-visible { outline: 3px solid var(--bq-mag-primary); outline-offset: 2px; }
 .bq-mag-filter-empty { margin: 0 0 1.25rem; padding: 0.9rem 1rem; border-left: 4px solid var(--bq-mag-primary); border-radius: 8px; background: var(--bq-mag-card); color: var(--bq-mag-slate); font-size: 0.92rem; }
 [data-topics][hidden] { display: none !important; }
+
+/* -------------------------------------------------------------------------- */
+/* 5. CRÓNICAS DE LA COMUNIDAD (2026-10-15)                                   */
+/* -------------------------------------------------------------------------- */
+.bq-mag-masthead-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.bq-mag-write-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 9999px;
+  background: var(--bq-mag-accent);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.88rem;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(246, 94, 1, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.bq-mag-write-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(246, 94, 1, 0.36);
+  color: #FFFFFF;
+}
+
+.bq-mag-community {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--bq-mag-sand);
+}
+
+.bq-mag-community-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.bq-mag-community-title {
+  font-family: League Spartan, sans-serif;
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  font-weight: 900;
+  color: var(--bq-mag-dark);
+  margin: 0.35rem 0 0.5rem;
+  line-height: 1.15;
+}
+
+.bq-mag-community-lead {
+  margin: 0;
+  max-width: 52ch;
+  color: var(--bq-mag-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.bq-mag-community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.bq-mag-community-grid:empty {
+  display: none;
+}
+
+.bq-mag-community-byline {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  color: var(--bq-mag-muted);
+}
+
+.bq-mag-community-empty {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  border: 1px dashed var(--bq-mag-border);
+  border-radius: var(--bq-mag-radius);
+  background: var(--bq-mag-card);
+  color: var(--bq-mag-slate);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.bq-mag-community-empty[hidden] {
+  display: none;
+}
+
+.bq-mag-community-empty i {
+  color: var(--bq-mag-accent);
+  font-size: 1.2rem;
+}
+
+@media (max-width: 640px) {
+  .bq-mag-masthead-side {
+    align-items: flex-start;
+  }
+  .bq-mag-write-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

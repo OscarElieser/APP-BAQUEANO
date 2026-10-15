@@ -5,7 +5,7 @@
 -->
 # Auditoría estática de la salida publicada
 
-Generado: 2026-10-15T15:49:58.845Z · Páginas: 36 · URLs en sitemap: 27 · **Críticos: 0** · Advertencias: 71
+Generado: 2026-10-15T18:16:42.999Z · Páginas: 36 · URLs en sitemap: 27 · **Críticos: 0** · Advertencias: 71
 
 ## SEO por página
 
@@ -31,7 +31,7 @@ Generado: 2026-10-15T15:49:58.845Z · Páginas: 36 · URLs en sitemap: 27 · **C
 | gastronomia.html | Gastronomía Ancestral de los Hijos del Maíz \| Baqueano Nicar | 142 car. | /gastronomia.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | historia.html | Historia de Nicaragua \| Baqueano Nicaragua | 108 car. | /historia.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | i18n-test.html | BAQUEANO · I18N Test | — | — | ❌ | ❌ | 0 | 0 | ❌ | ❌ |
-| index.html | Baqueano Nicaragua \| Descubre lo que no sale en el mapa | 145 car. | / | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| index.html | BAQUEANO Nicaragua \| Descubrí lo que no sale en el mapa | 160 car. | / | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | legal.html | Centro Legal & Términos \| Baqueano Nicaragua | 92 car. | /legal.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | mapa.html | Mapa Interactivo de Nicaragua \| Baqueano | 130 car. | /mapa.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | mi-negocio.html | Portal de Anfitriones & Negocios \| Baqueano Nicaragua | 158 car. | /mi-negocio.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |

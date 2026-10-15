@@ -35,9 +35,10 @@
 
   // Texto con clave: el valor inicial sale del catálogo activo y global-language.js
   // lo mantiene sincronizado con el idioma elegido.
-  function keyed(tag, className, key) {
+  function keyed(tag, className, key, fallback) {
     var node = el(tag, className, { 'data-i18n': key });
-    node.textContent = t(key);
+    // Si el catálogo aún no cargó, un texto de respaldo evita enlaces sin nombre accesible.
+    node.textContent = t(key) || fallback || '';
     return node;
   }
 
@@ -127,7 +128,7 @@
       titleWrap.appendChild(keyed('p', 'bq-artists-group-tagline', BASE + 'groups.' + group.id));
       header.appendChild(titleWrap);
       var link = el('a', 'bq-artists-group-link', { href: 'departamento.html?id=' + group.id + '#territoryArtistsSection' });
-      link.appendChild(keyed('span', '', BASE + 'deptLink'));
+      link.appendChild(keyed('span', '', BASE + 'deptLink', 'Ver departamento'));
       link.appendChild(document.createTextNode(' '));
       link.appendChild(icon('fa-arrow-right'));
       header.appendChild(link);

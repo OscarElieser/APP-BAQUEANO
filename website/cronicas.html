@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css?v=20261003-mag-1">
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
-  <link rel="stylesheet" href="css/components/magazine-layout.css?v=20261006-filter-1">
+  <link rel="stylesheet" href="css/components/magazine-layout.css?v=20261015-fix-1">
   
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261009-a11y-4">
@@ -69,7 +69,12 @@
             <span data-i18n="pages.cronicas.bqMagazineMasthead.span1" class="bq-mag-kicker">Voces del Territorio · Edición Especial</span>
             <h1 data-i18n="pages.cronicas.bqMagazineMasthead.h11" class="bq-mag-title">Crónicas que se caminan</h1>
           </div>
-          <span data-i18n="pages.cronicas.bqMagazineMasthead.span2" class="bq-mag-date">Nicaragua · Cuaderno de Campo 2026</span>
+          <div class="bq-mag-masthead-side">
+            <span data-i18n="pages.cronicas.bqMagazineMasthead.span2" class="bq-mag-date">Nicaragua · Cuaderno de Campo 2026</span>
+            <a href="testimonios.html?accion=compartir&amp;formato=cronica" class="bq-mag-write-btn">
+              <i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> <span data-i18n="pages.cronicas.community.write">Escribí tu crónica</span>
+            </a>
+          </div>
         </div>
 
         <nav data-i18n-aria-label="pages.cronicas.bqMagSectionNav.navAriaLabel1" class="bq-mag-section-nav" aria-label="Secciones del magazine">
@@ -92,13 +97,13 @@
             <ul class="bq-mag-topic-list">
               <li>
                 <a href="departamento.html?id=madriz" class="bq-mag-topic-link">
-                  <span>Cañón de Somoto</span>
+                  <span data-i18n="pages.cronicas.place.somoto">Cañón de Somoto</span>
                   <span data-i18n="pages.cronicas.exploreTerritory" class="bq-mag-topic-badge">Explorar territorio</span>
                 </a>
               </li>
               <li>
                 <a href="departamento.html?id=rivas" class="bq-mag-topic-link">
-                  <span>Isla de Ometepe</span>
+                  <span data-i18n="pages.cronicas.place.ometepe">Isla de Ometepe</span>
                   <span data-i18n="pages.cronicas.exploreTerritory" class="bq-mag-topic-badge">Explorar territorio</span>
                 </a>
               </li>
@@ -116,7 +121,7 @@
               </li>
               <li>
                 <a href="departamento.html?id=raccs" class="bq-mag-topic-link">
-                  <span>Corn Island &amp; Bluefields</span>
+                  <span data-i18n="pages.cronicas.place.cornBluefields">Corn Island &amp; Bluefields</span>
                   <span data-i18n="pages.cronicas.exploreTerritory" class="bq-mag-topic-badge">Explorar territorio</span>
                 </a>
               </li>
@@ -194,6 +199,26 @@
             </article>
           </div>
 
+          <!-- Crónicas de la comunidad (2026-10-15): relatos de viajeros y anfitriones con la
+               etiqueta «cronica», aprobados en el Ops Center (misma fuente que la app). -->
+          <section class="bq-mag-community" id="bqMagCommunity" aria-labelledby="bqMagCommunityTitle">
+            <div class="bq-mag-community-head">
+              <div>
+                <span data-i18n="pages.cronicas.community.kicker" class="bq-mag-card-sm-kicker">Escritas por la comunidad</span>
+                <h2 id="bqMagCommunityTitle" data-i18n="pages.cronicas.community.title" class="bq-mag-community-title">Crónicas de viajeros y anfitriones</h2>
+                <p data-i18n="pages.cronicas.community.lead" class="bq-mag-community-lead">¿Viviste una historia en algún rincón de Nicaragua? Escribila con tus fotos. El equipo BAQUEANO la revisa y la publica aquí y en la app.</p>
+              </div>
+              <a href="testimonios.html?accion=compartir&amp;formato=cronica" class="bq-mag-write-btn">
+                <i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> <span data-i18n="pages.cronicas.community.write">Escribí tu crónica</span>
+              </a>
+            </div>
+            <div class="bq-mag-community-grid" id="bqMagCommunityGrid" aria-live="polite"></div>
+            <p class="bq-mag-community-empty" id="bqMagCommunityEmpty" hidden>
+              <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+              <span data-i18n="pages.cronicas.community.empty">Todavía no hay crónicas de la comunidad. ¡La tuya puede ser la primera!</span>
+            </p>
+          </section>
+
         </div>
 
         <!-- RIEL DERECHO: Lo Más Leído + Pull-Quote Campesina -->
@@ -244,8 +269,10 @@
 
   <footer id="siteFooter"></footer>
 
-  <script src="js/navigation.js?v=20261014-baqui-7"></script>
+  <script src="js/navigation.js?v=20261015-baqui-8"></script>
   <script src="js/cronicas-filter.js?v=20261006-1" defer></script>
+  <script src="js/community-api.js?v=20261004-1" defer></script>
+  <script src="js/cronicas-community.js?v=20261015-1" defer></script>
   <script src="js/global-injector.js"></script>
 </body>
 </html>

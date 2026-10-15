@@ -29,7 +29,8 @@
   'use strict';
   if (window.BaqueanoAuthModal) return;
 
-  var LOGO = 'assets/images/LOGOS/baqueano_icono_2000x2000-blanco.png';
+  // 2026-10-15: ícono oficial a color (17 KB) sobre insignia clara; antes, ícono blanco de 3,2 MB.
+  var LOGO = 'assets/images/LOGOS/baqueano_icono_oficial.png';
   var state = { mode: 'signin', busy: false, opener: null, dialog: null, nodes: {} };
 
   function t(key, fallback, params) {
@@ -133,7 +134,7 @@
 
     var card = el('div', { className: 'bq-auth-card' }, [
       n.close,
-      el('img', { className: 'bq-auth-logo', src: LOGO, alt: '', width: 56, height: 56, decoding: 'async' }),
+      el('img', { className: 'bq-auth-logo', src: LOGO, alt: '', width: 72, height: 72, decoding: 'async' }),
       n.title,
       el('p', { className: 'bq-auth-switch' }, [n.switchText, ' ', n.switchLink]),
       n.subtitle,

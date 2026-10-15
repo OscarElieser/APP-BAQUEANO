@@ -28,7 +28,7 @@
   var LOCALES = Object.freeze({ es: 'es-NI', en: 'en-US', fr: 'fr-FR', it: 'it-IT', pt: 'pt-BR', de: 'de-DE', ko: 'ko-KR', zh: 'zh-CN' });
   var STORAGE_KEY = 'baqueano_language_v2';
   var LEGACY_STORAGE_KEYS = Object.freeze(['baqueano_language_v1', 'baqueano_language']);
-  var VERSION = '2026.10.09-ko-zh-1';
+  var VERSION = '2026.10.15-frases-1';
   var cache = new Map();
   var semanticFallbackKeys = new Map();
   var originals = new WeakMap();
@@ -96,13 +96,68 @@
     }, source);
   }
 
+  // 2026-10-15: las frases se comparan sin importar saltos de línea ni espacios repetidos
+  // (el HTML con sangría dejaba «Tu comunidad merece\n   ganar el 100%» sin traducir).
+  function normalizeSpaces(value) { return String(value).replace(/\s+/g, ' ').trim(); }
+
+  // 2026-10-15: frases con partes variables («Destino {n} de {total}», «Agregar {name} a la
+  // ruta»). Cada valor del catálogo español con {token} se convierte en un patrón; un texto que
+  // coincide se traduce con la plantilla del idioma activo y conserva los valores (números,
+  // nombres). Si un valor capturado es a su vez una frase del catálogo, también se traduce.
+  var semanticTemplates = [];
+  // Variables numéricas: solo aceptan cifras («Guardar {n}» no debe atrapar «Guardar cambios»).
+  var NUMERIC_TOKENS = /^(n|count|total|from|to|num|number|current|index|page|pages|step|minutes|min|max|hours|days|km|percent|year|nights|people)$/;
+  function escapeRegExp(value) { return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  function indexTemplate(value, key) {
+    if (value.indexOf('{') === -1) return;
+    var tokens = [];
+    var literal = value.replace(/\{(\w+)\}/g, '').replace(/[\s\d.,:;·—–()\-]+/g, '');
+    if (literal.length < 3) return;
+    var pattern = escapeRegExp(value).replace(/\\\{(\w+)\\\}/g, function token(_, name) {
+      tokens.push(name);
+      return NUMERIC_TOKENS.test(name) ? '(\\d[\\d.,\\s]*)' : '(.+?)';
+    });
+    if (!tokens.length) return;
+    try { semanticTemplates.push({ key: key, tokens: tokens, regex: new RegExp('^' + pattern + '$') }); } catch (_) { /* patrón inválido: se ignora */ }
+  }
+
   function indexCanonicalPhrases(source, prefix) {
     Object.keys(source || {}).forEach(function indexValue(segment) {
       var key = prefix ? prefix + '.' + segment : segment;
       var value = source[segment];
       if (value && typeof value === 'object' && !Array.isArray(value)) indexCanonicalPhrases(value, key);
-      else if (typeof value === 'string' && value.trim() && !semanticFallbackKeys.has(value.trim())) semanticFallbackKeys.set(value.trim(), key);
+      else if (typeof value === 'string' && value.trim()) {
+        var phrase = normalizeSpaces(value);
+        if (!semanticFallbackKeys.has(phrase)) semanticFallbackKeys.set(phrase, key);
+        indexTemplate(phrase, key);
+      }
     });
+  }
+
+  var templateCache = new Map();
+  function translateTemplate(source) {
+    var cacheKey = currentLanguage + '\u0001' + source;
+    if (templateCache.has(cacheKey)) return templateCache.get(cacheKey);
+    if (templateCache.size > 4000) templateCache.clear();
+    var result = matchTemplate(source);
+    templateCache.set(cacheKey, result);
+    return result;
+  }
+  function matchTemplate(source) {
+    for (var index = 0; index < semanticTemplates.length; index += 1) {
+      var template = semanticTemplates[index];
+      var match = template.regex.exec(source);
+      if (!match) continue;
+      var params = {};
+      template.tokens.forEach(function capture(name, position) {
+        var captured = match[position + 1];
+        var nestedKey = semanticFallbackKeys.get(captured);
+        params[name] = nestedKey ? translate(nestedKey, { fallback: captured }) : captured;
+      });
+      params.fallback = source;
+      return translate(template.key, params);
+    }
+    return null;
   }
 
   async function loadCatalog(language) {
@@ -146,8 +201,13 @@
     var leading = (String(value).match(/^\s*/) || [''])[0];
     var trailing = (String(value).match(/\s*$/) || [''])[0];
     var source = String(value).trim();
-    var key = legacyKeys[source] || semanticFallbackKeys.get(source);
-    if (!key || currentLanguage === 'es') return value;
+    if (currentLanguage === 'es' || !source) return value;
+    var normalized = normalizeSpaces(source);
+    var key = legacyKeys[source] || semanticFallbackKeys.get(normalized);
+    if (!key) {
+      var templated = /[A-Za-zÁÉÍÓÚáéíóúÑñ]{3}/.test(normalized) ? translateTemplate(normalized) : null;
+      return templated ? leading + templated + trailing : value;
+    }
     var translated = translate(key, { fallback: source });
     return leading + translated + trailing;
   }

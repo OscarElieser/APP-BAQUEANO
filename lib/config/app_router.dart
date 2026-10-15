@@ -31,6 +31,7 @@ import '../features/catalog/screens/music_screen.dart';
 import '../features/catalog/screens/nightlife_screen.dart';
 import '../features/catalog/screens/tourism_screen.dart';
 import '../features/catalog/screens/videos_screen.dart';
+import '../features/community/screens/chronicles_screen.dart';
 import '../features/community/screens/community_screen.dart';
 import '../features/home/screens/home_screen.dart';
 import '../features/institutional/screens/brand_screen.dart';
@@ -197,6 +198,11 @@ class AppRouter {
       GoRoute(
         path: '/comunidad',
         builder: (context, state) => const CommunityScreen(),
+      ),
+      // Crónicas de la comunidad (paridad con cronicas.html, 2026-10-15).
+      GoRoute(
+        path: '/cronicas',
+        builder: (context, state) => const ChroniclesScreen(),
       ),
       GoRoute(
         path: '/relatos',

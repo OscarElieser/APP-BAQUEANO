@@ -60,7 +60,12 @@
   // --------------------------------------------------------------------------
   // 0. REGISTRO UNIVERSAL DE PÁGINAS Y SECCIONES DEL SITIO WEB (16 PÁGINAS)
   // --------------------------------------------------------------------------
-  const SITE_PAGES_REGISTRY = {
+  // Supabase: lectura pública de site_pages y escritura por la Edge Function baqueano-cms.
+  const CMS_SUPABASE_URL = 'https://heiudfpthqwtjrtluqlm.supabase.co';
+  const CMS_PUBLIC_KEY = 'sb_publishable_q7ZhqRIRjlerZK7WOu_Qxw_X_AqXV1d';
+  const CMS_ENDPOINT = `${CMS_SUPABASE_URL}/functions/v1/baqueano-cms`;
+
+const SITE_PAGES_REGISTRY = {
     // 01. PORTADA PRINCIPAL (INDEX)
     index: {
       name: 'Portada Principal',
@@ -3647,7 +3652,55 @@
     },
 
     // 7.10 GESTIÓN UNIVERSAL DE SECCIONES DE PÁGINAS (SITE_PAGES)
+    // 2026-10-15: el Website Builder lee y guarda en Supabase (public.site_pages); la fuente de
+    // verdad del proyecto. La lectura es pública (RLS); la escritura pasa por la Edge Function
+    // baqueano-cms, que verifica el rol de administrador. El camino de Firestore se conserva
+    // abajo y solo se usa si window.BaqueanoCmsBackend === 'firestore'.
+    usesSupabaseCms() {
+      return window.BaqueanoCmsBackend !== 'firestore' || !this.getDb();
+    },
+
+    async loadPageSectionsFromSupabase(pageId) {
+      const baseSections = SITE_PAGES_REGISTRY[pageId]?.sections || [];
+      try {
+        const url = `${CMS_SUPABASE_URL}/rest/v1/site_pages?page_id=eq.${encodeURIComponent(pageId)}&select=sections,updated_at,updated_by`;
+        const res = await fetch(url, { headers: { apikey: CMS_PUBLIC_KEY, Authorization: `Bearer ${CMS_PUBLIC_KEY}` }, cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const rows = await res.json();
+        const existing = Array.isArray(rows) && rows[0] && Array.isArray(rows[0].sections) ? rows[0].sections : [];
+        const existingIds = new Set(existing.map((s) => s.id));
+        const merged = [...existing, ...baseSections.filter((b) => !existingIds.has(b.id))];
+        merged.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+        OpsState.pageSections[pageId] = merged;
+      } catch (err) {
+        console.warn(`[OpsCMS] No se pudo leer site_pages/${pageId} en Supabase:`, err.message);
+        OpsState.pageSections[pageId] = OpsState.pageSections[pageId] || baseSections;
+      }
+      if (OpsState.activeTab === '24-builder' || OpsState.activeTab === '02-contenido') {
+        OpsUI.renderWebsiteBuilderModule(OpsState.activeTab);
+      }
+    },
+
+    async callCms(action, payload) {
+      const user = window.firebase?.auth?.().currentUser;
+      if (!user) throw new Error(i18n('ops.cms.noSession', 'Iniciá sesión con tu cuenta de administrador.'));
+      const token = await user.getIdToken();
+      const res = await fetch(CMS_ENDPOINT, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-firebase-token': token },
+        body: JSON.stringify(Object.assign({ action }, payload || {}))
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data || data.ok === false) throw new Error((data && data.error) || `HTTP ${res.status}`);
+      return data;
+    },
+
     listenToPageSections(pageId) {
+      if (this.usesSupabaseCms()) {
+        OpsState.pageSections[pageId] = OpsState.pageSections[pageId] || (SITE_PAGES_REGISTRY[pageId]?.sections || []);
+        this.loadPageSectionsFromSupabase(pageId);
+        return;
+      }
       const db = this.getDb();
       if (!db) return;
 
@@ -3694,6 +3747,7 @@
     },
 
     async savePageSection(pageId, sectionData) {
+      if (this.usesSupabaseCms()) return this.savePageSectionSupabase(pageId, sectionData);
       const db = this.getDb();
       if (!db) throw new Error('Firestore no disponible');
 
@@ -3740,6 +3794,30 @@
         description: `Sección "${sectionData.name || sectionData.title}" guardada en ${pageId}.html`,
         status: 'success'
       }).catch(e => console.warn(e));
+    },
+
+    // Guarda la página completa en Supabase (Edge Function baqueano-cms, rol admin verificado).
+    // A diferencia del camino anterior, espera la confirmación: el aviso de éxito solo aparece
+    // si Supabase guardó de verdad.
+    async savePageSectionSupabase(pageId, sectionData) {
+      let sections = [...(OpsState.pageSections?.[pageId] || SITE_PAGES_REGISTRY[pageId]?.sections || [])];
+      if (sectionData.id) {
+        const idx = sections.findIndex((s) => s.id === sectionData.id);
+        if (idx >= 0) sections[idx] = { ...sections[idx], ...sectionData };
+        else sections.push(sectionData);
+      } else {
+        sectionData.id = `sec_${pageId}_${Date.now()}`;
+        sectionData.sortOrder = sections.length + 1;
+        sections.push(sectionData);
+      }
+      sections.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+      await this.callCms('site_page_save', {
+        page_id: pageId,
+        title: SITE_PAGES_REGISTRY[pageId]?.name || pageId,
+        section_name: sectionData.name || sectionData.title || '',
+        sections
+      });
+      OpsState.pageSections[pageId] = sections;
     },
 
     async discoverPageElements(pageId) {

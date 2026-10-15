@@ -1670,7 +1670,7 @@ function loadBaqueanoDigital(openWhenReady) {
   if (!document.querySelector('link[data-baqueano-assistant]')) {
     const style = document.createElement('link');
     style.rel = 'stylesheet';
-    style.href = 'css/baqueano-assistant.css?v=20261006-a11y-1';
+    style.href = 'css/baqueano-assistant.css?v=20261015-target-1';
     style.dataset.baqueanoAssistant = 'true';
     document.head.appendChild(style);
   }
@@ -1685,7 +1685,7 @@ function loadBaqueanoDigital(openWhenReady) {
 
   if (!document.querySelector('script[data-baqueano-assistant]')) {
     const script = document.createElement('script');
-    script.src = 'js/baqueano-assistant.js?v=20261014-baqui-7';
+    script.src = 'js/baqueano-assistant.js?v=20261015-baqui-8';
     script.defer = true;
     script.dataset.baqueanoAssistant = 'true';
     if (openWhenReady) {

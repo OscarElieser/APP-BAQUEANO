@@ -1820,3 +1820,25 @@
   color: #64748B;
 }
 
+
+/* SEO de marca (2026-10-15): «BAQUEANO Nicaragua» como primera línea del H1, sin tapar el eslogan. */
+.hero-exact-title .hero-exact-brand {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #F4E6C1;
+}
+
+.hero-exact-brand-lead {
+  margin: 0 0 0.6rem;
+  max-width: 46rem;
+  font-size: clamp(0.98rem, 1.25vw, 1.12rem);
+  font-weight: 700;
+  line-height: 1.45;
+  color: #FFFFFF;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}

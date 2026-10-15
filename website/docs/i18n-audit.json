@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T15:19:06.068Z",
+  "generatedAt": "2026-10-15T18:16:42.788Z",
   "languages": [
     "es",
     "en",
@@ -11,24 +11,24 @@
     "zh"
   ],
   "keysPerLanguage": {
-    "es": 5651,
-    "en": 5651,
-    "fr": 5651,
-    "it": 5651,
-    "pt": 5651,
-    "de": 5651,
-    "ko": 5651,
-    "zh": 5651
+    "es": 5987,
+    "en": 5987,
+    "fr": 5987,
+    "it": 5987,
+    "pt": 5987,
+    "de": 5987,
+    "ko": 5987,
+    "zh": 5987
   },
   "html": {
     "files": 36,
-    "total": 4238,
-    "translated": 4237,
+    "total": 4246,
+    "translated": 4245,
     "untranslated": 1
   },
   "js": {
-    "files": 131,
-    "translated": 442,
+    "files": 132,
+    "translated": 443,
     "untranslated": 648
   },
   "jsEditorial": {
@@ -101,6 +101,7 @@
     "js/community-api.js",
     "js/community-faces.js",
     "js/contact-form.js",
+    "js/cronicas-community.js",
     "js/cronicas-filter.js",
     "js/definitive-index-interactions.js",
     "js/destination-community.js",
@@ -261,8 +262,8 @@
     {
       "file": "cronicas.html",
       "type": "html",
-      "total": 51,
-      "translated": 51,
+      "total": 57,
+      "translated": 57,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -360,8 +361,8 @@
     {
       "file": "index.html",
       "type": "html",
-      "total": 236,
-      "translated": 236,
+      "total": 237,
+      "translated": 237,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -477,8 +478,8 @@
     {
       "file": "testimonios.html",
       "type": "html",
-      "total": 79,
-      "translated": 79,
+      "total": 80,
+      "translated": 80,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -845,6 +846,15 @@
     },
     {
       "file": "js/contact-form.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/cronicas-community.js",
       "type": "js",
       "total": 0,
       "translated": 0,
@@ -1323,11 +1333,11 @@
     {
       "file": "js/ops-center/ops-engine.js",
       "type": "js",
-      "total": 368,
-      "translated": 112,
+      "total": 369,
+      "translated": 113,
       "untranslated": 256,
       "editorialStrings": 0,
-      "coverage": 30.4
+      "coverage": 30.6
     },
     {
       "file": "js/ops-center/ops-guides.js",

@@ -544,6 +544,7 @@
     if (!requireLogin({ action: 'compose' })) { saveDraft(); return; }
     loadPlaces();
     restoreDraft();
+    applyComposeFormat();
     $('#tmComposeStatus').textContent = '';
     openDialog($('#tmComposeDialog'));
     window.setTimeout(function () { $('#tmTitle').focus(); }, 30);
@@ -612,10 +613,31 @@
       visit_month: get('visit') || null,
       rating: rating ? Number(rating.value) : null,
       experience_type: get('type') || null,
-      tags: get('tags').split(/[,#，、;；]/).map(function (t) { return t.trim(); }).filter(Boolean).slice(0, 8),
+      tags: chronicleTags(get('tags').split(/[,#，、;；]/).map(function (t) { return t.trim(); }).filter(Boolean), form),
       recommendations: get('recommendations') || null,
       tips: get('tips') || null
     };
+  }
+
+  // Crónicas de la comunidad (2026-10-15): un relato marcado como crónica lleva la etiqueta
+  // «cronica»; cronicas.html y la app la usan para listarlo tras la moderación.
+  var CHRONICLE_TAG = 'cronica';
+  function chronicleTags(tags, form) {
+    var box = form.querySelector('#tmAsChronicle');
+    var clean = tags.filter(function (t) { return norm(t) !== CHRONICLE_TAG; });
+    if (box && box.checked) clean.unshift(CHRONICLE_TAG);
+    return clean.slice(0, 8);
+  }
+
+  function applyComposeFormat() {
+    var isChronicle = new URLSearchParams(window.location.search).get('formato') === 'cronica';
+    var box = $('#tmAsChronicle');
+    if (box && isChronicle) box.checked = true;
+    var title = $('#tmComposeTitleText');
+    if (title && isChronicle) {
+      title.setAttribute('data-i18n', 'testimonials.chronicleTitle');
+      title.textContent = tr('testimonials.chronicleTitle', 'Escribí tu crónica');
+    }
   }
 
   function submitCompose(form) {

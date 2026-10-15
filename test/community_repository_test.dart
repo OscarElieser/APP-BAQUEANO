@@ -104,4 +104,34 @@ void main() {
 
     expect(result.status, CommunitySubmitStatus.needsSignIn);
   });
+
+  group('CommunityChronicle.fromRow (crónicas de la comunidad)', () {
+    test('mapea una crónica publicada con foto segura y lugar', () {
+      final c = CommunityChronicle.fromRow({
+        'id': 'c1',
+        'title': 'La noche de los petroglifos',
+        'body': List.filled(450, 'palabra').join(' '),
+        'place_name': 'Ometepe',
+        'author_name': 'Rosa',
+        'tags': ['cronica'],
+        'media': [
+          {'kind': 'image', 'url': 'http://inseguro.example/a.jpg'},
+          {'kind': 'image', 'url': 'https://cdn.example/f.webp', 'thumb': 'https://cdn.example/t.webp'},
+        ],
+      });
+      expect(c, isNotNull);
+      expect(c!.place, 'Ometepe');
+      expect(c.photoUrl, 'https://cdn.example/t.webp');
+      expect(c.readMinutes, 2);
+    });
+
+    test('descarta filas sin título o sin texto', () {
+      expect(CommunityChronicle.fromRow({'id': 'x', 'title': '', 'body': 'texto'}), isNull);
+      expect(CommunityChronicle.fromRow({'id': 'x', 'title': 'Título', 'body': ''}), isNull);
+    });
+
+    test('la etiqueta de crónica coincide con la Web', () {
+      expect(CommunityRepository.chronicleTag, 'cronica');
+    });
+  });
 }

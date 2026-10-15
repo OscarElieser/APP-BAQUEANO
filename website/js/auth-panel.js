@@ -195,8 +195,41 @@ RELACIÓN:
 
     emailForm = buildEmailForm();
 
-    panel.append(eyebrow, title, lead, googleBtn, divider, emailForm, messageEl, privacy);
+    // 2026-10-15 (propietario): el acceso es el login nuevo sobre la página (js/auth-modal.js).
+    // Para visitantes, el perfil muestra una tarjeta con el mismo estilo y dos botones que abren
+    // ese login; el formulario anterior se conserva en el DOM (oculto por .is-gate) como respaldo
+    // si el login nuevo no cargara.
+    var logo = document.createElement('img');
+    logo.className = 'bq-auth-gate-logo';
+    logo.src = 'assets/images/LOGOS/baqueano_icono_oficial.png';
+    logo.alt = '';
+    logo.width = 72; logo.height = 72;
+    eyebrow.setAttribute('data-i18n', 'profile.gate.eyebrow');
+    title.setAttribute('data-i18n', 'profile.gate.title');
+    lead.setAttribute('data-i18n', 'profile.gate.lead');
+    var gateActions = document.createElement('div');
+    gateActions.className = 'bq-auth-gate-actions';
+    function gateLabel(key, fallback) {
+      var L = window.BaqueanoLanguage;
+      try { return (L && L.t && L.t(key, { fallback: fallback })) || fallback; } catch (_) { return fallback; }
+    }
+    var gateSignin = document.createElement('button');
+    gateSignin.type = 'button';
+    gateSignin.className = 'bq-auth-gate-btn is-primary';
+    gateSignin.setAttribute('data-bq-login', 'signin');
+    gateSignin.setAttribute('data-i18n', 'actions.login');
+    gateSignin.textContent = gateLabel('actions.login', 'Iniciar sesión');
+    var gateSignup = document.createElement('button');
+    gateSignup.type = 'button';
+    gateSignup.className = 'bq-auth-gate-btn';
+    gateSignup.setAttribute('data-bq-login', 'signup');
+    gateSignup.setAttribute('data-i18n', 'auth.signup');
+    gateSignup.textContent = gateLabel('auth.signup', 'Crear cuenta');
+    gateActions.append(gateSignin, gateSignup);
+
+    panel.append(logo, eyebrow, title, lead, gateActions, googleBtn, divider, emailForm, messageEl, privacy);
     setEmailMode('login');
+    if (window.BaqueanoAuthModal || document.querySelector('script[data-bq-auth-modal]') || window.BaqueanoGlobalInjector !== false) panel.classList.add('is-gate');
 
     var hero = document.querySelector('.prof-hero');
     if (hero && hero.parentNode) hero.parentNode.insertBefore(panel, hero.nextSibling);
@@ -437,9 +470,27 @@ RELACIÓN:
       if (panel) panel.hidden = false;
       setPrivateSectionsHidden(true);
       resetProfileFields();
+      openLoginOnce();
       var logout = document.getElementById('bq-auth-logout');
       if (logout) logout.remove();
     }
+  }
+
+  // Visitante en el perfil: el login nuevo se abre solo, una vez por carga de página.
+  // Si en 4 s no está disponible, la tarjeta muestra el formulario de respaldo.
+  var loginOpened = false;
+  function openLoginOnce() {
+    if (loginOpened) return;
+    loginOpened = true;
+    var tries = 0;
+    (function attempt() {
+      if (window.BaqueanoAuthModal && typeof window.BaqueanoAuthModal.open === 'function') {
+        window.BaqueanoAuthModal.open('signin');
+        return;
+      }
+      if (++tries < 40) { window.setTimeout(attempt, 100); return; }
+      if (panel) panel.classList.remove('is-gate');
+    }());
   }
 
   function init() {

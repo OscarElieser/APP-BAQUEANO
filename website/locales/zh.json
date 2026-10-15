@@ -275,7 +275,15 @@
     "listen": "收听",
     "artists": "艺术家",
     "festivals": "节日",
-    "archiveCountLabel": "件馆藏作品"
+    "archiveCountLabel": "件馆藏作品",
+    "ui": {
+      "play": "播放《{name}》",
+      "viewArtist": "查看{name}的介绍",
+      "likes": "点赞 {n}",
+      "favorite": "收藏 {n}",
+      "move": "移动位置",
+      "minimizePlayer": "最小化播放器"
+    }
   },
   "environmental": {
     "title": "环境守护",
@@ -439,7 +447,16 @@
     "settings": "设置",
     "logout": "退出登录",
     "editProfile": "编辑个人资料",
-    "favorites": "我的收藏"
+    "favorites": "我的收藏",
+    "gate": {
+      "eyebrow": "BAQUEANO 账户",
+      "title": "登录查看你的个人资料",
+      "lead": "收藏目的地、整理我的行程，并在任何设备上使用 Baqueano 护照。",
+      "orEmail": "或使用邮箱",
+      "passwordMin": "密码（至少 8 个字符）",
+      "noService": "无法连接登录服务。请检查网络并刷新页面。",
+      "termsPrefix": "继续即表示你接受"
+    }
   },
   "favorites": {
     "title": "收藏",
@@ -834,7 +851,9 @@
       "reported": "因举报审核中",
       "draft": "草稿",
       "archived": "已归档"
-    }
+    },
+    "asChronicle": "同时发布到纪实栏目：团队审核通过后，我的故事将作为社区纪实展示。",
+    "chronicleTitle": "撰写你的纪实"
   },
   "community": {
     "eyebrow": "BAQUEANO 社区",
@@ -3058,7 +3077,30 @@
         "sectionAriaLabel1": "地方纪事杂志"
       },
       "exploreTerritory": "探索这片地区",
-      "filterEmpty": "这个栏目还没有完整的纪事。看看推荐阅读吧。"
+      "filterEmpty": "这个栏目还没有完整的纪事。看看推荐阅读吧。",
+      "community": {
+        "write": "撰写你的纪实",
+        "kicker": "由社区撰写",
+        "title": "旅行者与东道主的纪实",
+        "lead": "你在尼加拉瓜的某个角落有过难忘的故事吗？配上照片写下来吧。BAQUEANO 团队审核后会发布在这里和应用中。",
+        "empty": "还没有社区纪实。你的可以成为第一篇！",
+        "kickerPlace": "纪实 · {place}",
+        "kickerPlain": "社区纪实",
+        "byline": "作者 {name} · 阅读约 {min} 分钟",
+        "anon": "BAQUEANO 旅行者",
+        "sent": "你的纪实已提交审核。BAQUEANO 团队审核通过后，将显示在这里和网站上。",
+        "error": "无法加载纪实，请检查网络连接。",
+        "invalid": "标题至少需要 5 个字符，正文至少需要 30 个字符。",
+        "signIn": "登录后即可发布你的纪实。",
+        "failed": "无法提交你的纪实，请稍后再试。",
+        "fieldTitle": "纪实标题 *",
+        "fieldBody": "纪实正文 *"
+      },
+      "place": {
+        "somoto": "索莫托峡谷",
+        "ometepe": "奥梅特佩岛",
+        "cornBluefields": "玉米岛与布卢菲尔兹"
+      }
     },
     "denuncias": {
       "body": {
@@ -4022,8 +4064,8 @@
     },
     "index": {
       "body": {
-        "title1": "Baqueano Nicaragua | 发现地图上找不到的地方",
-        "metaDescription1": "尼加拉瓜社区旅游与生态旅游官方门户。探索火山、湖泊、生物圈保护区、海滩和农民合作社。"
+        "title1": "BAQUEANO Nicaragua | 发现地图上找不到的地方",
+        "metaDescription1": "BAQUEANO Nicaragua：连接旅行者与目的地、文化、自然和本地创业者的尼加拉瓜旅游平台。火山、海滩与社区旅游。"
       },
       "heroNicaragua": {
         "span1": "地道",
@@ -4231,6 +4273,10 @@
       },
       "bizDescription": {
         "textareaPlaceholder1": "描述你的服务、餐饮、游览或住宿..."
+      },
+      "heroBrand": {
+        "name": "BAQUEANO Nicaragua",
+        "lead": "连接旅行者与尼加拉瓜目的地、文化、自然和本地创业者的旅游平台。"
       }
     },
     "legal": {
@@ -5926,6 +5972,9 @@
       "summary": "{total} 项服务中 {ok} 项正常运行",
       "more": "查看更多",
       "less": "收起"
+    },
+    "cms": {
+      "noSession": "请使用管理员账号登录。"
     }
   },
   "consent": {
@@ -7460,6 +7509,365 @@
       "prev": "上一张照片",
       "next": "下一张照片",
       "position": "第 {n} 张，共 {total} 张"
+    }
+  },
+  "ui": {
+    "sos": {
+      "drawerItem": "SOS · 紧急求助",
+      "subtitle": "即时联系尼加拉瓜紧急服务。点击联系人即可拨打。",
+      "gpsLoading": "正在获取安全位置…",
+      "gpsAllow": "请允许访问 GPS 以分享精确坐标。",
+      "openMap": "在地图上打开位置",
+      "emergencies118": "紧急情况：118",
+      "prehospital128": "院前急救：128",
+      "fire115": "火警与救援：115",
+      "general": "一般紧急情况",
+      "alt911": "备用热线：911",
+      "share": "分享我的位置",
+      "copy": "复制坐标",
+      "whileWaiting": "在救援到达之前",
+      "tip1": "说明你的位置、参照物和紧急情况类型。",
+      "tip2": "保持线路畅通，并按接线员的指示操作。",
+      "tip3": "除非有直接危险，否则不要移动伤者。",
+      "tip4": "在偏远地区，请把这些坐标分享给你信任的人。",
+      "coverage": "覆盖范围和响应时间可能因地区和信号情况而异。",
+      "center": "SOS 救助中心",
+      "centerDialog": "SOS 与救助中心"
+    },
+    "footer": {
+      "exploreUpper": "探索",
+      "cultureUpper": "文化",
+      "communityUpper": "社区",
+      "androidApp": "Android 应用",
+      "copyright": "© 2026 BAQUEANO。保留所有权利。",
+      "madeWith": "在尼加拉瓜",
+      "inNicaragua": "用心制作"
+    },
+    "baqui": {
+      "offline": "暂时没有信号 · 我会用已知信息回答",
+      "timeNic": "尼加拉瓜时间",
+      "promos": "优惠活动",
+      "noAlerts": "暂无提醒",
+      "greeting": "你好！我是 Baqüi。今天想发现什么？我可以帮你找地点、规划路线，或告诉你附近有什么。",
+      "chipPlan": "🗺️ 规划行程",
+      "chipDiscover": "🌋 发现目的地",
+      "chipEat": "🍽️ 去哪儿吃",
+      "chipMusic": "🎶 音乐",
+      "chipHistory": "📖 历史",
+      "chipNearby": "📍 附近有什么",
+      "chipFavorites": "❤️ 收藏",
+      "chipNicaragua": "🇳🇮 了解尼加拉瓜",
+      "chipSurprise": "✨ 给我惊喜",
+      "chipLodging": "🏨 住宿",
+      "hide30": "隐藏 30 分钟",
+      "birdGuide": "Baqüi，BAQUEANO 的虚拟向导小鸟",
+      "talk": "和 Baqüi 聊聊",
+      "digitalGuide": "Baqüi，尼加拉瓜数字向导",
+      "voiceRead": "开启语音并朗读消息",
+      "voiceOn": "开启语音",
+      "minimize": "最小化",
+      "minimizeBaqui": "最小化 Baqüi",
+      "usefulInfo": "实用信息",
+      "useful": "有帮助的回答",
+      "improve": "有待改进的回答",
+      "quickActions": "快捷操作",
+      "openOffline": "打开 Baqüi，离线也能用的智能助手",
+      "showAgain": "重新显示 Baqüi",
+      "closeSuggestion": "关闭建议",
+      "listen": "收听",
+      "openPanel": "打开面板",
+      "typeQuery": "输入你的问题",
+      "askPlaceholder": "询问目的地、路线或体验…",
+      "dictate": "开始语音输入",
+      "generalGuide": "Baqüi · 综合向导",
+      "chipAdventures": "🥾 探险"
+    },
+    "common": {
+      "notNow": "暂不",
+      "unavailable": "不可用",
+      "clear": "清除",
+      "stop": "停止",
+      "send": "发送",
+      "updating": "正在更新…",
+      "saveCount": "收藏 {n}",
+      "useful": "有帮助吗？",
+      "today": "今天"
+    },
+    "a11y": {
+      "skipNav": "跳过导航，直接进入主要内容"
+    },
+    "search": {
+      "shortcut": "搜索 (/)"
+    },
+    "allies": {
+      "searchLabel": "按名称或服务搜索合作伙伴",
+      "clearFilters": "清除筛选",
+      "visibleMany": "显示 {n} 个合作伙伴。",
+      "visibleOne": "显示 {n} 个合作伙伴。",
+      "searchPlaceholder": "名称、地区或服务…"
+    },
+    "passport": {
+      "points": "积分"
+    },
+    "form": {
+      "inputField": "输入框",
+      "emailExample": "you@example.com",
+      "emailExample2": "jose@example.com"
+    },
+    "theme": {
+      "label": "主题",
+      "openPalettes": "打开配色方案目录",
+      "customize": "自定义配色"
+    },
+    "trip": {
+      "baquiIntro": "你好！我是 BAQUI。告诉我目的地、天数、同行人数和预算，我一步帮你做好地图、行程和费用。",
+      "example": "例如：“Granada 和 Masaya 3 天，2 人，400 美元”。",
+      "addToBuild": "添加目的地来规划路线",
+      "noneYet": "你还没有选择目的地。可以问问 BAQUI，或从以下目的地开始：",
+      "tellBaqui": "告诉 BAQÜI 你想去哪些目的地，即可生成行程。",
+      "budgetPending": "预算待定",
+      "traceablePrices": "可追溯价格：",
+      "traceableNote": "每个类别只使用 BAQUEANO 已核实商家的现行价格，绝不加入编造的金额。",
+      "noVerifiedPrices": "暂无已核实价格",
+      "pricesTbc": "价格待确认",
+      "noCap": "○ 未设定上限",
+      "busManagua": "从马那瓜的市场发车：Roberto Huembes 开往马萨亚、格拉纳达和里瓦斯；Israel Lewites 开往莱昂。",
+      "ferryOmetepe": "前往奥梅特佩的船。",
+      "ferrySanJorge": "从 San Jorge（里瓦斯）出发。旺季请提前到达。",
+      "taxiFare": "不打表：上车前先谈好价格。",
+      "cornIsland": "可从马那瓜乘小型飞机，或从布卢菲尔兹乘船前往 Corn Island。",
+      "noSessionAlerts": "当前会话没有提醒",
+      "rainySeason": "5 月至 10 月是雨季：请留意道路和船班。",
+      "sunscreen": "带上防晒霜、帽子和水，尤其是去火山和太平洋海滩时。",
+      "cash": "去社区和市场请携带科多巴现金。",
+      "emergencyNumbers": "紧急电话：警察 118 · 消防 115 · 红十字会 128。",
+      "addToRoute": "将{name}加入路线",
+      "emptyTitle": "你还没有保存的行程",
+      "emptyText": "探索尼加拉瓜的 17 个地区，挑选你喜欢的景点，或让 Baqueano Digital 根据你的预算和天数规划路线",
+      "loadDemo": "加载示例行程"
+    },
+    "help": {
+      "welcome": "很高兴见到你！如果你已经知道想去哪里，就从目的地开始。还没想好的话，告诉我你喜欢什么，我们一起规划路线。"
+    },
+    "reports": {
+      "intro": "如果你看到了不对的情况，可以在这里反映。分享个人信息前请先阅读说明。"
+    },
+    "pager": {
+      "page": "第 {n} 页"
+    },
+    "gallery": {
+      "pause": "暂停图库",
+      "resume": "继续播放图库",
+      "pauseAuto": "暂停自动图库",
+      "resumeAuto": "继续播放自动图库",
+      "photoN": "{name} — 照片 {n}",
+      "landscapeOf": "{name}风光"
+    },
+    "messages": {
+      "showN": "显示第 {n} 条消息"
+    },
+    "managua": {
+      "title": "充满活力的首都",
+      "desc": "国家记忆、建筑、潟湖与 Xolotlán 湖畔的城市文化。",
+      "explore": "探索马那瓜"
+    },
+    "history": {
+      "openGuide": "打开地区指南，了解关于{name}的背景、位置、相关遗产和参观建议。",
+      "chapter": "第 {n} 章，共 {total} 章"
+    },
+    "madriz": {
+      "tagline": "清澈的河水、千年的岩石和社区向导，这里是中美洲最古老的地质景观之一。"
+    },
+    "map": {
+      "hiddenNoCoords": "{n} 个已发布地点尚无核实坐标，暂不显示。"
+    },
+    "business": {
+      "helpIntro": "你有旅游生意吗？这里教你如何发布，让更多旅行者找到你。",
+      "earn100": "你的社区理应获得其收费的 100%"
+    },
+    "destinations": {
+      "showing": "显示第 {from}–{to} 个，共 {total} 个目的地",
+      "itemN": "第 {n} 个目的地，共 {total} 个"
+    }
+  },
+  "dept": {
+    "tagline": {
+      "madriz": "千年峡谷、金黄 rosquillas、咖啡与塞哥维亚群山之地",
+      "leon": "历史漫步于火山之间的地方",
+      "rivas": "太平洋与科西沃尔卡湖相遇的地方",
+      "jinotega": "群山、咖啡与触及云端的水之间",
+      "masaya": "火焰、传统与巧手之地",
+      "granada": "火山、小岛与数百年历史之间",
+      "matagalpa": "咖啡诞生于群山之间的地方",
+      "esteli": "源自大地的山峦、艺术与传统",
+      "chinandega": "巨型火山与原始海岸之地",
+      "managua": "远不止是一座首都",
+      "carazo": "传统在咖啡园与太平洋之间起舞的地方",
+      "chontales": "河流如乳、石头似凝乳的地方",
+      "boaco": "群山讲述故事的绿色心脏",
+      "nuevaSegovia": "尼加拉瓜触及云端的地方",
+      "rioSanJuan": "航行历史，走进雨林",
+      "caribeNorte": "雨林、河流与加勒比海守护古老文化的地方",
+      "caribeSur": "尼加拉瓜说着多种语言、加勒比海描绘地平线的地方"
+    },
+    "ui": {
+      "loadingPlaces": "正在查询已发布地点…",
+      "experience": "体验：",
+      "routeN": "路线 {n}",
+      "photoArchiveUpper": "地区影像档案",
+      "photoArchive": "地区档案",
+      "keyMoments": "解读这片土地的时刻",
+      "whatToTry": "尝什么、怎么做、在哪里吃",
+      "dish": "菜品",
+      "howMade": "做法",
+      "celebrations": "节庆与认定地点",
+      "observe": "观察而不打扰",
+      "suggestedRoutes": "推荐路线",
+      "prepare": "根据天气和活动做好准备",
+      "emergencies": "当地紧急情况",
+      "hospital": "定点医院：",
+      "police118": "国家警察：118",
+      "ambulance128": "救护车 / 红十字会：128",
+      "fire115": "消防：115",
+      "sourcesDate": "官方资料查阅于 2026 年 9 月 26 日。",
+      "uniqueImages": "{n} 张独家图片",
+      "location": "位置：",
+      "buyFromMaker": "直接向制作者购买",
+      "rule": "BAQUEANO 原则：",
+      "indigenousRoot": "原住民根源",
+      "access": "交通：",
+      "wholeDept": "全省",
+      "musicTitle": "音乐与声音传统",
+      "listenMusic": "收听尼加拉瓜音乐",
+      "legendsN": "{n}. 传说与口述传统",
+      "legends": "传说与口述传统",
+      "legendsNote": "这些故事属于民间记忆，并非经过证实的历史事实。",
+      "exploreMunicipalities": "探索 {n} 个市镇",
+      "waterfallHiking": "瀑布 · 徒步",
+      "highCoffee": "高海拔咖啡",
+      "cloudBirds": "云雾林鸟类",
+      "raincoat": "雨衣",
+      "hikingShoes": "登山鞋",
+      "natureReserve": "自然保护区",
+      "century19": "19 世纪"
+    },
+    "code": {
+      "noExtract": "不要带走石头、植物、化石或考古文物。",
+      "buyDirect": "直接向当地生产者、手工艺人和合作社购买。",
+      "trash": "带走你的所有垃圾，尤其是塑料。",
+      "respect": "尊重每个社区的仪式、庙宇和传统。",
+      "askPhoto": "拍摄他人前先征得同意。",
+      "localGuides": "在火山、河流、雨林和保护区请雇用当地向导。",
+      "title": "探索者守则",
+      "titleN": "{n}. 探索者守则"
+    }
+  },
+  "dishes": {
+    "ui": {
+      "countTerritories": "来自 {total} 个地区的 {n} 道菜",
+      "count": "{n} 道菜",
+      "viewDept": "查看{name}页面"
+    },
+    "desc": {
+      "000": "用高原牧场奶牛的牛奶制成的柔软咸味奶酪。",
+      "001": "加入甜木薯和熟大蕉，用柴火炖煮 10 小时。",
+      "002": "源自原住民的温热提神饮品。",
+      "003": "在陶板上烤制，配新鲜 cuajada 凝乳。",
+      "004": "牧业社区制作的牛奶、奶酪、凝乳和奶油。",
+      "005": "güirilas、nacatamales、肉类、汤、蜂蜜、玉米饼和山地咖啡。",
+      "006": "途经 San Marcos、Diriamba、Dolores、Jinotepe 和乡村农场的路线：种植、烘焙与品鉴。",
+      "007": "与家常菜和节庆菜肴相关的传统菜式。",
+      "008": "用玉米、肉、蔬菜和家传手艺做成的本地菜。",
+      "009": "手工面包、melcochas 和本地甜点。",
+      "010": "尤其与 Jinotepe 及其社区相关的饮品和甜点。",
+      "011": "在 La Boquita、Casares、Huehuete 等海滨村镇烹制的鱼和海鲜。",
+      "012": "包着调味肉馅、用叶子裹起的玉米粽。",
+      "013": "刚从 Corinto 和 Aserradores 的红树林采收。",
+      "014": "被公认为全国最精致的之一。",
+      "015": "用本地紫玉米制作。",
+      "016": "享誉国际：quesillo 奶酪、辣椒奶酪和农场纯奶油。",
+      "017": "集市日搭配巨大的玉米饼供应。",
+      "018": "用橡木灰和海盐处理的玉米。",
+      "019": "发酵红玉米饮品。",
+      "020": "以牛奶、奶酪、奶油和牧业传统制成的代表性产品。",
+      "021": "鱼、肉、güirilas、nacatamales、汤和高地咖啡。",
+      "022": "海拔 1,200 米收获的玉米，配山地奶酪。",
+      "023": "以黄油般的口感和独特风味闻名。",
+      "024": "配热玉米饼、阿根廷青酱和煎奶酪。",
+      "025": "由农民合作社种植的有机咖啡。",
+      "026": "山地咖啡、玉米饼、凝乳、奶油、鸡蛋和豆子。",
+      "027": "与 La Garnacha 和乡村农场相关的社区产品。",
+      "028": "煮木薯、炸猪皮和卷心菜沙拉，在中央公园、市场和本地小馆供应。",
+      "029": "与湖畔生活相关的鱼、海鲜和菜肴。",
+      "030": "木薯炖猪肉、nacatamal、indio viejo 和 quesillo。",
+      "031": "连接格拉纳达与 Diriomo 家庭作坊的传统甜点。",
+      "032": "可可、天然果汁、chicha 和 pinolillo。",
+      "033": "Diriá 的 atol de ánimas 和 Nandaime 的传统菜式。",
+      "034": "带有巧克力、茉莉和柑橘风味，采收于海拔 1,400 米以上。",
+      "035": "用嫩玉米做的甜玉米饼，裹在大蕉叶里烤制。",
+      "036": "用煮玉米加姜和 rapadura 红糖做成的饮品。",
+      "037": "在农家灶台上用柴火烹煮。",
+      "038": "rosquillas、perrerreque、quesadillas、semitas、甜点和传统玉米饮品。",
+      "039": "可可、蜂蜜、凝乳、奶酪、奶油、豆子、玉米粽和凝乳汤。",
+      "040": "Nagarote 和 La Paz Centro 共同传承的玉米饼、奶酪、奶油和腌洋葱。",
+      "041": "vigorón、nacatamal、indio viejo、木薯炖猪肉、烤肉和玉米粽。",
+      "042": "用家传手艺做的牛肉汤、奶酪汤、güirilas 和玉米饼。",
+      "043": "西部地区的奶酪、cajetas、rosquillas 等传统甜点。",
+      "044": "可可、pinolillo、tiste、chicha 及多种传统玉米饮品。",
+      "045": "提供本地美食的市场、甜品店、咖啡馆和家庭小店。",
+      "046": "精选白玉米、陈年乡村奶酪、新鲜凝乳和农场黄油手工制作，在陶土炉中用柴火烤至金黄。",
+      "047": "中间包着融化 panela（rapadura 红糖）的酥脆玉米面团小点。",
+      "048": "用散养鸡、薄荷、牛奶和少许 chile congo 调味的嫩玉米粽。",
+      "049": "在 San Juan del Río Coco 海拔 1,000 至 1,400 米的山地树荫下种植的卡杜拉、波旁和卡杜艾品种。",
+      "050": "裹在大蕉叶中烤制的甜糕，配农场新鲜凝乳。",
+      "051": "圣周和主保圣人节的传统甜点，浸在 dulce de atado 糖浆里。",
+      "052": "烤肉、tajadas、enchiladas、塔可、repochetas 和夜间小吃。",
+      "053": "nacatamal、vigorón、quesillo、indio viejo、baho 以及各省的菜肴。",
+      "054": "在市场、街区和餐馆熬制的牛肉汤和牛肚汤。",
+      "055": "传统厨房、本地产品与城市的日常相遇。",
+      "056": "本国咖啡和以尼加拉瓜食材为灵感的现代菜品。",
+      "057": "该省及其节庆菜肴最具代表性的风味之一。",
+      "058": "与 Monimbó 社区身份紧密相连的传统菜式。",
+      "059": "市场、街区和节庆中常见的大众美食。",
+      "060": "由家庭和本地小店制作的传统甜点。",
+      "061": "可可、tiste、pinolillo 和玉米饮品。",
+      "062": "用山地种植的纯可可制成的浓郁芳香饮品。",
+      "063": "包着酸橙腌肉的嫩玉米面团。",
+      "064": "用橡木熟成的手工奶酪。",
+      "065": "由山谷里的乡村女工匠制作。",
+      "066": "güirilas、凝乳、奶油、玉米粽、indio viejo、汤和农场产品。",
+      "067": "在农场、社区和本地咖啡馆出售的山地产品。",
+      "068": "用猪油调味、包着土鸡肉的玉米面团。",
+      "069": "获得国际精品咖啡最高评分。",
+      "070": "加入山地奶酪烤制，口感酥脆。",
+      "071": "现点现炸，用纯猪油。",
+      "072": "güirilas、凝乳、奶油、豆子、肉类、蜂蜜、rosquillas 和面包。",
+      "073": "与 Jalapa 和 Macuelizo 相关的产品、甜点和饮品。",
+      "074": "米斯基托人的传统汤品，用牛肉与木薯、大蕉和野生香菜同煮。",
+      "075": "熟大蕉与新鲜椰奶打成的浓稠营养饮品。",
+      "076": "原住民的传统保存技艺。",
+      "077": "加入现刨椰丝用柴火烤制。",
+      "078": "按社区传统烹制的椰子、块根和鱼或肉。",
+      "079": "发酵木薯、鱼、海鲜、大蕉、玉米和椰子。",
+      "080": "新鲜鱼、龙虾、螃蟹、木薯、大蕉和面包果，用加了 chile cabro 的椰奶慢炖。",
+      "081": "带香料的非裔加勒比发酵饮品。",
+      "082": "包着辣肉末的酥脆馅饼。",
+      "083": "精致的传统糕点。",
+      "084": "椰香豆饭和加勒比菜的传统馅饼。",
+      "085": "鱼、虾、螃蟹和龙虾仅在许可季节供应。",
+      "086": "用黄油和大蒜烹制的大型淡水虾。",
+      "087": "用雨林蔬菜和椰奶烹制的“活化石”。",
+      "088": "用新鲜鱼肉做的酥脆小点。",
+      "089": "配河畔的新鲜凝乳。",
+      "090": "可可果、发酵、干燥、烘焙、巧克力，以及在农场和社区的品鉴。",
+      "091": "鱼、汤、大蕉、玉米、热带产品、蜂蜜和乡村乳制品。",
+      "092": "由与湖畔生活相关的家庭和厨房烹制的新鲜鱼。",
+      "093": "在 San Juan del Sur、Tola 和渔村供应的海鲜。",
+      "094": "tostones、tajadas 等里瓦斯菜的基本菜式。",
+      "095": "配玉米饼和本地产品的传统菜肴。",
+      "096": "岛上农场的大蕉、水果、蜂蜜、咖啡、鱼和农家菜。",
+      "097": "由社区和小企业制作的饮品和热带产品。",
+      "098": "可可、pinolillo、tiste、chicha、大麦饮和 jícaro 种子。"
     }
   }
 }

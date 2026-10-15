@@ -137,10 +137,17 @@ export function normalizeHtml(html, page) {
 
     // 4) Datos estructurados (solo si la página no declara los suyos).
     if (!alias && !/application\/ld\+json/i.test(head)) {
-      const website = { '@type': 'WebSite', '@id': `${SITE}/#website`, url: `${SITE}/`, name: 'Baqueano Nicaragua', inLanguage: LANGUAGES };
+      // Nombre del sitio para Google (2026-10-15): «BAQUEANO Nicaragua» con variantes de marca,
+      // para que la búsqueda «baqueano» reconozca el sitio oficial.
+      const website = {
+        '@type': 'WebSite', '@id': `${SITE}/#website`, url: `${SITE}/`, name: 'BAQUEANO Nicaragua',
+        alternateName: ['BAQUEANO', 'Baqueano Nicaragua', 'baqueanonicaragua.com'], inLanguage: LANGUAGES,
+        publisher: { '@id': `${SITE}/#organization` }
+      };
       const graph = page === 'index.html'
         ? [website, {
-          '@type': 'Organization', '@id': `${SITE}/#organization`, name: 'Baqueano Nicaragua', url: `${SITE}/`,
+          '@type': 'Organization', '@id': `${SITE}/#organization`, name: 'BAQUEANO Nicaragua', alternateName: ['BAQUEANO', 'Baqueano Nicaragua'],
+          description: 'Plataforma turística de Nicaragua que conecta viajeros con destinos, cultura, naturaleza y emprendedores locales.', url: `${SITE}/`,
           logo: `${SITE}/android-chrome-512x512.png`, image: DEFAULT_OG_IMAGE, sameAs: SOCIAL_PROFILES,
           areaServed: { '@type': 'Country', name: 'Nicaragua' }
         }]
