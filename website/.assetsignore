@@ -1,0 +1,2 @@
+# Archivos que la salida estática no publica en Cloudflare (reglas de Apache).
+.htaccess

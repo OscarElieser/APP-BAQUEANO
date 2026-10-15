@@ -21,7 +21,7 @@ if (path.dirname(output) !== path.resolve(root) || path.basename(output) !== 'di
 // (scripts/build-search-index.mjs); sin ellos el buscador cae al modo básico.
 const publicDirectories = ['assets', 'css', 'data', 'js', 'locales'];
 const publicRootFiles = new Set([
-  '.htaccess', 'app.js', 'favicon.ico', 'favicon.png', 'manifest.json', 'site.webmanifest',
+  '.htaccess', '_headers', '_redirects', '.assetsignore', 'app.js', 'favicon.ico', 'favicon.png', 'manifest.json', 'site.webmanifest',
   'favicon-16x16.png', 'favicon-32x32.png', 'favicon-48x48.png', 'favicon-64x64.png',
   'apple-touch-icon.png', 'android-chrome-192x192.png', 'android-chrome-512x512.png',
   'icon-192.png', 'icon-512.png', 'maskable-icon-192.png', 'maskable-icon-512.png',
@@ -32,7 +32,10 @@ const ignoredAssetNames = new Set([
   '20260925_203015.mp4', '20260925_195926.mp4', '20260925_195441.mp4', '20260925_200655.mp4',
   '20260925_202624.mp4', '20260925_195625.mp4', '20260925_195646.mp4', '20260925_195917.mp4',
   'video 2 (1).mp4', 'video nicaragua (1).mp4', 'destinos (1).mp4', 'gastronomia (1).mp4',
-  'historia (1).mp4', 'video (1).mp4', '[preview]destinos.mp4'
+  'historia (1).mp4', 'video (1).mp4', '[preview]destinos.mp4',
+  // 2026-10-15: original 2244 px / 44 MB (> 25 MB por archivo en Cloudflare); se publica
+  // assets/videos/video-nicaragua-web.mp4 (1600 px). El original se conserva en el repo.
+  'video nicaragua.mp4'
 ]);
 
 function gitValue(args, fallback = '') {

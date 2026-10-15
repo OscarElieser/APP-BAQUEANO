@@ -30,9 +30,23 @@
     Object.keys(attrs || {}).forEach(function (name) { node.setAttribute(name, attrs[name]); });
     return node;
   }
+  // 2026-10-15: texto en español desde el primer pintado. Si el catálogo de idioma
+  // todavía no llegó, t() devuelve vacío y los botones quedaban sin nombre accesible
+  // (axe button-name / link-name); al llegar el catálogo, data-i18n los traduce.
+  var FALLBACK_ES = {
+    'lodgingShowcase.whatsapp': 'Contactar por WhatsApp',
+    'lodgingShowcase.location': 'Ver ubicación',
+    'lodgingShowcase.share': 'Compartir',
+    'lodgingShowcase.baqueanoMap': 'Ver en el mapa de BAQUEANO',
+    'lodgingShowcase.sealTitle': 'Disponible en BAQUEANO',
+    'lodgingShowcase.sealTagline': 'Descubre lo que no sale en el mapa.',
+    'lodgingShowcase.pricesNote': 'Tarifas informadas por el hotel. Confirmá disponibilidad directamente con el establecimiento.',
+    'lodgingShowcase.pricesExpired': 'Las tarifas publicadas ya no están vigentes. Consultá la tarifa actual directamente con el hotel.'
+  };
   function keyed(tag, className, key, attrs) {
     var node = el(tag, className, Object.assign({ 'data-i18n': key }, attrs || {}));
-    node.textContent = t(key);
+    var text = t(key);
+    node.textContent = text && text !== key ? text : (FALLBACK_ES[key] || '');
     return node;
   }
   function proper(tag, className, text) {

@@ -47,7 +47,7 @@
     }
 
     if (bgVideo) {
-      bgVideo.src = 'assets/videos/video%20nicaragua.mp4';
+      bgVideo.src = 'assets/videos/video-nicaragua-web.mp4';
       bgVideo.loop = true;
       bgVideo.muted = true;
       bgVideo.playsInline = true;

@@ -130,3 +130,6 @@ Baqueano_Visual_Report.pdf
 baqueano_visual_report.pdf
 
 
+
+# Caché local de wrangler (Cloudflare Workers, 2026-10-15)
+.wrangler/

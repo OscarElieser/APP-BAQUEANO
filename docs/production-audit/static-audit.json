@@ -1,6 +1,6 @@
 {
  "summary": {
-  "generatedAt": "2026-10-07T20:25:03.994Z",
+  "generatedAt": "2026-10-15T15:19:06.273Z",
   "dir": "dist-hostinger",
   "pages": 36,
   "critical": 0,
@@ -42,7 +42,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -55,7 +55,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -68,7 +68,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -76,12 +76,12 @@
   {
    "page": "ayuda.html",
    "title": "Centro de Ayuda | Baqueano Nicaragua",
-   "description": "Centro de ayuda de Baqueano Nicaragua: respuestas sobre viajes, favoritos, reservas, negocios, seguridad y cuenta.",
+   "description": "Centro de ayuda de Baqueano Nicaragua: respuestas sobre viajes, favoritos, contacto con negocios, seguridad y cuenta.",
    "canonical": "https://baqueanonicaragua.com/ayuda.html",
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -107,7 +107,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es-NI",
    "sitemap": true
@@ -120,7 +120,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -133,7 +133,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -146,7 +146,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -159,7 +159,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -172,7 +172,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -185,7 +185,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es-NI",
    "sitemap": false
@@ -198,7 +198,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -211,7 +211,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -224,7 +224,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": false
@@ -237,7 +237,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -250,7 +250,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -276,7 +276,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -289,7 +289,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -302,7 +302,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -315,7 +315,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -328,7 +328,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": false
@@ -341,7 +341,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -354,7 +354,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -367,7 +367,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es-NI",
    "sitemap": true
@@ -393,7 +393,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -401,12 +401,12 @@
   {
    "page": "perfil.html",
    "title": "Mi Perfil | BAQUEANO Nicaragua Auténtica",
-   "description": "Tu información, reservas, preferencias de viaje y logros como Explorador BAQUEANO en Nicaragua, en un solo lugar.",
+   "description": "Tu información, negocios contactados, preferencias de viaje y logros como Explorador BAQUEANO en Nicaragua, en un solo lugar.",
    "canonical": "https://baqueanonicaragua.com/perfil.html",
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es-NI",
    "sitemap": false
@@ -419,7 +419,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es-NI",
    "sitemap": true
@@ -432,7 +432,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es-NI",
    "sitemap": true
@@ -445,7 +445,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -458,7 +458,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true
@@ -471,7 +471,7 @@
    "og": true,
    "twitter": true,
    "jsonLd": 1,
-   "hreflang": 7,
+   "hreflang": 9,
    "indexable": true,
    "lang": "es",
    "sitemap": true

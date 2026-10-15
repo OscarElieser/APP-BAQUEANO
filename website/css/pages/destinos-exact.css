@@ -599,7 +599,9 @@ html:not([data-destinos-mode="featured"]) body.page-destinos-exact .destinos-cat
   z-index: 2;
 }
 
-.dest-catalog-tag.orange { background: #F65E01; color: #FFFFFF; }
+/* 2026-10-15: #C54B01 (4.79:1 con blanco) desde el primer pintado; #F65E01 daba 3:1 si
+   la hoja global (baqueano-system.css) llegaba después de que se midiera la página. */
+.dest-catalog-tag.orange { background: #C54B01; color: #FFFFFF; }
 .dest-catalog-tag.blue { background: #0284C7; color: #FFFFFF; }
 .dest-catalog-tag.green { background: #165D6F; color: #FFFFFF; }
 .dest-catalog-tag.purple { background: #8B5CF6; color: #FFFFFF; }

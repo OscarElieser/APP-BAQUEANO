@@ -1,0 +1,25 @@
+// ============================================================================
+// 🧭 BAQUEANO — PUBLICACIÓN EN CLOUDFLARE WORKERS (wrangler.jsonc)
+// ============================================================================
+// 🎯 POR QUÉ: 2026-10-15 el propietario retira Azure: «trabajaré directamente con
+//   hostinger y cloudflare». El Worker «app-baqueano» ya está conectado a GitHub y
+//   se construye en cada push a main; antes publicaba una plantilla vacía de Flutter.
+// ⚙️ CÓMO: antes de publicar, wrangler ejecuta la misma build estática que usa el CI
+//   (website/scripts/build-hostinger-static.mjs) y sube website/dist-hostinger como
+//   archivos estáticos. Cabeceras en website/_headers, rutas en website/_redirects.
+// 📦 QUÉ: sitio web completo en https://app-baqueano.<cuenta>.workers.dev y, al
+//   asignar el dominio en Cloudflare, en baqueanonicaragua.com.
+// ============================================================================
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "app-baqueano",
+  "compatibility_date": "2026-09-01",
+  "build": {
+    "command": "cd website && node scripts/build-hostinger-static.mjs"
+  },
+  "assets": {
+    "directory": "./website/dist-hostinger",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

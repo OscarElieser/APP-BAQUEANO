@@ -5,7 +5,7 @@
 -->
 # Auditoría estática de la salida publicada
 
-Generado: 2026-10-07T20:25:03.994Z · Páginas: 36 · URLs en sitemap: 27 · **Críticos: 0** · Advertencias: 71
+Generado: 2026-10-15T15:19:06.273Z · Páginas: 36 · URLs en sitemap: 27 · **Críticos: 0** · Advertencias: 71
 
 ## SEO por página
 
@@ -13,40 +13,40 @@ Generado: 2026-10-07T20:25:03.994Z · Páginas: 36 · URLs en sitemap: 27 · **C
 |---|---|---|---|:-:|:-:|:-:|:-:|:-:|:-:|
 | 404.html | 404 — Este camino no lleva a ningún lado \| BAQUEANO Nicaragu | 95 car. | — | ❌ | ❌ | 0 | 0 | ❌ | ❌ |
 | admin.html | Baqueano Ops Center \| Centro de Operaciones & Administración | 134 car. | — | ❌ | ❌ | 0 | 0 | ❌ | ❌ |
-| aliados.html | Aliados Baqueano \| Conectá con quienes hacen posible la expe | 137 car. | /aliados.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| ambiental.html | Custodia del Territorio \| Baqueano Nicaragua | 105 car. | /ambiental.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| aviso-legal.html | Aviso Legal & Propiedad Intelectual \| BAQUEANO Nicaragua | 162 car. | /aviso-legal.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| ayuda.html | Centro de Ayuda \| Baqueano Nicaragua | 114 car. | /ayuda.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
+| aliados.html | Aliados Baqueano \| Conectá con quienes hacen posible la expe | 137 car. | /aliados.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| ambiental.html | Custodia del Territorio \| Baqueano Nicaragua | 105 car. | /ambiental.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| aviso-legal.html | Aviso Legal & Propiedad Intelectual \| BAQUEANO Nicaragua | 162 car. | /aviso-legal.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| ayuda.html | Centro de Ayuda \| Baqueano Nicaragua | 117 car. | /ayuda.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | baqueano-ai.html | Baqueano Digital \| Redirigiendo a Baqueano IA... | — | /baqueano-ia.html | ❌ | ❌ | 0 | 0 | ❌ | ❌ |
-| baqueano-ia.html | BAQUI \| Tu viaje por Nicaragua, pensado contigo | 143 car. | /baqueano-ia.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| cookies.html | Cookies y Almacenamiento Local \| BAQUEANO Nicaragua | 160 car. | /cookies.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| cronicas.html | Crónicas & Relatos Territoriales \| Baqueano Nicaragua | 124 car. | /cronicas.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| denuncias.html | Canal Ético Ambiental & Denuncias \| Baqueano Nicaragua | 134 car. | /denuncias.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| departamento.html | Guía Turística Departamental \| Baqueano Nicaragua | 107 car. | /departamento.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| descargar.html | Descargar BAQUEANO para Android \| App oficial | 141 car. | /descargar.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| destino.html | Ficha de Destino \| Baqueano Nicaragua | 112 car. | /destino.html | ✅ | ✅ | 1 | 7 | ✅ | ❌ |
-| destinos.html | Destinos de Nicaragua \| Baqueano Nicaragua | 84 car. | /destinos.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| experiencias.html | Experiencias de Aventura & Cultura \| Baqueano Nicaragua | 141 car. | /experiencias.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| favoritos.html | Mis Favoritos \| BAQUEANO Nicaragua | 77 car. | /favoritos.html | ✅ | ✅ | 1 | 7 | ✅ | ❌ |
-| gastronomia.html | Gastronomía Ancestral de los Hijos del Maíz \| Baqueano Nicar | 142 car. | /gastronomia.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| historia.html | Historia de Nicaragua \| Baqueano Nicaragua | 108 car. | /historia.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
+| baqueano-ia.html | BAQUI \| Tu viaje por Nicaragua, pensado contigo | 143 car. | /baqueano-ia.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| cookies.html | Cookies y Almacenamiento Local \| BAQUEANO Nicaragua | 160 car. | /cookies.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| cronicas.html | Crónicas & Relatos Territoriales \| Baqueano Nicaragua | 124 car. | /cronicas.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| denuncias.html | Canal Ético Ambiental & Denuncias \| Baqueano Nicaragua | 134 car. | /denuncias.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| departamento.html | Guía Turística Departamental \| Baqueano Nicaragua | 107 car. | /departamento.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| descargar.html | Descargar BAQUEANO para Android \| App oficial | 141 car. | /descargar.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| destino.html | Ficha de Destino \| Baqueano Nicaragua | 112 car. | /destino.html | ✅ | ✅ | 1 | 9 | ✅ | ❌ |
+| destinos.html | Destinos de Nicaragua \| Baqueano Nicaragua | 84 car. | /destinos.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| experiencias.html | Experiencias de Aventura & Cultura \| Baqueano Nicaragua | 141 car. | /experiencias.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| favoritos.html | Mis Favoritos \| BAQUEANO Nicaragua | 77 car. | /favoritos.html | ✅ | ✅ | 1 | 9 | ✅ | ❌ |
+| gastronomia.html | Gastronomía Ancestral de los Hijos del Maíz \| Baqueano Nicar | 142 car. | /gastronomia.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| historia.html | Historia de Nicaragua \| Baqueano Nicaragua | 108 car. | /historia.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | i18n-test.html | BAQUEANO · I18N Test | — | — | ❌ | ❌ | 0 | 0 | ❌ | ❌ |
-| index.html | Baqueano Nicaragua \| Descubre lo que no sale en el mapa | 145 car. | / | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| legal.html | Centro Legal & Términos \| Baqueano Nicaragua | 92 car. | /legal.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| mapa.html | Mapa Interactivo de Nicaragua \| Baqueano | 130 car. | /mapa.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| mi-negocio.html | Portal de Anfitriones & Negocios \| Baqueano Nicaragua | 158 car. | /mi-negocio.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| mi-viaje.html | Mi Viaje & Planificador \| Baqueano Nicaragua | 122 car. | /mi-viaje.html | ✅ | ✅ | 1 | 7 | ✅ | ❌ |
-| musica.html | Música & Patrimonio Sonoro \| Baqueano Nicaragua | 121 car. | /musica.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| normas-comunidad.html | Normas de la Comunidad y Política de Opiniones \| BAQUEANO | 150 car. | /normas-comunidad.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| nosotros.html | Nosotros \| BAQUEANO Nicaragua Auténtica | 135 car. | /nosotros.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
+| index.html | Baqueano Nicaragua \| Descubre lo que no sale en el mapa | 145 car. | / | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| legal.html | Centro Legal & Términos \| Baqueano Nicaragua | 92 car. | /legal.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| mapa.html | Mapa Interactivo de Nicaragua \| Baqueano | 130 car. | /mapa.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| mi-negocio.html | Portal de Anfitriones & Negocios \| Baqueano Nicaragua | 158 car. | /mi-negocio.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| mi-viaje.html | Mi Viaje & Planificador \| Baqueano Nicaragua | 122 car. | /mi-viaje.html | ✅ | ✅ | 1 | 9 | ✅ | ❌ |
+| musica.html | Música & Patrimonio Sonoro \| Baqueano Nicaragua | 121 car. | /musica.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| normas-comunidad.html | Normas de la Comunidad y Política de Opiniones \| BAQUEANO | 150 car. | /normas-comunidad.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| nosotros.html | Nosotros \| BAQUEANO Nicaragua Auténtica | 135 car. | /nosotros.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | offline.html | Modo Offline Territorial \| Baqueano Nicaragua | — | — | ❌ | ❌ | 0 | 0 | ❌ | ❌ |
-| opiniones.html | Opiniones sobre BAQUEANO \| Usuarios autenticados | 135 car. | /opiniones.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| perfil.html | Mi Perfil \| BAQUEANO Nicaragua Auténtica | 113 car. | /perfil.html | ✅ | ✅ | 1 | 7 | ✅ | ❌ |
-| privacidad.html | Privacidad & Seguridad de tus Datos \| BAQUEANO Nicaragua | 135 car. | /privacidad.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| terminos.html | Términos & Condiciones de Uso \| BAQUEANO Nicaragua | 150 car. | /terminos.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| testimonios.html | Experiencias de viajeros \| Testimonios BAQUEANO | 134 car. | /testimonios.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| todos-los-destinos.html | Todos los destinos \| BAQUEANO Nicaragua | 163 car. | /todos-los-destinos.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
-| todos-los-platos.html | Todos los platos de Nicaragua \| BAQUEANO | 167 car. | /todos-los-platos.html | ✅ | ✅ | 1 | 7 | ✅ | ✅ |
+| opiniones.html | Opiniones sobre BAQUEANO \| Usuarios autenticados | 135 car. | /opiniones.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| perfil.html | Mi Perfil \| BAQUEANO Nicaragua Auténtica | 125 car. | /perfil.html | ✅ | ✅ | 1 | 9 | ✅ | ❌ |
+| privacidad.html | Privacidad & Seguridad de tus Datos \| BAQUEANO Nicaragua | 135 car. | /privacidad.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| terminos.html | Términos & Condiciones de Uso \| BAQUEANO Nicaragua | 150 car. | /terminos.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| testimonios.html | Experiencias de viajeros \| Testimonios BAQUEANO | 134 car. | /testimonios.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| todos-los-destinos.html | Todos los destinos \| BAQUEANO Nicaragua | 163 car. | /todos-los-destinos.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| todos-los-platos.html | Todos los platos de Nicaragua \| BAQUEANO | 167 car. | /todos-los-platos.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 
 ## Hallazgos
 
