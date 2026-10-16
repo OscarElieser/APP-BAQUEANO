@@ -6019,7 +6019,10 @@
     },
     "player": {
       "seek": "Position de la chanson"
-    }
+    },
+    "sunShort": "Mode soleil",
+    "sunMode": "Mode soleil : contraste élevé pour lire en plein soleil",
+    "sunModeOff": "Quitter le mode soleil"
   },
   "destinos": {
     "verified": {

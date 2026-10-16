@@ -1,0 +1,192 @@
+/* ============================================================================
+ * 🧭 BAQUEANO — MÓDULO 1 · TARJETAS VIVAS Y MODO SOL (css/ui-cards.css)
+ * ============================================================================
+ * 🎯 POR QUÉ: pedido del propietario (15-10-2026, 23:37, «Módulo 1»). Las tarjetas de
+ *   destinos, aliados, experiencias y gastronomía mostraban un hueco gris mientras cargaba la
+ *   foto y saltaban de golpe. En el campo, con sol directo, el texto claro sobre fondos oscuros
+ *   no se lee.
+ * ⚙️ CÓMO:
+ *   - Esqueleto con brillo (shimmer) mientras la foto descarga.
+ *   - Desenfoque progresivo: la foto se pinta borrosa (los JPEG/WebP progresivos se ven por
+ *     pasadas) y se enfoca al terminar de cargar, con cubic-bezier(0.22, 1, 0.36, 1).
+ *   - Insignias de vidrio (glassmorphism) sobre la foto, con su color de categoría y un fondo
+ *     casi opaco para que el texto blanco conserve contraste aunque la foto sea clara.
+ *   - Modo Sol: html[data-bq-sun="on"] pone todo en negro sobre blanco (21:1, WCAG AAA),
+ *     enlaces subrayados, sin transparencias ni sombras, foco grueso.
+ *   - prefers-reduced-motion: sin brillo ni movimiento; prefers-reduced-transparency y
+ *     navegadores sin backdrop-filter: insignias sólidas.
+ * 📦 QUÉ: clases .bq-media-shell, .bq-progressive, .bq-glass, .bq-card-motion, .bq-sun-toggle
+ *   (las pone js/ui-cards.js) y las reglas de html[data-bq-sun="on"].
+ * ============================================================================ */
+
+:root {
+  --bq-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --bq-shimmer-base: #1c2a3f;
+  --bq-shimmer-glow: #2c3f5c;
+}
+
+/* ── 1. Esqueleto con brillo ─────────────────────────────────────────────── */
+.bq-media-shell { position: relative; overflow: hidden; isolation: isolate; }
+.bq-media-shell.is-loading { background-color: var(--bq-shimmer-base); }
+.bq-media-shell.is-loading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(100deg, transparent 20%, var(--bq-shimmer-glow) 45%, transparent 70%);
+  background-size: 220% 100%;
+  animation: bq-shimmer 1.4s var(--bq-ease-out) infinite;
+  pointer-events: none;
+}
+.bq-media-shell.is-error { background-color: var(--bq-shimmer-base); }
+@keyframes bq-shimmer {
+  from { background-position: 120% 0; }
+  to { background-position: -120% 0; }
+}
+
+/* ── 2. Desenfoque progresivo ────────────────────────────────────────────── */
+.bq-media-shell img.bq-progressive {
+  position: relative;
+  z-index: 1;
+  filter: blur(16px) saturate(1.1);
+  transform: scale(1.06);
+  opacity: 0.55;
+  transition: filter 0.8s var(--bq-ease-out), transform 0.9s var(--bq-ease-out), opacity 0.6s var(--bq-ease-out);
+}
+.bq-media-shell img.bq-progressive.is-loaded { filter: none; transform: none; opacity: 1; }
+.bq-media-shell.is-error img.bq-progressive { opacity: 0; }
+
+/* ── 3. Insignias de vidrio ──────────────────────────────────────────────── */
+.bq-media-shell .bq-glass:not(#bqg1#bqg2) {
+  z-index: 2;
+  background: var(--bq-glass-bg, rgba(12, 18, 30, 0.8)) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+  backdrop-filter: blur(12px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .bq-media-shell .bq-glass:not(#bqg1#bqg2) { background: var(--bq-glass-solid, #0c121e) !important; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .bq-media-shell .bq-glass:not(#bqg1#bqg2) { background: var(--bq-glass-solid, #0c121e) !important; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* ── 4. Movimiento de la tarjeta ─────────────────────────────────────────── */
+.bq-card-motion {
+  transition: transform 0.5s var(--bq-ease-out), box-shadow 0.5s var(--bq-ease-out);
+  will-change: auto;
+}
+@media (hover: hover) and (pointer: fine) {
+  .bq-card-motion:hover { transform: translateY(-4px); }
+}
+.bq-card-motion:focus-within { transform: translateY(-4px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bq-media-shell.is-loading::before { animation: none; }
+  .bq-media-shell img.bq-progressive { transition: none; transform: none; }
+  .bq-card-motion, .bq-card-motion:hover, .bq-card-motion:focus-within { transition: none; transform: none; }
+}
+
+/* ── 5. Botón «Modo Sol» en la barra ─────────────────────────────────────── */
+.bq-sun-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fde68a;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.35s var(--bq-ease-out), color 0.35s var(--bq-ease-out), transform 0.35s var(--bq-ease-out);
+}
+.bq-sun-toggle:hover { background: rgba(253, 230, 138, 0.18); }
+.bq-sun-toggle:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
+.bq-sun-toggle[aria-pressed="true"] { background: #fde68a; color: #111827; border-color: #fde68a; }
+.bq-sun-toggle .bq-sun-label { font-size: 0.82rem; }
+@media (max-width: 1100px) { .bq-sun-toggle .bq-sun-label { display: none; } }
+
+/* ── 6. Modo Sol: negro sobre blanco, WCAG AAA ───────────────────────────── */
+/* :not(#bqs1#bqs2#bqs3) suma especificidad de 3 ID sin depender de ningún ID real: así el Modo Sol
+   gana a las reglas !important de la barra y de las páginas (por ejemplo #mainNavbar .navbar-sos-btn). */
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) { color-scheme: light; background: #ffffff !important; }
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) body,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) body *:not(img):not(video):not(picture):not(canvas):not(iframe):not(svg):not(svg *):not([id="baqueanoAssistantBox"]):not([id="baqueanoAssistantBox"] *) {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #000000 !important;
+  /* Las transiciones ganan a !important en la cascada: sin esto un botón queda a mitad de color. */
+  transition: none !important;
+}
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) body svg:not([fill="none"]) { fill: currentColor; }
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) img,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) video { filter: none !important; opacity: 1 !important; }
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) a,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) a * {
+  color: #00008b !important;
+  -webkit-text-fill-color: #00008b !important;
+}
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) main a,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) footer a,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .bq-global-footer a { text-decoration: underline !important; text-underline-offset: 3px; }
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) button,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) [role="button"],
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) input,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) select,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) textarea { border: 2px solid #000000 !important; }
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) [aria-pressed="true"],
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) [aria-selected="true"],
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) [aria-current="page"],
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) [aria-checked="true"],
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .active,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .is-active {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) [aria-pressed="true"] *,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) [aria-selected="true"] *,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) [aria-current="page"] *,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) [aria-checked="true"] *,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .active *,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .is-active * {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) *:focus-visible { outline: 4px solid #000000 !important; outline-offset: 3px !important; }
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) ::placeholder { color: #333333 !important; -webkit-text-fill-color: #333333 !important; opacity: 1; }
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .bq-media-shell.is-loading::before { display: none; }
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .bq-media-shell .bq-glass:not(#bqg1#bqg2) { background: #ffffff !important; color: #000000 !important; border: 2px solid #000000 !important; }
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .bq-card-motion,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .bq-card-motion:hover { transform: none; border: 2px solid #000000 !important; }
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .bq-sun-toggle { background: #000000 !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .bq-sun-toggle * { background: transparent !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+
+/* SOS conserva su identidad de emergencia: rojo oscuro sobre blanco (7.9:1, AAA). */
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .sos-quick-btn,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .navbar-sos-btn { color: #a00000 !important; -webkit-text-fill-color: #a00000 !important; border: 2px solid #a00000 !important; }
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .sos-quick-btn *,
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) .navbar-sos-btn * { color: #a00000 !important; -webkit-text-fill-color: #a00000 !important; }
+
+/* Logos blancos (pensados para fondo oscuro): se invierten para verse sobre blanco. */
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) img[src*="blanco"],
+html[data-bq-sun="on"]:not(#bqs1#bqs2#bqs3) img[src*="-white"] { filter: invert(1) !important; }
+
+@media print {
+  .bq-sun-toggle { display: none !important; }
+}

@@ -6019,7 +6019,10 @@
     },
     "player": {
       "seek": "Posição da música"
-    }
+    },
+    "sunShort": "Modo sol",
+    "sunMode": "Modo sol: alto contraste para ler sob o sol",
+    "sunModeOff": "Sair do modo sol"
   },
   "destinos": {
     "verified": {

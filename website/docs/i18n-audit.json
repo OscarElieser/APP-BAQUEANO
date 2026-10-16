@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T05:42:56.474Z",
+  "generatedAt": "2026-10-16T05:58:52.837Z",
   "languages": [
     "es",
     "en",
@@ -11,14 +11,14 @@
     "zh"
   ],
   "keysPerLanguage": {
-    "es": 6182,
-    "en": 6182,
-    "fr": 6182,
-    "it": 6182,
-    "pt": 6182,
-    "de": 6182,
-    "ko": 6182,
-    "zh": 6182
+    "es": 6185,
+    "en": 6185,
+    "fr": 6185,
+    "it": 6185,
+    "pt": 6185,
+    "de": 6185,
+    "ko": 6185,
+    "zh": 6185
   },
   "html": {
     "files": 37,
@@ -27,7 +27,7 @@
     "untranslated": 1
   },
   "js": {
-    "files": 136,
+    "files": 137,
     "translated": 444,
     "untranslated": 648
   },
@@ -157,6 +157,7 @@
     "js/territory-municipalities.js",
     "js/territory-rich-sections.js",
     "js/todos-los-platos.js",
+    "js/ui-cards.js",
     "js/video-registry.js",
     "js/vivir-carousel.js",
     "js/website-business-catalog.js",
@@ -1766,6 +1767,15 @@
       "untranslated": 3,
       "editorialStrings": 0,
       "coverage": 75
+    },
+    {
+      "file": "js/ui-cards.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/user-session.js",

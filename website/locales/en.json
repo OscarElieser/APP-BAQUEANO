@@ -6019,7 +6019,10 @@
     },
     "player": {
       "seek": "Song position"
-    }
+    },
+    "sunShort": "Sun mode",
+    "sunMode": "Sun mode: high contrast for reading in sunlight",
+    "sunModeOff": "Turn off sun mode"
   },
   "destinos": {
     "verified": {

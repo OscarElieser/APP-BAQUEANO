@@ -18,6 +18,24 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## ☀️ MÓDULO 1: TARJETAS VIVAS Y MODO SOL (16-10-2026, 00:30)
+- **Solicitud (15-10, 23:37):** prompt «Principal Frontend Architect» con 4 módulos para baqueanonicaragua.com; *"Pregúntame qué módulo quieres que desarrollemos primero o entrega el Módulo 1 completo para empezar."* Se entregó el Módulo 1. El prompt asumía Firebase/Firestore; se adaptó al stack real (Supabase como base central, Firebase solo para el login).
+- **Hecho:** `css/ui-cards.css` + `js/ui-cards.js` (cargados por `global-injector.js` en toda la web pública; no en el Ops Center):
+  - Esqueleto con brillo mientras carga la foto.
+  - Desenfoque progresivo que se enfoca al terminar (`decode()`), con cubic-bezier(0.22,1,0.36,1).
+  - Si la foto falla, fondo neutro: no se inventan imágenes.
+  - Insignias de vidrio sobre la foto con su color, sólidas si no hay backdrop-filter o con prefers-reduced-transparency.
+  - Elevación de la tarjeta al pasar el mouse o al enfocarla con teclado. Sin movimiento con prefers-reduced-motion.
+  - Tarjetas cubiertas: destinos, aliados, experiencias, gastronomía, música y destacados por plan, también las que llegan después desde Supabase.
+- **Modo Sol:** botón ☀ en la barra (aria-pressed, 8 idiomas: a11y.sunShort / sunMode / sunModeOff).
+  - Pone todo en negro sobre blanco (21:1), enlaces azul oscuro subrayados y foco grueso. SOS queda en rojo oscuro (7.9:1).
+  - Los logos blancos se invierten. BAQUI no se repinta.
+  - Se recuerda en el navegador y se aplica antes de pintar. Respeta prefers-contrast: more.
+  - Las fotos de fondo decorativas se ocultan en este modo para priorizar la lectura.
+- **BlurHash:** no se implementó porque BAQUEANO no guarda el hash de cada foto. Para tenerlo hay que calcularlo al subir la imagen (columna en Supabase).
+- **CI rojo de 01ae600 (Azure, QA en navegador):** `mi-negocio.html@1366 axe target-size .bq-suggestion-close`. La burbuja de BAQUI aparecía a destiempo debajo del aviso de cookies. Corregido: BAQUI no sugiere mientras el aviso de cookies u otro diálogo está abierto (`baqueano-assistant.js` v=20261016-cookies-1).
+- **Checks:** i18n, glosario, auditoría, export app, territorios, build, SEO, production-audit (0 críticos), axe AAA en Modo Sol (8 páginas × 390/1366: 0 violaciones tras quitar transiciones en ese modo), browser QA completo.
+
 ## 💲 PLANES 10/35/90, IVA LISTO (APAGADO), BENEFICIOS REALES Y «PLANES Y PAGOS» EN TÉRMINOS (15-10-2026, 19:35–23:50)
 - **Solicitudes:** *"Quiero que la página: baqueanonicaragua.com/planes hacerla más mejor y las letras se vean mejor y si hacemos todos los que dice los planes implementarlo en cada planes además vamos agregar publicación y promoción en redes sociales … al sendero aumentarlo a 10 dólares recuerda que también le vamos aumentar IVA según Nicaragua"* (respuestas: Mirador 35 · Cumbre 90; IVA «Dejarlo listo, apagado») y *"hay un apartado que dice ver terminos Pero me lleva a index, llevarlo a términos y agregar el apartado de pagos y planes"*.
 - **Precios:** Sendero US$ 10 (C$ 366), Mirador US$ 35 (C$ 1,282), Cumbre US$ 90 (C$ 3,296) al mes; anual = 10 meses. Migración `20261016030000_plan_prices_iva_tiers.sql`.

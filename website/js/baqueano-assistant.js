@@ -264,7 +264,9 @@
 
   function isSensitiveInteraction() {
     const active = document.activeElement;
-    return Boolean(active?.matches('input,textarea,select,[contenteditable="true"]') || document.querySelector('[data-payment].is-open,.auth-modal.is-open,.modal-backdrop-pro.is-open'));
+    return Boolean(active?.matches('input,textarea,select,[contenteditable="true"]') || document.querySelector('[data-payment].is-open,.auth-modal.is-open,.modal-backdrop-pro.is-open,#bqCookieConsent:not([hidden]),dialog[open]'));
+    // 16-10-2026: mientras el aviso de cookies u otro diálogo está abierto, BAQUI no muestra sugerencias
+    // (la burbuja quedaba debajo del aviso y su botón cerrar no se podía tocar: axe target-size).
   }
 
   function appendFeedbackActions(messageItem, text) {

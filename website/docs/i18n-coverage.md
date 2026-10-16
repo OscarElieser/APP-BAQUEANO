@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-16T05:42:56.474Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6182 · en 6182 · fr 6182 · it 6182 · pt 6182 · de 6182 · ko 6182 · zh 6182
+Generado: 2026-10-16T05:58:52.837Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6185 · en 6185 · fr 6185 · it 6185 · pt 6185 · de 6185 · ko 6185 · zh 6185
 
 HTML: 4388/4389 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
@@ -254,6 +254,7 @@ HTML: 4388/4389 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/territory-municipalities.js | js | 14 | 14 | 0 | 100 % |
 | js/territory-rich-sections.js | js | 0 | 0 | 0 | 100 % |
 | js/todos-los-platos.js | js | 0 | 0 | 0 | 100 % |
+| js/ui-cards.js | js | 0 | 0 | 0 | 100 % |
 | js/video-registry.js | js | 0 | 0 | 0 | 100 % |
 | js/vivir-carousel.js | js | 0 | 0 | 0 | 100 % |
 | js/website-business-catalog.js | js | 0 | 0 | 0 | 100 % |

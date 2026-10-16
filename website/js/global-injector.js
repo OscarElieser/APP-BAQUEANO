@@ -32,6 +32,8 @@
 
 (function BaqueanoGlobalInjector() {
   'use strict';
+  // Modo Sol (Módulo 1): se aplica antes de pintar el resto para que no parpadee en oscuro.
+  try { if (localStorage.getItem('bq_sun_mode') === 'on') document.documentElement.setAttribute('data-bq-sun', 'on'); } catch (_) { /* sin almacenamiento */ }
 
   // ── Protección: no tocar admin.html ──────────────────────────────────────
   var currentPage = window.location.pathname.split('/').pop() || 'index.html';
@@ -75,6 +77,8 @@
       { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap' },
       // Capa de identidad "Cartografía viva": correcciones de contraste y responsive.
       { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261006-player-1' },
+      // Módulo 1 (15-10-2026): tarjetas con esqueleto, desenfoque progresivo, vidrio y Modo Sol.
+      { id: 'bq-ui-cards',  href: 'css/ui-cards.css?v=20261015-modulo1-1' },
       // Sistema de diseño global: SIEMPRE la última hoja. Ver css/baqueano-system.css
       { id: 'bq-system',    href: 'css/baqueano-system.css?v=20261009-a11y-4' }
     ];
@@ -946,6 +950,14 @@
       cmsScript.src = 'js/public-cms-sync.js?v=20261015-sin-plantilla-1';
       cmsScript.defer = true;
       document.body.appendChild(cmsScript);
+    }
+    // Módulo 1 (15-10-2026): tarjetas vivas y Modo Sol (alto contraste AAA) en la web pública.
+    if (!window.BaqueanoCards && !/admin(\.html)?$/i.test(location.pathname) && !document.querySelector('script[data-bq-ui-cards]')) {
+      var cardsScript = document.createElement('script');
+      cardsScript.src = 'js/ui-cards.js?v=20261015-modulo1-1';
+      cardsScript.dataset.bqUiCards = 'true';
+      cardsScript.defer = true;
+      document.body.appendChild(cardsScript);
     }
     if (!document.querySelector('script[data-platform-enhancements]')) {
       var enhancementScript = document.createElement('script');

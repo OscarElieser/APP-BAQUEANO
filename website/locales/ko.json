@@ -6019,7 +6019,10 @@
     },
     "player": {
       "seek": "노래 재생 위치"
-    }
+    },
+    "sunShort": "햇빛 모드",
+    "sunMode": "햇빛 모드: 햇빛 아래에서 읽기 쉬운 고대비",
+    "sunModeOff": "햇빛 모드 끄기"
   },
   "destinos": {
     "verified": {

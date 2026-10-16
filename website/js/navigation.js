@@ -1692,7 +1692,7 @@ function loadBaqueanoDigital(openWhenReady) {
 
   if (!document.querySelector('script[data-baqueano-assistant]')) {
     const script = document.createElement('script');
-    script.src = 'js/baqueano-assistant.js?v=20261015-baqui-8';
+    script.src = 'js/baqueano-assistant.js?v=20261016-cookies-1';
     script.defer = true;
     script.dataset.baqueanoAssistant = 'true';
     if (openWhenReady) {

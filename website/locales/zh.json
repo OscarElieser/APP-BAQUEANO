@@ -6019,7 +6019,10 @@
     },
     "player": {
       "seek": "歌曲进度"
-    }
+    },
+    "sunShort": "阳光模式",
+    "sunMode": "阳光模式：高对比度，便于在阳光下阅读",
+    "sunModeOff": "退出阳光模式"
   },
   "destinos": {
     "verified": {
