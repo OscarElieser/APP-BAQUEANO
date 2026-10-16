@@ -116,6 +116,8 @@
       var a = el('a', 'bq-feat-btn is-wa');
       a.href = 'https://wa.me/' + (wa.length === 8 ? '505' + wa : wa) + '?text=' + encodeURIComponent(t('allies.waHello', 'Hola {name}, los encontré en BAQUEANO.', { name: b.name }));
       a.target = '_blank'; a.rel = 'noopener noreferrer';
+      // Módulo 2: abre el formulario de contacto (fecha, personas, motivo) antes de WhatsApp.
+      a.setAttribute('data-bq-lead', ''); a.setAttribute('data-business-id', b.id); a.setAttribute('data-lead-name', b.name || '');
       a.appendChild(icon('fa-brands fa-whatsapp')); a.appendChild(document.createTextNode(' WhatsApp'));
       actions.appendChild(a);
     }

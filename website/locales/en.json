@@ -8113,5 +8113,42 @@
   },
   "opsPlans": {
     "title": "Plans and receipts"
+  },
+  "lead": {
+    "kicker": "Direct contact",
+    "lead": "Tell us what you're looking for and we'll write the message so the owner can reply faster.",
+    "title": "Message the owner",
+    "titleNamed": "Message {name}",
+    "date": "Approximate date (optional)",
+    "dateHint": "If you don't know yet, leave it blank.",
+    "people": "How many people?",
+    "intent": {
+      "label": "Reason",
+      "choose": "Choose a reason",
+      "info": "Ask for information",
+      "visit": "Visit the place",
+      "stay": "Accommodation",
+      "food": "Eat or try the local food",
+      "group": "Group, tour or excursion",
+      "event": "Event or celebration",
+      "other": "Something else"
+    },
+    "note": "Message for the owner (optional)",
+    "noteHint": "It's only sent through WhatsApp. BAQUEANO doesn't store it.",
+    "privacy": "BAQUEANO doesn't take bookings: you talk directly with the owner. We only count, without personal data, the reason and how many people are asking.",
+    "send": "Prepare WhatsApp message",
+    "skip": "Write without filling in",
+    "err": {
+      "pastDate": "Choose today or a later date.",
+      "people": "Enter a number of people between 1 and {max}.",
+      "intent": "Choose the reason for your enquiry."
+    },
+    "wa": {
+      "hello": "Hi, I found you on BAQUEANO.",
+      "intent": "Reason",
+      "people": "People",
+      "date": "Date",
+      "dateOpen": "not decided yet"
+    }
   }
 }

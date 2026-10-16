@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-16T05:58:52.837Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6185 · en 6185 · fr 6185 · it 6185 · pt 6185 · de 6185 · ko 6185 · zh 6185
+Generado: 2026-10-16T11:55:25.896Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6214 · en 6214 · fr 6214 · it 6214 · pt 6214 · de 6214 · ko 6214 · zh 6214
 
 HTML: 4388/4389 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
@@ -219,6 +219,7 @@ HTML: 4388/4389 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/historia-enlaces.js | js | 0 | 0 | 0 | 100 % |
 | js/impact-public.js | js | 6 | 6 | 0 | 100 % |
 | js/intake-api.js | js | 0 | 0 | 0 | 100 % |
+| js/lead-modal.js | js | 0 | 0 | 0 | 100 % |
 | js/lodging-showcase.js | js | 0 | 0 | 0 | 100 % |
 | js/mapa-atlas.js | js | 7 | 7 | 0 | 100 % |
 | js/musica-archivo.js | js | 0 | 0 | 0 | 100 % |

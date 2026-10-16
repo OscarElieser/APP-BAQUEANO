@@ -56,7 +56,7 @@
     consent_update: 'consent_updated'
   };
   // `signup` lo registra el servidor (user_registered) al crear el perfil verificado.
-  var SAFE_META_KEYS = ['latency_ms', 'count', 'mode', 'source', 'result_count', 'query_length', 'step'];
+  var SAFE_META_KEYS = ['latency_ms', 'count', 'mode', 'source', 'result_count', 'query_length', 'step', 'intent', 'people', 'lead_days'];
 
   function consentGranted() {
     return Boolean(window.BaqueanoConsent && window.BaqueanoConsent.analytics);
@@ -149,6 +149,52 @@
     return true;
   }
 
+  // Módulo 2 (16-10-2026): consulta con intención desde el formulario de contacto (lead-modal.js).
+  // Contrato { destinationId, hostId, experienceId, timestamp, intent, people, leadDays }. Va como
+  // acción comercial «whatsapp» (cuenta en «Contactos directos» del Ops Center y en las estadísticas
+  // de los planes) + evento inquiry_sent con el motivo. Nunca nombre, teléfono, nota ni fecha exacta.
+  var INTENTS = { info: 1, visit: 1, stay: 1, food: 1, group: 1, event: 1, other: 1, direct: 1 };
+  function trackLead(lead) {
+    if (!lead || !consentGranted()) return false;
+    var intent = INTENTS[lead.intent] ? lead.intent : 'other';
+    var people = Number(lead.people);
+    var days = Number(lead.leadDays);
+    var entityType = lead.hostId ? 'business' : (lead.experienceId ? 'experience' : (lead.destinationId ? 'destination' : null));
+    var entityId = lead.hostId || lead.experienceId || lead.destinationId || null;
+    if (entityId) {
+      try {
+        window.fetch(COMMERCIAL_ENDPOINT, {
+          method: 'POST',
+          keepalive: true,
+          headers: { 'Content-Type': 'application/json', apikey: PUBLIC_KEY, Authorization: 'Bearer ' + PUBLIC_KEY },
+          body: JSON.stringify({ p_action_type: 'whatsapp', p_anonymous_id: anonymousId(), p_session_id: sessionId(), p_platform: 'web',
+            p_business_id: lead.hostId ? String(lead.hostId).slice(0, 120) : null,
+            p_destination_id: lead.destinationId ? String(lead.destinationId).slice(0, 120) : null,
+            p_experience_id: lead.experienceId ? String(lead.experienceId).slice(0, 120) : null })
+        }).catch(function () { /* la analítica nunca rompe la navegación */ });
+      } catch (_) { /* sin red */ }
+    } else {
+      track('whatsapp_click', {});
+    }
+    var meta = { source: 'lead_modal', intent: intent };
+    if (Number.isInteger(people) && people > 0 && people <= 60) meta.people = people;
+    if (Number.isInteger(days) && days >= 0 && days <= 730) meta.lead_days = days;
+    var eventName = 'inquiry_sent';
+    if (sent >= 120) return true;
+    sent += 1;
+    try {
+      window.fetch(ENDPOINT, {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json', apikey: PUBLIC_KEY, Authorization: 'Bearer ' + PUBLIC_KEY },
+        body: JSON.stringify({ p_event_name: eventName, p_anonymous_id: anonymousId(), p_session_id: sessionId(), p_platform: 'web',
+          p_entity_type: entityType, p_entity_id: entityId ? String(entityId).slice(0, 120) : null, p_department_id: null,
+          p_language: language(), p_path: window.location.pathname.slice(0, 300), p_metadata: safeMeta(meta), p_utm: null })
+      }).catch(function () { /* la analítica nunca rompe la navegación */ });
+    } catch (_) { /* sin red */ }
+    return true;
+  }
+
   // ── Eventos automáticos ────────────────────────────────────────────────────
   function closestAttr(el, attr) {
     var node = el && el.closest ? el.closest('[' + attr + ']') : null;
@@ -159,6 +205,8 @@
     if (!target || !target.closest) return;
     var link = target.closest('a[href]');
     var href = link ? link.getAttribute('href') || '' : '';
+    // Los enlaces con formulario de contacto (data-bq-lead) los registra trackLead al enviar.
+    if (link && link.hasAttribute('data-bq-lead') && window.BaqueanoLeadModal) return;
     var businessId = closestAttr(link, 'data-business-id');
     if (/wa\.me\/|api\.whatsapp\.com|whatsapp:/i.test(href)) {
       if (!trackCommercial('whatsapp', businessId)) track('whatsapp_click', { entityType: businessId ? 'business' : null, entityId: businessId });
@@ -206,7 +254,7 @@
     if (IMPACT_EVENTS[d.event]) track(d.event, { entityType: d.entityType, entityId: d.entityId, departmentId: d.departmentId, source: d.source });
   });
 
-  window.BaqueanoAnalytics = { track: track, events: Object.keys(EVENT_MAP), consentGranted: consentGranted };
+  window.BaqueanoAnalytics = { track: track, trackLead: trackLead, events: Object.keys(EVENT_MAP), consentGranted: consentGranted };
 
   // Página vista (y, si corresponde, ficha de destino o negocio).
   track('page_view', {});

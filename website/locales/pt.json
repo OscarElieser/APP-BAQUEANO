@@ -8113,5 +8113,42 @@
   },
   "opsPlans": {
     "title": "Planos e comprovantes"
+  },
+  "lead": {
+    "kicker": "Contato direto",
+    "lead": "Conte o que você procura e montamos a mensagem para o proprietário responder mais rápido.",
+    "title": "Escreva ao proprietário",
+    "titleNamed": "Escreva para {name}",
+    "date": "Data aproximada (opcional)",
+    "dateHint": "Se ainda não sabe, deixe em branco.",
+    "people": "Quantas pessoas?",
+    "intent": {
+      "label": "Motivo",
+      "choose": "Escolha um motivo",
+      "info": "Pedir informações",
+      "visit": "Visitar ou conhecer o lugar",
+      "stay": "Hospedagem",
+      "food": "Comer ou provar a gastronomia",
+      "group": "Grupo, passeio ou excursão",
+      "event": "Evento ou comemoração",
+      "other": "Outro motivo"
+    },
+    "note": "Mensagem para o proprietário (opcional)",
+    "noteHint": "É enviada só pelo WhatsApp. O BAQUEANO não a guarda.",
+    "privacy": "O BAQUEANO não faz reservas: você fala direto com o proprietário. Só contamos, sem dados pessoais, o motivo e quantas pessoas consultam.",
+    "send": "Preparar mensagem no WhatsApp",
+    "skip": "Escrever sem preencher",
+    "err": {
+      "pastDate": "Escolha hoje ou uma data posterior.",
+      "people": "Informe um número de pessoas entre 1 e {max}.",
+      "intent": "Escolha o motivo da sua consulta."
+    },
+    "wa": {
+      "hello": "Olá, encontrei vocês no BAQUEANO.",
+      "intent": "Motivo",
+      "people": "Pessoas",
+      "date": "Data",
+      "dateOpen": "a definir"
+    }
   }
 }

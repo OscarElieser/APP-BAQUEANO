@@ -119,7 +119,7 @@
         el('p', { className: 'aliado-card-desc', text: b.description ? b.description.slice(0, 160) + (b.description.length > 160 ? '…' : '') : t(cat.key, cat.es) }),
         b.verified_at ? el('div', { className: 'aliado-card-audit' }, [icon('fa-calendar-check'), ' ', t('allies.verifiedOn', 'Verificado: {date}', { date: fmtDate(b.verified_at) })]) : null,
         el('div', { className: 'aliado-card-actions' }, [
-          el('a', { href: wa.url, target: '_blank', rel: 'noopener noreferrer', className: 'btn-aliado-whatsapp' }, [el('i', { className: 'fa-brands fa-whatsapp', 'aria-hidden': 'true' }), ' ', wa.own ? 'WhatsApp' : t('allies.officialLine', 'Línea BAQUEANO')]),
+          el('a', { href: wa.url, target: '_blank', rel: 'noopener noreferrer', className: 'btn-aliado-whatsapp', 'data-bq-lead': true, 'data-business-id': b.id, 'data-lead-name': b.name }, [el('i', { className: 'fa-brands fa-whatsapp', 'aria-hidden': 'true' }), ' ', wa.own ? 'WhatsApp' : t('allies.officialLine', 'Línea BAQUEANO')]),
           el('button', { type: 'button', className: 'btn-aliado-profile', text: t('allies.viewProfile', 'Ver perfil'), onclick: function (e) { openProfile(b, e.currentTarget); } })
         ])
       ])
@@ -164,7 +164,7 @@
       ]),
       wa.own ? null : el('p', { className: 'bq-ally-note', text: t('allies.noOwnWa', 'Este aliado todavía no tiene un WhatsApp verificado. El botón te comunica con la línea oficial de BAQUEANO, que coordina el contacto.') }),
       el('div', { className: 'bq-ally-actions' }, [
-        el('a', { href: wa.url, target: '_blank', rel: 'noopener noreferrer', className: 'bq-ally-btn is-primary' }, [el('i', { className: 'fa-brands fa-whatsapp', 'aria-hidden': 'true' }), ' ', wa.own ? t('allies.contactWa', 'Contactar por WhatsApp') : t('allies.contactOfficial', 'Contactar vía BAQUEANO')]),
+        el('a', { href: wa.url, target: '_blank', rel: 'noopener noreferrer', className: 'bq-ally-btn is-primary', 'data-bq-lead': true, 'data-business-id': b.id, 'data-lead-name': b.name }, [el('i', { className: 'fa-brands fa-whatsapp', 'aria-hidden': 'true' }), ' ', wa.own ? t('allies.contactWa', 'Contactar por WhatsApp') : t('allies.contactOfficial', 'Contactar vía BAQUEANO')]),
         hasCoords ? el('a', { href: 'mapa.html?lat=' + Number(b.latitude).toFixed(5) + '&lng=' + Number(b.longitude).toFixed(5), className: 'bq-ally-btn' }, [icon('fa-map-location-dot'), ' ', t('allies.onMap', 'Ver en el mapa')]) : null
       ]),
       dept ? el('p', { className: 'bq-ally-secondary' }, [t('allies.knowTerritory', '¿Querés conocer {territory}?', { territory: dept }), ' ', el('a', { href: 'departamento.html?id=' + b.department_id, text: t('allies.exploreTerritory', 'Explorar el territorio') })]) : null

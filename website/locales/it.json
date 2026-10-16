@@ -8113,5 +8113,42 @@
   },
   "opsPlans": {
     "title": "Piani e ricevute"
+  },
+  "lead": {
+    "kicker": "Contatto diretto",
+    "lead": "Dicci cosa cerchi e prepariamo il messaggio perché il proprietario ti risponda più in fretta.",
+    "title": "Scrivi al proprietario",
+    "titleNamed": "Scrivi a {name}",
+    "date": "Data indicativa (facoltativa)",
+    "dateHint": "Se non lo sai ancora, lascia vuoto.",
+    "people": "Quante persone?",
+    "intent": {
+      "label": "Motivo",
+      "choose": "Scegli un motivo",
+      "info": "Chiedere informazioni",
+      "visit": "Visitare il posto",
+      "stay": "Alloggio",
+      "food": "Mangiare o assaggiare la cucina",
+      "group": "Gruppo, tour o escursione",
+      "event": "Evento o festa",
+      "other": "Altro motivo"
+    },
+    "note": "Messaggio per il proprietario (facoltativo)",
+    "noteHint": "Viene inviato solo tramite WhatsApp. BAQUEANO non lo conserva.",
+    "privacy": "BAQUEANO non gestisce prenotazioni: parli direttamente con il proprietario. Contiamo solo, senza dati personali, il motivo e quante persone chiedono.",
+    "send": "Prepara il messaggio WhatsApp",
+    "skip": "Scrivi senza compilare",
+    "err": {
+      "pastDate": "Scegli oggi o una data successiva.",
+      "people": "Indica un numero di persone tra 1 e {max}.",
+      "intent": "Scegli il motivo della tua richiesta."
+    },
+    "wa": {
+      "hello": "Ciao, vi ho trovati su BAQUEANO.",
+      "intent": "Motivo",
+      "people": "Persone",
+      "date": "Data",
+      "dateOpen": "da definire"
+    }
   }
 }

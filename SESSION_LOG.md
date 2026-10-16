@@ -18,6 +18,19 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 💬 MÓDULO 2: CONTACTO DIRECTO CON INTENCIÓN ANTES DE WHATSAPP (16-10-2026, 05:46)
+- **Solicitud:** *"Continua"* (siguiente módulo del prompt de 4 módulos: modal de contacto accesible con fecha, personas y motivo que registra el interés en /api/track-lead {destinationId, hostId, timestamp, intent} y luego abre WhatsApp).
+- **Adaptado al stack real:** el registro va a Supabase con las RPC que ya existen (`track_commercial_action` «whatsapp» + `track_event` «inquiry_sent» con metadata {source, intent, people, lead_days}). No hubo que tocar el esquema. `BaqueanoAnalytics.trackLead()` recibe el contrato {destinationId, hostId, experienceId, timestamp, intent, people, leadDays}. Solo con consentimiento de analítica. Nunca se envían nombre, teléfono, nota ni fecha exacta (solo cuántos días faltan).
+- **Hecho:** `js/lead-modal.js` + `css/lead-modal.css`, cargados por `global-injector.js`.
+  - Formulario sobre `<dialog>` nativo: foco al primer campo, Esc o el fondo cierran y el foco vuelve al botón.
+  - Errores asociados con aria-describedby y role=alert. Campos de 48 px, hoja inferior en el teléfono.
+  - Campos: fecha aproximada (opcional, desde hoy), personas (1–60), motivo (7 opciones) y nota opcional que va solo por WhatsApp.
+  - El mensaje de WhatsApp sale con motivo, personas y fecha en el idioma de la persona, sobre el saludo que ya traía el botón. «Escribir sin completar» abre WhatsApp directo.
+  - Mejora progresiva: sin JS, el enlace sigue abriendo WhatsApp.
+- **Botones conectados (data-bq-lead):** tarjetas y ficha de Aliados, destacados por plan, ficha de destino en destinos.html y los 8 «Contactar» de experiencias.html. La analítica ya no cuenta dos veces esos clics.
+- **i18n:** 29 claves `lead.*` en 8 idiomas.
+- **Pruebas:** flujo completo en navegador con las RPC interceptadas (sin escribir filas de prueba en producción). axe AA del diálogo (escritorio y móvil) y AAA en Modo Sol: 0 violaciones. Más checks completos y browser QA.
+
 ## ☀️ MÓDULO 1: TARJETAS VIVAS Y MODO SOL (16-10-2026, 00:30)
 - **Solicitud (15-10, 23:37):** prompt «Principal Frontend Architect» con 4 módulos para baqueanonicaragua.com; *"Pregúntame qué módulo quieres que desarrollemos primero o entrega el Módulo 1 completo para empezar."* Se entregó el Módulo 1. El prompt asumía Firebase/Firestore; se adaptó al stack real (Supabase como base central, Firebase solo para el login).
 - **Hecho:** `css/ui-cards.css` + `js/ui-cards.js` (cargados por `global-injector.js` en toda la web pública; no en el Ops Center):

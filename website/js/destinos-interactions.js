@@ -496,6 +496,9 @@
       route.append(iconEl('fa-solid fa-map-location-dot'), ' ' + i18n('pages.destinos.detail.route', 'Ver ruta y ubicación'));
       const wa = make('a', 'dest-detail-btn is-whatsapp'); wa.target = '_blank'; wa.rel = 'noopener';
       wa.href = 'https://wa.me/' + info.contact + '?text=' + encodeURIComponent(i18n('pages.destinos.detail.waMessage', 'Hola, deseo información actualizada sobre {name} desde BAQUEANO', { name: title }));
+      // Módulo 2: formulario de contacto (fecha, personas, motivo) antes de abrir WhatsApp.
+      wa.setAttribute('data-bq-lead', ''); wa.setAttribute('data-lead-name', title);
+      if (card.dataset.destinationId) wa.setAttribute('data-destination-id', card.dataset.destinationId);
       wa.append(iconEl('fa-brands fa-whatsapp'), ' ' + i18n('pages.destinos.detail.contact', 'Contactar por WhatsApp'));
       const trip = make('button', 'dest-detail-btn is-trip'); trip.type = 'button';
       const store = window.BaqueanoTrip;

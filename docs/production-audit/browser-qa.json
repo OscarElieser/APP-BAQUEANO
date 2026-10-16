@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-16T07:33:43.381Z",
+ "generatedAt": "2026-10-16T12:12:58.329Z",
  "base": "http://127.0.0.1:8790/",
  "widths": [
   320,
@@ -72,7 +72,9 @@
   }
  ],
  "fails": [],
- "slowLoads": [],
+ "slowLoads": [
+  "destinos.html@2560"
+ ],
  "results": [
   {
    "page": "404.html",
@@ -2339,7 +2341,7 @@
    "offscreen": [],
    "imgNoAlt": [],
    "error": null,
-   "slowLoad": false
+   "slowLoad": true
   },
   {
    "page": "experiencias.html",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T05:58:52.837Z",
+  "generatedAt": "2026-10-16T11:55:25.896Z",
   "languages": [
     "es",
     "en",
@@ -11,14 +11,14 @@
     "zh"
   ],
   "keysPerLanguage": {
-    "es": 6185,
-    "en": 6185,
-    "fr": 6185,
-    "it": 6185,
-    "pt": 6185,
-    "de": 6185,
-    "ko": 6185,
-    "zh": 6185
+    "es": 6214,
+    "en": 6214,
+    "fr": 6214,
+    "it": 6214,
+    "pt": 6214,
+    "de": 6214,
+    "ko": 6214,
+    "zh": 6214
   },
   "html": {
     "files": 37,
@@ -27,7 +27,7 @@
     "untranslated": 1
   },
   "js": {
-    "files": 137,
+    "files": 138,
     "translated": 444,
     "untranslated": 648
   },
@@ -122,6 +122,7 @@
     "js/historia-enlaces.js",
     "js/impact-public.js",
     "js/intake-api.js",
+    "js/lead-modal.js",
     "js/lodging-showcase.js",
     "js/mapa-atlas.js",
     "js/musica-archivo.js",
@@ -1203,6 +1204,15 @@
     },
     {
       "file": "js/intake-api.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/lead-modal.js",
       "type": "js",
       "total": 0,
       "translated": 0,

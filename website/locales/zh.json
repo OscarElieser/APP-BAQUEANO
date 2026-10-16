@@ -8113,5 +8113,42 @@
   },
   "opsPlans": {
     "title": "方案与收据"
+  },
+  "lead": {
+    "kicker": "直接联系",
+    "lead": "告诉我们你的需求，我们会帮你写好消息，让店主更快回复。",
+    "title": "给店主发消息",
+    "titleNamed": "给{name}发消息",
+    "date": "大致日期（可选）",
+    "dateHint": "如果还不确定，可以留空。",
+    "people": "几个人？",
+    "intent": {
+      "label": "目的",
+      "choose": "请选择目的",
+      "info": "咨询信息",
+      "visit": "参观该地",
+      "stay": "住宿",
+      "food": "用餐或品尝美食",
+      "group": "团体、导览或短途游",
+      "event": "活动或庆祝",
+      "other": "其他"
+    },
+    "note": "给店主的留言（可选）",
+    "noteHint": "仅通过 WhatsApp 发送，BAQUEANO 不会保存。",
+    "privacy": "BAQUEANO 不提供预订：你直接与店主联系。我们只统计目的和咨询人数，不收集个人信息。",
+    "send": "准备 WhatsApp 消息",
+    "skip": "不填写直接发消息",
+    "err": {
+      "pastDate": "请选择今天或之后的日期。",
+      "people": "请输入 1 到 {max} 之间的人数。",
+      "intent": "请选择咨询目的。"
+    },
+    "wa": {
+      "hello": "你好，我在 BAQUEANO 上找到了你们。",
+      "intent": "目的",
+      "people": "人数",
+      "date": "日期",
+      "dateOpen": "待定"
+    }
   }
 }
