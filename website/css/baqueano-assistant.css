@@ -297,6 +297,8 @@
 */
 
 .bq-suggestion {
+  /* La burbuja va encima de la mascota: si no, la mascota tapaba el botón cerrar (axe target-size, 16-10-2026). */
+  z-index: 5;
   width: min(310px, calc(100vw - 32px));
   padding: 16px 40px 14px 16px;
 }
