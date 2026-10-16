@@ -87,7 +87,8 @@
     "cookies": "쿠키 정책",
     "legal_notice": "법적 고지",
     "copyright": "© {year} Baqueano Nicaragua.",
-    "madeIn": "니카라과에서 만들었어요"
+    "madeIn": "니카라과에서 만들었어요",
+    "plans": "업체용 요금제"
   },
   "actions": {
     "search": "검색",
@@ -673,7 +674,8 @@
     "searchPlaceholder": "해변, 화산, León 등을 검색하세요…",
     "platformReviews": "BAQUEANO 평가",
     "platformReviewsDesc": "플랫폼 이용 경험을 평가해 주세요",
-    "androidApp": "Android 앱"
+    "androidApp": "Android 앱",
+    "plans": "요금제"
   },
   "testimonials": {
     "metaTitle": "여행자 경험 | BAQUEANO 후기",
@@ -7869,5 +7871,189 @@
       "097": "마을과 소상공인이 만든 음료와 열대 산물.",
       "098": "카카오, pinolillo, tiste, chicha, 보리 음료, 히카로 씨앗."
     }
+  },
+  "plans": {
+    "hero": {
+      "kicker": "숙소, 식당, 가이드, 소상공인을 위한",
+      "title": "여행자가 당신을 찾게 하세요",
+      "lead": "BAQUEANO 웹사이트와 앱에 업체를 등록하세요. 고객이 WhatsApp이나 전화로 직접 연락합니다. 받는 금액은 수수료 없이 100% 당신의 것입니다.",
+      "trust1": "고객과 직접 연락",
+      "trust2": "8개 언어로 소개",
+      "trust3": "웹사이트와 Android 앱",
+      "trust4": "고객당 수수료 0%"
+    },
+    "toggle": {
+      "monthly": "월간",
+      "annual": "연간",
+      "save": "2개월 무료",
+      "aria": "결제 주기"
+    },
+    "grid": {
+      "title": "요금제를 선택하세요"
+    },
+    "sendero": {
+      "tag": "노출을 시작하세요"
+    },
+    "price": {
+      "perMonth": "/ 월",
+      "perYear": "/ 년",
+      "equiv": "월 {amount}에 해당"
+    },
+    "f": {
+      "listing": "웹사이트와 Android 앱의 업체 소개 페이지",
+      "contact": "WhatsApp·전화 직접 연결 버튼, 수수료 없음",
+      "map": "인터랙티브 지도에 위치 표시",
+      "languages": "BAQUEANO의 8개 언어로 소개",
+      "photos6": "사진 최대 6장, 영업시간과 서비스",
+      "panel": "요금제와 영수증을 확인할 아이디와 비밀번호",
+      "department": "해당 주(데파르타멘토) 페이지에 추천 노출",
+      "priority": "검색과 BAQUI 경로에서 우선 노출",
+      "stats": "방문·문의 월간 통계",
+      "home": "BAQUEANO 메인 페이지 노출",
+      "allSendero": "Sendero 요금제의 모든 혜택",
+      "photos20": "사진 최대 20장",
+      "verified": "BAQUEANO 인증 배지 (서류 확인 또는 방문 후)",
+      "chronicle": "매월 연대기·커뮤니티 게시물 1건",
+      "social": "Instagram·Facebook·TikTok 월간 홍보",
+      "report": "월간 PDF 보고서와 우선 지원",
+      "allMirador": "Mirador 요금제의 모든 혜택",
+      "photosUnlimited": "사진 무제한과 소개 영상",
+      "baqui": "지역에서 해당 서비스를 찾을 때 BAQUI가 먼저 추천",
+      "promos": "소개 페이지에 시즌 프로모션·할인 게시",
+      "onboarding": "소개 페이지 제작 지원: 글과 사진"
+    },
+    "cta": "요금제 선택",
+    "mirador": {
+      "badge": "가장 인기",
+      "tag": "지역에서 돋보이세요"
+    },
+    "cumbre": {
+      "tag": "최대 노출"
+    },
+    "note": {
+      "exchange": "코르도바 가격은 BAQUEANO 기준 환율(US$ 1 = C$ 36.6243)을 적용합니다. 연간 요금제는 10개월 요금으로 2개월이 무료입니다."
+    },
+    "steps": {
+      "title": "이용 방법",
+      "s1t": "요금제 선택",
+      "s1": "업체 정보와 영수증 정보를 입력하세요.",
+      "s2t": "WhatsApp으로 결제 안내",
+      "s2": "결제 방법을 안내합니다: 계좌이체, 입금 또는 현금.",
+      "s3t": "영수증과 계정 수령",
+      "s3": "본인 정보가 담긴 영수증과 요금제를 확인할 아이디·비밀번호.",
+      "s4t": "업체를 게시합니다",
+      "s4": "팀이 검토 후 웹사이트와 앱에 게시합니다."
+    },
+    "mine": {
+      "title": "내 요금제",
+      "login": "이미 요금제가 있나요? 보내드린 아이디로 로그인해 요금제와 영수증을 확인하세요.",
+      "loginBtn": "로그인",
+      "passTitle": "임시 비밀번호를 변경하세요",
+      "passHelp": "보안을 위해 8자 이상의 새 비밀번호를 정하세요.",
+      "passNew": "새 비밀번호",
+      "passRepeat": "비밀번호 확인",
+      "passSave": "비밀번호 저장",
+      "passShort": "비밀번호는 8자 이상이어야 합니다.",
+      "passMismatch": "비밀번호가 일치하지 않습니다.",
+      "passDone": "완료: 비밀번호가 변경되었습니다.",
+      "passRelogin": "보안을 위해 로그아웃 후 임시 비밀번호로 다시 로그인해 바로 변경하세요.",
+      "loading": "요금제를 불러오는 중…",
+      "none": "아직 요금제가 없습니다. 위에서 선택하시면 WhatsApp으로 도와드립니다.",
+      "item": "{plan} 요금제 · {business}",
+      "order": "신청",
+      "valid": "{from}부터 {to}까지 유효",
+      "review": "업체 게시: 신청 {code} 팀 검토 중.",
+      "receipt": "영수증 {n} 보기",
+      "pay": "결제 안내받기",
+      "payText": "안녕하세요 BAQUEANO, 신청 {code}의 결제를 안내받고 싶습니다."
+    },
+    "faq": {
+      "title": "자주 묻는 질문",
+      "q1": "BAQUEANO는 고객당 수수료를 받나요?",
+      "a1": "아니요. 여행자가 WhatsApp이나 전화로 직접 연락하고 당신에게 결제합니다. 요금제 비용만 내면 됩니다.",
+      "q2": "어떻게 결제하나요?",
+      "a2": "정보를 보낸 뒤 WhatsApp으로 연락하시면 결제 방법(계좌이체, 입금, 현금)을 정합니다.",
+      "q3": "어떤 서류를 받나요?",
+      "a3": "BAQUEANO와 고객 정보(이름 또는 상호, 신분증, 주소, 요금제, 기간, 코르도바·달러 금액)가 담긴 번호가 매겨진 결제 영수증입니다.",
+      "q4": "업체는 언제 게시되나요?",
+      "a4": "결제가 확인되면 팀 검토를 거쳐 웹사이트와 앱에 게시됩니다. 부족한 정보가 있으면 연락드립니다.",
+      "q5": "요금제를 바꿀 수 있나요?",
+      "a5": "네. WhatsApp으로 연락하시면 다음 기간부터 원하는 요금제로 변경해 드립니다."
+    },
+    "form": {
+      "title": "정보 입력",
+      "billing": "영수증 정보",
+      "clientType": "청구 대상",
+      "persona": "개인",
+      "empresa": "기업 또는 협동조합",
+      "legalName": "성명 또는 상호",
+      "idType": "신분증 종류",
+      "cedula": "신분증",
+      "ruc": "RUC (사업자 번호)",
+      "passport": "여권",
+      "residence": "거주증",
+      "idNumber": "신분증 번호",
+      "address": "주소",
+      "owner": "대표자 및 연락처",
+      "contactName": "대표자 또는 담당자 이름",
+      "email": "이메일 (아이디로 사용)",
+      "phone": "WhatsApp 또는 전화번호",
+      "business": "업체 정보",
+      "businessName": "업체명",
+      "category": "업종",
+      "department": "주(데파르타멘토)",
+      "municipality": "시·군",
+      "description": "무엇을 제공하나요? (20~300자)",
+      "notes": "메모 (선택)",
+      "terms": "BAQUEANO 약관에 동의하며, 결제 안내를 위해 WhatsApp 연락을 받는 데 동의합니다.",
+      "termsLink": "약관 보기",
+      "cancel": "취소",
+      "submit": "보내고 WhatsApp으로 계속",
+      "close": "닫기",
+      "summary": "{plan} 요금제 · {period} · {nio} ({usd})",
+      "sending": "전송 중…"
+    },
+    "cat": {
+      "alojamiento": "숙소",
+      "restaurante": "식당",
+      "gastronomia": "카페 또는 전통 음식",
+      "guia": "관광 가이드",
+      "experiencia": "투어 또는 체험",
+      "turismo_rural": "농촌·공동체 관광",
+      "finca": "농장",
+      "day_pass": "데이 패스",
+      "transporte": "교통",
+      "alquiler_vehiculos": "차량 대여",
+      "artesania": "수공예",
+      "cultura": "문화",
+      "musica": "음악",
+      "otro": "기타"
+    },
+    "done": {
+      "title": "신청이 접수되었습니다!",
+      "code": "신청 코드",
+      "next": "이 코드로 WhatsApp에 연락해 결제를 안내받으세요. 확인되면 영수증과 아이디를 받게 됩니다.",
+      "whatsapp": "WhatsApp으로 계속",
+      "close": "닫기",
+      "waText": "안녕하세요 BAQUEANO, 신청 {code}을(를) 보냈습니다: {business}의 {plan} 요금제 {period} ({nio} / {usd}). 결제를 안내받고 싶습니다."
+    },
+    "error": {
+      "generic": "요청을 완료하지 못했습니다. 다시 시도해 주세요.",
+      "terms": "계속하려면 약관에 동의해야 합니다.",
+      "field": "이 항목을 확인하세요: {field}"
+    },
+    "status": {
+      "pending": "결제 대기",
+      "contacted": "WhatsApp 상담 중",
+      "paid": "결제 완료",
+      "cancelled": "취소됨"
+    },
+    "meta": {
+      "title": "업체용 요금제 | Baqueano Nicaragua",
+      "description": "BAQUEANO Nicaragua에 숙소, 식당, 투어, 업체를 등록하세요. 코르도바·달러 월간·연간 요금제, 고객과 직접 연락, 수수료 없음."
+    }
+  },
+  "opsPlans": {
+    "title": "요금제와 영수증"
   }
 }

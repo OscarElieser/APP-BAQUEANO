@@ -28,7 +28,7 @@ const AXE_WIDTHS = new Set([390, 1366]);
 // destino.html sin ?id= redirige a destinos.html (ya medida): si la carga es lenta, la redirección
 // ocurría en plena medición (CI, ejecuciones 151/152). Se mide la ficha real con un id del dossier.
 const ALL_PAGES = ['index.html', 'destinos.html', 'destino.html?id=ometepe', 'departamento.html?depto=madriz', 'mapa.html', 'experiencias.html',
-  'historia.html', 'gastronomia.html', 'musica.html', 'cronicas.html', 'baqueano-ia.html', 'mi-viaje.html', 'perfil.html',
+  'historia.html', 'gastronomia.html', 'musica.html', 'cronicas.html', 'planes.html', 'baqueano-ia.html', 'mi-viaje.html', 'perfil.html',
   'favoritos.html', 'mi-negocio.html', 'testimonios.html', 'opiniones.html', 'descargar.html', 'normas-comunidad.html', 'nosotros.html', 'aliados.html', 'ambiental.html', 'denuncias.html',
   'ayuda.html', 'cookies.html', 'privacidad.html', 'terminos.html', 'aviso-legal.html', 'legal.html', '404.html', 'offline.html'];
 const argPages = (process.argv.find((a) => a.startsWith('--pages=')) || '').split('=').slice(1).join('=');

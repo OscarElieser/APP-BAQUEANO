@@ -87,7 +87,8 @@
     "cookies": "Cookie 政策",
     "legal_notice": "法律声明",
     "copyright": "© {year} Baqueano Nicaragua.",
-    "madeIn": "尼加拉瓜制造"
+    "madeIn": "尼加拉瓜制造",
+    "plans": "商家方案"
   },
   "actions": {
     "search": "搜索",
@@ -673,7 +674,8 @@
     "searchPlaceholder": "搜索海滩、火山、León…",
     "platformReviews": "对 BAQUEANO 的评价",
     "platformReviewsDesc": "为你使用平台的体验打分",
-    "androidApp": "Android 应用"
+    "androidApp": "Android 应用",
+    "plans": "方案"
   },
   "testimonials": {
     "metaTitle": "旅行者体验 | BAQUEANO 旅行者心声",
@@ -7869,5 +7871,189 @@
       "097": "由社区和小企业制作的饮品和热带产品。",
       "098": "可可、pinolillo、tiste、chicha、大麦饮和 jícaro 种子。"
     }
+  },
+  "plans": {
+    "hero": {
+      "kicker": "面向住宿、餐厅、导游和小型企业",
+      "title": "让旅行者找到您",
+      "lead": "在 BAQUEANO 网站和应用上展示您的店铺。客户通过 WhatsApp 或电话直接联系您：收入 100% 归您，无任何佣金。",
+      "trust1": "与客户直接联系",
+      "trust2": "8 种语言展示",
+      "trust3": "网站和 Android 应用",
+      "trust4": "每位客户 0% 佣金"
+    },
+    "toggle": {
+      "monthly": "按月",
+      "annual": "按年",
+      "save": "赠送 2 个月",
+      "aria": "付款周期"
+    },
+    "grid": {
+      "title": "选择您的方案"
+    },
+    "sendero": {
+      "tag": "开始曝光"
+    },
+    "price": {
+      "perMonth": "/ 月",
+      "perYear": "/ 年",
+      "equiv": "相当于每月 {amount}"
+    },
+    "f": {
+      "listing": "在网站和 Android 应用上的店铺页面",
+      "contact": "WhatsApp 和电话直连按钮，无佣金",
+      "map": "在互动地图上显示位置",
+      "languages": "以 BAQUEANO 的 8 种语言展示",
+      "photos6": "最多 6 张照片、营业时间和服务",
+      "panel": "用于查看方案和收据的账号与密码",
+      "department": "在所在省份页面重点展示",
+      "priority": "在搜索和 BAQUI 路线中优先显示",
+      "stats": "每月访问和联系统计",
+      "home": "在 BAQUEANO 首页展示",
+      "allSendero": "包含 Sendero 方案全部内容",
+      "photos20": "最多 20 张照片",
+      "verified": "BAQUEANO 认证标识（经文件审核或实地走访）",
+      "chronicle": "每月在“纪事”和“社区”发布一篇",
+      "social": "每月在 Instagram、Facebook 和 TikTok 推广",
+      "report": "每月 PDF 报告和优先服务",
+      "allMirador": "包含 Mirador 方案全部内容",
+      "photosUnlimited": "不限照片数量并附介绍视频",
+      "baqui": "游客在您所在地区寻找此类服务时，BAQUI 优先推荐您",
+      "promos": "在店铺页面发布季节性促销和优惠",
+      "onboarding": "协助您制作店铺页面：文字和照片"
+    },
+    "cta": "选择方案",
+    "mirador": {
+      "badge": "最受欢迎",
+      "tag": "在您的地区脱颖而出"
+    },
+    "cumbre": {
+      "tag": "最大曝光"
+    },
+    "note": {
+      "exchange": "科多巴价格按 BAQUEANO 参考汇率（1 美元 = 36.6243 科多巴）计算。年度方案按 10 个月收费：赠送 2 个月。"
+    },
+    "steps": {
+      "title": "使用流程",
+      "s1t": "选择方案",
+      "s1": "填写店铺信息和收据信息。",
+      "s2t": "通过 WhatsApp 安排付款",
+      "s2": "我们告知付款方式：转账、存款或现金。",
+      "s3t": "获取收据和账号",
+      "s3": "一份含您信息的收据，以及查看方案的账号和密码。",
+      "s4t": "发布您的店铺",
+      "s4": "团队审核后在网站和应用上发布。"
+    },
+    "mine": {
+      "title": "我的方案",
+      "login": "已有方案？请使用我们发送给您的账号登录，查看方案和收据。",
+      "loginBtn": "登录",
+      "passTitle": "请修改临时密码",
+      "passHelp": "为安全起见，请设置至少 8 个字符的新密码。",
+      "passNew": "新密码",
+      "passRepeat": "再次输入密码",
+      "passSave": "保存密码",
+      "passShort": "密码至少需要 8 个字符。",
+      "passMismatch": "两次输入的密码不一致。",
+      "passDone": "完成：密码已修改。",
+      "passRelogin": "为安全起见，请退出后用临时密码重新登录并立即修改。",
+      "loading": "正在加载您的方案…",
+      "none": "您的账户还没有方案。请在上方选择，我们会通过 WhatsApp 协助您。",
+      "item": "{plan} 方案 · {business}",
+      "order": "订单",
+      "valid": "有效期：{from} 至 {to}",
+      "review": "店铺发布：申请 {code} 正在由团队审核。",
+      "receipt": "查看收据 {n}",
+      "pay": "安排付款",
+      "payText": "您好 BAQUEANO，我想为订单 {code} 安排付款。"
+    },
+    "faq": {
+      "title": "常见问题",
+      "q1": "BAQUEANO 是否按客户收取佣金？",
+      "a1": "不收取。游客通过 WhatsApp 或电话直接联系并付款给您，您只需支付方案费用。",
+      "q2": "如何付款？",
+      "a2": "提交信息后通过 WhatsApp 联系我们，商定付款方式：转账、存款或现金。",
+      "q3": "我会收到什么凭证？",
+      "a3": "一份带编号的付款收据，包含 BAQUEANO 和您的信息：姓名或公司名称、证件、地址、方案、期限以及科多巴和美元金额。",
+      "q4": "店铺何时上线？",
+      "a4": "确认付款后，店铺进入团队审核并在网站和应用上发布。如缺少信息，我们会联系您。",
+      "q5": "可以更换方案吗？",
+      "a5": "可以。通过 WhatsApp 联系我们，从下一个周期起为您更换方案。"
+    },
+    "form": {
+      "title": "您的信息",
+      "billing": "收据信息",
+      "clientType": "开具给",
+      "persona": "个人",
+      "empresa": "公司或合作社",
+      "legalName": "全名或公司名称",
+      "idType": "证件类型",
+      "cedula": "身份证",
+      "ruc": "RUC（税号）",
+      "passport": "护照",
+      "residence": "居留证",
+      "idNumber": "证件号码",
+      "address": "地址",
+      "owner": "负责人和联系方式",
+      "contactName": "负责人姓名",
+      "email": "电子邮箱（即您的账号）",
+      "phone": "WhatsApp 或电话",
+      "business": "您的店铺",
+      "businessName": "店铺名称",
+      "category": "业务类型",
+      "department": "省份",
+      "municipality": "市镇",
+      "description": "您提供什么？（20 至 300 个字符）",
+      "notes": "备注（可选）",
+      "terms": "我接受 BAQUEANO 的条款，并同意通过 WhatsApp 联系以安排付款。",
+      "termsLink": "查看条款",
+      "cancel": "取消",
+      "submit": "提交并通过 WhatsApp 继续",
+      "close": "关闭",
+      "summary": "{plan} 方案 · {period} · {nio}（{usd}）",
+      "sending": "正在提交…"
+    },
+    "cat": {
+      "alojamiento": "住宿",
+      "restaurante": "餐厅",
+      "gastronomia": "咖啡馆或特色小吃",
+      "guia": "导游",
+      "experiencia": "旅游或体验",
+      "turismo_rural": "乡村或社区旅游",
+      "finca": "农场",
+      "day_pass": "一日通票",
+      "transporte": "交通",
+      "alquiler_vehiculos": "车辆租赁",
+      "artesania": "手工艺品",
+      "cultura": "文化",
+      "musica": "音乐",
+      "otro": "其他"
+    },
+    "done": {
+      "title": "我们已收到您的订单！",
+      "code": "您的订单编号是",
+      "next": "请凭此编号通过 WhatsApp 联系我们安排付款。确认后您将收到收据和账号。",
+      "whatsapp": "通过 WhatsApp 继续",
+      "close": "关闭",
+      "waText": "您好 BAQUEANO，我已提交订单 {code}：{business} 的 {plan} 方案，{period}（{nio} / {usd}）。我想安排付款。"
+    },
+    "error": {
+      "generic": "无法完成请求，请重试。",
+      "terms": "您需要接受条款才能继续。",
+      "field": "请检查此项：{field}"
+    },
+    "status": {
+      "pending": "待付款",
+      "contacted": "WhatsApp 沟通中",
+      "paid": "已付款",
+      "cancelled": "已取消"
+    },
+    "meta": {
+      "title": "商家方案 | Baqueano Nicaragua",
+      "description": "在 BAQUEANO Nicaragua 展示您的住宿、餐厅、旅游项目或店铺。提供科多巴和美元的月度、年度方案，与客户直接联系，无佣金。"
+    }
+  },
+  "opsPlans": {
+    "title": "方案与收据"
   }
 }

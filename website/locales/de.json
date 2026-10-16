@@ -234,7 +234,8 @@
     "privacy": "Datenschutzerklärung",
     "cookies": "Cookie-Richtlinie",
     "legal_notice": "Impressum",
-    "copyright": "© {year} Baqueano Nicaragua."
+    "copyright": "© {year} Baqueano Nicaragua.",
+    "plans": "Pläne für Unternehmen"
   },
   "seo": {
     "defaultTitle": "BAQUEANO — Nicaragua entdecken",
@@ -300,7 +301,8 @@
     "searchPlaceholder": "Strände, Vulkane, León…",
     "platformReviews": "Bewertungen zu BAQUEANO",
     "platformReviewsDesc": "Bewerte deine Erfahrung mit der Plattform",
-    "androidApp": "Android-App"
+    "androidApp": "Android-App",
+    "plans": "Pläne"
   },
   "testimonials": {
     "metaTitle": "Reiseerfahrungen | BAQUEANO-Erfahrungsberichte",
@@ -7869,5 +7871,189 @@
       "097": "Getränke und tropische Produkte von Gemeinden und Kleinbetrieben.",
       "098": "Kakao, Pinolillo, Tiste, Chicha, Gerstengetränk und Jícaro-Samen."
     }
+  },
+  "plans": {
+    "hero": {
+      "kicker": "Für Unterkünfte, Restaurants, Guides und Kleinunternehmen",
+      "title": "Lass dich von Reisenden finden",
+      "lead": "Präsentiere dein Geschäft auf der Website und in der App von BAQUEANO. Kunden schreiben dir direkt per WhatsApp oder rufen an: Was du verlangst, gehört zu 100 % dir – ohne Provision.",
+      "trust1": "Direkter Kontakt zu deinen Kunden",
+      "trust2": "Dein Eintrag in 8 Sprachen",
+      "trust3": "Website und Android-App",
+      "trust4": "0 % Provision pro Kunde"
+    },
+    "toggle": {
+      "monthly": "Monatlich",
+      "annual": "Jährlich",
+      "save": "2 Monate gratis",
+      "aria": "Abrechnungszeitraum"
+    },
+    "grid": {
+      "title": "Wähle deinen Plan"
+    },
+    "sendero": {
+      "tag": "Werde sichtbar"
+    },
+    "price": {
+      "perMonth": "/ Monat",
+      "perYear": "/ Jahr",
+      "equiv": "Entspricht {amount} pro Monat"
+    },
+    "f": {
+      "listing": "Eintrag deines Geschäfts auf der Website und in der Android-App",
+      "contact": "Direkte WhatsApp- und Anruf-Buttons, ohne Provision",
+      "map": "Standort auf der interaktiven Karte",
+      "languages": "Dein Eintrag in den 8 Sprachen von BAQUEANO",
+      "photos6": "Bis zu 6 Fotos, Öffnungszeiten und Leistungen",
+      "panel": "Benutzername und Passwort für deinen Plan und deine Belege",
+      "department": "Hervorgehoben auf der Seite deines Departamentos",
+      "priority": "Vorrang in Suchen und BAQUI-Routen",
+      "stats": "Monatliche Statistiken zu Besuchen und Kontakten",
+      "home": "Präsenz auf der Startseite von BAQUEANO",
+      "allSendero": "Alles aus dem Plan Sendero",
+      "photos20": "Bis zu 20 Fotos",
+      "verified": "BAQUEANO-Verifizierungssiegel (nach Dokumentenprüfung oder Besuch)",
+      "chronicle": "Ein Beitrag pro Monat in Chroniken und Community",
+      "social": "Monatliche Präsenz auf Instagram, Facebook und TikTok",
+      "report": "Monatlicher PDF-Bericht und bevorzugter Support",
+      "allMirador": "Alles aus dem Plan Mirador",
+      "photosUnlimited": "Unbegrenzt Fotos und Vorstellungsvideo",
+      "baqui": "BAQUI empfiehlt dich zuerst, wenn jemand deine Leistung in deiner Region sucht",
+      "promos": "Saisonale Aktionen und Angebote in deinem Eintrag",
+      "onboarding": "Wir helfen dir beim Eintrag: Texte und Fotos"
+    },
+    "cta": "Plan wählen",
+    "mirador": {
+      "badge": "Am beliebtesten",
+      "tag": "Hebe dich in deiner Region hervor"
+    },
+    "cumbre": {
+      "tag": "Maximale Sichtbarkeit"
+    },
+    "note": {
+      "exchange": "Córdoba-Preise zum Referenzkurs von BAQUEANO (C$ 36,6243 pro 1 US$). Der Jahresplan kostet 10 Monate: 2 Monate gratis."
+    },
+    "steps": {
+      "title": "So funktioniert es",
+      "s1t": "Wähle deinen Plan",
+      "s1": "Gib die Daten deines Geschäfts und für den Beleg ein.",
+      "s2t": "Zahlung per WhatsApp abstimmen",
+      "s2": "Wir nennen dir die Zahlungswege: Überweisung, Einzahlung oder bar.",
+      "s3t": "Beleg und Zugang erhalten",
+      "s3": "Ein Beleg mit deinen Daten sowie Benutzername und Passwort für deinen Plan.",
+      "s4t": "Wir veröffentlichen dein Geschäft",
+      "s4": "Das Team prüft deinen Eintrag und veröffentlicht ihn auf Website und App."
+    },
+    "mine": {
+      "title": "Mein Plan",
+      "login": "Du hast schon einen Plan? Melde dich mit dem zugesandten Benutzernamen an, um Plan und Belege zu sehen.",
+      "loginBtn": "Anmelden",
+      "passTitle": "Ändere dein vorläufiges Passwort",
+      "passHelp": "Wähle aus Sicherheitsgründen ein eigenes Passwort mit mindestens 8 Zeichen.",
+      "passNew": "Neues Passwort",
+      "passRepeat": "Passwort wiederholen",
+      "passSave": "Passwort speichern",
+      "passShort": "Das Passwort muss mindestens 8 Zeichen haben.",
+      "passMismatch": "Die Passwörter stimmen nicht überein.",
+      "passDone": "Fertig: Dein Passwort wurde geändert.",
+      "passRelogin": "Melde dich aus Sicherheitsgründen ab, melde dich mit dem vorläufigen Passwort erneut an und ändere es sofort.",
+      "loading": "Dein Plan wird geladen…",
+      "none": "Dein Konto hat noch keinen Plan. Wähle oben einen aus, wir helfen dir per WhatsApp.",
+      "item": "Plan {plan} · {business}",
+      "order": "Bestellung",
+      "valid": "Gültig vom {from} bis {to}",
+      "review": "Veröffentlichung deines Geschäfts: Anfrage {code} wird vom Team geprüft.",
+      "receipt": "Beleg {n} ansehen",
+      "pay": "Zahlung abstimmen",
+      "payText": "Hallo BAQUEANO, ich möchte die Zahlung für meine Bestellung {code} abstimmen."
+    },
+    "faq": {
+      "title": "Häufige Fragen",
+      "q1": "Verlangt BAQUEANO eine Provision pro Kunde?",
+      "a1": "Nein. Reisende kontaktieren dich direkt per WhatsApp oder Telefon und bezahlen dich. Du zahlst nur deinen Plan.",
+      "q2": "Wie bezahle ich?",
+      "a2": "Nachdem du deine Daten gesendet hast, schreib uns per WhatsApp und wir vereinbaren die Zahlungsart: Überweisung, Einzahlung oder bar.",
+      "q3": "Welches Dokument bekomme ich?",
+      "a3": "Einen nummerierten Zahlungsbeleg mit den Daten von BAQUEANO und deinen: Name oder Firma, Ausweis, Adresse, Plan, Zeitraum und Betrag in Córdoba und Dollar.",
+      "q4": "Wann erscheint mein Geschäft?",
+      "a4": "Sobald wir die Zahlung bestätigen, prüft das Team deinen Eintrag und veröffentlicht ihn auf Website und App. Fehlt etwas, melden wir uns.",
+      "q5": "Kann ich den Plan wechseln?",
+      "a5": "Ja. Schreib uns per WhatsApp und wir stellen ab dem nächsten Zeitraum auf den passenden Plan um."
+    },
+    "form": {
+      "title": "Deine Daten",
+      "billing": "Daten für deinen Beleg",
+      "clientType": "Rechnung an",
+      "persona": "Privatperson",
+      "empresa": "Unternehmen oder Genossenschaft",
+      "legalName": "Vollständiger Name oder Firmenname",
+      "idType": "Ausweis",
+      "cedula": "Personalausweis",
+      "ruc": "RUC (Steuernummer)",
+      "passport": "Reisepass",
+      "residence": "Aufenthaltskarte",
+      "idNumber": "Ausweisnummer",
+      "address": "Adresse",
+      "owner": "Inhaber und Kontakt",
+      "contactName": "Name des Inhabers oder Verantwortlichen",
+      "email": "E-Mail (dein Benutzername)",
+      "phone": "WhatsApp oder Telefon",
+      "business": "Dein Geschäft",
+      "businessName": "Name des Geschäfts",
+      "category": "Art des Geschäfts",
+      "department": "Departamento",
+      "municipality": "Gemeinde",
+      "description": "Was bietest du an? (20 bis 300 Zeichen)",
+      "notes": "Anmerkungen (optional)",
+      "terms": "Ich akzeptiere die Bedingungen von BAQUEANO und bin einverstanden, per WhatsApp zur Zahlung kontaktiert zu werden.",
+      "termsLink": "Bedingungen ansehen",
+      "cancel": "Abbrechen",
+      "submit": "Senden und per WhatsApp fortfahren",
+      "close": "Schließen",
+      "summary": "Plan {plan} · {period} · {nio} ({usd})",
+      "sending": "Wird gesendet…"
+    },
+    "cat": {
+      "alojamiento": "Unterkunft",
+      "restaurante": "Restaurant",
+      "gastronomia": "Café oder typische Küche",
+      "guia": "Reiseführer",
+      "experiencia": "Tour oder Erlebnis",
+      "turismo_rural": "Ländlicher oder gemeindebasierter Tourismus",
+      "finca": "Finca (Bauernhof)",
+      "day_pass": "Tagespass",
+      "transporte": "Transport",
+      "alquiler_vehiculos": "Fahrzeugvermietung",
+      "artesania": "Kunsthandwerk",
+      "cultura": "Kultur",
+      "musica": "Musik",
+      "otro": "Sonstiges"
+    },
+    "done": {
+      "title": "Wir haben deine Bestellung erhalten!",
+      "code": "Dein Bestellcode lautet",
+      "next": "Schreib uns mit diesem Code per WhatsApp, um die Zahlung abzustimmen. Nach der Bestätigung erhältst du Beleg und Benutzernamen.",
+      "whatsapp": "Per WhatsApp fortfahren",
+      "close": "Schließen",
+      "waText": "Hallo BAQUEANO, ich habe meine Bestellung {code} gesendet: Plan {plan} {period} ({nio} / {usd}) für {business}. Ich möchte die Zahlung abstimmen."
+    },
+    "error": {
+      "generic": "Die Anfrage konnte nicht abgeschlossen werden. Bitte versuche es erneut.",
+      "terms": "Du musst die Bedingungen akzeptieren, um fortzufahren.",
+      "field": "Bitte prüfe dieses Feld: {field}"
+    },
+    "status": {
+      "pending": "Zahlung ausstehend",
+      "contacted": "Kontakt per WhatsApp",
+      "paid": "Bezahlt",
+      "cancelled": "Storniert"
+    },
+    "meta": {
+      "title": "Pläne für Unternehmen | Baqueano Nicaragua",
+      "description": "Präsentiere deine Unterkunft, dein Restaurant, deine Tour oder dein Geschäft auf BAQUEANO Nicaragua. Monats- und Jahrespläne in Córdoba und Dollar, direkter Kundenkontakt und keine Provision."
+    }
+  },
+  "opsPlans": {
+    "title": "Pläne und Belege"
   }
 }

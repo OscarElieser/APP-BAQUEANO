@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🧭 BAQUEANO — PLANES PARA NEGOCIOS (planes.html)
+============================================================================
+🎯 POR QUÉ: pedido del propietario (2026-10-15): tres planes en córdobas y dólares, mensual
+  y anual, pago coordinado por WhatsApp, comprobante con los datos de BAQUEANO y del cliente,
+  y usuario y contraseña para que el propietario vea su plan. Objetivo: atraer negocios.
+⚙️ CÓMO: los precios salen de Supabase (plan_catalog) por la Edge Function baqueano-plans;
+  si no responde, se muestran los mismos precios publicados aquí. El formulario guarda el
+  pedido (order_create) y abre WhatsApp con el código. «Mi plan» lee los planes del
+  propietario con su sesión de Firebase. Textos con data-i18n en los 8 idiomas.
+📦 QUÉ: tarjetas Sendero, Mirador y Cumbre; cómo funciona; preguntas; formulario; Mi plan.
+============================================================================
+-->
+<html lang="es" data-i18n-title="plans.meta.title" data-i18n-description="plans.meta.description" data-bq-page="planes" data-bq-group="comunidad">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Planes para negocios | Baqueano Nicaragua</title>
+  <meta name="description" content="Publicá tu hospedaje, restaurante, tour o emprendimiento en BAQUEANO Nicaragua. Planes mensuales y anuales en córdobas y dólares, contacto directo con tus clientes y sin comisiones.">
+  <link rel="canonical" href="https://baqueanonicaragua.com/planes">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=League+Spartan:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css?v=20261003-mag-1">
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261009-a11y-4">
+  <link rel="stylesheet" href="css/pages/planes.css?v=20261015-1">
+  <meta name="theme-color" content="#165D6F">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+<body class="page-planes">
+  <nav class="main-navbar-exact main-navbar" id="mainNavbar" aria-label="Navegación principal">
+    <div class="exact-container nav-inner">
+      <a href="index.html" class="exact-nav-brand navbar-brand-pill">
+        <img src="assets/images/LOGOS/baqueano_icono_500x386-blanco.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo" decoding="async" width="500" height="386">
+        <div class="exact-nav-brand-text">
+          <span class="exact-nav-title">BAQUEANO</span>
+          <span class="exact-nav-tagline">NICARAGUA AUTÉNTICA</span>
+        </div>
+      </a>
+      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu"></div>
+      <div class="exact-nav-actions global-nav-actions"></div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="bq-plans-page">
+    <header class="bq-plans-hero">
+      <div class="bq-plans-wrap">
+        <p class="bq-plans-kicker"><i class="fa-solid fa-store" aria-hidden="true"></i> <span data-i18n="plans.hero.kicker">Para hospedajes, restaurantes, guías y emprendimientos</span></p>
+        <h1 class="bq-plans-title" data-i18n="plans.hero.title">Que los viajeros te encuentren</h1>
+        <p class="bq-plans-lead" data-i18n="plans.hero.lead">Publicá tu local en la web y en la app de BAQUEANO. Los clientes te escriben directo por WhatsApp o te llaman: lo que cobrás es 100 % tuyo, sin comisiones.</p>
+        <ul class="bq-plans-trust" role="list">
+          <li><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> <span data-i18n="plans.hero.trust1">Contacto directo con tus clientes</span></li>
+          <li><i class="fa-solid fa-language" aria-hidden="true"></i> <span data-i18n="plans.hero.trust2">Tu ficha en 8 idiomas</span></li>
+          <li><i class="fa-brands fa-android" aria-hidden="true"></i> <span data-i18n="plans.hero.trust3">Web y app Android</span></li>
+          <li><i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i> <span data-i18n="plans.hero.trust4">0 % de comisión por cliente</span></li>
+        </ul>
+
+        <div class="bq-plans-toggle" role="group" aria-label="Período de pago" data-i18n-aria-label="plans.toggle.aria">
+          <button type="button" class="is-active" data-period="monthly" aria-pressed="true" data-i18n="plans.toggle.monthly">Mensual</button>
+          <button type="button" data-period="annual" aria-pressed="false"><span data-i18n="plans.toggle.annual">Anual</span> <small class="bq-plans-save" data-i18n="plans.toggle.save">2 meses de regalo</small></button>
+        </div>
+      </div>
+    </header>
+
+    <section class="bq-plans-grid-section" aria-labelledby="bqPlansGridTitle">
+      <h2 id="bqPlansGridTitle" class="bq-visually-hidden" data-i18n="plans.grid.title">Elegí tu plan</h2>
+      <div class="bq-plans-wrap bq-plans-grid" id="bqPlansGrid">
+
+        <article class="bq-plan-card is-sendero" data-plan="sendero" data-monthly-usd="8" data-annual-usd="80" data-monthly-nio="293" data-annual-nio="2930">
+          <div class="bq-plan-ribbon">
+            <span class="bq-plan-name" translate="no">SENDERO</span>
+            <span class="bq-plan-tag" data-i18n="plans.sendero.tag">Empezá a aparecer</span>
+            <p class="bq-plan-price"><span class="bq-plan-nio" data-price-nio>C$ 293</span> <small data-price-unit data-i18n="plans.price.perMonth">/ mes</small></p>
+            <p class="bq-plan-usd"><span data-price-usd>US$ 8.00</span> <span class="bq-plan-equiv" data-price-equiv></span></p>
+          </div>
+          <ol class="bq-plan-features">
+            <li class="is-yes"><span data-i18n="plans.f.listing">Ficha de tu local en la web y en la app Android</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.contact">Botones de WhatsApp y llamada directos, sin comisiones</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.map">Ubicación en el mapa interactivo</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.languages">Tu ficha en los 8 idiomas de BAQUEANO</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.photos6">Hasta 6 fotos, horario y servicios</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.panel">Usuario y contraseña para ver tu plan y tus comprobantes</span></li>
+            <li class="is-no"><span data-i18n="plans.f.department">Destacado en la página de tu departamento</span></li>
+            <li class="is-no"><span data-i18n="plans.f.priority">Prioridad en búsquedas y en las rutas de BAQUI</span></li>
+            <li class="is-no"><span data-i18n="plans.f.stats">Estadísticas mensuales de visitas y contactos</span></li>
+            <li class="is-no"><span data-i18n="plans.f.home">Presencia en la portada de BAQUEANO</span></li>
+          </ol>
+          <button type="button" class="bq-plan-cta" data-choose-plan="sendero" data-i18n="plans.cta">Elegir plan</button>
+        </article>
+
+        <article class="bq-plan-card is-mirador is-featured" data-plan="mirador" data-monthly-usd="20" data-annual-usd="200" data-monthly-nio="732" data-annual-nio="7325">
+          <p class="bq-plan-badge"><i class="fa-solid fa-star" aria-hidden="true"></i> <span data-i18n="plans.mirador.badge">El más elegido</span></p>
+          <div class="bq-plan-ribbon">
+            <span class="bq-plan-name" translate="no">MIRADOR</span>
+            <span class="bq-plan-tag" data-i18n="plans.mirador.tag">Destacá en tu zona</span>
+            <p class="bq-plan-price"><span class="bq-plan-nio" data-price-nio>C$ 732</span> <small data-price-unit data-i18n="plans.price.perMonth">/ mes</small></p>
+            <p class="bq-plan-usd"><span data-price-usd>US$ 20.00</span> <span class="bq-plan-equiv" data-price-equiv></span></p>
+          </div>
+          <ol class="bq-plan-features">
+            <li class="is-yes"><span data-i18n="plans.f.allSendero">Todo lo del plan Sendero</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.photos20">Hasta 20 fotos</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.department">Destacado en la página de tu departamento</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.priority">Prioridad en búsquedas y en las rutas de BAQUI</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.verified">Sello BAQUEANO verificado (con revisión de documentos o visita)</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.stats">Estadísticas mensuales de visitas y contactos</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.chronicle">Una publicación al mes en Crónicas y Comunidad</span></li>
+            <li class="is-no"><span data-i18n="plans.f.home">Presencia en la portada de BAQUEANO</span></li>
+            <li class="is-no"><span data-i18n="plans.f.social">Difusión mensual en Instagram, Facebook y TikTok</span></li>
+            <li class="is-no"><span data-i18n="plans.f.report">Informe mensual en PDF y atención prioritaria</span></li>
+          </ol>
+          <button type="button" class="bq-plan-cta" data-choose-plan="mirador" data-i18n="plans.cta">Elegir plan</button>
+        </article>
+
+        <article class="bq-plan-card is-cumbre" data-plan="cumbre" data-monthly-usd="50" data-annual-usd="500" data-monthly-nio="1831" data-annual-nio="18312">
+          <div class="bq-plan-ribbon">
+            <span class="bq-plan-name" translate="no">CUMBRE</span>
+            <span class="bq-plan-tag" data-i18n="plans.cumbre.tag">Máxima visibilidad</span>
+            <p class="bq-plan-price"><span class="bq-plan-nio" data-price-nio>C$ 1,831</span> <small data-price-unit data-i18n="plans.price.perMonth">/ mes</small></p>
+            <p class="bq-plan-usd"><span data-price-usd>US$ 50.00</span> <span class="bq-plan-equiv" data-price-equiv></span></p>
+          </div>
+          <ol class="bq-plan-features">
+            <li class="is-yes"><span data-i18n="plans.f.allMirador">Todo lo del plan Mirador</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.photosUnlimited">Fotos sin límite y video de presentación</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.home">Presencia en la portada de BAQUEANO</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.baqui">BAQUI te recomienda primero cuando piden tu servicio en tu zona</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.promos">Promociones y ofertas de temporada en tu ficha</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.social">Difusión mensual en Instagram, Facebook y TikTok</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.report">Informe mensual en PDF y atención prioritaria</span></li>
+            <li class="is-yes"><span data-i18n="plans.f.onboarding">Te ayudamos a armar tu ficha: textos y fotos</span></li>
+          </ol>
+          <button type="button" class="bq-plan-cta" data-choose-plan="cumbre" data-i18n="plans.cta">Elegir plan</button>
+        </article>
+      </div>
+      <p class="bq-plans-wrap bq-plans-note" data-i18n="plans.note.exchange">Precios en córdobas al cambio de referencia de BAQUEANO (C$ 36.6243 por US$ 1). El plan anual equivale a 10 meses: 2 meses de regalo.</p>
+    </section>
+
+    <section class="bq-plans-steps" aria-labelledby="bqPlansStepsTitle">
+      <div class="bq-plans-wrap">
+        <h2 id="bqPlansStepsTitle" data-i18n="plans.steps.title">Así funciona</h2>
+        <ol class="bq-plans-step-list">
+          <li><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i><strong data-i18n="plans.steps.s1t">Elegí tu plan</strong><span data-i18n="plans.steps.s1">Completá los datos de tu local y los de tu comprobante.</span></li>
+          <li><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><strong data-i18n="plans.steps.s2t">Coordinamos el pago por WhatsApp</strong><span data-i18n="plans.steps.s2">Te indicamos los métodos de pago: transferencia, depósito o efectivo.</span></li>
+          <li><i class="fa-solid fa-file-invoice" aria-hidden="true"></i><strong data-i18n="plans.steps.s3t">Recibís tu comprobante y tu acceso</strong><span data-i18n="plans.steps.s3">Comprobante con tus datos y un usuario y contraseña para ver tu plan.</span></li>
+          <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><strong data-i18n="plans.steps.s4t">Publicamos tu local</strong><span data-i18n="plans.steps.s4">El equipo revisa tu ficha y la publica en la web y en la app.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="bq-plans-mine" id="mi-plan" aria-labelledby="bqMyPlanTitle">
+      <div class="bq-plans-wrap">
+        <h2 id="bqMyPlanTitle" data-i18n="plans.mine.title">Mi plan</h2>
+        <div id="bqMyPlan" class="bq-my-plan" aria-live="polite">
+          <p class="bq-my-plan-empty" data-i18n="plans.mine.login">¿Ya tenés un plan? Iniciá sesión con el usuario que te enviamos para ver tu plan y tus comprobantes.</p>
+          <button type="button" class="bq-plan-cta is-secondary" data-plans-login data-i18n="plans.mine.loginBtn">Iniciar sesión</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="bq-plans-faq" aria-labelledby="bqPlansFaqTitle">
+      <div class="bq-plans-wrap">
+        <h2 id="bqPlansFaqTitle" data-i18n="plans.faq.title">Preguntas frecuentes</h2>
+        <details><summary data-i18n="plans.faq.q1">¿BAQUEANO cobra comisión por cada cliente?</summary><p data-i18n="plans.faq.a1">No. El viajero te contacta directo por WhatsApp o llamada y te paga a vos. Solo pagás tu plan.</p></details>
+        <details><summary data-i18n="plans.faq.q2">¿Cómo pago?</summary><p data-i18n="plans.faq.a2">Después de enviar tus datos te comunicás con nosotros por WhatsApp y coordinamos el método: transferencia bancaria, depósito o efectivo.</p></details>
+        <details><summary data-i18n="plans.faq.q3">¿Qué documento recibo?</summary><p data-i18n="plans.faq.a3">Un comprobante de pago numerado con los datos de BAQUEANO y los tuyos: nombre o razón social, identificación, dirección, plan, período y monto en córdobas y dólares.</p></details>
+        <details><summary data-i18n="plans.faq.q4">¿Cuándo aparece mi local?</summary><p data-i18n="plans.faq.a4">Cuando confirmamos el pago, tu local pasa a revisión del equipo y se publica en la web y en la app. Si falta información, te escribimos.</p></details>
+        <details><summary data-i18n="plans.faq.q5">¿Puedo cambiar de plan?</summary><p data-i18n="plans.faq.a5">Sí. Escribinos por WhatsApp y te pasamos al plan que necesités desde el siguiente período.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="bqPlanDialog" class="bq-plan-dialog" aria-labelledby="bqPlanDialogTitle">
+    <form id="bqPlanForm" class="bq-plan-form" novalidate>
+      <header class="bq-plan-dialog-head">
+        <h2 id="bqPlanDialogTitle" data-i18n="plans.form.title">Tus datos</h2>
+        <button type="button" class="bq-plan-dialog-close" data-plan-close aria-label="Cerrar" data-i18n-aria-label="plans.form.close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </header>
+      <p class="bq-plan-summary" id="bqPlanSummary"></p>
+
+      <fieldset>
+        <legend data-i18n="plans.form.billing">Datos para tu comprobante</legend>
+        <div class="bq-plan-field-row">
+          <label class="bq-plan-field"><span data-i18n="plans.form.clientType">Facturar a</span>
+            <select name="client_type" required>
+              <option value="persona" data-i18n="plans.form.persona">Persona natural</option>
+              <option value="empresa" data-i18n="plans.form.empresa">Empresa o cooperativa</option>
+            </select>
+          </label>
+          <label class="bq-plan-field"><span data-i18n="plans.form.legalName">Nombre completo o razón social</span>
+            <input name="legal_name" required minlength="2" maxlength="160" autocomplete="name">
+          </label>
+        </div>
+        <div class="bq-plan-field-row">
+          <label class="bq-plan-field"><span data-i18n="plans.form.idType">Identificación</span>
+            <select name="id_type" required>
+              <option value="cedula" data-i18n="plans.form.cedula">Cédula de identidad</option>
+              <option value="ruc" data-i18n="plans.form.ruc">RUC</option>
+              <option value="pasaporte" data-i18n="plans.form.passport">Pasaporte</option>
+              <option value="residencia" data-i18n="plans.form.residence">Cédula de residencia</option>
+            </select>
+          </label>
+          <label class="bq-plan-field"><span data-i18n="plans.form.idNumber">Número de identificación</span>
+            <input name="id_number" required minlength="4" maxlength="30" autocomplete="off">
+          </label>
+        </div>
+        <label class="bq-plan-field"><span data-i18n="plans.form.address">Dirección</span>
+          <input name="billing_address" required minlength="5" maxlength="300" autocomplete="street-address">
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend data-i18n="plans.form.owner">Propietario y contacto</legend>
+        <label class="bq-plan-field"><span data-i18n="plans.form.contactName">Nombre del propietario o encargado</span>
+          <input name="contact_name" required minlength="2" maxlength="120" autocomplete="name">
+        </label>
+        <div class="bq-plan-field-row">
+          <label class="bq-plan-field"><span data-i18n="plans.form.email">Correo (será tu usuario)</span>
+            <input name="email" type="email" required maxlength="254" autocomplete="email">
+          </label>
+          <label class="bq-plan-field"><span data-i18n="plans.form.phone">WhatsApp o teléfono</span>
+            <input name="phone" type="tel" required maxlength="20" autocomplete="tel" placeholder="+505 8888 8888">
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-i18n="plans.form.business">Tu local</legend>
+        <div class="bq-plan-field-row">
+          <label class="bq-plan-field"><span data-i18n="plans.form.businessName">Nombre del local</span>
+            <input name="business_name" required minlength="2" maxlength="160">
+          </label>
+          <label class="bq-plan-field"><span data-i18n="plans.form.category">Tipo de negocio</span>
+            <select name="business_category" required>
+              <option value="alojamiento" data-i18n="plans.cat.alojamiento">Hospedaje</option>
+              <option value="restaurante" data-i18n="plans.cat.restaurante">Restaurante</option>
+              <option value="gastronomia" data-i18n="plans.cat.gastronomia">Cafetería o comida típica</option>
+              <option value="guia" data-i18n="plans.cat.guia">Guía turístico</option>
+              <option value="experiencia" data-i18n="plans.cat.experiencia">Tour o experiencia</option>
+              <option value="turismo_rural" data-i18n="plans.cat.turismo_rural">Turismo rural o comunitario</option>
+              <option value="finca" data-i18n="plans.cat.finca">Finca</option>
+              <option value="day_pass" data-i18n="plans.cat.day_pass">Pase de día</option>
+              <option value="transporte" data-i18n="plans.cat.transporte">Transporte</option>
+              <option value="alquiler_vehiculos" data-i18n="plans.cat.alquiler_vehiculos">Alquiler de vehículos</option>
+              <option value="artesania" data-i18n="plans.cat.artesania">Artesanía</option>
+              <option value="cultura" data-i18n="plans.cat.cultura">Cultura</option>
+              <option value="musica" data-i18n="plans.cat.musica">Música</option>
+              <option value="otro" data-i18n="plans.cat.otro">Otro</option>
+            </select>
+          </label>
+        </div>
+        <div class="bq-plan-field-row">
+          <label class="bq-plan-field"><span data-i18n="plans.form.department">Departamento</span>
+            <select name="department" required>
+              <option>Boaco</option><option>Carazo</option><option>Chinandega</option><option>Chontales</option>
+              <option value="Costa Caribe Norte" data-i18n="pages.historia.territoryTrack.imgAlt1">Costa Caribe Norte</option><option value="Costa Caribe Sur" data-i18n="pages.historia.territoryTrack.imgAlt2">Costa Caribe Sur</option><option>Estelí</option><option>Granada</option>
+              <option>Jinotega</option><option>León</option><option>Madriz</option><option selected>Managua</option>
+              <option>Masaya</option><option>Matagalpa</option><option>Nueva Segovia</option><option>Río San Juan</option><option>Rivas</option>
+            </select>
+          </label>
+          <label class="bq-plan-field"><span data-i18n="plans.form.municipality">Municipio</span>
+            <input name="municipality" maxlength="80">
+          </label>
+        </div>
+        <label class="bq-plan-field"><span data-i18n="plans.form.description">¿Qué ofrecés? (20 a 300 caracteres)</span>
+          <textarea name="business_description" required minlength="20" maxlength="300" rows="3"></textarea>
+        </label>
+        <label class="bq-plan-field"><span data-i18n="plans.form.notes">Notas (opcional)</span>
+          <textarea name="notes" maxlength="1000" rows="2"></textarea>
+        </label>
+      </fieldset>
+
+      <label class="bq-plan-check"><input type="checkbox" name="accept_terms" required> <span data-i18n="plans.form.terms">Acepto los términos de BAQUEANO y que me contacten por WhatsApp para coordinar el pago.</span> <a href="terminos.html" target="_blank" rel="noopener" data-i18n="plans.form.termsLink">Ver términos</a></label>
+      <p class="bq-plan-error" id="bqPlanError" role="alert" hidden></p>
+      <footer class="bq-plan-dialog-foot">
+        <button type="button" class="bq-plan-cta is-secondary" data-plan-close data-i18n="plans.form.cancel">Cancelar</button>
+        <button type="submit" class="bq-plan-cta" id="bqPlanSubmit" data-i18n="plans.form.submit">Enviar y continuar por WhatsApp</button>
+      </footer>
+    </form>
+
+    <div class="bq-plan-done" id="bqPlanDone" hidden>
+      <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+      <h2 data-i18n="plans.done.title">¡Recibimos tu pedido!</h2>
+      <p><span data-i18n="plans.done.code">Tu código de pedido es</span> <strong id="bqPlanCode"></strong></p>
+      <p data-i18n="plans.done.next">Escribinos por WhatsApp con ese código para coordinar el pago. Al confirmarlo recibís tu comprobante y tu usuario.</p>
+      <a class="bq-plan-cta is-whatsapp" id="bqPlanWhatsapp" href="https://wa.me/50577976973" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> <span data-i18n="plans.done.whatsapp">Continuar por WhatsApp</span></a>
+      <button type="button" class="bq-plan-cta is-secondary" data-plan-close data-i18n="plans.done.close">Cerrar</button>
+    </div>
+  </dialog>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="js/navigation.js?v=20261015-planes-1"></script>
+  <script src="js/plan-receipt.js?v=20261015-1" defer></script>
+  <script src="js/business-plans.js?v=20261015-1" defer></script>
+  <script src="js/global-injector.js"></script>
+</body>
+</html>

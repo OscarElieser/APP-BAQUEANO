@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T23:34:45.192Z",
+  "generatedAt": "2026-10-16T00:49:25.101Z",
   "languages": [
     "es",
     "en",
@@ -11,24 +11,24 @@
     "zh"
   ],
   "keysPerLanguage": {
-    "es": 5987,
-    "en": 5987,
-    "fr": 5987,
-    "it": 5987,
-    "pt": 5987,
-    "de": 5987,
-    "ko": 5987,
-    "zh": 5987
+    "es": 6133,
+    "en": 6133,
+    "fr": 6133,
+    "it": 6133,
+    "pt": 6133,
+    "de": 6133,
+    "ko": 6133,
+    "zh": 6133
   },
   "html": {
-    "files": 36,
-    "total": 4247,
-    "translated": 4246,
+    "files": 37,
+    "total": 4374,
+    "translated": 4373,
     "untranslated": 1
   },
   "js": {
-    "files": 132,
-    "translated": 443,
+    "files": 135,
+    "translated": 444,
     "untranslated": 648
   },
   "jsEditorial": {
@@ -72,6 +72,7 @@
     "offline.html",
     "opiniones.html",
     "perfil.html",
+    "planes.html",
     "privacidad.html",
     "terminos.html",
     "testimonios.html",
@@ -97,6 +98,7 @@
     "js/baqui-brain.js",
     "js/bq-marquee.js",
     "js/business-application.js",
+    "js/business-plans.js",
     "js/category-strip-marquee.js",
     "js/community-api.js",
     "js/community-faces.js",
@@ -135,9 +137,11 @@
     "js/ops-center/ops-nav-groups.js",
     "js/ops-center/ops-payments.js",
     "js/ops-center/ops-places.js",
+    "js/ops-center/ops-plans.js",
     "js/ops-center/ops-platform-reviews.js",
     "js/ops-center/ops-tech-report.js",
     "js/ops-center/ops-users.js",
+    "js/plan-receipt.js",
     "js/platform-reviews.js",
     "js/profile-editor.js",
     "js/safety-gallery.js",
@@ -190,8 +194,8 @@
     {
       "file": "admin.html",
       "type": "html",
-      "total": 726,
-      "translated": 726,
+      "total": 728,
+      "translated": 728,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -453,6 +457,15 @@
       "type": "html",
       "total": 168,
       "translated": 168,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "planes.html",
+      "type": "html",
+      "total": 125,
+      "translated": 125,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -774,6 +787,15 @@
     },
     {
       "file": "js/business-application.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/business-plans.js",
       "type": "js",
       "total": 0,
       "translated": 0,
@@ -1270,11 +1292,11 @@
     {
       "file": "js/navigation.js",
       "type": "js",
-      "total": 26,
-      "translated": 9,
+      "total": 27,
+      "translated": 10,
       "untranslated": 17,
       "editorialStrings": 0,
-      "coverage": 34.6
+      "coverage": 37
     },
     {
       "file": "js/nicaragua-real-map.js",
@@ -1430,6 +1452,15 @@
       "coverage": 100
     },
     {
+      "file": "js/ops-center/ops-plans.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/ops-center/ops-platform-reviews.js",
       "type": "js",
       "total": 0,
@@ -1473,6 +1504,15 @@
       "untranslated": 9,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/plan-receipt.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/platform-enhancements.js",

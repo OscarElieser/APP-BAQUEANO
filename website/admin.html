@@ -160,6 +160,10 @@
         <!-- GRUPO 2: OPERACIONES & NEGOCIOS -->
         <div class="ops-nav-group">
           <div data-i18n="pages.admin.opsSidebarNav.div2" class="ops-nav-group-title">02 — Operaciones &amp; Negocios</div>
+          <a class="ops-nav-item" data-tab="44-planes">
+            <i class="fa-solid fa-file-invoice-dollar ops-nav-item-icon"></i>
+            <span data-i18n="opsPlans.title" class="ops-nav-item-label">Planes y comprobantes</span>
+          </a>
           <a class="ops-nav-item" data-tab="08-negocios">
             <i class="fa-solid fa-store ops-nav-item-icon"></i>
             <span data-i18n="pages.admin.opsSidebarNav.span5" class="ops-nav-item-label">Negocios &amp; Aliados</span>
@@ -944,6 +948,9 @@
         <section class="ops-view-panel" id="view-37-opiniones">
           <div class="ops-view-header"><h1><i class="fa-solid fa-star"></i> <span data-i18n="menu.platformReviews">Opiniones BAQUEANO</span></h1></div>
           <div class="ops-empty-state"><i class="fa-solid fa-star ops-empty-icon"></i><div data-i18n="menu.platformReviews" class="ops-empty-title">Opiniones BAQUEANO</div><div data-i18n="menu.platformReviewsDesc" class="ops-empty-desc">Calificá tu experiencia con la plataforma</div></div>
+        </section>
+        <section class="ops-view-panel" id="view-44-planes">
+          <div class="ops-view-header"><h1><i class="fa-solid fa-store"></i> <span data-i18n="opsPlans.title">Planes y comprobantes</span></h1></div>
         </section>
         <section class="ops-view-panel" id="view-43-lugares">
           <div class="ops-view-header"><h1><i class="fa-solid fa-location-dot"></i> <span data-i18n="opsPlaces.title">Lugares</span></h1></div>
@@ -2714,7 +2721,7 @@
   <script src="js/shared/roles.js?v=20261005-rbac-1"></script>
     <!-- Catálogo operativo y mock data real de respaldo para cero listas vacías -->
   <script src="js/ops-center/ops-mock-data.js?v=20261008-1"></script>
-  <script src="js/ops-center/ops-engine.js?v=20261015-cms-1"></script>
+  <script src="js/ops-center/ops-engine.js?v=20261015-planes-1"></script>
   <script src="js/ops-center/ops-live-data.js?v=20261014-contacto-1"></script>
   <script src="js/ops-center/ops-ia-copilot.js?v=20261005-ops2-1"></script>
   <!-- Moderación de la comunidad: cliente de la Edge Function + vista 36. -->
@@ -2731,6 +2738,8 @@
   <script defer src="js/ops-center/ops-automation.js?v=20261007-2"></script>
   <script defer src="js/ops-center/ops-messages.js?v=20261009-i18n-1"></script>
   <script defer src="js/ops-center/ops-places.js?v=20261009-acciones-1"></script>
+  <script defer src="js/plan-receipt.js?v=20261015-1"></script>
+  <script defer src="js/ops-center/ops-plans.js?v=20261015-1"></script>
   <script defer src="js/ops-center/ops-users.js?v=20261009-i18n-1"></script>
   <script defer src="js/ops-center/ops-businesses.js?v=20261009-i18n-1"></script>
     <script defer src="js/ops-center/ops-payments.js?v=20261009-i18n-1"></script>

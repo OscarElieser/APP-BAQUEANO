@@ -1795,6 +1795,13 @@ const SITE_PAGES_REGISTRY = {
     // 40: Aplicación Android (data/app-release.json + Supabase public_app_download_stats). Lo pinta ops-android-app.js.
     // 42: Mensajes de viajeros (F6): Edge Function baqueano-messages. Lo pinta ops-messages.js.
     // 43: Lugares (auditoría 2026-10-07, A08): places vía baqueano-ops. Lo pinta ops-places.js.
+    // 44: Planes y comprobantes (2026-10-15): Edge Function baqueano-plans. Lo pinta ops-plans.js.
+    '44-planes': {
+      isSystem: true,
+      title: 'Planes y comprobantes',
+      icon: 'fa-file-invoice-dollar',
+      roleRequired: 'auditor'
+    },
     '43-lugares': {
       isSystem: true,
       title: 'Lugares',
@@ -4307,6 +4314,10 @@ const SITE_PAGES_REGISTRY = {
       if (tabId === '20-sos') return this.renderSosModule();
       if (tabId === '11-reservas') return this.renderReservationsModule();
       if (tabId === '35-backup') return this.renderBackupSyncModule();
+      if (tabId === '44-planes') {
+        if (window.BaqueanoOpsPlans) return window.BaqueanoOpsPlans.render(panel);
+        return;
+      }
       if (tabId === '43-lugares') {
         if (window.BaqueanoOpsPlaces) return window.BaqueanoOpsPlaces.render(panel);
         return;

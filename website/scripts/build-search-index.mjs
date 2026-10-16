@@ -189,6 +189,7 @@ const PAGES = [
   ['Música de Nicaragua', 'musica.html', 'Archivo sonoro, artistas e instrumentos.', 'musica canciones marimba son nica folclor', 'fa-solid fa-music'],
   ['Custodia ambiental', 'ambiental.html', 'Áreas protegidas y buenas prácticas.', 'ambiental conservacion areas protegidas', 'fa-solid fa-leaf'],
   ['Crónicas', 'cronicas.html', 'Relatos y reportajes de Nicaragua.', 'cronicas relatos reportajes revista', 'fa-regular fa-newspaper'],
+  ['Planes para negocios', 'planes.html', 'Publicá tu local: planes mensuales y anuales en córdobas y dólares.', 'planes precios negocio publicar local hospedaje restaurante anunciar', 'fa-solid fa-store'],
   ['Experiencias de viajeros (Testimonios)', 'testimonios.html', 'Viajeros reales comparten lo que vivieron en Nicaragua.', 'testimonios opiniones resenas experiencias viajeros comunidad comentarios', 'fa-regular fa-comments'],
   ['Red de aliados', 'aliados.html', 'Organizaciones vinculadas al turismo.', 'aliados organizaciones socios', 'fa-regular fa-handshake'],
   ['Mi negocio', 'mi-negocio.html', 'Registrá tu emprendimiento turístico.', 'negocio emprendimiento registrar hospedaje restaurante guia', 'fa-solid fa-shop'],

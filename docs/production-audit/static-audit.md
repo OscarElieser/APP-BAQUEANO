@@ -5,7 +5,7 @@
 -->
 # Auditoría estática de la salida publicada
 
-Generado: 2026-10-15T23:34:45.345Z · Páginas: 36 · URLs en sitemap: 27 · **Críticos: 0** · Advertencias: 71
+Generado: 2026-10-16T00:19:14.096Z · Páginas: 37 · URLs en sitemap: 28 · **Críticos: 0** · Advertencias: 72
 
 ## SEO por página
 
@@ -42,6 +42,7 @@ Generado: 2026-10-15T23:34:45.345Z · Páginas: 36 · URLs en sitemap: 27 · **C
 | offline.html | Modo Offline Territorial \| Baqueano Nicaragua | — | — | ❌ | ❌ | 0 | 0 | ❌ | ❌ |
 | opiniones.html | Opiniones sobre BAQUEANO \| Usuarios autenticados | 135 car. | /opiniones.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | perfil.html | Mi Perfil \| BAQUEANO Nicaragua Auténtica | 125 car. | /perfil.html | ✅ | ✅ | 1 | 9 | ✅ | ❌ |
+| planes.html | Planes para negocios \| Baqueano Nicaragua | 181 car. | /planes.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | privacidad.html | Privacidad & Seguridad de tus Datos \| BAQUEANO Nicaragua | 135 car. | /privacidad.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | terminos.html | Términos & Condiciones de Uso \| BAQUEANO Nicaragua | 150 car. | /terminos.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | testimonios.html | Experiencias de viajeros \| Testimonios BAQUEANO | 134 car. | /testimonios.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
@@ -108,6 +109,7 @@ Generado: 2026-10-15T23:34:45.345Z · Páginas: 36 · URLs en sitemap: 27 · **C
 | ⚠️ advertencia | perfil.html | anchor-missing | mi-viaje.html#reservas: ancla #reservas no encontrada en mi-viaje.html (estático) |
 | ⚠️ advertencia | perfil.html | anchor-missing | mi-viaje.html#favoritos: ancla #favoritos no encontrada en mi-viaje.html (estático) |
 | ⚠️ advertencia | perfil.html | anchor-missing | aliados.html#postular: ancla #postular no encontrada en aliados.html (estático) |
+| ⚠️ advertencia | planes.html | description-length | 181 caracteres (recomendado 50–170) |
 | ⚠️ advertencia | privacidad.html | anchor-missing | index.html#sos: ancla #sos no encontrada en index.html (estático) |
 | ⚠️ advertencia | privacidad.html | anchor-missing | mi-viaje.html#favoritos: ancla #favoritos no encontrada en mi-viaje.html (estático) |
 | ⚠️ advertencia | privacidad.html | anchor-missing | aliados.html#postular: ancla #postular no encontrada en aliados.html (estático) |

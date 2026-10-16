@@ -1,11 +1,11 @@
 {
  "summary": {
-  "generatedAt": "2026-10-15T23:34:45.345Z",
+  "generatedAt": "2026-10-16T00:19:14.096Z",
   "dir": "dist-hostinger",
-  "pages": 36,
+  "pages": 37,
   "critical": 0,
-  "warnings": 71,
-  "sitemapUrls": 27
+  "warnings": 72,
+  "sitemapUrls": 28
  },
  "seo": [
   {
@@ -412,6 +412,19 @@
    "sitemap": false
   },
   {
+   "page": "planes.html",
+   "title": "Planes para negocios | Baqueano Nicaragua",
+   "description": "Publicá tu hospedaje, restaurante, tour o emprendimiento en BAQUEANO Nicaragua. Planes mensuales y anuales en córdobas y dólares, contacto directo con tus clientes y sin comisiones.",
+   "canonical": "https://baqueanonicaragua.com/planes.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 9,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
    "page": "privacidad.html",
    "title": "Privacidad & Seguridad de tus Datos | BAQUEANO Nicaragua",
    "description": "Política de privacidad de BAQUEANO Nicaragua. Tus datos bajo tu control: cero venta de información, privacidad en IA y seguridad cloud.",
@@ -813,6 +826,12 @@
    "page": "perfil.html",
    "rule": "anchor-missing",
    "detail": "aliados.html#postular: ancla #postular no encontrada en aliados.html (estático)"
+  },
+  {
+   "severity": "warning",
+   "page": "planes.html",
+   "rule": "description-length",
+   "detail": "181 caracteres (recomendado 50–170)"
   },
   {
    "severity": "warning",

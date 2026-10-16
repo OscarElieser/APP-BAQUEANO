@@ -87,7 +87,8 @@
     "cookies": "Política de Cookies",
     "legal_notice": "Aviso Legal",
     "copyright": "© {year} Baqueano Nicaragua.",
-    "madeIn": "Hecho en Nicaragua"
+    "madeIn": "Hecho en Nicaragua",
+    "plans": "Planes para negocios"
   },
   "actions": {
     "search": "Buscar",
@@ -673,7 +674,8 @@
     "searchPlaceholder": "Buscá playas, volcanes, León…",
     "platformReviews": "Opiniones sobre BAQUEANO",
     "platformReviewsDesc": "Calificá tu experiencia con la plataforma",
-    "androidApp": "App Android"
+    "androidApp": "App Android",
+    "plans": "Planes"
   },
   "testimonials": {
     "metaTitle": "Experiencias de viajeros | Testimonios BAQUEANO",
@@ -7869,5 +7871,189 @@
       "097": "Bebidas y productos tropicales elaborados en comunidades y emprendimientos.",
       "098": "Cacao, pinolillo, tiste, chicha, cebada y semilla de jícaro."
     }
+  },
+  "plans": {
+    "hero": {
+      "kicker": "Para hospedajes, restaurantes, guías y emprendimientos",
+      "title": "Que los viajeros te encuentren",
+      "lead": "Publicá tu local en la web y en la app de BAQUEANO. Los clientes te escriben directo por WhatsApp o te llaman: lo que cobrás es 100 % tuyo, sin comisiones.",
+      "trust1": "Contacto directo con tus clientes",
+      "trust2": "Tu ficha en 8 idiomas",
+      "trust3": "Web y app Android",
+      "trust4": "0 % de comisión por cliente"
+    },
+    "toggle": {
+      "monthly": "Mensual",
+      "annual": "Anual",
+      "save": "2 meses de regalo",
+      "aria": "Período de pago"
+    },
+    "grid": {
+      "title": "Elegí tu plan"
+    },
+    "sendero": {
+      "tag": "Empezá a aparecer"
+    },
+    "price": {
+      "perMonth": "/ mes",
+      "perYear": "/ año",
+      "equiv": "Equivale a {amount} al mes"
+    },
+    "f": {
+      "listing": "Ficha de tu local en la web y en la app Android",
+      "contact": "Botones de WhatsApp y llamada directos, sin comisiones",
+      "map": "Ubicación en el mapa interactivo",
+      "languages": "Tu ficha en los 8 idiomas de BAQUEANO",
+      "photos6": "Hasta 6 fotos, horario y servicios",
+      "panel": "Usuario y contraseña para ver tu plan y tus comprobantes",
+      "department": "Destacado en la página de tu departamento",
+      "priority": "Prioridad en búsquedas y en las rutas de BAQUI",
+      "stats": "Estadísticas mensuales de visitas y contactos",
+      "home": "Presencia en la portada de BAQUEANO",
+      "allSendero": "Todo lo del plan Sendero",
+      "photos20": "Hasta 20 fotos",
+      "verified": "Sello BAQUEANO verificado (con revisión de documentos o visita)",
+      "chronicle": "Una publicación al mes en Crónicas y Comunidad",
+      "social": "Difusión mensual en Instagram, Facebook y TikTok",
+      "report": "Informe mensual en PDF y atención prioritaria",
+      "allMirador": "Todo lo del plan Mirador",
+      "photosUnlimited": "Fotos sin límite y video de presentación",
+      "baqui": "BAQUI te recomienda primero cuando piden tu servicio en tu zona",
+      "promos": "Promociones y ofertas de temporada en tu ficha",
+      "onboarding": "Te ayudamos a armar tu ficha: textos y fotos"
+    },
+    "cta": "Elegir plan",
+    "mirador": {
+      "badge": "El más elegido",
+      "tag": "Destacá en tu zona"
+    },
+    "cumbre": {
+      "tag": "Máxima visibilidad"
+    },
+    "note": {
+      "exchange": "Precios en córdobas al cambio de referencia de BAQUEANO (C$ 36.6243 por US$ 1). El plan anual equivale a 10 meses: 2 meses de regalo."
+    },
+    "steps": {
+      "title": "Así funciona",
+      "s1t": "Elegí tu plan",
+      "s1": "Completá los datos de tu local y los de tu comprobante.",
+      "s2t": "Coordinamos el pago por WhatsApp",
+      "s2": "Te indicamos los métodos de pago: transferencia, depósito o efectivo.",
+      "s3t": "Recibís tu comprobante y tu acceso",
+      "s3": "Comprobante con tus datos y un usuario y contraseña para ver tu plan.",
+      "s4t": "Publicamos tu local",
+      "s4": "El equipo revisa tu ficha y la publica en la web y en la app."
+    },
+    "mine": {
+      "title": "Mi plan",
+      "login": "¿Ya tenés un plan? Iniciá sesión con el usuario que te enviamos para ver tu plan y tus comprobantes.",
+      "loginBtn": "Iniciar sesión",
+      "passTitle": "Cambiá tu contraseña temporal",
+      "passHelp": "Por seguridad, elegí una contraseña propia de al menos 8 caracteres.",
+      "passNew": "Nueva contraseña",
+      "passRepeat": "Repetí la contraseña",
+      "passSave": "Guardar contraseña",
+      "passShort": "La contraseña debe tener al menos 8 caracteres.",
+      "passMismatch": "Las contraseñas no coinciden.",
+      "passDone": "Listo: tu contraseña quedó cambiada.",
+      "passRelogin": "Por seguridad, cerrá sesión, volvé a entrar con la contraseña temporal y cambiála de inmediato.",
+      "loading": "Cargando tu plan…",
+      "none": "Tu cuenta todavía no tiene planes. Elegí uno arriba y te ayudamos por WhatsApp.",
+      "item": "Plan {plan} · {business}",
+      "order": "Pedido",
+      "valid": "Vigente del {from} al {to}",
+      "review": "Publicación de tu local: solicitud {code} en revisión del equipo.",
+      "receipt": "Ver comprobante {n}",
+      "pay": "Coordinar pago",
+      "payText": "Hola BAQUEANO, quiero coordinar el pago de mi pedido {code}."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "q1": "¿BAQUEANO cobra comisión por cada cliente?",
+      "a1": "No. El viajero te contacta directo por WhatsApp o llamada y te paga a vos. Solo pagás tu plan.",
+      "q2": "¿Cómo pago?",
+      "a2": "Después de enviar tus datos te comunicás con nosotros por WhatsApp y coordinamos el método: transferencia bancaria, depósito o efectivo.",
+      "q3": "¿Qué documento recibo?",
+      "a3": "Un comprobante de pago numerado con los datos de BAQUEANO y los tuyos: nombre o razón social, identificación, dirección, plan, período y monto en córdobas y dólares.",
+      "q4": "¿Cuándo aparece mi local?",
+      "a4": "Cuando confirmamos el pago, tu local pasa a revisión del equipo y se publica en la web y en la app. Si falta información, te escribimos.",
+      "q5": "¿Puedo cambiar de plan?",
+      "a5": "Sí. Escribinos por WhatsApp y te pasamos al plan que necesités desde el siguiente período."
+    },
+    "form": {
+      "title": "Tus datos",
+      "billing": "Datos para tu comprobante",
+      "clientType": "Facturar a",
+      "persona": "Persona natural",
+      "empresa": "Empresa o cooperativa",
+      "legalName": "Nombre completo o razón social",
+      "idType": "Identificación",
+      "cedula": "Cédula de identidad",
+      "ruc": "RUC",
+      "passport": "Pasaporte",
+      "residence": "Cédula de residencia",
+      "idNumber": "Número de identificación",
+      "address": "Dirección",
+      "owner": "Propietario y contacto",
+      "contactName": "Nombre del propietario o encargado",
+      "email": "Correo (será tu usuario)",
+      "phone": "WhatsApp o teléfono",
+      "business": "Tu local",
+      "businessName": "Nombre del local",
+      "category": "Tipo de negocio",
+      "department": "Departamento",
+      "municipality": "Municipio",
+      "description": "¿Qué ofrecés? (20 a 300 caracteres)",
+      "notes": "Notas (opcional)",
+      "terms": "Acepto los términos de BAQUEANO y que me contacten por WhatsApp para coordinar el pago.",
+      "termsLink": "Ver términos",
+      "cancel": "Cancelar",
+      "submit": "Enviar y continuar por WhatsApp",
+      "close": "Cerrar",
+      "summary": "Plan {plan} · {period} · {nio} ({usd})",
+      "sending": "Enviando…"
+    },
+    "cat": {
+      "alojamiento": "Hospedaje",
+      "restaurante": "Restaurante",
+      "gastronomia": "Cafetería o comida típica",
+      "guia": "Guía turístico",
+      "experiencia": "Tour o experiencia",
+      "turismo_rural": "Turismo rural o comunitario",
+      "finca": "Finca",
+      "day_pass": "Pase de día",
+      "transporte": "Transporte",
+      "alquiler_vehiculos": "Alquiler de vehículos",
+      "artesania": "Artesanía",
+      "cultura": "Cultura",
+      "musica": "Música",
+      "otro": "Otro"
+    },
+    "done": {
+      "title": "¡Recibimos tu pedido!",
+      "code": "Tu código de pedido es",
+      "next": "Escribinos por WhatsApp con ese código para coordinar el pago. Al confirmarlo recibís tu comprobante y tu usuario.",
+      "whatsapp": "Continuar por WhatsApp",
+      "close": "Cerrar",
+      "waText": "Hola BAQUEANO, envié mi pedido {code}: plan {plan} {period} ({nio} / {usd}) para {business}. Quiero coordinar el pago."
+    },
+    "error": {
+      "generic": "No pudimos completar la solicitud. Intentá de nuevo.",
+      "terms": "Tenés que aceptar los términos para continuar.",
+      "field": "Revisá este dato: {field}"
+    },
+    "status": {
+      "pending": "Pendiente de pago",
+      "contacted": "En contacto por WhatsApp",
+      "paid": "Pagado",
+      "cancelled": "Cancelado"
+    },
+    "meta": {
+      "title": "Planes para negocios | Baqueano Nicaragua",
+      "description": "Publicá tu hospedaje, restaurante, tour o emprendimiento en BAQUEANO Nicaragua. Planes mensuales y anuales en córdobas y dólares, contacto directo con tus clientes y sin comisiones."
+    }
+  },
+  "opsPlans": {
+    "title": "Planes y comprobantes"
   }
 }

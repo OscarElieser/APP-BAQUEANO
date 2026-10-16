@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-15T23:34:45.192Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 5987 · en 5987 · fr 5987 · it 5987 · pt 5987 · de 5987 · ko 5987 · zh 5987
+Generado: 2026-10-16T00:49:25.101Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6133 · en 6133 · fr 6133 · it 6133 · pt 6133 · de 6133 · ko 6133 · zh 6133
 
-HTML: 4246/4247 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
+HTML: 4373/4374 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -33,7 +33,7 @@ HTML: 4246/4247 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/baqueano-map.js | js | 19 | 0 | 19 | 0 % |
 | apps/admin/src/app/destinos/nuevo/page.tsx | tsx | 18 | 0 | 18 | 0 % |
 | js/index-features.js | js | 17 | 0 | 17 | 0 % |
-| js/navigation.js | js | 26 | 9 | 17 | 34.6 % |
+| js/navigation.js | js | 27 | 10 | 17 | 37 % |
 | js/testimonios.js | js | 17 | 0 | 17 | 0 % |
 | js/admin-ops.js | js | 16 | 0 | 16 | 0 % |
 | js/baqueano-travel-session.js | js | 66 | 50 | 16 | 75.8 % |
@@ -139,7 +139,7 @@ HTML: 4246/4247 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/territory-carousel.js | js | 1 | 0 | 1 | 0 % |
 | js/territory-media-experience.js | js | 1 | 0 | 1 | 0 % |
 | 404.html | html | 25 | 25 | 0 | 100 % |
-| admin.html | html | 726 | 726 | 0 | 100 % |
+| admin.html | html | 728 | 728 | 0 | 100 % |
 | aliados.html | html | 189 | 189 | 0 | 100 % |
 | ambiental.html | html | 131 | 131 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -195,6 +195,7 @@ HTML: 4246/4247 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/baqui-brain.js | js | 0 | 0 | 0 | 100 % |
 | js/bq-marquee.js | js | 0 | 0 | 0 | 100 % |
 | js/business-application.js | js | 0 | 0 | 0 | 100 % |
+| js/business-plans.js | js | 0 | 0 | 0 | 100 % |
 | js/category-strip-marquee.js | js | 0 | 0 | 0 | 100 % |
 | js/community-api.js | js | 0 | 0 | 0 | 100 % |
 | js/community-faces.js | js | 0 | 0 | 0 | 100 % |
@@ -233,9 +234,11 @@ HTML: 4246/4247 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/ops-center/ops-nav-groups.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-payments.js | js | 44 | 44 | 0 | 100 % |
 | js/ops-center/ops-places.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-plans.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-tech-report.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-users.js | js | 38 | 38 | 0 | 100 % |
+| js/plan-receipt.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/profile-editor.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |
@@ -266,6 +269,7 @@ HTML: 4246/4247 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | packages/i18n/src/index.tsx | tsx | 2 | 2 | 0 | 100 % |
 | packages/ui/src/index.tsx | tsx | 0 | 0 | 0 | 100 % |
 | perfil.html | html | 168 | 168 | 0 | 100 % |
+| planes.html | html | 125 | 125 | 0 | 100 % |
 | privacidad.html | html | 88 | 88 | 0 | 100 % |
 | terminos.html | html | 192 | 192 | 0 | 100 % |
 | testimonios.html | html | 80 | 80 | 0 | 100 % |

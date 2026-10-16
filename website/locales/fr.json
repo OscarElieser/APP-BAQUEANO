@@ -234,7 +234,8 @@
     "privacy": "Politique de confidentialité",
     "cookies": "Politique de cookies",
     "legal_notice": "Mentions légales",
-    "copyright": "© {year} Baqueano Nicaragua."
+    "copyright": "© {year} Baqueano Nicaragua.",
+    "plans": "Formules pour les entreprises"
   },
   "seo": {
     "defaultTitle": "BAQUEANO — Découvrez le Nicaragua",
@@ -300,7 +301,8 @@
     "searchPlaceholder": "Plages, volcans, León…",
     "platformReviews": "Avis sur BAQUEANO",
     "platformReviewsDesc": "Notez votre expérience avec la plateforme",
-    "androidApp": "Application Android"
+    "androidApp": "Application Android",
+    "plans": "Formules"
   },
   "testimonials": {
     "metaTitle": "Expériences de voyageurs | Témoignages BAQUEANO",
@@ -7869,5 +7871,189 @@
       "097": "Boissons et produits tropicaux élaborés par des communautés et de petites entreprises.",
       "098": "Cacao, pinolillo, tiste, chicha, boisson d'orge et graine de jícaro."
     }
+  },
+  "plans": {
+    "hero": {
+      "kicker": "Pour hébergements, restaurants, guides et entrepreneurs",
+      "title": "Que les voyageurs vous trouvent",
+      "lead": "Publiez votre établissement sur le site et l’application BAQUEANO. Les clients vous écrivent directement sur WhatsApp ou vous appellent : ce que vous facturez vous revient à 100 %, sans commission.",
+      "trust1": "Contact direct avec vos clients",
+      "trust2": "Votre fiche en 8 langues",
+      "trust3": "Site web et application Android",
+      "trust4": "0 % de commission par client"
+    },
+    "toggle": {
+      "monthly": "Mensuel",
+      "annual": "Annuel",
+      "save": "2 mois offerts",
+      "aria": "Période de paiement"
+    },
+    "grid": {
+      "title": "Choisissez votre formule"
+    },
+    "sendero": {
+      "tag": "Commencez à être visible"
+    },
+    "price": {
+      "perMonth": "/ mois",
+      "perYear": "/ an",
+      "equiv": "Soit {amount} par mois"
+    },
+    "f": {
+      "listing": "Fiche de votre établissement sur le site et l’application Android",
+      "contact": "Boutons WhatsApp et appel directs, sans commission",
+      "map": "Emplacement sur la carte interactive",
+      "languages": "Votre fiche dans les 8 langues de BAQUEANO",
+      "photos6": "Jusqu’à 6 photos, horaires et services",
+      "panel": "Identifiant et mot de passe pour voir votre formule et vos reçus",
+      "department": "Mis en avant sur la page de votre département",
+      "priority": "Priorité dans les recherches et les itinéraires de BAQUI",
+      "stats": "Statistiques mensuelles de visites et de contacts",
+      "home": "Présence sur la page d’accueil de BAQUEANO",
+      "allSendero": "Tout le plan Sendero",
+      "photos20": "Jusqu’à 20 photos",
+      "verified": "Badge BAQUEANO vérifié (après examen des documents ou visite)",
+      "chronicle": "Une publication par mois dans Chroniques et Communauté",
+      "social": "Diffusion mensuelle sur Instagram, Facebook et TikTok",
+      "report": "Rapport mensuel en PDF et assistance prioritaire",
+      "allMirador": "Tout le plan Mirador",
+      "photosUnlimited": "Photos illimitées et vidéo de présentation",
+      "baqui": "BAQUI vous recommande en premier quand on cherche votre service dans votre région",
+      "promos": "Promotions et offres saisonnières sur votre fiche",
+      "onboarding": "Nous vous aidons à créer votre fiche : textes et photos"
+    },
+    "cta": "Choisir",
+    "mirador": {
+      "badge": "Le plus choisi",
+      "tag": "Démarquez-vous dans votre région"
+    },
+    "cumbre": {
+      "tag": "Visibilité maximale"
+    },
+    "note": {
+      "exchange": "Prix en córdobas au taux de référence de BAQUEANO (C$ 36,6243 pour 1 US$). La formule annuelle équivaut à 10 mois : 2 mois offerts."
+    },
+    "steps": {
+      "title": "Comment ça marche",
+      "s1t": "Choisissez votre formule",
+      "s1": "Renseignez les données de votre établissement et de votre reçu.",
+      "s2t": "Paiement organisé sur WhatsApp",
+      "s2": "Nous vous indiquons les moyens de paiement : virement, dépôt ou espèces.",
+      "s3t": "Recevez votre reçu et votre accès",
+      "s3": "Un reçu à votre nom et un identifiant et mot de passe pour voir votre formule.",
+      "s4t": "Nous publions votre établissement",
+      "s4": "L’équipe vérifie votre fiche et la publie sur le site et l’application."
+    },
+    "mine": {
+      "title": "Ma formule",
+      "login": "Vous avez déjà une formule ? Connectez-vous avec l’identifiant reçu pour voir votre formule et vos reçus.",
+      "loginBtn": "Se connecter",
+      "passTitle": "Changez votre mot de passe temporaire",
+      "passHelp": "Par sécurité, choisissez votre propre mot de passe d’au moins 8 caractères.",
+      "passNew": "Nouveau mot de passe",
+      "passRepeat": "Répétez le mot de passe",
+      "passSave": "Enregistrer",
+      "passShort": "Le mot de passe doit contenir au moins 8 caractères.",
+      "passMismatch": "Les mots de passe ne correspondent pas.",
+      "passDone": "C’est fait : votre mot de passe a été modifié.",
+      "passRelogin": "Par sécurité, déconnectez-vous, reconnectez-vous avec le mot de passe temporaire et changez-le aussitôt.",
+      "loading": "Chargement de votre formule…",
+      "none": "Votre compte n’a pas encore de formule. Choisissez-en une ci-dessus et nous vous aidons sur WhatsApp.",
+      "item": "Formule {plan} · {business}",
+      "order": "Demande",
+      "valid": "Valable du {from} au {to}",
+      "review": "Publication de votre établissement : demande {code} en cours d’examen.",
+      "receipt": "Voir le reçu {n}",
+      "pay": "Organiser le paiement",
+      "payText": "Bonjour BAQUEANO, je souhaite organiser le paiement de ma demande {code}."
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "q1": "BAQUEANO prend-il une commission par client ?",
+      "a1": "Non. Le voyageur vous contacte directement par WhatsApp ou par téléphone et vous paie. Vous ne payez que votre formule.",
+      "q2": "Comment payer ?",
+      "a2": "Après l’envoi de vos données, contactez-nous sur WhatsApp et nous convenons du moyen : virement, dépôt ou espèces.",
+      "q3": "Quel document vais-je recevoir ?",
+      "a3": "Un reçu de paiement numéroté avec les données de BAQUEANO et les vôtres : nom ou raison sociale, identifiant, adresse, formule, période et montant en córdobas et en dollars.",
+      "q4": "Quand mon établissement apparaîtra-t-il ?",
+      "a4": "Dès que le paiement est confirmé, votre établissement passe en revue par l’équipe puis est publié sur le site et l’application. S’il manque des informations, nous vous écrivons.",
+      "q5": "Puis-je changer de formule ?",
+      "a5": "Oui. Écrivez-nous sur WhatsApp et nous passons à la formule souhaitée dès la période suivante."
+    },
+    "form": {
+      "title": "Vos données",
+      "billing": "Données pour votre reçu",
+      "clientType": "Facturer à",
+      "persona": "Personne physique",
+      "empresa": "Entreprise ou coopérative",
+      "legalName": "Nom complet ou raison sociale",
+      "idType": "Pièce d’identité",
+      "cedula": "Carte d’identité",
+      "ruc": "RUC (identifiant fiscal)",
+      "passport": "Passeport",
+      "residence": "Carte de résident",
+      "idNumber": "Numéro d’identification",
+      "address": "Adresse",
+      "owner": "Propriétaire et contact",
+      "contactName": "Nom du propriétaire ou responsable",
+      "email": "E-mail (votre identifiant)",
+      "phone": "WhatsApp ou téléphone",
+      "business": "Votre établissement",
+      "businessName": "Nom de l’établissement",
+      "category": "Type d’activité",
+      "department": "Département",
+      "municipality": "Commune",
+      "description": "Que proposez-vous ? (20 à 300 caractères)",
+      "notes": "Remarques (facultatif)",
+      "terms": "J’accepte les conditions de BAQUEANO et d’être contacté sur WhatsApp pour organiser le paiement.",
+      "termsLink": "Voir les conditions",
+      "cancel": "Annuler",
+      "submit": "Envoyer et continuer sur WhatsApp",
+      "close": "Fermer",
+      "summary": "Formule {plan} · {period} · {nio} ({usd})",
+      "sending": "Envoi…"
+    },
+    "cat": {
+      "alojamiento": "Hébergement",
+      "restaurante": "Restaurant",
+      "gastronomia": "Café ou cuisine typique",
+      "guia": "Guide touristique",
+      "experiencia": "Excursion ou expérience",
+      "turismo_rural": "Tourisme rural ou communautaire",
+      "finca": "Ferme",
+      "day_pass": "Pass journée",
+      "transporte": "Transport",
+      "alquiler_vehiculos": "Location de véhicules",
+      "artesania": "Artisanat",
+      "cultura": "Culture",
+      "musica": "Musique",
+      "otro": "Autre"
+    },
+    "done": {
+      "title": "Nous avons reçu votre demande !",
+      "code": "Votre code de demande est",
+      "next": "Écrivez-nous sur WhatsApp avec ce code pour organiser le paiement. Une fois confirmé, vous recevrez votre reçu et votre identifiant.",
+      "whatsapp": "Continuer sur WhatsApp",
+      "close": "Fermer",
+      "waText": "Bonjour BAQUEANO, j’ai envoyé ma demande {code} : formule {plan} {period} ({nio} / {usd}) pour {business}. Je souhaite organiser le paiement."
+    },
+    "error": {
+      "generic": "Impossible de terminer la demande. Réessayez.",
+      "terms": "Vous devez accepter les conditions pour continuer.",
+      "field": "Vérifiez ce champ : {field}"
+    },
+    "status": {
+      "pending": "En attente de paiement",
+      "contacted": "En contact via WhatsApp",
+      "paid": "Payé",
+      "cancelled": "Annulé"
+    },
+    "meta": {
+      "title": "Formules pour les entreprises | Baqueano Nicaragua",
+      "description": "Publiez votre hébergement, restaurant, excursion ou activité sur BAQUEANO Nicaragua. Formules mensuelles et annuelles en córdobas et en dollars, contact direct avec vos clients et sans commission."
+    }
+  },
+  "opsPlans": {
+    "title": "Formules et reçus"
   }
 }

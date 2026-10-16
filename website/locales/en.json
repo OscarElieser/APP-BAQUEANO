@@ -234,7 +234,8 @@
     "privacy": "Privacy Policy",
     "cookies": "Cookie Policy",
     "legal_notice": "Legal Notice",
-    "copyright": "© {year} Baqueano Nicaragua."
+    "copyright": "© {year} Baqueano Nicaragua.",
+    "plans": "Plans for businesses"
   },
   "seo": {
     "defaultTitle": "BAQUEANO — Discover Nicaragua",
@@ -300,7 +301,8 @@
     "searchPlaceholder": "Search beaches, volcanoes, León…",
     "platformReviews": "Reviews of BAQUEANO",
     "platformReviewsDesc": "Rate your experience with the platform",
-    "androidApp": "Android app"
+    "androidApp": "Android app",
+    "plans": "Plans"
   },
   "testimonials": {
     "metaTitle": "Traveler experiences | BAQUEANO testimonials",
@@ -7869,5 +7871,189 @@
       "097": "Drinks and tropical products made by communities and small businesses.",
       "098": "Cacao, pinolillo, tiste, chicha, barley drink and jícaro seed."
     }
+  },
+  "plans": {
+    "hero": {
+      "kicker": "For lodgings, restaurants, guides and small businesses",
+      "title": "Let travelers find you",
+      "lead": "List your business on the BAQUEANO website and app. Customers message you directly on WhatsApp or call you: what you charge is 100% yours, with no commissions.",
+      "trust1": "Direct contact with your customers",
+      "trust2": "Your listing in 8 languages",
+      "trust3": "Website and Android app",
+      "trust4": "0% commission per customer"
+    },
+    "toggle": {
+      "monthly": "Monthly",
+      "annual": "Yearly",
+      "save": "2 months free",
+      "aria": "Billing period"
+    },
+    "grid": {
+      "title": "Choose your plan"
+    },
+    "sendero": {
+      "tag": "Start showing up"
+    },
+    "price": {
+      "perMonth": "/ month",
+      "perYear": "/ year",
+      "equiv": "Equals {amount} per month"
+    },
+    "f": {
+      "listing": "Your business listing on the website and Android app",
+      "contact": "Direct WhatsApp and call buttons, no commissions",
+      "map": "Location on the interactive map",
+      "languages": "Your listing in BAQUEANO’s 8 languages",
+      "photos6": "Up to 6 photos, opening hours and services",
+      "panel": "Username and password to see your plan and receipts",
+      "department": "Featured on your department’s page",
+      "priority": "Priority in searches and BAQUI routes",
+      "stats": "Monthly stats on visits and contacts",
+      "home": "Featured on the BAQUEANO home page",
+      "allSendero": "Everything in the Sendero plan",
+      "photos20": "Up to 20 photos",
+      "verified": "BAQUEANO verified badge (after document review or visit)",
+      "chronicle": "One post a month in Chronicles and Community",
+      "social": "Monthly promotion on Instagram, Facebook and TikTok",
+      "report": "Monthly PDF report and priority support",
+      "allMirador": "Everything in the Mirador plan",
+      "photosUnlimited": "Unlimited photos and an intro video",
+      "baqui": "BAQUI recommends you first when travelers ask for your service in your area",
+      "promos": "Seasonal promotions and offers on your listing",
+      "onboarding": "We help you build your listing: texts and photos"
+    },
+    "cta": "Choose plan",
+    "mirador": {
+      "badge": "Most popular",
+      "tag": "Stand out in your area"
+    },
+    "cumbre": {
+      "tag": "Maximum visibility"
+    },
+    "note": {
+      "exchange": "Córdoba prices use BAQUEANO’s reference rate (C$ 36.6243 per US$ 1). The yearly plan costs 10 months: 2 months free."
+    },
+    "steps": {
+      "title": "How it works",
+      "s1t": "Choose your plan",
+      "s1": "Fill in your business details and your receipt details.",
+      "s2t": "We arrange payment on WhatsApp",
+      "s2": "We share the payment options: bank transfer, deposit or cash.",
+      "s3t": "Get your receipt and access",
+      "s3": "A receipt with your details and a username and password to see your plan.",
+      "s4t": "We publish your business",
+      "s4": "The team reviews your listing and publishes it on the website and app."
+    },
+    "mine": {
+      "title": "My plan",
+      "login": "Already have a plan? Sign in with the username we sent you to see your plan and receipts.",
+      "loginBtn": "Sign in",
+      "passTitle": "Change your temporary password",
+      "passHelp": "For security, choose your own password of at least 8 characters.",
+      "passNew": "New password",
+      "passRepeat": "Repeat the password",
+      "passSave": "Save password",
+      "passShort": "The password must be at least 8 characters.",
+      "passMismatch": "The passwords don’t match.",
+      "passDone": "Done: your password has been changed.",
+      "passRelogin": "For security, sign out, sign back in with the temporary password and change it right away.",
+      "loading": "Loading your plan…",
+      "none": "Your account has no plans yet. Choose one above and we’ll help you on WhatsApp.",
+      "item": "{plan} plan · {business}",
+      "order": "Order",
+      "valid": "Valid from {from} to {to}",
+      "review": "Your business listing: request {code} under team review.",
+      "receipt": "View receipt {n}",
+      "pay": "Arrange payment",
+      "payText": "Hello BAQUEANO, I’d like to arrange payment for my order {code}."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "q1": "Does BAQUEANO charge a commission per customer?",
+      "a1": "No. Travelers contact you directly on WhatsApp or by phone and pay you. You only pay for your plan.",
+      "q2": "How do I pay?",
+      "a2": "After sending your details, contact us on WhatsApp and we agree on the method: bank transfer, deposit or cash.",
+      "q3": "What document do I get?",
+      "a3": "A numbered payment receipt with BAQUEANO’s details and yours: name or company name, ID, address, plan, period and amount in córdobas and dollars.",
+      "q4": "When will my business appear?",
+      "a4": "Once we confirm the payment, your business goes to team review and is published on the website and app. If something is missing, we’ll message you.",
+      "q5": "Can I change plans?",
+      "a5": "Yes. Message us on WhatsApp and we’ll move you to the plan you need from the next period."
+    },
+    "form": {
+      "title": "Your details",
+      "billing": "Details for your receipt",
+      "clientType": "Bill to",
+      "persona": "Individual",
+      "empresa": "Company or cooperative",
+      "legalName": "Full name or company name",
+      "idType": "ID document",
+      "cedula": "National ID card",
+      "ruc": "RUC (tax ID)",
+      "passport": "Passport",
+      "residence": "Residence card",
+      "idNumber": "ID number",
+      "address": "Address",
+      "owner": "Owner and contact",
+      "contactName": "Owner or manager name",
+      "email": "Email (your username)",
+      "phone": "WhatsApp or phone",
+      "business": "Your business",
+      "businessName": "Business name",
+      "category": "Type of business",
+      "department": "Department",
+      "municipality": "Municipality",
+      "description": "What do you offer? (20 to 300 characters)",
+      "notes": "Notes (optional)",
+      "terms": "I accept BAQUEANO’s terms and agree to be contacted on WhatsApp to arrange payment.",
+      "termsLink": "View terms",
+      "cancel": "Cancel",
+      "submit": "Send and continue on WhatsApp",
+      "close": "Close",
+      "summary": "{plan} plan · {period} · {nio} ({usd})",
+      "sending": "Sending…"
+    },
+    "cat": {
+      "alojamiento": "Lodging",
+      "restaurante": "Restaurant",
+      "gastronomia": "Café or local food",
+      "guia": "Tour guide",
+      "experiencia": "Tour or experience",
+      "turismo_rural": "Rural or community tourism",
+      "finca": "Farm",
+      "day_pass": "Day pass",
+      "transporte": "Transportation",
+      "alquiler_vehiculos": "Vehicle rental",
+      "artesania": "Handicrafts",
+      "cultura": "Culture",
+      "musica": "Music",
+      "otro": "Other"
+    },
+    "done": {
+      "title": "We received your order!",
+      "code": "Your order code is",
+      "next": "Message us on WhatsApp with that code to arrange payment. Once confirmed, you’ll get your receipt and username.",
+      "whatsapp": "Continue on WhatsApp",
+      "close": "Close",
+      "waText": "Hello BAQUEANO, I sent my order {code}: {plan} plan, {period} ({nio} / {usd}) for {business}. I’d like to arrange payment."
+    },
+    "error": {
+      "generic": "We couldn’t complete the request. Please try again.",
+      "terms": "You must accept the terms to continue.",
+      "field": "Please check this field: {field}"
+    },
+    "status": {
+      "pending": "Awaiting payment",
+      "contacted": "In contact via WhatsApp",
+      "paid": "Paid",
+      "cancelled": "Cancelled"
+    },
+    "meta": {
+      "title": "Plans for businesses | Baqueano Nicaragua",
+      "description": "List your lodging, restaurant, tour or small business on BAQUEANO Nicaragua. Monthly and yearly plans in córdobas and dollars, direct contact with your customers and no commissions."
+    }
+  },
+  "opsPlans": {
+    "title": "Plans and receipts"
   }
 }

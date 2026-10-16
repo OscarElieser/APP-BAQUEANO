@@ -174,6 +174,13 @@ function bqRenderGlobalMenu(current) {
       </div>`;
   });
 
+  // 2026-10-15 — «un botón al menú principal» (propietario): Planes para negocios.
+  const plansCurrent = current === 'planes.html' || current === 'planes';
+  html += `
+      <a href="planes.html" class="bq-menu-home bq-menu-plans exact-nav-link${plansCurrent ? ' active' : ''}"${plansCurrent ? ' aria-current="page"' : ''}>
+        <i class="fa-solid fa-store bq-menu-trigger-icon" aria-hidden="true"></i><span data-i18n="menu.plans">Planes</span>
+      </a>`;
+
   html += `
       <div class="bq-drawer-tools">
         <p class="bq-menu-section-title" data-i18n="menu.session">Tu sesión</p>
