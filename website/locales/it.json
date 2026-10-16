@@ -7965,7 +7965,12 @@
       "review": "Pubblicazione della tua attività: richiesta {code} in revisione.",
       "receipt": "Vedi ricevuta {n}",
       "pay": "Concorda il pagamento",
-      "payText": "Ciao BAQUEANO, vorrei concordare il pagamento del mio ordine {code}."
+      "payText": "Ciao BAQUEANO, vorrei concordare il pagamento del mio ordine {code}.",
+      "expiresIn": "Scade tra {days} giorni",
+      "expiresToday": "Scade oggi",
+      "expiredOn": "Scaduto il {date}",
+      "renew": "Rinnova su WhatsApp",
+      "renewText": "Ciao BAQUEANO, vorrei rinnovare il mio piano {plan} (ordine {code})."
     },
     "faq": {
       "title": "Domande frequenti",
@@ -8051,6 +8056,14 @@
     "meta": {
       "title": "Piani per le attività | Baqueano Nicaragua",
       "description": "Pubblica il tuo alloggio, ristorante, tour o attività su BAQUEANO Nicaragua. Piani mensili e annuali in córdoba e dollari, contatto diretto con i clienti e senza commissioni."
+    },
+    "notify": {
+      "title": "Il tuo piano scade a breve",
+      "body": "Il tuo piano {plan} per {business} scade tra {days} giorni ({date}). Rinnovalo su WhatsApp per restare visibile.",
+      "tomorrow": "Il tuo piano {plan} per {business} scade domani ({date}). Rinnovalo su WhatsApp per restare visibile.",
+      "today": "Il tuo piano {plan} per {business} scade oggi ({date}). Rinnovalo su WhatsApp per restare visibile.",
+      "expiredTitle": "Il tuo piano è scaduto",
+      "expired": "Il tuo piano {plan} per {business} è scaduto il {date}. Rinnovalo su WhatsApp per tornare visibile."
     }
   },
   "opsPlans": {

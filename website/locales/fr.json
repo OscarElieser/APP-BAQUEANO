@@ -7965,7 +7965,12 @@
       "review": "Publication de votre établissement : demande {code} en cours d’examen.",
       "receipt": "Voir le reçu {n}",
       "pay": "Organiser le paiement",
-      "payText": "Bonjour BAQUEANO, je souhaite organiser le paiement de ma demande {code}."
+      "payText": "Bonjour BAQUEANO, je souhaite organiser le paiement de ma demande {code}.",
+      "expiresIn": "Expire dans {days} jours",
+      "expiresToday": "Expire aujourd’hui",
+      "expiredOn": "Expiré le {date}",
+      "renew": "Renouveler sur WhatsApp",
+      "renewText": "Bonjour BAQUEANO, je souhaite renouveler ma formule {plan} (demande {code})."
     },
     "faq": {
       "title": "Questions fréquentes",
@@ -8051,6 +8056,14 @@
     "meta": {
       "title": "Formules pour les entreprises | Baqueano Nicaragua",
       "description": "Publiez votre hébergement, restaurant, excursion ou activité sur BAQUEANO Nicaragua. Formules mensuelles et annuelles en córdobas et en dollars, contact direct avec vos clients et sans commission."
+    },
+    "notify": {
+      "title": "Votre formule expire bientôt",
+      "body": "Votre formule {plan} pour {business} expire dans {days} jours ({date}). Renouvelez-la sur WhatsApp pour rester visible.",
+      "tomorrow": "Votre formule {plan} pour {business} expire demain ({date}). Renouvelez-la sur WhatsApp pour rester visible.",
+      "today": "Votre formule {plan} pour {business} expire aujourd’hui ({date}). Renouvelez-la sur WhatsApp pour rester visible.",
+      "expiredTitle": "Votre formule a expiré",
+      "expired": "Votre formule {plan} pour {business} a expiré le {date}. Renouvelez-la sur WhatsApp pour que votre établissement soit de nouveau visible."
     }
   },
   "opsPlans": {

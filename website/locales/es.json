@@ -7965,7 +7965,12 @@
       "review": "Publicación de tu local: solicitud {code} en revisión del equipo.",
       "receipt": "Ver comprobante {n}",
       "pay": "Coordinar pago",
-      "payText": "Hola BAQUEANO, quiero coordinar el pago de mi pedido {code}."
+      "payText": "Hola BAQUEANO, quiero coordinar el pago de mi pedido {code}.",
+      "expiresIn": "Vence en {days} días",
+      "expiresToday": "Vence hoy",
+      "expiredOn": "Venció el {date}",
+      "renew": "Renovar por WhatsApp",
+      "renewText": "Hola BAQUEANO, quiero renovar mi plan {plan} (pedido {code})."
     },
     "faq": {
       "title": "Preguntas frecuentes",
@@ -8051,6 +8056,14 @@
     "meta": {
       "title": "Planes para negocios | Baqueano Nicaragua",
       "description": "Publicá tu hospedaje, restaurante, tour o emprendimiento en BAQUEANO Nicaragua. Planes mensuales y anuales en córdobas y dólares, contacto directo con tus clientes y sin comisiones."
+    },
+    "notify": {
+      "title": "Tu plan vence pronto",
+      "body": "Tu plan {plan} de {business} vence en {days} días ({date}). Renovalo por WhatsApp para seguir visible.",
+      "tomorrow": "Tu plan {plan} de {business} vence mañana ({date}). Renovalo por WhatsApp para seguir visible.",
+      "today": "Tu plan {plan} de {business} vence hoy ({date}). Renovalo por WhatsApp para seguir visible.",
+      "expiredTitle": "Tu plan venció",
+      "expired": "Tu plan {plan} de {business} venció el {date}. Renovalo por WhatsApp para que tu local vuelva a estar visible."
     }
   },
   "opsPlans": {

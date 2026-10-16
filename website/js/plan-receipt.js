@@ -8,6 +8,8 @@
  *   pedido ya emitido (número BQ-000001…, fecha, cliente, plan, período, montos en C$ y US$,
  *   cambio, método y referencia de pago). Desde ahí se imprime o se guarda como PDF.
  *   Todo texto del cliente se escapa. Lo usan planes.html (Mi plan) y el Ops Center.
+ *   15-10-2026: logo de BAQUEANO y hora de la suscripción, del pago y de la emisión (hora de
+ *   Nicaragua), a pedido del propietario.
  * 📦 QUÉ: window.BaqueanoPlanReceipt.open(order).
  */
 (function () {
@@ -41,6 +43,18 @@
     return d.toLocaleDateString('es-NI', { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'America/Managua' });
   }
 
+  // Fecha y hora en Nicaragua (el comprobante muestra la hora exacta de la suscripción y del pago).
+  function dateTime(value) {
+    if (!value) return '—';
+    var d = new Date(value);
+    if (isNaN(d)) return '—';
+    return d.toLocaleString('es-NI', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'America/Managua' });
+  }
+  function logoUrl() {
+    var origin = (window.location && /^https?:/.test(window.location.origin)) ? window.location.origin : 'https://baqueanonicaragua.com';
+    return origin + '/assets/images/LOGOS/baqueano_logo_horizontal_negro.png';
+  }
+
   function html(o) {
     var period = o.billing_period === 'annual' ? 'Anual (12 meses)' : 'Mensual (1 mes)';
     var plan = PLAN_NAMES[o.plan_code] || ('Plan ' + o.plan_code);
@@ -50,7 +64,7 @@
       '*{box-sizing:border-box}body{margin:0;background:#e5e7eb;font:14px/1.45 "Segoe UI",Arial,sans-serif;color:#111827}' +
       '.sheet{width:min(800px,100%);margin:20px auto;background:#fff;padding:36px 40px;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.15)}' +
       '.top{display:flex;justify-content:space-between;gap:20px;border-bottom:3px solid #165D6F;padding-bottom:16px}' +
-      '.brand h1{margin:0;font-size:24px;letter-spacing:.06em;color:#0D1B2A}.brand p{margin:2px 0;color:#374151}' +
+      '.brand .logo{display:block;width:200px;max-width:60vw;height:auto;margin:0 0 8px}.brand h1{margin:0;font-size:24px;letter-spacing:.06em;color:#0D1B2A}.brand p{margin:2px 0;color:#374151}' +
       '.doc{text-align:right}.doc h2{margin:0;font-size:18px;color:#C2410C;letter-spacing:.04em}.doc .num{font-size:22px;font-weight:800;margin:4px 0}' +
       '.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}' +
       '.box{border:1px solid #d1d5db;border-radius:6px;padding:12px 14px}.box h3{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#165D6F}' +
@@ -64,11 +78,11 @@
       '@media(max-width:640px){.sheet{padding:20px}.top,.foot{flex-direction:column}.doc{text-align:left}.grid{grid-template-columns:1fr}}' +
       '</style></head><body>' +
       '<div class="sheet">' +
-        '<div class="top"><div class="brand"><h1>BAQUEANO</h1><p><strong>' + esc(ISSUER.name) + '</strong></p><p>' + esc(ISSUER.city) + '</p><p>' + esc(ISSUER.phone) + ' · ' + esc(ISSUER.email) + '</p><p>' + esc(ISSUER.site) + '</p></div>' +
-        '<div class="doc"><h2>COMPROBANTE DE PAGO</h2><div class="num">N.º ' + esc(o.receipt_number) + '</div><p>Fecha de emisión: ' + esc(date(o.receipt_issued_at)) + '</p><p>Pedido: ' + esc(o.code) + '</p></div></div>' +
+        '<div class="top"><div class="brand"><img class="logo" src="' + esc(logoUrl()) + '" alt="BAQUEANO Nicaragua" width="200"><p><strong>' + esc(ISSUER.name) + '</strong></p><p>' + esc(ISSUER.city) + '</p><p>' + esc(ISSUER.phone) + ' · ' + esc(ISSUER.email) + '</p><p>' + esc(ISSUER.site) + '</p></div>' +
+        '<div class="doc"><h2>COMPROBANTE DE PAGO</h2><div class="num">N.º ' + esc(o.receipt_number) + '</div><p>Emisión: ' + esc(dateTime(o.receipt_issued_at)) + '</p><p>Pedido: ' + esc(o.code) + '</p><p>Suscripción: ' + esc(dateTime(o.created_at)) + '</p></div></div>' +
         '<div class="grid">' +
           '<div class="box"><h3>Cliente</h3><p><strong>' + esc(o.legal_name) + '</strong></p><p>' + esc(ID_TYPES[o.id_type] || o.id_type) + ': ' + esc(o.id_number) + '</p><p>' + esc(o.billing_address) + '</p><p>' + esc(o.phone) + ' · ' + esc(o.email) + '</p>' + (o.client_type === 'empresa' ? '<p>Contacto: ' + esc(o.contact_name) + '</p>' : '') + '</div>' +
-          '<div class="box"><h3>Local publicado</h3><p><strong>' + esc(o.business_name) + '</strong></p><p>' + esc([o.municipality, o.department].filter(Boolean).join(', ')) + '</p><h3 style="margin-top:10px">Pago</h3><p>' + esc(METHODS[o.payment_method] || o.payment_method || '—') + (o.payment_reference ? ' · Ref. ' + esc(o.payment_reference) : '') + '</p><p>Fecha de pago: ' + esc(date(o.paid_at)) + '</p></div>' +
+          '<div class="box"><h3>Local publicado</h3><p><strong>' + esc(o.business_name) + '</strong></p><p>' + esc([o.municipality, o.department].filter(Boolean).join(', ')) + '</p><h3 style="margin-top:10px">Pago</h3><p>' + esc(METHODS[o.payment_method] || o.payment_method || '—') + (o.payment_reference ? ' · Ref. ' + esc(o.payment_reference) : '') + '</p><p>Fecha y hora de pago: ' + esc(dateTime(o.paid_at)) + '</p></div>' +
         '</div>' +
         '<table><thead><tr><th>Cant.</th><th>Descripción</th><th class="r">Precio US$</th><th class="r">Total C$</th></tr></thead><tbody>' +
           '<tr><td>1</td><td>' + esc(plan) + ' — publicación del local en BAQUEANO (web y app Android).<br>Modalidad: ' + esc(period) + '<br>Vigencia: del ' + esc(date(o.period_start)) + ' al ' + esc(date(o.period_end)) + '</td><td class="r">' + esc(money(o.amount_usd, 'USD')) + '</td><td class="r">' + esc(money(o.amount_nio, 'NIO')) + '</td></tr>' +

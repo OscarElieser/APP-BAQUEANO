@@ -7965,7 +7965,12 @@
       "review": "Your business listing: request {code} under team review.",
       "receipt": "View receipt {n}",
       "pay": "Arrange payment",
-      "payText": "Hello BAQUEANO, I’d like to arrange payment for my order {code}."
+      "payText": "Hello BAQUEANO, I’d like to arrange payment for my order {code}.",
+      "expiresIn": "Expires in {days} days",
+      "expiresToday": "Expires today",
+      "expiredOn": "Expired on {date}",
+      "renew": "Renew on WhatsApp",
+      "renewText": "Hello BAQUEANO, I’d like to renew my {plan} plan (order {code})."
     },
     "faq": {
       "title": "Frequently asked questions",
@@ -8051,6 +8056,14 @@
     "meta": {
       "title": "Plans for businesses | Baqueano Nicaragua",
       "description": "List your lodging, restaurant, tour or small business on BAQUEANO Nicaragua. Monthly and yearly plans in córdobas and dollars, direct contact with your customers and no commissions."
+    },
+    "notify": {
+      "title": "Your plan expires soon",
+      "body": "Your {plan} plan for {business} expires in {days} days ({date}). Renew it on WhatsApp to stay visible.",
+      "tomorrow": "Your {plan} plan for {business} expires tomorrow ({date}). Renew it on WhatsApp to stay visible.",
+      "today": "Your {plan} plan for {business} expires today ({date}). Renew it on WhatsApp to stay visible.",
+      "expiredTitle": "Your plan has expired",
+      "expired": "Your {plan} plan for {business} expired on {date}. Renew it on WhatsApp so your business is visible again."
     }
   },
   "opsPlans": {

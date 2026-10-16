@@ -7965,7 +7965,12 @@
       "review": "업체 게시: 신청 {code} 팀 검토 중.",
       "receipt": "영수증 {n} 보기",
       "pay": "결제 안내받기",
-      "payText": "안녕하세요 BAQUEANO, 신청 {code}의 결제를 안내받고 싶습니다."
+      "payText": "안녕하세요 BAQUEANO, 신청 {code}의 결제를 안내받고 싶습니다.",
+      "expiresIn": "{days}일 후 만료",
+      "expiresToday": "오늘 만료",
+      "expiredOn": "{date}에 만료됨",
+      "renew": "WhatsApp으로 갱신",
+      "renewText": "안녕하세요 BAQUEANO, {plan} 요금제를 갱신하고 싶습니다 (신청 {code})."
     },
     "faq": {
       "title": "자주 묻는 질문",
@@ -8051,6 +8056,14 @@
     "meta": {
       "title": "업체용 요금제 | Baqueano Nicaragua",
       "description": "BAQUEANO Nicaragua에 숙소, 식당, 투어, 업체를 등록하세요. 코르도바·달러 월간·연간 요금제, 고객과 직접 연락, 수수료 없음."
+    },
+    "notify": {
+      "title": "요금제가 곧 만료됩니다",
+      "body": "{business}의 {plan} 요금제가 {days}일 후({date}) 만료됩니다. 계속 노출되려면 WhatsApp으로 갱신하세요.",
+      "tomorrow": "{business}의 {plan} 요금제가 내일({date}) 만료됩니다. 계속 노출되려면 WhatsApp으로 갱신하세요.",
+      "today": "{business}의 {plan} 요금제가 오늘({date}) 만료됩니다. 계속 노출되려면 WhatsApp으로 갱신하세요.",
+      "expiredTitle": "요금제가 만료되었습니다",
+      "expired": "{business}의 {plan} 요금제가 {date}에 만료되었습니다. 다시 노출되려면 WhatsApp으로 갱신하세요."
     }
   },
   "opsPlans": {

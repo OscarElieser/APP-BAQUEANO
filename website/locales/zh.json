@@ -7965,7 +7965,12 @@
       "review": "店铺发布：申请 {code} 正在由团队审核。",
       "receipt": "查看收据 {n}",
       "pay": "安排付款",
-      "payText": "您好 BAQUEANO，我想为订单 {code} 安排付款。"
+      "payText": "您好 BAQUEANO，我想为订单 {code} 安排付款。",
+      "expiresIn": "{days} 天后到期",
+      "expiresToday": "今天到期",
+      "expiredOn": "已于 {date} 到期",
+      "renew": "通过 WhatsApp 续费",
+      "renewText": "您好 BAQUEANO，我想续费 {plan} 方案（订单 {code}）。"
     },
     "faq": {
       "title": "常见问题",
@@ -8051,6 +8056,14 @@
     "meta": {
       "title": "商家方案 | Baqueano Nicaragua",
       "description": "在 BAQUEANO Nicaragua 展示您的住宿、餐厅、旅游项目或店铺。提供科多巴和美元的月度、年度方案，与客户直接联系，无佣金。"
+    },
+    "notify": {
+      "title": "您的方案即将到期",
+      "body": "{business} 的 {plan} 方案将在 {days} 天后（{date}）到期。请通过 WhatsApp 续费以保持展示。",
+      "tomorrow": "{business} 的 {plan} 方案将于明天（{date}）到期。请通过 WhatsApp 续费以保持展示。",
+      "today": "{business} 的 {plan} 方案今天（{date}）到期。请通过 WhatsApp 续费以保持展示。",
+      "expiredTitle": "您的方案已到期",
+      "expired": "{business} 的 {plan} 方案已于 {date} 到期。请通过 WhatsApp 续费，让店铺重新展示。"
     }
   },
   "opsPlans": {

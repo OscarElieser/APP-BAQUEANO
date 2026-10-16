@@ -13,6 +13,8 @@
 //     order_confirm_payment (plan_receipt_issue: número correlativo sin saltos),
 //     owner_account_create (crea la cuenta en Firebase Auth con contraseña temporal que se
 //     muestra una sola vez y no se guarda; registra el local en business_applications).
+//   - Vencimientos (equipo): reminders_list y reminders_run (plan_reminders_run: campana,
+//     correo y WhatsApp; la tarea diaria de pg_cron hace lo mismo sola).
 //   - Nada se borra: los pedidos se cancelan. Todo cambio del equipo queda en audit_logs.
 // 📦 QUÉ: POST { action, ... }.
 // ============================================================================
@@ -312,6 +314,31 @@ async function handle(action: string, body: Record<string, unknown>, req: Reques
       await audit(service, req, w, "PLAN_OWNER_ACCOUNT", order.code, `Cuenta del propietario creada para ${order.email} (pedido ${order.code})`, { owner_uid: uid, application: appCode });
       // La contraseña temporal se devuelve una sola vez y no se guarda en ningún lado.
       return { email: order.email, temp_password: password, application_code: appCode, phone: order.phone, contact_name: order.contact_name };
+    }
+
+    // Vencimientos: planes pagados que vencen en 10 días o vencieron hace poco, con el estado de
+    // cada aviso (plataforma, correo, WhatsApp) que dejó plan_reminders_run().
+    case "reminders_list": {
+      requireStaff(await who(req, service, true), false);
+      const today = new Date(Date.now() - 6 * 3600 * 1000).toISOString().slice(0, 10);
+      const until = new Date(Date.now() + 10 * 86400 * 1000).toISOString().slice(0, 10);
+      const since = new Date(Date.now() - 15 * 86400 * 1000).toISOString().slice(0, 10);
+      const { data: orders, error } = await service.from("plan_orders").select("id, code, plan_code, billing_period, business_name, contact_name, phone, email, period_end, owner_uid")
+        .eq("status", "paid").gte("period_end", since).lte("period_end", until).order("period_end");
+      if (error) throw new HttpError(500, "No se pudieron leer los vencimientos.", "read_failed");
+      const ids = (orders || []).map((o) => o.id);
+      const { data: reminders } = ids.length
+        ? await service.from("plan_reminders").select("order_id, kind, channel, status, detail, created_at").in("order_id", ids).order("created_at", { ascending: false })
+        : { data: [] };
+      return { today, orders: orders || [], reminders: reminders || [] };
+    }
+
+    case "reminders_run": {
+      const w = requireStaff(await who(req, service, true), true);
+      const { data, error } = await service.rpc("plan_reminders_run");
+      if (error) throw new HttpError(500, `No se pudieron enviar los avisos: ${error.message}`, "run_failed");
+      await audit(service, req, w, "PLAN_REMINDERS_RUN", "plan_reminders", "Avisos de vencimiento ejecutados a mano", { result: data });
+      return { result: data };
     }
 
     default:

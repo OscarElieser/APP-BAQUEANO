@@ -9,6 +9,8 @@
 //   el servidor decide el rol (auditor solo lee; admin y super_admin actúan) y deja auditoría.
 //   El comprobante lo arma js/plan-receipt.js. La contraseña temporal llega una sola vez y no se
 //   guarda en ningún lado: se muestra para copiarla o enviarla. Todo se pinta con textContent.
+// - 15-10-2026: «Vencimientos próximos» con el estado de cada aviso (campana, correo, WhatsApp),
+//   botón para avisar por WhatsApp a mano y «Enviar avisos ahora».
 // 📦 QUÉ: window.BaqueanoOpsPlans = { render(panel), refresh() } para la vista 44-planes.
 // ============================================================================
 (function (window, document) {
@@ -23,7 +25,7 @@
   var STATUS_LABEL = { pending: 'Pendiente de pago', contacted: 'En contacto', paid: 'Pagado', cancelled: 'Cancelado' };
   var ID_TYPES = { cedula: 'Cédula', ruc: 'RUC', pasaporte: 'Pasaporte', residencia: 'Residencia' };
   var METHODS = [['transferencia', 'Transferencia bancaria'], ['deposito', 'Depósito bancario'], ['efectivo', 'Efectivo'], ['billetera', 'Billetera electrónica'], ['otro', 'Otro']];
-  var state = { panel: null, filter: '', orders: [], loading: false, error: '', notice: '', role: '' };
+  var state = { panel: null, filter: '', orders: [], loading: false, error: '', notice: '', role: '', expiring: [], reminders: [], remError: '' };
 
   function el(tag, attrs, children) {
     var n = document.createElement(tag);
@@ -59,9 +61,13 @@
   function refresh() {
     state.loading = true; state.error = ''; paint();
     try { var s = window.BaqueanoOpsData && window.BaqueanoOpsData.state; state.role = (s && s.role) || state.role; } catch (_) {}
-    return call('orders_list', {}).then(function (res) {
+    var a = call('orders_list', {}).then(function (res) {
       state.orders = res.orders || [];
-    }).catch(function (e) { state.error = e.message; }).then(function () { state.loading = false; paint(); });
+    }).catch(function (e) { state.error = e.message; });
+    var b = call('reminders_list', {}).then(function (res) {
+      state.expiring = res.orders || []; state.reminders = res.reminders || []; state.remError = '';
+    }).catch(function (e) { state.remError = e.message; });
+    return Promise.all([a, b]).then(function () { state.loading = false; paint(); });
   }
 
   // ── Ventanas ──
@@ -209,6 +215,56 @@
     return el('article', { className: 'ops-plans-card' }, [head, info, actions]);
   }
 
+  // ── Vencimientos: avisos por la campana, correo y WhatsApp ──
+  var CHANNEL = { platform: 'Campana', email: 'Correo', whatsapp: 'WhatsApp' };
+  var REM_STATUS = { sent: 'enviado', failed: 'falló', not_configured: 'sin configurar', skipped: 'sin cuenta' };
+  function daysLeft(end) {
+    var e = new Date(end + 'T12:00:00'); var t = new Date(); t.setHours(12, 0, 0, 0);
+    return Math.round((e - t) / 86400000);
+  }
+  function expiringSection() {
+    var box = el('section', { className: 'ops-plans-expiring', 'aria-labelledby': 'opsPlansExpTitle' });
+    var run = el('button', { type: 'button', className: 'ops-btn' }, [icon('fa-solid fa-bell'), ' Enviar avisos ahora']);
+    run.addEventListener('click', function () {
+      run.disabled = true;
+      call('reminders_run', {}).then(function (res) {
+        var s2 = (res.result && res.result.sent) || {};
+        state.notice = 'Avisos enviados · campana ' + (s2.platform || 0) + ' · correo ' + (s2.email || 0) + ' · WhatsApp ' + (s2.whatsapp || 0) + '.';
+        refresh();
+      }).catch(function (e) { state.error = e.message; run.disabled = false; paint(); });
+    });
+    box.appendChild(el('div', { className: 'ops-plans-exp-head' }, [
+      el('h2', { id: 'opsPlansExpTitle' }, [icon('fa-solid fa-hourglass-half'), ' Vencimientos próximos']),
+      canWrite() ? run : null
+    ]));
+    box.appendChild(el('p', { className: 'ops-plans-hint', text: 'Cada día a las 8:05 a. m. el sistema avisa a 7, 3 y 1 día del vencimiento, el día que vence y el día después: en la campana de la plataforma, por correo y por WhatsApp.' }));
+    if (state.remError) { box.appendChild(el('p', { className: 'ops-plans-error', role: 'alert', text: state.remError })); return box; }
+    if (!state.expiring.length) { box.appendChild(el('p', { className: 'ops-plans-empty', text: 'Ningún plan vence en los próximos 10 días.' })); return box; }
+    state.expiring.forEach(function (o) {
+      var left = daysLeft(o.period_end);
+      var label = left < 0 ? 'Venció hace ' + Math.abs(left) + ' día' + (left === -1 ? '' : 's') : left === 0 ? 'Vence hoy' : 'Vence en ' + left + ' día' + (left === 1 ? '' : 's');
+      var chips = el('div', { className: 'ops-plans-chips' });
+      ['platform', 'email', 'whatsapp'].forEach(function (ch) {
+        var last = state.reminders.find(function (r) { return r.order_id === o.id && r.channel === ch; });
+        var c = el('span', { className: 'ops-plans-chip is-' + (last ? last.status : 'none'), title: last && last.detail ? last.detail : '', text: CHANNEL[ch] + ': ' + (last ? REM_STATUS[last.status] || last.status : 'pendiente') });
+        chips.appendChild(c);
+      });
+      var msg = 'Hola ' + o.contact_name + ', te escribimos de BAQUEANO: tu plan ' + (PLAN_NAMES[o.plan_code] || o.plan_code) + ' de «' + o.business_name + '» ' +
+        (left < 0 ? 'venció el ' + o.period_end : 'vence el ' + o.period_end) + '. ¿Querés renovarlo para seguir visible en la web y en la app? Pedido ' + o.code + '.';
+      var wa = el('a', { className: 'ops-btn is-primary', href: 'https://wa.me/' + waDigits(o.phone) + '?text=' + encodeURIComponent(msg), target: '_blank', rel: 'noopener' }, [icon('fa-brands fa-whatsapp'), ' Avisar por WhatsApp']);
+      box.appendChild(el('article', { className: 'ops-plans-card is-expiring' + (left < 0 ? ' is-expired' : '') }, [
+        el('div', { className: 'ops-plans-card-head' }, [
+          el('strong', { text: o.code }),
+          el('span', { className: 'ops-plans-status ' + (left < 0 ? 'is-cancelled' : 'is-pending'), text: label }),
+          el('span', { className: 'ops-plans-plan is-' + o.plan_code, text: (PLAN_NAMES[o.plan_code] || o.plan_code) + ' · ' + o.business_name })
+        ]),
+        chips,
+        el('div', { className: 'ops-plans-actions' }, [wa])
+      ]));
+    });
+    return box;
+  }
+
   function paint() {
     if (!state.panel) return;
     var counts = {};
@@ -236,6 +292,8 @@
     var children = [header, intro, el('div', { className: 'ops-plans-toolbar' }, [filters, el('div', { className: 'ops-plans-tools' }, [reload, page])])];
     if (state.notice) children.push(el('p', { className: 'ops-plans-notice', role: 'status', text: state.notice }));
     if (!canWrite()) children.push(el('p', { className: 'ops-plans-hint', text: 'Rol de solo lectura: podés ver los pedidos y los comprobantes.' }));
+    if (!state.loading) children.push(expiringSection());
+    children.push(el('h2', { className: 'ops-plans-subtitle' }, [icon('fa-solid fa-receipt'), ' Pedidos']));
     children.push(list);
     state.panel.replaceChildren.apply(state.panel, children);
   }
@@ -266,6 +324,14 @@
       '.ops-plans-form input,.ops-plans-form select{min-height:44px;padding:.5rem .7rem;border-radius:10px;border:1px solid rgba(244,230,193,.22);background:#0b1320;color:#fff;font:inherit}' +
       '.ops-plans-dialog-foot{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;padding:0 16px 16px}' +
       '.ops-plans-pass{display:inline-block;padding:.3rem .6rem;border-radius:8px;background:#0b1320;border:1px dashed #f4e6c1;font-size:1.05rem;letter-spacing:.04em;user-select:all}' +
+      '.ops-plans-expiring{margin:8px 0 18px;padding:14px;border-radius:16px;border:1px solid rgba(251,191,36,.35);background:rgba(251,191,36,.06)}' +
+      '.ops-plans-exp-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px}' +
+      '.ops-plans-expiring h2,.ops-plans-subtitle{margin:0;font:800 1.05rem/1.2 League Spartan,sans-serif;color:#fff}.ops-plans-subtitle{margin:14px 0 8px}' +
+      '.ops-plans-card.is-expiring{margin-top:10px}.ops-plans-card.is-expired{border-color:rgba(248,113,113,.5)}' +
+      '.ops-plans-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}' +
+      '.ops-plans-chip{padding:.2rem .55rem;border-radius:999px;font-size:.76rem;font-weight:700;background:rgba(148,163,184,.18);color:#e2e8f0}' +
+      '.ops-plans-chip.is-sent{background:rgba(74,222,128,.18);color:#bbf7d0}.ops-plans-chip.is-failed{background:rgba(248,113,113,.18);color:#fecaca}' +
+      '.ops-plans-chip.is-not_configured{background:rgba(251,191,36,.18);color:#fde68a}' +
       '@media(max-width:600px){.ops-plans-info{grid-template-columns:1fr}.ops-plans-amount{margin-left:0}}';
     var s = document.createElement('style'); s.id = 'opsPlansStyle'; s.textContent = css; document.head.appendChild(s);
   }

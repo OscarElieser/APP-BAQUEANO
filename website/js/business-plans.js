@@ -244,6 +244,23 @@
         info.appendChild(status);
         info.appendChild(el('p', null, (o.billing_period === 'annual' ? t('plans.toggle.annual', 'Anual') : t('plans.toggle.monthly', 'Mensual')) + ' · ' + nio(o.amount_nio) + ' (' + usd(o.amount_usd) + ') · ' + t('plans.mine.order', 'Pedido') + ' ' + o.code));
         if (o.period_start) info.appendChild(el('p', null, t('plans.mine.valid', 'Vigente del {from} al {to}', { from: fmtDate(o.period_start), to: fmtDate(o.period_end) })));
+        if (o.status === 'paid' && o.period_end) {
+          // Aviso de vencimiento (el mismo que llega a la campana, al correo y por WhatsApp).
+          var end = new Date(o.period_end + 'T12:00:00');
+          var today = new Date(); today.setHours(12, 0, 0, 0);
+          var left = Math.round((end - today) / 86400000);
+          if (left <= 7) {
+            var warn = el('p', 'bq-my-plan-warn' + (left < 0 ? ' is-expired' : ''),
+              left < 0 ? t('plans.mine.expiredOn', 'Venció el {date}', { date: fmtDate(o.period_end) })
+                : left === 0 ? t('plans.mine.expiresToday', 'Vence hoy')
+                : t('plans.mine.expiresIn', 'Vence en {days} días', { days: left }));
+            info.appendChild(warn);
+            var renew = el('a', 'bq-plan-cta is-whatsapp', t('plans.mine.renew', 'Renovar por WhatsApp'));
+            renew.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(t('plans.mine.renewText', 'Hola BAQUEANO, quiero renovar mi plan {plan} (pedido {code}).', { plan: PLAN_NAMES[o.plan_code] || o.plan_code, code: o.code }));
+            renew.target = '_blank'; renew.rel = 'noopener';
+            info.appendChild(renew);
+          }
+        }
         if (o.business_application_code) info.appendChild(el('p', null, t('plans.mine.review', 'Publicación de tu local: solicitud {code} en revisión del equipo.', { code: o.business_application_code })));
         item.appendChild(info);
         if (o.receipt_number) {

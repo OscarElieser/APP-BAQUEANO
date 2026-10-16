@@ -7965,7 +7965,12 @@
       "review": "Veröffentlichung deines Geschäfts: Anfrage {code} wird vom Team geprüft.",
       "receipt": "Beleg {n} ansehen",
       "pay": "Zahlung abstimmen",
-      "payText": "Hallo BAQUEANO, ich möchte die Zahlung für meine Bestellung {code} abstimmen."
+      "payText": "Hallo BAQUEANO, ich möchte die Zahlung für meine Bestellung {code} abstimmen.",
+      "expiresIn": "Läuft in {days} Tagen ab",
+      "expiresToday": "Läuft heute ab",
+      "expiredOn": "Abgelaufen am {date}",
+      "renew": "Per WhatsApp verlängern",
+      "renewText": "Hallo BAQUEANO, ich möchte meinen Plan {plan} verlängern (Bestellung {code})."
     },
     "faq": {
       "title": "Häufige Fragen",
@@ -8051,6 +8056,14 @@
     "meta": {
       "title": "Pläne für Unternehmen | Baqueano Nicaragua",
       "description": "Präsentiere deine Unterkunft, dein Restaurant, deine Tour oder dein Geschäft auf BAQUEANO Nicaragua. Monats- und Jahrespläne in Córdoba und Dollar, direkter Kundenkontakt und keine Provision."
+    },
+    "notify": {
+      "title": "Dein Plan läuft bald ab",
+      "body": "Dein Plan {plan} für {business} läuft in {days} Tagen ab ({date}). Verlängere ihn per WhatsApp, um sichtbar zu bleiben.",
+      "tomorrow": "Dein Plan {plan} für {business} läuft morgen ab ({date}). Verlängere ihn per WhatsApp, um sichtbar zu bleiben.",
+      "today": "Dein Plan {plan} für {business} läuft heute ab ({date}). Verlängere ihn per WhatsApp, um sichtbar zu bleiben.",
+      "expiredTitle": "Dein Plan ist abgelaufen",
+      "expired": "Dein Plan {plan} für {business} ist am {date} abgelaufen. Verlängere ihn per WhatsApp, damit dein Geschäft wieder sichtbar ist."
     }
   },
   "opsPlans": {

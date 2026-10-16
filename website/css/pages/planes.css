@@ -111,6 +111,9 @@
 .bq-my-plan-item p { margin: .2rem 0 0; color: var(--pl-muted); font-size: .88rem; }
 .bq-my-plan-status { display: inline-flex; padding: .25rem .6rem; border-radius: 999px; font-size: .76rem; font-weight: 800; background: rgba(148, 163, 184, .2); color: #e2e8f0; }
 .bq-my-plan-status.is-paid { background: rgba(74, 222, 128, .18); color: #bbf7d0; }
+.bq-my-plan-warn { margin: .5rem 0 !important; padding: .45rem .7rem; border-radius: 10px; background: rgba(251, 191, 36, .16); border: 1px solid rgba(251, 191, 36, .5); color: #fde68a !important; font-weight: 800; }
+.bq-my-plan-warn.is-expired { background: rgba(248, 113, 113, .16); border-color: rgba(248, 113, 113, .5); color: #fecaca !important; }
+.bq-my-plan-item .bq-plan-cta.is-whatsapp { margin-top: .4rem; }
 .bq-my-plan-pass { width: 100%; display: grid; gap: 10px; padding: 16px; border-radius: 14px; border: 1px solid rgba(246, 94, 1, .5); background: rgba(194, 65, 12, .12); }
 .bq-my-plan-pass input { min-height: 44px; padding: .6rem .8rem; border-radius: 10px; border: 1px solid var(--pl-line); background: #0b1320; color: #fff; font: inherit; }
 
