@@ -277,6 +277,7 @@
         <a href="#sec-28" class="term-index-link"><span class="num">28.</span> <span data-i18n="pages.terminos.termIndexNav.a22">Resolución de conflictos</span></a>
         <a href="#sec-29" class="term-index-link"><span class="num">29.</span> <span data-i18n="common.contacto">Contacto</span></a>
         <a href="#sec-30" class="term-index-link"><span class="num">30.</span> <span data-i18n="pages.terminos.termIndexNav.a23">Vigencia</span></a>
+        <a href="#sec-31" class="term-index-link"><span class="num">31.</span> <span data-i18n="pages.terminos.termIndexNav.a24">Planes y pagos</span></a>
       </nav>
     </aside>
 
@@ -820,12 +821,35 @@
             <span data-i18n="pages.terminos.sec30.div1">Esta versión de los Términos y Condiciones entró en vigor el</span> <strong data-i18n="common.deSeptiembreDe2026">26 de septiembre de 2026</strong> <span data-i18n="pages.terminos.sec30.div2">y sustituye cualquier acuerdo previo relativo al uso de los servicios digitales de BAQUEANO.</span>
           </div>
         </article>
+
+        <article class="term-accordion-item" id="sec-31">
+          <div class="term-acc-header">
+            <div class="term-acc-header-left">
+              <span class="term-acc-badge b-orange">31</span>
+              <div class="term-acc-title-group">
+                <h4 data-i18n="pages.terminos.sec31.h41">31. Planes para negocios y pagos</h4>
+                <p data-i18n="pages.terminos.sec31.p1">Planes Sendero, Mirador y Cumbre: pagos, comprobantes, renovación y cancelación.</p>
+              </div>
+            </div>
+            <i class="fa-solid fa-chevron-down term-acc-chevron"></i>
+          </div>
+          <div class="term-acc-body">
+            <p data-i18n="pages.terminos.sec31.b1">BAQUEANO ofrece tres planes para negocios turísticos: Sendero, Mirador y Cumbre, con pago mensual o anual. Los precios vigentes se publican en la página Planes, primero en córdobas y luego en dólares, al cambio de referencia de BAQUEANO.</p>
+            <p data-i18n="pages.terminos.sec31.b2">El pago se coordina por WhatsApp (+505 7797 6973) mediante transferencia bancaria, depósito o efectivo. BAQUEANO nunca solicita contraseñas ni datos completos de tarjetas.</p>
+            <p data-i18n="pages.terminos.sec31.b3">Al confirmar el pago se emite un comprobante numerado con los datos del cliente y la fecha y hora de la suscripción y del pago. Mientras BAQUEANO no cuente con numeración autorizada por la Dirección General de Ingresos (DGI), el comprobante es un documento no fiscal. Cuando corresponda, se aplicará el Impuesto al Valor Agregado (IVA) vigente en Nicaragua y se detallará por separado.</p>
+            <p data-i18n="pages.terminos.sec31.b4">El plan se activa desde la fecha de pago y dura un mes o un año según la modalidad elegida. BAQUEANO avisa antes del vencimiento por la plataforma, por correo y por WhatsApp. Si el plan no se renueva, el local deja de mostrarse destacado y su ficha puede ocultarse hasta la renovación.</p>
+            <p data-i18n="pages.terminos.sec31.b5">La publicación del local está sujeta a la revisión del equipo y a estos términos. BAQUEANO puede rechazar o suspender fichas con información falsa, contenido ilegal o que afecte a las comunidades o al ambiente, e informa al titular por WhatsApp o correo.</p>
+            <p data-i18n="pages.terminos.sec31.b6">Los pagos de períodos ya iniciados no son reembolsables, salvo un error de cobro atribuible a BAQUEANO o cuando el local no pueda publicarse por causas ajenas al titular. Los cambios de plan se aplican desde el período siguiente.</p>
+            <p data-i18n="pages.terminos.sec31.b7">Las publicaciones y promociones en redes sociales incluidas en cada plan las prepara el equipo de BAQUEANO con el material que entregue el negocio y siguen las normas de cada red social.</p>
+            <p data-i18n="pages.terminos.sec31.b8">BAQUEANO no cobra comisión por los clientes que contactan al negocio: el precio y el servicio se acuerdan directamente entre el viajero y el negocio.</p>
+          </div>
+        </article>
       </section>
 
       <!-- BOTÓN VER TODAS LAS SECCIONES -->
       <div class="term-expand-all-box">
         <button type="button" class="term-expand-all-btn" id="termToggleAllBtn">
-          <span data-i18n="pages.terminos.termToggleAllBtn.span1">Ver todas las secciones (30)</span>
+          <span data-i18n="pages.terminos.termToggleAllBtn.span1">Ver todas las secciones (31)</span>
           <i class="fa-solid fa-chevron-down"></i>
         </button>
       </div>
@@ -956,6 +980,18 @@
         });
       });
 
+      // 2026-10-15: si se llega con #sec-N (por ejemplo «Ver términos» desde Planes → #sec-31),
+      // esa sección se abre y se muestra.
+      function openFromHash() {
+        const target = location.hash && document.getElementById(location.hash.slice(1));
+        if (target && target.classList.contains('term-accordion-item')) {
+          target.classList.add('open');
+          target.scrollIntoView({ block: 'start' });
+        }
+      }
+      openFromHash();
+      window.addEventListener('hashchange', openFromHash);
+
       // Expand / Collapse all button
       const toggleAllBtn = document.getElementById('termToggleAllBtn');
       let allExpanded = false;
@@ -971,8 +1007,8 @@
             }
           });
           toggleAllBtn.querySelector('span').textContent = allExpanded 
-            ? 'Contraer todas las secciones (30)' 
-            : 'Ver todas las secciones (30)';
+            ? 'Contraer todas las secciones (31)' 
+            : 'Ver todas las secciones (31)';
           const icon = toggleAllBtn.querySelector('i');
           icon.style.transform = allExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
         });

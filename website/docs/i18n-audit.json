@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T01:32:09.555Z",
+  "generatedAt": "2026-10-16T05:42:56.474Z",
   "languages": [
     "es",
     "en",
@@ -11,23 +11,23 @@
     "zh"
   ],
   "keysPerLanguage": {
-    "es": 6144,
-    "en": 6144,
-    "fr": 6144,
-    "it": 6144,
-    "pt": 6144,
-    "de": 6144,
-    "ko": 6144,
-    "zh": 6144
+    "es": 6182,
+    "en": 6182,
+    "fr": 6182,
+    "it": 6182,
+    "pt": 6182,
+    "de": 6182,
+    "ko": 6182,
+    "zh": 6182
   },
   "html": {
     "files": 37,
-    "total": 4374,
-    "translated": 4373,
+    "total": 4389,
+    "translated": 4388,
     "untranslated": 1
   },
   "js": {
-    "files": 135,
+    "files": 136,
     "translated": 444,
     "untranslated": 648
   },
@@ -141,6 +141,7 @@
     "js/ops-center/ops-platform-reviews.js",
     "js/ops-center/ops-tech-report.js",
     "js/ops-center/ops-users.js",
+    "js/plan-featured.js",
     "js/plan-receipt.js",
     "js/platform-reviews.js",
     "js/profile-editor.js",
@@ -464,8 +465,8 @@
     {
       "file": "planes.html",
       "type": "html",
-      "total": 125,
-      "translated": 125,
+      "total": 129,
+      "translated": 129,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -482,8 +483,8 @@
     {
       "file": "terminos.html",
       "type": "html",
-      "total": 192,
-      "translated": 192,
+      "total": 203,
+      "translated": 203,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -1504,6 +1505,15 @@
       "untranslated": 9,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/plan-featured.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/plan-receipt.js",

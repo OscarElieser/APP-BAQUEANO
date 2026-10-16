@@ -165,3 +165,27 @@
   .bq-plan-dialog-foot .bq-plan-cta { flex: 1 1 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .bq-plan-card { transition: none; } }
+
+/* 2026-10-15 — «las letras se vean mejor»: textos más grandes, más gruesos y con más contraste. */
+.page-planes .bq-plans-lead { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; font-size: clamp(1.06rem, 2.2vw, 1.24rem); font-weight: 500; }
+.page-planes .bq-plans-trust li { font-size: .97rem; color: #f8fafc; }
+.page-planes .bq-plan-features li { font-size: 1.02rem; font-weight: 600; color: #f8fafc; line-height: 1.45; padding: 11px 0; }
+.page-planes .bq-plan-features li span { color: inherit !important; -webkit-text-fill-color: currentColor !important; }
+.page-planes .bq-plan-features li.is-no { color: #b4bfcf; font-weight: 500; }
+.page-planes .bq-plan-tag { font-size: .95rem; opacity: 1; }
+.page-planes .bq-plan-name { font-size: 1rem; }
+.page-planes .bq-plan-usd { font-size: 1.05rem; }
+.page-planes .bq-plan-equiv { font-size: .88rem; }
+.page-planes .bq-plans-note { color: #e2e8f0 !important; font-size: .97rem; line-height: 1.55; }
+.page-planes .bq-plans-step-list strong { font-size: 1.1rem; }
+.page-planes .bq-plans-step-list span, .page-planes .bq-plans-faq details p { color: #e2e8f0 !important; font-size: 1.02rem; }
+.page-planes .bq-plans-faq summary { font-size: 1.06rem; }
+.page-planes .bq-plan-field { font-size: .97rem; }
+.page-planes .bq-plan-cta { font-size: 1.04rem; }
+.bq-my-plan-promo { margin: .4rem 0 0; color: #fde68a !important; font-weight: 700; }
+.bq-my-plan-stats-title { margin: .6rem 0 .3rem !important; color: #f4e6c1 !important; font-weight: 800; }
+.bq-my-plan-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0; }
+.bq-my-plan-stats div { padding: 8px 10px; border-radius: 10px; background: #0b1320; border: 1px solid rgba(244, 230, 193, .14); }
+.bq-my-plan-stats dt { color: #cbd5e1; font-size: .82rem; font-weight: 700; }
+.bq-my-plan-stats dd { margin: 2px 0 0; color: #fff; font: 800 1.35rem/1.1 'League Spartan', sans-serif; }
+@media (max-width: 600px) { .bq-my-plan-stats { grid-template-columns: 1fr 1fr; } }

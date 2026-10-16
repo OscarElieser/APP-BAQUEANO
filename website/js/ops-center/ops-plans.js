@@ -63,6 +63,8 @@
     try { var s = window.BaqueanoOpsData && window.BaqueanoOpsData.state; state.role = (s && s.role) || state.role; } catch (_) {}
     var a = call('orders_list', {}).then(function (res) {
       state.orders = res.orders || [];
+      state.businesses = res.businesses || [];
+      state.iva = res.iva || null;
     }).catch(function (e) { state.error = e.message; });
     var b = call('reminders_list', {}).then(function (res) {
       state.expiring = res.orders || []; state.reminders = res.reminders || []; state.remError = '';
@@ -151,6 +153,40 @@
     ]), [copy, wa]);
   }
 
+  // Vincula el pedido pagado con el negocio publicado: activa en la web el destacado del plan
+  // (departamento, portada, Aliados) y, en Cumbre, la promoción de la ficha.
+  function linkBusiness(o) {
+    var sel = el('select', {});
+    sel.appendChild(el('option', { value: '', text: '— Sin vincular —' }));
+    (state.businesses || []).forEach(function (b) {
+      var opt = el('option', { value: b.id, text: b.name + (b.municipality ? ' · ' + b.municipality : '') });
+      if (o.business_id === b.id) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    var promo = el('input', { maxlength: '160', placeholder: 'Ej.: 10 % de descuento en temporada verde' });
+    promo.value = o.promo_text || '';
+    var until = el('input', { type: 'date' });
+    until.value = o.promo_until || '';
+    var err = el('p', { className: 'ops-plans-error', role: 'alert', hidden: true });
+    var isCumbre = o.plan_code === 'cumbre';
+    var body = el('div', { className: 'ops-plans-form' }, [
+      el('p', { text: 'Pedido ' + o.code + ' · «' + o.business_name + '». Elegí el negocio ya publicado en Aliados (si todavía no aparece, publicalo primero desde Solicitudes de negocios ' + (o.business_application_code || '') + ').' }),
+      el('label', {}, [el('span', { text: 'Negocio publicado' }), sel]),
+      isCumbre ? el('label', {}, [el('span', { text: 'Promoción en la ficha (Cumbre)' }), promo]) : null,
+      isCumbre ? el('label', {}, [el('span', { text: 'Promoción válida hasta (opcional)' }), until]) : null,
+      el('p', { className: 'ops-plans-hint', text: 'Sendero: aparece en Aliados. Mirador: además «Destacado» en su departamento y primero en Aliados. Cumbre: además la portada y la promoción.' }),
+      err
+    ]);
+    var ok = el('button', { type: 'button', className: 'ops-btn is-primary' }, [icon('fa-solid fa-link'), ' Guardar']);
+    var d = dialog('Negocio y beneficios del plan', body, [ok]);
+    ok.addEventListener('click', function () {
+      ok.disabled = true; err.hidden = true;
+      call('order_link', { id: o.id, business_id: sel.value || null, promo_text: isCumbre ? promo.value : null, promo_until: isCumbre ? until.value : null })
+        .then(function () { d.close(); state.notice = 'Pedido ' + o.code + ': beneficios del plan actualizados.'; refresh(); })
+        .catch(function (e) { ok.disabled = false; err.textContent = e.message; err.hidden = false; });
+    });
+  }
+
   function setStatus(o, status, label) {
     if (status === 'cancelled' && !window.confirm('¿Cancelar el pedido ' + o.code + '? No se borra: queda como cancelado.')) return;
     call('order_status', { id: o.id, status: status }).then(function () {
@@ -176,6 +212,10 @@
       o.receipt_number ? el('dd', { text: o.receipt_number + ' · ' + fmt(o.receipt_issued_at) + ' · vigencia ' + (o.period_start || '') + ' → ' + (o.period_end || '') }) : null,
       o.owner_uid ? el('dt', { text: 'Cuenta' }) : null,
       o.owner_uid ? el('dd', { text: 'Creada ' + fmt(o.account_created_at) + (o.must_change_password ? ' · falta cambiar la contraseña temporal' : ' · contraseña cambiada') + (o.business_application_code ? ' · solicitud ' + o.business_application_code : '') }) : null,
+      el('dt', { text: 'Beneficios' }),
+      el('dd', { text: o.business_id ? 'Activos en la web para «' + (((state.businesses || []).find(function (b) { return b.id === o.business_id; }) || {}).name || o.business_id) + '»' + (o.promo_text ? ' · promoción: ' + o.promo_text : '') : (o.status === 'paid' ? 'Falta vincular el negocio publicado' : '—') }),
+      Number(o.iva_rate) > 0 ? el('dt', { text: 'IVA' }) : null,
+      Number(o.iva_rate) > 0 ? el('dd', { text: Math.round(Number(o.iva_rate) * 100) + ' % · ' + nio(o.iva_nio) + ' (' + usd(o.iva_usd) + ')' }) : null,
       o.notes ? el('dt', { text: 'Notas del cliente' }) : null,
       o.notes ? el('dd', { text: o.notes }) : null
     ]);
@@ -205,6 +245,11 @@
         var re = el('button', { type: 'button', className: 'ops-btn' }, [icon('fa-solid fa-rotate-left'), ' Reabrir']);
         re.addEventListener('click', function () { setStatus(o, 'pending', 'reabierto'); });
         actions.appendChild(re);
+      }
+      if (o.status === 'paid') {
+        var lk = el('button', { type: 'button', className: 'ops-btn' }, [icon('fa-solid fa-link'), o.business_id ? ' Cambiar negocio o promoción' : ' Vincular negocio publicado']);
+        lk.addEventListener('click', function () { linkBusiness(o); });
+        actions.appendChild(lk);
       }
       if (o.status === 'paid' && !o.owner_uid) {
         var a = el('button', { type: 'button', className: 'ops-btn is-primary' }, [icon('fa-solid fa-user-plus'), ' Crear cuenta del propietario']);
@@ -288,7 +333,7 @@
       rows.forEach(function (o) { list.appendChild(orderCard(o)); });
     }
     var header = el('div', { className: 'ops-view-header' }, [el('h1', {}, [icon('fa-solid fa-store'), ' ', el('span', { 'data-i18n': 'opsPlans.title', text: 'Planes y comprobantes' })])]);
-    var intro = el('p', { className: 'ops-plans-hint', text: 'Pedidos de Sendero (US$ 8), Mirador (US$ 20) y Cumbre (US$ 50). Flujo: en contacto por WhatsApp → confirmar pago (sale el comprobante) → crear la cuenta del propietario (el local entra a revisión).' });
+    var intro = el('p', { className: 'ops-plans-hint', text: 'Pedidos de Sendero (US$ 10), Mirador (US$ 35) y Cumbre (US$ 90) al mes, antes de IVA. Flujo: en contacto por WhatsApp → confirmar pago (sale el comprobante) → crear la cuenta del propietario (el local entra a revisión) → publicar el local y vincularlo aquí para activar sus beneficios en la web.' });
     var children = [header, intro, el('div', { className: 'ops-plans-toolbar' }, [filters, el('div', { className: 'ops-plans-tools' }, [reload, page])])];
     if (state.notice) children.push(el('p', { className: 'ops-plans-notice', role: 'status', text: state.notice }));
     if (!canWrite()) children.push(el('p', { className: 'ops-plans-hint', text: 'Rol de solo lectura: podés ver los pedidos y los comprobantes.' }));

@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-16T01:32:09.555Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6144 · en 6144 · fr 6144 · it 6144 · pt 6144 · de 6144 · ko 6144 · zh 6144
+Generado: 2026-10-16T05:42:56.474Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6182 · en 6182 · fr 6182 · it 6182 · pt 6182 · de 6182 · ko 6182 · zh 6182
 
-HTML: 4373/4374 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
+HTML: 4388/4389 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -238,6 +238,7 @@ HTML: 4373/4374 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-tech-report.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-users.js | js | 38 | 38 | 0 | 100 % |
+| js/plan-featured.js | js | 0 | 0 | 0 | 100 % |
 | js/plan-receipt.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/profile-editor.js | js | 0 | 0 | 0 | 100 % |
@@ -269,9 +270,9 @@ HTML: 4373/4374 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | packages/i18n/src/index.tsx | tsx | 2 | 2 | 0 | 100 % |
 | packages/ui/src/index.tsx | tsx | 0 | 0 | 0 | 100 % |
 | perfil.html | html | 168 | 168 | 0 | 100 % |
-| planes.html | html | 125 | 125 | 0 | 100 % |
+| planes.html | html | 129 | 129 | 0 | 100 % |
 | privacidad.html | html | 88 | 88 | 0 | 100 % |
-| terminos.html | html | 192 | 192 | 0 | 100 % |
+| terminos.html | html | 203 | 203 | 0 | 100 % |
 | testimonios.html | html | 80 | 80 | 0 | 100 % |
 | todos-los-destinos.html | html | 84 | 84 | 0 | 100 % |
 | todos-los-platos.html | html | 18 | 18 | 0 | 100 % |

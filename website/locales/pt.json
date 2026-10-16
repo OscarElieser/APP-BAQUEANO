@@ -964,7 +964,9 @@
     "statPublished": "Parceiros publicados",
     "statTerritories": "Territórios com parceiros",
     "statCommission": "Comissão: o BAQUEANO não cobra dentro da plataforma",
-    "statSourced": "Com fonte verificável"
+    "statSourced": "Com fonte verificável",
+    "clearQuery": "Ver todos",
+    "filterQuery": "Resultados para «{q}»: {n}"
   },
   "business": {
     "register": {
@@ -5382,7 +5384,8 @@
         "a20": "Modificações dos termos",
         "a21": "Lei aplicável e jurisdição",
         "a22": "Resolução de conflitos",
-        "a23": "Vigência"
+        "a23": "Vigência",
+        "a24": "Planos e pagamentos"
       },
       "termSearchCard": {
         "h31": "O que você quer consultar?",
@@ -5563,7 +5566,7 @@
         "div2": "e substitui qualquer acordo anterior relativo ao uso dos serviços digitais do BAQUEANO."
       },
       "termToggleAllBtn": {
-        "span1": "Ver todas as seções (30)"
+        "span1": "Ver todas as seções (31)"
       },
       "termRelatedCard": {
         "p1": "Você também pode consultar nossas políticas e avisos legais para mais informações.",
@@ -5578,6 +5581,18 @@
       },
       "termSearchInput": {
         "inputPlaceholder1": "Busque um tema nos termos e condições..."
+      },
+      "sec31": {
+        "h41": "31. Planos para negócios e pagamentos",
+        "p1": "Planos Sendero, Mirador e Cumbre: pagamentos, comprovantes, renovação e cancelamento.",
+        "b1": "A BAQUEANO oferece três planos para negócios turísticos: Sendero, Mirador e Cumbre, com pagamento mensal ou anual. Os preços vigentes são publicados na página Planos, primeiro em córdobas e depois em dólares, pela taxa de referência da BAQUEANO.",
+        "b2": "O pagamento é combinado pelo WhatsApp (+505 7797 6973) por transferência bancária, depósito ou dinheiro. A BAQUEANO nunca pede senhas nem dados completos de cartões.",
+        "b3": "Ao confirmar o pagamento é emitido um comprovante numerado com os dados do cliente e a data e hora da assinatura e do pagamento. Enquanto a BAQUEANO não tiver numeração autorizada pela Dirección General de Ingresos (DGI), o comprovante é um documento não fiscal. Quando couber, será aplicado o Imposto sobre Valor Agregado (IVA) vigente na Nicarágua, detalhado separadamente.",
+        "b4": "O plano é ativado na data do pagamento e dura um mês ou um ano, conforme a modalidade escolhida. A BAQUEANO avisa antes do vencimento pela plataforma, por e-mail e pelo WhatsApp. Se não for renovado, o negócio deixa de aparecer em destaque e sua página pode ser ocultada até a renovação.",
+        "b5": "A publicação do negócio está sujeita à revisão da equipe e a estes termos. A BAQUEANO pode recusar ou suspender páginas com informações falsas, conteúdo ilegal ou que prejudique as comunidades ou o meio ambiente, e informa o titular pelo WhatsApp ou e-mail.",
+        "b6": "Pagamentos de períodos já iniciados não são reembolsáveis, salvo erro de cobrança atribuível à BAQUEANO ou quando o negócio não puder ser publicado por motivos alheios ao titular. As mudanças de plano valem a partir do período seguinte.",
+        "b7": "As publicações e promoções em redes sociais incluídas em cada plano são preparadas pela equipe da BAQUEANO com o material enviado pelo negócio e seguem as regras de cada rede.",
+        "b8": "A BAQUEANO não cobra comissão pelos clientes que entram em contato com o negócio: preço e serviço são combinados diretamente entre o viajante e o negócio."
       }
     },
     "todosDestinos": {
@@ -7920,7 +7935,14 @@
       "photosUnlimited": "Fotos ilimitadas e vídeo de apresentação",
       "baqui": "O BAQUI recomenda você primeiro quando pedem seu serviço na sua região",
       "promos": "Promoções e ofertas de temporada na sua página",
-      "onboarding": "Ajudamos a montar sua página: textos e fotos"
+      "onboarding": "Ajudamos a montar sua página: textos e fotos",
+      "priority2": "Primeiro em Aliados e nas buscas do BAQUI",
+      "socialAds": "Uma publicação impulsionada (anúncio pago) por mês nas redes",
+      "socialCumbre": "4 publicações por mês no Instagram, Facebook e TikTok, com stories toda semana",
+      "socialMirador": "2 publicações por mês no Instagram, Facebook e TikTok, com stories",
+      "socialWelcome": "Publicação de boas-vindas no Instagram, Facebook e TikTok do BAQUEANO",
+      "statsBasic": "Visitas à sua ficha e contatos do mês no seu painel",
+      "statsCompare": "Estatísticas do mês comparadas com o mês anterior"
     },
     "cta": "Escolher plano",
     "mirador": {
@@ -7931,7 +7953,9 @@
       "tag": "Máxima visibilidade"
     },
     "note": {
-      "exchange": "Preços em córdobas pela taxa de referência da BAQUEANO (C$ 36,6243 por US$ 1). O plano anual equivale a 10 meses: 2 meses grátis."
+      "exchange": "Preços em córdobas pela taxa de referência da BAQUEANO (C$ 36,6243 por US$ 1). O plano anual equivale a 10 meses: 2 meses grátis.",
+      "ivaOn": "Preços sem IVA. Seu comprovante soma o IVA da Nicarágua ({rate}%).",
+      "ivaPending": "Preços sem IVA. O IVA da Nicarágua (15%) será somado e detalhado no seu comprovante quando o BAQUEANO estiver inscrito na DGI."
     },
     "steps": {
       "title": "Como funciona",
@@ -7970,7 +7994,15 @@
       "expiresToday": "Vence hoje",
       "expiredOn": "Venceu em {date}",
       "renew": "Renovar pelo WhatsApp",
-      "renewText": "Olá BAQUEANO, quero renovar meu plano {plan} (pedido {code})."
+      "renewText": "Olá BAQUEANO, quero renovar meu plano {plan} (pedido {code}).",
+      "promo": "Promoção na sua ficha: {text}",
+      "statCalls": "Ligações",
+      "statMessages": "Mensagens",
+      "statViews": "Visitas à sua ficha",
+      "statWa": "Contatos pelo WhatsApp",
+      "statsPending": "Suas estatísticas aparecem quando seu negócio estiver publicado.",
+      "statsPrev": "Mês anterior: {views} visitas e {contacts} contatos.",
+      "statsTitle": "Este mês ({month})"
     },
     "faq": {
       "title": "Perguntas frequentes",
@@ -8064,6 +8096,16 @@
       "today": "Seu plano {plan} de {business} vence hoje ({date}). Renove pelo WhatsApp para continuar visível.",
       "expiredTitle": "Seu plano venceu",
       "expired": "Seu plano {plan} de {business} venceu em {date}. Renove pelo WhatsApp para seu negócio voltar a ficar visível."
+    },
+    "featured": {
+      "badge": "Destaque",
+      "deptLead": "Negócios deste território com plano BAQUEANO. Fale com eles direto pelo WhatsApp.",
+      "deptTitle": "Negócios em destaque em {dept}",
+      "homeLead": "Hospedagens, restaurantes e experiências com plano Cumbre. Fale direto com eles, sem comissões.",
+      "homeTitle": "Negócios em destaque",
+      "kicker": "Negócios locais com plano BAQUEANO",
+      "more": "Ver ficha",
+      "yourBusiness": "Tem um negócio? Conheça os planos"
     }
   },
   "opsPlans": {

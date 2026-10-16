@@ -58,6 +58,8 @@
   function html(o) {
     var period = o.billing_period === 'annual' ? 'Anual (12 meses)' : 'Mensual (1 mes)';
     var plan = PLAN_NAMES[o.plan_code] || ('Plan ' + o.plan_code);
+    // Subtotal antes de IVA (los pedidos anteriores al IVA no lo traen: el subtotal es el total).
+    var sub = { usd: o.subtotal_usd != null ? o.subtotal_usd : o.amount_usd, nio: o.subtotal_nio != null ? o.subtotal_nio : o.amount_nio };
     return '<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Comprobante ' + esc(o.receipt_number) + ' · BAQUEANO</title>' +
       '<meta name="viewport" content="width=device-width,initial-scale=1">' +
       '<style>' +
@@ -85,11 +87,16 @@
           '<div class="box"><h3>Local publicado</h3><p><strong>' + esc(o.business_name) + '</strong></p><p>' + esc([o.municipality, o.department].filter(Boolean).join(', ')) + '</p><h3 style="margin-top:10px">Pago</h3><p>' + esc(METHODS[o.payment_method] || o.payment_method || '—') + (o.payment_reference ? ' · Ref. ' + esc(o.payment_reference) : '') + '</p><p>Fecha y hora de pago: ' + esc(dateTime(o.paid_at)) + '</p></div>' +
         '</div>' +
         '<table><thead><tr><th>Cant.</th><th>Descripción</th><th class="r">Precio US$</th><th class="r">Total C$</th></tr></thead><tbody>' +
-          '<tr><td>1</td><td>' + esc(plan) + ' — publicación del local en BAQUEANO (web y app Android).<br>Modalidad: ' + esc(period) + '<br>Vigencia: del ' + esc(date(o.period_start)) + ' al ' + esc(date(o.period_end)) + '</td><td class="r">' + esc(money(o.amount_usd, 'USD')) + '</td><td class="r">' + esc(money(o.amount_nio, 'NIO')) + '</td></tr>' +
+          '<tr><td>1</td><td>' + esc(plan) + ' — publicación del local en BAQUEANO (web y app Android).<br>Modalidad: ' + esc(period) + '<br>Vigencia: del ' + esc(date(o.period_start)) + ' al ' + esc(date(o.period_end)) + '</td><td class="r">' + esc(money(sub.usd, 'USD')) + '</td><td class="r">' + esc(money(sub.nio, 'NIO')) + '</td></tr>' +
+          '<tr><td colspan="3" class="r">Subtotal</td><td class="r">' + esc(money(sub.nio, 'NIO')) + '<br><small>' + esc(money(sub.usd, 'USD')) + '</small></td></tr>' +
+          (Number(o.iva_rate) > 0
+            ? '<tr><td colspan="3" class="r">IVA (' + esc(Math.round(Number(o.iva_rate) * 100)) + ' %)</td><td class="r">' + esc(money(o.iva_nio, 'NIO')) + '<br><small>' + esc(money(o.iva_usd, 'USD')) + '</small></td></tr>'
+            : '<tr><td colspan="3" class="r">IVA</td><td class="r">No aplica*</td></tr>') +
           '<tr class="tot"><td colspan="3" class="r">TOTAL PAGADO</td><td class="r">' + esc(money(o.amount_nio, 'NIO')) + '<br><small>' + esc(money(o.amount_usd, 'USD')) + '</small></td></tr>' +
         '</tbody></table>' +
         '<p style="margin:8px 0 0;font-size:12px;color:#4b5563">Tipo de cambio de referencia: C$ ' + esc(Number(o.exchange_rate || 36.6243).toFixed(4)) + ' por US$ 1. Precio original en dólares.</p>' +
-        '<div class="note"><strong>Documento no fiscal.</strong> Este comprobante acredita el pago del plan. BAQUEANO emitirá factura con numeración autorizada por la Dirección General de Ingresos (DGI) cuando cuente con dicha autorización.</div>' +
+        '<div class="note"><strong>Documento no fiscal.</strong> Este comprobante acredita el pago del plan. BAQUEANO emitirá factura con numeración autorizada por la Dirección General de Ingresos (DGI) cuando cuente con dicha autorización.' +
+          (Number(o.iva_rate) > 0 ? '' : '<br>* El IVA de Nicaragua (15 %) se aplicará cuando BAQUEANO esté inscrito como responsable recaudador ante la DGI.') + '</div>' +
         '<div class="foot"><div><p>Gracias por confiar en BAQUEANO.</p><p>Consultas: ' + esc(ISSUER.phone) + ' (WhatsApp)</p></div><div class="sign">Recibido por BAQUEANO</div></div>' +
       '</div>' +
       '<div class="actions"><button type="button" onclick="window.print()">Imprimir o guardar PDF</button></div>' +

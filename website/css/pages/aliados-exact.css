@@ -1243,3 +1243,9 @@ body.page-aliados-exact {
 .bq-ally-secondary { font-size: .86rem; color: #334155; margin: 8px 0 0; }
 .bq-ally-secondary a { color: #165D6F; font-weight: 700; }
 @media (max-width: 560px) { .bq-ally-row { grid-template-columns: 1fr; gap: 2px; } .bq-ally-dialog { width: 100vw; max-width: 100vw; max-height: 100dvh; height: 100dvh; border-radius: 0; } .bq-ally-actions > * { flex: 1 1 auto; } }
+/* 15-10-2026 · Planes: insignia «Destacado» (Mirador/Cumbre) y promoción del mes (Cumbre). Solo aparece con un plan pagado y vinculado. */
+.aliado-card-exact.is-featured { box-shadow: 0 0 0 2px #C2410C, 0 10px 24px rgba(194,65,12,.18); }
+.aliado-card-exact.is-cumbre { box-shadow: 0 0 0 3px #92400E, 0 12px 28px rgba(146,64,14,.22); }
+.bq-ally-featured { position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: .78rem; font-weight: 800; color: #fff; background: #9A3412; box-shadow: 0 2px 8px rgba(0,0,0,.25); z-index: 2; }
+.bq-ally-featured.is-cumbre { background: #78350F; }
+.bq-ally-promo { margin: 6px 0 0; padding: 6px 10px; border-radius: 8px; background: #FFF7ED; border: 1px solid #FDBA74; color: #7C2D12; font-size: .86rem; font-weight: 700; }

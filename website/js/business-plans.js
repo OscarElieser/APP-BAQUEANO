@@ -15,7 +15,7 @@
   var ENDPOINT = 'https://heiudfpthqwtjrtluqlm.supabase.co/functions/v1/baqueano-plans';
   var WHATSAPP = '50577976973';
   var PLAN_NAMES = { sendero: 'Sendero', mirador: 'Mirador', cumbre: 'Cumbre' };
-  var state = { period: 'monthly', plan: null, plans: {}, sending: false };
+  var state = { period: 'monthly', plan: null, plans: {}, sending: false, iva: null };
 
   function t(key, fallback, vars) {
     var out = fallback;
@@ -83,6 +83,17 @@
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     renderPrices();
+  }
+
+  // IVA: mientras BAQUEANO no esté inscrito ante la DGI queda apagado y se avisa que los precios
+  // son antes de IVA; encendido, se dice que el comprobante suma el 15 %.
+  function renderIvaNote() {
+    var note = document.getElementById('bqPlansIvaNote');
+    if (!note) return;
+    if (state.iva && state.iva.iva_enabled) {
+      note.setAttribute('data-i18n', 'plans.note.ivaOn');
+      note.textContent = t('plans.note.ivaOn', 'Precios antes de IVA. Tu comprobante suma el IVA de Nicaragua ({rate} %).', { rate: Math.round(Number(state.iva.iva_rate || 0.15) * 100) });
+    }
   }
 
   // ── Formulario ──
@@ -261,6 +272,20 @@
             info.appendChild(renew);
           }
         }
+        if (o.promo_text) info.appendChild(el('p', 'bq-my-plan-promo', t('plans.mine.promo', 'Promoción en tu ficha: {text}', { text: o.promo_text })));
+        if (o.stats) {
+          // Estadísticas reales del mes (visitas a la ficha y contactos registrados en BAQUEANO).
+          var st = o.stats;
+          var box = el('dl', 'bq-my-plan-stats');
+          [[t('plans.mine.statViews', 'Visitas a tu ficha'), st.views], [t('plans.mine.statWa', 'Contactos por WhatsApp'), st.whatsapp], [t('plans.mine.statCalls', 'Llamadas'), st.calls], [t('plans.mine.statMessages', 'Mensajes'), st.messages]].forEach(function (pair) {
+            var d = el('div'); d.appendChild(el('dt', null, pair[0])); d.appendChild(el('dd', null, String(pair[1] || 0))); box.appendChild(d);
+          });
+          info.appendChild(el('p', 'bq-my-plan-stats-title', t('plans.mine.statsTitle', 'Este mes ({month})', { month: st.month || '' })));
+          info.appendChild(box);
+          if (o.plan_code !== 'sendero') info.appendChild(el('p', null, t('plans.mine.statsPrev', 'Mes anterior: {views} visitas y {contacts} contactos.', { views: st.views_prev || 0, contacts: st.contacts_prev || 0 })));
+        } else if (o.status === 'paid' && !o.business_id) {
+          info.appendChild(el('p', null, t('plans.mine.statsPending', 'Tus estadísticas aparecen cuando tu local esté publicado.')));
+        }
         if (o.business_application_code) info.appendChild(el('p', null, t('plans.mine.review', 'Publicación de tu local: solicitud {code} en revisión del equipo.', { code: o.business_application_code })));
         item.appendChild(info);
         if (o.receipt_number) {
@@ -303,6 +328,8 @@
 
     api('catalog', {}, false).then(function (res) {
       (res.plans || []).forEach(function (p) { state.plans[p.code] = p; });
+      state.iva = res.iva || null;
+      renderIvaNote();
       renderPrices();
     }).catch(function () { /* quedan los precios publicados en el HTML */ });
     renderPrices();

@@ -594,7 +594,9 @@
     "statPublished": "已发布的合作伙伴",
     "statTerritories": "有合作伙伴的地区",
     "statCommission": "佣金：BAQUEANO 在平台内不收取任何费用",
-    "statSourced": "有可核实的来源"
+    "statSourced": "有可核实的来源",
+    "clearQuery": "查看全部",
+    "filterQuery": "“{q}”的结果：{n}"
   },
   "business": {
     "register": {
@@ -5382,7 +5384,8 @@
         "a20": "条款变更",
         "a21": "适用法律与管辖",
         "a22": "争议解决",
-        "a23": "有效期"
+        "a23": "有效期",
+        "a24": "方案与付款"
       },
       "termSearchCard": {
         "h31": "你想查询什么？",
@@ -5563,7 +5566,7 @@
         "div2": "起生效，并取代此前关于使用 BAQUEANO 数字服务的任何协议。"
       },
       "termToggleAllBtn": {
-        "span1": "查看全部章节（30）"
+        "span1": "查看全部章节（31）"
       },
       "termRelatedCard": {
         "p1": "如需更多信息，你也可以查看我们的政策和法律声明。",
@@ -5578,6 +5581,18 @@
       },
       "termSearchInput": {
         "inputPlaceholder1": "在条款与条件中搜索主题..."
+      },
+      "sec31": {
+        "h41": "31. 商家方案与付款",
+        "p1": "Sendero、Mirador 和 Cumbre 方案：付款、收据、续费和取消。",
+        "b1": "BAQUEANO 为旅游商家提供三种方案：Sendero、Mirador 和 Cumbre，可按月或按年付款。现行价格公布在“方案”页面，先以科多巴、再以美元标示，采用 BAQUEANO 参考汇率。",
+        "b2": "付款通过 WhatsApp（+505 7797 6973）安排，可转账、存款或现金。BAQUEANO 绝不会索取密码或完整的银行卡信息。",
+        "b3": "确认付款后，将开具一张带编号的收据，列明客户信息以及订阅和付款的日期与时间。在 BAQUEANO 获得税务总局（DGI）授权编号之前，该收据为非税务凭证。如适用，将按尼加拉瓜现行增值税（IVA）计算并单独列示。",
+        "b4": "方案自付款日起生效，按所选方式持续一个月或一年。BAQUEANO 会在到期前通过平台、电子邮件和 WhatsApp 提醒。如未续费，店铺将不再重点展示，其页面可能被隐藏直至续费。",
+        "b5": "店铺发布须经团队审核并遵守本条款。对于含有虚假信息、违法内容或损害社区与环境内容的页面，BAQUEANO 可拒绝或暂停发布，并通过 WhatsApp 或电子邮件通知负责人。",
+        "b6": "已开始周期的付款不予退还，但因 BAQUEANO 收费错误或因非负责人原因无法发布店铺的情况除外。方案变更自下一个周期起生效。",
+        "b7": "各方案所含的社交媒体发布和推广由 BAQUEANO 团队根据商家提供的素材制作，并遵守各平台的规则。",
+        "b8": "BAQUEANO 不对联系商家的客户收取佣金：价格和服务由游客与商家直接商定。"
       }
     },
     "todosDestinos": {
@@ -7920,7 +7935,14 @@
       "photosUnlimited": "不限照片数量并附介绍视频",
       "baqui": "游客在您所在地区寻找此类服务时，BAQUI 优先推荐您",
       "promos": "在店铺页面发布季节性促销和优惠",
-      "onboarding": "协助您制作店铺页面：文字和照片"
+      "onboarding": "协助您制作店铺页面：文字和照片",
+      "priority2": "在合作伙伴列表和 BAQUI 搜索中排在最前",
+      "socialAds": "每月在社交媒体投放一条付费推广帖子",
+      "socialCumbre": "每月在 Instagram、Facebook 和 TikTok 发布 4 条帖子，并每周发布快拍",
+      "socialMirador": "每月在 Instagram、Facebook 和 TikTok 发布 2 条帖子，并附快拍",
+      "socialWelcome": "在 BAQUEANO 的 Instagram、Facebook 和 TikTok 发布欢迎帖子",
+      "statsBasic": "在你的面板中查看本月主页访问量和联系次数",
+      "statsCompare": "本月统计数据与上月对比"
     },
     "cta": "选择方案",
     "mirador": {
@@ -7931,7 +7953,9 @@
       "tag": "最大曝光"
     },
     "note": {
-      "exchange": "科多巴价格按 BAQUEANO 参考汇率（1 美元 = 36.6243 科多巴）计算。年度方案按 10 个月收费：赠送 2 个月。"
+      "exchange": "科多巴价格按 BAQUEANO 参考汇率（1 美元 = 36.6243 科多巴）计算。年度方案按 10 个月收费：赠送 2 个月。",
+      "ivaOn": "价格不含增值税。你的凭证将加上尼加拉瓜增值税（{rate}%）。",
+      "ivaPending": "价格不含增值税。BAQUEANO 在 DGI 完成登记后，尼加拉瓜增值税（15%）将加入并列明在你的凭证上。"
     },
     "steps": {
       "title": "使用流程",
@@ -7970,7 +7994,15 @@
       "expiresToday": "今天到期",
       "expiredOn": "已于 {date} 到期",
       "renew": "通过 WhatsApp 续费",
-      "renewText": "您好 BAQUEANO，我想续费 {plan} 方案（订单 {code}）。"
+      "renewText": "您好 BAQUEANO，我想续费 {plan} 方案（订单 {code}）。",
+      "promo": "主页促销：{text}",
+      "statCalls": "电话",
+      "statMessages": "消息",
+      "statViews": "主页访问量",
+      "statWa": "WhatsApp 联系",
+      "statsPending": "商家发布后即可查看统计数据。",
+      "statsPrev": "上月：{views} 次访问，{contacts} 次联系。",
+      "statsTitle": "本月（{month}）"
     },
     "faq": {
       "title": "常见问题",
@@ -8064,6 +8096,16 @@
       "today": "{business} 的 {plan} 方案今天（{date}）到期。请通过 WhatsApp 续费以保持展示。",
       "expiredTitle": "您的方案已到期",
       "expired": "{business} 的 {plan} 方案已于 {date} 到期。请通过 WhatsApp 续费，让店铺重新展示。"
+    },
+    "featured": {
+      "badge": "精选",
+      "deptLead": "本地区开通 BAQUEANO 套餐的商家。可直接通过 WhatsApp 联系。",
+      "deptTitle": "{dept}的精选商家",
+      "homeLead": "开通 Cumbre 套餐的住宿、餐厅和体验。直接联系，无佣金。",
+      "homeTitle": "精选商家",
+      "kicker": "开通 BAQUEANO 套餐的本地商家",
+      "more": "查看详情",
+      "yourBusiness": "有商家？了解套餐"
     }
   },
   "opsPlans": {

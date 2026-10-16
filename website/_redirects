@@ -11,8 +11,10 @@
 /health                          /health.json        200
 /negocio                         /mi-negocio         301
 /ops                             /admin              301
-/privacidad                      /#privacidad        302
-/terminos                        /#terminos          302
+# 2026-10-15: /privacidad y /terminos ya son páginas propias (privacidad.html, terminos.html);
+#   la regla vieja las mandaba al inicio (#privacidad, #terminos). Se dejan comentadas.
+# /privacidad                      /#privacidad        302
+# /terminos                        /#terminos          302
 /departamentos                   /departamento       302
 /departamentos.html              /departamento       302
 /app                             /descargar          301

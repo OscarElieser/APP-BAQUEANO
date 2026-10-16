@@ -27,6 +27,9 @@
 // - Si Supabase no responde, se muestra un estado de error con "Reintentar" en lugar de tarjetas
 //   ficticias.
 //
+// - 2026-10-15 (planes): los negocios con plan vigente van primero y Mirador/Cumbre llevan
+//   «Destacado» y su promoción; ?negocio=<id> abre la ficha; ?q= filtra (lo usa BAQUI). Abrir una
+//   ficha registra business_viewed (estadísticas del plan).
 // 📦 QUÉ: se engancha a #aliadosCardsGrid en aliados.html; window.BaqueanoAllies = { reload }.
 // ============================================================================
 (function (window, document) {
@@ -52,7 +55,9 @@
     guia: { filter: 'guias', icon: 'fa-person-hiking', key: 'allies.cat.guides', es: 'Guías' },
     transporte: { filter: 'transporte', icon: 'fa-van-shuttle', key: 'allies.cat.transport', es: 'Transporte' }
   };
-  var state = { rows: [], shown: PAGE, dialog: null };
+  var state = { rows: [], shown: PAGE, dialog: null, tiers: new Map(), query: '' };
+  function tierOf(b) { return state.tiers.get(String(b.id)) || null; }
+  function fold(v) { return String(v || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
 
   function t(key, fallback, vars) {
     var text = fallback;
@@ -96,17 +101,21 @@
   function card(b) {
     var cat = CAT[b.category] || { filter: 'otro', icon: 'fa-store', key: 'allies.cat.other', es: 'Otro' };
     var s = seal(b);
+    var tier = tierOf(b);
     var media = b.cover_image && /^https:\/\//.test(b.cover_image)
       ? el('img', { src: b.cover_image, alt: b.name, className: 'aliado-card-img', loading: 'lazy', decoding: 'async', width: 399, height: 260 })
       : el('div', { className: 'aliado-card-img bq-ally-noimg', role: 'img', 'aria-label': t(cat.key, cat.es) }, [icon(cat.icon)]);
     var wa = waLink(b);
     // data-business-id / data-business-name: el contacto (WhatsApp, llamada, correo) queda atribuido al
     // negocio real en el Ops Center (commercial_actions) y en «Negocios contactados» del perfil.
-    return el('article', { className: 'aliado-card-exact bq-ally-live', 'data-dept': b.department_id || '', 'data-cat': cat.filter, 'data-id': b.id, 'data-business-id': b.id, 'data-business-name': b.name }, [
-      el('div', { className: 'aliado-img-box' }, [media, el('span', { className: 'bq-ally-seal is-' + s.kind }, [icon(s.kind === 'verified' ? 'fa-check' : 'fa-clock'), ' ', s.text])]),
+    return el('article', { className: 'aliado-card-exact bq-ally-live' + (tier && tier.plan !== 'sendero' ? ' is-featured is-' + tier.plan : ''), 'data-dept': b.department_id || '', 'data-cat': cat.filter, 'data-id': b.id, 'data-business-id': b.id, 'data-business-name': b.name }, [
+      el('div', { className: 'aliado-img-box' }, [media, el('span', { className: 'bq-ally-seal is-' + s.kind }, [icon(s.kind === 'verified' ? 'fa-check' : 'fa-clock'), ' ', s.text]),
+        // Plan Mirador o Cumbre vigente: «Destacado» (pedido del propietario, 2026-10-15).
+        tier && tier.plan !== 'sendero' ? el('span', { className: 'bq-ally-featured is-' + tier.plan }, [icon('fa-star'), ' ', el('span', { 'data-i18n': 'plans.featured.badge', text: t('plans.featured.badge', 'Destacado') })]) : null]),
       el('div', { className: 'aliado-card-body' }, [
         el('h3', { className: 'aliado-card-title', text: b.name }),
         el('div', { className: 'aliado-card-location' }, [icon('fa-location-dot'), ' ', place(b) || '—']),
+        tier && tier.promo ? el('p', { className: 'bq-ally-promo' }, [icon('fa-tag'), ' ', tier.promo]) : null,
         el('p', { className: 'aliado-card-desc', text: b.description ? b.description.slice(0, 160) + (b.description.length > 160 ? '…' : '') : t(cat.key, cat.es) }),
         b.verified_at ? el('div', { className: 'aliado-card-audit' }, [icon('fa-calendar-check'), ' ', t('allies.verifiedOn', 'Verificado: {date}', { date: fmtDate(b.verified_at) })]) : null,
         el('div', { className: 'aliado-card-actions' }, [
@@ -141,6 +150,7 @@
     var dept = DEPT_NAMES[b.department_id];
     var body = el('div', { className: 'bq-ally-body' }, [
       el('p', { className: 'bq-ally-kicker' }, [icon(cat.icon), ' ', t(cat.key, cat.es), ' · ', el('span', { className: 'bq-ally-seal is-' + s.kind, text: s.text })]),
+      tierOf(b) && tierOf(b).promo ? el('p', { className: 'bq-ally-promo' }, [icon('fa-tag'), ' ', tierOf(b).promo]) : null,
       b.description ? el('p', { className: 'bq-ally-desc', text: b.description }) : null,
       el('dl', { className: 'bq-ally-data' }, [
         row(t('allies.where', 'Ubicación'), [b.address, place(b)].filter(Boolean).join(' · ')),
@@ -168,6 +178,8 @@
     );
     state.dialog.showModal();
     document.documentElement.classList.add('bqd-open');
+    // Visita a la ficha: alimenta las estadísticas del plan del negocio (solo con consentimiento).
+    try { if (window.BaqueanoAnalytics && window.BaqueanoAnalytics.track) window.BaqueanoAnalytics.track('business_view', { entityType: 'business', entityId: b.id, departmentId: b.department_id }); } catch (_) { /* sin analítica */ }
     state.dialog.querySelector('.bq-ally-close').focus();
   }
 
@@ -193,13 +205,23 @@
   }
 
   // ------------------------------------------------------------------ carga
+  function visibleRows() {
+    if (!state.query) return state.rows;
+    var q = fold(state.query);
+    return state.rows.filter(function (r) { return [r.name, r.municipality, DEPT_NAMES[r.department_id], r.description, r.category].some(function (v) { return fold(v).indexOf(q) >= 0; }); });
+  }
   function render() {
-    var cards = state.rows.slice(0, state.shown).map(card);
-    var more = state.rows.length > state.shown
-      ? el('div', { className: 'bq-ally-more' }, [el('button', { type: 'button', className: 'bq-ally-btn', text: t('allies.showMore', 'Ver más aliados ({n} restantes)', { n: state.rows.length - state.shown }), onclick: function () { state.shown += PAGE; render(); } })])
+    var rowsAll = visibleRows();
+    var cards = rowsAll.slice(0, state.shown).map(card);
+    var more = rowsAll.length > state.shown
+      ? el('div', { className: 'bq-ally-more' }, [el('button', { type: 'button', className: 'bq-ally-btn', text: t('allies.showMore', 'Ver más aliados ({n} restantes)', { n: rowsAll.length - state.shown }), onclick: function () { state.shown += PAGE; render(); } })])
       : null;
+    var filterNote = state.query ? el('p', { className: 'bq-ally-count' }, [
+      t('allies.filterQuery', 'Resultados para «{q}»: {n}', { q: state.query, n: rowsAll.length }), ' ',
+      el('button', { type: 'button', className: 'bq-ally-btn', text: t('allies.clearQuery', 'Ver todos'), onclick: function () { state.query = ''; state.shown = PAGE; render(); } })
+    ]) : null;
     var count = el('p', { className: 'bq-ally-count', role: 'status', text: t('allies.countReal', '{n} aliados publicados en BAQUEANO, con su fuente y estado de verificación.', { n: state.rows.length }) });
-    grid.replaceChildren.apply(grid, [count].concat(cards).concat([more]).filter(Boolean));
+    grid.replaceChildren.apply(grid, [count, filterNote].concat(cards).concat([more]).filter(Boolean));
     renderMetrics();
     document.dispatchEvent(new CustomEvent('baqueano:alliesRendered', { detail: { total: state.rows.length } }));
   }
@@ -246,11 +268,22 @@
     fetch(url, { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } })
       .then(function (res) { if (!res.ok) throw new Error('http'); return res.json(); })
       .then(function (rows) {
-        state.rows = (Array.isArray(rows) ? rows : []).sort(function (a, b) {
-          var rank = { verified: 0, legacy: 1, partial: 2 };
-          return rank[seal(a).kind] - rank[seal(b).kind] || String(a.name).localeCompare(String(b.name), 'es');
+        var tiersP = window.BaqueanoPlanTiers ? window.BaqueanoPlanTiers.load() : Promise.resolve(new Map());
+        return tiersP.then(function (tiers) {
+          state.tiers = tiers || new Map();
+          // Primero los planes vigentes (Cumbre, Mirador, Sendero); luego el orden de verificación.
+          var planRank = function (b) { var tr = tierOf(b); return tr ? window.BaqueanoPlanTiers.rank(tr.plan) : 9; };
+          state.rows = (Array.isArray(rows) ? rows : []).sort(function (a, b) {
+            var rank = { verified: 0, legacy: 1, partial: 2 };
+            return planRank(a) - planRank(b) || rank[seal(a).kind] - rank[seal(b).kind] || String(a.name).localeCompare(String(b.name), 'es');
+          });
+          var params = new URLSearchParams(window.location.search);
+          state.query = (params.get('q') || '').slice(0, 80);
+          rebuildFilters(); render();
+          var wanted = params.get('negocio');
+          var target = wanted && state.rows.find(function (r) { return String(r.id) === wanted; });
+          if (target) openProfile(target, null);
         });
-        rebuildFilters(); render();
       })
       .catch(error)
       .then(function () { grid.removeAttribute('aria-busy'); });

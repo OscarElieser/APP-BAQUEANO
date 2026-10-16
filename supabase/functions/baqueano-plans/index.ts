@@ -13,6 +13,9 @@
 //     order_confirm_payment (plan_receipt_issue: número correlativo sin saltos),
 //     owner_account_create (crea la cuenta en Firebase Auth con contraseña temporal que se
 //     muestra una sola vez y no se guarda; registra el local en business_applications).
+//   - Beneficios: order_link vincula el pedido con el negocio publicado (destacados en la web
+//     vía public_plan_tiers) y la promoción de la ficha; my_plans trae las estadísticas del mes.
+//   - IVA: subtotal, IVA y total separados; el IVA solo se suma si plan_settings lo enciende.
 //   - Vencimientos (equipo): reminders_list y reminders_run (plan_reminders_run: campana,
 //     correo y WhatsApp; la tarea diaria de pg_cron hace lo mismo sola).
 //   - Nada se borra: los pedidos se cancelan. Todo cambio del equipo queda en audit_logs.
@@ -41,7 +44,7 @@ const DEPARTMENTS = ["Boaco", "Carazo", "Chinandega", "Chontales", "Costa Caribe
 const LANGS = new Set(["es", "en", "fr", "it", "pt", "de", "ko", "zh"]);
 const METHODS = new Set(["transferencia", "deposito", "efectivo", "billetera", "otro"]);
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const PUBLIC_ORDER_FIELDS = "code, plan_code, billing_period, amount_usd, amount_nio, exchange_rate, client_type, legal_name, id_type, id_number, contact_name, email, phone, billing_address, business_name, business_category, department, municipality, status, payment_method, payment_reference, paid_at, period_start, period_end, receipt_number, receipt_issued_at, must_change_password, business_application_code, created_at";
+const PUBLIC_ORDER_FIELDS = "code, plan_code, billing_period, amount_usd, amount_nio, exchange_rate, client_type, legal_name, id_type, id_number, contact_name, email, phone, billing_address, business_name, business_category, department, municipality, status, payment_method, payment_reference, paid_at, period_start, period_end, receipt_number, receipt_issued_at, must_change_password, business_application_code, created_at, subtotal_usd, subtotal_nio, iva_rate, iva_usd, iva_nio, business_id, promo_text, promo_until";
 
 class HttpError extends Error {
   constructor(public status: number, message: string, public code = "error") { super(message); }
@@ -144,7 +147,8 @@ async function handle(action: string, body: Record<string, unknown>, req: Reques
     case "catalog": {
       const { data, error } = await service.from("plan_catalog").select("code, sort_order, monthly_usd, annual_usd, monthly_nio, annual_nio, exchange_rate, photo_limit").eq("is_active", true).order("sort_order");
       if (error) throw new HttpError(500, "No se pudieron leer los planes.", "catalog_failed");
-      return { plans: data || [] };
+      const { data: settings } = await service.from("plan_settings").select("iva_enabled, iva_rate").eq("id", 1).maybeSingle();
+      return { plans: data || [], iva: settings || { iva_enabled: false, iva_rate: 0.15 } };
     }
 
     case "order_create": {
@@ -172,11 +176,23 @@ async function handle(action: string, body: Record<string, unknown>, req: Reques
       if (!idType) throw new HttpError(400, "Elegí el tipo de identificación.", "bad_id_type");
       if (body.accept_terms !== true) throw new HttpError(400, "Tenés que aceptar los términos para continuar.", "terms_required");
 
+      // IVA: solo si está encendido en plan_settings (BAQUEANO inscrito como responsable en la DGI).
+      const { data: settings } = await service.from("plan_settings").select("iva_enabled, iva_rate").eq("id", 1).maybeSingle();
+      const ivaRate = settings?.iva_enabled ? Number(settings.iva_rate || 0) : 0;
+      const subUsd = Number(period === "annual" ? plan.annual_usd : plan.monthly_usd);
+      const subNio = Number(period === "annual" ? plan.annual_nio : plan.monthly_nio);
+      const ivaUsd = Math.round(subUsd * ivaRate * 100) / 100;
+      const ivaNio = Math.round(subNio * ivaRate * 100) / 100;
       const row = {
         plan_code: plan.code,
         billing_period: period,
-        amount_usd: period === "annual" ? plan.annual_usd : plan.monthly_usd,
-        amount_nio: period === "annual" ? plan.annual_nio : plan.monthly_nio,
+        subtotal_usd: subUsd,
+        subtotal_nio: subNio,
+        iva_rate: ivaRate,
+        iva_usd: ivaUsd,
+        iva_nio: ivaNio,
+        amount_usd: Math.round((subUsd + ivaUsd) * 100) / 100,
+        amount_nio: Math.round((subNio + ivaNio) * 100) / 100,
         exchange_rate: plan.exchange_rate,
         client_type: body.client_type === "empresa" ? "empresa" : "persona",
         legal_name: text(body.legal_name, 160, { required: true, min: 2, label: "el nombre o razón social" })!,
@@ -208,7 +224,14 @@ async function handle(action: string, body: Record<string, unknown>, req: Reques
       q = w!.email && w!.emailVerified ? q.or(`owner_uid.eq.${w!.uid},email.eq."${w!.email}"`) : q.eq("owner_uid", w!.uid);
       const { data, error } = await q;
       if (error) throw new HttpError(500, "No se pudieron leer tus planes.", "read_failed");
-      return { orders: data || [] };
+      // Estadísticas del mes (visitas a la ficha y contactos) para cada plan con negocio publicado.
+      const orders = (data || []) as Record<string, unknown>[];
+      await Promise.all(orders.map(async (o) => {
+        if (o.status !== "paid" || !o.business_id) return;
+        const { data: stats } = await service.rpc("plan_business_stats", { p_business_id: String(o.business_id) });
+        o.stats = stats || null;
+      }));
+      return { orders };
     }
 
     case "password_changed": {
@@ -225,7 +248,9 @@ async function handle(action: string, body: Record<string, unknown>, req: Reques
       const { data, error } = await q;
       if (error) throw new HttpError(500, "No se pudieron leer los pedidos.", "read_failed");
       const { data: plans } = await service.from("plan_catalog").select("*").order("sort_order");
-      return { orders: data || [], plans: plans || [] };
+      const { data: businesses } = await service.from("businesses").select("id, name, department_id, municipality").eq("is_published", true).is("deleted_at", null).order("name").limit(1000);
+      const { data: settings } = await service.from("plan_settings").select("iva_enabled, iva_rate").eq("id", 1).maybeSingle();
+      return { orders: data || [], plans: plans || [], businesses: businesses || [], iva: settings || null };
     }
 
     case "order_status": {
@@ -314,6 +339,27 @@ async function handle(action: string, body: Record<string, unknown>, req: Reques
       await audit(service, req, w, "PLAN_OWNER_ACCOUNT", order.code, `Cuenta del propietario creada para ${order.email} (pedido ${order.code})`, { owner_uid: uid, application: appCode });
       // La contraseña temporal se devuelve una sola vez y no se guarda en ningún lado.
       return { email: order.email, temp_password: password, application_code: appCode, phone: order.phone, contact_name: order.contact_name };
+    }
+
+    // Vincula el pedido con el negocio publicado (activa los beneficios del plan en la web) y guarda
+    // la promoción de la ficha (Cumbre).
+    case "order_link": {
+      const w = requireStaff(await who(req, service, true), true);
+      const id = String(body.id || "");
+      if (!UUID_RE.test(id)) throw new HttpError(400, "Pedido inválido.", "bad_id");
+      const businessId = body.business_id ? String(body.business_id).slice(0, 120) : null;
+      if (businessId) {
+        const { data: biz } = await service.from("businesses").select("id").eq("id", businessId).eq("is_published", true).is("deleted_at", null).maybeSingle();
+        if (!biz) throw new HttpError(400, "Ese negocio no está publicado.", "bad_business");
+      }
+      const promo = text(body.promo_text, 160, { label: "la promoción" });
+      const promoUntil = typeof body.promo_until === "string" && /^\d{4}-\d{2}-\d{2}$/.test(body.promo_until) ? body.promo_until : null;
+      const { data: before } = await service.from("plan_orders").select("code, business_id, promo_text").eq("id", id).maybeSingle();
+      if (!before) throw new HttpError(404, "No existe ese pedido.", "not_found");
+      const { error } = await service.from("plan_orders").update({ business_id: businessId, promo_text: promo, promo_until: promoUntil }).eq("id", id);
+      if (error) throw new HttpError(500, "No se pudo guardar.", "update_failed");
+      await audit(service, req, w, "PLAN_ORDER_LINK", before.code, `Pedido ${before.code} vinculado al negocio ${businessId || "(ninguno)"}`, { before, after: { business_id: businessId, promo_text: promo, promo_until: promoUntil } });
+      return { ok: true };
     }
 
     // Vencimientos: planes pagados que vencen en 10 días o vencieron hace poco, con el estado de

@@ -18,6 +18,16 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 💲 PLANES 10/35/90, IVA LISTO (APAGADO), BENEFICIOS REALES Y «PLANES Y PAGOS» EN TÉRMINOS (15-10-2026, 19:35–23:50)
+- **Solicitudes:** *"Quiero que la página: baqueanonicaragua.com/planes hacerla más mejor y las letras se vean mejor y si hacemos todos los que dice los planes implementarlo en cada planes además vamos agregar publicación y promoción en redes sociales … al sendero aumentarlo a 10 dólares recuerda que también le vamos aumentar IVA según Nicaragua"* (respuestas: Mirador 35 · Cumbre 90; IVA «Dejarlo listo, apagado») y *"hay un apartado que dice ver terminos Pero me lleva a index, llevarlo a términos y agregar el apartado de pagos y planes"*.
+- **Precios:** Sendero US$ 10 (C$ 366), Mirador US$ 35 (C$ 1,282), Cumbre US$ 90 (C$ 3,296) al mes; anual = 10 meses. Migración `20261016030000_plan_prices_iva_tiers.sql`.
+- **IVA:** `plan_settings` (15 %, apagado). El comprobante separa Subtotal / IVA («No aplica*» mientras esté apagado) / Total. Se enciende solo cuando BAQUEANO esté inscrito como responsable ante la DGI.
+- **Beneficios implementados:** redes sociales en las tarjetas (bienvenida, 2 y 4 publicaciones al mes, pauta pagada en Cumbre); insignia «Destacado» y orden por plan en Aliados; bloque «Negocios destacados» en el inicio (Cumbre) y en cada departamento (Mirador y Cumbre) con `plan-featured.js` + RPC `public_plan_tiers`; promoción de la ficha (Cumbre); estadísticas del mes en «Mi plan» (`plan_business_stats`); Ops: «Vincular negocio publicado». Solo aparecen con planes pagados y vinculados (hoy ninguno: no se muestra nada inventado).
+- **Términos:** `_redirects` ya no manda `/terminos` ni `/privacidad` al inicio; sección 31 «Planes y pagos» con enlace directo `terminos.html#sec-31`.
+- **Función** `baqueano-plans` v3 desplegada. **i18n:** 39 claves nuevas en 8 idiomas. **Checks:** i18n, glosario, auditoría, export app, territorios, build, SEO, production-audit (0 críticos), browser QA 6 páginas × 16 anchos (0 fallos), flutter test (95 OK).
+- **Pendiente del propietario:** correr en Supabase > SQL Editor el archivo combinado `BAQUEANO-planes-completo-15oct.sql` (3 migraciones). Hasta entonces los planes no reciben pedidos.
+- **También recibido (23:37):** prompt de 4 módulos de frontend (tarjetas, modal de contacto, offline, Worker). Se adapta a Supabase (Firestore ya no se usa) y se empieza por el Módulo 1.
+
 ## ⏰ COMPROBANTE CON LOGO Y HORA + AVISOS DE VENCIMIENTO DE PLANES (15-10-2026, 19:25)
 - **Solicitud:** *"A la factura ponerle hora que hizo suscripción también agregarle el logo de baqueano y que el sistema le mandé un mensaje por notificación dentro de la plataforma y además por correo y WhatsApp que pronto se le acabará su plan se puede hacer o es mucho"*.
 - **Comprobante:** logo oficial de BAQUEANO y hora de Nicaragua en suscripción (pedido), pago y emisión (`plan-receipt.js` v=20261015-logo-1).

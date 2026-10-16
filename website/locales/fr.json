@@ -964,7 +964,9 @@
     "statPublished": "Partenaires publiés",
     "statTerritories": "Territoires avec partenaires",
     "statCommission": "Commission : BAQUEANO n'encaisse rien sur la plateforme",
-    "statSourced": "Avec une source vérifiable"
+    "statSourced": "Avec une source vérifiable",
+    "clearQuery": "Tout voir",
+    "filterQuery": "Résultats pour « {q} » : {n}"
   },
   "business": {
     "register": {
@@ -5382,7 +5384,8 @@
         "a20": "Modifications des conditions",
         "a21": "Droit applicable et juridiction",
         "a22": "Règlement des litiges",
-        "a23": "Durée"
+        "a23": "Durée",
+        "a24": "Formules et paiements"
       },
       "termSearchCard": {
         "h31": "Que voulez-vous consulter ?",
@@ -5563,7 +5566,7 @@
         "div2": "et remplace tout accord antérieur relatif à l'utilisation des services numériques de BAQUEANO."
       },
       "termToggleAllBtn": {
-        "span1": "Voir toutes les sections (30)"
+        "span1": "Voir toutes les sections (31)"
       },
       "termRelatedCard": {
         "p1": "Vous pouvez aussi consulter nos politiques et mentions légales pour plus d'informations.",
@@ -5578,6 +5581,18 @@
       },
       "termSearchInput": {
         "inputPlaceholder1": "Recherchez un sujet dans les conditions générales..."
+      },
+      "sec31": {
+        "h41": "31. Formules pour les entreprises et paiements",
+        "p1": "Formules Sendero, Mirador et Cumbre : paiements, reçus, renouvellement et annulation.",
+        "b1": "BAQUEANO propose trois formules aux entreprises touristiques : Sendero, Mirador et Cumbre, avec paiement mensuel ou annuel. Les prix en vigueur sont publiés sur la page Formules, d’abord en córdobas puis en dollars, au taux de référence de BAQUEANO.",
+        "b2": "Le paiement s’organise sur WhatsApp (+505 7797 6973) par virement, dépôt ou espèces. BAQUEANO ne demande jamais de mots de passe ni de données complètes de carte.",
+        "b3": "À la confirmation du paiement, un reçu numéroté est émis avec les données du client ainsi que la date et l’heure de la souscription et du paiement. Tant que BAQUEANO ne dispose pas d’une numérotation autorisée par la Dirección General de Ingresos (DGI), le reçu est un document non fiscal. Le cas échéant, la TVA (IVA) en vigueur au Nicaragua sera appliquée et détaillée séparément.",
+        "b4": "La formule s’active à la date du paiement et dure un mois ou un an selon la modalité choisie. BAQUEANO prévient avant l’échéance via la plateforme, par e-mail et sur WhatsApp. Sans renouvellement, l’établissement n’est plus mis en avant et sa fiche peut être masquée jusqu’au renouvellement.",
+        "b5": "La publication de l’établissement est soumise à l’examen de l’équipe et aux présentes conditions. BAQUEANO peut refuser ou suspendre des fiches contenant de fausses informations, un contenu illégal ou nuisible aux communautés ou à l’environnement, et en informe le titulaire par WhatsApp ou e-mail.",
+        "b6": "Les paiements des périodes déjà commencées ne sont pas remboursables, sauf erreur de facturation imputable à BAQUEANO ou lorsque l’établissement ne peut être publié pour des raisons indépendantes du titulaire. Les changements de formule s’appliquent à la période suivante.",
+        "b7": "Les publications et promotions sur les réseaux sociaux incluses dans chaque formule sont préparées par l’équipe BAQUEANO avec le matériel fourni par l’établissement et respectent les règles de chaque réseau.",
+        "b8": "BAQUEANO ne prend aucune commission sur les clients qui contactent l’établissement : le prix et le service se conviennent directement entre le voyageur et l’établissement."
       }
     },
     "todosDestinos": {
@@ -7920,7 +7935,14 @@
       "photosUnlimited": "Photos illimitées et vidéo de présentation",
       "baqui": "BAQUI vous recommande en premier quand on cherche votre service dans votre région",
       "promos": "Promotions et offres saisonnières sur votre fiche",
-      "onboarding": "Nous vous aidons à créer votre fiche : textes et photos"
+      "onboarding": "Nous vous aidons à créer votre fiche : textes et photos",
+      "priority2": "En tête des Alliés et des recherches de BAQUI",
+      "socialAds": "Une publication sponsorisée (publicité payante) par mois sur les réseaux",
+      "socialCumbre": "4 publications par mois sur Instagram, Facebook et TikTok, avec des stories chaque semaine",
+      "socialMirador": "2 publications par mois sur Instagram, Facebook et TikTok, avec des stories",
+      "socialWelcome": "Publication de bienvenue sur Instagram, Facebook et TikTok de BAQUEANO",
+      "statsBasic": "Visites de votre fiche et contacts du mois dans votre espace",
+      "statsCompare": "Statistiques du mois comparées au mois précédent"
     },
     "cta": "Choisir",
     "mirador": {
@@ -7931,7 +7953,9 @@
       "tag": "Visibilité maximale"
     },
     "note": {
-      "exchange": "Prix en córdobas au taux de référence de BAQUEANO (C$ 36,6243 pour 1 US$). La formule annuelle équivaut à 10 mois : 2 mois offerts."
+      "exchange": "Prix en córdobas au taux de référence de BAQUEANO (C$ 36,6243 pour 1 US$). La formule annuelle équivaut à 10 mois : 2 mois offerts.",
+      "ivaOn": "Prix hors TVA. Votre reçu ajoute la TVA du Nicaragua ({rate} %).",
+      "ivaPending": "Prix hors TVA. La TVA du Nicaragua (15 %) sera ajoutée et détaillée sur votre reçu lorsque BAQUEANO sera inscrit auprès de la DGI."
     },
     "steps": {
       "title": "Comment ça marche",
@@ -7970,7 +7994,15 @@
       "expiresToday": "Expire aujourd’hui",
       "expiredOn": "Expiré le {date}",
       "renew": "Renouveler sur WhatsApp",
-      "renewText": "Bonjour BAQUEANO, je souhaite renouveler ma formule {plan} (demande {code})."
+      "renewText": "Bonjour BAQUEANO, je souhaite renouveler ma formule {plan} (demande {code}).",
+      "promo": "Promotion sur votre fiche : {text}",
+      "statCalls": "Appels",
+      "statMessages": "Messages",
+      "statViews": "Visites de votre fiche",
+      "statWa": "Contacts WhatsApp",
+      "statsPending": "Vos statistiques apparaîtront une fois votre établissement publié.",
+      "statsPrev": "Mois précédent : {views} visites et {contacts} contacts.",
+      "statsTitle": "Ce mois-ci ({month})"
     },
     "faq": {
       "title": "Questions fréquentes",
@@ -8064,6 +8096,16 @@
       "today": "Votre formule {plan} pour {business} expire aujourd’hui ({date}). Renouvelez-la sur WhatsApp pour rester visible.",
       "expiredTitle": "Votre formule a expiré",
       "expired": "Votre formule {plan} pour {business} a expiré le {date}. Renouvelez-la sur WhatsApp pour que votre établissement soit de nouveau visible."
+    },
+    "featured": {
+      "badge": "À la une",
+      "deptLead": "Établissements de ce territoire avec un plan BAQUEANO. Contactez-les directement sur WhatsApp.",
+      "deptTitle": "Établissements à la une à {dept}",
+      "homeLead": "Hébergements, restaurants et expériences avec le plan Cumbre. Contactez-les directement, sans commission.",
+      "homeTitle": "Établissements à la une",
+      "kicker": "Établissements locaux avec un plan BAQUEANO",
+      "more": "Voir la fiche",
+      "yourBusiness": "Vous avez un établissement ? Découvrez les plans"
     }
   },
   "opsPlans": {

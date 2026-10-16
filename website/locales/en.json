@@ -964,7 +964,9 @@
     "statPublished": "Published partners",
     "statTerritories": "Territories with partners",
     "statCommission": "Commission: BAQUEANO doesn't charge inside the platform",
-    "statSourced": "With a verifiable source"
+    "statSourced": "With a verifiable source",
+    "clearQuery": "Show all",
+    "filterQuery": "Results for “{q}”: {n}"
   },
   "business": {
     "register": {
@@ -5382,7 +5384,8 @@
         "a20": "Changes to the terms",
         "a21": "Applicable law and jurisdiction",
         "a22": "Dispute resolution",
-        "a23": "Term"
+        "a23": "Term",
+        "a24": "Plans and payments"
       },
       "termSearchCard": {
         "h31": "What would you like to look up?",
@@ -5563,7 +5566,7 @@
         "div2": "and supersedes any prior agreement regarding the use of BAQUEANO's digital services."
       },
       "termToggleAllBtn": {
-        "span1": "View all sections (30)"
+        "span1": "View all sections (31)"
       },
       "termRelatedCard": {
         "p1": "You can also check our policies and legal notices for more information.",
@@ -5578,6 +5581,18 @@
       },
       "termSearchInput": {
         "inputPlaceholder1": "Search for a topic within the terms and conditions..."
+      },
+      "sec31": {
+        "h41": "31. Business plans and payments",
+        "p1": "Sendero, Mirador and Cumbre plans: payments, receipts, renewal and cancellation.",
+        "b1": "BAQUEANO offers three plans for tourism businesses: Sendero, Mirador and Cumbre, paid monthly or yearly. Current prices are published on the Plans page, first in córdobas and then in dollars, at BAQUEANO’s reference rate.",
+        "b2": "Payment is arranged on WhatsApp (+505 7797 6973) by bank transfer, deposit or cash. BAQUEANO never asks for passwords or full card details.",
+        "b3": "Once payment is confirmed, a numbered receipt is issued with the customer’s details and the date and time of the subscription and payment. Until BAQUEANO has numbering authorized by the Dirección General de Ingresos (DGI), the receipt is a non-fiscal document. When applicable, Nicaragua’s Value Added Tax (IVA) will be applied and shown separately.",
+        "b4": "The plan starts on the payment date and lasts one month or one year depending on the option chosen. BAQUEANO sends reminders before it expires on the platform, by email and on WhatsApp. If the plan is not renewed, the business stops being featured and its listing may be hidden until renewal.",
+        "b5": "Publishing a business is subject to team review and these terms. BAQUEANO may reject or suspend listings with false information, illegal content or content that harms communities or the environment, and will inform the owner by WhatsApp or email.",
+        "b6": "Payments for periods already started are non-refundable, except for a billing error attributable to BAQUEANO or when the business cannot be published for reasons beyond the owner’s control. Plan changes apply from the next period.",
+        "b7": "Social media posts and promotions included in each plan are prepared by the BAQUEANO team with material provided by the business and follow each network’s rules.",
+        "b8": "BAQUEANO charges no commission for customers who contact the business: price and service are agreed directly between the traveler and the business."
       }
     },
     "todosDestinos": {
@@ -7920,7 +7935,14 @@
       "photosUnlimited": "Unlimited photos and an intro video",
       "baqui": "BAQUI recommends you first when travelers ask for your service in your area",
       "promos": "Seasonal promotions and offers on your listing",
-      "onboarding": "We help you build your listing: texts and photos"
+      "onboarding": "We help you build your listing: texts and photos",
+      "priority2": "First in Allies and in BAQUI searches",
+      "socialAds": "One promoted (paid) social media post per month",
+      "socialCumbre": "4 posts per month on Instagram, Facebook and TikTok, with weekly stories",
+      "socialMirador": "2 posts per month on Instagram, Facebook and TikTok, with stories",
+      "socialWelcome": "Welcome post on BAQUEANO's Instagram, Facebook and TikTok",
+      "statsBasic": "Profile views and contacts for the month in your dashboard",
+      "statsCompare": "Monthly statistics compared with the previous month"
     },
     "cta": "Choose plan",
     "mirador": {
@@ -7931,7 +7953,9 @@
       "tag": "Maximum visibility"
     },
     "note": {
-      "exchange": "Córdoba prices use BAQUEANO’s reference rate (C$ 36.6243 per US$ 1). The yearly plan costs 10 months: 2 months free."
+      "exchange": "Córdoba prices use BAQUEANO’s reference rate (C$ 36.6243 per US$ 1). The yearly plan costs 10 months: 2 months free.",
+      "ivaOn": "Prices before VAT. Your receipt adds Nicaraguan VAT ({rate}%).",
+      "ivaPending": "Prices before VAT. Nicaraguan VAT (15%) will be added and itemized on your receipt once BAQUEANO is registered with the DGI as a VAT collector."
     },
     "steps": {
       "title": "How it works",
@@ -7970,7 +7994,15 @@
       "expiresToday": "Expires today",
       "expiredOn": "Expired on {date}",
       "renew": "Renew on WhatsApp",
-      "renewText": "Hello BAQUEANO, I’d like to renew my {plan} plan (order {code})."
+      "renewText": "Hello BAQUEANO, I’d like to renew my {plan} plan (order {code}).",
+      "promo": "Promotion on your profile: {text}",
+      "statCalls": "Calls",
+      "statMessages": "Messages",
+      "statViews": "Profile views",
+      "statWa": "WhatsApp contacts",
+      "statsPending": "Your statistics appear once your business is published.",
+      "statsPrev": "Previous month: {views} views and {contacts} contacts.",
+      "statsTitle": "This month ({month})"
     },
     "faq": {
       "title": "Frequently asked questions",
@@ -8064,6 +8096,16 @@
       "today": "Your {plan} plan for {business} expires today ({date}). Renew it on WhatsApp to stay visible.",
       "expiredTitle": "Your plan has expired",
       "expired": "Your {plan} plan for {business} expired on {date}. Renew it on WhatsApp so your business is visible again."
+    },
+    "featured": {
+      "badge": "Featured",
+      "deptLead": "Local businesses in this territory with a BAQUEANO plan. Contact them directly on WhatsApp.",
+      "deptTitle": "Featured businesses in {dept}",
+      "homeLead": "Lodging, restaurants and experiences on the Cumbre plan. Contact them directly, no commissions.",
+      "homeTitle": "Featured businesses",
+      "kicker": "Local businesses with a BAQUEANO plan",
+      "more": "View profile",
+      "yourBusiness": "Have a business? See the plans"
     }
   },
   "opsPlans": {

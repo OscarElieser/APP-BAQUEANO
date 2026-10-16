@@ -964,7 +964,9 @@
     "statPublished": "Veröffentlichte Partner",
     "statTerritories": "Gebiete mit Partnern",
     "statCommission": "Provision: BAQUEANO kassiert nichts auf der Plattform",
-    "statSourced": "Mit überprüfbarer Quelle"
+    "statSourced": "Mit überprüfbarer Quelle",
+    "clearQuery": "Alle anzeigen",
+    "filterQuery": "Ergebnisse für „{q}“: {n}"
   },
   "business": {
     "register": {
@@ -5382,7 +5384,8 @@
         "a20": "Änderungen der Bedingungen",
         "a21": "Anwendbares Recht und Gerichtsstand",
         "a22": "Streitbeilegung",
-        "a23": "Geltungsdauer"
+        "a23": "Geltungsdauer",
+        "a24": "Pläne und Zahlungen"
       },
       "termSearchCard": {
         "h31": "Wonach suchst du?",
@@ -5563,7 +5566,7 @@
         "div2": "und ersetzt alle früheren Vereinbarungen zur Nutzung der digitalen Dienste von BAQUEANO."
       },
       "termToggleAllBtn": {
-        "span1": "Alle Abschnitte ansehen (30)"
+        "span1": "Alle Abschnitte ansehen (31)"
       },
       "termRelatedCard": {
         "p1": "Weitere Informationen findest du in unseren Richtlinien und rechtlichen Hinweisen.",
@@ -5578,6 +5581,18 @@
       },
       "termSearchInput": {
         "inputPlaceholder1": "Suche ein Thema in den Nutzungsbedingungen..."
+      },
+      "sec31": {
+        "h41": "31. Pläne für Unternehmen und Zahlungen",
+        "p1": "Pläne Sendero, Mirador und Cumbre: Zahlungen, Belege, Verlängerung und Kündigung.",
+        "b1": "BAQUEANO bietet touristischen Unternehmen drei Pläne an: Sendero, Mirador und Cumbre, mit monatlicher oder jährlicher Zahlung. Die aktuellen Preise stehen auf der Seite Pläne, zuerst in Córdoba und dann in Dollar, zum Referenzkurs von BAQUEANO.",
+        "b2": "Die Zahlung wird per WhatsApp (+505 7797 6973) per Überweisung, Einzahlung oder bar abgestimmt. BAQUEANO fragt nie nach Passwörtern oder vollständigen Kartendaten.",
+        "b3": "Nach Bestätigung der Zahlung wird ein nummerierter Beleg mit den Kundendaten sowie Datum und Uhrzeit der Anmeldung und der Zahlung ausgestellt. Solange BAQUEANO keine von der Dirección General de Ingresos (DGI) genehmigte Nummerierung hat, ist der Beleg kein Steuerdokument. Wenn zutreffend, wird die in Nicaragua geltende Mehrwertsteuer (IVA) separat ausgewiesen.",
+        "b4": "Der Plan beginnt mit dem Zahlungsdatum und läuft je nach gewählter Option einen Monat oder ein Jahr. BAQUEANO erinnert vor dem Ablauf über die Plattform, per E-Mail und per WhatsApp. Ohne Verlängerung wird das Geschäft nicht mehr hervorgehoben und der Eintrag kann bis zur Verlängerung ausgeblendet werden.",
+        "b5": "Die Veröffentlichung unterliegt der Prüfung durch das Team und diesen Bedingungen. BAQUEANO kann Einträge mit falschen Angaben, illegalen oder für Gemeinden oder Umwelt schädlichen Inhalten ablehnen oder sperren und informiert den Inhaber per WhatsApp oder E-Mail.",
+        "b6": "Zahlungen für bereits begonnene Zeiträume werden nicht erstattet, außer bei einem Abrechnungsfehler von BAQUEANO oder wenn das Geschäft aus Gründen, die der Inhaber nicht zu vertreten hat, nicht veröffentlicht werden kann. Planwechsel gelten ab dem nächsten Zeitraum.",
+        "b7": "Die in jedem Plan enthaltenen Beiträge und Werbeaktionen in sozialen Netzwerken erstellt das BAQUEANO-Team mit dem vom Geschäft gelieferten Material; es gelten die Regeln des jeweiligen Netzwerks.",
+        "b8": "BAQUEANO erhebt keine Provision für Kunden, die das Geschäft kontaktieren: Preis und Leistung vereinbaren Reisende und Geschäft direkt."
       }
     },
     "todosDestinos": {
@@ -7920,7 +7935,14 @@
       "photosUnlimited": "Unbegrenzt Fotos und Vorstellungsvideo",
       "baqui": "BAQUI empfiehlt dich zuerst, wenn jemand deine Leistung in deiner Region sucht",
       "promos": "Saisonale Aktionen und Angebote in deinem Eintrag",
-      "onboarding": "Wir helfen dir beim Eintrag: Texte und Fotos"
+      "onboarding": "Wir helfen dir beim Eintrag: Texte und Fotos",
+      "priority2": "Ganz oben bei den Partnern und in den BAQUI-Suchen",
+      "socialAds": "Ein beworbener (bezahlter) Social-Media-Beitrag pro Monat",
+      "socialCumbre": "4 Beiträge pro Monat auf Instagram, Facebook und TikTok, mit wöchentlichen Storys",
+      "socialMirador": "2 Beiträge pro Monat auf Instagram, Facebook und TikTok, mit Storys",
+      "socialWelcome": "Willkommensbeitrag auf Instagram, Facebook und TikTok von BAQUEANO",
+      "statsBasic": "Profilaufrufe und Kontakte des Monats in deinem Bereich",
+      "statsCompare": "Monatsstatistiken im Vergleich zum Vormonat"
     },
     "cta": "Plan wählen",
     "mirador": {
@@ -7931,7 +7953,9 @@
       "tag": "Maximale Sichtbarkeit"
     },
     "note": {
-      "exchange": "Córdoba-Preise zum Referenzkurs von BAQUEANO (C$ 36,6243 pro 1 US$). Der Jahresplan kostet 10 Monate: 2 Monate gratis."
+      "exchange": "Córdoba-Preise zum Referenzkurs von BAQUEANO (C$ 36,6243 pro 1 US$). Der Jahresplan kostet 10 Monate: 2 Monate gratis.",
+      "ivaOn": "Preise ohne MwSt. Dein Beleg rechnet die nicaraguanische MwSt. ({rate} %) hinzu.",
+      "ivaPending": "Preise ohne MwSt. Die nicaraguanische MwSt. (15 %) wird auf deinem Beleg ausgewiesen, sobald BAQUEANO bei der DGI registriert ist."
     },
     "steps": {
       "title": "So funktioniert es",
@@ -7970,7 +7994,15 @@
       "expiresToday": "Läuft heute ab",
       "expiredOn": "Abgelaufen am {date}",
       "renew": "Per WhatsApp verlängern",
-      "renewText": "Hallo BAQUEANO, ich möchte meinen Plan {plan} verlängern (Bestellung {code})."
+      "renewText": "Hallo BAQUEANO, ich möchte meinen Plan {plan} verlängern (Bestellung {code}).",
+      "promo": "Aktion in deinem Profil: {text}",
+      "statCalls": "Anrufe",
+      "statMessages": "Nachrichten",
+      "statViews": "Profilaufrufe",
+      "statWa": "WhatsApp-Kontakte",
+      "statsPending": "Deine Statistiken erscheinen, sobald dein Betrieb veröffentlicht ist.",
+      "statsPrev": "Vormonat: {views} Aufrufe und {contacts} Kontakte.",
+      "statsTitle": "Dieser Monat ({month})"
     },
     "faq": {
       "title": "Häufige Fragen",
@@ -8064,6 +8096,16 @@
       "today": "Dein Plan {plan} für {business} läuft heute ab ({date}). Verlängere ihn per WhatsApp, um sichtbar zu bleiben.",
       "expiredTitle": "Dein Plan ist abgelaufen",
       "expired": "Dein Plan {plan} für {business} ist am {date} abgelaufen. Verlängere ihn per WhatsApp, damit dein Geschäft wieder sichtbar ist."
+    },
+    "featured": {
+      "badge": "Empfohlen",
+      "deptLead": "Betriebe in diesem Gebiet mit BAQUEANO-Plan. Kontaktiere sie direkt per WhatsApp.",
+      "deptTitle": "Empfohlene Betriebe in {dept}",
+      "homeLead": "Unterkünfte, Restaurants und Erlebnisse mit dem Cumbre-Plan. Direkt kontaktieren, ohne Provision.",
+      "homeTitle": "Empfohlene Betriebe",
+      "kicker": "Lokale Betriebe mit BAQUEANO-Plan",
+      "more": "Profil ansehen",
+      "yourBusiness": "Du hast einen Betrieb? Sieh dir die Pläne an"
     }
   },
   "opsPlans": {
