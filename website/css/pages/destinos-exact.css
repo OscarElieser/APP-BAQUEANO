@@ -1218,11 +1218,11 @@ html body.page-destinos-exact .destinos-pagination-wrap .pagination-btn.active {
 .destinos-all-cta-copy p { margin: 0; color: #E2E8F0; font-size: 0.92rem; line-height: 1.5; max-width: 60ch; }
 .destinos-all-cta-btn {
   flex-shrink: 0; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 12px 22px;
-  border-radius: 14px; background: #F65E01; color: #FFFFFF; text-decoration: none;
+  border-radius: 14px; background: #C2410C; color: #FFFFFF; text-decoration: none; /* 5.2:1 con blanco (antes #F65E01: 3:1, no cumplía AA) */
   font: 800 1rem/1.2 'League Spartan', 'Plus Jakarta Sans', sans-serif;
   box-shadow: 0 10px 24px -12px rgba(246, 94, 1, 0.75); transition: transform 0.2s ease, background 0.2s ease;
 }
-.destinos-all-cta-btn:hover { background: #C2410C; transform: translateY(-2px); color: #FFFFFF; }
+.destinos-all-cta-btn:hover { background: #9A3412; transform: translateY(-2px); color: #FFFFFF; }
 .destinos-all-cta-btn:focus-visible { outline: 3px solid #F4E6C1; outline-offset: 3px; }
 @media (max-width: 680px) {
   .destinos-all-cta { flex-direction: column; align-items: stretch; text-align: left; padding: 20px; }

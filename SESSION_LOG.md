@@ -34,6 +34,7 @@ LO QUE FUNCIONA EN ESTE PUNTO:
   - Las fotos de fondo decorativas se ocultan en este modo para priorizar la lectura.
 - **BlurHash:** no se implementó porque BAQUEANO no guarda el hash de cada foto. Para tenerlo hay que calcularlo al subir la imagen (columna en Supabase).
 - **CI rojo de 01ae600 (Azure, QA en navegador):** `mi-negocio.html@1366 axe target-size .bq-suggestion-close`. La burbuja de BAQUI aparecía a destiempo debajo del aviso de cookies. Corregido: BAQUI no sugiere mientras el aviso de cookies u otro diálogo está abierto (`baqueano-assistant.js` v=20261016-cookies-1).
+- **CI rojo de 9b69729:** en el servidor la barra quedaba llena a 1366 px (search target-size), el botón cerrar de BAQUI se achicaba durante su entrada y el CTA «Ver los N destinos» tenía contraste 3:1. Corregido: Modo Sol solo con ícono por debajo de 1600 px, cerrar de BAQUI a 34 px y CTA en #C2410C (5.2:1).
 - **Checks:** i18n, glosario, auditoría, export app, territorios, build, SEO, production-audit (0 críticos), axe AAA en Modo Sol (8 páginas × 390/1366: 0 violaciones tras quitar transiciones en ese modo), browser QA completo.
 
 ## 💲 PLANES 10/35/90, IVA LISTO (APAGADO), BENEFICIOS REALES Y «PLANES Y PAGOS» EN TÉRMINOS (15-10-2026, 19:35–23:50)

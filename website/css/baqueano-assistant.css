@@ -298,15 +298,16 @@
 
 .bq-suggestion {
   width: min(310px, calc(100vw - 32px));
-  padding: 16px 34px 14px 16px;
+  padding: 16px 40px 14px 16px;
 }
 
 .bq-suggestion .bq-suggestion-close {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  min-width: 28px;
-  min-height: 28px;
+  top: 2px;
+  right: 2px;
+  /* 34 px: durante la entrada de BAQUI (escala .72) sigue midiendo más de 24 px (WCAG 2.5.8). */
+  min-width: 34px;
+  min-height: 34px;
   display: inline-flex;
   align-items: center;
   justify-content: center;

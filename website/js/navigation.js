@@ -1677,7 +1677,7 @@ function loadBaqueanoDigital(openWhenReady) {
   if (!document.querySelector('link[data-baqueano-assistant]')) {
     const style = document.createElement('link');
     style.rel = 'stylesheet';
-    style.href = 'css/baqueano-assistant.css?v=20261015-target-1';
+    style.href = 'css/baqueano-assistant.css?v=20261016-target-2';
     style.dataset.baqueanoAssistant = 'true';
     document.head.appendChild(style);
   }

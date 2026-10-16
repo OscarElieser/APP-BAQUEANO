@@ -8,7 +8,7 @@
   'use strict';
   if (window.BaqueanoAssistant?.version === '6') return;
   if (!document.querySelector('link[data-baqueano-assistant]')) {
-    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20261015-target-1'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
+    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'css/baqueano-assistant.css?v=20261016-target-2'; style.dataset.baqueanoAssistant = 'true'; document.head.appendChild(style);
   }
 
   // 🎯 POR QUÉ: Firebase Hosting no expone /health y su 404 pintaba el asistente en rojo aunque Supabase estuviera operativo.

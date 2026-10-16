@@ -78,7 +78,7 @@
       // Capa de identidad "Cartografía viva": correcciones de contraste y responsive.
       { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261006-player-1' },
       // Módulo 1 (15-10-2026): tarjetas con esqueleto, desenfoque progresivo, vidrio y Modo Sol.
-      { id: 'bq-ui-cards',  href: 'css/ui-cards.css?v=20261015-modulo1-1' },
+      { id: 'bq-ui-cards',  href: 'css/ui-cards.css?v=20261016-modulo1-2' },
       // Sistema de diseño global: SIEMPRE la última hoja. Ver css/baqueano-system.css
       { id: 'bq-system',    href: 'css/baqueano-system.css?v=20261009-a11y-4' }
     ];

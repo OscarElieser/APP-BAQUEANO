@@ -111,7 +111,9 @@
 .bq-sun-toggle:focus-visible { outline: 3px solid #F65E01; outline-offset: 2px; }
 .bq-sun-toggle[aria-pressed="true"] { background: #fde68a; color: #111827; border-color: #fde68a; }
 .bq-sun-toggle .bq-sun-label { font-size: 0.82rem; }
-@media (max-width: 1100px) { .bq-sun-toggle .bq-sun-label { display: none; } }
+/* Solo ícono salvo en pantallas muy anchas: la barra ya va llena (búsqueda, SOS, sesión, idioma)
+   y el texto empujaba «Planes» encima del botón de búsqueda (axe target-size en CI, 16-10-2026). */
+@media (max-width: 1599px) { .bq-sun-toggle { padding: 0; width: 44px; } .bq-sun-toggle .bq-sun-label { display: none; } }
 
 /* ── 6. Modo Sol: negro sobre blanco, WCAG AAA ───────────────────────────── */
 /* :not(#bqs1#bqs2#bqs3) suma especificidad de 3 ID sin depender de ningún ID real: así el Modo Sol
