@@ -904,7 +904,36 @@
     "title": "Hors ligne",
     "subtitle": "Le signal est perdu",
     "desc": "Ce que vous avez déjà chargé reste disponible. Quand internet reviendra, nous continuerons.",
-    "retry": "Tester la connexion"
+    "retry": "Tester la connexion",
+    "route": {
+      "title": "Votre itinéraire hors connexion",
+      "desc": "Enregistrez vos étapes, leurs photos et cette page sur ce téléphone pour les ouvrir sans internet.",
+      "save": "Enregistrer mon itinéraire hors connexion",
+      "resave": "Enregistrer à nouveau",
+      "update": "Mettre à jour l'itinéraire enregistré",
+      "remove": "Retirer du téléphone",
+      "unsupported": "Ce navigateur ne permet pas d'enregistrer l'itinéraire hors connexion.",
+      "saved": "Enregistré le {date} · Étapes : {stops} · Photos : {photos} · {mb} Mo",
+      "changed": "Vous avez modifié votre voyage après l'avoir enregistré : mettez-le à jour avant de partir.",
+      "notSaved": "Vous ne l'avez pas encore enregistré sur ce téléphone.",
+      "empty": "Ajoutez des destinations à Mon voyage pour les enregistrer.",
+      "saving": "Enregistrement…",
+      "progress": "Enregistrement {done} sur {total}…",
+      "done": "C'est fait, votre itinéraire s'ouvre maintenant hors connexion sur ce téléphone. Étapes : {stops} · Photos : {photos} · {mb} Mo",
+      "errOffline": "Il faut une connexion pour enregistrer l'itinéraire. Faites-le avant de partir.",
+      "errSave": "L'enregistrement a échoué. Vérifiez l'espace libre du téléphone et réessayez.",
+      "removed": "L'itinéraire enregistré a été retiré de ce téléphone. Votre voyage reste dans Mon voyage."
+    },
+    "page": {
+      "title": "Votre itinéraire enregistré",
+      "saved": "Enregistré le {date}",
+      "open": "Ouvrir Mon voyage"
+    },
+    "toast": {
+      "offRoute": "Pas de réseau. Votre itinéraire enregistré reste disponible.",
+      "off": "Pas de réseau. Les pages déjà ouvertes restent consultables.",
+      "on": "La connexion est revenue."
+    }
   },
   "notFound": {
     "title": "Ce chemin ne mène nulle part",
@@ -8149,6 +8178,8 @@
       "people": "Personnes",
       "date": "Date",
       "dateOpen": "à définir"
-    }
+    },
+    "offline": "Pas de réseau : WhatsApp garde votre message et l'envoie au retour de la connexion.",
+    "offlineDesk": "Pas de réseau : le message est prêt, mais WhatsApp Web a besoin d'internet pour l'envoyer."
   }
 }

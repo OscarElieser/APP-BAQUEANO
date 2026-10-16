@@ -73,11 +73,17 @@
   }
 
   // El saludo que ya traía el enlace (por ejemplo «Hola Hotel X, los encontré en BAQUEANO.»).
+  // Se conservan los demás parámetros (por ejemplo ?phone= de api.whatsapp.com) y el número para
+  // abrir la app directo sin señal.
   function splitWa(href) {
     try {
       var u = new URL(href, window.location.href);
-      return { base: u.origin + u.pathname, greeting: u.searchParams.get('text') || '' };
-    } catch (_) { return { base: href.split('?')[0], greeting: '' }; }
+      var greeting = u.searchParams.get('text') || '';
+      u.searchParams.delete('text');
+      var rest = u.searchParams.toString();
+      var phone = (u.searchParams.get('phone') || (/wa\.me$/i.test(u.hostname) ? u.pathname.slice(1) : '')).replace(/\D/g, '');
+      return { base: u.origin + u.pathname + (rest ? '?' + rest + '&' : '?'), greeting: greeting, phone: phone };
+    } catch (_) { return { base: href.split('?')[0] + '?', greeting: '', phone: '' }; }
   }
 
   // ── Diálogo ───────────────────────────────────────────────────────────────
@@ -194,7 +200,13 @@
   function finish(withDetails) {
     if (withDetails && !validate()) return;
     var c = state.current;
-    var url = c.base + '?text=' + encodeURIComponent(message(withDetails));
+    var text = encodeURIComponent(message(withDetails));
+    var url = c.base + 'text=' + text;
+    // Módulo 3: sin señal, en el teléfono se abre la app de WhatsApp directo (whatsapp://), que
+    // guarda el mensaje y lo envía al volver la conexión. wa.me necesitaría internet para redirigir.
+    var offline = navigator.onLine === false;
+    var touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    if (offline && touch && c.phone) url = 'whatsapp://send?phone=' + c.phone + '&text=' + text;
     var dateVal = withDetails ? document.getElementById('bqLeadDate').value : '';
     var payload = {
       destinationId: c.destinationId || null,
@@ -208,6 +220,14 @@
     try { if (window.BaqueanoAnalytics && typeof window.BaqueanoAnalytics.trackLead === 'function') window.BaqueanoAnalytics.trackLead(payload); } catch (_) { /* la analítica nunca bloquea el contacto */ }
     try { document.dispatchEvent(new CustomEvent('bq:lead', { detail: payload })); } catch (_) { /* navegadores viejos */ }
     state.dialog.close('sent');
+    if (offline) {
+      try {
+        if (window.BaqueanoOffline) window.BaqueanoOffline.toast(touch && c.phone
+          ? t('lead.offline', 'Sin señal: WhatsApp guarda tu mensaje y lo envía cuando vuelvas a tener conexión.')
+          : t('lead.offlineDesk', 'Sin señal: el mensaje está listo, pero WhatsApp Web necesita internet para enviarlo.'), { tone: 'warn', duration: 9000 });
+      } catch (_) { /* sin módulo offline */ }
+    }
+    if (/^whatsapp:/.test(url)) { window.location.href = url; return; }
     // El envío del formulario es un gesto del usuario: el navegador permite abrir la pestaña.
     var win = window.open(url, '_blank', 'noopener');
     if (!win) window.location.href = url;
@@ -219,7 +239,7 @@
     state.dialog = document.getElementById('bqLeadDialog') || build();
     var wa = splitWa(opts.href);
     state.current = {
-      base: wa.base, greeting: wa.greeting,
+      base: wa.base, greeting: wa.greeting, phone: wa.phone,
       businessId: opts.businessId || null, destinationId: opts.destinationId || null, experienceId: opts.experienceId || null
     };
     state.opener = opts.opener || document.activeElement;

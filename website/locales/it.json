@@ -904,7 +904,36 @@
     "title": "Offline",
     "subtitle": "Il segnale è sparito",
     "desc": "Ciò che hai già caricato è ancora qui. Quando tornerà internet, continueremo.",
-    "retry": "Verifica connessione"
+    "retry": "Verifica connessione",
+    "route": {
+      "title": "Il tuo percorso senza segnale",
+      "desc": "Salva su questo telefono le tue tappe, le foto e questa pagina per aprirle dove non c'è internet.",
+      "save": "Salva il mio percorso offline",
+      "resave": "Salva di nuovo",
+      "update": "Aggiorna il percorso salvato",
+      "remove": "Rimuovi dal telefono",
+      "unsupported": "Questo browser non permette di salvare il percorso offline.",
+      "saved": "Salvato il {date} · Tappe: {stops} · Foto: {photos} · {mb} MB",
+      "changed": "Hai cambiato il viaggio dopo averlo salvato: aggiornalo prima di partire.",
+      "notSaved": "Non l'hai ancora salvato su questo telefono.",
+      "empty": "Aggiungi destinazioni al Mio viaggio per salvarle.",
+      "saving": "Salvataggio…",
+      "progress": "Salvataggio {done} di {total}…",
+      "done": "Fatto, ora puoi aprire il percorso offline su questo telefono. Tappe: {stops} · Foto: {photos} · {mb} MB",
+      "errOffline": "Serve la connessione per salvare il percorso. Fallo prima di partire.",
+      "errSave": "Non è stato possibile salvare. Controlla lo spazio libero del telefono e riprova.",
+      "removed": "Abbiamo rimosso il percorso salvato da questo telefono. Il viaggio resta nel Mio viaggio."
+    },
+    "page": {
+      "title": "Il tuo percorso salvato",
+      "saved": "Salvato il {date}",
+      "open": "Apri il Mio viaggio"
+    },
+    "toast": {
+      "offRoute": "Nessun segnale. Il percorso salvato è ancora disponibile.",
+      "off": "Nessun segnale. Le pagine già aperte restano consultabili.",
+      "on": "Il segnale è tornato."
+    }
   },
   "notFound": {
     "title": "Questa strada non porta da nessuna parte",
@@ -8149,6 +8178,8 @@
       "people": "Persone",
       "date": "Data",
       "dateOpen": "da definire"
-    }
+    },
+    "offline": "Nessun segnale: WhatsApp conserva il messaggio e lo invia quando torna la connessione.",
+    "offlineDesk": "Nessun segnale: il messaggio è pronto, ma WhatsApp Web ha bisogno di internet per inviarlo."
   }
 }

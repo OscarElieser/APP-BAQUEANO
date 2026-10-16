@@ -904,7 +904,36 @@
     "title": "Sem conexão",
     "subtitle": "O sinal caiu",
     "desc": "O que você já carregou continua aqui. Quando a internet voltar, seguimos.",
-    "retry": "Testar conexão"
+    "retry": "Testar conexão",
+    "route": {
+      "title": "Sua rota sem sinal",
+      "desc": "Salve neste celular suas paradas, as fotos e esta página para abri-las onde não há internet.",
+      "save": "Salvar minha rota para usar sem sinal",
+      "resave": "Salvar de novo",
+      "update": "Atualizar a rota salva",
+      "remove": "Remover do celular",
+      "unsupported": "Este navegador não permite salvar a rota para uso sem conexão.",
+      "saved": "Salva em {date} · Paradas: {stops} · Fotos: {photos} · {mb} MB",
+      "changed": "Você mudou a viagem depois de salvar: atualize antes de sair.",
+      "notSaved": "Você ainda não salvou neste celular.",
+      "empty": "Adicione destinos a Minha viagem para poder salvá-los.",
+      "saving": "Salvando…",
+      "progress": "Salvando {done} de {total}…",
+      "done": "Pronto, agora você pode abrir sua rota sem sinal neste celular. Paradas: {stops} · Fotos: {photos} · {mb} MB",
+      "errOffline": "Você precisa de conexão para salvar a rota. Faça isso antes de sair.",
+      "errSave": "Não foi possível salvar. Verifique o espaço livre do celular e tente de novo.",
+      "removed": "Removemos a rota salva deste celular. Sua viagem continua em Minha viagem."
+    },
+    "page": {
+      "title": "Sua rota salva",
+      "saved": "Salva em {date}",
+      "open": "Abrir Minha viagem"
+    },
+    "toast": {
+      "offRoute": "Sem sinal. Sua rota salva continua disponível.",
+      "off": "Sem sinal. As páginas que você já abriu continuam visíveis.",
+      "on": "O sinal voltou."
+    }
   },
   "notFound": {
     "title": "Este caminho não leva a lugar nenhum",
@@ -8149,6 +8178,8 @@
       "people": "Pessoas",
       "date": "Data",
       "dateOpen": "a definir"
-    }
+    },
+    "offline": "Sem sinal: o WhatsApp guarda sua mensagem e envia quando a conexão voltar.",
+    "offlineDesk": "Sem sinal: a mensagem está pronta, mas o WhatsApp Web precisa de internet para enviar."
   }
 }

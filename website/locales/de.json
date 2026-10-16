@@ -904,7 +904,36 @@
     "title": "Offline",
     "subtitle": "Das Signal ist weg",
     "desc": "Was du schon geladen hast, bleibt verfügbar. Sobald das Internet zurück ist, geht es weiter.",
-    "retry": "Verbindung prüfen"
+    "retry": "Verbindung prüfen",
+    "route": {
+      "title": "Deine Route ohne Empfang",
+      "desc": "Speichere deine Stopps, ihre Fotos und diese Seite auf diesem Handy, um sie ohne Internet zu öffnen.",
+      "save": "Meine Route offline speichern",
+      "resave": "Erneut speichern",
+      "update": "Gespeicherte Route aktualisieren",
+      "remove": "Vom Handy entfernen",
+      "unsupported": "Dieser Browser kann die Route nicht offline speichern.",
+      "saved": "Gespeichert am {date} · Stopps: {stops} · Fotos: {photos} · {mb} MB",
+      "changed": "Du hast deine Reise nach dem Speichern geändert: aktualisiere sie vor der Abfahrt.",
+      "notSaved": "Du hast sie auf diesem Handy noch nicht gespeichert.",
+      "empty": "Füge Ziele zu Meine Reise hinzu, um sie zu speichern.",
+      "saving": "Wird gespeichert …",
+      "progress": "Speichere {done} von {total} …",
+      "done": "Fertig, du kannst deine Route jetzt offline auf diesem Handy öffnen. Stopps: {stops} · Fotos: {photos} · {mb} MB",
+      "errOffline": "Zum Speichern brauchst du eine Verbindung. Mach es vor der Abfahrt.",
+      "errSave": "Speichern fehlgeschlagen. Prüfe den freien Speicher und versuche es erneut.",
+      "removed": "Die gespeicherte Route wurde vom Handy entfernt. Deine Reise bleibt in Meine Reise."
+    },
+    "page": {
+      "title": "Deine gespeicherte Route",
+      "saved": "Gespeichert am {date}",
+      "open": "Meine Reise öffnen"
+    },
+    "toast": {
+      "offRoute": "Kein Empfang. Deine gespeicherte Route ist weiter verfügbar.",
+      "off": "Kein Empfang. Bereits geöffnete Seiten bleiben sichtbar.",
+      "on": "Du bist wieder online."
+    }
   },
   "notFound": {
     "title": "Dieser Weg führt nirgendwohin",
@@ -8149,6 +8178,8 @@
       "people": "Personen",
       "date": "Datum",
       "dateOpen": "noch offen"
-    }
+    },
+    "offline": "Kein Empfang: WhatsApp behält deine Nachricht und sendet sie, sobald du wieder online bist.",
+    "offlineDesk": "Kein Empfang: Die Nachricht ist fertig, aber WhatsApp Web braucht Internet zum Senden."
   }
 }

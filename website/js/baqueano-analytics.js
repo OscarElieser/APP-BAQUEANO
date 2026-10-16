@@ -102,6 +102,20 @@
     return out;
   }
 
+  // Módulo 3 (16-10-2026): sin señal, el envío queda en la cola de js/offline-route.js y sale al
+  // volver la conexión (Background Sync o, en iOS, desde la página). Sin ese módulo, fetch directo.
+  function post(url, body) {
+    var headers = { 'Content-Type': 'application/json', apikey: PUBLIC_KEY, Authorization: 'Bearer ' + PUBLIC_KEY };
+    try {
+      if (window.BaqueanoOffline && typeof window.BaqueanoOffline.send === 'function') {
+        window.BaqueanoOffline.send(url, body, headers).catch(function () { /* la analítica nunca rompe la navegación */ });
+        return;
+      }
+      window.fetch(url, { method: 'POST', keepalive: true, headers: headers, body: JSON.stringify(body) })
+        .catch(function () { /* la analítica nunca rompe la navegación */ });
+    } catch (_) { /* sin red o fetch bloqueado */ }
+  }
+
   var sent = 0;
   function track(name, data) {
     if (!consentGranted()) return false;
@@ -122,14 +136,7 @@
       p_metadata: safeMeta(data),
       p_utm: name === 'page_view' ? utm() : null
     };
-    try {
-      window.fetch(ENDPOINT, {
-        method: 'POST',
-        keepalive: true,
-        headers: { 'Content-Type': 'application/json', apikey: PUBLIC_KEY, Authorization: 'Bearer ' + PUBLIC_KEY },
-        body: JSON.stringify(body)
-      }).catch(function () { /* la analítica nunca rompe la navegación */ });
-    } catch (_) { /* sin red o fetch bloqueado */ }
+    post(ENDPOINT, body);
     return true;
   }
 
@@ -138,14 +145,7 @@
   function trackCommercial(actionType, businessId) {
     if (!consentGranted() || !businessId || commercialSent >= 30) return false;
     commercialSent += 1;
-    try {
-      window.fetch(COMMERCIAL_ENDPOINT, {
-        method: 'POST',
-        keepalive: true,
-        headers: { 'Content-Type': 'application/json', apikey: PUBLIC_KEY, Authorization: 'Bearer ' + PUBLIC_KEY },
-        body: JSON.stringify({ p_action_type: actionType, p_anonymous_id: anonymousId(), p_session_id: sessionId(), p_platform: 'web', p_business_id: String(businessId).slice(0, 120) })
-      }).catch(function () { /* la analítica nunca rompe la navegación */ });
-    } catch (_) { /* sin red o fetch bloqueado */ }
+    post(COMMERCIAL_ENDPOINT, { p_action_type: actionType, p_anonymous_id: anonymousId(), p_session_id: sessionId(), p_platform: 'web', p_business_id: String(businessId).slice(0, 120) });
     return true;
   }
 
@@ -162,17 +162,10 @@
     var entityType = lead.hostId ? 'business' : (lead.experienceId ? 'experience' : (lead.destinationId ? 'destination' : null));
     var entityId = lead.hostId || lead.experienceId || lead.destinationId || null;
     if (entityId) {
-      try {
-        window.fetch(COMMERCIAL_ENDPOINT, {
-          method: 'POST',
-          keepalive: true,
-          headers: { 'Content-Type': 'application/json', apikey: PUBLIC_KEY, Authorization: 'Bearer ' + PUBLIC_KEY },
-          body: JSON.stringify({ p_action_type: 'whatsapp', p_anonymous_id: anonymousId(), p_session_id: sessionId(), p_platform: 'web',
+      post(COMMERCIAL_ENDPOINT, { p_action_type: 'whatsapp', p_anonymous_id: anonymousId(), p_session_id: sessionId(), p_platform: 'web',
             p_business_id: lead.hostId ? String(lead.hostId).slice(0, 120) : null,
             p_destination_id: lead.destinationId ? String(lead.destinationId).slice(0, 120) : null,
-            p_experience_id: lead.experienceId ? String(lead.experienceId).slice(0, 120) : null })
-        }).catch(function () { /* la analítica nunca rompe la navegación */ });
-      } catch (_) { /* sin red */ }
+            p_experience_id: lead.experienceId ? String(lead.experienceId).slice(0, 120) : null });
     } else {
       track('whatsapp_click', {});
     }
@@ -182,16 +175,9 @@
     var eventName = 'inquiry_sent';
     if (sent >= 120) return true;
     sent += 1;
-    try {
-      window.fetch(ENDPOINT, {
-        method: 'POST',
-        keepalive: true,
-        headers: { 'Content-Type': 'application/json', apikey: PUBLIC_KEY, Authorization: 'Bearer ' + PUBLIC_KEY },
-        body: JSON.stringify({ p_event_name: eventName, p_anonymous_id: anonymousId(), p_session_id: sessionId(), p_platform: 'web',
+    post(ENDPOINT, { p_event_name: eventName, p_anonymous_id: anonymousId(), p_session_id: sessionId(), p_platform: 'web',
           p_entity_type: entityType, p_entity_id: entityId ? String(entityId).slice(0, 120) : null, p_department_id: null,
-          p_language: language(), p_path: window.location.pathname.slice(0, 300), p_metadata: safeMeta(meta), p_utm: null })
-      }).catch(function () { /* la analítica nunca rompe la navegación */ });
-    } catch (_) { /* sin red */ }
+          p_language: language(), p_path: window.location.pathname.slice(0, 300), p_metadata: safeMeta(meta), p_utm: null });
     return true;
   }
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T11:55:25.896Z",
+  "generatedAt": "2026-10-16T12:43:49.631Z",
   "languages": [
     "es",
     "en",
@@ -11,14 +11,14 @@
     "zh"
   ],
   "keysPerLanguage": {
-    "es": 6214,
-    "en": 6214,
-    "fr": 6214,
-    "it": 6214,
-    "pt": 6214,
-    "de": 6214,
-    "ko": 6214,
-    "zh": 6214
+    "es": 6239,
+    "en": 6239,
+    "fr": 6239,
+    "it": 6239,
+    "pt": 6239,
+    "de": 6239,
+    "ko": 6239,
+    "zh": 6239
   },
   "html": {
     "files": 37,
@@ -27,7 +27,7 @@
     "untranslated": 1
   },
   "js": {
-    "files": 138,
+    "files": 139,
     "translated": 444,
     "untranslated": 648
   },
@@ -126,6 +126,7 @@
     "js/lodging-showcase.js",
     "js/mapa-atlas.js",
     "js/musica-archivo.js",
+    "js/offline-route.js",
     "js/ops-center/ops-alerts.js",
     "js/ops-center/ops-android-app.js",
     "js/ops-center/ops-automation.js",
@@ -1318,6 +1319,15 @@
       "untranslated": 5,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/offline-route.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/ops-center/ops-alerts.js",

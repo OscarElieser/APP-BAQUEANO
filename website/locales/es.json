@@ -534,7 +534,36 @@
     "title": "Sin conexión",
     "subtitle": "Se fue la señal",
     "desc": "Lo que ya cargaste sigue aquí. Cuando vuelva el internet, seguimos.",
-    "retry": "Probar la conexión"
+    "retry": "Probar la conexión",
+    "route": {
+      "title": "Tu ruta sin señal",
+      "desc": "Guardá en este teléfono tus paradas, sus fotos y esta página para abrirlas donde no hay internet.",
+      "save": "Guardar mi ruta para ir sin señal",
+      "resave": "Volver a guardar",
+      "update": "Actualizar la ruta guardada",
+      "remove": "Quitar del teléfono",
+      "unsupported": "Este navegador no permite guardar la ruta sin conexión.",
+      "saved": "Guardada el {date} · Paradas: {stops} · Fotos: {photos} · {mb} MB",
+      "changed": "Cambiaste tu viaje después de guardarla: actualizala antes de salir.",
+      "notSaved": "Todavía no la guardaste en este teléfono.",
+      "empty": "Agregá destinos a Mi viaje para poder guardarlos.",
+      "saving": "Guardando…",
+      "progress": "Guardando {done} de {total}…",
+      "done": "Listo, ya podés abrir tu ruta sin señal en este teléfono. Paradas: {stops} · Fotos: {photos} · {mb} MB",
+      "errOffline": "Necesitás conexión para guardar la ruta. Hacelo antes de salir.",
+      "errSave": "No se pudo guardar. Revisá el espacio libre del teléfono e intentá de nuevo.",
+      "removed": "Quitamos la ruta guardada de este teléfono. Tu viaje sigue en Mi viaje."
+    },
+    "page": {
+      "title": "Tu ruta guardada",
+      "saved": "Guardada el {date}",
+      "open": "Abrir Mi viaje"
+    },
+    "toast": {
+      "offRoute": "Sin señal. Tu ruta guardada sigue disponible.",
+      "off": "Sin señal. Las páginas que ya abriste se pueden seguir viendo.",
+      "on": "Volviste a tener señal."
+    }
   },
   "notFound": {
     "title": "Este camino no lleva a ningún lado",
@@ -8149,6 +8178,8 @@
       "people": "Personas",
       "date": "Fecha",
       "dateOpen": "por definir"
-    }
+    },
+    "offline": "Sin señal: WhatsApp guarda tu mensaje y lo envía cuando vuelvas a tener conexión.",
+    "offlineDesk": "Sin señal: el mensaje está listo, pero WhatsApp Web necesita internet para enviarlo."
   }
 }

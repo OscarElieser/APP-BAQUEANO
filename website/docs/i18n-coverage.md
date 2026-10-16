@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-16T11:55:25.896Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6214 · en 6214 · fr 6214 · it 6214 · pt 6214 · de 6214 · ko 6214 · zh 6214
+Generado: 2026-10-16T12:43:49.631Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6239 · en 6239 · fr 6239 · it 6239 · pt 6239 · de 6239 · ko 6239 · zh 6239
 
 HTML: 4388/4389 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
@@ -223,6 +223,7 @@ HTML: 4388/4389 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/lodging-showcase.js | js | 0 | 0 | 0 | 100 % |
 | js/mapa-atlas.js | js | 7 | 7 | 0 | 100 % |
 | js/musica-archivo.js | js | 0 | 0 | 0 | 100 % |
+| js/offline-route.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-alerts.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-android-app.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-automation.js | js | 0 | 0 | 0 | 100 % |

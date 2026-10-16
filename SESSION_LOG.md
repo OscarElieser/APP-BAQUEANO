@@ -18,6 +18,33 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 📶 MÓDULO 3: RUTA SIN SEÑAL Y ENVÍOS PENDIENTES (16-10-2026, 06:29)
+- **Solicitud:** *"Continua"* (Módulo 3 del prompt de 4 módulos: «Guardar ruta para ir sin señal» con IndexedDB, Cache Storage y WebP, más una cola Background Sync con alternativa para iOS y avisos).
+- **Hecho:** `js/offline-route.js` + `css/offline-route.css`, cargados por `global-injector.js`.
+  - **Mi viaje:** panel «Tu ruta sin señal» con el botón «Guardar mi ruta para ir sin señal».
+    - IndexedDB `baqueano-offline/routes`: copia de las paradas (nombre, lugar, descripción, coordenadas reales, foto).
+    - Cache Storage `baqueano-rutas-v1`: la página Mi viaje con todos sus estilos, scripts y traducciones ya cargados, la página offline y las fotos de las paradas. Las fotos propias se recomprimen a WebP (máx. 1280 px) si ocupan menos.
+    - Pide `navigator.storage.persist()`.
+    - Muestra fecha, paradas, fotos y MB, avisa si el viaje cambió después de guardar y permite quitarla del teléfono.
+  - **offline.html:** muestra «Tu ruta guardada» con cada parada y sus coordenadas.
+  - **Cola `outbox`:** la analítica (incluido el registro de contactos del Módulo 2) que falla sin señal se guarda y se envía al volver la conexión.
+    - Chrome/Android: Background Sync `bq-outbox` desde el service worker.
+    - iOS/Safari y Firefox: desde la página (online, volver a la pestaña o próxima visita).
+    - Solo RPC de analítica de Supabase; máx. 50 envíos y 7 días.
+  - **Formulario de contacto sin señal (teléfono):** abre la app con `whatsapp://`, que guarda y envía el mensaje al volver la señal, con un aviso.
+  - **Corrección:** los enlaces `api.whatsapp.com/send?phone=` perdían el número al armar el mensaje.
+  - **Avisos** (role=status) al perder o recuperar la señal.
+- **service-worker.js:** no borra las cachés `baqueano-rutas-*` al actualizarse; `/locales/` y `/fonts/` como recursos públicos; evento `sync`.
+- **i18n:** 27 claves `offline.*` y `lead.offline*` en 8 idiomas.
+- **Pruebas:**
+  - Prueba real sin red, con el servidor local apagado y no solo el modo offline del navegador, que no afecta al service worker:
+    - Mi viaje abrió desde el teléfono con sus paradas y estilos, y las fotos salieron de la caché.
+    - Una página no guardada cayó en offline.html con la ruta guardada.
+    - La cola guardó 4 envíos sin red y el `sync` del service worker los mandó al volver.
+  - axe AA del panel y del aviso, y AAA en Modo Sol: 0 violaciones. Checks completos, browser QA y flutter test.
+- **⚠ Incidente de prueba:** el service worker esquiva la intercepción de Playwright, así que la prueba del `sync` envió a producción 8 filas en `analytics_events` (6 eventos + 2 `user_activated`). Son de los anonymous_id `web-14cc0710-9de5-433c-ae57-74326e1509e4` y `web-98cc1565-98e2-46cf-b174-243c465cf999`. En `commercial_actions` no entró nada (el negocio de prueba no existe y el servidor lo rechazó). No se borraron: se informó al propietario con la línea exacta para quitarlas si lo autoriza. Desde ahora las pruebas con service worker bloquean Supabase o no disparan `sync` contra producción.
+- **SQL de planes (06:33):** el propietario pegó en el SQL Editor la ruta del archivo en lugar del SQL (error 42601, sin cambios en la base). `apply_migration` por MCP sigue cancelado. Se publicó la página privada «SQL de planes BAQUEANO» con un botón «Copiar todo el SQL».
+
 ## 💬 MÓDULO 2: CONTACTO DIRECTO CON INTENCIÓN ANTES DE WHATSAPP (16-10-2026, 05:46)
 - **Solicitud:** *"Continua"* (siguiente módulo del prompt de 4 módulos: modal de contacto accesible con fecha, personas y motivo que registra el interés en /api/track-lead {destinationId, hostId, timestamp, intent} y luego abre WhatsApp).
 - **Adaptado al stack real:** el registro va a Supabase con las RPC que ya existen (`track_commercial_action` «whatsapp» + `track_event` «inquiry_sent» con metadata {source, intent, people, lead_days}). No hubo que tocar el esquema. `BaqueanoAnalytics.trackLead()` recibe el contrato {destinationId, hostId, experienceId, timestamp, intent, people, leadDays}. Solo con consentimiento de analítica. Nunca se envían nombre, teléfono, nota ni fecha exacta (solo cuántos días faltan).

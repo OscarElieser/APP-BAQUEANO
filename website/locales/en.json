@@ -904,7 +904,36 @@
     "title": "Offline",
     "subtitle": "The signal is gone",
     "desc": "What you already loaded is still here. When the internet comes back, we'll continue.",
-    "retry": "Check connection"
+    "retry": "Check connection",
+    "route": {
+      "title": "Your route without signal",
+      "desc": "Save your stops, their photos and this page on this phone to open them where there's no internet.",
+      "save": "Save my route for offline use",
+      "resave": "Save again",
+      "update": "Update the saved route",
+      "remove": "Remove from this phone",
+      "unsupported": "This browser can't save the route for offline use.",
+      "saved": "Saved {date} · Stops: {stops} · Photos: {photos} · {mb} MB",
+      "changed": "You changed your trip after saving it: update it before you leave.",
+      "notSaved": "You haven't saved it on this phone yet.",
+      "empty": "Add destinations to My trip to save them.",
+      "saving": "Saving…",
+      "progress": "Saving {done} of {total}…",
+      "done": "Done, you can now open your route offline on this phone. Stops: {stops} · Photos: {photos} · {mb} MB",
+      "errOffline": "You need a connection to save the route. Do it before you leave.",
+      "errSave": "It couldn't be saved. Check your phone's free space and try again.",
+      "removed": "We removed the saved route from this phone. Your trip is still in My trip."
+    },
+    "page": {
+      "title": "Your saved route",
+      "saved": "Saved {date}",
+      "open": "Open My trip"
+    },
+    "toast": {
+      "offRoute": "No signal. Your saved route is still available.",
+      "off": "No signal. Pages you already opened can still be viewed.",
+      "on": "You're back online."
+    }
   },
   "notFound": {
     "title": "This road leads nowhere",
@@ -8149,6 +8178,8 @@
       "people": "People",
       "date": "Date",
       "dateOpen": "not decided yet"
-    }
+    },
+    "offline": "No signal: WhatsApp keeps your message and sends it when you're back online.",
+    "offlineDesk": "No signal: the message is ready, but WhatsApp Web needs internet to send it."
   }
 }

@@ -77,9 +77,11 @@
       { id: 'bq-fonts',     href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap' },
       // Capa de identidad "Cartografía viva": correcciones de contraste y responsive.
       { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261006-player-1' },
-      // Módulo 1 (15-10-2026): tarjetas con esqueleto, desenfoque progresivo, vidrio y Modo Sol.
       // Módulo 2 (16-10-2026): formulario de contacto directo antes de WhatsApp.
       { id: 'bq-lead-modal', href: 'css/lead-modal.css?v=20261016-modulo2-2' },
+      // Módulo 3 (16-10-2026): ruta sin señal y avisos de conexión.
+      { id: 'bq-offline-route', href: 'css/offline-route.css?v=20261016-modulo3-1' },
+      // Módulo 1 (15-10-2026): tarjetas con esqueleto, desenfoque progresivo, vidrio y Modo Sol.
       { id: 'bq-ui-cards',  href: 'css/ui-cards.css?v=20261016-modulo1-2' },
       // Sistema de diseño global: SIEMPRE la última hoja. Ver css/baqueano-system.css
       { id: 'bq-system',    href: 'css/baqueano-system.css?v=20261009-a11y-4' }
@@ -702,7 +704,7 @@
     function loadAnalytics() {
       if (document.querySelector('script[data-baqueano-analytics]')) return;
       var script = document.createElement('script');
-      script.src = 'js/baqueano-analytics.js?v=20261016-lead-1';
+      script.src = 'js/baqueano-analytics.js?v=20261016-offline-1';
       script.defer = true;
       script.dataset.baqueanoAnalytics = 'true';
       document.body.appendChild(script);
@@ -961,10 +963,18 @@
       cardsScript.defer = true;
       document.body.appendChild(cardsScript);
     }
+    // Módulo 3 (16-10-2026): ruta sin señal (IndexedDB + Cache Storage) y cola de envíos pendientes.
+    if (!window.BaqueanoOffline && !/admin(\.html)?$/i.test(location.pathname) && !document.querySelector('script[data-bq-offline]')) {
+      var offlineScript = document.createElement('script');
+      offlineScript.src = 'js/offline-route.js?v=20261016-modulo3-1';
+      offlineScript.dataset.bqOffline = 'true';
+      offlineScript.defer = true;
+      document.body.appendChild(offlineScript);
+    }
     // Módulo 2 (16-10-2026): formulario de contacto (fecha, personas, motivo) antes de WhatsApp.
     if (!window.BaqueanoLeadModal && !/admin(\.html)?$/i.test(location.pathname) && !document.querySelector('script[data-bq-lead-modal]')) {
       var leadScript = document.createElement('script');
-      leadScript.src = 'js/lead-modal.js?v=20261016-modulo2-2';
+      leadScript.src = 'js/lead-modal.js?v=20261016-modulo3-1';
       leadScript.dataset.bqLeadModal = 'true';
       leadScript.defer = true;
       document.body.appendChild(leadScript);

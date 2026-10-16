@@ -1,0 +1,81 @@
+/* ============================================================================
+ * 🧭 BAQUEANO — MÓDULO 3 · RUTA SIN SEÑAL (css/offline-route.css)
+ * 🎯 POR QUÉ: el panel «Tu ruta sin señal» de Mi viaje, la lista de la ruta guardada en la página
+ *   offline y los avisos de señal tienen que leerse de un vistazo, con el sol y con una mano.
+ * ⚙️ CÓMO: contraste AA o mejor, botones de 48 px, curva cubic-bezier(0.22, 1, 0.36, 1) del
+ *   Módulo 1, sin movimiento con reduced-motion. En Modo Sol lo repinta ui-cards.css.
+ * 📦 QUÉ: .bq-offline-panel, .bq-offline-saved, .bq-offline-toast (los crea js/offline-route.js).
+ * ============================================================================ */
+.bq-offline-panel {
+  margin: 18px 0 0;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid #a7c4cc;
+  background: #f0f7f8;
+  color: #0f172a;
+}
+.bq-offline-panel[data-state="changed"] { border-color: #c2410c; background: #fff7ed; }
+.bq-offline-head { display: flex; gap: 12px; align-items: flex-start; }
+.bq-offline-head > i { flex: none; margin-top: 4px; color: #165d6f; font-size: 1.2rem; }
+.bq-offline-panel h3 { margin: 0; color: #0f172a; font: 800 1.1rem/1.3 'League Spartan', 'Plus Jakarta Sans', sans-serif; }
+.bq-offline-desc { margin: 4px 0 0; color: #334155; font-size: 0.95rem; line-height: 1.5; }
+.bq-offline-status { margin: 12px 0 0; color: #0f172a; font-size: 0.95rem; font-weight: 600; }
+.bq-offline-panel[data-state="changed"] .bq-offline-status { color: #7c2d12; }
+.bq-offline-progress { height: 8px; margin: 10px 0 0; border-radius: 999px; background: #cbd5e1; overflow: hidden; }
+.bq-offline-bar { height: 100%; width: 0; background: #165d6f; transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.bq-offline-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.bq-offline-save,
+.bq-offline-remove {
+  min-height: 48px; padding: 10px 18px; border-radius: 999px; cursor: pointer;
+  font: 800 0.98rem/1.25 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.bq-offline-save { border: 0; background: #165d6f; color: #ffffff; flex: 1 1 240px; }
+.bq-offline-save:hover:not(:disabled) { background: #0c3843; }
+.bq-offline-save:disabled { background: #64748b; cursor: not-allowed; }
+.bq-offline-remove { border: 2px solid #475569; background: #ffffff; color: #1e293b; }
+.bq-offline-save:focus-visible,
+.bq-offline-remove:focus-visible,
+.bq-offline-open:focus-visible,
+.bq-offline-toast a:focus-visible,
+.bq-offline-toast button:focus-visible { outline: 3px solid #c2410c; outline-offset: 2px; }
+
+/* Página offline: la ruta guardada */
+.bq-offline-saved {
+  margin: 22px auto; padding: 18px 20px; max-width: 640px; text-align: left;
+  border-radius: 16px; border: 1px solid rgba(244, 230, 193, 0.3); background: rgba(15, 23, 42, 0.85); color: #f8fafc;
+}
+.bq-offline-saved h2 { margin: 0 0 4px; color: #ffffff; font: 800 1.2rem/1.3 'League Spartan', 'Plus Jakarta Sans', sans-serif; }
+.bq-offline-saved p { margin: 0 0 10px; color: #e2e8f0; }
+.bq-offline-saved ol { margin: 0 0 14px; padding-left: 1.3rem; display: grid; gap: 6px; }
+.bq-offline-saved li { color: #f1f5f9; line-height: 1.45; }
+.bq-offline-coords { display: block; color: #cbd5e1; font-size: 0.86rem; font-variant-numeric: tabular-nums; }
+.bq-offline-open {
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; border-radius: 999px;
+  background: #c2410c; color: #ffffff; font-weight: 800; text-decoration: none;
+}
+
+/* Avisos */
+.bq-offline-toast {
+  position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 13000;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  width: min(560px, calc(100vw - 24px)); padding: 12px 48px 12px 16px; box-sizing: border-box;
+  border-radius: 14px; background: #0f172a; color: #ffffff; border-left: 6px solid #38bdf8;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+  transform: translate(-50%, 140%); opacity: 0; visibility: hidden;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.45s;
+}
+.bq-offline-toast.is-visible { transform: translate(-50%, 0); opacity: 1; visibility: visible; }
+.bq-offline-toast[data-tone="ok"] { border-left-color: #4ade80; }
+.bq-offline-toast[data-tone="warn"] { border-left-color: #fb923c; }
+.bq-offline-toast p { margin: 0; flex: 1 1 240px; font-size: 0.95rem; line-height: 1.45; color: #ffffff; }
+.bq-offline-toast a { color: #fde68a; font-weight: 800; text-decoration: underline; min-height: 44px; display: inline-flex; align-items: center; }
+.bq-offline-toast-close {
+  position: absolute; top: 6px; right: 6px; width: 40px; height: 40px; border: 0; border-radius: 10px;
+  background: transparent; color: #ffffff; font-size: 1.4rem; cursor: pointer;
+}
+/* La barra inferior del teléfono no tapa el aviso. */
+@media (max-width: 768px) { .bq-offline-toast { bottom: calc(86px + env(safe-area-inset-bottom)); } }
+@media (prefers-reduced-motion: reduce) {
+  .bq-offline-toast, .bq-offline-bar { transition: none; }
+}
+@media print { .bq-offline-panel, .bq-offline-toast { display: none !important; } }

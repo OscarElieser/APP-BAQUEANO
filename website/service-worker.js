@@ -6,6 +6,12 @@
  * CÓMO: Precarga solo una página offline y recursos visuales públicos; excluye
  * rutas privadas, API, Firebase, otros orígenes y cualquier petición no GET.
  * QUÉ: Instalación, limpieza versionada, caché estática y fallback de navegación.
+ * 16-10-2026 (Módulo 3, «ruta sin señal»):
+ *   - Las cachés «baqueano-rutas-*» las llena la persona con «Guardar mi ruta para ir sin
+ *     señal» (js/offline-route.js): no se borran al actualizar el service worker.
+ *   - /locales/ entra como recurso público: sin señal la página conserva el idioma elegido.
+ *   - Background Sync «bq-outbox»: envía a Supabase los registros de contacto que quedaron en
+ *     la cola de IndexedDB sin señal. Solo las RPC de analítica; máx. 7 días.
  * ============================================================================
  */
 'use strict';
@@ -32,7 +38,8 @@ const PRECACHE_URLS = [
   '/assets/images/logo.png'
 ];
 const PRIVATE_PREFIXES = ['/admin', '/perfil', '/api/', '/health'];
-const STATIC_PREFIXES = ['/assets/images/', '/assets/audio/', '/css/', '/js/', '/assets/icons/'];
+const STATIC_PREFIXES = ['/assets/images/', '/assets/audio/', '/css/', '/js/', '/assets/icons/', '/locales/', '/fonts/'];
+const ROUTE_CACHE_PREFIX = 'baqueano-rutas-';
 function isPrivatePath(pathname) {
   return PRIVATE_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 }
@@ -48,7 +55,7 @@ self.addEventListener('install', (event) => {
 });
 self.addEventListener('activate', (event) => {
   event.waitUntil(caches.keys()
-    .then((keys) => Promise.all(keys.filter((key) => key !== CACHE_VERSION).map((key) => caches.delete(key))))
+    .then((keys) => Promise.all(keys.filter((key) => key !== CACHE_VERSION && !key.startsWith(ROUTE_CACHE_PREFIX)).map((key) => caches.delete(key))))
     .then(() => self.clients.claim()));
 });
 self.addEventListener('fetch', (event) => {
@@ -81,3 +88,49 @@ self.addEventListener('fetch', (event) => {
     return response;
   }).catch(() => caches.match(request)));
 });
+
+// ── Cola de envíos pendientes (Background Sync) ────────────────────────────
+const OUTBOX_ALLOW = /^https:\/\/heiudfpthqwtjrtluqlm\.supabase\.co\/rest\/v1\/rpc\/(track_event|track_commercial_action)$/;
+const OUTBOX_TTL = 7 * 86400000;
+function outboxDb() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open('baqueano-offline', 1);
+    req.onupgradeneeded = () => {
+      const d = req.result;
+      if (!d.objectStoreNames.contains('routes')) d.createObjectStore('routes', { keyPath: 'id' });
+      if (!d.objectStoreNames.contains('outbox')) d.createObjectStore('outbox', { keyPath: 'id', autoIncrement: true });
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+function outboxAll(d) {
+  return new Promise((resolve, reject) => {
+    const r = d.transaction('outbox', 'readonly').objectStore('outbox').getAll();
+    r.onsuccess = () => resolve(r.result || []);
+    r.onerror = () => reject(r.error);
+  });
+}
+function outboxDelete(d, id) {
+  return new Promise((resolve) => {
+    const tr = d.transaction('outbox', 'readwrite');
+    tr.objectStore('outbox').delete(id);
+    tr.oncomplete = () => resolve();
+    tr.onerror = () => resolve();
+  });
+}
+async function flushOutbox() {
+  const d = await outboxDb();
+  const items = await outboxAll(d);
+  for (const item of items) {
+    if (Date.now() - item.createdAt > OUTBOX_TTL || !OUTBOX_ALLOW.test(item.url)) { await outboxDelete(d, item.id); continue; }
+    // Sin red, fetch lanza error: el navegador reintenta el sync más tarde.
+    const res = await fetch(item.url, { method: 'POST', headers: item.headers, body: JSON.stringify(item.body) });
+    if (res.status >= 500) throw new Error('servidor ocupado');
+    await outboxDelete(d, item.id);
+  }
+}
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'bq-outbox') event.waitUntil(flushOutbox());
+});
+
