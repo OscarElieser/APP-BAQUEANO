@@ -165,6 +165,8 @@
       wa.own ? null : el('p', { className: 'bq-ally-note', text: t('allies.noOwnWa', 'Este aliado todavía no tiene un WhatsApp verificado. El botón te comunica con la línea oficial de BAQUEANO, que coordina el contacto.') }),
       el('div', { className: 'bq-ally-actions' }, [
         el('a', { href: wa.url, target: '_blank', rel: 'noopener noreferrer', className: 'bq-ally-btn is-primary', 'data-bq-lead': true, 'data-business-id': b.id, 'data-lead-name': b.name }, [el('i', { className: 'fa-brands fa-whatsapp', 'aria-hidden': 'true' }), ' ', wa.own ? t('allies.contactWa', 'Contactar por WhatsApp') : t('allies.contactOfficial', 'Contactar vía BAQUEANO')]),
+        // 20-10-2026: «Cómo llegar» abre la ruta dentro de BAQUEANO (js/bq-navigator.js).
+        hasCoords ? el('button', { type: 'button', className: 'bq-ally-btn', 'data-bq-route': true, 'data-lat': Number(b.latitude).toFixed(6), 'data-lng': Number(b.longitude).toFixed(6), 'data-name': b.name, 'data-business-id': b.id }, [icon('fa-route'), ' ', t('destinations.howToGet', 'Cómo llegar')]) : null,
         hasCoords ? el('a', { href: 'mapa.html?lat=' + Number(b.latitude).toFixed(5) + '&lng=' + Number(b.longitude).toFixed(5), className: 'bq-ally-btn' }, [icon('fa-map-location-dot'), ' ', t('allies.onMap', 'Ver en el mapa')]) : null
       ]),
       dept ? el('p', { className: 'bq-ally-secondary' }, [t('allies.knowTerritory', '¿Querés conocer {territory}?', { territory: dept }), ' ', el('a', { href: 'departamento.html?id=' + b.department_id, text: t('allies.exploreTerritory', 'Explorar el territorio') })]) : null

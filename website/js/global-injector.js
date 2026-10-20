@@ -79,6 +79,8 @@
       { id: 'bq-identity',  href: 'css/baqueano-identity.css?v=20261006-player-1' },
       // Módulo 2 (16-10-2026): formulario de contacto directo antes de WhatsApp.
       { id: 'bq-lead-modal', href: 'css/lead-modal.css?v=20261016-modulo2-2' },
+      // 20-10-2026: «Cómo llegar» dentro de BAQUEANO (mapa, ruta e indicaciones).
+      { id: 'bq-navigator', href: 'css/bq-navigator.css?v=20261020-nav-1' },
       // Módulo 3 (16-10-2026): ruta sin señal y avisos de conexión.
       { id: 'bq-offline-route', href: 'css/offline-route.css?v=20261016-modulo3-1' },
       // Módulo 1 (15-10-2026): tarjetas con esqueleto, desenfoque progresivo, vidrio y Modo Sol.
@@ -962,6 +964,14 @@
       cardsScript.dataset.bqUiCards = 'true';
       cardsScript.defer = true;
       document.body.appendChild(cardsScript);
+    }
+    // 20-10-2026: «Cómo llegar» dentro de BAQUEANO. Intercepta los enlaces que antes iban a Google Maps.
+    if (!window.BaqueanoNavigator && !/admin(\.html)?$/i.test(location.pathname) && !document.querySelector('script[data-bq-navigator]')) {
+      var navScript = document.createElement('script');
+      navScript.src = 'js/bq-navigator.js?v=20261020-nav-1';
+      navScript.dataset.bqNavigator = 'true';
+      navScript.defer = true;
+      document.body.appendChild(navScript);
     }
     // Módulo 3 (16-10-2026): ruta sin señal (IndexedDB + Cache Storage) y cola de envíos pendientes.
     if (!window.BaqueanoOffline && !/admin(\.html)?$/i.test(location.pathname) && !document.querySelector('script[data-bq-offline]')) {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T21:40:44.119Z",
+  "generatedAt": "2026-10-20T21:59:25.530Z",
   "languages": [
     "es",
     "en",
@@ -11,23 +11,23 @@
     "zh"
   ],
   "keysPerLanguage": {
-    "es": 6239,
-    "en": 6239,
-    "fr": 6239,
-    "it": 6239,
-    "pt": 6239,
-    "de": 6239,
-    "ko": 6239,
-    "zh": 6239
+    "es": 6301,
+    "en": 6301,
+    "fr": 6301,
+    "it": 6301,
+    "pt": 6301,
+    "de": 6301,
+    "ko": 6301,
+    "zh": 6301
   },
   "html": {
     "files": 37,
-    "total": 4389,
-    "translated": 4388,
+    "total": 4391,
+    "translated": 4390,
     "untranslated": 1
   },
   "js": {
-    "files": 139,
+    "files": 140,
     "translated": 444,
     "untranslated": 648
   },
@@ -97,6 +97,7 @@
     "js/baqueano-trip-store.js",
     "js/baqui-brain.js",
     "js/bq-marquee.js",
+    "js/bq-navigator.js",
     "js/business-application.js",
     "js/business-plans.js",
     "js/category-strip-marquee.js",
@@ -252,8 +253,8 @@
     {
       "file": "baqueano-ia.html",
       "type": "html",
-      "total": 193,
-      "translated": 193,
+      "total": 195,
+      "translated": 195,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -782,6 +783,15 @@
     },
     {
       "file": "js/bq-marquee.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/bq-navigator.js",
       "type": "js",
       "total": 0,
       "translated": 0,

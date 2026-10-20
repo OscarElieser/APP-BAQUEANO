@@ -185,9 +185,9 @@
       mapEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // Fallback abrir navegación directa en Google Maps GPS
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
+    // 20-10-2026: la ruta se abre dentro de BAQUEANO (js/bq-navigator.js), sin salir a Google Maps.
+    if (window.BaqueanoNavigator) { window.BaqueanoNavigator.open({ lat: lat, lng: lng, name: name || '', id: placeId || '' }); return; }
+    window.location.href = 'mapa.html?lat=' + Number(lat).toFixed(5) + '&lng=' + Number(lng).toFixed(5);
   }
 
   // Mapeo de Macro-Categorías con sus Subcategorías

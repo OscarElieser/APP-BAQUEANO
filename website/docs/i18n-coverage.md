@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-20T21:40:44.119Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6239 · en 6239 · fr 6239 · it 6239 · pt 6239 · de 6239 · ko 6239 · zh 6239
+Generado: 2026-10-20T21:59:25.530Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6301 · en 6301 · fr 6301 · it 6301 · pt 6301 · de 6301 · ko 6301 · zh 6301
 
-HTML: 4388/4389 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
+HTML: 4390/4391 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -162,7 +162,7 @@ HTML: 4388/4389 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | aviso-legal.html | html | 94 | 94 | 0 | 100 % |
 | ayuda.html | html | 64 | 64 | 0 | 100 % |
 | baqueano-ai.html | html | 3 | 3 | 0 | 100 % |
-| baqueano-ia.html | html | 193 | 193 | 0 | 100 % |
+| baqueano-ia.html | html | 195 | 195 | 0 | 100 % |
 | cookies.html | html | 123 | 123 | 0 | 100 % |
 | cronicas.html | html | 57 | 57 | 0 | 100 % |
 | denuncias.html | html | 61 | 61 | 0 | 100 % |
@@ -194,6 +194,7 @@ HTML: 4388/4389 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/baqueano-trip-store.js | js | 0 | 0 | 0 | 100 % |
 | js/baqui-brain.js | js | 0 | 0 | 0 | 100 % |
 | js/bq-marquee.js | js | 0 | 0 | 0 | 100 % |
+| js/bq-navigator.js | js | 0 | 0 | 0 | 100 % |
 | js/business-application.js | js | 0 | 0 | 0 | 100 % |
 | js/business-plans.js | js | 0 | 0 | 0 | 100 % |
 | js/category-strip-marquee.js | js | 0 | 0 | 0 | 100 % |

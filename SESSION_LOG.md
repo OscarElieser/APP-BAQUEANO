@@ -18,6 +18,24 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 NAVEGACIÓN INTERNA «CÓMO LLEGAR» (20-10-2026, 15:40) — rama feat/navegacion-interna
+- **Solicitud:** prompt «BAQUEANO NICARAGUA — Sistema de navegación y rutas integrado» (no salir de BAQUEANO al tocar «Cómo llegar») y *"arma la navegacion interna que tenemos"*.
+- **Decisión:** ninguna clave del proyecto tiene habilitada la Routes API de Google (comprobado con consultas reales). Se arma con la base de mapas actual: Leaflet + OpenStreetMap, con rutas reales de Valhalla (FOSSGIS). Al tener clave y Map ID se agrega el proveedor de Google sin cambiar la interfaz.
+- **Hecho:** `js/bq-navigator.js` + `css/bq-navigator.css`, cargados por global-injector.
+  - Intercepta todos los enlaces «Cómo llegar» que iban a Google Maps y los botones `[data-bq-route]`. SOS queda igual.
+  - Ruta, distancia, tiempo, hora de llegada, pasos y alternativas.
+  - Modos auto, moto, a pie y bici. Bus desactivado y explicado: sin horarios en línea en Nicaragua.
+  - Origen por GPS (solo al tocar el botón) o escrito (Nominatim, limitado a Nicaragua).
+  - Seguimiento GPS con próximo paso, distancia restante, aviso de salida de ruta y recálculo. Voz opcional y bloqueo de pantalla.
+  - Sin coordenadas: aviso. Área general: sin ruta, con aviso.
+  - Atrás cierra el mapa. Idioma en vivo. 62 claves `routeNav.*` en 8 idiomas.
+  - «Cómo llegar» en la ficha de Aliados. Ruta por carretera de Mi viaje y del itinerario de BAQUI.
+  - Arreglada la etiqueta rota del botón del mapa de BAQUI.
+  - CSP: `connect-src` + valhalla1.openstreetmap.de.
+- **Informe completo** (archivos, 15 pruebas, limitaciones, pasos para Google): `docs/NAVEGACION-INTERNA.md`.
+- **Checks en la rama:** i18n, glosario, auditoría, export app, territorios, build, SEO, production-audit (0 críticos), axe del navegador (escritorio y celular: 0), browser QA 32 × 16 (0 fallos) y flutter test.
+- **Producción:** no se publica hasta que el propietario lo autorice (regla del prompt). Luego, merge a main.
+
 ## 🌐 REVISIÓN DE IDIOMAS EN TODAS LAS PÁGINAS — PARTE 1 (20-10-2026, 15:17)
 - **Solicitud:** *"quiero que revise el repositorio y revise que en todas las paginas que tenemos en la web tienen que cambiar el idiomas"* (con el repositorio y https://baqueanonicaragua.com/).
 - **Nueva herramienta:** `scripts/i18n-visible-audit.mjs`.

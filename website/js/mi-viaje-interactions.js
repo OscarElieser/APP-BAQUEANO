@@ -232,7 +232,9 @@
     try { sessionStorage.setItem('baqueano_map_focus', JSON.stringify({ lat: day.lat, lng: day.lng, title: day.title })); } catch(e) {}
     toast('Abriendo mapa → ' + day.location, 'info');
     // Sin coordenadas verificadas se abre el mapa de BAQUEANO buscando por nombre (no se inventa un punto).
-    if (hasCoords) window.open('https://www.google.com/maps/search/?api=1&query=' + day.lat + ',' + day.lng, '_blank', 'noopener');
+    // 20-10-2026: el mapa y la ruta se abren dentro de BAQUEANO (js/bq-navigator.js).
+    if (hasCoords && window.BaqueanoNavigator) window.BaqueanoNavigator.open({ lat: day.lat, lng: day.lng, name: day.title, image: day.image || '', id: day.destId || '' });
+    else if (hasCoords) window.location.href = 'mapa.html?lat=' + Number(day.lat).toFixed(5) + '&lng=' + Number(day.lng).toFixed(5);
     else window.location.href = 'mapa.html?q=' + encodeURIComponent(day.title);
   };
 

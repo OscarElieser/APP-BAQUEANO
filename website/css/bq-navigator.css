@@ -1,0 +1,142 @@
+/* ============================================================================
+ * 🧭 BAQUEANO — CENTRO DE NAVEGACIÓN «CÓMO LLEGAR» (css/bq-navigator.css)
+ * 🎯 POR QUÉ: «Cómo llegar» se abre dentro de BAQUEANO. En escritorio: mapa grande y panel
+ *   lateral con la ruta; en el teléfono: mapa casi completo y panel inferior plegable, con
+ *   botones grandes para usar con una mano y al sol.
+ * ⚙️ CÓMO: colores oficiales (naranja #F65E01, azul #165D6F, verde #4A7A5A, azul oscuro
+ *   #0D1B2A), contraste AA, objetivos táctiles de 44–48 px, curva cubic-bezier(0.22, 1, 0.36, 1)
+ *   y sin movimiento con reduced-motion. Respeta las áreas seguras del teléfono.
+ * 📦 QUÉ: .bq-nav (lo crea js/bq-navigator.js).
+ * ============================================================================ */
+html.bq-nav-open, html.bq-nav-open body { overflow: hidden; }
+/* Lo que el script oculta con [hidden] queda oculto aunque una regla le dé display. */
+.bq-nav [hidden] { display: none !important; }
+.bq-nav {
+  position: fixed; inset: 0; z-index: 14000; display: none;
+  background: #0d1b2a; color: #0f172a;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.bq-nav.is-open { display: block; animation: bq-nav-in 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+@keyframes bq-nav-in { from { opacity: 0; } to { opacity: 1; } }
+.bq-nav-map { position: absolute; inset: 0 420px 0 0; background: #dfe7ea; z-index: 0; } /* contexto propio: las capas de Leaflet (z 400+) no tapan el panel */
+.bq-nav-map-msg { position: absolute; inset: 40% 10% auto; margin: 0; padding: 14px; border-radius: 12px; background: #ffffff; color: #0f172a; text-align: center; font-weight: 700; z-index: 2; }
+.bq-nav.is-blocked .bq-nav-map { display: none; }
+.bq-nav-close,
+.bq-nav-fab {
+  position: absolute; z-index: 3; width: 48px; height: 48px; border-radius: 14px;
+  border: 0; background: #ffffff; color: #0d1b2a; font-size: 1.2rem; cursor: pointer;
+  box-shadow: 0 6px 18px rgba(13, 27, 42, 0.3);
+}
+.bq-nav-close { top: calc(14px + env(safe-area-inset-top, 0px)); left: calc(14px + env(safe-area-inset-left, 0px)); }
+.bq-nav-fab { bottom: calc(24px + env(safe-area-inset-bottom, 0px)); right: calc(436px + env(safe-area-inset-right, 0px)); color: #165d6f; }
+.bq-nav.is-blocked .bq-nav-fab { display: none; }
+.bq-nav button:focus-visible,
+.bq-nav input:focus-visible { outline: 3px solid #f65e01; outline-offset: 2px; }
+
+.bq-nav-panel {
+  position: absolute; top: 0; right: 0; bottom: 0; width: 420px; box-sizing: border-box;
+  padding: calc(18px + env(safe-area-inset-top, 0px)) calc(18px + env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) 18px;
+  overflow-y: auto; overscroll-behavior: contain; background: #ffffff; display: grid; align-content: start; gap: 14px; z-index: 2;
+  box-shadow: -10px 0 30px rgba(13, 27, 42, 0.25);
+}
+.bq-nav.is-blocked .bq-nav-panel { left: 0; right: 0; margin: 0 auto; width: min(560px, 100%); }
+.bq-nav-grip { display: none; }
+.bq-nav-head { display: flex; gap: 12px; align-items: center; }
+.bq-nav-photo { width: 72px; height: 72px; border-radius: 14px; object-fit: cover; flex: none; }
+.bq-nav-headtext { min-width: 0; }
+.bq-nav-kicker { margin: 0; color: #b84500; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.bq-nav-head h2 { margin: 2px 0 0; color: #0d1b2a; font: 800 1.25rem/1.25 'League Spartan', 'Plus Jakarta Sans', sans-serif; overflow-wrap: anywhere; }
+.bq-nav-coords { margin: 2px 0 0; color: #475569; font-size: 0.82rem; font-variant-numeric: tabular-nums; }
+.bq-nav-notice { margin: 0; padding: 12px 14px; border-radius: 12px; background: #fff7ed; border: 1px solid #fdba74; color: #7c2d12; font-size: 0.95rem; line-height: 1.5; }
+.bq-nav-origin { display: grid; gap: 8px; }
+.bq-nav-origin h3, .bq-nav-steps-title { margin: 0; color: #0d1b2a; font-size: 0.95rem; font-weight: 800; }
+.bq-nav-origin-now { margin: 0; color: #165d6f; font-weight: 700; font-size: 0.92rem; }
+.bq-nav-manual { display: grid; gap: 6px; }
+.bq-nav-manual label { color: #334155; font-size: 0.88rem; font-weight: 600; }
+.bq-nav-manual-row { display: flex; gap: 8px; }
+.bq-nav-manual input {
+  flex: 1; min-width: 0; min-height: 46px; box-sizing: border-box; padding: 8px 12px;
+  border: 2px solid #94a3b8; border-radius: 12px; background: #ffffff; color: #0f172a; font: 500 1rem 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.bq-nav-geolist { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.bq-nav-georow {
+  width: 100%; min-height: 44px; padding: 8px 12px; text-align: left; border: 1px solid #cbd5e1; border-radius: 10px;
+  background: #f8fafc; color: #0f172a; font: 500 0.9rem/1.35 'Plus Jakarta Sans', system-ui, sans-serif; cursor: pointer;
+}
+.bq-nav-georow:hover { background: #e0f2f1; }
+.bq-nav-btn {
+  min-height: 48px; padding: 8px 16px; border-radius: 999px; border: 2px solid #165d6f; background: #ffffff; color: #165d6f;
+  font: 800 0.95rem/1.2 'Plus Jakarta Sans', system-ui, sans-serif; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  transition: background 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.bq-nav-btn:hover { background: #e6f1f3; }
+.bq-nav-btn.is-primary { background: #c2410c; border-color: #c2410c; color: #ffffff; }
+.bq-nav-btn.is-primary:hover { background: #9a3412; border-color: #9a3412; }
+.bq-nav-btn.is-danger { background: #0d1b2a; border-color: #0d1b2a; color: #ffffff; }
+.bq-nav-btn[aria-pressed="true"] { background: #165d6f; color: #ffffff; }
+.bq-nav-modes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.bq-nav-mode {
+  min-height: 56px; padding: 6px 4px; border-radius: 12px; border: 2px solid #cbd5e1; background: #ffffff; color: #1e293b;
+  display: grid; justify-items: center; gap: 2px; font: 700 0.78rem 'Plus Jakarta Sans', system-ui, sans-serif; cursor: pointer;
+}
+.bq-nav-mode i { font-size: 1.05rem; }
+.bq-nav-mode[aria-checked="true"] { border-color: #165d6f; background: #165d6f; color: #ffffff; }
+.bq-nav-mode:disabled { opacity: 1; background: #f1f5f9; color: #64748b; border-style: dashed; cursor: not-allowed; }
+.bq-nav-modenote, .bq-nav-langnote { margin: 0; color: #475569; font-size: 0.85rem; }
+.bq-nav-status { margin: 0; min-height: 1.2em; color: #0f172a; font-weight: 600; font-size: 0.93rem; }
+.bq-nav-status[data-tone="warn"] { color: #9a3412; }
+.bq-nav-status[data-tone="ok"] { color: #166534; }
+.bq-nav-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.bq-nav-metric { display: flex; gap: 8px; align-items: flex-start; padding: 10px; border-radius: 12px; background: #f0f7f8; }
+.bq-nav-metric i { color: #165d6f; margin-top: 3px; }
+.bq-nav-metric div { display: grid; min-width: 0; }
+.bq-nav-metric-lbl { color: #475569; font-size: 0.74rem; font-weight: 700; }
+.bq-nav-metric strong { color: #0d1b2a; font-size: 1.02rem; font-variant-numeric: tabular-nums; }
+.bq-nav-alts { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.bq-nav-alts-lbl { color: #475569; font-size: 0.8rem; font-weight: 700; width: 100%; }
+.bq-nav-alt { min-height: 40px; padding: 6px 12px; border-radius: 999px; border: 1px solid #94a3b8; background: #ffffff; color: #1e293b; font: 700 0.82rem 'Plus Jakarta Sans', system-ui, sans-serif; cursor: pointer; font-variant-numeric: tabular-nums; }
+.bq-nav-alt.is-active { border-color: #c2410c; background: #fff7ed; color: #9a3412; }
+.bq-nav-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.bq-nav-actions #bqNavStart, .bq-nav-actions #bqNavStop { grid-column: 1 / -1; }
+.bq-nav-next { display: grid; gap: 2px; padding: 12px 14px; border-radius: 12px; background: #0d1b2a; color: #ffffff; }
+.bq-nav-next strong { font-size: 1.05rem; line-height: 1.35; }
+.bq-nav-next span { color: #cbd5e1; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+.bq-nav-steps { margin: 0; padding: 0 0 0 1.4rem; display: grid; gap: 8px; }
+.bq-nav-step { color: #1e293b; line-height: 1.45; font-size: 0.93rem; padding: 4px 6px; border-radius: 8px; }
+.bq-nav-step.is-current { background: #fff7ed; outline: 2px solid #fdba74; }
+.bq-nav-step-km { display: block; color: #64748b; font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.bq-nav-safety { margin: 0; padding: 10px 12px; border-radius: 10px; background: #f1f5f9; color: #334155; font-size: 0.85rem; line-height: 1.5; }
+.bq-nav-credit { margin: 0; color: #64748b; font-size: 0.76rem; }
+.bq-nav-pin-wrap { background: none; border: 0; }
+/* Botones de zoom de 40 px (objetivo táctil cómodo, WCAG 2.5.8). */
+.bq-nav .leaflet-control-zoom a { width: 40px; height: 40px; line-height: 40px; font-size: 20px; }
+.bq-nav-pin { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 3px 10px rgba(13, 27, 42, 0.45); color: #ffffff; font: 800 12px 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; }
+.bq-nav-pin.is-dest { background: #f65e01; }
+.bq-nav-pin.is-stop { background: #165d6f; }
+.bq-nav-pin.is-origin { background: #4a7a5a; }
+.bq-nav-me { display: block; width: 22px; height: 22px; border-radius: 50%; background: #165d6f; border: 4px solid #ffffff; box-shadow: 0 0 0 6px rgba(22, 93, 111, 0.25); box-sizing: border-box; }
+
+/* Teléfono: mapa casi completo y panel inferior plegable. */
+@media (max-width: 760px) {
+  .bq-nav-map { inset: 0; }
+  .bq-nav .leaflet-control-zoom { display: none; } /* con los dedos; arriba a la derecha va «Mi ubicación» */
+  .bq-nav-fab { right: calc(14px + env(safe-area-inset-right, 0px)); bottom: auto; top: calc(14px + env(safe-area-inset-top, 0px)); }
+  .bq-nav-panel {
+    top: auto; left: 0; width: 100%; max-height: 62dvh; border-radius: 20px 20px 0 0;
+    padding: 6px max(16px, env(safe-area-inset-right, 0px)) calc(18px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+    box-shadow: 0 -10px 30px rgba(13, 27, 42, 0.3);
+    transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .bq-nav-panel.is-collapsed { max-height: 168px; overflow: hidden; }
+  .bq-nav.is-blocked .bq-nav-panel { max-height: 100dvh; top: 0; border-radius: 0; padding-top: calc(70px + env(safe-area-inset-top, 0px)); }
+  .bq-nav-grip { display: grid; place-items: center; width: 100%; height: 28px; border: 0; background: transparent; cursor: pointer; }
+  .bq-nav-grip span { width: 46px; height: 5px; border-radius: 999px; background: #94a3b8; }
+  .bq-nav-head { padding-left: 0; }
+  .bq-nav-photo { width: 56px; height: 56px; }
+  .bq-nav-modes { grid-template-columns: repeat(5, minmax(56px, 1fr)); overflow-x: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bq-nav.is-open, .bq-nav-panel, .bq-nav-btn { animation: none; transition: none; }
+}
+@media print { .bq-nav { display: none !important; } }
