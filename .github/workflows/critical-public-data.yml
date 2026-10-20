@@ -1,0 +1,31 @@
+name: BAQUEANO — integridad de información pública
+
+on:
+  pull_request:
+    paths:
+      - 'website/aliados.html'
+      - 'website/js/allies-directory.js'
+      - 'website/destinos.html'
+      - 'website/index.html'
+      - 'website/mapa.html'
+      - 'website/cookies.html'
+      - 'website/scripts/critical-public-data.test.mjs'
+      - 'website/package.json'
+      - '.github/workflows/critical-public-data.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  critical-public-data:
+    name: Integridad sin despliegue
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar información pública y SOS
+        working-directory: website
+        run: npm run test:critical
