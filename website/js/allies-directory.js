@@ -55,7 +55,7 @@
     guia: { filter: 'guias', icon: 'fa-person-hiking', key: 'allies.cat.guides', es: 'Guías' },
     transporte: { filter: 'transporte', icon: 'fa-van-shuttle', key: 'allies.cat.transport', es: 'Transporte' }
   };
-  var state = { rows: [], shown: PAGE, dialog: null, tiers: new Map(), query: '' };
+  var state = { rows: [], shown: PAGE, dialog: null, tiers: new Map(), query: '', userLocation: null };
   function tierOf(b) { return state.tiers.get(String(b.id)) || null; }
   function fold(v) { return String(v || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
 
@@ -88,6 +88,30 @@
     return { kind: 'partial', text: t('allies.sealPartial', 'Verificación parcial') };
   }
   function place(b) { return [b.municipality, DEPT_NAMES[b.department_id] || ''].filter(Boolean).join(', '); }
+  function coordsOf(b) {
+    if (b.latitude == null || b.longitude == null || b.latitude === '' || b.longitude === '') return null;
+    var lat = Number(b.latitude), lng = Number(b.longitude);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat < 10.5 || lat > 15.2 || lng < -88 || lng > -82.5) return null;
+    return { lat: lat, lng: lng };
+  }
+  function kmBetween(p, q) {
+    var rad = Math.PI / 180, dLat = (q.lat - p.lat) * rad, dLng = (q.lng - p.lng) * rad;
+    var a = Math.sin(dLat / 2) ** 2 + Math.cos(p.lat * rad) * Math.cos(q.lat * rad) * Math.sin(dLng / 2) ** 2;
+    return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+  function publishedMapPoints() {
+    return state.rows.map(function (b) {
+      var p = coordsOf(b);
+      return p ? { id: String(b.id), name: b.name, lat: p.lat, lng: p.lng, seal: seal(b).text } : null;
+    }).filter(Boolean);
+  }
+  function sortNear(lat, lng) {
+    if (!Number.isFinite(Number(lat)) || !Number.isFinite(Number(lng))) return false;
+    state.userLocation = { lat: Number(lat), lng: Number(lng) };
+    state.shown = PAGE;
+    render();
+    return true;
+  }
   function waLink(b) {
     var own = digits(b.whatsapp);
     var number = own.length >= 8 ? (own.length === 8 ? '505' + own : own) : OFFICIAL_WA;
@@ -206,9 +230,27 @@
 
   // ------------------------------------------------------------------ carga
   function visibleRows() {
-    if (!state.query) return state.rows;
     var q = fold(state.query);
-    return state.rows.filter(function (r) { return [r.name, r.municipality, DEPT_NAMES[r.department_id], r.description, r.category].some(function (v) { return fold(v).indexOf(q) >= 0; }); });
+    var dept = document.getElementById('filterDepto');
+    var category = document.getElementById('filterCat');
+    var verification = document.getElementById('filterVerif');
+    var deptId = dept ? dept.value : '';
+    var categoryId = category ? category.value : '';
+    var verificationId = verification ? verification.value : '';
+    var rows = state.rows.filter(function (b) {
+      var c = (CAT[b.category] || { filter: 'otro' }).filter;
+      return (!q || [b.name, b.municipality, DEPT_NAMES[b.department_id], b.description, b.category].some(function (v) { return fold(v).indexOf(q) >= 0; }))
+        && (!deptId || deptId === 'todos' || b.department_id === deptId)
+        && (!categoryId || c === categoryId)
+        && (!verificationId || verificationId === 'todos' || seal(b).kind === 'verified');
+    });
+    if (state.userLocation) {
+      rows = rows.slice().sort(function (a, b) {
+        var pa = coordsOf(a), pb = coordsOf(b);
+        return (pa ? kmBetween(state.userLocation, pa) : Infinity) - (pb ? kmBetween(state.userLocation, pb) : Infinity);
+      });
+    }
+    return rows;
   }
   function render() {
     var rowsAll = visibleRows();
@@ -289,6 +331,13 @@
       .then(function () { grid.removeAttribute('aria-busy'); });
   }
   window.addEventListener('baqueano:languageChanged', function () { if (state.rows.length) { rebuildFilters(); render(); } });
-  window.BaqueanoAllies = { reload: load };
+  ['filterDepto', 'filterCat', 'filterVerif', 'btnFilterAliados'].forEach(function (id) {
+    var control = document.getElementById(id);
+    if (control) control.addEventListener(id === 'btnFilterAliados' ? 'click' : 'change', function () {
+      state.shown = PAGE;
+      render();
+    });
+  });
+  window.BaqueanoAllies = { reload: load, getMapPoints: publishedMapPoints, sortNear: sortNear };
   load();
 })(window, document);
