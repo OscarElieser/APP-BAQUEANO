@@ -11,6 +11,11 @@
 //    descarta sus propias mutaciones (takeRecords). Antes reescribía la etiqueta "ES" del
 //    selector en cada pasada: el MutationObserver la veía como texto nuevo y volvía a traducir
 //    en bucle (~20 veces por segundo, recálculo de estilo de toda la página en cada vuelta).
+// 📚 CATÁLOGOS DE CONTENIDO (2026-10-20): el contenido editorial de los territorios y destinos
+//    (miles de frases) no va en locales/<idioma>.json, que carga en todas las páginas. Va en
+//    locales/content/<paquete>.<idioma>.json ({ "frase en español": "traducción" }) y solo lo
+//    piden las páginas que lo declaran con <meta name="bq-i18n-content" content="territorios">
+//    o BaqueanoLanguage.useContent('paquete'). Se traduce por frase, igual que el catálogo.
 // 🌏 COREANO Y CHINO (2026-10-09): 8 idiomas. ko → ko-KR y zh → zh-CN (chino simplificado).
 //    El coreano corta líneas entre palabras (word-break: keep-all) como lo leen los coreanos;
 //    la regla va sobre cada elemento porque mobile-first-core.css y responsive-ecosystem.css
@@ -28,10 +33,14 @@
   var LOCALES = Object.freeze({ es: 'es-NI', en: 'en-US', fr: 'fr-FR', it: 'it-IT', pt: 'pt-BR', de: 'de-DE', ko: 'ko-KR', zh: 'zh-CN' });
   var STORAGE_KEY = 'baqueano_language_v2';
   var LEGACY_STORAGE_KEYS = Object.freeze(['baqueano_language_v1', 'baqueano_language']);
-  var VERSION = '2026.10.15-frases-1';
+  var VERSION = '2026.10.20-contenido-1';
   var cache = new Map();
   var semanticFallbackKeys = new Map();
   var originals = new WeakMap();
+  // Contenido editorial por paquete (ver encabezado): frase normalizada → traducción del idioma activo.
+  var contentBundles = [];
+  var contentPhrases = new Map();
+  var contentLoaded = new Map();
   var attributeOriginals = new WeakMap();
   var applying = false;
   var scheduled = false;
@@ -204,6 +213,7 @@
     if (currentLanguage === 'es' || !source) return value;
     var normalized = normalizeSpaces(source);
     var key = legacyKeys[source] || semanticFallbackKeys.get(normalized);
+    if (!key && contentPhrases.has(normalized)) return leading + contentPhrases.get(normalized) + trailing;
     if (!key) {
       var templated = /[A-Za-zÁÉÍÓÚáéíóúÑñ]{3}/.test(normalized) ? translateTemplate(normalized) : null;
       return templated ? leading + templated + trailing : value;
@@ -318,14 +328,60 @@
   // pisar un "Español" elegido segundos después.
   var languageRequest = 0;
 
+  function normalizeBundle(name) { return String(name || '').toLowerCase().replace(/[^a-z0-9-]/g, ''); }
+  function declaredBundles() {
+    var meta = document.querySelector('meta[name="bq-i18n-content"]');
+    (meta ? meta.getAttribute('content') || '' : '').split(',').forEach(function addDeclared(name) {
+      var clean = normalizeBundle(name);
+      if (clean && contentBundles.indexOf(clean) === -1) contentBundles.push(clean);
+    });
+  }
+  function loadBundle(name, language) {
+    var cacheKey = name + '.' + language;
+    if (contentLoaded.has(cacheKey)) return contentLoaded.get(cacheKey);
+    var request = fetch('locales/content/' + name + '.' + language + '.json?v=' + VERSION, { credentials: 'same-origin', cache: 'no-cache' })
+      .then(function parse(response) { return response.ok ? response.json() : {}; })
+      .catch(function noBundle() { return {}; });
+    contentLoaded.set(cacheKey, request);
+    return request;
+  }
+  // Carga los paquetes del idioma pedido y reemplaza el índice de frases de contenido.
+  async function loadContent(language) {
+    declaredBundles();
+    var next = new Map();
+    if (language !== 'es' && contentBundles.length) {
+      var bundles = await Promise.all(contentBundles.map(function each(name) { return loadBundle(name, language); }));
+      bundles.forEach(function index(bundle) {
+        Object.keys(bundle || {}).forEach(function add(source) {
+          var target = bundle[source];
+          if (typeof target === 'string' && target.trim()) next.set(normalizeSpaces(source), target);
+        });
+      });
+    }
+    return next;
+  }
+  async function useContent(name) {
+    var clean = normalizeBundle(name);
+    if (!clean || contentBundles.indexOf(clean) !== -1) return;
+    contentBundles.push(clean);
+    if (currentLanguage === 'es') return;
+    var language = currentLanguage;
+    var phrases = await loadContent(language);
+    if (language !== currentLanguage) return;
+    contentPhrases = phrases;
+    applyTranslations(document.body);
+  }
+
   async function changeLanguage(language, options) {
     var next = normalizeLanguage(language);
     var request = ++languageRequest;
     fallbackCatalog = fallbackCatalog || await loadCatalog('es');
     if (!semanticFallbackKeys.size) indexCanonicalPhrases(fallbackCatalog, '');
     var catalog = next === 'es' ? fallbackCatalog : await loadCatalog(next);
+    var phrases = await loadContent(next);
     if (request !== languageRequest) return currentLanguage;
     activeCatalog = catalog;
+    contentPhrases = phrases;
     currentLanguage = next;
     try {
       localStorage.setItem(STORAGE_KEY, currentLanguage);
@@ -481,6 +537,7 @@
     set: changeLanguage,
     t: translate,
     translate: translateLegacy,
+    useContent: useContent,
     apply: applyTranslations,
     translateElement: function translateElement(element) { applyTranslations(element); },
     refresh: function refresh() { applyTranslations(document.body); },

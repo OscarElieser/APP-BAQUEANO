@@ -1,0 +1,2372 @@
+{
+  "base": "http://127.0.0.1:8790/",
+  "langs": [
+    "en"
+  ],
+  "generatedAt": "2026-10-20T21:33:49.029Z",
+  "pages": [
+    {
+      "page": "404.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "aliados.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "Coop. Cañón de Somoto",
+              "kind": "text",
+              "where": "#aliadoNearbyName1"
+            },
+            {
+              "t": "Posada Ecológica La Abuela",
+              "kind": "text",
+              "where": "#aliadoNearbyName2"
+            },
+            {
+              "t": "Posada La Abuela",
+              "kind": "alt",
+              "where": "img.aliado-nearby-img"
+            }
+          ],
+          "content": 22,
+          "contentSample": [
+            "Cocina de Doña Haydée",
+            "Restaurante nicaragüense ampliamente conocido en Managua. La ficha comercial actual confirma su dire",
+            "Comedor de comida casera nicaragüense en Granada. La dirección, el teléfono y las coordenadas coinci",
+            "Comedor popular en León con ubicación geográfica verificable y referencias públicas de comida nicara",
+            "Hotel Darío"
+          ]
+        }
+      }
+    },
+    {
+      "page": "ambiental.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "aviso-legal.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "🛡️ LEGAL",
+              "kind": "text",
+              "where": "div.legal-badge-pill"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "ayuda.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "baqueano-ia.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "(Hotel)",
+              "kind": "text",
+              "where": "span"
+            },
+            {
+              "t": "Buses interurbanos.",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "ai Map Recenter Btn",
+              "kind": "aria-label",
+              "where": "#aiMapRecenterBtn"
+            }
+          ],
+          "content": 2,
+          "contentSample": [
+            "Zoom in",
+            "Zoom out"
+          ]
+        }
+      }
+    },
+    {
+      "page": "cookies.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "🛡️ LEGAL",
+              "kind": "text",
+              "where": "div.cookies-badge-pill"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "cronicas.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "Cerro Negro & Poneloya",
+              "kind": "text",
+              "where": "span"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "denuncias.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "Abrir a Baqüi, inteligencia territorial activa",
+              "kind": "aria-label",
+              "where": "#bqMascot"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "departamento.html?id=madriz",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "Geoparque Mundial UNESCO Río Coco · 9 Municipios",
+              "kind": "text",
+              "where": "#deptBadgeText"
+            },
+            {
+              "t": "«Tierra de Cañones Milenarios, Rosquillas Doradas, Café y Montañas Segovianas»",
+              "kind": "text",
+              "where": "#deptTagline"
+            },
+            {
+              "t": "Las Segovias · Norte de Nicaragua |",
+              "kind": "text",
+              "where": "#deptShortDesc"
+            },
+            {
+              "t": "9 Territorios Hermanos |",
+              "kind": "text",
+              "where": "#deptShortDesc"
+            },
+            {
+              "t": "Geoparque Mundial UNESCO Río Coco (2020)",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "No vengás solamente a conocer Madriz. Vení a comprenderlo. Una tierra esculpida por el agua donde la geología milenaria, la memoria indígena, los talleres campe",
+              "kind": "text",
+              "where": "span"
+            },
+            {
+              "t": "Geoparque Mundial UNESCO Río Coco",
+              "kind": "text",
+              "where": "span.m-badge-primary"
+            },
+            {
+              "t": "9 Municipios Segovianos",
+              "kind": "text",
+              "where": "span.m-badge-secondary"
+            },
+            {
+              "t": "Ecoturismo Sin Intermediarios",
+              "kind": "text",
+              "where": "span.m-badge-accent"
+            },
+            {
+              "t": "No vengás solamente a conocer Madriz. Vení a comprenderlo.",
+              "kind": "text",
+              "where": "h2.manifesto-headline"
+            },
+            {
+              "t": "Madriz combina valles elevados, serranías, bosques de nebliselva, áreas cafetaleras de estricta altura, comunidades rurales de profunda memoria indígena y una d",
+              "kind": "text",
+              "where": "p.manifesto-copy"
+            },
+            {
+              "t": "Explorar sus 9 Municipios",
+              "kind": "text",
+              "where": "a.btn-hero-primary"
+            },
+            {
+              "t": "Modo Geológico Científico",
+              "kind": "text",
+              "where": "a.btn-hero-secondary"
+            },
+            {
+              "t": "EXPERIENCIA AUDIOVISUAL",
+              "kind": "text",
+              "where": "div.sub-label-tag"
+            },
+            {
+              "t": "Explorá los paisajes, la gente y la cultura de Madriz a través de nuestra selección de videos verificados.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Navegando el Cañón de Somoto",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Turismo comunitario guiado por baqueanos locales.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Elaboración de Rosquillas",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Tradición centenaria en hornos de barro.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "CARTOGRAFÍA VIVA DE MADRIZ",
+              "kind": "text",
+              "where": "div.sub-label-tag"
+            },
+            {
+              "t": "Explorá Madriz desde el territorio real",
+              "kind": "text",
+              "where": "#madrizMapTitle"
+            },
+            {
+              "t": "Seleccioná una ficha para acercarte al lugar. Solamente mostramos ubicaciones publicadas con coordenadas verificables.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Tiles © Esri |",
+              "kind": "text",
+              "where": "div.maplibregl-ctrl-attrib-inner"
+            },
+            {
+              "t": "11 lugares de la guía ubicados en Madriz.",
+              "kind": "text",
+              "where": "#madrizMapStatus"
+            },
+            {
+              "t": "REGISTRO FOTOGRÁFICO VERIFICADO",
+              "kind": "text",
+              "where": "div.sub-label-tag"
+            },
+            {
+              "t": "El Cañón de Somoto en Alta Fidelidad",
+              "kind": "text",
+              "where": "h3.section-title-clean"
+            },
+            {
+              "t": "3 Perspectivas Clave",
+              "kind": "text",
+              "where": "span.tag-verified-count"
+            },
+            {
+              "t": "Interior del Cañón",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Navegación entre paredes volcánicas verticales de hasta 100 m.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Guía Campesino",
+              "kind": "text",
+              "where": "span.photo-badge"
+            },
+            {
+              "t": "Recorrido en Bote",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Acompañamiento local con chalecos y remos artesanales.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Millones de años de erosión fluvial y fallas activas.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "1. Antes de llegar: entendé dónde estás entrando",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Geoparque Mundial UNESCO Río Coco · 95,400 Hectáreas Protegidas",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "Madriz no debe entenderse solamente como el departamento donde está el Cañón de Somoto. Una parte fundamental de su identidad está asociada al",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": ", designado en 2020 como el",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "primer Geoparque Mundial de la UNESCO en Centroamérica",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "UNESCO describe este territorio como una combinación viva de patrimonio geológico de relevancia planetaria, comunidades rurales, bosques nubosos, manantiales de",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Cerro Volcán de Somoto (~1,730 msnm)",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "Lo que BAQUEANO quiere que comprendás:",
+              "kind": "text",
+              "where": "h5"
+            },
+            {
+              "t": "No estás entrando solamente a una zona turística. Estás entrando a un territorio donde la geología, el agua, el maíz, el café, las montañas y las comunidades ha",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Hectáreas de Territorio",
+              "kind": "text",
+              "where": "span.stat-label"
+            },
+            {
+              "t": "Cuenca alta del Río Coco",
+              "kind": "text",
+              "where": "span.stat-desc"
+            },
+            {
+              "t": "Geositios Oficiales",
+              "kind": "text",
+              "where": "span.stat-label"
+            },
+            {
+              "t": "Relevancia planetaria",
+              "kind": "text",
+              "where": "span.stat-desc"
+            },
+            {
+              "t": "Punto Más Alto",
+              "kind": "text",
+              "where": "span.stat-label"
+            },
+            {
+              "t": "Cerro Volcán de Somoto",
+              "kind": "text",
+              "where": "span.stat-desc"
+            },
+            {
+              "t": "2. Historia, Origen & Memoria Viva",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Constitución de 1936 y Línea de Tiempo Territorial",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "Madriz fue constituido como departamento en",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "al separarse de Nueva Segovia, honrando la memoria del expresidente José Madriz con Somoto como cabecera. Sin embargo, su historia humana se remonta a miles de ",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Pueblos Originarios",
+              "kind": "text",
+              "where": "h5"
+            },
+            {
+              "t": "Chorotegas y pueblos norteños; petroglifos y alfarería ancestral.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Período Colonial",
+              "kind": "text",
+              "where": "h5"
+            },
+            {
+              "t": "Templos barrocos de Somoto y Totogalpa; caminos reales de mulas.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Gestas campesinas y consolidación de la cultura del café y el maíz.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Autonomía departamental con sus 9 municipios hermanos.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Geoparque UNESCO, turismo rural sin intermediarios y café de altura.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "3. Una Historia Escrita en Piedra",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Modo Explorador Científico BAQUEANO · Cañón de Somoto",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "El Cañón de Somoto no es simplemente \"un lugar bonito para nadar\". Es un libro abierto donde la corteza terrestre revela millones de años de procesos volcánicos",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "¿Qué estoy viendo?",
+              "kind": "text",
+              "where": "button.geo-tab-btn"
+            },
+            {
+              "t": "Cómo se formó",
+              "kind": "text",
+              "where": "button.geo-tab-btn"
+            },
+            {
+              "t": "El agua que lo transformó",
+              "kind": "text",
+              "where": "button.geo-tab-btn"
+            },
+            {
+              "t": "Escala temporal & Reglas",
+              "kind": "text",
+              "where": "button.geo-tab-btn"
+            },
+            {
+              "t": "Estructura Geológica Visible",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Paredes casi verticales de entre",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "80 y 100 metros",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "de altura, que en fallas profundas superan los",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "190 metros",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": ". Están compuestas por",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "rocas volcánicas terciarias (ignimbritas y basaltos compactos)",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "formadas hace 5 a 13 millones de años.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Longitud del cañón:",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "Aprox. 3 kilómetros de estrecho desfiladero.",
+              "kind": "text",
+              "where": "li"
+            },
+            {
+              "t": "Ancho mínimo:",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "Sectores con pasos de menos de 10 metros de ancho.",
+              "kind": "text",
+              "where": "li"
+            },
+            {
+              "t": "Profundidad de pozas:",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "Entre 2 y 15 metros en aguas calmas de verano.",
+              "kind": "text",
+              "where": "li"
+            },
+            {
+              "t": "Punto Fotográfico Científico",
+              "kind": "text",
+              "where": "span.geo-tip-title"
+            },
+            {
+              "t": "Desde la entrada este al amanecer (7:00 AM - 9:00 AM) la luz solar entra oblicua resaltando las estrías verticales de corte por cizalla en la pared rocosa.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "4. Monumento Nacional Cañón de Somoto",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Área Protegida de 170.3 Hectáreas · Declarada en 2006",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "A 15 km de Somoto sobre la comunidad de Sonís.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "3 km de longitud con paredes de 80 a 100 m.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Experiencias Habilitadas",
+              "kind": "text",
+              "where": "h5"
+            },
+            {
+              "t": "Senderismo, navegación en lancha, flotación guiada y Trail running.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Nivel de aguas, tarifas y guías verificados en tiempo real con la cooperativa.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "5. Reserva Natural Tepesomoto–La Pataste",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "10,069 Hectáreas · Bosque Nuboso y Pinares",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "Reserva protegida compartida entre Madriz y Estelí declarada en 1991. Conserva robledales, pinares y sectores de nebliselva con orquídeas y helechos gigantes.",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Nivel: Moderado",
+              "kind": "text",
+              "where": "span.meta-pill"
+            },
+            {
+              "t": "Altitud: Hasta 1,730 m",
+              "kind": "text",
+              "where": "span.meta-pill"
+            },
+            {
+              "t": "Duración: 3 a 5 hrs",
+              "kind": "text",
+              "where": "span.meta-pill"
+            },
+            {
+              "t": "6. Laguna La Bruja (Las Sabanas)",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Comunidad El Pegador · Zona de Amortiguamiento",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "Ubicada en Las Sabanas. Cuenta con senderos de orquídeas, paseos en lancha, canopy y avistamiento de aves de altura en un entorno de paz absoluta.",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Fuente: MARENA",
+              "kind": "text",
+              "where": "span.source-tag"
+            },
+            {
+              "t": "Paseo en lancha y canopy disponible con guías de El Pegador.",
+              "kind": "text",
+              "where": "p.price-policy-desc"
+            },
+            {
+              "t": "(Requiere confirmación previa según temporada de lluvia).",
+              "kind": "text",
+              "where": "em"
+            },
+            {
+              "t": "7. San Juan del Río Coco: Donde el Café Cuenta una Historia",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Ruta BAQUEANO del Café de Estricta Altura",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "San Juan del Río Coco respira aroma de café. Sus plantaciones bajo sombra se alimentan de manantiales de montaña en el Parque Natural El Majaste, produciendo gr",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Variedades Caturra, Borbón y Catuaí bajo sombra.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "2. Cultivo de Altura",
+              "kind": "text",
+              "where": "h5"
+            },
+            {
+              "t": "Cuidado agroecológico entre 1,000 y 1,400 msnm.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Cosecha manual de cerezas rojas (Diciembre - Marzo).",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Lavado con aguas de manantial y secado solar en patio.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "5. Tostado Artesanal",
+              "kind": "text",
+              "where": "h5"
+            },
+            {
+              "t": "Tueste medio que preserva aromas afrutados de Las Segovias.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "6. Taza Campesina",
+              "kind": "text",
+              "where": "h5"
+            },
+            {
+              "t": "Degustación directa con la familia productora en finca.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "8 & 9. Rosquillas & Sabores de Madriz (Hijos del Maíz)",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Somoto y Yalagüina · Gastronomía Campesina Ancestral",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "Las rosquillas son el estandarte culinario de Madriz. Decenas de talleres tradicionales, históricamente dirigidos por mujeres en Somoto y Yalagüina, hornean dia",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Matriz de Gastronomía Ancestral del Maíz",
+              "kind": "text",
+              "where": "h4.sub-table-title"
+            },
+            {
+              "t": "Plato Tradicional",
+              "kind": "text",
+              "where": "th"
+            },
+            {
+              "t": "Ingrediente Principal",
+              "kind": "text",
+              "where": "th"
+            },
+            {
+              "t": "Quién lo Prepara",
+              "kind": "text",
+              "where": "th"
+            },
+            {
+              "t": "Cómo se Cocina",
+              "kind": "text",
+              "where": "th"
+            },
+            {
+              "t": "Dónde Probarlo",
+              "kind": "text",
+              "where": "th"
+            },
+            {
+              "t": "Maíz blanco nitzamalizado, queso seco criollo, mantequilla de hacienda, cuajada",
+              "kind": "text",
+              "where": "td"
+            },
+            {
+              "t": "Matriarcas rosquilleras en talleres familiares dirigidos tradicionalmente por mujeres",
+              "kind": "text",
+              "where": "td"
+            },
+            {
+              "t": "Masa fina sobada a mano, moldeada en argollas y dorada a doble cocción en horno de leña de barro",
+              "kind": "text",
+              "where": "td"
+            },
+            {
+              "t": "Talleres tradicionales de Somoto y Yalagüina (Ruta de las Rosquillas Verificada)",
+              "kind": "text",
+              "where": "span.badge-location"
+            },
+            {
+              "t": "Maíz tierno de elote, manteca de cerdo o leche entera, pollo sazonado con hierbabuena y chile congo",
+              "kind": "text",
+              "where": "td"
+            },
+            {
+              "t": "Cizineras tradicionales campesinas de Somoto y Telpaneca",
+              "kind": "text",
+              "where": "td"
+            },
+            {
+              "t": "Masa tierna molida y condimentada, envuelta en la propia tuza del elote y hervida al vapor de leña",
+              "kind": "text",
+              "where": "td"
+            },
+            {
+              "t": "Comedores comunitarios y mercados municipales de Somoto y Telpaneca",
+              "kind": "text",
+              "where": "span.badge-location"
+            },
+            {
+              "t": "Maíz seleccionado, dulce de panela (rapadura de caña) de molienda y cuajada madura",
+              "kind": "text",
+              "where": "td"
+            },
+            {
+              "t": "Artesanas reposteras campesinas de Las Segovias",
+              "kind": "text",
+              "where": "td"
+            },
+            {
+              "t": "Crujientes piezas horneadas con corazón dulce derretido que carameliza la masa",
+              "kind": "text",
+              "where": "td"
+            },
+            {
+              "t": "Puestos y cooperativas de rosquilleras en la Panamericana y centros urbanos",
+              "kind": "text",
+              "where": "span.badge-location"
+            },
+            {
+              "t": "Güirilas con Cuajada de Hacienda",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "Maíz elote tierno recién cosechado, sal y cuajada fresca de ordeño",
+              "kind": "text",
+              "where": "td"
+            },
+            {
+              "t": "Madres y productoras de comunidades rurales de Palacagüina y Totogalpa",
+              "kind": "text",
+              "where": "td"
+            },
+            {
+              "t": "Masa molida sin manteca ni agua, asada a fuego lento sobre hoja de plátano en comal de barro",
+              "kind": "text",
+              "where": "td"
+            },
+            {
+              "t": "Paradas tradicionales en empalmes de Yalagüina y Palacagüina",
+              "kind": "text",
+              "where": "span.badge-location"
+            },
+            {
+              "t": "10. Artesanías: Llevarte Algo que Tiene una Historia",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Talleres Vivenciales de 1 Hora · Compra Directa al Artesano",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "En BAQUEANO no proponemos solamente comprar artesanía en vitrina. Te invitamos a conocer al artesano, sentarte a su lado, aprender su técnica centenaria y molde",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Cestería en Hoja de Pino",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Asociación de Mujeres de Cusmapa",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "1 hora aprendiendo el tejido de espiral con acícula seca aromática.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Comercio Justo 100%",
+              "kind": "text",
+              "where": "span.verified-badge"
+            },
+            {
+              "t": "Conectar Taller",
+              "kind": "text",
+              "where": "a.btn-hero-primary"
+            },
+            {
+              "t": "Alfarería Ancestral Loma Panda",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Colectivo Mujeres de Loma Panda",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Modelado a mano de vasijas de barro y quemado tradicional en fogón.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Memoria Indígena",
+              "kind": "text",
+              "where": "span.verified-badge"
+            },
+            {
+              "t": "Fibras Naturales",
+              "kind": "text",
+              "where": "span.artisan-tag"
+            },
+            {
+              "t": "Familias campesinas tejedoras",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Tejido de fibras vegetales de caña, tule y bambú para sombreros y paneras.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Tradición Campesina",
+              "kind": "text",
+              "where": "span.verified-badge"
+            },
+            {
+              "t": "11. Escuchá Madriz: Patrimonio Musical Segoviano",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Polkas, Mazurcas y Creadores del Canto Nacional",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "Madriz suena a guitarra de cedro, acordeón campesino, violín de talalate y tambor. Aquí nacieron referentes de la música nicaragüense como",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Polka Norteña & Mazurca Campesina",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Danza y compás tradicional de las montañas de Madriz y Las Segovias.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Escuchar Polka Segoviana",
+              "kind": "text",
+              "where": "#btnPlayMadrizPolka"
+            },
+            {
+              "t": "Abrir Patrimonio Sonoro",
+              "kind": "text",
+              "where": "a.btn-hero-secondary"
+            },
+            {
+              "t": "12. Fiestas y Vida Comunitaria",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Somoto celebra el",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "25 de julio",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "sus fiestas de Santiago Apóstol acompañadas del histórico",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": ", honrando la labor de estos animales en la vida campesina.",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Próxima edición: Julio 2026 (Verificado)",
+              "kind": "text",
+              "where": "div.event-mini-badge"
+            },
+            {
+              "t": "13. Patrimonio Oficial INC",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Murales de Arte Monumental de Somoto",
+              "kind": "text",
+              "where": "li"
+            },
+            {
+              "t": "Museo Comunitario El Almendro",
+              "kind": "text",
+              "where": "li"
+            },
+            {
+              "t": "Patrimonio Verificado INC",
+              "kind": "text",
+              "where": "span.seal-patrimonio"
+            },
+            {
+              "t": "Piedras Pintadas y petroglifos en Telpaneca testimonian la presencia de pueblos precolombinos.",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "En BAQUEANO declaramos con rigor: «Petroglifos con origen en investigación arqueológica activa».",
+              "kind": "text",
+              "where": "span"
+            },
+            {
+              "t": "Navegación Territorial Individual: Tocá Cada Municipio para Descubrirlo",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "Madriz no termina en Somoto. Cada uno de sus 9 municipios posee su propia geografía, microclima, cooperativas, memorias y senderos. Tocá cualquiera de ellos par",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Cañón, Rosquillas y Música Campesina",
+              "kind": "text",
+              "where": "h5.mun-title"
+            },
+            {
+              "t": "Cabecera departamental y puerta principal del Monumento Nacional Cañón de Somoto. Conectada por la Carretera P...",
+              "kind": "text",
+              "where": "p.mun-short-desc"
+            },
+            {
+              "t": "Cañón de Somoto · Geología · Rosquillas en horno de leña · Música segoviana · Centro histórico · Fiestas tradicionales",
+              "kind": "text",
+              "where": "div.mun-vivi-tag"
+            },
+            {
+              "t": "Explorar Municipio",
+              "kind": "text",
+              "where": "span"
+            },
+            {
+              "t": "Tierra del Maíz",
+              "kind": "text",
+              "where": "span.mun-badge-pill"
+            },
+            {
+              "t": "Rosquillas Tradicionales y Bosque Seco",
+              "kind": "text",
+              "where": "h5.mun-title"
+            },
+            {
+              "t": "Comparte con Somoto la centenaria tradición rosquillera en hornos de barro. Alberga el Parque Natural Zonzapot...",
+              "kind": "text",
+              "where": "p.mun-short-desc"
+            },
+            {
+              "t": "Rosquillas recién horneadas · Senderos de montaña · Miradores · Música segoviana · Cocina del maíz",
+              "kind": "text",
+              "where": "div.mun-vivi-tag"
+            },
+            {
+              "t": "Cultura Indígena",
+              "kind": "text",
+              "where": "span.mun-badge-pill"
+            },
+            {
+              "t": "Patrimonio Ancestral y Turismo Rural",
+              "kind": "text",
+              "where": "h5.mun-title"
+            },
+            {
+              "t": "Conserva profundas raíces indígenas y arqueología. La comunidad de San José de Palmira ofrece turismo rural co...",
+              "kind": "text",
+              "where": "p.mun-short-desc"
+            },
+            {
+              "t": "Comunidad indígena · Arqueología viva · Museo El Almendro · Artesanía · Convivencia comunitaria",
+              "kind": "text",
+              "where": "div.mun-vivi-tag"
+            },
+            {
+              "t": "Cerámica Ancestral y Memoria Viva",
+              "kind": "text",
+              "where": "h5.mun-title"
+            },
+            {
+              "t": "Hogar de las reconocidas Mujeres Artesanas de Loma Panda, quienes moldean barro con técnicas precolombinas. En...",
+              "kind": "text",
+              "where": "p.mun-short-desc"
+            },
+            {
+              "t": "Alfarería en barro · Cultura indígena · Geositio La Remedona · Finca rural · Convivencia campesina",
+              "kind": "text",
+              "where": "div.mun-vivi-tag"
+            },
+            {
+              "t": "Nebliselva & Laguna",
+              "kind": "text",
+              "where": "span.mun-badge-pill"
+            },
+            {
+              "t": "Laguna La Bruja, Café y Alturas Segovianas",
+              "kind": "text",
+              "where": "h5.mun-title"
+            },
+            {
+              "t": "Ubicado en la Reserva Tepesomoto-La Pataste con alturas superiores a los 1,700 msnm. En la comunidad El Pegado...",
+              "kind": "text",
+              "where": "p.mun-short-desc"
+            },
+            {
+              "t": "Laguna La Bruja · Bosque nuboso · Café de altura · Senderismo de montaña · Fotografía de paisaje",
+              "kind": "text",
+              "where": "div.mun-vivi-tag"
+            },
+            {
+              "t": "Miradores Hacia el Pacífico y Cestería en Pino",
+              "kind": "text",
+              "where": "h5.mun-title"
+            },
+            {
+              "t": "El municipio más encumbrado de Madriz. El Mirador El Balcón ofrece panorámicas espectaculares hacia la cadena ...",
+              "kind": "text",
+              "where": "p.mun-short-desc"
+            },
+            {
+              "t": "Mirador El Balcón · Cestería en acícula de pino · Bosque de pino · Historia indígena · Mazurcas con acordeón",
+              "kind": "text",
+              "where": "div.mun-vivi-tag"
+            },
+            {
+              "t": "Territorio del Café",
+              "kind": "text",
+              "where": "span.mun-badge-pill"
+            },
+            {
+              "t": "Aroma de Café, Cascadas y Nebliselva",
+              "kind": "text",
+              "where": "h5.mun-title"
+            },
+            {
+              "t": "Corazón cafetalero de Madriz de clima fresco y brumoso. Fincas agroturísticas vivenciales donde se vive la rut...",
+              "kind": "text",
+              "where": "p.mun-short-desc"
+            },
+            {
+              "t": "Café de estricta altura · Fincas vivenciales · Cascadas cristalinas · Bosque nuboso · Cabalgatas",
+              "kind": "text",
+              "where": "div.mun-vivi-tag"
+            },
+            {
+              "t": "Pueblo del Río Coco",
+              "kind": "text",
+              "where": "span.mun-badge-pill"
+            },
+            {
+              "t": "Río Sagrado, Memoria y Gastronomía Rural",
+              "kind": "text",
+              "where": "h5.mun-title"
+            },
+            {
+              "t": "Asentamiento prehispánico a orillas del majestuoso Río Coco (Wangki). Posee una amplia gastronomía ancestral d...",
+              "kind": "text",
+              "where": "p.mun-short-desc"
+            },
+            {
+              "t": "Ribera del Río Coco · Memoria indígena · Reserva El Malacate · Cocina campesina · Música rural",
+              "kind": "text",
+              "where": "div.mun-vivi-tag"
+            },
+            {
+              "t": "Historia Segoviana",
+              "kind": "text",
+              "where": "span.mun-badge-pill"
+            },
+            {
+              "t": "Memoria Histórica, Cerro de la Iguana y Tradición",
+              "kind": "text",
+              "where": "h5.mun-title"
+            },
+            {
+              "t": "Inmortalizada en el cancionero nacional por la pieza \"El Cristo de Palacagüina\". Sus serranías resguardan la P...",
+              "kind": "text",
+              "where": "p.mun-short-desc"
+            },
+            {
+              "t": "Historia patria · Paisaje segoviano · Caminatas rurales · Antigua iglesia María Reina · Cancionero popular",
+              "kind": "text",
+              "where": "div.mun-vivi-tag"
+            },
+            {
+              "t": "16. Naturaleza Viva: ¿Quién vive aquí?",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Monitoreo Biológico MARENA · Observación sin Perturbar",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "En monitoreos oficiales en la Reserva Tepesomoto-La Pataste y pinares segovianos se ha documentado la presencia de fauna protegida:",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Puma (Puma concolor)",
+              "kind": "text",
+              "where": "span.wild-tag"
+            },
+            {
+              "t": "Orquídeas de Montaña",
+              "kind": "text",
+              "where": "span.wild-tag"
+            },
+            {
+              "t": "17. Leyendas & Tradición Oral",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Memoria Popular de las Serranías",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "TRADICIÓN ORAL",
+              "kind": "text",
+              "where": "span.oral-badge"
+            },
+            {
+              "t": "Este relato forma parte de la memoria popular y no se presenta como un acontecimiento histórico comprobado.",
+              "kind": "text",
+              "where": "em"
+            },
+            {
+              "t": "Relatos transmitidos en fogones sobre los misterios de",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "en Yalagüina, los espíritus guardianes de la",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "en Cusmapa y las apariciones en la",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Laguna La Bruja",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "18. ¿Quiénes Hacen Vivir Este Territorio?",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Conocé a su Gente · Anfitriones Verificados",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "Madriz vive gracias a personas reales que custodian el agua, hornean el maíz, cuidan los cafetales y tejen sus fibras. En BAQUEANO cada perfil es real, registra",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Baqueanos del Cañón",
+              "kind": "text",
+              "where": "div.person-tag-pill"
+            },
+            {
+              "t": "Don Manuel & Guías Comunitarios de Sonís",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Comunidad Sonís, Cañón de Somoto",
+              "kind": "text",
+              "where": "span.person-comunidad"
+            },
+            {
+              "t": "Nacidos a orillas del Cañón antes de su declaración oficial en 2006. Conocen cada cueva, la profundidad de cada poza y la historia geológica de las paredes.",
+              "kind": "text",
+              "where": "p.person-desc"
+            },
+            {
+              "t": "Perfil Verificado BAQUEANO",
+              "kind": "text",
+              "where": "div.person-footer-badge"
+            },
+            {
+              "t": "Productoras de Rosquillas",
+              "kind": "text",
+              "where": "div.person-tag-pill"
+            },
+            {
+              "t": "Más de 40 años manteniendo vivo el oficio con recetas transmitidas de abuelas a nietas. Emprendimientos encabezados por mujeres campesinas.",
+              "kind": "text",
+              "where": "p.person-desc"
+            },
+            {
+              "t": "Familias Cafetaleras",
+              "kind": "text",
+              "where": "div.person-tag-pill"
+            },
+            {
+              "t": "Familia Gutiérrez & Cooperativas El Majaste",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Productores agroecológicos que cultivan bajo sombra protegiendo las fuentes hídricas del Río Coco y la biodiversidad de nebliselva.",
+              "kind": "text",
+              "where": "p.person-desc"
+            },
+            {
+              "t": "Mujeres Artesanas del Barro",
+              "kind": "text",
+              "where": "div.person-tag-pill"
+            },
+            {
+              "t": "Manos indígenas que moldean vasijas, cántaros y piezas ornamentales extrayendo y purificando el barro con técnicas precolombinas.",
+              "kind": "text",
+              "where": "p.person-desc"
+            },
+            {
+              "t": "Transforman las agujas secas caídas del pino en cestas aromáticas, paneras y joyería vegetal sin talar un solo árbol.",
+              "kind": "text",
+              "where": "p.person-desc"
+            },
+            {
+              "t": "Comunidades Indígenas",
+              "kind": "text",
+              "where": "div.person-tag-pill"
+            },
+            {
+              "t": "Consejo Comunitario San José de Palmira",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Familias campesinas indígenas que ofrecen hospedaje rural, cabalgatas y senderismo respetuoso compartiendo sus raíces originarias.",
+              "kind": "text",
+              "where": "p.person-desc"
+            },
+            {
+              "t": "19. Viví Madriz, No Solamente lo Observés",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "5 Rutas Experienciales con Cálculo Inteligente de Tiempo y Costos Reales",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "🫓 Una Mañana entre Rosquillas",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Somoto y Yalagüina ➔ Conocer taller familiar ➔ Amasado de maíz con cuajada ➔ Horno de leña ➔ Degustación caliente ➔ Compra directa.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "☕ Del Cafetal a la Taza",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "San Juan del Río Coco ➔ Recorrer finca agroecológica ➔ Conocer floración y grano ➔ Proceso de secado ➔ Catación con la familia productora.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "🪨 Un Día entre Millones de Años",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Cañón de Somoto ➔ Guía campesino con chaleco ➔ Navegación en desfiladero ➔ Interpretación geológica ➔ Almuerzo campestre en Sonís.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "🌲 Madriz de Montaña",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Las Sabanas ➔ Laguna La Bruja ➔ Cusmapa ➔ Mirador El Balcón ➔ Cestería de acícula de pino ➔ Hospedaje rural campesino.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "🏺 Ruta de Memoria Indígena",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Totogalpa ➔ Museo Comunitario El Almendro ➔ San Lucas ➔ Alfarería de Loma Panda ➔ Petroglifos ➔ Convivencia comunitaria en Palmira.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "20, 21 & 22. Guía Práctica de Viaje & Logística",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Acceso por Panamericana Norte, Clima por Actividad y Equipamiento",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "20. Cómo Llegar",
+              "kind": "text",
+              "where": "h5"
+            },
+            {
+              "t": "Desde Managua por la Carretera Panamericana Norte (NIC-1) pasando por Sébaco y Estelí hacia Somoto (216 km, aprox. 3.5 a 4 hrs). Buses expresos salen desde la",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "21. Cuándo Visitar",
+              "kind": "text",
+              "where": "h5"
+            },
+            {
+              "t": "Noviembre a mayo (aguas mansas).",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Diciembre a marzo (cosecha dorada).",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Clima fresco todo el año; llevar abrigo para noches en Cusmapa.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Calzado con agarre para agua y rocas, ropa de cambio impermeable, abrigo para serranías, repelente biodegradable y dinero en córdobas para compras comunitarias ",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "23. Seguridad & SOS Madriz",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "Telemetría y Enlaces de Emergencia Territorial",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "Hospital Juan Antonio Brenes Palacios (Somoto), Policía Nacional (118), Bomberos (115) y Cruz Roja (128).",
+              "kind": "text",
+              "where": "p.departamento-inline-001"
+            },
+            {
+              "t": "Decálogo Verde de Visita Soberana",
+              "kind": "text",
+              "where": "span.card-subtitle"
+            },
+            {
+              "t": "No extraer piedras, plantas ni piezas arqueológicas.",
+              "kind": "text",
+              "where": "li"
+            },
+            {
+              "t": "Comprar directo a campesinos y artesanas.",
+              "kind": "text",
+              "where": "li"
+            },
+            {
+              "t": "Retornar con el 100% de tus residuos plásticos.",
+              "kind": "text",
+              "where": "li"
+            },
+            {
+              "t": "Respetar ceremonias y tradiciones locales.",
+              "kind": "text",
+              "where": "li"
+            },
+            {
+              "t": "Reportar Incidencia Ambiental en Madriz",
+              "kind": "text",
+              "where": "a.report-damage-btn"
+            },
+            {
+              "t": "¿Ya conocés Madriz o querés empezar a comprenderlo?",
+              "kind": "text",
+              "where": "h2.closing-title"
+            },
+            {
+              "t": "Elegí cómo querés conectar hoy con este territorio milenario de cañones, café y maíz:",
+              "kind": "text",
+              "where": "p.closing-desc"
+            },
+            {
+              "t": "Explorar los 9 Municipios",
+              "kind": "text",
+              "where": "a.closing-action-btn"
+            },
+            {
+              "t": "Conocer el Cañón de Somoto",
+              "kind": "text",
+              "where": "a.closing-action-btn"
+            },
+            {
+              "t": "Ruta de las Rosquillas",
+              "kind": "text",
+              "where": "a.closing-action-btn"
+            },
+            {
+              "t": "Vivir Experiencia Cafetalera",
+              "kind": "text",
+              "where": "a.closing-action-btn"
+            },
+            {
+              "t": "Escuchar Madriz",
+              "kind": "text",
+              "where": "a.closing-action-btn"
+            },
+            {
+              "t": "Construir Mi Aventura IA",
+              "kind": "text",
+              "where": "button.closing-action-btn"
+            },
+            {
+              "t": "Conectar con Anfitriones",
+              "kind": "text",
+              "where": "a.closing-action-btn"
+            },
+            {
+              "t": "Galería continua de Madriz",
+              "kind": "aria-label",
+              "where": "section.infinite-gallery-section"
+            },
+            {
+              "t": "Mapa interactivo de lugares publicados en Madriz",
+              "kind": "aria-label",
+              "where": "#madrizMap"
+            },
+            {
+              "t": "Centro territorial de Madriz",
+              "kind": "aria-label",
+              "where": "button.baqueano-map-marker"
+            },
+            {
+              "t": "Mostrar Monumento Nacional Cañón de Somoto",
+              "kind": "aria-label",
+              "where": "button.baqueano-map-marker"
+            },
+            {
+              "t": "Mostrar Laguna La Bruja (Las Sabanas)",
+              "kind": "aria-label",
+              "where": "button.baqueano-map-marker"
+            },
+            {
+              "t": "Mostrar Mirador El Balcón (San José de Cusmapa)",
+              "kind": "aria-label",
+              "where": "button.baqueano-map-marker"
+            },
+            {
+              "t": "Mostrar Parque Natural El Majaste (San Juan del Río Coco)",
+              "kind": "aria-label",
+              "where": "button.baqueano-map-marker"
+            },
+            {
+              "t": "Mostrar Comunidad Indígena San José de Palmira (Totogalpa)",
+              "kind": "aria-label",
+              "where": "button.baqueano-map-marker"
+            },
+            {
+              "t": "Mostrar Talleres de Cerámica de Loma Panda (San Lucas)",
+              "kind": "aria-label",
+              "where": "button.baqueano-map-marker"
+            },
+            {
+              "t": "Mostrar Parque Arqueológico Piedras Pintadas",
+              "kind": "aria-label",
+              "where": "button.baqueano-map-marker"
+            },
+            {
+              "t": "Mostrar Rosquillas Delicias del Norte",
+              "kind": "aria-label",
+              "where": "button.baqueano-map-marker"
+            },
+            {
+              "t": "Mostrar Finca Entre Pinos",
+              "kind": "aria-label",
+              "where": "button.baqueano-map-marker"
+            },
+            {
+              "t": "Mostrar Casa de Huésped La Ceibita",
+              "kind": "aria-label",
+              "where": "button.baqueano-map-marker"
+            },
+            {
+              "t": "Mostrar Río Estelí",
+              "kind": "aria-label",
+              "where": "button.baqueano-map-marker"
+            },
+            {
+              "t": "Zoom in",
+              "kind": "aria-label",
+              "where": "button.maplibregl-ctrl-zoom-in"
+            },
+            {
+              "t": "Zoom out",
+              "kind": "aria-label",
+              "where": "button.maplibregl-ctrl-zoom-out"
+            },
+            {
+              "t": "Reset bearing to north",
+              "kind": "aria-label",
+              "where": "button.maplibregl-ctrl-compass"
+            },
+            {
+              "t": "Toggle attribution",
+              "kind": "aria-label",
+              "where": "summary.maplibregl-ctrl-attrib-button"
+            },
+            {
+              "t": "Interior del Cañón de Somoto",
+              "kind": "alt",
+              "where": "img"
+            },
+            {
+              "t": "Bote en el Cañón de Somoto",
+              "kind": "alt",
+              "where": "img"
+            },
+            {
+              "t": "Panorámica del Cañón de Somoto",
+              "kind": "alt",
+              "where": "img"
+            }
+          ],
+          "content": 21,
+          "contentSample": [
+            "Humedal de Altura & Canopy",
+            "Vistas al Pacífico & Serranías",
+            "Cafetales de Altura & Cascadas",
+            "Turismo Rural Comunitario",
+            "Petroglifos & Memoria Viva"
+          ]
+        }
+      }
+    },
+    {
+      "page": "descargar.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "destino.html?id=ometepe",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "Naturaleza & Volcanes",
+              "kind": "text",
+              "where": "span.bq-dossier-badge"
+            },
+            {
+              "t": "Verificado BAQUEANO · Actualización pendiente",
+              "kind": "text",
+              "where": "span.bq-dossier-badge"
+            },
+            {
+              "t": "Altagracia & Moyogalpa, Rivas · Coordenadas: 11.5380° N, 85.6220° W",
+              "kind": "text",
+              "where": "p.bq-dossier-loc"
+            },
+            {
+              "t": "Precio Sugerido",
+              "kind": "text",
+              "where": "span.bq-dossier-metric-label"
+            },
+            {
+              "t": "Precio pendiente de verificación",
+              "kind": "text",
+              "where": "span.bq-dossier-metric-val"
+            },
+            {
+              "t": "(Sin publicar)",
+              "kind": "text",
+              "where": "small"
+            },
+            {
+              "t": "Clima Promedio",
+              "kind": "text",
+              "where": "span.bq-dossier-metric-label"
+            },
+            {
+              "t": "27°C · Brisa lacustre fresca",
+              "kind": "text",
+              "where": "span.bq-dossier-metric-val"
+            },
+            {
+              "t": "2 a 3 días sugeridos",
+              "kind": "text",
+              "where": "span.bq-dossier-metric-val"
+            },
+            {
+              "t": "Moderada / Exigente en volcanes",
+              "kind": "text",
+              "where": "span.bq-dossier-metric-val"
+            },
+            {
+              "t": "Protocolo de Verificación Territorial en 8 Puntos Aprobado",
+              "kind": "text",
+              "where": "h5"
+            },
+            {
+              "t": "✔ Coordenadas georreferenciadas en campo · ✔ Anfitriones y cooperativas acreditadas · ✔ Cero comisiones foráneas añadidas sobre precios locales · ✔ Sincronizado",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Sobre este destino",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Ometepe (\"dos montañas\" en lengua náhuatl) es la mayor isla volcánica lacustre del mundo, declarada Reserva de Biosfera por la UNESCO en 2010. Formada por dos c",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Desde Managua tomar la Carretera Panamericana Sur (NIC-2) hasta la ciudad de Rivas (110 km) y continuar 5 km hasta el Puerto de San Jorge. Desde San Jorge zarpa",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Actividades recomendadas",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Ascenso guiado al Volcán Concepción (jornada de 7-9 horas con guías comunitarios)",
+              "kind": "text",
+              "where": "div.bq-dossier-chip-item"
+            },
+            {
+              "t": "Senderismo al bosque nuboso y laguna del cráter del Volcán Maderas",
+              "kind": "text",
+              "where": "div.bq-dossier-chip-item"
+            },
+            {
+              "t": "Baño en las aguas minerales curativas del manantial Ojo de Agua",
+              "kind": "text",
+              "where": "div.bq-dossier-chip-item"
+            },
+            {
+              "t": "Kayak ecológico por el Río Istián entre manglares y garzas",
+              "kind": "text",
+              "where": "div.bq-dossier-chip-item"
+            },
+            {
+              "t": "Ruta arqueológica de petroglifos ancestrales en Finca Magdalena y Museo El Ceibo",
+              "kind": "text",
+              "where": "div.bq-dossier-chip-item"
+            },
+            {
+              "t": "Gastronomía ancestral & sabores locales",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Pescado guapote frito del Cocibolca con tostones y ensalada criolla",
+              "kind": "text",
+              "where": "div.bq-dossier-chip-item"
+            },
+            {
+              "t": "Plátano maduro horneado con queso frito y cuajada de finca",
+              "kind": "text",
+              "where": "div.bq-dossier-chip-item"
+            },
+            {
+              "t": "Café orgánico de sombra cultivado por cooperativas campesinas del Volcán Maderas",
+              "kind": "text",
+              "where": "div.bq-dossier-chip-item"
+            },
+            {
+              "t": "Batidos de frutas tropicales frescas de temporada (mango, maracuyá, guanábana)",
+              "kind": "text",
+              "where": "div.bq-dossier-chip-item"
+            },
+            {
+              "t": "Aliados y Cooperativas Verificadas",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Cooperativa Agropecuaria Finca Magdalena (Ecoturismo & Café Orgánico)",
+              "kind": "text",
+              "where": "div.bq-dossier-chip-item"
+            },
+            {
+              "t": "Red Comunitaria Ometepe Viva (Guías de montaña acreditados)",
+              "kind": "text",
+              "where": "div.bq-dossier-chip-item"
+            },
+            {
+              "t": "Posada Rural San Ramón (Hospedaje ecológico campesino)",
+              "kind": "text",
+              "where": "div.bq-dossier-chip-item"
+            },
+            {
+              "t": "Recomendaciones de seguridad & respeto ambiental",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Para ascender a cualquiera de los dos volcanes es mandatorio ir acompañado por un guía local acreditado. Llevar calzado cerrado con tracción, protector solar bi",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "¿Te resultó útil esta información territorial?",
+              "kind": "text",
+              "where": "div.bq-dossier-feedback-title"
+            },
+            {
+              "t": "Sí, útil",
+              "kind": "text",
+              "where": "span"
+            },
+            {
+              "t": "Podría mejorar",
+              "kind": "text",
+              "where": "span"
+            },
+            {
+              "t": "Reportar dato",
+              "kind": "text",
+              "where": "#openReportModalBtn"
+            },
+            {
+              "t": "+ Mi Viaje",
+              "kind": "text",
+              "where": "span"
+            },
+            {
+              "t": "Actualización pendiente",
+              "kind": "text",
+              "where": "span.bq-dossier-badge"
+            },
+            {
+              "t": "Estado de confianza",
+              "kind": "text",
+              "where": "h5"
+            },
+            {
+              "t": "Esta ficha espera una fuente y fecha de verificación registradas en Supabase. Los datos sin respaldo no se presentan como confirmados.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Ficha Territorial de Destino",
+              "kind": "aria-label",
+              "where": "#bqDestinationDossierOverlay"
+            },
+            {
+              "t": "Cerrar ficha",
+              "kind": "aria-label",
+              "where": "#bqDossierCloseBtn"
+            },
+            {
+              "t": "Sí, muy útil",
+              "kind": "aria-label",
+              "where": "#modalVoteUp"
+            },
+            {
+              "t": "Reportar dato desactualizado o incorrecto",
+              "kind": "title",
+              "where": "#modalReportBtn"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "destinos.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "Hotel Encanto del Sur",
+              "kind": "alt",
+              "where": "img.bq-lodging-logo"
+            }
+          ],
+          "content": 12,
+          "contentSample": [
+            "Albergue ecológico a orillas de los humedales del río Papaturro, en el Refugio de Vida Silvestre Los",
+            "Albergue familiar en el bosque nublado de Miraflor Moropotente, con huertos, hongos y recorridos bot",
+            "Ecolodge en San Ramón con alimentos orgánicos de la finca, plantas medicinales y tours nocturnos de ",
+            "Islas de pintores y talladores de madera de balsa en el Cocibolca.",
+            "Iniciativa comunitaria en La Garnacha, San Nicolás, con paisajes de montaña, queso de cabra, hortali"
+          ]
+        }
+      }
+    },
+    {
+      "page": "experiencias.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "Sandboarding Cerro Negro",
+              "kind": "alt",
+              "where": "img.exp-img"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "favoritos.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "gastronomia.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "La Paz Centro & Nagarote",
+              "kind": "text",
+              "where": "span.dish-region"
+            },
+            {
+              "t": "Indio Viejo",
+              "kind": "text",
+              "where": "h3.dish-title"
+            },
+            {
+              "t": "Tres Leches",
+              "kind": "text",
+              "where": "h5.sweet-name"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "historia.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "León Viejo",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "Hacienda San Jacinto",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "CIUDAD DARÍO · MATAGALPA",
+              "kind": "text",
+              "where": "div"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "index.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "Cerro Negro · León",
+              "kind": "text",
+              "where": "span.vivir-option-place"
+            },
+            {
+              "t": "Cañón de Somoto · Madriz",
+              "kind": "text",
+              "where": "span.vivir-option-place"
+            },
+            {
+              "t": "Laguna de Apoyo · Masaya",
+              "kind": "text",
+              "where": "span.vivir-option-place"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "legal.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "mapa.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 3,
+          "contentSample": [
+            "Reserva Natural Cerro Musún",
+            "Zoom in",
+            "Zoom out"
+          ]
+        }
+      }
+    },
+    {
+      "page": "mi-negocio.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "¿Tenés un negocio turístico? Aquí te explico cómo publicarlo para que más viajeros te encuentren.",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Abrir a Baqüi, inteligencia territorial activa",
+              "kind": "aria-label",
+              "where": "#bqMascot"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "mi-viaje.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "Descubrí los 17 territorios de Nicaragua, elegí tus atractivos favoritos o dejá que Baqueano Digital planifique una ruta a tu medida según tu presupuesto y días",
+              "kind": "text",
+              "where": "p"
+            },
+            {
+              "t": "Hotel Boutique Adela",
+              "kind": "text",
+              "where": "div.rec-card-name"
+            }
+          ],
+          "content": 4,
+          "contentSample": [
+            "© OpenStreetMap contributors",
+            "Zoom in",
+            "Zoom out",
+            "A JavaScript library for interactive maps"
+          ]
+        }
+      }
+    },
+    {
+      "page": "musica.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "Justo Santos",
+              "kind": "text",
+              "where": "#featuredTrackArtist"
+            },
+            {
+              "t": "Son Nica",
+              "kind": "text",
+              "where": "h3"
+            },
+            {
+              "t": "🎶 Marimba",
+              "kind": "text",
+              "where": "button.musica-chip-btn"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "normas-comunidad.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "nosotros.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "2. Baqueano Digital",
+              "kind": "text",
+              "where": "h4"
+            },
+            {
+              "t": "@baqueano.nicaragu",
+              "kind": "text",
+              "where": "small"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "offline.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "Cañón de Somoto:",
+              "kind": "text",
+              "where": "strong"
+            },
+            {
+              "t": "Cerro Negro / Telica:",
+              "kind": "text",
+              "where": "strong"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "opiniones.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 4,
+          "contentSample": [
+            "Se los recomiendo, es una plataforma que podemos explorar nuevos lugares, y ver las bellezas de Nica",
+            "encontré un restaurante con comida deliciosa, música ambiental y piscina.",
+            "Me encanta Baqueano, me ha hecho descubrir Nicaragua como nunca, desde lo que ya conocia hasta los b",
+            "Me encantó usar BAQUEANO. Es una plataforma fácil de explorar, con información útil para conocer Nic"
+          ]
+        }
+      }
+    },
+    {
+      "page": "perfil.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "planes.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "privacidad.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "terminos.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "testimonios.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    },
+    {
+      "page": "todos-los-destinos.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [],
+          "content": 12,
+          "contentSample": [
+            "Albergue ecológico a orillas de los humedales del río Papaturro, en el Refugio de Vida Silvestre Los",
+            "Albergue familiar en el bosque nublado de Miraflor Moropotente, con huertos, hongos y recorridos bot",
+            "Ecolodge en San Ramón con alimentos orgánicos de la finca, plantas medicinales y tours nocturnos de ",
+            "Islas de pintores y talladores de madera de balsa en el Cocibolca.",
+            "Iniciativa comunitaria en La Garnacha, San Nicolás, con paisajes de montaña, queso de cabra, hortali"
+          ]
+        }
+      }
+    },
+    {
+      "page": "todos-los-platos.html",
+      "langs": {
+        "en": {
+          "htmlLang": "en-US",
+          "error": null,
+          "ui": [
+            {
+              "t": "Nacatamal, indio viejo, tortillas, rosquillas, güirilas y tamales.",
+              "kind": "text",
+              "where": "p"
+            }
+          ],
+          "content": 0,
+          "contentSample": []
+        }
+      }
+    }
+  ]
+}

@@ -1078,7 +1078,10 @@
 
       // 1. Obtener ID inicial (Por defecto 'madriz' o por parámetro URL)
       const urlParams = new URLSearchParams(window.location.search);
-      let initialDeptId = urlParams.get('id') || 'madriz';
+      // 20-10-2026: Supabase usa guion bajo (nueva_segovia, rio_san_juan) y este catálogo guion
+      // (nueva-segovia): sin normalizar, esos enlaces caían en Madriz.
+      const normalizeDeptId = (v) => String(v || '').trim().toLowerCase().replace(/_/g, '-');
+      let initialDeptId = normalizeDeptId(urlParams.get('id')) || 'madriz';
       let activeDept = territories.find(t => t.id === initialDeptId) || territories[0];
 
       // 2. Renderizar Píldoras Horizontales Superiores
@@ -1396,7 +1399,7 @@
       // 7. Manejo de botones atrás/adelante del navegador
       window.addEventListener('popstate', (e) => {
         const currentUrlParams = new URLSearchParams(window.location.search);
-        const popId = currentUrlParams.get('id') || 'madriz';
+        const popId = String(currentUrlParams.get('id') || 'madriz').trim().toLowerCase().replace(/_/g, '-');
         switchDepartment(popId, false, false);
       });
 

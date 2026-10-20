@@ -18,6 +18,23 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🌐 REVISIÓN DE IDIOMAS EN TODAS LAS PÁGINAS — PARTE 1 (20-10-2026, 15:17)
+- **Solicitud:** *"quiero que revise el repositorio y revise que en todas las paginas que tenemos en la web tienen que cambiar el idiomas"* (con el repositorio y https://baqueanonicaragua.com/).
+- **Nueva herramienta:** `scripts/i18n-visible-audit.mjs`.
+  - Abre cada página pública en español y en otro idioma, y lista los textos visibles (texto, placeholder, aria-label, title, alt) que quedan iguales.
+  - Descarta nombres propios, precios y medidas. Distingue etiquetas en Mayúsculas Iniciales de topónimos usando el vocabulario de es.json.
+  - Separa la interfaz del contenido de Supabase. No da consentimiento de analítica.
+  - Resultado en docs/i18n-visible-audit.json.
+- **Diagnóstico (inglés):**
+  - Las páginas generales están casi completas; lo que queda son nombres propios.
+  - **departamento.html: 146–302 textos por departamento en español** (contenido editorial de territories-data.js, madriz-experience.js, chinandega-experience.js y territories-rich-data.js, unos 200 000 caracteres solo en español).
+  - **destino.html: 30–44 por destino** (destination-dossier.js: etiquetas y contenido).
+  - BAQUI (sugerencias y etiquetas), mi-viaje, baqueano-ia (botón de mapa con aria-label roto «ai Map Recenter Btn») y la línea de todos-los-platos.
+- **Bug corregido:** Supabase guarda los departamentos con guion bajo (`nueva_segovia`, `rio_san_juan`) y departamento.html los busca con guion (`nueva-segovia`). Los enlaces de Aliados, de BAQUI y de otras secciones abrían **Madriz**. Ahora el id se normaliza.
+- **Motor de idiomas (global-language.js 2026.10.20-contenido-1):** catálogos de contenido por paquete, `locales/content/<paquete>.<idioma>.json`. Solo los cargan las páginas que los declaran (`<meta name="bq-i18n-content">` o `BaqueanoLanguage.useContent`), así el contenido de los territorios no engorda las otras páginas. Se traduce por frase, igual que el catálogo.
+- **Pendiente (parte 2):** extraer las frases de los 17 departamentos y de los destinos, traducirlas a 7 idiomas, sumar las etiquetas de interfaz faltantes y correr la auditoría en los 7 idiomas.
+- **20-10-2026, 15:31 y 15:40:** el propietario mandó el prompt de navegación interna («Cómo llegar» sin salir de BAQUEANO) y pidió *"arma la navegacion interna que tenemos"*. Ninguna clave del proyecto tiene habilitada la Routes API de Google (comprobado: la clave web de Firebase tiene el servicio bloqueado y el proyecto 935908985330 tiene la API desactivada). Se arma con los mapas actuales (OpenStreetMap) en una rama aparte.
+
 ## 📶 MÓDULO 3: RUTA SIN SEÑAL Y ENVÍOS PENDIENTES (16-10-2026, 06:29)
 - **Solicitud:** *"Continua"* (Módulo 3 del prompt de 4 módulos: «Guardar ruta para ir sin señal» con IndexedDB, Cache Storage y WebP, más una cola Background Sync con alternativa para iOS y avisos).
 - **Hecho:** `js/offline-route.js` + `css/offline-route.css`, cargados por `global-injector.js`.
