@@ -691,8 +691,8 @@
         <p data-i18n="common.tuUbicacionGpsEstaActiva">Tu ubicación GPS está activa para asistencia en ruta y enlace directo con autoridades de socorro.</p>
       </div>
       <div class="sos-gps-card">
-        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> <span data-i18n="common.gpsSatelitalAutonomo">GPS Satelital Autónomo</span></div>
-        <div class="sos-gps-coords" id="sosGpsDisplay"><span data-i18n="pages.aliados.sosGpsDisplay.div1">Obteniendo coordenadas satelitales...</span></div>
+        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> <span>GPS del dispositivo (requiere permiso)</span></div>
+        <div class="sos-gps-coords" id="sosGpsDisplay"><span>Ubicación pendiente de autorización…</span></div>
         <small data-i18n="pages.aliados.sosModal.small1" style="color: #94A3B8;">Funciona con el chip GNSS de tu dispositivo, sin necesidad de saldo.</small>
       </div>
       <div class="sos-emergency-buttons">
@@ -880,10 +880,13 @@
             },
             () => {
               const d = document.getElementById('sosGpsDisplay');
-              if (d) d.textContent = "12.5061° N, 86.7022° W (Referencia Nacional)";
+              if (d) d.textContent = "GPS no disponible o permiso denegado. Consultá emergencias directamente.";
             },
-            { enableHighAccuracy: true, timeout: 5000 }
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
           );
+        } else {
+          const d = document.getElementById('sosGpsDisplay');
+          if (d) d.textContent = "Este dispositivo no permite obtener la ubicación. Contactá emergencias directamente.";
         }
       }
     }
