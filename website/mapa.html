@@ -423,11 +423,11 @@
       <button type="button" class="exact-modal-close" onclick="closeSosModal()">&times;</button>
       <div class="exact-modal-header">
         <h3><i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> <span data-i18n="common.centroSosAuxilioInmediato">Centro SOS &amp; Auxilio Inmediato</span></h3>
-        <p data-i18n="pages.mapa.sosModal.p1">Tu ubicación satelital está calculada para asistencia en ruta.</p>
+        <p>Si das permiso de ubicación, las coordenadas se mostrarán aquí. BAQUEANO no envía una alerta automáticamente: debés llamar al servicio de emergencia.</p>
       </div>
       <div class="sos-gps-card">
-        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> <span data-i18n="common.gpsSatelitalAutonomo">GPS Satelital Autónomo</span></div>
-        <div class="sos-gps-coords" id="sosGpsDisplay"><span data-i18n="common.n867022WNicaragua">12.5061° N, 86.7022° W (Nicaragua)</span></div>
+        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> <span>GPS del dispositivo (requiere permiso)</span></div>
+        <div class="sos-gps-coords" id="sosGpsDisplay" role="status" aria-live="polite">Ubicación no solicitada. Abrí SOS y autorizá el GPS para obtener coordenadas.</div>
       </div>
       <div class="sos-emergency-buttons">
         <a href="tel:118" class="btn-sos-call police"><i class="fa-solid fa-shield"></i> <span data-i18n="common.policiaNacional118">Policía Nacional (118)</span></a>
@@ -710,10 +710,28 @@
     function openSosModal(e) {
       if (e && e.preventDefault) e.preventDefault();
       const modal = document.getElementById('sosModal');
-      if (modal) {
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
+      if (!modal) return;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      const gpsDisplay = document.getElementById('sosGpsDisplay');
+      if (gpsDisplay) gpsDisplay.textContent = 'Solicitando permiso para conocer tu ubicación…';
+      if (!navigator.geolocation) {
+        if (gpsDisplay) gpsDisplay.textContent = 'Este dispositivo no permite obtener tu ubicación. Contactá directamente a emergencias.';
+        return;
       }
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          if (!modal.classList.contains('is-open') || !gpsDisplay) return;
+          gpsDisplay.textContent = pos.coords.latitude.toFixed(6) + ', ' +
+            pos.coords.longitude.toFixed(6) + ' (precisión aproximada ±' +
+            Math.round(pos.coords.accuracy || 0) + ' m)';
+        },
+        function () {
+          if (!modal.classList.contains('is-open') || !gpsDisplay) return;
+          gpsDisplay.textContent = 'GPS no disponible o permiso denegado. No se mostrarán coordenadas de referencia como si fueran tu ubicación.';
+        },
+        { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
+      );
     }
 
     function closeSosModal() {

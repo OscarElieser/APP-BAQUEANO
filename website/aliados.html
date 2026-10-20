@@ -22,7 +22,7 @@
 - Hero con titular oficial "Conectá con quienes hacen posible la experiencia".
 - Franja de 6 métricas clave de verificación.
 - Barra de filtros interactiva con geolocalización por cercanía.
-- Catálogo de 10 aliados verificados con fecha de auditoría en campo.
+- Catálogo dinámico con fuente y estado de verificación real; sin fichas estáticas.
 - Mapa territorial interactivo Leaflet de aliados.
 - Protocolo de 8 fases de auditoría comunitaria.
 - Sección de impacto con cifras auditadas y llamado a emprendedores turísticos.
@@ -228,7 +228,7 @@
           <i class="fa-solid fa-shield-check"></i>
           <select data-i18n-aria-label="pages.aliados.filterVerif.selectAriaLabel1" class="aliados-filter-select" id="filterVerif" aria-label="Filtrar por verificación">
             <option data-i18n="pages.aliados.filterVerif.option1" value="todos">Verificados: Todos</option>
-            <option data-i18n="pages.aliados.filterVerif.option2" value="auditados">100% Auditados en campo</option>
+            <option value="auditados">Verificados según registro</option>
           </select>
         </div>
 
@@ -264,197 +264,9 @@
         </div>
       </div>
 
-      <div class="aliados-grid-exact" id="aliadosCardsGrid">
-        <!-- 1. Coop. Cañón de Somoto -->
-        <article class="aliado-card-exact" data-dept="madriz" data-cat="coop">
-          <div class="aliado-img-box">
-            <img data-i18n-alt="pages.aliados.aliadoCardExact.h31" src="assets/images/destinos/canon_de_somoto.jpg" alt="Coop. Cañón de Somoto" class="aliado-card-img" loading="lazy" decoding="async" width="399" height="501">
-            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
-          </div>
-          <div class="aliado-card-body">
-            <h3 data-i18n="pages.aliados.aliadoCardExact.h31" class="aliado-card-title">Coop. Cañón de Somoto</h3>
-            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> Somoto, Madriz</div>
-            <p data-i18n="pages.aliados.aliadoCardExact.p1" class="aliado-card-desc">Senderismo, rappell y recorridos en el majestuoso Cañón de Somoto con guías comunitarios.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div1">Auditado: 12 ago 2026</span></div>
-            <div class="aliado-card-actions">
-              <a href="https://wa.me/50584431289?text=Hola%20Coop%20Cañón%20de%20Somoto,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=madriz" class="btn-aliado-profile">Ver perfil</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 2. Posada Ecológica La Abuela -->
-        <article class="aliado-card-exact" data-dept="matagalpa" data-cat="lodge">
-          <div class="aliado-img-box">
-            <img data-i18n-alt="pages.aliados.aliadoCardExact.h32" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Posada Ecológica La Abuela" class="aliado-card-img" loading="lazy" decoding="async">
-            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
-          </div>
-          <div class="aliado-card-body">
-            <h3 data-i18n="pages.aliados.aliadoCardExact.h32" class="aliado-card-title">Posada Ecológica La Abuela</h3>
-            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> San Ramón, Matagalpa</div>
-            <p data-i18n="pages.aliados.aliadoCardExact.p2" class="aliado-card-desc">Hospedaje rural, café de altura y senderos de nebliselva en el corazón del norte.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div2">Auditado: 05 ago 2026</span></div>
-            <div class="aliado-card-actions">
-              <a href="https://wa.me/50584431289?text=Hola%20Posada%20La%20Abuela,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=matagalpa" class="btn-aliado-profile">Ver perfil</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 3. Arenas Beach Hotel & Cabañas -->
-        <article class="aliado-card-exact" data-dept="leon" data-cat="playa">
-          <div class="aliado-img-box">
-            <img data-i18n-alt="pages.aliados.aliadoCardExact.h33" src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="Arenas Beach Hotel & Cabañas" class="aliado-card-img" loading="lazy" decoding="async" width="447" height="447">
-            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
-          </div>
-          <div class="aliado-card-body">
-            <h3 data-i18n="pages.aliados.aliadoCardExact.h33" class="aliado-card-title">Arenas Beach Hotel &amp; Cabañas</h3>
-            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> <span data-i18n="pages.aliados.aliadoCardExact.div3">Las Peñitas, León</span></div>
-            <p data-i18n="pages.aliados.aliadoCardExact.p3" class="aliado-card-desc">Frente al mar, descanso, surf y deportes acuáticos en las costas del Pacífico leonés.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div4">Auditado: 28 jul 2026</span></div>
-            <div class="aliado-card-actions">
-              <a href="https://wa.me/50584431289?text=Hola%20Arenas%20Beach,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=leon" class="btn-aliado-profile">Ver perfil</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 4. Baqueanos Cerro Negro -->
-        <article class="aliado-card-exact" data-dept="leon" data-cat="guias">
-          <div class="aliado-img-box">
-            <img data-i18n-alt="pages.aliados.aliadoCardExact.h34" src="assets/images/destinos/cerro_negro.jpg" alt="Baqueanos Cerro Negro" class="aliado-card-img" loading="lazy" decoding="async" width="700" height="438">
-            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
-          </div>
-          <div class="aliado-card-body">
-            <h3 data-i18n="pages.aliados.aliadoCardExact.h34" class="aliado-card-title">Baqueanos Cerro Negro</h3>
-            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> León</div>
-            <p data-i18n="pages.aliados.aliadoCardExact.p4" class="aliado-card-desc">Ascenso al volcán más joven de Centroamérica, sandboarding y guías locales certificados.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div5">Auditado: 18 ago 2026</span></div>
-            <div class="aliado-card-actions">
-              <a href="https://wa.me/50584431289?text=Hola%20Baqueanos%20Cerro%20Negro,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=leon" class="btn-aliado-profile">Ver perfil</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 5. Finca Magdalena & Ometepe -->
-        <article class="aliado-card-exact" data-dept="rivas" data-cat="coop">
-          <div class="aliado-img-box">
-            <img data-i18n-alt="pages.aliados.aliadoCardExact.h35" src="assets/images/destinos/selva_negra.jpg" alt="Finca Magdalena & Ometepe" class="aliado-card-img" loading="lazy" decoding="async" width="399" height="501">
-            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
-          </div>
-          <div class="aliado-card-body">
-            <h3 data-i18n="pages.aliados.aliadoCardExact.h35" class="aliado-card-title">Finca Magdalena &amp; Ometepe</h3>
-            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> Ometepe, Rivas</div>
-            <p data-i18n="pages.aliados.aliadoCardExact.p5" class="aliado-card-desc">Agroturismo comunitario, gastronomía campesina y senderismo al Volcán Maderas.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div6">Auditado: 22 ago 2026</span></div>
-            <div class="aliado-card-actions">
-              <a href="https://wa.me/50584431289?text=Hola%20Finca%20Magdalena,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=rivas" class="btn-aliado-profile">Ver perfil</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 6. San Simián Eco-Lodge -->
-        <article class="aliado-card-exact" data-dept="rivas" data-cat="lodge">
-          <div class="aliado-img-box">
-            <img data-i18n-alt="pages.aliados.aliadoCardExact.h36" src="assets/images/destinos/isla_de_ometepe.jpg" alt="San Simián Eco-Lodge" class="aliado-card-img" loading="lazy" decoding="async" width="1600" height="900">
-            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
-          </div>
-          <div class="aliado-card-body">
-            <h3 data-i18n="pages.aliados.aliadoCardExact.h36" class="aliado-card-title">San Simián Eco-Lodge</h3>
-            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> Isla de Ometepe, Rivas</div>
-            <p data-i18n="pages.aliados.aliadoCardExact.p6" class="aliado-card-desc">Cabañas ecológicas frente a la costa lacustre, avistamiento de aves y descanso sostenible.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div7">Auditado: 10 ago 2026</span></div>
-            <div class="aliado-card-actions">
-              <a href="https://wa.me/50584431289?text=Hola%20San%20Simián,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=rivas" class="btn-aliado-profile">Ver perfil</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 7. Morgan's Rock -->
-        <article class="aliado-card-exact" data-dept="rivas" data-cat="lodge">
-          <div class="aliado-img-box">
-            <img data-i18n-alt="pages.aliados.aliadoCardExact.h37" src="assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg" alt="Morgan's Rock" class="aliado-card-img" loading="lazy" decoding="async" width="447" height="447">
-            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
-          </div>
-          <div class="aliado-card-body">
-            <h3 data-i18n="pages.aliados.aliadoCardExact.h37" class="aliado-card-title">Morgan's Rock</h3>
-            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> San Juan del Sur, Rivas</div>
-            <p data-i18n="pages.aliados.aliadoCardExact.p7" class="aliado-card-desc">Eco-lodge inmerso en bosque privado y playa de anidación de tortugas marinas.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div8">Auditado: 15 ago 2026</span></div>
-            <div class="aliado-card-actions">
-              <a href="https://wa.me/50584431289?text=Hola%20Morgan%20Rock,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=rivas" class="btn-aliado-profile">Ver perfil</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 8. Hola Ola Eco-Hostal -->
-        <article class="aliado-card-exact" data-dept="rivas" data-cat="playa">
-          <div class="aliado-img-box">
-            <img data-i18n-alt="pages.aliados.aliadoCardExact.h38" src="assets/images/destinos/corn_island.jpg" alt="Hola Ola Eco-Hostal" class="aliado-card-img" loading="lazy" decoding="async" width="800" height="550">
-            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
-          </div>
-          <div class="aliado-card-body">
-            <h3 data-i18n="pages.aliados.aliadoCardExact.h38" class="aliado-card-title">Hola Ola Eco-Hostal</h3>
-            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> <span data-i18n="pages.aliados.aliadoCardExact.div9">Popoyo, Rivas</span></div>
-            <p data-i18n="pages.aliados.aliadoCardExact.p8" class="aliado-card-desc">Surf, playa y ambiente comunitario entre viajeros y familias pescadoras locales.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div10">Auditado: 08 ago 2026</span></div>
-            <div class="aliado-card-actions">
-              <a href="https://wa.me/50584431289?text=Hola%20Hola%20Ola,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=rivas" class="btn-aliado-profile">Ver perfil</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 9. Feel at Home Campestre -->
-        <article class="aliado-card-exact" data-dept="masaya" data-cat="lodge">
-          <div class="aliado-img-box">
-            <img data-i18n-alt="pages.aliados.aliadoCardExact.h39" src="assets/images/destinos/volcan_masaya.jpg" alt="Feel at Home Campestre" class="aliado-card-img" loading="lazy" decoding="async" width="1600" height="1131">
-            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
-          </div>
-          <div class="aliado-card-body">
-            <h3 data-i18n="pages.aliados.aliadoCardExact.h39" class="aliado-card-title">Feel at Home Campestre</h3>
-            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> Masaya</div>
-            <p data-i18n="pages.aliados.aliadoCardExact.p9" class="aliado-card-desc">Hospedaje familiar, naturaleza, talleres artesanales y gastronomía típica en los Pueblos Blancos.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div11">Auditado: 16 ago 2026</span></div>
-            <div class="aliado-card-actions">
-              <a href="https://wa.me/50584431289?text=Hola%20Feel%20at%20Home,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=masaya" class="btn-aliado-profile">Ver perfil</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 10. Sohla Rooftop Granada -->
-        <article class="aliado-card-exact" data-dept="granada" data-cat="gastro">
-          <div class="aliado-img-box">
-            <img data-i18n-alt="pages.aliados.aliadoCardExact.h310" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Sohla Rooftop Granada" class="aliado-card-img" loading="lazy" decoding="async" width="401" height="498">
-            <button data-i18n-title="actions.save" type="button" class="aliado-fav-btn" title="Guardar"><i class="fa-regular fa-heart"></i></button>
-            <span class="aliado-verified-pill"><i class="fa-solid fa-check"></i> <span data-i18n="pages.aliados.aliadosMetricsStrip.strong1">Verificado BAQUEANO</span></span>
-          </div>
-          <div class="aliado-card-body">
-            <h3 data-i18n="pages.aliados.aliadoCardExact.h310" class="aliado-card-title">Sohla Rooftop Granada</h3>
-            <div class="aliado-card-location"><i class="fa-solid fa-location-dot"></i> Granada</div>
-            <p data-i18n="pages.aliados.aliadoCardExact.p10" class="aliado-card-desc">Gastronomía fusión nicaragüense, coctelería de autor y vista panorámica a la Gran Sultana y al volcán.</p>
-            <div class="aliado-card-audit"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="pages.aliados.aliadoCardExact.div12">Auditado: 20 ago 2026</span></div>
-            <div class="aliado-card-actions">
-              <a href="https://wa.me/50584431289?text=Hola%20Sohla%20Rooftop,%20los%20encontré%20en%20Baqueano" target="_blank" rel="noopener noreferrer" class="btn-aliado-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a data-i18n="pages.aliados.aliadoCardExact.a1" href="departamento.html?id=granada" class="btn-aliado-profile">Ver perfil</a>
-            </div>
-          </div>
-        </article>
-      </div>
+      <div class="aliados-grid-exact" id="aliadosCardsGrid" aria-live="polite" aria-busy="true">
+        <p role="status">Cargando información de aliados publicada en BAQUEANO…</p>
+        <noscript>Para consultar negocios y contactos actualizados, activá JavaScript en tu navegador. No mostramos fichas sin verificar sus datos.</noscript>
     </div>
   </section>
 
@@ -479,43 +291,12 @@
         <!-- Derecha: Aliados cercanos y verificados -->
         <div class="aliados-nearby-box">
           <div class="aliados-nearby-head">
-            <h4><i class="fa-solid fa-location-arrow"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.h41">Aliados cercanos y verificados</span></h4>
+            <h4><i class="fa-solid fa-location-arrow"></i> <span>Aliados con ubicación publicada</span></h4>
             <a data-i18n="pages.aliados.aliadosMapSplitSection.a2" href="mapa.html" class="aliados-nearby-link">Ver en el mapa &rarr;</a>
           </div>
 
           <div class="aliados-nearby-list">
-            <!-- 1. Coop. Cañón de Somoto -->
-            <div class="aliado-nearby-item">
-              <img data-i18n-alt="pages.aliados.aliadoCardExact.h31" loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Coop. Cañón de Somoto" class="aliado-nearby-img" width="399" height="501">
-              <div class="aliado-nearby-info">
-                <div id="aliadoNearbyName1" data-i18n="pages.aliados.aliadoCardExact.h31" class="aliado-nearby-name">Coop. Cañón de Somoto</div>
-                <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> Somoto, Madriz</div>
-                <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.div1">~ 12 km · Verificado</span></div>
-              </div>
-              <a href="departamento.html?id=madriz" class="aliado-nearby-arrow" aria-labelledby="aliadoNearbyName1"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-            </div>
-
-            <!-- 2. Posada Ecológica La Abuela -->
-            <div class="aliado-nearby-item">
-              <img data-i18n-alt="pages.aliados.aliadosMapSplitSection.imgAlt1" loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Posada La Abuela" class="aliado-nearby-img">
-              <div class="aliado-nearby-info">
-                <div id="aliadoNearbyName2" data-i18n="pages.aliados.aliadoCardExact.h32" class="aliado-nearby-name">Posada Ecológica La Abuela</div>
-                <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> San Ramón, Matagalpa</div>
-                <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.div2">~ 35 km · Verificado</span></div>
-              </div>
-              <a href="departamento.html?id=matagalpa" class="aliado-nearby-arrow" aria-labelledby="aliadoNearbyName2"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-            </div>
-
-            <!-- 3. Sohla Rooftop Granada -->
-            <div class="aliado-nearby-item">
-              <img data-i18n-alt="pages.aliados.aliadosMapSplitSection.imgAlt2" loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Sohla Rooftop" class="aliado-nearby-img" width="401" height="498">
-              <div class="aliado-nearby-info">
-                <div id="aliadoNearbyName3" data-i18n="pages.aliados.aliadoCardExact.h310" class="aliado-nearby-name">Sohla Rooftop Granada</div>
-                <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
-                <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.div3">~ 48 km · Verificado</span></div>
-              </div>
-              <a href="departamento.html?id=granada" class="aliado-nearby-arrow" aria-labelledby="aliadoNearbyName3"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-            </div>
+            <p class="aliado-nearby-info" role="status">Consultá el mapa para ver los aliados con coordenadas registradas. Para ordenar el directorio por cercanía, utilizá «Cerca de mí» y autorizá tu ubicación.</p>
           </div>
         </div>
       </div>
@@ -879,8 +660,8 @@
         <p data-i18n="common.tuUbicacionGpsEstaActiva">Tu ubicación GPS está activa para asistencia en ruta y enlace directo con autoridades de socorro.</p>
       </div>
       <div class="sos-gps-card">
-        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> <span data-i18n="common.gpsSatelitalAutonomo">GPS Satelital Autónomo</span></div>
-        <div class="sos-gps-coords" id="sosGpsDisplay"><span data-i18n="pages.aliados.sosGpsDisplay.div1">Obteniendo coordenadas satelitales...</span></div>
+        <div class="sos-gps-badge"><i class="fa-solid fa-satellite-dish"></i> <span>GPS del dispositivo (requiere permiso)</span></div>
+        <div class="sos-gps-coords" id="sosGpsDisplay"><span>Ubicación pendiente de autorización…</span></div>
         <small data-i18n="pages.aliados.sosModal.small1" style="color: #94A3B8;">Funciona con el chip GNSS de tu dispositivo, sin necesidad de saldo.</small>
       </div>
       <div class="sos-emergency-buttons">
@@ -912,30 +693,28 @@
             maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
           }).addTo(map);
 
-          // Pines de Aliados
-          const aliadosPins = [
-            { name: "Coop. Cañón de Somoto", lat: 13.4833, lng: -86.5833, color: "#4A7A5A" },
-            { name: "Posada La Abuela", lat: 12.9167, lng: -85.8333, color: "#4A7A5A" },
-            { name: "Arenas Beach Hotel", lat: 12.3556, lng: -87.0319, color: "#0284C7" },
-            { name: "Baqueanos Cerro Negro", lat: 12.5061, lng: -86.7022, color: "#F65E01" },
-            { name: "Finca Magdalena", lat: 11.5206, lng: -85.5700, color: "#4A7A5A" },
-            { name: "San Simián Eco-Lodge", lat: 11.5400, lng: -85.6200, color: "#4A7A5A" },
-            { name: "Morgan's Rock", lat: 11.2700, lng: -85.9000, color: "#0284C7" },
-            { name: "Hola Ola Eco-Hostal", lat: 11.4500, lng: -86.1000, color: "#0284C7" },
-            { name: "Feel at Home Campestre", lat: 11.9700, lng: -86.0900, color: "#F65E01" },
-            { name: "Sohla Rooftop Granada", lat: 11.9344, lng: -85.9560, color: "#165D6F" }
-          ];
-
-          aliadosPins.forEach(function (a) {
-            L.circleMarker([a.lat, a.lng], {
-              radius: 8,
-              fillColor: a.color,
-              color: '#FFFFFF',
-              weight: 2,
-              opacity: 1,
-              fillOpacity: 0.95
-            }).addTo(map).bindPopup(`<strong>${a.name}</strong><br><span style="color:#4A7A5A;font-weight:700;">Aliado Verificado</span>`);
-          });
+          // Mostrar solo negocios publicados con coordenadas válidas desde Supabase.
+          // El directorio avisa cuando finaliza la carga de registros.
+          const allyLayer = L.layerGroup().addTo(map);
+          const redrawAllyMap = function () {
+            allyLayer.clearLayers();
+            const locations = window.BaqueanoAllies && window.BaqueanoAllies.getMapPoints
+              ? window.BaqueanoAllies.getMapPoints() : [];
+            locations.forEach(function (place) {
+              const popup = document.createElement('div');
+              const heading = document.createElement('strong');
+              heading.textContent = place.name;
+              const status = document.createElement('div');
+              status.textContent = place.seal;
+              popup.append(heading, status);
+              L.circleMarker([place.lat, place.lng], {
+                radius: 8, fillColor: '#165D6F', color: '#FFFFFF',
+                weight: 2, opacity: 1, fillOpacity: 0.95
+              }).addTo(allyLayer).bindPopup(popup);
+            });
+          };
+          document.addEventListener('baqueano:alliesRendered', redrawAllyMap);
+          redrawAllyMap();
 
           setTimeout(() => map.invalidateSize(), 300);
         } catch (e) {
@@ -943,53 +722,28 @@
         }
       }
 
-      // 2. Filtros de la Barra
-      const filterDepto = document.getElementById('filterDepto');
-      const filterCat = document.getElementById('filterCat');
-      const btnFilter = document.getElementById('btnFilterAliados');
-      const cards = document.querySelectorAll('.aliado-card-exact');
+      // 2. Los filtros del catálogo dinámico están implementados en allies-directory.js.
 
-      function filterCards() {
-        const dVal = filterDepto ? filterDepto.value.toLowerCase() : '';
-        const cVal = filterCat ? filterCat.value.toLowerCase() : '';
-
-        cards.forEach(card => {
-          const cDept = (card.getAttribute('data-dept') || '').toLowerCase();
-          const cCat = (card.getAttribute('data-cat') || '').toLowerCase();
-
-          const matchDept = !dVal || cDept.includes(dVal);
-          const matchCat = !cVal || cCat.includes(cVal);
-
-          if (matchDept && matchCat) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      }
-
-      if (btnFilter) btnFilter.addEventListener('click', filterCards);
-      if (filterDepto) filterDepto.addEventListener('change', filterCards);
-      if (filterCat) filterCat.addEventListener('change', filterCards);
-
-      // Botón Cerca de mí
+      // El orden real depende de la ubicación autorizada y de las coordenadas publicadas.
       const btnNear = document.getElementById('btnAliadosNearMe');
       if (btnNear) {
         btnNear.addEventListener('click', function () {
-          if (navigator.geolocation) {
-            btnNear.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Localizando...';
-            navigator.geolocation.getCurrentPosition(
-              function () {
-                btnNear.innerHTML = '<i class="fa-solid fa-check"></i> Ordenado por cercanía';
-                btnNear.style.background = '#DCFCE7';
-                btnNear.style.borderColor = '#86EFAC';
-              },
-              function () {
-                alert('No se pudo obtener la geolocalización. Mostrando aliados de todo el país.');
-                btnNear.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> Cerca de mí';
-              }
-            );
+          if (!navigator.geolocation || !window.BaqueanoAllies) {
+            alert('No se puede activar el orden por cercanía en este dispositivo.');
+            return;
           }
+          btnNear.textContent = 'Localizando…';
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              const didSort = window.BaqueanoAllies.sortNear(position.coords.latitude, position.coords.longitude);
+              btnNear.textContent = didSort ? 'Ordenado por cercanía' : 'Cerca de mí';
+            },
+            function () {
+              btnNear.textContent = 'Cerca de mí';
+              alert('No se pudo obtener tu ubicación. El orden del directorio no cambió.');
+            },
+            { enableHighAccuracy: false, timeout: 12000, maximumAge: 60000 }
+          );
         });
       }
 
@@ -1068,10 +822,13 @@
             },
             () => {
               const d = document.getElementById('sosGpsDisplay');
-              if (d) d.textContent = "12.5061° N, 86.7022° W (Referencia Nacional)";
+              if (d) d.textContent = "GPS no disponible o permiso denegado. Consultá emergencias directamente.";
             },
-            { enableHighAccuracy: true, timeout: 5000 }
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
           );
+        } else {
+          const d = document.getElementById('sosGpsDisplay');
+          if (d) d.textContent = "Este dispositivo no permite obtener la ubicación. Contactá emergencias directamente.";
         }
       }
     }
