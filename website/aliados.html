@@ -228,7 +228,7 @@
           <i class="fa-solid fa-shield-check"></i>
           <select data-i18n-aria-label="pages.aliados.filterVerif.selectAriaLabel1" class="aliados-filter-select" id="filterVerif" aria-label="Filtrar por verificación">
             <option data-i18n="pages.aliados.filterVerif.option1" value="todos">Verificados: Todos</option>
-            <option data-i18n="pages.aliados.filterVerif.option2" value="auditados">100% Auditados en campo</option>
+            <option value="auditados">Verificados según registro</option>
           </select>
         </div>
 
@@ -291,43 +291,12 @@
         <!-- Derecha: Aliados cercanos y verificados -->
         <div class="aliados-nearby-box">
           <div class="aliados-nearby-head">
-            <h4><i class="fa-solid fa-location-arrow"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.h41">Aliados cercanos y verificados</span></h4>
+            <h4><i class="fa-solid fa-location-arrow"></i> <span>Aliados con ubicación publicada</span></h4>
             <a data-i18n="pages.aliados.aliadosMapSplitSection.a2" href="mapa.html" class="aliados-nearby-link">Ver en el mapa &rarr;</a>
           </div>
 
           <div class="aliados-nearby-list">
-            <!-- 1. Coop. Cañón de Somoto -->
-            <div class="aliado-nearby-item">
-              <img data-i18n-alt="pages.aliados.aliadoCardExact.h31" loading="lazy" decoding="async" src="assets/images/destinos/canon_de_somoto.jpg" alt="Coop. Cañón de Somoto" class="aliado-nearby-img" width="399" height="501">
-              <div class="aliado-nearby-info">
-                <div id="aliadoNearbyName1" data-i18n="pages.aliados.aliadoCardExact.h31" class="aliado-nearby-name">Coop. Cañón de Somoto</div>
-                <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> Somoto, Madriz</div>
-                <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.div1">~ 12 km · Verificado</span></div>
-              </div>
-              <a href="departamento.html?id=madriz" class="aliado-nearby-arrow" aria-labelledby="aliadoNearbyName1"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-            </div>
-
-            <!-- 2. Posada Ecológica La Abuela -->
-            <div class="aliado-nearby-item">
-              <img data-i18n-alt="pages.aliados.aliadosMapSplitSection.imgAlt1" loading="lazy" decoding="async" src="assets/images/destinos/Posada Rural San Ramón Ometepe.avif" alt="Posada La Abuela" class="aliado-nearby-img">
-              <div class="aliado-nearby-info">
-                <div id="aliadoNearbyName2" data-i18n="pages.aliados.aliadoCardExact.h32" class="aliado-nearby-name">Posada Ecológica La Abuela</div>
-                <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> San Ramón, Matagalpa</div>
-                <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.div2">~ 35 km · Verificado</span></div>
-              </div>
-              <a href="departamento.html?id=matagalpa" class="aliado-nearby-arrow" aria-labelledby="aliadoNearbyName2"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-            </div>
-
-            <!-- 3. Sohla Rooftop Granada -->
-            <div class="aliado-nearby-item">
-              <img data-i18n-alt="pages.aliados.aliadosMapSplitSection.imgAlt2" loading="lazy" decoding="async" src="assets/images/destinos/Calle La Calzada & Zona Bohemia.jpg" alt="Sohla Rooftop" class="aliado-nearby-img" width="401" height="498">
-              <div class="aliado-nearby-info">
-                <div id="aliadoNearbyName3" data-i18n="pages.aliados.aliadoCardExact.h310" class="aliado-nearby-name">Sohla Rooftop Granada</div>
-                <div class="aliado-nearby-loc"><i class="fa-solid fa-location-dot"></i> Granada</div>
-                <div class="aliado-nearby-tag"><i class="fa-solid fa-shield-check"></i> <span data-i18n="pages.aliados.aliadosMapSplitSection.div3">~ 48 km · Verificado</span></div>
-              </div>
-              <a href="departamento.html?id=granada" class="aliado-nearby-arrow" aria-labelledby="aliadoNearbyName3"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-            </div>
+            <p class="aliado-nearby-info" role="status">Consultá el mapa para ver los aliados con coordenadas registradas. Para ordenar el directorio por cercanía, utilizá «Cerca de mí» y autorizá tu ubicación.</p>
           </div>
         </div>
       </div>
@@ -724,30 +693,28 @@
             maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
           }).addTo(map);
 
-          // Pines de Aliados
-          const aliadosPins = [
-            { name: "Coop. Cañón de Somoto", lat: 13.4833, lng: -86.5833, color: "#4A7A5A" },
-            { name: "Posada La Abuela", lat: 12.9167, lng: -85.8333, color: "#4A7A5A" },
-            { name: "Arenas Beach Hotel", lat: 12.3556, lng: -87.0319, color: "#0284C7" },
-            { name: "Baqueanos Cerro Negro", lat: 12.5061, lng: -86.7022, color: "#F65E01" },
-            { name: "Finca Magdalena", lat: 11.5206, lng: -85.5700, color: "#4A7A5A" },
-            { name: "San Simián Eco-Lodge", lat: 11.5400, lng: -85.6200, color: "#4A7A5A" },
-            { name: "Morgan's Rock", lat: 11.2700, lng: -85.9000, color: "#0284C7" },
-            { name: "Hola Ola Eco-Hostal", lat: 11.4500, lng: -86.1000, color: "#0284C7" },
-            { name: "Feel at Home Campestre", lat: 11.9700, lng: -86.0900, color: "#F65E01" },
-            { name: "Sohla Rooftop Granada", lat: 11.9344, lng: -85.9560, color: "#165D6F" }
-          ];
-
-          aliadosPins.forEach(function (a) {
-            L.circleMarker([a.lat, a.lng], {
-              radius: 8,
-              fillColor: a.color,
-              color: '#FFFFFF',
-              weight: 2,
-              opacity: 1,
-              fillOpacity: 0.95
-            }).addTo(map).bindPopup(`<strong>${a.name}</strong><br><span style="color:#4A7A5A;font-weight:700;">Aliado Verificado</span>`);
-          });
+          // Mostrar solo negocios publicados con coordenadas válidas desde Supabase.
+          // El directorio avisa cuando finaliza la carga de registros.
+          const allyLayer = L.layerGroup().addTo(map);
+          const redrawAllyMap = function () {
+            allyLayer.clearLayers();
+            const locations = window.BaqueanoAllies && window.BaqueanoAllies.getMapPoints
+              ? window.BaqueanoAllies.getMapPoints() : [];
+            locations.forEach(function (place) {
+              const popup = document.createElement('div');
+              const heading = document.createElement('strong');
+              heading.textContent = place.name;
+              const status = document.createElement('div');
+              status.textContent = place.seal;
+              popup.append(heading, status);
+              L.circleMarker([place.lat, place.lng], {
+                radius: 8, fillColor: '#165D6F', color: '#FFFFFF',
+                weight: 2, opacity: 1, fillOpacity: 0.95
+              }).addTo(allyLayer).bindPopup(popup);
+            });
+          };
+          document.addEventListener('baqueano:alliesRendered', redrawAllyMap);
+          redrawAllyMap();
 
           setTimeout(() => map.invalidateSize(), 300);
         } catch (e) {
@@ -755,53 +722,28 @@
         }
       }
 
-      // 2. Filtros de la Barra
-      const filterDepto = document.getElementById('filterDepto');
-      const filterCat = document.getElementById('filterCat');
-      const btnFilter = document.getElementById('btnFilterAliados');
-      const cards = document.querySelectorAll('.aliado-card-exact');
+      // 2. Los filtros del catálogo dinámico están implementados en allies-directory.js.
 
-      function filterCards() {
-        const dVal = filterDepto ? filterDepto.value.toLowerCase() : '';
-        const cVal = filterCat ? filterCat.value.toLowerCase() : '';
-
-        cards.forEach(card => {
-          const cDept = (card.getAttribute('data-dept') || '').toLowerCase();
-          const cCat = (card.getAttribute('data-cat') || '').toLowerCase();
-
-          const matchDept = !dVal || cDept.includes(dVal);
-          const matchCat = !cVal || cCat.includes(cVal);
-
-          if (matchDept && matchCat) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      }
-
-      if (btnFilter) btnFilter.addEventListener('click', filterCards);
-      if (filterDepto) filterDepto.addEventListener('change', filterCards);
-      if (filterCat) filterCat.addEventListener('change', filterCards);
-
-      // Botón Cerca de mí
+      // El orden real depende de la ubicación autorizada y de las coordenadas publicadas.
       const btnNear = document.getElementById('btnAliadosNearMe');
       if (btnNear) {
         btnNear.addEventListener('click', function () {
-          if (navigator.geolocation) {
-            btnNear.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Localizando...';
-            navigator.geolocation.getCurrentPosition(
-              function () {
-                btnNear.innerHTML = '<i class="fa-solid fa-check"></i> Ordenado por cercanía';
-                btnNear.style.background = '#DCFCE7';
-                btnNear.style.borderColor = '#86EFAC';
-              },
-              function () {
-                alert('No se pudo obtener la geolocalización. Mostrando aliados de todo el país.');
-                btnNear.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> Cerca de mí';
-              }
-            );
+          if (!navigator.geolocation || !window.BaqueanoAllies) {
+            alert('No se puede activar el orden por cercanía en este dispositivo.');
+            return;
           }
+          btnNear.textContent = 'Localizando…';
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              const didSort = window.BaqueanoAllies.sortNear(position.coords.latitude, position.coords.longitude);
+              btnNear.textContent = didSort ? 'Ordenado por cercanía' : 'Cerca de mí';
+            },
+            function () {
+              btnNear.textContent = 'Cerca de mí';
+              alert('No se pudo obtener tu ubicación. El orden del directorio no cambió.');
+            },
+            { enableHighAccuracy: false, timeout: 12000, maximumAge: 60000 }
+          );
         });
       }
 
