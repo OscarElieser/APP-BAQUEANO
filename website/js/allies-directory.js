@@ -106,7 +106,7 @@
     }).filter(Boolean);
   }
   function sortNear(lat, lng) {
-    if (!Number.isFinite(Number(lat)) || !Number.isFinite(Number(lng))) return false;
+    if (!Number.isFinite(Number(lat)) || !Number.isFinite(Number(lng)) || !publishedMapPoints().length) return false;
     state.userLocation = { lat: Number(lat), lng: Number(lng) };
     state.shown = PAGE;
     render();
