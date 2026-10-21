@@ -21,7 +21,7 @@ export function cleanText(value: unknown, max: number, opts: { required?: boolea
   if (typeof value !== "string") throw new HttpError(400, `${opts.label} no es texto.`, `${opts.code}_invalid`);
   const text = value.normalize("NFC")
     .replace(/[\u0000-\u0009\u000B-\u001F\u007F]/g, " ")
-    .replace(/[​-‏‪-‮⁦-⁩]/g, "")
+    .replace(/[\u200b-\u200f\u202a-\u202e\u2066-\u2069]/g, "")
     .replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim();
   if (!text) {
     if (opts.required) throw new HttpError(400, `Falta ${opts.label}.`, `${opts.code}_required`);

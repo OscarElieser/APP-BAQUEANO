@@ -28,7 +28,7 @@ const DEPARTMENTS: Array<[string, RegExp, string]> = [
   ["rivas", /\brivas\b|\bsan juan del sur\b|\bometepe\b/, "Rivas"],
 ];
 
-function norm(text: string) { return text.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); }
+function norm(text: string) { return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
 
 export function isEventsQuestion(text: string): boolean {
   const t = norm(text);

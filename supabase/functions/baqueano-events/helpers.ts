@@ -22,7 +22,7 @@ const MODALITIES = ["presencial", "virtual", "hibrido"];
 const ACCESS = ["free", "paid", "unconfirmed"];
 
 export function slugify(text: string): string {
-  return text.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
     .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 90).replace(/-+$/g, "");
 }
 
@@ -52,7 +52,7 @@ function text(v: unknown, max: number, label: string, opts: { required?: boolean
   }
   if (typeof v !== "string") throw new HttpError(400, `${label} no es texto.`, "field_invalid");
   const clean = v.normalize("NFC").replace(/[\u0000-\u0009\u000B-\u001F\u007F]/g, " ")
-    .replace(/[​-‏‪-‮⁦-⁩]/g, "").replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim();
+    .replace(/[\u200b-\u200f\u202a-\u202e\u2066-\u2069]/g, "").replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim();
   if (!clean) {
     if (opts.required) throw new HttpError(400, `Falta ${label}.`, "field_required");
     return null;
