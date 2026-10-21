@@ -1,0 +1,134 @@
+/* ============================================================================
+ * 🗓️ BAQUEANO — AGENDA DE EVENTOS (bq-events.css)
+ * 🎯 POR QUÉ: «¡Nicaragua está de fiesta!» tiene que verse parte original de BAQUEANO:
+ *   colores oficiales (naranja #F65E01, petróleo #165D6F, verde #4A7A5A, azul #0D1B2A),
+ *   tarjetas consistentes, fecha y hora siempre legibles, sin desplazamiento horizontal.
+ * ⚙️ CÓMO: tokens bq-ev-*; el naranja de texto/botón es #C2410C (contraste AA sobre blanco);
+ *   carrusel con scroll-snap (táctil + flechas); objetivos de 44 px; sin animación si se reduce.
+ * 📦 QUÉ: sección del index, página eventos.html y ficha evento.html (js/bq-events.js).
+ * ============================================================================ */
+:root {
+  --ev-orange: #F65E01; --ev-cta: #C2410C; --ev-teal: #165D6F; --ev-green: #4A7A5A; --ev-navy: #0D1B2A;
+  --ev-ink: #0F172A; --ev-muted: #475569; --ev-line: #E2E8F0; --ev-card: #FFFFFF; --ev-soft: #F8FAFC;
+}
+
+/* ---------------------------------------------------------------- sección del index */
+.bq-events-section { padding: 52px 0 44px; background: var(--ev-card); }
+.bq-events-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 24px; margin-bottom: 22px; }
+.bq-events-head > div { min-width: 0; max-width: 62ch; }
+.bq-events-eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 6px; color: var(--ev-cta); font: 800 0.76rem/1 'League Spartan', system-ui, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; }
+.bq-events-eyebrow::before { content: ''; width: 22px; height: 3px; border-radius: 3px; background: var(--ev-orange); }
+.bq-events-title { margin: 0 0 6px; color: var(--ev-navy); font: 900 clamp(1.6rem, 3.2vw, 2.25rem)/1.1 'League Spartan', system-ui, sans-serif; text-wrap: balance; }
+.bq-events-sub { margin: 0; color: var(--ev-muted); font-size: 0.98rem; line-height: 1.55; }
+.bq-events-tools { display: flex; align-items: center; gap: 8px; }
+.bq-events-arrow { display: inline-grid; place-items: center; width: 44px; height: 44px; border: 1px solid #CBD5E1; border-radius: 50%; background: var(--ev-card); color: var(--ev-navy); cursor: pointer; }
+.bq-events-arrow:disabled { opacity: 0.35; cursor: default; }
+.bq-events-all { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 999px; background: var(--ev-teal); color: #FFFFFF !important; font: 800 0.88rem/1 'League Spartan', system-ui, sans-serif; text-decoration: none; }
+.bq-events-arrow:focus-visible, .bq-events-all:focus-visible, .bq-ev-btn:focus-visible, .bq-ev-title a:focus-visible, .bq-ev-chip:focus-visible, .bq-ev-track:focus-visible { outline: 3px solid var(--ev-ink); outline-offset: 2px; }
+
+.bq-ev-track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 40px) / 3.15); gap: 20px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; padding: 4px 2px 14px; scrollbar-width: thin; }
+.bq-ev-track > * { scroll-snap-align: start; }
+.bq-ev-track.is-empty { grid-auto-flow: row; grid-auto-columns: auto; overflow: visible; }
+@media (min-width: 1200px) { .bq-ev-track { grid-auto-columns: calc((100% - 60px) / 3.6); } }
+@media (max-width: 900px) { .bq-ev-track { grid-auto-columns: calc((100% - 20px) / 1.9); } }
+@media (max-width: 600px) {
+  .bq-ev-track { grid-auto-columns: 86%; gap: 14px; }
+  .bq-events-arrow { display: none; }
+  .bq-events-section { padding: 40px 0 32px; }
+}
+
+/* ---------------------------------------------------------------- tarjeta */
+.bq-ev-card { display: grid; grid-template-rows: auto 1fr; min-width: 0; overflow: hidden; border: 1px solid var(--ev-line); border-radius: 18px; background: var(--ev-card); box-shadow: 0 10px 28px rgba(13, 27, 42, 0.08); }
+.bq-ev-card.is-skeleton { min-height: 420px; background: linear-gradient(100deg, #F1F5F9 30%, #E2E8F0 50%, #F1F5F9 70%) 0 0 / 300% 100%; animation: bqEvShimmer 1.4s linear infinite; }
+@keyframes bqEvShimmer { to { background-position: -150% 0; } }
+.bq-ev-card.is-cancelled .bq-ev-media img, .bq-ev-card.is-finished .bq-ev-media img { filter: grayscale(0.8); }
+.bq-ev-media { position: relative; display: block; aspect-ratio: 16 / 10; max-width: 100%; background: linear-gradient(135deg, var(--ev-teal), var(--ev-navy)); overflow: hidden; }
+.bq-ev-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+.bq-ev-card:hover .bq-ev-media img { transform: scale(1.04); }
+.bq-ev-date { position: absolute; left: 12px; top: 12px; display: grid; justify-items: center; min-width: 58px; padding: 6px 8px 7px; border-radius: 14px; background: var(--ev-card); color: var(--ev-navy); box-shadow: 0 6px 16px rgba(13, 27, 42, 0.2); font-variant-numeric: tabular-nums; }
+.bq-ev-date b { font: 900 1.65rem/1 'League Spartan', system-ui, sans-serif; color: var(--ev-cta); }
+.bq-ev-date span { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
+.bq-ev-state, .bq-ev-featured { position: absolute; right: 12px; top: 12px; padding: 5px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; background: var(--ev-card); color: var(--ev-ink); }
+.bq-ev-featured { top: auto; bottom: 12px; background: var(--ev-orange); color: #1A0A00; }
+.bq-ev-state.is-today, .bq-ev-state.is-ongoing { background: #DCFCE7; color: #14532D; }
+.bq-ev-state.is-cancelled { background: #FEE2E2; color: #7F1D1D; }
+.bq-ev-state.is-rescheduled, .bq-ev-state.is-postponed { background: #FEF3C7; color: #78350F; }
+.bq-ev-state.is-finished { background: #E2E8F0; color: #334155; }
+.bq-ev-state.is-upcoming { background: #E0F2F1; color: var(--ev-teal); }
+.bq-ev-body { display: grid; align-content: start; gap: 8px; padding: 16px 18px 18px; min-width: 0; }
+.bq-ev-cat { display: inline-flex; align-items: center; gap: 6px; color: var(--ev-green); font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+.bq-ev-title { margin: 0; font: 800 1.12rem/1.25 'League Spartan', system-ui, sans-serif; color: var(--ev-navy); overflow-wrap: anywhere; }
+.bq-ev-title a { color: inherit; text-decoration: none; }
+.bq-ev-title a:hover { text-decoration: underline; }
+.bq-ev-meta { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; color: var(--ev-ink); font-size: 0.86rem; }
+.bq-ev-meta li { display: grid; grid-template-columns: 18px 1fr; align-items: start; gap: 6px; }
+.bq-ev-meta i { color: var(--ev-teal); margin-top: 3px; }
+.bq-ev-note { color: #78350F; font-weight: 700; }
+.bq-ev-note { display: block !important; }
+.bq-ev-desc { margin: 0; color: var(--ev-muted); font-size: 0.86rem; line-height: 1.5; }
+.bq-ev-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.bq-ev-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 16px; border: 2px solid var(--ev-cta); border-radius: 12px; background: var(--ev-cta); color: #FFFFFF !important; font: 800 0.86rem/1.1 'League Spartan', system-ui, sans-serif; text-decoration: none; cursor: pointer; }
+.bq-ev-btn.is-ghost { background: var(--ev-card); color: var(--ev-teal) !important; border-color: var(--ev-teal); }
+.bq-ev-btn:disabled { opacity: 0.6; }
+
+.bq-ev-empty { display: grid; justify-items: center; gap: 12px; padding: 40px 20px; border: 1px dashed #CBD5E1; border-radius: 18px; background: var(--ev-soft); text-align: center; color: var(--ev-muted); }
+.bq-ev-empty i { font-size: 2.2rem; color: var(--ev-orange); }
+.bq-ev-empty p, .bq-ev-empty h1 { margin: 0; max-width: 46ch; font-size: 1rem; font-weight: 700; color: var(--ev-ink); }
+.bq-ev-empty h1 { font: 900 1.5rem/1.2 'League Spartan', system-ui, sans-serif; }
+
+/* ---------------------------------------------------------------- página de la agenda */
+.bq-ev-page { max-width: 1240px; margin: 0 auto; padding-block: 28px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); box-sizing: border-box; color: var(--ev-ink); }
+.bq-ev-page-head { display: grid; gap: 6px; margin-bottom: 20px; }
+.bq-ev-filters { display: grid; grid-template-columns: auto repeat(4, minmax(0, 1fr)) auto; align-items: end; gap: 12px; padding: 16px; margin-bottom: 14px; border: 1px solid var(--ev-line); border-radius: 16px; background: var(--ev-soft); }
+.bq-ev-field { display: grid; gap: 4px; min-width: 0; }
+.bq-ev-field label { font-size: 0.78rem; font-weight: 800; color: var(--ev-ink); }
+.bq-ev-field select, .bq-ev-field input { min-height: 44px; width: 100%; box-sizing: border-box; padding: 8px 10px; border: 1px solid #94A3B8; border-radius: 10px; background: var(--ev-card); color: var(--ev-ink); font: inherit; }
+.bq-ev-scope { display: flex; gap: 6px; }
+.bq-ev-chip { min-height: 44px; padding: 8px 14px; border: 1px solid #94A3B8; border-radius: 999px; background: var(--ev-card); color: var(--ev-ink); font-weight: 800; cursor: pointer; }
+.bq-ev-chip[aria-pressed="true"] { background: var(--ev-teal); border-color: var(--ev-teal); color: #FFFFFF; }
+.bq-ev-link { min-height: 44px; border: 0; background: none; color: var(--ev-teal); font-weight: 800; text-decoration: underline; cursor: pointer; }
+.bq-ev-count { margin: 0 0 12px; color: var(--ev-muted); font-weight: 700; font-size: 0.9rem; }
+.bq-ev-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 20px; }
+.bq-ev-grid > .bq-ev-empty { grid-column: 1 / -1; }
+.bq-ev-more { display: flex; margin: 22px auto 0; }
+@media (max-width: 1000px) { .bq-ev-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); } .bq-ev-scope { grid-column: 1 / -1; } }
+@media (max-width: 520px) { .bq-ev-filters { grid-template-columns: 1fr; } }
+
+/* ---------------------------------------------------------------- ficha del evento */
+.bq-ev-loading { padding: 60px 0; text-align: center; color: var(--ev-muted); }
+.bq-ev-detail { display: grid; gap: 18px; max-width: 920px; margin: 0 auto; }
+.bq-ev-hero { position: relative; display: grid; align-items: end; min-height: 260px; overflow: hidden; border-radius: 22px; background: linear-gradient(135deg, var(--ev-teal), var(--ev-navy)); }
+.bq-ev-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.bq-ev-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,27,42,0) 30%, rgba(13,27,42,0.9) 100%); }
+.bq-ev-credit { position: absolute; right: 10px; top: 10px; z-index: 2; padding: 3px 8px; border-radius: 999px; background: rgba(13,27,42,0.8); color: #F4E6C1; font-size: 0.7rem; }
+.bq-ev-hero-text { position: relative; z-index: 1; display: grid; gap: 10px; padding: 26px; }
+.bq-ev-hero-text .bq-ev-cat { color: #BBF7D0; }
+.bq-ev-hero-text .bq-ev-state { position: static; }
+.bq-ev-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.bq-ev-h1 { margin: 0; color: #FFFFFF; font: 900 clamp(1.7rem, 4vw, 2.6rem)/1.08 'League Spartan', system-ui, sans-serif; text-wrap: balance; overflow-wrap: anywhere; }
+.bq-ev-alert { padding: 14px 16px; border-radius: 14px; font-weight: 700; }
+.bq-ev-alert p { margin: 6px 0 0; font-weight: 500; }
+.bq-ev-alert.is-cancelled { background: #FEE2E2; color: #7F1D1D; }
+.bq-ev-alert.is-rescheduled, .bq-ev-alert.is-postponed { background: #FEF3C7; color: #78350F; }
+.bq-ev-facts { display: grid; grid-template-columns: minmax(120px, 170px) 1fr; gap: 10px 18px; margin: 0; padding: 18px; border: 1px solid var(--ev-line); border-radius: 16px; background: var(--ev-soft); font-variant-numeric: tabular-nums; }
+.bq-ev-facts dt { font-weight: 800; color: var(--ev-teal); }
+.bq-ev-facts dd { margin: 0; color: var(--ev-ink); overflow-wrap: anywhere; }
+.bq-ev-actions.is-detail { margin: 0; }
+.bq-ev-langnote, .bq-ev-small { margin: 0; color: var(--ev-muted); font-size: 0.85rem; }
+.bq-ev-section h2 { margin: 0 0 8px; color: var(--ev-navy); font: 800 1.2rem/1.25 'League Spartan', system-ui, sans-serif; }
+.bq-ev-section h2 i { color: var(--ev-orange); }
+.bq-ev-section p { margin: 0; line-height: 1.65; white-space: pre-line; max-width: 72ch; }
+.bq-ev-program { margin: 0; padding-left: 1.3rem; display: grid; gap: 6px; }
+.bq-ev-program strong { color: var(--ev-teal); font-variant-numeric: tabular-nums; }
+.bq-ev-links { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 8px; }
+.bq-ev-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--ev-teal); font-weight: 800; }
+@media (max-width: 560px) {
+  .bq-ev-facts { grid-template-columns: 1fr; }
+  .bq-ev-facts dd { margin-bottom: 6px; }
+  .bq-ev-hero-text { padding: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bq-ev-card.is-skeleton { animation: none; }
+  .bq-ev-media img { transition: none; }
+  .bq-ev-card:hover .bq-ev-media img { transform: none; }
+}

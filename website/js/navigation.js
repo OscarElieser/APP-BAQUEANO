@@ -69,7 +69,9 @@ const BQ_MENU_GROUPS = [
         ['gastronomia.html', 'fa-solid fa-utensils', 'gastronomy', 'Gastronomía', 'Platos, bebidas y tradiciones'],
         ['musica.html', 'fa-solid fa-music', 'music', 'Música', 'Archivo sonoro, artistas e instrumentos'],
         ['ambiental.html', 'fa-solid fa-leaf', 'environmental', 'Ambiental', 'Áreas protegidas y buenas prácticas'],
-        ['cronicas.html', 'fa-regular fa-newspaper', 'chronicles', 'Crónicas', 'Relatos y reportajes de Nicaragua']
+        ['cronicas.html', 'fa-regular fa-newspaper', 'chronicles', 'Crónicas', 'Relatos y reportajes de Nicaragua'],
+        // 2026-10-20 — Agenda BAQUEANO: eventos reales publicados desde el Ops Center.
+        ['eventos.html', 'fa-regular fa-calendar-days', 'events', 'Agenda de eventos', 'Ferias, festivales y actividades', ['evento.html']]
       ] }
     ]
   },

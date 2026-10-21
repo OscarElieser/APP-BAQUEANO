@@ -204,6 +204,11 @@
             <span data-i18n="menu.platformReviews" class="ops-nav-item-label">Opiniones BAQUEANO</span>
             <span class="ops-nav-badge" id="badgeCount-37" style="display:none;">0</span>
           </a>
+          <a class="ops-nav-item" data-tab="46-eventos">
+            <i class="fa-solid fa-calendar-days ops-nav-item-icon"></i>
+            <span data-i18n="opsEvents.navLabel" class="ops-nav-item-label">Gestión de eventos</span>
+            <span class="ops-nav-badge" id="badgeCount-46" style="display:none;">0</span>
+          </a>
           <a class="ops-nav-item" data-tab="45-resenas-lugares">
             <i class="fa-solid fa-map-location-dot ops-nav-item-icon"></i>
             <span data-i18n="opsPlaceReviews.navLabel" class="ops-nav-item-label">Reseñas turísticas</span>
@@ -953,6 +958,10 @@
         <section class="ops-view-panel" id="view-37-opiniones">
           <div class="ops-view-header"><h1><i class="fa-solid fa-star"></i> <span data-i18n="menu.platformReviews">Opiniones BAQUEANO</span></h1></div>
           <div class="ops-empty-state"><i class="fa-solid fa-star ops-empty-icon"></i><div data-i18n="menu.platformReviews" class="ops-empty-title">Opiniones BAQUEANO</div><div data-i18n="menu.platformReviewsDesc" class="ops-empty-desc">Calificá tu experiencia con la plataforma</div></div>
+        </section>
+        <section class="ops-view-panel" id="view-46-eventos">
+          <div class="ops-view-header"><h1><i class="fa-solid fa-calendar-days"></i> <span data-i18n="opsEvents.navLabel">Gestión de eventos</span></h1></div>
+          <div class="ops-empty-state"><i class="fa-solid fa-calendar-days ops-empty-icon"></i><div data-i18n="opsEvents.navLabel" class="ops-empty-title">Gestión de eventos</div><div data-i18n="opsEvents.desc" class="ops-empty-desc">Crear, revisar, publicar, reprogramar o cancelar los eventos de la Agenda BAQUEANO.</div></div>
         </section>
         <section class="ops-view-panel" id="view-45-resenas-lugares">
           <div class="ops-view-header"><h1><i class="fa-solid fa-map-location-dot"></i> <span data-i18n="opsPlaceReviews.navLabel">Reseñas turísticas</span></h1></div>
@@ -2730,7 +2739,7 @@
   <script src="js/shared/roles.js?v=20261005-rbac-1"></script>
     <!-- Catálogo operativo y mock data real de respaldo para cero listas vacías -->
   <script src="js/ops-center/ops-mock-data.js?v=20261008-1"></script>
-  <script src="js/ops-center/ops-engine.js?v=20261020-resenas-1"></script>
+  <script src="js/ops-center/ops-engine.js?v=20261020-agenda-1"></script>
   <script src="js/ops-center/ops-live-data.js?v=20261014-contacto-1"></script>
   <script src="js/ops-center/ops-ia-copilot.js?v=20261005-ops2-1"></script>
   <!-- Moderación de la comunidad: cliente de la Edge Function + vista 36. -->
@@ -2739,6 +2748,7 @@
   <!-- Opiniones sobre BAQUEANO: moderación vía Edge Function baqueano-reviews (vista 37). -->
   <script defer src="js/ops-center/ops-platform-reviews.js?v=20261006-1"></script>
   <script defer src="js/ops-center/ops-place-reviews.js?v=20261020-resenas-1"></script>
+  <script defer src="js/ops-center/ops-events.js?v=20261020-agenda-1"></script>
   <!-- Buzón real: contacto, solicitudes de negocios y denuncias (Edge Function baqueano-intake, vista 38). -->
   <script defer src="js/ops-center/ops-intake-inbox.js?v=20261006-1"></script>
   <script defer src="js/ops-center/ops-live-presence.js?v=20261009-utf8-1"></script>

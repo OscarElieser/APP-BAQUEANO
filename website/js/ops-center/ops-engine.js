@@ -1854,6 +1854,13 @@ const SITE_PAGES_REGISTRY = {
       title: 'Gestión de reseñas turísticas',
       icon: 'fa-map-location-dot',
       roleRequired: 'admin'
+    },
+    // 46: Agenda BAQUEANO (Edge Function baqueano-events, tabla events). Lo pinta js/ops-center/ops-events.js.
+    '46-eventos': {
+      isSystem: true,
+      title: 'Gestión de eventos',
+      icon: 'fa-calendar-days',
+      roleRequired: 'admin'
     }
   };
 
@@ -4350,6 +4357,10 @@ const SITE_PAGES_REGISTRY = {
       }
       if (tabId === '38-buzon') {
         if (window.BaqueanoOpsInbox) return window.BaqueanoOpsInbox.render(panel);
+        return;
+      }
+      if (tabId === '46-eventos') {
+        if (window.BaqueanoOpsEvents) return window.BaqueanoOpsEvents.render(panel);
         return;
       }
       if (tabId === '45-resenas-lugares') {

@@ -1,11 +1,11 @@
 {
  "summary": {
-  "generatedAt": "2026-10-20T22:57:55.737Z",
+  "generatedAt": "2026-10-21T02:43:27.833Z",
   "dir": "dist-hostinger",
-  "pages": 37,
+  "pages": 39,
   "critical": 0,
   "warnings": 72,
-  "sitemapUrls": 28
+  "sitemapUrls": 30
  },
  "seo": [
   {
@@ -195,6 +195,32 @@
    "title": "Destinos de Nicaragua | Baqueano Nicaragua",
    "description": "Explora los destinos naturales, playas, volcanes y patrimonio cultural de Nicaragua.",
    "canonical": "https://baqueanonicaragua.com/destinos.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 9,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "evento.html",
+   "title": "Evento | Agenda BAQUEANO",
+   "description": "Fecha, horario, lugar, programa y cómo llegar a un evento de la Agenda BAQUEANO en Nicaragua.",
+   "canonical": "https://baqueanonicaragua.com/evento.html",
+   "og": true,
+   "twitter": true,
+   "jsonLd": 1,
+   "hreflang": 9,
+   "indexable": true,
+   "lang": "es",
+   "sitemap": true
+  },
+  {
+   "page": "eventos.html",
+   "title": "Agenda de eventos en Nicaragua | Baqueano Nicaragua",
+   "description": "Ferias, festivales, conciertos, tradiciones y experiencias en Nicaragua: fechas, horarios y lugares confirmados por sus organizadores.",
+   "canonical": "https://baqueanonicaragua.com/eventos.html",
    "og": true,
    "twitter": true,
    "jsonLd": 1,

@@ -18,13 +18,27 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
-## 🗓️ AGENDA BAQUEANO — PEDIDO RECIBIDO (20-10-2026, 16:43) — pendiente, rama feat/agenda-eventos
+## 🚀 PUBLICACIÓN AUTORIZADA (20-10-2026, 20:43)
+- *"Entonces subis todo a main"* (después de preguntar por qué no veía los cambios: todo estaba en ramas y la vista previa de Cloudflare falla en ramas).
+- Se fusiona a `main`: navegación interna (#10), mapa preciso y estrellas reales (#12) y Agenda BAQUEANO.
+- Base de datos y Edge Functions esperan que el propietario corra el SQL. Sin eso, la web muestra estados vacíos honestos.
+
+## 🗓️ AGENDA BAQUEANO — «¡NICARAGUA ESTÁ DE FIESTA!» (20-10-2026, 16:43–21:00) — rama feat/agenda-eventos
 - **Solicitud:** documento «Próximos eventos en Nicaragua».
-  - Sección «¡Nicaragua está de fiesta!» (AGENDA BAQUEANO) justo antes del bloque «Explorá Nicaragua en el mapa» + BAQÜI en el index.
-  - Ficha de evento, «Gestión de eventos» en el Ops Center con Supabase, .ics, Mi Viaje, «Cómo llegar» interno, BAQÜI, 8 idiomas, pruebas.
-  - Sin eventos ficticios y sin publicar sin autorización.
-- **Revisado:** Supabase ya tiene `events` (29 columnas) y `festivals`, las dos vacías: se amplían en vez de crear tablas nuevas.
-- **16:55:** *"RECUERDA SUBIR TODO A GITHUB"*. Cada rama se sube a GitHub; producción sigue sin tocarse.
+  - Sección justo antes de «Explorá Nicaragua en el mapa» + BAQÜI.
+  - Ficha de evento, «Gestión de eventos» en el Ops Center con Supabase, .ics, Mi Viaje, «Cómo llegar» interno y BAQÜI.
+  - 8 idiomas, sin eventos ficticios.
+- **Hecho:**
+  - `public.events` ampliada (existía vacía): migración 20261020150000, función `baqueano-events`.
+  - `js/bq-events.js` + `css/bq-events.css`; páginas `eventos.html` y `evento.html`.
+  - Ops Center pestaña 46; intención «eventos» en BAQÜI (`baqueano-ai/events-answer.ts`).
+  - Menú, sitemap y buscador; 97 claves en 8 idiomas.
+- **Pruebas:**
+  - SQL 15/15 (local; falla sin migración).
+  - Deno 5/5 + 4/4.
+  - Navegador 32/32 (orden antes del mapa en computadora y celular, estado vacío, filtros, .ics, Mi Viaje sin duplicar, idioma).
+- **Informe:** `docs/AGENDA-EVENTOS.md`.
+- **16:55:** *"RECUERDA SUBIR TODO A GITHUB"*.
 
 ## ⭐ MAPA PRECISO, ESTRELLAS REALES Y FICHA POR LUGAR (20-10-2026, 16:16–17:10) — rama feat/mapa-resenas
 - **Solicitud:** prompt «Mapa turístico inteligente, navegación GPS y reseñas reales», con tres prioridades: ubicación precisa, opiniones auténticas y RLS. Un único sistema para /mapa, /destinos y la ficha.

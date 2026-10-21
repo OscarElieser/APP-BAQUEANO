@@ -49,6 +49,7 @@
   <link rel="stylesheet" href="css/pages/index.css?v=20260927-center-framed-14">
   <link rel="stylesheet" href="css/demo-hackathon.css?v=20260927-1">
   <link rel="stylesheet" href="css/pages/index-exact.css?v=20261015-marca-1">
+  <link rel="stylesheet" href="css/bq-events.css?v=20261020-agenda-1">
   <link rel="stylesheet" href="css/pages/index-destinos-editorial.css?v=20260930-1">
   <link rel="stylesheet" href="css/pages/tres-pilares.css?v=20261003-postales-1">
   <link rel="stylesheet" href="css/vivir-carousel.css?v=20261014-vivir-1">
@@ -847,6 +848,30 @@
     </section>
 
     <!-- ============================================================================
+         AGENDA BAQUEANO (20-10-2026): próximos eventos reales, justo antes del mapa y BAQÜI.
+         Los publica el equipo desde el Ops Center (Supabase, tabla events); js/bq-events.js
+         los carga cuando la sección se acerca a la pantalla. Sin eventos: estado vacío, nunca ejemplos.
+         ============================================================================ -->
+    <section class="bq-events-section" id="agendaEventos" data-bq-events-home aria-labelledby="agendaEventosTitle">
+      <div class="exact-container">
+        <div class="bq-events-head">
+          <div>
+            <p class="bq-events-eyebrow" data-i18n="events.home.eyebrow">Agenda BAQUEANO</p>
+            <h2 class="bq-events-title" id="agendaEventosTitle" data-i18n="events.home.title">¡Nicaragua está de fiesta!</h2>
+            <p class="bq-events-sub" data-i18n="events.home.subtitle">Descubrí los próximos eventos, festivales, ferias y experiencias que se viven en cada rincón de nuestro país.</p>
+          </div>
+          <div class="bq-events-tools">
+            <button type="button" class="bq-events-arrow" data-ev-prev data-i18n-aria-label="events.prev" aria-label="Eventos anteriores" hidden><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+            <button type="button" class="bq-events-arrow" data-ev-next data-i18n-aria-label="events.next" aria-label="Más eventos" hidden><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+            <a class="bq-events-all" href="eventos.html"><span data-i18n="events.allEvents">Ver todos los eventos</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="bq-ev-track" data-ev-track tabindex="0" role="region" data-i18n-aria-label="events.trackAria" aria-label="Próximos eventos en Nicaragua"></div>
+        <p class="bq-sr-only" data-ev-status role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ============================================================================
          SECCIÓN 4: SPLIT 2-COLUMNAS (MAPA INTERACTIVO + BAQUEANO DIGITAL - IMAGEN 4)
          ============================================================================ -->
     <section class="map-ai-section-exact" id="mapaAiSection">
@@ -1578,6 +1603,8 @@
 <script defer src="js/community-api.js?v=20261004-1"></script>
 <script defer src="js/home-community.js?v=20261004-galeria-1"></script>
 <script defer src="js/category-strip-marquee.js?v=20261007-1"></script>
+  <!-- Agenda BAQUEANO: próximos eventos publicados (Edge Function baqueano-events). -->
+  <script defer src="js/bq-events.js?v=20261020-agenda-1"></script>
 </body>
 
 </html>

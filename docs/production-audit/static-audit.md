@@ -5,7 +5,7 @@
 -->
 # Auditoría estática de la salida publicada
 
-Generado: 2026-10-20T22:57:55.737Z · Páginas: 37 · URLs en sitemap: 28 · **Críticos: 0** · Advertencias: 72
+Generado: 2026-10-21T02:43:27.833Z · Páginas: 39 · URLs en sitemap: 30 · **Críticos: 0** · Advertencias: 72
 
 ## SEO por página
 
@@ -26,6 +26,8 @@ Generado: 2026-10-20T22:57:55.737Z · Páginas: 37 · URLs en sitemap: 28 · **C
 | descargar.html | Descargar BAQUEANO para Android \| App oficial | 141 car. | /descargar.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | destino.html | Ficha de Destino \| Baqueano Nicaragua | 112 car. | /destino.html | ✅ | ✅ | 1 | 9 | ✅ | ❌ |
 | destinos.html | Destinos de Nicaragua \| Baqueano Nicaragua | 84 car. | /destinos.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| evento.html | Evento \| Agenda BAQUEANO | 93 car. | /evento.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
+| eventos.html | Agenda de eventos en Nicaragua \| Baqueano Nicaragua | 134 car. | /eventos.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | experiencias.html | Experiencias de Aventura & Cultura \| Baqueano Nicaragua | 141 car. | /experiencias.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |
 | favoritos.html | Mis Favoritos \| BAQUEANO Nicaragua | 77 car. | /favoritos.html | ✅ | ✅ | 1 | 9 | ✅ | ❌ |
 | gastronomia.html | Gastronomía Ancestral de los Hijos del Maíz \| Baqueano Nicar | 142 car. | /gastronomia.html | ✅ | ✅ | 1 | 9 | ✅ | ✅ |

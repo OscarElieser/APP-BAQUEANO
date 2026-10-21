@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-20T22:49:50.640Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6409 · en 6409 · fr 6409 · it 6409 · pt 6409 · de 6409 · ko 6409 · zh 6409
+Generado: 2026-10-21T02:44:18.797Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6506 · en 6506 · fr 6506 · it 6506 · pt 6506 · de 6506 · ko 6506 · zh 6506
 
-HTML: 4425/4426 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
+HTML: 4444/4445 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -139,7 +139,7 @@ HTML: 4425/4426 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/territory-carousel.js | js | 1 | 0 | 1 | 0 % |
 | js/territory-media-experience.js | js | 1 | 0 | 1 | 0 % |
 | 404.html | html | 25 | 25 | 0 | 100 % |
-| admin.html | html | 732 | 732 | 0 | 100 % |
+| admin.html | html | 736 | 736 | 0 | 100 % |
 | aliados.html | html | 189 | 189 | 0 | 100 % |
 | ambiental.html | html | 131 | 131 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -170,11 +170,13 @@ HTML: 4425/4426 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | descargar.html | html | 33 | 33 | 0 | 100 % |
 | destino.html | html | 18 | 18 | 0 | 100 % |
 | destinos.html | html | 148 | 148 | 0 | 100 % |
+| evento.html | html | 3 | 3 | 0 | 100 % |
+| eventos.html | html | 5 | 5 | 0 | 100 % |
 | experiencias.html | html | 157 | 157 | 0 | 100 % |
 | favoritos.html | html | 8 | 8 | 0 | 100 % |
 | gastronomia.html | html | 205 | 205 | 0 | 100 % |
 | historia.html | html | 184 | 184 | 0 | 100 % |
-| index.html | html | 242 | 242 | 0 | 100 % |
+| index.html | html | 249 | 249 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
 | js/allies-directory.js | js | 0 | 0 | 0 | 100 % |
 | js/ambiental-report-handoff.js | js | 0 | 0 | 0 | 100 % |
@@ -193,6 +195,7 @@ HTML: 4425/4426 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/baqueano-traffic-tracker.js | js | 0 | 0 | 0 | 100 % |
 | js/baqueano-trip-store.js | js | 0 | 0 | 0 | 100 % |
 | js/baqui-brain.js | js | 0 | 0 | 0 | 100 % |
+| js/bq-events.js | js | 0 | 0 | 0 | 100 % |
 | js/bq-marquee.js | js | 0 | 0 | 0 | 100 % |
 | js/bq-navigator.js | js | 0 | 0 | 0 | 100 % |
 | js/bq-reviews.js | js | 0 | 0 | 0 | 100 % |
@@ -231,6 +234,7 @@ HTML: 4425/4426 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/ops-center/ops-automation.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-businesses.js | js | 36 | 36 | 0 | 100 % |
 | js/ops-center/ops-community-moderation.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-events.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-guides.js | js | 13 | 13 | 0 | 100 % |
 | js/ops-center/ops-intake-inbox.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-live-presence.js | js | 0 | 0 | 0 | 100 % |

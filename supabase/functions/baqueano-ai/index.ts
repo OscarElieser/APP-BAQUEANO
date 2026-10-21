@@ -34,6 +34,8 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "@supabase/supabase-js";
 import { BaqueanoKnowledgeService } from "../_shared/baqueano-knowledge.ts";
 import { BAQUI_SYSTEM_PROMPT } from "../_shared/baqui-persona.ts";
+// 2026-10-20 — Agenda BAQUEANO: BAQÜI responde con eventos publicados reales (nunca inventados).
+import { buildEventsAnswer, isEventsQuestion } from "./events-answer.ts";
 
 const BCN_RATE = 36.6243;
 const GROUNDED_MODEL = "gemini-3.5-flash-lite";
@@ -296,7 +298,7 @@ function normalizeIntentText(value: unknown): string {
   return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 }
 
-function conversationIntent(prompt: string): "greeting" | "farewell" | "thanks" | "help" | "impact" | "planning" | "tourism" {
+function conversationIntent(prompt: string): "greeting" | "farewell" | "thanks" | "help" | "impact" | "events" | "planning" | "tourism" {
   const text = normalizeIntentText(prompt);
   const words = text.split(/\s+/).filter(Boolean);
   if (words.length <= 8 && /^(hola|buenas|buenos dias|buenas tardes|buenas noches|hey|saludos|que tal)[!.? ]*$/.test(text)) return "greeting";
@@ -306,6 +308,8 @@ function conversationIntent(prompt: string): "greeting" | "farewell" | "thanks" 
   // BAQUEANO IMPACTO: preguntas sobre el aporte de la plataforma al país (no sobre un destino).
   if (/\b(baqueano|baqui|plataforma|app|aplicacion)\b/.test(text)
     && /\b(contribu\w*|aport\w*|impacto|alinea\w*|desarrollo (turistico|territorial|comunitario)|plan nacional|pnlcp|pndh|intur|economia creativa|estrategia nacional|politica\w* public\w*|prioridades nacionales)\b/.test(text)) return "impact";
+  // Agenda: «¿qué eventos hay este fin de semana en León?» → tabla events (solo publicados).
+  if (isEventsQuestion(prompt) && !/\b(itinerario|planifica\w*|arma\w* (una |la )?ruta)\b/.test(text)) return "events";
   if (/\b(itinerario|planifica|planificar|ruta|viaje|vacaciones|dias|noches|presupuesto|viajeros|hospedaje|quedarme|recorrido)\b/.test(text)) return "planning";
   return "tourism";
 }
@@ -567,6 +571,23 @@ Deno.serve(async (req: Request) => {
         sources: impact.sources.map((src) => ({label: src.label, url: src.url, type: "official"})),
         sourcePolicy: {internalFirst: true, internalSufficient: impact.status === "impact_grounded", externalUsed: false, officialVsContribution: true},
         countryCode, currentLanguage, actions: []
+      }, null, 2), {status: 200, headers: CORS_HEADERS});
+    }
+    if (intent === "events") {
+      const events = await buildEventsAnswer(supabase, prompt, currentLanguage);
+      await logExchange(supabase, {
+        sessionKey, language: currentLanguage, channel, provider: "baqueano-events",
+        userContent: prompt, assistantContent: events.message, latencyMs: Date.now() - startedAt,
+        sources: [{source_type: "internal_database", entity_type: "events", entity_id: null, title: "Agenda BAQUEANO (Supabase, eventos publicados)"}],
+      });
+      return new Response(JSON.stringify({
+        success: true, ok: true, type: "conversation", intent, message: events.message,
+        provider: "baqueano-events", groundingStatus: events.status,
+        events: events.events.map((e) => ({slug: e.slug, title: e.title, start_at: e.start_at, time_confirmed: e.time_confirmed, location_name: e.location_name, department_id: e.department_id, url: `/evento.html?e=${e.slug}`})),
+        sources: [{label: "Agenda BAQUEANO", url: "https://baqueanonicaragua.com/eventos.html", type: "internal"}],
+        sourcePolicy: {internalFirst: true, internalSufficient: true, externalUsed: false},
+        countryCode, currentLanguage,
+        actions: [{type: "open_url", label: "Ver la agenda", url: "/eventos.html"}]
       }, null, 2), {status: 200, headers: CORS_HEADERS});
     }
     if (intent !== "planning") {

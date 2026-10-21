@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+🗓️ BAQUEANO — FICHA DE EVENTO (evento.html)
+============================================================================
+🎯 POR QUÉ: pedido del propietario (2026-10-20): agenda turística y cultural con eventos reales de
+  Nicaragua que el equipo publica desde el Ops Center, sin tocar código ni volver a desplegar.
+⚙️ CÓMO: js/bq-events.js lee la Edge Function baqueano-events (solo eventos aprobados y
+  publicados; estados y fechas en hora de Nicaragua). Menú y pie: js/navigation.js.
+  «Cómo llegar» usa el navegador interno (js/bq-navigator.js, cargado por global-injector).
+📦 QUÉ: evento.html (ficha de un evento: evento.html?e=<slug>). Textos con data-i18n en los 8 idiomas (events.*).
+============================================================================
+-->
+<html lang="es" data-i18n-title="events.meta.eventTitle" data-i18n-description="events.meta.eventDescription" data-bq-page="eventos" data-bq-group="cultura">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Evento | Agenda BAQUEANO</title>
+  <meta name="description" content="Fecha, horario, lugar, programa y cómo llegar a un evento de la Agenda BAQUEANO en Nicaragua.">
+  <link rel="canonical" href="https://baqueanonicaragua.com/evento">
+  <meta property="og:title" content="Evento | Agenda BAQUEANO">
+  <meta property="og:description" content="Fecha, horario, lugar, programa y cómo llegar a un evento de la Agenda BAQUEANO en Nicaragua.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=League+Spartan:wght@600;700;800;900&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css?v=20261003-mag-1">
+  <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
+  <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
+  <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261009-a11y-4">
+  <link rel="stylesheet" href="css/bq-events.css?v=20261020-agenda-1">
+  <meta name="theme-color" content="#165D6F">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+<body class="page-eventos">
+  <nav class="main-navbar-exact main-navbar" id="mainNavbar" aria-label="Navegación principal">
+    <div class="exact-container nav-inner">
+      <a href="index.html" class="exact-nav-brand navbar-brand-pill">
+        <img src="assets/images/LOGOS/baqueano_icono_500x386-blanco.png" alt="Baqueano" class="exact-nav-logo navbar-brand-logo" decoding="async" width="500" height="386">
+        <div class="exact-nav-brand-text">
+          <span class="exact-nav-title">BAQUEANO</span>
+          <span class="exact-nav-tagline">NICARAGUA AUTÉNTICA</span>
+        </div>
+      </a>
+      <div class="exact-nav-menu nav-links-menu" id="navLinksMenu"></div>
+      <div class="exact-nav-actions global-nav-actions"></div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="bq-ev-page">
+    <p><a class="bq-ev-link" href="eventos.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> <span data-i18n="events.backToAgenda">Volver a la agenda</span></a></p>
+    <div data-bq-events-detail>
+      <p class="bq-ev-loading" data-i18n="events.loadingOne">Cargando el evento…</p>
+    </div>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="js/navigation.js?v=20261015-planes-1"></script>
+  <script src="js/baqueano-trip-store.js?v=20261009-1"></script>
+  <script src="js/global-injector.js"></script>
+  <script defer src="js/bq-events.js?v=20261020-agenda-1"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T22:49:50.640Z",
+  "generatedAt": "2026-10-21T02:44:18.797Z",
   "languages": [
     "es",
     "en",
@@ -11,23 +11,23 @@
     "zh"
   ],
   "keysPerLanguage": {
-    "es": 6409,
-    "en": 6409,
-    "fr": 6409,
-    "it": 6409,
-    "pt": 6409,
-    "de": 6409,
-    "ko": 6409,
-    "zh": 6409
+    "es": 6506,
+    "en": 6506,
+    "fr": 6506,
+    "it": 6506,
+    "pt": 6506,
+    "de": 6506,
+    "ko": 6506,
+    "zh": 6506
   },
   "html": {
-    "files": 37,
-    "total": 4426,
-    "translated": 4425,
+    "files": 39,
+    "total": 4445,
+    "translated": 4444,
     "untranslated": 1
   },
   "js": {
-    "files": 143,
+    "files": 145,
     "translated": 450,
     "untranslated": 648
   },
@@ -57,6 +57,8 @@
     "descargar.html",
     "destino.html",
     "destinos.html",
+    "evento.html",
+    "eventos.html",
     "experiencias.html",
     "favoritos.html",
     "gastronomia.html",
@@ -96,6 +98,7 @@
     "js/baqueano-traffic-tracker.js",
     "js/baqueano-trip-store.js",
     "js/baqui-brain.js",
+    "js/bq-events.js",
     "js/bq-marquee.js",
     "js/bq-navigator.js",
     "js/bq-reviews.js",
@@ -134,6 +137,7 @@
     "js/ops-center/ops-automation.js",
     "js/ops-center/ops-businesses.js",
     "js/ops-center/ops-community-moderation.js",
+    "js/ops-center/ops-events.js",
     "js/ops-center/ops-guides.js",
     "js/ops-center/ops-intake-inbox.js",
     "js/ops-center/ops-live-presence.js",
@@ -202,8 +206,8 @@
     {
       "file": "admin.html",
       "type": "html",
-      "total": 732,
-      "translated": 732,
+      "total": 736,
+      "translated": 736,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -326,6 +330,24 @@
       "coverage": 100
     },
     {
+      "file": "evento.html",
+      "type": "html",
+      "total": 3,
+      "translated": 3,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
+      "file": "eventos.html",
+      "type": "html",
+      "total": 5,
+      "translated": 5,
+      "untranslated": 0,
+      "legacyPhrase": 0,
+      "coverage": 100
+    },
+    {
       "file": "experiencias.html",
       "type": "html",
       "total": 157,
@@ -373,8 +395,8 @@
     {
       "file": "index.html",
       "type": "html",
-      "total": 242,
-      "translated": 242,
+      "total": 249,
+      "translated": 249,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -783,6 +805,15 @@
       "untranslated": 2,
       "editorialStrings": 0,
       "coverage": 0
+    },
+    {
+      "file": "js/bq-events.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/bq-marquee.js",
@@ -1404,6 +1435,15 @@
       "untranslated": 256,
       "editorialStrings": 0,
       "coverage": 30.6
+    },
+    {
+      "file": "js/ops-center/ops-events.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
     },
     {
       "file": "js/ops-center/ops-guides.js",
