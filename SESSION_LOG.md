@@ -18,6 +18,24 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## ⭐ RESEÑAS REALES ACTIVAS (20-10-2026, 21:39–21:50)
+- *"Ahora sí prueba"*. Los intentos anteriores no habían llegado a la base. Se republicó la página del SQL con el enlace directo al editor del proyecto `heiudfpthqwtjrtluqlm`.
+- **Verificado en producción:**
+  - `reviews` pasó de 11 a 30 columnas.
+  - `review_target_aliases` tiene 8 alias; existen `review_events` y `review_reports`.
+  - 5 funciones y 1 trigger.
+  - 0 políticas en `reviews`: se cerró la lectura pública que exponía `user_uid`.
+  - `anon` no tiene SELECT directo.
+- **RPC como anon:**
+  - `place_review_summaries` devuelve count 0 y average null (nunca un 5 por defecto).
+  - `destination:granada` no se resuelve (es ambiguo), como corresponde.
+- **`baqueano-place-reviews` v1 ACTIVA.** Prueba real:
+  - `summary` y `list` responden `ok`.
+  - `submit` y `mod_list` sin sesión dan 401 `login_required`.
+  - Un token falso da 401 `session_expired`.
+  - Un destino inválido da 400.
+- Pendiente opcional: bloque 3 (respaldo + vaciar las 7 calificaciones sin respaldo de `destinations`).
+
 ## 🛰️ DESPLIEGUE DE FUNCIONES (20-10-2026, 21:18–21:40)
 - *"Listo ya lo hice el segundo bloque no lo pegue"*. El propietario corrió el bloque 1 de los SQL. El bloque 2 eran las pruebas, que son opcionales.
 - **Agenda aplicada en producción.** Verificado por consulta:
