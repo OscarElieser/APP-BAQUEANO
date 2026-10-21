@@ -21,6 +21,9 @@
 --    tarea cron "baqueano-automation-hourly".
 -- ============================================================================
 create extension if not exists pg_cron;
+-- La función de ejecución usa extensions.http_response: en producción `http` ya estaba instalada
+-- (schema extensions); en una base nueva hay que crearla aquí.
+create extension if not exists http with schema extensions;
 
 create table if not exists public.automation_runs (
   id bigint generated always as identity primary key,

@@ -55,7 +55,11 @@ create or replace trigger trg_municipalities_geom before insert or update of lat
 comment on table public.municipalities is 'Municipios oficiales de Nicaragua (153). Fuente de verdad territorial; las demás entidades referencian municipality_id.';
 comment on column public.municipalities.location_precision is 'verified = coordenada comprobada; approximate = centro aproximado del inventario del portal; missing = sin coordenada (no se inventa).';
 
-insert into public.municipalities (id, department_id, name, latitude, longitude, location_precision)
+-- Carga en tabla temporal: si un municipio ya existe con otro id (semillero 013, ids «mun_*»,
+-- nunca aplicado en producción), se le asigna el id oficial en lugar de duplicarlo. No se borra nada.
+create temp table _bq_municipalities (id text, department_id text, name text, latitude double precision,
+  longitude double precision, location_precision text) on commit drop;
+insert into _bq_municipalities (id, department_id, name, latitude, longitude, location_precision)
 values
   ('madriz__somoto', 'madriz', 'Somoto', 13.4833, -86.5833, 'approximate'),
   ('madriz__yalaguina', 'madriz', 'Yalagüina', 13.4833, -86.5, 'approximate'),
@@ -209,7 +213,21 @@ values
   ('chinandega__santo_tomas_del_norte', 'chinandega', 'Santo Tomás del Norte', null, null, 'missing'),
   ('chinandega__cinco_pinos', 'chinandega', 'Cinco Pinos', null, null, 'missing'),
   ('chinandega__san_francisco_del_norte', 'chinandega', 'San Francisco del Norte', null, null, 'missing'),
-  ('chinandega__san_pedro_del_norte', 'chinandega', 'San Pedro del Norte', null, null, 'missing')
+  ('chinandega__san_pedro_del_norte', 'chinandega', 'San Pedro del Norte', null, null, 'missing');
+
+update public.municipalities m
+set id = t.id,
+    latitude = coalesce(m.latitude, t.latitude),
+    longitude = coalesce(m.longitude, t.longitude),
+    location_precision = case when m.latitude is null then t.location_precision else m.location_precision end
+from _bq_municipalities t
+where m.department_id = t.department_id and m.name = t.name and m.id <> t.id
+  and not exists (select 1 from public.municipalities x where x.id = t.id);
+
+insert into public.municipalities (id, department_id, name, latitude, longitude, location_precision)
+select t.id, t.department_id, t.name, t.latitude, t.longitude, t.location_precision
+from _bq_municipalities t
+where not exists (select 1 from public.municipalities m where m.department_id = t.department_id and m.name = t.name)
 on conflict (id) do nothing;
 
 update public.municipalities

@@ -1,0 +1,89 @@
+# ============================================================================
+# 🛡️ BAQUEANO — PUERTA DE CALIDAD Y SEGURIDAD EN CADA PR (puerta-calidad.yml)
+# ============================================================================
+# 🎯 POR QUÉ (propietario, 2026-10-21): «Qué hacemos para que no tenga fallas ni problemas de
+#   seguridad, hay que blindar eso». Hasta hoy las validaciones del sitio solo corrían después de
+#   llegar a main (deploy-production.yml) y la revisión de Supabase también: los errores se
+#   descubrían ya publicados.
+# ⚙️ CÓMO: tres trabajos independientes, en cada PR hacia main y en cada push a main:
+#   1. Seguridad: credenciales, clave de servidor en cliente, RLS, search_path y palabra vetada.
+#   2. Sitio web: i18n en 8 idiomas, paridad web → app, regla de territorios y pruebas de funciones.
+#   3. Base de datos: todas las migraciones aplicadas desde cero sobre Postgres de Supabase.
+# 📦 QUÉ: si alguno falla, el PR queda en rojo antes de publicar nada.
+# ============================================================================
+name: 🛡️ Puerta de calidad y seguridad
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: puerta-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  seguridad:
+    name: 🔐 Seguridad del código
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Pruebas de la puerta de seguridad
+        run: node --test tools/security-guard.test.mjs
+      - name: Puerta de seguridad (sin hallazgos nuevos)
+        run: node tools/security-guard.mjs
+
+  sitio:
+    name: 🌐 Sitio web y funciones
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Puerta i18n (8 idiomas, claves existentes, sin texto nuevo sin traducir)
+        working-directory: website
+        run: node scripts/validate-i18n.mjs && node scripts/i18n-audit.mjs
+      - name: Glosario coreano/chino
+        working-directory: website
+        run: node scripts/i18n-cjk-glossary.test.mjs
+      - name: Paridad Web → APK (8 idiomas)
+        working-directory: website
+        run: node scripts/export-locales-for-app.mjs --check
+      - name: Paridad Web → APK (territorios y lugares)
+        working-directory: website
+        run: node scripts/export-territories-for-app.mjs --check
+      - name: Regla «Franja viva de lugares»
+        working-directory: website
+        run: node scripts/territory-places-rule.test.mjs
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Pruebas de las funciones de Supabase (Deno)
+        run: |
+          set -e
+          for t in supabase/functions/*/*.test.ts; do
+            dir="$(dirname "$t")"
+            cfg="$dir/deno.json"; [ -f "$cfg" ] || cfg="supabase/functions/baqueano-ai/deno.json"
+            echo "▶ $t"
+            deno test --allow-net=jsr.io --config "$cfg" "$t"
+          done
+
+  migraciones:
+    name: 🗄️ Migraciones desde cero
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Aplicar todas las migraciones sobre Postgres de Supabase
+        run: bash tools/ci/migrations-replay.sh

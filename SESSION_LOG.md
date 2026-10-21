@@ -18,6 +18,29 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🛡️ BLINDAJE: PUERTA DE CALIDAD Y SEGURIDAD EN CADA PR (21-10-2026, 06:35–08:00) — rama feat/blindaje-seguridad
+- **Solicitud:** *"Que hacemos para que no tenga fallas ni problemas de seguridad hay que blindar eso no cree"*; luego *"Ok hazlo te autorizo"*.
+- **Diagnóstico** (asesor de Supabase + GitHub):
+  - 32 tablas con RLS y sin políticas: correcto, quedan cerradas al cliente (solo servidor).
+  - Las funciones públicas son lecturas a propósito; los informes internos exigen permiso.
+  - `security_posture()` pública: se mantiene. La usa la revisión de producción con la clave pública y no expone datos, solo lo que cualquiera averigua probando. Riesgo aceptado y documentado.
+  - `main` sin protección, Dependabot apagado: los activa el propietario (sin permiso desde aquí).
+  - Las validaciones del sitio y la revisión de Supabase solo corrían en main: los errores se veían ya publicados.
+- **Revisión de Supabase en rojo, causa real:** las migraciones no se podían aplicar desde cero. Se reprodujo localmente con la imagen oficial de Postgres de Supabase. Arreglos (ninguno cambia producción, donde esas migraciones ya corrieron o nunca corrieron):
+  - `013`: ids de departamento con guion (`nueva-segovia`, `rio-san-juan`) → los oficiales con guion bajo; tipos de emergencia en español → los del catálogo (`police`, `firefighters`, `red_cross`). 013 nunca corrió en producción.
+  - `20261005050000`: el ALTER POLICY de telemetría solo si la política existe.
+  - `20261005051000`: si un municipio ya existe con otro id (semillero 013), se le asigna el id oficial en lugar de duplicarlo. No se borra nada.
+  - `20261007220000`: crea la extensión `http` que su función usa (en producción ya estaba).
+  - `20261020120000`: los alias de reseñas solo para lugares que existen.
+  - Resultado: 87/87 migraciones desde cero. Con el 013 original la prueba falla con el mismo error que Supabase.
+- **Hecho:**
+  - `tools/security-guard.mjs` (+ 6 pruebas): claves privadas, `sb_secret_`, JWT `service_role`, cuentas de servicio, AWS, clave de servidor en web/app/APK, tablas sin RLS (117 revisadas), SECURITY DEFINER sin search_path (79 revisadas), palabra vetada. Trinquete en `security-guard-baseline.json`: solo quedan 11 menciones históricas (citas en esta bitácora, nombre de un disco de Azure, un valor CHECK ya existente en producción).
+  - La palabra vetada salió del Ops Center: clase `is-refined` (CSS y JS a la vez) y comentarios reescritos; admin.html v=20261021-blindaje-1.
+  - `tools/ci/migrations-replay.sh`: todas las migraciones desde cero en cada PR.
+  - `.github/workflows/puerta-calidad.yml`: en cada PR y en main → seguridad, i18n y paridad web→app, funciones Deno (24 pruebas) y migraciones desde cero.
+  - Migración `20261021030000_security_function_search_path.sql`: `plan_html_escape` con search_path fijo. Aplicada y verificada en producción (escapa igual).
+- **Pendiente del propietario:** proteger main, activar Dependabot y secret scanning, restringir la clave web de Firebase a los dominios, verificación en dos pasos, y desactivar o revisar las vistas previas de ramas en Cloudflare (no tengo acceso a sus registros).
+
 ## 🧭 «CÓMO LLEGAR» COMO GOOGLE MAPS, DENTRO DE BAQUEANO (21-10-2026, 05:36–07:10) — rama feat/mapa-como-llegar
 - **Solicitud:** *"cuando el usuario de clik en como llegar poner la ruta desde donde está… azul su punto de partida o ubicación actual y rojo el punto de llegada… cuánto tiempo le tocaría llegar si va en bus, carro, moto, helicóptero o avión (opcional)… bicicleta o si va a pies, e ir dirigiéndolo como hace Google maps. Pero siempre dentro de la plataforma web"*.
 - **Hecho** (`js/bq-navigator.js`, `css/bq-navigator.css`, global-injector v=20261021-ruta-1):

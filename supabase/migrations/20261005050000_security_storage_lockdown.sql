@@ -67,16 +67,24 @@ begin
 end $$;
 
 -- G-4 Telemetría: inserción pública acotada ---------------------------------
-alter policy "Permitir insercion de telemetria publica" on public.traffic_sessions
-  with check (
-    platform in ('web', 'android', 'ios')
-    and char_length(id) between 8 and 80
-    and (path is null or char_length(path) <= 300)
-    and (page is null or char_length(page) <= 200)
-    and (referrer is null or char_length(referrer) <= 500)
-    and (user_agent is null or char_length(user_agent) <= 400)
-    and (user_id is null or char_length(user_id) <= 128)
-  );
+-- Solo si la política existe: en una base nueva 20261003213000 ya la retiró
+-- (telemetría cerrada), y un ALTER sin ella hacía fallar la revisión de Supabase.
+do $$
+begin
+  if exists (select 1 from pg_policies where schemaname = 'public' and tablename = 'traffic_sessions'
+             and policyname = 'Permitir insercion de telemetria publica') then
+    execute $p$alter policy "Permitir insercion de telemetria publica" on public.traffic_sessions
+      with check (
+        platform in ('web', 'android', 'ios')
+        and char_length(id) between 8 and 80
+        and (path is null or char_length(path) <= 300)
+        and (page is null or char_length(page) <= 200)
+        and (referrer is null or char_length(referrer) <= 500)
+        and (user_agent is null or char_length(user_agent) <= 400)
+        and (user_id is null or char_length(user_id) <= 128)
+      )$p$;
+  end if;
+end $$;
 
 -- G-5 SOS: cierre explícito (antes implícito por RLS sin políticas) ---------
 do $$

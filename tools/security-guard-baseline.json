@@ -1,0 +1,8 @@
+{
+  "note": "Hallazgos previos a la puerta (2026-10-21). Solo pueden bajar.",
+  "counts": {
+    "palabra-prohibida|SESSION_LOG.md|": 9,
+    "palabra-prohibida|docs/deployment/AZURE_DEPLOYMENT.md|": 1,
+    "palabra-prohibida|supabase/migrations/012_comprehensive_cultural_and_ops_schema.sql|": 1
+  }
+}
