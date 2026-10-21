@@ -8157,7 +8157,10 @@
       "homeTitle": "Negocios destacados",
       "kicker": "Negocios locales con plan BAQUEANO",
       "more": "Ver ficha",
-      "yourBusiness": "¿Tenés un negocio? Conocé los planes"
+      "yourBusiness": "¿Tenés un negocio? Conocé los planes",
+      "homeEmpty": "Todavía no hay negocios destacados. Este espacio es para hospedajes, restaurantes y experiencias con plan Cumbre.",
+      "homeCta": "Quiero que mi negocio aparezca aquí",
+      "homeAll": "Ver todos los aliados"
     },
     "report": {
       "metric": "Indicador",
@@ -8182,6 +8185,51 @@
       "verification": "Sello BAQUEANO verificado",
       "video": "Video de presentación",
       "onboarding": "Armado de tu ficha (textos y fotos)"
+    },
+    "gallery": {
+      "statusActive": "Publicada",
+      "statusPending": "Pendiente de revisión",
+      "statusRejected": "Rechazada",
+      "uploadFailed": "No se pudo subir la foto. Intentá de nuevo.",
+      "title": "Fotos de la ficha",
+      "countUnlimited": "{n} fotos · sin límite en tu plan",
+      "noPlan": "Este negocio no tiene un plan vigente con galería.",
+      "count": "{n} de {limit} fotos",
+      "ownerHint": "Las fotos que subís las revisa el equipo antes de publicarlas en tu ficha.",
+      "reason": "Motivo: {reason}",
+      "approve": "Aprobar",
+      "approved": "Foto publicada en la ficha.",
+      "reject": "Rechazar",
+      "rejected": "Foto rechazada. El propietario ve el motivo.",
+      "makeFirst": "Poner primera",
+      "reordered": "Orden guardado.",
+      "remove": "Retirar",
+      "removed": "Foto retirada de la ficha.",
+      "empty": "Todavía no hay fotos en la ficha.",
+      "full": "Llegaste al límite de tu plan. Retirá una foto para subir otra.",
+      "reasonOptional": "Motivo (opcional)",
+      "reasonRequired": "Motivo (queda en el historial)",
+      "reasonLabel": "Motivo",
+      "confirm": "Confirmar",
+      "altPh": "Ej.: terraza con vista al volcán",
+      "file": "Foto (JPG, PNG o WebP, hasta 5 MB)",
+      "alt": "Qué se ve en la foto (para personas que usan lector de pantalla)",
+      "upload": "Subir foto",
+      "badType": "Subí una foto JPG, PNG o WebP.",
+      "tooBig": "La foto tiene que pesar menos de 5 MB.",
+      "uploadedLive": "Foto publicada en la ficha.",
+      "uploadedPending": "Foto subida. El equipo la revisa antes de publicarla.",
+      "videoTitle": "Video de presentación (Cumbre)",
+      "videoApproved": "Video publicado en la ficha.",
+      "videoRemoved": "Video retirado.",
+      "videoUrl": "Enlace de YouTube, Vimeo, Facebook, Instagram o TikTok",
+      "videoSave": "Guardar video",
+      "videoPending": "Video guardado. El equipo lo revisa antes de publicarlo.",
+      "loading": "Cargando fotos…",
+      "open": "Fotos de mi ficha",
+      "publicTitle": "Fotos del negocio",
+      "watchVideo": "Ver video de presentación",
+      "videoPh": "https://youtu.be/…"
     }
   },
   "opsPlans": {
@@ -8575,6 +8623,8 @@
     "intro": "Lo que el equipo debe entregar a cada negocio con plan vigente. Lo automático (destacados, orden, promoción, estadísticas, BAQUI) ya lo aplica el sistema; acá se registra lo que hacemos a mano, con su enlace como evidencia.",
     "loading": "Cargando compromisos…",
     "empty": "No hay planes pagados vigentes en este mes.",
-    "total": "Total del mes: {done} de {required} entregas · {n} negocios"
+    "total": "Total del mes: {done} de {required} entregas · {n} negocios",
+    "galleryPending": "Galería · {n} por revisar",
+    "gallery": "Galería de la ficha"
   }
 }

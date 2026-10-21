@@ -8157,7 +8157,10 @@
       "homeTitle": "Attività in evidenza",
       "kicker": "Attività locali con un piano BAQUEANO",
       "more": "Vedi scheda",
-      "yourBusiness": "Hai un'attività? Scopri i piani"
+      "yourBusiness": "Hai un'attività? Scopri i piani",
+      "homeEmpty": "Ancora nessuna attività in evidenza. Questo spazio è per alloggi, ristoranti ed esperienze con il piano Cumbre.",
+      "homeCta": "Voglio che la mia attività compaia qui",
+      "homeAll": "Vedi tutti i partner"
     },
     "report": {
       "metric": "Indicatore",
@@ -8182,6 +8185,51 @@
       "verification": "Sigillo BAQUEANO verificato",
       "video": "Video di presentazione",
       "onboarding": "Preparazione della tua scheda (testi e foto)"
+    },
+    "gallery": {
+      "statusActive": "Pubblicata",
+      "statusPending": "In attesa di revisione",
+      "statusRejected": "Rifiutata",
+      "uploadFailed": "Impossibile caricare la foto. Riprova.",
+      "title": "Foto della scheda",
+      "countUnlimited": "{n} foto · illimitate nel tuo piano",
+      "noPlan": "Questa attività non ha un piano attivo con galleria fotografica.",
+      "count": "{n} di {limit} foto",
+      "ownerHint": "Il team controlla le foto che carichi prima di pubblicarle nella tua scheda.",
+      "reason": "Motivo: {reason}",
+      "approve": "Approva",
+      "approved": "Foto pubblicata nella scheda.",
+      "reject": "Rifiuta",
+      "rejected": "Foto rifiutata. Il titolare vede il motivo.",
+      "makeFirst": "Metti per prima",
+      "reordered": "Ordine salvato.",
+      "remove": "Rimuovi",
+      "removed": "Foto rimossa dalla scheda.",
+      "empty": "Nessuna foto nella scheda per ora.",
+      "full": "Hai raggiunto il limite del tuo piano. Rimuovi una foto per caricarne un'altra.",
+      "reasonOptional": "Motivo (facoltativo)",
+      "reasonRequired": "Motivo (resta nella cronologia)",
+      "reasonLabel": "Motivo",
+      "confirm": "Conferma",
+      "altPh": "Es.: terrazza con vista sul vulcano",
+      "file": "Foto (JPG, PNG o WebP, fino a 5 MB)",
+      "alt": "Cosa mostra la foto (per chi usa un lettore di schermo)",
+      "upload": "Carica foto",
+      "badType": "Carica una foto JPG, PNG o WebP.",
+      "tooBig": "La foto deve pesare meno di 5 MB.",
+      "uploadedLive": "Foto pubblicata nella scheda.",
+      "uploadedPending": "Foto caricata. Il team la controlla prima di pubblicarla.",
+      "videoTitle": "Video di presentazione (Cumbre)",
+      "videoApproved": "Video pubblicato nella scheda.",
+      "videoRemoved": "Video rimosso.",
+      "videoUrl": "Link di YouTube, Vimeo, Facebook, Instagram o TikTok",
+      "videoSave": "Salva video",
+      "videoPending": "Video salvato. Il team lo controlla prima di pubblicarlo.",
+      "loading": "Caricamento delle foto…",
+      "open": "Foto della mia scheda",
+      "publicTitle": "Foto dell'attività",
+      "watchVideo": "Guarda il video di presentazione",
+      "videoPh": "https://youtu.be/…"
     }
   },
   "opsPlans": {
@@ -8575,6 +8623,8 @@
     "intro": "Ciò che il team deve consegnare a ogni attività con piano attivo. L'automatico (evidenze, ordine, promozione, statistiche, BAQUI) lo applica già il sistema; qui si registra ciò che facciamo a mano, con il link come prova.",
     "loading": "Caricamento degli impegni…",
     "empty": "Nessun piano pagato attivo in questo mese.",
-    "total": "Totale del mese: {done} di {required} consegne · {n} attività"
+    "total": "Totale del mese: {done} di {required} consegne · {n} attività",
+    "galleryPending": "Galleria · {n} da revisionare",
+    "gallery": "Galleria della scheda"
   }
 }

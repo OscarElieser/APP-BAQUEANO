@@ -8157,7 +8157,10 @@
       "homeTitle": "Établissements à la une",
       "kicker": "Établissements locaux avec un plan BAQUEANO",
       "more": "Voir la fiche",
-      "yourBusiness": "Vous avez un établissement ? Découvrez les plans"
+      "yourBusiness": "Vous avez un établissement ? Découvrez les plans",
+      "homeEmpty": "Pas encore de commerces mis en avant. Cet espace est réservé aux hébergements, restaurants et expériences avec la formule Cumbre.",
+      "homeCta": "Je veux que mon commerce apparaisse ici",
+      "homeAll": "Voir tous les partenaires"
     },
     "report": {
       "metric": "Indicateur",
@@ -8182,6 +8185,51 @@
       "verification": "Label BAQUEANO vérifié",
       "video": "Vidéo de présentation",
       "onboarding": "Création de votre fiche (textes et photos)"
+    },
+    "gallery": {
+      "statusActive": "Publiée",
+      "statusPending": "En attente de validation",
+      "statusRejected": "Refusée",
+      "uploadFailed": "La photo n'a pas pu être envoyée. Réessayez.",
+      "title": "Photos de la fiche",
+      "countUnlimited": "{n} photos · illimitées avec votre formule",
+      "noPlan": "Ce commerce n'a pas de formule en cours avec galerie photo.",
+      "count": "{n} sur {limit} photos",
+      "ownerHint": "L'équipe vérifie les photos que vous envoyez avant de les publier sur votre fiche.",
+      "reason": "Motif : {reason}",
+      "approve": "Approuver",
+      "approved": "Photo publiée sur la fiche.",
+      "reject": "Refuser",
+      "rejected": "Photo refusée. Le propriétaire voit le motif.",
+      "makeFirst": "Mettre en premier",
+      "reordered": "Ordre enregistré.",
+      "remove": "Retirer",
+      "removed": "Photo retirée de la fiche.",
+      "empty": "Pas encore de photos sur la fiche.",
+      "full": "Vous avez atteint la limite de votre formule. Retirez une photo pour en envoyer une autre.",
+      "reasonOptional": "Motif (facultatif)",
+      "reasonRequired": "Motif (conservé dans l'historique)",
+      "reasonLabel": "Motif",
+      "confirm": "Confirmer",
+      "altPh": "Ex. : terrasse avec vue sur le volcan",
+      "file": "Photo (JPG, PNG ou WebP, jusqu'à 5 Mo)",
+      "alt": "Ce que montre la photo (pour les personnes utilisant un lecteur d'écran)",
+      "upload": "Envoyer la photo",
+      "badType": "Envoyez une photo JPG, PNG ou WebP.",
+      "tooBig": "La photo doit peser moins de 5 Mo.",
+      "uploadedLive": "Photo publiée sur la fiche.",
+      "uploadedPending": "Photo envoyée. L'équipe la vérifie avant de la publier.",
+      "videoTitle": "Vidéo de présentation (Cumbre)",
+      "videoApproved": "Vidéo publiée sur la fiche.",
+      "videoRemoved": "Vidéo retirée.",
+      "videoUrl": "Lien YouTube, Vimeo, Facebook, Instagram ou TikTok",
+      "videoSave": "Enregistrer la vidéo",
+      "videoPending": "Vidéo enregistrée. L'équipe la vérifie avant de la publier.",
+      "loading": "Chargement des photos…",
+      "open": "Photos de ma fiche",
+      "publicTitle": "Photos du commerce",
+      "watchVideo": "Voir la vidéo de présentation",
+      "videoPh": "https://youtu.be/…"
     }
   },
   "opsPlans": {
@@ -8575,6 +8623,8 @@
     "intro": "Ce que l'équipe doit livrer à chaque commerce ayant une formule en cours. L'automatique (mises en avant, ordre, promotion, statistiques, BAQUI) est déjà appliqué par le système ; ici on enregistre ce qu'on fait à la main, avec son lien comme preuve.",
     "loading": "Chargement des engagements…",
     "empty": "Aucune formule payée en cours ce mois-ci.",
-    "total": "Total du mois : {done} sur {required} livraisons · {n} commerces"
+    "total": "Total du mois : {done} sur {required} livraisons · {n} commerces",
+    "galleryPending": "Galerie · {n} à vérifier",
+    "gallery": "Galerie de la fiche"
   }
 }

@@ -8157,7 +8157,10 @@
       "homeTitle": "Featured businesses",
       "kicker": "Local businesses with a BAQUEANO plan",
       "more": "View profile",
-      "yourBusiness": "Have a business? See the plans"
+      "yourBusiness": "Have a business? See the plans",
+      "homeEmpty": "No featured businesses yet. This space is for lodgings, restaurants and experiences with the Cumbre plan.",
+      "homeCta": "I want my business to appear here",
+      "homeAll": "See all partners"
     },
     "report": {
       "metric": "Indicator",
@@ -8182,6 +8185,51 @@
       "verification": "Verified BAQUEANO seal",
       "video": "Presentation video",
       "onboarding": "Setting up your listing (texts and photos)"
+    },
+    "gallery": {
+      "statusActive": "Published",
+      "statusPending": "Pending review",
+      "statusRejected": "Rejected",
+      "uploadFailed": "The photo could not be uploaded. Please try again.",
+      "title": "Listing photos",
+      "countUnlimited": "{n} photos · unlimited on your plan",
+      "noPlan": "This business has no active plan with a photo gallery.",
+      "count": "{n} of {limit} photos",
+      "ownerHint": "The team reviews the photos you upload before publishing them on your listing.",
+      "reason": "Reason: {reason}",
+      "approve": "Approve",
+      "approved": "Photo published on the listing.",
+      "reject": "Reject",
+      "rejected": "Photo rejected. The owner sees the reason.",
+      "makeFirst": "Make first",
+      "reordered": "Order saved.",
+      "remove": "Remove",
+      "removed": "Photo removed from the listing.",
+      "empty": "No photos on the listing yet.",
+      "full": "You reached your plan's limit. Remove a photo to upload another.",
+      "reasonOptional": "Reason (optional)",
+      "reasonRequired": "Reason (kept in the history)",
+      "reasonLabel": "Reason",
+      "confirm": "Confirm",
+      "altPh": "E.g.: terrace with a view of the volcano",
+      "file": "Photo (JPG, PNG or WebP, up to 5 MB)",
+      "alt": "What the photo shows (for people who use a screen reader)",
+      "upload": "Upload photo",
+      "badType": "Upload a JPG, PNG or WebP photo.",
+      "tooBig": "The photo must be under 5 MB.",
+      "uploadedLive": "Photo published on the listing.",
+      "uploadedPending": "Photo uploaded. The team reviews it before publishing.",
+      "videoTitle": "Presentation video (Cumbre)",
+      "videoApproved": "Video published on the listing.",
+      "videoRemoved": "Video removed.",
+      "videoUrl": "YouTube, Vimeo, Facebook, Instagram or TikTok link",
+      "videoSave": "Save video",
+      "videoPending": "Video saved. The team reviews it before publishing.",
+      "loading": "Loading photos…",
+      "open": "My listing photos",
+      "publicTitle": "Business photos",
+      "watchVideo": "Watch the presentation video",
+      "videoPh": "https://youtu.be/…"
     }
   },
   "opsPlans": {
@@ -8575,6 +8623,8 @@
     "intro": "What the team must deliver to each business with an active plan. Automatic items (featured spots, order, promotion, stats, BAQUI) are already applied by the system; here we record what we do by hand, with its link as evidence.",
     "loading": "Loading commitments…",
     "empty": "No paid plans are active this month.",
-    "total": "Month total: {done} of {required} deliveries · {n} businesses"
+    "total": "Month total: {done} of {required} deliveries · {n} businesses",
+    "galleryPending": "Gallery · {n} to review",
+    "gallery": "Listing gallery"
   }
 }

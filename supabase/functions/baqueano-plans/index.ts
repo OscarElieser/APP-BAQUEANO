@@ -21,6 +21,9 @@
 //   - Compromisos (2026-10-20): duties_list, duty_record y duty_void llevan el registro de lo que
 //     el equipo entrega a cada plan (redes, Crónica, pauta, informe, verificación, video, ficha);
 //     my_plans le muestra al propietario las reglas de su plan y lo entregado ese mes.
+//   - Galería (2026-10-21): media_* sube, aprueba, ordena y retira fotos y el video de cada negocio
+//     con plan. El límite lo controla la base (business_media_guard) según el plan vigente. Lo que
+//     sube el propietario queda pendiente hasta que el equipo lo aprueba.
 //   - Nada se borra: los pedidos se cancelan. Todo cambio del equipo queda en audit_logs.
 // 📦 QUÉ: POST { action, ... }.
 // ============================================================================
@@ -145,6 +148,40 @@ function tempPassword() {
   const bytes = crypto.getRandomValues(new Uint8Array(12));
   const core = Array.from(bytes, (b) => alphabet[b % alphabet.length]).join("");
   return `Bq-${core.slice(0, 4)}-${core.slice(4, 8)}-${core.slice(8, 12)}`;
+}
+
+// ── Galería: quién puede tocar las fotos de un negocio ──
+// Equipo (el auditor solo lee) o el propietario de un plan pagado y vigente vinculado a ese negocio.
+const MEDIA_BUCKET = "businesses";
+const MEDIA_TYPES: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
+const MEDIA_MAX_BYTES = 5 * 1024 * 1024;
+const BIZ_ID_RE = /^[a-z0-9_-]{2,120}$/;
+async function mediaAccess(service: SupabaseClient, w: Who, businessId: string, write: boolean): Promise<"staff" | "owner"> {
+  if (!BIZ_ID_RE.test(businessId)) throw new HttpError(400, "Negocio inválido.", "bad_business");
+  if (STAFF_ROLES.has(w.role)) {
+    if (write && w.role === "auditor") throw new HttpError(403, "Rol de solo lectura: esta acción requiere un administrador.", "read_only");
+    return "staff";
+  }
+  const today = new Date(Date.now() - 6 * 3600_000).toISOString().slice(0, 10);
+  let q = service.from("plan_orders").select("id").eq("business_id", businessId).eq("status", "paid").gte("period_end", today).limit(1);
+  q = w.email && w.emailVerified ? q.or(`owner_uid.eq.${w.uid},email.eq."${w.email}"`) : q.eq("owner_uid", w.uid);
+  const { data } = await q;
+  if (!data || !data.length) throw new HttpError(403, "Solo el propietario con un plan vigente puede cambiar las fotos de este negocio.", "forbidden");
+  return "owner";
+}
+async function mediaState(service: SupabaseClient, businessId: string) {
+  const { data: plan } = await service.rpc("business_plan_code", { p_business_id: businessId });
+  const code = typeof plan === "string" ? plan : null;
+  const limit = code && isPlan(code) ? PLAN_RULES[code].photoLimit : 0;
+  const { data: rows } = await service.from("business_media")
+    .select("id, kind, url, alt_text, sort_order, status, status_reason, uploaded_role, created_at, reviewed_at")
+    .eq("business_id", businessId).neq("status", "removed").order("kind").order("sort_order").order("created_at");
+  const items = (rows || []) as Array<Record<string, unknown>>;
+  const used = items.filter((r) => r.kind === "photo" && (r.status === "active" || r.status === "pending")).length;
+  return { plan: code, photo_limit: limit, video_allowed: code === "cumbre", used, items };
+}
+function mediaReason(value: unknown, required: boolean) {
+  return text(value, 500, { required, min: 3, label: "el motivo" });
 }
 
 async function handle(action: string, body: Record<string, unknown>, req: Request, service: SupabaseClient, origin: string | null) {
@@ -490,6 +527,124 @@ async function handle(action: string, body: Record<string, unknown>, req: Reques
       if (error) throw new HttpError(500, "No se pudo anular.", "update_failed");
       await audit(service, req, w, "PLAN_DUTY_VOID", row.order_id, `Entrega ${row.kind} (${String(row.period_month).slice(0, 7)}) anulada`, { reason });
       return { ok: true };
+    }
+
+    // ── Galería de fotos y video por plan (2026-10-21) ──
+    case "media_list": {
+      const w = (await who(req, service, true))!;
+      const businessId = String(body.business_id || "");
+      const role = await mediaAccess(service, w, businessId, false);
+      return { role, ...(await mediaState(service, businessId)) };
+    }
+
+    case "media_upload_url": {
+      const w = (await who(req, service, true))!;
+      const businessId = String(body.business_id || "");
+      await mediaAccess(service, w, businessId, true);
+      const type = String(body.content_type || "");
+      const ext = MEDIA_TYPES[type];
+      if (!ext) throw new HttpError(400, "Subí una foto JPG, PNG o WebP.", "bad_type");
+      const size = Number(body.size || 0);
+      if (!(size > 0) || size > MEDIA_MAX_BYTES) throw new HttpError(400, "La foto tiene que pesar menos de 5 MB.", "too_big");
+      const state = await mediaState(service, businessId);
+      if (state.photo_limit === 0) throw new HttpError(409, "Este negocio no tiene un plan vigente con galería de fotos.", "no_plan");
+      if (state.photo_limit != null && state.used >= state.photo_limit) throw new HttpError(409, `Tu plan permite hasta ${state.photo_limit} fotos. Retirá una para subir otra.`, "limit_reached");
+      const path = `gallery/${businessId}/${crypto.randomUUID()}.${ext}`;
+      const { data, error } = await service.storage.from(MEDIA_BUCKET).createSignedUploadUrl(path);
+      if (error || !data) throw new HttpError(500, "No se pudo preparar la subida.", "upload_url_failed");
+      return { path, token: data.token, signed_url: data.signedUrl };
+    }
+
+    case "media_attach": {
+      const w = (await who(req, service, true))!;
+      const businessId = String(body.business_id || "");
+      const role = await mediaAccess(service, w, businessId, true);
+      const path = String(body.path || "");
+      if (!new RegExp(`^gallery/${businessId.replace(/[-]/g, "\\-")}/[a-f0-9-]{36}\\.(jpg|png|webp)$`).test(path)) throw new HttpError(400, "Archivo inválido.", "bad_path");
+      const alt = text(body.alt_text, 160, { required: true, min: 3, label: "la descripción de la foto" })!;
+      const dir = path.slice(0, path.lastIndexOf("/"));
+      const file = path.slice(path.lastIndexOf("/") + 1);
+      const { data: found } = await service.storage.from(MEDIA_BUCKET).list(dir, { search: file, limit: 1 });
+      if (!found || !found.some((f: { name: string }) => f.name === file)) throw new HttpError(409, "La foto no terminó de subir. Intentá de nuevo.", "not_uploaded");
+      const url = service.storage.from(MEDIA_BUCKET).getPublicUrl(path).data.publicUrl;
+      const now = new Date().toISOString();
+      const { data, error } = await service.from("business_media").insert({
+        business_id: businessId, kind: "photo", storage_path: path, url, alt_text: alt,
+        status: role === "staff" ? "active" : "pending", uploaded_by: w.email || w.uid, uploaded_role: role,
+        reviewed_by: role === "staff" ? (w.email || w.uid) : null, reviewed_at: role === "staff" ? now : null,
+      }).select("id, status").single();
+      if (error || !data) throw new HttpError(409, error?.message?.includes("permite") || error?.message?.includes("plan") ? error.message : "No se pudo guardar la foto.", "attach_failed");
+      if (role === "staff") await audit(service, req, w, "PLAN_MEDIA_ADDED", businessId, `Foto agregada a ${businessId}`, { media: data.id });
+      return { media: data };
+    }
+
+    case "media_video": {
+      const w = (await who(req, service, true))!;
+      const businessId = String(body.business_id || "");
+      const role = await mediaAccess(service, w, businessId, true);
+      const url = String(body.url || "").trim();
+      if (!/^https:\/\/(www\.|m\.)?(youtube\.com|youtu\.be|vimeo\.com|facebook\.com|fb\.watch|instagram\.com|tiktok\.com)\/[^\s<>"']+$/i.test(url) || url.length > 500) {
+        throw new HttpError(400, "Pegá el enlace del video de YouTube, Vimeo, Facebook, Instagram o TikTok.", "bad_video");
+      }
+      const now = new Date().toISOString();
+      const { data, error } = await service.from("business_media").insert({
+        business_id: businessId, kind: "video", url, alt_text: text(body.alt_text, 160, { label: "la descripción del video" }),
+        status: role === "staff" ? "active" : "pending", uploaded_by: w.email || w.uid, uploaded_role: role,
+        reviewed_by: role === "staff" ? (w.email || w.uid) : null, reviewed_at: role === "staff" ? now : null,
+      }).select("id, status").single();
+      if (error || !data) throw new HttpError(409, error?.message?.includes("video") ? error.message : "No se pudo guardar el video.", "video_failed");
+      return { media: data };
+    }
+
+    case "media_review": {
+      const w = requireStaff(await who(req, service, true), true);
+      const id = String(body.id || "");
+      if (!UUID_RE.test(id)) throw new HttpError(400, "Foto inválida.", "bad_id");
+      const approve = body.decision === "approve";
+      const reason = mediaReason(body.reason, !approve);
+      const { data: row } = await service.from("business_media").select("id, business_id, status").eq("id", id).maybeSingle();
+      if (!row || row.status !== "pending") throw new HttpError(404, "Esa foto no está pendiente.", "not_pending");
+      const { error } = await service.from("business_media").update({
+        status: approve ? "active" : "rejected", status_reason: reason, reviewed_by: w.email || w.uid, reviewed_at: new Date().toISOString(),
+      }).eq("id", id);
+      if (error) throw new HttpError(409, error.message || "No se pudo revisar.", "review_failed");
+      await audit(service, req, w, approve ? "PLAN_MEDIA_APPROVED" : "PLAN_MEDIA_REJECTED", row.business_id, `Foto ${id} ${approve ? "aprobada" : "rechazada"}`, { reason });
+      return { status: approve ? "active" : "rejected" };
+    }
+
+    case "media_remove": {
+      const w = (await who(req, service, true))!;
+      const id = String(body.id || "");
+      if (!UUID_RE.test(id)) throw new HttpError(400, "Foto inválida.", "bad_id");
+      const { data: row } = await service.from("business_media").select("id, business_id, status").eq("id", id).maybeSingle();
+      if (!row || !["active", "pending"].includes(row.status)) throw new HttpError(404, "Esa foto ya no está en la galería.", "not_found");
+      const role = await mediaAccess(service, w, row.business_id, true);
+      const reason = mediaReason(body.reason, role === "staff");
+      const { error } = await service.from("business_media").update({ status: "removed", status_reason: reason || "Retirada por el propietario" }).eq("id", id);
+      if (error) throw new HttpError(500, "No se pudo retirar.", "remove_failed");
+      if (role === "staff") await audit(service, req, w, "PLAN_MEDIA_REMOVED", row.business_id, `Foto ${id} retirada`, { reason });
+      return { status: "removed" };
+    }
+
+    case "media_reorder": {
+      const w = (await who(req, service, true))!;
+      const businessId = String(body.business_id || "");
+      await mediaAccess(service, w, businessId, true);
+      const ids = Array.isArray(body.ids) ? body.ids.map(String).filter((x) => UUID_RE.test(x)).slice(0, 200) : [];
+      for (let i = 0; i < ids.length; i++) {
+        await service.from("business_media").update({ sort_order: (i + 1) * 10 }).eq("id", ids[i]).eq("business_id", businessId);
+      }
+      return { ok: true };
+    }
+
+    // Fotos que esperan revisión del equipo, de todos los negocios.
+    case "media_pending": {
+      requireStaff(await who(req, service, true), false);
+      const { data, error } = await service.from("business_media").select("business_id").eq("status", "pending").limit(1000);
+      if (error) throw new HttpError(500, "No se pudieron leer las fotos pendientes.", "read_failed");
+      const counts: Record<string, number> = {};
+      (data || []).forEach((r: { business_id: string }) => { counts[r.business_id] = (counts[r.business_id] || 0) + 1; });
+      return { counts };
     }
 
     default:

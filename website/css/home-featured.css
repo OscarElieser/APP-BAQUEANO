@@ -1,0 +1,40 @@
+/* ============================================================================
+   🧭 BAQUEANO — NEGOCIOS DESTACADOS EN EL INICIO (junto al mapa)
+   🎯 POR QUÉ (propietario, 21-10-2026): reemplaza la tarjeta de BAQÜI después de la Agenda por
+      los negocios con plan Cumbre (el plan que incluye la portada).
+   ⚙️ CÓMO: ocupa la columna derecha de #mapaAiSection; las tarjetas las arma js/plan-featured.js.
+   📦 QUÉ: .home-featured-card y su estado vacío.
+   ============================================================================ */
+.home-featured-card {
+  --hf-bg: #0f1b2b; --hf-line: rgba(244, 230, 193, .18); --hf-text: #f8fafc; --hf-muted: #cbd5e1; --hf-sand: #f4e6c1; --hf-gold: #d4a72c;
+  display: flex; flex-direction: column; gap: .7rem; min-width: 0;
+  padding: clamp(18px, 2.4vw, 28px); border-radius: 24px; border: 1px solid var(--hf-line);
+  background: radial-gradient(520px 260px at 100% 0, rgba(212, 167, 44, .16), transparent 70%), var(--hf-bg);
+  color: var(--hf-text); box-shadow: 0 18px 40px rgba(2, 6, 23, .28);
+}
+.home-featured-kicker { margin: 0; display: inline-flex; align-items: center; gap: .45rem; color: var(--hf-sand); font-weight: 800; font-size: .8rem; letter-spacing: .07em; text-transform: uppercase; }
+.home-featured-kicker i { color: var(--hf-gold); }
+.home-featured-card h3 { margin: 0; font: 800 clamp(1.35rem, 2.4vw, 1.8rem)/1.15 "League Spartan", "Plus Jakarta Sans", sans-serif; color: #fff; -webkit-text-fill-color: #fff; background: none; text-wrap: balance; }
+.home-featured-lead { margin: 0; color: var(--hf-muted); line-height: 1.55; }
+.home-featured-list { display: grid; gap: 12px; }
+.home-featured-list:empty { display: none; }
+.home-featured-list .bq-feat-card { flex-direction: row; min-height: 0; }
+.home-featured-list .bq-feat-media { flex: 0 0 38%; aspect-ratio: auto; min-height: 120px; }
+.home-featured-list .bq-feat-body { padding: 12px 14px; }
+.home-featured-list .bq-feat-name { color: #fff; -webkit-text-fill-color: #fff; font: 800 1.02rem/1.25 "League Spartan", sans-serif; margin: 0; }
+.home-featured-empty { display: grid; gap: .8rem; margin-top: auto; padding: 16px; border-radius: 16px; border: 1px dashed var(--hf-line); background: rgba(255, 255, 255, .03); }
+.home-featured-empty p { margin: 0; color: var(--hf-muted); line-height: 1.55; }
+.home-featured-cta, .home-featured-all { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 48px; padding: .7rem 1.2rem; border-radius: 999px; font-weight: 800; text-decoration: none; }
+.home-featured-cta { background: #c2410c; color: #fff; }
+.home-featured-all { border: 1px solid var(--hf-line); color: var(--hf-sand); }
+.home-featured-cta:focus-visible, .home-featured-all:focus-visible { outline: 3px solid var(--hf-sand); outline-offset: 2px; }
+@media (max-width: 560px) {
+  .home-featured-list .bq-feat-card { flex-direction: column; }
+  .home-featured-list .bq-feat-media { flex-basis: auto; aspect-ratio: 16 / 10; }
+}
+/* [hidden] tiene que ganarle al display propio (el estado vacío se oculta cuando hay negocios). */
+.home-featured-card [hidden] { display: none !important; }
+/* Los íconos de las tarjetas no heredan los tamaños de la sección del mapa. */
+.home-featured-card .bq-feat-badge i { font-size: .8rem; width: auto; height: auto; line-height: 1; background: none; box-shadow: none; padding: 0; margin: 0; }
+.home-featured-card .bq-feat-media.is-empty > i { font-size: 2rem; width: auto; height: auto; background: none; }
+.home-featured-card .bq-feat-place i, .home-featured-card .bq-feat-btn i { font-size: 1em; width: auto; height: auto; background: none; }

@@ -50,6 +50,7 @@
   <link rel="stylesheet" href="css/demo-hackathon.css?v=20260927-1">
   <link rel="stylesheet" href="css/pages/index-exact.css?v=20261015-marca-1">
   <link rel="stylesheet" href="css/bq-events.css?v=20261020-agenda-1">
+  <link rel="stylesheet" href="css/home-featured.css?v=20261021-destacados-2">
   <link rel="stylesheet" href="css/pages/index-destinos-editorial.css?v=20260930-1">
   <link rel="stylesheet" href="css/pages/tres-pilares.css?v=20261003-postales-1">
   <link rel="stylesheet" href="css/vivir-carousel.css?v=20261014-vivir-1">
@@ -912,33 +913,23 @@
             </div>
           </div>
 
-          <!-- Columna Derecha: Baqueano Digital Asistente IA -->
-          <div class="ai-card-exact" id="baqueanoDigitalCard">
-            <div class="ai-avatar-side">
-              <img data-i18n-alt="pages.index.baqueanoDigitalCard.imgAlt1" loading="lazy" decoding="async" src="assets/images/assistant/baqui.png?v=20261009" alt="Baqüi Asistente IA" class="ai-avatar-img" width="300" height="300">
+          <!-- Columna Derecha: Negocios destacados (plan Cumbre).
+               21-10-2026, pedido del propietario: «quitar a BAQÜI del index, la que está después de
+               eventos, y poner ahí los negocios destacados según su plan». BAQÜI sigue disponible en
+               el botón flotante de todas las páginas y en baqueano-ai.html. La lista la llena
+               js/plan-featured.js con public_plan_tiers() (solo Cumbre incluye la portada); sin
+               negocios con plan vigente se ve el estado vacío, nunca un destacado inventado. -->
+          <aside class="home-featured-card" id="bqHomeFeatured" aria-labelledby="bqHomeFeaturedTitle">
+            <p class="home-featured-kicker"><i class="fa-solid fa-star" aria-hidden="true"></i> <span data-i18n="plans.featured.kicker">Negocios locales con plan BAQUEANO</span></p>
+            <h3 id="bqHomeFeaturedTitle" data-i18n="plans.featured.homeTitle">Negocios destacados</h3>
+            <p class="home-featured-lead" data-i18n="plans.featured.homeLead">Hospedajes, restaurantes y experiencias con plan Cumbre. Contactalos directo, sin comisiones.</p>
+            <div class="home-featured-list" data-bq-home-featured aria-live="polite"></div>
+            <div class="home-featured-empty" data-bq-home-featured-empty>
+              <p data-i18n="plans.featured.homeEmpty">Todavía no hay negocios destacados. Este espacio es para hospedajes, restaurantes y experiencias con plan Cumbre.</p>
+              <a href="planes.html#cumbre" class="home-featured-cta"><span data-i18n="plans.featured.homeCta">Quiero que mi negocio aparezca aquí</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
-            <div class="ai-content-side">
-              <div class="ai-title-row">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                <h3>BAQUI</h3>
-              </div>
-              <p data-i18n="pages.index.baqueanoDigitalCard.p1" class="ai-desc-text">
-                Contame qué querés vivir y te creo un itinerario personalizado con destinos, precios y mapa.
-              </p>
-              <a class="ai-btn-plan" id="btnLaunchIaPlanner" href="baqueano-ai.html?prompt=ruta-personalizada">
-                <span data-i18n="pages.index.btnLaunchIaPlanner.a1">Planificar mi aventura</span> <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
-              </a>
-
-              <!-- Chips de Solicitudes Rápidas -->
-              <div class="ai-chips-wrap">
-                <a data-i18n="common.tengoC1500" class="ai-quick-chip" href="baqueano-ai.html?prompt=presupuesto-1500">💵 Tengo C$1,500</a>
-                <a data-i18n="pages.index.baqueanoDigitalCard.a1" class="ai-quick-chip" href="baqueano-ai.html?prompt=playas">🏖️ Quiero playa</a>
-                <a data-i18n="common.viajoConNinos" class="ai-quick-chip" href="baqueano-ai.html?prompt=viaje-con-ninos">👨‍👩‍👧 Viajo con niños</a>
-                <a data-i18n="common.quieroAventura" class="ai-quick-chip" href="baqueano-ai.html?prompt=aventura">🧗 Quiero aventura</a>
-                <a data-i18n="common.algoCerca" class="ai-quick-chip" href="baqueano-ai.html?prompt=cerca-de-mi">📍 Algo cerca</a>
-              </div>
-            </div>
-          </div>
+            <a href="aliados.html" class="home-featured-all" data-bq-home-featured-all hidden><span data-i18n="plans.featured.homeAll">Ver todos los aliados</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </aside>
         </div>
       </div>
     </section>
@@ -1597,7 +1588,7 @@
 <script src="js/tres-pilares.js?v=20261006-a11y-1"></script>
 <script src="js/vivir-carousel.js?v=20261014-vivir-1" defer></script>
 <script src="js/navigation.js?v=20261015-planes-1"></script>
-<script defer src="js/plan-featured.js?v=20261016-lead-1"></script>
+<script defer src="js/plan-featured.js?v=20261021-destacados-2"></script>
 <script src="js/global-injector.js"></script>
 <!-- Testimonios de la portada = comunidad real (misma fuente que testimonios.html). -->
 <script defer src="js/community-api.js?v=20261004-1"></script>
