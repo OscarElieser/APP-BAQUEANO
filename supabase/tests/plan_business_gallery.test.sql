@@ -142,9 +142,10 @@ do $$ begin
   values ('00000000-0000-4000-8000-0000000000b3', 'PL-ZZ-3', 'mirador', 'monthly', 35, 1282, 36.6243, 'persona', 'Prueba', 'cedula', '0010101010000Z',
     'Beto Prueba', 'beto@example.org', '+50588882222', 'Calle de prueba', 'Negocio ZZ Falla', 'restaurante', 'Granada', 'Negocio de prueba para la falla controlada',
     'paid', current_date, current_date + 30, 'BQ-ZZ-3', 'NEG-ZZ-3');
-  -- La falla se provoca con una solicitud sin nombre (businesses.name es obligatorio).
-  insert into public.business_applications (id, code, user_id, business_name, trade_name, owner_name, phone, email, department, category, short_description, status, consents, language)
-  values ('00000000-0000-4000-8000-0000000000c3', 'NEG-ZZ-3', 'uid-zz-beto', null, null, 'Beto', '+50588882222', 'beto@example.org', 'Granada', 'restaurante', 'Solicitud que no puede crear negocio', 'approved', '{}'::jsonb, 'es');
+  -- La falla se provoca con una regla temporal en businesses (se revierte con la prueba).
+  alter table public.businesses add constraint zz_prueba_falla check (name <> 'Negocio ZZ Falla') not valid;
+  insert into public.business_applications (id, code, user_id, business_name, owner_name, phone, email, department, category, short_description, status, consents, language)
+  values ('00000000-0000-4000-8000-0000000000c3', 'NEG-ZZ-3', 'uid-zz-beto', 'Negocio ZZ Falla', 'Beto', '+50588882222', 'beto@example.org', 'Granada', 'restaurante', 'Solicitud que no puede crear negocio', 'approved', '{}'::jsonb, 'es');
   update public.business_applications set status = 'published' where code = 'NEG-ZZ-3';
   if (select status from public.business_applications where code = 'NEG-ZZ-3') <> 'published' then raise exception 'FALLA 13a'; end if;
   if (select business_id from public.plan_orders where code = 'PL-ZZ-3') is not null
