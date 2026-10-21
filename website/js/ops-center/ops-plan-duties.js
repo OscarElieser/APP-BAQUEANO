@@ -57,8 +57,10 @@
 
   function load() {
     state.loading = true; state.error = ''; paint();
-    return state.call('duties_list', { month: state.month }).then(function (res) {
-      state.data = res; state.loading = false; paint();
+    // 21-10-2026: también las fotos que esperan revisión (galería por plan).
+    var pending = state.call('media_pending', {}).then(function (res) { state.pendingMedia = res.counts || {}; }).catch(function () { state.pendingMedia = {}; });
+    return Promise.all([state.call('duties_list', { month: state.month }), pending]).then(function (all) {
+      state.data = all[0]; state.loading = false; paint();
     }).catch(function (e) { state.loading = false; state.error = e.message; paint(); });
   }
 
@@ -117,6 +119,26 @@
     reason.focus();
   }
 
+  // Galería de la ficha del negocio (js/plan-gallery.js), con las fotos por revisar.
+  function galleryButton(item) {
+    var n = (state.pendingMedia || {})[item.business_id] || 0;
+    var label = n ? tr('opsDuties.galleryPending', 'Galería · {n} por revisar', { n: n }) : tr('opsDuties.gallery', 'Galería de la ficha');
+    var b = el('button', { type: 'button', className: 'ops-btn' + (n ? ' is-primary' : '') }, [icon('fa-solid fa-images'), ' ' + label]);
+    b.addEventListener('click', function () {
+      var d = el('dialog', { className: 'ops-plans-dialog', 'aria-label': tr('opsDuties.gallery', 'Galería de la ficha') });
+      var close = el('button', { type: 'button', className: 'ops-btn', 'aria-label': tr('opsDuties.close', 'Cerrar') }, [icon('fa-solid fa-xmark')]);
+      close.addEventListener('click', function () { d.close(); });
+      var body = el('div', { className: 'ops-plans-form' });
+      d.appendChild(el('header', { className: 'ops-plans-dialog-head' }, [el('h2', { text: item.business_name }), close]));
+      d.appendChild(body);
+      d.addEventListener('close', function () { d.remove(); load(); });
+      document.body.appendChild(d);
+      d.showModal();
+      window.BaqueanoPlanGallery.mount(body, { businessId: item.business_id, call: state.call });
+    });
+    return el('div', { className: 'ops-plans-actions' }, [b]);
+  }
+
   function itemCard(item) {
     var s = item.summary || { required: 0, done: 0 };
     var pct = s.required ? Math.round((s.done / s.required) * 100) : 100;
@@ -169,6 +191,7 @@
       el('div', { className: 'ops-duties-bar', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-valuenow': String(pct), 'aria-label': tr('opsDuties.progressLabel', 'Avance de entregas del mes') }, [el('span', { style: 'width:' + pct + '%' })]),
       el('p', { className: 'ops-plans-hint', text: tr('opsDuties.photos', 'Fotos permitidas: {n}', { n: rules.photo_limit == null ? tr('opsDuties.unlimited', 'sin límite + video') : rules.photo_limit }) + ' · ' + tr('opsDuties.auto', 'Automático: {list}', { list: autoList }) + (item.business_id ? '' : ' · ' + tr('opsDuties.unlinked', 'Falta vincular el negocio publicado: sin eso no se activan los beneficios automáticos.')) }),
       duties,
+      item.business_id && window.BaqueanoPlanGallery ? galleryButton(item) : null,
       item.history && item.history.length ? el('details', { className: 'ops-duties-details' }, [el('summary', { text: tr('opsDuties.history', 'Historial de entregas ({n})', { n: item.history.length }) }), history]) : null
     ]);
   }

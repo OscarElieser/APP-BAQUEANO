@@ -245,6 +245,24 @@
     info.appendChild(el('p', 'bq-my-plan-photos', rules.photo_limit == null
       ? t('plans.mine.photosUnlimited', 'Fotos en tu ficha: sin límite, más video de presentación')
       : t('plans.mine.photos', 'Fotos en tu ficha: hasta {n}', { n: rules.photo_limit })));
+    // 21-10-2026: galería de la ficha (js/plan-gallery.js) para planes pagados con negocio publicado.
+    if (o.status === 'paid' && o.business_id && o.month && window.BaqueanoPlanGallery) {
+      var galBtn = el('button', 'bq-plan-cta', t('plans.gallery.open', 'Fotos de mi ficha'));
+      galBtn.type = 'button';
+      galBtn.setAttribute('aria-expanded', 'false');
+      var galBox = el('div', 'bq-my-plan-gallery');
+      galBox.hidden = true;
+      galBtn.addEventListener('click', function () {
+        var open = galBox.hidden;
+        galBox.hidden = !open;
+        galBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open && !galBox.childNodes.length) {
+          window.BaqueanoPlanGallery.mount(galBox, { businessId: o.business_id, call: function (action, payload) { return api(action, payload, true); } });
+        }
+      });
+      info.appendChild(galBtn);
+      info.appendChild(galBox);
+    }
     if (!o.duties || !o.duties.length) return;
     var wrap = el('section', 'bq-my-plan-duties');
     wrap.appendChild(el('h4', null, t('plans.mine.dutiesTitle', 'Lo que BAQUEANO hace por tu negocio este mes')));

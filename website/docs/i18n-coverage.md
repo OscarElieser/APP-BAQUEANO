@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-21T10:46:04.046Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6584 · en 6584 · fr 6584 · it 6584 · pt 6584 · de 6584 · ko 6584 · zh 6584
+Generado: 2026-10-21T11:27:30.591Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6632 · en 6632 · fr 6632 · it 6632 · pt 6632 · de 6632 · ko 6632 · zh 6632
 
-HTML: 4444/4445 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
+HTML: 4442/4443 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -176,7 +176,7 @@ HTML: 4444/4445 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | favoritos.html | html | 8 | 8 | 0 | 100 % |
 | gastronomia.html | html | 205 | 205 | 0 | 100 % |
 | historia.html | html | 184 | 184 | 0 | 100 % |
-| index.html | html | 249 | 249 | 0 | 100 % |
+| index.html | html | 247 | 247 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
 | js/allies-directory.js | js | 0 | 0 | 0 | 100 % |
 | js/ambiental-report-handoff.js | js | 0 | 0 | 0 | 100 % |
@@ -250,6 +250,7 @@ HTML: 4444/4445 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/ops-center/ops-users.js | js | 38 | 38 | 0 | 100 % |
 | js/place-ficha.js | js | 0 | 0 | 0 | 100 % |
 | js/plan-featured.js | js | 0 | 0 | 0 | 100 % |
+| js/plan-gallery.js | js | 0 | 0 | 0 | 100 % |
 | js/plan-receipt.js | js | 0 | 0 | 0 | 100 % |
 | js/plan-report.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |

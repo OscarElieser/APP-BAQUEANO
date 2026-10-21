@@ -179,10 +179,46 @@
       body
     );
     state.dialog.showModal();
+    loadGallery(b.id, body);
     document.documentElement.classList.add('bqd-open');
     // Visita a la ficha: alimenta las estadísticas del plan del negocio (solo con consentimiento).
     try { if (window.BaqueanoAnalytics && window.BaqueanoAnalytics.track) window.BaqueanoAnalytics.track('business_view', { entityType: 'business', entityId: b.id, departmentId: b.department_id }); } catch (_) { /* sin analítica */ }
     state.dialog.querySelector('.bq-ally-close').focus();
+  }
+
+  // ------------------------------------------------------------------ galería (21-10-2026)
+  // Fotos aprobadas y video (Cumbre) dentro del límite del plan vigente: business_media_public().
+  // Sin plan o sin fotos no se muestra nada. Todo con textContent; los enlaces se validan https.
+  function loadGallery(id, body) {
+    fetch(REST + 'rpc/business_media_public', { method: 'POST', headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'content-type': 'application/json' }, body: JSON.stringify({ p_business_id: id }) })
+      .then(function (res) { return res.ok ? res.json() : []; })
+      .then(function (rows) {
+        rows = Array.isArray(rows) ? rows.filter(function (r) { return r && /^https:\/\//.test(r.url || ''); }) : [];
+        if (!rows.length || !state.dialog || state.dialog.getAttribute('data-business-id') !== id) return;
+        var photos = rows.filter(function (r) { return r.kind === 'photo'; });
+        var video = rows.filter(function (r) { return r.kind === 'video'; })[0];
+        var wrap = el('section', { className: 'bq-ally-gallery', 'aria-label': t('plans.gallery.publicTitle', 'Fotos del negocio') });
+        if (photos.length) {
+          var strip = el('ul', { className: 'bq-ally-gallery-strip' });
+          photos.forEach(function (p) {
+            strip.append(el('li', {}, [el('a', { href: p.url, target: '_blank', rel: 'noopener noreferrer' }, [
+              el('img', { src: p.url, alt: p.alt_text || '', loading: 'lazy', decoding: 'async', width: 240, height: 180 })])]));
+          });
+          wrap.append(strip);
+        }
+        if (video) wrap.append(el('a', { className: 'bq-ally-btn', href: video.url, target: '_blank', rel: 'noopener noreferrer' }, [icon('fa-circle-play'), ' ', t('plans.gallery.watchVideo', 'Ver video de presentación')]));
+        var desc = body.querySelector('.bq-ally-desc') || body.querySelector('.bq-ally-data');
+        if (desc && desc.parentNode) desc.parentNode.insertBefore(wrap, desc); else body.prepend(wrap);
+        if (!document.getElementById('bqAllyGalleryStyle')) {
+          var st = document.createElement('style'); st.id = 'bqAllyGalleryStyle';
+          var galleryCss = '.bq-ally-gallery{display:grid;gap:10px;margin:0 0 12px}.bq-ally-gallery-strip{list-style:none;margin:0;padding:0 0 4px;display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory}' +
+            '.bq-ally-gallery-strip li{flex:0 0 auto;scroll-snap-align:start}.bq-ally-gallery-strip img{display:block;width:220px;max-width:70vw;aspect-ratio:4/3;object-fit:cover;border-radius:12px}' +
+            '.bq-ally-gallery-strip a:focus-visible{outline:3px solid #f4e6c1;outline-offset:2px;border-radius:12px}';
+          st.textContent = galleryCss;
+          document.head.append(st);
+        }
+      })
+      .catch(function () { /* sin galería */ });
   }
 
   // ------------------------------------------------------------------ filtros

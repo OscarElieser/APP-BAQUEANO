@@ -8,7 +8,7 @@
  *   bloque no se muestra: nunca se inventa un destacado. Textos con data-i18n / textContent.
  *   En el departamento, el bloque se vuelve a colocar cuando la página cambia de territorio.
  * 📦 QUÉ: window.BaqueanoPlanTiers = { load() → Promise<Map(id → {plan, promo})>, rank(plan) };
- *   bloques #bqFeaturedBiz en index.html y departamento.html.
+ *   espacio #bqHomeFeatured del inicio (junto al mapa) y bloque #bqFeaturedBiz en departamento.html.
  */
 (function (window, document) {
   'use strict';
@@ -167,7 +167,7 @@
       '.bq-feat-card{display:flex;flex-direction:column;border-radius:18px;overflow:hidden;background:#16243a;border:1px solid rgba(244,230,193,.16);box-shadow:0 14px 34px rgba(0,0,0,.35)}' +
       '.bq-feat-card.is-cumbre{border-color:#d4a72c;box-shadow:0 0 0 1px #d4a72c,0 14px 34px rgba(0,0,0,.35)}' +
       '.bq-feat-media{position:relative;aspect-ratio:16/10;background:#0d1726;display:grid;place-items:center}' +
-      '.bq-feat-media img{width:100%;height:100%;object-fit:cover}.bq-feat-media.is-empty i{font-size:2.2rem;color:#f4e6c1}' +
+      '.bq-feat-media img{width:100%;height:100%;object-fit:cover}.bq-feat-media.is-empty>i{font-size:2.2rem;color:#f4e6c1}' +
       '.bq-feat-badge{position:absolute;top:10px;left:10px;display:inline-flex;gap:.35rem;align-items:center;padding:.3rem .65rem;border-radius:999px;background:#c2410c;color:#fff;font-weight:800;font-size:.78rem}' +
       '.bq-feat-card.is-cumbre .bq-feat-badge{background:linear-gradient(135deg,#fde68a,#d4a72c);color:#2b2004}' +
       '.bq-feat-body{display:flex;flex-direction:column;gap:.45rem;padding:14px 16px 16px;flex:1}' +
@@ -193,7 +193,26 @@
   }
 
   // Portada: negocios Cumbre.
+  // 21-10-2026: el inicio tiene su propio espacio junto al mapa (#bqHomeFeatured, donde estaba
+  // la tarjeta de BAQÜI). Se muestran hasta 3 negocios Cumbre; sin ninguno queda el estado vacío
+  // con el enlace a los planes. Si la página no tiene ese espacio, se usa el bloque de antes.
+  function initHomeSlot(slot) {
+    var list = slot.querySelector('[data-bq-home-featured]');
+    var empty = slot.querySelector('[data-bq-home-featured-empty]');
+    var all = slot.querySelector('[data-bq-home-featured-all]');
+    featured(function (tier) { return tier.plan === 'cumbre'; }).then(function (items) {
+      if (!items.length || !list) return;
+      installStyle();
+      list.replaceChildren();
+      items.slice(0, 3).forEach(function (it) { list.appendChild(card(it.b, it.tier)); });
+      slot.classList.add('has-items');
+      if (empty) empty.hidden = true;
+      if (all) all.hidden = items.length <= 3;
+    });
+  }
   function initHome() {
+    var slot = document.getElementById('bqHomeFeatured');
+    if (slot) return initHomeSlot(slot);
     var anchor = document.getElementById('experienciasSection') || document.getElementById('testimoniosSection');
     if (!anchor) return;
     featured(function (tier) { return tier.plan === 'cumbre'; }).then(function (items) {

@@ -18,6 +18,37 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🖼️ GALERÍA POR PLAN, VÍNCULO AUTOMÁTICO Y DESTACADOS EN EL INICIO (21-10-2026, 05:16–06:30) — rama feat/planes-galeria-vinculo
+- **Solicitudes:**
+  - *"Las fotos… Vincular cada pedido pagado… Resolvamos esto"*.
+  - *"Quiero quitar a baqui del index la que está después de eventos y poner ahí los negocios destacados según su plan… y si experiencia destacadas cuál es su función"*.
+- **Hallazgo:** marcar una solicitud como «publicada» solo cambiaba su estado. No creaba el negocio en Aliados, así que un pedido pagado nunca se vinculaba.
+- **Vínculo automático** (migración `20261021020000_plan_business_gallery.sql`):
+  - Al pasar a `published` la solicitud de un plan pagado, la base crea el negocio y lo vincula.
+  - Reutiliza uno existente del mismo titular, o con el mismo nombre y departamento: no duplica.
+  - El negocio nace sin verificar, sin pin exacto (ubicación aproximada) y con `source_type` `business_owner`.
+  - Si algo falla, la publicación sigue y el motivo queda en `staff_notes`; el botón «Vincular» queda como respaldo.
+- **Galería:**
+  - Tabla `business_media`, con límite controlado en la base: Sendero 6, Mirador 20, Cumbre sin límite más 1 video (YouTube, Vimeo, Facebook, Instagram o TikTok).
+  - Lo que sube el propietario queda pendiente y el equipo lo aprueba. No se borra: se retira o rechaza con motivo.
+  - `business_media_public()` muestra solo lo aprobado dentro del límite del plan vigente. Si el plan baja o vence, no se borra nada.
+  - Edge `baqueano-plans`: `media_list`, `media_upload_url` (enlace firmado), `media_attach`, `media_video`, `media_review`, `media_remove`, `media_reorder` y `media_pending`.
+  - Web: `js/plan-gallery.js` en «Mi plan» (propietario) y en el Ops Center (Compromisos del mes → «Galería · n por revisar»). La ficha de Aliados muestra las fotos aprobadas y el video.
+- **Inicio:**
+  - Se quitó la tarjeta de BAQÜI de `#mapaAiSection` (a pedido). BAQÜI sigue en el botón flotante y en `baqueano-ai.html`.
+  - En su lugar va «Negocios destacados» (`#bqHomeFeatured`): solo Cumbre, hasta 3. Sin ninguno, estado vacío con «Quiero que mi negocio aparezca aquí» → `planes.html#cumbre`.
+  - Se corrigió en `plan-featured.js` la regla que agrandaba la estrella de «Destacado» en tarjetas sin foto; también afectaba a departamento.
+- **«Experiencias destacadas»** son 4 accesos editoriales fijos (Volcanes, Gastronomía, Comunidades, Playas) que llevan a `experiencias.html` filtrado y a `gastronomia.html`. No dependen de planes ni de datos.
+- **Pruebas:**
+  - SQL `plan_business_gallery.test.sql` 13/13 y migración ×2 sin duplicar.
+  - Navegador `galeria-qa.mjs` 21/21; planes 18/18; mapa 29/29; agenda 32/32.
+  - i18n: 48 claves en 8 idiomas, 0 errores.
+- **05:39, prueba en producción:** el bloque 1 quedó aplicado, pero la prueba falló en su caso 1: *"cannot insert a non-DEFAULT value into column is_published"*.
+  - En producción `businesses.is_published` es una columna calculada (`status = 'published'` y sin borrar).
+  - La función ya no la escribe. Se probó en producción dentro de una transacción revertida: crea el negocio publicado, sin verificar, con ubicación aproximada, y lo vincula.
+  - La base local de pruebas ahora imita esa columna calculada (13/13).
+  - La página «SQL galería BAQUEANO» tiene la corrección como bloque 1.
+
 ## 💼 PLANES: CADA PLAN CUMPLE LO QUE PROMETE (20-10-2026, 21:46–22:30) — rama feat/planes-cumplimiento
 - **Solicitud:** *"Quiero que adapte según el plan seleccionado para así cumplir lo que debemos de hacer. Revisa los planes y haces los ajustes que debemos hacer"*.
 - **Hallazgo 1:** el sistema de planes no existía en producción. No había catálogo, pedidos, comprobantes ni avisos, porque los SQL del 15-10 nunca se corrieron. El formulario de /planes no guardaba nada.

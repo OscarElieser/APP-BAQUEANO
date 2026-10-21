@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T10:46:04.046Z",
+  "generatedAt": "2026-10-21T11:27:30.591Z",
   "languages": [
     "es",
     "en",
@@ -11,23 +11,23 @@
     "zh"
   ],
   "keysPerLanguage": {
-    "es": 6584,
-    "en": 6584,
-    "fr": 6584,
-    "it": 6584,
-    "pt": 6584,
-    "de": 6584,
-    "ko": 6584,
-    "zh": 6584
+    "es": 6632,
+    "en": 6632,
+    "fr": 6632,
+    "it": 6632,
+    "pt": 6632,
+    "de": 6632,
+    "ko": 6632,
+    "zh": 6632
   },
   "html": {
     "files": 39,
-    "total": 4445,
-    "translated": 4444,
+    "total": 4443,
+    "translated": 4442,
     "untranslated": 1
   },
   "js": {
-    "files": 147,
+    "files": 148,
     "translated": 450,
     "untranslated": 648
   },
@@ -153,6 +153,7 @@
     "js/ops-center/ops-users.js",
     "js/place-ficha.js",
     "js/plan-featured.js",
+    "js/plan-gallery.js",
     "js/plan-receipt.js",
     "js/plan-report.js",
     "js/platform-reviews.js",
@@ -397,8 +398,8 @@
     {
       "file": "index.html",
       "type": "html",
-      "total": 249,
-      "translated": 249,
+      "total": 247,
+      "translated": 247,
       "untranslated": 0,
       "legacyPhrase": 0,
       "coverage": 100
@@ -1620,6 +1621,15 @@
     },
     {
       "file": "js/plan-featured.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/plan-gallery.js",
       "type": "js",
       "total": 0,
       "translated": 0,

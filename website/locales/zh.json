@@ -8157,7 +8157,10 @@
       "homeTitle": "精选商家",
       "kicker": "开通 BAQUEANO 套餐的本地商家",
       "more": "查看详情",
-      "yourBusiness": "有商家？了解套餐"
+      "yourBusiness": "有商家？了解套餐",
+      "homeEmpty": "暂无推荐商家。此处展示使用 Cumbre 套餐的住宿、餐厅和体验。",
+      "homeCta": "我想让我的商家出现在这里",
+      "homeAll": "查看所有合作伙伴"
     },
     "report": {
       "metric": "指标",
@@ -8182,6 +8185,51 @@
       "verification": "BAQUEANO 认证标识",
       "video": "介绍视频",
       "onboarding": "搭建您的页面（文字和照片）"
+    },
+    "gallery": {
+      "statusActive": "已发布",
+      "statusPending": "待审核",
+      "statusRejected": "未通过",
+      "uploadFailed": "照片上传失败，请重试。",
+      "title": "页面照片",
+      "countUnlimited": "{n} 张照片 · 您的套餐不限数量",
+      "noPlan": "该商家没有包含相册的有效套餐。",
+      "count": "{n}/{limit} 张照片",
+      "ownerHint": "您上传的照片经团队审核后才会发布到页面。",
+      "reason": "原因：{reason}",
+      "approve": "通过",
+      "approved": "照片已发布到页面。",
+      "reject": "不通过",
+      "rejected": "照片未通过，业主可看到原因。",
+      "makeFirst": "设为首图",
+      "reordered": "顺序已保存。",
+      "remove": "撤下",
+      "removed": "照片已从页面撤下。",
+      "empty": "页面还没有照片。",
+      "full": "已达到套餐上限。请先撤下一张照片再上传。",
+      "reasonOptional": "原因（选填）",
+      "reasonRequired": "原因（保留在历史中）",
+      "reasonLabel": "原因",
+      "confirm": "确认",
+      "altPh": "例如：可看到火山的露台",
+      "file": "照片（JPG、PNG 或 WebP，最大 5 MB）",
+      "alt": "照片内容说明（供使用读屏软件的人）",
+      "upload": "上传照片",
+      "badType": "请上传 JPG、PNG 或 WebP 照片。",
+      "tooBig": "照片必须小于 5 MB。",
+      "uploadedLive": "照片已发布到页面。",
+      "uploadedPending": "照片已上传，团队审核后发布。",
+      "videoTitle": "介绍视频（Cumbre）",
+      "videoApproved": "视频已发布到页面。",
+      "videoRemoved": "视频已撤下。",
+      "videoUrl": "YouTube、Vimeo、Facebook、Instagram 或 TikTok 链接",
+      "videoSave": "保存视频",
+      "videoPending": "视频已保存，团队审核后发布。",
+      "loading": "正在加载照片…",
+      "open": "我的页面照片",
+      "publicTitle": "商家照片",
+      "watchVideo": "观看介绍视频",
+      "videoPh": "https://youtu.be/…"
     }
   },
   "opsPlans": {
@@ -8575,6 +8623,8 @@
     "intro": "团队需要为每个有效套餐的商家完成的交付。自动部分（推荐、排序、促销、统计、BAQUI）系统已自动执行；这里记录人工完成的工作，并附链接作为证明。",
     "loading": "正在加载承诺…",
     "empty": "本月没有有效的已付费套餐。",
-    "total": "本月合计：{required} 项中完成 {done} 项 · {n} 家商家"
+    "total": "本月合计：{required} 项中完成 {done} 项 · {n} 家商家",
+    "galleryPending": "相册 · 待审核 {n} 张",
+    "gallery": "页面相册"
   }
 }

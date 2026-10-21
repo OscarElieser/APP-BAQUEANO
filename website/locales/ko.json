@@ -8157,7 +8157,10 @@
       "homeTitle": "추천 업체",
       "kicker": "BAQUEANO 플랜을 이용하는 지역 업체",
       "more": "정보 보기",
-      "yourBusiness": "사업체가 있나요? 플랜을 확인하세요"
+      "yourBusiness": "사업체가 있나요? 플랜을 확인하세요",
+      "homeEmpty": "아직 추천 업체가 없습니다. 이 공간은 Cumbre 요금제의 숙소, 음식점, 체험을 위한 곳입니다.",
+      "homeCta": "내 업체를 여기에 노출하고 싶어요",
+      "homeAll": "모든 파트너 보기"
     },
     "report": {
       "metric": "지표",
@@ -8182,6 +8185,51 @@
       "verification": "BAQUEANO 인증 배지",
       "video": "소개 영상",
       "onboarding": "목록 작성(글과 사진)"
+    },
+    "gallery": {
+      "statusActive": "게시됨",
+      "statusPending": "검토 대기",
+      "statusRejected": "거절됨",
+      "uploadFailed": "사진을 올리지 못했습니다. 다시 시도해 주세요.",
+      "title": "목록 사진",
+      "countUnlimited": "사진 {n}장 · 요금제 무제한",
+      "noPlan": "이 업체에는 사진 갤러리가 포함된 유효한 요금제가 없습니다.",
+      "count": "사진 {limit}장 중 {n}장",
+      "ownerHint": "올린 사진은 팀이 검토한 뒤 목록에 게시합니다.",
+      "reason": "사유: {reason}",
+      "approve": "승인",
+      "approved": "사진이 목록에 게시되었습니다.",
+      "reject": "거절",
+      "rejected": "사진이 거절되었습니다. 사업주가 사유를 확인합니다.",
+      "makeFirst": "맨 앞으로",
+      "reordered": "순서가 저장되었습니다.",
+      "remove": "내리기",
+      "removed": "사진을 목록에서 내렸습니다.",
+      "empty": "아직 목록에 사진이 없습니다.",
+      "full": "요금제 한도에 도달했습니다. 사진을 하나 내린 뒤 새로 올려 주세요.",
+      "reasonOptional": "사유(선택)",
+      "reasonRequired": "사유(기록에 남음)",
+      "reasonLabel": "사유",
+      "confirm": "확인",
+      "altPh": "예: 화산이 보이는 테라스",
+      "file": "사진(JPG, PNG, WebP, 최대 5MB)",
+      "alt": "사진 설명(화면 낭독기 사용자를 위해)",
+      "upload": "사진 올리기",
+      "badType": "JPG, PNG, WebP 사진을 올려 주세요.",
+      "tooBig": "사진은 5MB 미만이어야 합니다.",
+      "uploadedLive": "사진이 목록에 게시되었습니다.",
+      "uploadedPending": "사진을 올렸습니다. 팀이 검토한 뒤 게시합니다.",
+      "videoTitle": "소개 영상(Cumbre)",
+      "videoApproved": "영상이 목록에 게시되었습니다.",
+      "videoRemoved": "영상을 내렸습니다.",
+      "videoUrl": "유튜브·비메오·페이스북·인스타그램·틱톡 링크",
+      "videoSave": "영상 저장",
+      "videoPending": "영상을 저장했습니다. 팀이 검토한 뒤 게시합니다.",
+      "loading": "사진을 불러오는 중…",
+      "open": "내 목록 사진",
+      "publicTitle": "업체 사진",
+      "watchVideo": "소개 영상 보기",
+      "videoPh": "https://youtu.be/…"
     }
   },
   "opsPlans": {
@@ -8575,6 +8623,8 @@
     "intro": "유효한 요금제가 있는 각 업체에 팀이 제공해야 할 항목입니다. 자동 항목(추천, 순서, 프로모션, 통계, BAQUI)은 시스템이 이미 적용하며, 여기에는 직접 한 작업을 링크 증빙과 함께 기록합니다.",
     "loading": "약속을 불러오는 중…",
     "empty": "이번 달에 유효한 유료 요금제가 없습니다.",
-    "total": "이달 합계: {required}건 중 {done}건 · 업체 {n}곳"
+    "total": "이달 합계: {required}건 중 {done}건 · 업체 {n}곳",
+    "galleryPending": "갤러리 · 검토 {n}건",
+    "gallery": "목록 갤러리"
   }
 }
