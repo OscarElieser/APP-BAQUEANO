@@ -18,6 +18,25 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🛰️ DESPLIEGUE DE FUNCIONES (20-10-2026, 21:18–21:40)
+- *"Listo ya lo hice el segundo bloque no lo pegue"*. El propietario corrió el bloque 1 de los SQL. El bloque 2 eran las pruebas, que son opcionales.
+- **Agenda aplicada en producción.** Verificado por consulta:
+  - 4 columnas nuevas en `events`, 4 funciones y 0 políticas abiertas.
+  - `anon` no tiene SELECT directo.
+  - El bucket `event-images` existe.
+- **`baqueano-events` v1 ACTIVA.** Prueba real:
+  - `list` responde `ok` con `[]`.
+  - `get` de algo inexistente da 404.
+  - `save` sin token da `login_required`.
+  - Un token falso da `session_expired`.
+- **`baqueano-ai` v117 ACTIVA** (antes v116, mismo código más la intención `events`). Prueba real:
+  - «¿Qué eventos hay este fin de semana en León?» devuelve `intent:"events"` y «No hay eventos publicados… No te invento uno».
+  - El saludo sigue igual.
+- **Reseñas NO aplicadas.**
+  - No existen `review_target_aliases` ni las columnas nuevas de `reviews`.
+  - Sigue activa la política vieja que expone `user_uid`.
+  - `baqueano-place-reviews` queda sin desplegar hasta que se corra el bloque 1 de «SQL reseñas BAQUEANO».
+
 ## 🚀 PUBLICACIÓN AUTORIZADA (20-10-2026, 20:43)
 - *"Entonces subis todo a main"* (después de preguntar por qué no veía los cambios: todo estaba en ramas y la vista previa de Cloudflare falla en ramas).
 - Se fusiona a `main`: navegación interna (#10), mapa preciso y estrellas reales (#12) y Agenda BAQUEANO.
