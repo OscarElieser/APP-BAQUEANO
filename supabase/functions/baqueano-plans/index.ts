@@ -304,7 +304,9 @@ async function handle(action: string, body: Record<string, unknown>, req: Reques
         o.delivered = done.filter((d) => (d.order_id === like.id && d.period_month === month) || (same.includes(d.order_id) && rules.once.includes(d.kind as DutyKind)))
           .map((d) => ({ kind: d.kind, evidence_url: d.evidence_url, done_at: d.done_at }));
       });
-      return { orders };
+      // 21-10-2026: el rol del equipo (ya verificado y con revocación aplicada en who()) para que
+      // «Mi plan» no le diga a un superadministrador, administrador o auditor que «no tiene planes».
+      return { orders, staff_role: STAFF_ROLES.has(w!.role) ? w!.role : null };
     }
 
     case "password_changed": {

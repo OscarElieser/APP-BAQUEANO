@@ -8054,7 +8054,14 @@
       "photos": "Foto nella tua scheda: fino a {n}",
       "dutiesTitle": "Cosa fa BAQUEANO per la tua attività questo mese",
       "dutyDone": "Fatto",
-      "report": "Report del mese"
+      "report": "Report del mese",
+      "staff": "Hai effettuato l’accesso con un account del team BAQUEANO ({role}). I piani e le ricevute delle attività si gestiscono dall’Ops Center.",
+      "staffOpen": "Apri i piani nell’Ops Center",
+      "staffRole": {
+        "super_admin": "Super amministratore",
+        "admin": "Amministratore",
+        "auditor": "Revisore, sola lettura"
+      }
     },
     "faq": {
       "title": "Domande frequenti",

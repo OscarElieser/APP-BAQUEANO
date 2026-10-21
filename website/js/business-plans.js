@@ -295,6 +295,19 @@
       box.textContent = '';
       var orders = res.orders || [];
       if (!orders.length) {
+        // 21-10-2026 (propietario): al superadministrador, administradores y auditores no les
+        // corresponde «Tu cuenta todavía no tiene planes»: no son negocios. El rol lo decide el
+        // servidor (baqueano-plans → staff_role, verificado con la sesión), no el navegador.
+        var staffRole = ['super_admin', 'admin', 'auditor'].indexOf(res.staff_role) >= 0 ? res.staff_role : '';
+        if (staffRole) {
+          box.appendChild(el('p', 'bq-my-plan-empty', t('plans.mine.staff', 'Entraste con una cuenta del equipo BAQUEANO ({role}). Los planes y comprobantes de los negocios se gestionan desde el Ops Center.', {
+            role: t('plans.mine.staffRole.' + staffRole, { super_admin: 'Superadministrador', admin: 'Administrador', auditor: 'Auditor, solo lectura' }[staffRole])
+          })));
+          var ops = el('a', 'bq-plan-cta', t('plans.mine.staffOpen', 'Abrir Planes en el Ops Center'));
+          ops.href = 'admin.html#44-planes';
+          box.appendChild(ops);
+          return;
+        }
         box.appendChild(el('p', 'bq-my-plan-empty', t('plans.mine.none', 'Tu cuenta todavía no tiene planes. Elegí uno arriba y te ayudamos por WhatsApp.')));
         return;
       }

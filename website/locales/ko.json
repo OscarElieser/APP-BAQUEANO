@@ -8054,7 +8054,14 @@
       "photos": "목록 사진: 최대 {n}장",
       "dutiesTitle": "이번 달 BAQUEANO가 내 업체를 위해 하는 일",
       "dutyDone": "완료",
-      "report": "월간 보고서"
+      "report": "월간 보고서",
+      "staff": "BAQUEANO 팀 계정({role})으로 로그인했습니다. 업체의 플랜과 영수증은 Ops Center에서 관리합니다.",
+      "staffOpen": "Ops Center에서 플랜 열기",
+      "staffRole": {
+        "super_admin": "최고 관리자",
+        "admin": "관리자",
+        "auditor": "감사자, 읽기 전용"
+      }
     },
     "faq": {
       "title": "자주 묻는 질문",

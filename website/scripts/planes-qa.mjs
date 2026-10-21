@@ -39,7 +39,7 @@ const ORDERS = [
     rules: RULES.sendero, month: MONTH, duties: [{ kind: 'social_welcome', cadence: 'once', required: 1, done: 0, missing: 1 }], delivered: [] },
 ];
 
-async function open(browser) {
+async function open(browser, myPlans = { ok: true, orders: ORDERS }) {
   const ctx = await browser.newContext({ serviceWorkers: 'block', viewport: { width: 1280, height: 900 }, locale: 'es-NI' });
   await ctx.addInitScript(() => {
     try { localStorage.setItem('baqueano_cookie_consent_v1', JSON.stringify({ essential: true, preferences: false, analytics: false, version: 1, policyVersion: '2026-09-26' })); } catch (_) { /* nada */ }
@@ -59,7 +59,7 @@ async function open(browser) {
       calls.push(body);
       let data = { ok: false, error: 'no simulado' };
       if (body.action === 'catalog') data = { ok: true, plans: [], iva: { iva_enabled: false, iva_rate: 0.15 } };
-      if (body.action === 'my_plans') data = { ok: true, orders: ORDERS };
+      if (body.action === 'my_plans') data = myPlans;
       return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(data) });
     }
     if (/gstatic\.com\/firebasejs/.test(url)) return route.fulfill({ status: 200, contentType: 'text/javascript', body: '' });
@@ -112,6 +112,26 @@ try {
     if (process.env.QA_DEBUG) console.log('ERRORES:', JSON.stringify(errors));
     const relevant = errors.filter((e) => !/^db\.collection\(\.\.\.\)/.test(e) /* solo el Firestore simulado */);
     check('Sin errores de JavaScript propios en planes.html', relevant.length === 0, relevant.join(' | '));
+    await ctx.close();
+  }
+
+  // 1b) Equipo sin pedidos (propietario, 21-10-2026): no se le dice «no tiene planes».
+  for (const [role, label] of [['super_admin', 'Superadministrador'], ['admin', 'Administrador'], ['auditor', 'Auditor, solo lectura']]) {
+    const { ctx, page } = await open(browser, { ok: true, orders: [], staff_role: role });
+    await page.goto(BASE + 'planes.html#mi-plan', { waitUntil: 'domcontentloaded' });
+    await page.waitForFunction((l) => { const t = (document.getElementById('bqMyPlan') || {}).textContent || ''; return /todavía no tiene/.test(t) || t.includes(l); }, label, { timeout: 15000 }).catch(() => null);
+    const txt = await page.textContent('#bqMyPlan');
+    const href = await page.getAttribute('#bqMyPlan a.bq-plan-cta', 'href').catch(() => null);
+    check(`Equipo (${role}): sin «no tiene planes», con su rol y acceso al Ops Center`,
+      !/todavía no tiene planes/.test(txt) && txt.includes(label) && href === 'admin.html#44-planes', txt.slice(0, 160) + ' · ' + href);
+    await ctx.close();
+  }
+  {
+    const { ctx, page } = await open(browser, { ok: true, orders: [], staff_role: null });
+    await page.goto(BASE + 'planes.html#mi-plan', { waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => /todavía no tiene|equipo BAQUEANO/.test((document.getElementById('bqMyPlan') || {}).textContent || ''), null, { timeout: 15000 }).catch(() => null);
+    const txt = await page.textContent('#bqMyPlan');
+    check('Negocio sin pedidos: sigue viendo «Tu cuenta todavía no tiene planes»', /todavía no tiene planes/.test(txt) && !/equipo BAQUEANO/.test(txt), txt.slice(0, 120));
     await ctx.close();
   }
 

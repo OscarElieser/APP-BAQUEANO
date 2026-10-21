@@ -8054,7 +8054,14 @@
       "photos": "Fotos in Ihrem Eintrag: bis zu {n}",
       "dutiesTitle": "Was BAQUEANO diesen Monat für Ihren Betrieb tut",
       "dutyDone": "Erledigt",
-      "report": "Monatsbericht"
+      "report": "Monatsbericht",
+      "staff": "Du bist mit einem Konto des BAQUEANO-Teams angemeldet ({role}). Pläne und Belege der Betriebe werden im Ops Center verwaltet.",
+      "staffOpen": "Pläne im Ops Center öffnen",
+      "staffRole": {
+        "super_admin": "Superadministrator",
+        "admin": "Administrator",
+        "auditor": "Prüfer, nur Lesezugriff"
+      }
     },
     "faq": {
       "title": "Häufige Fragen",

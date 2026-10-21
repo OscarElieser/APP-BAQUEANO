@@ -8054,7 +8054,14 @@
       "photos": "页面照片：最多 {n} 张",
       "dutiesTitle": "本月 BAQUEANO 为您的商家所做的事",
       "dutyDone": "已完成",
-      "report": "月度报告"
+      "report": "月度报告",
+      "staff": "你已使用 BAQUEANO 团队账户（{role}）登录。商家的方案和收据在 Ops Center 中管理。",
+      "staffOpen": "在 Ops Center 中打开方案",
+      "staffRole": {
+        "super_admin": "超级管理员",
+        "admin": "管理员",
+        "auditor": "审计员，只读"
+      }
     },
     "faq": {
       "title": "常见问题",
