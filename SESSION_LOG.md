@@ -18,6 +18,43 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 💼 PLANES: CADA PLAN CUMPLE LO QUE PROMETE (20-10-2026, 21:46–22:30) — rama feat/planes-cumplimiento
+- **Solicitud:** *"Quiero que adapte según el plan seleccionado para así cumplir lo que debemos de hacer. Revisa los planes y haces los ajustes que debemos hacer"*.
+- **Hallazgo 1:** el sistema de planes no existía en producción. No había catálogo, pedidos, comprobantes ni avisos, porque los SQL del 15-10 nunca se corrieron. El formulario de /planes no guardaba nada.
+- **Hallazgo 2:** «Mi plan» no mostraba ningún pedido pagado. En business-plans.js, `var box` (estadísticas) tapaba al contenedor dentro del forEach. Ahora se llama `statsBox`.
+- **Hallazgo 3:** Sendero iba primero en Aliados, pero su tarjeta dice ✗ «Primero en Aliados».
+- **Hallazgo 4:** «Primero en las búsquedas de BAQUI» (Mirador) y «BAQUI te recomienda primero» (Cumbre) no estaban implementados.
+- **Hecho:**
+  - `baqueano-plans/duties.ts`: única definición de cada plan, igual a planes.html. Fotos 6 / 20 / sin límite. Beneficios automáticos y entregas del equipo:
+    - Sendero: bienvenida en redes.
+    - Mirador: 2 publicaciones y 1 Crónica al mes, más verificación.
+    - Cumbre: 4 publicaciones, 1 Crónica, 1 pauta y el informe al mes, más verificación, video y armado de la ficha.
+  - Migración `20261021010000_plan_deliverables.sql`: registro de entregas con evidencia https. No se borra; se anula con motivo. Sin acceso anon ni authenticated.
+  - Acciones nuevas `duties_list`, `duty_record` y `duty_void` (rol verificado; el auditor solo lee). Las entregas públicas exigen enlace.
+  - `my_plans` devuelve las reglas del plan y lo entregado en el mes. Sendero ya no recibe la comparación con el mes anterior.
+  - Ops Center: «Compromisos del mes por plan» (`ops-plan-duties.js`) dentro de 44-planes. Muestra avance, navegación por mes, registrar o anular e historial.
+  - «Mi plan»: fotos permitidas, «Lo que BAQUEANO hace por tu negocio este mes» con enlaces de evidencia y, en Cumbre, «Informe del mes» (`plan-report.js`, datos reales, imprimible o en PDF).
+  - BAQUI (`_shared/baqueano-knowledge.ts`):
+    - Mirador y Cumbre van primero y se marcan `plan_featured`.
+    - Cumbre se recomienda cuando piden su servicio en su departamento.
+    - Siempre dice «aliado destacado»; nunca «el mejor».
+  - Aliados: Sendero ya no tiene prioridad.
+  - 78 claves nuevas en 8 idiomas (opsDuties.*, plans.duty.*, plans.report.*, plans.mine.*).
+- **Pruebas:**
+  - deno duties 6/6 y knowledge 4/4.
+  - SQL `plan_deliverables.test.sql` 9/9.
+  - Bloque completo de planes ×2 en PostgreSQL local, con imitaciones de cron, Vault y http: sin duplicar.
+  - Navegador `planes-qa.mjs` 18/18; agenda 32/32; mapa y reseñas 29/29.
+  - i18n: 0 faltantes y 0 errores; app sincronizada.
+  - BAQUI: los mismos 9 errores de tipos que ya existían; ninguno nuevo.
+- **Producción:**
+  - El propietario corrió el bloque 1 de «SQL planes BAQUEANO». Verificado:
+    - Precios 10/35/90 y fotos 6/20/∞.
+    - Pedidos, avisos y entregas creados; 1 tarea cron; IVA apagado.
+    - anon sin acceso a pedidos ni entregas; 3 triggers y 6 funciones.
+  - Desplegados `baqueano-plans` v4 y `baqueano-ai` v118.
+- **Pendiente del equipo (manual, ahora con registro):** publicar en redes, Crónicas, pauta, video, verificación y armado de ficha, y cargar cada entrega con su enlace en el Ops Center. La galería de fotos por negocio todavía no existe en el sistema: el límite por plan lo aplica el equipo al armar la ficha.
+
 ## ⭐ RESEÑAS REALES ACTIVAS (20-10-2026, 21:39–21:50)
 - *"Ahora sí prueba"*. Los intentos anteriores no habían llegado a la base. Se republicó la página del SQL con el enlace directo al editor del proyecto `heiudfpthqwtjrtluqlm`.
 - **Verificado en producción:**

@@ -232,6 +232,40 @@
     });
     box.appendChild(wrap);
   }
+  // ── Lo que incluye el plan y lo que BAQUEANO entregó este mes (20-10-2026) ──
+  // Mismas reglas que las tarjetas de planes.html (baqueano-plans/duties.ts).
+  var DUTY_FALLBACK = {
+    social_welcome: 'Publicación de bienvenida en redes', social_post: 'Publicaciones en Instagram, Facebook y TikTok',
+    social_ad: 'Publicación promocionada (pauta pagada)', chronicle: 'Publicación en Crónicas y Comunidad',
+    report_pdf: 'Informe mensual en PDF', verification: 'Sello BAQUEANO verificado',
+    video: 'Video de presentación', onboarding: 'Armado de tu ficha (textos y fotos)'
+  };
+  function renderEntitlements(info, o) {
+    var rules = o.rules || {};
+    info.appendChild(el('p', 'bq-my-plan-photos', rules.photo_limit == null
+      ? t('plans.mine.photosUnlimited', 'Fotos en tu ficha: sin límite, más video de presentación')
+      : t('plans.mine.photos', 'Fotos en tu ficha: hasta {n}', { n: rules.photo_limit })));
+    if (!o.duties || !o.duties.length) return;
+    var wrap = el('section', 'bq-my-plan-duties');
+    wrap.appendChild(el('h4', null, t('plans.mine.dutiesTitle', 'Lo que BAQUEANO hace por tu negocio este mes')));
+    var list = el('ul');
+    o.duties.forEach(function (d) {
+      var li = el('li', d.missing ? 'is-pending' : 'is-done');
+      li.appendChild(el('span', 'bq-duty-name', t('plans.duty.' + d.kind, DUTY_FALLBACK[d.kind] || d.kind)));
+      li.appendChild(el('span', 'bq-duty-state', d.cadence === 'monthly'
+        ? t('plans.mine.dutyMonthly', '{done} de {required} este mes', { done: Math.min(d.done, d.required), required: d.required })
+        : (d.missing ? t('plans.mine.dutyPending', 'Pendiente') : t('plans.mine.dutyDone', 'Hecho'))));
+      (o.delivered || []).filter(function (x) { return x.kind === d.kind && x.evidence_url && /^https:\/\//.test(x.evidence_url); }).forEach(function (x) {
+        var a = el('a', 'bq-duty-link', t('plans.mine.dutySee', 'Ver publicación'));
+        a.href = x.evidence_url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+        li.appendChild(a);
+      });
+      list.appendChild(li);
+    });
+    wrap.appendChild(list);
+    info.appendChild(wrap);
+  }
+
   function renderMine() {
     var box = document.getElementById('bqMyPlan');
     if (!box) return;
@@ -275,19 +309,29 @@
         if (o.promo_text) info.appendChild(el('p', 'bq-my-plan-promo', t('plans.mine.promo', 'Promoción en tu ficha: {text}', { text: o.promo_text })));
         if (o.stats) {
           // Estadísticas reales del mes (visitas a la ficha y contactos registrados en BAQUEANO).
+          // 20-10-2026: antes esta variable se llamaba «box» y tapaba al contenedor de «Mi plan»
+          // (var dentro del forEach): el pedido no se agregaba. Ahora es statsBox.
           var st = o.stats;
-          var box = el('dl', 'bq-my-plan-stats');
+          var statsBox = el('dl', 'bq-my-plan-stats');
           [[t('plans.mine.statViews', 'Visitas a tu ficha'), st.views], [t('plans.mine.statWa', 'Contactos por WhatsApp'), st.whatsapp], [t('plans.mine.statCalls', 'Llamadas'), st.calls], [t('plans.mine.statMessages', 'Mensajes'), st.messages]].forEach(function (pair) {
-            var d = el('div'); d.appendChild(el('dt', null, pair[0])); d.appendChild(el('dd', null, String(pair[1] || 0))); box.appendChild(d);
+            var d = el('div'); d.appendChild(el('dt', null, pair[0])); d.appendChild(el('dd', null, String(pair[1] || 0))); statsBox.appendChild(d);
           });
           info.appendChild(el('p', 'bq-my-plan-stats-title', t('plans.mine.statsTitle', 'Este mes ({month})', { month: st.month || '' })));
-          info.appendChild(box);
+          info.appendChild(statsBox);
           if (o.plan_code !== 'sendero') info.appendChild(el('p', null, t('plans.mine.statsPrev', 'Mes anterior: {views} visitas y {contacts} contactos.', { views: st.views_prev || 0, contacts: st.contacts_prev || 0 })));
         } else if (o.status === 'paid' && !o.business_id) {
           info.appendChild(el('p', null, t('plans.mine.statsPending', 'Tus estadísticas aparecen cuando tu local esté publicado.')));
         }
+        if (o.rules) renderEntitlements(info, o);
         if (o.business_application_code) info.appendChild(el('p', null, t('plans.mine.review', 'Publicación de tu local: solicitud {code} en revisión del equipo.', { code: o.business_application_code })));
         item.appendChild(info);
+        // Cumbre: «Informe mensual en PDF» con los datos reales del mes (js/plan-report.js).
+        if (o.plan_code === 'cumbre' && o.status === 'paid' && o.month && window.BaqueanoPlanReport) {
+          var rep = el('button', 'bq-plan-cta', t('plans.mine.report', 'Informe del mes'));
+          rep.type = 'button';
+          rep.addEventListener('click', function () { window.BaqueanoPlanReport.open(o); });
+          item.appendChild(rep);
+        }
         if (o.receipt_number) {
           var b = el('button', 'bq-plan-cta', t('plans.mine.receipt', 'Ver comprobante {n}', { n: o.receipt_number }));
           b.type = 'button';
