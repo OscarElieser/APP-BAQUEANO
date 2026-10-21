@@ -18,6 +18,11 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🔁 MIGRACIONES DESDE CERO: REINTENTOS AL DESCARGAR LA IMAGEN (21-10-2026, 07:10) — rama fix/migraciones-imagen-reintentos
+- **Hallazgo:** en main, «Migraciones desde cero» murió antes de aplicar nada: ECR cortó la descarga anónima de la imagen (*"toomanyrequests: Rate exceeded"*). En el PR había pasado 87/87.
+- **Hecho:** `tools/ci/migrations-replay.sh` reintenta 3 veces y usa la misma imagen oficial desde Docker Hub (`supabase/postgres`) si ECR no responde. Local: 87/87.
+- **Revisión de Supabase en main:** ya no falla por migraciones rotas sino por *"Remote migration versions not found in local migrations directory"*: el historial de producción tiene números de versión distintos a los archivos del repositorio. Reconciliarlo cambia el historial de producción y podría hacer que la integración aplique migraciones pendientes: queda para decisión del propietario.
+
 ## 🛡️ BLINDAJE: PUERTA DE CALIDAD Y SEGURIDAD EN CADA PR (21-10-2026, 06:35–08:00) — rama feat/blindaje-seguridad
 - **Solicitud:** *"Que hacemos para que no tenga fallas ni problemas de seguridad hay que blindar eso no cree"*; luego *"Ok hazlo te autorizo"*.
 - **Diagnóstico** (asesor de Supabase + GitHub):
