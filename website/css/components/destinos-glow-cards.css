@@ -1,0 +1,85 @@
+/*
+ * BAQUEANO · Bordes luminosos para tarjetas de Destinos (piloto, 2026-10-20).
+ *
+ * Alcance: solo páginas que enlazan este archivo y llevan data-bq-page="destinos".
+ * Sin JavaScript ni cambios al marcado: incluye el catálogo dinámico de Supabase.
+ * No modifica los estilos de movimiento, enlaces, fotos, botones ni el Modo Sol.
+ */
+
+@property --bq-destination-glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card) {
+  position: relative;
+}
+
+/* Fallback seguro: si el navegador no admite máscara recortada, no se dibuja
+   ninguna capa sobre fotografías, botones ni textos. */
+html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card)::after {
+  display: none;
+}
+
+@supports ((-webkit-mask-composite: xor) or (mask-composite: exclude)) {
+  html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card)::after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    padding: 2px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from var(--bq-destination-glow-angle),
+      #F65E01 0deg,
+      #F4E6C1 70deg,
+      #165D6F 150deg,
+      #4A7A5A 240deg,
+      #F65E01 360deg
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0.48;
+    pointer-events: none;
+    transition: opacity 250ms ease;
+    animation: bq-destination-glow-spin 6s linear infinite paused;
+  }
+
+  html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card):focus-within::after {
+    opacity: 1;
+    animation-play-state: running;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card):hover::after {
+      opacity: 1;
+      animation-play-state: running;
+    }
+  }
+}
+
+@keyframes bq-destination-glow-spin {
+  to { --bq-destination-glow-angle: 360deg; }
+}
+
+/* Accesibilidad: respetar preferencias de movimiento y conservar Modo Sol. */
+@media (prefers-reduced-motion: reduce) {
+  html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card)::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+html[data-bq-sun="on"][data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card)::after {
+  display: none !important;
+}
+
+@media print {
+  html[data-bq-page="destinos"] :is(.dest-highlight-card, .dest-catalog-card)::after {
+    display: none !important;
+  }
+}
