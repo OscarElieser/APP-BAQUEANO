@@ -8054,7 +8054,14 @@
       "photos": "Photos sur votre fiche : jusqu'à {n}",
       "dutiesTitle": "Ce que BAQUEANO fait pour votre commerce ce mois-ci",
       "dutyDone": "Fait",
-      "report": "Rapport du mois"
+      "report": "Rapport du mois",
+      "staff": "Vous êtes connecté avec un compte de l’équipe BAQUEANO ({role}). Les formules et reçus des commerces se gèrent depuis l’Ops Center.",
+      "staffOpen": "Ouvrir les formules dans l’Ops Center",
+      "staffRole": {
+        "super_admin": "Super-administrateur",
+        "admin": "Administrateur",
+        "auditor": "Auditeur, lecture seule"
+      }
     },
     "faq": {
       "title": "Questions fréquentes",

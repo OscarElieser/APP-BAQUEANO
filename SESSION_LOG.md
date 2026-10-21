@@ -18,6 +18,14 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 👤 «MI PLAN» PARA EL EQUIPO: SIN «NO TIENE PLANES» (21-10-2026, 09:55) — rama fix/mi-plan-equipo
+- **Solicitud:** *"recuerda que al superadministrador, administradores o auditores no le tienen que salir que: Tu cuenta todavía no tiene planes. Elegí uno arriba y te ayudamos por WhatsApp."*
+- **Hecho:**
+  - `baqueano-plans` (v7 en producción): `my_plans` devuelve `staff_role`, el rol ya verificado en el servidor con la sesión y la revocación RBAC. El navegador no puede inventarlo.
+  - `business-plans.js` (v=20261021-equipo-1): al equipo sin pedidos le muestra «Entraste con una cuenta del equipo BAQUEANO (rol)…» y el botón «Abrir Planes en el Ops Center» (`admin.html#44-planes`). Un negocio sin pedidos sigue viendo el mensaje de siempre. Si alguien del equipo tiene pedidos propios, los ve normal.
+  - 5 claves `plans.mine.staff*` en 8 idiomas; nombre del rol con respaldo en español.
+- **Pruebas:** `planes-qa.mjs` 22/22 (nuevos: superadministrador, administrador, auditor y negocio sin pedidos). i18n 0 errores; app 6652 claves; puerta de seguridad sin hallazgos nuevos.
+
 ## 🔁 MIGRACIONES DESDE CERO: REINTENTOS AL DESCARGAR LA IMAGEN (21-10-2026, 07:10) — rama fix/migraciones-imagen-reintentos
 - **Hallazgo:** en main, «Migraciones desde cero» murió antes de aplicar nada: ECR cortó la descarga anónima de la imagen (*"toomanyrequests: Rate exceeded"*). En el PR había pasado 87/87.
 - **Hecho:** `tools/ci/migrations-replay.sh` reintenta 3 veces y usa la misma imagen oficial desde Docker Hub (`supabase/postgres`) si ECR no responde. Local: 87/87.

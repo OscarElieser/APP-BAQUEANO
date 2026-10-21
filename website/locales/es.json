@@ -8054,7 +8054,14 @@
       "photos": "Fotos en tu ficha: hasta {n}",
       "dutiesTitle": "Lo que BAQUEANO hace por tu negocio este mes",
       "dutyDone": "Hecho",
-      "report": "Informe del mes"
+      "report": "Informe del mes",
+      "staff": "Entraste con una cuenta del equipo BAQUEANO ({role}). Los planes y comprobantes de los negocios se gestionan desde el Ops Center.",
+      "staffOpen": "Abrir Planes en el Ops Center",
+      "staffRole": {
+        "super_admin": "Superadministrador",
+        "admin": "Administrador",
+        "auditor": "Auditor, solo lectura"
+      }
     },
     "faq": {
       "title": "Preguntas frecuentes",

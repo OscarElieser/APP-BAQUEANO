@@ -8054,7 +8054,14 @@
       "photos": "Photos on your listing: up to {n}",
       "dutiesTitle": "What BAQUEANO does for your business this month",
       "dutyDone": "Done",
-      "report": "Monthly report"
+      "report": "Monthly report",
+      "staff": "You are signed in with a BAQUEANO team account ({role}). Business plans and receipts are managed from the Ops Center.",
+      "staffOpen": "Open Plans in the Ops Center",
+      "staffRole": {
+        "super_admin": "Super administrator",
+        "admin": "Administrator",
+        "auditor": "Auditor, read-only"
+      }
     },
     "faq": {
       "title": "Frequently asked questions",
