@@ -11,10 +11,22 @@
 # ============================================================================
 set -uo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-IMAGE="${SUPABASE_PG_IMAGE:-public.ecr.aws/supabase/postgres:17.6.1.011}"
+TAG="17.6.1.011"
 NAME="bq-migrations-replay-$$"
 cleanup() { docker rm -f "$NAME" >/dev/null 2>&1 || true; }
 trap cleanup EXIT
+# La misma imagen oficial está en ECR y en Docker Hub. ECR limita las descargas anónimas
+# («toomanyrequests: Rate exceeded», 21-10-2026 en main): se reintenta y se usa la otra fuente.
+IMAGE=""
+for attempt in 1 2 3; do
+  for candidate in ${SUPABASE_PG_IMAGE:-} "public.ecr.aws/supabase/postgres:$TAG" "supabase/postgres:$TAG"; do
+    if docker pull -q "$candidate" >/dev/null 2>&1; then IMAGE="$candidate"; break 2; fi
+    echo "⚠️ No se pudo descargar $candidate (intento $attempt)."
+  done
+  sleep $((attempt * 15))
+done
+[ -n "$IMAGE" ] || { echo "❌ No se pudo descargar la imagen de Postgres de Supabase."; exit 1; }
+echo "Imagen: $IMAGE"
 docker run -d --name "$NAME" -e POSTGRES_PASSWORD=postgres "$IMAGE" >/dev/null || exit 1
 for i in $(seq 1 60); do docker exec "$NAME" pg_isready -U postgres -h 127.0.0.1 >/dev/null 2>&1 && break; sleep 2; done
 sleep 6
