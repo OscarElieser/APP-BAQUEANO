@@ -18,6 +18,41 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🗓️ AGENDA BAQUEANO — PEDIDO RECIBIDO (20-10-2026, 16:43) — pendiente, rama feat/agenda-eventos
+- **Solicitud:** documento «Próximos eventos en Nicaragua».
+  - Sección «¡Nicaragua está de fiesta!» (AGENDA BAQUEANO) justo antes del bloque «Explorá Nicaragua en el mapa» + BAQÜI en el index.
+  - Ficha de evento, «Gestión de eventos» en el Ops Center con Supabase, .ics, Mi Viaje, «Cómo llegar» interno, BAQÜI, 8 idiomas, pruebas.
+  - Sin eventos ficticios y sin publicar sin autorización.
+- **Revisado:** Supabase ya tiene `events` (29 columnas) y `festivals`, las dos vacías: se amplían en vez de crear tablas nuevas.
+- **16:55:** *"RECUERDA SUBIR TODO A GITHUB"*. Cada rama se sube a GitHub; producción sigue sin tocarse.
+
+## ⭐ MAPA PRECISO, ESTRELLAS REALES Y FICHA POR LUGAR (20-10-2026, 16:16–17:10) — rama feat/mapa-resenas
+- **Solicitud:** prompt «Mapa turístico inteligente, navegación GPS y reseñas reales», con tres prioridades: ubicación precisa, opiniones auténticas y RLS. Un único sistema para /mapa, /destinos y la ficha.
+- **Precisión:**
+  - Solo 21 pines exactos (`map_ready`) trazan ruta. Approximate, reference y centroid (176) se muestran como «zona», sin ruta.
+  - Comprobado que varios «approximate» comparten el punto del pueblo.
+  - Leyenda con los conteos reales.
+  - El Ops Center ya no pone Managua cuando faltan coordenadas.
+- **Estrellas falsas fuera:**
+  - 35 cifras escritas a mano (destinos 16, todos-los-destinos 10, index 5, gastronomía 4).
+  - Valores por defecto 4.9/150/5.0 en scripts.
+  - Las 3 asignaciones automáticas de 5 estrellas en el Ops Center.
+  - Ahora: «Aún sin valoraciones» o el promedio real.
+  - No se borraron datos semilla.
+- **Seguridad:** la política vigente de `reviews` exponía el UID de Firebase. La migración `20261020120000_place_reviews.sql` cierra la tabla y deja solo funciones públicas sin UID y escritura vía Edge Function `baqueano-place-reviews` (token Firebase).
+- **Hecho:**
+  - Componente `js/bq-reviews.js` + `css/bq-reviews.css`.
+  - Ficha `destino.html?lugar=` (`js/place-ficha.js`).
+  - Ops Center pestaña 45 «Gestión de reseñas turísticas».
+  - 108 claves en 8 idiomas.
+- **Pruebas:**
+  - SQL 16/16 en Postgres local (falla sin la migración).
+  - Deno 5/5 + check.
+  - Navegador 29/29.
+  - Checks de i18n, build y SEO.
+- **Pendiente del propietario:** correr el SQL (artifact), autorizar el despliegue de la función y luego la publicación. Informe: `docs/MAPA-RESENAS.md`.
+- **Anotado para Android:** los modelos ponen 5.0 estrellas, coordenadas 12.0/-86.0 y 35 USD cuando falta el dato.
+
 ## 🧭 NAVEGACIÓN INTERNA «CÓMO LLEGAR» (20-10-2026, 15:40) — rama feat/navegacion-interna
 - **Solicitud:** prompt «BAQUEANO NICARAGUA — Sistema de navegación y rutas integrado» (no salir de BAQUEANO al tocar «Cómo llegar») y *"arma la navegacion interna que tenemos"*.
 - **Decisión:** ninguna clave del proyecto tiene habilitada la Routes API de Google (comprobado con consultas reales). Se arma con la base de mapas actual: Leaflet + OpenStreetMap, con rutas reales de Valhalla (FOSSGIS). Al tener clave y Map ID se agrega el proveedor de Google sin cambiar la interfaz.

@@ -262,7 +262,7 @@
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <!-- ⚡ NAVBAR CÁPSULA — MÁXIMA PRIORIDAD CSS -->
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
-  <link rel="stylesheet" href="css/pages/mapa-exact.css?v=20261009-atlas-3">
+  <link rel="stylesheet" href="css/pages/mapa-exact.css?v=20261020-precision-1">
   <!-- Sistema de diseño global BAQUEANO: siempre la última hoja -->
   <link rel="stylesheet" id="bq-system" href="css/baqueano-system.css?v=20261009-a11y-4">
   <meta name="theme-color" content="#165D6F">
@@ -396,6 +396,7 @@
         <span><i class="legend-dot is-nature"></i> <span data-i18n="home.destinations.filters.nature">Naturaleza</span></span>
         <span><i class="legend-dot is-culture"></i> <span data-i18n="nav.culture">Cultura</span></span>
       </div>
+      <p class="map-atlas-precision" id="mapAtlasPrecision" hidden></p>
       <p class="map-atlas-missing" id="mapAtlasMissing" hidden></p>
     </aside>
     <p class="map-atlas-empty" id="mapAtlasEmpty" role="status" data-i18n="pages.mapa.atlas.empty" hidden>No hay lugares con ese filtro.</p>
@@ -443,7 +444,7 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
   <script defer src="js/services/places-service.js?v=20261005-1"></script>
   <script defer src="js/territory-media-catalog.js?v=20260926-1"></script>
-  <script defer src="js/mapa-atlas.js?v=20261009-1"></script>
+  <script defer src="js/mapa-atlas.js?v=20261020-precision-1"></script>
 
   <script>
     // Inventario Maestro de Destinos Georreferenciados de Nicaragua
@@ -468,10 +469,10 @@
       { id: 'hosp_poco_a_poco', name: 'Poco a Poco Hostel', lat: 12.437010, lng: -86.881820, cat: 'hostales', type: 'Hostal', dept: 'León', muni: 'León', desc: 'Hostal real en León con piscina, cocina, bar, rooftop y espacios de trabajo.', img: 'assets/images/destinos/cerro_negro.jpg', color: '#F97316', verified: true, phone: '+505 8295-5534', amenities: ['Piscina', 'Rooftop', 'Cocina', 'Coworking'] },
       { id: 'hosp_victoriano', name: 'Hotel Victoriano', lat: 11.250690, lng: -85.872710, cat: 'hoteles', type: 'Hotel boutique', dept: 'Rivas', muni: 'San Juan del Sur', desc: 'Hotel boutique frente a la playa de San Juan del Sur con piscina y spa.', img: 'assets/images/destinos/Bahía de San Juan del Sur & Mirador del Cristo.jpg', color: '#EAB308', verified: true, phone: '+505 8679-0261', amenities: ['Frente a la playa', 'Piscina', 'Spa', 'Restaurante'] },
       { id: 'hosp_morgans_rock', name: "Morgan's Rock Reserve & Ecolodge", lat: 11.305520, lng: -85.920490, cat: 'ecolodges', type: 'Eco-lodge / resort', dept: 'Rivas', muni: 'San Juan del Sur', desc: 'Eco-lodge y reserva privada en Playa Ocotal con bungalows y naturaleza.', img: 'assets/images/destinos/selva_negra.jpg', color: '#165D6F', verified: true, phone: '+505 8670-7676', whatsapp: '+505 8988-7176', amenities: ['Bungalows en selva', 'Playa privada', 'Reserva natural'] },
-      { id: 'hosp_selva_negra', name: 'Selva Negra Ecolodge', lat: 12.999080, lng: -85.909280, cat: 'ecolodges', type: 'Eco-lodge / finca cafetalera', dept: 'Matagalpa', muni: 'Matagalpa', desc: 'Hotel y finca cafetalera histórica en las montañas con senderismo y aviturismo.', img: 'assets/images/destinos/selva_negra.jpg', color: '#165D6F', verified: true, phone: '+505 8100-9100', amenities: ['Cafetal de sombra', 'Senderismo de montaña', 'Cabañas', 'Aviturismo'] },
+      { id: 'hosp_selva_negra', name: 'Selva Negra Ecolodge', precision: 'reference', lat: 12.999080, lng: -85.909280, cat: 'ecolodges', type: 'Eco-lodge / finca cafetalera', dept: 'Matagalpa', muni: 'Matagalpa', desc: 'Hotel y finca cafetalera histórica en las montañas con senderismo y aviturismo.', img: 'assets/images/destinos/selva_negra.jpg', color: '#165D6F', verified: true, phone: '+505 8100-9100', amenities: ['Cafetal de sombra', 'Senderismo de montaña', 'Cabañas', 'Aviturismo'] },
       { id: 'hosp_san_jose', name: 'Hotel San José Matagalpa', lat: 12.921630, lng: -85.918770, cat: 'hoteles', type: 'Hotel', dept: 'Matagalpa', muni: 'Matagalpa', desc: 'Hotel urbano en el centro de Matagalpa detrás de la Iglesia San José.', img: 'assets/images/destinos/selva_negra.jpg', color: '#EAB308', verified: true, phone: '+505 2772-2544', whatsapp: '+505 8534-9559', amenities: ['Centro urbano', 'Desayuno', 'Wi-Fi'] },
-      { id: 'hosp_totoco', name: 'TOTOCO Eco Resort', lat: 11.480420, lng: -85.521830, cat: 'resorts', type: 'Eco-resort', dept: 'Rivas', muni: 'Altagracia / Ometepe', desc: 'Eco resort con cabañas de selva y enfoque regenerativo en Balgüe, Isla de Ometepe.', img: 'assets/images/destinos/isla_de_ometepe.jpg', color: '#0EA5E9', verified: true, phone: '+505 5815-0757', amenities: ['Cabañas de selva', 'Piscina panorámica', 'Enfoque regenerativo'] },
-      { id: 'hosp_yemaya', name: 'Yemaya Reefs', lat: 12.301950, lng: -82.985020, cat: 'resorts', type: 'Resort / hotel boutique', dept: 'Caribe Sur', muni: 'Little Corn Island', desc: 'Hotel boutique frente al mar en Little Corn Island con spa y deportes acuáticos.', img: 'assets/images/destinos/corn_island.jpg', color: '#0EA5E9', verified: true, phone: '+505 5830-2200', whatsapp: '+505 8415-5543', amenities: ['Frente al mar', 'Wellness & Spa', 'Kayak & Snorkel'] }
+      { id: 'hosp_totoco', name: 'TOTOCO Eco Resort', precision: 'reference', lat: 11.480420, lng: -85.521830, cat: 'resorts', type: 'Eco-resort', dept: 'Rivas', muni: 'Altagracia / Ometepe', desc: 'Eco resort con cabañas de selva y enfoque regenerativo en Balgüe, Isla de Ometepe.', img: 'assets/images/destinos/isla_de_ometepe.jpg', color: '#0EA5E9', verified: true, phone: '+505 5815-0757', amenities: ['Cabañas de selva', 'Piscina panorámica', 'Enfoque regenerativo'] },
+      { id: 'hosp_yemaya', name: 'Yemaya Reefs', precision: 'reference', lat: 12.301950, lng: -82.985020, cat: 'resorts', type: 'Resort / hotel boutique', dept: 'Caribe Sur', muni: 'Little Corn Island', desc: 'Hotel boutique frente al mar en Little Corn Island con spa y deportes acuáticos.', img: 'assets/images/destinos/corn_island.jpg', color: '#0EA5E9', verified: true, phone: '+505 5830-2200', whatsapp: '+505 8415-5543', amenities: ['Frente al mar', 'Wellness & Spa', 'Kayak & Snorkel'] }
     ];
 
     let mapInstance = null;

@@ -45,9 +45,12 @@
     raccs: 'Costa Caribe Sur', esteli: 'Estelí', granada: 'Granada', jinotega: 'Jinotega', leon: 'León', madriz: 'Madriz',
     managua: 'Managua', masaya: 'Masaya', matagalpa: 'Matagalpa', nueva_segovia: 'Nueva Segovia', rio_san_juan: 'Río San Juan', rivas: 'Rivas'
   };
-  var PRECISE = { exact: true, reference: true };
+  // Solo un pin exacto y validado (map_ready) traza ruta. Lo demás se dibuja como zona:
+  // varios "approximate" comparten el punto del pueblo, y llevar a un turista ahí en vez de
+  // a la cascada o al hotel sería inventar el destino. Misma regla que public.place_navigation.
+  var ROUTABLE = { exact: true };
 
-  var state = { map: null, cluster: null, places: [], missing: 0, group: 'all', query: '' };
+  var state = { map: null, cluster: null, places: [], missing: 0, areas: 0, group: 'all', query: '' };
 
   function i18n(key, fallback, vars) {
     var out = fallback;
@@ -80,18 +83,22 @@
       id: p.slug || p.id, name: p.name, lat: lat, lng: lng, group: cat[0], icon: cat[1],
       typeKey: 'destinos.verified.kind.' + p.category, type: p.type_label || '',
       dept: DEPARTMENTS[p.department_id] || '', deptId: p.department_id, zone: p.zone_text || '',
-      desc: p.short_description || '', precise: !!PRECISE[p.location_precision],
+      desc: p.short_description || '', precise: !!(ROUTABLE[p.location_precision] && p.map_ready), precision: p.location_precision,
       verification: p.verification_status || 'pending_review',
       photo: photoFor(p.department_id, p.id || p.name, attrs.cover_image || attrs.image),
-      link: p.department_id ? 'departamento.html?id=' + encodeURIComponent(String(p.department_id).replace(/_/g, '-')) + '&ir=' + encodeURIComponent(p.name) : 'destinos.html'
+      // Ficha propia del lugar (destino.html?lugar=): misma información y opiniones que /destinos.
+      link: p.slug ? 'destino.html?lugar=' + encodeURIComponent(p.slug) : (p.department_id ? 'departamento.html?id=' + encodeURIComponent(String(p.department_id).replace(/_/g, '-')) + '&ir=' + encodeURIComponent(p.name) : 'destinos.html'),
+      ratingTarget: p.slug ? 'place:' + p.slug : ''
     };
   }
   function fromFallback(p) {
     var cat = CATEGORY[p.cat] || ['cultura', 'fa-location-dot'];
+    var precision = p.precision || 'exact';
     return {
       id: p.id, name: p.name, lat: p.lat, lng: p.lng, group: cat[0], icon: cat[1], typeKey: '', type: p.type || '',
-      dept: p.dept || '', zone: p.muni || '', desc: p.desc || '', precise: true,
-      verification: p.verified ? 'verified' : 'pending_review', photo: p.img ? { src: p.img, territory: false } : null,
+      dept: p.dept || '', zone: p.muni || '', desc: p.desc || '', precise: precision === 'exact', precision: precision,
+      // Las fotos del respaldo estático son del territorio, no del establecimiento: se rotulan así.
+      verification: p.verified ? 'verified' : 'pending_review', photo: p.img ? { src: p.img, territory: /^assets\/images\/destinos\//.test(p.img) } : null,
       link: 'destinos.html?q=' + encodeURIComponent(p.name), phone: p.phone, whatsapp: p.whatsapp
     };
   }
@@ -132,17 +139,22 @@
     var photo = place.photo ? '<div class="bq-atlas-photo"><img src="' + esc(place.photo.src) + '" alt="" loading="lazy" decoding="async">' +
       (place.photo.territory ? '<span>' + esc(i18n('pages.destinos.live.territoryPhoto', 'Foto del territorio')) + '</span>' : '') + '</div>' : '';
     var where = [place.zone, place.dept].filter(Boolean).join(' · ');
-    var approx = place.precise ? '' : '<p class="bq-atlas-approx"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> ' + esc(i18n('pages.mapa.atlas.approx', 'Ubicación aproximada: confirmá el acceso con la comunidad o el prestador.')) + '</p>';
-    var route = 'https://www.google.com/maps/dir/?api=1&destination=' + place.lat + ',' + place.lng;
+    var approx = place.precise ? '' : '<p class="bq-atlas-approx"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> ' + esc(i18n('pages.mapa.atlas.approxArea', 'Zona aproximada: este punto no es la entrada del lugar. Confirmá el acceso con la comunidad o el prestador antes de salir.')) + '</p>';
+    // "Cómo llegar" abre el navegador interno; si el pin no es exacto, se abre en modo zona (sin trazar ruta).
+    var route = '<button type="button" data-bq-route data-lat="' + place.lat + '" data-lng="' + place.lng + '" data-precision="' + (place.precise ? 'exact' : 'area') + '" data-place-id="' + esc(place.id) + '"' +
+      (place.photo && !place.photo.territory ? ' data-image="' + esc(place.photo.src) + '"' : '') + '>' +
+      '<i class="fa-solid ' + (place.precise ? 'fa-diamond-turn-right' : 'fa-map-location-dot') + '" aria-hidden="true"></i> ' +
+      esc(place.precise ? i18n('pages.mapa.atlas.directions', 'Cómo llegar') : i18n('pages.mapa.atlas.viewArea', 'Ver la zona')) + '</button>';
     return '<article class="bq-atlas-card" style="--pin:' + g.color + '">' + photo +
       '<div class="bq-atlas-body">' +
       '<span class="bq-atlas-kind"><i class="fa-solid ' + place.icon + '" aria-hidden="true"></i> ' + esc(type) + '</span>' +
       '<h4 translate="no">' + esc(place.name) + '</h4>' +
       (where ? '<p class="bq-atlas-where" translate="no"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> ' + esc(where) + '</p>' : '') +
-      seal + (place.desc ? '<p class="bq-atlas-desc">' + esc(place.desc) + '</p>' : '') + approx +
+      seal + (place.ratingTarget ? '<p class="bq-atlas-rating" data-bq-rating="' + esc(place.ratingTarget) + '"><i class="fa-regular fa-star" aria-hidden="true"></i> <span data-i18n="reviews.summary.none">' + esc(i18n('reviews.summary.none', 'Aún sin valoraciones')) + '</span></p>' : '') +
+      (place.desc ? '<p class="bq-atlas-desc">' + esc(place.desc) + '</p>' : '') + approx +
       '<div class="bq-atlas-actions">' +
       '<a class="is-primary" href="' + esc(place.link) + '">' + esc(i18n('testimonials.viewDestination', 'Ver destino')) + '</a>' +
-      '<a href="' + route + '" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-diamond-turn-right" aria-hidden="true"></i> ' + esc(i18n('pages.mapa.atlas.directions', 'Cómo llegar')) + '</a>' +
+      route +
       '</div></div></article>';
   }
 
@@ -192,6 +204,20 @@
         row.append(dot, ' ', label, ' ');
         var n = document.createElement('small'); n.textContent = counts[g]; row.appendChild(n);
         legend.appendChild(row);
+      });
+    }
+    var exact = state.places.filter(function (p) { return p.precise; }).length;
+    var precision = document.getElementById('mapAtlasPrecision');
+    if (precision) {
+      precision.hidden = !state.places.length;
+      precision.replaceChildren();
+      [['', 'pages.mapa.atlas.legendExact', '{n} con ubicación exacta: «Cómo llegar» traza la ruta.', exact],
+        ['is-approx', 'pages.mapa.atlas.legendArea', '{n} en zona aproximada: no trazamos ruta hasta verificar la entrada.', state.places.length - exact]].forEach(function (row) {
+        if (!row[3]) return;
+        var line = document.createElement('span');
+        var mark = document.createElement('i'); mark.className = row[0]; mark.setAttribute('aria-hidden', 'true');
+        line.append(mark, i18n(row[1], row[2], { n: row[3] }));
+        precision.appendChild(line);
       });
     }
     var missing = document.getElementById('mapAtlasMissing');

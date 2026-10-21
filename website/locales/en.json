@@ -4402,7 +4402,11 @@
         "directions": "Directions",
         "missingNote": "{n} published places don't have verified coordinates yet and are not shown.",
         "statPlaces": "places on the map",
-        "empty": "No places match that filter."
+        "empty": "No places match that filter.",
+        "approxArea": "Approximate area: this point is not the entrance. Confirm access with the community or the provider before you go.",
+        "viewArea": "View the area",
+        "legendExact": "{n} with an exact location: “Directions” draws the route.",
+        "legendArea": "{n} in an approximate area: no route until the entrance is verified."
       }
     },
     "miNegocio": {
@@ -6763,7 +6767,13 @@
     "reviewResponseBody": "You can read the reply in your review history.",
     "newArrived": "You have {n} new notifications",
     "soundOnLabel": "Sound on: tap to mute",
-    "soundOffLabel": "Sound muted: tap to turn it on"
+    "soundOffLabel": "Sound muted: tap to turn it on",
+    "placeReviewApprovedTitle": "Your review was published",
+    "placeReviewApprovedBody": "Your review of {place} is now visible on BAQUEANO.",
+    "placeReviewRejectedTitle": "Your review wasn't approved",
+    "placeReviewRejectedBody": "Your review of {place} wasn't published. Reason: {reason}",
+    "placeReviewResponseTitle": "BAQUEANO replied to your review",
+    "placeReviewResponseBody": "There's an official reply to your review of {place}."
   },
   "baquiBrain": {
     "groupKids": "{adults} adults and {kids} children",
@@ -8251,5 +8261,125 @@
     },
     "tripRoute": "See the road route",
     "recenter": "Center the map on the route"
+  },
+  "reviews": {
+    "summary": {
+      "none": "No ratings yet",
+      "aria": "{avg} out of 5 stars, {n} approved reviews"
+    },
+    "starsAria": "{stars} out of 5 stars",
+    "count": {
+      "one": "1 approved review",
+      "many": "{n} approved reviews"
+    },
+    "title": "Visitor reviews",
+    "prompt": "Have you been here? Share your experience and help other travelers discover Nicaragua.",
+    "distTitle": "Rating breakdown",
+    "distAria": "{stars} stars: {n}",
+    "sort": {
+      "label": "Sort reviews",
+      "recent": "Most recent",
+      "best": "Highest rated",
+      "critical": "Critical"
+    },
+    "loading": "Loading reviews…",
+    "error": "We couldn't load the reviews. Please try again later.",
+    "empty": "Nobody has published a review of this place yet.",
+    "more": "See more reviews",
+    "edited": "edited",
+    "writtenIn": "Written in {lang}",
+    "officialReply": "Reply from BAQUEANO",
+    "anonymousName": "BAQUEANO traveler",
+    "reportBtn": "Report",
+    "reportForm": {
+      "reason": "Reason for the report",
+      "send": "Send report",
+      "cancel": "Cancel",
+      "sent": "Thank you. The team will review this review."
+    },
+    "reason": {
+      "spam": "Spam or advertising",
+      "insulto": "Insults or offensive content",
+      "falso": "Looks fake",
+      "datos_personales": "Personal data",
+      "suplantacion": "Impersonation",
+      "enlace_peligroso": "Dangerous link",
+      "discriminacion": "Discrimination",
+      "otro": "Other reason"
+    },
+    "mine": "Your review",
+    "edit": "Edit",
+    "login": "Sign in to write a review",
+    "loginHint": "We ask for an account to keep reviews authentic. Reading is open to everyone.",
+    "notLinked": "This destination is not yet linked to a verified BAQUEANO place, so it can't receive reviews yet.",
+    "errorGeneric": "The action couldn't be completed.",
+    "errorNetwork": "We couldn't connect to BAQUEANO. Check your internet and try again.",
+    "status": {
+      "pending": "Under review",
+      "published": "Published",
+      "rejected": "Not approved",
+      "hidden": "Hidden by the team",
+      "reported": "Under review after a report",
+      "reason": "Reason: {reason}"
+    },
+    "form": {
+      "rating": "Your rating",
+      "star": "{n} star",
+      "stars": "{n} stars",
+      "comment": "Comment (optional)",
+      "commentHint": "Tell us about access, what you did and what you'd recommend. At least 10 characters; no links or phone numbers.",
+      "nameMode": "How your name appears",
+      "nameFull": "Full name",
+      "nameShort": "First name and last initial",
+      "showAvatar": "Show my profile photo",
+      "consent": "I agree that my public name, rating and comment are shown on BAQUEANO. My review is moderated before it's published.",
+      "submit": "Submit review",
+      "update": "Save changes",
+      "withdraw": "Withdraw my review",
+      "withdrawConfirm": "Tap again to confirm",
+      "withdrawn": "You withdrew your review. It's no longer shown.",
+      "needRating": "Choose from 1 to 5 stars.",
+      "needLonger": "The comment needs at least 10 characters, or leave it empty.",
+      "needConsent": "To publish, you need to accept the notice.",
+      "sending": "Sending…",
+      "sent": "Thank you! Your review is under review and will be published once the team approves it."
+    }
+  },
+  "placeFicha": {
+    "loading": "Loading the page…",
+    "notFoundTitle": "Place not found",
+    "notFoundBody": "We couldn't find a published place with the ID “{id}”.",
+    "backToMap": "Back to the map",
+    "territoryPhoto": "Photo of the department, not of this place",
+    "verified": "Verified information",
+    "pending": "Information pending verification",
+    "ratingLoading": "Loading ratings…",
+    "directions": "Directions",
+    "viewArea": "View the area",
+    "onMap": "See on the map",
+    "addTrip": "Add to My trip",
+    "inTrip": "In My trip",
+    "spanishOnly": "Original content in Spanish. Translation of place pages is in progress.",
+    "about": "About this place",
+    "practical": "Practical information",
+    "fact": {
+      "activities": "Activities",
+      "facts": "About the place",
+      "amenities": "Services",
+      "prices": "Prices and opening hours",
+      "contact": "Contact",
+      "address": "Address"
+    },
+    "checkedOn": "checked on {date}",
+    "location": "Location",
+    "precisionExact": "Verified exact location: “Directions” draws the route to this point.",
+    "precisionArea": "Approximate area: the map point is not the entrance. Confirm access with the community or the provider before you go.",
+    "precisionMissing": "This place doesn't have verified coordinates yet. Ask the community or the provider how to get there.",
+    "source": "Source of the information",
+    "verifiedOn": "verified on {date}"
+  },
+  "opsPlaceReviews": {
+    "navLabel": "Place reviews",
+    "desc": "Place ratings and reviews: moderation, reports and official replies."
   }
 }

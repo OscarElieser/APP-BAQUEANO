@@ -62,7 +62,7 @@
             <a href="https://api.whatsapp.com/send?phone=${p.phone}&text=${whatsappText}" target="_blank" rel="noopener noreferrer" class="btn-card-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
             <button type="button" class="btn-card-route btn-action-route" data-lat="${p.lat}" data-lng="${p.lng}" data-name="${p.name}" data-id="${p.id}"><i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar</button>
           </div>
-          <div class="dest-footer-strip"><span class="dest-rating-gold"><i class="fa-solid fa-star"></i> ${p.rating} (${p.reviews} reseñas)</span><span class="dest-coop-name">${p.host}</span></div>
+          <div class="dest-footer-strip"><span class="dest-rating-gold" data-bq-rating="destination:${p.id}"><i class="fa-regular fa-star"></i> <span data-i18n="reviews.summary.none">Aún sin valoraciones</span></span><span class="dest-coop-name">${p.host}</span></div>
         </div>
       </div>`;
   }

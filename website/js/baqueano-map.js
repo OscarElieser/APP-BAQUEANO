@@ -156,9 +156,7 @@ window.BaqueanoMap = (function() {
         <div class="baqueano-map-pin-body">
           <i class="fa-solid ${style.icon}"></i>
         </div>
-        <div class="baqueano-map-pin-rating">
-          <i class="fa-solid fa-star"></i> ${rating || '5.0'}
-        </div>
+        ${rating ? `<div class="baqueano-map-pin-rating"><i class="fa-solid fa-star"></i> ${rating}</div>` : ''}
       </div>
     `;
 
@@ -195,7 +193,7 @@ window.BaqueanoMap = (function() {
           <h4 class="map-popup-title">${place.name}</h4>
           <div class="map-popup-meta">
             <span><i class="fa-solid fa-location-dot" style="color: var(--terracotta);"></i> ${dept}</span>
-            <span><i class="fa-solid fa-star" style="color: #F59E0B;"></i> ${place.rating || '4.9'} (${place.reviewCount || '150'})</span>
+            <span data-bq-rating="place:${place.id || ''}"><i class="fa-regular fa-star" style="color: #F59E0B;"></i> <span data-i18n="reviews.summary.none">Aún sin valoraciones</span></span>
           </div>
           <p class="map-popup-desc">${place.description || ''}</p>
           ${place.priceDetail ? `
@@ -492,7 +490,8 @@ window.BaqueanoMap = (function() {
     places.forEach(place => {
       if (!place.lat || !place.lng) return;
 
-      const icon = createCustomPin(place.category, place.rating);
+      // Sin calificación inventada: el pin solo muestra estrellas con reseñas reales.
+      const icon = createCustomPin(place.category, place.reviewSummary && place.reviewSummary.count > 0 ? Number(place.reviewSummary.average).toFixed(1) : '');
       const popupHtml = buildPopupContent(place);
 
       const marker = L.marker([place.lat, place.lng], {

@@ -4402,7 +4402,11 @@
         "directions": "Como chegar",
         "missingNote": "{n} lugares publicados ainda não têm coordenadas verificadas e não são exibidos.",
         "statPlaces": "lugares no mapa",
-        "empty": "Nenhum lugar com esse filtro."
+        "empty": "Nenhum lugar com esse filtro.",
+        "approxArea": "Área aproximada: este ponto não é a entrada do local. Confirme o acesso com a comunidade ou o prestador antes de sair.",
+        "viewArea": "Ver a área",
+        "legendExact": "{n} com localização exata: «Como chegar» traça a rota.",
+        "legendArea": "{n} em área aproximada: sem rota até verificarmos a entrada."
       }
     },
     "miNegocio": {
@@ -6763,7 +6767,13 @@
     "reviewResponseBody": "Você pode ler a resposta no seu histórico de avaliações.",
     "newArrived": "Você tem {n} novas notificações",
     "soundOnLabel": "Som ativado: toque para silenciar",
-    "soundOffLabel": "Som silenciado: toque para ativar"
+    "soundOffLabel": "Som silenciado: toque para ativar",
+    "placeReviewApprovedTitle": "Sua avaliação foi publicada",
+    "placeReviewApprovedBody": "Sua avaliação sobre {place} já aparece na BAQUEANO.",
+    "placeReviewRejectedTitle": "Sua avaliação não foi aprovada",
+    "placeReviewRejectedBody": "Sua avaliação sobre {place} não foi publicada. Motivo: {reason}",
+    "placeReviewResponseTitle": "A BAQUEANO respondeu sua avaliação",
+    "placeReviewResponseBody": "Há uma resposta oficial à sua avaliação sobre {place}."
   },
   "baquiBrain": {
     "groupKids": "{adults} adultos e {kids} crianças",
@@ -8251,5 +8261,125 @@
     },
     "tripRoute": "Ver a rota pela estrada",
     "recenter": "Centralizar o mapa na rota"
+  },
+  "reviews": {
+    "summary": {
+      "none": "Ainda sem avaliações",
+      "aria": "{avg} de 5 estrelas, {n} avaliações aprovadas"
+    },
+    "starsAria": "{stars} de 5 estrelas",
+    "count": {
+      "one": "1 avaliação aprovada",
+      "many": "{n} avaliações aprovadas"
+    },
+    "title": "Avaliações dos visitantes",
+    "prompt": "Já conheceu este lugar? Compartilhe sua experiência e ajude outros viajantes a descobrir a Nicarágua.",
+    "distTitle": "Distribuição das avaliações",
+    "distAria": "{stars} estrelas: {n}",
+    "sort": {
+      "label": "Ordenar avaliações",
+      "recent": "Recentes",
+      "best": "Melhores",
+      "critical": "Críticas"
+    },
+    "loading": "Carregando avaliações…",
+    "error": "Não conseguimos carregar as avaliações. Tente novamente mais tarde.",
+    "empty": "Ninguém publicou uma avaliação sobre este lugar ainda.",
+    "more": "Ver mais avaliações",
+    "edited": "editada",
+    "writtenIn": "Escrita em {lang}",
+    "officialReply": "Resposta da BAQUEANO",
+    "anonymousName": "Viajante BAQUEANO",
+    "reportBtn": "Denunciar",
+    "reportForm": {
+      "reason": "Motivo da denúncia",
+      "send": "Enviar denúncia",
+      "cancel": "Cancelar",
+      "sent": "Obrigado. A equipe vai revisar esta avaliação."
+    },
+    "reason": {
+      "spam": "Spam ou publicidade",
+      "insulto": "Insultos ou ofensas",
+      "falso": "Parece falsa",
+      "datos_personales": "Dados pessoais",
+      "suplantacion": "Falsidade ideológica",
+      "enlace_peligroso": "Link perigoso",
+      "discriminacion": "Discriminação",
+      "otro": "Outro motivo"
+    },
+    "mine": "Sua avaliação",
+    "edit": "Editar",
+    "login": "Entre para avaliar",
+    "loginHint": "Pedimos uma conta para manter avaliações autênticas. Ler é livre.",
+    "notLinked": "Este destino ainda não está vinculado a um lugar verificado da BAQUEANO, por isso ainda não recebe avaliações.",
+    "errorGeneric": "Não foi possível concluir a ação.",
+    "errorNetwork": "Não conseguimos conectar à BAQUEANO. Verifique sua internet e tente novamente.",
+    "status": {
+      "pending": "Em revisão",
+      "published": "Publicada",
+      "rejected": "Não aprovada",
+      "hidden": "Ocultada pela equipe",
+      "reported": "Em revisão por denúncia",
+      "reason": "Motivo: {reason}"
+    },
+    "form": {
+      "rating": "Sua nota",
+      "star": "{n} estrela",
+      "stars": "{n} estrelas",
+      "comment": "Comentário (opcional)",
+      "commentHint": "Conte como foi o acesso, o que fez e o que recomendaria. Mínimo de 10 caracteres; sem links nem telefones.",
+      "nameMode": "Como seu nome aparece",
+      "nameFull": "Nome completo",
+      "nameShort": "Nome e inicial do sobrenome",
+      "showAvatar": "Mostrar minha foto de perfil",
+      "consent": "Aceito que meu nome público, nota e comentário apareçam na BAQUEANO. Minha avaliação passa por moderação antes de ser publicada.",
+      "submit": "Enviar avaliação",
+      "update": "Salvar alterações",
+      "withdraw": "Retirar minha avaliação",
+      "withdrawConfirm": "Toque de novo para confirmar",
+      "withdrawn": "Você retirou sua avaliação. Ela não aparece mais.",
+      "needRating": "Escolha de 1 a 5 estrelas.",
+      "needLonger": "O comentário precisa de pelo menos 10 caracteres, ou deixe-o vazio.",
+      "needConsent": "Para publicar, você precisa aceitar o aviso.",
+      "sending": "Enviando…",
+      "sent": "Obrigado! Sua avaliação está em revisão e será publicada quando a equipe aprovar."
+    }
+  },
+  "placeFicha": {
+    "loading": "Carregando a ficha…",
+    "notFoundTitle": "Lugar não encontrado",
+    "notFoundBody": "Não encontramos um lugar publicado com o identificador «{id}».",
+    "backToMap": "Voltar ao mapa",
+    "territoryPhoto": "Foto do departamento, não deste lugar",
+    "verified": "Informação verificada",
+    "pending": "Informação a verificar",
+    "ratingLoading": "Carregando avaliações…",
+    "directions": "Como chegar",
+    "viewArea": "Ver a área",
+    "onMap": "Ver no mapa",
+    "addTrip": "Adicionar a Minha viagem",
+    "inTrip": "Em Minha viagem",
+    "spanishOnly": "Conteúdo original em espanhol. A tradução das fichas está em andamento.",
+    "about": "Sobre este lugar",
+    "practical": "Informações práticas",
+    "fact": {
+      "activities": "Atividades",
+      "facts": "Dados do lugar",
+      "amenities": "Serviços",
+      "prices": "Preços e horários",
+      "contact": "Contato",
+      "address": "Endereço"
+    },
+    "checkedOn": "consultado em {date}",
+    "location": "Localização",
+    "precisionExact": "Localização exata verificada: «Como chegar» traça a rota até este ponto.",
+    "precisionArea": "Área aproximada: o ponto no mapa não é a entrada do local. Confirme o acesso com a comunidade ou o prestador antes de sair.",
+    "precisionMissing": "Este lugar ainda não tem coordenadas verificadas. Pergunte à comunidade ou ao prestador como chegar.",
+    "source": "Fonte da informação",
+    "verifiedOn": "verificado em {date}"
+  },
+  "opsPlaceReviews": {
+    "navLabel": "Avaliações turísticas",
+    "desc": "Notas e avaliações dos lugares: revisão, denúncias e resposta oficial."
   }
 }

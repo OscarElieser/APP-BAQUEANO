@@ -4402,7 +4402,11 @@
         "directions": "交通指南",
         "missingNote": "有 {n} 个已发布的地点尚无经核实的坐标，因此未显示。",
         "statPlaces": "个地点在地图上",
-        "empty": "没有符合该筛选条件的地点。"
+        "empty": "没有符合该筛选条件的地点。",
+        "approxArea": "大致区域：此点不是该地点的入口。出发前请向社区或服务方确认进入方式。",
+        "viewArea": "查看区域",
+        "legendExact": "{n} 个精确位置：“交通指南”可绘制路线。",
+        "legendArea": "{n} 个大致区域：入口核实前不绘制路线。"
       }
     },
     "miNegocio": {
@@ -6763,7 +6767,13 @@
     "reviewResponseBody": "你可以在评价记录中查看回复。",
     "newArrived": "你有 {n} 条新通知",
     "soundOnLabel": "声音已开启：点击静音",
-    "soundOffLabel": "已静音：点击开启声音"
+    "soundOffLabel": "已静音：点击开启声音",
+    "placeReviewApprovedTitle": "你的评价已发布",
+    "placeReviewApprovedBody": "你对 {place} 的评价已在 BAQUEANO 上显示。",
+    "placeReviewRejectedTitle": "你的评价未通过审核",
+    "placeReviewRejectedBody": "你对 {place} 的评价未发布。原因：{reason}",
+    "placeReviewResponseTitle": "BAQUEANO 回复了你的评价",
+    "placeReviewResponseBody": "你对 {place} 的评价有一条官方回复。"
   },
   "baquiBrain": {
     "groupKids": "{adults} 位成人和 {kids} 名儿童",
@@ -8251,5 +8261,125 @@
     },
     "tripRoute": "查看公路路线",
     "recenter": "将地图居中到路线"
+  },
+  "reviews": {
+    "summary": {
+      "none": "暂无评分",
+      "aria": "5 星中的 {avg} 星，{n} 条已审核评价"
+    },
+    "starsAria": "5 星中的 {stars} 星",
+    "count": {
+      "one": "1 条已审核评价",
+      "many": "{n} 条已审核评价"
+    },
+    "title": "游客评价",
+    "prompt": "去过这里吗？分享你的经历，帮助其他旅行者发现尼加拉瓜。",
+    "distTitle": "评分分布",
+    "distAria": "{stars} 星：{n}",
+    "sort": {
+      "label": "评价排序",
+      "recent": "最新",
+      "best": "最高分",
+      "critical": "批评性评价"
+    },
+    "loading": "正在加载评价…",
+    "error": "无法加载评价，请稍后再试。",
+    "empty": "还没有人发布关于此地的评价。",
+    "more": "查看更多评价",
+    "edited": "已编辑",
+    "writtenIn": "以{lang}撰写",
+    "officialReply": "BAQUEANO 的回复",
+    "anonymousName": "BAQUEANO 旅行者",
+    "reportBtn": "举报",
+    "reportForm": {
+      "reason": "举报原因",
+      "send": "提交举报",
+      "cancel": "取消",
+      "sent": "谢谢，团队将审核这条评价。"
+    },
+    "reason": {
+      "spam": "垃圾信息或广告",
+      "insulto": "辱骂或冒犯内容",
+      "falso": "疑似虚假",
+      "datos_personales": "个人信息",
+      "suplantacion": "冒充他人",
+      "enlace_peligroso": "危险链接",
+      "discriminacion": "歧视",
+      "otro": "其他原因"
+    },
+    "mine": "你的评价",
+    "edit": "编辑",
+    "login": "登录后发表评价",
+    "loginHint": "为保证评价真实，发表需要账号；阅读对所有人开放。",
+    "notLinked": "该目的地尚未关联到 BAQUEANO 已核实的地点，因此暂时无法接收评价。",
+    "errorGeneric": "无法完成该操作。",
+    "errorNetwork": "无法连接 BAQUEANO，请检查网络后重试。",
+    "status": {
+      "pending": "审核中",
+      "published": "已发布",
+      "rejected": "未通过",
+      "hidden": "已被团队隐藏",
+      "reported": "因举报审核中",
+      "reason": "原因：{reason}"
+    },
+    "form": {
+      "rating": "你的评分",
+      "star": "{n} 星",
+      "stars": "{n} 星",
+      "comment": "评论（选填）",
+      "commentHint": "说说交通情况、你做了什么以及你的建议。至少 10 个字符；不能包含链接或电话号码。",
+      "nameMode": "姓名显示方式",
+      "nameFull": "全名",
+      "nameShort": "名字和姓氏首字母",
+      "showAvatar": "显示我的头像",
+      "consent": "我同意在 BAQUEANO 上显示我的公开姓名、评分和评论。评价发布前会经过审核。",
+      "submit": "提交评价",
+      "update": "保存修改",
+      "withdraw": "撤回我的评价",
+      "withdrawConfirm": "再点一次以确认",
+      "withdrawn": "你已撤回评价，它将不再显示。",
+      "needRating": "请选择 1 到 5 星。",
+      "needLonger": "评论至少需要 10 个字符，或者留空。",
+      "needConsent": "发布前需要同意上述说明。",
+      "sending": "正在提交…",
+      "sent": "谢谢！你的评价正在审核，团队通过后即会发布。"
+    }
+  },
+  "placeFicha": {
+    "loading": "正在加载页面…",
+    "notFoundTitle": "未找到该地点",
+    "notFoundBody": "未找到标识为“{id}”的已发布地点。",
+    "backToMap": "返回地图",
+    "territoryPhoto": "这是省份照片，并非该地点",
+    "verified": "信息已核实",
+    "pending": "信息待核实",
+    "ratingLoading": "正在加载评分…",
+    "directions": "交通指南",
+    "viewArea": "查看区域",
+    "onMap": "在地图上查看",
+    "addTrip": "加入我的行程",
+    "inTrip": "已在我的行程中",
+    "spanishOnly": "原文为西班牙语，地点页面的翻译正在进行中。",
+    "about": "关于此地",
+    "practical": "实用信息",
+    "fact": {
+      "activities": "活动",
+      "facts": "地点资料",
+      "amenities": "服务",
+      "prices": "价格与开放时间",
+      "contact": "联系方式",
+      "address": "地址"
+    },
+    "checkedOn": "于 {date} 查询",
+    "location": "位置",
+    "precisionExact": "已核实的精确位置：“交通指南”可绘制到此点的路线。",
+    "precisionArea": "大致区域：地图上的点不是该地点的入口。出发前请向社区或服务方确认进入方式。",
+    "precisionMissing": "该地点尚无已核实的坐标，请向社区或服务方询问如何前往。",
+    "source": "信息来源",
+    "verifiedOn": "于 {date} 核实"
+  },
+  "opsPlaceReviews": {
+    "navLabel": "旅游评价",
+    "desc": "地点评分与评价：审核、举报与官方回复。"
   }
 }

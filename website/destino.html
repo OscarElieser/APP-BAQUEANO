@@ -44,6 +44,7 @@
   <link rel="stylesheet" href="css/headings-system.css?v=20260927-1">
   <link rel="stylesheet" href="css/navigation-mega.css?v=20261004-menu-2">
   <link rel="stylesheet" href="css/destination-dossier.css?v=20261004-comunidad-1">
+  <link rel="stylesheet" href="css/place-ficha.css?v=20261020-resenas-1">
 
   <style>
     body {
@@ -363,6 +364,9 @@
   <script src="js/baqueano-api.js"></script>
   <script src="js/baqueano-trip-store.js?v=20261009-1"></script>
   <script src="js/global-injector.js"></script>
+  <!-- 20-10-2026: ficha propia de cada lugar publicado (destino.html?lugar=<slug>) desde Supabase. -->
+  <script src="js/services/places-service.js?v=20261005-1"></script>
+  <script src="js/place-ficha.js?v=20261020-resenas-1"></script>
   <!-- Experiencias aprobadas de la comunidad para este destino (Edge Function baqueano-community). -->
   <script defer src="js/community-api.js?v=20261004-1"></script>
   <script defer src="js/destination-community.js?v=20261004-1"></script>
@@ -371,6 +375,12 @@
     document.addEventListener('DOMContentLoaded', function() {
       const params = new URLSearchParams(window.location.search);
       const destId = params.get('id');
+      // Ficha de un lugar de Supabase (desde /mapa «Ver destino»): mismo sistema de opiniones.
+      const placeSlug = params.get('lugar');
+      if (placeSlug && window.BaqueanoPlaceFicha) {
+        window.BaqueanoPlaceFicha.render(document.getElementById('destinoContentCard'), placeSlug);
+        return;
+      }
 
       if (!destId) {
         window.location.replace('destinos.html');
@@ -513,6 +523,9 @@
             </div>
           </div>
         </div>
+
+        <!-- Opiniones reales (public.reviews), las mismas que en /mapa y /destinos. -->
+        <section class="bq-pf-reviews" id="opiniones" data-bq-reviews="destination:${encodeURIComponent(dest.id)}"></section>
 
         <div class="bq-dossier-footer-bar">
           <div class="bq-dossier-btn-group">

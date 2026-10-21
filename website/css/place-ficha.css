@@ -1,0 +1,55 @@
+/* ============================================================================
+ * 🧭 BAQUEANO — FICHA DE LUGAR (place-ficha.css)
+ * 🎯 POR QUÉ: la ficha de destino.html?lugar=<slug> vive sobre la tarjeta oscura de
+ *   destino.html; los textos necesitan contraste AA sobre #0D263B.
+ * 📦 QUÉ: estilos de js/place-ficha.js (prefijo bq-pf-).
+ * ============================================================================ */
+.bq-pf { color: #E2E8F0; }
+.bq-pf-loading, .bq-pf-missing { padding: 60px 24px; text-align: center; color: #CBD5E1; }
+.bq-pf-missing i { font-size: 2.4rem; color: #FB923C; }
+.bq-pf-missing h1 { font: 800 1.5rem/1.2 'League Spartan', system-ui, sans-serif; color: #FFFFFF; }
+
+.bq-pf-hero { position: relative; min-height: 340px; display: grid; align-items: end; background: #0F2A40; }
+.bq-pf-hero.is-nophoto { min-height: 0; }
+.bq-pf-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.bq-pf-hero:not(.is-nophoto)::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,24,39,0.05) 20%, rgba(8,24,39,0.92) 100%); }
+.bq-pf-photo-note { position: absolute; top: 12px; right: 12px; z-index: 2; padding: 4px 10px; border-radius: 99px; background: rgba(8,24,39,0.82); color: #F4E6C1; font-size: 0.74rem; font-weight: 700; }
+.bq-pf-hero-text { position: relative; z-index: 1; display: grid; gap: 8px; padding: 28px 28px 22px; }
+.bq-pf-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.bq-pf-badge { padding: 4px 10px; border-radius: 99px; background: rgba(8,24,39,0.78); border: 1px solid rgba(244,230,193,0.35); color: #F4E6C1; font-size: 0.76rem; font-weight: 700; }
+.bq-pf-badge.is-verified { background: #14532D; border-color: #22C55E; color: #FFFFFF; }
+.bq-pf-badge.is-pending { background: #78350F; border-color: #F59E0B; color: #FFFFFF; }
+.bq-pf-title { margin: 0; font: 800 clamp(1.7rem, 4vw, 2.6rem)/1.1 'League Spartan', system-ui, sans-serif; color: #FFFFFF; }
+.bq-pf-zone { margin: 0; color: #E2E8F0; }
+.bq-pf-rating { justify-self: start; padding: 6px 12px; border-radius: 99px; background: #FFFFFF; color: #0F172A; font-weight: 700; font-size: 0.88rem; }
+.bq-pf-rating i { color: #B45309; }
+.bq-pf-rating.is-empty { background: #F1F5F9; }
+
+.bq-pf-actions { display: flex; flex-wrap: wrap; gap: 10px; padding: 18px 28px; border-bottom: 1px solid rgba(244,230,193,0.15); }
+.bq-pf-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 12px; border: 2px solid #C2410C; background: #C2410C; color: #FFFFFF; font: 800 0.9rem/1.1 'League Spartan', system-ui, sans-serif; text-decoration: none; cursor: pointer; }
+.bq-pf-btn.is-ghost { background: transparent; border-color: #F4E6C1; color: #F4E6C1; }
+.bq-pf-btn:focus-visible { outline: 3px solid #FFFFFF; outline-offset: 2px; }
+.bq-pf-langnote { margin: 16px 28px 0; padding: 10px 14px; border-radius: 10px; background: rgba(244,230,193,0.1); color: #F4E6C1; font-size: 0.85rem; }
+
+.bq-pf-section { padding: 22px 28px 4px; }
+.bq-pf-section h2 { margin: 0 0 10px; font: 800 1.15rem/1.25 'League Spartan', system-ui, sans-serif; color: #F4E6C1; }
+.bq-pf-section h2 i { color: #FB923C; }
+.bq-pf-section p { margin: 0; line-height: 1.65; color: #E2E8F0; }
+.bq-pf-section a { color: #7DD3FC; }
+.bq-pf-facts { display: grid; grid-template-columns: minmax(150px, 220px) 1fr; gap: 10px 18px; margin: 0; }
+.bq-pf-facts dt { font-weight: 800; color: #F4E6C1; }
+.bq-pf-facts dt i { color: #FB923C; width: 18px; }
+.bq-pf-facts dd { margin: 0; line-height: 1.55; }
+.bq-pf-precision { padding: 10px 14px; border-radius: 10px; }
+.bq-pf-precision.is-exact { background: rgba(34,197,94,0.14); }
+.bq-pf-precision.is-area, .bq-pf-precision.is-missing { background: rgba(245,158,11,0.14); }
+.bq-pf-reviews { margin: 24px 28px 28px !important; }
+
+@media (max-width: 640px) {
+  .bq-pf-hero { min-height: 260px; }
+  .bq-pf-hero-text, .bq-pf-actions, .bq-pf-section { padding-left: 16px; padding-right: 16px; }
+  .bq-pf-langnote { margin-left: 16px; margin-right: 16px; }
+  .bq-pf-facts { grid-template-columns: 1fr; }
+  .bq-pf-facts dd { margin-bottom: 6px; }
+  .bq-pf-reviews { margin: 20px 12px !important; }
+}

@@ -821,7 +821,9 @@ window.BaqueanoIndexFeatures = (function () {
     places.forEach((place) => {
       if (!place.lat || !place.lng) return;
       const catStyle = CATEGORY_STYLES[place.category] || { color: '#F65E01', icon: 'fa-map-pin', label: 'Destino' };
-      const rating = place.rating ? Number(place.rating).toFixed(1) : '4.9';
+      // Solo reseñas reales aprobadas (resumen de public.reviews); los datos semilla no traen calificación válida.
+      const summary = place.reviewSummary && place.reviewSummary.count > 0 ? place.reviewSummary : null;
+      const rating = summary ? Number(summary.average).toFixed(1) : '';
 
       // Pin vectorial con halo luminoso, icono temático y badge de calificación
       const pinHtml = `
@@ -830,9 +832,7 @@ window.BaqueanoIndexFeatures = (function () {
           <div class="baqueano-map-pin-body">
             <i class="fa-solid ${catStyle.icon}"></i>
           </div>
-          <div class="baqueano-map-pin-rating">
-            <i class="fa-solid fa-star"></i> ${rating}
-          </div>
+          ${rating ? `<div class="baqueano-map-pin-rating"><i class="fa-solid fa-star"></i> ${rating}</div>` : ''}
         </div>
       `;
 
@@ -865,7 +865,7 @@ window.BaqueanoIndexFeatures = (function () {
             <h4 class="map-popup-title">${escapeHtml(place.name)}</h4>
             <div class="map-popup-meta">
               <span><i class="fa-solid fa-location-dot" style="color: #F65E01;"></i> ${escapeHtml(dept)}</span>
-              <span><i class="fa-solid fa-star" style="color: #F59E0B;"></i> ${rating} (${place.reviewCount || '150'})</span>
+              <span data-bq-rating="place:${escapeHtml(String(place.id || ''))}"><i class="fa-regular fa-star" style="color: #F59E0B;"></i> ${rating ? `${rating} (${summary.count})` : '<span data-i18n="reviews.summary.none">Aún sin valoraciones</span>'}</span>
             </div>
             <p class="map-popup-desc">${escapeHtml(place.description || '')}</p>
             ${place.priceDetail ? `

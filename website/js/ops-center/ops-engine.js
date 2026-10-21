@@ -1846,6 +1846,14 @@ const SITE_PAGES_REGISTRY = {
       title: 'Opiniones BAQUEANO',
       icon: 'fa-star',
       roleRequired: 'admin'
+    },
+    // 45: Estrellas y opiniones de lugares (Edge Function baqueano-place-reviews, tabla reviews).
+    // Lo pinta js/ops-center/ops-place-reviews.js; el servidor exige rol admin para actuar.
+    '45-resenas-lugares': {
+      isSystem: true,
+      title: 'Gestión de reseñas turísticas',
+      icon: 'fa-map-location-dot',
+      roleRequired: 'admin'
     }
   };
 
@@ -2788,14 +2796,18 @@ const SITE_PAGES_REGISTRY = {
         payload.title = payload.name;
         payload.priceUsd = parseFloat(payload.priceUsd) || 0;
         payload.priceNio = parseFloat(payload.priceNio) || null;
-        payload.rating = payload.rating || 5.0;
-        payload.reviewsCount = payload.reviewsCount || 0;
+        // Las estrellas y la cantidad de opiniones salen solo de reseñas reales aprobadas
+        // (public.reviews): el Ops Center no las escribe ni las inventa.
+        delete payload.rating;
+        delete payload.reviewsCount;
 
-        const lat = parseFloat(payload.latitude) || 12.1364;
-        const lng = parseFloat(payload.longitude) || -86.2514;
-        payload.coordinates = { lat, lng };
-        payload.latitude = lat;
-        payload.longitude = lng;
+        // Sin coordenadas no se inventa un punto (antes caía en el centro de Managua).
+        const lat = parseFloat(payload.latitude);
+        const lng = parseFloat(payload.longitude);
+        const hasPin = Number.isFinite(lat) && Number.isFinite(lng);
+        payload.coordinates = hasPin ? { lat, lng } : null;
+        payload.latitude = hasPin ? lat : null;
+        payload.longitude = hasPin ? lng : null;
       }
 
       if (tabId === '22-notificaciones') {
@@ -2845,7 +2857,6 @@ const SITE_PAGES_REGISTRY = {
               latitude: Number(payload.latitude) || null,
               longitude: Number(payload.longitude) || null,
               cover_image: payload.imageUrl || payload.coverImage || null,
-              rating: Number(payload.rating) || 5.0,
               verified: payload.verified !== false,
               status: payload.status || 'published'
             }, { onConflict: 'id' }).catch(e => console.warn('[Supabase destinations]', e));
@@ -3621,7 +3632,6 @@ const SITE_PAGES_REGISTRY = {
               latitude: dest.latitude || null,
               longitude: dest.longitude || null,
               cover_image: dest.imageUrl || null,
-              rating: 5.0,
               verified: true,
               status: 'published'
             }, { onConflict: 'id' }).catch(() => {});
@@ -4340,6 +4350,10 @@ const SITE_PAGES_REGISTRY = {
       }
       if (tabId === '38-buzon') {
         if (window.BaqueanoOpsInbox) return window.BaqueanoOpsInbox.render(panel);
+        return;
+      }
+      if (tabId === '45-resenas-lugares') {
+        if (window.BaqueanoPlaceReviewsModeration) return window.BaqueanoPlaceReviewsModeration.render(panel);
         return;
       }
       if (tabId === '37-opiniones') {

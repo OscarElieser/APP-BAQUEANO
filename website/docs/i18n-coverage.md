@@ -1,8 +1,8 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-20T21:59:25.530Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6301 · en 6301 · fr 6301 · it 6301 · pt 6301 · de 6301 · ko 6301 · zh 6301
+Generado: 2026-10-20T22:49:50.640Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6409 · en 6409 · fr 6409 · it 6409 · pt 6409 · de 6409 · ko 6409 · zh 6409
 
-HTML: 4390/4391 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
+HTML: 4425/4426 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
 | Archivo | Tipo | Textos | Con clave | Sin traducir | Cobertura |
 |---|---|---:|---:|---:|---:|
@@ -30,9 +30,9 @@ HTML: 4390/4391 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | apps/web/src/components/sections/HomeNarrative.tsx | tsx | 21 | 0 | 21 | 0 % |
 | apps/web/src/app/kiosk/[smartPointId]/page.tsx | tsx | 20 | 0 | 20 | 0 % |
 | apps/admin/src/app/confianza/page.tsx | tsx | 19 | 0 | 19 | 0 % |
-| js/baqueano-map.js | js | 19 | 0 | 19 | 0 % |
+| js/baqueano-map.js | js | 20 | 1 | 19 | 5 % |
 | apps/admin/src/app/destinos/nuevo/page.tsx | tsx | 18 | 0 | 18 | 0 % |
-| js/index-features.js | js | 17 | 0 | 17 | 0 % |
+| js/index-features.js | js | 18 | 1 | 17 | 5.6 % |
 | js/navigation.js | js | 27 | 10 | 17 | 37 % |
 | js/testimonios.js | js | 17 | 0 | 17 | 0 % |
 | js/admin-ops.js | js | 16 | 0 | 16 | 0 % |
@@ -114,7 +114,7 @@ HTML: 4390/4391 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/demo-hackathon-tour.js | js | 3 | 0 | 3 | 0 % |
 | js/index-destinos-editorial.js | js | 3 | 0 | 3 | 0 % |
 | js/panorama-viewer.js | js | 3 | 0 | 3 | 0 % |
-| js/tourism-catalog-expansion.js | js | 3 | 0 | 3 | 0 % |
+| js/tourism-catalog-expansion.js | js | 4 | 1 | 3 | 25 % |
 | js/tres-pilares.js | js | 12 | 9 | 3 | 75 % |
 | js/user-session.js | js | 3 | 0 | 3 | 0 % |
 | apps/admin/src/components/ModulePlaceholder.tsx | tsx | 2 | 0 | 2 | 0 % |
@@ -139,7 +139,7 @@ HTML: 4390/4391 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/territory-carousel.js | js | 1 | 0 | 1 | 0 % |
 | js/territory-media-experience.js | js | 1 | 0 | 1 | 0 % |
 | 404.html | html | 25 | 25 | 0 | 100 % |
-| admin.html | html | 728 | 728 | 0 | 100 % |
+| admin.html | html | 732 | 732 | 0 | 100 % |
 | aliados.html | html | 189 | 189 | 0 | 100 % |
 | ambiental.html | html | 131 | 131 | 0 | 100 % |
 | apps/admin/src/app/layout.tsx | tsx | 0 | 0 | 0 | 100 % |
@@ -169,12 +169,12 @@ HTML: 4390/4391 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | departamento.html | html | 82 | 82 | 0 | 100 % |
 | descargar.html | html | 33 | 33 | 0 | 100 % |
 | destino.html | html | 18 | 18 | 0 | 100 % |
-| destinos.html | html | 132 | 132 | 0 | 100 % |
+| destinos.html | html | 148 | 148 | 0 | 100 % |
 | experiencias.html | html | 157 | 157 | 0 | 100 % |
 | favoritos.html | html | 8 | 8 | 0 | 100 % |
 | gastronomia.html | html | 205 | 205 | 0 | 100 % |
 | historia.html | html | 184 | 184 | 0 | 100 % |
-| index.html | html | 237 | 237 | 0 | 100 % |
+| index.html | html | 242 | 242 | 0 | 100 % |
 | js/ai-assistant.js | js | 0 | 0 | 0 | 100 % |
 | js/allies-directory.js | js | 0 | 0 | 0 | 100 % |
 | js/ambiental-report-handoff.js | js | 0 | 0 | 0 | 100 % |
@@ -195,6 +195,7 @@ HTML: 4390/4391 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/baqui-brain.js | js | 0 | 0 | 0 | 100 % |
 | js/bq-marquee.js | js | 0 | 0 | 0 | 100 % |
 | js/bq-navigator.js | js | 0 | 0 | 0 | 100 % |
+| js/bq-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/business-application.js | js | 0 | 0 | 0 | 100 % |
 | js/business-plans.js | js | 0 | 0 | 0 | 100 % |
 | js/category-strip-marquee.js | js | 0 | 0 | 0 | 100 % |
@@ -222,7 +223,7 @@ HTML: 4390/4391 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/intake-api.js | js | 0 | 0 | 0 | 100 % |
 | js/lead-modal.js | js | 0 | 0 | 0 | 100 % |
 | js/lodging-showcase.js | js | 0 | 0 | 0 | 100 % |
-| js/mapa-atlas.js | js | 7 | 7 | 0 | 100 % |
+| js/mapa-atlas.js | js | 10 | 10 | 0 | 100 % |
 | js/musica-archivo.js | js | 0 | 0 | 0 | 100 % |
 | js/offline-route.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-alerts.js | js | 0 | 0 | 0 | 100 % |
@@ -236,11 +237,13 @@ HTML: 4390/4391 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/ops-center/ops-messages.js | js | 12 | 12 | 0 | 100 % |
 | js/ops-center/ops-nav-groups.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-payments.js | js | 44 | 44 | 0 | 100 % |
+| js/ops-center/ops-place-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-places.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-plans.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-tech-report.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-users.js | js | 38 | 38 | 0 | 100 % |
+| js/place-ficha.js | js | 0 | 0 | 0 | 100 % |
 | js/plan-featured.js | js | 0 | 0 | 0 | 100 % |
 | js/plan-receipt.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |
@@ -278,5 +281,5 @@ HTML: 4390/4391 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | privacidad.html | html | 88 | 88 | 0 | 100 % |
 | terminos.html | html | 203 | 203 | 0 | 100 % |
 | testimonios.html | html | 80 | 80 | 0 | 100 % |
-| todos-los-destinos.html | html | 84 | 84 | 0 | 100 % |
+| todos-los-destinos.html | html | 94 | 94 | 0 | 100 % |
 | todos-los-platos.html | html | 18 | 18 | 0 | 100 % |

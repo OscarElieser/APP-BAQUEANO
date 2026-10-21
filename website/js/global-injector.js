@@ -81,6 +81,7 @@
       { id: 'bq-lead-modal', href: 'css/lead-modal.css?v=20261016-modulo2-2' },
       // 20-10-2026: «Cómo llegar» dentro de BAQUEANO (mapa, ruta e indicaciones).
       { id: 'bq-navigator', href: 'css/bq-navigator.css?v=20261020-nav-1' },
+      { id: 'bq-reviews', href: 'css/bq-reviews.css?v=20261020-resenas-1' },
       // Módulo 3 (16-10-2026): ruta sin señal y avisos de conexión.
       { id: 'bq-offline-route', href: 'css/offline-route.css?v=20261016-modulo3-1' },
       // Módulo 1 (15-10-2026): tarjetas con esqueleto, desenfoque progresivo, vidrio y Modo Sol.
@@ -972,6 +973,14 @@
       navScript.dataset.bqNavigator = 'true';
       navScript.defer = true;
       document.body.appendChild(navScript);
+    }
+    // 20-10-2026: estrellas y opiniones reales (public.reviews) en /mapa, /destinos y la ficha.
+    if (!window.BaqueanoReviews && !/admin(\.html)?$/i.test(location.pathname) && !document.querySelector('script[data-bq-reviews-js]')) {
+      var reviewsScript = document.createElement('script');
+      reviewsScript.src = 'js/bq-reviews.js?v=20261020-resenas-1';
+      reviewsScript.dataset.bqReviewsJs = 'true';
+      reviewsScript.defer = true;
+      document.body.appendChild(reviewsScript);
     }
     // Módulo 3 (16-10-2026): ruta sin señal (IndexedDB + Cache Storage) y cola de envíos pendientes.
     if (!window.BaqueanoOffline && !/admin(\.html)?$/i.test(location.pathname) && !document.querySelector('script[data-bq-offline]')) {
