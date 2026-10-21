@@ -560,7 +560,9 @@ async function handle(action: string, body: Record<string, unknown>, req: Reques
       const businessId = String(body.business_id || "");
       const role = await mediaAccess(service, w, businessId, true);
       const path = String(body.path || "");
-      if (!new RegExp(`^gallery/${businessId.replace(/[-]/g, "\\-")}/[a-f0-9-]{36}\\.(jpg|png|webp)$`).test(path)) throw new HttpError(400, "Archivo inválido.", "bad_path");
+      // Sin armar expresiones con datos de la petición: prefijo exacto + nombre de archivo fijo.
+      const prefix = `gallery/${businessId}/`;
+      if (!path.startsWith(prefix) || !/^[a-f0-9-]{36}\.(jpg|png|webp)$/.test(path.slice(prefix.length))) throw new HttpError(400, "Archivo inválido.", "bad_path");
       const alt = text(body.alt_text, 160, { required: true, min: 3, label: "la descripción de la foto" })!;
       const dir = path.slice(0, path.lastIndexOf("/"));
       const file = path.slice(path.lastIndexOf("/") + 1);
