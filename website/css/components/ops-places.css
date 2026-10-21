@@ -41,7 +41,7 @@
 }
 
 /* ============================================================================
-   2026-10-09 — BOTONES PREMIUM Y ACCIONES POR FILA (pedido del propietario)
+   2026-10-09 — BOTONES CON ACABADO REFINADO Y ACCIONES POR FILA (pedido del propietario)
    POR QUÉ: «Actualizar» y «Nuevo lugar» usaban .ops-btn, que no tenía estilo (se veían como
      texto subrayado); y agregar, modificar, suspender, verificar y eliminar debían estar a mano.
    CÓMO: .ops-btn con relieve, borde arena y foco visible (también lo usa Automatización);

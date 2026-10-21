@@ -214,7 +214,7 @@
   const latencyClass = (ms) => (ms == null ? '' : ms < 200 ? 'is-fast' : ms < 600 ? 'is-medium' : 'is-slow');
 
   function healthCard(compact) {
-    const wrap = el('section', `ops-health is-premium ${compact ? 'is-compact' : ''}`);
+    const wrap = el('section', `ops-health is-refined ${compact ? 'is-compact' : ''}`);
     wrap.setAttribute('aria-label', 'Estado real de los servicios');
     const head = el('div', 'ops-health-head');
     const title = el('h3', 'ops-health-title', compact ? 'Estado real de los servicios' : 'Health Center · comprobaciones en vivo');
@@ -222,7 +222,7 @@
     const btn = el('button', 'btn-ops-matte', 'Volver a comprobar');
     btn.type = 'button';
     btn.addEventListener('click', () => refresh({ health: true, force: true }));
-    // 2026-10-09 (pedido del propietario: «hacerlo más premium»): resumen general arriba.
+    // 2026-10-09 (pedido del propietario: mejorar el acabado del panel): resumen general arriba.
     const checks = state.health ? state.health.checks : [];
     const okCount = checks.filter((c) => HEALTH_COLORS[c.state] === 'ok').length;
     const badCount = checks.filter((c) => HEALTH_COLORS[c.state] === 'bad').length;

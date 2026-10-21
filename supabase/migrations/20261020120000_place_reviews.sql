@@ -145,7 +145,9 @@ create table if not exists public.review_target_aliases (
 );
 comment on table public.review_target_aliases is
   'Claves de tarjetas de /destinos (destinos.html?id=…) que equivalen a un único lugar de places. Las ambiguas (Granada, León, Masaya…) no se vinculan: muestran «Aún sin valoraciones».';
-insert into public.review_target_aliases (alias, place_id, note) values
+-- Solo los lugares que existen: en una base nueva (revisión de Supabase) places llega vacía.
+insert into public.review_target_aliases (alias, place_id, note)
+select v.alias, v.place_id, v.note from (values
   ('ometepe',    'pl-reserva-de-biosfera-isla-de-ometepe',        'Isla de Ometepe'),
   ('isletas',    'pl-isletas-de-granada',                         'Las Isletas de Granada'),
   ('miraflor',   'pl-reserva-natural-miraflor',                   'Miraflor'),
@@ -154,6 +156,8 @@ insert into public.review_target_aliases (alias, place_id, note) values
   ('indiomaiz',  'pl-reserva-biologica-indio-maiz',               'Reserva Indio Maíz'),
   ('sjds',       'pl-san-juan-del-sur-y-cristo-de-la-misericordia', 'San Juan del Sur'),
   ('riosanjuan', 'pl-rio-san-juan',                               'Río San Juan')
+) as v(alias, place_id, note)
+where exists (select 1 from public.places p where p.id = v.place_id)
 on conflict (alias) do nothing;
 
 -- 4) Permisos: sin acceso directo ---------------------------------------------
