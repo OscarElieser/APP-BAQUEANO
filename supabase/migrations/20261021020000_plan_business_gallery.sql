@@ -107,7 +107,7 @@ begin
     insert into public.businesses (
       id, slug, name, category, department, department_id, municipality, phone, whatsapp, email, address,
       latitude, longitude, location_precision, map_ready, description, website_url, owner_uid, host_name,
-      verified, ethical_badge, verification_status, status, is_published,
+      verified, ethical_badge, verification_status, status,
       source_type, source_name, retrieved_at, created_by, attributes)
     values (
       v_biz, v_slug, v_name, public.plan_business_category(new.category), new.department, v_dept, new.municipality,
@@ -118,7 +118,7 @@ begin
       left(coalesce(nullif(new.description, ''), new.short_description), 2000),
       case when new.website ~ '^https?://[^ ]+$' then new.website end,
       new.user_id, nullif(new.owner_name, ''),
-      false, false, 'unverified', 'published', true,
+      false, false, 'unverified', 'published',
       'business_owner', 'Solicitud ' || new.code || ' (plan ' || v_order.plan_code || ')', now(),
       coalesce(new.reviewed_by, 'plan_application_published'),
       jsonb_build_object('plan_order', v_order.code, 'application', new.code));

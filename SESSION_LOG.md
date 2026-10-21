@@ -43,7 +43,11 @@ LO QUE FUNCIONA EN ESTE PUNTO:
   - SQL `plan_business_gallery.test.sql` 13/13 y migración ×2 sin duplicar.
   - Navegador `galeria-qa.mjs` 21/21; planes 18/18; mapa 29/29; agenda 32/32.
   - i18n: 48 claves en 8 idiomas, 0 errores.
-- **Pendiente del propietario:** correr el bloque 1 de «SQL galería BAQUEANO». Después se despliega `baqueano-plans` y se fusiona.
+- **05:39, prueba en producción:** el bloque 1 quedó aplicado, pero la prueba falló en su caso 1: *"cannot insert a non-DEFAULT value into column is_published"*.
+  - En producción `businesses.is_published` es una columna calculada (`status = 'published'` y sin borrar).
+  - La función ya no la escribe. Se probó en producción dentro de una transacción revertida: crea el negocio publicado, sin verificar, con ubicación aproximada, y lo vincula.
+  - La base local de pruebas ahora imita esa columna calculada (13/13).
+  - La página «SQL galería BAQUEANO» tiene la corrección como bloque 1.
 
 ## 💼 PLANES: CADA PLAN CUMPLE LO QUE PROMETE (20-10-2026, 21:46–22:30) — rama feat/planes-cumplimiento
 - **Solicitud:** *"Quiero que adapte según el plan seleccionado para así cumplir lo que debemos de hacer. Revisa los planes y haces los ajustes que debemos hacer"*.
