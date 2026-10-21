@@ -8290,7 +8290,9 @@
     "note": {
       "bus": "Bus: Nicaragua has no online public transport timetables, so we don't calculate bus routes. Ask at the bus terminal or the business.",
       "moto": "Motorcycle routes use the road network for vehicles; follow local restrictions.",
-      "langEn": "Step-by-step directions aren't available in this language yet: they are shown in English."
+      "langEn": "Step-by-step directions aren't available in this language yet: they are shown in English.",
+      "busEstimate": "Bus: driving time for a bus by road. It does not include stops, waits or timetables (Nicaragua has no online timetables): ask at the terminal.",
+      "air": "Helicopter and plane: rough straight-line reference, not a regular service. Domestic flights leave only from airfields (Managua, Bluefields, Corn Island, Bilwi, San Carlos and others): check with the airline or operator."
     },
     "start": "Start navigation",
     "finish": "End trip",
@@ -8339,10 +8341,25 @@
       "moto": "Motorcycle",
       "walk": "Walk",
       "bike": "Bike",
-      "bus": "Bus"
+      "bus": "Bus",
+      "heli": "Helicopter",
+      "plane": "Plane"
     },
     "tripRoute": "See the road route",
-    "recenter": "Center the map on the route"
+    "recenter": "Center the map on the route",
+    "pickOnMap": "Pick on the map",
+    "legendFrom": "Start",
+    "legendTo": "Destination",
+    "compare": {
+      "title": "Time by how you travel",
+      "loading": "Calculating…",
+      "none": "No route",
+      "error": "Not available",
+      "straight": " · {km} in a straight line"
+    },
+    "pickHint": "Tap the map where you are starting from.",
+    "pickedOnMap": "Point picked on the map",
+    "rerouting": "You left the route. Recalculating from where you are…"
   },
   "reviews": {
     "summary": {

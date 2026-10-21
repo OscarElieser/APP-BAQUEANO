@@ -8290,7 +8290,9 @@
     "note": {
       "bus": "Autobus: in Nicaragua non ci sono orari dei trasporti pubblici online, quindi non calcoliamo percorsi in autobus. Chiedi al terminal o all'attività.",
       "moto": "I percorsi in moto usano la rete stradale per veicoli; rispetta le restrizioni locali.",
-      "langEn": "Le indicazioni passo passo non sono ancora disponibili in questa lingua: sono mostrate in inglese."
+      "langEn": "Le indicazioni passo passo non sono ancora disponibili in questa lingua: sono mostrate in inglese.",
+      "busEstimate": "Autobus: tempo di guida di un autobus su strada. Non include fermate, attese né orari (in Nicaragua non ci sono orari online): chiedi al terminal.",
+      "air": "Elicottero e aereo: riferimento approssimativo in linea retta, non un servizio regolare. I voli nazionali partono solo dagli aeroporti (Managua, Bluefields, Corn Island, Bilwi, San Carlos e altri): chiedi alla compagnia o all'operatore."
     },
     "start": "Avvia la navigazione",
     "finish": "Termina il percorso",
@@ -8339,10 +8341,25 @@
       "moto": "Moto",
       "walk": "A piedi",
       "bike": "Bici",
-      "bus": "Autobus"
+      "bus": "Autobus",
+      "heli": "Elicottero",
+      "plane": "Aereo"
     },
     "tripRoute": "Vedi il percorso stradale",
-    "recenter": "Centra la mappa sul percorso"
+    "recenter": "Centra la mappa sul percorso",
+    "pickOnMap": "Scegli sulla mappa",
+    "legendFrom": "Partenza",
+    "legendTo": "Arrivo",
+    "compare": {
+      "title": "Tempo in base a come viaggi",
+      "loading": "Calcolo in corso…",
+      "none": "Nessun percorso",
+      "error": "Non disponibile",
+      "straight": " · {km} in linea retta"
+    },
+    "pickHint": "Tocca la mappa nel punto da cui parti.",
+    "pickedOnMap": "Punto scelto sulla mappa",
+    "rerouting": "Sei uscito dal percorso. Ricalcolo da dove ti trovi…"
   },
   "reviews": {
     "summary": {

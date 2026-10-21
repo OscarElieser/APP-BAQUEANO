@@ -18,6 +18,19 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🧭 «CÓMO LLEGAR» COMO GOOGLE MAPS, DENTRO DE BAQUEANO (21-10-2026, 05:36–07:10) — rama feat/mapa-como-llegar
+- **Solicitud:** *"cuando el usuario de clik en como llegar poner la ruta desde donde está… azul su punto de partida o ubicación actual y rojo el punto de llegada… cuánto tiempo le tocaría llegar si va en bus, carro, moto, helicóptero o avión (opcional)… bicicleta o si va a pies, e ir dirigiéndolo como hace Google maps. Pero siempre dentro de la plataforma web"*.
+- **Hecho** (`js/bq-navigator.js`, `css/bq-navigator.css`, global-injector v=20261021-ruta-1):
+  - Partida en azul (ubicación actual, dirección escrita o «Elegir en el mapa») y llegada con gota roja; línea de ruta azul. Leyenda en el panel.
+  - Tabla «Tiempo según cómo viajás»: auto, moto, bus, bici y a pie, calculados por carretera con Valhalla (resumen sin indicaciones, uno tras otro). Tocar un modo traza esa ruta.
+  - Bus: aviso de que el tiempo es por carretera y no incluye horarios ni esperas.
+  - Helicóptero (200 km/h + 10 min) y avión (250 km/h + 25 min): solo referencia en línea recta, con aviso de que no son servicios regulares.
+  - Guía: próximo giro, lo que falta y tu posición en azul. Si te salís de la ruta en dos lecturas seguidas, recalcula sola desde donde estás (como mucho cada 30 s); el mapa no salta mientras te sigue.
+  - Corrección: la distancia a la ruta se mide contra cada tramo, no solo contra sus vértices. En carreteras rectas los vértices están a kilómetros y daba «te saliste» yendo sobre la ruta.
+  - Todo dentro de la web: ninguna apertura de Google Maps. 15 claves `routeNav.*` nuevas en 8 idiomas.
+- **Pruebas:** `scripts/mapa-ruta-qa.mjs` 17/17 (GPS y rutas simulados); mapa y reseñas 29/29; i18n 0 errores, app 6647 claves, territorios 266.
+- **Cierre de la galería:** PR #15 fusionado en main; `baqueano-plans` v6 desplegada igual al repositorio (prueba básica: 401 sin sesión, catálogo responde).
+
 ## 🖼️ GALERÍA POR PLAN, VÍNCULO AUTOMÁTICO Y DESTACADOS EN EL INICIO (21-10-2026, 05:16–06:30) — rama feat/planes-galeria-vinculo
 - **Solicitudes:**
   - *"Las fotos… Vincular cada pedido pagado… Resolvamos esto"*.

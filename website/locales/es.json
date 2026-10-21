@@ -8290,7 +8290,9 @@
     "note": {
       "bus": "Bus: en Nicaragua no hay horarios de transporte público en línea, por eso no calculamos rutas en bus. Consultá en la terminal o con el negocio.",
       "moto": "Para moto se usa la red de carreteras para vehículos; respetá las restricciones locales.",
-      "langEn": "Las indicaciones paso a paso todavía no están disponibles en este idioma: se muestran en inglés."
+      "langEn": "Las indicaciones paso a paso todavía no están disponibles en este idioma: se muestran en inglés.",
+      "busEstimate": "Bus: tiempo de manejo de un bus por carretera. No incluye paradas, esperas ni horarios (no hay horarios en línea en Nicaragua): consultá en la terminal.",
+      "air": "Helicóptero y avión: referencia aproximada en línea recta, no un servicio regular. Los vuelos nacionales salen solo de aeródromos (Managua, Bluefields, Corn Island, Bilwi, San Carlos y otros): consultá con la aerolínea u operador."
     },
     "start": "Iniciar navegación",
     "finish": "Finalizar recorrido",
@@ -8339,10 +8341,25 @@
       "moto": "Moto",
       "walk": "A pie",
       "bike": "Bici",
-      "bus": "Bus"
+      "bus": "Bus",
+      "heli": "Helicóptero",
+      "plane": "Avión"
     },
     "tripRoute": "Ver la ruta por carretera",
-    "recenter": "Centrar el mapa en la ruta"
+    "recenter": "Centrar el mapa en la ruta",
+    "pickOnMap": "Elegir en el mapa",
+    "legendFrom": "Partida",
+    "legendTo": "Llegada",
+    "compare": {
+      "title": "Tiempo según cómo vayas",
+      "loading": "Calculando…",
+      "none": "Sin ruta",
+      "error": "No disponible",
+      "straight": " · {km} en línea recta"
+    },
+    "pickHint": "Tocá el mapa en el punto desde donde salís.",
+    "pickedOnMap": "Punto elegido en el mapa",
+    "rerouting": "Te saliste de la ruta. Recalculando desde donde estás…"
   },
   "reviews": {
     "summary": {

@@ -23,6 +23,14 @@
  *     Sin JavaScript el enlace sigue funcionando. Los de SOS no se tocan.
  *   - El botón «Atrás» del navegador cierra el mapa y vuelve a la ficha; el idioma cambia en vivo
  *     y, si hay una ruta, se piden las indicaciones en el idioma nuevo.
+ * - 21-10-2026 (propietario): «poner azul su punto de partida o ubicación actual y rojo el punto de
+ *   llegada… cuánto tiempo le tocaría llegar si va en bus, carro, moto, helicóptero o avión
+ *   (opcional), bicicleta o a pie, e ir dirigiéndolo como hace Google Maps, siempre dentro de la
+ *   plataforma». Partida y posición en azul, llegada en rojo y línea de ruta azul; tabla
+ *   «Tiempo según cómo vayas» (todos los modos por carretera con Valhalla, bus incluido como
+ *   tiempo de manejo sin esperas ni horarios; helicóptero y avión solo como referencia en línea
+ *   recta, sin servicio regular); «Elegir en el mapa» para el punto de partida y recálculo
+ *   automático cuando te salís de la ruta.
  * 📦 QUÉ: window.BaqueanoNavigator = { open({ lat, lng, name, image, id, precision, stops }), close() }.
  */
 (function () {
@@ -42,14 +50,21 @@
     { id: 'motorcycle', icon: 'fa-motorcycle', key: 'routeNav.mode.moto', es: 'Moto' },
     { id: 'pedestrian', icon: 'fa-person-walking', key: 'routeNav.mode.walk', es: 'A pie' },
     { id: 'bicycle', icon: 'fa-bicycle', key: 'routeNav.mode.bike', es: 'Bici' },
-    { id: 'transit', icon: 'fa-bus', key: 'routeNav.mode.bus', es: 'Bus', disabled: true }
+    // Bus: Valhalla calcula el recorrido de un bus por carretera (sin horarios ni esperas: se avisa).
+    { id: 'bus', icon: 'fa-bus', key: 'routeNav.mode.bus', es: 'Bus' }
+  ];
+  // Referencia aérea (no hay ruta por carretera ni servicio regular): velocidad de crucero típica
+  // y un tiempo fijo de preparación y aterrizaje. Solo se muestra como estimación en línea recta.
+  var AIR = [
+    { id: 'heli', icon: 'fa-helicopter', key: 'routeNav.mode.heli', es: 'Helicóptero', kmh: 200, extraMin: 10 },
+    { id: 'plane', icon: 'fa-plane', key: 'routeNav.mode.plane', es: 'Avión', kmh: 250, extraMin: 25 }
   ];
 
   var state = {
     root: null, map: null, layers: null, dest: null, stops: [], origin: null, mode: 'auto',
     routes: [], active: 0, watchId: null, posMarker: null, accCircle: null, lastIndex: 0,
     offCount: 0, voice: false, spoken: {}, wakeLock: null, pushed: false, opener: null,
-    reqId: 0, cache: new Map(), geoResults: []
+    reqId: 0, cache: new Map(), geoResults: [], compare: {}, compareId: 0, picking: false, lastReroute: 0
   };
 
   // ── Utilidades ────────────────────────────────────────────────────────────
@@ -187,7 +202,13 @@
     row.appendChild(input); row.appendChild(searchBtn);
     form.appendChild(inputLbl); form.appendChild(row);
     var geoList = el('ul', 'bq-nav-geolist', { id: 'bqNavGeoList', hidden: true });
-    originBox.appendChild(gpsBtn); originBox.appendChild(originNow); originBox.appendChild(form); originBox.appendChild(geoList);
+    var pickBtn = el('button', 'bq-nav-btn', { type: 'button', id: 'bqNavPick', 'aria-pressed': 'false' });
+    pickBtn.appendChild(icon('fa-map-pin')); pickBtn.appendChild(document.createTextNode(' '));
+    pickBtn.appendChild(label(el('span'), 'routeNav.pickOnMap', 'Elegir en el mapa'));
+    var legend = el('p', 'bq-nav-legend', { 'aria-hidden': 'true' });
+    legend.appendChild(el('span', 'bq-nav-dot is-origin')); legend.appendChild(label(el('span'), 'routeNav.legendFrom', 'Partida'));
+    legend.appendChild(el('span', 'bq-nav-dot is-dest')); legend.appendChild(label(el('span'), 'routeNav.legendTo', 'Llegada'));
+    originBox.appendChild(gpsBtn); originBox.appendChild(pickBtn); originBox.appendChild(originNow); originBox.appendChild(form); originBox.appendChild(geoList); originBox.appendChild(legend);
 
     var modes = el('div', 'bq-nav-modes', { role: 'radiogroup', id: 'bqNavModes' });
     aria(modes, 'routeNav.modes', 'Cómo vas a viajar');
@@ -197,7 +218,12 @@
       modes.appendChild(b);
     });
     var modeNote = el('p', 'bq-nav-modenote', { id: 'bqNavModeNote', hidden: true });
-    var busNote = label(el('p', 'bq-nav-modenote'), 'routeNav.note.bus', 'Bus: en Nicaragua no hay horarios de transporte público en línea, por eso no calculamos rutas en bus. Consultá en la terminal o con el negocio.');
+    var busNote = label(el('p', 'bq-nav-modenote', { id: 'bqNavBusNote', hidden: true }), 'routeNav.note.busEstimate', 'Bus: tiempo de manejo de un bus por carretera. No incluye paradas, esperas ni horarios (no hay horarios en línea en Nicaragua): consultá en la terminal.');
+    // «Tiempo según cómo vayas»: todos los modos de una vez, como en Google Maps.
+    var compare = el('section', 'bq-nav-compare', { id: 'bqNavCompare', hidden: true, 'aria-labelledby': 'bqNavCompareTitle' });
+    compare.appendChild(label(el('h3', '', { id: 'bqNavCompareTitle' }), 'routeNav.compare.title', 'Tiempo según cómo vayas'));
+    compare.appendChild(el('ul', 'bq-nav-compare-list', { id: 'bqNavCompareList' }));
+    compare.appendChild(label(el('p', 'bq-nav-modenote'), 'routeNav.note.air', 'Helicóptero y avión: referencia aproximada en línea recta, no un servicio regular. Los vuelos nacionales salen solo de aeródromos (Managua, Bluefields, Corn Island, Bilwi, San Carlos y otros): consultá con la aerolínea u operador.'));
 
     var status = el('p', 'bq-nav-status', { id: 'bqNavStatus', role: 'status', 'aria-live': 'polite' });
     var summary = el('div', 'bq-nav-summary', { id: 'bqNavSummary', hidden: true });
@@ -226,7 +252,7 @@
     var credit = el('p', 'bq-nav-credit');
     credit.appendChild(label(el('span'), 'routeNav.credit', 'Rutas calculadas con Valhalla sobre datos de © OpenStreetMap. Tiempos estimados, no garantizados.'));
 
-    [grip, next, head, notice, originBox, modes, busNote, modeNote, status, summary, alts, actions, stepsTitle, steps, langNote, safety, credit].forEach(function (n) { panel.appendChild(n); });
+    [grip, next, head, notice, originBox, modes, busNote, modeNote, status, summary, alts, actions, compare, stepsTitle, steps, langNote, safety, credit].forEach(function (n) { panel.appendChild(n); });
     root.appendChild(mapBox); root.appendChild(locateBtn); root.appendChild(closeBtn); root.appendChild(panel);
     document.body.appendChild(root);
 
@@ -237,6 +263,7 @@
       setTimeout(function () { if (state.map) state.map.invalidateSize(); }, 350);
     });
     gpsBtn.addEventListener('click', function () { locate(true); });
+    pickBtn.addEventListener('click', function () { startPicking(); });
     locateBtn.addEventListener('click', function () { if (state.posMarker && state.map) state.map.setView(state.posMarker.getLatLng(), 16); else locate(true); });
     form.addEventListener('submit', function (e) { e.preventDefault(); searchOrigin(input.value); });
     modes.addEventListener('click', function (e) {
@@ -295,6 +322,7 @@
       if (!touch) L.control.zoom({ position: 'topright' }).addTo(state.map);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(state.map);
       state.layers = L.layerGroup().addTo(state.map);
+      state.map.on('click', onMapClick);
       return L;
     }).catch(function () {
       var msg = $('bqNavMapMsg');
@@ -303,8 +331,12 @@
     });
   }
   function pin(L, latlng, kind, text) {
+    // Llegada: gota roja con la punta en el lugar exacto. Partida: punto azul. Paradas: número.
+    if (kind === 'dest') {
+      return L.marker(latlng, { icon: L.divIcon({ className: 'bq-nav-pin-wrap', html: '<span class="bq-nav-pin is-dest"><i class="fa-solid fa-flag-checkered" aria-hidden="true"></i></span>', iconSize: [34, 44], iconAnchor: [17, 42] }), keyboard: false, zIndexOffset: 500 });
+    }
     var html = '<span class="bq-nav-pin is-' + kind + '">' + (text || '') + '</span>';
-    return L.marker(latlng, { icon: L.divIcon({ className: 'bq-nav-pin-wrap', html: html, iconSize: [30, 30], iconAnchor: [15, 15] }), keyboard: false });
+    return L.marker(latlng, { icon: L.divIcon({ className: 'bq-nav-pin-wrap', html: html, iconSize: [30, 30], iconAnchor: [15, 15] }), keyboard: false, zIndexOffset: kind === 'origin' ? 400 : 0 });
   }
   function drawBase() {
     var L = window.L;
@@ -316,7 +348,7 @@
     });
     if (state.origin) pin(L, [state.origin.lat, state.origin.lng], 'origin').addTo(state.layers);
   }
-  function drawRoutes() {
+  function drawRoutes(keepView) {
     var L = window.L;
     drawBase();
     if (!state.routes.length) return;
@@ -326,9 +358,10 @@
       alt.on('click', function () { selectRoute(i); });
     });
     var a = state.routes[state.active];
-    L.polyline(a.shape, { color: '#ffffff', weight: 10, opacity: 0.9 }).addTo(state.layers);
-    L.polyline(a.shape, { color: '#F65E01', weight: 6, opacity: 1 }).addTo(state.layers);
-    state.map.fitBounds(L.latLngBounds(a.shape), { padding: [40, 40] });
+    L.polyline(a.shape, { color: '#ffffff', weight: 10, opacity: 0.95 }).addTo(state.layers);
+    L.polyline(a.shape, { color: '#1a73e8', weight: 6, opacity: 1 }).addTo(state.layers);
+    // Durante la navegación el mapa sigue a la persona: no se aleja a mostrar toda la ruta.
+    if (!keepView) state.map.fitBounds(L.latLngBounds(a.shape), { padding: [40, 40] });
   }
 
   // ── Origen ────────────────────────────────────────────────────────────────
@@ -356,6 +389,100 @@
     else label(now, 'routeNav.fromPlace', 'Saliendo desde: {place}', { place: origin.label });
     $('bqNavGeoList').hidden = true;
     computeRoute(false);
+    computeCompare();
+  }
+
+  // ── Elegir el punto de partida tocando el mapa ────────────────────────────
+  function startPicking() {
+    if (!state.map) return;
+    state.picking = !state.picking;
+    $('bqNavPick').setAttribute('aria-pressed', state.picking ? 'true' : 'false');
+    state.root.classList.toggle('is-picking', state.picking);
+    if (state.picking) setStatus('routeNav.pickHint', 'Tocá el mapa en el punto desde donde salís.');
+    else setStatus(null);
+  }
+  function onMapClick(e) {
+    if (!state.picking) return;
+    state.picking = false;
+    $('bqNavPick').setAttribute('aria-pressed', 'false');
+    state.root.classList.remove('is-picking');
+    var lat = e.latlng.lat, lng = e.latlng.lng;
+    if (!validCoords(lat, lng)) { setStatus('routeNav.err.outside', 'Tu ubicación está fuera de Nicaragua. Escribí un punto de partida dentro del país.', null, 'warn'); return; }
+    setStatus(null);
+    setOrigin({ lat: lat, lng: lng, label: t('routeNav.pickedOnMap', 'Punto elegido en el mapa'), labelKey: 'routeNav.pickedOnMap', source: 'map' });
+  }
+
+  // ── Tiempo según cómo vayas ───────────────────────────────────────────────
+  // Por carretera: un pedido corto a Valhalla por modo (solo el resumen, sin indicaciones), uno
+  // después del otro para no saturar el servicio comunitario. Aéreo: línea recta, solo referencia.
+  function compareKey(mode) {
+    var pts = [state.origin].concat(state.stops).map(function (p) { return p.lat.toFixed(4) + ',' + p.lng.toFixed(4); }).join('|');
+    return pts + '#' + mode;
+  }
+  function straightKm() {
+    var pts = [[state.origin.lat, state.origin.lng]].concat(state.stops.map(function (s) { return [s.lat, s.lng]; }));
+    var m = 0;
+    for (var i = 1; i < pts.length; i++) m += haversine(pts[i - 1], pts[i]);
+    return m / 1000;
+  }
+  function computeCompare() {
+    if (!state.origin || !state.stops.length || state.dest.precision === 'area') return;
+    var id = ++state.compareId;
+    $('bqNavCompare').hidden = false;
+    renderCompare();
+    var queue = MODES.map(function (m) { return m.id; });
+    (function nextMode() {
+      if (id !== state.compareId || !queue.length) return;
+      var mode = queue.shift();
+      var key = compareKey(mode);
+      if (state.compare[key]) { renderCompare(); return nextMode(); }
+      var locations = [{ lat: state.origin.lat, lon: state.origin.lng, type: 'break' }].concat(state.stops.map(function (s) { return { lat: s.lat, lon: s.lng, type: 'break' }; }));
+      var body = { locations: locations, costing: mode, units: 'kilometers', directions_type: 'none' };
+      fetch(ROUTER + '?json=' + encodeURIComponent(JSON.stringify(body))).then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          state.compare[key] = res.ok && res.d.trip ? { km: res.d.trip.summary.length, sec: res.d.trip.summary.time } : { none: true };
+        })
+        .catch(function () { state.compare[key] = { error: true }; })
+        .then(function () { if (id === state.compareId) { renderCompare(); setTimeout(nextMode, 350); } });
+    })();
+  }
+  function renderCompare() {
+    var list = $('bqNavCompareList');
+    if (!list || !state.origin) return;
+    list.textContent = '';
+    MODES.forEach(function (m) {
+      var v = state.compare[compareKey(m.id)];
+      var li = el('li');
+      var b = el('button', 'bq-nav-cmp', { type: 'button', 'data-mode': m.id, 'aria-pressed': state.mode === m.id ? 'true' : 'false' });
+      b.appendChild(icon(m.icon));
+      b.appendChild(label(el('span', 'bq-nav-cmp-name'), m.key, m.es));
+      var val = el('span', 'bq-nav-cmp-val');
+      if (!v) label(val, 'routeNav.compare.loading', 'Calculando…');
+      else if (v.none) { label(val, 'routeNav.compare.none', 'Sin ruta'); b.disabled = true; }
+      else if (v.error) label(val, 'routeNav.compare.error', 'No disponible');
+      else { val.appendChild(el('strong', '', { text: fmtDuration(v.sec) })); val.appendChild(el('span', '', { text: ' · ' + fmtKm(v.km) })); }
+      b.appendChild(val);
+      b.addEventListener('click', function () { setMode(m.id); });
+      li.appendChild(b); list.appendChild(li);
+    });
+    var km = straightKm();
+    AIR.forEach(function (a) {
+      var li = el('li');
+      var row = el('div', 'bq-nav-cmp is-air');
+      row.appendChild(icon(a.icon));
+      row.appendChild(label(el('span', 'bq-nav-cmp-name'), a.key, a.es));
+      var val = el('span', 'bq-nav-cmp-val');
+      var sec = Math.round((km / a.kmh) * 3600 + a.extraMin * 60);
+      val.appendChild(el('strong', '', { text: '≈ ' + fmtDuration(sec) }));
+      val.appendChild(label(el('span'), 'routeNav.compare.straight', ' · {km} en línea recta', { km: fmtKm(km) }));
+      row.appendChild(val);
+      li.appendChild(row); list.appendChild(li);
+    });
+  }
+  function markCompare() {
+    var list = $('bqNavCompareList');
+    if (!list) return;
+    list.querySelectorAll('button.bq-nav-cmp').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.mode === state.mode ? 'true' : 'false'); });
   }
   function searchOrigin(text) {
     var q = String(text || '').trim();
@@ -388,6 +515,8 @@
     var note = $('bqNavModeNote');
     if (mode === 'motorcycle') { label(note, 'routeNav.note.moto', 'Para moto se usa la red de carreteras para vehículos; respetá las restricciones locales.'); note.hidden = false; }
     else note.hidden = true;
+    $('bqNavBusNote').hidden = mode !== 'bus';
+    markCompare();
     if (state.origin) computeRoute(false);
   }
   function computeRoute(force) {
@@ -437,8 +566,11 @@
   }
   function applyRoutes(routes) {
     state.routes = routes; state.active = 0; state.lastIndex = 0; state.spoken = {};
-    setStatus(null);
-    drawRoutes(); renderRoute();
+    var tracking = state.watchId != null;
+    if (tracking) setStatus('routeNav.tracking', 'Siguiendo tu ubicación. Podés detenerlo cuando quieras.'); else setStatus(null);
+    // La tabla «Tiempo según cómo vayas» muestra lo mismo que la ruta dibujada para este modo.
+    if (state.origin && routes[0]) { state.compare[compareKey(state.mode)] = { km: routes[0].km, sec: routes[0].sec }; renderCompare(); }
+    drawRoutes(tracking); renderRoute();
   }
   function selectRoute(i) { state.active = i; state.lastIndex = 0; state.spoken = {}; drawRoutes(); renderRoute(); }
 
@@ -479,12 +611,27 @@
   }
 
   // ── Seguimiento GPS ───────────────────────────────────────────────────────
+  // Distancia (m) de p al tramo a→b. En carreteras rectas los vértices de la ruta pueden estar a
+  // kilómetros entre sí: medir solo contra vértices daría «te saliste de la ruta» yendo sobre ella.
+  function segDist(p, a, b) {
+    var k = Math.cos(p[0] * Math.PI / 180) * 111320, m = 110540;
+    var ax = (a[1] - p[1]) * k, ay = (a[0] - p[0]) * m, bx = (b[1] - p[1]) * k, by = (b[0] - p[0]) * m;
+    var dx = bx - ax, dy = by - ay, len = dx * dx + dy * dy;
+    var t0 = len ? Math.max(0, Math.min(1, -(ax * dx + ay * dy) / len)) : 0;
+    var x = ax + t0 * dx, y = ay + t0 * dy;
+    return Math.sqrt(x * x + y * y);
+  }
   function nearest(route, p) {
     // Busca primero cerca del último punto conocido (ventana) y, si queda lejos, en toda la ruta.
-    var best = { i: 0, d: Infinity };
-    var from = Math.max(0, state.lastIndex - 30), to = Math.min(route.shape.length, state.lastIndex + 300);
-    for (var i = from; i < to; i++) { var d = haversine(p, route.shape[i]); if (d < best.d) best = { i: i, d: d }; }
-    if (best.d > 150) for (var j = 0; j < route.shape.length; j++) { var d2 = haversine(p, route.shape[j]); if (d2 < best.d) best = { i: j, d: d2 }; }
+    var s = route.shape, best = { i: 0, d: Infinity };
+    function scan(from, to) {
+      for (var i = from; i < to; i++) {
+        var d = i + 1 < s.length ? segDist(p, s[i], s[i + 1]) : haversine(p, s[i]);
+        if (d < best.d) best = { i: i, d: d };
+      }
+    }
+    scan(Math.max(0, state.lastIndex - 30), Math.min(s.length, state.lastIndex + 300));
+    if (best.d > 150) scan(0, s.length);
     return best;
   }
   function startTracking() {
@@ -504,7 +651,7 @@
     if (!L || !state.map || !r) return;
     var p = [pos.coords.latitude, pos.coords.longitude], acc = pos.coords.accuracy || 30;
     if (!state.posMarker) {
-      state.accCircle = L.circle(p, { radius: acc, color: '#165D6F', weight: 1, fillOpacity: 0.12 }).addTo(state.map);
+      state.accCircle = L.circle(p, { radius: acc, color: '#1a73e8', weight: 1, fillOpacity: 0.12 }).addTo(state.map);
       state.posMarker = L.marker(p, { icon: L.divIcon({ className: 'bq-nav-pin-wrap', html: '<span class="bq-nav-me"></span>', iconSize: [22, 22], iconAnchor: [11, 11] }), keyboard: false }).addTo(state.map);
       state.map.setView(p, 16);
     } else {
@@ -527,8 +674,19 @@
     // Fuera de ruta: más de max(60 m, 1,5 × precisión) en dos lecturas seguidas.
     var tolerance = Math.max(60, acc * 1.5);
     if (near.d > tolerance) state.offCount++; else state.offCount = 0;
-    if (state.offCount >= 2) setStatus('routeNav.offRoute', 'Parece que te saliste de la ruta. Tocá «Recalcular ruta» para buscar otra desde donde estás.', null, 'warn');
-    else if ($('bqNavStatus').dataset.navKey === 'routeNav.offRoute') setStatus('routeNav.tracking', 'Siguiendo tu ubicación. Podés detenerlo cuando quieras.');
+    if (state.offCount >= 2) {
+      // Como Google Maps: recalcula sola desde donde estás (como mucho cada 30 s y con conexión).
+      if (navigator.onLine && Date.now() - state.lastReroute > 30000) {
+        state.lastReroute = Date.now();
+        state.offCount = 0;
+        state.origin = { lat: p[0], lng: p[1], label: t('routeNav.myLocation', 'Mi ubicación'), labelKey: 'routeNav.myLocation', source: 'gps' };
+        setStatus('routeNav.rerouting', 'Te saliste de la ruta. Recalculando desde donde estás…', null, 'warn');
+        speak(t('routeNav.rerouting', 'Te saliste de la ruta. Recalculando desde donde estás…'));
+        computeRoute(true);
+        return;
+      }
+      setStatus('routeNav.offRoute', 'Parece que te saliste de la ruta. Tocá «Recalcular ruta» para buscar otra desde donde estás.', null, 'warn');
+    } else if ($('bqNavStatus').dataset.navKey === 'routeNav.offRoute' || $('bqNavStatus').dataset.navKey === 'routeNav.rerouting') setStatus('routeNav.tracking', 'Siguiendo tu ubicación. Podés detenerlo cuando quieras.');
     var remaining = r.cum[r.cum.length - 1] - r.cum[near.i];
     var nextM = null, nextIdx = -1;
     for (var k = 0; k < r.maneuvers.length; k++) { if (r.maneuvers[k].at > near.i) { nextM = r.maneuvers[k]; nextIdx = k; break; } }
@@ -579,6 +737,8 @@
     if (!state.root) state.root = build();
     stopTracking(false);
     state.routes = []; state.origin = null; state.stops = valid; state.dest = valid[valid.length - 1] || stops[stops.length - 1];
+    state.compareId++; state.picking = false;
+    $('bqNavCompare').hidden = true; $('bqNavPick').setAttribute('aria-pressed', 'false'); state.root.classList.remove('is-picking');
     var last = stops[stops.length - 1];
     $('bqNavTitle').textContent = stops.length > 1 ? t('routeNav.tripTitle', 'Ruta de tu viaje ({n} paradas)', { n: stops.length }) : (last.name || t('routeNav.destination', 'Destino'));
     var photo = $('bqNavPhoto');

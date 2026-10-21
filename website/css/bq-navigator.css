@@ -112,10 +112,13 @@ html.bq-nav-open, html.bq-nav-open body { overflow: hidden; }
 /* Botones de zoom de 40 px (objetivo táctil cómodo, WCAG 2.5.8). */
 .bq-nav .leaflet-control-zoom a { width: 40px; height: 40px; line-height: 40px; font-size: 20px; }
 .bq-nav-pin { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 3px 10px rgba(13, 27, 42, 0.45); color: #ffffff; font: 800 12px 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; }
-.bq-nav-pin.is-dest { background: #f65e01; }
+/* 21-10-2026: llegada en rojo con forma de gota (la punta marca el lugar). */
+.bq-nav-pin.is-dest { width: 34px; height: 34px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #d93025; }
+.bq-nav-pin.is-dest i { transform: rotate(45deg); font-size: 13px; }
 .bq-nav-pin.is-stop { background: #165d6f; }
-.bq-nav-pin.is-origin { background: #4a7a5a; }
-.bq-nav-me { display: block; width: 22px; height: 22px; border-radius: 50%; background: #165d6f; border: 4px solid #ffffff; box-shadow: 0 0 0 6px rgba(22, 93, 111, 0.25); box-sizing: border-box; }
+/* 21-10-2026: partida en azul. */
+.bq-nav-pin.is-origin { background: #1a73e8; }
+.bq-nav-me { display: block; width: 22px; height: 22px; border-radius: 50%; background: #1a73e8; border: 4px solid #ffffff; box-shadow: 0 0 0 6px rgba(26, 115, 232, 0.25); box-sizing: border-box; }
 
 /* Teléfono: mapa casi completo y panel inferior plegable. */
 @media (max-width: 760px) {
@@ -140,3 +143,24 @@ html.bq-nav-open, html.bq-nav-open body { overflow: hidden; }
   .bq-nav.is-open, .bq-nav-panel, .bq-nav-btn { animation: none; transition: none; }
 }
 @media print { .bq-nav { display: none !important; } }
+
+/* ── 21-10-2026: leyenda, «Elegir en el mapa» y «Tiempo según cómo vayas» ── */
+.bq-nav-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 10px 0 0; font-size: .85rem; color: inherit; }
+.bq-nav-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #ffffff; box-shadow: 0 0 0 1px rgba(13, 27, 42, .35); }
+.bq-nav-dot.is-origin { background: #1a73e8; }
+.bq-nav-dot.is-dest { background: #d93025; margin-left: 6px; }
+#bqNavPick[aria-pressed="true"] { background: #1a73e8; border-color: #1a73e8; color: #ffffff; }
+.bq-nav.is-picking .bq-nav-map, .bq-nav.is-picking .leaflet-container { cursor: crosshair; }
+.bq-nav-compare { margin: 14px 0 0; }
+.bq-nav-compare h3 { margin: 0 0 8px; font-size: 1rem; }
+.bq-nav-compare-list { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 6px; }
+.bq-nav-cmp { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; align-items: center; gap: 8px; width: 100%; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(100, 116, 139, .35); background: transparent; color: inherit; font: inherit; text-align: left; box-sizing: border-box; }
+button.bq-nav-cmp { cursor: pointer; }
+button.bq-nav-cmp[aria-pressed="true"] { border-color: #1a73e8; box-shadow: inset 0 0 0 1px #1a73e8; }
+button.bq-nav-cmp:disabled { opacity: .55; cursor: not-allowed; }
+button.bq-nav-cmp:focus-visible { outline: 3px solid #1a73e8; outline-offset: 2px; }
+.bq-nav-cmp i { text-align: center; color: #1a73e8; }
+.bq-nav-cmp.is-air { border-style: dashed; }
+.bq-nav-cmp.is-air i { color: #64748b; }
+.bq-nav-cmp-name { font-weight: 700; }
+.bq-nav-cmp-val { justify-self: end; text-align: right; font-size: .9rem; }

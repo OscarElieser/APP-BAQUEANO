@@ -8290,7 +8290,9 @@
     "note": {
       "bus": "Bus: In Nicaragua gibt es keine Online-Fahrpläne für den öffentlichen Verkehr, daher berechnen wir keine Busrouten. Frag am Busbahnhof oder beim Betrieb nach.",
       "moto": "Motorradrouten nutzen das Straßennetz für Fahrzeuge; beachte örtliche Beschränkungen.",
-      "langEn": "Die Schritt-für-Schritt-Anweisungen gibt es in dieser Sprache noch nicht: Sie werden auf Englisch angezeigt."
+      "langEn": "Die Schritt-für-Schritt-Anweisungen gibt es in dieser Sprache noch nicht: Sie werden auf Englisch angezeigt.",
+      "busEstimate": "Bus: Fahrzeit eines Busses auf der Straße. Ohne Haltestellen, Wartezeiten oder Fahrpläne (in Nicaragua gibt es keine Online-Fahrpläne): am Busbahnhof nachfragen.",
+      "air": "Hubschrauber und Flugzeug: ungefährer Richtwert in Luftlinie, kein regelmäßiger Dienst. Inlandsflüge starten nur von Flugplätzen (Managua, Bluefields, Corn Island, Bilwi, San Carlos u. a.): bei Fluggesellschaft oder Betreiber nachfragen."
     },
     "start": "Navigation starten",
     "finish": "Fahrt beenden",
@@ -8339,10 +8341,25 @@
       "moto": "Motorrad",
       "walk": "Zu Fuß",
       "bike": "Fahrrad",
-      "bus": "Bus"
+      "bus": "Bus",
+      "heli": "Hubschrauber",
+      "plane": "Flugzeug"
     },
     "tripRoute": "Straßenroute ansehen",
-    "recenter": "Karte auf die Route zentrieren"
+    "recenter": "Karte auf die Route zentrieren",
+    "pickOnMap": "Auf der Karte wählen",
+    "legendFrom": "Start",
+    "legendTo": "Ziel",
+    "compare": {
+      "title": "Zeit je nach Verkehrsmittel",
+      "loading": "Wird berechnet…",
+      "none": "Keine Route",
+      "error": "Nicht verfügbar",
+      "straight": " · {km} Luftlinie"
+    },
+    "pickHint": "Tippen Sie auf der Karte auf Ihren Startpunkt.",
+    "pickedOnMap": "Auf der Karte gewählter Punkt",
+    "rerouting": "Sie haben die Route verlassen. Neuberechnung ab Ihrem Standort…"
   },
   "reviews": {
     "summary": {

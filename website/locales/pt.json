@@ -8290,7 +8290,9 @@
     "note": {
       "bus": "Ônibus: a Nicarágua não tem horários de transporte público online, por isso não calculamos rotas de ônibus. Pergunte no terminal ou ao estabelecimento.",
       "moto": "Rotas de moto usam a rede de estradas para veículos; respeite as restrições locais.",
-      "langEn": "As instruções passo a passo ainda não estão disponíveis neste idioma: são exibidas em inglês."
+      "langEn": "As instruções passo a passo ainda não estão disponíveis neste idioma: são exibidas em inglês.",
+      "busEstimate": "Ônibus: tempo de viagem de um ônibus pela estrada. Não inclui paradas, esperas nem horários (não há horários on-line na Nicarágua): consulte no terminal.",
+      "air": "Helicóptero e avião: referência aproximada em linha reta, não é um serviço regular. Os voos nacionais saem só de aeródromos (Manágua, Bluefields, Corn Island, Bilwi, San Carlos e outros): consulte a companhia ou o operador."
     },
     "start": "Iniciar navegação",
     "finish": "Finalizar percurso",
@@ -8339,10 +8341,25 @@
       "moto": "Moto",
       "walk": "A pé",
       "bike": "Bicicleta",
-      "bus": "Ônibus"
+      "bus": "Ônibus",
+      "heli": "Helicóptero",
+      "plane": "Avião"
     },
     "tripRoute": "Ver a rota pela estrada",
-    "recenter": "Centralizar o mapa na rota"
+    "recenter": "Centralizar o mapa na rota",
+    "pickOnMap": "Escolher no mapa",
+    "legendFrom": "Partida",
+    "legendTo": "Chegada",
+    "compare": {
+      "title": "Tempo conforme o meio de transporte",
+      "loading": "Calculando…",
+      "none": "Sem rota",
+      "error": "Indisponível",
+      "straight": " · {km} em linha reta"
+    },
+    "pickHint": "Toque no mapa no ponto de onde você sai.",
+    "pickedOnMap": "Ponto escolhido no mapa",
+    "rerouting": "Você saiu da rota. Recalculando de onde você está…"
   },
   "reviews": {
     "summary": {
