@@ -18,6 +18,12 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🔤 PLANES: TÍTULOS QUE NO SE LEÍAN (21-10-2026, 11:27) — rama fix/planes-titulos
+- **Solicitud:** *"los h2 de la pagina https://baqueanonicaragua.com/planes no se ven muy bien"* (captura de `#bqMyPlanTitle`).
+- **Causa medida:** «Así funciona», «Mi plan» y «Preguntas frecuentes» salían `rgb(15,23,42)` sobre fondo `rgb(11,19,32)` (casi negro sobre negro) y alineados a la izquierda. `css/headings-system.css` (global) fija `color: inherit !important` con más especificidad que `.page-planes main h2`, y las secciones oscuras heredan texto oscuro.
+- **Hecho:** `css/pages/planes.css` (v=20261021-titulos-1) con una regla más específica: blanco, centrado, League Spartan 800 y una línea arena debajo. La global no se tocó (la usan las demás páginas); los títulos de los diálogos no estaban afectados.
+- **Verificado** en 1280 px (claro y oscuro) y 390 px: blanco sobre el fondo oscuro. `planes-qa` 22/22.
+
 ## 👤 «MI PLAN» PARA EL EQUIPO: SIN «NO TIENE PLANES» (21-10-2026, 09:55) — rama fix/mi-plan-equipo
 - **Solicitud:** *"recuerda que al superadministrador, administradores o auditores no le tienen que salir que: Tu cuenta todavía no tiene planes. Elegí uno arriba y te ayudamos por WhatsApp."*
 - **Hecho:**
