@@ -1,6 +1,6 @@
 # Cobertura i18n por archivo
 
-Generado: 2026-10-21T02:44:18.797Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6506 · en 6506 · fr 6506 · it 6506 · pt 6506 · de 6506 · ko 6506 · zh 6506
+Generado: 2026-10-21T10:46:04.046Z · Idiomas: es, en, fr, it, pt, de, ko, zh · Claves por idioma: es 6584 · en 6584 · fr 6584 · it 6584 · pt 6584 · de 6584 · ko 6584 · zh 6584
 
 HTML: 4444/4445 textos con clave (1 pendientes) · JS: 648 textos dinámicos pendientes · TSX: 1094 pendientes · Contenido editorial JS: 21 cadenas (estrategia de contenido).
 
@@ -243,6 +243,7 @@ HTML: 4444/4445 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/ops-center/ops-payments.js | js | 44 | 44 | 0 | 100 % |
 | js/ops-center/ops-place-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-places.js | js | 0 | 0 | 0 | 100 % |
+| js/ops-center/ops-plan-duties.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-plans.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/ops-center/ops-tech-report.js | js | 0 | 0 | 0 | 100 % |
@@ -250,6 +251,7 @@ HTML: 4444/4445 textos con clave (1 pendientes) · JS: 648 textos dinámicos pen
 | js/place-ficha.js | js | 0 | 0 | 0 | 100 % |
 | js/plan-featured.js | js | 0 | 0 | 0 | 100 % |
 | js/plan-receipt.js | js | 0 | 0 | 0 | 100 % |
+| js/plan-report.js | js | 0 | 0 | 0 | 100 % |
 | js/platform-reviews.js | js | 0 | 0 | 0 | 100 % |
 | js/profile-editor.js | js | 0 | 0 | 0 | 100 % |
 | js/safety-gallery.js | js | 0 | 0 | 0 | 100 % |

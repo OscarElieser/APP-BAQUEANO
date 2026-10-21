@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T02:44:18.797Z",
+  "generatedAt": "2026-10-21T10:46:04.046Z",
   "languages": [
     "es",
     "en",
@@ -11,14 +11,14 @@
     "zh"
   ],
   "keysPerLanguage": {
-    "es": 6506,
-    "en": 6506,
-    "fr": 6506,
-    "it": 6506,
-    "pt": 6506,
-    "de": 6506,
-    "ko": 6506,
-    "zh": 6506
+    "es": 6584,
+    "en": 6584,
+    "fr": 6584,
+    "it": 6584,
+    "pt": 6584,
+    "de": 6584,
+    "ko": 6584,
+    "zh": 6584
   },
   "html": {
     "files": 39,
@@ -27,7 +27,7 @@
     "untranslated": 1
   },
   "js": {
-    "files": 145,
+    "files": 147,
     "translated": 450,
     "untranslated": 648
   },
@@ -146,6 +146,7 @@
     "js/ops-center/ops-payments.js",
     "js/ops-center/ops-place-reviews.js",
     "js/ops-center/ops-places.js",
+    "js/ops-center/ops-plan-duties.js",
     "js/ops-center/ops-plans.js",
     "js/ops-center/ops-platform-reviews.js",
     "js/ops-center/ops-tech-report.js",
@@ -153,6 +154,7 @@
     "js/place-ficha.js",
     "js/plan-featured.js",
     "js/plan-receipt.js",
+    "js/plan-report.js",
     "js/platform-reviews.js",
     "js/profile-editor.js",
     "js/safety-gallery.js",
@@ -1545,6 +1547,15 @@
       "coverage": 100
     },
     {
+      "file": "js/ops-center/ops-plan-duties.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
       "file": "js/ops-center/ops-plans.js",
       "type": "js",
       "total": 0,
@@ -1618,6 +1629,15 @@
     },
     {
       "file": "js/plan-receipt.js",
+      "type": "js",
+      "total": 0,
+      "translated": 0,
+      "untranslated": 0,
+      "editorialStrings": 0,
+      "coverage": 100
+    },
+    {
+      "file": "js/plan-report.js",
       "type": "js",
       "total": 0,
       "translated": 0,

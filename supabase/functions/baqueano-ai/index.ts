@@ -314,8 +314,12 @@ function conversationIntent(prompt: string): "greeting" | "farewell" | "thanks" 
   return "tourism";
 }
 
-function internalKnowledgeAnswer(records: Array<{title: string; entityType: string}>, language: string): string {
-  const titles = [...new Set(records.map((record) => record.title).filter(Boolean))].slice(0, 8).join(", ");
+// 2026-10-20 (planes): un negocio que va primero por su plan Mirador o Cumbre se marca como
+// «aliado destacado» (publicidad identificable: nunca se presenta como el mejor por pagar).
+const FEATURED_LABEL: Record<string, string> = {es: "aliado destacado", en: "featured partner", fr: "partenaire mis en avant", it: "partner in evidenza", pt: "parceiro em destaque", de: "hervorgehobener Partner"};
+function internalKnowledgeAnswer(records: Array<{title: string; entityType: string; payload?: Record<string, unknown>}>, language: string): string {
+  const label = FEATURED_LABEL[language] || FEATURED_LABEL.es;
+  const titles = [...new Set(records.map((record) => record.title && record.payload?.plan_featured ? `${record.title} (${label})` : record.title).filter(Boolean))].slice(0, 8).join(", ");
   const messages: Record<string, string> = {
     es: `Según la información interna de BAQUEANO, encontré: ${titles}. Puedo ayudarte a convertir estos datos en una ruta o ampliar una categoría específica.`,
     en: `According to BAQUEANO's internal information, I found: ${titles}. I can turn these results into a route or explore a specific category.`,
@@ -398,6 +402,7 @@ ESTADO DE CONVERSACIÓN (memoria; no vuelvas a pedir estos datos): ${conversatio
 INFORMACIÓN INTERNA BAQUEANO (prevalece sobre todo lo demás): ${JSON.stringify(internalContext).slice(0, 8000)}.
 FUENTES OFICIALES AUTORIZADAS (URL Context, solo si falta información interna; citá la procedencia): ${TRUSTED_SOURCE_URLS.join(" ")}.
 POLÍTICAS PÚBLICAS: distinguí siempre HECHO OFICIAL (con fuente) de CONTRIBUCIÓN DE BAQUEANO; nunca digas que una institución reconoce oficialmente a BAQUEANO.
+ALIADOS DESTACADOS: un negocio con plan_featured tiene un plan BAQUEANO vigente. Podés mencionarlo primero, pero decí que es un aliado destacado de BAQUEANO; nunca digas que es el mejor ni inventes atributos por eso.
 No construyas un itinerario día por día salvo que lo pidan.
 HISTORIAL RECIENTE:\n${recentHistory || "Sin historial previo."}
 MENSAJE ACTUAL: ${prompt}`;

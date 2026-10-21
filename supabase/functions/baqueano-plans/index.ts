@@ -18,6 +18,9 @@
 //   - IVA: subtotal, IVA y total separados; el IVA solo se suma si plan_settings lo enciende.
 //   - Vencimientos (equipo): reminders_list y reminders_run (plan_reminders_run: campana,
 //     correo y WhatsApp; la tarea diaria de pg_cron hace lo mismo sola).
+//   - Compromisos (2026-10-20): duties_list, duty_record y duty_void llevan el registro de lo que
+//     el equipo entrega a cada plan (redes, Crónica, pauta, informe, verificación, video, ficha);
+//     my_plans le muestra al propietario las reglas de su plan y lo entregado ese mes.
 //   - Nada se borra: los pedidos se cancelan. Todo cambio del equipo queda en audit_logs.
 // 📦 QUÉ: POST { action, ... }.
 // ============================================================================
@@ -25,6 +28,8 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient, type SupabaseClient } from "jsr:@supabase/supabase-js@2";
 import { createRemoteJWKSet, jwtVerify } from "npm:jose@5.9.6";
 import { effectiveStaffRole } from "../_shared/staff-revocation.ts";
+// 2026-10-20 — compromisos de cada plan (lo que el equipo entrega cada mes) y beneficios por nivel.
+import { activeInMonth, DUTY_KINDS, type DutyKind, dutiesFor, isPlan, monthStart, PLAN_RULES, sameBusiness, summarize } from "./duties.ts";
 
 const FIREBASE_PROJECT_ID = "app-baqueano";
 // Clave web pública de Firebase (la misma de firebase-config.js; no es un secreto).
@@ -229,8 +234,39 @@ async function handle(action: string, body: Record<string, unknown>, req: Reques
       await Promise.all(orders.map(async (o) => {
         if (o.status !== "paid" || !o.business_id) return;
         const { data: stats } = await service.rpc("plan_business_stats", { p_business_id: String(o.business_id) });
+        // Sendero ve el mes en curso; la comparación con el mes anterior es de Mirador y Cumbre.
+        if (stats && isPlan(o.plan_code) && !PLAN_RULES[o.plan_code].automatic.statsCompare) {
+          delete (stats as Record<string, unknown>).views_prev;
+          delete (stats as Record<string, unknown>).contacts_prev;
+        }
         o.stats = stats || null;
       }));
+      // Lo que incluye su plan y lo que BAQUEANO ya entregó este mes (transparencia del servicio).
+      const month = monthStart();
+      const ids = orders.map((o) => String((o as { id?: string }).id || "")).filter(Boolean);
+      const { data: rawIds } = await service.from("plan_orders").select("id, code").in("code", orders.map((o) => String(o.code)));
+      const idByCode = new Map((rawIds || []).map((r: { id: string; code: string }) => [r.code, r.id]));
+      const orderIds = ids.length ? ids : [...idByCode.values()];
+      const { data: delivered } = orderIds.length
+        ? await service.from("plan_deliverables").select("order_id, kind, period_month, status, evidence_url, done_at").in("order_id", orderIds).eq("status", "done").order("done_at", { ascending: false })
+        : { data: [] };
+      const done = (delivered || []) as Array<{ order_id: string; kind: string; period_month: string; status: string; evidence_url: string | null; done_at: string }>;
+      const likes = orders.map((o) => ({ id: idByCode.get(String(o.code)) || "", plan_code: String(o.plan_code), status: String(o.status), period_start: (o.period_start as string) || null, period_end: (o.period_end as string) || null, email: (o.email as string) || null, business_id: (o.business_id as string) || null }));
+      orders.forEach((o, i) => {
+        if (!isPlan(o.plan_code)) return;
+        const rules = PLAN_RULES[o.plan_code];
+        o.rules = { photo_limit: rules.photoLimit, automatic: rules.automatic, monthly: rules.monthly, once: rules.once };
+        const like = likes[i];
+        if (!like.id || !activeInMonth(like, month)) return;
+        const same = sameBusiness(like, likes);
+        const duties = dutiesFor(like, month, done, same);
+        o.month = month;
+        o.duties = duties;
+        o.duties_summary = summarize(duties);
+        // Solo la evidencia pública (enlace https) y la fecha; nunca quién del equipo lo hizo.
+        o.delivered = done.filter((d) => (d.order_id === like.id && d.period_month === month) || (same.includes(d.order_id) && rules.once.includes(d.kind as DutyKind)))
+          .map((d) => ({ kind: d.kind, evidence_url: d.evidence_url, done_at: d.done_at }));
+      });
       return { orders };
     }
 
@@ -385,6 +421,75 @@ async function handle(action: string, body: Record<string, unknown>, req: Reques
       if (error) throw new HttpError(500, `No se pudieron enviar los avisos: ${error.message}`, "run_failed");
       await audit(service, req, w, "PLAN_REMINDERS_RUN", "plan_reminders", "Avisos de vencimiento ejecutados a mano", { result: data });
       return { result: data };
+    }
+
+    // ── Compromisos del mes por plan ──
+    // Pedidos pagados vigentes en el mes, con lo que corresponde a su plan y lo ya entregado.
+    case "duties_list": {
+      requireStaff(await who(req, service, true), false);
+      const month = monthStart(typeof body.month === "string" ? body.month : null);
+      const { data: orders, error } = await service.from("plan_orders")
+        .select("id, code, plan_code, billing_period, status, period_start, period_end, business_name, business_id, contact_name, phone, email, department")
+        .eq("status", "paid").order("period_end");
+      if (error) throw new HttpError(500, "No se pudieron leer los planes vigentes.", "read_failed");
+      const all = (orders || []) as Array<Record<string, string | null> & { id: string; plan_code: string; status: string }>;
+      const active = all.filter((o) => activeInMonth(o as never, month));
+      const ids = all.map((o) => o.id);
+      const { data: rows } = ids.length
+        ? await service.from("plan_deliverables").select("id, order_id, kind, period_month, evidence_url, note, status, void_reason, done_by, done_at, voided_by, voided_at").in("order_id", ids).order("done_at", { ascending: false })
+        : { data: [] };
+      const done = (rows || []) as Array<{ id: string; order_id: string; kind: string; period_month: string; status: string }>;
+      const items = active.map((o) => {
+        const same = sameBusiness(o as never, all as never);
+        const duties = dutiesFor(o as never, month, done, same);
+        return {
+          ...o, rules: { photo_limit: PLAN_RULES[o.plan_code as "sendero"].photoLimit, automatic: PLAN_RULES[o.plan_code as "sendero"].automatic },
+          duties, summary: summarize(duties),
+          history: done.filter((d) => same.includes(d.order_id) && (d.period_month === month || duties.some((x) => x.cadence === "once" && x.kind === d.kind))),
+        };
+      });
+      const totals = items.reduce((t, i) => ({ required: t.required + i.summary.required, done: t.done + i.summary.done }), { required: 0, done: 0 });
+      return { month, items, totals };
+    }
+
+    case "duty_record": {
+      const w = requireStaff(await who(req, service, true), true);
+      const id = String(body.order_id || "");
+      if (!UUID_RE.test(id)) throw new HttpError(400, "Pedido inválido.", "bad_id");
+      const kind = String(body.kind || "") as DutyKind;
+      if (!DUTY_KINDS.includes(kind)) throw new HttpError(400, "Tipo de entrega inválido.", "bad_kind");
+      const month = monthStart(typeof body.month === "string" ? body.month : null);
+      const evidence = typeof body.evidence_url === "string" && body.evidence_url.trim() ? body.evidence_url.trim() : null;
+      if (evidence && (!/^https:\/\/[^\s<>"']+$/.test(evidence) || evidence.length > 500)) throw new HttpError(400, "La evidencia tiene que ser un enlace https (publicación, archivo o carpeta).", "bad_evidence");
+      const note = text(body.note, 500, { label: "la nota" });
+      const { data: order } = await service.from("plan_orders").select("id, code, plan_code, status, period_start, period_end").eq("id", id).maybeSingle();
+      if (!order) throw new HttpError(404, "No existe ese pedido.", "not_found");
+      if (!activeInMonth(order as never, month)) throw new HttpError(409, "Ese plan no está vigente en el mes elegido.", "not_active");
+      const rules = PLAN_RULES[order.plan_code as "sendero"];
+      if (!rules.monthly[kind] && !rules.once.includes(kind)) throw new HttpError(409, `El plan ${order.plan_code} no incluye esa entrega.`, "not_included");
+      // Las entregas que se ven en público (redes, Crónica, pauta) necesitan su enlace como evidencia.
+      if (!evidence && ["social_welcome", "social_post", "social_ad", "chronicle", "video"].includes(kind)) {
+        throw new HttpError(400, "Pegá el enlace de la publicación como evidencia.", "evidence_required");
+      }
+      const { data, error } = await service.from("plan_deliverables").insert({
+        order_id: id, kind, period_month: month, evidence_url: evidence, note, done_by: w.email || w.uid,
+      }).select("id, kind, period_month, evidence_url, note, done_at").single();
+      if (error || !data) throw new HttpError(500, "No se pudo registrar la entrega.", "save_failed");
+      await audit(service, req, w, "PLAN_DUTY_DONE", order.code, `Pedido ${order.code}: entrega ${kind} (${month.slice(0, 7)})`, { kind, month, evidence });
+      return { deliverable: data };
+    }
+
+    case "duty_void": {
+      const w = requireStaff(await who(req, service, true), true);
+      const id = String(body.id || "");
+      if (!UUID_RE.test(id)) throw new HttpError(400, "Entrega inválida.", "bad_id");
+      const reason = text(body.reason, 500, { required: true, min: 5, label: "el motivo" })!;
+      const { data: row } = await service.from("plan_deliverables").select("id, order_id, kind, period_month, status").eq("id", id).maybeSingle();
+      if (!row || row.status !== "done") throw new HttpError(404, "Esa entrega no existe o ya fue anulada.", "not_found");
+      const { error } = await service.from("plan_deliverables").update({ status: "void", void_reason: reason, voided_by: w.email || w.uid }).eq("id", id);
+      if (error) throw new HttpError(500, "No se pudo anular.", "update_failed");
+      await audit(service, req, w, "PLAN_DUTY_VOID", row.order_id, `Entrega ${row.kind} (${String(row.period_month).slice(0, 7)}) anulada`, { reason });
+      return { ok: true };
     }
 
     default:

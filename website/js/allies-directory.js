@@ -273,8 +273,9 @@
         var tiersP = window.BaqueanoPlanTiers ? window.BaqueanoPlanTiers.load() : Promise.resolve(new Map());
         return tiersP.then(function (tiers) {
           state.tiers = tiers || new Map();
-          // Primero los planes vigentes (Cumbre, Mirador, Sendero); luego el orden de verificación.
-          var planRank = function (b) { var tr = tierOf(b); return tr ? window.BaqueanoPlanTiers.rank(tr.plan) : 9; };
+          // Primero Cumbre y Mirador («Primero en Aliados», planes.html); Sendero no trae esa
+          // prioridad y va con el resto (20-10-2026). Luego el orden de verificación.
+          var planRank = function (b) { var tr = tierOf(b); return tr && tr.plan !== 'sendero' ? window.BaqueanoPlanTiers.rank(tr.plan) : 9; };
           state.rows = (Array.isArray(rows) ? rows : []).sort(function (a, b) {
             var rank = { verified: 0, legacy: 1, partial: 2 };
             return planRank(a) - planRank(b) || rank[seal(a).kind] - rank[seal(b).kind] || String(a.name).localeCompare(String(b.name), 'es');

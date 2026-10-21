@@ -11,6 +11,7 @@
 //   guarda en ningún lado: se muestra para copiarla o enviarla. Todo se pinta con textContent.
 // - 15-10-2026: «Vencimientos próximos» con el estado de cada aviso (campana, correo, WhatsApp),
 //   botón para avisar por WhatsApp a mano y «Enviar avisos ahora».
+// - 20-10-2026: «Compromisos del mes por plan» (ops-plan-duties.js) dentro de esta vista.
 // 📦 QUÉ: window.BaqueanoOpsPlans = { render(panel), refresh() } para la vista 44-planes.
 // ============================================================================
 (function (window, document) {
@@ -69,7 +70,8 @@
     var b = call('reminders_list', {}).then(function (res) {
       state.expiring = res.orders || []; state.reminders = res.reminders || []; state.remError = '';
     }).catch(function (e) { state.remError = e.message; });
-    return Promise.all([a, b]).then(function () { state.loading = false; paint(); });
+    var c = window.BaqueanoOpsPlanDuties ? window.BaqueanoOpsPlanDuties.reload() : null;
+    return Promise.all([a, b, c]).then(function () { state.loading = false; paint(); });
   }
 
   // ── Ventanas ──
@@ -338,6 +340,8 @@
     if (state.notice) children.push(el('p', { className: 'ops-plans-notice', role: 'status', text: state.notice }));
     if (!canWrite()) children.push(el('p', { className: 'ops-plans-hint', text: 'Rol de solo lectura: podés ver los pedidos y los comprobantes.' }));
     if (!state.loading) children.push(expiringSection());
+    // 20-10-2026: compromisos del mes de cada plan (js/ops-center/ops-plan-duties.js).
+    if (window.BaqueanoOpsPlanDuties) children.push(window.BaqueanoOpsPlanDuties.section(call, canWrite()));
     children.push(el('h2', { className: 'ops-plans-subtitle' }, [icon('fa-solid fa-receipt'), ' Pedidos']));
     children.push(list);
     state.panel.replaceChildren.apply(state.panel, children);
