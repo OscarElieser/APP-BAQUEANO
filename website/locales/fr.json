@@ -8290,7 +8290,9 @@
     "note": {
       "bus": "Bus : le Nicaragua n'a pas d'horaires de transport public en ligne, nous ne calculons donc pas d'itinéraires en bus. Renseignez-vous au terminal ou auprès de l'établissement.",
       "moto": "Les itinéraires à moto utilisent le réseau routier des véhicules ; respectez les restrictions locales.",
-      "langEn": "Les indications pas à pas ne sont pas encore disponibles dans cette langue : elles s'affichent en anglais."
+      "langEn": "Les indications pas à pas ne sont pas encore disponibles dans cette langue : elles s'affichent en anglais.",
+      "busEstimate": "Bus : temps de trajet d'un bus par la route. Arrêts, attentes et horaires non compris (pas d'horaires en ligne au Nicaragua) : renseignez-vous au terminal.",
+      "air": "Hélicoptère et avion : référence approximative en ligne droite, pas un service régulier. Les vols intérieurs partent seulement des aérodromes (Managua, Bluefields, Corn Island, Bilwi, San Carlos et d'autres) : renseignez-vous auprès de la compagnie ou de l'opérateur."
     },
     "start": "Démarrer la navigation",
     "finish": "Terminer le trajet",
@@ -8339,10 +8341,25 @@
       "moto": "Moto",
       "walk": "À pied",
       "bike": "Vélo",
-      "bus": "Bus"
+      "bus": "Bus",
+      "heli": "Hélicoptère",
+      "plane": "Avion"
     },
     "tripRoute": "Voir l'itinéraire routier",
-    "recenter": "Centrer la carte sur l'itinéraire"
+    "recenter": "Centrer la carte sur l'itinéraire",
+    "pickOnMap": "Choisir sur la carte",
+    "legendFrom": "Départ",
+    "legendTo": "Arrivée",
+    "compare": {
+      "title": "Temps selon votre mode de transport",
+      "loading": "Calcul en cours…",
+      "none": "Pas d'itinéraire",
+      "error": "Indisponible",
+      "straight": " · {km} en ligne droite"
+    },
+    "pickHint": "Touchez la carte à l'endroit d'où vous partez.",
+    "pickedOnMap": "Point choisi sur la carte",
+    "rerouting": "Vous avez quitté l'itinéraire. Nouveau calcul depuis votre position…"
   },
   "reviews": {
     "summary": {
