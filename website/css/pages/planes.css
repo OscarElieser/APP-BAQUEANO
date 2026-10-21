@@ -97,6 +97,30 @@
 
 /* ── Pasos, Mi plan, preguntas ── */
 .page-planes main h2 { color: #fff !important; -webkit-text-fill-color: #fff !important; background: none !important; font: 800 clamp(1.5rem, 3vw, 2rem)/1.15 'League Spartan', sans-serif; text-align: center; margin: 0 0 1.4rem; text-transform: none; letter-spacing: 0; }
+/* 21-10-2026 (propietario: «los h2 de la página no se ven muy bien»): css/headings-system.css
+   (global) fija `color: inherit !important` con más especificidad que la regla de arriba, y estas
+   secciones oscuras heredan texto oscuro: quedaba #0F172A sobre #0B1320 y sin centrar. Esta regla
+   le gana sin tocar la global, que usan las demás páginas. */
+body.page-planes main h2:not(.title-handwritten):not(.handwriting-h2):not(.bq-visually-hidden) {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  font-family: 'League Spartan', 'Plus Jakarta Sans', sans-serif !important;
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.15 !important;
+  text-align: center;
+  margin: 0 auto 1.4rem !important;
+}
+body.page-planes main h2:not(.title-handwritten):not(.handwriting-h2):not(.bq-visually-hidden)::after {
+  content: "" !important;
+  display: block !important;
+  width: 56px;
+  height: 3px;
+  margin: 0.7rem auto 0;
+  border-radius: 3px;
+  background: var(--pl-sand, #f4e6c1);
+}
 .bq-plans-steps, .bq-plans-mine, .bq-plans-faq { padding: clamp(40px, 6vw, 70px) 0 0; }
 .bq-plans-step-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .bq-plans-step-list li { display: flex; flex-direction: column; gap: .45rem; padding: 18px; border-radius: 16px; background: var(--pl-panel); border: 1px solid var(--pl-line); }
