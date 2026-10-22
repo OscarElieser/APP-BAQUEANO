@@ -2,7 +2,7 @@
 -- 🧭 BAQUEANO — IMPORTACIÓN MARENA: ÁREAS PROTEGIDAS (GENERADO — NO editar a mano)
 -- 🎯 Fuente oficial trazable. ⚙️ Generado por website/scripts/import-marena-*.mjs; idempotente.
 -- 📦 116 sentencias. Importar ≠ publicar: nada queda is_published = true.
--- ⚠️ Requiere 20261005090000_environmental_marena_module.sql. Ejecutar en UNA transacción y SOLO con autorización.
+-- ⚠️ Requiere supabase/manual/20261005090000_environmental_marena_module.sql (en pausa, fuera de las migraciones). Ejecutar en UNA transacción y SOLO con autorización.
 -- ============================================================================
 insert into public.protected_area_details (place_id, official_name, official_name_as_published, official_category, legal_framework, ownership_type, source_url, verified_at, verification_status, notes, created_by, updated_by)
 values ('pl-reserva-natural-tisey-la-estanzuela', 'Reserva Natural Tisey la Estanzuela', 'Reserva Natural Tisey la Estanzuela', 'reserva_natural', null, 'unknown', 'https://www.marena.gob.ni/planes-de-manejo/plan-de-manejo-reserva-natural-tisey-la-estanzuela/', '2026-10-05'::timestamptz, 'partial', null, 'import:marena', 'import:marena')

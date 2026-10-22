@@ -1,0 +1,12 @@
+-- ============================================================================
+-- 🗂️ BAQUEANO — MARCADOR DE HISTORIAL: 20261006222600 realtime_presence_v2
+-- ============================================================================
+-- 🎯 POR QUÉ (propietario, 22-10-2026, opción A «sin borrar nada»): producción registró
+--   este número en supabase_migrations.schema_migrations, pero el repositorio guarda el
+--   cambio con otro número o lo aplicó desde el editor SQL. La revisión de Supabase falla
+--   si un número de producción no tiene archivo.
+-- ⚙️ CÓMO: este archivo no ejecuta nada (solo «select 1»): el cambio real está en
+--   supabase/migrations/20261006200200_realtime_presence_v2.sql.
+-- 📦 QUÉ: no crea, cambia ni borra nada. No editar ni renombrar.
+-- ============================================================================
+select 1;
