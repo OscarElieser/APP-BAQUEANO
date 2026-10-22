@@ -27,6 +27,7 @@ LO QUE FUNCIONA EN ESTE PUNTO:
   - 76 marcadores en `supabase/migrations` (uno por número que producción registró sin archivo con ese número): solo `select 1` y un comentario con el archivo real. No se borró nada.
   - Producción: se insertaron en `supabase_migrations.schema_migrations` los 70 números del repo que faltaban (solo INSERT, probado antes con transacción revertida). Verificado: historial 160 = repositorio 160, 0 sobrantes, 0 faltantes.
   - Migraciones desde cero: 160/160. Puerta de seguridad sin hallazgos nuevos.
+  - PR #21 fusionado. La revisión «Supabase Preview» en main sigue con *"Remote migration versions not found"*: su enlace apunta al proyecto `xgejrnnrppmlrsgcfjei`, no a producción (`heiudfpthqwtjrtluqlm`, ya 160 = 160). Es la rama de vista previa `main` creada el 18/19-09-2026 con estado MIGRATIONS_FAILED. No se reseteó desde aquí porque la herramienta la muestra como predeterminada y ligada a producción: lo revisa el propietario en Supabase → Settings → Integrations → GitHub (desactivar Branching o reiniciar solo esa rama de prueba).
 
 ## 🔤 PLANES: TÍTULOS QUE NO SE LEÍAN (21-10-2026, 11:27) — rama fix/planes-titulos
 - **Solicitud:** *"los h2 de la pagina https://baqueanonicaragua.com/planes no se ven muy bien"* (captura de `#bqMyPlanTitle`).
