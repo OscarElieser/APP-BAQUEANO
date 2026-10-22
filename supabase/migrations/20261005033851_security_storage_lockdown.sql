@@ -1,0 +1,12 @@
+-- ============================================================================
+-- 🗂️ BAQUEANO — MARCADOR DE HISTORIAL: 20261005033851 security_storage_lockdown
+-- ============================================================================
+-- 🎯 POR QUÉ (propietario, 22-10-2026, opción A «sin borrar nada»): producción registró
+--   este número en supabase_migrations.schema_migrations, pero el repositorio guarda el
+--   cambio con otro número o lo aplicó desde el editor SQL. La revisión de Supabase falla
+--   si un número de producción no tiene archivo.
+-- ⚙️ CÓMO: este archivo no ejecuta nada (solo «select 1»): el cambio real está en
+--   supabase/migrations/20261005050000_security_storage_lockdown.sql.
+-- 📦 QUÉ: no crea, cambia ni borra nada. No editar ni renombrar.
+-- ============================================================================
+select 1;

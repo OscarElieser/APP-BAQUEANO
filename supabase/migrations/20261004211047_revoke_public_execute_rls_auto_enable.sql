@@ -1,0 +1,12 @@
+-- ============================================================================
+-- 🗂️ BAQUEANO — MARCADOR DE HISTORIAL: 20261004211047 revoke_public_execute_rls_auto_enable
+-- ============================================================================
+-- 🎯 POR QUÉ (propietario, 22-10-2026, opción A «sin borrar nada»): producción registró
+--   este número en supabase_migrations.schema_migrations, pero el repositorio guarda el
+--   cambio con otro número o lo aplicó desde el editor SQL. La revisión de Supabase falla
+--   si un número de producción no tiene archivo.
+-- ⚙️ CÓMO: este archivo no ejecuta nada (solo «select 1»): el cambio real está en
+--   una migración aplicada desde el panel de Supabase, sin archivo propio (revocación de EXECUTE en rls_auto_enable); su efecto lo cubren las migraciones de endurecimiento posteriores.
+-- 📦 QUÉ: no crea, cambia ni borra nada. No editar ni renombrar.
+-- ============================================================================
+select 1;
