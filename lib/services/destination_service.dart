@@ -21,26 +21,29 @@ class DestinationService extends ChangeNotifier {
     _destinations = List.from(BaqueanoFullCatalog.destinations);
     _businesses = List.from(BaqueanoFullCatalog.localBusinesses);
     _experiences = List.from(BaqueanoFullCatalog.communityExperiences);
-    _reservations = [
-      ReservationModel(
-        bookingCode: 'BAQ-849204',
-        userId: 'u-1',
-        userEmail: 'explorador@baqueano.ni',
-        destinationId: 'cascada-la-luna',
-        destinationTitle: 'Cascada La Luna & Cañones',
-        date: DateTime.now().add(const Duration(days: 3)),
-        participants: 2,
-        isForeignTourist: true,
-        vatRate: 0.0,
-        vatAmountUsd: 0.0,
-        subtotalUsd: 70.0,
-        discountUsd: 10.5,
-        totalUsd: 59.5,
-        totalNio: 2180.67,
-        status: 'confirmed',
-        qrData: 'BAQUEANO-PASS-NIC-849204-EXPLORER',
-      ),
-    ];
+    // 22-10-2026: la reserva de ejemplo «BAQ-849204» se contaba como real en el panel
+    // (y BAQUEANO no ofrece reservas). Se conserva comentada:
+    // _reservations = [
+    //   ReservationModel(
+    //     bookingCode: 'BAQ-849204',
+    //     userId: 'u-1',
+    //     userEmail: 'explorador@baqueano.ni',
+    //     destinationId: 'cascada-la-luna',
+    //     destinationTitle: 'Cascada La Luna & Cañones',
+    //     date: DateTime.now().add(const Duration(days: 3)),
+    //     participants: 2,
+    //     isForeignTourist: true,
+    //     vatRate: 0.0,
+    //     vatAmountUsd: 0.0,
+    //     subtotalUsd: 70.0,
+    //     discountUsd: 10.5,
+    //     totalUsd: 59.5,
+    //     totalNio: 2180.67,
+    //     status: 'confirmed',
+    //     qrData: 'BAQUEANO-PASS-NIC-849204-EXPLORER',
+    //   ),
+    // ];
+    _reservations = <ReservationModel>[];
   }
 
   List<DestinationModel> get destinations => _destinations;

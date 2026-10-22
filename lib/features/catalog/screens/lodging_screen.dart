@@ -74,14 +74,19 @@ class _LodgingScreenState extends State<LodgingScreen> {
   /// Lanza WhatsApp 100% real con mensaje predeterminado
   Future<void> _launchWhatsApp(BuildContext context, LodgingSpot spot) async {
     HapticFeedback.lightImpact();
-    final phone = spot.contactPhone ?? '+505 8888 1234';
+    // 22-10-2026: sin número de relleno (antes un 8888 inventado): si el lugar no tiene teléfono,
+    // solo se usa su enlace de WhatsApp verificado.
+    final phone = spot.contactPhone ?? '';
     final cleanPhone = phone.replaceAll(RegExp(r'[^\d]'), '');
+    if (cleanPhone.isEmpty && (spot.whatsappUrl == null || spot.whatsappUrl!.isEmpty)) return;
     final defaultMsg = Uri.encodeComponent(
       '¡Hola! Los contacto a través de la app Baqueano Nicaragua. Quisiera consultar sobre disponibilidad y tarifas de hospedaje en ${spot.name}.',
     );
 
     // Intent nativo directo de WhatsApp en Android
-    final nativeWaUri = Uri.parse('whatsapp://send?phone=$cleanPhone&text=$defaultMsg');
+    final nativeWaUri = cleanPhone.isEmpty
+        ? Uri.parse(spot.whatsappUrl!)
+        : Uri.parse('whatsapp://send?phone=$cleanPhone&text=$defaultMsg');
     final webWaUri = spot.whatsappUrl != null && spot.whatsappUrl!.isNotEmpty
         ? Uri.parse(spot.whatsappUrl!)
         : Uri.parse('https://wa.me/$cleanPhone?text=$defaultMsg');
@@ -111,7 +116,9 @@ class _LodgingScreenState extends State<LodgingScreen> {
   /// Abre cliente de correo con asunto y cuerpo predefinidos
   Future<void> _launchEmail(BuildContext context, LodgingSpot spot) async {
     HapticFeedback.lightImpact();
-    final email = spot.email ?? 'info@baqueano.ni';
+    // 22-10-2026: sin correo de relleno ('info@baqueano.ni', que no existe).
+    final email = spot.email;
+    if (email == null || email.isEmpty) return;
     final subject = Uri.encodeComponent('Consulta - ${spot.name} (App Baqueano)');
     final body = Uri.encodeComponent(
       'Estimado equipo de ${spot.name},\n\n'

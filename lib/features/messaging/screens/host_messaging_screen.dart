@@ -34,6 +34,8 @@ import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/custom_toast.dart';
 import '../../../core/widgets/responsive_scaffold.dart';
 import '../../../services/booking_and_communication_service.dart';
+import '../../../config/feature_flags.dart';
+import '../../../core/i18n/app_i18n.dart';
 
 class HostContact {
   final String id;
@@ -364,8 +366,60 @@ class _HostMessagingScreenState extends ConsumerState<HostMessagingScreen> with 
     }
   }
 
+  /// Mientras `kHostMessagingEnabled` esté apagado: aviso honesto y acceso a los
+  /// aliados verificados (contacto directo con el propietario), sin anfitriones inventados.
+  Widget _buildMessagingOff(BuildContext context) {
+    final s = ref.strings;
+    return ResponsiveScaffold(
+      currentIndex: 4,
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 520),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.forum_outlined, size: 44, color: AppColors.gold),
+                const SizedBox(height: 14),
+                Text(
+                  s.t('app.messaging.offTitle', 'Mensajes con anfitriones'),
+                  textAlign: TextAlign.center,
+                  style: BaqueanoFonts.display(fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  s.t('app.messaging.offBody', 'Todavía no está disponible dentro de la app. Para escribirle a un negocio, usá el contacto directo de los aliados verificados por BAQUEANO.'),
+                  textAlign: TextAlign.center,
+                  style: BaqueanoFonts.text(fontSize: 14, color: Colors.white70, height: 1.45),
+                ),
+                const SizedBox(height: 18),
+                ElevatedButton.icon(
+                  onPressed: () async {
+                    HapticFeedback.lightImpact();
+                    try {
+                      await launchUrl(Uri.parse('https://baqueanonicaragua.com/aliados'), mode: LaunchMode.externalApplication);
+                    } catch (_) {
+                      if (context.mounted) {
+                        CustomToast.show(context, message: s.t('app.honest.alliesFallback', 'Aliados verificados: baqueanonicaragua.com/aliados'));
+                      }
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.terracotta, foregroundColor: Colors.white),
+                  icon: const Icon(Icons.verified_rounded, size: 18),
+                  label: Text(s.t('app.honest.seeVerifiedAllies', 'Ver aliados verificados')),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (!kHostMessagingEnabled) return _buildMessagingOff(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
     final bottomPadding = MediaQuery.of(context).padding.bottom;

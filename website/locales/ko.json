@@ -1104,6 +1104,24 @@
       "throttled": "알림이 이미 운영 센터에 등록되어 있어요.",
       "signIn": "운영 센터가 알림을 받으려면 로그인하세요. 전화는 그대로 이용할 수 있어요.",
       "failed": "운영 센터에 알리지 못했어요(오프라인). 전화는 그대로 이용할 수 있어요."
+    },
+    "honest": {
+      "whereToTry": "맛볼 수 있는 곳",
+      "region": "지역:",
+      "noVerifiedVenue": "이 음식을 맛볼 수 있는 검증된 가게가 아직 없습니다. BAQUEANO가 확인한 식당은 제휴처에서 직접 연락처와 함께 볼 수 있습니다.",
+      "seeVerifiedAllies": "검증된 제휴처 보기",
+      "alliesFallback": "검증된 제휴처: baqueanonicaragua.com/aliados",
+      "seeOnMap": "지도에서 보기"
+    },
+    "messaging": {
+      "offTitle": "호스트와 메시지",
+      "offBody": "아직 앱에서는 이용할 수 없습니다. 업체에 연락하려면 BAQUEANO가 검증한 제휴처의 직접 연락처를 이용하세요."
+    },
+    "testimonials": {
+      "tag": "실제 후기",
+      "title": "탐험가들의 이야기",
+      "empty": "아직 게시된 후기가 없습니다. 경험을 남겨 주시면 팀이 확인한 뒤 게시합니다.",
+      "share": "내 경험 공유하기"
     }
   },
   "auth": {

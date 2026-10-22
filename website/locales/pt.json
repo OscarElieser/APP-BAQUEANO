@@ -1104,6 +1104,24 @@
       "throttled": "Seu alerta já está registrado no Centro de Operações.",
       "signIn": "Entre para que o Centro de Operações receba seu alerta. A ligação funciona mesmo assim.",
       "failed": "Não foi possível avisar o Centro de Operações (sem conexão). A ligação funciona mesmo assim."
+    },
+    "honest": {
+      "whereToTry": "ONDE PROVAR",
+      "region": "Região:",
+      "noVerifiedVenue": "Ainda não temos um local verificado para este prato. Os restaurantes e comedores revisados pelo BAQUEANO estão em Aliados, com contato direto.",
+      "seeVerifiedAllies": "Ver aliados verificados",
+      "alliesFallback": "Aliados verificados: baqueanonicaragua.com/aliados",
+      "seeOnMap": "Ver no mapa"
+    },
+    "messaging": {
+      "offTitle": "Mensagens com anfitriões",
+      "offBody": "Ainda não está disponível no app. Para escrever a um negócio, use o contato direto dos aliados verificados pelo BAQUEANO."
+    },
+    "testimonials": {
+      "tag": "DEPOIMENTOS REAIS",
+      "title": "O que dizem nossos Exploradores",
+      "empty": "Ainda não há depoimentos publicados. Conte sua experiência e a equipe a revisa antes de publicar.",
+      "share": "Contar minha experiência"
     }
   },
   "auth": {

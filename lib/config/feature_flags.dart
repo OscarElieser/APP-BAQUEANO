@@ -19,3 +19,9 @@
 /// Solicitudes de reserva (flujo `ReservationRequestSheet`). Apagado por la regla
 /// del propietario del 2026-10-14: en su lugar, contacto directo con el negocio.
 const bool kReservationRequestsEnabled = false;
+
+/// Chat con anfitriones dentro de la app. Apagado el 2026-10-22: la lista de
+/// anfitriones era inventada (nombres y teléfonos) y los mensajes nunca salían del
+/// teléfono, aunque la app decía que estaban «en la cola». Se conserva el código:
+/// se reactiva cuando exista un canal real con negocios verificados.
+const bool kHostMessagingEnabled = false;

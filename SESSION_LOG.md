@@ -18,6 +18,19 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 📱 APP ANDROID SIN DATOS INVENTADOS (22-10-2026, 11:20–12:30) — rama fix/app-sin-datos-falsos
+- **Solicitud:** *"Todos"* (los pendientes: reseñas bloque 3, restaurantes de gastronomía, valores falsos en Android, idiomas parte 2).
+- **Reseñas, bloque 3:** ya estaba aplicado en producción. Los 7 destinos tienen rating null y reviews_count 0; el respaldo guarda 4,88–4,98; 0 reseñas reales detrás. Nada que correr.
+- **Hallazgos en la app y cambios** (los datos viejos se conservan en `catalog_data.dart`; nada se borró):
+  - Gastronomía: cada plato mostraba local, dueño, dirección, horario, precio y teléfono inventados («Doña Tania Morán», «+505 2278-4512»…) con botones de llamar y WhatsApp a esos números. Ahora: «Dónde probarlo» con la región real y «Ver aliados verificados» (web /aliados). Sin precio en la tarjeta; el buscador muestra solo la región.
+  - Mensajes: 10 anfitriones inventados con teléfono, y los mensajes nunca salían del teléfono aunque la app decía «en la cola». Interruptor `kHostMessagingEnabled = false` con aviso honesto y acceso a Aliados.
+  - Portada: testimonios de personas inventadas → testimonios reales de Comunidad (`baqueano-community`, solo publicados); sin publicados, invitación a contar la experiencia.
+  - Hospedaje: sin teléfono de relleno (8888…) ni correo `info@baqueano.ni` cuando el lugar no los tiene.
+  - Playas y ríos: sin estrellas (no venían de reseñas).
+  - Panel: la reserva de ejemplo «BAQ-849204» se contaba como real; queda comentada.
+- 12 claves `app.*` en 8 idiomas (app 6664 claves, 87 propias).
+- **Pruebas:** Flutter 3.47.7 instalado aquí: `flutter analyze --fatal-infos --fatal-warnings` sin avisos; `flutter test` 101/101 (nueva `test/no_fake_contacts_test.dart`, 6 casos). i18n 0 errores; puerta de seguridad sin hallazgos nuevos.
+
 ## 🗂️ CONCILIACIÓN DEL HISTORIAL DE MIGRACIONES (21-10-2026, 21:05) — rama fix/conciliacion-migraciones
 - **Solicitud:** *"Continúa"* (pendiente: armar la tabla para destrabar la revisión de Supabase).
 - **Verificado en producción, solo lectura:** de 87 migraciones del repo, 69 están registradas (14 con el mismo número, 55 con otro o partidas), 14 aplicadas sin registro (planes, reseñas, eventos, galería, etc.; objetos comprobados), 1 superada (`20261003213000`: sus 11 políticas siguen pero no abren nada) y 3 nunca aplicadas (013, hospedajes `lodgings`, módulo MARENA).

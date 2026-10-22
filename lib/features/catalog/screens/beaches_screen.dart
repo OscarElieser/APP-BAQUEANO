@@ -592,21 +592,7 @@ class BeachesScreen extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
-                                const SizedBox(width: 8),
-                                Row(
-                                  children: [
-                                    const Icon(Icons.star, color: AppColors.gold, size: 14),
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      '${spot.rating}',
-                                      style: BaqueanoFonts.text(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                // 22-10-2026: sin estrellas: la calificación no venía de reseñas reales.
                               ],
                             ),
                             const SizedBox(height: 4),

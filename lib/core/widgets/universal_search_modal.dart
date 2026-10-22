@@ -228,7 +228,7 @@ class _UniversalSearchModalState extends State<UniversalSearchModal> {
                     (g) => _buildResultItem(
                       icon: Icons.restaurant_menu_rounded,
                       title: g.name,
-                      subtitle: '${g.region} · ${g.recommendedPlace}',
+                      subtitle: g.region,
                       onTap: () {
                         Navigator.pop(context);
                         context.go('/gastronomia');
