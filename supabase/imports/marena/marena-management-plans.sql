@@ -2,7 +2,7 @@
 -- 🧭 BAQUEANO — IMPORTACIÓN MARENA: PLANES DE MANEJO (GENERADO — NO editar a mano)
 -- 🎯 Fuente oficial trazable. ⚙️ Generado por website/scripts/import-marena-*.mjs; idempotente.
 -- 📦 42 sentencias. Importar ≠ publicar: nada queda is_published = true.
--- ⚠️ Requiere 20261005090000_environmental_marena_module.sql. Ejecutar en UNA transacción y SOLO con autorización.
+-- ⚠️ Requiere supabase/manual/20261005090000_environmental_marena_module.sql (en pausa, fuera de las migraciones). Ejecutar en UNA transacción y SOLO con autorización.
 -- ============================================================================
 insert into public.management_plans (place_id, area_key, title, title_as_published, document_url, document_qr_url, approval_reference, gazette_reference, gazette_url, source_name, source_url, verified_at, status, notes, created_by, updated_by)
 values ('pl-reserva-natural-tisey-la-estanzuela', 'reserva-natural-tisey-la-estanzuela', 'Plan de Manejo Reserva Natural Tisey la Estanzuela', 'Plan de Manejo Reserva Natural Tisey la Estanzuela', 'https://www.marena.gob.ni/wp-content/uploads/2022/03/Plan-Manejo-Reserva-Natural-Tisey-Estanzuela.pdf', null, 'Resolución Ministerial No. 313-2021', 'La Gaceta, Diario Oficial No. 50 (martes 15 de marzo de 2022)', 'https://www.marena.gob.ni/wp-content/uploads/2023/11/R.M.-313-2021.-Reserva-Natural-Tisey-la-Estanzuela.pdf', 'MARENA — Planes de Manejo de Áreas Protegidas', 'https://www.marena.gob.ni/planes-de-manejo/plan-de-manejo-reserva-natural-tisey-la-estanzuela/', '2026-10-05'::timestamptz, 'partial', null, 'import:marena', 'import:marena')

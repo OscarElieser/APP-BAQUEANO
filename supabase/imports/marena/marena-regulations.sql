@@ -2,7 +2,7 @@
 -- 🧭 BAQUEANO — IMPORTACIÓN MARENA: NORMATIVAS Y VEDAS (GENERADO — NO editar a mano)
 -- 🎯 Fuente oficial trazable. ⚙️ Generado por website/scripts/import-marena-*.mjs; idempotente.
 -- 📦 211 sentencias. Importar ≠ publicar: nada queda is_published = true.
--- ⚠️ Requiere 20261005090000_environmental_marena_module.sql. Ejecutar en UNA transacción y SOLO con autorización.
+-- ⚠️ Requiere supabase/manual/20261005090000_environmental_marena_module.sql (en pausa, fuera de las migraciones). Ejecutar en UNA transacción y SOLO con autorización.
 -- ============================================================================
 insert into public.environmental_regulations (regulation_key, title, document_type, institution, publication_reference, publication_date, effective_date, source_url, applies_to, summary, superseded_by, verified_at, status)
 values ('rm-016-2026-vedas', 'Resolución Ministerial No. 016-2026 "Actualización del Sistema de Vedas para el año 2026"', 'resolucion_ministerial', 'MARENA', 'La Gaceta, Diario Oficial No. 29, págs. 1643-1654', '2026-02-16'::date, '2026-02-16'::date, 'https://www.marena.gob.ni/wp-content/uploads/2026/03/GACETA29_2026.pdf', 'Todo el territorio nacional: especies de flora y fauna silvestres (Art. 2).', 'Vedas nacionales indefinidas (Art. 4) y parciales (Art. 5) para 2026. Art. 6: tortuga verde del Caribe solo consumo de subsistencia de comunidades costeñas. Art. 7: pesca deportiva de Sábalo Real autorizada en septiembre en Río San Juan con autorizaciones. Art. 9 deroga la R.M. 009-2025. Art. 10: sigue vigente si no se publica el sistema 2027. Vigencia desde su publicación (Art. 11).', null, '2026-10-05'::timestamptz, 'verified')

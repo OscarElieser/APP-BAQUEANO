@@ -18,6 +18,13 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🗂️ CONCILIACIÓN DEL HISTORIAL DE MIGRACIONES (21-10-2026, 21:05) — rama fix/conciliacion-migraciones
+- **Solicitud:** *"Continúa"* (pendiente: armar la tabla para destrabar la revisión de Supabase).
+- **Verificado en producción, solo lectura:** de 87 migraciones del repo, 69 están registradas (14 con el mismo número, 55 con otro o partidas), 14 aplicadas sin registro (planes, reseñas, eventos, galería, etc.; objetos comprobados), 1 superada (`20261003213000`: sus 11 políticas siguen pero no abren nada) y 3 nunca aplicadas (013, hospedajes `lodgings`, módulo MARENA).
+- **Decisiones del propietario:** no aplicar 013, dar por aplicada la de cierre, dejar fuera hospedajes y mantener MARENA en pausa.
+- **Hecho:** 013, `20261005071000` y `20261005090000` pasan a `supabase/manual/` (movidas, no borradas). Migraciones desde cero: 84/84. Comentarios de los imports MARENA apuntan a la nueva ruta.
+- **Pendiente de decisión:** igualar el historial de producción. A) marcadores sin contenido para los 77 números sin archivo + insertar los 70 que faltan (sin borrar nada); B) respaldo y retirar los 77 registros. El sistema bloqueó B por borrar filas: se espera la elección del propietario.
+
 ## 🔤 PLANES: TÍTULOS QUE NO SE LEÍAN (21-10-2026, 11:27) — rama fix/planes-titulos
 - **Solicitud:** *"los h2 de la pagina https://baqueanonicaragua.com/planes no se ven muy bien"* (captura de `#bqMyPlanTitle`).
 - **Causa medida:** «Así funciona», «Mi plan» y «Preguntas frecuentes» salían `rgb(15,23,42)` sobre fondo `rgb(11,19,32)` (casi negro sobre negro) y alineados a la izquierda. `css/headings-system.css` (global) fija `color: inherit !important` con más especificidad que `.page-planes main h2`, y las secciones oscuras heredan texto oscuro.
