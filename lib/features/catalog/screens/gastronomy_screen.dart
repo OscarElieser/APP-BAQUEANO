@@ -20,6 +20,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/i18n/app_i18n.dart';
 import '../../../core/theme/baqueano_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/data/catalog_data.dart';
@@ -41,6 +43,21 @@ class GastronomyScreen extends StatefulWidget {
 class _GastronomyScreenState extends State<GastronomyScreen> {
   String _selectedCategory = 'Todos';
 
+  /// Aliados verificados (web): negocios revisados por el equipo, con contacto directo.
+  static Future<void> _openVerifiedAllies(BuildContext context, String fallbackMessage) async {
+    HapticFeedback.lightImpact();
+    final uri = Uri.parse('https://baqueanonicaragua.com/aliados');
+    try {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } catch (_) {
+      if (context.mounted) {
+        CustomToast.show(context, message: fallbackMessage);
+      }
+    }
+  }
+
+  // Sin uso desde 22-10-2026 (llamaban a teléfonos inventados); se conservan.
+  // ignore: unused_element
   static Future<void> _callPhone(BuildContext context, String phone) async {
     HapticFeedback.lightImpact();
     final cleanPhone = phone.replaceAll(RegExp(r'[^\d+]'), '');
@@ -54,6 +71,7 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
     }
   }
 
+  // ignore: unused_element
   static Future<void> _openWhatsApp(BuildContext context, String phone, String dishName, String place) async {
     HapticFeedback.lightImpact();
     final cleanPhone = phone.replaceAll(RegExp(r'[^\d]'), '');
@@ -302,6 +320,8 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
   }
 
   Widget _buildDishCard(BuildContext context, GastronomyDish dish) {
+    // Textos en 8 idiomas (sección app.* de los idiomas web, exportada a assets/i18n).
+    final s = ProviderScope.containerOf(context, listen: false).read(appStringsProvider).valueOrNull ?? AppStrings.empty;
     return Container(
       decoration: BoxDecoration(
         gradient: AppGradients.cardGlass,
@@ -392,39 +412,8 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                     ),
                     const SizedBox(width: 8),
 
-                    // Badge de Precio Estimado (Autoescalable para no solapar la región)
-                    Flexible(
-                      flex: 3,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          gradient: AppGradients.sunsetTerracotta,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.white24, width: 0.8),
-                          boxShadow: [
-                            BoxShadow(color: Colors.black.withValues(alpha: 0.5), blurRadius: 8),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(Icons.payments_rounded, size: 13, color: Colors.white),
-                            const SizedBox(width: 4),
-                            Flexible(
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  dish.estimatedPrice,
-                                  style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w900, color: Colors.white),
-                                  maxLines: 1,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // 22-10-2026: sin «precio estimado»: era un valor inventado, no un precio verificado.
+                    const SizedBox.shrink(),
                   ],
                 ),
               ),
@@ -532,7 +521,12 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                 const Divider(color: AppColors.borderLight, height: 1),
                 const SizedBox(height: 14),
 
-                // 🧭 FICHA DEL COMEDOR & ANFITRIONA RURAL (INFORMACIÓN COMPLETA Y VISIBLE)
+                // 🧭 DÓNDE PROBARLO (22-10-2026)
+                // POR QUÉ: la ficha mostraba un local, un dueño, una dirección, un horario, un precio
+                //   y un teléfono inventados («Doña Tania Morán», «+505 2278-4512»…), y los botones
+                //   llamaban o escribían por WhatsApp a esos números. Regla: todo real, sin datos falsos.
+                // CÓMO: solo la región real del plato y un acceso a los negocios verificados de
+                //   Aliados en la web. Los datos viejos siguen en catalog_data.dart (no se borran).
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(16),
@@ -540,13 +534,6 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                     color: const Color(0xFF041920).withValues(alpha: 0.95),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: AppColors.borderGold, width: 1.2),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.3),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -557,67 +544,24 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
-                              'PUESTO & COMEDOR CAMPESINO RECOMENDADO',
+                              s.t('app.honest.whereToTry', 'DÓNDE PROBARLO'),
                               style: BaqueanoFonts.text(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.gold, letterSpacing: 0.8),
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 12),
-
-                      // Nombre del Local
-                      _buildInfoField(
-                        icon: Icons.restaurant_rounded,
-                        label: 'Comedor / Local:',
-                        value: dish.recommendedPlace,
-                        isHighlight: true,
-                      ),
-                      const SizedBox(height: 8),
-
-                      // Propietario / Anfitrión Campesino
-                      _buildInfoField(
-                        icon: Icons.person_pin_circle_rounded,
-                        label: 'Propietario / Anfitrión:',
-                        value: dish.ownerName,
-                      ),
-                      const SizedBox(height: 8),
-
-                      // Dirección Completa (Totalmente visible sin truncamiento)
                       _buildInfoField(
                         icon: Icons.location_on_rounded,
-                        label: 'Dirección Completa:',
-                        value: dish.fullAddress,
+                        label: s.t('app.honest.region', 'Región:'),
+                        value: dish.region,
+                        isHighlight: true,
                         isFullText: true,
-                        iconColor: AppColors.terracottaLight,
                       ),
-                      const SizedBox(height: 8),
-
-                      // Precio Estimado
-                      _buildInfoField(
-                        icon: Icons.payments_rounded,
-                        label: 'Precio Estimado:',
-                        value: dish.estimatedPrice,
-                        valueColor: AppColors.goldLight,
-                      ),
-
-                      // Horario
-                      if (dish.schedule != null) ...[
-                        const SizedBox(height: 8),
-                        _buildInfoField(
-                          icon: Icons.access_time_rounded,
-                          label: 'Horario de Atención:',
-                          value: dish.schedule!,
-                        ),
-                      ],
-
-                      const SizedBox(height: 8),
-
-                      // Teléfono
-                      _buildInfoField(
-                        icon: Icons.phone_rounded,
-                        label: 'Teléfono Directo:',
-                        value: dish.contactPhone,
-                        valueColor: Colors.white,
+                      const SizedBox(height: 10),
+                      Text(
+                        s.t('app.honest.noVerifiedVenue', 'Todavía no tenemos un local verificado para este plato. Los comedores y restaurantes revisados por BAQUEANO están en Aliados, con su contacto directo.'),
+                        style: BaqueanoFonts.text(fontSize: 12, color: Colors.white70, height: 1.4),
                       ),
                     ],
                   ),
@@ -625,12 +569,11 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
 
                 const SizedBox(height: 16),
 
-                // Botones Interactivos de Acción (Llamar, WhatsApp, Mapa)
                 Row(
                   children: [
                     Expanded(
                       child: ElevatedButton.icon(
-                        onPressed: () => _callPhone(context, dish.contactPhone),
+                        onPressed: () => _openVerifiedAllies(context, s.t('app.honest.alliesFallback', 'Aliados verificados: baqueanonicaragua.com/aliados')),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.terracotta,
                           foregroundColor: Colors.white,
@@ -638,33 +581,16 @@ class _GastronomyScreenState extends State<GastronomyScreen> {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                           elevation: 4,
                         ),
-                        icon: const Icon(Icons.phone_in_talk_rounded, size: 16, color: Colors.white),
+                        icon: const Icon(Icons.verified_rounded, size: 16, color: Colors.white),
                         label: Text(
-                          'Llamar al Local',
+                          s.t('app.honest.seeVerifiedAllies', 'Ver aliados verificados'),
                           style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
                     const SizedBox(width: 8),
-                    Expanded(
-                      child: OutlinedButton.icon(
-                        onPressed: () => _openWhatsApp(context, dish.contactPhone, dish.name, dish.recommendedPlace),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: const Color(0xFF25D366),
-                          side: const BorderSide(color: Color(0xFF25D366), width: 1.3),
-                          padding: const EdgeInsets.symmetric(vertical: 13),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        ),
-                        icon: const Icon(Icons.chat_rounded, size: 16, color: Color(0xFF25D366)),
-                        label: Text(
-                          'WhatsApp',
-                          style: BaqueanoFonts.text(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
                     IconButton(
-                      tooltip: 'Ver en Mapa Satelital',
+                      tooltip: s.t('app.honest.seeOnMap', 'Ver en el mapa'),
                       onPressed: () {
                         HapticFeedback.lightImpact();
                         context.go('/mapa');

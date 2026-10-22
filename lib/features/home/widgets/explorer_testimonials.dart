@@ -21,20 +21,28 @@
 // ============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/theme/baqueano_fonts.dart';
-import '../../../core/data/catalog_data.dart';
+import '../../../core/i18n/app_i18n.dart';
+import '../../../core/models/cultural_models.dart';
+import '../../../data/repositories/community_repository.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/section_header.dart';
 
-class ExplorerTestimonials extends StatefulWidget {
+class ExplorerTestimonials extends ConsumerStatefulWidget {
   const ExplorerTestimonials({super.key});
 
   @override
-  State<ExplorerTestimonials> createState() => _ExplorerTestimonialsState();
+  ConsumerState<ExplorerTestimonials> createState() => _ExplorerTestimonialsState();
 }
 
-class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
+class _ExplorerTestimonialsState extends ConsumerState<ExplorerTestimonials> {
+  // 22-10-2026: testimonios REALES de Comunidad (baqueano-community, solo publicados).
+  // Antes: la lista fija de CatalogData con personas y calificaciones inventadas (se conserva en código).
+  Future<List<ExplorerReview>>? _future;
+
   /// Testimonio actualmente seleccionado para modal de lectura detallada
   dynamic _selectedReview;
 
@@ -174,7 +182,52 @@ class _ExplorerTestimonialsState extends State<ExplorerTestimonials> {
 
   @override
   Widget build(BuildContext context) {
-    final reviews = CatalogData.explorerReviews;
+    _future ??= ref.read(communityRepositoryProvider).listPublished(limit: 6).catchError((_) => <ExplorerReview>[]);
+    return FutureBuilder<List<ExplorerReview>>(
+      future: _future,
+      builder: (context, snap) {
+        if (snap.connectionState != ConnectionState.done) {
+          return const Padding(
+            padding: EdgeInsets.symmetric(vertical: 32),
+            child: Center(child: CircularProgressIndicator(color: AppColors.gold, strokeWidth: 2)),
+          );
+        }
+        final reviews = snap.data ?? const <ExplorerReview>[];
+        if (reviews.isEmpty) return _buildEmpty(context);
+        return _buildContent(context, reviews);
+      },
+    );
+  }
+
+  /// Sin testimonios publicados todavía: se dice así, sin inventar personas.
+  Widget _buildEmpty(BuildContext context) {
+    final s = ref.strings;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      child: Column(
+        children: [
+          SectionHeader(
+            tag: s.t('app.testimonials.tag', 'TESTIMONIOS REALES'),
+            title: s.t('app.testimonials.title', 'Lo que dicen nuestros Exploradores'),
+            subtitle: s.t('app.testimonials.empty', 'Todavía no hay testimonios publicados. Contá tu experiencia y el equipo la revisa antes de publicarla.'),
+            isCentered: true,
+          ),
+          const SizedBox(height: 12),
+          OutlinedButton.icon(
+            onPressed: () => context.go('/comunidad'),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: AppColors.gold,
+              side: const BorderSide(color: AppColors.gold),
+            ),
+            icon: const Icon(Icons.edit_note_rounded, size: 18),
+            label: Text(s.t('app.testimonials.share', 'Contar mi experiencia')),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContent(BuildContext context, List<ExplorerReview> reviews) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktop = screenWidth >= 950;
 

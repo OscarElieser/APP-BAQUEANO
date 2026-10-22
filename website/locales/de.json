@@ -1104,6 +1104,24 @@
       "throttled": "Dein Alarm ist bereits im Einsatzzentrum registriert.",
       "signIn": "Melde dich an, damit das Einsatzzentrum deinen Alarm erhält. Der Anruf funktioniert trotzdem.",
       "failed": "Das Einsatzzentrum konnte nicht benachrichtigt werden (offline). Der Anruf funktioniert trotzdem."
+    },
+    "honest": {
+      "whereToTry": "WO PROBIEREN",
+      "region": "Region:",
+      "noVerifiedVenue": "Für dieses Gericht haben wir noch kein geprüftes Lokal. Die von BAQUEANO geprüften Comedores und Restaurants findest du bei den Partnern, mit direktem Kontakt.",
+      "seeVerifiedAllies": "Geprüfte Partner ansehen",
+      "alliesFallback": "Geprüfte Partner: baqueanonicaragua.com/aliados",
+      "seeOnMap": "Auf der Karte ansehen"
+    },
+    "messaging": {
+      "offTitle": "Nachrichten an Gastgeber",
+      "offBody": "Das gibt es in der App noch nicht. Um einem Betrieb zu schreiben, nutze den direkten Kontakt der von BAQUEANO geprüften Partner."
+    },
+    "testimonials": {
+      "tag": "ECHTE ERFAHRUNGEN",
+      "title": "Was unsere Entdecker sagen",
+      "empty": "Es gibt noch keine veröffentlichten Erfahrungsberichte. Erzähl von deiner Reise – das Team prüft den Text vor der Veröffentlichung.",
+      "share": "Meine Erfahrung teilen"
     }
   },
   "auth": {

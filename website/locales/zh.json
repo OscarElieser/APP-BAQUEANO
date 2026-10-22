@@ -1104,6 +1104,24 @@
       "throttled": "你的警报已在运营中心登记。",
       "signIn": "登录后运营中心才能收到你的警报。电话呼叫照常可用。",
       "failed": "无法通知运营中心（无网络）。电话呼叫照常可用。"
+    },
+    "honest": {
+      "whereToTry": "在哪里品尝",
+      "region": "地区：",
+      "noVerifiedVenue": "这道菜暂时还没有经过核实的店家。BAQUEANO 审核过的食堂和餐厅都在“合作伙伴”中，并附有直接联系方式。",
+      "seeVerifiedAllies": "查看已核实的合作伙伴",
+      "alliesFallback": "已核实的合作伙伴：baqueanonicaragua.com/aliados",
+      "seeOnMap": "在地图上查看"
+    },
+    "messaging": {
+      "offTitle": "与接待方的消息",
+      "offBody": "应用内暂不提供此功能。如需联系商家，请使用经 BAQUEANO 核实的合作伙伴的直接联系方式。"
+    },
+    "testimonials": {
+      "tag": "真实评价",
+      "title": "探索者们怎么说",
+      "empty": "目前还没有已发布的评价。分享你的经历，团队审核后会发布。",
+      "share": "分享我的经历"
     }
   },
   "auth": {

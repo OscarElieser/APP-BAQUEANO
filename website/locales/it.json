@@ -1104,6 +1104,24 @@
       "throttled": "La tua allerta è già registrata al Centro operativo.",
       "signIn": "Accedi perché il Centro operativo riceva la tua allerta. La chiamata funziona comunque.",
       "failed": "Impossibile avvisare il Centro operativo (offline). La chiamata funziona comunque."
+    },
+    "honest": {
+      "whereToTry": "DOVE ASSAGGIARLO",
+      "region": "Regione:",
+      "noVerifiedVenue": "Non abbiamo ancora un locale verificato per questo piatto. Le trattorie e i ristoranti verificati da BAQUEANO sono in Alleati, con il loro contatto diretto.",
+      "seeVerifiedAllies": "Vedi gli alleati verificati",
+      "alliesFallback": "Alleati verificati: baqueanonicaragua.com/aliados",
+      "seeOnMap": "Vedi sulla mappa"
+    },
+    "messaging": {
+      "offTitle": "Messaggi con gli host",
+      "offBody": "Non è ancora disponibile nell'app. Per scrivere a un'attività, usa il contatto diretto degli alleati verificati da BAQUEANO."
+    },
+    "testimonials": {
+      "tag": "TESTIMONIANZE REALI",
+      "title": "Cosa dicono i nostri Esploratori",
+      "empty": "Non ci sono ancora testimonianze pubblicate. Racconta la tua esperienza: il team la verifica prima di pubblicarla.",
+      "share": "Racconta la mia esperienza"
     }
   },
   "auth": {
