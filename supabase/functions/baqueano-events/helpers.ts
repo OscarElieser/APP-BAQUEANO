@@ -62,8 +62,14 @@ function text(v: unknown, max: number, label: string, opts: { required?: boolean
   return clean;
 }
 function https(v: unknown, label: string): string | null {
-  const s = text(v, 500, label);
+  let s = text(v, 500, label);
   if (!s) return null;
+  // Se pega «facebook.com/…» o «http://…»: se completa a https:// (la base solo admite https).
+  if (/^http:\/\//i.test(s)) s = "https://" + s.slice(7);
+  else if (/^[a-z][a-z0-9+-]*:/i.test(s) && !/^https:\/\//i.test(s)) {
+    // Otro esquema (javascript:, mailto:, ftp:…) nunca se acepta.
+    throw new HttpError(400, `${label} debe ser un enlace https:// válido.`, "url_invalid");
+  } else if (!/^https:\/\//i.test(s)) s = "https://" + s.replace(/^\/+/, "");
   try {
     const u = new URL(s);
     if (u.protocol !== "https:") throw new Error("x");
@@ -95,8 +101,8 @@ export function validateEvent(p: Record<string, unknown>): EventRow {
     if (!endAt) throw new HttpError(400, "Revisá la fecha y la hora de finalización.", "end_invalid");
     if (Date.parse(endAt) < Date.parse(startAt)) throw new HttpError(400, "La finalización no puede ser antes del inicio.", "end_before_start");
   }
+  // Un borrador puede guardarse incompleto: departamento y lugar se exigen al publicar.
   const departmentId = p.departmentId ? oneOf(p.departmentId, DEPARTMENTS, "El departamento") : null;
-  if (modality !== "virtual" && !departmentId) throw new HttpError(400, "Elegí el departamento del evento.", "department_required");
   const access = oneOf(p.accessType, ACCESS, "El tipo de acceso", "unconfirmed");
   let price: number | null = null;
   let currency: string | null = null;
@@ -123,7 +129,7 @@ export function validateEvent(p: Record<string, unknown>): EventRow {
     if (day && !/^\d{4}-\d{2}-\d{2}$/.test(day)) throw new HttpError(400, `Fecha inválida en la actividad ${i + 1}.`, "program_invalid");
     return { date: day || null, time: time || null, what };
   }) : [];
-  const venue = text(p.locationName, 160, "el lugar", { required: modality !== "virtual" }) || (modality === "virtual" ? "En línea" : null);
+  const venue = text(p.locationName, 160, "el lugar") || (modality === "virtual" ? "En línea" : null);
   return {
     title,
     short_description: text(p.shortDescription, 280, "la descripción breve"),

@@ -36,15 +36,25 @@ Deno.test("precio solo si es de pago; gratis nunca lleva precio", () => {
   assertThrows(() => validateEvent({ ...base, accessType: "paid", price: "-5", currency: "NIO" }), HttpError);
 });
 
+Deno.test("un borrador se guarda solo con nombre y fecha (lo demás se completa antes de publicar)", () => {
+  const draft = validateEvent({ title: "Agüizotes 2026", category: "tradiciones", startDate: "2026-10-23" });
+  assertEquals([draft.department_id, draft.location_name, draft.description, draft.source_url], [null, null, null, null]);
+  assertThrows(() => validateEvent({ category: "tradiciones", startDate: "2026-10-23" }), HttpError);
+  assertThrows(() => validateEvent({ title: "Agüizotes 2026", category: "tradiciones" }), HttpError);
+});
+
 Deno.test("validaciones que evitan datos inventados o peligrosos", () => {
   assertThrows(() => validateEvent({ ...base, category: "rave" }), HttpError);
-  assertThrows(() => validateEvent({ ...base, departmentId: "" }), HttpError);
+  assertThrows(() => validateEvent({ ...base, departmentId: "atlantida" }), HttpError);
   assertThrows(() => validateEvent({ ...base, latitude: 40.4, longitude: -3.7 }), HttpError);
   assertThrows(() => validateEvent({ ...base, officialUrl: "javascript:alert(1)" }), HttpError);
-  assertThrows(() => validateEvent({ ...base, officialUrl: "http://inseguro.ni" }), HttpError);
+  assertThrows(() => validateEvent({ ...base, officialUrl: "mailto:x@y.ni" }), HttpError);
   assertThrows(() => validateEvent({ ...base, endDate: "2026-11-13" }), HttpError);
   const virtual = validateEvent({ ...base, modality: "virtual", departmentId: "", locationName: "", virtualUrl: "https://example.org/vivo" });
   assertEquals([virtual.location_name, virtual.department_id], ["En línea", null]);
+  // Enlaces pegados sin https:// o con http:// se completan a https:// (la base solo admite https).
+  assertEquals(validateEvent({ ...base, officialUrl: "http://alcaldia.ni/agenda" }).official_url, "https://alcaldia.ni/agenda");
+  assertEquals(validateEvent({ ...base, sourceUrl: "facebook.com/AlcaldiaMasaya" }).source_url, "https://facebook.com/AlcaldiaMasaya");
   const coords = validateEvent({ ...base, latitude: "12.4351", longitude: "-86.8794" });
   assertEquals(coords.coords_verified, false);
 });

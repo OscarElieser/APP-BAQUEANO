@@ -18,6 +18,18 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🗓️ EVENTOS: GUARDAR BORRADOR INCOMPLETO (22-10-2026, 20:35) — rama fix/eventos-borrador
+- **Solicitud:** *"Quiero que revise lo de eventos iba agregar un evento para que saliera Pero no llene algunos datos, y al guardar no me dejó quiero que no se obligatorio llenar todos los datos"* (evento: Agüizotes, Masaya, viernes 23 y Torovenado de Monimbó, domingo 25).
+- **Causa real (registros de Postgres, 22-10 20:09 UTC):** `insert or update on table "events" violates foreign key constraint "events_municipality_id_fkey"`. El campo «Municipio» era texto libre («Masaya») y la columna es la clave de `municipalities` (`masaya__masaya`). El Ops Center solo mostraba «No se pudo crear el evento».
+- **Cambios en `baqueano-events` (desplegada v4):**
+  - El municipio se resuelve por nombre sin tildes o por id dentro del departamento; si no coincide queda vacío y el borrador se guarda igual.
+  - Un borrador solo exige nombre y fecha de inicio. Departamento y lugar exacto se exigen al publicar (y al editar un evento ya publicado), además de lo que ya pedía la base: descripción, foto y fuente oficial.
+  - Enlaces pegados sin `https://` o con `http://` se completan a `https://`; otros esquemas (`javascript:`, `mailto:`) siguen rechazados.
+  - Los errores de la base al guardar quedan en el registro de la función.
+- **Ops Center:** etiquetas «(obligatorio)» solo en nombre y fecha, «· para publicar» en el resto, ayuda en Municipio y aviso nuevo; `ops-events.js?v=20261022-borrador-1`.
+- **Pruebas:** `deno test` 6/6 (caso nuevo de borrador con solo nombre y fecha, enlaces completados); `deno check` sin errores; función en producción responde a la lectura pública y pide sesión para guardar.
+- **Pendiente sigue en curso:** Idiomas parte 2 (traducciones de territorios, tandas 1–19 listas de 27).
+
 ## 📱 APP ANDROID SIN DATOS INVENTADOS (22-10-2026, 11:20–12:30) — rama fix/app-sin-datos-falsos
 - **Solicitud:** *"Todos"* (los pendientes: reseñas bloque 3, restaurantes de gastronomía, valores falsos en Android, idiomas parte 2).
 - **Reseñas, bloque 3:** ya estaba aplicado en producción. Los 7 destinos tienen rating null y reviews_count 0; el respaldo guarda 4,88–4,98; 0 reseñas reales detrás. Nada que correr.
