@@ -18,6 +18,18 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🌐 IDIOMAS PARTE 2: CONTENIDO DE DEPARTAMENTOS Y DESTINOS EN 8 IDIOMAS (22-10-2026, 22:20) — rama feat/idiomas-territorios
+- **Pedido:** «Todos» (pendientes) → traducir el contenido territorial que seguía en español al cambiar de idioma.
+- **Medición (Playwright sobre el sitio compilado, `scripts/i18n-content-extract.mjs`):** antes 3.348 frases únicas quedaban iguales en inglés en los 17 departamentos y 10 destinos; ahora 308, casi todas nombres propios (pueblos, personas, hoteles, «INTUR — Masaya», «SOS Rivas») que se escriben igual en todos los idiomas.
+- **Cambio:** `website/locales/content/territorios.{en,fr,it,pt,de,ko,zh}.json` (3.119 frases cada uno, formato `{ "frase en español": "traducción" }`, ya soportado por `global-language.js`). `departamento.html` y `destino.html` declaran `<meta name="bq-i18n-content" content="territorios">`. Versión del cargador `2026.10.22-territorios-1` (`global-injector.js` pide `global-language.js?v=20261022-territorios-1`).
+- **Glosario ko/zh** (`scripts/i18n-glossary-ko-zh.json`): mismos nombres en todos los textos; «Río San Juan» = 圣胡安河 (se corrigieron 5 frases que decían 圣胡安河省). Nombres de la tabla del glosario sin traducción propia (Bluefields, Somoto) usan su forma ko/zh.
+- **Verificación:** capturas en inglés, coreano y chino sin errores de JavaScript; `validate-i18n.mjs` sin claves faltantes; puerta de seguridad sin hallazgos nuevos. Ninguna palabra prohibida en los paquetes.
+
+## 👻 EVENTOS: AGÜIZOTES Y TOROVENADO CARGADOS COMO BORRADOR (22-10-2026, 21:46)
+- Pedido: «veo que no agregaste el evento de la fiesta de los Agüizotes».
+- Se cargaron en `public.events` (borrador, con historial en `event_changes`): `ev-aguizotes-2026` (vie 23-oct, concentración 18:00 en Plaza de Monimbó, salida 20:00; fuente El Diario Nica 22-oct-2026) y `ev-torovenado-de-monimbo-2026` (dom 25-oct, hora sin confirmar; alborada sáb 24; fuente Radio Nicaragua, plan de fiestas de Masaya 2026).
+- Falta la foto de portada: la base la exige para publicar y no hay ninguna foto propia de Agüizotes/Torovenado (no se usan fotos de prensa ajenas ni una foto genérica de Masaya). El administrador sube la foto en Ops Center → Eventos y publica.
+
 ## 🎨 SE QUITA EL SELECTOR DE TEMAS (22-10-2026, 21:12) — rama fix/quitar-selector-tema
 - **Solicitud:** *"Quiero que revise lo del tema ya que cuando lo pongo claro todos se pone en blanco y se pierde mejor quitarlo por completo o lo revisa tu cuál es la mejor opción"*.
 - **Revisión (Playwright, sitio compilado):** con el diseño oficial (fondo blanco que el script aplica en cada carga) las páginas se ven bien. El botón «Tema» ofrecía 8 paletas, 7 fondos y colores libres por sección que solo repintan parte de las variables; cada página está diseñada para una sola combinación, así que según la mezcla los textos quedaban blanco sobre blanco o negro sobre negro. La paleta y los colores de sección quedaban guardados en el navegador y se aplicaban en cada visita.
