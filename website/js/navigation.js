@@ -1242,7 +1242,7 @@ function ensureThemeSwitcherLoaded() {
   if (!window.BaqueanoThemeManager && !document.getElementById('baqueanoThemeSwitcherScript')) {
     const script = document.createElement('script');
     script.id = 'baqueanoThemeSwitcherScript';
-    script.src = 'js/theme-switcher.js?v=20260926-global-theme-1';
+    script.src = 'js/theme-switcher.js?v=20261022-sin-selector-1';
     document.head.appendChild(script);
   }
 }

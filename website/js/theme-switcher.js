@@ -29,6 +29,14 @@
   const CUSTOM_COLORS_STORAGE_KEY = 'baqueano_custom_section_colors';
   const SITE_BG_STORAGE_KEY = 'baqueano_site_bg';
   const DEFAULT_THEME_ID = 'baqueano_origen';
+  // 🎯 POR QUÉ (propietario, 22-10-2026): «cuando lo pongo claro todo se pone en blanco y se pierde;
+  //   mejor quitarlo por completo o revisalo». Cada página está diseñada para una sola combinación;
+  //   mezclar 8 paletas, 7 fondos y colores libres dejaba textos blancos sobre blanco (o negro sobre
+  //   negro) y la elección quedaba guardada en el navegador en cada visita.
+  // ⚙️ CÓMO: con el interruptor apagado no se muestra el botón «Tema», no se abre el modal y se
+  //   ignoran las preferencias guardadas: todos ven el diseño oficial. Nada se borra; para volver a
+  //   ofrecerlo basta con poner true (después de rediseñar las combinaciones).
+  const THEME_PICKER_ENABLED = false;
 
   // Colección de los 8 temas oficiales de alta gama
   const THEMES_CATALOG = [
@@ -375,7 +383,7 @@
   let activeCustomColors = { ...defaultCustomColors };
   let customSectionColorsEnabled = false;
 
-  try {
+  if (THEME_PICKER_ENABLED) try {
     const savedCustom = localStorage.getItem(CUSTOM_COLORS_STORAGE_KEY);
     if (savedCustom) {
       activeCustomColors = { ...defaultCustomColors, ...JSON.parse(savedCustom) };
@@ -603,7 +611,7 @@
 
 
   // Iniciar tema inmediatamente desde almacenamiento
-  try {
+  if (THEME_PICKER_ENABLED) try {
     const savedTheme = localStorage.getItem(STORAGE_KEY);
     if (savedTheme && THEMES_CATALOG.some((t) => t.themeId === savedTheme)) {
       currentThemeId = savedTheme;
@@ -1274,6 +1282,7 @@
   }
 
   function openModal() {
+    if (!THEME_PICKER_ENABLED) return;
     buildModal();
     renderCards('all');
     renderSiteBackgroundCards();
@@ -1309,8 +1318,12 @@
     activeSiteBg = 'blanco';
     activeCustomBgHex = null;
     applySiteBackground(activeSiteBg, activeCustomBgHex, false);
-    injectNavbarButton();
     injectFloatingTrigger();
+    if (THEME_PICKER_ENABLED) {
+      injectNavbarButton();
+    } else {
+      document.querySelectorAll('#navThemeSwitcherBtn, .nav-theme-btn, [data-open-theme-modal]').forEach((b) => b.remove());
+    }
   }
 
   if (document.readyState === 'loading') {
@@ -1324,7 +1337,7 @@
   // Delegación global infalible para el botón Tema
   document.addEventListener('click', (e) => {
     const trigger = e.target.closest('#navThemeSwitcherBtn, .nav-theme-btn, #baqFloatingThemeBtn, [data-open-theme-modal]');
-    if (trigger) {
+    if (trigger && THEME_PICKER_ENABLED) {
       e.preventDefault();
       e.stopPropagation();
       openModal();
