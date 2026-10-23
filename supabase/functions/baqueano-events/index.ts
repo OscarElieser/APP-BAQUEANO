@@ -127,6 +127,23 @@ async function loadEvent(service: SupabaseClient, id: string) {
   return data as Record<string, unknown>;
 }
 
+// El campo «Municipio» se escribe a mano («Masaya», «nindiri»…), pero la columna es una clave de
+// public.municipalities (p. ej. masaya__nindiri). Se busca por id o por nombre sin tildes; si no
+// coincide con ninguno, se guarda vacío en lugar de rechazar el borrador entero.
+function plainName(s: string): string {
+  return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+async function resolveMunicipality(service: SupabaseClient, raw: string | null, departmentId: string | null): Promise<string | null> {
+  if (!raw) return null;
+  let q = service.from("municipalities").select("id, name, department_id");
+  if (departmentId) q = q.eq("department_id", departmentId);
+  const { data, error } = await q.limit(400);
+  if (error || !data) return null;
+  const wanted = plainName(raw);
+  const hit = (data as { id: string; name: string }[]).find((m) => m.id === raw || plainName(m.name) === wanted || plainName(m.id.split("__").pop() || "") === wanted);
+  return hit ? hit.id : null;
+}
+
 async function uniqueSlug(service: SupabaseClient, base: string, exceptId?: string): Promise<string> {
   const root = base || "evento";
   for (let i = 0; i < 50; i += 1) {
@@ -204,14 +221,21 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
     case "save": {
       const a = requireEditor(actor);
       const row = validateEvent((body.event || {}) as Record<string, unknown>);
+      row.municipality_id = await resolveMunicipality(service, row.municipality_id as string | null, row.department_id as string | null);
       const id = body.id ? cleanId(body.id) : null;
       if (id) {
         const before = await loadEvent(service, id);
+        if (before.publication_status === "published" && row.modality !== "virtual" && (!row.department_id || !row.location_name)) {
+          throw new HttpError(400, "Este evento está publicado: necesita el departamento y el lugar exacto.", "publish_requirements");
+        }
         // El slug no cambia una vez publicado (los enlaces compartidos no se rompen).
         const patch: Record<string, unknown> = { ...row, updated_by: a.email || a.uid };
         if (!before.published_at) patch.slug = await uniqueSlug(service, slugify(`${row.title} ${String(row.start_at).slice(0, 4)}`), id);
         const { data, error } = await service.from("events").update(patch).eq("id", id).select(STAFF_COLUMNS).single();
-        if (error) throw new HttpError(400, error.code === "23514" ? "Faltan datos obligatorios para un evento publicado (foto, descripción o fuente)." : "No se pudo guardar el evento.", "save_failed");
+        if (error) {
+          console.error("[baqueano-events] save", error.code, error.message);
+          throw new HttpError(400, error.code === "23514" ? "Faltan datos obligatorios para un evento publicado (foto, descripción o fuente)." : "No se pudo guardar el evento.", "save_failed");
+        }
         await logChange(service, req, a, id, "edited", null, { title: before.title, start_at: before.start_at, description: before.description });
         return { event: data };
       }
@@ -221,7 +245,10 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
         ...row, id: newId, slug, start_date: String(row.start_at).slice(0, 10), publication_status: "draft",
         event_status: "scheduled", created_by: a.email || a.uid, updated_by: a.email || a.uid,
       }).select(STAFF_COLUMNS).single();
-      if (error) throw new HttpError(400, "No se pudo crear el evento.", "create_failed");
+      if (error) {
+        console.error("[baqueano-events] create", error.code, error.message);
+        throw new HttpError(400, "No se pudo crear el evento.", "create_failed");
+      }
       await logChange(service, req, a, newId, "created", null, null);
       return { event: data };
     }
@@ -233,7 +260,13 @@ async function handle(action: string, body: Record<string, unknown>, actor: Acto
       const before = await loadEvent(service, id);
       const reason = reasonText(body.reason, to === "unpublished");
       const patch: Record<string, unknown> = { publication_status: to, updated_by: a.email || a.uid };
-      if (to === "published") patch.approved_by = a.email || a.uid;
+      if (to === "published") {
+        // El borrador puede estar incompleto; publicar un evento presencial exige saber dónde es.
+        if (before.modality !== "virtual" && (!before.department_id || !before.location_name)) {
+          throw new HttpError(400, "Para publicar falta el departamento y el lugar exacto del evento.", "publish_requirements");
+        }
+        patch.approved_by = a.email || a.uid;
+      }
       const { error } = await service.from("events").update(patch).eq("id", id);
       if (error) {
         if (error.code === "23514") throw new HttpError(400, "Para publicar faltan datos: fecha de inicio, descripción, foto y fuente oficial (nombre y enlace).", "publish_requirements");

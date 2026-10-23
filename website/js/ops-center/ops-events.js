@@ -171,7 +171,7 @@
         state.canEdit = !!(r[0].user && r[0].user.canEdit);
         state.items = r[1].items || [];
         state.totals = r[1].totals || {};
-        var note = el('p', { style: 'margin:0 0 1rem;font-size:0.78rem;color:var(--ops-text-muted);', text: 'Para publicar hacen falta: fecha de inicio, descripción, foto autorizada y la fuente oficial (nombre y enlace). Un evento tomado de internet se guarda como borrador y se verifica con el organizador antes de publicarlo.' });
+        var note = el('p', { style: 'margin:0 0 1rem;font-size:0.78rem;color:var(--ops-text-muted);', text: 'Para guardar un borrador solo hacen falta el nombre y la fecha de inicio; lo demás se puede completar después. Para publicar hacen falta además: descripción, departamento y lugar (si es presencial), foto autorizada y la fuente oficial (nombre y enlace). Un evento tomado de internet se guarda como borrador y se verifica con el organizador antes de publicarlo.' });
         var list = state.items.length ? el('div', { style: 'display:grid;gap:0.8rem;' }, state.items.map(row))
           : el('div', { className: 'ops-empty-state' }, [icon('fa-calendar-plus ops-empty-icon'), el('div', { className: 'ops-empty-title', text: 'Sin eventos en esta vista' }), el('div', { className: 'ops-empty-desc', text: state.canEdit ? 'Tocá «Nuevo evento» para cargar el primero.' : 'Cuando el equipo cargue eventos aparecerán aquí.' })]);
         paint([header(), tabs(), note, list]);
@@ -219,22 +219,22 @@
     var programText = (ev.program || []).map(function (p) { return [p.date || '', p.time || '', p.what].join(' | '); }).join('\n');
     form.append(
       group('Datos principales', [
-        input('title', 'Nombre oficial *', ev.title, { wide: true, extra: { maxlength: 160, required: true } }),
-        input('category', 'Categoría *', ev.category || 'festival_cultural', { tag: 'select', options: CATEGORIES }),
+        input('title', 'Nombre oficial (obligatorio)', ev.title, { wide: true, extra: { maxlength: 160, required: true } }),
+        input('category', 'Categoría', ev.category || 'festival_cultural', { tag: 'select', options: CATEGORIES }),
         input('modality', 'Modalidad', ev.modality || 'presencial', { tag: 'select', options: { presencial: 'Presencial', virtual: 'Virtual', hibrido: 'Híbrido' } }),
         input('shortDescription', 'Descripción breve (tarjeta)', ev.short_description, { tag: 'textarea', rows: 2, wide: true, extra: { maxlength: 280 } }),
-        input('description', 'Descripción detallada *', ev.description, { tag: 'textarea', rows: 6, wide: true, extra: { maxlength: 8000 } })
+        input('description', 'Descripción detallada · para publicar', ev.description, { tag: 'textarea', rows: 6, wide: true, extra: { maxlength: 8000 } })
       ]),
       group('Fecha y hora (hora de Nicaragua)', [
-        input('startDate', 'Fecha de inicio *', start.date, { type: 'date' }),
+        input('startDate', 'Fecha de inicio (obligatoria)', start.date, { type: 'date' }),
         input('startTime', 'Hora de inicio', ev.time_confirmed ? start.time : '', { type: 'time', hint: 'Dejala vacía si todavía no está confirmada: se mostrará «Horario por confirmar».' }),
         input('endDate', 'Fecha de finalización', end.date, { type: 'date' }),
         input('endTime', 'Hora de finalización', ev.end_at && ev.time_confirmed ? end.time : '', { type: 'time' })
       ]),
       group('Lugar', [
-        input('departmentId', 'Departamento *', ev.department_id || '', { tag: 'select', options: Object.assign({ '': '— Elegí —' }, DEPARTMENTS) }),
-        input('municipalityId', 'Municipio', ev.municipality_id),
-        input('locationName', 'Lugar exacto *', ev.location_name, { extra: { maxlength: 160 } }),
+        input('departmentId', 'Departamento · para publicar', ev.department_id || '', { tag: 'select', options: Object.assign({ '': '— Elegí —' }, DEPARTMENTS) }),
+        input('municipalityId', 'Municipio', ev.municipality_id, { hint: 'Escribí el nombre (ej.: Masaya, Nindirí). Si no coincide con un municipio registrado se guarda vacío.' }),
+        input('locationName', 'Lugar exacto · para publicar', ev.location_name, { extra: { maxlength: 160 } }),
         input('address', 'Dirección', ev.address, { extra: { maxlength: 300 } }),
         input('latitude', 'Latitud', ev.latitude, { type: 'number', extra: { step: 'any', min: 10.5, max: 15.2 } }),
         input('longitude', 'Longitud', ev.longitude, { type: 'number', extra: { step: 'any', min: -88, max: -82.5 } }),
@@ -252,8 +252,8 @@
         input('organizerUrl', 'Sitio del organizador', ev.organizer_url, { type: 'url' }),
         input('contactInfo', 'Contacto público', ev.contact_info, { wide: true, extra: { maxlength: 300 } }),
         input('officialUrl', 'Enlace oficial del evento', ev.official_url, { type: 'url', wide: true }),
-        input('sourceName', 'Fuente de la información *', ev.source_name, { hint: 'Ej.: INTUR, Alcaldía de León, organizador.' }),
-        input('sourceUrl', 'Enlace de la fuente *', ev.source_url, { type: 'url' })
+        input('sourceName', 'Fuente de la información · para publicar', ev.source_name, { hint: 'Ej.: INTUR, Alcaldía de León, organizador.' }),
+        input('sourceUrl', 'Enlace de la fuente · para publicar', ev.source_url, { type: 'url' })
       ]),
       group('Detalle', [
         input('program', 'Programa (una actividad por línea: fecha | hora | actividad)', programText, { tag: 'textarea', rows: 4, wide: true, hint: 'Ejemplo: 2026-11-14 | 18:30 | Desfile inaugural. Fecha y hora son opcionales.' }),
@@ -292,7 +292,7 @@
 
     // Foto
     var photo = el('div', { style: 'display:grid;gap:0.5rem;' }, [
-      el('strong', { style: 'color:#fff;', text: 'Foto oficial o autorizada *' }),
+      el('strong', { style: 'color:#fff;', text: 'Foto oficial o autorizada · para publicar' }),
       ev.cover_image ? el('img', { src: ev.cover_image, alt: ev.image_alt || '', style: 'max-width:100%;width:420px;aspect-ratio:16/10;object-fit:cover;border-radius:10px;' }) : el('p', { style: 'margin:0;color:var(--ops-text-muted);font-size:0.8rem;', text: 'Sin foto. Guardá el evento primero y después subí la foto (WebP, JPG o PNG, hasta 5 MB). Sin foto no se puede publicar.' })
     ]);
     if (state.canEdit && ev.id) {
@@ -353,7 +353,7 @@
     paint([
       el('div', { className: 'ops-view-header' }, [el('div', { className: 'ops-view-title-group' }, [
         el('h1', null, [icon('fa-calendar-days'), ' ' + (ev.id ? ev.title : 'Nuevo evento')]),
-        el('p', { className: 'ops-view-subtitle', text: ev.id ? ('ID ' + ev.id + (ev.slug ? ' · enlace evento.html?e=' + ev.slug : '')) : 'SE GUARDA COMO BORRADOR · NO SE PUBLICA HASTA QUE LO APRUEBES' })
+        el('p', { className: 'ops-view-subtitle', text: ev.id ? ('ID ' + ev.id + (ev.slug ? ' · enlace evento.html?e=' + ev.slug : '')) : 'SE GUARDA COMO BORRADOR · SOLO EL NOMBRE Y LA FECHA SON OBLIGATORIOS · NO SE PUBLICA HASTA QUE LO APRUEBES' })
       ])]),
       statusBox, photo, form, history, actions
     ]);
