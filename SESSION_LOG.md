@@ -18,6 +18,13 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 🎨 SE QUITA EL SELECTOR DE TEMAS (22-10-2026, 21:12) — rama fix/quitar-selector-tema
+- **Solicitud:** *"Quiero que revise lo del tema ya que cuando lo pongo claro todos se pone en blanco y se pierde mejor quitarlo por completo o lo revisa tu cuál es la mejor opción"*.
+- **Revisión (Playwright, sitio compilado):** con el diseño oficial (fondo blanco que el script aplica en cada carga) las páginas se ven bien. El botón «Tema» ofrecía 8 paletas, 7 fondos y colores libres por sección que solo repintan parte de las variables; cada página está diseñada para una sola combinación, así que según la mezcla los textos quedaban blanco sobre blanco o negro sobre negro. La paleta y los colores de sección quedaban guardados en el navegador y se aplicaban en cada visita.
+- **Decisión:** quitar el selector y fijar el diseño oficial; arreglar todas las combinaciones no es sostenible.
+- **Cambio:** `js/theme-switcher.js` con `THEME_PICKER_ENABLED = false`: sin botón «Tema», el modal no abre y se ignoran las preferencias guardadas. Nada se borró; poniendo `true` vuelve. Versiones: `theme-switcher.js?v=20261022-sin-selector-1` y `navigation.js?v=20261022-sin-selector-1` en 37 páginas.
+- **Prueba:** visitante nuevo y visitante con una combinación vieja guardada (paleta fuego, fondo negro, secciones blancas) en index, departamento de Masaya y planes: fondo blanco, paleta oficial, sin botón, el modal no abre, sin errores JS.
+
 ## 🗓️ EVENTOS: GUARDAR BORRADOR INCOMPLETO (22-10-2026, 20:35) — rama fix/eventos-borrador
 - **Solicitud:** *"Quiero que revise lo de eventos iba agregar un evento para que saliera Pero no llene algunos datos, y al guardar no me dejó quiero que no se obligatorio llenar todos los datos"* (evento: Agüizotes, Masaya, viernes 23 y Torovenado de Monimbó, domingo 25).
 - **Causa real (registros de Postgres, 22-10 20:09 UTC):** `insert or update on table "events" violates foreign key constraint "events_municipality_id_fkey"`. El campo «Municipio» era texto libre («Masaya») y la columna es la clave de `municipalities` (`masaya__masaya`). El Ops Center solo mostraba «No se pudo crear el evento».
