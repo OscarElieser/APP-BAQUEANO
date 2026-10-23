@@ -18,6 +18,11 @@ LO QUE FUNCIONA EN ESTE PUNTO:
 
 <!-- ============================================================ -->
 
+## 📸 EVENTOS: FOTO Y DATOS NUEVOS DE LOS AGÜIZOTES (22-10-2026, 23:05) — rama feat/foto-aguizotes
+- **Pedido:** «No sale el evento creado aquí en el index» + foto y datos enviados por el administrador: viernes 23-oct 7:00 p. m., Plaza María Magdalena (Monimbó); Vela del Candil en días previos; Festival de los Agüizotes en La Concepción, sábado 24-oct 4:30 p. m.
+- **Causa:** los eventos estaban en borrador porque no tenían foto (la base exige foto para publicar); la portada solo muestra publicados.
+- **Cambio:** foto enviada por el administrador en `website/assets/images/eventos/aguizotes-masaya-2026.jpg` (mismo dominio, la CSP la permite). En la base: Agüizotes 2026 con hora 19:00 y Plaza María Magdalena, nuevo evento «Festival de los Agüizotes en La Concepción 2026», ambos publicados con esa foto. El Torovenado sigue en borrador hasta tener una foto propia.
+
 ## 🌐 IDIOMAS PARTE 2: CONTENIDO DE DEPARTAMENTOS Y DESTINOS EN 8 IDIOMAS (22-10-2026, 22:20) — rama feat/idiomas-territorios
 - **Pedido:** «Todos» (pendientes) → traducir el contenido territorial que seguía en español al cambiar de idioma.
 - **Medición (Playwright sobre el sitio compilado, `scripts/i18n-content-extract.mjs`):** antes 3.348 frases únicas quedaban iguales en inglés en los 17 departamentos y 10 destinos; ahora 308, casi todas nombres propios (pueblos, personas, hoteles, «INTUR — Masaya», «SOS Rivas») que se escriben igual en todos los idiomas.
